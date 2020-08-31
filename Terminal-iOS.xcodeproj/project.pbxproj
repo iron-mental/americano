@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */; };
+		A52F00DA24FD186100DE3126 /* CreateStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
 		CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5824FD0C930026C3EA /* SceneDelegate.swift */; };
 		CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5A24FD0C930026C3EA /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyViewController.swift; sourceTree = "<group>"; };
 		CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCA1FF5824FD0C930026C3EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,6 +67,31 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A52F00D624FD182800DE3126 /* Set */ = {
+			isa = PBXGroup;
+			children = (
+				CCA1FF6E24FD10290026C3EA /* SetViewController.swift */,
+			);
+			path = Set;
+			sourceTree = "<group>";
+		};
+		A52F00D724FD182B00DE3126 /* MyStudy */ = {
+			isa = PBXGroup;
+			children = (
+				CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */,
+			);
+			path = MyStudy;
+			sourceTree = "<group>";
+		};
+		A52F00D824FD182C00DE3126 /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */,
+				A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */,
+			);
+			path = Study;
+			sourceTree = "<group>";
+		};
 		CCA1FF4A24FD0C930026C3EA = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +113,9 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A52F00D824FD182C00DE3126 /* Study */,
+				A52F00D724FD182B00DE3126 /* MyStudy */,
+				A52F00D624FD182800DE3126 /* Set */,
 				CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */,
 				CCA1FF5824FD0C930026C3EA /* SceneDelegate.swift */,
 				CCA1FF5A24FD0C930026C3EA /* ViewController.swift */,
@@ -93,9 +123,6 @@
 				CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */,
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
-				CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */,
-				CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */,
-				CCA1FF6E24FD10290026C3EA /* SetViewController.swift */,
 			);
 			path = "Terminal-iOS";
 			sourceTree = "<group>";
@@ -220,6 +247,7 @@
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,
+				A52F00DA24FD186100DE3126 /* CreateStudyViewController.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -296,7 +324,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -350,7 +378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

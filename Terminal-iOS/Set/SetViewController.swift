@@ -1,5 +1,5 @@
 //
-//  StudyViewController.swift
+//  SetViewController.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2020/08/31.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class StudyViewController: UIViewController {
+class SetViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .green
+        view.backgroundColor = .red
         // Do any additional setup after loading the view.
     }
     
