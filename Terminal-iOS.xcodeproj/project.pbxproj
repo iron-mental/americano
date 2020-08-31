@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,9 @@
 		CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF5C24FD0C930026C3EA /* Main.storyboard */; };
 		CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */; };
 		CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */; };
+		CCA1FF6B24FD0FF40026C3EA /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */; };
+		CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */; };
+		CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6E24FD10290026C3EA /* SetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 		CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCA1FF6224FD0C930026C3EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCA1FF6424FD0C930026C3EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
+		CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyViewController.swift; sourceTree = "<group>"; };
+		CCA1FF6E24FD10290026C3EA /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
 		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -56,7 +62,6 @@
 				0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */,
 				87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -88,6 +93,9 @@
 				CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */,
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
+				CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */,
+				CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */,
+				CCA1FF6E24FD10290026C3EA /* SetViewController.swift */,
 			);
 			path = "Terminal-iOS";
 			sourceTree = "<group>";
@@ -207,8 +215,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCA1FF6B24FD0FF40026C3EA /* StudyViewController.swift in Sources */,
+				CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
+				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
