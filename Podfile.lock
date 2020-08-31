@@ -1,0 +1,24 @@
+PODS:
+  - NMapsMap (3.8.0)
+  - SwiftLint (0.39.2)
+  - Then (2.6.0)
+
+DEPENDENCIES:
+  - NMapsMap
+  - SwiftLint
+  - Then
+
+SPEC REPOS:
+  trunk:
+    - NMapsMap
+    - SwiftLint
+    - Then
+
+SPEC CHECKSUMS:
+  NMapsMap: b3633ad688483a318be9293aeddd323a714fb08b
+  SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
+  Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
+
+PODFILE CHECKSUM: fdac4e8f32bb22a97d5e03743b738027e8bd1a58
+
+COCOAPODS: 1.9.1
