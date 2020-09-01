@@ -21,10 +21,10 @@ class StudyViewController: UIViewController {
     }
     
     func attribute() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToCreateStudy))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToSelectCategory))
     }
     
-    @objc func goToCreateStudy() {
+    @objc func goToSelectCategory() {
         let createStudyViewController = CreateStudyViewController()
         navigationController?.pushViewController(createStudyViewController, animated: true)
     }
