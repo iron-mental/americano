@@ -12,12 +12,20 @@ class StudyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createStudy))
+        attribute()
     }
     
-    @objc func createStudy() {
-        let view = CreateStudyViewController()
-        navigationController?.pushViewController(view, animated: true)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "스터디"
+    }
+    
+    func attribute() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToCreateStudy))
+    }
+    
+    @objc func goToCreateStudy() {
+        let createStudyViewController = CreateStudyViewController()
+        navigationController?.pushViewController(createStudyViewController, animated: true)
     }
 }
