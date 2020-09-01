@@ -10,7 +10,7 @@ import UIKit
 import Then
 
 
-class CreateStudyViewController: UIViewController {
+class SelectCategoryViewController: UIViewController {
     let label = UILabel()
     let textLabel = UILabel()
     let font = UIFont(name:"Apple Color Emoji" , size: 25)
@@ -18,15 +18,16 @@ class CreateStudyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         attribute()
         layout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(false)
         self.navigationController?.navigationBar.topItem?.title = ""
     }
-    
+
     func attribute() {
         view.do {
             $0.backgroundColor = .white
@@ -70,6 +71,7 @@ class CreateStudyViewController: UIViewController {
     }
     
     @objc func gotoCreateStudy(sender: UIButton!) {
-      print("Button tapped")
+        print("Button tapped")
+        self.dismiss(animated: false, completion: nil)
     }
 }

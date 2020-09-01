@@ -12,11 +12,12 @@ class StudyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         attribute()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        UIView.setAnimationsEnabled(false)
         navigationItem.title = "스터디"
     }
     
@@ -25,7 +26,7 @@ class StudyViewController: UIViewController {
     }
     
     @objc func goToSelectCategory() {
-        let createStudyViewController = CreateStudyViewController()
-        navigationController?.pushViewController(createStudyViewController, animated: true)
+        let selectCategoryViewController = SelectCategoryViewController()
+        navigationController?.pushViewController(selectCategoryViewController, animated: true)
     }
 }
