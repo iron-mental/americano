@@ -25,7 +25,10 @@ class StudyViewController: UIViewController {
         layout()
         view.backgroundColor = .white
         title = "스터디"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createStudy))
+        let createStudyBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createStudy))
+        let searchStudyBtn = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchStudy))
+
+        self.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
     }
     
     func attirbute() {
@@ -48,6 +51,10 @@ class StudyViewController: UIViewController {
     
     @objc func createStudy() {
         let view = CreateStudyViewController()
+        navigationController?.pushViewController(view, animated: true)
+    }
+    @objc func searchStudy() {
+        let view = SearchStudyViewController()
         navigationController?.pushViewController(view, animated: true)
     }
 }
