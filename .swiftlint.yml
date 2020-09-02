@@ -1,0 +1,8 @@
+function_body_length: 300
+disabled_rules:
+- line_length
+- trailing_whitespace
+
+included:
+excluded:
+- Pods
