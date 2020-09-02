@@ -2,7 +2,8 @@ function_body_length: 300
 disabled_rules:
 - line_length
 - trailing_whitespace
-
+- opening_brace
+- force_cast
 included:
 excluded:
 - Pods

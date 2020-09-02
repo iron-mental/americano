@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */; };
 		A52F00DA24FD186100DE3126 /* CreateStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */; };
+		A55B4CDA24FF764B006102EB /* StudyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55B4CD924FF764B006102EB /* StudyCell.swift */; };
+		A55B4CDD24FF79A8006102EB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A55B4CDC24FF79A8006102EB /* .swiftlint.yml */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
 		CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5824FD0C930026C3EA /* SceneDelegate.swift */; };
 		CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5A24FD0C930026C3EA /* ViewController.swift */; };
@@ -24,6 +26,8 @@
 		0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyViewController.swift; sourceTree = "<group>"; };
+		A55B4CD924FF764B006102EB /* StudyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCell.swift; sourceTree = "<group>"; };
+		A55B4CDC24FF79A8006102EB /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCA1FF5824FD0C930026C3EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,13 +92,22 @@
 			children = (
 				CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */,
 				A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */,
+				A55B4CD924FF764B006102EB /* StudyCell.swift */,
 			);
 			path = Study;
+			sourceTree = "<group>";
+		};
+		A55B4CDE24FF8927006102EB /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		CCA1FF4A24FD0C930026C3EA = {
 			isa = PBXGroup;
 			children = (
+				A55B4CDC24FF79A8006102EB /* .swiftlint.yml */,
 				CCA1FF5524FD0C930026C3EA /* Terminal-iOS */,
 				CCA1FF5424FD0C930026C3EA /* Products */,
 				5ABD6AFD2D9CBF39ED6C88B5 /* Pods */,
@@ -113,6 +126,7 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A55B4CDE24FF8927006102EB /* Entity */,
 				A52F00D824FD182C00DE3126 /* Study */,
 				A52F00D724FD182B00DE3126 /* MyStudy */,
 				A52F00D624FD182800DE3126 /* Set */,
@@ -139,6 +153,7 @@
 				CCA1FF5024FD0C930026C3EA /* Frameworks */,
 				CCA1FF5124FD0C930026C3EA /* Resources */,
 				C782E0649B9B4B73DCAE348D /* [CP] Embed Pods Frameworks */,
+				A55B4CDB24FF7922006102EB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -187,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A55B4CDD24FF79A8006102EB /* .swiftlint.yml in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
@@ -218,6 +234,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A55B4CDB24FF7922006102EB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 		C782E0649B9B4B73DCAE348D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -242,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A55B4CDA24FF764B006102EB /* StudyCell.swift in Sources */,
 				CCA1FF6B24FD0FF40026C3EA /* StudyViewController.swift in Sources */,
 				CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
