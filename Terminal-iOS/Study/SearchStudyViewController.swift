@@ -7,24 +7,40 @@
 //
 
 import UIKit
+import Then
 
 class SearchStudyViewController: UIViewController {
 
+    let backBtn = UIButton(type: .custom)
+    let searchBar = UISearchBar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .white
+        attribute()
+        layout()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func attribute() {
+        backBtn.do {
+            $0.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+        }
     }
-    */
+    
+    func layout() {
+        view.addSubview(backBtn)
+        view.addSubview(searchBar)
+        
+        backBtn.translatesAutoresizingMaskIntoConstraints = false
+        backBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                     constant: 10).isActive = true
+        backBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                         constant: 10).isActive = true
 
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+        searchBar.leadingAnchor.constraint(equalTo: backBtn.trailingAnchor, constant: 10).isActive = true
+        searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
 }

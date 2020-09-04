@@ -11,7 +11,7 @@ import Then
 
 class StudyViewController: UIViewController {
     
-    var temp = ["swift","android","tensorflow","node","frontend","jpark","swift","android","tensorflow","node","frontend","jpark"]
+    var temp = ["swift", "android","tensorflow","node","frontend","jpark","swift","android","tensorflow","node","frontend","jpark"]
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -55,7 +55,8 @@ class StudyViewController: UIViewController {
     }
     @objc func searchStudy() {
         let view = SearchStudyViewController()
-        navigationController?.pushViewController(view, animated: true)
+        present(view, animated: true, completion: nil)
+//        navigationController?.pushViewController(view, animated: true)
     }
 }
 
