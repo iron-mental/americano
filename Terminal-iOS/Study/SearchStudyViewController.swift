@@ -11,8 +11,9 @@ import Then
 
 class SearchStudyViewController: UIViewController {
 
-    let backBtn = UIButton(type: .custom)
+    let backBtn = UIButton()
     let searchBar = UISearchBar()
+    let placeSearch = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +26,18 @@ class SearchStudyViewController: UIViewController {
         backBtn.do {
             $0.setImage(#imageLiteral(resourceName: "back"), for: .normal)
         }
+        placeSearch.do {
+            $0.setTitle("장소로 검색", for: .normal)
+            $0.setTitleColor(.black, for: .normal)
+            $0.layer.borderWidth = 3
+            $0.layer.cornerRadius = 10
+        }
     }
     
     func layout() {
         view.addSubview(backBtn)
         view.addSubview(searchBar)
+        view.addSubview(placeSearch)
         
         backBtn.translatesAutoresizingMaskIntoConstraints = false
         backBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
@@ -42,5 +50,11 @@ class SearchStudyViewController: UIViewController {
         searchBar.leadingAnchor.constraint(equalTo: backBtn.trailingAnchor, constant: 10).isActive = true
         searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        placeSearch.translatesAutoresizingMaskIntoConstraints = false
+        placeSearch.topAnchor.constraint(equalTo: backBtn.bottomAnchor, constant: 20).isActive = true
+        placeSearch.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        placeSearch.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        placeSearch.widthAnchor.constraint(equalToConstant: 100).isActive = true
     }
 }
