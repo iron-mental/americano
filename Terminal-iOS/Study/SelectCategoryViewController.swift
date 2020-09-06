@@ -18,11 +18,10 @@ class SelectCategoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         attribute()
         layout()
     }
-    
+     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
         self.navigationController?.navigationBar.topItem?.title = ""
