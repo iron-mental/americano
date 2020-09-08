@@ -15,6 +15,7 @@ class SelectCategoryViewController: UIViewController {
     let textLabel = UILabel()
     let font = UIFont(name:"Apple Color Emoji" , size: 25)
     let tempButton = UIButton()
+    let textField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,7 @@ class SelectCategoryViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        UIView.setAnimationsEnabled(true)
         UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
             self.textLabel.transform = self.label.transform.translatedBy(x: -490, y: 0)
         }) { _ in
@@ -48,7 +50,7 @@ class SelectCategoryViewController: UIViewController {
             $0.backgroundColor = .white
         }
         label.do {
-            $0.text = "스터디 만들기"
+            $0.text = ""
             $0.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
         }
         navigationItem.do {
@@ -61,6 +63,10 @@ class SelectCategoryViewController: UIViewController {
             attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font, range: NSMakeRange(0, 7))
             textLabel.attributedText = attributedStr
         }
+        textField.do {
+            $0.frame = CGRect(x: 0, y: 0, width: 300, height: 100)
+            $0.backgroundColor = .red
+        }
         tempButton.do {
             $0.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
             $0.backgroundColor = .green
@@ -71,12 +77,19 @@ class SelectCategoryViewController: UIViewController {
     
     func layout() {
         view.addSubview(textLabel)
+        view.addSubview(textField)
         view.addSubview(tempButton)
         
         textLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 500).isActive = true
+        }
+        textField.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -150).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -100).isActive = true
         }
         tempButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +99,8 @@ class SelectCategoryViewController: UIViewController {
     }
     
     @objc func gotoCreateStudy(sender: UIButton!) {
-        print("Button tapped")
-        self.dismiss(animated: false, completion: nil)
+        let createStudyViewController = CreateStudyViewController()
+        createStudyViewController.tempTextLabel.text = textField.text
+        navigationController?.pushViewController(createStudyViewController, animated: true)
     }
 }

@@ -17,8 +17,8 @@ class StudyViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        UIView.setAnimationsEnabled(true)
-        navigationItem.title = "스터디"
+        UIView.setAnimationsEnabled(false)
+        navigationItem.title = ""
     }
     
     func attribute() {

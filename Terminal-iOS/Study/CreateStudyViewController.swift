@@ -2,29 +2,38 @@
 //  CreateStudyViewController.swift
 //  Terminal-iOS
 //
-//  Created by 정재인 on 2020/09/02.
+//  Created by 정재인 on 2020/09/08.
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
 import UIKit
 
 class CreateStudyViewController: UIViewController {
+    var tempTextLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        attribute()
+        layout()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func attribute() {
+        view.do {
+            $0.backgroundColor = .green
+        }
+        tempTextLabel.do {
+            $0.frame = CGRect(x: 0, y: 0, width: 0, height: 35)
+            $0.backgroundColor = .red
+        }
     }
-    */
-
+    
+    func layout() {
+        view.addSubview(tempTextLabel)
+        i
+        tempTextLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        }
+    }
 }

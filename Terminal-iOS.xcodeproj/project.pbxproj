@@ -18,6 +18,7 @@
 		CCA1FF6B24FD0FF40026C3EA /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */; };
 		CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */; };
 		CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6E24FD10290026C3EA /* SetViewController.swift */; };
+		CCD6DFE825073FF50014D711 /* CreateStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6DFE725073FF50014D711 /* CreateStudyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
 		CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyViewController.swift; sourceTree = "<group>"; };
 		CCA1FF6E24FD10290026C3EA /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
+		CCD6DFE725073FF50014D711 /* CreateStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyViewController.swift; sourceTree = "<group>"; };
 		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 			children = (
 				CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */,
 				A52F00D924FD186100DE3126 /* SelectCategoryViewController.swift */,
+				CCD6DFE725073FF50014D711 /* CreateStudyViewController.swift */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,
 				A52F00DA24FD186100DE3126 /* SelectCategoryViewController.swift in Sources */,
+				CCD6DFE825073FF50014D711 /* CreateStudyViewController.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
