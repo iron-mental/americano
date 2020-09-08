@@ -10,7 +10,7 @@ import UIKit
 import Then
 
 class SearchStudyViewController: UIViewController {
-
+    
     let backBtn = UIButton()
     let searchBar = UISearchBar()
     let placeSearch = UIButton()
@@ -55,24 +55,27 @@ class SearchStudyViewController: UIViewController {
         view.addSubview(tempView)
         view.addSubview(keywordLable)
         
-        backBtn.translatesAutoresizingMaskIntoConstraints = false
-        backBtn.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                     constant: 10).isActive = true
-        backBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                         constant: 10).isActive = true
-
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-        searchBar.leadingAnchor.constraint(equalTo: backBtn.trailingAnchor, constant: 10).isActive = true
-        searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-        searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        placeSearch.translatesAutoresizingMaskIntoConstraints = false
-        placeSearch.topAnchor.constraint(equalTo: backBtn.bottomAnchor, constant: 20).isActive = true
-        placeSearch.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        placeSearch.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        placeSearch.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        
+        backBtn.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                    constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                        constant: 10).isActive = true
+        }
+        searchBar.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backBtn.trailingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        }
+        placeSearch.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: backBtn.bottomAnchor, constant: 20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        }
         hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: placeSearch.bottomAnchor, constant: 30).isActive = true
@@ -90,7 +93,7 @@ class SearchStudyViewController: UIViewController {
             $0.topAnchor.constraint(equalTo: tempView.bottomAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         }
-
+        
     }
     
     @objc func back() {
