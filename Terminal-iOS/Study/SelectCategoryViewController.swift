@@ -100,7 +100,14 @@ class SelectCategoryViewController: UIViewController {
     
     @objc func gotoCreateStudy(sender: UIButton!) {
         let createStudyViewController = CreateStudyViewController()
+        createStudyViewController.delegate = self
         createStudyViewController.tempTextLabel.text = textField.text
         navigationController?.pushViewController(createStudyViewController, animated: true)
+    }
+}
+
+extension SelectCategoryViewController: testDelegate {
+    func setData(data: String) {
+        textField.text = data
     }
 }
