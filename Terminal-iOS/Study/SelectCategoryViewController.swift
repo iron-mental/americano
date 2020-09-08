@@ -20,13 +20,29 @@ class SelectCategoryViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        
     }
-     
+    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
+        super.viewWillAppear(true)
         self.navigationController?.navigationBar.topItem?.title = ""
+        
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
+            self.textLabel.transform = self.label.transform.translatedBy(x: -490, y: 0)
+        }) { _ in
+            UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+                self.textLabel.transform = self.label.transform.translatedBy(x: -480, y: 0)
+            }) { _ in
+                UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+                self.textLabel.transform = self.label.transform.translatedBy(x: -485, y: 0)
+                })
+            }
+        }
+    }
+    
     func attribute() {
         view.do {
             $0.backgroundColor = .white
@@ -60,7 +76,7 @@ class SelectCategoryViewController: UIViewController {
         textLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 22).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 500).isActive = true
         }
         tempButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
