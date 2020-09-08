@@ -14,35 +14,20 @@ class SelectCategoryViewController: UIViewController {
     let label = UILabel()
     let textLabel = UILabel()
     let font = UIFont(name:"Apple Color Emoji" , size: 25)
-    let tempButton = UIButton()
-    let textField = UITextField()
+    let tempView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         self.navigationController?.navigationBar.topItem?.title = ""
-        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        UIView.setAnimationsEnabled(true)
-        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCurlUp, animations: {
-            self.textLabel.transform = self.label.transform.translatedBy(x: -490, y: 0)
-        }) { _ in
-            UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-                self.textLabel.transform = self.label.transform.translatedBy(x: -480, y: 0)
-            }) { _ in
-                UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-                self.textLabel.transform = self.label.transform.translatedBy(x: -485, y: 0)
-                })
-            }
-        }
+        textLabelAnimation()
     }
     
     func attribute() {
@@ -63,51 +48,67 @@ class SelectCategoryViewController: UIViewController {
             attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font, range: NSMakeRange(0, 7))
             textLabel.attributedText = attributedStr
         }
-        textField.do {
-            $0.frame = CGRect(x: 0, y: 0, width: 300, height: 100)
-            $0.backgroundColor = .red
+        tempView.do {
+            $0.image = #imageLiteral(resourceName: "categoryimage")
+            $0.contentMode = .scaleAspectFit
         }
-        tempButton.do {
-            $0.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-            $0.backgroundColor = .green
-            $0.setTitle("임시버튼", for: .selected)
-            $0.addTarget(self, action: #selector(gotoCreateStudy(sender:)), for: .touchUpInside)
-        }
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "◁", style: .plain, target: self, action: #selector(backTapped(sender:)))
     }
     
     func layout() {
         view.addSubview(textLabel)
-        view.addSubview(textField)
-        view.addSubview(tempButton)
+        view.addSubview(tempView)
         
         textLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 500).isActive = true
         }
-        textField.do {
+        tempView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -150).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -100).isActive = true
+            $0.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor,constant: -10).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -30).isActive = true
+            
         }
-        tempButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+    }
+    
+    
+    func textLabelAnimation() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
+            self.textLabel.transform = self.label.transform.translatedBy(x: -490, y: 0)
+        }) { _ in
+            UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+                self.textLabel.transform = self.label.transform.translatedBy(x: -480, y: 0)
+            }) { _ in
+                UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+                    self.textLabel.transform = self.label.transform.translatedBy(x: -485, y: 0)
+                })
+            }
         }
     }
     
     @objc func gotoCreateStudy(sender: UIButton!) {
         let createStudyViewController = CreateStudyViewController()
         createStudyViewController.delegate = self
-        createStudyViewController.tempTextLabel.text = textField.text
+//        createStudyViewController.tempTextLabel.text = textField.text
         navigationController?.pushViewController(createStudyViewController, animated: true)
+    }
+    @objc func backTapped(sender: UIBarButtonItem) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
+            self.textLabel.transform = self.textLabel.transform.translatedBy(x: 500, y: 0)
+        }) { _ in
+            UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+                self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
+            },completion: { _ in
+               self.navigationController?.popViewController(animated: false)
+            })
+        }
     }
 }
 
 extension SelectCategoryViewController: testDelegate {
     func setData(data: String) {
-        textField.text = data
+//        textField.text = data
     }
 }

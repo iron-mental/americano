@@ -20,12 +20,11 @@ class StudyViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        UIView.setAnimationsEnabled(false)
+        super.viewWillAppear(false)
         navigationItem.title = ""
     }
     func attribute() {
         tempView.do {
-            //            $0.frame = CGRect(x: 0, y: 0, width: 300, height: 600)
             $0.image = #imageLiteral(resourceName: "categoryimage")
             $0.contentMode = .scaleAspectFit
         }
@@ -45,12 +44,12 @@ class StudyViewController: UIViewController {
     
     @objc func goToSelectCategory() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-            self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: 30)
+            self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: 60)
         },completion: {_ in
             let selectCategoryViewController = SelectCategoryViewController()
-            self.navigationController?.pushViewController(selectCategoryViewController, animated: true)
+            self.navigationController?.pushViewController(selectCategoryViewController, animated: false)
             UIView.animate(withDuration: 0, animations: {
-                self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -30)
+                self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
             })
         })
         
