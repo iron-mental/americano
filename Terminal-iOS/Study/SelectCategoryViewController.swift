@@ -52,7 +52,7 @@ class SelectCategoryViewController: UIViewController {
             $0.image = #imageLiteral(resourceName: "categoryimage")
             $0.contentMode = .scaleAspectFit
         }
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "◁", style: .plain, target: self, action: #selector(backTapped(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backTapped(sender:)))
     }
     
     func layout() {
@@ -67,7 +67,7 @@ class SelectCategoryViewController: UIViewController {
         tempView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor,constant: -10).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -30).isActive = true
             
         }
@@ -91,7 +91,6 @@ class SelectCategoryViewController: UIViewController {
     @objc func gotoCreateStudy(sender: UIButton!) {
         let createStudyViewController = CreateStudyViewController()
         createStudyViewController.delegate = self
-//        createStudyViewController.tempTextLabel.text = textField.text
         navigationController?.pushViewController(createStudyViewController, animated: true)
     }
     @objc func backTapped(sender: UIBarButtonItem) {
@@ -109,6 +108,5 @@ class SelectCategoryViewController: UIViewController {
 
 extension SelectCategoryViewController: testDelegate {
     func setData(data: String) {
-//        textField.text = data
     }
 }
