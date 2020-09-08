@@ -11,7 +11,7 @@ import Then
 
 class StudyViewController: UIViewController {
     
-    var temp = ["swift", "android","tensorflow","node","frontend","jpark","swift","android","tensorflow","node","frontend","jpark"]
+    var temp = ["swift", "android", "tensorflow", "node", "frontend", "jpark", "swift", "android", "tensorflow", "node", "frontend", "jpark"]
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
