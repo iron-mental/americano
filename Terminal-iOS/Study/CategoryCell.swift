@@ -1,15 +1,15 @@
 //
-//  StudyCollectionViewCell.swift
+//  CategoryCell.swift
 //  Terminal-iOS
 //
-//  Created by once on 2020/09/02.
+//  Created by once on 2020/09/11.
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
 import UIKit
 import Then
 
-class StudyCell: UICollectionViewCell {
+class CategoryCell: UICollectionViewCell {
     
     let imageView = UIImageView()
     

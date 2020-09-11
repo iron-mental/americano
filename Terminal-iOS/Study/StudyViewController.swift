@@ -33,7 +33,7 @@ class StudyViewController: UIViewController {
     
     func attirbute() {
         collectionView.do {
-            $0.register(StudyCell.self, forCellWithReuseIdentifier: "cell")
+            $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = .white
@@ -69,7 +69,7 @@ extension StudyViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! StudyCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
         cell.layer.cornerRadius = 10
         cell.imageView.image = UIImage(named: temp[indexPath.row])
         return cell
