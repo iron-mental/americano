@@ -11,6 +11,9 @@ import Then
 
 class StudyListViewController: UIViewController {
     let tableView = UITableView()
+    
+    
+    
     override func viewDidLoad() {
         attribute()
         layout()

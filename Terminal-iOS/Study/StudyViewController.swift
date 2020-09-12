@@ -74,4 +74,9 @@ extension StudyViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.imageView.image = UIImage(named: temp[indexPath.row])
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let view = StudyListViewController()
+        navigationController?.pushViewController(view, animated: true)
+    }
 }

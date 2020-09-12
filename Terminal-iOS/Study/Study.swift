@@ -10,9 +10,9 @@ import UIKit
 
 struct Study {
     var title: String
-    var descript: String
+    var subTitle: String
     var location: String
     var date: String
-    var numberOfMember: String
-    var titleImage: UIImage
+    var managerImage: UIImage
+    var mainImage: UIImage
 }
