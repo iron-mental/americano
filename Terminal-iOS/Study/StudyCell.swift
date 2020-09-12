@@ -29,40 +29,44 @@ class StudyCell: UITableViewCell {
     }
     
     func attribute() {
-//        title1.text = "스니커즈 어플 만드실분"
-//        subTitle.text = "안녕하세요 많은 참여 부탁드립니다."
-//        location.text = "강남구"
-//        date.text = "4/23 |"
-//        managerImage.image = #imageLiteral(resourceName: "Image-1")
-//        mainImage.image = #imageLiteral(resourceName: "Image")
     }
     
     func layout() {
         addSubview(title1)
-        title1.translatesAutoresizingMaskIntoConstraints = false
-        title1.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        title1.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        title1.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        }
         
         addSubview(subTitle)
-        subTitle.translatesAutoresizingMaskIntoConstraints = false
-        subTitle.topAnchor.constraint(equalTo: title1.bottomAnchor, constant: 10).isActive = true
-        subTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        subTitle.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: title1.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        }
         
         addSubview(date)
-        date.translatesAutoresizingMaskIntoConstraints = false
-        date.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 10).isActive = true
-        leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        date.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        }
         
         addSubview(managerImage)
-        managerImage.translatesAutoresizingMaskIntoConstraints = false
-        managerImage.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 10).isActive = true
-        managerImage.leadingAnchor.constraint(equalTo: date.trailingAnchor, constant: 10).isActive = true
+        managerImage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: date.trailingAnchor, constant: 10).isActive = true
+        }
         
         addSubview(mainImage)
-        mainImage.translatesAutoresizingMaskIntoConstraints = false
-        mainImage.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        mainImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        mainImage.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        mainImage.widthAnchor.constraint(equalToConstant: 112).isActive = true
+        mainImage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 75).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 112).isActive = true
+        }
     }
 }
