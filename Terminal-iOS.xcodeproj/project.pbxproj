@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */; };
 		A506896A250BAD7A001D02BC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5068969250BAD7A001D02BC /* CategoryCell.swift */; };
-		A506896C250BB14E001D02BC /* StudyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A506896B250BB14E001D02BC /* StudyListViewController.swift */; };
+		A506896C250BB14E001D02BC /* StudyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A506896B250BB14E001D02BC /* StudyListView.swift */; };
 		A506896E250BB180001D02BC /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = A506896D250BB180001D02BC /* Study.swift */; };
 		A5068970250BB26E001D02BC /* StudyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A506896F250BB26E001D02BC /* StudyCell.swift */; };
 		A52F00DA24FD186100DE3126 /* CreateStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */; };
@@ -29,7 +29,7 @@
 		CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF5C24FD0C930026C3EA /* Main.storyboard */; };
 		CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */; };
 		CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */; };
-		CCA1FF6B24FD0FF40026C3EA /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */; };
+		CCA1FF6B24FD0FF40026C3EA /* StudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6A24FD0FF40026C3EA /* StudyView.swift */; };
 		CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */; };
 		CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6E24FD10290026C3EA /* SetViewController.swift */; };
 /* End PBXBuildFile section */
@@ -38,7 +38,7 @@
 		0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A5068969250BAD7A001D02BC /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		A506896B250BB14E001D02BC /* StudyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListViewController.swift; sourceTree = "<group>"; };
+		A506896B250BB14E001D02BC /* StudyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListView.swift; sourceTree = "<group>"; };
 		A506896D250BB180001D02BC /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Study.swift; path = "Terminal-iOS/Study/Study.swift"; sourceTree = SOURCE_ROOT; };
 		A506896F250BB26E001D02BC /* StudyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCell.swift; sourceTree = "<group>"; };
 		A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 		CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCA1FF6224FD0C930026C3EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCA1FF6424FD0C930026C3EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyViewController.swift; sourceTree = "<group>"; };
+		CCA1FF6A24FD0FF40026C3EA /* StudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyView.swift; sourceTree = "<group>"; };
 		CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyViewController.swift; sourceTree = "<group>"; };
 		CCA1FF6E24FD10290026C3EA /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
 		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,7 +133,7 @@
 		A5A2FBFF250FAB3A00E1D7D4 /* StudyCategory */ = {
 			isa = PBXGroup;
 			children = (
-				CCA1FF6A24FD0FF40026C3EA /* StudyViewController.swift */,
+				CCA1FF6A24FD0FF40026C3EA /* StudyView.swift */,
 				A5068969250BAD7A001D02BC /* CategoryCell.swift */,
 				A5A2FC01250FB12000E1D7D4 /* StudyCategoryInteractor.swift */,
 				A5A2FC03250FB14900E1D7D4 /* StudyCategoryPresenter.swift */,
@@ -146,7 +146,7 @@
 		A5A2FC00250FB0B200E1D7D4 /* StudyList */ = {
 			isa = PBXGroup;
 			children = (
-				A506896B250BB14E001D02BC /* StudyListViewController.swift */,
+				A506896B250BB14E001D02BC /* StudyListView.swift */,
 				A506896F250BB26E001D02BC /* StudyCell.swift */,
 				A5A2FC07250FB1FD00E1D7D4 /* StudyListInteractor.swift */,
 				A5A2FC09250FB20800E1D7D4 /* StudyListPresenter.swift */,
@@ -328,7 +328,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A55B4CE024FFE915006102EB /* SearchStudyViewController.swift in Sources */,
-				CCA1FF6B24FD0FF40026C3EA /* StudyViewController.swift in Sources */,
+				CCA1FF6B24FD0FF40026C3EA /* StudyView.swift in Sources */,
 				A5A2FC0C250FB21700E1D7D4 /* StudyListWireFrame.swift in Sources */,
 				A5A2FC10250FB27800E1D7D4 /* StudyCategoryProtocols.swift in Sources */,
 				A5A2FC04250FB14900E1D7D4 /* StudyCategoryPresenter.swift in Sources */,
@@ -343,7 +343,7 @@
 				A5A2FC02250FB12000E1D7D4 /* StudyCategoryInteractor.swift in Sources */,
 				A52F00DA24FD186100DE3126 /* CreateStudyViewController.swift in Sources */,
 				A5A2FC0A250FB20800E1D7D4 /* StudyListPresenter.swift in Sources */,
-				A506896C250BB14E001D02BC /* StudyListViewController.swift in Sources */,
+				A506896C250BB14E001D02BC /* StudyListView.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				A5068970250BB26E001D02BC /* StudyCell.swift in Sources */,
 				A5A2FC06250FB16600E1D7D4 /* StudyCategoryWireFrame.swift in Sources */,

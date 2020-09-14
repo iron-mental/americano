@@ -9,7 +9,7 @@
 import UIKit
 import Then
 
-class StudyListViewController: UIViewController {
+class StudyListView: UIViewController {
     let tableView = UITableView()
     
     let studyList = [
@@ -47,7 +47,7 @@ class StudyListViewController: UIViewController {
     }
 }
 
-extension StudyListViewController: UITableViewDataSource, UITableViewDelegate {
+extension StudyListView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studyList.count
     }

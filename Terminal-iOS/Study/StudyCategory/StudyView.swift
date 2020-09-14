@@ -75,7 +75,7 @@ extension StudyView: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let view = StudyListViewController()
+        let view = StudyListView()
         navigationController?.pushViewController(view, animated: true)
     }
 }
