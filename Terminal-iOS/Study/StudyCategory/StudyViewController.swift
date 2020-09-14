@@ -56,7 +56,6 @@ class StudyViewController: UIViewController {
     @objc func searchStudy() {
         let view = SearchStudyViewController()
         present(view, animated: true, completion: nil)
-//        navigationController?.pushViewController(view, animated: true)
     }
 }
 
