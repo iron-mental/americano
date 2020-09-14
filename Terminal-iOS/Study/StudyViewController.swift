@@ -11,25 +11,43 @@ import UIKit
 class StudyViewController: UIViewController {
     
     var tempView = UIImageView()
+    var titleView = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         attribute()
         layout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
-        navigationItem.title = ""
     }
+    
     func attribute() {
+        view.do {
+            $0.backgroundColor = UIColor(named: "backGround")
+        }
+        navigationController?.navigationBar.do {
+            $0.tintColor = .white
+            $0.barTintColor = UIColor(named: "backGround")
+            $0.isTranslucent = false
+        }
         tempView.do {
             $0.image = #imageLiteral(resourceName: "categoryimage")
             $0.contentMode = .scaleAspectFit
         }
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToSelectCategory))
+        
+        titleView.do {
+            $0.text = "스터디"
+            $0.textColor = .white
+        }
+        navigationItem.do {
+            $0.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToSelectCategory))
+            $0.titleView = titleView
+        }
+        
     }
+    
     func layout() {
         view.addSubview(tempView)
         
@@ -38,7 +56,6 @@ class StudyViewController: UIViewController {
             $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: -60).isActive = true
             $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -30).isActive = true
-            
         }
     }
     

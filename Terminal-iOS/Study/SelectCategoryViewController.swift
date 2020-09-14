@@ -11,7 +11,7 @@ import Then
 
 
 class SelectCategoryViewController: UIViewController {
-    let label = UILabel()
+    let titleView = UILabel()
     let textLabel = UILabel()
     let font = UIFont(name:"Apple Color Emoji" , size: 25)
     let tempView = UIImageView()
@@ -32,17 +32,19 @@ class SelectCategoryViewController: UIViewController {
     
     func attribute() {
         view.do {
-            $0.backgroundColor = .white
+            $0.backgroundColor = UIColor(named: "backGround")
         }
-        label.do {
-            $0.text = ""
+        titleView.do {
+            $0.text = "스터디 선택"
             $0.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
+            $0.textColor = .white
         }
         navigationItem.do {
-            $0.titleView = label
+            $0.titleView = titleView
         }
         textLabel.do {
             $0.text = "카테고리 선택"
+            $0.textColor = .white
             $0.frame = CGRect(x: 0, y: 0, width: 90, height: 35)
             let attributedStr = NSMutableAttributedString(string: textLabel.text ?? "empty")
             attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font, range: NSMakeRange(0, 7))
@@ -52,7 +54,9 @@ class SelectCategoryViewController: UIViewController {
             $0.image = #imageLiteral(resourceName: "categoryimage")
             $0.contentMode = .scaleAspectFit
         }
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backTapped(sender:)))
+        navigationItem.do {
+           $0.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backTapped(sender:)))
+        }
     }
     
     func layout() {
@@ -76,13 +80,13 @@ class SelectCategoryViewController: UIViewController {
     
     func textLabelAnimation() {
         UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
-            self.textLabel.transform = self.label.transform.translatedBy(x: -490, y: 0)
+            self.textLabel.transform = self.titleView.transform.translatedBy(x: -490, y: 0)
         }) { _ in
             UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-                self.textLabel.transform = self.label.transform.translatedBy(x: -480, y: 0)
+                self.textLabel.transform = self.titleView.transform.translatedBy(x: -480, y: 0)
             }) { _ in
                 UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-                    self.textLabel.transform = self.label.transform.translatedBy(x: -485, y: 0)
+                    self.textLabel.transform = self.titleView.transform.translatedBy(x: -485, y: 0)
                 })
             }
         }
