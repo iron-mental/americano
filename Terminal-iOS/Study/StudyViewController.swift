@@ -17,6 +17,7 @@ class StudyViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

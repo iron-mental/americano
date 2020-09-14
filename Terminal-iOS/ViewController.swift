@@ -51,9 +51,11 @@ class ViewController: UITabBarController {
             $0.barTintColor = UIColor(named: "backGround")
             $0.isTranslucent = false
             $0.unselectedItemTintColor = .white
+            $0.standardAppearance.backgroundColor = .white
         }
-        
-        
+//        tabBar.standardAppearance.backgroundImage = UIImage.colorForNavBar(.whiteColor())
+//        tabBar.standardAppearance.shadowImage = UIImage.colorForNavBar(.redColor())
+
         studyViewController.tabBarItem = tabBarItems[.study]
         studyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         

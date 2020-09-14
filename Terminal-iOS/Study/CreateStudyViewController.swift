@@ -13,9 +13,12 @@ protocol testDelegate {
 }
 
 class CreateStudyViewController: UIViewController {
+    let titleView = UILabel()
     let tempTextLabel = UILabel()
     let textField = UITextField()
     let button = UIButton()
+    
+    
     var delegate: testDelegate?
 
     override func viewDidLoad() {
@@ -27,6 +30,10 @@ class CreateStudyViewController: UIViewController {
     func attribute() {
         view.do {
             $0.backgroundColor = .green
+        }
+        titleView.do {
+            $0.text = "스터디 만들기"
+            $0.textColor = .white
         }
         tempTextLabel.do {
             $0.frame = CGRect(x: 0, y: 0, width: 0, height: 35)
@@ -41,12 +48,15 @@ class CreateStudyViewController: UIViewController {
             $0.backgroundColor = .systemPink
             $0.addTarget(self, action: #selector(backToPreView), for: .touchUpInside)
         }
+        navigationItem.titleView = titleView
     }
     
     func layout() {
+        view.addSubview(titleView)
         view.addSubview(tempTextLabel)
         view.addSubview(textField)
         view.addSubview(button)
+        
         
         tempTextLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -63,8 +73,8 @@ class CreateStudyViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: -75).isActive = true
-            
         }
+        
     }
     @objc func backToPreView() {
         navigationController?.popViewController(animated: true)

@@ -15,6 +15,7 @@ class SelectCategoryViewController: UIViewController {
     let textLabel = UILabel()
     let font = UIFont(name:"Apple Color Emoji" , size: 25)
     let tempView = UIImageView()
+    let tempcategorySelectButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ class SelectCategoryViewController: UIViewController {
             $0.backgroundColor = UIColor(named: "backGround")
         }
         titleView.do {
-            $0.text = "스터디 선택"
+            $0.text = "스터디 만들기"
             $0.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
             $0.textColor = .white
         }
@@ -57,11 +58,17 @@ class SelectCategoryViewController: UIViewController {
         navigationItem.do {
            $0.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backTapped(sender:)))
         }
+        tempcategorySelectButton.do {
+            $0.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            $0.backgroundColor = .green
+            $0.addTarget(self, action: #selector(gotoCreateStudy), for: .touchUpInside)
+        }
     }
     
     func layout() {
         view.addSubview(textLabel)
         view.addSubview(tempView)
+        view.addSubview(tempcategorySelectButton)
         
         textLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -73,12 +80,16 @@ class SelectCategoryViewController: UIViewController {
             $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -30).isActive = true
-            
+        }
+        tempcategorySelectButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
     
-    
     func textLabelAnimation() {
+        //애니메이션은 task 단위로 묶어서 하나 하는 중일 때 하나 들어오면 그전 꺼 취소하거나 그런식으로..
         UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
             self.textLabel.transform = self.titleView.transform.translatedBy(x: -490, y: 0)
         }) { _ in
@@ -95,6 +106,7 @@ class SelectCategoryViewController: UIViewController {
     @objc func gotoCreateStudy(sender: UIButton!) {
         let createStudyViewController = CreateStudyViewController()
         createStudyViewController.delegate = self
+        createStudyViewController.modalPresentationStyle = .popover
         navigationController?.pushViewController(createStudyViewController, animated: true)
     }
     @objc func backTapped(sender: UIBarButtonItem) {
