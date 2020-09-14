@@ -37,7 +37,7 @@ class SelectCategoryViewController: UIViewController {
         }
         titleView.do {
             $0.text = "스터디 만들기"
-            $0.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
+            //            $0.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
             $0.textColor = .white
         }
         navigationItem.do {
@@ -56,7 +56,7 @@ class SelectCategoryViewController: UIViewController {
             $0.contentMode = .scaleAspectFit
         }
         navigationItem.do {
-           $0.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backTapped(sender:)))
+            $0.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backTapped(sender:)))
         }
         tempcategorySelectButton.do {
             $0.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
@@ -91,13 +91,15 @@ class SelectCategoryViewController: UIViewController {
     func textLabelAnimation() {
         //애니메이션은 task 단위로 묶어서 하나 하는 중일 때 하나 들어오면 그전 꺼 취소하거나 그런식으로..
         UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
-            self.textLabel.transform = self.titleView.transform.translatedBy(x: -490, y: 0)
-        }) { _ in
+            self.textLabel.transform = self.textLabel.transform.translatedBy(x: -490, y: 0)
+        })
+        { _ in
             UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-                self.textLabel.transform = self.titleView.transform.translatedBy(x: -480, y: 0)
-            }) { _ in
+                self.textLabel.transform = self.textLabel.transform.translatedBy(x: 10, y: 0)
+            })
+            { _ in
                 UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-                    self.textLabel.transform = self.titleView.transform.translatedBy(x: -485, y: 0)
+                    self.textLabel.transform = self.textLabel.transform.translatedBy(x: -5, y: 0)
                 })
             }
         }
@@ -106,9 +108,9 @@ class SelectCategoryViewController: UIViewController {
     @objc func gotoCreateStudy(sender: UIButton!) {
         let createStudyViewController = CreateStudyViewController()
         createStudyViewController.delegate = self
-        createStudyViewController.modalPresentationStyle = .popover
-        navigationController?.pushViewController(createStudyViewController, animated: true)
+        navigationController?.pushViewController(createStudyViewController, animated: false)
     }
+    
     @objc func backTapped(sender: UIBarButtonItem) {
         UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
             self.textLabel.transform = self.textLabel.transform.translatedBy(x: 500, y: 0)
@@ -116,7 +118,7 @@ class SelectCategoryViewController: UIViewController {
             UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
                 self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
             },completion: { _ in
-               self.navigationController?.popViewController(animated: false)
+                self.navigationController?.popViewController(animated: false)
             })
         }
     }
@@ -124,5 +126,6 @@ class SelectCategoryViewController: UIViewController {
 
 extension SelectCategoryViewController: testDelegate {
     func setData(data: String) {
+        
     }
 }
