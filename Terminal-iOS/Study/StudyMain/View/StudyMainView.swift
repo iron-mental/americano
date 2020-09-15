@@ -17,15 +17,15 @@ class StudyMainView: UIViewController {
 }
 
 extension StudyMainView: StudyMainViewProtocol {
+    func showCategory(category: String) {
+        print("가져온부분 : \(category)")
+    }
     func showLoading() {
         print("showLoading")
     }
-    
     func hideLoading() {
         print("hideLoading")
     }
-    
-    
 }
 
 //    var tempView = UIImageView()

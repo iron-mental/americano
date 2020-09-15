@@ -14,6 +14,14 @@ class StudyMainInteractor: StudyMainInteractorProtocol {
     var remoteDataManager: StudyMainRemoteDataManagerProtocol?
     
     func searchCategory() {
-        localDataManager?.getCategory()
+        do {
+            if let category = localDataManager?.getCategory() {
+                //여러가지 비지니스 로직을 거친 뒤
+                presenter?.didSearchCategory(category: category)
+            }
+        } catch {
+            //에러가 난 부분(하지만 가져오는데는 성공했지만 비어있는 경우도 분기해주어야함)
+            presenter?.didSearchCategory(category: "")
+        }
     }
 }

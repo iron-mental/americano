@@ -9,6 +9,8 @@
 import UIKit
 
 class StudyMainLocalDataManager: StudyMainLocalDataManagerProtocol {
-    func getCategory() {
+    
+    func getCategory() -> String {
+        return "대충 카테고리 클릭 순으로 정렬한 배열"
     }
 }

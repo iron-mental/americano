@@ -13,14 +13,14 @@ protocol StudyMainViewProtocol: class {
     
     //PRESENTER -> VIEW
     
-    //func showCategory(category: [] )
+    func showCategory(category: String)
     func showLoading()
     func hideLoading()
     
 }
 
 protocol StudyMainWireFrameProtocol: class {
-    
+    static func createStudyMainModule() -> UIViewController
 }
 
 protocol StudyMainPresenterProtocol: class {
@@ -31,7 +31,8 @@ protocol StudyMainPresenterProtocol: class {
     //VIEW -> PRESENTER
     func viewDidLoad()
     func goToSearchStudy()
-
+    //String은 추후에 [카테고리모델] 이런식으로 예상
+    func didSearchCategory(category: String)
 }
 
 protocol StudyMainInteractorProtocol: class {
@@ -45,9 +46,10 @@ protocol StudyMainInteractorProtocol: class {
 }
 
 protocol StudyMainLocalDataManagerProtocol: class {
-    func getCategory()
+    //String은 추후에 [카테고리모델] 이런식으로 예상
+    func getCategory() -> String
 }
 
 protocol StudyMainRemoteDataManagerProtocol: class {
-    
+    func getCategory() -> String
 }
