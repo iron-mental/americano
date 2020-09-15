@@ -9,10 +9,6 @@
 import UIKit
 
 class StudyMainPresenter: StudyMainPresenterProtocol {
-    
-    
-    
-    
     var view: StudyMainViewProtocol?
     var wireFrame: StudyMainWireFrameProtocol?
     var interactor: StudyMainInteractorProtocol?
@@ -21,9 +17,16 @@ class StudyMainPresenter: StudyMainPresenterProtocol {
         view?.showLoading()
         interactor?.searchCategory()
     }
+    
     func goToSearchStudy() {
         print("스터디 검색하러 갈거다.")
     }
+    
+    func goToCreateStudy() {
+        print("스터디 만들러 갈거다.")
+        wireFrame?.goToSelectStudy()
+    }
+    
     func didSearchCategory(category: String) {
         view?.hideLoading()
         view?.showCategory(category: category)

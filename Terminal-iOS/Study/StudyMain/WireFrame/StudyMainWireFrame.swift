@@ -9,6 +9,8 @@
 import UIKit
 
 class StudyMainWireFrame: StudyMainWireFrameProtocol {
+    
+    
     static func createStudyMainModule() -> UIViewController {
         let view = StudyMainView()
         let presenter: StudyMainPresenterProtocol = StudyMainPresenter()
@@ -27,7 +29,14 @@ class StudyMainWireFrame: StudyMainWireFrameProtocol {
         interactor.localDataManager = localDataManager
         interactor.remoteDataManager = remoteDataManager
         
-        
         return view
+    }
+    
+    func goToSelectStudy() {
+        print("goToSelectStudy")
+    }
+    
+    func goToCreateStudy() {
+        
     }
 }

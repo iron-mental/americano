@@ -12,15 +12,18 @@ protocol StudyMainViewProtocol: class {
     var presenter: StudyMainPresenterProtocol? { get set }
     
     //PRESENTER -> VIEW
-    
     func showCategory(category: String)
     func showLoading()
     func hideLoading()
-    
 }
 
 protocol StudyMainWireFrameProtocol: class {
     static func createStudyMainModule() -> UIViewController
+    
+    //PRESENTER -> WIREFRAME
+    func goToSelectStudy()
+    func goToCreateStudy()
+    
 }
 
 protocol StudyMainPresenterProtocol: class {
@@ -31,6 +34,7 @@ protocol StudyMainPresenterProtocol: class {
     //VIEW -> PRESENTER
     func viewDidLoad()
     func goToSearchStudy()
+    func goToCreateStudy()
     //String은 추후에 [카테고리모델] 이런식으로 예상
     func didSearchCategory(category: String)
 }
