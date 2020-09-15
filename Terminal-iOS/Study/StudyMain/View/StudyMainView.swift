@@ -14,6 +14,7 @@ class StudyMainView: UIViewController {
     
     var tempView = UIImageView()
     var titleView = UILabel()
+    var tempCategory = ""
     
     override func viewDidLoad() {
         presenter?.viewDidLoad()
@@ -63,15 +64,10 @@ class StudyMainView: UIViewController {
         }
     }
     
+    
+    
     @objc func goToSelectCategory() {
-        UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-            self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: 60)
-        },completion: { _ in
-            self.presenter?.goToCreateStudy()
-            UIView.animate(withDuration: 0, animations: {
-                self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
-            })
-        })
+        self.presenter?.goToCreateStudy(category: self.tempCategory)
     }
 }
 
@@ -80,7 +76,7 @@ extension StudyMainView: StudyMainViewProtocol {
     func showCategory(category: String) {
         attribute()
         layout()
-        print("가져온부분 : \(category)")
+        tempCategory = category
     }
     
     func showLoading() {
@@ -91,5 +87,20 @@ extension StudyMainView: StudyMainViewProtocol {
         print("hideLoading")
     }
     
+    func categoryDownAnimate() {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+            self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: 60)
+        },completion: { _ in
+            
+        })
+    }
+    
+    func categoryUpAnimate() {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+            self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
+        },completion: { _ in
+            
+        })
+    }
 }
 

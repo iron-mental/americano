@@ -169,41 +169,9 @@
 		CCB2AC9B250F834300435E5F /* SelectCategory */ = {
 			isa = PBXGroup;
 			children = (
-				CCB2AC9F250F83DF00435E5F /* WireFrame */,
-				CCB2AC9E250F83D700435E5F /* Presenter */,
-				CCB2AC9D250F83BD00435E5F /* Interactor */,
-				CCB2AC9C250F83B600435E5F /* View */,
-			);
-			path = SelectCategory;
-			sourceTree = "<group>";
-		};
-		CCB2AC9C250F83B600435E5F /* View */ = {
-			isa = PBXGroup;
-			children = (
 				A52F00D924FD186100DE3126 /* SelectCategoryViewController.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		CCB2AC9D250F83BD00435E5F /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		CCB2AC9E250F83D700435E5F /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		CCB2AC9F250F83DF00435E5F /* WireFrame */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = WireFrame;
+			path = SelectCategory;
 			sourceTree = "<group>";
 		};
 		CCB2ACA0250F843900435E5F /* View */ = {

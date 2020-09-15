@@ -15,13 +15,15 @@ protocol StudyMainViewProtocol: class {
     func showCategory(category: String)
     func showLoading()
     func hideLoading()
+    func categoryDownAnimate()
+    func categoryUpAnimate()
 }
 
 protocol StudyMainWireFrameProtocol: class {
     static func createStudyMainModule() -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func goToSelectStudy()
+    func goToSelectStudy(from view: StudyMainViewProtocol, category: String)
     func goToCreateStudy()
     
 }
@@ -34,7 +36,7 @@ protocol StudyMainPresenterProtocol: class {
     //VIEW -> PRESENTER
     func viewDidLoad()
     func goToSearchStudy()
-    func goToCreateStudy()
+    func goToCreateStudy(category: String)
     //String은 추후에 [카테고리모델] 이런식으로 예상
     func didSearchCategory(category: String)
 }

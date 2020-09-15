@@ -16,7 +16,7 @@ class SelectCategoryViewController: UIViewController {
     let font = UIFont(name:"Apple Color Emoji" , size: 25)
     let tempView = UIImageView()
     let tempcategorySelectButton = UIButton()
-    
+    var tempCategory: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()

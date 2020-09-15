@@ -22,9 +22,9 @@ class StudyMainPresenter: StudyMainPresenterProtocol {
         print("스터디 검색하러 갈거다.")
     }
     
-    func goToCreateStudy() {
-        print("스터디 만들러 갈거다.")
-        wireFrame?.goToSelectStudy()
+    func goToCreateStudy(category: String) {
+        view?.categoryAnimate()
+        wireFrame?.goToSelectStudy(from: view!, category: category)
     }
     
     func didSearchCategory(category: String) {
