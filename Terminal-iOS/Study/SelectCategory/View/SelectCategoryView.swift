@@ -48,12 +48,12 @@ class SelectCategoryView: UIViewController {
             $0.contentMode = .scaleAspectFit
         }
         navigationItem.do {
-            $0.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backTapped(sender:)))
+            $0.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backButtonTapped))
         }
         tempcategorySelectButton.do {
             $0.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
             $0.backgroundColor = .green
-            $0.addTarget(self, action: #selector(gotoCreateStudy), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(goToCreateStudy), for: .touchUpInside)
         }
     }
     
@@ -79,8 +79,14 @@ class SelectCategoryView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
+    @objc func backButtonTapped() {
+        presenter?.back()
+    }
+    @objc func goToCreateStudy() {
+        presenter?.go(selected: selectedCategory)
+    }
     
-    func textLabelAnimation() {
+    func viewAppearAnimation() {
         //애니메이션은 task 단위로 묶어서 하나 하는 중일 때 하나 들어오면 그전 꺼 취소하거나 그런식으로..
         UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
             self.textLabel.transform = self.textLabel.transform.translatedBy(x: -490, y: 0)
@@ -97,38 +103,32 @@ class SelectCategoryView: UIViewController {
         }
     }
     
-    @objc func gotoCreateStudy(sender: UIButton!) {
-        let createStudyViewController = CreateStudyViewController()
-        createStudyViewController.selectedCategory = "선택된 카테고리다."
-        navigationController?.pushViewController(createStudyViewController, animated: false)
+    func viewDisappearAnimation() {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
+            self.textLabel.transform = self.textLabel.transform.translatedBy(x: 500, y: 0)
+        }) { _ in
+            UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+                self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
+            },completion: { _ in
+                self.navigationController?.popViewController(animated: false)
+            })
+        }
     }
-    
-    @objc func backTapped(sender: UIBarButtonItem) {
-           UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
-               self.textLabel.transform = self.textLabel.transform.translatedBy(x: 500, y: 0)
-           }) { _ in
-               UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-                   self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
-               },completion: { _ in
-                   self.navigationController?.popViewController(animated: false)
-               })
-           }
-       }
 }
 
 extension SelectCategoryView: SelectCategoryViewProtocols {
     func showCategory() {
         attribute()
         layout()
-        textLabelAnimation()
-    }
-    func backTapped() {
-        backTapped()
-        presenter?.back()
+        viewAppearAnimation()
     }
     //이부분은 콜렉션뷰의 didSelected 부분에 들어가게 되겠네요
     func selected() {
         //이부분은 리스트에[선택한인덱스] 가 파라미터로 들어가겠네요
         presenter?.go(selected: selectedCategory)
+    }
+    
+    func backTapped() {
+        viewDisappearAnimation()
     }
 }

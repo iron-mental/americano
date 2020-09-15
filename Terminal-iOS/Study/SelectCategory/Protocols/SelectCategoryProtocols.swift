@@ -33,4 +33,5 @@ protocol SelectCategoryWireFrameProtocols: class {
     static func createSelectCategoryViewModul(category: String) -> UIViewController
     
     func goToCreateStudy(view: UIViewController)
+    func backToStudyMain(view: UIViewController)
 }
