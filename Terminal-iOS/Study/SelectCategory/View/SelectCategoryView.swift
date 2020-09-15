@@ -1,35 +1,26 @@
 //
-//  CreateStudyViewController.swift
+//  SelectCategoryView.swift
 //  Terminal-iOS
 //
-//  Created by once on 2020/08/31.
+//  Created by 정재인 on 2020/09/15.
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
 import UIKit
-import Then
 
-
-class SelectCategoryViewController: UIViewController {
+class SelectCategoryView: UIViewController {
+    var presenter: SelectCategoryPresenterProtocols?
+    
     let titleView = UILabel()
     let textLabel = UILabel()
     let font = UIFont(name:"Apple Color Emoji" , size: 25)
     let tempView = UIImageView()
     let tempcategorySelectButton = UIButton()
     var tempCategory: String?
+    var selectedCategory = "선택된 카테고리 역할"
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        attribute()
-        layout()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.navigationBar.topItem?.title = ""
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        textLabelAnimation()
+        presenter?.viewDidLoad()
     }
     
     func attribute() {
@@ -113,14 +104,31 @@ class SelectCategoryViewController: UIViewController {
     }
     
     @objc func backTapped(sender: UIBarButtonItem) {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
-            self.textLabel.transform = self.textLabel.transform.translatedBy(x: 500, y: 0)
-        }) { _ in
-            UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-                self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
-            },completion: { _ in
-                self.navigationController?.popViewController(animated: false)
-            })
-        }
+           UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
+               self.textLabel.transform = self.textLabel.transform.translatedBy(x: 500, y: 0)
+           }) { _ in
+               UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+                   self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
+               },completion: { _ in
+                   self.navigationController?.popViewController(animated: false)
+               })
+           }
+       }
+}
+
+extension SelectCategoryView: SelectCategoryViewProtocols {
+    func showCategory() {
+        attribute()
+        layout()
+        textLabelAnimation()
+    }
+    func backTapped() {
+        backTapped()
+        presenter?.back()
+    }
+    //이부분은 콜렉션뷰의 didSelected 부분에 들어가게 되겠네요
+    func selected() {
+        //이부분은 리스트에[선택한인덱스] 가 파라미터로 들어가겠네요
+        presenter?.go(selected: selectedCategory)
     }
 }

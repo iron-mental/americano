@@ -32,12 +32,11 @@ class StudyMainWireFrame: StudyMainWireFrameProtocol {
         return view
     }
     
-    func goToSelectStudy(from view: StudyMainViewProtocol, category: String) {
-        let selectCategoryView = SelectCategoryViewController()
-        selectCategoryView.tempCategory = category
+    func goToSelectCategory(from view: StudyMainViewProtocol, category: String) {
+        let selectCategoryView = SelectCategoryWireFrame.createSelectCategoryViewModul(category: category)
         
         if let sourceView = view as? UIViewController {
-           sourceView.navigationController?.pushViewController(selectCategoryView, animated: true)
+           sourceView.navigationController?.pushViewController(selectCategoryView, animated: false)
         }
     }
     func goToCreateStudy() {

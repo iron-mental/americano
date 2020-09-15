@@ -23,7 +23,7 @@ protocol StudyMainWireFrameProtocol: class {
     static func createStudyMainModule() -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func goToSelectStudy(from view: StudyMainViewProtocol, category: String)
+    func goToSelectCategory(from view: StudyMainViewProtocol, category: String)
     func goToCreateStudy()
     
 }
@@ -37,6 +37,7 @@ protocol StudyMainPresenterProtocol: class {
     func viewDidLoad()
     func goToSearchStudy()
     func goToCreateStudy(category: String)
+    func didClickedCreateButton()
     //String은 추후에 [카테고리모델] 이런식으로 예상
     func didSearchCategory(category: String)
 }

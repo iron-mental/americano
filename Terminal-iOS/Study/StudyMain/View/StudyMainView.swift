@@ -18,39 +18,34 @@ class StudyMainView: UIViewController {
     
     override func viewDidLoad() {
         presenter?.viewDidLoad()
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
+    override func viewDidDisappear(_ animated: Bool) {
+        
     }
     
     func attribute() {
-        
         view.do {
             $0.backgroundColor = UIColor(named: "backGround")
         }
-        
         navigationController?.navigationBar.do {
             $0.tintColor = .white
             $0.barTintColor = UIColor(named: "backGround")
             $0.isTranslucent = false
         }
-        
         tempView.do {
             $0.image = #imageLiteral(resourceName: "categoryimage")
             $0.contentMode = .scaleAspectFit
         }
-        
         titleView.do {
             $0.text = "스터디"
             $0.textColor = .white
         }
-        
         navigationItem.do {
-            $0.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToSelectCategory))
+            $0.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didClickedCreateButton))
             $0.titleView = titleView
         }
-        
     }
     
     func layout() {
@@ -64,10 +59,8 @@ class StudyMainView: UIViewController {
         }
     }
     
-    
-    
-    @objc func goToSelectCategory() {
-        self.presenter?.goToCreateStudy(category: self.tempCategory)
+    @objc func didClickedCreateButton() {
+        presenter?.didClickedCreateButton()
     }
 }
 
@@ -78,29 +71,22 @@ extension StudyMainView: StudyMainViewProtocol {
         layout()
         tempCategory = category
     }
-    
     func showLoading() {
         print("showLoading")
     }
-    
     func hideLoading() {
         print("hideLoading")
     }
-    
     func categoryDownAnimate() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
             self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: 60)
         },completion: { _ in
-            
+            self.presenter?.goToCreateStudy(category: self.tempCategory)
         })
     }
-    
     func categoryUpAnimate() {
-        UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-            self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
-        },completion: { _ in
-            
-        })
+        tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
     }
 }
+
 

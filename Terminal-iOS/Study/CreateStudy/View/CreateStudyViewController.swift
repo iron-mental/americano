@@ -8,20 +8,15 @@
 
 import UIKit
 
-protocol testDelegate {
-    func setData(data: String)
-}
-
 class CreateStudyViewController: UIViewController {
     let titleView = UILabel()
+    var selectedCategory: String?
     
-    
-    var delegate: testDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
+        dump(selectedCategory)
     }
     
     func attribute() {
