@@ -6,4 +6,26 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class StudyListPresenter: StudyListPresenterProtocol {
+    var view: StudyListViewProtocol?
+    
+    var interactor: StudyListInteractorInputProtocol?
+    
+    var wireFrame: StudyListWireFrameProtocol?
+    
+    func viewDidLoad() {
+        
+    }
+}
+
+extension StudyListPresenter: StudyListInteractorOutputProtocol {
+    func didRetrieveStudies(_ studies: [Study]) {
+        
+    }
+    
+    func onError() {
+        
+    }
+}

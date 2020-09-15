@@ -9,10 +9,10 @@
 import UIKit
 
 protocol StudyCategoryViewProtocol: class {
-    var presenter: StudyCategoryPresenterProtocol { get set }
+    var presenter: StudyCategoryPresenterProtocol? { get set }
     
     // PRESENT -> VIEW
-    func showCategoryList(with category: Category)
+    func showCategoryList(with category: [Category])
     func showError()
     func showLoading()
     func hideLoading()
@@ -47,7 +47,7 @@ protocol StudyCategoryInteractorInputProtocol: class {
     var remoteDatamanager: StudyCategoryRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func retrievePostList()
+    func retrieveStudyCategory()
 }
 
 protocol StudyCategoryDataManagerInputProtocol: class {
@@ -69,6 +69,6 @@ protocol StudyCategoryRemoteDataManagerOutputProtocol: class {
 
 protocol StudyCategoryLocalDataManagerInputProtocol: class {
      // INTERACTOR -> LOCALDATAMANAGER
-    func retrieveStudyCategory() throws -> [Category]
+    func retrieveStudyCategory() -> [Category]
 //    func savePost(id: Int, title: String, imageUrl: String, thumbImageUrl: String) throws
 }

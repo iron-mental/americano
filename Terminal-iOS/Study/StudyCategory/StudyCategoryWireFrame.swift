@@ -16,7 +16,7 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
         let localDataManager: StudyCategoryLocalDataManagerInputProtocol = StudyCategoryLocalDataManager()
         let remoteDataManager: StudyCategoryRemoteDataManagerInputProtocol = StudyCategoryRemoteManager()
         let wireFrame: StudyCategoryWireFrameProtocol = StudyCategoryWireFrame()
-        
+        print("여기됨?")
         view.presenter = presenter
         presenter.view = view
         presenter.wireFrame = wireFrame
@@ -36,6 +36,4 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
     func presentStudyListScreen(from view: StudyCategoryViewProtocol, forCategory category: Category) {
         
     }
-    
-    
 }

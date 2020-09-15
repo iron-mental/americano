@@ -7,3 +7,26 @@
 //
 
 import Foundation
+
+class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
+    var view: StudyCategoryViewProtocol?
+    
+    var interactor: StudyCategoryInteractorInputProtocol?
+    
+    var wireFrame: StudyCategoryWireFrameProtocol?
+    
+    func viewDidLoad() {
+        print("왜 실행이 안될까요??")
+        interactor?.retrieveStudyCategory()
+    }
+}
+
+extension StudyCategoryPresenter: StudyCategoryInteractorOutputProtocol {
+    func didRetrieveCategories(_ categories: [Category]) {
+        view?.showCategoryList(with: categories)
+    }
+    
+    func onError() {
+        
+    }
+}

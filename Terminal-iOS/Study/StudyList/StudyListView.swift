@@ -10,6 +10,9 @@ import UIKit
 import Then
 
 class StudyListView: UIViewController {
+    
+    var presenter: StudyListPresenterProtocol?
+    
     let tableView = UITableView()
     
     let studyList = [
@@ -45,6 +48,22 @@ class StudyListView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
     }
+}
+
+extension StudyListView: StudyListViewProtocol {
+    
+    func showStudyList(with studies: [Study]) {
+        
+    }
+    
+    func showLoading() {
+        
+    }
+    
+    func hideLoading() {
+        
+    }
+    
 }
 
 extension StudyListView: UITableViewDataSource, UITableViewDelegate {

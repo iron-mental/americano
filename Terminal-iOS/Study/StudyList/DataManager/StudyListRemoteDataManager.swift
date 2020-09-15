@@ -6,4 +6,12 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
+    var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
+    
+    func retrieveStudyList() {
+        
+    }
+}

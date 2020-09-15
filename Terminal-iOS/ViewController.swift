@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UITabBarController {
-    let studyViewController = StudyView()
+    let studyViewController = StudyCategoryView()
     let myStudyViewController = MyStudyViewController()
     let setViewController = SetViewController()
     

@@ -6,8 +6,8 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Category {
-    var name: String
+    var name: UIImage
 }
