@@ -9,7 +9,7 @@
 import UIKit
 import Then
 
-class StudyView: UIViewController {
+class StudyCategoryView: UIViewController {
     
     var temp = ["swift", "android", "tensorflow", "node", "frontend", "jpark", "swift", "android", "tensorflow", "node", "frontend", "jpark"]
     
@@ -59,7 +59,7 @@ class StudyView: UIViewController {
     }
 }
 
-extension StudyView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width / 2.3, height: collectionView.frame.width / 3)
     }

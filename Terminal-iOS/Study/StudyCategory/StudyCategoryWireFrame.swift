@@ -6,4 +6,36 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
+    static func createStudyCategory() -> UIViewController {
+        let view = StudyCategoryView()
+        let presenter: StudyCategoryPresenterProtocol & StudyCategoryInteractorOutputProtocol = StudyCategoryPresenter()
+        let interactor: StudyCategoryInteractorInputProtocol & StudyCategoryRemoteDataManagerOutputProtocol = StudyCategoryInteractor()
+        let localDataManager: StudyCategoryLocalDataManagerInputProtocol = StudyCategoryLocalDataManager()
+        let remoteDataManager: StudyCategoryRemoteDataManagerInputProtocol = StudyCategoryRemoteManager()
+        let wireFrame: StudyCategoryWireFrameProtocol = StudyCategoryWireFrame()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.wireFrame = wireFrame
+        presenter.interactor = interactor
+        interactor.presenter = presenter
+        interactor.localDatamanager = localDataManager
+        interactor.remoteDatamanager = remoteDataManager
+        remoteDataManager.remoteRequestHandler = interactor
+        
+        if let view = view as? StudyCategoryView {
+            return UINavigationController(rootViewController: view)
+        } else {
+            return UIViewController()
+        }
+    }
+    
+    func presentStudyListScreen(from view: StudyCategoryViewProtocol, forCategory category: Category) {
+        
+    }
+    
+    
+}
