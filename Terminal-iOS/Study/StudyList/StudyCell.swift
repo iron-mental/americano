@@ -21,14 +21,36 @@ class StudyCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        attribute()
         layout()
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func attribute() {
+    func setData(_ data: Study) {
+        title1.do {
+            $0.text = data.title
+        }
+        
+        subTitle.do {
+            $0.text = data.subTitle
+        }
+        
+        location.do {
+            $0.text = data.location
+        }
+        
+        date.do {
+            $0.text = data.date
+        }
+        
+        managerImage.do {
+            $0.image = data.managerImage
+        }
+        
+        mainImage.do {
+            $0.image = data.mainImage
+        }
     }
     
     func layout() {

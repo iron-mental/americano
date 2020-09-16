@@ -100,13 +100,12 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
         cell.layer.cornerRadius = 10
         let category = categoryList[indexPath.row]
         cell.imageView.image = category.name
-        print("아나아낭나")
 //        cell.imageView.image = UIImage(named: temp[indexPath.row])
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let view = StudyListView()
-        navigationController?.pushViewController(view, animated: true)
+        print("cell clicked")
+        presenter?.showStudyListDetail()
     }
 }

@@ -22,7 +22,8 @@ protocol StudyCategoryWireFrameProtocol: class {
     static func createStudyCategory() -> UIViewController
     
     // PRESENTER -> WIREFRAME
-    func presentStudyListScreen(from view: StudyCategoryViewProtocol, forCategory category: Category)
+    func presentStudyListScreen(from view: StudyCategoryViewProtocol)
+//    func presentStudyListScreen(from view: StudyCategoryViewProtocol, forCategory category: Category)
 }
 
 protocol StudyCategoryPresenterProtocol: class {
@@ -32,7 +33,7 @@ protocol StudyCategoryPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-//    func showStudyListDetail(forPost post: Study)
+    func showStudyListDetail()
 }
 
 protocol StudyCategoryInteractorOutputProtocol: class {

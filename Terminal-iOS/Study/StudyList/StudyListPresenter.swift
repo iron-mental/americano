@@ -16,13 +16,13 @@ class StudyListPresenter: StudyListPresenterProtocol {
     var wireFrame: StudyListWireFrameProtocol?
     
     func viewDidLoad() {
-        
+        interactor?.retrieveStudyList()
     }
 }
 
 extension StudyListPresenter: StudyListInteractorOutputProtocol {
     func didRetrieveStudies(_ studies: [Study]) {
-        
+        view?.showStudyList(with: studies)
     }
     
     func onError() {

@@ -33,7 +33,11 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
         }
     }
     
-    func presentStudyListScreen(from view: StudyCategoryViewProtocol, forCategory category: Category) {
+    func presentStudyListScreen(from view: StudyCategoryViewProtocol) {
+        let studyListViewController = StudyListWireFrame.createStudyListModule()
         
+        if let sourceView = view as? UIViewController {
+           sourceView.navigationController?.pushViewController(studyListViewController, animated: true)
+        }
     }
 }

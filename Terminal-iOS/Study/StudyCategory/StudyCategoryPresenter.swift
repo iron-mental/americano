@@ -9,6 +9,7 @@
 import Foundation
 
 class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
+        
     var view: StudyCategoryViewProtocol?
     
     var interactor: StudyCategoryInteractorInputProtocol?
@@ -16,9 +17,12 @@ class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
     var wireFrame: StudyCategoryWireFrameProtocol?
     
     func viewDidLoad() {
-        print("왜 실행이 안될까요??")
         interactor?.retrieveStudyCategory()
     }
+    func showStudyListDetail() {
+        wireFrame?.presentStudyListScreen(from: view!)
+    }
+
 }
 
 extension StudyCategoryPresenter: StudyCategoryInteractorOutputProtocol {

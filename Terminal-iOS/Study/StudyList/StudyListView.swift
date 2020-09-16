@@ -11,22 +11,16 @@ import Then
 
 class StudyListView: UIViewController {
     
-    var presenter: StudyListPresenterProtocol?
-    
     let tableView = UITableView()
     
-    let studyList = [
-        Study(title: "스니커즈 어플 만드실분", subTitle: "안녕하세요 많은 참여 부탁드립니다.", location: "강남구", date: "09/21 |", managerImage: #imageLiteral(resourceName: "Image-1"), mainImage: #imageLiteral(resourceName: "Image")),
-        Study(title: "스니커즈 어플 만드실분", subTitle: "안녕하세요 많은 참여 부탁드립니다.", location: "강남구", date: "09/21 |", managerImage: #imageLiteral(resourceName: "Image-1"), mainImage: #imageLiteral(resourceName: "Image")),
-        Study(title: "스니커즈 어플 만드실분", subTitle: "안녕하세요 많은 참여 부탁드립니다.", location: "강남구", date: "09/21 |", managerImage: #imageLiteral(resourceName: "Image-1"), mainImage: #imageLiteral(resourceName: "Image")),
-        Study(title: "스니커즈 어플 만드실분", subTitle: "안녕하세요 많은 참여 부탁드립니다.", location: "강남구", date: "09/21 |", managerImage: #imageLiteral(resourceName: "Image-1"), mainImage: #imageLiteral(resourceName: "Image")),
-        Study(title: "스니커즈 어플 만드실분", subTitle: "안녕하세요 많은 참여 부탁드립니다. ", location: "강남구", date: "09/21 |", managerImage: #imageLiteral(resourceName: "Image-1"), mainImage: #imageLiteral(resourceName: "Image"))
-        ]
-    
+    var presenter: StudyListPresenterProtocol?
+    var studyList: [Study] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
+        presenter?.viewDidLoad()
     }
     
     func attribute() {
@@ -53,7 +47,8 @@ class StudyListView: UIViewController {
 extension StudyListView: StudyListViewProtocol {
     
     func showStudyList(with studies: [Study]) {
-        
+        studyList = studies
+        tableView.reloadData()
     }
     
     func showLoading() {
@@ -74,15 +69,9 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StudyCell.cellId, for: indexPath) as! StudyCell
         
-        cell.do {
-            $0.title1.text = studyList[indexPath.row].title
-            $0.subTitle.text = studyList[indexPath.row].subTitle
-            $0.location.text = studyList[indexPath.row].location
-            $0.date.text = studyList[indexPath.row].date
-            $0.managerImage.image = studyList[indexPath.row].managerImage
-            $0.mainImage.image = studyList[indexPath.row].mainImage
-        }
-        
+        let study = studyList[indexPath.row]
+        cell.setData(study)
+                
         return cell
     }
 }

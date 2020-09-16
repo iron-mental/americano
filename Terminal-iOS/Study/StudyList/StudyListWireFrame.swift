@@ -27,11 +27,10 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
         remoteDataManager.remoteRequestHandler = interactor
         
         if let view = view as? StudyListView {
-            return UINavigationController(rootViewController: view)
+            return view
         } else {
             return UIViewController()
         }
-
     }
     
     func presentStudyDetailScreen(from view: StudyListViewProtocol, forStudy study: Study) {
