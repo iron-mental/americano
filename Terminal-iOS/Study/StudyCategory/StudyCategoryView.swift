@@ -15,10 +15,7 @@ class StudyCategoryView: UIViewController {
     
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
-//        = [
-//        UIImage(named: "swift"), UIImage(named: "android"), UIImage(named: "tensorflow"), UIImage(named: "node"), UIImage(named: "frontend"), UIImage(named: "jpark"), UIImage(named: "swift"), UIImage(named: "android"), UIImage(named: "tensorflow"), UIImage(named: "node"), UIImage(named: "frontend"), UIImage(named: "jpark")
-//    ]
-//
+
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -30,21 +27,28 @@ class StudyCategoryView: UIViewController {
         
         attirbute()
         layout()
-        view.backgroundColor = .white
-        title = "스터디"
-        let createStudyBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(createStudy))
-        let searchStudyBtn = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchStudy))
-        
-        self.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
         presenter?.viewDidLoad()
     }
     
     func attirbute() {
+        title = "스터디"
+        view.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
+        let createStudyBtn = UIBarButtonItem(barButtonSystemItem: .add,
+                                             target: self,
+                                             action: #selector(createStudy))
+        let searchStudyBtn = UIBarButtonItem(barButtonSystemItem: .search,
+                                             target: self,
+                                             action: #selector(searchStudy))
+        
+        self.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
+        
         collectionView.do {
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self
-            $0.backgroundColor = .white
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }
     
@@ -52,8 +56,8 @@ class StudyCategoryView: UIViewController {
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -25).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
     }
     
@@ -89,7 +93,7 @@ extension StudyCategoryView: StudyCategoryViewProtocol {
 
 extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 2.3, height: collectionView.frame.width / 3)
+        return CGSize(width: 150, height: 100)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryList.count
