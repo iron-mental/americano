@@ -16,7 +16,6 @@ class CreateStudyViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        dump(selectedCategory)
     }
     
     func attribute() {

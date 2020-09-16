@@ -14,6 +14,9 @@
 		CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0362510D83100F88313 /* SelectCategoryWireFrame.swift */; };
 		CC1BE0392510D8AD00F88313 /* CreateStudyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */; };
 		CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */; };
+		CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */; };
+		CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */; };
+		CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */; };
 		CC4F335125108C9600968B17 /* StudyMainWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F335025108C9600968B17 /* StudyMainWireFrame.swift */; };
 		CC4F335325108F9700968B17 /* StudyMainRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
@@ -41,6 +44,9 @@
 		CC1BE0362510D83100F88313 /* SelectCategoryWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryWireFrame.swift; sourceTree = "<group>"; };
 		CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyWireFrame.swift; sourceTree = "<group>"; };
 		CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyProtocols.swift; sourceTree = "<group>"; };
+		CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyPresenter.swift; sourceTree = "<group>"; };
+		CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyInteractor.swift; sourceTree = "<group>"; };
+		CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyView.swift; sourceTree = "<group>"; };
 		CC4F335025108C9600968B17 /* StudyMainWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainWireFrame.swift; sourceTree = "<group>"; };
 		CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				CCD6DFE725073FF50014D711 /* CreateStudyViewController.swift */,
+				CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -271,6 +278,7 @@
 		CCB2ACA5250F846200435E5F /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -278,6 +286,7 @@
 		CCB2ACA6250F846700435E5F /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -439,10 +448,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC1BE0392510D8AD00F88313 /* CreateStudyWireFrame.swift in Sources */,
+				CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */,
 				CCB2ACB5250F940900435E5F /* StudyMainLocalDataManager.swift in Sources */,
 				CCA1FF6B24FD0FF40026C3EA /* StudyMainView.swift in Sources */,
 				CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */,
 				CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */,
+				CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				CCB2ACAB250F856700435E5F /* StudyMainPresenter.swift in Sources */,
@@ -452,6 +463,7 @@
 				CC4F335325108F9700968B17 /* StudyMainRemoteDataManager.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				CC4F335125108C9600968B17 /* StudyMainWireFrame.swift in Sources */,
+				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
 				CCD6DFE825073FF50014D711 /* CreateStudyViewController.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,

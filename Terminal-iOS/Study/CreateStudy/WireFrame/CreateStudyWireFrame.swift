@@ -10,8 +10,17 @@ import UIKit
 
 class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
     static func createStudyViewModul() -> UIViewController {
-        let creatStudyView = CreateStudyViewController()
+        let view = CreateStudyView()
+        let presenter = CreateStudyPresenter()
+        let interactor = CreateStudyInteractor()
         
-        return creatStudyView
+        view.presenter = presenter
+        
+        presenter.view = view
+        presenter.interactor = interactor
+        
+        interactor.presenter = presenter
+        
+        return view
     }
 }

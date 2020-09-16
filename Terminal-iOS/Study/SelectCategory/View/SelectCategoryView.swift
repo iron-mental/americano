@@ -79,9 +79,11 @@ class SelectCategoryView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
+    
     @objc func backButtonTapped() {
         presenter?.back()
     }
+    
     @objc func goToCreateStudy() {
         presenter?.go(selected: selectedCategory)
     }
