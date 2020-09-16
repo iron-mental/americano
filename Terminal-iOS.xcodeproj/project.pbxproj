@@ -32,7 +32,6 @@
 		CCB2ACAE250F863400435E5F /* StudyMainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACAD250F863400435E5F /* StudyMainProtocols.swift */; };
 		CCB2ACB0250F8E9B00435E5F /* StudyMainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */; };
 		CCB2ACB5250F940900435E5F /* StudyMainLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACB4250F940900435E5F /* StudyMainLocalDataManager.swift */; };
-		CCD6DFE825073FF50014D711 /* CreateStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD6DFE725073FF50014D711 /* CreateStudyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,7 +63,6 @@
 		CCB2ACAD250F863400435E5F /* StudyMainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainProtocols.swift; sourceTree = "<group>"; };
 		CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainInteractor.swift; sourceTree = "<group>"; };
 		CCB2ACB4250F940900435E5F /* StudyMainLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainLocalDataManager.swift; sourceTree = "<group>"; };
-		CCD6DFE725073FF50014D711 /* CreateStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyViewController.swift; sourceTree = "<group>"; };
 		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -269,7 +267,6 @@
 		CCB2ACA4250F845A00435E5F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CCD6DFE725073FF50014D711 /* CreateStudyViewController.swift */,
 				CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */,
 			);
 			path = View;
@@ -464,7 +461,6 @@
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				CC4F335125108C9600968B17 /* StudyMainWireFrame.swift in Sources */,
 				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
-				CCD6DFE825073FF50014D711 /* CreateStudyViewController.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,
