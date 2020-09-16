@@ -15,6 +15,14 @@ class CreateStudyView: UIViewController {
     
     override func viewDidLoad() {
         presenter?.viewDidLoad()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        let layout =  UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 60, height: 60)
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: SNSCollectionViewCell.identifier)
+
     }
     func attribute() {
         view.do {
@@ -54,7 +62,8 @@ extension CreateStudyView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return 6
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SNSCollectionViewCell.identifier , for: indexPath)
+        return cell
     }
     
     
