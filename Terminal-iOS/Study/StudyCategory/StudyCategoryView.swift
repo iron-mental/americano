@@ -10,9 +10,7 @@ import UIKit
 import Then
 
 class StudyCategoryView: UIViewController {
-    
-    var temp = ["swift", "android", "tensorflow", "node", "frontend", "jpark", "swift", "android", "tensorflow", "node", "frontend", "jpark"]
-    
+
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
 
@@ -24,25 +22,28 @@ class StudyCategoryView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         attirbute()
         layout()
         presenter?.viewDidLoad()
     }
     
     func attirbute() {
-        title = "스터디"
-        view.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
-        }
+        
         let createStudyBtn = UIBarButtonItem(barButtonSystemItem: .add,
                                              target: self,
                                              action: #selector(createStudy))
         let searchStudyBtn = UIBarButtonItem(barButtonSystemItem: .search,
                                              target: self,
                                              action: #selector(searchStudy))
-        
-        self.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
+        self.do {
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.title = "스터디"
+            $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
+            $0.navigationController?.navigationBar.do {
+                $0.barTintColor = UIColor.appColor(.terminalBackground)
+                $0.titleTextAttributes = [.foregroundColor: UIColor.white]
+            }
+        }
         
         collectionView.do {
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
@@ -101,10 +102,11 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
+        
         cell.layer.cornerRadius = 10
         let category = categoryList[indexPath.row]
         cell.imageView.image = category.name
-//        cell.imageView.image = UIImage(named: temp[indexPath.row])
+        
         return cell
     }
     

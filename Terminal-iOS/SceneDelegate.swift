@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        guard let _ = (scene as? UIWindowScene) else { return }
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            let view = StudyCategoryWireFrame.createStudyCategory()
+            let view = ViewController()
             window.rootViewController = view
             
             self.window = window
