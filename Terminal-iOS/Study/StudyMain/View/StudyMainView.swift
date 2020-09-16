@@ -27,11 +27,11 @@ class StudyMainView: UIViewController {
     
     func attribute() {
         view.do {
-            $0.backgroundColor = UIColor(named: "backGround")
+            $0.backgroundColor = UIColor(named: "background")
         }
         navigationController?.navigationBar.do {
             $0.tintColor = .white
-            $0.barTintColor = UIColor(named: "backGround")
+            $0.barTintColor = UIColor(named: "background")
             $0.isTranslucent = false
         }
         tempView.do {

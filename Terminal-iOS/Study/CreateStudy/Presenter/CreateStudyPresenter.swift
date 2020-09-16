@@ -14,9 +14,7 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
     var wireFrame: CreateStudyWireFrameProtocols?
     
     func viewDidLoad() {
-        print("이거 안넘어와?")
         view?.setView()
-        
     }
     
     func notionInputFinish() {

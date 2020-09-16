@@ -25,7 +25,7 @@ class SelectCategoryView: UIViewController {
     
     func attribute() {
         view.do {
-            $0.backgroundColor = UIColor(named: "backGround")
+            $0.backgroundColor = UIColor(named: "background")
         }
         titleView.do {
             $0.text = "스터디 만들기"
