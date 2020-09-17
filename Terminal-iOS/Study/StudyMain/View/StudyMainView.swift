@@ -17,6 +17,7 @@ class StudyMainView: UIViewController {
     var tempCategory = ""
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         presenter?.viewDidLoad()
         
     }

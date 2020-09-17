@@ -10,34 +10,37 @@ import UIKit
 
 class CreateStudyView: UIViewController {
     var presenter: CreateStudyPresenterProtocols?
+    var testUIView = UIView()
+    var collectionView = SNSCollectionView(frame: CGRect(x: 0, y: 0, width: 300, height: 100))
     var selectedCategory: String?
-    var collectionView = UICollectionView()
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         presenter?.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        let layout =  UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 60, height: 60)
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: SNSCollectionViewCell.identifier)
-
     }
+    
     func attribute() {
         view.do {
             $0.backgroundColor = UIColor(named: "background")
         }
-        
     }
     
     func layout() {
         view.addSubview(collectionView)
-        
         collectionView.do {
-            $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo:view.centerXAnchor)
+                .isActive = true // ---- 1
+            $0.centerYAnchor.constraint(equalTo:view.centerYAnchor)
+                .isActive = true // ---- 2
+            $0.heightAnchor.constraint(equalToConstant: 200)
+                .isActive = true // ---- 3
+            $0.widthAnchor.constraint(equalToConstant: 200)
+                .isActive = true // ---- 4
         }
+
     }
 }
 
@@ -65,8 +68,6 @@ extension CreateStudyView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SNSCollectionViewCell.identifier , for: indexPath)
         return cell
     }
-    
-    
 }
 
 extension CreateStudyView: UICollectionViewDelegate {

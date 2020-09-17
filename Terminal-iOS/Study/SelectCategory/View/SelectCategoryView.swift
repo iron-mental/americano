@@ -20,6 +20,7 @@ class SelectCategoryView: UIViewController {
     var selectedCategory = "선택된 카테고리 역할"
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         presenter?.viewDidLoad()
     }
     
