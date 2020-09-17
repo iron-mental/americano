@@ -17,7 +17,7 @@ class SelectCategoryView: UIViewController {
     let tempView = UIImageView()
     let tempcategorySelectButton = UIButton()
     var tempCategory: String?
-    var selectedCategory = "선택된 카테고리 역할"
+    var selectedCategory = "카테고리선택부터넘어온값"
     
     override func viewDidLoad() {
         super.viewDidLoad()

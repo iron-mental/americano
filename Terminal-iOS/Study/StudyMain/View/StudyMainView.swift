@@ -14,12 +14,12 @@ class StudyMainView: UIViewController {
     
     var tempView = UIImageView()
     var titleView = UILabel()
+    
     var tempCategory = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
-        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -71,6 +71,7 @@ extension StudyMainView: StudyMainViewProtocol {
         attribute()
         layout()
         tempCategory = category
+        print(tempCategory)
     }
     func showLoading() {
         print("showLoading")

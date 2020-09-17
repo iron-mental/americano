@@ -19,7 +19,6 @@ class StudyMainPresenter: StudyMainPresenterProtocol {
         interactor?.searchCategory()
     }
     func goToSearchStudy() {
-        print("스터디 검색하러 갈거다.")
     }
     func didClickedCreateButton() {
         view?.categoryDownAnimate()
