@@ -25,7 +25,6 @@ class StudyCategoryView: UIViewController {
         attirbute()
         layout()
         presenter?.viewDidLoad()
-        print(self.navigationController?.navigationBar.frame.height)
     }
     
     func attirbute() {

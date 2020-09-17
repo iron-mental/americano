@@ -12,7 +12,7 @@ import Then
 class StudyCell: UITableViewCell {
     static let cellId = "cellId"
     
-    let title1 = UILabel()
+    let mainTitle = UILabel()
     let location = UILabel()
     let subTitle = UILabel()
     let date = UILabel()
@@ -21,6 +21,7 @@ class StudyCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        attribute()
         layout()
     }
     required init?(coder: NSCoder) {
@@ -28,7 +29,7 @@ class StudyCell: UITableViewCell {
     }
     
     func setData(_ data: Study) {
-        title1.do {
+        mainTitle.do {
             $0.text = data.title
         }
         
@@ -53,9 +54,22 @@ class StudyCell: UITableViewCell {
         }
     }
     
+    func attribute() {
+        self.backgroundColor = UIColor.appColor(.terminalBackground)
+        mainTitle.do {
+            $0.textColor = .white
+        }
+        subTitle.do {
+            $0.textColor = .white
+        }
+        date.do {
+            $0.textColor = .white
+        }
+    }
+    
     func layout() {
-        addSubview(title1)
-        title1.do {
+        addSubview(mainTitle)
+        mainTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
@@ -64,7 +78,7 @@ class StudyCell: UITableViewCell {
         addSubview(subTitle)
         subTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: title1.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: mainTitle.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         }
         
