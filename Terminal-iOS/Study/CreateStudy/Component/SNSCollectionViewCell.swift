@@ -37,7 +37,7 @@ class SNSCollectionViewCell: UICollectionViewCell {
         textField.do {
             $0.backgroundColor = .red
             $0.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
-            $0.placeholder = "이거 플레이스홀더맞나요?"
+            $0.placeholder = "이거 플레이스 홀더"
         }
         verifiedImage.do {
             $0.image = #imageLiteral(resourceName: "set_clicked")
