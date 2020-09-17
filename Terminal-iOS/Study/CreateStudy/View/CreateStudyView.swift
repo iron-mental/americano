@@ -10,7 +10,9 @@ import UIKit
 
 class CreateStudyView: UIViewController {
     var presenter: CreateStudyPresenterProtocols?
-    var testUIView = UIView()
+    
+    let imageView = UIImageView()
+    let screenSize = UIScreen.main.bounds
     var collectionView = SNSCollectionView(frame: CGRect(x: 0, y: 0, width: 300, height: 100))
     var selectedCategory: String?
     
@@ -25,20 +27,31 @@ class CreateStudyView: UIViewController {
         view.do {
             $0.backgroundColor = UIColor(named: "background")
         }
+        imageView.do {
+            $0.frame = CGRect(x: 0, y: 0, width: screenSize.width, height: (170/667) * screenSize.height)
+            $0.image = #imageLiteral(resourceName: "swiftBackground")
+        }
     }
     
     func layout() {
+        view.addSubview(imageView)
         view.addSubview(collectionView)
+        
+        imageView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        }
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo:view.centerXAnchor)
-                .isActive = true // ---- 1
+                .isActive = true
             $0.centerYAnchor.constraint(equalTo:view.centerYAnchor)
-                .isActive = true // ---- 2
-            $0.heightAnchor.constraint(equalToConstant: 200)
-                .isActive = true // ---- 3
-            $0.widthAnchor.constraint(equalToConstant: 200)
-                .isActive = true // ---- 4
+                .isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 170)
+                .isActive = true
+            $0.widthAnchor.constraint(equalToConstant: screenSize.width )
+                .isActive = true
         }
 
     }
