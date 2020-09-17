@@ -12,7 +12,8 @@ import Then
 class StudyListView: UIViewController {
     
     let tableView = UITableView()
-    
+    let lateButton = UIButton()
+    let locationButton = UIButton()
     var presenter: StudyListPresenterProtocol?
     var studyList: [Study] = []
 

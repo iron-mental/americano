@@ -40,7 +40,6 @@ class ViewController: UITabBarController {
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.barTintColor = UIColor.appColor(.terminalBackground)
         attribute()
         
     }
