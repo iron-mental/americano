@@ -71,5 +71,4 @@ protocol StudyCategoryRemoteDataManagerOutputProtocol: class {
 protocol StudyCategoryLocalDataManagerInputProtocol: class {
      // INTERACTOR -> LOCALDATAMANAGER
     func retrieveStudyCategory() -> [Category]
-//    func savePost(id: Int, title: String, imageUrl: String, thumbImageUrl: String) throws
 }
