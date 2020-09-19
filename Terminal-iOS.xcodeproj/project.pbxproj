@@ -127,46 +127,6 @@
 			path = Study;
 			sourceTree = "<group>";
 		};
-		CC1BE02A2510C9FC00F88313 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		CC1BE02C2510CA1500F88313 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		CC1BE02D2510CA1C00F88313 /* WireFrame */ = {
-			isa = PBXGroup;
-			children = (
-				CC1BE0362510D83100F88313 /* SelectCategoryWireFrame.swift */,
-			);
-			path = WireFrame;
-			sourceTree = "<group>";
-		};
-		CC1BE02E2510CA2700F88313 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		CC1BE03A2510D8C500F88313 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		CC1BE0432511FD5400F88313 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,12 +175,13 @@
 		CCB2AC99250F819400435E5F /* StudyMain */ = {
 			isa = PBXGroup;
 			children = (
-				CCB2ACB1250F903B00435E5F /* DataManager */,
-				CCB2ACAC250F85F500435E5F /* Protocols */,
-				CCB2ACA3250F844D00435E5F /* WireFrame */,
-				CCB2ACA2250F844800435E5F /* Presenter */,
-				CCB2ACA1250F844100435E5F /* Interactor */,
-				CCB2ACA0250F843900435E5F /* View */,
+				CCA1FF6A24FD0FF40026C3EA /* StudyMainView.swift */,
+				CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */,
+				CCB2ACAA250F856700435E5F /* StudyMainPresenter.swift */,
+				CC4F335025108C9600968B17 /* StudyMainWireFrame.swift */,
+				CCB2ACAD250F863400435E5F /* StudyMainProtocols.swift */,
+				CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */,
+				CCB2ACB4250F940900435E5F /* StudyMainLocalDataManager.swift */,
 			);
 			path = StudyMain;
 			sourceTree = "<group>";
@@ -228,12 +189,12 @@
 		CCB2AC9A250F81AC00435E5F /* CreateStudy */ = {
 			isa = PBXGroup;
 			children = (
+				CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */,
+				CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */,
+				CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */,
+				CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */,
+				CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */,
 				CC1BE0432511FD5400F88313 /* Component */,
-				CC1BE03A2510D8C500F88313 /* Protocols */,
-				CCB2ACA7250F846C00435E5F /* WireFrame */,
-				CCB2ACA6250F846700435E5F /* Presenter */,
-				CCB2ACA5250F846200435E5F /* Interactor */,
-				CCB2ACA4250F845A00435E5F /* View */,
 			);
 			path = CreateStudy;
 			sourceTree = "<group>";
@@ -241,109 +202,12 @@
 		CCB2AC9B250F834300435E5F /* SelectCategory */ = {
 			isa = PBXGroup;
 			children = (
-				CC1BE02E2510CA2700F88313 /* Protocols */,
-				CC1BE02D2510CA1C00F88313 /* WireFrame */,
-				CC1BE02C2510CA1500F88313 /* Presenter */,
-				CC1BE02A2510C9FC00F88313 /* View */,
+				CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */,
+				CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */,
+				CC1BE0362510D83100F88313 /* SelectCategoryWireFrame.swift */,
+				CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */,
 			);
 			path = SelectCategory;
-			sourceTree = "<group>";
-		};
-		CCB2ACA0250F843900435E5F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				CCA1FF6A24FD0FF40026C3EA /* StudyMainView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		CCB2ACA1250F844100435E5F /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		CCB2ACA2250F844800435E5F /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				CCB2ACAA250F856700435E5F /* StudyMainPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		CCB2ACA3250F844D00435E5F /* WireFrame */ = {
-			isa = PBXGroup;
-			children = (
-				CC4F335025108C9600968B17 /* StudyMainWireFrame.swift */,
-			);
-			path = WireFrame;
-			sourceTree = "<group>";
-		};
-		CCB2ACA4250F845A00435E5F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		CCB2ACA5250F846200435E5F /* Interactor */ = {
-			isa = PBXGroup;
-			children = (
-				CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */,
-			);
-			path = Interactor;
-			sourceTree = "<group>";
-		};
-		CCB2ACA6250F846700435E5F /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-				CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */,
-			);
-			path = Presenter;
-			sourceTree = "<group>";
-		};
-		CCB2ACA7250F846C00435E5F /* WireFrame */ = {
-			isa = PBXGroup;
-			children = (
-				CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */,
-			);
-			path = WireFrame;
-			sourceTree = "<group>";
-		};
-		CCB2ACAC250F85F500435E5F /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				CCB2ACAD250F863400435E5F /* StudyMainProtocols.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		CCB2ACB1250F903B00435E5F /* DataManager */ = {
-			isa = PBXGroup;
-			children = (
-				CCB2ACB3250F905200435E5F /* Remote */,
-				CCB2ACB2250F904C00435E5F /* Local */,
-			);
-			path = DataManager;
-			sourceTree = "<group>";
-		};
-		CCB2ACB2250F904C00435E5F /* Local */ = {
-			isa = PBXGroup;
-			children = (
-				CCB2ACB4250F940900435E5F /* StudyMainLocalDataManager.swift */,
-			);
-			path = Local;
-			sourceTree = "<group>";
-		};
-		CCB2ACB3250F905200435E5F /* Remote */ = {
-			isa = PBXGroup;
-			children = (
-				CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */,
-			);
-			path = Remote;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
