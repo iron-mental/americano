@@ -6,7 +6,8 @@ target 'Terminal-iOS' do
   use_frameworks!
   pod 'SwiftLint'
   pod 'Then'
-  pod 'NMapsMap'  
+  pod 'NMapsMap'
+  pod 'Firebase/Analytics'  
   # Pods for Terminal-iOS
 
 end

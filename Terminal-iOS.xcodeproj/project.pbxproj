@@ -30,6 +30,20 @@
 		A5A2FC1C2510C1C600E1D7D4 /* StudyListRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC1B2510C1C600E1D7D4 /* StudyListRemoteDataManager.swift */; };
 		A5A2FC1F2510FF7600E1D7D4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC1D2510FF7600E1D7D4 /* Model.xcdatamodeld */; };
 		A5A2FC222511FBB400E1D7D4 /* UIColor-Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC212511FBB400E1D7D4 /* UIColor-Ext.swift */; };
+		CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */; };
+		CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */; };
+		CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */; };
+		CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0362510D83100F88313 /* SelectCategoryWireFrame.swift */; };
+		CC1BE0392510D8AD00F88313 /* CreateStudyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */; };
+		CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */; };
+		CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */; };
+		CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */; };
+		CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */; };
+		CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */; };
+		CC1BE047251213F200F88313 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC1BE046251213F200F88313 /* GoogleService-Info.plist */; };
+		CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0482512286B00F88313 /* SNSCollectionView.swift */; };
+		CC4F335125108C9600968B17 /* StudyMainWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F335025108C9600968B17 /* StudyMainWireFrame.swift */; };
+		CC4F335325108F9700968B17 /* StudyMainRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
 		CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5824FD0C930026C3EA /* SceneDelegate.swift */; };
 		CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5A24FD0C930026C3EA /* ViewController.swift */; };
@@ -37,8 +51,13 @@
 		CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */; };
 		CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */; };
 		CCA1FF6B24FD0FF40026C3EA /* StudyCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6A24FD0FF40026C3EA /* StudyCategoryView.swift */; };
+		CCA1FF6B24FD0FF40026C3EA /* StudyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6A24FD0FF40026C3EA /* StudyMainView.swift */; };
 		CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */; };
 		CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6E24FD10290026C3EA /* SetViewController.swift */; };
+		CCB2ACAB250F856700435E5F /* StudyMainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACAA250F856700435E5F /* StudyMainPresenter.swift */; };
+		CCB2ACAE250F863400435E5F /* StudyMainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACAD250F863400435E5F /* StudyMainProtocols.swift */; };
+		CCB2ACB0250F8E9B00435E5F /* StudyMainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */; };
+		CCB2ACB5250F940900435E5F /* StudyMainLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACB4250F940900435E5F /* StudyMainLocalDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +85,20 @@
 		A5A2FC1B2510C1C600E1D7D4 /* StudyListRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListRemoteDataManager.swift; sourceTree = "<group>"; };
 		A5A2FC1E2510FF7600E1D7D4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		A5A2FC212511FBB400E1D7D4 /* UIColor-Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Ext.swift"; sourceTree = "<group>"; };
+		CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
+		CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryProtocols.swift; sourceTree = "<group>"; };
+		CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryPresenter.swift; sourceTree = "<group>"; };
+		CC1BE0362510D83100F88313 /* SelectCategoryWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryWireFrame.swift; sourceTree = "<group>"; };
+		CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyWireFrame.swift; sourceTree = "<group>"; };
+		CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyProtocols.swift; sourceTree = "<group>"; };
+		CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyPresenter.swift; sourceTree = "<group>"; };
+		CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyInteractor.swift; sourceTree = "<group>"; };
+		CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyView.swift; sourceTree = "<group>"; };
+		CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionViewCell.swift; sourceTree = "<group>"; };
+		CC1BE046251213F200F88313 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CC1BE0482512286B00F88313 /* SNSCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionView.swift; sourceTree = "<group>"; };
+		CC4F335025108C9600968B17 /* StudyMainWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainWireFrame.swift; sourceTree = "<group>"; };
+		CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCA1FF5824FD0C930026C3EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -75,8 +108,13 @@
 		CCA1FF6224FD0C930026C3EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCA1FF6424FD0C930026C3EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCA1FF6A24FD0FF40026C3EA /* StudyCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryView.swift; sourceTree = "<group>"; };
+		CCA1FF6A24FD0FF40026C3EA /* StudyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainView.swift; sourceTree = "<group>"; };
 		CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyViewController.swift; sourceTree = "<group>"; };
 		CCA1FF6E24FD10290026C3EA /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
+		CCB2ACAA250F856700435E5F /* StudyMainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainPresenter.swift; sourceTree = "<group>"; };
+		CCB2ACAD250F863400435E5F /* StudyMainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainProtocols.swift; sourceTree = "<group>"; };
+		CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainInteractor.swift; sourceTree = "<group>"; };
+		CCB2ACB4250F940900435E5F /* StudyMainLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainLocalDataManager.swift; sourceTree = "<group>"; };
 		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -132,6 +170,9 @@
 				A5A2FBFF250FAB3A00E1D7D4 /* StudyCategory */,
 				A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */,
 				A55B4CDF24FFE915006102EB /* SearchStudyViewController.swift */,
+				CCB2AC9B250F834300435E5F /* SelectCategory */,
+				CCB2AC9A250F81AC00435E5F /* CreateStudy */,
+				CCB2AC99250F819400435E5F /* StudyMain */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -197,6 +238,13 @@
 				A5A2FC212511FBB400E1D7D4 /* UIColor-Ext.swift */,
 			);
 			path = "Extensions-Utillities";
+		CC1BE0432511FD5400F88313 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */,
+				CC1BE0482512286B00F88313 /* SNSCollectionView.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		CCA1FF4A24FD0C930026C3EA = {
@@ -234,8 +282,47 @@
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
 				A5A2FC1D2510FF7600E1D7D4 /* Model.xcdatamodeld */,
+				CC1BE046251213F200F88313 /* GoogleService-Info.plist */,
 			);
 			path = "Terminal-iOS";
+			sourceTree = "<group>";
+		};
+		CCB2AC99250F819400435E5F /* StudyMain */ = {
+			isa = PBXGroup;
+			children = (
+				CCA1FF6A24FD0FF40026C3EA /* StudyMainView.swift */,
+				CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */,
+				CCB2ACAA250F856700435E5F /* StudyMainPresenter.swift */,
+				CC4F335025108C9600968B17 /* StudyMainWireFrame.swift */,
+				CCB2ACAD250F863400435E5F /* StudyMainProtocols.swift */,
+				CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */,
+				CCB2ACB4250F940900435E5F /* StudyMainLocalDataManager.swift */,
+			);
+			path = StudyMain;
+			sourceTree = "<group>";
+		};
+		CCB2AC9A250F81AC00435E5F /* CreateStudy */ = {
+			isa = PBXGroup;
+			children = (
+				CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */,
+				CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */,
+				CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */,
+				CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */,
+				CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */,
+				CC1BE0432511FD5400F88313 /* Component */,
+			);
+			path = CreateStudy;
+			sourceTree = "<group>";
+		};
+		CCB2AC9B250F834300435E5F /* SelectCategory */ = {
+			isa = PBXGroup;
+			children = (
+				CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */,
+				CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */,
+				CC1BE0362510D83100F88313 /* SelectCategoryWireFrame.swift */,
+				CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */,
+			);
+			path = SelectCategory;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +388,7 @@
 			files = (
 				A55B4CDD24FF79A8006102EB /* .swiftlint.yml in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
+				CC1BE047251213F200F88313 /* GoogleService-Info.plist in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
 			);
@@ -372,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
 				A55B4CE024FFE915006102EB /* SearchStudyViewController.swift in Sources */,
 				A5A2FC1C2510C1C600E1D7D4 /* StudyListRemoteDataManager.swift in Sources */,
 				CCA1FF6B24FD0FF40026C3EA /* StudyCategoryView.swift in Sources */,
@@ -385,7 +474,13 @@
 				A5A2FC08250FB1FD00E1D7D4 /* StudyListInteractor.swift in Sources */,
 				A5A2FC0E250FB26900E1D7D4 /* StudyListProtocols.swift in Sources */,
 				A5A2FC1F2510FF7600E1D7D4 /* Model.xcdatamodeld in Sources */,
+				CC1BE0392510D8AD00F88313 /* CreateStudyWireFrame.swift in Sources */,
+				CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */,
+				CCB2ACB5250F940900435E5F /* StudyMainLocalDataManager.swift in Sources */,
+				CCA1FF6B24FD0FF40026C3EA /* StudyMainView.swift in Sources */,
+				CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */,
 				CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */,
+				CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				A506896A250BAD7A001D02BC /* CategoryCell.swift in Sources */,
@@ -395,6 +490,19 @@
 				A5A2FC0A250FB20800E1D7D4 /* StudyListPresenter.swift in Sources */,
 				A5A2FC172510B6BC00E1D7D4 /* StudyCategoryRemoteManager.swift in Sources */,
 				A506896C250BB14E001D02BC /* StudyListView.swift in Sources */,
+				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
+				CCB2ACAB250F856700435E5F /* StudyMainPresenter.swift in Sources */,
+				CCB2ACAE250F863400435E5F /* StudyMainProtocols.swift in Sources */,
+				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,
+				CCB2ACB0250F8E9B00435E5F /* StudyMainInteractor.swift in Sources */,
+				CC4F335325108F9700968B17 /* StudyMainRemoteDataManager.swift in Sources */,
+				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
+				CC4F335125108C9600968B17 /* StudyMainWireFrame.swift in Sources */,
+				CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */,
+				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
+				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
+				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
+				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				A5068970250BB26E001D02BC /* StudyCell.swift in Sources */,
 				A5A2FC06250FB16600E1D7D4 /* StudyCategoryWireFrame.swift in Sources */,
