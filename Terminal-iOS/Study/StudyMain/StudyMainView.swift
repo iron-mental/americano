@@ -22,10 +22,6 @@ class StudyMainView: UIViewController {
         presenter?.viewDidLoad()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        
-    }
-    
     func attribute() {
         view.do {
             $0.backgroundColor = UIColor(named: "background")

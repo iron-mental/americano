@@ -43,7 +43,7 @@ class CreateStudyView: UIViewController {
         }
         studyOverviewUIView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0),category: seletedCategory!)
         studyOverviewUIView?.do {
-            $0.backgroundColor = .gray
+            $0.backgroundColor = UIColor(named: "background")
         }
     }
     
