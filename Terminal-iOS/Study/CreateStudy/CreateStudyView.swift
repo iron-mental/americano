@@ -76,7 +76,9 @@ class CreateStudyView: UIViewController {
         }
         studyOverviewUIView!.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            
             $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 100).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyOverviewUIView!.textView.bottomAnchor, constant: 10).isActive = true
         }

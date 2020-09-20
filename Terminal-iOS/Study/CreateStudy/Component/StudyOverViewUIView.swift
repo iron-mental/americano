@@ -24,17 +24,14 @@ class StudyOverViewUIView: UIView {
     func attribute() {
         titleLabel.do {
             $0.text = "스터디 소개"
-//            $0.backgroundColor = .gray
-            $0.textColor = .white
         }
         categoryLabel.do {
             $0.text = seletedCategory
-//            $0.backgroundColor = .gray
-            $0.textColor = .white
         }
         textView.do {
             $0.text = "test"
             $0.backgroundColor = UIColor(named: "background")
+            
         }
     }
     
