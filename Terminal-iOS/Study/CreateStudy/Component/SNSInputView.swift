@@ -14,9 +14,9 @@ class SNSInputView: UIView {
     var categoryLabel = UILabel()
     var textView = UITextView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, category: String) {
         super.init(frame: frame)
-        self.seletedCategory = "바꿔야할 부분"
+        seletedCategory = category
         attribute()
         layout()
     }
@@ -28,7 +28,7 @@ class SNSInputView: UIView {
             $0.textColor = .white
         }
         categoryLabel.do {
-            $0.text = "야야야ㅑ야야야야야야야야"
+            $0.text = seletedCategory
             $0.backgroundColor = .gray
             $0.textColor = .white
         }

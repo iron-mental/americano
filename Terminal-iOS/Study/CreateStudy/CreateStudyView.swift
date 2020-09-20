@@ -18,8 +18,8 @@ class CreateStudyView: UIViewController {
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
-    var studyOverviewUIView = SNSInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-    
+    var studyOverviewUIView: SNSInputView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
@@ -41,8 +41,10 @@ class CreateStudyView: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .black
         }
-        studyOverviewUIView.do {
+        studyOverviewUIView = SNSInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 0),category: seletedCategory!)
+        studyOverviewUIView?.do {
             $0.backgroundColor = .gray
+//            $0.seletedCategory = "seletedCategory!d"
         }
     }
     
@@ -50,7 +52,7 @@ class CreateStudyView: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(studyTitleTextField)
-        scrollView.addSubview(studyOverviewUIView)
+        scrollView.addSubview(studyOverviewUIView!)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -73,11 +75,11 @@ class CreateStudyView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
             $0.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
         }
-        studyOverviewUIView.do {
+        studyOverviewUIView!.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
             $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 100).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyOverviewUIView.textView.bottomAnchor, constant: 10).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyOverviewUIView!.textView.bottomAnchor, constant: 10).isActive = true
         }
     }
 }

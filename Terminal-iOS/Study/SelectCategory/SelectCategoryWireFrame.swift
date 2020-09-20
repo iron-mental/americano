@@ -24,9 +24,7 @@ class SelectCategoryWireFrame: SelectCategoryWireFrameProtocols {
     }
     
     func goToCreateStudy(view: UIViewController, category: String) {
-        let createStudyView = CreateStudyWireFrame.createStudyViewModul()
-        
-        (createStudyView as! CreateStudyView).selectedCategory = category
+        let createStudyView = CreateStudyWireFrame.createStudyViewModul(category: category)
         view.navigationController?.pushViewController(createStudyView, animated: false)
     }
     
