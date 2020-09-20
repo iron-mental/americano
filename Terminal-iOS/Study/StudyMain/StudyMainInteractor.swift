@@ -15,7 +15,7 @@ class StudyMainInteractor: StudyMainInteractorProtocol {
     
     func searchCategory() {
         do {
-            if let category = localDataManager?.getCategory() {
+            if let category = try localDataManager?.getCategory() {
                 //여러가지 비지니스 로직을 거친 뒤
                 presenter?.didSearchCategory(category: category)
             }

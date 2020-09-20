@@ -17,14 +17,14 @@ class CreateStudyView: UIViewController {
     let scrollView = UIScrollView()
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
-    let collectionView = SNSCollectionView(frame: CGRect(x: 0, y: 0, width: 300, height: 100))
-    
-    
+    var seletedCategory: String?
+    var titleLabel = UILabel()
+    var categoryLabel = UILabel()
+    var textView = UITextView()
+    var uiView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.dataSource = self
     }
     
     func attribute() {
@@ -32,7 +32,7 @@ class CreateStudyView: UIViewController {
             $0.backgroundColor = UIColor(named: "background")
         }
         scrollView.do {
-            $0.backgroundColor = .cyan
+            $0.backgroundColor = UIColor(named: "background")
         }
         imageView.do {
             $0.image = #imageLiteral(resourceName: "swiftBackground")
@@ -43,13 +43,29 @@ class CreateStudyView: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .black
         }
+        titleLabel.do {
+            $0.text = "스터디 소개"
+            $0.backgroundColor = .gray
+            $0.textColor = .white
+        }
+        categoryLabel.do {
+            $0.text = "야야야ㅑ야야야야야야야야"
+            $0.backgroundColor = .gray
+            $0.textColor = .white
+        }
+        textView.do {
+            $0.text = "test"
+            $0.backgroundColor = .green
+        }
+        uiView.do {
+            $0.backgroundColor = .gray
+        }
     }
     
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(studyTitleTextField)
-        scrollView.addSubview(collectionView)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -72,16 +88,35 @@ class CreateStudyView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
             $0.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
         }
-        collectionView.do {
+        
+        scrollView.addSubview(uiView)
+        
+        uiView.addSubview(titleLabel)
+        uiView.addSubview(categoryLabel)
+        uiView.addSubview(textView)
+        
+        uiView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo:scrollView.centerXAnchor)
-                .isActive = true
-            $0.centerYAnchor.constraint(equalTo:scrollView.centerYAnchor, constant: 200)
-                .isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 170)
-                .isActive = true
-            $0.widthAnchor.constraint(equalToConstant: screenSize.width )
-                .isActive = true
+            $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
+            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 100).isActive = true
+            $0.bottomAnchor.constraint(equalTo: textView.bottomAnchor, constant: 10).isActive = true
+        }
+        titleLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.leadingAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.topAnchor).isActive = true
+        }
+        categoryLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.trailingAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.topAnchor).isActive = true
+        }
+        textView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 300).isActive = true
+            $0.topAnchor.constraint(equalTo: titleLabel.safeAreaLayoutGuide.bottomAnchor, constant: 30).isActive = true
+            $0.leadingAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.leadingAnchor).isActive = true
         }
     }
 }
@@ -96,22 +131,5 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     func setBackgroundImage() {
         print("setVackgroundImage")
-    }
-}
-
-extension CreateStudyView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SNSCollectionViewCell.identifier , for: indexPath)
-        return cell
-    }
-}
-
-extension CreateStudyView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
     }
 }
