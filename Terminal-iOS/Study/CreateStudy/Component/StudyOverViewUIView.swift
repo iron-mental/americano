@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SNSInputView: UIView {
+class StudyOverViewUIView: UIView {
     var seletedCategory: String?
     var titleLabel = UILabel()
     var categoryLabel = UILabel()

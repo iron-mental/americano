@@ -18,7 +18,7 @@ class CreateStudyView: UIViewController {
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
-    var studyOverviewUIView: SNSInputView?
+    var studyOverviewUIView: StudyOverViewUIView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +41,9 @@ class CreateStudyView: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .black
         }
-        studyOverviewUIView = SNSInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 0),category: seletedCategory!)
+        studyOverviewUIView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0),category: seletedCategory!)
         studyOverviewUIView?.do {
             $0.backgroundColor = .gray
-//            $0.seletedCategory = "seletedCategory!d"
         }
     }
     
