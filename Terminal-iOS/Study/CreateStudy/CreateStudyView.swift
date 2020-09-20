@@ -18,10 +18,8 @@ class CreateStudyView: UIViewController {
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
-    var titleLabel = UILabel()
-    var categoryLabel = UILabel()
-    var textView = UITextView()
-    var uiView = UIView()
+    var studyOverviewUIView = SNSInputView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
@@ -43,21 +41,7 @@ class CreateStudyView: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .black
         }
-        titleLabel.do {
-            $0.text = "스터디 소개"
-            $0.backgroundColor = .gray
-            $0.textColor = .white
-        }
-        categoryLabel.do {
-            $0.text = "야야야ㅑ야야야야야야야야"
-            $0.backgroundColor = .gray
-            $0.textColor = .white
-        }
-        textView.do {
-            $0.text = "test"
-            $0.backgroundColor = .green
-        }
-        uiView.do {
+        studyOverviewUIView.do {
             $0.backgroundColor = .gray
         }
     }
@@ -66,6 +50,7 @@ class CreateStudyView: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(studyTitleTextField)
+        scrollView.addSubview(studyOverviewUIView)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -88,35 +73,11 @@ class CreateStudyView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
             $0.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
         }
-        
-        scrollView.addSubview(uiView)
-        
-        uiView.addSubview(titleLabel)
-        uiView.addSubview(categoryLabel)
-        uiView.addSubview(textView)
-        
-        uiView.do {
+        studyOverviewUIView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
             $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 100).isActive = true
-            $0.bottomAnchor.constraint(equalTo: textView.bottomAnchor, constant: 10).isActive = true
-        }
-        titleLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.leadingAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.topAnchor).isActive = true
-        }
-        categoryLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.trailingAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.trailingAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.topAnchor).isActive = true
-        }
-        textView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 300).isActive = true
-            $0.topAnchor.constraint(equalTo: titleLabel.safeAreaLayoutGuide.bottomAnchor, constant: 30).isActive = true
-            $0.leadingAnchor.constraint(equalTo: uiView.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyOverviewUIView.textView.bottomAnchor, constant: 10).isActive = true
         }
     }
 }

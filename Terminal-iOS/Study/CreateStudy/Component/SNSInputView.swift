@@ -28,13 +28,13 @@ class SNSInputView: UIView {
             $0.textColor = .white
         }
         categoryLabel.do {
-            $0.text = seletedCategory
+            $0.text = "야야야ㅑ야야야야야야야야"
             $0.backgroundColor = .gray
             $0.textColor = .white
         }
         textView.do {
             $0.text = "test"
-            $0.backgroundColor = .cyan
+            $0.backgroundColor = .green
         }
     }
     
@@ -55,7 +55,9 @@ class SNSInputView: UIView {
         }
         textView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12).isActive = true
+            $0.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 300).isActive = true
+            $0.topAnchor.constraint(equalTo: titleLabel.safeAreaLayoutGuide.bottomAnchor, constant: 30).isActive = true
             $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
         }
     }
