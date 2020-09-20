@@ -8,6 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */; };
+		A506896A250BAD7A001D02BC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5068969250BAD7A001D02BC /* CategoryCell.swift */; };
+		A506896C250BB14E001D02BC /* StudyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A506896B250BB14E001D02BC /* StudyListView.swift */; };
+		A506896E250BB180001D02BC /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = A506896D250BB180001D02BC /* Study.swift */; };
+		A5068970250BB26E001D02BC /* StudyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A506896F250BB26E001D02BC /* StudyCell.swift */; };
+		A52F00DA24FD186100DE3126 /* CreateStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */; };
+		A55B4CDD24FF79A8006102EB /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A55B4CDC24FF79A8006102EB /* .swiftlint.yml */; };
+		A55B4CE024FFE915006102EB /* SearchStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55B4CDF24FFE915006102EB /* SearchStudyViewController.swift */; };
+		A5A2FC02250FB12000E1D7D4 /* StudyCategoryInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC01250FB12000E1D7D4 /* StudyCategoryInteractor.swift */; };
+		A5A2FC04250FB14900E1D7D4 /* StudyCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC03250FB14900E1D7D4 /* StudyCategoryPresenter.swift */; };
+		A5A2FC06250FB16600E1D7D4 /* StudyCategoryWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC05250FB16600E1D7D4 /* StudyCategoryWireFrame.swift */; };
+		A5A2FC08250FB1FD00E1D7D4 /* StudyListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC07250FB1FD00E1D7D4 /* StudyListInteractor.swift */; };
+		A5A2FC0A250FB20800E1D7D4 /* StudyListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC09250FB20800E1D7D4 /* StudyListPresenter.swift */; };
+		A5A2FC0C250FB21700E1D7D4 /* StudyListWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC0B250FB21700E1D7D4 /* StudyListWireFrame.swift */; };
+		A5A2FC0E250FB26900E1D7D4 /* StudyListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC0D250FB26900E1D7D4 /* StudyListProtocols.swift */; };
+		A5A2FC10250FB27800E1D7D4 /* StudyCategoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC0F250FB27800E1D7D4 /* StudyCategoryProtocols.swift */; };
+		A5A2FC1225109EA600E1D7D4 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC1125109EA600E1D7D4 /* Category.swift */; };
+		A5A2FC152510B66B00E1D7D4 /* StudyCategoryLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC142510B66B00E1D7D4 /* StudyCategoryLocalDataManager.swift */; };
+		A5A2FC172510B6BC00E1D7D4 /* StudyCategoryRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC162510B6BC00E1D7D4 /* StudyCategoryRemoteManager.swift */; };
+		A5A2FC1A2510C1B400E1D7D4 /* StudyListLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC192510C1B400E1D7D4 /* StudyListLocalDataManager.swift */; };
+		A5A2FC1C2510C1C600E1D7D4 /* StudyListRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC1B2510C1C600E1D7D4 /* StudyListRemoteDataManager.swift */; };
+		A5A2FC1F2510FF7600E1D7D4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC1D2510FF7600E1D7D4 /* Model.xcdatamodeld */; };
+		A5A2FC222511FBB400E1D7D4 /* UIColor-Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A2FC212511FBB400E1D7D4 /* UIColor-Ext.swift */; };
 		CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */; };
 		CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */; };
 		CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */; };
@@ -28,6 +50,7 @@
 		CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF5C24FD0C930026C3EA /* Main.storyboard */; };
 		CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */; };
 		CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */; };
+		CCA1FF6B24FD0FF40026C3EA /* StudyCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6A24FD0FF40026C3EA /* StudyCategoryView.swift */; };
 		CCA1FF6B24FD0FF40026C3EA /* StudyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6A24FD0FF40026C3EA /* StudyMainView.swift */; };
 		CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */; };
 		CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6E24FD10290026C3EA /* SetViewController.swift */; };
@@ -40,6 +63,28 @@
 /* Begin PBXFileReference section */
 		0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		A5068969250BAD7A001D02BC /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		A506896B250BB14E001D02BC /* StudyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListView.swift; sourceTree = "<group>"; };
+		A506896D250BB180001D02BC /* Study.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Study.swift; path = "Terminal-iOS/Study/Study.swift"; sourceTree = SOURCE_ROOT; };
+		A506896F250BB26E001D02BC /* StudyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCell.swift; sourceTree = "<group>"; };
+		A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyViewController.swift; sourceTree = "<group>"; };
+		A55B4CDC24FF79A8006102EB /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		A55B4CDF24FFE915006102EB /* SearchStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyViewController.swift; sourceTree = "<group>"; };
+		A5A2FC01250FB12000E1D7D4 /* StudyCategoryInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryInteractor.swift; sourceTree = "<group>"; };
+		A5A2FC03250FB14900E1D7D4 /* StudyCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryPresenter.swift; sourceTree = "<group>"; };
+		A5A2FC05250FB16600E1D7D4 /* StudyCategoryWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryWireFrame.swift; sourceTree = "<group>"; };
+		A5A2FC07250FB1FD00E1D7D4 /* StudyListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListInteractor.swift; sourceTree = "<group>"; };
+		A5A2FC09250FB20800E1D7D4 /* StudyListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListPresenter.swift; sourceTree = "<group>"; };
+		A5A2FC0B250FB21700E1D7D4 /* StudyListWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListWireFrame.swift; sourceTree = "<group>"; };
+		A5A2FC0D250FB26900E1D7D4 /* StudyListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListProtocols.swift; sourceTree = "<group>"; };
+		A5A2FC0F250FB27800E1D7D4 /* StudyCategoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryProtocols.swift; sourceTree = "<group>"; };
+		A5A2FC1125109EA600E1D7D4 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Category.swift; path = "Terminal-iOS/Study/StudyCategory/Category.swift"; sourceTree = SOURCE_ROOT; };
+		A5A2FC142510B66B00E1D7D4 /* StudyCategoryLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryLocalDataManager.swift; sourceTree = "<group>"; };
+		A5A2FC162510B6BC00E1D7D4 /* StudyCategoryRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryRemoteManager.swift; sourceTree = "<group>"; };
+		A5A2FC192510C1B400E1D7D4 /* StudyListLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListLocalDataManager.swift; sourceTree = "<group>"; };
+		A5A2FC1B2510C1C600E1D7D4 /* StudyListRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListRemoteDataManager.swift; sourceTree = "<group>"; };
+		A5A2FC1E2510FF7600E1D7D4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		A5A2FC212511FBB400E1D7D4 /* UIColor-Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Ext.swift"; sourceTree = "<group>"; };
 		CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryProtocols.swift; sourceTree = "<group>"; };
 		CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryPresenter.swift; sourceTree = "<group>"; };
@@ -62,6 +107,7 @@
 		CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCA1FF6224FD0C930026C3EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCA1FF6424FD0C930026C3EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCA1FF6A24FD0FF40026C3EA /* StudyCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCategoryView.swift; sourceTree = "<group>"; };
 		CCA1FF6A24FD0FF40026C3EA /* StudyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainView.swift; sourceTree = "<group>"; };
 		CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyViewController.swift; sourceTree = "<group>"; };
 		CCA1FF6E24FD10290026C3EA /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +166,10 @@
 		A52F00D824FD182C00DE3126 /* Study */ = {
 			isa = PBXGroup;
 			children = (
+				A5A2FC00250FB0B200E1D7D4 /* StudyList */,
+				A5A2FBFF250FAB3A00E1D7D4 /* StudyCategory */,
+				A52F00D924FD186100DE3126 /* CreateStudyViewController.swift */,
+				A55B4CDF24FFE915006102EB /* SearchStudyViewController.swift */,
 				CCB2AC9B250F834300435E5F /* SelectCategory */,
 				CCB2AC9A250F81AC00435E5F /* CreateStudy */,
 				CCB2AC99250F819400435E5F /* StudyMain */,
@@ -127,6 +177,67 @@
 			path = Study;
 			sourceTree = "<group>";
 		};
+		A55B4CDE24FF8927006102EB /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				A506896D250BB180001D02BC /* Study.swift */,
+				A5A2FC1125109EA600E1D7D4 /* Category.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		A5A2FBFF250FAB3A00E1D7D4 /* StudyCategory */ = {
+			isa = PBXGroup;
+			children = (
+				A5A2FC132510B64200E1D7D4 /* DataManager */,
+				CCA1FF6A24FD0FF40026C3EA /* StudyCategoryView.swift */,
+				A5068969250BAD7A001D02BC /* CategoryCell.swift */,
+				A5A2FC03250FB14900E1D7D4 /* StudyCategoryPresenter.swift */,
+				A5A2FC01250FB12000E1D7D4 /* StudyCategoryInteractor.swift */,
+				A5A2FC05250FB16600E1D7D4 /* StudyCategoryWireFrame.swift */,
+				A5A2FC0F250FB27800E1D7D4 /* StudyCategoryProtocols.swift */,
+			);
+			path = StudyCategory;
+			sourceTree = "<group>";
+		};
+		A5A2FC00250FB0B200E1D7D4 /* StudyList */ = {
+			isa = PBXGroup;
+			children = (
+				A5A2FC182510C19100E1D7D4 /* DataManager */,
+				A506896B250BB14E001D02BC /* StudyListView.swift */,
+				A506896F250BB26E001D02BC /* StudyCell.swift */,
+				A5A2FC07250FB1FD00E1D7D4 /* StudyListInteractor.swift */,
+				A5A2FC09250FB20800E1D7D4 /* StudyListPresenter.swift */,
+				A5A2FC0B250FB21700E1D7D4 /* StudyListWireFrame.swift */,
+				A5A2FC0D250FB26900E1D7D4 /* StudyListProtocols.swift */,
+			);
+			path = StudyList;
+			sourceTree = "<group>";
+		};
+		A5A2FC132510B64200E1D7D4 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				A5A2FC142510B66B00E1D7D4 /* StudyCategoryLocalDataManager.swift */,
+				A5A2FC162510B6BC00E1D7D4 /* StudyCategoryRemoteManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		A5A2FC182510C19100E1D7D4 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				A5A2FC192510C1B400E1D7D4 /* StudyListLocalDataManager.swift */,
+				A5A2FC1B2510C1C600E1D7D4 /* StudyListRemoteDataManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		A5A2FC202511FB8A00E1D7D4 /* Extensions-Utillities */ = {
+			isa = PBXGroup;
+			children = (
+				A5A2FC212511FBB400E1D7D4 /* UIColor-Ext.swift */,
+			);
+			path = "Extensions-Utillities";
 		CC1BE0432511FD5400F88313 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +250,7 @@
 		CCA1FF4A24FD0C930026C3EA = {
 			isa = PBXGroup;
 			children = (
+				A55B4CDC24FF79A8006102EB /* .swiftlint.yml */,
 				CCA1FF5524FD0C930026C3EA /* Terminal-iOS */,
 				CCA1FF5424FD0C930026C3EA /* Products */,
 				5ABD6AFD2D9CBF39ED6C88B5 /* Pods */,
@@ -157,6 +269,8 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A5A2FC202511FB8A00E1D7D4 /* Extensions-Utillities */,
+				A55B4CDE24FF8927006102EB /* Entity */,
 				A52F00D824FD182C00DE3126 /* Study */,
 				A52F00D724FD182B00DE3126 /* MyStudy */,
 				A52F00D624FD182800DE3126 /* Set */,
@@ -167,6 +281,7 @@
 				CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */,
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
+				A5A2FC1D2510FF7600E1D7D4 /* Model.xcdatamodeld */,
 				CC1BE046251213F200F88313 /* GoogleService-Info.plist */,
 			);
 			path = "Terminal-iOS";
@@ -222,6 +337,7 @@
 				CCA1FF5024FD0C930026C3EA /* Frameworks */,
 				CCA1FF5124FD0C930026C3EA /* Resources */,
 				C782E0649B9B4B73DCAE348D /* [CP] Embed Pods Frameworks */,
+				A55B4CDB24FF7922006102EB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -270,6 +386,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A55B4CDD24FF79A8006102EB /* .swiftlint.yml in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
 				CC1BE047251213F200F88313 /* GoogleService-Info.plist in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
@@ -302,6 +419,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A55B4CDB24FF7922006102EB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 		C782E0649B9B4B73DCAE348D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,6 +460,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
+				A55B4CE024FFE915006102EB /* SearchStudyViewController.swift in Sources */,
+				A5A2FC1C2510C1C600E1D7D4 /* StudyListRemoteDataManager.swift in Sources */,
+				CCA1FF6B24FD0FF40026C3EA /* StudyCategoryView.swift in Sources */,
+				A5A2FC0C250FB21700E1D7D4 /* StudyListWireFrame.swift in Sources */,
+				A5A2FC152510B66B00E1D7D4 /* StudyCategoryLocalDataManager.swift in Sources */,
+				A5A2FC10250FB27800E1D7D4 /* StudyCategoryProtocols.swift in Sources */,
+				A5A2FC04250FB14900E1D7D4 /* StudyCategoryPresenter.swift in Sources */,
+				A506896E250BB180001D02BC /* Study.swift in Sources */,
+				A5A2FC222511FBB400E1D7D4 /* UIColor-Ext.swift in Sources */,
+				A5A2FC1A2510C1B400E1D7D4 /* StudyListLocalDataManager.swift in Sources */,
+				A5A2FC08250FB1FD00E1D7D4 /* StudyListInteractor.swift in Sources */,
+				A5A2FC0E250FB26900E1D7D4 /* StudyListProtocols.swift in Sources */,
+				A5A2FC1F2510FF7600E1D7D4 /* Model.xcdatamodeld in Sources */,
 				CC1BE0392510D8AD00F88313 /* CreateStudyWireFrame.swift in Sources */,
 				CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */,
 				CCB2ACB5250F940900435E5F /* StudyMainLocalDataManager.swift in Sources */,
@@ -335,6 +483,13 @@
 				CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
+				A506896A250BAD7A001D02BC /* CategoryCell.swift in Sources */,
+				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,
+				A5A2FC02250FB12000E1D7D4 /* StudyCategoryInteractor.swift in Sources */,
+				A52F00DA24FD186100DE3126 /* CreateStudyViewController.swift in Sources */,
+				A5A2FC0A250FB20800E1D7D4 /* StudyListPresenter.swift in Sources */,
+				A5A2FC172510B6BC00E1D7D4 /* StudyCategoryRemoteManager.swift in Sources */,
+				A506896C250BB14E001D02BC /* StudyListView.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				CCB2ACAB250F856700435E5F /* StudyMainPresenter.swift in Sources */,
 				CCB2ACAE250F863400435E5F /* StudyMainProtocols.swift in Sources */,
@@ -349,6 +504,9 @@
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
+				A5068970250BB26E001D02BC /* StudyCell.swift in Sources */,
+				A5A2FC06250FB16600E1D7D4 /* StudyCategoryWireFrame.swift in Sources */,
+				A5A2FC1225109EA600E1D7D4 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,7 +661,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Terminal-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -522,7 +680,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Terminal-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -548,6 +706,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A5A2FC1D2510FF7600E1D7D4 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A5A2FC1E2510FF7600E1D7D4 /* Model.xcdatamodel */,
+			);
+			currentVersion = A5A2FC1E2510FF7600E1D7D4 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CCA1FF4B24FD0C930026C3EA /* Project object */;
 }
