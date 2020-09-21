@@ -11,7 +11,7 @@ import UIKit
 class StudyCategoryLocalDataManager: StudyCategoryLocalDataManagerInputProtocol {
     func retrieveStudyCategory() -> [Category] {
         let arr = [
-            Category(name: UIImage(named: "swift")!), Category(name: UIImage(named: "android")!), Category(name: UIImage(named: "tensorflow")!), Category(name: UIImage(named: "node")!), Category(name: UIImage(named: "frontend")!), Category(name: UIImage(named: "android")!), Category(name: UIImage(named: "node")!), Category(name: UIImage(named: "jpark")!), Category(name: UIImage(named: "jpark")!), Category(name: UIImage(named: "jpark")!), Category(name: UIImage(named: "jpark")!), Category(name: UIImage(named: "jpark")!)
+            Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!)
         ]
         return arr
     }

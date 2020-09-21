@@ -9,13 +9,13 @@
 import UIKit
 
 class SelectCategoryWireFrame: SelectCategoryWireFrameProtocols {
-    static func createSelectCategoryViewModul(category: String) -> UIViewController {
+    static func createSelectCategoryViewModul(category: [Category]) -> UIViewController {
         let view = SelectCategoryView()
         let presenter: SelectCategoryPresenterProtocols = SelectCategoryPresenter()
         let wireFrame: SelectCategoryWireFrameProtocols = SelectCategoryWireFrame()
         
         view.presenter = presenter
-        view.tempCategory = category
+//        view.tempCategory = category
         
         presenter.view = view
         presenter.wireFrame = wireFrame

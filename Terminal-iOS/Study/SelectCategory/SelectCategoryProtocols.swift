@@ -30,7 +30,7 @@ protocol SelectCategoryPresenterProtocols: class {
 }
 
 protocol SelectCategoryWireFrameProtocols: class {
-    static func createSelectCategoryViewModul(category: String) -> UIViewController
+    static func createSelectCategoryViewModul(category: [Category]) -> UIViewController
     
     func goToCreateStudy(view: UIViewController, category: String)
     func backToStudyMain(view: UIViewController)

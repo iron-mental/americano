@@ -11,6 +11,8 @@ import UIKit
 class StudyMainWireFrame: StudyMainWireFrameProtocol {
     
     
+    
+    
     static func createStudyMainModule() -> UIViewController {
         let view = StudyMainView()
         let presenter: StudyMainPresenterProtocol = StudyMainPresenter()
@@ -33,6 +35,10 @@ class StudyMainWireFrame: StudyMainWireFrameProtocol {
     }
     
     func goToSelectCategory(from view: StudyMainViewProtocol, category: String) {
+        print("Test")
+    }
+    
+    func goToSelectCategory(from view: StudyMainViewProtocol, category: [Category]) {
         let selectCategoryView = SelectCategoryWireFrame.createSelectCategoryViewModul(category: category)
         
         if let sourceView = view as? UIViewController {

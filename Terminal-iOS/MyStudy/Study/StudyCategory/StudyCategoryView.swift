@@ -36,11 +36,11 @@ class StudyCategoryView: UIViewController {
                                              target: self,
                                              action: #selector(searchStudy))
         self.do {
-            $0.view.backgroundColor = UIColor(named: "background")
+            $0.view.backgroundColor = .white
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
             $0.navigationController?.navigationBar.do {
-                $0.barTintColor = UIColor(named: "background")
+                $0.barTintColor = .white
                 $0.titleTextAttributes = [.foregroundColor: UIColor.white]
             }
         }
@@ -63,8 +63,7 @@ class StudyCategoryView: UIViewController {
     }
     
     @objc func createStudy() {
-        let view = CreateStudyViewController()
-        navigationController?.pushViewController(view, animated: true)
+        presenter?.didClickedCreateButton()
     }
     @objc func searchStudy() {
         let view = SearchStudyViewController()
@@ -73,7 +72,6 @@ class StudyCategoryView: UIViewController {
 }
 
 extension StudyCategoryView: StudyCategoryViewProtocol {
-    
     func showCategoryList(with category: [Category]) {
         categoryList = category
         collectionView.reloadData()
@@ -89,6 +87,17 @@ extension StudyCategoryView: StudyCategoryViewProtocol {
     
     func hideLoading() {
         
+    }
+    func categoryDownAnimate() {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+            self.collectionView.transform = self.collectionView.transform.translatedBy(x: 0, y: 60)
+        },completion: { _ in
+            self.presenter?.goToCreateStudy(category: self.categoryList)
+        })
+    }
+    
+    func categoryUpAnimate() {
+        collectionView.transform = self.collectionView.transform.translatedBy(x: 0, y: -60)
     }
 }
 

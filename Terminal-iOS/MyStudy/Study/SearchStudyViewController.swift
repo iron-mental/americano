@@ -27,7 +27,7 @@ class SearchStudyViewController: UIViewController {
     
     func attribute() {
         backBtn.do {
-            $0.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            $0.setImage(#imageLiteral(resourceName: "study"), for: .normal)
             $0.addTarget(self, action: #selector(back), for: .touchUpInside)
         }
         placeSearch.do {

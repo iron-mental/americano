@@ -10,20 +10,16 @@ import UIKit
 import Then
 
 class StudyMainView: UIViewController {
+    
     var presenter: StudyMainPresenterProtocol?
+    var tempCategory = ""
     
     var tempView = UIImageView()
     var titleView = UILabel()
     
-    var tempCategory = ""
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        
     }
     
     func attribute() {
