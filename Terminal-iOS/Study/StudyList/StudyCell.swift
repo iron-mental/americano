@@ -65,7 +65,6 @@ class StudyCell: UITableViewCell {
         date.do {
             $0.textColor = .white
         }
-        mainImage.layer.cornerRadius = 1
     }
     
     func layout() {

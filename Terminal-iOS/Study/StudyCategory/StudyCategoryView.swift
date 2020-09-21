@@ -42,10 +42,6 @@ class StudyCategoryView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
-            //            $0.navigationController?.navigationBar.do {
-            //                $0.barTintColor = UIColor(named: "background")
-            //                $0.titleTextAttributes = [.foregroundColor: UIColor.white]
-//                        }
         }
         
         collectionView.do {
