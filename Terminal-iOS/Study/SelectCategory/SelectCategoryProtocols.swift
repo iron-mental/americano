@@ -16,7 +16,6 @@ protocol SelectCategoryViewProtocols: class {
     
     //VIEW -> PRESENTER
     func backTapped()
-    func selected()
 }
 
 protocol SelectCategoryPresenterProtocols: class {

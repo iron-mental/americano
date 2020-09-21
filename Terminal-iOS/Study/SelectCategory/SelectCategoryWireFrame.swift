@@ -31,7 +31,7 @@ class SelectCategoryWireFrame: SelectCategoryWireFrameProtocols {
     }
     
     func backToStudyMain(view: UIViewController) {
-        let studyMainView = StudyMainWireFrame.createStudyMainModule()
+        let studyMainView = StudyCategoryWireFrame.createStudyCategory()
         view.navigationController?.pushViewController(studyMainView, animated: false)
         view.navigationController?.popViewController(animated: false)
     }
