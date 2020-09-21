@@ -10,9 +10,9 @@ import UIKit
 
 class ViewController: UITabBarController {
     
-    let studyViewController = StudyMainWireFrame.createStudyMainModule()
+    let studyViewController = StudyCategoryWireFrame.createStudyCategory()
     
-    let myStudyViewController = StudyCategoryWireFrame.createStudyCategory()
+    let myStudyViewController = MyStudyViewController()
     let setViewController = SetViewController()
     
     enum Tab: Int {

@@ -10,10 +10,10 @@ import UIKit
 import Then
 
 class StudyCategoryView: UIViewController {
-
+    
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
-
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -35,17 +35,21 @@ class StudyCategoryView: UIViewController {
         let searchStudyBtn = UIBarButtonItem(barButtonSystemItem: .search,
                                              target: self,
                                              action: #selector(searchStudy))
+        view.do {
+            $0.backgroundColor = UIColor(named: "background")
+        }
         self.do {
             $0.view.backgroundColor = .white
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
-            $0.navigationController?.navigationBar.do {
-                $0.barTintColor = .white
-                $0.titleTextAttributes = [.foregroundColor: UIColor.white]
-            }
+            //            $0.navigationController?.navigationBar.do {
+            ////                $0.barTintColor = UIColor(named: "background")
+            ////                $0.titleTextAttributes = [.foregroundColor: UIColor.white]
+            //            }
         }
         
         collectionView.do {
+            $0.backgroundColor = .white
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self

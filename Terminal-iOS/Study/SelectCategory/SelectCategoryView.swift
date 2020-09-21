@@ -29,12 +29,8 @@ class SelectCategoryView: UIViewController {
     }
     
     func attribute() {
-//        view.do {
-////            $0.backgroundColor = UIColor(named: "background")
-//        }
-        navigationController?.navigationBar.do {
-            $0.barTintColor = .white
-            $0.titleTextAttributes = [.foregroundColor: UIColor.white]
+        view.do {
+            $0.backgroundColor = UIColor(named: "background")
         }
         titleView.do {
             $0.text = "스터디 만들기"
