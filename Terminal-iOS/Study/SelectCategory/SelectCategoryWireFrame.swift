@@ -9,13 +9,13 @@
 import UIKit
 
 class SelectCategoryWireFrame: SelectCategoryWireFrameProtocols {
-    static func createSelectCategoryViewModul(category: String) -> UIViewController {
+    static func createSelectCategoryViewModul(category: [Category]) -> UIViewController {
         let view = SelectCategoryView()
         let presenter: SelectCategoryPresenterProtocols = SelectCategoryPresenter()
         let wireFrame: SelectCategoryWireFrameProtocols = SelectCategoryWireFrame()
         
         view.presenter = presenter
-        view.tempCategory = category
+        view.categoryList = category
         
         presenter.view = view
         presenter.wireFrame = wireFrame
@@ -23,15 +23,15 @@ class SelectCategoryWireFrame: SelectCategoryWireFrameProtocols {
         return view
     }
     
-    func goToCreateStudy(view: UIViewController, category: String) {
+    func goToCreateStudy(view: UIViewController, category: Category) {
         let createStudyView = CreateStudyWireFrame.createStudyViewModul()
         
-        (createStudyView as! CreateStudyView).selectedCategory = category
+//        (createStudyView as! CreateStudyView).selectedCategory = category
         view.navigationController?.pushViewController(createStudyView, animated: false)
     }
     
     func backToStudyMain(view: UIViewController) {
-        let studyMainView = StudyMainWireFrame.createStudyMainModule()
+        let studyMainView = StudyCategoryWireFrame.createStudyCategory()
         view.navigationController?.pushViewController(studyMainView, animated: false)
         view.navigationController?.popViewController(animated: false)
     }

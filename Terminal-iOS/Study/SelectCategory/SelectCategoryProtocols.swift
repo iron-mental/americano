@@ -16,7 +16,6 @@ protocol SelectCategoryViewProtocols: class {
     
     //VIEW -> PRESENTER
     func backTapped()
-    func selected()
 }
 
 protocol SelectCategoryPresenterProtocols: class {
@@ -25,13 +24,13 @@ protocol SelectCategoryPresenterProtocols: class {
 
     //VIEW -> PRESENTER
     func viewDidLoad()
-    func go(selected: String)
+    func go(selected: Category)
     func back()
 }
 
 protocol SelectCategoryWireFrameProtocols: class {
-    static func createSelectCategoryViewModul(category: String) -> UIViewController
+    static func createSelectCategoryViewModul(category: [Category]) -> UIViewController
     
-    func goToCreateStudy(view: UIViewController, category: String)
+    func goToCreateStudy(view: UIViewController, category: Category)
     func backToStudyMain(view: UIViewController)
 }
