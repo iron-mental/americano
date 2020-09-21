@@ -7,7 +7,6 @@ target 'Terminal-iOS' do
   pod 'SwiftLint'
   pod 'Then'
   pod 'NMapsMap'
-  pod 'Firebase/Analytics'  
   # Pods for Terminal-iOS
 
 end

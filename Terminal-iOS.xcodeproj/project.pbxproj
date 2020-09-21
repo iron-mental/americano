@@ -18,7 +18,6 @@
 		CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */; };
 		CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */; };
 		CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */; };
-		CC1BE047251213F200F88313 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CC1BE046251213F200F88313 /* GoogleService-Info.plist */; };
 		CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0482512286B00F88313 /* SNSCollectionView.swift */; };
 		CC4F335125108C9600968B17 /* StudyMainWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F335025108C9600968B17 /* StudyMainWireFrame.swift */; };
 		CC4F335325108F9700968B17 /* StudyMainRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */; };
@@ -50,7 +49,6 @@
 		CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyInteractor.swift; sourceTree = "<group>"; };
 		CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyView.swift; sourceTree = "<group>"; };
 		CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionViewCell.swift; sourceTree = "<group>"; };
-		CC1BE046251213F200F88313 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CC1BE0482512286B00F88313 /* SNSCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionView.swift; sourceTree = "<group>"; };
 		CC4F335025108C9600968B17 /* StudyMainWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainWireFrame.swift; sourceTree = "<group>"; };
 		CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 				CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */,
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
-				CC1BE046251213F200F88313 /* GoogleService-Info.plist */,
 			);
 			path = "Terminal-iOS";
 			sourceTree = "<group>";
@@ -271,7 +268,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
-				CC1BE047251213F200F88313 /* GoogleService-Info.plist in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
 			);
