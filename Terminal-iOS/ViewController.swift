@@ -42,7 +42,6 @@ class ViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
-        
     }
     
     func attribute() {

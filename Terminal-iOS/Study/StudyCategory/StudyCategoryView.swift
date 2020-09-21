@@ -39,28 +39,27 @@ class StudyCategoryView: UIViewController {
             $0.backgroundColor = UIColor(named: "background")
         }
         self.do {
-            $0.view.backgroundColor = .white
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
             //            $0.navigationController?.navigationBar.do {
-            ////                $0.barTintColor = UIColor(named: "background")
-            ////                $0.titleTextAttributes = [.foregroundColor: UIColor.white]
-            //            }
+            //                $0.barTintColor = UIColor(named: "background")
+            //                $0.titleTextAttributes = [.foregroundColor: UIColor.white]
+//                        }
         }
         
         collectionView.do {
-            $0.backgroundColor = .white
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self
-            $0.backgroundColor = UIColor(named: "background")
         }
     }
     
     func layout() {
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
