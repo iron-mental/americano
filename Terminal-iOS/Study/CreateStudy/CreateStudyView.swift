@@ -19,6 +19,7 @@ class CreateStudyView: UIViewController {
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
     var studyOverviewUIView: StudyOverViewUIView?
+    var SNSUIView = SNSInputUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,9 @@ class CreateStudyView: UIViewController {
         studyOverviewUIView?.do {
             $0.backgroundColor = UIColor(named: "background")
         }
+        SNSUIView.do {
+            $0.backgroundColor = .cyan
+        }
     }
     
     func layout() {
@@ -52,6 +56,7 @@ class CreateStudyView: UIViewController {
         scrollView.addSubview(imageView)
         scrollView.addSubview(studyTitleTextField)
         scrollView.addSubview(studyOverviewUIView!)
+        scrollView.addSubview(SNSUIView)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -81,6 +86,13 @@ class CreateStudyView: UIViewController {
             
             $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 100).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyOverviewUIView!.textView.bottomAnchor, constant: 10).isActive = true
+        }
+        SNSUIView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.topAnchor.constraint(equalTo: (studyOverviewUIView?.safeAreaLayoutGuide.bottomAnchor)!, constant: 10).isActive = true
+            $0.bottomAnchor.constraint(equalTo: SNSUIView.notion.bottomAnchor,constant: 10).isActive = true
         }
     }
 }

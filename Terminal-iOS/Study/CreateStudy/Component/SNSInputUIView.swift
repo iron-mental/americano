@@ -10,10 +10,17 @@ import UIKit
 
 class SNSInputUIView: UIView {
     var titleLabel = UILabel()
-    
+    var notion = SNSInputItem(frame: CGRect(x: 0, y: 0, width: 100, height: 60))
+    var evernote = SNSInputItem(frame: CGRect(x: 0, y: 0, width: 100, height: 60))
+    var web = SNSInputItem(frame: CGRect(x: 0, y: 0, width: 100, height: 60))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        notion.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor).isActive = true
+        }
     }
     
     required init?(coder: NSCoder) {

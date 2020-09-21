@@ -25,9 +25,10 @@ class SNSInputItem: UIView {
         }
         textField.do {
             $0.placeholder = "깃허브아이디넣어보세요"
+            $0.frame = CGRect(x: 0, y: 0, width: 40, height: 20)
         }
         validImageView.do {
-            $0.image = #imageLiteral(resourceName: "vaild")
+            $0.image = #imageLiteral(resourceName: "Vaild")
             $0.contentMode = .scaleAspectFit
         }
     }
@@ -44,9 +45,12 @@ class SNSInputItem: UIView {
         textField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,constant: (35 / 375) * self.bounds.width).isActive = true
-            
+            $0.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
         }
-        
+        validImageView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+        }
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
