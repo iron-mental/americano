@@ -15,7 +15,7 @@ class SelectCategoryWireFrame: SelectCategoryWireFrameProtocols {
         let wireFrame: SelectCategoryWireFrameProtocols = SelectCategoryWireFrame()
         
         view.presenter = presenter
-//        view.tempCategory = category
+        view.categoryList = category
         
         presenter.view = view
         presenter.wireFrame = wireFrame
