@@ -136,7 +136,6 @@
 		A52F00D724FD182B00DE3126 /* MyStudy */ = {
 			isa = PBXGroup;
 			children = (
-				CCA3FF39251781FD00F62627 /* Study */,
 				CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */,
 			);
 			path = MyStudy;
@@ -145,9 +144,12 @@
 		A52F00D824FD182C00DE3126 /* Study */ = {
 			isa = PBXGroup;
 			children = (
+				CCA3FF642517829D00F62627 /* CreateStudyViewController.swift */,
+				CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */,
+				CCA3FF3B2517821900F62627 /* StudyList */,
+				CCA3FF4D2517824900F62627 /* StudyCategory */,
 				CCB2AC9B250F834300435E5F /* SelectCategory */,
 				CCB2AC9A250F81AC00435E5F /* CreateStudy */,
-				CCB2AC99250F819400435E5F /* StudyMain */,
 			);
 			path = Study;
 			sourceTree = "<group>";
@@ -214,17 +216,6 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
-		CCA3FF39251781FD00F62627 /* Study */ = {
-			isa = PBXGroup;
-			children = (
-				CCA3FF642517829D00F62627 /* CreateStudyViewController.swift */,
-				CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */,
-				CCA3FF4D2517824900F62627 /* StudyCategory */,
-				CCA3FF3B2517821900F62627 /* StudyList */,
-			);
-			path = Study;
-			sourceTree = "<group>";
-		};
 		CCA3FF3B2517821900F62627 /* StudyList */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,13 +260,6 @@
 				CCA3FF502517826100F62627 /* StudyCategoryRemoteManager.swift */,
 			);
 			path = DataManager;
-			sourceTree = "<group>";
-		};
-		CCB2AC99250F819400435E5F /* StudyMain */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = StudyMain;
 			sourceTree = "<group>";
 		};
 		CCB2AC9A250F81AC00435E5F /* CreateStudy */ = {
