@@ -20,14 +20,14 @@ class SearchStudyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.appColor(.terminalBackground)
         attribute()
         layout()
     }
     
     func attribute() {
         backBtn.do {
-            $0.setImage(#imageLiteral(resourceName: "study"), for: .normal)
+            $0.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
             $0.addTarget(self, action: #selector(back), for: .touchUpInside)
         }
         placeSearch.do {
@@ -38,12 +38,12 @@ class SearchStudyViewController: UIViewController {
         }
         hotLable.do {
             $0.text = "핫 등록 키워드"
-            $0.textColor = .black
+            $0.textColor = .white
         }
         tempView.backgroundColor = .red
         keywordLable.do {
             $0.text = "관심 키워드를 선택할 수 있습니다."
-            $0.textColor = .black
+            $0.textColor = .white
         }
     }
     
