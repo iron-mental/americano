@@ -131,5 +131,6 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.showStudyListDetail()
+        print(indexPath)
     }
 }
