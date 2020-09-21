@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */; };
+		A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */; };
 		CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */; };
 		CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */; };
 		CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */; };
@@ -52,6 +53,7 @@
 /* Begin PBXFileReference section */
 		0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Ext.swift"; path = "Terminal-iOS/Entity/UIColor+Ext.swift"; sourceTree = SOURCE_ROOT; };
 		CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryProtocols.swift; sourceTree = "<group>"; };
 		CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryPresenter.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 		CCA3FF31251781D600F62627 /* Extensions-Utillities */ = {
 			isa = PBXGroup;
 			children = (
+				A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CCA3FF4A2517823E00F62627 /* StudyListWireFrame.swift in Sources */,
 				CCA3FF4B2517823E00F62627 /* StudyCell.swift in Sources */,
+				A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */,
