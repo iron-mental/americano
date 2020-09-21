@@ -20,11 +20,39 @@ class CreateStudyView: UIViewController {
     var seletedCategory: String?
     var studyOverviewUIView: StudyOverViewUIView?
     var SNSUIView: SNSInputUIView?
+    var test = SNSInputItem(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
     
+    let textField = UITextField()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
+        test.do {
+            $0.textField.text = "tesasdft"
+//            $0.frame = CGRect(x: 0, y: 0, width: 300, height: 30)
+        }
+        scrollView.addSubview(test)
+        test.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+
+        }
+        
+//        textField.do {
+//            $0.frame = CGRect(x: 0, y: 0, width: 40, height: 20)
+//            $0.text = "test"
+//
+//        }
+//
+//        scrollView.addSubview(textField)
+//
+//        textField.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20).isActive = true
+//            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 10).isActive = true
+//        }
     }
     
     func attribute() {
@@ -49,7 +77,7 @@ class CreateStudyView: UIViewController {
         }
         SNSUIView = SNSInputUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         SNSUIView!.do {
-            $0.backgroundColor = .cyan
+            $0.backgroundColor = .gray
         }
     }
     

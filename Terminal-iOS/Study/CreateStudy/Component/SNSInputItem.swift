@@ -25,7 +25,8 @@ class SNSInputItem: UIView {
         }
         textField.do {
             $0.frame = CGRect(x: 0, y: 0, width: 40, height: 20)
-            $0.placeholder = "아이디혹은 url을 한번넣어보세요"
+            $0.text = "test"
+            $0.isUserInteractionEnabled = false
         }
         validImageView.do {
             $0.image = #imageLiteral(resourceName: "Vaild")
@@ -44,7 +45,7 @@ class SNSInputItem: UIView {
         }
         textField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: iconImageView.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: iconImageView.safeAreaLayoutGuide.trailingAnchor, constant: 10).isActive = true
             $0.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
         }
         validImageView.do {
