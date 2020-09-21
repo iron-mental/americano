@@ -2,7 +2,7 @@
 //  Study.swift
 //  Terminal-iOS
 //
-//  Created by once on 2020/09/11.
+//  Created by once on 2020/09/21.
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
