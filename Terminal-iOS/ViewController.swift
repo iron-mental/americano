@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UITabBarController {
     
     let studyViewController = StudyCategoryWireFrame.createStudyCategory()
-    
     let myStudyViewController = MyStudyViewController()
     let setViewController = SetViewController()
     
@@ -43,13 +42,12 @@ class ViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
-        
     }
     
     func attribute() {
         tabBar.do {
             $0.tintColor = UIColor(named: "key")
-            $0.barTintColor = UIColor(named: "background")
+            $0.barTintColor = UIColor.appColor(.terminalBackground)
             $0.isTranslucent = false
             $0.unselectedItemTintColor = .white
             $0.standardAppearance.backgroundColor = .white
