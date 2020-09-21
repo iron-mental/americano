@@ -26,7 +26,8 @@ class StudyListView: UIViewController {
     }
     
     func attribute() {
-        aligmentView.backgroundColor = UIColor.appColor(.terminalBackground)
+//        aligmentView.backgroundColor = UIColor.appColor(.terminalBackground)
+        aligmentView.backgroundColor = UIColor(named: "background")
         
         lateButton.do {
             $0.setTitle("최신", for: .normal)
@@ -39,7 +40,8 @@ class StudyListView: UIViewController {
         tableView.do {
             $0.delegate = self
             $0.dataSource = self
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+//            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = UIColor(named: "background")
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
             $0.rowHeight = 100
         }

@@ -9,7 +9,7 @@
 import Foundation
 
 class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
-        
+    
     var view: StudyCategoryViewProtocol?
     
     var interactor: StudyCategoryInteractorInputProtocol?
@@ -21,6 +21,14 @@ class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
     }
     func showStudyListDetail() {
         wireFrame?.presentStudyListScreen(from: view!)
+    }
+    func goToCreateStudy(category: [Category]) {
+        wireFrame?.goToSelectCategory(from: view!, category: category)
+        view?.categoryUpAnimate()
+    }
+    
+    func didClickedCreateButton() {
+        view?.categoryDownAnimate()
     }
 
 }

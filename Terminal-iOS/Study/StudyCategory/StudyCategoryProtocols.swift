@@ -16,6 +16,8 @@ protocol StudyCategoryViewProtocol: class {
     func showError()
     func showLoading()
     func hideLoading()
+    func categoryDownAnimate()
+    func categoryUpAnimate()
 }
 
 protocol StudyCategoryWireFrameProtocol: class {
@@ -24,6 +26,7 @@ protocol StudyCategoryWireFrameProtocol: class {
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyCategoryViewProtocol)
 //    func presentStudyListScreen(from view: StudyCategoryViewProtocol, forCategory category: Category)
+    func goToSelectCategory(from view: StudyCategoryViewProtocol, category: [Category])
 }
 
 protocol StudyCategoryPresenterProtocol: class {
@@ -34,6 +37,8 @@ protocol StudyCategoryPresenterProtocol: class {
     // VIEW -> PRESENTER
     func viewDidLoad()
     func showStudyListDetail()
+    func goToCreateStudy(category: [Category])
+    func didClickedCreateButton()
 }
 
 protocol StudyCategoryInteractorOutputProtocol: class {

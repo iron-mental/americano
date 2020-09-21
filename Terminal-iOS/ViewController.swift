@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UITabBarController {
-
+    
     let studyViewController = StudyCategoryWireFrame.createStudyCategory()
     let myStudyViewController = MyStudyViewController()
     let setViewController = SetViewController()
@@ -38,21 +38,36 @@ class ViewController: UITabBarController {
         )
         
     ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         
     }
+    
     func attribute() {
-            studyViewController.tabBarItem = tabBarItems[.study]
-            myStudyViewController.tabBarItem = tabBarItems[.mystudy]
-            setViewController.tabBarItem = tabBarItems[.set]
-            
-            self.viewControllers = [
-                UINavigationController(rootViewController: studyViewController),
-                UINavigationController(rootViewController: myStudyViewController),
-                UINavigationController(rootViewController: setViewController)
-            ]
-    }
+        tabBar.do {
+            $0.tintColor = UIColor(named: "key")
+            $0.barTintColor = UIColor(named: "background")
+            $0.isTranslucent = false
+            $0.unselectedItemTintColor = .white
+            $0.standardAppearance.backgroundColor = .white
+        }
 
+        studyViewController.tabBarItem = tabBarItems[.study]
+        studyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        
+        myStudyViewController.tabBarItem = tabBarItems[.mystudy]
+        myStudyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        
+        setViewController.tabBarItem = tabBarItems[.set]
+        setViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        
+        self.viewControllers = [
+            UINavigationController(rootViewController: studyViewController),
+            UINavigationController(rootViewController: myStudyViewController),
+            UINavigationController(rootViewController: setViewController)
+        ]
+    }
 }
+

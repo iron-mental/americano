@@ -10,10 +10,10 @@ import UIKit
 import Then
 
 class StudyCategoryView: UIViewController {
-
+    
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
-
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -35,36 +35,39 @@ class StudyCategoryView: UIViewController {
         let searchStudyBtn = UIBarButtonItem(barButtonSystemItem: .search,
                                              target: self,
                                              action: #selector(searchStudy))
+        view.do {
+            $0.backgroundColor = UIColor(named: "background")
+        }
         self.do {
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = .white
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
-            $0.navigationController?.navigationBar.do {
-                $0.barTintColor = UIColor.appColor(.terminalBackground)
-                $0.titleTextAttributes = [.foregroundColor: UIColor.white]
-            }
+            //            $0.navigationController?.navigationBar.do {
+            ////                $0.barTintColor = UIColor(named: "background")
+            ////                $0.titleTextAttributes = [.foregroundColor: UIColor.white]
+            //            }
         }
         
         collectionView.do {
+            $0.backgroundColor = .white
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = UIColor(named: "background")
         }
     }
     
     func layout() {
         view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
     @objc func createStudy() {
-        let view = CreateStudyViewController()
-        navigationController?.pushViewController(view, animated: true)
+        presenter?.didClickedCreateButton()
     }
     @objc func searchStudy() {
         let view = SearchStudyViewController()
@@ -73,7 +76,6 @@ class StudyCategoryView: UIViewController {
 }
 
 extension StudyCategoryView: StudyCategoryViewProtocol {
-    
     func showCategoryList(with category: [Category]) {
         categoryList = category
         collectionView.reloadData()
@@ -89,6 +91,17 @@ extension StudyCategoryView: StudyCategoryViewProtocol {
     
     func hideLoading() {
         
+    }
+    func categoryDownAnimate() {
+        UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+            self.collectionView.transform = self.collectionView.transform.translatedBy(x: 0, y: 60)
+        },completion: { _ in
+            self.presenter?.goToCreateStudy(category: self.categoryList)
+        })
+    }
+    
+    func categoryUpAnimate() {
+        collectionView.transform = self.collectionView.transform.translatedBy(x: 0, y: -60)
     }
 }
 
@@ -122,5 +135,6 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.showStudyListDetail()
+        print(indexPath)
     }
 }
