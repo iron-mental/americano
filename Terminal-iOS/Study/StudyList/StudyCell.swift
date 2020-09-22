@@ -55,7 +55,7 @@ class StudyCell: UITableViewCell {
     }
     
     func attribute() {
-        self.backgroundColor = UIColor(named: "background")
+        self.backgroundColor = UIColor.appColor(.terminalBackground)
         mainTitle.do {
             $0.textColor = .white
         }
