@@ -19,40 +19,15 @@ class CreateStudyView: UIViewController {
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
     var studyOverviewUIView: StudyOverViewUIView?
-    var SNSUIView: SNSInputUIView?
-    var test = SNSInputItem(frame: CGRect(x: 0, y: 0, width: 100, height: 20))
+//    var SNSUIView: SNSInputUIView?
     
-    let textField = UITextField()
-
+    var notion = SNSInputItem(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    var textField = UITextField(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+    var testView = TextFieldTestView(frame: CGRect(x: 0, y: 0, width: 100, height: 200))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
-        test.do {
-            $0.textField.text = "tesasdft"
-//            $0.frame = CGRect(x: 0, y: 0, width: 300, height: 30)
-        }
-        scrollView.addSubview(test)
-        test.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20).isActive = true
-            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-
-        }
-        
-//        textField.do {
-//            $0.frame = CGRect(x: 0, y: 0, width: 40, height: 20)
-//            $0.text = "test"
-//
-//        }
-//
-//        scrollView.addSubview(textField)
-//
-//        textField.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20).isActive = true
-//            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 10).isActive = true
-//        }
     }
     
     func attribute() {
@@ -75,9 +50,26 @@ class CreateStudyView: UIViewController {
         studyOverviewUIView?.do {
             $0.backgroundColor = UIColor(named: "background")
         }
-        SNSUIView = SNSInputUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        SNSUIView!.do {
-            $0.backgroundColor = .gray
+        notion.do {
+            $0.textField.backgroundColor = .red
+        }
+        textField.do {
+        //            $0.frame = CGRect(x: 0, y: 0, width: 40, height: 20)
+                    $0.text = "test"
+        //            $0.isUserInteractionEnabled = false
+                }
+//        SNSUIView = SNSInputUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+//        SNSUIView!.do {
+//            $0.backgroundColor = .gray
+//        }
+        testView.do {
+            $0.backgroundColor = .green
+        }
+        scrollView.addSubview(testView)
+        testView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: textField.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         }
     }
     
@@ -86,8 +78,9 @@ class CreateStudyView: UIViewController {
         scrollView.addSubview(imageView)
         scrollView.addSubview(studyTitleTextField)
         scrollView.addSubview(studyOverviewUIView!)
-        scrollView.addSubview(SNSUIView!)
-        
+//        scrollView.addSubview(SNSUIView!)
+        scrollView.addSubview(notion)
+        scrollView.addSubview(textField)
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
@@ -113,16 +106,27 @@ class CreateStudyView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-            
+
             $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 100).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: studyOverviewUIView!.textView.bottomAnchor, constant: 10).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyOverviewUIView!.textView.bottomAnchor, constant: 10).isActive = true
         }
-        SNSUIView!.do {
+//        SNSUIView!.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+//            $0.topAnchor.constraint(equalTo: (studyOverviewUIView?.safeAreaLayoutGuide.bottomAnchor)!, constant: 10).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: (SNSUIView?.web.bottomAnchor)!, constant: 10).isActive = true
+//        }
+        notion.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.topAnchor.constraint(equalTo: (studyOverviewUIView?.safeAreaLayoutGuide.bottomAnchor)!, constant: 10).isActive = true
-            $0.bottomAnchor.constraint(equalTo: (SNSUIView?.web.bottomAnchor)!, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        }
+        textField.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: notion.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         }
     }
 }

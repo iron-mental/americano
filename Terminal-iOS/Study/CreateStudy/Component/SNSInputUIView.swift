@@ -14,8 +14,6 @@ class SNSInputUIView: UIView {
     var evernote = SNSInputItem(frame: CGRect(x: 0, y: 0, width: 100, height: 60))
     var web = SNSInputItem(frame: CGRect(x: 0, y: 0, width: 100, height: 60))
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
@@ -26,9 +24,9 @@ class SNSInputUIView: UIView {
         titleLabel.do {
             $0.text = "SNS"
         }
-        notion.do {
-            $0.textField.backgroundColor = .red
-        }
+//        notion.do {
+////            $0.textField.backgroundColor = .red
+//        }
         evernote.do {
             $0.textField.backgroundColor = .green
         }

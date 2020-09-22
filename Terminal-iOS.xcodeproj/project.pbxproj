@@ -36,6 +36,7 @@
 		CCB2ACAE250F863400435E5F /* StudyMainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACAD250F863400435E5F /* StudyMainProtocols.swift */; };
 		CCB2ACB0250F8E9B00435E5F /* StudyMainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */; };
 		CCB2ACB5250F940900435E5F /* StudyMainLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB2ACB4250F940900435E5F /* StudyMainLocalDataManager.swift */; };
+		CCC571B02519C7CA006A0749 /* testView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC571AF2519C7CA006A0749 /* testView.swift */; };
 		CCCF2A90251732B50077B75C /* StudyOverViewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF2A8F251732B50077B75C /* StudyOverViewUIView.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		CCB2ACAD250F863400435E5F /* StudyMainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainProtocols.swift; sourceTree = "<group>"; };
 		CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainInteractor.swift; sourceTree = "<group>"; };
 		CCB2ACB4250F940900435E5F /* StudyMainLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainLocalDataManager.swift; sourceTree = "<group>"; };
+		CCC571AF2519C7CA006A0749 /* testView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testView.swift; sourceTree = "<group>"; };
 		CCCF2A8F251732B50077B75C /* StudyOverViewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyOverViewUIView.swift; sourceTree = "<group>"; };
 		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -139,6 +141,7 @@
 				CCCF2A8F251732B50077B75C /* StudyOverViewUIView.swift */,
 				CCAA430C251764F80053ADDB /* SNSInputUIView.swift */,
 				CCAA430E251766760053ADDB /* SNSInputItem.swift */,
+				CCC571AF2519C7CA006A0749 /* testView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				CCB2ACB5250F940900435E5F /* StudyMainLocalDataManager.swift in Sources */,
 				CCAA430D251764F80053ADDB /* SNSInputUIView.swift in Sources */,
 				CCA1FF6B24FD0FF40026C3EA /* StudyMainView.swift in Sources */,
+				CCC571B02519C7CA006A0749 /* testView.swift in Sources */,
 				CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */,
 				CCA1FF6F24FD10290026C3EA /* SetViewController.swift in Sources */,
 				CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */,

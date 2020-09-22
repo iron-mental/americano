@@ -33,9 +33,6 @@ class StudyOverViewUIView: UIView {
         }
         textView.do {
             $0.text = "test"
-//            $0.backgroundColor = UIColor(named: "background")
-//            $0.backgroundColor = .gray
-            
         }
     }
     
