@@ -19,6 +19,7 @@ class CreateStudyView: UIViewController {
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
     var studyOverviewUIView: StudyOverViewUIView?
+    var SNSInputUIView = SNSInputView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +47,9 @@ class CreateStudyView: UIViewController {
         studyOverviewUIView!.do {
             $0.backgroundColor = UIColor(named: "background")
         }
-//        studyOverviewUIView.do {
-//            $0.backgroundColor = UIColor(named: "background")
-//            $0.backgroundColor = .red
-//        }
+        SNSInputUIView.do {
+            $0.backgroundColor = .lightGray
+        }
     }
     
     func layout() {
@@ -57,6 +57,9 @@ class CreateStudyView: UIViewController {
         scrollView.addSubview(imageView)
         scrollView.addSubview(studyTitleTextField)
         scrollView.addSubview(studyOverviewUIView!)
+        //        scrollView.addSubview(SNSInputUIView)
+        //        SNSInputUIView.addSubview(SNStest)
+        scrollView.addSubview(SNSInputUIView)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -85,6 +88,14 @@ class CreateStudyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 100).isActive = true
             $0.bottomAnchor.constraint(equalTo: (studyOverviewUIView?.textView.bottomAnchor)!, constant: 10).isActive = true
+        }
+        SNSInputUIView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: studyOverviewUIView!.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: SNSInputUIView.topAnchor,constant: 300).isActive = true
         }
     }
 }
