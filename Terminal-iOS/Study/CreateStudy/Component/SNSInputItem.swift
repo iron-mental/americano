@@ -13,9 +13,15 @@ class SNSInputItem: UIView {
     
     init() {
         super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        attribute()
+        layout()
+    }
+    func attribute() {
         textField.do {
             $0.placeholder = "이거 플레이스홀더에연"
         }
+    }
+    func layout() {
         addSubview(textField)
         textField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +31,6 @@ class SNSInputItem: UIView {
             $0.widthAnchor.constraint(equalTo: widthAnchor,constant: -50).isActive = true
         }
     }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

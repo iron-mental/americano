@@ -19,7 +19,7 @@ class CreateStudyView: UIViewController {
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
     var studyOverviewUIView: StudyOverViewUIView?
-    var SNSInputUIView = SNSInputView()
+    var SNSInputUIView = SNSInputUIVIew()
     
     override func viewDidLoad() {
         super.viewDidLoad()

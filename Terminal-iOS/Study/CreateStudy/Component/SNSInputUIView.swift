@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SNSInputView: UIView {
+class SNSInputUIVIew: UIView {
     var notion =  SNSInputItem()
     
     init() {
