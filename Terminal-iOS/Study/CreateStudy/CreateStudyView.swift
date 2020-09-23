@@ -21,6 +21,7 @@ class CreateStudyView: UIViewController {
     var studyOverviewView: StudyOverViewUIView?
     var SNSInputView = SNSInputUIVIew()
     var locationView = LocationUIVIew()
+    var timeView = TimeUIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,10 @@ class CreateStudyView: UIViewController {
             $0.backgroundColor = .red
             $0.detailAddress.backgroundColor = .yellow
         }
+        timeView.do {
+            $0.backgroundColor = .blue
+            $0.detailTime.backgroundColor = .brown
+        }
     }
     
     func layout() {
@@ -66,6 +71,7 @@ class CreateStudyView: UIViewController {
         scrollView.addSubview(studyOverviewView!)
         scrollView.addSubview(SNSInputView)
         scrollView.addSubview(locationView)
+        scrollView.addSubview(timeView)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -108,6 +114,13 @@ class CreateStudyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
+        }
+        timeView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: timeView.detailTime.bottomAnchor).isActive = true
         }
     }
 }
