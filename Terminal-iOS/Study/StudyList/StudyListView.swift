@@ -41,7 +41,7 @@ class StudyListView: UIViewController {
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
-            $0.rowHeight = 100
+            $0.rowHeight = 105
         }
     }
     

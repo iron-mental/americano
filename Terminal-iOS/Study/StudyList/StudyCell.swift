@@ -62,6 +62,15 @@ class StudyCell: UITableViewCell {
         subTitle.do {
             $0.textColor = .white
         }
+        location.do {
+            $0.backgroundColor = .white
+            $0.textColor = .black
+            $0.textAlignment = .center
+            $0.sizeToFit()
+            $0.layer.masksToBounds = true
+            $0.layer.cornerRadius = 7
+            
+        }
         date.do {
             $0.textColor = .white
         }
@@ -69,40 +78,50 @@ class StudyCell: UITableViewCell {
     
     func layout() {
         addSubview(mainTitle)
+        addSubview(subTitle)
+        addSubview(date)
+        addSubview(managerImage)
+        addSubview(mainImage)
+        addSubview(location)
+        
         mainTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         }
         
-        addSubview(subTitle)
         subTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: mainTitle.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         }
         
-        addSubview(date)
         date.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         }
         
-        addSubview(managerImage)
         managerImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: date.trailingAnchor, constant: 10).isActive = true
         }
         
-        addSubview(mainImage)
         mainImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 75).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 112).isActive = true
+        }
+        
+        location.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: mainImage.leadingAnchor, constant: -20).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 22).isActive = true
         }
     }
 }
