@@ -8,11 +8,12 @@
 
 import UIKit
 
-class CreateStudyView: UIViewController {
+class CreateStudyView: UIViewController{
     var presenter: CreateStudyPresenterProtocols?
     
     let screenSize = UIScreen.main.bounds
     var selectedCategory: String?
+    let picker = UIImagePickerController()
     
     let scrollView = UIScrollView()
     let imageView = UIImageView()
@@ -141,6 +142,7 @@ class CreateStudyView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: 250).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 150).isActive = true
         }
+        picker.delegate = self
     }
     
     // FUNCTION
@@ -158,10 +160,13 @@ class CreateStudyView: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     func openLibrary() {
-        print("사진첩 열렸당")
+        picker.sourceType = .photoLibrary
+        present(picker, animated: false, completion: nil)
     }
     func openCamera() {
-        print("카메라 열렸당")
+        //시뮬에서 앱죽는거 에러처리 해야함
+        picker.sourceType = .camera
+        present(picker, animated: false, completion: nil)
     }
 }
 
@@ -176,5 +181,15 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     func setBackgroundImage() {
         print("setVackgroundImage")
+    }
+}
+
+extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            imageView.image = image
+            print(info)
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
