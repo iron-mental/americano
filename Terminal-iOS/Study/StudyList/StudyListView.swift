@@ -52,7 +52,7 @@ class StudyListView: UIViewController {
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 55).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 45).isActive = true
         }
         aligmentView.addSubview(lateButton)
         aligmentView.addSubview(locationButton)

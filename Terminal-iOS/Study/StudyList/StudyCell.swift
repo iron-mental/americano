@@ -60,7 +60,7 @@ class StudyCell: UITableViewCell {
             $0.textColor = .white
         }
         subTitle.do {
-            $0.textColor = .white
+            $0.textColor = UIColor.appColor(.studySubTitle)
         }
         location.do {
             $0.backgroundColor = .white
@@ -73,6 +73,10 @@ class StudyCell: UITableViewCell {
         }
         date.do {
             $0.textColor = .white
+        }
+        managerImage.do {
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = 10
         }
     }
     
