@@ -9,28 +9,57 @@
 import UIKit
 
 class SNSInputItem: UIView {
+    var icon = UIImageView()
     var textField = UITextField()
+    var valid = UIImageView()
     
     init() {
-        super.init(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        super.init(frame: CGRect.zero)
         attribute()
         layout()
     }
+    
     func attribute() {
+        icon.do {
+            $0.image = #imageLiteral(resourceName: "notion")
+            //height을 따로 지정해줘야 하는건가? 컨텐트 모드만 지정해주면 width에 맞춰 알아서하는건가?
+            $0.frame = CGRect(x: 0, y: 0, width: (20/345) * bounds.width, height: 0)
+            $0.contentMode = .scaleAspectFit
+        }
         textField.do {
             $0.placeholder = "이거 플레이스홀더에연"
+            $0.sizeToFit()
+            $0.backgroundColor = .red
+        }
+        valid.do {
+            $0.image = #imageLiteral(resourceName: "Vaild")
         }
     }
+    
     func layout() {
+        addSubview(icon)
         addSubview(textField)
+        addSubview(valid)
+        
+        //각각 길이 화면대응 해주어야 합니다.
+        icon.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        }
         textField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: heightAnchor,constant: -50).isActive = true
-            $0.widthAnchor.constraint(equalTo: widthAnchor,constant: -50).isActive = true
+            $0.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 20).isActive = true
+            $0.widthAnchor.constraint(equalTo: widthAnchor,constant: -100).isActive = true
+        }
+        valid.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10).isActive = true
         }
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

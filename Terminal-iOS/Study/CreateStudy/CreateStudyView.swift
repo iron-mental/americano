@@ -97,6 +97,7 @@ class CreateStudyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: SNSInputUIView.topAnchor,constant: 300).isActive = true
         }
+        print("d이거 타요?")
     }
 }
 
