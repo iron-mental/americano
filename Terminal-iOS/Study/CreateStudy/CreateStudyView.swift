@@ -32,7 +32,6 @@ class CreateStudyView: UIViewController {
         
     }
     
-    
     func attribute() {
         
         view.do {
@@ -147,7 +146,22 @@ class CreateStudyView: UIViewController {
     // FUNCTION
     
     @objc func didImageViewClicked() {
-        print("didImageViewClicked")
+        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
+        let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(library)
+        alert.addAction(camera)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    func openLibrary() {
+        print("사진첩 열렸당")
+    }
+    func openCamera() {
+        print("카메라 열렸당")
     }
 }
 
