@@ -63,13 +63,13 @@ class StudyCell: UITableViewCell {
             $0.textColor = UIColor.appColor(.studySubTitle)
         }
         location.do {
-            $0.backgroundColor = .white
-            $0.textColor = .black
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.textColor = .white
+            $0.font = UIFont.boldSystemFont(ofSize: 14)
             $0.textAlignment = .center
             $0.sizeToFit()
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 7
-            
         }
         date.do {
             $0.textColor = .white
@@ -108,7 +108,7 @@ class StudyCell: UITableViewCell {
         
         managerImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 13).isActive = true
             $0.leadingAnchor.constraint(equalTo: date.trailingAnchor, constant: 10).isActive = true
         }
         
