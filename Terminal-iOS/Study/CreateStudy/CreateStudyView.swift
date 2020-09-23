@@ -18,8 +18,9 @@ class CreateStudyView: UIViewController {
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
-    var studyOverviewUIView: StudyOverViewUIView?
-    var SNSInputUIView = SNSInputUIVIew()
+    var studyOverviewView: StudyOverViewUIView?
+    var SNSInputView = SNSInputUIVIew()
+    var locationView = LocationUIVIew()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,13 +44,18 @@ class CreateStudyView: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .black
         }
-        studyOverviewUIView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), category: seletedCategory!)
-        studyOverviewUIView!.do {
-            $0.backgroundColor = UIColor(named: "background")
+        studyOverviewView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), category: seletedCategory!)
+        studyOverviewView!.do {
+            $0.backgroundColor = .cyan
+            $0.textView.backgroundColor = .blue
         }
-        SNSInputUIView.do {
-            $0.backgroundColor = .lightGray
+        SNSInputView.do {
+            $0.backgroundColor = .orange
             $0.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        }
+        locationView.do {
+            $0.backgroundColor = .red
+            $0.detailAddress.backgroundColor = .yellow
         }
     }
     
@@ -57,8 +63,9 @@ class CreateStudyView: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(studyTitleTextField)
-        scrollView.addSubview(studyOverviewUIView!)
-        scrollView.addSubview(SNSInputUIView)
+        scrollView.addSubview(studyOverviewView!)
+        scrollView.addSubview(SNSInputView)
+        scrollView.addSubview(locationView)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -81,19 +88,26 @@ class CreateStudyView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
             $0.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
         }
-        studyOverviewUIView!.do {
+        studyOverviewView!.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: 100).isActive = true
-            $0.bottomAnchor.constraint(equalTo: (studyOverviewUIView?.textView.bottomAnchor)!, constant: 10).isActive = true
+            $0.bottomAnchor.constraint(equalTo: (studyOverviewView?.textView.bottomAnchor)!, constant: 10).isActive = true
         }
-        SNSInputUIView.do {
+        SNSInputView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyOverviewUIView!.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: studyOverviewView!.safeAreaLayoutGuide.bottomAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: SNSInputUIView.web.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: SNSInputView.web.bottomAnchor).isActive = true
+        }
+        locationView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
         }
     }
 }
