@@ -49,6 +49,7 @@ class CreateStudyView: UIViewController {
         }
         SNSInputUIView.do {
             $0.backgroundColor = .lightGray
+            $0.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
         }
     }
     
@@ -57,8 +58,6 @@ class CreateStudyView: UIViewController {
         scrollView.addSubview(imageView)
         scrollView.addSubview(studyTitleTextField)
         scrollView.addSubview(studyOverviewUIView!)
-        //        scrollView.addSubview(SNSInputUIView)
-        //        SNSInputUIView.addSubview(SNStest)
         scrollView.addSubview(SNSInputUIView)
         
         scrollView.do {
@@ -92,12 +91,10 @@ class CreateStudyView: UIViewController {
         SNSInputUIView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyOverviewUIView!.safeAreaLayoutGuide.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: SNSInputUIView.topAnchor,constant: 300).isActive = true
+            $0.bottomAnchor.constraint(equalTo: SNSInputUIView.web.bottomAnchor).isActive = true
         }
-        print("d이거 타요?")
     }
 }
 
