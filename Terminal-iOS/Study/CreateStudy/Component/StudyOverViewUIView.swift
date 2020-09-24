@@ -44,7 +44,7 @@ class StudyOverViewUIView: UIView {
         titleLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,constant: (18/170) * frame.size.height ).isActive = true
         }
         categoryLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

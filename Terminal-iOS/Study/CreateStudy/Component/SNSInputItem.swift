@@ -10,7 +10,7 @@ import UIKit
 
 class SNSInputItem: UIView {
     var icon = UIImageView()
-    var textField = UITextField()
+    var textField = SNSInputUITextField()
     var valid = UIImageView()
     
     init() {
