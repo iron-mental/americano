@@ -55,12 +55,12 @@ class CreateStudyView: UIViewController{
             $0.isUserInteractionEnabled = true
             $0.addGestureRecognizer(tapGestureRecognizer)
         }
-        //        studyTitleTextField.do {
-        //            $0.placeholder = "스터디 이름"
-        //            $0.backgroundColor = .white
-        //            $0.textAlignment = .center
-        //            $0.textColor = .black
-        //        }
+        studyTitleTextField.do {
+            $0.placeholder = "스터디 이름"
+            $0.backgroundColor = .white
+            $0.textAlignment = .center
+            $0.textColor = .black
+        }
         //        studyOverviewView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), category: seletedCategory!)
         //        studyOverviewView!.do {
         //            $0.backgroundColor = .cyan
@@ -88,7 +88,7 @@ class CreateStudyView: UIViewController{
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
         backgroundView.addSubview(imageView)
-        //        scrollView.addSubview(studyTitleTextField)
+        backgroundView.addSubview(studyTitleTextField)
         //        scrollView.addSubview(studyOverviewView!)
         //        scrollView.addSubview(SNSInputView)
         //        scrollView.addSubview(locationView)
@@ -109,11 +109,6 @@ class CreateStudyView: UIViewController{
             $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 3000).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-//            $0.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant:0).isActive = true
-//            $0.topAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-//            $0.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
-//            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 3000).isActive = true
         }
         imageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -122,13 +117,13 @@ class CreateStudyView: UIViewController{
             $0.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
         }
-        //        studyTitleTextField.do {
-        //            $0.translatesAutoresizingMaskIntoConstraints = false
-        //            $0.centerXAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        //            $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
-        //            $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
-        //            $0.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
-        //        }
+        studyTitleTextField.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
+            $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
+        }
         //        studyOverviewView!.do {
         //            $0.translatesAutoresizingMaskIntoConstraints = false
         //            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor).isActive = true
