@@ -74,10 +74,10 @@ class CreateStudyView: UIViewController{
         studyInfoView.do {
             $0.backgroundColor = .blue
         }
-//        locationView.do {
-//            $0.backgroundColor = .red
-//            $0.detailAddress.backgroundColor = .yellow
-//        }
+        locationView.do {
+            $0.backgroundColor = .red
+            $0.detailAddress.backgroundColor = .yellow
+        }
         //        timeView.do {
         //            $0.backgroundColor = .blue
         //            $0.detailTime.backgroundColor = .brown

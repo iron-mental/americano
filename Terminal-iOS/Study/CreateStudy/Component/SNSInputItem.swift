@@ -32,7 +32,6 @@ class SNSInputItem: UIView {
             $0.backgroundColor = .red
         }
         valid.do {
-            //            $0.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
             $0.image = #imageLiteral(resourceName: "Vaild")
         }
     }
@@ -49,9 +48,6 @@ class SNSInputItem: UIView {
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (20/24) * frame.size.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (20/352) * frame.size.width).isActive = true
-//            $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
         }
         textField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

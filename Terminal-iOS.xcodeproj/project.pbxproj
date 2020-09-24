@@ -145,9 +145,9 @@
 				CCCF2A8F251732B50077B75C /* StudyOverViewUIView.swift */,
 				CC6F1CBC251A155700511016 /* SNSInputUIView.swift */,
 				CC6F1CBA251A148D00511016 /* SNSInputItem.swift */,
-				CC26AD57251B27B3006B11E9 /* LocationUIVIew.swift */,
 				CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */,
 				CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */,
+				CC26AD57251B27B3006B11E9 /* LocationUIVIew.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
