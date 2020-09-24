@@ -117,11 +117,10 @@ class CreateStudyView: UIViewController{
         }
         imageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (170/667) * screenSize.height).isActive = true
             $0.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: backgroundView.frame.size.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (170/667) * view.frame.size.height).isActive = true
-            //                    $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
         }
         //        studyTitleTextField.do {
         //            $0.translatesAutoresizingMaskIntoConstraints = false
