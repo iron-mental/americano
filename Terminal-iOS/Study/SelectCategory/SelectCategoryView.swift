@@ -31,7 +31,7 @@ class SelectCategoryView: UIViewController {
         }
         titleView.do {
             $0.text = "스터디 만들기"
-            //            $0.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
+$0.font = UIFont.boldSystemFont(ofSize: UIFont.labelFontSize)
             $0.textColor = .white
         }
         navigationItem.do {

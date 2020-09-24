@@ -102,18 +102,18 @@ class CreateStudyView: UIViewController{
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leftAnchor.constraint(equalTo: view.leftAnchor, constant:0).isActive = true
+            $0.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            $0.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
+            $0.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
         backgroundView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: view.heightAnchor,constant: 3000).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: button.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 400).isActive = true
+            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
         imageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

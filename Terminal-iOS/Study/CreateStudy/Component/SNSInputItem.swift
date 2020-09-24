@@ -15,7 +15,6 @@ class SNSInputItem: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        print(frame)
         attribute()
         layout()
     }
@@ -53,7 +52,7 @@ class SNSInputItem: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 31).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: frame.size.height).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (20/24) * frame.size.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (272/352) * frame.size.width).isActive = true
         }
         valid.do {
