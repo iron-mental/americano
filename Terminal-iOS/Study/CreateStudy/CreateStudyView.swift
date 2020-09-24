@@ -82,10 +82,10 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = .blue
             $0.detailTime.backgroundColor = .brown
         }
-        //        button.do {
-        //            $0.setTitle("완료", for: .normal)
-        //            $0.backgroundColor = UIColor(named: "key")
-        //        }
+        button.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor(named: "key")
+        }
     }
     
     func layout() {
@@ -98,7 +98,7 @@ class CreateStudyView: UIViewController{
         backgroundView.addSubview(studyInfoView)
         backgroundView.addSubview(locationView)
         backgroundView.addSubview(timeView)
-        //        scrollView.addSubview(button)
+        backgroundView.addSubview(button)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -109,11 +109,11 @@ class CreateStudyView: UIViewController{
         }
         backgroundView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 3000).isActive = true
-            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: view.heightAnchor,constant: 3000).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: button.bottomAnchor).isActive = true
         }
         imageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -165,13 +165,13 @@ class CreateStudyView: UIViewController{
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: timeView.detailTime.bottomAnchor).isActive = true
         }
-        //        button.do {
-        //            $0.translatesAutoresizingMaskIntoConstraints = false
-        //            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: 30).isActive = true
-        //            $0.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        //            $0.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        //            $0.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        //        }
+        button.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: (26/667) * screenSize.height).isActive = true
+            $0.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (335/375) * screenSize.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (43/667) * screenSize.height).isActive = true
+        }
         
     }
     
