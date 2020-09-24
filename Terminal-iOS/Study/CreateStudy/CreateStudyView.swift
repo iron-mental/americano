@@ -19,8 +19,8 @@ class CreateStudyView: UIViewController{
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
-    var studyOverviewView = StudyOverViewUIView()
-    var SNSInputView = SNSInputUIVIew()
+    var studyOverviewView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (121/667) * UIScreen.main.bounds.width, height: (352/375) * UIScreen.main.bounds.height))
+    var SNSInputView = SNSInputUIVIew(frame: CGRect(x: 0, y: 0, width: (121/667) * UIScreen.main.bounds.width, height: (352/375) * UIScreen.main.bounds.height))
     var locationView = LocationUIVIew()
     var timeView = TimeUIView()
     var button = UIButton()
@@ -65,10 +65,9 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = .cyan
             $0.textView.backgroundColor = .blue
         }
-        //        SNSInputView.do {
-        //            $0.backgroundColor = .orange
-        //            $0.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-        //        }
+        SNSInputView.do {
+            $0.backgroundColor = .orange
+        }
         //        locationView.do {
         //            $0.backgroundColor = .red
         //            $0.detailAddress.backgroundColor = .yellow
@@ -89,7 +88,7 @@ class CreateStudyView: UIViewController{
         backgroundView.addSubview(imageView)
         backgroundView.addSubview(studyTitleTextField)
         backgroundView.addSubview(studyOverviewView)
-        //        scrollView.addSubview(SNSInputView)
+        backgroundView.addSubview(SNSInputView)
         //        scrollView.addSubview(locationView)
         //        scrollView.addSubview(timeView)
         //        scrollView.addSubview(button)
@@ -125,20 +124,18 @@ class CreateStudyView: UIViewController{
         }
         studyOverviewView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor,constant: (18/667) * screenSize.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            
             $0.bottomAnchor.constraint(equalTo: studyOverviewView.textView.bottomAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: (151/667) * screenSize.height).isActive = true
         }
-        //        SNSInputView.do {
-        //            $0.translatesAutoresizingMaskIntoConstraints = false
-        //            $0.topAnchor.constraint(equalTo: studyOverviewView!.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        //            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-        //            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-        //            $0.bottomAnchor.constraint(equalTo: SNSInputView.web.bottomAnchor).isActive = true
-        //        }
+        SNSInputView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: studyOverviewView.bottomAnchor,constant: (10/667) * screenSize.height).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: SNSInputView.web.bottomAnchor).isActive = true
+        }
         //        locationView.do {
         //            $0.translatesAutoresizingMaskIntoConstraints = false
         //            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor).isActive = true
