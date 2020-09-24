@@ -22,11 +22,16 @@ class CreateStudyView: UIViewController {
     var SNSInputView = SNSInputUIVIew()
     var locationView = LocationUIVIew()
     var timeView = TimeUIView()
+    var button = UIButton()
+    var tapGestureRecognizer = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.presenter?.viewDidLoad()
+        
     }
+    
     
     func attribute() {
         
@@ -37,7 +42,10 @@ class CreateStudyView: UIViewController {
             $0.backgroundColor = UIColor(named: "background")
         }
         imageView.do {
+            tapGestureRecognizer = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
             $0.image = #imageLiteral(resourceName: "swiftBackground")
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(tapGestureRecognizer)
         }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름"
@@ -62,6 +70,10 @@ class CreateStudyView: UIViewController {
             $0.backgroundColor = .blue
             $0.detailTime.backgroundColor = .brown
         }
+        button.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor(named: "key")
+        }
     }
     
     func layout() {
@@ -72,14 +84,15 @@ class CreateStudyView: UIViewController {
         scrollView.addSubview(SNSInputView)
         scrollView.addSubview(locationView)
         scrollView.addSubview(timeView)
+        scrollView.addSubview(button)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-            $0.contentSize = CGSize(width: screenSize.width, height: 2000)
+            $0.contentSize = CGSize(width: screenSize.width, height: 1500)
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         }
         imageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -122,6 +135,19 @@ class CreateStudyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: timeView.detailTime.bottomAnchor).isActive = true
         }
+        button.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: 30).isActive = true
+            $0.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 250).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        }
+    }
+    
+    // FUNCTION
+    
+    @objc func didImageViewClicked() {
+        print("didImageViewClicked")
     }
 }
 
@@ -130,6 +156,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
         attribute()
         layout()
     }
+    
     func getBackgroundImage() {
         print("getBackgroundImage")
     }

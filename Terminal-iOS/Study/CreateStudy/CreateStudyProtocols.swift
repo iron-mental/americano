@@ -11,6 +11,8 @@ import UIKit
 protocol CreateStudyViewProtocols: class {
     var presenter: CreateStudyPresenterProtocols? { get set }
     
+    //VIew -> PRESENTER
+    
     //PRESENTER -> VIEW
     func setView()
     func getBackgroundImage()

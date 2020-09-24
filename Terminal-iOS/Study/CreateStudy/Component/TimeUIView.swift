@@ -10,7 +10,7 @@ import UIKit
 
 class TimeUIView: UIView {
     var title = UILabel()
-    var detailTime = UILabel()
+    var detailTime = UITextField()
     
     init() {
         super.init(frame: CGRect.zero)
@@ -23,7 +23,7 @@ class TimeUIView: UIView {
             $0.text = "장소"
         }
         detailTime.do {
-            $0.text = "상세 위치"
+            $0.placeholder = "상세 위치"
         }
     }
     
