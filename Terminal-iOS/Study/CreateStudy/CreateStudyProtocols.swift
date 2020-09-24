@@ -47,6 +47,6 @@ protocol CreateStudyLocalDataManagerProtocols: class {
 }
 
 protocol CreateStudyWireFrameProtocols: class {
-    static func createStudyViewModul(category: String) -> UIViewController
+    static func createStudyViewModul(category: Category) -> UIViewController
     
 }

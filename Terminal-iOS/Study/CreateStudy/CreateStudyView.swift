@@ -18,7 +18,7 @@ class CreateStudyView: UIViewController{
     let scrollView = UIScrollView()
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
-    var seletedCategory: String?
+    var seletedCategory: Category?
     var studyOverView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")
     var SNSInputView = IdInputView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (118/667) * UIScreen.main.bounds.height))
     var studyInfoView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
