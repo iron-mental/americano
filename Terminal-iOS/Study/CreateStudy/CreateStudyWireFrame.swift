@@ -15,6 +15,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         let interactor = CreateStudyInteractor()
         
         view.presenter = presenter
+//        view.selectedCategory
         
         presenter.view = view
         presenter.interactor = interactor

@@ -15,7 +15,7 @@ class SelectCategoryPresenter: SelectCategoryPresenterProtocols {
     func viewDidLoad() {
         view?.showCategory()
     }
-    func go(selected: String) {
+    func go(selected: Category) {
         wireFrame?.goToCreateStudy(view: view as! UIViewController, category: selected)
     }
     func back() {
