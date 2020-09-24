@@ -12,8 +12,8 @@ class TimeUIView: UIView {
     var title = UILabel()
     var detailTime = UITextField()
     
-    init() {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         attribute()
         layout()
     }
@@ -35,15 +35,15 @@ class TimeUIView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (32/352) * frame.size.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (14/53) * frame.size.height).isActive = true
         }
         detailTime.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: (13/53) * frame.size.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 70).isActive = true
+            $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (14/53) * frame.size.height).isActive = true
         }
     }
     required init?(coder: NSCoder) {

@@ -23,7 +23,7 @@ class CreateStudyView: UIViewController{
     var SNSInputView = IdInputView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (118/667) * UIScreen.main.bounds.height))
     var studyInfoView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
     var locationView = LocationUIVIew(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
-    var timeView = TimeUIView()
+    var timeView = TimeUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
     var button = UIButton()
     var tapGestureRecognizer = UITapGestureRecognizer()
     
@@ -78,10 +78,10 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = .red
             $0.detailAddress.backgroundColor = .yellow
         }
-        //        timeView.do {
-        //            $0.backgroundColor = .blue
-        //            $0.detailTime.backgroundColor = .brown
-        //        }
+        timeView.do {
+            $0.backgroundColor = .blue
+            $0.detailTime.backgroundColor = .brown
+        }
         //        button.do {
         //            $0.setTitle("완료", for: .normal)
         //            $0.backgroundColor = UIColor(named: "key")
@@ -97,7 +97,7 @@ class CreateStudyView: UIViewController{
         backgroundView.addSubview(SNSInputView)
         backgroundView.addSubview(studyInfoView)
         backgroundView.addSubview(locationView)
-        //        scrollView.addSubview(timeView)
+        backgroundView.addSubview(timeView)
         //        scrollView.addSubview(button)
         
         scrollView.do {
@@ -153,18 +153,18 @@ class CreateStudyView: UIViewController{
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor,constant: (11/667) * screenSize.height).isActive = true
+            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
         }
-        //        timeView.do {
-        //            $0.translatesAutoresizingMaskIntoConstraints = false
-        //            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor).isActive = true
-        //            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-        //            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-        //            $0.bottomAnchor.constraint(equalTo: timeView.detailTime.bottomAnchor).isActive = true
-        //        }
+        timeView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: timeView.detailTime.bottomAnchor).isActive = true
+        }
         //        button.do {
         //            $0.translatesAutoresizingMaskIntoConstraints = false
         //            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: 30).isActive = true

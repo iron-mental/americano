@@ -40,10 +40,10 @@ class LocationUIVIew: UIView {
         }
         detailAddress.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: (13/53) * frame.size.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 70).isActive = true
+            $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (14/53) * frame.size.height).isActive = true
         }
     }
     required init?(coder: NSCoder) {
