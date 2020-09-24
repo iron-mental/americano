@@ -22,7 +22,7 @@ class CreateStudyView: UIViewController{
     var studyOverView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")
     var SNSInputView = IdInputView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (118/667) * UIScreen.main.bounds.height))
     var studyInfoView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
-    var locationView = LocationUIVIew()
+    var locationView = LocationUIVIew(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
     var timeView = TimeUIView()
     var button = UIButton()
     var tapGestureRecognizer = UITapGestureRecognizer()
@@ -31,14 +31,13 @@ class CreateStudyView: UIViewController{
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
         
-        
         studyTitleTextField.delegate = self
-        SNSInputView.notion.textField.delegate = self
-        SNSInputView.evernote.textField.delegate = self
-        SNSInputView.web.textField.delegate = self
+        SNSInputView.notion?.textField.delegate = self
+        SNSInputView.evernote?.textField.delegate = self
+        SNSInputView.web?.textField.delegate = self
         picker.delegate = self
         
-        SNSInputView.evernote.textField.debounce(delay: 1) { text in
+        SNSInputView.evernote!.textField.debounce(delay: 1) { text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             print(text)
         }
@@ -97,7 +96,7 @@ class CreateStudyView: UIViewController{
         backgroundView.addSubview(studyOverView)
         backgroundView.addSubview(SNSInputView)
         backgroundView.addSubview(studyInfoView)
-//        backgroundView.addSubview(locationView)
+        backgroundView.addSubview(locationView)
         //        scrollView.addSubview(timeView)
         //        scrollView.addSubview(button)
         
@@ -142,7 +141,7 @@ class CreateStudyView: UIViewController{
             $0.topAnchor.constraint(equalTo: studyOverView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: $0.web.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: $0.web!.bottomAnchor).isActive = true
             
         }
         studyInfoView.do {
@@ -152,13 +151,13 @@ class CreateStudyView: UIViewController{
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: $0.textView.bottomAnchor).isActive = true
         }
-//        locationView.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor).isActive = true
-//            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
-//        }
+        locationView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor,constant: (11/667) * screenSize.height).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
+        }
         //        timeView.do {
         //            $0.translatesAutoresizingMaskIntoConstraints = false
         //            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor).isActive = true

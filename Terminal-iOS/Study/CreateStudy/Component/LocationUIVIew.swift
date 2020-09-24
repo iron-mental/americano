@@ -35,8 +35,8 @@ class LocationUIVIew: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (32/352) * frame.size.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (14/53) * frame.size.height).isActive = true
         }
         detailAddress.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

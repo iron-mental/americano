@@ -10,13 +10,16 @@ import UIKit
 
 class IdInputView: UIView {
     var titleLabel = UILabel()
-    
-    var notion = SNSInputItem()
-    var evernote = SNSInputItem()
-    var web = SNSInputItem()
+    var notion: SNSInputItem?
+    var evernote: SNSInputItem?
+    var web: SNSInputItem?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        notion = SNSInputItem(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: (25/118) * frame.size.height))
+        evernote = SNSInputItem(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: (25/118) * frame.size.height))
+        web = SNSInputItem(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: (25/118) * frame.size.height))
+        
         attribute()
         layout()
     }
@@ -25,21 +28,21 @@ class IdInputView: UIView {
         titleLabel.do {
             $0.text = "SNS"
         }
-        notion.do {
+        notion!.do {
             $0.textField.text = "notion"
         }
-        evernote.do {
+        evernote!.do {
             $0.textField.text = "evernote"
         }
-        web.do {
+        web!.do {
             $0.textField.text = "web"
         }
     }
     func layout() {
         addSubview(titleLabel)
-        addSubview(notion)
-        addSubview(evernote)
-        addSubview(web)
+        addSubview(notion!)
+        addSubview(evernote!)
+        addSubview(web!)
         
         titleLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +51,7 @@ class IdInputView: UIView {
             $0.heightAnchor.constraint(equalToConstant: (18/117) * frame.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (31/352) * frame.width).isActive = true
         }
-        notion.do {
+        notion!.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (28/121) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
@@ -56,17 +59,17 @@ class IdInputView: UIView {
             $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
         }
-        evernote.do {
+        evernote!.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: notion.bottomAnchor, constant: (10/121) * frame.height).isActive = true
+            $0.topAnchor.constraint(equalTo: notion!.bottomAnchor, constant: (10/121) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
         }
-        web.do {
+        web!.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: evernote.bottomAnchor, constant: (10/121) * frame.height).isActive = true
+            $0.topAnchor.constraint(equalTo: evernote!.bottomAnchor, constant: (10/121) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
