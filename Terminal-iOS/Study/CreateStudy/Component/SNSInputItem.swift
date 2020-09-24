@@ -13,8 +13,8 @@ class SNSInputItem: UIView {
     var textField = SNSInputUITextField()
     var valid = UIImageView()
     
-    init() {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         attribute()
         layout()
     }

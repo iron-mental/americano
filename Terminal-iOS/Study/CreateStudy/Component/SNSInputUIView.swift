@@ -9,6 +9,7 @@
 import UIKit
 
 class SNSInputUIVIew: UIView {
+    var titleLabel = UILabel()
     var notion =  SNSInputItem()
     var evernote =  SNSInputItem()
     var web =  SNSInputItem()
@@ -20,6 +21,9 @@ class SNSInputUIVIew: UIView {
     }
     
     func attribute() {
+        titleLabel.do {
+            $0.text = "SNS"
+        }
         notion.do {
             $0.textField.text = "notion"
         }
@@ -31,27 +35,38 @@ class SNSInputUIVIew: UIView {
         }
     }
     func layout() {
+        addSubview(titleLabel)
         addSubview(notion)
         addSubview(evernote)
         addSubview(web)
         
+        titleLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (18/117) * frame.height).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (31/352) * frame.width).isActive = true
+        }
         notion.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (28/121) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.topAnchor, constant: 30).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
         }
         evernote.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: notion.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: notion.bottomAnchor, constant: (10/121) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: evernote.topAnchor,constant: 30).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
         }
         web.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: evernote.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: evernote.bottomAnchor, constant: (10/121) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: web.topAnchor, constant: 30).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
         }
     }
     

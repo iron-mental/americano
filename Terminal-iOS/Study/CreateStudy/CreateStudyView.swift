@@ -37,7 +37,6 @@ class CreateStudyView: UIViewController{
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             print(text)
         }
-        print((121/667) * UIScreen.main.bounds.width)
     }
     
     func attribute() {
@@ -69,10 +68,10 @@ class CreateStudyView: UIViewController{
         SNSInputView.do {
             $0.backgroundColor = .orange
         }
-        //        locationView.do {
-        //            $0.backgroundColor = .red
-        //            $0.detailAddress.backgroundColor = .yellow
-        //        }
+//        locationView.do {
+//            $0.backgroundColor = .red
+//            $0.detailAddress.backgroundColor = .yellow
+//        }
         //        timeView.do {
         //            $0.backgroundColor = .blue
         //            $0.detailTime.backgroundColor = .brown
@@ -90,7 +89,7 @@ class CreateStudyView: UIViewController{
         backgroundView.addSubview(studyTitleTextField)
         backgroundView.addSubview(studyOverviewView)
         backgroundView.addSubview(SNSInputView)
-        //        scrollView.addSubview(locationView)
+//        backgroundView.addSubview(locationView)
         //        scrollView.addSubview(timeView)
         //        scrollView.addSubview(button)
         
@@ -133,17 +132,17 @@ class CreateStudyView: UIViewController{
         SNSInputView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyOverviewView.bottomAnchor,constant: (10/667) * screenSize.height).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: SNSInputView.web.bottomAnchor).isActive = true
         }
-        //        locationView.do {
-        //            $0.translatesAutoresizingMaskIntoConstraints = false
-        //            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor).isActive = true
-        //            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-        //            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-        //            $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
-        //        }
+//        locationView.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
+//        }
         //        timeView.do {
         //            $0.translatesAutoresizingMaskIntoConstraints = false
         //            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor).isActive = true
