@@ -19,8 +19,8 @@ class CreateStudyView: UIViewController{
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
-    var studyOverviewView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (121/667) * UIScreen.main.bounds.width, height: (352/375) * UIScreen.main.bounds.height))
-    var SNSInputView = SNSInputUIVIew(frame: CGRect(x: 0, y: 0, width: (121/667) * UIScreen.main.bounds.width, height: (352/375) * UIScreen.main.bounds.height))
+    var studyOverviewView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height))
+    var SNSInputView = SNSInputUIVIew(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height))
     var locationView = LocationUIVIew()
     var timeView = TimeUIView()
     var button = UIButton()
@@ -37,6 +37,7 @@ class CreateStudyView: UIViewController{
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             print(text)
         }
+        print((121/667) * UIScreen.main.bounds.width)
     }
     
     func attribute() {

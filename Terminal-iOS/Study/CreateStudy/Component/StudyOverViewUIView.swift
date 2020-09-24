@@ -38,17 +38,16 @@ class StudyOverViewUIView: UIView {
         titleLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (16 / 667) * frame.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (76/375) * frame.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (18/117) * frame.height).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (76/352) * frame.width).isActive = true
         }
         textView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (18/667) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (117/667) * frame.height).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (117/151) * frame.height).isActive = true
         }
     }
     
