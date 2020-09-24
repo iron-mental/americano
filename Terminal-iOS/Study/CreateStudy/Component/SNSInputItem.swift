@@ -13,8 +13,8 @@ class SNSInputItem: UIView {
     var textField = SNSInputUITextField()
     var valid = UIImageView()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: CGRect.zero)
         attribute()
         layout()
     }
@@ -22,16 +22,16 @@ class SNSInputItem: UIView {
     func attribute() {
         icon.do {
             $0.image = #imageLiteral(resourceName: "notion")
-            //height을 따로 지정해줘야 하는건가? 컨텐트 모드만 지정해주면 width에 맞춰 알아서하는건가?
-            $0.frame = CGRect(x: 0, y: 0, width: (20/345) * bounds.width, height: 0)
             $0.contentMode = .scaleAspectFit
         }
         textField.do {
+            
             $0.placeholder = "이거 플레이스홀더에연"
             $0.sizeToFit()
             $0.backgroundColor = .red
         }
         valid.do {
+            //            $0.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
             $0.image = #imageLiteral(resourceName: "Vaild")
         }
     }
@@ -44,19 +44,24 @@ class SNSInputItem: UIView {
         //각각 길이 화면대응 해주어야 합니다.
         icon.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
         }
         textField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 20).isActive = true
-            $0.widthAnchor.constraint(equalTo: widthAnchor,constant: -100).isActive = true
+            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 31).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 70).isActive = true
         }
         valid.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
         }
     }
     

@@ -8,11 +8,12 @@
 
 import UIKit
 
-class SNSInputUIVIew: UIView {
+class IdInputView: UIView {
     var titleLabel = UILabel()
-    var notion =  SNSInputItem()
-    var evernote =  SNSInputItem()
-    var web =  SNSInputItem()
+    
+    var notion = SNSInputItem()
+    var evernote = SNSInputItem()
+    var web = SNSInputItem()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,6 +52,7 @@ class SNSInputUIVIew: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (28/121) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
         }
@@ -58,6 +60,7 @@ class SNSInputUIVIew: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: notion.bottomAnchor, constant: (10/121) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
         }
@@ -65,6 +68,7 @@ class SNSInputUIVIew: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: evernote.bottomAnchor, constant: (10/121) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
         }

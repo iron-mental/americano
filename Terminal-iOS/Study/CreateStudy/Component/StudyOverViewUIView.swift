@@ -1,5 +1,5 @@
 //
-//  SNSInputView.swift
+//  StudyOverViewUIView.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2020/09/20.
@@ -11,10 +11,12 @@ import UIKit
 class StudyOverViewUIView: UIView {
     var seletedCategory: String?
     var titleLabel = UILabel()
+    var title: String?
     var textView = UITextView()
     
-    override init(frame: CGRect) {
+    init(frame: CGRect,title: String) {
         super.init(frame: frame)
+        self.title = title
         attribute()
         layout()
     }
@@ -24,7 +26,7 @@ class StudyOverViewUIView: UIView {
             $0.backgroundColor = .white
         }
         titleLabel.do {
-            $0.text = "스터디 소개"
+            $0.text = title
         }
         textView.do {
             $0.text = "test"

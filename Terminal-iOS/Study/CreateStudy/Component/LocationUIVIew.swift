@@ -12,8 +12,8 @@ class LocationUIVIew: UIView {
     var title = UILabel()
     var detailAddress = UILabel()
     
-    init() {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         attribute()
         layout()
     }
