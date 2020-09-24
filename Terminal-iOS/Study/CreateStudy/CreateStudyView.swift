@@ -19,7 +19,7 @@ class CreateStudyView: UIViewController{
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
-    var studyOverviewView: StudyOverViewUIView?
+    var studyOverviewView = StudyOverViewUIView()
     var SNSInputView = SNSInputUIVIew()
     var locationView = LocationUIVIew()
     var timeView = TimeUIView()
@@ -61,11 +61,10 @@ class CreateStudyView: UIViewController{
             $0.textAlignment = .center
             $0.textColor = .black
         }
-        //        studyOverviewView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), category: seletedCategory!)
-        //        studyOverviewView!.do {
-        //            $0.backgroundColor = .cyan
-        //            $0.textView.backgroundColor = .blue
-        //        }
+        studyOverviewView.do {
+            $0.backgroundColor = .cyan
+            $0.textView.backgroundColor = .blue
+        }
         //        SNSInputView.do {
         //            $0.backgroundColor = .orange
         //            $0.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
@@ -89,7 +88,7 @@ class CreateStudyView: UIViewController{
         scrollView.addSubview(backgroundView)
         backgroundView.addSubview(imageView)
         backgroundView.addSubview(studyTitleTextField)
-        //        scrollView.addSubview(studyOverviewView!)
+        backgroundView.addSubview(studyOverviewView)
         //        scrollView.addSubview(SNSInputView)
         //        scrollView.addSubview(locationView)
         //        scrollView.addSubview(timeView)
@@ -124,13 +123,15 @@ class CreateStudyView: UIViewController{
             $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
         }
-        //        studyOverviewView!.do {
-        //            $0.translatesAutoresizingMaskIntoConstraints = false
-        //            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor).isActive = true
-        //            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-        //            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-        //            $0.bottomAnchor.constraint(equalTo: (studyOverviewView?.textView.bottomAnchor)!, constant: 10).isActive = true
-        //        }
+        studyOverviewView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            
+            $0.bottomAnchor.constraint(equalTo: studyOverviewView.textView.bottomAnchor).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: (151/667) * screenSize.height).isActive = true
+        }
         //        SNSInputView.do {
         //            $0.translatesAutoresizingMaskIntoConstraints = false
         //            $0.topAnchor.constraint(equalTo: studyOverviewView!.safeAreaLayoutGuide.bottomAnchor).isActive = true
