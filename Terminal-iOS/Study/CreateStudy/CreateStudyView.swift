@@ -30,28 +30,17 @@ class CreateStudyView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
-        
-        studyTitleTextField.delegate = self
-        SNSInputView.notion?.textField.delegate = self
-        SNSInputView.evernote?.textField.delegate = self
-        SNSInputView.web?.textField.delegate = self
-        picker.delegate = self
-        
-        SNSInputView.evernote!.textField.debounce(delay: 1) { text in
-            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            print(text)
-        }
     }
     
     func attribute() {
         view.do {
-            $0.backgroundColor = UIColor(named: "background")
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         scrollView.do {
-            $0.backgroundColor = UIColor(named: "background")
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         backgroundView.do {
-            $0.backgroundColor = .brown
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         imageView.do {
             tapGestureRecognizer = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
@@ -60,27 +49,26 @@ class CreateStudyView: UIViewController{
             $0.addGestureRecognizer(tapGestureRecognizer)
         }
         studyTitleTextField.do {
-            $0.placeholder = "스터디 이름"
-            $0.backgroundColor = .white
+            $0.placeholder = "스터디 이름을 입력하세요"
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.textAlignment = .center
-            $0.textColor = .black
+            $0.textColor = .white
+            $0.layer.cornerRadius = 10
         }
         studyOverView.do {
-            $0.backgroundColor = .cyan
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         SNSInputView.do {
-            $0.backgroundColor = .red
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         studyInfoView.do {
-            $0.backgroundColor = .blue
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         locationView.do {
-            $0.backgroundColor = .red
-            $0.detailAddress.backgroundColor = .yellow
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         timeView.do {
-            $0.backgroundColor = .blue
-            $0.detailTime.backgroundColor = .brown
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         button.do {
             $0.setTitle("완료", for: .normal)
@@ -175,6 +163,34 @@ class CreateStudyView: UIViewController{
         
     }
     
+    func setDelegate() {
+        scrollView.delegate = self
+        
+        studyTitleTextField.delegate = self
+        
+        SNSInputView.notion?.textField.delegate = self
+        SNSInputView.evernote?.textField.delegate = self
+        SNSInputView.web?.textField.delegate = self
+        
+        picker.delegate = self
+        
+        
+        SNSInputView.notion!.textField.debounce(delay: 1) { text in
+            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
+            print(text)
+        }
+        
+        SNSInputView.evernote!.textField.debounce(delay: 1) { text in
+            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
+            print(text)
+        }
+        
+        SNSInputView.web!.textField.debounce(delay: 1) { text in
+            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
+            print(text)
+        }
+    }
+    
     // FUNCTION
     
     @objc func didImageViewClicked() {
@@ -204,6 +220,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func setView() {
         attribute()
         layout()
+        setDelegate()
     }
     
     func getBackgroundImage() {
@@ -226,4 +243,10 @@ extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationContro
 
 extension CreateStudyView: UITextFieldDelegate {
     
+}
+
+extension CreateStudyView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
 }
