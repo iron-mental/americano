@@ -14,6 +14,8 @@ class SetViewController: UIViewController {
     let profile = UIImageView(frame: CGRect(x: 0, y: 0,
                                             width: UIScreen.main.bounds.height * 0.1,
                                             height: UIScreen.main.bounds.height * 0.1))
+    let name = UILabel()
+    let descript = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,12 @@ class SetViewController: UIViewController {
             $0.image = #imageLiteral(resourceName: "leehi")
             $0.layer.cornerRadius = $0.frame.size.width/2
             $0.clipsToBounds = true
+        }
+        name.do {
+            $0.text = "이하이"
+            $0.textColor = .white
+            $0.textAlignment = .center
+            $0.font = $0.font.withSize(20)
         }
     }
     
@@ -52,5 +60,10 @@ class SetViewController: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.1).isActive = true
         }
         
+        name.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: frameView.topAnchor, constant: 20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
+        }
     }
 }
