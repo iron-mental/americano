@@ -35,6 +35,9 @@ class StudyCategoryView: UIViewController {
         let searchStudyBtn = UIBarButtonItem(barButtonSystemItem: .search,
                                              target: self,
                                              action: #selector(searchStudy))
+        view.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.title = "스터디"

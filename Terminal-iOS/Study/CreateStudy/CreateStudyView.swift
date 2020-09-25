@@ -8,81 +8,212 @@
 
 import UIKit
 
-class CreateStudyView: UIViewController {
+class CreateStudyView: UIViewController{
     var presenter: CreateStudyPresenterProtocols?
     
     let screenSize = UIScreen.main.bounds
-    var selectedCategory: String?
-    
+    var selectedCategory: Category?
+    let picker = UIImagePickerController()
+    var backgroundView = UIView()
     let scrollView = UIScrollView()
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
-    let collectionView = SNSCollectionView(frame: CGRect(x: 0, y: 0, width: 300, height: 100))
-    
+    var seletedCategory: Category?
+    var studyOverView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")
+    var SNSInputView = IdInputView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (118/667) * UIScreen.main.bounds.height))
+    var studyInfoView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
+    var locationView = LocationUIVIew(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
+    var timeView = TimeUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
+    var button = UIButton()
+    var tapGestureRecognizer = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        self.presenter?.viewDidLoad()
     }
     
     func attribute() {
         view.do {
-            $0.backgroundColor = UIColor(named: "background")
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         scrollView.do {
-            $0.backgroundColor = .cyan
+            $0.backgroundColor = UIColor.appColor(.testColor)
+        }
+        backgroundView.do {
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         imageView.do {
+            tapGestureRecognizer = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
             $0.image = #imageLiteral(resourceName: "swiftBackground")
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(tapGestureRecognizer)
         }
         studyTitleTextField.do {
-            $0.placeholder = "스터디 이름"
-            $0.backgroundColor = .white
+            $0.placeholder = "스터디 이름을 입력하세요"
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.textAlignment = .center
-            $0.textColor = .black
+            $0.textColor = .white
+            $0.layer.cornerRadius = 10
+        }
+        studyOverView.do {
+            $0.backgroundColor = UIColor.appColor(.testColor)
+        }
+        SNSInputView.do {
+            $0.backgroundColor = UIColor.appColor(.testColor)
+        }
+        studyInfoView.do {
+            $0.backgroundColor = UIColor.appColor(.testColor)
+        }
+        locationView.do {
+            $0.backgroundColor = UIColor.appColor(.testColor)
+        }
+        timeView.do {
+            $0.backgroundColor = UIColor.appColor(.testColor)
+        }
+        button.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor(named: "key")
+            $0.layer.cornerRadius = 10
         }
     }
     
     func layout() {
         view.addSubview(scrollView)
-        scrollView.addSubview(imageView)
-        scrollView.addSubview(studyTitleTextField)
-        scrollView.addSubview(collectionView)
+        scrollView.addSubview(backgroundView)
+        backgroundView.addSubview(imageView)
+        backgroundView.addSubview(studyTitleTextField)
+        backgroundView.addSubview(studyOverView)
+        backgroundView.addSubview(SNSInputView)
+        backgroundView.addSubview(studyInfoView)
+        backgroundView.addSubview(locationView)
+        backgroundView.addSubview(timeView)
+        backgroundView.addSubview(button)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
-            $0.contentSize = CGSize(width: screenSize.width, height: 2000)
+            $0.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        }
+        backgroundView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 400).isActive = true
+            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
         imageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (170/667) * screenSize.height).isActive = true
-            $0.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
         }
         studyTitleTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
+            $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
-            $0.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
         }
-        collectionView.do {
+        studyOverView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo:scrollView.centerXAnchor)
-                .isActive = true
-            $0.centerYAnchor.constraint(equalTo:scrollView.centerYAnchor, constant: 200)
-                .isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 170)
-                .isActive = true
-            $0.widthAnchor.constraint(equalToConstant: screenSize.width )
-                .isActive = true
+            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor,constant: (18/667) * screenSize.height).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyOverView.textView.bottomAnchor).isActive = true
         }
+        SNSInputView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: studyOverView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: $0.web!.bottomAnchor).isActive = true
+            
+        }
+        studyInfoView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor, constant: (13/667) * screenSize.height).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: $0.textView.bottomAnchor).isActive = true
+        }
+        locationView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
+        }
+        timeView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: timeView.detailTime.bottomAnchor).isActive = true
+        }
+        button.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: (26/667) * screenSize.height).isActive = true
+            $0.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (335/375) * screenSize.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (43/667) * screenSize.height).isActive = true
+        }
+        
+    }
+    
+    func setDelegate() {
+        scrollView.delegate = self
+        
+        studyTitleTextField.delegate = self
+        
+        SNSInputView.notion?.textField.delegate = self
+        SNSInputView.evernote?.textField.delegate = self
+        SNSInputView.web?.textField.delegate = self
+        
+        picker.delegate = self
+        
+        
+        SNSInputView.notion!.textField.debounce(delay: 1) { text in
+            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
+            print(text)
+        }
+        
+        SNSInputView.evernote!.textField.debounce(delay: 1) { text in
+            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
+            print(text)
+        }
+        
+        SNSInputView.web!.textField.debounce(delay: 1) { text in
+            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
+            print(text)
+        }
+    }
+    
+    // FUNCTION
+    
+    @objc func didImageViewClicked() {
+        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
+        let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(library)
+        alert.addAction(camera)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    func openLibrary() {
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
+    }
+    func openCamera() {
+        //시뮬에서 앱죽는거 에러처리 해야함
+        picker.sourceType = .camera
+        present(picker, animated: true, completion: nil)
     }
 }
 
@@ -90,7 +221,9 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func setView() {
         attribute()
         layout()
+        setDelegate()
     }
+    
     func getBackgroundImage() {
         print("getBackgroundImage")
     }
@@ -99,19 +232,22 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
 }
 
-extension CreateStudyView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SNSCollectionViewCell.identifier , for: indexPath)
-        return cell
+extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            imageView.image = image
+            print(info)
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
 
-extension CreateStudyView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+extension CreateStudyView: UITextFieldDelegate {
+    
+}
+
+extension CreateStudyView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
 }
