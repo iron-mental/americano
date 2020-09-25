@@ -176,19 +176,17 @@ class CreateStudyView: UIViewController{
         picker.delegate = self
         
         
-        SNSInputView.notion!.textField.debounce(delay: 1) { text in
+        SNSInputView.notion!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            print(text)
+            self!.presenter?.notionInputFinish(id: text ?? "")
         }
-        
-        SNSInputView.evernote!.textField.debounce(delay: 1) { text in
+        SNSInputView.evernote!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            print(text)
+            self!.presenter?.everNoteInputFinish(url: text ?? "")
         }
-        
-        SNSInputView.web!.textField.debounce(delay: 1) { text in
+        SNSInputView.web!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            print(text)
+            self!.presenter?.URLInputFinish(url: text ?? "")
         }
     }
     
@@ -229,6 +227,52 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     func setBackgroundImage() {
         print("setVackgroundImage")
+    }
+    func showLoadingToNotionInput() {
+        print("노션 로딩중")
+    }
+    
+    func showLoadingToEvernoteInput() {
+        print("에버노트 로딩중")
+    }
+    
+    func showLoadingToWebInput() {
+        print("웹 로딩중")
+    }
+    func hideLoadingToNotionInput() {
+        print("hideLoadingToNotionInput")
+    }
+    
+    func hideLoadingToEvernoteInput() {
+        print("hideLoadingToEvernoteInput")
+    }
+    
+    func hideLoadingToWebInput() {
+        print("hideLoadingToWebInput")
+    }
+    
+    func notionValid() {
+        print("notionValid")
+    }
+    
+    func evernoteValid() {
+        print("evernoteValid")
+    }
+    
+    func webValid() {
+        print("webValid")
+    }
+    
+    func notionInvalid() {
+        print("notionInvalid")
+    }
+    
+    func evernoteInvalid() {
+        print("evernoteInvalid")
+    }
+    
+    func webInvalid() {
+        print("webInvalid")
     }
 }
 
