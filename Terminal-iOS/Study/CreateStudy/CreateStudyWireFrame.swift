@@ -13,6 +13,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         let view = CreateStudyView()
         let presenter = CreateStudyPresenter()
         let interactor = CreateStudyInteractor()
+        let remoteDataManager = CreateStudyRemoteManager()
         
         view.presenter = presenter
         view.selectedCategory = category
@@ -21,6 +22,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         presenter.interactor = interactor
         
         interactor.presenter = presenter
+        interactor.createStudyRemoteDataManager = remoteDataManager
         
         view.seletedCategory = category
         

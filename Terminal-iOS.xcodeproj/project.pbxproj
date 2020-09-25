@@ -23,6 +23,7 @@
 		CC26AD58251B27B3006B11E9 /* LocationUIVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD57251B27B3006B11E9 /* LocationUIVIew.swift */; };
 		CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */; };
 		CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */; };
+		CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
@@ -74,6 +75,7 @@
 		CC26AD57251B27B3006B11E9 /* LocationUIVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUIVIew.swift; sourceTree = "<group>"; };
 		CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUIView.swift; sourceTree = "<group>"; };
 		CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUITextField.swift; sourceTree = "<group>"; };
+		CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyRemoteManager.swift; sourceTree = "<group>"; };
 		CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */,
 				CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */,
 				CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */,
+				CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */,
 				CC1BE0432511FD5400F88313 /* Component */,
 			);
 			path = CreateStudy;
@@ -434,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */,
 				CC1BE0392510D8AD00F88313 /* CreateStudyWireFrame.swift in Sources */,
 				CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */,
 				CCA3FF472517823E00F62627 /* StudyListProtocols.swift in Sources */,
