@@ -11,6 +11,9 @@ import UIKit
 class SetViewController: UIViewController {
     
     let frameView = UIView()
+    let profile = UIImageView(frame: CGRect(x: 0, y: 0,
+                                            width: UIScreen.main.bounds.height * 0.1,
+                                            height: UIScreen.main.bounds.height * 0.1))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +23,12 @@ class SetViewController: UIViewController {
     }
     
     func attribute() {
-        
+        profile.do {
+            $0.contentMode = .scaleAspectFill
+            $0.image = #imageLiteral(resourceName: "leehi")
+            $0.layer.cornerRadius = $0.frame.size.width/2
+            $0.clipsToBounds = true
+        }
     }
     
     func layout() {
@@ -31,6 +39,17 @@ class SetViewController: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.126).isActive = true
+        }
+        
+        view.addSubview(profile)
+        view.addSubview(name)
+        
+        profile.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: frameView.centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.1).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.1).isActive = true
         }
         
     }
