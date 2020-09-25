@@ -30,20 +30,6 @@ class CreateStudyView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
-        print(seletedCategory)
     }
     
     func attribute() {
