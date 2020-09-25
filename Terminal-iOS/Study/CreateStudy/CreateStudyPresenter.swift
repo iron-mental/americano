@@ -9,6 +9,8 @@
 import UIKit
 
 class CreateStudyPresenter: CreateStudyPresenterProtocols {
+    
+    
     var view: CreateStudyViewProtocols?
     var interactor: CreateStudyInteractorProtocols?
     var wireFrame: CreateStudyWireFrameProtocols?
@@ -17,16 +19,19 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
         view?.setView()
     }
     
-    func notionInputFinish() {
-        print("notion")
+    func notionInputFinish(id: String?) {
+        view?.showLoadingToNotionInput()
+        interactor?.searchNotionID(id: id)
     }
     
-    func everNoteInputFinish() {
-        print("everNote")
+    func everNoteInputFinish(url: String?) {
+        view?.showLoadingToEvernoteInput()
+        interactor?.searchEvernoteURL(url: url)
     }
     
-    func URLInputFinish() {
-        print("URL")
+    func URLInputFinish(url: String?) {
+        view?.showLoadingToWebInput()
+        interactor?.searchWebURL(url: url)
     }
     
     func clickAddressInput() {
@@ -37,5 +42,30 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
         print("complete")
     }
     
-
+    func showNotionValidResult(result: Bool) {
+        view?.hideLoadingToNotionInput()
+        if result {
+            view?.notionValid()
+        } else {
+            view?.notionInvalid()
+        }
+    }
+    
+    func showEvernoteValidResult(result: Bool) {
+        view?.hideLoadingToEvernoteInput()
+        if result {
+            view?.evernoteValid()
+        } else {
+            view?.evernoteInvalid()
+        }
+    }
+    
+    func showWebValidResult(result: Bool) {
+        view?.hideLoadingToWebInput()
+        if result {
+            view?.webValid()
+        } else {
+            view?.webInvalid()
+        }
+    }
 }
