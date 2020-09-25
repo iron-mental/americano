@@ -30,6 +30,8 @@ class StudyOverViewUIView: UIView {
         }
         textView.do {
             $0.text = "test"
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.layer.cornerRadius = 10
         }
     }
     
@@ -46,7 +48,7 @@ class StudyOverViewUIView: UIView {
         }
         textView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (18/667) * frame.height).isActive = true
+            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (18/117) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (117/151) * frame.height).isActive = true

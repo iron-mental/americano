@@ -53,7 +53,7 @@ class IdInputView: UIView {
         }
         notion!.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (28/121) * frame.height).isActive = true
+            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (18/107) * frame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
