@@ -25,10 +25,11 @@ class SNSInputItem: UIView {
             $0.contentMode = .scaleAspectFit
         }
         textField.do {
-            
             $0.placeholder = "이거 플레이스홀더에연"
             $0.sizeToFit()
-            $0.backgroundColor = .red
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.layer.cornerRadius = 10
+            $0.addLeftPadding()
         }
         valid.do {
             $0.image = #imageLiteral(resourceName: "Vaild")
@@ -53,14 +54,16 @@ class SNSInputItem: UIView {
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 31).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (20/24) * frame.size.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (272/352) * frame.size.width).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (260/352) * frame.size.width).isActive = true
+            
         }
         valid.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
+//            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (20/24) * frame.size.height).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (15/24) * frame.size.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (20/352) * frame.size.width).isActive = true
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         }
     }
     

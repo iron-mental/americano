@@ -20,10 +20,11 @@ class TimeUIView: UIView {
     
     func attribute() {
         title.do {
-            $0.text = "장소"
+            $0.text = "시간"
         }
         detailTime.do {
-            $0.placeholder = "상세 위치"
+            $0.placeholder = "시간정보 입력"
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
         }
     }
     

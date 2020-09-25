@@ -24,6 +24,7 @@ class LocationUIVIew: UIView {
         }
         detailAddress.do {
             $0.text = "상세 위치"
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
         }
     }
     

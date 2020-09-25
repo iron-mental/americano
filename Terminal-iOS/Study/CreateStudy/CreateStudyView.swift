@@ -12,7 +12,7 @@ class CreateStudyView: UIViewController{
     var presenter: CreateStudyPresenterProtocols?
     
     let screenSize = UIScreen.main.bounds
-    var selectedCategory: String?
+    var selectedCategory: Category?
     let picker = UIImagePickerController()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
@@ -30,6 +30,20 @@ class CreateStudyView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
+        print(seletedCategory)
     }
     
     func attribute() {
@@ -73,6 +87,7 @@ class CreateStudyView: UIViewController{
         button.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor(named: "key")
+            $0.layer.cornerRadius = 10
         }
     }
     

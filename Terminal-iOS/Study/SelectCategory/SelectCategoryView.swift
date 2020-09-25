@@ -98,7 +98,6 @@ class SelectCategoryView: UIViewController {
     }
     
     func viewDisappearAnimation() {
-        print("이거 타나요?")
         UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
             self.textLabel.transform = self.textLabel.transform.translatedBy(x: 500, y: 0)
         }) { _ in
