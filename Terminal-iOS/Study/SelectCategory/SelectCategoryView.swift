@@ -31,7 +31,7 @@ class SelectCategoryView: UIViewController {
     
     func attribute() {
         view.do {
-            $0.backgroundColor = UIColor(named: "background")
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         titleView.do {
             $0.text = "스터디 만들기"
@@ -52,8 +52,7 @@ class SelectCategoryView: UIViewController {
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self
-//            $0.backgroundColor = UIColor(named: "background")
-            $0.backgroundColor = .white
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         navigationItem.do {
             $0.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backButtonTapped))
@@ -71,7 +70,7 @@ class SelectCategoryView: UIViewController {
         }
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true

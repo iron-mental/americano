@@ -36,7 +36,7 @@ class StudyCategoryView: UIViewController {
                                              target: self,
                                              action: #selector(searchStudy))
         view.do {
-            $0.backgroundColor = UIColor(named: "background")
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
