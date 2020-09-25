@@ -9,9 +9,11 @@
 import UIKit
 
 enum AssetsColor {
-  case terminalBackground
-  case studySubTitle
-  case mainColor
+    case terminalBackground
+    case studySubTitle
+    case mainColor
+    case InputViewColor
+    case testColor
 }
 
 extension UIColor {
@@ -23,7 +25,12 @@ extension UIColor {
             return #colorLiteral(red: 0.5843137255, green: 0.5843137255, blue: 0.5843137255, alpha: 1)
         case .mainColor:
             return #colorLiteral(red: 0.1607843137, green: 0.462745098, blue: 0.9529411765, alpha: 1)
+        case .InputViewColor:
+            return #colorLiteral(red: 0.1139655635, green: 0.1133503988, blue: 0.1351134777, alpha: 1)
+        case .testColor:
+            return #colorLiteral(red: 0.09033346921, green: 0.08997825533, blue: 0.1030491814, alpha: 1)
         }
+        
     }
 }
 //
