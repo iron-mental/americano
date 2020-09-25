@@ -10,21 +10,7 @@ import UIKit
 import Then
 
 class StudyListView: UIViewController {
-    
-//    var isSelected: Bool {
-//        willSet {
-//            if newValue {
-//                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
-//                    self.selectedUnderline.transform = self.selectedUnderline.transform.translatedBy(x: self.lateButton.center.x, y: 0)
-//                }
-//            } else {
-//                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) {
-//                    self.selectedUnderline.transform = self.selectedUnderline.transform.translatedBy(x: self.locationButton.center.x, y: 0)
-//                }
-//            }
-//        }
-//    }
-    
+        
     let tableView = UITableView()
     let aligmentView = UIView()
     let lateButton = UIButton()
@@ -110,13 +96,13 @@ class StudyListView: UIViewController {
         }
     }
     @objc func late() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
             self.selectedUnderline.center.x = self.lateButton.center.x
         }
     }
     
     @objc func location() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
             self.selectedUnderline.center.x = self.locationButton.center.x
         }
     }

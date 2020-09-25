@@ -9,22 +9,29 @@
 import UIKit
 
 class SetViewController: UIViewController {
-
+    
+    let frameView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.appColor(.terminalBackground)
+        attribute()
+        layout()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func attribute() {
+        
     }
-    */
-
+    
+    func layout() {
+        view.addSubview(frameView)
+        frameView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.126).isActive = true
+        }
+        
+    }
 }
