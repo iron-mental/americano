@@ -16,6 +16,7 @@ class SetViewController: UIViewController {
                                             height: UIScreen.main.bounds.height * 0.1))
     let name = UILabel()
     let descript = UILabel()
+    let location = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,10 @@ class SetViewController: UIViewController {
             $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다."
             $0.font = $0.font.withSize(16)
         }
+        location.do {
+            $0.text = "서울시 마포구"
+            $0.font = $0.font.withSize(13)
+        }
     }
     
     func layout() {
@@ -56,6 +61,7 @@ class SetViewController: UIViewController {
         view.addSubview(profile)
         view.addSubview(name)
         view.addSubview(descript)
+        view.addSubview(location)
         
         profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +81,11 @@ class SetViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
-            
+        }
+        location.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: frameView.topAnchor, constant: 30).isActive = true
+            $0.trailingAnchor.constraint(equalTo: frameView.trailingAnchor, constant: -20).isActive = true
         }
     }
 }
