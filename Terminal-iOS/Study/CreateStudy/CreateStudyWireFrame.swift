@@ -30,7 +30,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         return view
     }
     
-    static func selectLocationViewModul() -> UIViewController {
-        <#code#>
+    func goToSelectLocation() {
+        let view =  SelectLocationWireFrame.selectLocationViewModul()
     }
 }

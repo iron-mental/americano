@@ -9,5 +9,7 @@
 import UIKit
 
 class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
-
+    static func selectLocationViewModul() -> UIViewController {
+        return SelectLocationView()
+    }
 }

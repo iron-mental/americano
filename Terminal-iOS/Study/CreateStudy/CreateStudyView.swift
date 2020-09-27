@@ -229,7 +229,6 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func showLoadingToNotionInput() {
         print("노션 로딩중")
     }
-    
     func showLoadingToEvernoteInput() {
         print("에버노트 로딩중")
     }

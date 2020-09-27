@@ -72,6 +72,6 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
     }
     //추후에 스터디모델이 파라미터 값으로 들어가야겠쬬
     func clickCompleteButton() {
-        wireFrame?.create
+        wireFrame?.goToSelectLocation()
     }
 }

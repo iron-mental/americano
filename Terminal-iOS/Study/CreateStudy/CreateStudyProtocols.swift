@@ -75,5 +75,5 @@ protocol CreateStudyLocalDataManagerProtocols: class {
 protocol CreateStudyWireFrameProtocols: class {
     static func createStudyViewModul(category: Category) -> UIViewController
     //추후에 스터디 모델이 들어가야겠네용?
-    static func selectLocationViewModul() -> UIViewController
+    func goToSelectLocation()
 }
