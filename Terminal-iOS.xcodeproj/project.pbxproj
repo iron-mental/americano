@@ -25,7 +25,7 @@
 		CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */; };
 		CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */; };
 		CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */; };
-		CC29FB2B25207C1A00C1BDCE /* SelectLocationViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2A25207C1A00C1BDCE /* SelectLocationViewViewController.swift */; };
+		CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
@@ -79,7 +79,7 @@
 		CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUITextField.swift; sourceTree = "<group>"; };
 		CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyRemoteManager.swift; sourceTree = "<group>"; };
 		CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationProtocol.swift; sourceTree = "<group>"; };
-		CC29FB2A25207C1A00C1BDCE /* SelectLocationViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewViewController.swift; sourceTree = "<group>"; };
+		CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewView.swift; sourceTree = "<group>"; };
 		CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */,
-				CC29FB2A25207C1A00C1BDCE /* SelectLocationViewViewController.swift */,
+				CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */,
 			);
 			path = SelectLocation;
 			sourceTree = "<group>";
@@ -471,7 +471,7 @@
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
-				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewViewController.swift in Sources */,
+				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
 				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,

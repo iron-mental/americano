@@ -10,7 +10,7 @@ import UIKit
 
 class SelectCategoryView: UIViewController {
     
-    var presenter: SelectCategoryPresenterProtocols?
+    var presenter: SelectCategoryPresenterProtocol?
     var categoryList: [Category] = []
     
     let collectionView: UICollectionView = {
@@ -110,7 +110,7 @@ class SelectCategoryView: UIViewController {
     }
 }
 
-extension SelectCategoryView: SelectCategoryViewProtocols {
+extension SelectCategoryView: SelectCategoryViewProtocol {
     func showCategory() {
         attribute()
         layout()

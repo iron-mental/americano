@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SelectCategoryPresenter: SelectCategoryPresenterProtocols {
-    var view: SelectCategoryViewProtocols?
-    var wireFrame: SelectCategoryWireFrameProtocols?
+class SelectCategoryPresenter: SelectCategoryPresenterProtocol {
+    var view: SelectCategoryViewProtocol?
+    var wireFrame: SelectCategoryWireFrameProtocol?
     
     func viewDidLoad() {
         view?.showCategory()
