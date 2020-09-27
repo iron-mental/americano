@@ -24,6 +24,8 @@
 		CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */; };
 		CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */; };
 		CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */; };
+		CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */; };
+		CC29FB2B25207C1A00C1BDCE /* SelectLocationViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2A25207C1A00C1BDCE /* SelectLocationViewViewController.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
@@ -76,6 +78,8 @@
 		CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUIView.swift; sourceTree = "<group>"; };
 		CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUITextField.swift; sourceTree = "<group>"; };
 		CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyRemoteManager.swift; sourceTree = "<group>"; };
+		CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationProtocol.swift; sourceTree = "<group>"; };
+		CC29FB2A25207C1A00C1BDCE /* SelectLocationViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewViewController.swift; sourceTree = "<group>"; };
 		CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
@@ -195,6 +199,15 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		CC29FB2425207B4500C1BDCE /* SelectLocation */ = {
+			isa = PBXGroup;
+			children = (
+				CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */,
+				CC29FB2A25207C1A00C1BDCE /* SelectLocationViewViewController.swift */,
+			);
+			path = SelectLocation;
+			sourceTree = "<group>";
+		};
 		CCA1FF4A24FD0C930026C3EA = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +313,7 @@
 		CCB2AC9A250F81AC00435E5F /* CreateStudy */ = {
 			isa = PBXGroup;
 			children = (
+				CC29FB2425207B4500C1BDCE /* SelectLocation */,
 				CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */,
 				CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */,
 				CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */,
@@ -457,6 +471,7 @@
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
+				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewViewController.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
 				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,
@@ -467,6 +482,7 @@
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */,
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,
+				CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */,
 				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
 				CC26AD58251B27B3006B11E9 /* LocationUIVIew.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,

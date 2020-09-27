@@ -12,6 +12,7 @@ protocol CreateStudyViewProtocols: class {
     var presenter: CreateStudyPresenterProtocols? { get set }
     
     //VIew -> PRESENTER
+    func didClickButton()
     
     //PRESENTER -> VIEW
     func setView()
@@ -39,8 +40,6 @@ protocol CreateStudyInteractorProtocols: class {
     func searchNotionID(id: String?)
     func searchEvernoteURL(url: String?)
     func searchWebURL(url: String?)
-    
-    
 }
 
 protocol CreateStudyPresenterProtocols: class {
@@ -55,6 +54,7 @@ protocol CreateStudyPresenterProtocols: class {
     func URLInputFinish(url: String?)
     func clickAddressInput()
     func didCompleteButtonClick()
+    func clickCompleteButton()
     
     //INTERACTOR -> PRESENTER
     func showNotionValidResult(result: Bool)
@@ -74,5 +74,6 @@ protocol CreateStudyLocalDataManagerProtocols: class {
 
 protocol CreateStudyWireFrameProtocols: class {
     static func createStudyViewModul(category: Category) -> UIViewController
-    
+    //추후에 스터디 모델이 들어가야겠네용?
+    static func selectLocationViewModul() -> UIViewController
 }

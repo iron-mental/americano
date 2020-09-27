@@ -9,10 +9,10 @@
 import UIKit
 
 class SNSInputUITextField: UITextField {
+    
     deinit {
         self.removeTarget(self, action: #selector(self.editingChanged(_:)), for: .editingChanged)
     }
-    
     
     private var workItem: DispatchWorkItem?
     private var delay: Double = 0

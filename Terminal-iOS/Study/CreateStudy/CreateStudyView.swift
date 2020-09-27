@@ -131,7 +131,6 @@ class CreateStudyView: UIViewController{
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: $0.web!.bottomAnchor).isActive = true
-            
         }
         studyInfoView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -221,7 +220,6 @@ extension CreateStudyView: CreateStudyViewProtocols {
         layout()
         setDelegate()
     }
-    
     func getBackgroundImage() {
         print("getBackgroundImage")
     }
@@ -274,13 +272,16 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func webInvalid() {
         print("webInvalid")
     }
+    //추후에 파라미터로 스터디모델 넘겨줘야겠다
+    func didClickButton() {
+        presenter?.clickCompleteButton()
+    }
 }
 
 extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             imageView.image = image
-            print(info)
         }
         dismiss(animated: true, completion: nil)
     }

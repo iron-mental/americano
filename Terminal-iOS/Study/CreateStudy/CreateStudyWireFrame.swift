@@ -9,6 +9,7 @@
 import UIKit
 
 class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
+    
     static func createStudyViewModul(category: Category) -> UIViewController {
         let view = CreateStudyView()
         let presenter = CreateStudyPresenter()
@@ -27,5 +28,9 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         view.seletedCategory = category
         
         return view
+    }
+    
+    static func selectLocationViewModul() -> UIViewController {
+        <#code#>
     }
 }
