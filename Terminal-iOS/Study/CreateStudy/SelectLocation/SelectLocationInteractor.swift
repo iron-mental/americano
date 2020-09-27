@@ -8,6 +8,6 @@
 
 import UIKit
 
-class SelectLocationInteractor: Class {
+class SelectLocationInteractor: SelectLocationInteractorProtocol {
 
 }

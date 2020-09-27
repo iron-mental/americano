@@ -1,5 +1,5 @@
 //
-//  SelectLocationPresenter.swift
+//  SelectLocationRemoteDataManager.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2020/09/27.
@@ -8,6 +8,6 @@
 
 import UIKit
 
-class SelectLocationPresenter: SelectLocationPresenterProtocol {
+class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
 
 }

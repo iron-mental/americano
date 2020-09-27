@@ -26,6 +26,11 @@
 		CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */; };
 		CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */; };
 		CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */; };
+		CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2E25207D3F00C1BDCE /* SelectLocationInteractor.swift */; };
+		CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3125207D6000C1BDCE /* SelectLocationPresenter.swift */; };
+		CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */; };
+		CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3725207E8E00C1BDCE /* SelectLocationLocalDataManager.swift */; };
+		CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
@@ -80,6 +85,11 @@
 		CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyRemoteManager.swift; sourceTree = "<group>"; };
 		CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationProtocol.swift; sourceTree = "<group>"; };
 		CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewView.swift; sourceTree = "<group>"; };
+		CC29FB2E25207D3F00C1BDCE /* SelectLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationInteractor.swift; sourceTree = "<group>"; };
+		CC29FB3125207D6000C1BDCE /* SelectLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationPresenter.swift; sourceTree = "<group>"; };
+		CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationRemoteDataManager.swift; sourceTree = "<group>"; };
+		CC29FB3725207E8E00C1BDCE /* SelectLocationLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationLocalDataManager.swift; sourceTree = "<group>"; };
+		CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationWireFrame.swift; sourceTree = "<group>"; };
 		CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
@@ -202,8 +212,13 @@
 		CC29FB2425207B4500C1BDCE /* SelectLocation */ = {
 			isa = PBXGroup;
 			children = (
-				CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */,
 				CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */,
+				CC29FB2E25207D3F00C1BDCE /* SelectLocationInteractor.swift */,
+				CC29FB3125207D6000C1BDCE /* SelectLocationPresenter.swift */,
+				CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */,
+				CC29FB3725207E8E00C1BDCE /* SelectLocationLocalDataManager.swift */,
+				CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */,
+				CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */,
 			);
 			path = SelectLocation;
 			sourceTree = "<group>";
@@ -464,16 +479,20 @@
 				CCA3FF4A2517823E00F62627 /* StudyListWireFrame.swift in Sources */,
 				CCA3FF4B2517823E00F62627 /* StudyCell.swift in Sources */,
 				A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */,
+				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */,
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,
+				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
 				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */,
+				CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
+				CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */,
 				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
@@ -488,6 +507,7 @@
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CCCF2A90251732B50077B75C /* StudyOverViewUIView.swift in Sources */,
 				CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */,
+				CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CCA3FF482517823E00F62627 /* StudyListView.swift in Sources */,
