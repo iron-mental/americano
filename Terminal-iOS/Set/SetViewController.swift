@@ -50,6 +50,8 @@ class SetViewController: UIViewController {
     
     func layout() {
         view.addSubview(frameView)
+        frameView.layer.zPosition = 1
+        frameView.backgroundColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.5)
         frameView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -70,13 +72,11 @@ class SetViewController: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.1).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.1).isActive = true
         }
-        
         name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: frameView.topAnchor, constant: 30).isActive = true
             $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
         }
-        
         descript.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 10).isActive = true
