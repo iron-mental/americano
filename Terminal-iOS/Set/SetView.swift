@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetViewController: UIViewController {
+class SetView: UIViewController {
     
     let frameView = UIView()
     let profile = UIImageView(frame: CGRect(x: 0, y: 0,
