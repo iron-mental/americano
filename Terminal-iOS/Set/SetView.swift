@@ -60,7 +60,7 @@ class SetView: UIViewController {
         settingList.do {
             $0.delegate = self
             $0.dataSource = self
-            $0.backgroundColor = .white
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(DefalutCell.self, forCellReuseIdentifier: DefalutCell.cellId)
         }
     }

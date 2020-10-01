@@ -17,7 +17,7 @@ class DefalutCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .white
+        backgroundColor = UIColor.appColor(.terminalBackground)
         attribute()
         layout()
     }
@@ -39,13 +39,13 @@ class DefalutCell: UITableViewCell {
         title.do {
             $0.textAlignment = .center
             $0.font = $0.font.withSize(12)
-            $0.textColor = .black
+            $0.textColor = .white
         }
         
         rightLabel.do {
             $0.textAlignment = .right
             $0.font = $0.font.withSize(12)
-            $0.textColor = .black
+            $0.textColor = .white
         }
     }
     
