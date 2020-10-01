@@ -68,6 +68,8 @@ class SetView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.sectionHeaderHeight = 40
+            $0.separatorColor = .clear
             $0.register(DefaultCell.self, forCellReuseIdentifier: DefaultCell.defalutCellId)
             $0.register(NotiCell.self, forCellReuseIdentifier: NotiCell.notiCellId)
             $0.register(AccountCell.self, forCellReuseIdentifier: AccountCell.accountCellId)
@@ -130,12 +132,22 @@ extension SetView: SetViewProtocol {
 }
 
 extension SetView: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        
+        if section == 0 {
+            label.text = sections[0]
+        } else if section == 1 {
+            label.text = sections[1]
+        } else if section == 2{
+            label.text = sections[2]
+        }
+        return label
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

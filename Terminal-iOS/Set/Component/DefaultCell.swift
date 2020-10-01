@@ -38,13 +38,13 @@ class DefaultCell: UITableViewCell {
     func attribute() {
         title.do {
             $0.textAlignment = .center
-            $0.font = $0.font.withSize(12)
+//            $0.font = $0.font.withSize(12)
             $0.textColor = .white
         }
         
         rightLabel.do {
             $0.textAlignment = .right
-            $0.font = $0.font.withSize(12)
+//            $0.font = $0.font.withSize(12)
             $0.textColor = .white
         }
     }
