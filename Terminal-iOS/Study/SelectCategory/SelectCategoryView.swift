@@ -72,8 +72,8 @@ class SelectCategoryView: UIViewController {
         scrollView.addSubview(backgroundView)
         backgroundView.addSubview(textLabel)
         backgroundView.addSubview(collectionView)
-//        view.addSubview(textLabel)
-//        view.addSubview(collectionView)
+        //        view.addSubview(textLabel)
+        //        view.addSubview(collectionView)
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -91,15 +91,17 @@ class SelectCategoryView: UIViewController {
         }
         textLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 500).isActive = true
+            //            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
+            //            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 500).isActive = true
+            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 24).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 500).isActive = true
         }
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
-//            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            //            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
+            //            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
+            //            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
+            //            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
     
