@@ -27,7 +27,12 @@ class DefalutCell: UITableViewCell {
     }
     
     func setData(_ data: Setting){
-        self.title.text = data.title
+        title.do {
+            $0.text = data.title
+        }
+        rightLabel.do {
+            $0.text = data.status
+        }
     }
     
     func attribute() {
@@ -38,8 +43,9 @@ class DefalutCell: UITableViewCell {
         }
         
         rightLabel.do {
-            $0.textAlignment = .center
+            $0.textAlignment = .right
             $0.font = $0.font.withSize(12)
+            $0.textColor = .black
         }
     }
     

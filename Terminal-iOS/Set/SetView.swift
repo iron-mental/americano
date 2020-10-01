@@ -10,12 +10,12 @@ import UIKit
 
 class SetView: UIViewController {
     
-    var tempData: [Setting] = [Setting(title: "앱버전"),
-                               Setting(title: "공지사항"),
-                               Setting(title: "도움말"),
-                               Setting(title: "문의하기"),
-                               Setting(title: "이용약관"),
-                               Setting(title: "개인정보 취급방침")]
+    var tempData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
+                               Setting(title: "공지사항", status: ">"),
+                               Setting(title: "도움말", status: ">"),
+                               Setting(title: "문의하기", status: ">"),
+                               Setting(title: "이용약관", status: ">"),
+                               Setting(title: "개인정보 취급방침", status: ">")]
     
     var presenter: SetViewPresenterProtocol?
     
@@ -129,7 +129,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         
         let data = tempData[indexPath.row]
         cell.setData(data)
-        print(data.title)
+        
         return cell
     }
 }

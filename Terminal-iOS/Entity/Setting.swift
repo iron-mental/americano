@@ -10,4 +10,5 @@ import Foundation
 
 struct Setting {
     var title: String
+    var status: String
 }
