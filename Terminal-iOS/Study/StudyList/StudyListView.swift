@@ -135,6 +135,8 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate {
         
         let study = studyList[indexPath.row]
         cell.setData(study)
+
+        
         
         return cell
     }

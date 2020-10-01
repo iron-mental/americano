@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import Then
 
 class DefalutCell: UITableViewCell {
+    static let cellId = "defaltCell"
     
-    lazy var title = UILabel()
-    lazy var rightLabel = UILabel()
+    let title = UILabel()
+    let rightLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .white
         attribute()
         layout()
     }
@@ -23,10 +26,15 @@ class DefalutCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setData(_ data: Setting){
+        self.title.text = data.title
+    }
+    
     func attribute() {
         title.do {
             $0.textAlignment = .center
             $0.font = $0.font.withSize(12)
+            $0.textColor = .black
         }
         
         rightLabel.do {

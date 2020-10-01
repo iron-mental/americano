@@ -10,6 +10,15 @@ import UIKit
 
 class SetView: UIViewController {
     
+    var tempData: [Setting] = [Setting(title: "앱버전"),
+                               Setting(title: "공지사항"),
+                               Setting(title: "도움말"),
+                               Setting(title: "문의하기"),
+                               Setting(title: "이용약관"),
+                               Setting(title: "개인정보 취급방침")]
+    
+    var presenter: SetViewPresenterProtocol?
+    
     let frameView = UIView()
     let profile = UIImageView(frame: CGRect(x: 0, y: 0,
                                             width: UIScreen.main.bounds.height * 0.1,
@@ -17,6 +26,8 @@ class SetView: UIViewController {
     let name = UILabel()
     let descript = UILabel()
     let location = UILabel()
+    let settingList = UITableView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +35,7 @@ class SetView: UIViewController {
         attribute()
         layout()
     }
-    
+        
     func attribute() {
         profile.do {
             $0.contentMode = .scaleAspectFill
@@ -46,6 +57,12 @@ class SetView: UIViewController {
             $0.text = "서울시 마포구"
             $0.font = $0.font.withSize(13)
         }
+        settingList.do {
+            $0.delegate = self
+            $0.dataSource = self
+            $0.backgroundColor = .white
+            $0.register(DefalutCell.self, forCellReuseIdentifier: DefalutCell.cellId)
+        }
     }
     
     func layout() {
@@ -64,6 +81,7 @@ class SetView: UIViewController {
         view.addSubview(name)
         view.addSubview(descript)
         view.addSubview(location)
+        view.addSubview(settingList)
         
         profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -87,5 +105,31 @@ class SetView: UIViewController {
             $0.topAnchor.constraint(equalTo: frameView.topAnchor, constant: 30).isActive = true
             $0.trailingAnchor.constraint(equalTo: frameView.trailingAnchor, constant: -20).isActive = true
         }
+        settingList.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: frameView.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
+    }
+}
+
+extension SetView: SetViewProtocol {
+    
+}
+
+extension SetView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tempData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DefalutCell.cellId, for: indexPath) as! DefalutCell
+        
+        let data = tempData[indexPath.row]
+        cell.setData(data)
+        print(data.title)
+        return cell
     }
 }
