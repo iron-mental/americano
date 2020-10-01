@@ -42,11 +42,12 @@ class SelectCategoryView: UIViewController {
         navigationItem.do {
             $0.titleView = titleView
         }
+        //추후에 스크롤뷰 위 백그라운드 뷰는 컴포넌트화 시켜서 코드를 줄여봅시다.
         scrollView.do {
-            $0.backgroundColor = .red
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         backgroundView.do {
-            $0.backgroundColor = .blue
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         textLabel.do {
             $0.text = "카테고리 선택"
@@ -72,8 +73,6 @@ class SelectCategoryView: UIViewController {
         scrollView.addSubview(backgroundView)
         backgroundView.addSubview(textLabel)
         backgroundView.addSubview(collectionView)
-        //        view.addSubview(textLabel)
-        //        view.addSubview(collectionView)
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -82,26 +81,27 @@ class SelectCategoryView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
         backgroundView.do {
+            //동적으로 추후에 변경해야함
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 400).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 50).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
         textLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            //            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
-            //            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 500).isActive = true
             $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 24).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 500).isActive = true
         }
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            //            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
-            //            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
-            //            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
-            //            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 80).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: $0.contentSize.height).isActive = true
+            $0.widthAnchor.constraint(equalTo: backgroundView.widthAnchor).isActive = true
         }
     }
     
