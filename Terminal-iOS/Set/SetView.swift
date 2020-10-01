@@ -10,6 +10,9 @@ import UIKit
 
 class SetView: UIViewController {
     
+    var sections: [String] = ["알림", "정보"]
+    var account: [String] = ["이메일", "SNS"]
+    var noti: [String] = ["알림"]
     var tempData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
                                Setting(title: "공지사항", status: ">"),
                                Setting(title: "도움말", status: ">"),
@@ -51,6 +54,7 @@ class SetView: UIViewController {
         }
         descript.do {
             $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다."
+            $0.numberOfLines = 0
             $0.font = $0.font.withSize(16)
         }
         location.do {
@@ -61,20 +65,21 @@ class SetView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.register(DefalutCell.self, forCellReuseIdentifier: DefalutCell.cellId)
+            $0.register(DefaultCell.self, forCellReuseIdentifier: DefaultCell.defalutCellId)
+            $0.register(SettingCell.self, forCellReuseIdentifier: SettingCell.settingCellId)
         }
     }
     
     func layout() {
         view.addSubview(frameView)
         frameView.layer.zPosition = 1
-        frameView.backgroundColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.5)
+//        frameView.backgroundColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.5)
         frameView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.126).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.13).isActive = true
         }
         
         view.addSubview(profile)
@@ -99,6 +104,7 @@ class SetView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -3).isActive = true
         }
         location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -120,16 +126,40 @@ extension SetView: SetViewProtocol {
 }
 
 extension SetView: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tempData.count
+        if section == 0 {
+            return noti.count
+        } else if section == 1 {
+            return tempData.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DefalutCell.cellId, for: indexPath) as! DefalutCell
+        let defaultCell = tableView.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId, for: indexPath) as! DefaultCell
+        
+        let settingCell = tableView.dequeueReusableCell(withIdentifier: SettingCell.settingCellId, for: indexPath) as! SettingCell
+        
+        settingCell.title.text = noti[0]
         
         let data = tempData[indexPath.row]
-        cell.setData(data)
+        defaultCell.setData(data)
         
-        return cell
+        if indexPath.section == 0 {
+            return settingCell
+        } else if indexPath.section == 1 {
+            return defaultCell
+        } else {
+            return UITableViewCell()
+        }
     }
 }

@@ -9,11 +9,11 @@
 import UIKit
 import Then
 
-class DefalutCell: UITableViewCell {
-    static let cellId = "defaltCell"
+class DefaultCell: UITableViewCell {
+    static let defalutCellId = "defaltCell"
     
-    let title = UILabel()
-    let rightLabel = UILabel()
+    lazy var title = UILabel()
+    lazy var rightLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

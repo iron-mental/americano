@@ -15,7 +15,7 @@
 		A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */; };
 		A5686A452524F048005990DC /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A442524F048005990DC /* SettingCell.swift */; };
 		A5686A492524F49C005990DC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A482524F49C005990DC /* Profile.swift */; };
-		A5686A502525D6FC005990DC /* DefalutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A4F2525D6FC005990DC /* DefalutCell.swift */; };
+		A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A4F2525D6FC005990DC /* DefaultCell.swift */; };
 		A5686A532525DE13005990DC /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A522525DE13005990DC /* Setting.swift */; };
 		CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */; };
 		CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */; };
@@ -74,7 +74,7 @@
 		A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Ext.swift"; path = "Terminal-iOS/Extensions-Utillities/UIColor+Ext.swift"; sourceTree = SOURCE_ROOT; };
 		A5686A442524F048005990DC /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		A5686A482524F49C005990DC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		A5686A4F2525D6FC005990DC /* DefalutCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefalutCell.swift; sourceTree = "<group>"; };
+		A5686A4F2525D6FC005990DC /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		A5686A522525DE13005990DC /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryProtocols.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				A5686A442524F048005990DC /* SettingCell.swift */,
-				A5686A4F2525D6FC005990DC /* DefalutCell.swift */,
+				A5686A4F2525D6FC005990DC /* DefaultCell.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -481,7 +481,7 @@
 				A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
-				A5686A502525D6FC005990DC /* DefalutCell.swift in Sources */,
+				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
 				CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */,
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,

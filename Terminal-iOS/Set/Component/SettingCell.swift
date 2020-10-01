@@ -8,6 +8,22 @@
 
 import UIKit
 
-class SettingCell: DefalutCell {
+class SettingCell: DefaultCell {
+    static let settingCellId = "settingCell"
     
+    lazy var notiToggle = UISwitch()
+    
+    override func attribute() {
+        rightLabel.isHidden = true
+    }
+    
+    override func layout() {
+        super.layout()
+        addSubview(notiToggle)
+        notiToggle.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+        }
+    }
 }
