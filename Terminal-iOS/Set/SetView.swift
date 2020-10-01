@@ -10,7 +10,10 @@ import UIKit
 
 class SetView: UIViewController {
     
-    var sections: [String] = ["알림", "정보"]
+    // 섹션
+    var sections: [String] = ["계정", "알림", "정보"]
+    
+    
     var account: [String] = ["이메일", "SNS"]
     var noti: [String] = ["알림"]
     var tempData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
@@ -66,7 +69,8 @@ class SetView: UIViewController {
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(DefaultCell.self, forCellReuseIdentifier: DefaultCell.defalutCellId)
-            $0.register(SettingCell.self, forCellReuseIdentifier: SettingCell.settingCellId)
+            $0.register(NotiCell.self, forCellReuseIdentifier: NotiCell.notiCellId)
+            $0.register(AccountCell.self, forCellReuseIdentifier: AccountCell.accountCellId)
         }
     }
     
@@ -136,8 +140,10 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return noti.count
+            return account.count
         } else if section == 1 {
+            return noti.count
+        } else if section == 2{
             return tempData.count
         } else {
             return 0
@@ -145,18 +151,25 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let defaultCell = tableView.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId, for: indexPath) as! DefaultCell
         
-        let settingCell = tableView.dequeueReusableCell(withIdentifier: SettingCell.settingCellId, for: indexPath) as! SettingCell
+        let accountCell = tableView.dequeueReusableCell(withIdentifier: AccountCell.accountCellId,
+                                                        for: indexPath) as! AccountCell
         
-        settingCell.title.text = noti[0]
+        let notiCell = tableView.dequeueReusableCell(withIdentifier: NotiCell.notiCellId,
+                                                     for: indexPath) as! NotiCell
         
-        let data = tempData[indexPath.row]
-        defaultCell.setData(data)
+        let defaultCell = tableView.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId,
+                                                        for: indexPath) as! DefaultCell
         
         if indexPath.section == 0 {
-            return settingCell
+            accountCell.title.text = account[indexPath.row]
+            return accountCell
         } else if indexPath.section == 1 {
+            notiCell.title.text = noti[0]
+            return notiCell
+        } else if indexPath.section == 2 {
+            let data = tempData[indexPath.row]
+            defaultCell.setData(data)
             return defaultCell
         } else {
             return UITableViewCell()
