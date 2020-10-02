@@ -10,6 +10,7 @@ import UIKit
 
 enum AssetsColor {
     case terminalBackground
+    case cellBackground
     case studySubTitle
     case mainColor
     case InputViewColor
@@ -21,6 +22,8 @@ extension UIColor {
         switch name {
         case .terminalBackground:
             return #colorLiteral(red: 0.1607843137, green: 0.1607843137, blue: 0.1607843137, alpha: 1)
+        case .cellBackground:
+            return #colorLiteral(red: 0.1960784314, green: 0.1960784314, blue: 0.2039215686, alpha: 1)
         case .studySubTitle:
             return #colorLiteral(red: 0.5843137255, green: 0.5843137255, blue: 0.5843137255, alpha: 1)
         case .mainColor:
