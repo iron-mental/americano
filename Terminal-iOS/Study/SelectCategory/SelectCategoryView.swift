@@ -101,7 +101,6 @@ class SelectCategoryView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: $0.contentSize.height).isActive = true
-            $0.widthAnchor.constraint(equalTo: backgroundView.widthAnchor).isActive = true
         }
     }
     
