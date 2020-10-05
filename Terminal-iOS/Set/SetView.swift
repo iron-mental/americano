@@ -34,6 +34,7 @@ class SetView: UIViewController {
     let location = UILabel()
     let settingList = UITableView()
     
+    let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,12 +75,18 @@ class SetView: UIViewController {
             $0.register(NotiCell.self, forCellReuseIdentifier: NotiCell.notiCellId)
             $0.register(AccountCell.self, forCellReuseIdentifier: AccountCell.accountCellId)
         }
+        accountButton.do {
+            $0.setTitle("인증", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            $0.layer.borderWidth = 1
+            $0.layer.cornerRadius = 10
+        }
     }
     
     func layout() {
         view.addSubview(frameView)
         frameView.layer.zPosition = 1
-//        frameView.backgroundColor = UIColor(red: 255, green: 0, blue: 0, alpha: 0.5)
         frameView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -175,6 +182,9 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0 {
             accountCell.title.text = account[indexPath.row]
+            if indexPath.row == 0 {
+                accountCell.accessoryView = accountButton
+            }
             return accountCell
         } else if indexPath.section == 1 {
             notiCell.title.text = noti[0]
