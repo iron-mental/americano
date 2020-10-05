@@ -74,6 +74,7 @@ class CreateStudyView: UIViewController{
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor(named: "key")
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
         }
     }
     
@@ -232,47 +233,39 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func showLoadingToEvernoteInput() {
         print("에버노트 로딩중")
     }
-    
     func showLoadingToWebInput() {
         print("웹 로딩중")
     }
     func hideLoadingToNotionInput() {
         print("hideLoadingToNotionInput")
     }
-    
     func hideLoadingToEvernoteInput() {
         print("hideLoadingToEvernoteInput")
     }
-    
     func hideLoadingToWebInput() {
         print("hideLoadingToWebInput")
     }
-    
     func notionValid() {
         print("notionValid")
     }
-    
     func evernoteValid() {
         print("evernoteValid")
     }
-    
     func webValid() {
         print("webValid")
     }
-    
     func notionInvalid() {
         print("notionInvalid")
     }
-    
     func evernoteInvalid() {
         print("evernoteInvalid")
     }
-    
     func webInvalid() {
         print("webInvalid")
     }
     //추후에 파라미터로 스터디모델 넘겨줘야겠다
-    func didClickButton() {
+    @objc func didClickButton() {
+        print("버튼이 클릭됐다")
         presenter?.clickCompleteButton()
     }
 }
