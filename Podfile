@@ -7,6 +7,7 @@ target 'Terminal-iOS' do
   pod 'SwiftLint'
   pod 'Then'
   pod 'NMapsMap'
+  pod 'Alamofire'
   # Pods for Terminal-iOS
 
 end
