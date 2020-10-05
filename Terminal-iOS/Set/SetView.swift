@@ -34,16 +34,20 @@ class SetView: UIViewController {
     let location = UILabel()
     let settingList = UITableView()
     
-    let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 25))
+    let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 25))
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = UIColor.appColor(.terminalBackground)
         attribute()
         layout()
     }
         
     func attribute() {
+        self.do {
+            $0.title = "설정"
+        }
         profile.do {
             $0.contentMode = .scaleAspectFill
             $0.image = #imageLiteral(resourceName: "leehi")
