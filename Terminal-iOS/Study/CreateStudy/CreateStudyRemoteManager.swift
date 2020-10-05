@@ -27,22 +27,18 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             "locationDetail" : studyInfo.location
         ]
         var urlComponent = URLComponents(string: "http://3.35.154.27:3000/v1/study")
-        let header: HTTPHeaders = [
-            "Content-Type": "multipart/form-data"
-        ]
+        let header: HTTPHeaders = [ "Content-Type": "multipart/form-data" ]
         guard let url = urlComponent?.url else { return true }
-        
         let imageData = UIImage(named: "test")?.jpegData(compressionQuality: 1.0)
-        
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
             }
-            multipartFormData.append(imageData!, withName: "image", fileName: "\(1).jpg", mimeType: "image/jpeg")
+            multipartFormData.append(imageData!, withName: "image", fileName: "\(studyInfo.userID).jpg", mimeType: "image/jpeg")
         }, to: url, method: .post, headers: header) { result in
             dump(result)
         }.resume()
-        
+        return true
         //        guard let endpoint = URL (string : "http://3.35.154.27:3000/v1/study") else {
         //            print ( "Error creating endpoint")
         //            return false
@@ -91,7 +87,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         //                print(error)
         //            }
         //        }.resume()
-        return true
+        
     }
     func getNotionValid(id: String?) -> Bool {
         return true
