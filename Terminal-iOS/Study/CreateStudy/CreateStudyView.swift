@@ -268,7 +268,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
-        presenter?.clickCompleteButton(image: <#T##UIImage#>, userID: <#T##Int#>, category: <#T##String#>, title: <#T##String#>, introduce: <#T##String#>, progress: <#T##String#>, studyTime: <#T##String#>, location: <#T##String#>, notion: <#T##String#>, everNote: <#T##String#>, web: <#T##String#>)
+        presenter?.clickCompleteButton(image: imageView.image!, userID: 1, category: "1", title: "1", introduce: "1", progress: "1", studyTime: "1", location: "1", notion: "1", everNote: "1", web: "1")
     }
 }
 
