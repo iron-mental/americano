@@ -26,7 +26,7 @@ struct StudyInfo {
     var category: String
     var title: String
     var introduce: String
-    var proress: String
+    var progress: String
     var studyTime: String
     var location: String
     var notion: String
