@@ -43,7 +43,7 @@ class SetView: UIViewController {
         attribute()
         layout()
     }
-        
+
     func attribute() {
         self.do {
             $0.title = "설정"
