@@ -19,7 +19,7 @@
 		A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A4F2525D6FC005990DC /* DefaultCell.swift */; };
 		A5686A532525DE13005990DC /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A522525DE13005990DC /* Setting.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
-		A5AB2708252B8A3400A39240 /* ProfileModify.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2707252B8A3400A39240 /* ProfileModify.swift */; };
+		A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileModifyView.swift */; };
 		CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */; };
 		CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */; };
 		CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */; };
@@ -81,7 +81,7 @@
 		A5686A4F2525D6FC005990DC /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		A5686A522525DE13005990DC /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
-		A5AB2707252B8A3400A39240 /* ProfileModify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModify.swift; sourceTree = "<group>"; };
+		A5B78A95252B950600E0B440 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
 		CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryProtocols.swift; sourceTree = "<group>"; };
 		CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryPresenter.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 		A5AB26FF252B6E9300A39240 /* ProfileModify */ = {
 			isa = PBXGroup;
 			children = (
-				A5AB2707252B8A3400A39240 /* ProfileModify.swift */,
+				A5B78A95252B950600E0B440 /* ProfileModifyView.swift */,
 			);
 			path = ProfileModify;
 			sourceTree = "<group>";
@@ -522,7 +522,6 @@
 				CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */,
 				CCA3FF652517829D00F62627 /* SearchStudyViewController.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
-				A5AB2708252B8A3400A39240 /* ProfileModify.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				A51438B52524956500ACB241 /* SetViewProtocols.swift in Sources */,
 				A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */,
@@ -544,6 +543,7 @@
 				A51438B22524953F00ACB241 /* SetViewWireFrame.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
+				A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
 				CCA3FF5C2517826B00F62627 /* StudyCategoryPresenter.swift in Sources */,
 			);

@@ -1,5 +1,5 @@
 //
-//  ProfileModify.swift
+//  ProfileModifyView.swift
 //  Terminal-iOS
 //
 //  Created by once on 2020/10/06.
@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import Then
 
-class ProfileModify: UIViewController {
-    
+class ProfileModifyView: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+
+        view.backgroundColor = .blue
     }
     
+
 }
