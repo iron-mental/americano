@@ -221,6 +221,9 @@ extension CreateStudyView: CreateStudyViewProtocols {
         layout()
         setDelegate()
     }
+    func loading() {
+        print("전체 화면 로딩 중 ")
+    }
     func getBackgroundImage() {
         print("getBackgroundImage")
     }
@@ -263,10 +266,9 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func webInvalid() {
         print("webInvalid")
     }
-    //추후에 파라미터로 스터디모델 넘겨줘야겠다
     @objc func didClickButton() {
-        print("버튼이 클릭됐다")
-        presenter?.clickCompleteButton()
+        //하드로 넣어주고 추후에 손을 봅시다.
+        presenter?.clickCompleteButton(image: <#T##UIImage#>, userID: <#T##Int#>, category: <#T##String#>, title: <#T##String#>, introduce: <#T##String#>, progress: <#T##String#>, studyTime: <#T##String#>, location: <#T##String#>, notion: <#T##String#>, everNote: <#T##String#>, web: <#T##String#>)
     }
 }
 

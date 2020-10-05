@@ -15,6 +15,7 @@ protocol CreateStudyViewProtocols: class {
     func didClickButton()
     
     //PRESENTER -> VIEW
+    func loading()
     func setView()
     func getBackgroundImage()
     func setBackgroundImage()
@@ -40,7 +41,17 @@ protocol CreateStudyInteractorProtocols: class {
     func searchNotionID(id: String?)
     func searchEvernoteURL(url: String?)
     func searchWebURL(url: String?)
-    func studyCreateComplete(study: Study)
+    func studyCreateComplete(image: UIImage,
+                             userID: Int,
+                             category: String,
+                             title: String,
+                             introduce: String,
+                             progress: String,
+                             studyTime: String,
+                             location: String,
+                             notion: String,
+                             everNote: String,
+                             web: String)
 }
 
 protocol CreateStudyPresenterProtocols: class {
@@ -77,7 +88,7 @@ protocol CreateStudyRemoteDataManagerProtocols: class {
     func getNotionValid(id: String?) -> Bool
     func getEvernoteValid(url: String?) -> Bool
     func getWebValid(url: String?) -> Bool
-    func postStudy(study: Study) -> 
+    func postStudy(studyInfo: StudyInfo) -> Bool
 }
 
 protocol CreateStudyLocalDataManagerProtocols: class {

@@ -11,8 +11,6 @@ import UIKit
 class CreateStudyPresenter: CreateStudyPresenterProtocols {
     
     
-    
-    
     var view: CreateStudyViewProtocols?
     var interactor: CreateStudyInteractorProtocols?
     var wireFrame: CreateStudyWireFrameProtocols?
@@ -70,8 +68,8 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
             view?.webInvalid()
         }
     }
-    //추후에 스터디모델이 파라미터 값으로 들어가야겠쬬
-    func clickCompleteButton() {
-        wireFrame?.goToSelectLocation()
+    func clickCompleteButton(image: UIImage, userID: Int, category: String, title: String, introduce: String, progress: String, studyTime: String, location: String, notion: String, everNote: String, web: String) {
+        view?.loading()
+        interactor?.studyCreateComplete(image: image, userID: userID, category: category, title: title, introduce: introduce, progress: progress, studyTime: studyTime, location: location, notion: notion, everNote: everNote, web: web)
     }
 }

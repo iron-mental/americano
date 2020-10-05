@@ -9,6 +9,10 @@
 import UIKit
 
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
+    func postStudy(studyInfo: StudyInfo) -> Bool {
+        <#code#>
+    }
+    
     func getNotionValid(id: String?) -> Bool {
         return true
     }
