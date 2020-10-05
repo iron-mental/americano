@@ -14,6 +14,7 @@ class AccountCell: DefaultCell {
     lazy var rightImage = UIImageView()
     
     override func attribute() {
+        super.attribute()
         rightLabel.isHidden = true
         
         rightImage.do {

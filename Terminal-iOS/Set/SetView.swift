@@ -17,11 +17,11 @@ class SetView: UIViewController {
     var account: [String] = ["이메일", "SNS"]
     var noti: [String] = ["알림"]
     var tempData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
-                               Setting(title: "공지사항", status: ">"),
-                               Setting(title: "도움말", status: ">"),
-                               Setting(title: "문의하기", status: ">"),
-                               Setting(title: "이용약관", status: ">"),
-                               Setting(title: "개인정보 취급방침", status: ">")]
+                               Setting(title: "공지사항"),
+                               Setting(title: "도움말"),
+                               Setting(title: "문의하기"),
+                               Setting(title: "이용약관"),
+                               Setting(title: "개인정보 취급방침")]
     
     var presenter: SetViewPresenterProtocol?
     
@@ -182,6 +182,9 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 2 {
             let data = tempData[indexPath.row]
             defaultCell.setData(data)
+            if tempData[indexPath.row].status == nil {
+                defaultCell.accessoryType = .disclosureIndicator
+            }
             return defaultCell
         } else {
             return UITableViewCell()
