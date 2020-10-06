@@ -23,7 +23,7 @@ class SetView: UIViewController {
                                Setting(title: "이용약관"),
                                Setting(title: "개인정보 취급방침")]
     
-    var presenter: SetViewPresenterProtocol?
+    var presenter: SetPresenterProtocol?
     
     let frameView = UIView()
     let profile = UIImageView(frame: CGRect(x: 0, y: 0,

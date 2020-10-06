@@ -8,18 +8,18 @@
 
 import Foundation
 
-class SetViewPresenter: SetViewPresenterProtocol {
+class SetPresenter: SetPresenterProtocol {
     var view: SetViewProtocol?
     
-    var interactor: SetViewInteractortInputProtocol?
+    var interactor: SetInteractortInputProtocol?
     
-    var wireFrame: SetViewWireFrameProtocol?
+    var wireFrame: SetWireFrameProtocol?
     
     func viewDidLoad() {
         
     }
 }
 
-extension SetViewPresenter: SetViewInteractorOutputProtocol {
+extension SetPresenter: SetInteractorOutputProtocol {
     
 }

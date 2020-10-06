@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */; };
-		A51438AC2524951E00ACB241 /* SetViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AB2524951E00ACB241 /* SetViewInteractor.swift */; };
-		A51438AF2524952F00ACB241 /* SetViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AE2524952F00ACB241 /* SetViewPresenter.swift */; };
-		A51438B22524953F00ACB241 /* SetViewWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438B12524953F00ACB241 /* SetViewWireFrame.swift */; };
-		A51438B52524956500ACB241 /* SetViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438B42524956500ACB241 /* SetViewProtocols.swift */; };
+		A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AE2524952F00ACB241 /* SetPresenter.swift */; };
+		A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5172164252CFA47005AD11B /* SetWireFrame.swift */; };
+		A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5172168252CFA90005AD11B /* SetInteractor.swift */; };
+		A517216D252CFAAA005AD11B /* SetProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A517216C252CFAAA005AD11B /* SetProtocols.swift */; };
 		A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D8BE025264DB9003BD1B9 /* AccountCell.swift */; };
 		A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */; };
 		A5686A452524F048005990DC /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A442524F048005990DC /* NotiCell.swift */; };
@@ -76,10 +76,10 @@
 /* Begin PBXFileReference section */
 		0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		A51438AB2524951E00ACB241 /* SetViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewInteractor.swift; sourceTree = "<group>"; };
-		A51438AE2524952F00ACB241 /* SetViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewPresenter.swift; sourceTree = "<group>"; };
-		A51438B12524953F00ACB241 /* SetViewWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewWireFrame.swift; sourceTree = "<group>"; };
-		A51438B42524956500ACB241 /* SetViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewProtocols.swift; sourceTree = "<group>"; };
+		A51438AE2524952F00ACB241 /* SetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPresenter.swift; sourceTree = "<group>"; };
+		A5172164252CFA47005AD11B /* SetWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWireFrame.swift; sourceTree = "<group>"; };
+		A5172168252CFA90005AD11B /* SetInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInteractor.swift; sourceTree = "<group>"; };
+		A517216C252CFAAA005AD11B /* SetProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProtocols.swift; sourceTree = "<group>"; };
 		A51D8BE025264DB9003BD1B9 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Ext.swift"; path = "Terminal-iOS/Extensions-Utillities/UIColor+Ext.swift"; sourceTree = SOURCE_ROOT; };
 		A5686A442524F048005990DC /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
@@ -179,10 +179,10 @@
 			isa = PBXGroup;
 			children = (
 				CCA1FF6E24FD10290026C3EA /* SetView.swift */,
-				A51438AB2524951E00ACB241 /* SetViewInteractor.swift */,
-				A51438AE2524952F00ACB241 /* SetViewPresenter.swift */,
-				A51438B12524953F00ACB241 /* SetViewWireFrame.swift */,
-				A51438B42524956500ACB241 /* SetViewProtocols.swift */,
+				A51438AE2524952F00ACB241 /* SetPresenter.swift */,
+				A5172164252CFA47005AD11B /* SetWireFrame.swift */,
+				A5172168252CFA90005AD11B /* SetInteractor.swift */,
+				A517216C252CFAAA005AD11B /* SetProtocols.swift */,
 				A5686A472524F056005990DC /* Component */,
 			);
 			path = Set;
@@ -528,7 +528,7 @@
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */,
 				CCA3FF4A2517823E00F62627 /* StudyListWireFrame.swift in Sources */,
-				A51438AF2524952F00ACB241 /* SetViewPresenter.swift in Sources */,
+				A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */,
 				CCA3FF4B2517823E00F62627 /* StudyCell.swift in Sources */,
 				A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */,
 				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
@@ -541,7 +541,7 @@
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
-				A51438AC2524951E00ACB241 /* SetViewInteractor.swift in Sources */,
+				A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */,
 				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */,
 				CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
@@ -555,7 +555,6 @@
 				CCA3FF652517829D00F62627 /* SearchStudyViewController.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
-				A51438B52524956500ACB241 /* SetViewProtocols.swift in Sources */,
 				CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */,
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,
 				CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */,
@@ -570,14 +569,15 @@
 				CCA3FF482517823E00F62627 /* StudyListView.swift in Sources */,
 				A5686A492524F49C005990DC /* Profile.swift in Sources */,
 				CCA3FF492517823E00F62627 /* StudyListPresenter.swift in Sources */,
+				A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */,
 				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,
-				A51438B22524953F00ACB241 /* SetViewWireFrame.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
 				CCA3FF5C2517826B00F62627 /* StudyCategoryPresenter.swift in Sources */,
+				A517216D252CFAAA005AD11B /* SetProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
