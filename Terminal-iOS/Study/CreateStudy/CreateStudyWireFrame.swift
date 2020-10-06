@@ -30,7 +30,8 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         return view
     }
     
-    func goToSelectLocation() {
+    func goToSelectLocation(view: UIViewController) {
         let view =  SelectLocationWireFrame.selectLocationViewModul()
+        //받아온 리턴값 view를 
     }
 }

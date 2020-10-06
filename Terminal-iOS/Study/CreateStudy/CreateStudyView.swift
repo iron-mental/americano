@@ -207,7 +207,7 @@ class CreateStudyView: UIViewController{
     }
     @objc func didLocationViewClicked() {
         //SelectLocationView를 띄우는 게 맞습니다.
-        print("locationView 띄워주면 됩니다.")
+        presenter?.clickLocationView(view: self)
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary

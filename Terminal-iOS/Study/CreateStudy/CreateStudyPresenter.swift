@@ -34,12 +34,9 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
         interactor?.searchWebURL(url: url)
     }
     
-    func clickAddressInput() {
+    func clickLocationView(view: UIViewController) {
         print("address")
-    }
-    
-    func didCompleteButtonClick() {
-        print("complete")
+        wireFrame?.goToSelectLocation(view: view)
     }
     
     func showNotionValidResult(result: Bool) {

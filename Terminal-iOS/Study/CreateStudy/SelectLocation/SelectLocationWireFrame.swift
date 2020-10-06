@@ -10,6 +10,7 @@ import UIKit
 
 class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
     static func selectLocationViewModul() -> UIViewController {
+        //여기서 view presenter 어쩌고 저쩌고 다할당 시켜서 리턴
         return SelectLocationView()
     }
 }
