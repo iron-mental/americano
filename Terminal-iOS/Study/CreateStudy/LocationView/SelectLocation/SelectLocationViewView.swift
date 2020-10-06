@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectLocationView: UIViewController {
+class SelectLocationView: SelectLocationViewProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()

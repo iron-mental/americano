@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SelectLocationViewProtocol: class {
-
+    var presenter: SelectLocationPresenterProtocol { get set }
 }
 
 protocol SelectLocationInteractorProtocol: class {
