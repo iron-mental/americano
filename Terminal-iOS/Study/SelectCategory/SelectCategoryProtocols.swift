@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol SelectCategoryViewProtocols: class {
-    var presenter: SelectCategoryPresenterProtocols? { get set }
+protocol SelectCategoryViewProtocol: class {
+    var presenter: SelectCategoryPresenterProtocol? { get set }
     
     //PRESENTER -> VIEW
     func showCategory()
@@ -18,9 +18,9 @@ protocol SelectCategoryViewProtocols: class {
     func backTapped()
 }
 
-protocol SelectCategoryPresenterProtocols: class {
-    var view: SelectCategoryViewProtocols? { get set }
-    var wireFrame: SelectCategoryWireFrameProtocols? { get set }
+protocol SelectCategoryPresenterProtocol: class {
+    var view: SelectCategoryViewProtocol? { get set }
+    var wireFrame: SelectCategoryWireFrameProtocol? { get set }
 
     //VIEW -> PRESENTER
     func viewDidLoad()
@@ -28,7 +28,7 @@ protocol SelectCategoryPresenterProtocols: class {
     func back()
 }
 
-protocol SelectCategoryWireFrameProtocols: class {
+protocol SelectCategoryWireFrameProtocol: class {
     static func createSelectCategoryViewModul(category: [Category]) -> UIViewController
     
     func goToCreateStudy(view: UIViewController, category: Category)

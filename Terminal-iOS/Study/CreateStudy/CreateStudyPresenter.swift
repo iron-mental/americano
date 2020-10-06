@@ -9,6 +9,8 @@
 import UIKit
 
 class CreateStudyPresenter: CreateStudyPresenterProtocols {
+    
+    
     var view: CreateStudyViewProtocols?
     var interactor: CreateStudyInteractorProtocols?
     var wireFrame: CreateStudyWireFrameProtocols?
@@ -17,25 +19,53 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
         view?.setView()
     }
     
-    func notionInputFinish() {
-        print("notion")
+    func notionInputFinish(id: String?) {
+        view?.showLoadingToNotionInput()
+        interactor?.searchNotionID(id: id)
     }
     
-    func everNoteInputFinish() {
-        print("everNote")
+    func everNoteInputFinish(url: String?) {
+        view?.showLoadingToEvernoteInput()
+        interactor?.searchEvernoteURL(url: url)
     }
     
-    func URLInputFinish() {
-        print("URL")
+    func URLInputFinish(url: String?) {
+        view?.showLoadingToWebInput()
+        interactor?.searchWebURL(url: url)
     }
     
-    func clickAddressInput() {
-        print("address")
+    func clickLocationView(currentView: UIViewController) {
+        wireFrame?.goToSelectLocation(view: currentView)
     }
     
-    func didCompleteButtonClick() {
-        print("complete")
+    func showNotionValidResult(result: Bool) {
+        view?.hideLoadingToNotionInput()
+        if result {
+            view?.notionValid()
+        } else {
+            view?.notionInvalid()
+        }
     }
     
-
+    func showEvernoteValidResult(result: Bool) {
+        view?.hideLoadingToEvernoteInput()
+        if result {
+            view?.evernoteValid()
+        } else {
+            view?.evernoteInvalid()
+        }
+    }
+    
+    func showWebValidResult(result: Bool) {
+        view?.hideLoadingToWebInput()
+        if result {
+            view?.webValid()
+        } else {
+            view?.webInvalid()
+        }
+    }
+    func clickCompleteButton(image: UIImage, userID: Int, category: String, title: String, introduce: String, progress: String, studyTime: String, location: String, notion: String, everNote: String, web: String) {
+        view?.loading()
+        interactor?.studyCreateComplete(image: image, userID: userID, category: category, title: title, introduce: introduce, progress: progress, studyTime: studyTime, location: location, notion: notion, everNote: everNote, web: web)
+    }
 }
