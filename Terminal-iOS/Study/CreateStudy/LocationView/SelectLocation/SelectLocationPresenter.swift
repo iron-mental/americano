@@ -7,7 +7,19 @@
 //
 
 import UIKit
+import NMapsMap
 
-class SelectLocationPresenter: SelectLocationPresenterProtocol {
+class SelectLocationPresenter: SelectLocationPresenterProtocols {
+    var view: SelectLocationViewProtocols?
+    var interactor: SelectLocationInteractorProtocols?
+    var wireFrame: SelectLocationWireFrameProtocols?
+    
+    func getAddress(lat: Double?, Lng: Double?) {
+        print("getAddress")
+    }
+    func getAddressResult(latLng: NMGLatLng, address: String) {
+        print("getAddressResult")
+    }
+    
 
 }

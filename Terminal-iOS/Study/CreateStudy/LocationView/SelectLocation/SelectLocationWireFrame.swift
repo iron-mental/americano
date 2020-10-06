@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
+class SelectLocationWireFrame: SelectLocationWireFrameProtocols {
+    var presenter: SelectLocationPresenterProtocols?
+    
     static func selectLocationViewModul() -> UIViewController {
         var view = SelectLocationView()
         let interactor = SelectLocationInteractor()
@@ -19,6 +21,6 @@ class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
         
         
         //여기서 view presenter 어쩌고 저쩌고 다할당 시켜서 리턴
-        return
+        return view
     }
 }

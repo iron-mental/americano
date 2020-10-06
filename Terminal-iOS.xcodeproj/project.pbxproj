@@ -223,6 +223,22 @@
 			path = SelectLocation;
 			sourceTree = "<group>";
 		};
+		CCA00AD9252C4ED900FF7404 /* LocationView */ = {
+			isa = PBXGroup;
+			children = (
+				CCA00ADA252C4EE500FF7404 /* SearchLocation */,
+				CC29FB2425207B4500C1BDCE /* SelectLocation */,
+			);
+			path = LocationView;
+			sourceTree = "<group>";
+		};
+		CCA00ADA252C4EE500FF7404 /* SearchLocation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SearchLocation;
+			sourceTree = "<group>";
+		};
 		CCA1FF4A24FD0C930026C3EA = {
 			isa = PBXGroup;
 			children = (
@@ -328,7 +344,7 @@
 		CCB2AC9A250F81AC00435E5F /* CreateStudy */ = {
 			isa = PBXGroup;
 			children = (
-				CC29FB2425207B4500C1BDCE /* SelectLocation */,
+				CCA00AD9252C4ED900FF7404 /* LocationView */,
 				CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */,
 				CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */,
 				CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */,

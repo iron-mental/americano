@@ -7,7 +7,11 @@
 //
 
 import UIKit
+import NMapsMap
 
-class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
-
+class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocols {
+    func getAddressWithLatLng(latLng: NMGLatLng?) -> (NMGLatLng, String) {
+        print("getAddressWithLatLng")
+        return (NMGLatLng(), "")
+    }
 }

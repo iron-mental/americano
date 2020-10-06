@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import NMapsMap
 
-class SelectLocationView: SelectLocationViewProtocol {
-
+class SelectLocationView: UIViewController {
+    var presenter: SelectLocationPresenterProtocols?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
     }
 }
-
-extension SelectLocationView: SelectLocationViewProtocol {
-    
+extension SelectLocationView: SelectLocationViewProtocols {
+    func setViewWithResult(latLng: NMGLatLng, address: String) {
+        print("setViewWithResult")
+    }
 }

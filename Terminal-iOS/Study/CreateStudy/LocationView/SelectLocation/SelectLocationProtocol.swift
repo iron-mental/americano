@@ -9,26 +9,26 @@
 import UIKit
 import NMapsMap
 
-protocol SelectLocationViewProtocol: class {
-    var presenter: SelectLocationPresenterProtocol { get set }
+protocol SelectLocationViewProtocols: class {
+    var presenter: SelectLocationPresenterProtocols? { get set }
     
     //PRESENTER -> VIEW
     func setViewWithResult(latLng: NMGLatLng, address: String)
 }
 
-protocol SelectLocationInteractorProtocol: class {
-    var presenter: SelectLocationPresenterProtocol { get set }
-    var remoteDataManager: SelectLocationRemoteDataManagerProtocol { get set }
-    var localDataManager: SelectLocationLocalDataManagerProtocol { get set }
+protocol SelectLocationInteractorProtocols: class {
+    var presenter: SelectLocationPresenterProtocols? { get set }
+    var remoteDataManager: SelectLocationRemoteDataManagerProtocols? { get set }
+    var localDataManager: SelectLocationLocalDataManagerProtocols? { get set }
     
     //PRESENTER -> INTERACTOR
     func searchAddress(lat: Double?, Lng: Double?)
 }
 
-protocol SelectLocationPresenterProtocol: class {
-    var view: SelectLocationViewProtocol { get set }
-    var interactor: SelectLocationInteractorProtocol { get set }
-    var wireFrame: SelectLocationWireFrameProtocol { get set }
+protocol SelectLocationPresenterProtocols: class {
+    var view: SelectLocationViewProtocols? { get set }
+    var interactor: SelectLocationInteractorProtocols? { get set }
+    var wireFrame: SelectLocationWireFrameProtocols? { get set }
     
     //VIEW -> PRESENTER
     func getAddress(lat: Double?, Lng: Double?)
@@ -37,16 +37,16 @@ protocol SelectLocationPresenterProtocol: class {
     func getAddressResult(latLng: NMGLatLng, address: String)
 }
 
-protocol SelectLocationRemoteDataManagerProtocol: class {
+protocol SelectLocationRemoteDataManagerProtocols: class {
     //INTERACTOR -> REMOTEDATAMANAGER
     func getAddressWithLatLng(latLng: NMGLatLng?) -> (NMGLatLng, String)
 }
 
-protocol SelectLocationLocalDataManagerProtocol: class {
+protocol SelectLocationLocalDataManagerProtocols: class {
     //INTERACTOR -> LOCALDATAMANAGER
     func getCurrentLocation() ->(NMGLatLng)
 }
 
-protocol SelectLocationWireFrameProtocol: class {
-    var presenter: SelectLocationPresenterProtocol { get set }
+protocol SelectLocationWireFrameProtocols: class {
+    var presenter: SelectLocationPresenterProtocols? { get set }
 }

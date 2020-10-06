@@ -8,6 +8,14 @@
 
 import UIKit
 
-class SelectLocationInteractor: SelectLocationInteractorProtocol {
+class SelectLocationInteractor: SelectLocationInteractorProtocols {
+    var presenter: SelectLocationPresenterProtocols?
+    var remoteDataManager: SelectLocationRemoteDataManagerProtocols?
+    var localDataManager: SelectLocationLocalDataManagerProtocols?
+    
+    func searchAddress(lat: Double?, Lng: Double?) {
+        print("searchAddress")
+    }
+    
 
 }
