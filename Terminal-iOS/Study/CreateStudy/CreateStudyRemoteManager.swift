@@ -29,7 +29,8 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         var urlComponent = URLComponents(string: "http://3.35.154.27:3000/v1/study")
         let header: HTTPHeaders = [ "Content-Type": "multipart/form-data" ]
         guard let url = urlComponent?.url else { return true }
-        let imageData = UIImage(named: "test")?.jpegData(compressionQuality: 1.0)
+//        let imageData = UIImage(named: "test")?.jpegData(compressionQuality: 1.0)
+        let imageData = studyInfo.image.jpegData(compressionQuality: 1.0)
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
@@ -87,7 +88,6 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         //                print(error)
         //            }
         //        }.resume()
-        
     }
     func getNotionValid(id: String?) -> Bool {
         return true

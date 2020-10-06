@@ -61,7 +61,7 @@
 		CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF582517826B00F62627 /* StudyCategoryView.swift */; };
 		CCA3FF652517829D00F62627 /* SearchStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */; };
 		CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF642517829D00F62627 /* CreateStudyViewController.swift */; };
-		CCCF2A90251732B50077B75C /* StudyOverViewUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF2A8F251732B50077B75C /* StudyOverViewUIView.swift */; };
+		CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,7 +124,7 @@
 		CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStudyViewController.swift; sourceTree = "<group>"; };
 		CCA3FF642517829D00F62627 /* CreateStudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStudyViewController.swift; sourceTree = "<group>"; };
 		CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainInteractor.swift; sourceTree = "<group>"; };
-		CCCF2A8F251732B50077B75C /* StudyOverViewUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyOverViewUIView.swift; sourceTree = "<group>"; };
+		CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithTextView.swift; sourceTree = "<group>"; };
 		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -199,7 +199,7 @@
 			children = (
 				CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */,
 				CC1BE0482512286B00F88313 /* SNSCollectionView.swift */,
-				CCCF2A8F251732B50077B75C /* StudyOverViewUIView.swift */,
+				CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */,
 				CC6F1CBC251A155700511016 /* SNSInputUIView.swift */,
 				CC6F1CBA251A148D00511016 /* SNSInputItem.swift */,
 				CC26AD57251B27B3006B11E9 /* LocationUIVIew.swift */,
@@ -505,7 +505,7 @@
 				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
 				CC26AD58251B27B3006B11E9 /* LocationUIVIew.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
-				CCCF2A90251732B50077B75C /* StudyOverViewUIView.swift in Sources */,
+				CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */,
 				CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */,
 				CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
