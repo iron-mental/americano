@@ -10,9 +10,11 @@ import UIKit
 
 class SelectCategoryView: UIViewController {
     
-    var presenter: SelectCategoryPresenterProtocols?
+    var presenter: SelectCategoryPresenterProtocol?
     var categoryList: [Category] = []
     
+    let scrollView = UIScrollView()
+    let backgroundView = UIView()
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -40,6 +42,13 @@ class SelectCategoryView: UIViewController {
         navigationItem.do {
             $0.titleView = titleView
         }
+        //추후에 스크롤뷰 위 백그라운드 뷰는 컴포넌트화 시켜서 코드를 줄여봅시다.
+        scrollView.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
+        backgroundView.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         textLabel.do {
             $0.text = "카테고리 선택"
             $0.textColor = .white
@@ -60,20 +69,39 @@ class SelectCategoryView: UIViewController {
     }
     
     func layout() {
-        view.addSubview(textLabel)
-        view.addSubview(collectionView)
-        
+        view.addSubview(scrollView)
+        scrollView.addSubview(backgroundView)
+        backgroundView.addSubview(textLabel)
+        backgroundView.addSubview(collectionView)
+        scrollView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        }
+        backgroundView.do {
+            //동적으로 추후에 변경해야함
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 50).isActive = true
+            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        }
         textLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 500).isActive = true
+            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 24).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 500).isActive = true
         }
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        collectionView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 80).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: $0.contentSize.height).isActive = true
+        }
     }
     
     @objc func backButtonTapped() {
@@ -110,7 +138,7 @@ class SelectCategoryView: UIViewController {
     }
 }
 
-extension SelectCategoryView: SelectCategoryViewProtocols {
+extension SelectCategoryView: SelectCategoryViewProtocol {
     func showCategory() {
         attribute()
         layout()
@@ -123,7 +151,6 @@ extension SelectCategoryView: SelectCategoryViewProtocols {
 
 extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return CGSize(width: UIScreen.main.bounds.width * 0.4,
                       height: UIScreen.main.bounds.width * 0.27)
     }
@@ -142,10 +169,8 @@ extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
-        
         let category = categoryList[indexPath.row]
         cell.imageView.image = category.name
-        
         return cell
     }
     

@@ -9,10 +9,10 @@
 import UIKit
 
 class SNSInputUITextField: UITextField {
+    
     deinit {
         self.removeTarget(self, action: #selector(self.editingChanged(_:)), for: .editingChanged)
     }
-    
     
     private var workItem: DispatchWorkItem?
     private var delay: Double = 0
@@ -21,14 +21,18 @@ class SNSInputUITextField: UITextField {
     func debounce(delay: Double, callback: @escaping ((String?) -> Void)) {
         self.delay = delay
         self.callback = callback
+        
         DispatchQueue.main.async {
             self.callback?(self.text)
         }
+        
         self.addTarget(self, action: #selector(self.editingChanged(_:)), for: .editingChanged)
     }
     
     @objc private func editingChanged(_ sender: UITextField) {
         self.workItem?.cancel()
+        self.layer.borderWidth = 0.4
+        self.layer.borderColor = UIColor.red.cgColor
         
         let workItem = DispatchWorkItem(block: { [weak self] in
             self?.callback?(sender.text)

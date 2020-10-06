@@ -19,13 +19,14 @@ class CreateStudyView: UIViewController{
     let imageView = UIImageView()
     let studyTitleTextField = UITextField()
     var seletedCategory: Category?
-    var studyOverView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")
+    var studyOverView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")
     var SNSInputView = IdInputView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (118/667) * UIScreen.main.bounds.height))
-    var studyInfoView = StudyOverViewUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
+    var studyInfoView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
     var locationView = LocationUIVIew(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
     var timeView = TimeUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
     var button = UIButton()
-    var tapGestureRecognizer = UITapGestureRecognizer()
+    var mainImageTapGesture = UITapGestureRecognizer()
+    var locationTapGesture = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +44,10 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor.appColor(.testColor)
         }
         imageView.do {
-            tapGestureRecognizer = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
+            mainImageTapGesture = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
             $0.image = #imageLiteral(resourceName: "swiftBackground")
             $0.isUserInteractionEnabled = true
-            $0.addGestureRecognizer(tapGestureRecognizer)
+            $0.addGestureRecognizer(mainImageTapGesture)
         }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
@@ -66,6 +67,8 @@ class CreateStudyView: UIViewController{
         }
         locationView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
+            $0.addGestureRecognizer(locationTapGesture)
         }
         timeView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -74,6 +77,7 @@ class CreateStudyView: UIViewController{
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor(named: "key")
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
         }
     }
     
@@ -131,7 +135,6 @@ class CreateStudyView: UIViewController{
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: $0.web!.bottomAnchor).isActive = true
-            
         }
         studyInfoView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -166,29 +169,25 @@ class CreateStudyView: UIViewController{
     
     func setDelegate() {
         scrollView.delegate = self
-        
         studyTitleTextField.delegate = self
-        
         SNSInputView.notion?.textField.delegate = self
         SNSInputView.evernote?.textField.delegate = self
         SNSInputView.web?.textField.delegate = self
-        
         picker.delegate = self
-        
-        
-        SNSInputView.notion!.textField.debounce(delay: 1) { text in
+        SNSInputView.notion!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            print(text)
+            self!.presenter?.notionInputFinish(id: text ?? "")
+            self!.SNSInputView.notion!.textField.layer.borderColor = UIColor.blue.cgColor
         }
-        
-        SNSInputView.evernote!.textField.debounce(delay: 1) { text in
+        SNSInputView.evernote!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            print(text)
+            self!.presenter?.everNoteInputFinish(url: text ?? "")
+            self!.SNSInputView.evernote!.textField.layer.borderColor = UIColor.blue.cgColor
         }
-        
-        SNSInputView.web!.textField.debounce(delay: 1) { text in
+        SNSInputView.web!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            print(text)
+            self!.presenter?.URLInputFinish(url: text ?? "")
+            self!.SNSInputView.web!.textField.layer.borderColor = UIColor.blue.cgColor
         }
     }
     
@@ -205,6 +204,10 @@ class CreateStudyView: UIViewController{
         alert.addAction(cancel)
         
         present(alert, animated: true, completion: nil)
+    }
+    @objc func didLocationViewClicked() {
+        //SelectLocationView를 띄우는 게 맞습니다.
+        presenter?.clickLocationView(currentView: self)
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary
@@ -223,12 +226,54 @@ extension CreateStudyView: CreateStudyViewProtocols {
         layout()
         setDelegate()
     }
-    
+    func loading() {
+        print("전체 화면 로딩 중 ")
+    }
     func getBackgroundImage() {
         print("getBackgroundImage")
     }
     func setBackgroundImage() {
         print("setVackgroundImage")
+    }
+    func showLoadingToNotionInput() {
+        print("노션 로딩중")
+    }
+    func showLoadingToEvernoteInput() {
+        print("에버노트 로딩중")
+    }
+    func showLoadingToWebInput() {
+        print("웹 로딩중")
+    }
+    func hideLoadingToNotionInput() {
+        print("hideLoadingToNotionInput")
+    }
+    func hideLoadingToEvernoteInput() {
+        print("hideLoadingToEvernoteInput")
+    }
+    func hideLoadingToWebInput() {
+        print("hideLoadingToWebInput")
+    }
+    func notionValid() {
+        print("notionValid")
+    }
+    func evernoteValid() {
+        print("evernoteValid")
+    }
+    func webValid() {
+        print("webValid")
+    }
+    func notionInvalid() {
+        print("notionInvalid")
+    }
+    func evernoteInvalid() {
+        print("evernoteInvalid")
+    }
+    func webInvalid() {
+        print("webInvalid")
+    }
+    @objc func didClickButton() {
+        //하드로 넣어주고 추후에 손을 봅시다.
+        presenter?.clickCompleteButton(image: imageView.image!, userID: 1, category: "1", title: "1", introduce: "1", progress: "1", studyTime: "1", location: "1", notion: "1", everNote: "1", web: "1")
     }
 }
 
@@ -236,7 +281,6 @@ extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationContro
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             imageView.image = image
-            print(info)
         }
         dismiss(animated: true, completion: nil)
     }

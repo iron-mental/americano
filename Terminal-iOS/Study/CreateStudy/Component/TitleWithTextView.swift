@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudyOverViewUIView: UIView {
+class TitleWithTextView: UIView {
     var seletedCategory: String?
     var titleLabel = UILabel()
     var title: String?

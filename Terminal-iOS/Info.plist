@@ -45,6 +45,12 @@
 	<string>Dark</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>위치 항상 쓰쉴?</string>
+	<key>NMFClientId</key>
+	<string>ky7k19ifw2</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>쓸 때만 쓰쉴?</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

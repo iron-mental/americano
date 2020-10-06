@@ -43,12 +43,12 @@ class StudyCategoryView: UIViewController {
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
         }
-        
         collectionView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self
+            $0.isScrollEnabled = false
         }
     }
     
@@ -60,7 +60,6 @@ class StudyCategoryView: UIViewController {
         collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
-    
     @objc func createStudy() {
         presenter?.didClickedCreateButton()
     }
