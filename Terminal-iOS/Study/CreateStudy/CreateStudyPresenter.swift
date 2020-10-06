@@ -34,9 +34,8 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
         interactor?.searchWebURL(url: url)
     }
     
-    func clickLocationView(view: UIViewController) {
-        print("address")
-        wireFrame?.goToSelectLocation(view: view)
+    func clickLocationView(currentView: UIViewController) {
+        wireFrame?.goToSelectLocation(view: currentView)
     }
     
     func showNotionValidResult(result: Bool) {
