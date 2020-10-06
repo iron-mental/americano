@@ -179,14 +179,17 @@ class CreateStudyView: UIViewController{
         SNSInputView.notion!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             self!.presenter?.notionInputFinish(id: text ?? "")
+            self!.SNSInputView.notion!.textField.layer.borderColor = UIColor.blue.cgColor
         }
         SNSInputView.evernote!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             self!.presenter?.everNoteInputFinish(url: text ?? "")
+            self!.SNSInputView.evernote!.textField.layer.borderColor = UIColor.blue.cgColor
         }
         SNSInputView.web!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             self!.presenter?.URLInputFinish(url: text ?? "")
+            self!.SNSInputView.web!.textField.layer.borderColor = UIColor.blue.cgColor
         }
     }
     

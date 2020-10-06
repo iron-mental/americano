@@ -21,6 +21,7 @@ class SNSInputUITextField: UITextField {
     func debounce(delay: Double, callback: @escaping ((String?) -> Void)) {
         self.delay = delay
         self.callback = callback
+        
         DispatchQueue.main.async {
             self.callback?(self.text)
         }
@@ -29,6 +30,8 @@ class SNSInputUITextField: UITextField {
     
     @objc private func editingChanged(_ sender: UITextField) {
         self.workItem?.cancel()
+        self.layer.borderWidth = 0.4
+        self.layer.borderColor = UIColor.red.cgColor
         
         let workItem = DispatchWorkItem(block: { [weak self] in
             self?.callback?(sender.text)
