@@ -25,6 +25,7 @@ class SNSInputUITextField: UITextField {
         DispatchQueue.main.async {
             self.callback?(self.text)
         }
+        
         self.addTarget(self, action: #selector(self.editingChanged(_:)), for: .editingChanged)
     }
     

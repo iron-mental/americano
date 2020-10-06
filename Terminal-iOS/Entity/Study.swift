@@ -29,7 +29,7 @@ struct StudyInfo {
     var progress: String
     var studyTime: String
     var location: String
-    var notion: String
-    var everNote: String
-    var web: String
+    var notion: String?
+    var everNote: String?
+    var web: String?
 }

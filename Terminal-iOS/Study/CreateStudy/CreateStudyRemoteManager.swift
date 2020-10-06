@@ -30,6 +30,9 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         let header: HTTPHeaders = [ "Content-Type": "multipart/form-data" ]
         guard let url = urlComponent?.url else { return true }
 //        let imageData = UIImage(named: "test")?.jpegData(compressionQuality: 1.0)
+        
+        
+//         위의 주석된 걸로 하면 asset에 넣어놓은 test이미지가 날라가구요 밑에 코드는 사진 실제로 선택해야 비어있지않고 잘날라가용
         let imageData = studyInfo.image.jpegData(compressionQuality: 1.0)
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {

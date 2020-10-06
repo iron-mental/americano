@@ -11,7 +11,7 @@ import NMapsMap
 
 class SelectLocationView: UIViewController {
     var presenter: SelectLocationPresenterProtocols?
-    
+
     var nmapFView = NMFMapView()
 
     override func viewDidLoad() {
@@ -33,6 +33,7 @@ class SelectLocationView: UIViewController {
         view.addSubview(nmapFView)
     }
 }
+
 extension SelectLocationView: SelectLocationViewProtocols {
     func setViewWithResult(latLng: NMGLatLng, address: String) {
         print("setViewWithResult")
