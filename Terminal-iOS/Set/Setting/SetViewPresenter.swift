@@ -9,6 +9,7 @@
 import Foundation
 
 class SetViewPresenter: SetViewPresenterProtocol {
+    
     var view: SetViewProtocol?
     
     var interactor: SetViewInteractortInputProtocol?
@@ -18,6 +19,11 @@ class SetViewPresenter: SetViewPresenterProtocol {
     func viewDidLoad() {
         
     }
+    
+    func showProfileDetail() {
+        
+    }
+    
 }
 
 extension SetViewPresenter: SetViewInteractorOutputProtocol {

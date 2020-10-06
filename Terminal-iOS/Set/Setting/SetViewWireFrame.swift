@@ -7,3 +7,21 @@
 //
 
 import Foundation
+
+class SetViewWireFrame: SetViewWireFrameProtocol {
+    static func createModule() -> UIViewController {
+        let view = SetView()
+        let presenter: SetViewPresenterProtocol & SetViewInteractorOutputProtocol = SetViewPresenter()
+        let interactor: SetViewInteractortInputProtocol & SetViewRemoteDataManagerOutputProtocol = SetViewInteractor()
+        
+        let wireFrame: SetViewWireFrameProtocol = SetViewWireFrame()
+        
+        
+    }
+    
+    func presentMenuDetailScreen(from view: SetViewProtocol) {
+        
+    }
+    
+    
+}

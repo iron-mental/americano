@@ -26,19 +26,21 @@ protocol SetViewPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    
+    func showProfileDetail()
 }
 
 protocol SetViewInteractorOutputProtocol: class {
-    
+    func onError()
 }
 
 protocol SetViewInteractortInputProtocol: class {
-    
+    var presenter: SetViewInteractorOutputProtocol? { get set }
+    var localDatamanager: SetViewLocalDataManagerInputProtocol? { get set }
+    var remoteDatamanager: SetViewRemoteDataManagerInputProtocol? { get set }
 }
 
 protocol SetViewDataManagerInputProtocol: class {
-    
+    // INTERACOTER -> DATAMANAGER
 }
 
 protocol SetViewRemoteDataManagerInputProtocol: class {
