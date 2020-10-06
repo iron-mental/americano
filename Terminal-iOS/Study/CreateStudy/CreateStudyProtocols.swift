@@ -64,7 +64,7 @@ protocol CreateStudyPresenterProtocols: class {
     func notionInputFinish(id: String?)
     func everNoteInputFinish(url: String?)
     func URLInputFinish(url: String?)
-    func clickLocationView(view: UIViewController)
+    func clickLocationView(currentView: UIViewController)
     func clickCompleteButton(image: UIImage,
                              userID: Int,
                              category: String,
