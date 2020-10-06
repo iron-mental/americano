@@ -25,7 +25,8 @@ class CreateStudyView: UIViewController{
     var locationView = LocationUIVIew(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
     var timeView = TimeUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
     var button = UIButton()
-    var tapGestureRecognizer = UITapGestureRecognizer()
+    var mainImageTapGesture = UITapGestureRecognizer()
+    var locationTapGesture = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +44,10 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor.appColor(.testColor)
         }
         imageView.do {
-            tapGestureRecognizer = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
+            mainImageTapGesture = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
             $0.image = #imageLiteral(resourceName: "swiftBackground")
             $0.isUserInteractionEnabled = true
-            $0.addGestureRecognizer(tapGestureRecognizer)
+            $0.addGestureRecognizer(mainImageTapGesture)
         }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
@@ -66,6 +67,8 @@ class CreateStudyView: UIViewController{
         }
         locationView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
+            $0.addGestureRecognizer(locationTapGesture)
         }
         timeView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -166,16 +169,11 @@ class CreateStudyView: UIViewController{
     
     func setDelegate() {
         scrollView.delegate = self
-        
         studyTitleTextField.delegate = self
-        
         SNSInputView.notion?.textField.delegate = self
         SNSInputView.evernote?.textField.delegate = self
         SNSInputView.web?.textField.delegate = self
-        
         picker.delegate = self
-        
-        
         SNSInputView.notion!.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             self!.presenter?.notionInputFinish(id: text ?? "")
@@ -206,6 +204,10 @@ class CreateStudyView: UIViewController{
         alert.addAction(cancel)
         
         present(alert, animated: true, completion: nil)
+    }
+    @objc func didLocationViewClicked() {
+        //SelectLocationView를 띄우는 게 맞습니다.
+        print("locationView 띄워주면 됩니다.")
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary
