@@ -16,7 +16,19 @@ class SetWireFrame: SetWireFrameProtocol {
         
         let wireFrame: SetWireFrameProtocol = SetWireFrame()
         
+        view.presenter = presenter
         
+        presenter.view = view
+        presenter.wireFrame = wireFrame
+        presenter.interactor = interactor
+        
+        interactor.presenter = presenter
+        
+        if let view = view as? SetView {
+            return view
+        } else {
+            return UIViewController()
+        }
     }
     
     func presentMenuDetailScreen(from view: SetViewProtocol) {
