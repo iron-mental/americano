@@ -18,6 +18,8 @@
 		A5686A492524F49C005990DC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A482524F49C005990DC /* Profile.swift */; };
 		A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A4F2525D6FC005990DC /* DefaultCell.swift */; };
 		A5686A532525DE13005990DC /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A522525DE13005990DC /* Setting.swift */; };
+		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
+		A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileModifyView.swift */; };
 		CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */; };
 		CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */; };
 		CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */; };
@@ -86,6 +88,8 @@
 		A5686A482524F49C005990DC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		A5686A4F2525D6FC005990DC /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		A5686A522525DE13005990DC /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		A5B78A95252B950600E0B440 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
 		CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryProtocols.swift; sourceTree = "<group>"; };
 		CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryPresenter.swift; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 				A5172168252CFA90005AD11B /* SetInteractor.swift */,
 				A517216C252CFAAA005AD11B /* SetProtocols.swift */,
 				A5686A472524F056005990DC /* Component */,
+				A5AB26FF252B6E9300A39240 /* ProfileModify */,
+				A5AB26FD252B6C6400A39240 /* Setting */,
 			);
 			path = Set;
 			sourceTree = "<group>";
@@ -215,6 +221,7 @@
 				A5686A442524F048005990DC /* NotiCell.swift */,
 				A5686A4F2525D6FC005990DC /* DefaultCell.swift */,
 				A51D8BE025264DB9003BD1B9 /* AccountCell.swift */,
+				A5AB2704252B6F2300A39240 /* ProfileCell.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -225,6 +232,27 @@
 				A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
+			sourceTree = "<group>";
+		};
+		A5AB26FD252B6C6400A39240 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A5686A472524F056005990DC /* Component */,
+				CCA1FF6E24FD10290026C3EA /* SetView.swift */,
+				A51438AB2524951E00ACB241 /* SetViewInteractor.swift */,
+				A51438AE2524952F00ACB241 /* SetViewPresenter.swift */,
+				A51438B12524953F00ACB241 /* SetViewWireFrame.swift */,
+				A51438B42524956500ACB241 /* SetViewProtocols.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		A5AB26FF252B6E9300A39240 /* ProfileModify */ = {
+			isa = PBXGroup;
+			children = (
+				A5B78A95252B950600E0B440 /* ProfileModifyView.swift */,
+			);
+			path = ProfileModify;
 			sourceTree = "<group>";
 		};
 		CC1BE0432511FD5400F88313 /* Component */ = {
@@ -555,6 +583,8 @@
 				CCA3FF652517829D00F62627 /* SearchStudyViewController.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
+				A51438B52524956500ACB241 /* SetViewProtocols.swift in Sources */,
+				A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */,
 				CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */,
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,
 				CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */,
@@ -575,6 +605,7 @@
 				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
+				A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
 				CCA3FF5C2517826B00F62627 /* StudyCategoryPresenter.swift in Sources */,
 				A517216D252CFAAA005AD11B /* SetProtocols.swift in Sources */,

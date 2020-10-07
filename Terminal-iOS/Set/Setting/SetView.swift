@@ -13,7 +13,6 @@ class SetView: UIViewController {
     // 섹션
     var sections: [String] = ["계정", "알림", "정보"]
     
-    
     var account: [String] = ["이메일", "SNS"]
     var noti: [String] = ["알림"]
     var tempData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
@@ -33,20 +32,25 @@ class SetView: UIViewController {
     let descript = UILabel()
     let location = UILabel()
     let settingList = UITableView()
-    
     let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 25))
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.appColor(.terminalBackground)
         attribute()
         layout()
     }
-        
+
     func attribute() {
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                     action: #selector(pushProfileModify(_:)))
         self.do {
             $0.title = "설정"
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
+        frameView.do {
+            $0.layer.zPosition = 1
+            $0.addGestureRecognizer(gesture)
         }
         profile.do {
             $0.contentMode = .scaleAspectFill
@@ -90,7 +94,6 @@ class SetView: UIViewController {
     
     func layout() {
         view.addSubview(frameView)
-        frameView.layer.zPosition = 1
         frameView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -104,7 +107,7 @@ class SetView: UIViewController {
         view.addSubview(descript)
         view.addSubview(location)
         view.addSubview(settingList)
-        print("\(UIScreen.main.bounds.height * 0.13)")
+        
         profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: frameView.centerYAnchor).isActive = true
@@ -135,6 +138,11 @@ class SetView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
+    }
+    
+    @objc func pushProfileModify(_ sender: UITapGestureRecognizer) {
+        let view = ProfileModifyView()
+        self.navigationController?.pushViewController(view, animated: true)
     }
 }
 
