@@ -21,7 +21,6 @@ class ProfileCell: UITableViewCell {
         layout()
     }
     
-    
     func attribute() {
         profile.do {
             $0.contentMode = .scaleAspectFill
