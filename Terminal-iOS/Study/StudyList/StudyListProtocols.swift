@@ -49,7 +49,7 @@ protocol StudyListInteractorInputProtocol: class {
     func retrieveStudyList()
 }
 
-protocol StudyListDataManagerInputManager: class {
+protocol StudyListDataManagerInputProtocol: class {
     // INTERACTOR -> DATAMANAGER
 }
 

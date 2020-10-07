@@ -9,7 +9,7 @@
 import UIKit
 
 class SNSCollectionViewCell: UICollectionViewCell {
-    static  let identifier = "SNSCollectionViewCell"
+    static let identifier = "SNSCollectionViewCell"
     
     var icon = UIImageView()
     var verifiedImage = UIImageView()
