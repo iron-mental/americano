@@ -104,7 +104,7 @@ class SetView: UIViewController {
         view.addSubview(descript)
         view.addSubview(location)
         view.addSubview(settingList)
-        
+        print("\(UIScreen.main.bounds.height * 0.13)")
         profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: frameView.centerYAnchor).isActive = true
@@ -114,19 +114,19 @@ class SetView: UIViewController {
         }
         name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: frameView.topAnchor, constant: 30).isActive = true
-            $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: frameView.topAnchor, constant: UIScreen.main.bounds.height * 0.03).isActive = true
+            $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: UIScreen.main.bounds.width * 0.048).isActive = true
         }
         descript.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: UIScreen.main.bounds.height * 0.022).isActive = true
+            $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: UIScreen.main.bounds.width * 0.048).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -3).isActive = true
         }
         location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: frameView.topAnchor, constant: 30).isActive = true
-            $0.trailingAnchor.constraint(equalTo: frameView.trailingAnchor, constant: -20).isActive = true
+            $0.topAnchor.constraint(equalTo: frameView.topAnchor, constant: UIScreen.main.bounds.height * 0.03).isActive = true
+            $0.trailingAnchor.constraint(equalTo: frameView.trailingAnchor, constant:  -(UIScreen.main.bounds.width * 0.048)).isActive = true
         }
         settingList.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
