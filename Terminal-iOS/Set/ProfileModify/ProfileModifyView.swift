@@ -27,8 +27,8 @@ class ProfileModifyView: UIViewController {
         }
         profileImage.do {
             $0.contentMode = .scaleAspectFill
-            $0.frame.size.width = 100
-            $0.frame.size.height = 100
+            $0.frame.size.width = UIScreen.main.bounds.width * 0.266
+            $0.frame.size.height = UIScreen.main.bounds.width * 0.266
             $0.image = #imageLiteral(resourceName: "leehi")
             $0.layer.cornerRadius = $0.frame.size.width/2
             $0.clipsToBounds = true
@@ -56,8 +56,8 @@ class ProfileModifyView: UIViewController {
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                     constant: UIScreen.main.bounds.height * 0.02).isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-                        $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
-                        $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.266).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.266).isActive = true
         }
         name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
