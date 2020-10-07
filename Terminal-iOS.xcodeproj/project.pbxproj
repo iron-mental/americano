@@ -182,12 +182,6 @@
 		A52F00D624FD182800DE3126 /* Set */ = {
 			isa = PBXGroup;
 			children = (
-				CCA1FF6E24FD10290026C3EA /* SetView.swift */,
-				A51438AE2524952F00ACB241 /* SetPresenter.swift */,
-				A5172164252CFA47005AD11B /* SetWireFrame.swift */,
-				A5172168252CFA90005AD11B /* SetInteractor.swift */,
-				A517216C252CFAAA005AD11B /* SetProtocols.swift */,
-				A5686A472524F056005990DC /* Component */,
 				A5AB26FF252B6E9300A39240 /* ProfileModify */,
 				A5AB26FD252B6C6400A39240 /* Setting */,
 			);
@@ -237,12 +231,12 @@
 		A5AB26FD252B6C6400A39240 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				A5686A472524F056005990DC /* Component */,
 				CCA1FF6E24FD10290026C3EA /* SetView.swift */,
-				A51438AB2524951E00ACB241 /* SetViewInteractor.swift */,
-				A51438AE2524952F00ACB241 /* SetViewPresenter.swift */,
-				A51438B12524953F00ACB241 /* SetViewWireFrame.swift */,
-				A51438B42524956500ACB241 /* SetViewProtocols.swift */,
+				A51438AE2524952F00ACB241 /* SetPresenter.swift */,
+				A5172164252CFA47005AD11B /* SetWireFrame.swift */,
+				A5172168252CFA90005AD11B /* SetInteractor.swift */,
+				A517216C252CFAAA005AD11B /* SetProtocols.swift */,
+				A5686A472524F056005990DC /* Component */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -583,7 +577,6 @@
 				CCA3FF652517829D00F62627 /* SearchStudyViewController.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
-				A51438B52524956500ACB241 /* SetViewProtocols.swift in Sources */,
 				A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */,
 				CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */,
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,

@@ -26,5 +26,9 @@ class SetPresenter: SetPresenterProtocol {
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {
+    func onError() {
+        
+    }
+    
     
 }
