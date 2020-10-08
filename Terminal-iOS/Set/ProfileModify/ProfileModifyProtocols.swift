@@ -12,6 +12,6 @@ protocol ProfileModifyViewProtocol: class {
     
 }
 
-protocol ProfileModifyWi {
+protocol ProfileModifyWireFrameProtocol: class {
     
 }
