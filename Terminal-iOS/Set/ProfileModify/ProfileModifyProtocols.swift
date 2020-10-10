@@ -6,12 +6,37 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ProfileModifyViewProtocol: class {
-    
+    var presenter: ProfileModifyPresenterProtocol? { get set }
 }
 
 protocol ProfileModifyWireFrameProtocol: class {
+    static func createModule() -> UIViewController
+    
+}
+
+protocol ProfileModifyPresenterProtocol: class {
+    
+}
+
+protocol ProfileModifyInteractorInputProtocol: class {
+    
+}
+
+protocol ProfileModifyInteractorOutputProtocol: class {
+    
+}
+
+protocol ProfileModifyRemoteDataManagerInputProtocol: class {
+    
+}
+
+protocol ProfileModifyRemoteDataManagerOutputProtocol: class {
+    
+}
+
+protocol ProfileModifyLocalDataManagerInputProtocol: class {
     
 }

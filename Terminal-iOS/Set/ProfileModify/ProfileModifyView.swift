@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileModifyView: UIViewController {
     
+    let scrollView = UIScrollView()
+    let frameView = UIView()
     let profileImage = UIImageView()
     let name = UILabel()
     let descript = UILabel()
@@ -21,6 +23,7 @@ class ProfileModifyView: UIViewController {
     }
     
     func attribute() {
+        
         self.do {
             $0.title = "프로필"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -47,9 +50,19 @@ class ProfileModifyView: UIViewController {
     }
     
     func layout() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(frameView)
         view.addSubview(profileImage)
         view.addSubview(name)
         view.addSubview(descript)
+        
+        scrollView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        }
         
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
