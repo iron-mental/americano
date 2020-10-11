@@ -8,6 +8,6 @@
 
 import UIKit
 
-class MyStudyMainInteractor: CLass {
-
+class MyStudyMainInteractor: MyStudyMainInteractorProtocol {
+    var presenter: MyStudyMainPresenterProtocol?
 }
