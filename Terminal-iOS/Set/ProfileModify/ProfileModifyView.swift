@@ -10,8 +10,13 @@ import UIKit
 
 class ProfileModifyView: UIViewController {
     
-    let scrollView = UIScrollView()
-    let frameView = UIView()
+    let scrollView = UIScrollView().then {
+        $0.backgroundColor = .red
+    }
+    let backgroundView = UIView().then {
+        $0.backgroundColor = .blue
+    }
+    let profileAreaView = UIView()
     let profileImage = UIImageView()
     let name = UILabel()
     let descript = UILabel()
@@ -23,7 +28,6 @@ class ProfileModifyView: UIViewController {
     }
     
     func attribute() {
-        
         self.do {
             $0.title = "프로필"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -51,36 +55,45 @@ class ProfileModifyView: UIViewController {
     
     func layout() {
         view.addSubview(scrollView)
-        scrollView.addSubview(frameView)
-        view.addSubview(profileImage)
-        view.addSubview(name)
-        view.addSubview(descript)
+        scrollView.addSubview(backgroundView)
+        backgroundView.addSubview(profileImage)
+        backgroundView.addSubview(name)
+        backgroundView.addSubview(descript)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         }
-        
-        profileImage.do {
+        backgroundView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                    constant: UIScreen.main.bounds.height * 0.02).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.266).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.266).isActive = true
+            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 1.3).isActive = true
         }
-        name.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        }
-        descript.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 10).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        }
+
+//        profileImage.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: frameView.topAnchor,
+//                                    constant: UIScreen.main.bounds.height * 0.02).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: frameView.centerXAnchor).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.266).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.266).isActive = true
+//        }
+//        name.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: frameView.centerXAnchor).isActive = true
+//        }
+//        descript.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 10).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: frameView.centerXAnchor).isActive = true
+//        }
     }
 }
