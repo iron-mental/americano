@@ -14,12 +14,14 @@ protocol MyStudyMainViewProtocol: class {
 
 protocol MyStudyMainInteractorProtocol: class {
     var presenter: MyStudyMainPresenterProtocol? { get set }
+    var remoteManager: MyStudyMainRemoteDataManagerProtocol? { get set }
+    var localManager: MyStudyMainLocalDataManagerProtocol? { get set }
 }
 
 protocol MyStudyMainPresenterProtocol: class {
     var view: MyStudyMainViewProtocol? { get set }
-    var wireFrame: MyStudyMainWireFrameProtocol { get set }
-    var interactor: MyStudyMainInteractorProtocol { get set }
+    var wireFrame: MyStudyMainWireFrameProtocol? { get set }
+    var interactor: MyStudyMainInteractorProtocol? { get set }
 }
 
 protocol MyStudyMainRemoteDataManagerProtocol: class {
