@@ -10,6 +10,6 @@ import UIKit
 
 class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
     var view: MyStudyMainViewProtocol?
-    var wireFrame: MyStudyMainWireFrameProtocol
-    var interactor: MyStudyMainInteractorProtocol
+    var wireFrame: MyStudyMainWireFrameProtocol?
+    var interactor: MyStudyMainInteractorProtocol?
 }

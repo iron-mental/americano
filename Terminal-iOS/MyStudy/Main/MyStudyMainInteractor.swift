@@ -10,4 +10,6 @@ import UIKit
 
 class MyStudyMainInteractor: MyStudyMainInteractorProtocol {
     var presenter: MyStudyMainPresenterProtocol?
+    var remoteManager: MyStudyMainRemoteDataManagerProtocol?
+    var localManager: MyStudyMainLocalDataManagerProtocol?
 }
