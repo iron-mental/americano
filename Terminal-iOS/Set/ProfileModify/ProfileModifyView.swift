@@ -10,13 +10,28 @@ import UIKit
 
 class ProfileModifyView: UIViewController {
     
-    let scrollView = UIScrollView().then {
-        $0.backgroundColor = .red
-    }
+    let scrollView = UIScrollView()
     let backgroundView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    let profileAreaView = UIView().then {
+        $0.backgroundColor = .yellow
+    }
+    let careerAreaView = UIView().then {
         $0.backgroundColor = .blue
     }
-    let profileAreaView = UIView()
+    let projectAreaView = UIView().then {
+        $0.backgroundColor = .cyan
+    }
+    let snsAreaView = UIView().then {
+        $0.backgroundColor = .darkGray
+    }
+    let emailAreaView = UIView().then {
+        $0.backgroundColor = .green
+    }
+    let locationAreaView = UIView().then {
+        $0.backgroundColor = .red
+    }
     let profileImage = UIImageView()
     let name = UILabel()
     let descript = UILabel()
@@ -56,9 +71,16 @@ class ProfileModifyView: UIViewController {
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
-        backgroundView.addSubview(profileImage)
-        backgroundView.addSubview(name)
-        backgroundView.addSubview(descript)
+        backgroundView.addSubview(profileAreaView)
+        backgroundView.addSubview(careerAreaView)
+        backgroundView.addSubview(projectAreaView)
+        backgroundView.addSubview(snsAreaView)
+        backgroundView.addSubview(emailAreaView)
+        backgroundView.addSubview(locationAreaView)
+        
+//        backgroundView.addSubview(profileImage)
+//        backgroundView.addSubview(name)
+//        backgroundView.addSubview(descript)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -74,9 +96,50 @@ class ProfileModifyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 1.3).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 1.31).isActive = true
         }
-
+        profileAreaView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.355).isActive = true
+        }
+        careerAreaView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: profileAreaView.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.218).isActive = true
+        }
+        projectAreaView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: careerAreaView.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.368).isActive = true
+        }
+        snsAreaView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: projectAreaView.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.098).isActive = true
+        }
+        emailAreaView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: snsAreaView.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.091).isActive = true
+        }
+        locationAreaView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: emailAreaView.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
+        }
 //        profileImage.do {
 //            $0.translatesAutoresizingMaskIntoConstraints = false
 //            $0.topAnchor.constraint(equalTo: frameView.topAnchor,
