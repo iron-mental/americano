@@ -35,7 +35,9 @@ class MyStudyMainView: UIViewController {
         }
         tableView.do {
             $0.backgroundColor = .cyan
-            
+            $0.register(MyStudyMainTableViewCell.self, forCellReuseIdentifier: MyStudyMainTableViewCell.identifier)
+            $0.delegate = self
+            $0.dataSource = self
         }
     }
     
@@ -66,6 +68,8 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: MyStudyMainTableViewCell.identifier) as! MyStudyMainTableViewCell
+        cell.locationLabel.text = "테스트에영~~~~~"
+        return cell
     }
 }
