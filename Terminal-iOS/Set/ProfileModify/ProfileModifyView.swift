@@ -44,6 +44,13 @@ class ProfileModifyView: UIViewController {
     let projectTitle = UILabel()
     let projectDescript = UILabel()
     
+    let snsLabel = UILabel()
+    
+    let emailLabel = UILabel()
+    let email = UILabel()
+    
+    let locationLabel = UILabel()
+    let location = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +111,30 @@ class ProfileModifyView: UIViewController {
             $0.numberOfLines = 0
             $0.textColor = .black
         }
+        
+        snsLabel.do {
+            $0.text = "SNS"
+            $0.textColor = .black
+        }
+        
+        emailLabel.do {
+            $0.text = "Email"
+            $0.textColor = .black
+        }
+        email.do {
+            $0.text = "jerry@gmail.com"
+            $0.textColor = .black
+        }
+        
+        locationLabel.do {
+            $0.text = "활동지역"
+            $0.textColor = .black
+        }
+        location.do {
+            $0.text = "서울 마포구 주민입니다. 서울 모든 곳 가능합니다."
+            $0.textColor = .black
+        }
+
     }
     
     func layout() {
@@ -132,6 +163,17 @@ class ProfileModifyView: UIViewController {
             $0.addSubview(projectLabel)
             $0.addSubview(projectTitle)
             $0.addSubview(projectDescript)
+        }
+        snsAreaView.do {
+            $0.addSubview(snsLabel)
+        }
+        emailAreaView.do {
+            $0.addSubview(emailLabel)
+            $0.addSubview(email)
+        }
+        locationAreaView.do {
+            $0.addSubview(locationLabel)
+            $0.addSubview(location)
         }
         
         // 스크롤뷰 오토레이아웃
@@ -264,6 +306,39 @@ class ProfileModifyView: UIViewController {
             $0.topAnchor.constraint(equalTo: projectTitle.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: projectAreaView.leadingAnchor, constant: 40).isActive = true
             $0.trailingAnchor.constraint(equalTo: projectAreaView.trailingAnchor, constant: -40).isActive = true
+        }
+        
+        // SNS 요소
+        snsLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: snsAreaView.topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: snsAreaView.leadingAnchor, constant: 24).isActive = true
+        }
+        
+        // Email 요소
+        emailLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: emailAreaView.topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: emailAreaView.leadingAnchor, constant: 24).isActive = true
+        }
+        email.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: emailAreaView.leadingAnchor, constant: 40).isActive = true
+            $0.trailingAnchor.constraint(equalTo: emailAreaView.trailingAnchor, constant: -40).isActive = true
+        }
+        
+        // 활동지역 요소
+        locationLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: locationAreaView.topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: locationAreaView.leadingAnchor, constant: 24).isActive = true
+        }
+        location.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: locationAreaView.leadingAnchor, constant: 40).isActive = true
+            $0.trailingAnchor.constraint(equalTo: locationAreaView.trailingAnchor, constant: -40).isActive = true
         }
     }
 }
