@@ -17,6 +17,7 @@
 		A521DDF1252F0C9600F83DB3 /* ProfileModifyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF0252F0C9500F83DB3 /* ProfileModifyInteractor.swift */; };
 		A521DDF4252F0D6300F83DB3 /* ProfileModifyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF3252F0D6300F83DB3 /* ProfileModifyPresenter.swift */; };
 		A521DDF7252F107A00F83DB3 /* ProfileModifyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF6252F107A00F83DB3 /* ProfileModifyWireFrame.swift */; };
+		A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */; };
 		A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */; };
 		A5686A452524F048005990DC /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A442524F048005990DC /* NotiCell.swift */; };
 		A5686A492524F49C005990DC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A482524F49C005990DC /* Profile.swift */; };
@@ -91,6 +92,7 @@
 		A521DDF0252F0C9500F83DB3 /* ProfileModifyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyInteractor.swift; sourceTree = "<group>"; };
 		A521DDF3252F0D6300F83DB3 /* ProfileModifyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyPresenter.swift; sourceTree = "<group>"; };
 		A521DDF6252F107A00F83DB3 /* ProfileModifyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyWireFrame.swift; sourceTree = "<group>"; };
+		A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Ext.swift"; path = "Terminal-iOS/Extensions-Utillities/UIColor+Ext.swift"; sourceTree = SOURCE_ROOT; };
 		A5686A442524F048005990DC /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
 		A5686A482524F49C005990DC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -214,14 +216,22 @@
 		A52F00D824FD182C00DE3126 /* Study */ = {
 			isa = PBXGroup;
 			children = (
+				A55C295B2535E9AB001E0A4D /* SearchStudy */,
 				CCA3FF642517829D00F62627 /* CreateStudyViewController.swift */,
-				CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */,
 				CCA3FF3B2517821900F62627 /* StudyList */,
 				CCA3FF4D2517824900F62627 /* StudyCategory */,
 				CCB2AC9B250F834300435E5F /* SelectCategory */,
 				CCB2AC9A250F81AC00435E5F /* CreateStudy */,
 			);
 			path = Study;
+			sourceTree = "<group>";
+		};
+		A55C295B2535E9AB001E0A4D /* SearchStudy */ = {
+			isa = PBXGroup;
+			children = (
+				CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */,
+			);
+			path = SearchStudy;
 			sourceTree = "<group>";
 		};
 		A5686A472524F056005990DC /* Component */ = {
@@ -239,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */,
+				A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -581,6 +592,7 @@
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
 				CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */,
+				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,
 				A5686A452524F048005990DC /* NotiCell.swift in Sources */,
