@@ -66,7 +66,7 @@ class SetView: UIViewController {
         }
         descript.do {
             $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다."
-            $0.numberOfLines = 0
+            $0.numberOfLines = 1
             $0.font = $0.font.withSize(16)
         }
         location.do {
