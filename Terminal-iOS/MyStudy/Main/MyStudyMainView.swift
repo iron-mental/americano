@@ -18,6 +18,7 @@ class MyStudyMainView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        
     }
     
     func attribute() {
