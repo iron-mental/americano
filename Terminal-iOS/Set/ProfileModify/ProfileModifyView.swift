@@ -59,9 +59,12 @@ class ProfileModifyView: UIViewController {
     }
     
     func attribute() {
+        let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"), style: .plain, target: nil, action: nil)
+        
         self.do {
             $0.title = "프로필"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.navigationItem.rightBarButtonItem = modifyBtn
         }
         profileImage.do {
             $0.contentMode = .scaleAspectFill
@@ -75,41 +78,43 @@ class ProfileModifyView: UIViewController {
             $0.text = "이하이"
             $0.textColor = .black
             $0.textAlignment = .center
-            $0.font = $0.font.withSize(20)
+            $0.dynamicFont(fontSize: 20, weight: .bold)
         }
         descript.do {
             $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다."
             $0.textColor = .black
             $0.numberOfLines = 0
-            $0.font = $0.font.withSize(16)
+            $0.dynamicFont(fontSize: 16, weight: .regular)
         }
         careerLabel.do {
             $0.text = "경력"
             $0.textColor = .black
         }
         careerTitle.do {
-            $0.font = UIFont.boldSystemFont(ofSize: 20)
             $0.text = "OO대학교 4학년 재학중"
             $0.textColor = .black
+            $0.dynamicFont(fontSize: 20, weight: .bold)
         }
         careerDescript.do {
             $0.text = "경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다."
             $0.numberOfLines = 0
             $0.textColor = .black
+            $0.dynamicFont(fontSize: 16, weight: .regular)
         }
         projectLabel.do {
             $0.text = "프로젝트"
             $0.textColor = .black
         }
         projectTitle.do {
-            $0.font = UIFont.boldSystemFont(ofSize: 20)
             $0.text = "Terminal"
             $0.textColor = .black
+            $0.dynamicFont(fontSize: 20, weight: .bold)
         }
         projectDescript.do {
             $0.text = "MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다."
             $0.numberOfLines = 0
             $0.textColor = .black
+            $0.dynamicFont(fontSize: 16, weight: .regular)
         }
         
         snsLabel.do {
