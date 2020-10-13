@@ -48,7 +48,6 @@ class SearchStudyViewController: UIViewController {
         view.addSubview(placeSearch)
         view.addSubview(hotLable)
         view.addSubview(tempView)
-        view.addSubview(keywordLable)
         
         backBtn.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -82,11 +81,6 @@ class SearchStudyViewController: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        }
-        keywordLable.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: tempView.bottomAnchor, constant: 20).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         }
     }
     
