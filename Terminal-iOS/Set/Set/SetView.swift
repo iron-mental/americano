@@ -157,7 +157,6 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         let label = UILabel().then {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.textAlignment = .center
-//            $0.textColor =
         }
         headerView.addSubview(label)
         label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
