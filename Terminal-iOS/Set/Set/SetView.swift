@@ -153,7 +153,15 @@ extension SetView: SetViewProtocol {
 extension SetView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let label = UILabel()
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        let label = UILabel().then {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.textAlignment = .center
+//            $0.textColor =
+        }
+        headerView.addSubview(label)
+        label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 13).isActive = true
         
         if section == 0 {
             label.text = sections[0]
@@ -162,7 +170,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         } else if section == 2{
             label.text = sections[2]
         }
-        return label
+        return headerView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
