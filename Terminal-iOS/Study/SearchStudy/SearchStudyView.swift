@@ -16,6 +16,11 @@ class SearchStudyView: UIViewController {
     let placeSearch = UIButton()
     let hotLable = UILabel()
     let tempView = UIView()
+    let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +92,11 @@ class SearchStudyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
         }
+        
+        collectionView.do {
+            $0.delegate = self
+            $0.dataSource = self
+        }
     }
     
     @objc func back() {
@@ -95,6 +105,14 @@ class SearchStudyView: UIViewController {
 }
 
 
-extension SearchStudyView {
+extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        <#code#>
+    }
+    
     
 }
