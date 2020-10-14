@@ -9,7 +9,7 @@
 import UIKit
 
 class HotKeywordCell: UICollectionViewCell {
-    
+    static let cellId = "HotKeywordCellId"
     let keyword = UIButton()
     
     override init(frame: CGRect) {
