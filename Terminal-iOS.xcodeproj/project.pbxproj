@@ -151,7 +151,7 @@
 		CCA3FF562517826B00F62627 /* StudyCategoryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyCategoryPresenter.swift; sourceTree = "<group>"; };
 		CCA3FF572517826B00F62627 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		CCA3FF582517826B00F62627 /* StudyCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyCategoryView.swift; sourceTree = "<group>"; };
-		CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStudyViewController.swift; sourceTree = "<group>"; };
+		CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchStudyViewController.swift; path = ../SearchStudy/SearchStudyViewController.swift; sourceTree = "<group>"; };
 		CCA3FF642517829D00F62627 /* CreateStudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStudyViewController.swift; sourceTree = "<group>"; };
 		CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainInteractor.swift; sourceTree = "<group>"; };
 		CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithTextView.swift; sourceTree = "<group>"; };
@@ -214,8 +214,8 @@
 		A52F00D824FD182C00DE3126 /* Study */ = {
 			isa = PBXGroup;
 			children = (
+				A5D2A5EB253710C20010AE1C /* SearchStudy */,
 				CCA3FF642517829D00F62627 /* CreateStudyViewController.swift */,
-				CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */,
 				CCA3FF3B2517821900F62627 /* StudyList */,
 				CCA3FF4D2517824900F62627 /* StudyCategory */,
 				CCB2AC9B250F834300435E5F /* SelectCategory */,
@@ -267,6 +267,14 @@
 				A521DDF6252F107A00F83DB3 /* ProfileModifyWireFrame.swift */,
 			);
 			path = ProfileModify;
+			sourceTree = "<group>";
+		};
+		A5D2A5EB253710C20010AE1C /* SearchStudy */ = {
+			isa = PBXGroup;
+			children = (
+				CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */,
+			);
+			path = SearchStudy;
 			sourceTree = "<group>";
 		};
 		CC1BE0432511FD5400F88313 /* Component */ = {

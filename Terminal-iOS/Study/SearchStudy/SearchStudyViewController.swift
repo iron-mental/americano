@@ -16,7 +16,6 @@ class SearchStudyViewController: UIViewController {
     let placeSearch = UIButton()
     let hotLable = UILabel()
     let tempView = UIView()
-    let keywordLable = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +40,6 @@ class SearchStudyViewController: UIViewController {
             $0.textColor = .white
         }
         tempView.backgroundColor = .red
-        keywordLable.do {
-            $0.text = "관심 키워드를 선택할 수 있습니다."
-            $0.textColor = .white
-        }
     }
     
     func layout() {
@@ -53,7 +48,6 @@ class SearchStudyViewController: UIViewController {
         view.addSubview(placeSearch)
         view.addSubview(hotLable)
         view.addSubview(tempView)
-        view.addSubview(keywordLable)
         
         backBtn.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -88,12 +82,6 @@ class SearchStudyViewController: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
         }
-        keywordLable.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: tempView.bottomAnchor, constant: 20).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        }
-        
     }
     
     @objc func back() {
