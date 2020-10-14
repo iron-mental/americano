@@ -64,7 +64,7 @@ class StudyCategoryView: UIViewController {
         presenter?.didClickedCreateButton()
     }
     @objc func searchStudy() {
-        let view = SearchStudyViewController()
+        let view = SearchStudyView()
         present(view, animated: true, completion: nil)
     }
 }

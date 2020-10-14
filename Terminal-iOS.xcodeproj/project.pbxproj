@@ -75,7 +75,7 @@
 		CCA3FF5C2517826B00F62627 /* StudyCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF562517826B00F62627 /* StudyCategoryPresenter.swift */; };
 		CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF572517826B00F62627 /* CategoryCell.swift */; };
 		CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF582517826B00F62627 /* StudyCategoryView.swift */; };
-		CCA3FF652517829D00F62627 /* SearchStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */; };
+		CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF632517829D00F62627 /* SearchStudyView.swift */; };
 		CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF642517829D00F62627 /* CreateStudyViewController.swift */; };
 		CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */; };
 /* End PBXBuildFile section */
@@ -153,7 +153,7 @@
 		CCA3FF562517826B00F62627 /* StudyCategoryPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyCategoryPresenter.swift; sourceTree = "<group>"; };
 		CCA3FF572517826B00F62627 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		CCA3FF582517826B00F62627 /* StudyCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyCategoryView.swift; sourceTree = "<group>"; };
-		CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStudyViewController.swift; sourceTree = "<group>"; };
+		CCA3FF632517829D00F62627 /* SearchStudyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStudyView.swift; sourceTree = "<group>"; };
 		CCA3FF642517829D00F62627 /* CreateStudyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStudyViewController.swift; sourceTree = "<group>"; };
 		CCB2ACAF250F8E9B00435E5F /* StudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainInteractor.swift; sourceTree = "<group>"; };
 		CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithTextView.swift; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 		A55C295B2535E9AB001E0A4D /* SearchStudy */ = {
 			isa = PBXGroup;
 			children = (
-				CCA3FF632517829D00F62627 /* SearchStudyViewController.swift */,
+				CCA3FF632517829D00F62627 /* SearchStudyView.swift */,
 			);
 			path = SearchStudy;
 			sourceTree = "<group>";
@@ -598,7 +598,7 @@
 				A5686A452524F048005990DC /* NotiCell.swift in Sources */,
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
 				CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */,
-				CCA3FF652517829D00F62627 /* SearchStudyViewController.swift in Sources */,
+				CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */,
 				A521DDF1252F0C9600F83DB3 /* ProfileModifyInteractor.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
