@@ -25,6 +25,7 @@
 		A5686A532525DE13005990DC /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A522525DE13005990DC /* Setting.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
 		A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileModifyView.swift */; };
+		A5D2A5F925373D180010AE1C /* HotKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */; };
 		CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */; };
 		CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */; };
 		CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */; };
@@ -100,6 +101,7 @@
 		A5686A522525DE13005990DC /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		A5B78A95252B950600E0B440 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
+		A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeywordCell.swift; sourceTree = "<group>"; };
 		CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryProtocols.swift; sourceTree = "<group>"; };
 		CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryPresenter.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		A55C295B2535E9AB001E0A4D /* SearchStudy */ = {
 			isa = PBXGroup;
 			children = (
+				A5D2A5F7253734310010AE1C /* Component */,
 				CCA3FF632517829D00F62627 /* SearchStudyView.swift */,
 			);
 			path = SearchStudy;
@@ -278,6 +281,14 @@
 				A521DDF6252F107A00F83DB3 /* ProfileModifyWireFrame.swift */,
 			);
 			path = ProfileModify;
+			sourceTree = "<group>";
+		};
+		A5D2A5F7253734310010AE1C /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		CC1BE0432511FD5400F88313 /* Component */ = {
@@ -629,6 +640,7 @@
 				A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
 				CCA3FF5C2517826B00F62627 /* StudyCategoryPresenter.swift in Sources */,
+				A5D2A5F925373D180010AE1C /* HotKeywordCell.swift in Sources */,
 				A517216D252CFAAA005AD11B /* SetProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

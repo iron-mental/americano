@@ -11,6 +11,8 @@ import Then
 
 class SearchStudyView: UIViewController {
     
+    var arr: [String] = ["안드로이드", "node.js", "코드리뷰", "취업스터디", "프로젝트", "Swift"]
+        
     let backBtn = UIButton()
     let searchBar = UISearchBar()
     let placeSearch = UIButton()
@@ -49,7 +51,15 @@ class SearchStudyView: UIViewController {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 14, weight: .semibold)
         }
-        tempView.backgroundColor = .red
+        collectionView.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.register(HotKeywordCell.self, forCellWithReuseIdentifier: HotKeywordCell.cellId)
+            $0.delegate = self
+            $0.dataSource = self
+        }
+        tempView.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
     }
     
     func layout() {
@@ -58,6 +68,7 @@ class SearchStudyView: UIViewController {
         view.addSubview(placeSearch)
         view.addSubview(hotLable)
         view.addSubview(tempView)
+        view.addSubview(collectionView)
         
         backBtn.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -92,10 +103,12 @@ class SearchStudyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
         }
-        
         collectionView.do {
-            $0.delegate = self
-            $0.dataSource = self
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: tempView.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempView.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: tempView.bottomAnchor).isActive = true
         }
     }
     
@@ -106,12 +119,20 @@ class SearchStudyView: UIViewController {
 
 
 extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width * 0.266, height: UIScreen.main.bounds.height * 0.045)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        <#code#>
+        return arr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        <#code#>
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotKeywordCell.cellId, for: indexPath) as! HotKeywordCell
+        
+        cell.keyword.setTitle(arr[indexPath.row], for: .normal)
+        
+        return cell
     }
     
     
