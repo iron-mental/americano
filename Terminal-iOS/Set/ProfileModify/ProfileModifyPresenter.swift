@@ -8,6 +8,10 @@
 
 import Foundation
 
-class ProfileModifyPresenter {
+class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
+    
+}
+
+extension ProfileModifyPresenter: ProfileModifyInteractorOutputProtocol {
     
 }
