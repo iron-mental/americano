@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileModifyView: UIViewController {
     
+    var presenter: ProfileModifyPresenterProtocol?
     let scrollView = UIScrollView()
     let backgroundView = UIView().then {
         $0.backgroundColor = .white
@@ -346,4 +347,8 @@ class ProfileModifyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: locationAreaView.trailingAnchor, constant: -40).isActive = true
         }
     }
+}
+
+extension ProfileModifyView: ProfileModifyViewProtocol {
+    
 }

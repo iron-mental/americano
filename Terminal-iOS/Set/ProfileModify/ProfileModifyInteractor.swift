@@ -8,6 +8,14 @@
 
 import Foundation
 
-class ProfileModifyInteractor {
+class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
+    var presenter: ProfileModifyInteractorOutputProtocol?
+    var localDataManager: ProfileModifyLocalDataManagerInputProtocol?
+    var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol?
+    
+    
+}
+
+extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol {
     
 }

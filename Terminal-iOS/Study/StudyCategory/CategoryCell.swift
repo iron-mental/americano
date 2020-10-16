@@ -36,7 +36,6 @@ class CategoryCell: UICollectionViewCell {
     }
     
     private func layout() {
-//        contentView.addSubview(imageView)
         addSubview(imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
