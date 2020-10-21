@@ -13,29 +13,34 @@ class MyStudyMainView: UIViewController {
     
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
+    var alarmButton: UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        
     }
     
     func attribute() {
         view.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
         }
-        moreButton = UIBarButtonItem(title: "왜이래", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
+        moreButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
         moreButton?.do {
             //추후에 more버튼으로 교체
-            $0.image = #imageLiteral(resourceName: "Vaild")
+            $0.image = #imageLiteral(resourceName: "more")
+            $0.tintColor = .white
+        }
+        alarmButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
+        alarmButton?.do {
+            $0.image = #imageLiteral(resourceName: "alarm")
+            $0.tintColor = .white
         }
         self.do {
             $0.title = "내 스터디"
-            $0.navigationItem.rightBarButtonItem = moreButton
+            $0.navigationItem.rightBarButtonItems = [moreButton!, alarmButton!]
             $0.navigationController?.navigationBar.backgroundColor = UIColor.appColor(.testColor)
             $0.navigationController?.navigationBar.prefersLargeTitles = true
-            $0.navigationController?.navigationBar.isTranslucent = true
         }
         tableView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
