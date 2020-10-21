@@ -14,6 +14,7 @@ class MyStudyMainView: UIViewController {
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
     var alarmButton: UIBarButtonItem?
+    var tempButton: UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +37,10 @@ class MyStudyMainView: UIViewController {
             $0.image = #imageLiteral(resourceName: "alarm")
             $0.tintColor = .white
         }
+        tempButton = UIBarButtonItem(title: "임시버튼", style: .done, target: self, action: #selector(goToLoginAction(_ :)))
         self.do {
             $0.title = "내 스터디"
-            $0.navigationItem.rightBarButtonItems = [moreButton!, alarmButton!]
+            $0.navigationItem.rightBarButtonItems = [moreButton!, alarmButton!,tempButton!]
             $0.navigationController?.navigationBar.backgroundColor = UIColor.appColor(.testColor)
             $0.navigationController?.navigationBar.prefersLargeTitles = true
         }
@@ -64,6 +66,11 @@ class MyStudyMainView: UIViewController {
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
         print("clicked more Button!!")
+    }
+    @objc func goToLoginAction(_ sender: UIBarButtonItem) {
+        let view = LoginView()
+        view.modalPresentationStyle = .fullScreen
+        self.present(view, animated: true)
     }
 }
 
