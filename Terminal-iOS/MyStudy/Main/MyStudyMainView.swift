@@ -32,7 +32,7 @@ class MyStudyMainView: UIViewController {
             $0.image = #imageLiteral(resourceName: "more")
             $0.tintColor = .white
         }
-        alarmButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
+        alarmButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(alarmButtonAction(_ :)))
         alarmButton?.do {
             $0.image = #imageLiteral(resourceName: "alarm")
             $0.tintColor = .white
@@ -65,6 +65,18 @@ class MyStudyMainView: UIViewController {
     }
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
+        let alert =  UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
+        let edit =  UIAlertAction(title: "스터디 편집", style: .default) {_ in }
+        let temp =  UIAlertAction(title: "여긴뭐들어갑니까", style: .default) {_ in }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        [edit,temp,cancel].forEach {
+            alert.addAction($0)
+        }
+        
+        present(alert, animated: true, completion: nil)
+    }
+    @objc func alarmButtonAction(_ sender: UIBarButtonItem) {
         print("clicked more Button!!")
     }
     @objc func goToLoginAction(_ sender: UIBarButtonItem) {
