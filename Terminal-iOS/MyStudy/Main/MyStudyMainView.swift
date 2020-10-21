@@ -23,9 +23,9 @@ class MyStudyMainView: UIViewController {
     
     func attribute() {
         view.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = UIColor.appColor(.testColor)
         }
-        moreButton = UIBarButtonItem(title: "왜이래", style: .plain, target: self, action: #selector(moreButtonAction(_ :)))
+        moreButton = UIBarButtonItem(title: "왜이래", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
         moreButton?.do {
             //추후에 more버튼으로 교체
             $0.image = #imageLiteral(resourceName: "Vaild")
@@ -33,9 +33,12 @@ class MyStudyMainView: UIViewController {
         self.do {
             $0.title = "내 스터디"
             $0.navigationItem.rightBarButtonItem = moreButton
+            $0.navigationController?.navigationBar.backgroundColor = UIColor.appColor(.testColor)
+            $0.navigationController?.navigationBar.prefersLargeTitles = true
+            $0.navigationController?.navigationBar.isTranslucent = true
         }
         tableView.do {
-            $0.backgroundColor = .cyan
+            $0.backgroundColor = UIColor.appColor(.testColor)
             $0.register(MyStudyMainTableViewCell.self, forCellReuseIdentifier: MyStudyMainTableViewCell.identifier)
             $0.delegate = self
             $0.dataSource = self
@@ -65,7 +68,7 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
 
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -26,31 +26,42 @@ class MyStudyMainTableViewCell: UITableViewCell {
     }
     
     func attribute() {
+        self.do {
+            $0.backgroundColor = UIColor.appColor(.testColor)
+        }
         studyMainimage.do {
-            $0.image = #imageLiteral(resourceName: "leehi")
-            $0.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+            $0.image = #imageLiteral(resourceName: "swiftmain")
+            $0.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * (53 / 375), height: UIScreen.main.bounds.height * (53 / 667))
+//            $0.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
             $0.contentMode = .scaleAspectFit
         }
         locationLabel.do {
-            $0.text = "이수역 부추삼겹살"
+            $0.text = "사당역 스타벅스"
+            $0.textColor = UIColor.appColor(.mainColor)
         }
         titleLabel.do {
-            $0.text = "부추삼겹살 스터디!!"
+            $0.text = "Swift 정복하기"
         }
         newChatLabel.do {
             $0.text = "새 채팅"
-            $0.backgroundColor = .blue
+            $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.font = newChatLabel.font.withSize(13)
+            $0.layer.cornerRadius = 5
+            $0.textAlignment = .center
         }
         newNoticeLabel.do {
             $0.text = "새 공지"
-            $0.backgroundColor = .red
+            $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.font = newNoticeLabel.font.withSize(13)
+            $0.layer.cornerRadius = 5
+            $0.textAlignment = .center
         }
         newMemberLabel.do {
             $0.text = "새 멤버"
-            $0.backgroundColor = .yellow
+            $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.font = newMemberLabel.font.withSize(13)
+            $0.layer.cornerRadius = 5
+            $0.textAlignment = .center
         }
     }
     
@@ -66,7 +77,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
             //bounds 접근 가능한지ㅘ뽀자
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: (24/375) * parentFrame.width).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 40).isActive = true
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         }
         locationLabel.do {
@@ -85,22 +95,22 @@ class MyStudyMainTableViewCell: UITableViewCell {
         }
         newChatLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: topAnchor, constant: (13/667) * parentFrame.height).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: (14/375) * parentFrame.width).isActive = true
+            $0.bottomAnchor.constraint(equalTo: newNoticeLabel.topAnchor, constant: -(4/667) * parentFrame.height).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(14/375) * parentFrame.width).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (50/375) * parentFrame.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (19/667) * parentFrame.height).isActive = true
         }
         newNoticeLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: newChatLabel.bottomAnchor, constant: (4/667) * parentFrame.height).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: (14/375) * parentFrame.width).isActive = true
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(14/375) * parentFrame.width).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (50/375) * parentFrame.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (19/667) * parentFrame.height).isActive = true
         }
         newMemberLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: newNoticeLabel.bottomAnchor, constant: (4/667) * parentFrame.height).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: (14/375) * parentFrame.width).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(14/375) * parentFrame.width).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (50/375) * parentFrame.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (19/667) * parentFrame.height).isActive = true
             print(parentFrame.height)

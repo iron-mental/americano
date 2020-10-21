@@ -47,7 +47,7 @@ class ViewController: UITabBarController {
     func attribute() {
         tabBar.do {
             $0.tintColor = UIColor(named: "key")
-            $0.barTintColor = UIColor.appColor(.terminalBackground)
+            $0.barTintColor = UIColor.appColor(.testColor)
             $0.isTranslucent = false
             $0.unselectedItemTintColor = .white
             $0.standardAppearance.backgroundColor = .white
