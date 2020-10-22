@@ -10,6 +10,7 @@ import UIKit
 
 class LoginView: UIViewController {
     var closeButton = UIButton()
+    var nextButton = UIButton()
     var emailTextfield = UITextField()
     
     override func viewDidLoad() {
@@ -29,11 +30,17 @@ class LoginView: UIViewController {
             $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
             $0.addTarget(self, action: #selector(didClickedCloseButon), for: .touchUpInside)
         }
+        nextButton.do {
+            $0.setTitle("다음", for: .normal)
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.addTarget(self, action: #selector(didClickedNextButton), for: .touchUpInside)
+        }
     }
     
     func layout() {
         view.addSubview(emailTextfield)
         view.addSubview(closeButton)
+        view.addSubview(nextButton)
         
         emailTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -49,9 +56,20 @@ class LoginView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: (18/375) * UIScreen.main.bounds.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (18/375) * UIScreen.main.bounds.width).isActive = true
         }
+        nextButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: (18/667) * UIScreen.main.bounds.height).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -(18/375) * UIScreen.main.bounds.width).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (40/375) * UIScreen.main.bounds.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (20/375) * UIScreen.main.bounds.width).isActive = true
+        }
     }
     
     @objc func didClickedCloseButon() {
         dismiss(animated: true)
+    }
+    
+    @objc func didClickedNextButton() {
+        print("clicked NextButton!")
     }
 }
