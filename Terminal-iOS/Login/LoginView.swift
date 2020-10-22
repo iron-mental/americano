@@ -11,6 +11,7 @@ import UIKit
 class LoginView: UIViewController {
     var closeButton = UIButton()
     var nextButton = UIButton()
+    var guideLabel = UILabel()
     var emailTextfield = UITextField()
     
     override func viewDidLoad() {
@@ -24,7 +25,7 @@ class LoginView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
         }
         emailTextfield.do {
-            $0.placeholder = "이메일 입력하세요"
+            $0.placeholder = "youremail@youplatform.com"
         }
         closeButton.do {
             $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
@@ -35,12 +36,18 @@ class LoginView: UIViewController {
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             $0.addTarget(self, action: #selector(didClickedNextButton), for: .touchUpInside)
         }
+        guideLabel.do {
+            $0.numberOfLines = 0
+            $0.text = "이메일을\n입력해 주세요"
+            $0.font = UIFont.boldSystemFont(ofSize: 24)
+        }
     }
     
     func layout() {
         view.addSubview(emailTextfield)
         view.addSubview(closeButton)
         view.addSubview(nextButton)
+        view.addSubview(guideLabel)
         
         emailTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +69,13 @@ class LoginView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -(18/375) * UIScreen.main.bounds.width).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (40/375) * UIScreen.main.bounds.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (20/375) * UIScreen.main.bounds.width).isActive = true
+        }
+        guideLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.bottomAnchor.constraint(equalTo: emailTextfield.topAnchor, constant: -(20/667) * UIScreen.main.bounds.height).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (33/375) * UIScreen.main.bounds.width).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: (137/375) * UIScreen.main.bounds.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (93/667) * UIScreen.main.bounds.height).isActive = true
         }
     }
     
