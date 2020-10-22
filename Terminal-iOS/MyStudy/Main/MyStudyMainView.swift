@@ -17,6 +17,9 @@ class MyStudyMainView: UIViewController {
     var tempButton: UIBarButtonItem?
     var rightBarButtomItem: UIBarButtonItem?
     
+    //alarmbutton 쇼잉을 위한 임시 변수!! 곧 삭제됩니다.
+    var tempCountForBadge = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -75,7 +78,9 @@ class MyStudyMainView: UIViewController {
     }
     
     @objc func alarmButtonAction(_ sender: UIBarButtonItem) {
-        print("clicked more Button!!")
+        alarmButton.badgeLabel.isHidden = false
+        tempCountForBadge += 1
+        alarmButton.badgeLabel.text = "\(tempCountForBadge)"
     }
     
     @objc func goToLoginAction(_ sender: UIBarButtonItem) {

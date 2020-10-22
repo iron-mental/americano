@@ -22,17 +22,17 @@ class ViewController: UITabBarController {
     
     let tabBarItems: [Tab: UITabBarItem] = [
         .study: UITabBarItem(
-            title: nil,
+            title: "스터디",
             image: #imageLiteral(resourceName: "study"),
             selectedImage: #imageLiteral(resourceName: "study_clicked")
         ),
         .mystudy: UITabBarItem(
-            title: nil,
+            title: "내스터디",
             image: #imageLiteral(resourceName: "mystudy"),
             selectedImage: #imageLiteral(resourceName: "mystudy_clicked")
         ),
         .set: UITabBarItem(
-            title: nil,
+            title: "설정",
             image: #imageLiteral(resourceName: "set"),
             selectedImage: #imageLiteral(resourceName: "set_clicked")
         )

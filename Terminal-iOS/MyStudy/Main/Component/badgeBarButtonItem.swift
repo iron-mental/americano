@@ -9,7 +9,7 @@
 import UIKit
 
 class badgeBarButtonItem: UIBarButtonItem {
-    var badgeLabel = UILabel(frame: CGRect(x: -8, y: -5, width: 15, height: 15))
+    var badgeLabel = UILabel(frame: CGRect(x: -10, y: -5, width: 18, height: 18))
     var button = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
     
     func attribute() {
@@ -22,7 +22,8 @@ class badgeBarButtonItem: UIBarButtonItem {
             $0.font = $0.font.withSize(10)
             $0.textColor = .white
             $0.backgroundColor = .red
-            $0.text = "1"
+            $0.text = nil
+            $0.isHidden = true
         }
         button.do {
             $0.setBackgroundImage(#imageLiteral(resourceName: "alarm"), for: .normal)
