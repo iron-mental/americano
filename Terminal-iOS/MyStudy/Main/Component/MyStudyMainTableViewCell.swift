@@ -86,7 +86,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
         locationLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor, constant: (15/667) * parentFrame.height).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: titleLabel.topAnchor,constant: -(14/667) * parentFrame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: studyMainimage.trailingAnchor, constant: (23/375) * parentFrame.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (20/667) * parentFrame.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (200/375) * parentFrame.width).isActive = true
