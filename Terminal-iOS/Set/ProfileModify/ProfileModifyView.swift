@@ -13,9 +13,9 @@ class ProfileModifyView: UIViewController {
     var presenter: ProfileModifyPresenterProtocol?
     let scrollView = UIScrollView()
     let backgroundView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = UIColor.appColor(.terminalBackground)
     }
-
+    let profile = ProfileView()
     let profileImage = UIImageView()
     let name = UILabel()
     let descript = UILabel()
@@ -24,17 +24,27 @@ class ProfileModifyView: UIViewController {
     let careerLabel = UILabel()
     let careerTitle = UILabel()
     let careerDescript = UILabel()
+    let careerDescriptBackground = UIView()
     
     let projectStack = UIStackView()
     let projectLabel = UILabel()
     let projectTitle = UILabel()
     let projectDescript = UILabel()
     
+    let snsBackground = UIView().then {
+        $0.backgroundColor = .cyan
+    }
     let snsLabel = UILabel()
     
+    let emailBackground = UIView().then {
+        $0.backgroundColor = .brown
+    }
     let emailLabel = UILabel()
     let email = UILabel()
     
+    let locationBackground = UIView().then {
+        $0.backgroundColor = .blue
+    }
     let locationLabel = UILabel()
     let location = UILabel()
     
@@ -52,15 +62,6 @@ class ProfileModifyView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationItem.rightBarButtonItem = modifyBtn
         }
-//        profileStack.do {
-//            $0.axis = .vertical
-//            $0.alignment = .center
-//            $0.distribution = .fill
-//            $0.spacing = 5
-//            $0.addArrangedSubview(self.profileImage)
-//            $0.addArrangedSubview(self.name)
-//            $0.addArrangedSubview(self.descript)
-//        }
         profileImage.do {
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = UIScreen.main.bounds.height * 0.15
@@ -85,9 +86,8 @@ class ProfileModifyView: UIViewController {
         careerStack.do {
             $0.axis = .vertical
             $0.alignment = .leading
-            $0.distribution = .fill
+            $0.distribution = .fillProportionally
             $0.backgroundColor = .red
-            $0.spacing = 5
             $0.addArrangedSubview(careerLabel)
             $0.addArrangedSubview(careerTitle)
             $0.addArrangedSubview(careerDescript)
@@ -102,10 +102,19 @@ class ProfileModifyView: UIViewController {
             $0.dynamicFont(fontSize: 20, weight: .bold)
         }
         careerDescript.do {
-            $0.text = "경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다."
+            $0.text = "경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다.경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다."
             $0.numberOfLines = 0
             $0.textColor = .black
             $0.dynamicFont(fontSize: 16, weight: .regular)
+        }
+        projectStack.do {
+            $0.axis = .vertical
+            $0.alignment = .leading
+            $0.distribution = .fillProportionally
+            $0.backgroundColor = .blue
+            $0.addArrangedSubview(projectLabel)
+            $0.addArrangedSubview(projectTitle)
+            $0.addArrangedSubview(projectDescript)
         }
         projectLabel.do {
             $0.text = "프로젝트"
@@ -122,12 +131,11 @@ class ProfileModifyView: UIViewController {
             $0.textColor = .black
             $0.dynamicFont(fontSize: 16, weight: .regular)
         }
-        
         snsLabel.do {
             $0.text = "SNS"
-            $0.textColor = .black
+            $0.textColor = .white
+            $0.dynamicFont(fontSize: 12, weight: .regular)
         }
-        
         emailLabel.do {
             $0.text = "Email"
             $0.textColor = .black
@@ -136,7 +144,6 @@ class ProfileModifyView: UIViewController {
             $0.text = "jerry@gmail.com"
             $0.textColor = .black
         }
-        
         locationLabel.do {
             $0.text = "활동지역"
             $0.textColor = .black
@@ -150,10 +157,30 @@ class ProfileModifyView: UIViewController {
     
     func layout() {
         view.addSubview(scrollView)
-        scrollView.addSubview(profileImage)
-        scrollView.addSubview(name)
-        scrollView.addSubview(descript)
-        scrollView.addSubview(careerStack)
+        scrollView.addSubview(backgroundView)
+        backgroundView.do {
+            $0.addSubview(profile)
+//            $0.addSubview(profileImage)
+//            $0.addSubview(name)
+//            $0.addSubview(descript)
+            $0.addSubview(careerStack)
+            $0.addSubview(projectStack)
+            $0.addSubview(snsBackground)
+            $0.addSubview(emailBackground)
+            $0.addSubview(locationBackground)
+        }
+        snsBackground.do {
+            $0.addSubview(snsLabel)
+        }
+//        emailBackground.do {
+//            $0.addSubview(emailLabel)
+//            $0.addSubview(email)
+//        }
+//        locationBackground.do {
+//            $0.addSubview(locationLabel)
+//            $0.addSubview(location)
+//        }
+        
         // 스크롤뷰 오토레이아웃
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -163,24 +190,69 @@ class ProfileModifyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         }
         
-        profileImage.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
+        backgroundView.do {
+            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         }
-        name.do {
+        profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: backgroundView.widthAnchor, constant: -20).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 150).isActive = true
         }
-        descript.do {
+//        profileImage.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 20).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
+//        }
+//        name.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        }
+//        descript.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        }
+        careerStack.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
+            $0.topAnchor.constraint(equalTo: descript.bottomAnchor, constant: 20).isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        }        
-
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        }
+        projectStack.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: careerStack.bottomAnchor, constant: 20).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -20).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        }
+        snsLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: projectStack.bottomAnchor, constant: 30).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        }
+        snsBackground.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: snsLabel.topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
+            $0.bottomAnchor.constraint(equalTo: snsLabel.bottomAnchor, constant: 10).isActive = true
+        }
+        
+//        emailLabel.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//        }
+        
     }
 }
 
