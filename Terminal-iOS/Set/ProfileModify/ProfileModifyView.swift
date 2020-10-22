@@ -15,32 +15,17 @@ class ProfileModifyView: UIViewController {
     let backgroundView = UIView().then {
         $0.backgroundColor = .white
     }
-    let profileAreaView = UIView().then {
-        $0.backgroundColor = .yellow
-    }
-    let careerAreaView = UIView().then {
-        $0.backgroundColor = .blue
-    }
-    let projectAreaView = UIView().then {
-        $0.backgroundColor = .cyan
-    }
-    let snsAreaView = UIView().then {
-        $0.backgroundColor = .darkGray
-    }
-    let emailAreaView = UIView().then {
-        $0.backgroundColor = .green
-    }
-    let locationAreaView = UIView().then {
-        $0.backgroundColor = .red
-    }
+
     let profileImage = UIImageView()
     let name = UILabel()
     let descript = UILabel()
     
+    let careerStack = UIStackView()
     let careerLabel = UILabel()
     let careerTitle = UILabel()
     let careerDescript = UILabel()
     
+    let projectStack = UIStackView()
     let projectLabel = UILabel()
     let projectTitle = UILabel()
     let projectDescript = UILabel()
@@ -67,6 +52,15 @@ class ProfileModifyView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationItem.rightBarButtonItem = modifyBtn
         }
+//        profileStack.do {
+//            $0.axis = .vertical
+//            $0.alignment = .center
+//            $0.distribution = .fill
+//            $0.spacing = 5
+//            $0.addArrangedSubview(self.profileImage)
+//            $0.addArrangedSubview(self.name)
+//            $0.addArrangedSubview(self.descript)
+//        }
         profileImage.do {
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = UIScreen.main.bounds.height * 0.15
@@ -77,15 +71,26 @@ class ProfileModifyView: UIViewController {
         }
         name.do {
             $0.text = "이하이"
-            $0.textColor = .black
+            $0.textColor = .white
             $0.textAlignment = .center
-            $0.dynamicFont(fontSize: 20, weight: .bold)
+            $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
         descript.do {
             $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다."
-            $0.textColor = .black
+            $0.textColor = .white
             $0.numberOfLines = 0
+            $0.textAlignment = .center
             $0.dynamicFont(fontSize: 16, weight: .regular)
+        }
+        careerStack.do {
+            $0.axis = .vertical
+            $0.alignment = .leading
+            $0.distribution = .fill
+            $0.backgroundColor = .red
+            $0.spacing = 5
+            $0.addArrangedSubview(careerLabel)
+            $0.addArrangedSubview(careerTitle)
+            $0.addArrangedSubview(careerDescript)
         }
         careerLabel.do {
             $0.text = "경력"
@@ -145,43 +150,10 @@ class ProfileModifyView: UIViewController {
     
     func layout() {
         view.addSubview(scrollView)
-        scrollView.addSubview(backgroundView)
-        
-        backgroundView.do {
-            $0.addSubview(profileAreaView)
-            $0.addSubview(careerAreaView)
-            $0.addSubview(projectAreaView)
-            $0.addSubview(snsAreaView)
-            $0.addSubview(emailAreaView)
-            $0.addSubview(locationAreaView)
-        }
-        profileAreaView.do {
-            $0.addSubview(profileImage)
-            $0.addSubview(name)
-            $0.addSubview(descript)
-        }
-        careerAreaView.do {
-            $0.addSubview(careerLabel)
-            $0.addSubview(careerTitle)
-            $0.addSubview(careerDescript)
-        }
-        projectAreaView.do {
-            $0.addSubview(projectLabel)
-            $0.addSubview(projectTitle)
-            $0.addSubview(projectDescript)
-        }
-        snsAreaView.do {
-            $0.addSubview(snsLabel)
-        }
-        emailAreaView.do {
-            $0.addSubview(emailLabel)
-            $0.addSubview(email)
-        }
-        locationAreaView.do {
-            $0.addSubview(locationLabel)
-            $0.addSubview(location)
-        }
-        
+        scrollView.addSubview(profileImage)
+        scrollView.addSubview(name)
+        scrollView.addSubview(descript)
+        scrollView.addSubview(careerStack)
         // 스크롤뷰 오토레이아웃
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -191,161 +163,24 @@ class ProfileModifyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         }
         
-        // 전체영역의 뷰
-        backgroundView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 1.31).isActive = true
-        }
-        
-        // 프로필 영역
-        profileAreaView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.355).isActive = true
-        }
-        
-        // 경력 영역
-        careerAreaView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: profileAreaView.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.218).isActive = true
-        }
-        
-        // 프로젝트 영역
-        projectAreaView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: careerAreaView.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.368).isActive = true
-        }
-        
-        // SNS 영역
-        snsAreaView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectAreaView.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.098).isActive = true
-        }
-        
-        // 이메일 영역
-        emailAreaView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: snsAreaView.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.091).isActive = true
-        }
-        
-        // 지역 영역
-        locationAreaView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: emailAreaView.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
-        }
-        
-        // 프로필 요소
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: profileAreaView.topAnchor,
-                                    constant: UIScreen.main.bounds.height * 0.02).isActive = true
-            $0.centerXAnchor.constraint(equalTo: profileAreaView.centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
         }
         name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20).isActive = true
-            $0.centerXAnchor.constraint(equalTo: profileAreaView.centerXAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         }
         descript.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 10).isActive = true
-            $0.centerXAnchor.constraint(equalTo: profileAreaView.centerXAnchor).isActive = true
-        }
-        
-        // 경력 요소
-        careerLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: careerAreaView.topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: careerAreaView.leadingAnchor, constant: 24).isActive = true
-        }
-        careerTitle.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: careerLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: careerAreaView.leadingAnchor, constant: 40).isActive = true
-            $0.trailingAnchor.constraint(equalTo: careerAreaView.trailingAnchor, constant: -40).isActive = true
-        }
-        careerDescript.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: careerTitle.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: careerAreaView.leadingAnchor, constant: 40).isActive = true
-            $0.trailingAnchor.constraint(equalTo: careerAreaView.trailingAnchor, constant: -40).isActive = true
-        }
-        
-        // 프로젝트 요소
-        projectLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectAreaView.topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: projectAreaView.leadingAnchor, constant: 24).isActive = true
-        }
-        projectTitle.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: projectAreaView.leadingAnchor, constant: 40).isActive = true
-            $0.trailingAnchor.constraint(equalTo: projectAreaView.trailingAnchor, constant: -40).isActive = true
-        }
-        projectDescript.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectTitle.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: projectAreaView.leadingAnchor, constant: 40).isActive = true
-            $0.trailingAnchor.constraint(equalTo: projectAreaView.trailingAnchor, constant: -40).isActive = true
-        }
-        
-        // SNS 요소
-        snsLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: snsAreaView.topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: snsAreaView.leadingAnchor, constant: 24).isActive = true
-        }
-        
-        // Email 요소
-        emailLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: emailAreaView.topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: emailAreaView.leadingAnchor, constant: 24).isActive = true
-        }
-        email.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: emailAreaView.leadingAnchor, constant: 40).isActive = true
-            $0.trailingAnchor.constraint(equalTo: emailAreaView.trailingAnchor, constant: -40).isActive = true
-        }
-        
-        // 활동지역 요소
-        locationLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationAreaView.topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: locationAreaView.leadingAnchor, constant: 24).isActive = true
-        }
-        location.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: locationAreaView.leadingAnchor, constant: 40).isActive = true
-            $0.trailingAnchor.constraint(equalTo: locationAreaView.trailingAnchor, constant: -40).isActive = true
-        }
+            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        }        
+
     }
 }
 
