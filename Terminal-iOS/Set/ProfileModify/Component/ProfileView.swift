@@ -34,7 +34,7 @@ class ProfileView: UIView {
             $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
         descript.do {
-            $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다."
+            $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다."
             $0.textColor = .white
             $0.numberOfLines = 0
             $0.textAlignment = .left
@@ -64,6 +64,8 @@ class ProfileView: UIView {
             $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
             $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         }
     }
     
