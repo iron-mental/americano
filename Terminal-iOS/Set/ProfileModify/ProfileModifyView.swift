@@ -21,9 +21,6 @@ class ProfileModifyView: UIViewController {
         $0.backgroundColor = .blue
         $0.profileImage.image = #imageLiteral(resourceName: "leehi")
     }
-    let profileImage = UIImageView()
-    let name = UILabel()
-    let descript = UILabel()
     
     let careerStack = UIStackView()
     let careerLabel = UILabel()
@@ -164,9 +161,6 @@ class ProfileModifyView: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
         backgroundView.addSubview(profile)
-//        backgroundView.addSubview(profileImage)
-//        backgroundView.addSubview(name)
-//        backgroundView.addSubview(descript)
         
         // 스크롤뷰 오토레이아웃
         scrollView.do {
@@ -194,23 +188,6 @@ class ProfileModifyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 250).isActive = true
         }
-//        profileImage.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 15).isActive = true
-//            $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
-//        }
-//        name.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20).isActive = true
-//            $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
-//        }
-//        descript.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
-//            $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
-//        }
     }
 }
 
