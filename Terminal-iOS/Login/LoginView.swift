@@ -83,8 +83,8 @@ class LoginView: UIViewController {
         }
         cancelButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: emailTextfield.trailingAnchor,constant: 10).isActive = true
+            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
