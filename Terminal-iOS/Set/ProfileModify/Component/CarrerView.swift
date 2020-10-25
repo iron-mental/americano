@@ -9,7 +9,6 @@
 import UIKit
 
 class CarrerView: UIView {
-    
     let careerLabel = UILabel()
     let careerTitle = UILabel()
     let careerDescript = UILabel()

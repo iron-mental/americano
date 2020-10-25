@@ -57,7 +57,7 @@ class ProjectView: UIView {
             $0.topAnchor.constraint(equalTo: self.projectTitle.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         }
     }
     required init?(coder: NSCoder) {
