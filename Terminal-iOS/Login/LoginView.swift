@@ -21,6 +21,9 @@ class IntroView: UIViewController {
     var emailTextfield = UITextField()
     var cancelButton = UIButton()
     var state: state?
+    var rightBarButton: UIBarButtonItem?
+    var leftBarButton: UIBarButtonItem?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +33,16 @@ class IntroView: UIViewController {
     }
     
     func attribute() {
+        rightBarButton = UIBarButtonItem(customView: nextButton)
+        leftBarButton = UIBarButtonItem(customView: closeButton)
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
+            $0.navigationItem.rightBarButtonItem = rightBarButton
+            $0.navigationItem.leftBarButtonItem = leftBarButton
+            $0.navigationController?.navigationBar.shadowImage = UIImage()
+            $0.navigationController?.navigationBar.isTranslucent = false
+            $0.navigationController?.navigationBar.backgroundColor = UIColor.systemBackground
+            $0.view.backgroundColor = UIColor.systemBackground
         }
         emailTextfield.do {
             $0.font = UIFont.boldSystemFont(ofSize: 18)
@@ -71,13 +82,6 @@ class IntroView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: (18/375) * UIScreen.main.bounds.width).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (18/375) * UIScreen.main.bounds.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (18/375) * UIScreen.main.bounds.width).isActive = true
-        }
-        nextButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: (18/667) * UIScreen.main.bounds.height).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -(18/375) * UIScreen.main.bounds.width).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (40/375) * UIScreen.main.bounds.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (20/375) * UIScreen.main.bounds.width).isActive = true
         }
         guideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -120,9 +124,10 @@ class IntroView: UIViewController {
             print("some")
         }
         
-        self.present(view, animated: true)
+        navigationController?.pushViewController(view, animated: true)
         
     }
+    
     @objc func didClickedCancelButton() {
         switch state {
         case .emailInput:
