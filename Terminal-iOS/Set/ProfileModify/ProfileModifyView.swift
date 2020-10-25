@@ -25,6 +25,9 @@ class ProfileModifyView: UIViewController {
     let project = ProjectView().then {
         $0.backgroundColor = .red
     }
+    let sns = SNSView().then {
+        $0.backgroundColor = .blue
+    }
     
     let projectStack = UIStackView()
     
@@ -99,6 +102,7 @@ class ProfileModifyView: UIViewController {
         backgroundView.addSubview(profile)
         backgroundView.addSubview(carrer)
         backgroundView.addSubview(project)
+        backgroundView.addSubview(sns)
         
         // 스크롤뷰 오토레이아웃
         scrollView.do {
@@ -108,7 +112,6 @@ class ProfileModifyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         }
-        
         backgroundView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
@@ -138,6 +141,13 @@ class ProfileModifyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalTo: project.heightAnchor).isActive = true
+        }
+        sns.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: project.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: sns.heightAnchor).isActive = true
         }
     }
 }
