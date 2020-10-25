@@ -40,6 +40,8 @@
 		CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */; };
 		CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3725207E8E00C1BDCE /* SelectLocationLocalDataManager.swift */; };
 		CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */; };
+		CC3F99202545448E00428B11 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F991F2545448E00428B11 /* HomeView.swift */; };
+		CC3F992325454B5500428B11 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F992225454B5500428B11 /* Terminal.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
@@ -118,6 +120,8 @@
 		CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC29FB3725207E8E00C1BDCE /* SelectLocationLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationLocalDataManager.swift; sourceTree = "<group>"; };
 		CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationWireFrame.swift; sourceTree = "<group>"; };
+		CC3F991F2545448E00428B11 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		CC3F992225454B5500428B11 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
 		CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 				CCA3FF36251781EB00F62627 /* Category.swift */,
 				A5686A482524F49C005990DC /* Profile.swift */,
 				A5686A522525DE13005990DC /* Setting.swift */,
+				CC3F992225454B5500428B11 /* Terminal.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -452,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				CCC4DA8025407E9100D9E674 /* LoginView.swift */,
+				CC3F991F2545448E00428B11 /* HomeView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -616,6 +622,7 @@
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,
 				CCAF0FDF2533034B0060A2F6 /* MyStudyMainRemoteDataManager.swift in Sources */,
 				CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */,
+				CC3F99202545448E00428B11 /* HomeView.swift in Sources */,
 				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
 				CC26AD58251B27B3006B11E9 /* LocationUIVIew.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
@@ -637,6 +644,7 @@
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */,
 				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,
+				CC3F992325454B5500428B11 /* Terminal.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,

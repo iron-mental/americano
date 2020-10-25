@@ -8,12 +8,19 @@
 
 import UIKit
 
-class LoginView: UIViewController {
+enum state: String {
+    case emailInput
+    case pwdInput
+    case nickname
+}
+
+class IntroView: UIViewController {
     var closeButton = UIButton()
     var nextButton = UIButton()
     var guideLabel = UILabel()
     var emailTextfield = UITextField()
     var cancelButton = UIButton()
+    var state: state?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +34,6 @@ class LoginView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
         }
         emailTextfield.do {
-            $0.placeholder = "abc1234@terminal.com"
             $0.font = UIFont.boldSystemFont(ofSize: 18)
         }
         closeButton.do {
@@ -41,7 +47,6 @@ class LoginView: UIViewController {
         }
         guideLabel.do {
             $0.numberOfLines = 0
-            $0.text = "이메일을\n입력해 주세요"
             $0.font = UIFont.boldSystemFont(ofSize: 24)
         }
         cancelButton.do {
@@ -89,15 +94,47 @@ class LoginView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
     }
+    func setting() {
+    }
     
     @objc func didClickedCloseButon() {
         dismiss(animated: true)
     }
-    
     @objc func didClickedNextButton() {
-        print("clicked NextButton!")
+        let view = IntroView()
+        
+        switch state {
+        case .emailInput:
+            view.guideLabel.text = "사용하실 비밀번호를\n설정해 주세요"
+            view.emailTextfield.placeholder = "비밀번호"
+            view.state = .pwdInput
+        case .pwdInput:
+            view.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
+            view.emailTextfield.placeholder = "추천 닉네임"
+            view.state = .nickname
+        case .nickname:
+            dismiss(animated: true)
+        case .none:
+            print("none")
+        case .some(_):
+            print("some")
+        }
+        
+        self.present(view, animated: true)
+        
     }
     @objc func didClickedCancelButton() {
-        emailTextfield.text = ""
+        switch state {
+        case .emailInput:
+            emailTextfield.text = ""
+        case .pwdInput:
+            emailTextfield.text = ""
+        case .nickname:
+            emailTextfield.text = ""
+        case .none:
+            print("none")
+        case .some(_):
+            print("some")
+        }
     }
 }

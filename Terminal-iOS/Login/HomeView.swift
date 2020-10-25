@@ -9,22 +9,31 @@
 import UIKit
 
 class HomeView: UIViewController {
+    var loginButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        attribute()
+        layout()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func attribute() {
+        loginButton.do {
+            $0.setTitle("로그인", for: .normal)
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        }
     }
-    */
-
+    
+    func layout() {
+        view.addSubview(loginButton)
+        
+//        loginButton.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: convertHeigt(value: 20)).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -convertWidth(value: 25)).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: convertHeigt(value: 19)).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: convertWidth(value: 42)).isActive = true
+//        }
+    }
+    
 }

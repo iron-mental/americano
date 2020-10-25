@@ -84,9 +84,14 @@ class MyStudyMainView: UIViewController {
     }
     
     @objc func goToLoginAction(_ sender: UIBarButtonItem) {
-        let view = LoginView()
+        let view = IntroView()
         view.modalPresentationStyle = .fullScreen
+        view.guideLabel.text = "이메일을\n입력해 주세요"
+        view.emailTextfield.placeholder = "abc1234@terminal.com"
+        view.state = .emailInput
         self.present(view, animated: true)
+//        let view = HomeView()
+
     }
 }
 
