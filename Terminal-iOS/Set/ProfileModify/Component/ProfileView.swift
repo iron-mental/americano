@@ -63,8 +63,8 @@ class ProfileView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
             $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
         }
-
     }
     
     required init?(coder: NSCoder) {
