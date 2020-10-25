@@ -22,9 +22,8 @@ class ProfileView: UIView {
     func attribute() {
         profileImage.do {
             $0.contentMode = .scaleAspectFill
-//            $0.frame.size.width = UIScreen.main.bounds.height * 0.15
-//            $0.frame.size.height = UIScreen.main.bounds.height * 0.15
-            $0.image = #imageLiteral(resourceName: "leehi")
+            $0.frame.size.width = UIScreen.main.bounds.height * 0.15
+            $0.frame.size.height = UIScreen.main.bounds.height * 0.15
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
         }
@@ -44,10 +43,14 @@ class ProfileView: UIView {
     }
     
     func layout() {
+        addSubview(profileImage)
+        addSubview(name)
+        addSubview(descript)
+        
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
-            $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
         }
