@@ -15,6 +15,7 @@ enum state: String {
 }
 
 class IntroView: UIViewController {
+    
     var closeButton = UIButton()
     var nextButton = UIButton()
     var guideLabel = UILabel()
@@ -24,10 +25,8 @@ class IntroView: UIViewController {
     var rightBarButton: UIBarButtonItem?
     var leftBarButton: UIBarButtonItem?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTextfield.becomeFirstResponder()
         attribute()
         layout()
     }
@@ -100,22 +99,26 @@ class IntroView: UIViewController {
     }
     func setting() {
     }
-    
+    @objc func keyboardWillHide(notification: Notification) {
+        emailTextfield.becomeFirstResponder()
+    }
     @objc func didClickedCloseButon() {
         dismiss(animated: true)
     }
     @objc func didClickedNextButton() {
-        let view = IntroView()
         
+        let view = IntroView()
         switch state {
         case .emailInput:
             view.guideLabel.text = "사용하실 비밀번호를\n설정해 주세요"
             view.emailTextfield.placeholder = "비밀번호"
             view.state = .pwdInput
+            self.emailTextfield.endEditing(true)
         case .pwdInput:
             view.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
             view.emailTextfield.placeholder = "추천 닉네임"
             view.state = .nickname
+            self.emailTextfield.endEditing(true)
         case .nickname:
             dismiss(animated: true)
         case .none:
@@ -124,8 +127,9 @@ class IntroView: UIViewController {
             print("some")
         }
         
-        navigationController?.pushViewController(view, animated: true)
-        
+        navigationController?.pushViewController(view, animated: true) {
+//            view.emailTextfield.becomeFirstResponder()
+        }
     }
     
     @objc func didClickedCancelButton() {

@@ -42,6 +42,7 @@
 		CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */; };
 		CC3F99202545448E00428B11 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F991F2545448E00428B11 /* HomeView.swift */; };
 		CC3F992325454B5500428B11 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F992225454B5500428B11 /* Terminal.swift */; };
+		CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F99252545765500428B11 /* UINavigationController+Ext.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
@@ -122,6 +123,7 @@
 		CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationWireFrame.swift; sourceTree = "<group>"; };
 		CC3F991F2545448E00428B11 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CC3F992225454B5500428B11 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
+		CC3F99252545765500428B11 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		CC4F335225108F9700968B17 /* StudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */,
+				CC3F99252545765500428B11 /* UINavigationController+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */,
 				CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
+				CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */,
 				CCAF0FE6253303770060A2F6 /* MyStudyMainWireFrame.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,

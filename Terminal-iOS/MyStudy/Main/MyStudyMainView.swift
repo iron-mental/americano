@@ -90,7 +90,9 @@ class MyStudyMainView: UIViewController {
         view.guideLabel.text = "이메일을\n입력해 주세요"
         view.emailTextfield.placeholder = "abc1234@terminal.com"
         view.state = .emailInput
-        self.present(navigationController, animated: true)
+        self.present(navigationController, animated: true) {
+            view.emailTextfield.becomeFirstResponder()
+        }
 
     }
 }
