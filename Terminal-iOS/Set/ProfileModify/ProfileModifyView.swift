@@ -76,43 +76,43 @@ class ProfileModifyView: UIViewController {
         profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: profile.heightAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * (240 / 667)).isActive = true
         }
         carrer.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: profile.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: profile.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalTo: carrer.heightAnchor).isActive = true
         }
         project.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: carrer.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: carrer.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalTo: project.heightAnchor).isActive = true
         }
         sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: project.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: project.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalTo: sns.heightAnchor).isActive = true
         }
         email.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: sns.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: sns.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalTo: email.heightAnchor).isActive = true
         }
         location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: email.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
     }
