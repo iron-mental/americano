@@ -23,7 +23,7 @@ class SNSView: UIView {
     func attribute() {
         snsLabel.do {
             $0.text = "SNS"
-            $0.textColor = .black
+            $0.textColor = .white
         }
     }
     

@@ -22,17 +22,17 @@ class CarrerView: UIView {
     func attribute() {
         careerLabel.do {
             $0.text = "경력"
-            $0.textColor = .black
+            $0.textColor = .white
         }
         careerTitle.do {
             $0.text = "OO대학교 4학년 재학중"
-            $0.textColor = .black
+            $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .bold)
         }
         careerDescript.do {
             $0.text = "경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다.경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다."
             $0.numberOfLines = 0
-            $0.textColor = .black
+            $0.textColor = UIColor.appColor(.profileTextColor)
             $0.dynamicFont(fontSize: 14, weight: .regular)
         }
     }

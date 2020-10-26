@@ -287,8 +287,8 @@
 		A5AB26FF252B6E9300A39240 /* ProfileModify */ = {
 			isa = PBXGroup;
 			children = (
-				A5A20EEC25418CE300060FFA /* Component */,
 				A521DDF9252F108400F83DB3 /* DataManager */,
+				A5A20EEC25418CE300060FFA /* Component */,
 				A5B78A95252B950600E0B440 /* ProfileModifyView.swift */,
 				A521DDEC252DEA7E00F83DB3 /* ProfileModifyProtocols.swift */,
 				A521DDF0252F0C9500F83DB3 /* ProfileModifyInteractor.swift */,

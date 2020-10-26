@@ -22,11 +22,11 @@ class EmailView: UIView {
     func attribute() {
         emailLabel.do {
             $0.text = "Email"
-            $0.textColor = .black
+            $0.textColor = .white
         }
         email.do {
             $0.text = "unicornCaredoc@care.com"
-            $0.textColor = .black
+            $0.textColor = UIColor.appColor(.profileTextColor)
         }
     }
     func layout() {
