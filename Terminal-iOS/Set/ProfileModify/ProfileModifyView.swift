@@ -12,9 +12,6 @@ class ProfileModifyView: UIViewController {
     
     var presenter: ProfileModifyPresenterProtocol?
     let scrollView = UIScrollView()
-    let backgroundView = UIView().then {
-        $0.backgroundColor = UIColor.appColor(.terminalBackground)
-    }
     let profile = ProfileView().then {
         $0.backgroundColor = .blue
         $0.profileImage.image = #imageLiteral(resourceName: "leehi")
@@ -64,15 +61,6 @@ class ProfileModifyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         }
-//        backgroundView.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-//            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-//            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 800).isActive = true
-//
-//        }
         profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
