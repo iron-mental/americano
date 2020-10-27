@@ -34,8 +34,8 @@ class ProfileView: UIView {
             $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
         descript.do {
-            $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다. 잘 부탁드립니다."
-            $0.textColor = .white
+            $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다."
+            $0.textColor = UIColor.appColor(.profileTextColor)
             $0.numberOfLines = 0
             $0.textAlignment = .left
             $0.dynamicFont(fontSize: 16, weight: .regular)
