@@ -22,9 +22,9 @@ extension UIColor {
     static func appColor(_ name: AssetsColor) -> UIColor {
         switch name {
         case .terminalBackground:
-            return #colorLiteral(red: 0.1607843137, green: 0.1607843137, blue: 0.1607843137, alpha: 1)
+            return #colorLiteral(red: 0.09019607843, green: 0.09019607843, blue: 0.1098039216, alpha: 1)
         case .cellBackground:
-            return #colorLiteral(red: 0.1960784314, green: 0.1960784314, blue: 0.2039215686, alpha: 1)
+            return #colorLiteral(red: 0.1058823529, green: 0.1058823529, blue: 0.137254902, alpha: 1)
         case .studySubTitle:
             return #colorLiteral(red: 0.5843137255, green: 0.5843137255, blue: 0.5843137255, alpha: 1)
         case .mainColor:
