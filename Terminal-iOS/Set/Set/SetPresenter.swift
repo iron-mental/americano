@@ -18,8 +18,17 @@ class SetPresenter: SetPresenterProtocol {
     func viewDidLoad() {
         
     }
+    
+    func showProfileDetail() {
+        
+    }
+    
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {
+    func onError() {
+        
+    }
+    
     
 }
