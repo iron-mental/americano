@@ -11,7 +11,7 @@ import Then
 
 class SearchStudyView: UIViewController {
     
-    var arr: [String] = ["안드로이드", "node.js", "코드리뷰", "취업스터디", "프로젝트", "Swift"]
+    var keyword: [String] = ["안드로이드ㅇㅇㅇㅇㅇㅇㅇ", "node.js", "코드리뷰", "취업스터디", "프로젝트", "Swift", "갓우석님", "예비유니콘케어닥fffff", "뭐지??왜안나옴"]
         
     let backBtn = UIButton()
     let searchBar = UISearchBar()
@@ -19,7 +19,7 @@ class SearchStudyView: UIViewController {
     let hotLable = UILabel()
     let tempView = UIView()
     let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = LeftAlignedCollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
@@ -101,7 +101,7 @@ class SearchStudyView: UIViewController {
             $0.topAnchor.constraint(equalTo: hotLable.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 400).isActive = true
         }
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -119,21 +119,51 @@ class SearchStudyView: UIViewController {
 
 
 extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width * 0.266, height: UIScreen.main.bounds.height * 0.045)
+        let key = keyword[indexPath.row]
+        
+        let height = UIScreen.main.bounds.height * 0.045
+        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
+        let size = CGSize(width: 1000, height: height)
+        let estimatedFrame = NSString(string: key).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        
+        return CGSize(width: estimatedFrame.width + 50, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arr.count
+        return keyword.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotKeywordCell.cellId, for: indexPath) as! HotKeywordCell
         
-        cell.keyword.setTitle(arr[indexPath.row], for: .normal)
+        cell.keyword.setTitle(keyword[indexPath.row], for: .normal)
         
         return cell
     }
     
-    
+    class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
+        override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+            let attributes = super.layoutAttributesForElements(in: rect)
+
+            var leftMargin = sectionInset.left
+            var maxY: CGFloat = -1.0
+            attributes?.forEach { layoutAttribute in
+                if layoutAttribute.frame.origin.y >= maxY {
+                    leftMargin = sectionInset.left
+                }
+
+                layoutAttribute.frame.origin.x = leftMargin
+
+                leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
+                maxY = max(layoutAttribute.frame.maxY , maxY)
+            }
+
+            return attributes
+        }
+    }
 }
