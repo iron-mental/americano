@@ -15,26 +15,12 @@ class ProfileModifyView: UIViewController {
     let profile = ProfileView().then {
         $0.profileImage.image = #imageLiteral(resourceName: "leehi")
     }
-    let carrer = CarrerView().then {
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = UIColor.appColor(.cellBackground)
-    }
-    let project = ProjectView().then {
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = UIColor.appColor(.cellBackground)
-    }
-    let sns = SNSView().then {
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = UIColor.appColor(.cellBackground)
-    }
-    let email = EmailView().then {
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = UIColor.appColor(.cellBackground)
-    }
-    let location = LocationView().then {
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = UIColor.appColor(.cellBackground)
-    }
+    let carrer      = CarrerView()
+    let project     = ProjectView()
+    let sns         = SNSView()
+    let email       = EmailView()
+    let location    = LocationView()
+    
     let projectStack = UIStackView()
     
     override func viewDidLoad() {
@@ -45,7 +31,10 @@ class ProfileModifyView: UIViewController {
     
     func attribute() {
         let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"), style: .plain, target: nil, action: nil)
-        
+        [profile, carrer, project, sns, email, location].forEach {
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
+        }
         self.do {
             $0.title = "프로필"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
