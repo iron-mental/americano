@@ -40,7 +40,6 @@ class DefaultCell: UITableViewCell {
             $0.textAlignment = .center
             $0.textColor = .white
         }
-        
         rightLabel.do {
             $0.textAlignment = .right
             $0.textColor = .white

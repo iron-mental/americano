@@ -23,9 +23,16 @@
 		A5686A492524F49C005990DC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A482524F49C005990DC /* Profile.swift */; };
 		A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A4F2525D6FC005990DC /* DefaultCell.swift */; };
 		A5686A532525DE13005990DC /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A522525DE13005990DC /* Setting.swift */; };
+		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
 		A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileModifyView.swift */; };
 		A5D2A5F925373D180010AE1C /* HotKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */; };
+		A5C5B14A25455A4100F4A86D /* CarrerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14925455A4100F4A86D /* CarrerView.swift */; };
+		A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14C2545662600F4A86D /* ProjectView.swift */; };
+		A5C5B1502545699700F4A86D /* SNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14F2545699700F4A86D /* SNSView.swift */; };
+		A5C5B15325456E2800F4A86D /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B15225456E2800F4A86D /* EmailView.swift */; };
+		A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B155254573CD00F4A86D /* LocationView.swift */; };
+		A5D2A5F2253715610010AE1C /* UILabel-Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2A5F1253715610010AE1C /* UILabel-Ext.swift */; };
 		CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */; };
 		CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */; };
 		CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */; };
@@ -112,9 +119,16 @@
 		A5686A482524F49C005990DC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		A5686A4F2525D6FC005990DC /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		A5686A522525DE13005990DC /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		A5B78A95252B950600E0B440 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
 		A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeywordCell.swift; sourceTree = "<group>"; };
+		A5C5B14925455A4100F4A86D /* CarrerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrerView.swift; sourceTree = "<group>"; };
+		A5C5B14C2545662600F4A86D /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		A5C5B14F2545699700F4A86D /* SNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSView.swift; sourceTree = "<group>"; };
+		A5C5B15225456E2800F4A86D /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		A5C5B155254573CD00F4A86D /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		A5D2A5F1253715610010AE1C /* UILabel-Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel-Ext.swift"; sourceTree = "<group>"; };
 		CC1BE0302510CA5400F88313 /* SelectCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryView.swift; sourceTree = "<group>"; };
 		CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryProtocols.swift; sourceTree = "<group>"; };
 		CC1BE0342510D18100F88313 /* SelectCategoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryPresenter.swift; sourceTree = "<group>"; };
@@ -285,6 +299,19 @@
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
 		};
+		A5A20EEC25418CE300060FFA /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				A5A20EED25418D2A00060FFA /* ProfileView.swift */,
+				A5C5B14925455A4100F4A86D /* CarrerView.swift */,
+				A5C5B14C2545662600F4A86D /* ProjectView.swift */,
+				A5C5B14F2545699700F4A86D /* SNSView.swift */,
+				A5C5B15225456E2800F4A86D /* EmailView.swift */,
+				A5C5B155254573CD00F4A86D /* LocationView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		A5AB26FD252B6C6400A39240 /* Set */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				A521DDF9252F108400F83DB3 /* DataManager */,
+				A5A20EEC25418CE300060FFA /* Component */,
 				A5B78A95252B950600E0B440 /* ProfileModifyView.swift */,
 				A521DDEC252DEA7E00F83DB3 /* ProfileModifyProtocols.swift */,
 				A521DDF0252F0C9500F83DB3 /* ProfileModifyInteractor.swift */,
@@ -645,11 +673,14 @@
 				CCA1FF6F24FD10290026C3EA /* SetView.swift in Sources */,
 				CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */,
 				CCC4DA8125407E9100D9E674 /* LoginView.swift in Sources */,
+				A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */,
 				CCA3FF4A2517823E00F62627 /* StudyListWireFrame.swift in Sources */,
 				A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */,
+				A5C5B15325456E2800F4A86D /* EmailView.swift in Sources */,
 				CCA3FF4B2517823E00F62627 /* StudyCell.swift in Sources */,
+				A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */,
 				A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */,
 				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
@@ -666,12 +697,15 @@
 				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */,
 				CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
+				A5D2A5F2253715610010AE1C /* UILabel-Ext.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
 				CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */,
+				A5C5B1502545699700F4A86D /* SNSView.swift in Sources */,
 				CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */,
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				CCA1FF6D24FD100F0026C3EA /* MyStudyViewController.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,
+				A5C5B14A25455A4100F4A86D /* CarrerView.swift in Sources */,
 				A5686A452524F048005990DC /* NotiCell.swift in Sources */,
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
 				CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */,
@@ -679,6 +713,7 @@
 				A521DDF1252F0C9600F83DB3 /* ProfileModifyInteractor.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
+				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,
 				A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */,
 				CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */,
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,
