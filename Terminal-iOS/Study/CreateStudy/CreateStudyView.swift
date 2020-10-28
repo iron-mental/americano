@@ -84,14 +84,7 @@ class CreateStudyView: UIViewController{
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
-        backgroundView.addSubview(imageView)
-        backgroundView.addSubview(studyTitleTextField)
-        backgroundView.addSubview(studyOverView)
-        backgroundView.addSubview(SNSInputView)
-        backgroundView.addSubview(studyInfoView)
-        backgroundView.addSubview(locationView)
-        backgroundView.addSubview(timeView)
-        backgroundView.addSubview(button)
+        [imageView, studyTitleTextField, studyOverView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { backgroundView.addSubview($0)}
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
