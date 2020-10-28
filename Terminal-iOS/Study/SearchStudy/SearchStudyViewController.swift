@@ -9,14 +9,13 @@
 import UIKit
 import Then
 
-class SearchStudyViewController: UIViewController {
+class SearchStudyView: UIViewController {
     
     let backBtn = UIButton()
     let searchBar = UISearchBar()
     let placeSearch = UIButton()
     let hotLable = UILabel()
     let tempView = UIView()
-    let keywordLable = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,21 +29,22 @@ class SearchStudyViewController: UIViewController {
             $0.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
             $0.addTarget(self, action: #selector(back), for: .touchUpInside)
         }
+        searchBar.do {
+            $0.placeholder = "스터디명, 분류(키워드) 등"
+            $0.barTintColor = UIColor.appColor(.terminalBackground)
+        }
         placeSearch.do {
             $0.setTitle("장소로 검색", for: .normal)
-            $0.setTitleColor(.black, for: .normal)
-            $0.layer.borderWidth = 3
+            $0.setTitleColor(.white, for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.layer.cornerRadius = 10
         }
         hotLable.do {
             $0.text = "핫 등록 키워드"
             $0.textColor = .white
+            $0.dynamicFont(fontSize: 14, weight: .semibold)
         }
         tempView.backgroundColor = .red
-        keywordLable.do {
-            $0.text = "관심 키워드를 선택할 수 있습니다."
-            $0.textColor = .white
-        }
     }
     
     func layout() {
@@ -53,7 +53,6 @@ class SearchStudyViewController: UIViewController {
         view.addSubview(placeSearch)
         view.addSubview(hotLable)
         view.addSubview(tempView)
-        view.addSubview(keywordLable)
         
         backBtn.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -71,14 +70,14 @@ class SearchStudyViewController: UIViewController {
         }
         placeSearch.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: backBtn.bottomAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 115).isActive = true
         }
         hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: placeSearch.bottomAnchor, constant: 30).isActive = true
+            $0.topAnchor.constraint(equalTo: placeSearch.bottomAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         }
         tempView.do {
@@ -88,15 +87,14 @@ class SearchStudyViewController: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
         }
-        keywordLable.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: tempView.bottomAnchor, constant: 20).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        }
-        
     }
     
     @objc func back() {
         dismiss(animated: true, completion: nil)
     }
+}
+
+
+extension SearchStudyView {
+    
 }

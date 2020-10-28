@@ -98,7 +98,7 @@ class CreateStudyView: UIViewController{
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 400).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 400).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
         imageView.do {
