@@ -10,9 +10,8 @@ import UIKit
 
 class SNSView: UIView {
     let snsLabel = UILabel()
-    let snsStack = UIStackView().then {
-        $0.backgroundColor = .red
-    }
+    let snsStack = UIStackView()
+    let snsImage = UIImageView()
         
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,23 +24,27 @@ class SNSView: UIView {
             $0.text = "SNS"
             $0.textColor = .white
         }
+        snsImage.do {
+            $0.image = #imageLiteral(resourceName: "github")
+        }
     }
     
     func layout() {
         addSubview(snsLabel)
-        addSubview(snsStack)
+        addSubview(snsImage)
         
         snsLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         }
-        snsStack.do {
+        snsImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.snsLabel.bottomAnchor, constant: 4).isActive = true
+            $0.topAnchor.constraint(equalTo: snsLabel.bottomAnchor, constant: 5).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -100).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         }
     }
     

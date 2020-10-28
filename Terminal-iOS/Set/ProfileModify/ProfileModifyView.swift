@@ -13,6 +13,8 @@ class ProfileModifyView: UIViewController {
     var presenter: ProfileModifyPresenterProtocol?
     let scrollView = UIScrollView()
     let profile = ProfileView().then {
+        $0.layer.cornerRadius = 10
+        $0.backgroundColor = UIColor.appColor(.terminalBackground)
         $0.profileImage.image = #imageLiteral(resourceName: "leehi")
     }
     let carrer      = CarrerView()
@@ -31,7 +33,7 @@ class ProfileModifyView: UIViewController {
     
     func attribute() {
         let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"), style: .plain, target: nil, action: nil)
-        [profile, carrer, project, sns, email, location].forEach {
+        [carrer, project, sns, email, location].forEach {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
         }
