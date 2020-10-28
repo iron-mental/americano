@@ -38,9 +38,11 @@ class IntroView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             $0.navigationItem.rightBarButtonItem = rightBarButton
             $0.navigationItem.leftBarButtonItem = leftBarButton
+            
             $0.navigationController?.navigationBar.shadowImage = UIImage()
             $0.navigationController?.navigationBar.isTranslucent = false
             $0.navigationController?.navigationBar.backgroundColor = UIColor.systemBackground
+            
             $0.view.backgroundColor = UIColor.systemBackground
         }
         emailTextfield.do {
