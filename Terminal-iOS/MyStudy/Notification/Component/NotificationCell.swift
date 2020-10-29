@@ -33,6 +33,9 @@ class NotificationCell: UITableViewCell {
         }
     }
     func layout() {
+        addSubview(title)
+        addSubview(explain)
+        
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
