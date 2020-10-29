@@ -13,6 +13,7 @@ class BottomView: UIView {
     var searchButton = UIButton()
     var Address = UILabel()
     var detailAddress = UITextField()
+    var completeButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,10 +37,14 @@ class BottomView: UIView {
         detailAddress.do {
             $0.placeholder = "상세주소를 입력하세요"
         }
+        completeButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+        }
     }
     
     func layout() {
-        [textField, searchButton, Address, detailAddress].forEach { addSubview($0) }
+        [textField, searchButton, Address, detailAddress, completeButton].forEach { addSubview($0) }
         
         textField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +73,13 @@ class BottomView: UIView {
             $0.leadingAnchor.constraint(equalTo: textField.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 320)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: detailAddress.intrinsicContentSize.height).isActive = true
+        }
+        completeButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Terminal.convertHeigt(value: 27)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 324)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
         }
     }
     
