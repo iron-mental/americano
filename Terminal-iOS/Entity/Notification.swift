@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+struct Notification {
+    let title: String
+    let explain: String
+    let action: String
+}
