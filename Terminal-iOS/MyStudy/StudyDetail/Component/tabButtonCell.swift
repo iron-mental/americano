@@ -20,6 +20,7 @@ class tabButtonCell: UICollectionViewCell {
     }
     
     func attribute() {
+        self.backgroundColor = .blue
         state.do {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 14, weight: .medium)
@@ -27,6 +28,7 @@ class tabButtonCell: UICollectionViewCell {
         }
     }
     func layout() {
+        addSubview(state)
         state.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
