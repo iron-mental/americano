@@ -16,8 +16,8 @@ enum state: String {
 
 class IntroView: UIViewController {
     
-    var closeButton = UIButton()
-    var nextButton = UIButton()
+    var leftButton = UIButton()
+    var rightbutton = UIButton()
     var guideLabel = UILabel()
     var emailTextfield = UITextField()
     var cancelButton = UIButton()
@@ -27,21 +27,52 @@ class IntroView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setting()
         attribute()
         layout()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        emailTextfield.becomeFirstResponder()
     }
     
-    @objc func keyboardNotification(notification: NSNotification) {
+    override func viewDidAppear(_ animated: Bool) {
+        emailTextfield.becomeFirstResponder()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
+    }
+    
+    func setting() {
+        switch state {
+        case .emailInput:
+            self.guideLabel.text = "이메일을\n입력해 주세요"
+            self.emailTextfield.placeholder = "abc1234@terminal.com"
+            self.state = .emailInput
+            self.leftButton.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+            self.rightbutton.setTitle("다음", for: .normal)
+            break
+        case .pwdInput:
+            self.guideLabel.text = "사용하실 비밀번호를\n설정해 주세요"
+            self.emailTextfield.placeholder = "비밀번호"
+            self.state = .pwdInput
+            self.leftButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            self.rightbutton.setTitle("다음", for: .normal)
+            break
+        case .nickname:
+            self.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
+            self.emailTextfield.placeholder = "추천 닉네임"
+            self.state = .nickname
+            self.leftButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            self.rightbutton.setTitle("완료", for: .normal)
+            break
+        case .none:
+            print("none")
+            break
+        case .some(_):
+            print("some")
+            break
+        }
     }
     
     func attribute() {
-        rightBarButton = UIBarButtonItem(customView: nextButton)
-        leftBarButton = UIBarButtonItem(customView: closeButton)
+        rightBarButton = UIBarButtonItem(customView: rightbutton)
+        leftBarButton = UIBarButtonItem(customView: leftButton)
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             $0.navigationItem.rightBarButtonItem = rightBarButton
@@ -54,12 +85,10 @@ class IntroView: UIViewController {
         emailTextfield.do {
             $0.font = UIFont.boldSystemFont(ofSize: 18)
         }
-        closeButton.do {
-            $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
-            $0.addTarget(self, action: #selector(didClickedCloseButon), for: .touchUpInside)
+        leftButton.do {
+            $0.addTarget(self, action: #selector(didClickedBackButon), for: .touchUpInside)
         }
-        nextButton.do {
-            $0.setTitle("다음", for: .normal)
+        rightbutton.do {
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             $0.addTarget(self, action: #selector(didClickedNextButton), for: .touchUpInside)
         }
@@ -74,7 +103,7 @@ class IntroView: UIViewController {
     }
     
     func layout() {
-        [emailTextfield, closeButton, nextButton, guideLabel, cancelButton].forEach { view.addSubview($0) }
+        [emailTextfield, leftButton, rightbutton, guideLabel, cancelButton].forEach { view.addSubview($0) }
         
         emailTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +112,7 @@ class IntroView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * ( 235 / 375 )).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * ( 32 / 667 )).isActive = true
         }
-        closeButton.do {
+        leftButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: (18/667) * UIScreen.main.bounds.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: (18/375) * UIScreen.main.bounds.width).isActive = true
@@ -105,37 +134,45 @@ class IntroView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
     }
-    @objc func didClickedCloseButon() {
-        navigationController?.popViewController(animated: true)
+    @objc func didClickedBackButon() {
+        self.emailTextfield.endEditing(true)
+        switch state {
+        case .emailInput:
+            dismiss(animated: true)
+            break
+        case .pwdInput:
+            navigationController?.popViewController(animated: true)
+            
+            break
+        case .nickname:
+            navigationController?.popViewController(animated: true)
+            break
+        default:
+            print("none")
+        }
         self.emailTextfield.endEditing(true)
     }
     
     @objc func didClickedNextButton() {
-        
         let view = IntroView()
+        
         switch state {
         case .emailInput:
-            view.guideLabel.text = "사용하실 비밀번호를\n설정해 주세요"
-            view.emailTextfield.placeholder = "비밀번호"
             view.state = .pwdInput
             self.emailTextfield.endEditing(true)
             break
         case .pwdInput:
-            view.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
-            view.emailTextfield.placeholder = "추천 닉네임"
             view.state = .nickname
             self.emailTextfield.endEditing(true)
             break
         case .nickname:
+            self.state = .nickname
             dismiss(animated: true)
             break
-        case .none:
+        default:
             print("none")
-            break
-        case .some(_):
-            print("some")
-            break
         }
+        
         navigationController?.pushViewController(view, animated: true) {
         }
     }
