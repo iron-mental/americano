@@ -9,6 +9,8 @@
 import UIKit
 
 class NotificationCell: UITableViewCell {
+    static let cellID = "NotificationCell"
+    
     let title = UILabel()
     let explain = UILabel()
     let action = UIButton()
@@ -31,10 +33,14 @@ class NotificationCell: UITableViewCell {
             $0.dynamicFont(fontSize: 14, weight: .regular)
             $0.numberOfLines = 1
         }
+        action.do {
+            $0.setTitleColor(.blue, for: .normal)
+        }
     }
     func layout() {
         addSubview(title)
         addSubview(explain)
+        addSubview(action)
         
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +53,12 @@ class NotificationCell: UITableViewCell {
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 100)).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Terminal.convertHeigt(value: 5)).isActive = true
+        }
+        action.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 20)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Terminal.convertHeigt(value: 40)).isActive = true
         }
     }
     
