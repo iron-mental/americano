@@ -21,11 +21,20 @@ class StudyDetailView: UIViewController {
     }
     
     func attribute() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        
+        self.do {
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.navigationController?.navigationBar.standardAppearance = appearance
+        }
         tabSege.do {
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 14), .foregroundColor: UIColor.gray], for: .normal)
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.white], for: .selected)
+            $0.layer.cornerRadius = 0
             $0.backgroundColor = .clear
-            $0.tintColor = .white
+            $0.tintColor = UIColor.appColor(.terminalBackground)
+            $0.clearBG()
             $0.selectedSegmentTintColor = .clear
             $0.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         }
@@ -63,7 +72,7 @@ class StudyDetailView: UIViewController {
         
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
-            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1.4, y: 1)
+            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1.6, y: 1)
         } completion: { (finish) in
             UIView.animate(withDuration: 0.4, animations: {
                 self.selectedUnderLine.transform = CGAffineTransform.identity
