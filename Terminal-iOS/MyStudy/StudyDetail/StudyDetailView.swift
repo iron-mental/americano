@@ -51,9 +51,7 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegateF
         
         return CGSize(width: view.frame.width / 3 - 2, height: Terminal.convertHeigt(value: 38))
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
