@@ -9,20 +9,45 @@
 import UIKit
 import NMapsMap
 
+enum keyboardState: String {
+    case up
+    case down
+}
 class SelectLocationView: UIViewController {
     var presenter: SelectLocationPresenterProtocols?
     let pin = UIImageView()
     var task: DispatchWorkItem?
     var mapView = NMFMapView()
-
+    var bottomView = BottomView()
+    var keyboardHeight: CGFloat = 0
+    var keyboardState: keyboardState = .down
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
+        bottomView.textField.delegate = self
+        bottomView.detailAddress.delegate = self
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        bottomView.textField.becomeFirstResponder()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-          self.view.endEditing(true)
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            keyboardHeight = keyboardSize.height
+            bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -keyboardHeight).isActive = true
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        bottomView.frame.origin.y = UIScreen.main.bounds.height - bottomView.frame.height
     }
     
     func attribute() {
@@ -30,16 +55,14 @@ class SelectLocationView: UIViewController {
         mapView.do {
             $0.mapType = .basic
             $0.symbolScale = 0.7
-//            $0.positionMode = .direction
             $0.addCameraDelegate(delegate: self)
         }
         pin.do {
             $0.image = #imageLiteral(resourceName: "marker")
         }
     }
-    
     func layout() {
-        [mapView, pin].forEach { view.addSubview($0) }
+        [mapView, pin, bottomView].forEach { view.addSubview($0) }
         
         pin.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +70,13 @@ class SelectLocationView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 50)).isActive = true
+        }
+        bottomView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 202)).isActive = true
         }
     }
 }
@@ -75,5 +105,12 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
         UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
             self.pin.transform = CGAffineTransform(translationX: 0, y: -10)
         })
+    }
+}
+
+extension SelectLocationView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
 }
