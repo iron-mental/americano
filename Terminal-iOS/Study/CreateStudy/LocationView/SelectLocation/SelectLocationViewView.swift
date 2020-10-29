@@ -11,8 +11,9 @@ import NMapsMap
 
 class SelectLocationView: UIViewController {
     var presenter: SelectLocationPresenterProtocols?
-
-    var nmapFView = NMFMapView()
+    let pin = UIImageView()
+    var task: DispatchWorkItem?
+    var mapView = NMFMapView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,22 +21,59 @@ class SelectLocationView: UIViewController {
         layout()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+          self.view.endEditing(true)
+    }
+    
     func attribute() {
-        nmapFView = NMFMapView(frame: view.frame)
-        nmapFView.do {
+        mapView = NMFMapView(frame: view.frame)
+        mapView.do {
             $0.mapType = .basic
             $0.symbolScale = 0.7
-            $0.positionMode = .direction
+//            $0.positionMode = .direction
+            $0.addCameraDelegate(delegate: self)
+        }
+        pin.do {
+            $0.image = #imageLiteral(resourceName: "marker")
         }
     }
     
     func layout() {
-        view.addSubview(nmapFView)
+        [mapView, pin].forEach { view.addSubview($0) }
+        
+        pin.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 50)).isActive = true
+        }
     }
 }
 
 extension SelectLocationView: SelectLocationViewProtocols {
     func setViewWithResult(latLng: NMGLatLng, address: String) {
         print("setViewWithResult")
+    }
+}
+
+extension SelectLocationView: NMFMapViewCameraDelegate {
+    func mapViewCameraIdle(_ mapView: NMFMapView) {
+        task = DispatchWorkItem { [self] in
+            self.pin.alpha = 1
+            //추후에 여기서 mapView.cameraPosition.target.lat 으로 좌표알아내서 쏘면 됨
+            UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+                self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
+            })
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task!)
+    }
+    func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
+        self.view.endEditing(true)
+        task?.cancel()
+        pin.alpha = 0.5
+        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            self.pin.transform = CGAffineTransform(translationX: 0, y: -10)
+        })
     }
 }
