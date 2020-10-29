@@ -39,6 +39,7 @@ class StudyDetailView: UIViewController {
             $0.backgroundColor = .clear
             $0.tintColor = .white
             $0.selectedSegmentTintColor = .clear
+            $0.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         }
         selectedUnderLine.do {
             $0.backgroundColor = .white
@@ -70,6 +71,23 @@ class StudyDetailView: UIViewController {
             $0.centerXAnchor.constraint(equalTo: tabSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 3).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        }
+    }
+    
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+        let selectedIndex = CGFloat(sender.selectedSegmentIndex)
+        
+        UIView.animate(withDuration: 0.5) {
+            self.selectedUnderLine.center.x = self.view.frame.width / 6 * ((selectedIndex * 2) + 1)
+        }
+        
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1.4, y: 1)
+        } completion: { (finish) in
+            UIView.animate(withDuration: 0.4, animations: {
+                self.selectedUnderLine.transform = CGAffineTransform.identity
+            })
         }
     }
 }
