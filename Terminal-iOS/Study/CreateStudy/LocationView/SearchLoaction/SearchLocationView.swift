@@ -39,7 +39,6 @@ class SearchLocationView: UIViewController {
             $0.placeholder = "장소를 검색하세요"
         }
         tableView.do {
-            $0.backgroundColor = .cyan
             $0.delegate = self
             $0.dataSource = self
             $0.register(SearchLocationTableViewCell.self, forCellReuseIdentifier: SearchLocationTableViewCell.identifier)
@@ -99,7 +98,6 @@ extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchLocationTableViewCell.identifier, for: indexPath) as! SearchLocationTableViewCell
-        cell.category.text = "test"
         return cell
     }
 }

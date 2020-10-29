@@ -29,15 +29,18 @@ class SearchLocationTableViewCell: UITableViewCell {
             $0.text = "넥슨"
             $0.textColor = UIColor.appColor(.mainColor)
             $0.font = UIFont.boldSystemFont(ofSize: 20)
+            $0.sizeToFit()
         }
         category.do {
             $0.text = "게임제작"
             $0.textColor = .gray
             $0.font.withSize(14)
+            $0.sizeToFit()
         }
         detailAddress.do {
             $0.text = "경기 성남시 분당구 판교로 394-3"
             $0.font.withSize(18)
+            $0.sizeToFit()
         }
     }
     
@@ -56,7 +59,6 @@ class SearchLocationTableViewCell: UITableViewCell {
             $0.centerYAnchor.constraint(equalTo: title.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: title.trailingAnchor, constant: Terminal.convertWidth(value: 21.9)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 100)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 13).isActive = true
         }
         detailAddress.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
