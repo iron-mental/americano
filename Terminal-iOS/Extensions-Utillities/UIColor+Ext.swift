@@ -39,12 +39,3 @@ extension UIColor {
         
     }
 }
-//
-//extension UIColor {
-//  static func appColor(_ name: AssetsColor) -> UIColor {
-//    switch name {
-//    case .terminalBackground:
-//      return #colorLiteral(red: 0.2128759027, green: 0.2128818035, blue: 0.2128786147, alpha: 1)
-//    }
-//  }
-//}

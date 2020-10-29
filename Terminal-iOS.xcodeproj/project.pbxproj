@@ -26,6 +26,9 @@
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
 		A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileModifyView.swift */; };
+		A5BA1ED6254A8E9C0089D4E9 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */; };
+		A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1ED9254A8FF00089D4E9 /* NotificationCell.swift */; };
+		A5BA1EE1254A99250089D4E9 /* Noti.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1EE0254A99250089D4E9 /* Noti.swift */; };
 		A5C5B14A25455A4100F4A86D /* CarrerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14925455A4100F4A86D /* CarrerView.swift */; };
 		A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14C2545662600F4A86D /* ProjectView.swift */; };
 		A5C5B1502545699700F4A86D /* SNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14F2545699700F4A86D /* SNSView.swift */; };
@@ -121,6 +124,9 @@
 		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		A5B78A95252B950600E0B440 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
+		A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		A5BA1ED9254A8FF00089D4E9 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
+		A5BA1EE0254A99250089D4E9 /* Noti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noti.swift; sourceTree = "<group>"; };
 		A5C5B14925455A4100F4A86D /* CarrerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrerView.swift; sourceTree = "<group>"; };
 		A5C5B14C2545662600F4A86D /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		A5C5B14F2545699700F4A86D /* SNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSView.swift; sourceTree = "<group>"; };
@@ -247,6 +253,7 @@
 		A52F00D724FD182B00DE3126 /* MyStudy */ = {
 			isa = PBXGroup;
 			children = (
+				A5BA1ED4254A8E160089D4E9 /* Notification */,
 				CCAF0FD02532FFC70060A2F6 /* Main */,
 				CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */,
 			);
@@ -334,6 +341,23 @@
 				A521DDF6252F107A00F83DB3 /* ProfileModifyWireFrame.swift */,
 			);
 			path = ProfileModify;
+			sourceTree = "<group>";
+		};
+		A5BA1ED4254A8E160089D4E9 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				A5BA1ED8254A8F8D0089D4E9 /* Component */,
+				A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		A5BA1ED8254A8F8D0089D4E9 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				A5BA1ED9254A8FF00089D4E9 /* NotificationCell.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		A5D2A5F7253734310010AE1C /* Component */ = {
@@ -437,6 +461,7 @@
 				A5686A482524F49C005990DC /* Profile.swift */,
 				A5686A522525DE13005990DC /* Setting.swift */,
 				CC3F992225454B5500428B11 /* Terminal.swift */,
+				A5BA1EE0254A99250089D4E9 /* Noti.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -677,6 +702,7 @@
 				CCA3FF4B2517823E00F62627 /* StudyCell.swift in Sources */,
 				A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */,
 				A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */,
+				A5BA1ED6254A8E9C0089D4E9 /* NotificationView.swift in Sources */,
 				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
@@ -686,6 +712,7 @@
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
+				A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
 				A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */,
 				CCAF0FD6253300410060A2F6 /* MyStudyMainInteractor.swift in Sources */,
@@ -717,6 +744,7 @@
 				A521DDF7252F107A00F83DB3 /* ProfileModifyWireFrame.swift in Sources */,
 				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
 				CC26AD58251B27B3006B11E9 /* LocationUIVIew.swift in Sources */,
+				A5BA1EE1254A99250089D4E9 /* Noti.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */,
 				CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */,
