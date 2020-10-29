@@ -22,6 +22,12 @@ class NotificationCell: UITableViewCell {
         layout()
     }
     
+    func setData(_ title: String, _ explain: String, _ action: String) {
+        self.title.text = title
+        self.explain.text = explain
+        self.action.setTitle(action, for: .normal)
+    }
+    
     func attribute() {
         title.do {
             $0.textColor = .white
@@ -34,7 +40,7 @@ class NotificationCell: UITableViewCell {
             $0.numberOfLines = 1
         }
         action.do {
-            $0.setTitleColor(.blue, for: .normal)
+            $0.setTitleColor(UIColor.appColor(.mainColor), for: .normal)
         }
     }
     func layout() {
@@ -44,21 +50,19 @@ class NotificationCell: UITableViewCell {
         
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 15)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
         }
         explain.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 5)).isActive = true
+            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 100)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Terminal.convertHeigt(value: 5)).isActive = true
         }
         action.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 20)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Terminal.convertHeigt(value: 40)).isActive = true
         }
     }
     

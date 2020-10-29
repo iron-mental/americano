@@ -40,7 +40,9 @@ class MyStudyMainView: UIViewController {
             $0.title = "내 스터디"
             $0.navigationItem.rightBarButtonItems = [moreButton!, alarmButton, tempButton!]
             $0.navigationController?.navigationBar.backgroundColor = UIColor.appColor(.testColor)
-            $0.navigationController?.navigationBar.prefersLargeTitles = true
+            
+            //임시로 이렇게 처리
+//            $0.navigationController?.navigationBar.prefersLargeTitles = true
         }
         tableView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -51,7 +53,6 @@ class MyStudyMainView: UIViewController {
         alarmButton.do {
             $0.button.addTarget(self, action: #selector(alarmButtonAction(_:)), for: .touchUpInside)
         }
-        
     }
     
     func layout() {
@@ -78,9 +79,11 @@ class MyStudyMainView: UIViewController {
     }
     
     @objc func alarmButtonAction(_ sender: UIBarButtonItem) {
-        alarmButton.badgeLabel.isHidden = false
-        tempCountForBadge += 1
-        alarmButton.badgeLabel.text = "\(tempCountForBadge)"
+//        alarmButton.badgeLabel.isHidden = false
+//        tempCountForBadge += 1
+//        alarmButton.badgeLabel.text = "\(tempCountForBadge)"
+        let view = NotificationView()
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     @objc func goToLoginAction(_ sender: UIBarButtonItem) {

@@ -1,5 +1,5 @@
 //
-//  Notification.swift
+//  Noti.swift
 //  Terminal-iOS
 //
 //  Created by once on 2020/10/29.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Notification {
+struct Noti {
     let title: String
     let explain: String
     let action: String
