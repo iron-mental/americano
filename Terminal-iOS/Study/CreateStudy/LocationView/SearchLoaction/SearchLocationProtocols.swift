@@ -10,6 +10,7 @@ import UIKit
 
 protocol SearchLocationViewProtocol: class {
     var presenter: SearchLocationPresenterProtocol? { get set }
+    func dismiss()
 }
 
 protocol SearchLocationPresenterProtocol: class {

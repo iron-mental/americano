@@ -88,7 +88,9 @@ class SearchLocationView: UIViewController {
 }
 
 extension SearchLocationView: SearchLocationViewProtocol {
-    
+    func dismiss() {
+        dismiss(animated: true)
+    }
 }
 
 extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
@@ -100,6 +102,7 @@ extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchLocationTableViewCell.identifier, for: indexPath) as! SearchLocationTableViewCell
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.didSelectedItem(index: indexPath.row, view: self)
     }

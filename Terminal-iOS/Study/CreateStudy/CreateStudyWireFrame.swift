@@ -22,7 +22,6 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         
         presenter.view = view
         presenter.interactor = interactor
-        
         presenter.wireFrame = wireFrame
         
         interactor.presenter = presenter

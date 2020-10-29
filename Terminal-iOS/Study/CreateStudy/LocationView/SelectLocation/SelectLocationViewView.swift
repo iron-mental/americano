@@ -9,10 +9,6 @@
 import UIKit
 import NMapsMap
 
-enum keyboardState: String {
-    case up
-    case down
-}
 class SelectLocationView: UIViewController {
     var presenter: SelectLocationPresenterProtocols?
     let pin = UIImageView()
@@ -20,7 +16,6 @@ class SelectLocationView: UIViewController {
     var mapView = NMFMapView()
     var bottomView = BottomView()
     var keyboardHeight: CGFloat = 0
-    var keyboardState: keyboardState = .down
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +35,7 @@ class SelectLocationView: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             keyboardHeight = keyboardSize.height
-            bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -keyboardHeight).isActive = true
+            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardHeight).isActive = true
             view.setNeedsLayout()
             view.layoutIfNeeded()
         }
@@ -60,7 +55,11 @@ class SelectLocationView: UIViewController {
         pin.do {
             $0.image = #imageLiteral(resourceName: "marker")
         }
+        bottomView.do {
+            $0.completeButton.addTarget(self, action: #selector(didCompleteButtonClicked), for: .touchUpInside)
+        }
     }
+
     func layout() {
         [mapView, pin, bottomView].forEach { view.addSubview($0) }
         
@@ -74,14 +73,21 @@ class SelectLocationView: UIViewController {
         bottomView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 202)).isActive = true
         }
     }
+    
+    @objc func didCompleteButtonClicked() {
+        //추후에 로딩이미지 줍시다.
+        presentingViewController?.dismiss(animated: false)
+        self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+    }
 }
 
 extension SelectLocationView: SelectLocationViewProtocols {
+    
     func setViewWithResult(latLng: NMGLatLng, address: String) {
         print("setViewWithResult")
     }
@@ -98,6 +104,7 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task!)
     }
+    
     func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
         self.view.endEditing(true)
         task?.cancel()
