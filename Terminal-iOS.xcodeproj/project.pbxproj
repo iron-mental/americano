@@ -66,6 +66,7 @@
 		CC45F558254AA42800DC31C6 /* SearchLocationRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F557254AA42800DC31C6 /* SearchLocationRemoteDataManager.swift */; };
 		CC45F55B254AA44400DC31C6 /* SearchLocationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F55A254AA44400DC31C6 /* SearchLocationProtocols.swift */; };
 		CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F563254AABF400DC31C6 /* SearchLocationWireFrame.swift */; };
+		CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F567254AB16300DC31C6 /* SearchLocationTableViewCell.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
@@ -170,6 +171,7 @@
 		CC45F557254AA42800DC31C6 /* SearchLocationRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC45F55A254AA44400DC31C6 /* SearchLocationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationProtocols.swift; sourceTree = "<group>"; };
 		CC45F563254AABF400DC31C6 /* SearchLocationWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationWireFrame.swift; sourceTree = "<group>"; };
+		CC45F567254AB16300DC31C6 /* SearchLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationTableViewCell.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
@@ -417,8 +419,17 @@
 				CC45F557254AA42800DC31C6 /* SearchLocationRemoteDataManager.swift */,
 				CC45F563254AABF400DC31C6 /* SearchLocationWireFrame.swift */,
 				CC45F55A254AA44400DC31C6 /* SearchLocationProtocols.swift */,
+				CC45F56A254AB17000DC31C6 /* Component */,
 			);
 			path = SearchLoaction;
+			sourceTree = "<group>";
+		};
+		CC45F56A254AB17000DC31C6 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				CC45F567254AB16300DC31C6 /* SearchLocationTableViewCell.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		CC99A0CA25342D400027BA24 /* Component */ = {
@@ -733,6 +744,7 @@
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
+				CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */,
 				CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */,
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,

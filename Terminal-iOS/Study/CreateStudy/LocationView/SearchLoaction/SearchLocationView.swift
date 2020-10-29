@@ -14,6 +14,7 @@ class SearchLocationView: UIViewController {
     var closeButton = UIButton()
     var searchTextField = UITextField()
     var searchButton = UIButton()
+    var tableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +38,16 @@ class SearchLocationView: UIViewController {
             $0.textColor = .white
             $0.placeholder = "장소를 검색하세요"
         }
+        tableView.do {
+            $0.backgroundColor = .cyan
+            $0.delegate = self
+            $0.dataSource = self
+            $0.register(SearchLocationTableViewCell.self, forCellReuseIdentifier: SearchLocationTableViewCell.identifier)
+        }
     }
     
     func layout() {
-        [closeButton, searchTextField, searchButton].forEach { view.addSubview($0) }
+        [closeButton, searchTextField, searchButton, tableView].forEach { view.addSubview($0) }
         
         closeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +70,14 @@ class SearchLocationView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 250)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
         }
+        tableView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 20.6)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: Terminal.convertWidth(value: 13.5)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -Terminal.convertWidth(value: 13.5)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        }
     }
     
     @objc func didCloseButtonClicked() {
@@ -75,4 +90,16 @@ class SearchLocationView: UIViewController {
 
 extension SearchLocationView: SearchLocationViewProtocol {
     
+}
+
+extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchLocationTableViewCell.identifier, for: indexPath) as! SearchLocationTableViewCell
+        cell.category.text = "test"
+        return cell
+    }
 }
