@@ -12,6 +12,7 @@ class SearchLocationView: UIViewController {
     var presenter: SearchLocationPresenterProtocol?
     
     var closeButton = UIButton()
+    var searchTextField = UITextField()
     var searchButton = UIButton()
     
     override func viewDidLoad() {
@@ -32,10 +33,14 @@ class SearchLocationView: UIViewController {
             $0.setImage(#imageLiteral(resourceName: "search"), for: .normal)
             $0.addTarget(self, action: #selector(didSearchButtonClicked), for: .touchUpInside)
         }
+        searchTextField.do {
+            $0.textColor = .white
+            $0.placeholder = "장소를 검색하세요"
+        }
     }
     
     func layout() {
-        [closeButton, searchButton].forEach { view.addSubview($0) }
+        [closeButton, searchTextField, searchButton].forEach { view.addSubview($0) }
         
         closeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +55,13 @@ class SearchLocationView: UIViewController {
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 18)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
+        }
+        searchTextField.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 18)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: closeButton.trailingAnchor, constant: Terminal.convertWidth(value: 15.7)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 250)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
         }
     }
     
