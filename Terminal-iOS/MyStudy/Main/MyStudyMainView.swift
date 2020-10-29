@@ -113,6 +113,7 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let view = StudyDetailView()
+        view.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(view, animated: true)
     }
 }
