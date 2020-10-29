@@ -91,7 +91,7 @@ class MyStudyMainView: UIViewController {
         view.emailTextfield.placeholder = "abc1234@terminal.com"
         view.state = .emailInput
         self.present(navigationController, animated: true) {
-            view.emailTextfield.becomeFirstResponder()
+//            view.emailTextfield.becomeFirstResponder()
         }
 
     }

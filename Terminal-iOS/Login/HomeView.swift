@@ -26,14 +26,6 @@ class HomeView: UIViewController {
     
     func layout() {
         view.addSubview(loginButton)
-        
-//        loginButton.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: convertHeigt(value: 20)).isActive = true
-//            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -convertWidth(value: 25)).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: convertHeigt(value: 19)).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: convertWidth(value: 42)).isActive = true
-//        }
     }
     
 }

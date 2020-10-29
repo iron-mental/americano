@@ -29,6 +29,14 @@ class IntroView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotification(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        emailTextfield.becomeFirstResponder()
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
     }
     
     func attribute() {
@@ -38,11 +46,9 @@ class IntroView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             $0.navigationItem.rightBarButtonItem = rightBarButton
             $0.navigationItem.leftBarButtonItem = leftBarButton
-            
             $0.navigationController?.navigationBar.shadowImage = UIImage()
             $0.navigationController?.navigationBar.isTranslucent = false
             $0.navigationController?.navigationBar.backgroundColor = UIColor.systemBackground
-            
             $0.view.backgroundColor = UIColor.systemBackground
         }
         emailTextfield.do {
@@ -99,14 +105,11 @@ class IntroView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
     }
-    func setting() {
-    }
-    @objc func keyboardWillHide(notification: Notification) {
-        emailTextfield.becomeFirstResponder()
-    }
     @objc func didClickedCloseButon() {
-        dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
+        self.emailTextfield.endEditing(true)
     }
+    
     @objc func didClickedNextButton() {
         
         let view = IntroView()
@@ -116,24 +119,26 @@ class IntroView: UIViewController {
             view.emailTextfield.placeholder = "비밀번호"
             view.state = .pwdInput
             self.emailTextfield.endEditing(true)
+            break
         case .pwdInput:
             view.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
             view.emailTextfield.placeholder = "추천 닉네임"
             view.state = .nickname
             self.emailTextfield.endEditing(true)
+            break
         case .nickname:
             dismiss(animated: true)
+            break
         case .none:
             print("none")
+            break
         case .some(_):
             print("some")
+            break
         }
-        
         navigationController?.pushViewController(view, animated: true) {
-//            view.emailTextfield.becomeFirstResponder()
         }
     }
-    
     @objc func didClickedCancelButton() {
         switch state {
         case .emailInput:
