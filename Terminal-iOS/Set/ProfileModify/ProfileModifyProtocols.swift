@@ -18,11 +18,15 @@ protocol ProfileModifyWireFrameProtocol: class {
 }
 
 protocol ProfileModifyPresenterProtocol: class {
-    
+    var view: ProfileModifyViewProtocol? { get set }
+    var interactor: ProfileModifyInteractorInputProtocol? { get set }
+    var wireFrame: ProfileModifyWireFrameProtocol? { get set }
 }
 
 protocol ProfileModifyInteractorInputProtocol: class {
-    
+    var presenter: ProfileModifyInteractorOutputProtocol? { get set }
+    var localDataManager: ProfileModifyLocalDataManagerInputProtocol? { get set }
+    var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol? { get set }
 }
 
 protocol ProfileModifyInteractorOutputProtocol: class {

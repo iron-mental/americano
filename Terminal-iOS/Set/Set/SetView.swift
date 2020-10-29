@@ -44,9 +44,14 @@ class SetView: UIViewController {
     func attribute() {
         let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
                                                                      action: #selector(pushProfileModify(_:)))
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        
         self.do {
             $0.title = "설정"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.navigationController?.navigationBar.standardAppearance = appearance
         }
         frameView.do {
             $0.layer.zPosition = 1
@@ -74,6 +79,7 @@ class SetView: UIViewController {
             $0.font = $0.font.withSize(13)
         }
         settingList.do {
+            $0.alwaysBounceVertical = false
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
