@@ -9,21 +9,90 @@
 import UIKit
 
 class TempStudyDetailViewController: UIViewController {
+    
+    var scrollView = UIScrollView()
+    var tempBackgroundView = UIView()
     var mainImageView = MainImageView(frame: CGRect.zero)
+    var testView = UIView()
+    var mainImageViewTapGesture = UITapGestureRecognizer()
+    let picker = UIImagePickerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 580)
+        attribute()
         layout()
     }
     
-    func layout() {
-        [mainImageView].forEach { view.addSubview($0) }
+    func attribute() {
+        mainImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didimageViewClicked))
+        tempBackgroundView.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         mainImageView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 169)).isActive = true
+            $0.addGestureRecognizer(mainImageViewTapGesture)
+        }
+        
+        testView.do {
+            $0.backgroundColor = .red
         }
     }
+    
+    func layout() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(tempBackgroundView)
+        [mainImageView, testView].forEach { tempBackgroundView.addSubview($0) }
+        
+        scrollView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        }
+        tempBackgroundView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        }
+        mainImageView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: tempBackgroundView.centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: tempBackgroundView.topAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: tempBackgroundView.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 169)).isActive = true
+        }
+        testView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: tempBackgroundView.centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,constant: 500).isActive = true
+            $0.widthAnchor.constraint(equalTo: tempBackgroundView.widthAnchor, multiplier: 3/4).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            $0.bottomAnchor.constraint(equalTo: tempBackgroundView.bottomAnchor).isActive = true
+        }
+    }
+    @objc func didimageViewClicked() {
+        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
+        let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(library)
+        alert.addAction(camera)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    func openLibrary() {
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
+    }
+    func openCamera() {
+        //시뮬에서 앱죽는거 에러처리 해야함
+        picker.sourceType = .camera
+        present(picker, animated: true, completion: nil)
+    }
 }
+
