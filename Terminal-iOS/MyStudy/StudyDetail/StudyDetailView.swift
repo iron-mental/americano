@@ -152,8 +152,22 @@ class StudyDetailView: UIViewController {
 
 extension StudyDetailView: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let index = Int(targetContentOffset.pointee.x / view.frame.width)
-//        let index = Int(scrollView.contentOffset.x / view.frame.width)
-        tabSege.selectedSegmentIndex = index
+        let index = targetContentOffset.pointee.x / view.frame.width
+
+        tabSege.selectedSegmentIndex = Int(index)
+        
+        // UnderLine animate
+        UIView.animate(withDuration: 0.5) {
+            self.selectedUnderLine.center.x = self.view.frame.width / 6 * ((index * 2) + 1)
+        }
+        
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1.6, y: 1)
+        } completion: { (finish) in
+            UIView.animate(withDuration: 0.4, animations: {
+                self.selectedUnderLine.transform = CGAffineTransform.identity
+            })
+        }
     }
 }
