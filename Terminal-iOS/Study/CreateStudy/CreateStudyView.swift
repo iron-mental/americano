@@ -16,7 +16,9 @@ class CreateStudyView: UIViewController{
     let picker = UIImagePickerController()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
+    
     let imageView = UIImageView()
+    
     let studyTitleTextField = UITextField()
     var seletedCategory: Category?
     var studyOverView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")

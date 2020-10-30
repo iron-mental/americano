@@ -13,6 +13,13 @@ class StudyCategoryView: UIViewController {
     
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
+    var tempButton = UIBarButtonItem(image: #imageLiteral(resourceName: "marker"), style: .plain, target: self, action: #selector(tempForStudyDetail))
+    
+    @objc func tempForStudyDetail() {
+         let view = TempStudyDetailViewController()
+        view.modalPresentationStyle = .fullScreen
+        present(view, animated: true)
+    }
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
