@@ -128,6 +128,7 @@ class StudyDetailView: UIViewController {
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = CGFloat(sender.selectedSegmentIndex)
         
+        // 탭바 애니메이션
         UIView.animate(withDuration: 0.5) {
             self.selectedUnderLine.center.x = self.view.frame.width / 6 * ((selectedIndex * 2) + 1)
         }
@@ -140,5 +141,19 @@ class StudyDetailView: UIViewController {
                 self.selectedUnderLine.transform = CGAffineTransform.identity
             })
         }
+        
+        // ScrollView ContentOffset 설정
+        let xPosition = selectedIndex * view.frame.width
+        let newOffset = CGPoint(x: xPosition, y: 0)
+        scrollView.contentOffset = newOffset
+    }
+}
+
+extension StudyDetailView: UIScrollViewDelegate {
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.x)
+        
+        let index = Int(scrollView.contentOffset.x / view.frame.width)
+        tabSege.selectedSegmentIndex = index
     }
 }
