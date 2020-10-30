@@ -18,6 +18,7 @@ class TempStudyDetailViewController: UIViewController {
     var mainImageView = MainImageView(frame: CGRect.zero)
     var snsIconsView = SNSIconsView(frame: CGRect.zero)
     var studyIntroduceLabel = StudyIntroduceLabel()
+    var memberView = MemeberView()
     
     
     var testView = UIView()
@@ -45,7 +46,7 @@ class TempStudyDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, snsIconsView, studyIntroduceLabel, testView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, snsIconsView, studyIntroduceLabel, memberView, testView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -82,6 +83,17 @@ class TempStudyDetailViewController: UIViewController {
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 125).isActive = true
         }
+        memberView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: studyIntroduceLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 32)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 300)).isActive = true
+        }
+        
+        
+        
+        
         testView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: tempBackgroundView.centerXAnchor).isActive = true
