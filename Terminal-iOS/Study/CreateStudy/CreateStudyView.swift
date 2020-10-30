@@ -45,12 +45,9 @@ class CreateStudyView: UIViewController{
         backgroundView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
         }
-        //        imageView.do {
-        //            mainImageTapGesture = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
-        //            $0.image = #imageLiteral(resourceName: "swiftBackground")
-        //            $0.isUserInteractionEnabled = true
-        //            $0.addGestureRecognizer(mainImageTapGesture)
-        //        }
+        mainImageView.do {
+            $0.alpha = 0.7
+        }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
