@@ -47,6 +47,8 @@ class CreateStudyView: UIViewController{
         }
         mainImageView.do {
             $0.alpha = 0.7
+            mainImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
+            $0.addGestureRecognizer(mainImageTapGesture)
         }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
