@@ -39,7 +39,7 @@ class SNSIconsView: UIView {
         
         notion.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true

@@ -12,12 +12,15 @@ class TempStudyDetailViewController: UIViewController {
     
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
-    var mainImageView = MainImageView(frame: CGRect.zero)
-    var testView = UIView()
-    var mainImageViewTapGesture = UITapGestureRecognizer()
     let picker = UIImagePickerController()
+    var mainImageViewTapGesture = UITapGestureRecognizer()
+    
+    var mainImageView = MainImageView(frame: CGRect.zero)
     var snsIconsView = SNSIconsView(frame: CGRect.zero)
-
+    var studyIntroduceLabel = StudyIntroduceLabel()
+    
+    
+    var testView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 580)
@@ -42,7 +45,7 @@ class TempStudyDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView,snsIconsView, testView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, snsIconsView, studyIntroduceLabel, testView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -71,6 +74,13 @@ class TempStudyDetailViewController: UIViewController {
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
+        }
+        studyIntroduceLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: snsIconsView.bottomAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 125).isActive = true
         }
         testView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
