@@ -13,7 +13,7 @@ class StudyCategoryView: UIViewController {
     
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
-    var tempButton = UIBarButtonItem(image: #imageLiteral(resourceName: "marker"), style: .plain, target: self, action: #selector(tempForStudyDetail))
+    lazy var tempButton = UIBarButtonItem(image: #imageLiteral(resourceName: "marker"), style: .plain, target: self, action: #selector(tempForStudyDetail))
     
     @objc func tempForStudyDetail() {
          let view = TempStudyDetailViewController()
@@ -50,6 +50,7 @@ class StudyCategoryView: UIViewController {
             $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
+            $0.navigationItem.leftBarButtonItems = [tempButton]
         }
         collectionView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)

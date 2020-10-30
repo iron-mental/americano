@@ -17,7 +17,7 @@ class CreateStudyView: UIViewController{
     var backgroundView = UIView()
     let scrollView = UIScrollView()
     
-    let imageView = UIImageView()
+    let mainImageView = MainImageView(frame: CGRect.zero)
     
     let studyTitleTextField = UITextField()
     var seletedCategory: Category?
@@ -45,12 +45,12 @@ class CreateStudyView: UIViewController{
         backgroundView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
         }
-        imageView.do {
-            mainImageTapGesture = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
-            $0.image = #imageLiteral(resourceName: "swiftBackground")
-            $0.isUserInteractionEnabled = true
-            $0.addGestureRecognizer(mainImageTapGesture)
-        }
+        //        imageView.do {
+        //            mainImageTapGesture = UITapGestureRecognizer(target:self, action: #selector (didImageViewClicked))
+        //            $0.image = #imageLiteral(resourceName: "swiftBackground")
+        //            $0.isUserInteractionEnabled = true
+        //            $0.addGestureRecognizer(mainImageTapGesture)
+        //        }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
@@ -86,7 +86,7 @@ class CreateStudyView: UIViewController{
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
-        [imageView, studyTitleTextField, studyOverView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { backgroundView.addSubview($0)}
+        [mainImageView, studyTitleTextField, studyOverView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { backgroundView.addSubview($0)}
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +103,7 @@ class CreateStudyView: UIViewController{
             $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 400).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
-        imageView.do {
+        mainImageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (170/667) * screenSize.height).isActive = true
@@ -112,7 +112,7 @@ class CreateStudyView: UIViewController{
         }
         studyTitleTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: imageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
             $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
@@ -268,14 +268,14 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
-        presenter?.clickCompleteButton(image: imageView.image!, userID: 1, category: "1", title: "1", introduce: "1", progress: "1", studyTime: "1", location: "1", notion: "1", everNote: "1", web: "1")
+        presenter?.clickCompleteButton(image: mainImageView.image!, userID: 1, category: "1", title: "1", introduce: "1", progress: "1", studyTime: "1", location: "1", notion: "1", everNote: "1", web: "1")
     }
 }
 
 extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            imageView.image = image
+            mainImageView.image = image
         }
         dismiss(animated: true, completion: nil)
     }
