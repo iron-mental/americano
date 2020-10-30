@@ -11,7 +11,7 @@ import UIKit
 class MemeberView: UIView {
     var title = UILabel()
     var totalMember = UILabel()
-    var collectionView = MemberCollectionView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.8, height: 200))
+    var collectionView = MemberCollectionView(frame: CGRect.zero)
     
     init() {
         super.init(frame: CGRect.zero)
@@ -40,7 +40,7 @@ class MemeberView: UIView {
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: title.intrinsicContentSize.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: title.intrinsicContentSize.width).isActive = true
         }
@@ -54,9 +54,9 @@ class MemeberView: UIView {
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 12)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 72)).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 46)).isActive = true
         }
     }
     

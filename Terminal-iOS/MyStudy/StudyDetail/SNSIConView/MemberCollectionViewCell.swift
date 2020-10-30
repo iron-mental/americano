@@ -10,8 +10,9 @@ import UIKit
 
 class MemberCollectionViewCell: UICollectionViewCell {
     static  let identifier = "cell"
+    
     var profileImage = UIImageView()
-    var ranking =  UIImageView()
+    var nickname = UILabel()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -24,21 +25,38 @@ class MemberCollectionViewCell: UICollectionViewCell {
     }
     
     func attribute() {
+        profileImage.do {
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+            $0.contentMode = .scaleAspectFill
+        }
+        nickname.do {
+            $0.font = UIFont.boldSystemFont(ofSize: 10)
+        }
     }
     
     func layout() {
         addSubview(profileImage)
-        addSubview(ranking)
+        addSubview(nickname)
         
-//        profileImage.snp.makeConstraints {
-//            $0.top.centerX.equalToSuperview()
-//            $0.width.height.equalTo(MannaDemo.convertWidth(value: 43))
-//        }
-//        ranking.snp.makeConstraints {
-//            $0.centerX.equalToSuperview()
-//            $0.top.equalTo(profileImage.snp.bottom)
-//            $0.width.height.equalTo(MannaDemo.convertWidth(value: 27))
-//        }
+        profileImage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 46))
+//            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 46))
+        }
+        
+        nickname.do {
+            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: Terminal.convertHeigt(value: 4)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        }
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

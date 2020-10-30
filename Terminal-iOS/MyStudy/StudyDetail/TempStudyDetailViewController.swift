@@ -40,6 +40,11 @@ class TempStudyDetailViewController: UIViewController {
         testView.do {
             $0.backgroundColor = .red
         }
+        memberView.do {
+            $0.backgroundColor = .blue
+            $0.collectionView.delegate = self
+            $0.collectionView.dataSource = self
+        }
     }
     
     func layout() {
@@ -86,9 +91,9 @@ class TempStudyDetailViewController: UIViewController {
         memberView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyIntroduceLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 32)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 300)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 200)).isActive = true
         }
         
         
@@ -126,3 +131,19 @@ class TempStudyDetailViewController: UIViewController {
     }
 }
 
+extension TempStudyDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
+        cell.profileImage.image = #imageLiteral(resourceName: "leehi")
+        cell.nickname.text = "이하이"
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
+}
