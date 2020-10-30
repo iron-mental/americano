@@ -11,7 +11,6 @@ import NMapsMap
 
 protocol SelectLocationViewProtocols: class {
     var presenter: SelectLocationPresenterProtocols? { get set }
-    
     //PRESENTER -> VIEW
     func setViewWithResult(latLng: NMGLatLng, address: String)
 }

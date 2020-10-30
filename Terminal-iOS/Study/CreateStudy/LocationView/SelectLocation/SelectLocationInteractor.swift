@@ -16,6 +16,4 @@ class SelectLocationInteractor: SelectLocationInteractorProtocols {
     func searchAddress(lat: Double?, Lng: Double?) {
         print("searchAddress")
     }
-    
-
 }
