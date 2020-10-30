@@ -59,6 +59,7 @@ class StudyDetailView: UIViewController {
             $0.backgroundColor = .white
         }
         scrollView.do {
+            $0.isPagingEnabled = true
             $0.backgroundColor = .red
             $0.bounces = false
         }
