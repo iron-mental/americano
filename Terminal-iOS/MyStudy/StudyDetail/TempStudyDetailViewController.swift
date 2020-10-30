@@ -16,6 +16,7 @@ class TempStudyDetailViewController: UIViewController {
     var testView = UIView()
     var mainImageViewTapGesture = UITapGestureRecognizer()
     let picker = UIImagePickerController()
+    var snsIconsView = SNSIconsView(frame: CGRect.zero)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,6 @@ class TempStudyDetailViewController: UIViewController {
         mainImageView.do {
             $0.addGestureRecognizer(mainImageViewTapGesture)
         }
-        
         testView.do {
             $0.backgroundColor = .red
         }
@@ -41,7 +41,8 @@ class TempStudyDetailViewController: UIViewController {
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
-        [mainImageView, testView].forEach { tempBackgroundView.addSubview($0) }
+        
+        [mainImageView,snsIconsView, testView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -63,6 +64,13 @@ class TempStudyDetailViewController: UIViewController {
             $0.topAnchor.constraint(equalTo: tempBackgroundView.topAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: tempBackgroundView.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 169)).isActive = true
+        }
+        snsIconsView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: Terminal.convertHeigt(value: 26)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
         }
         testView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

@@ -109,6 +109,8 @@
 		CCBC88B6254ACF2500C2A6C4 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */; };
 		CCBC88BD254B104300C2A6C4 /* TempStudyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88BC254B104300C2A6C4 /* TempStudyDetailViewController.swift */; };
 		CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */; };
+		CCBC88CF254BEDE200C2A6C4 /* SNSIconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88CE254BEDE200C2A6C4 /* SNSIconsView.swift */; };
+		CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88D4254BEE2B00C2A6C4 /* SNSIconImageView.swift */; };
 		CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC4DA8025407E9100D9E674 /* IntroView.swift */; };
 		CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */; };
 /* End PBXBuildFile section */
@@ -219,6 +221,8 @@
 		CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		CCBC88BC254B104300C2A6C4 /* TempStudyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempStudyDetailViewController.swift; sourceTree = "<group>"; };
 		CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageView.swift; sourceTree = "<group>"; };
+		CCBC88CE254BEDE200C2A6C4 /* SNSIconsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSIconsView.swift; sourceTree = "<group>"; };
+		CCBC88D4254BEE2B00C2A6C4 /* SNSIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSIconImageView.swift; sourceTree = "<group>"; };
 		CCC4DA8025407E9100D9E674 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithTextView.swift; sourceTree = "<group>"; };
 		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -616,9 +620,19 @@
 		CCBC88BB254B101A00C2A6C4 /* StudyDetail */ = {
 			isa = PBXGroup;
 			children = (
+				CCBC88CD254BEDD000C2A6C4 /* SNSIConView */,
 				CCBC88BC254B104300C2A6C4 /* TempStudyDetailViewController.swift */,
 			);
 			path = StudyDetail;
+			sourceTree = "<group>";
+		};
+		CCBC88CD254BEDD000C2A6C4 /* SNSIConView */ = {
+			isa = PBXGroup;
+			children = (
+				CCBC88CE254BEDE200C2A6C4 /* SNSIconsView.swift */,
+				CCBC88D4254BEE2B00C2A6C4 /* SNSIconImageView.swift */,
+			);
+			path = SNSIConView;
 			sourceTree = "<group>";
 		};
 		CCC4DA7F25407E5900D9E674 /* Login */ = {
@@ -782,6 +796,7 @@
 				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */,
 				CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
+				CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
 				CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */,
 				A5C5B1502545699700F4A86D /* SNSView.swift in Sources */,
@@ -824,6 +839,7 @@
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,
 				CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */,
 				CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */,
+				CCBC88CF254BEDE200C2A6C4 /* SNSIconsView.swift in Sources */,
 				CC45F55B254AA44400DC31C6 /* SearchLocationProtocols.swift in Sources */,
 				CCA3FF482517823E00F62627 /* StudyListView.swift in Sources */,
 				A5686A492524F49C005990DC /* Profile.swift in Sources */,
