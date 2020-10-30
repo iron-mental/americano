@@ -33,7 +33,7 @@ class MemberCollectionView: UICollectionView {
             $0.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             $0.minimumLineSpacing = 10
             $0.minimumInteritemSpacing = 10
-            $0.itemSize = CGSize(width: Terminal.convertWidth(value: 50), height: Terminal.convertHeigt(value: 70))
+            $0.itemSize = CGSize(width: Terminal.convertWidth(value: 50), height: Terminal.convertHeigt(value: 75))
             $0.scrollDirection = .horizontal
         }
     }

@@ -26,12 +26,12 @@ class MemberCollectionViewCell: UICollectionViewCell {
     
     func attribute() {
         profileImage.do {
-            $0.layer.cornerRadius = 10
+            $0.layer.cornerRadius = Terminal.convertWidth(value: 46) / 2
             $0.layer.masksToBounds = true
             $0.contentMode = .scaleAspectFill
         }
         nickname.do {
-            $0.font = UIFont.boldSystemFont(ofSize: 10)
+            $0.text = "테스트"
         }
     }
     
@@ -44,19 +44,16 @@ class MemberCollectionViewCell: UICollectionViewCell {
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 46))
-//            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 46))
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 46)).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
         }
-        
         nickname.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: Terminal.convertHeigt(value: 4)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: nickname.intrinsicContentSize.height).isActive = true
         }
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
