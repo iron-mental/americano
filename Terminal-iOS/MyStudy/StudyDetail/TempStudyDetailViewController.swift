@@ -38,10 +38,9 @@ class TempStudyDetailViewController: UIViewController {
             $0.addGestureRecognizer(mainImageViewTapGesture)
         }
         testView.do {
-            $0.backgroundColor = .red
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         memberView.do {
-            $0.backgroundColor = .blue
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
         }

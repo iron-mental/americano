@@ -42,10 +42,9 @@ class MemberCollectionViewCell: UICollectionViewCell {
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 46)).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 46)).isActive = true
+            $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         }
         nickname.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

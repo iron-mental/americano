@@ -29,9 +29,6 @@ class MemeberView: UIView {
             $0.textColor = .gray
             $0.font.withSize(16)
         }
-        collectionView.do {
-            $0.backgroundColor = .red
-        }
     }
     
     func layout() {

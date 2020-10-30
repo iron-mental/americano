@@ -24,7 +24,7 @@ class MemberCollectionView: UICollectionView {
     
     func attribute() {
         self.do {
-            $0.backgroundColor = .white
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(MemberCollectionViewCell.self, forCellWithReuseIdentifier: MemberCollectionViewCell.identifier)
             $0.isPagingEnabled = true
             $0.showsHorizontalScrollIndicator = false
@@ -33,7 +33,7 @@ class MemberCollectionView: UICollectionView {
             $0.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             $0.minimumLineSpacing = 10
             $0.minimumInteritemSpacing = 10
-            $0.itemSize = CGSize(width: Terminal.convertWidth(value: 50), height: Terminal.convertHeigt(value: 75))
+            $0.itemSize = CGSize(width: Terminal.convertWidth(value: 46), height: Terminal.convertHeigt(value: 65))
             $0.scrollDirection = .horizontal
         }
     }
