@@ -59,6 +59,7 @@ class StudyDetailView: UIViewController {
             $0.backgroundColor = .white
         }
         scrollView.do {
+            $0.delegate = self
             $0.isPagingEnabled = true
             $0.backgroundColor = .red
             $0.bounces = false
@@ -150,10 +151,9 @@ class StudyDetailView: UIViewController {
 }
 
 extension StudyDetailView: UIScrollViewDelegate {
-    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.x)
-        
-        let index = Int(scrollView.contentOffset.x / view.frame.width)
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let index = Int(targetContentOffset.pointee.x / view.frame.width)
+//        let index = Int(scrollView.contentOffset.x / view.frame.width)
         tabSege.selectedSegmentIndex = index
     }
 }
