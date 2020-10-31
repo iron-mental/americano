@@ -22,8 +22,13 @@ class TitleWithTextView: UIView {
     }
     
     func attribute() {
+//        self.do {
+//            $0.backgroundColor = .white
+//            
+//        }
         titleLabel.do {
             $0.text = title
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
         }
         textView.do {
             $0.text = "test"
