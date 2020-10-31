@@ -19,7 +19,7 @@ class TempStudyDetailViewController: UIViewController {
     var snsIconsView = SNSIconsView(frame: CGRect.zero)
     var studyIntroduceLabel = StudyIntroduceLabel()
     var memberView = MemeberView()
-    var studyOverView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")
+    var studyPlanView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
     
     
     var testView = UIView()
@@ -46,10 +46,11 @@ class TempStudyDetailViewController: UIViewController {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
         }
-        studyOverView.do {
-            $0.backgroundColor = .blue
-//            $0.textView.text = "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "
-            $0.textView.text = "Test"
+        studyPlanView.do {
+            $0.titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.textView.text = "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "
+            $0.textView.font!.withSize(16)
         }
     }
     
@@ -57,7 +58,7 @@ class TempStudyDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, snsIconsView, studyIntroduceLabel, memberView, studyOverView, testView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, snsIconsView, studyIntroduceLabel, memberView, studyPlanView, testView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -101,12 +102,12 @@ class TempStudyDetailViewController: UIViewController {
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 96)).isActive = true
         }
-        studyOverView.do {
+        studyPlanView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,constant: (18/667) * UIScreen.main.bounds.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: (18/375) * UIScreen.main.bounds.width ).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -(18/375) * UIScreen.main.bounds.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyOverView.textView.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyPlanView.textView.bottomAnchor).isActive = true
         }
         
         
