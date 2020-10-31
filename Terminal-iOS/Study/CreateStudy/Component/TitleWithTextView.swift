@@ -22,9 +22,6 @@ class TitleWithTextView: UIView {
     }
     
     func attribute() {
-        self.do {
-            $0.backgroundColor = .white
-        }
         titleLabel.do {
             $0.text = title
         }

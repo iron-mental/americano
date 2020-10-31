@@ -19,12 +19,13 @@ class TempStudyDetailViewController: UIViewController {
     var snsIconsView = SNSIconsView(frame: CGRect.zero)
     var studyIntroduceLabel = StudyIntroduceLabel()
     var memberView = MemeberView()
+    var studyPlanView = TitleWithTextView(frame: CGRect.zero, title: "스터디 진행")
     
     
     var testView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 580)
+        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 1000)
         attribute()
         layout()
     }
@@ -44,13 +45,17 @@ class TempStudyDetailViewController: UIViewController {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
         }
+        studyPlanView.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.textView.text = "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "
+        }
     }
     
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, snsIconsView, studyIntroduceLabel, memberView, testView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, snsIconsView, studyIntroduceLabel, memberView, studyPlanView, testView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -94,6 +99,13 @@ class TempStudyDetailViewController: UIViewController {
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 200)).isActive = true
         }
+        studyPlanView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,constant: Terminal.convertHeigt(value: 29)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        }
         
         
         
@@ -103,7 +115,7 @@ class TempStudyDetailViewController: UIViewController {
             $0.centerXAnchor.constraint(equalTo: tempBackgroundView.centerXAnchor).isActive = true
             $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,constant: 500).isActive = true
             $0.widthAnchor.constraint(equalTo: tempBackgroundView.widthAnchor, multiplier: 3/4).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 3000).isActive = true
             $0.bottomAnchor.constraint(equalTo: tempBackgroundView.bottomAnchor).isActive = true
         }
     }
