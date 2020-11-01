@@ -25,24 +25,22 @@ class TempStudyDetailViewController: UIViewController {
     var locationView = TitleWithContentView()
     var mapView = NMFMapView()
     
-    var testView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentSize = CGSize(width: scrollView.contentSize.width, height: 1000)
         attribute()
         layout()
     }
     
     func attribute() {
         mainImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didimageViewClicked))
+        view.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         tempBackgroundView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         mainImageView.do {
             $0.addGestureRecognizer(mainImageViewTapGesture)
-        }
-        testView.do {
-            $0.backgroundColor = .red
         }
         studyIntroduceView.do {
             $0.titleHidden()
@@ -75,7 +73,7 @@ class TempStudyDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, locationView, mapView, testView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, locationView, mapView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -146,18 +144,6 @@ class TempStudyDetailViewController: UIViewController {
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 254)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 186)).isActive = true
-        }
-        
-        
-        
-        
-        
-        testView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo: tempBackgroundView.centerXAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,constant: 1000).isActive = true
-            $0.widthAnchor.constraint(equalTo: tempBackgroundView.widthAnchor, multiplier: 3/4).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 3000).isActive = true
             $0.bottomAnchor.constraint(equalTo: tempBackgroundView.bottomAnchor).isActive = true
         }
     }
