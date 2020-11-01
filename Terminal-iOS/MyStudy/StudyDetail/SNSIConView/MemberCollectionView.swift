@@ -26,7 +26,7 @@ class MemberCollectionView: UICollectionView {
         self.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(MemberCollectionViewCell.self, forCellWithReuseIdentifier: MemberCollectionViewCell.identifier)
-            $0.isPagingEnabled = true
+            $0.isPagingEnabled = false
             $0.showsHorizontalScrollIndicator = false
         }
         layoutValue.do {

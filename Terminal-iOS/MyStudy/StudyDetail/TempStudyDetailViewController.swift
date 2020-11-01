@@ -17,9 +17,10 @@ class TempStudyDetailViewController: UIViewController {
     
     var mainImageView = MainImageView(frame: CGRect.zero)
     var snsIconsView = SNSIconsView(frame: CGRect.zero)
-    var studyIntroduceLabel = StudyIntroduceLabel()
+    var studyIntroduceView = TitleWithContentView()
     var memberView = MemeberView()
-    var studyPlanView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
+    var studyPlanView = TitleWithContentView()
+    var timeView = TitleWithContentView()
     
     
     var testView = UIView()
@@ -39,18 +40,23 @@ class TempStudyDetailViewController: UIViewController {
             $0.addGestureRecognizer(mainImageViewTapGesture)
         }
         testView.do {
-//            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.backgroundColor = .red
+        }
+        studyIntroduceView.do {
+            $0.titleHidden()
+            $0.content.text = "안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"
+            $0.content.numberOfLines = 0
+            $0.content.setLineSpacing(lineSpacing: 13, lineHeightMultiple: 0)
         }
         memberView.do {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
         }
         studyPlanView.do {
-            $0.titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.title.font = UIFont.boldSystemFont(ofSize: 18)
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.textView.text = "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "
-            $0.textView.font!.withSize(16)
+            $0.content.text = "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "
+            $0.content.font!.withSize(16)
         }
     }
     
@@ -58,7 +64,7 @@ class TempStudyDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, snsIconsView, studyIntroduceLabel, memberView, studyPlanView, testView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, snsIconsView, studyIntroduceView, memberView, studyPlanView, testView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -83,12 +89,12 @@ class TempStudyDetailViewController: UIViewController {
         }
         snsIconsView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: Terminal.convertHeigt(value: 26)).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
         }
-        studyIntroduceLabel.do {
+        studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: snsIconsView.bottomAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
@@ -97,17 +103,17 @@ class TempStudyDetailViewController: UIViewController {
         }
         memberView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyIntroduceLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 32)).isActive = true
+            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 96)).isActive = true
         }
         studyPlanView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,constant: (18/667) * UIScreen.main.bounds.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: (18/375) * UIScreen.main.bounds.width ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -(18/375) * UIScreen.main.bounds.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyPlanView.textView.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,constant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyPlanView.content.bottomAnchor).isActive = true
         }
         
         
@@ -147,7 +153,7 @@ class TempStudyDetailViewController: UIViewController {
 
 extension TempStudyDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -159,5 +165,6 @@ extension TempStudyDetailViewController: UICollectionViewDataSource, UICollectio
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        studyIntroduceView.titleHidden()
     }
 }
