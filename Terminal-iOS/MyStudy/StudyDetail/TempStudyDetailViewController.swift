@@ -16,7 +16,7 @@ enum State {
 }
 
 class TempStudyDetailViewController: UIViewController {
-    var state: State = .before
+    var state: State = .after
     
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
