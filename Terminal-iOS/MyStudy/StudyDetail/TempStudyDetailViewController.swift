@@ -24,6 +24,7 @@ class TempStudyDetailViewController: UIViewController {
     var timeView = TitleWithContentView()
     var locationView = TitleWithContentView()
     var mapView = NMFMapView()
+    var joinButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,11 @@ class TempStudyDetailViewController: UIViewController {
         }
         mainImageView.do {
             $0.addGestureRecognizer(mainImageViewTapGesture)
+        }
+        joinButton.do {
+            $0.setTitle("스터디 참여하기", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
         }
         studyIntroduceView.do {
             $0.titleHidden()
@@ -73,7 +79,7 @@ class TempStudyDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, locationView, mapView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, joinButton, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, locationView, mapView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -100,8 +106,15 @@ class TempStudyDetailViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: snsIconsView.intrinsicContentSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
+        }
+        joinButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 113)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 29)).isActive = true
         }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
