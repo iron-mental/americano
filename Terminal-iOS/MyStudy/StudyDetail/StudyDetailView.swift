@@ -45,21 +45,6 @@ class StudyDetailView: UIViewController {
         selectedUnderLine.do {
             $0.backgroundColor = .white
         }
-//        scrollView.do {
-//            $0.delegate = self
-//            $0.isPagingEnabled = true
-//            $0.showsHorizontalScrollIndicator = false
-//            $0.backgroundColor = .red
-//            $0.bounces = false
-//        }
-//        notice.do {
-//            $0.register(NoticeCell.self, forCellReuseIdentifier: NoticeCell.cellID)
-////            $0.delegate = self
-////            $0.dataSource = self
-//            $0.isScrollEnabled = false
-//            $0.bounces = false
-//            $0.rowHeight = Terminal.convertHeigt(value: 123)
-//        }
         childPageView.view.backgroundColor = .red
     }
     
@@ -140,16 +125,3 @@ extension StudyDetailView: UIScrollViewDelegate {
         }
     }
 }
-
-
-//extension StudyDetailView: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return noticeTitleText.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = notice.dequeueReusableCell(withIdentifier: NoticeCell.cellID, for: indexPath) as! NoticeCell
-//        cell.noticeTitle.text = noticeTitleText[indexPath.row]
-//        return cell
-//    }
-//}
