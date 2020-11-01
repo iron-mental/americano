@@ -59,6 +59,7 @@ class CreateStudyView: UIViewController{
         }
         studyOverView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.textView.text = "테스트 들어가ㅏㄴ안들어가나"
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)

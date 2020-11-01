@@ -9,7 +9,14 @@
 import UIKit
 import NMapsMap
 
+enum State {
+    case before
+    case edit
+    case after
+}
+
 class TempStudyDetailViewController: UIViewController {
+    var state: State = .before
     
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
@@ -18,11 +25,11 @@ class TempStudyDetailViewController: UIViewController {
     
     var mainImageView = MainImageView(frame: CGRect.zero)
     var snsIconsView = SNSIconsView(frame: CGRect.zero)
-    var studyIntroduceView = TitleWithContentView()
+    lazy var studyIntroduceView = TitleWithContentView(state: state)
     var memberView = MemeberView()
-    var studyPlanView = TitleWithContentView()
-    var timeView = TitleWithContentView()
-    var locationView = TitleWithContentView()
+    lazy var studyPlanView = TitleWithContentView(state: state)
+    lazy var timeView = TitleWithContentView(state: state)
+    lazy var locationView = TitleWithContentView(state: state)
     var mapView = NMFMapView()
     var joinButton = UIButton()
     
@@ -44,35 +51,50 @@ class TempStudyDetailViewController: UIViewController {
             $0.addGestureRecognizer(mainImageViewTapGesture)
         }
         joinButton.do {
-            $0.setTitle("스터디 참여하기", for: .normal)
-            $0.setTitleColor(.white, for: .normal)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            if state == .before {
+                $0.setTitle("스터디 참여하기", for: .normal)
+                $0.setTitleColor(.white, for: .normal)
+                $0.backgroundColor = UIColor.appColor(.mainColor)
+                $0.layer.cornerRadius = 10
+                $0.clipsToBounds = false
+            } else {
+                $0.isHidden = true
+            }
         }
         studyIntroduceView.do {
             $0.titleHidden()
-            $0.content.text = "안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"
-            $0.content.numberOfLines = 0
-            $0.content.setLineSpacing(lineSpacing: 13, lineHeightMultiple: 0)
+            $0.contentText = "안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"
+            if state == .before || state == .after {
+            } else {
+            }
         }
         memberView.do {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
         }
         studyPlanView.do {
-            $0.content.text = "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "
-            $0.content.font!.withSize(16)
+            $0.title.text = "스터디 진행"
+            $0.contentText = "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "
+            if state == .before || state == .after {
+            } else {
+            }
         }
         timeView.do {
             $0.title.text = "시간"
-            $0.content.text = "매주 토요일 오후 2시~ 4시"
+            $0.contentText = "매주 토요일 오후 2시~ 4시"
+            if state == .before || state == .after {
+            } else {
+            }
         }
         locationView.do {
             $0.title.text = "장소"
-            $0.content.text = "네이버 본사"
+            $0.contentText = "네이버 본사"
         }
-        mapView.do {
-            $0.isUserInteractionEnabled = false
-        }
+//        mapView.do {
+//            $0.isUserInteractionEnabled = false
+//        }
+//        view.setNeedsLayout()
+//        view.layoutIfNeeded()
     }
     
     func layout() {
@@ -114,7 +136,7 @@ class TempStudyDetailViewController: UIViewController {
             $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 113)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 29)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 18)).isActive = true
         }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -135,21 +157,21 @@ class TempStudyDetailViewController: UIViewController {
             $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,constant: Terminal.convertHeigt(value: 30)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyPlanView.content.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyPlanView.label.bottomAnchor).isActive = true
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyPlanView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: timeView.content.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: timeView.label.bottomAnchor).isActive = true
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: locationView.content.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: locationView.label.bottomAnchor).isActive = true
         }
         mapView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -197,6 +219,7 @@ extension TempStudyDetailViewController: UICollectionViewDataSource, UICollectio
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
-        studyIntroduceView.titleHidden()
+        view.setNeedsLayout()
+        view.layoutIfNeeded()
     }
 }
