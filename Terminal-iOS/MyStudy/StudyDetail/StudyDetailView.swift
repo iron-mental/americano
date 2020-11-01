@@ -10,23 +10,10 @@ import UIKit
 
 class StudyDetailView: UIViewController {
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
-    
-    let background = UIView().then {
-        $0.backgroundColor = .white
-    }
-    let first = UIView().then {
-        $0.backgroundColor = .blue
-    }
-    let second = UIView().then {
-        $0.backgroundColor = .yellow
-    }
-    let third = UIView().then {
-        $0.backgroundColor = .brown
-    }
+    let childPageView = PageViewController()
     
     lazy var tabSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
-    lazy var scrollView = UIScrollView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,22 +45,30 @@ class StudyDetailView: UIViewController {
         selectedUnderLine.do {
             $0.backgroundColor = .white
         }
-        scrollView.do {
-            $0.delegate = self
-            $0.isPagingEnabled = true
-            $0.backgroundColor = .red
-            $0.bounces = false
-        }
+//        scrollView.do {
+//            $0.delegate = self
+//            $0.isPagingEnabled = true
+//            $0.showsHorizontalScrollIndicator = false
+//            $0.backgroundColor = .red
+//            $0.bounces = false
+//        }
+//        notice.do {
+//            $0.register(NoticeCell.self, forCellReuseIdentifier: NoticeCell.cellID)
+////            $0.delegate = self
+////            $0.dataSource = self
+//            $0.isScrollEnabled = false
+//            $0.bounces = false
+//            $0.rowHeight = Terminal.convertHeigt(value: 123)
+//        }
+        childPageView.view.backgroundColor = .red
     }
     
     func layout() {
         view.addSubview(tabSege)
         view.addSubview(selectedUnderLine)
-        view.addSubview(scrollView)
-        scrollView.addSubview(background)
-        background.addSubview(first)
-        background.addSubview(second)
-        background.addSubview(third)
+        addChild(childPageView)
+        view.addSubview(childPageView.view)
+        childPageView.didMove(toParent: self)
         
         tabSege.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -86,42 +81,15 @@ class StudyDetailView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: tabSege.bottomAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: tabSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 3).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
         }
-        scrollView.do {
+        
+        childPageView.view.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: tabSege.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        }
-        background.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3).isActive = true
-        }
-        first.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: background.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: background.leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        }
-        second.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: background.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: first.trailingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        }
-        third.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: background.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: second.trailingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
@@ -144,12 +112,13 @@ class StudyDetailView: UIViewController {
         }
         
         // ScrollView ContentOffset 설정
-        let xPosition = selectedIndex * view.frame.width
-        let newOffset = CGPoint(x: xPosition, y: 0)
-        scrollView.contentOffset = newOffset
+//        let xPosition = selectedIndex * view.frame.width
+//        let newOffset = CGPoint(x: xPosition, y: 0)
+//        scrollView.contentOffset = newOffset
     }
 }
 
+// 스크롤뷰 애니메이션 delegate
 extension StudyDetailView: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let index = targetContentOffset.pointee.x / view.frame.width
@@ -171,3 +140,16 @@ extension StudyDetailView: UIScrollViewDelegate {
         }
     }
 }
+
+
+//extension StudyDetailView: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return noticeTitleText.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = notice.dequeueReusableCell(withIdentifier: NoticeCell.cellID, for: indexPath) as! NoticeCell
+//        cell.noticeTitle.text = noticeTitleText[indexPath.row]
+//        return cell
+//    }
+//}
