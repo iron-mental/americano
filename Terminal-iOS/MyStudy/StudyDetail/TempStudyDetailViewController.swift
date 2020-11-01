@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NMapsMap
 
 class TempStudyDetailViewController: UIViewController {
     
@@ -22,7 +23,7 @@ class TempStudyDetailViewController: UIViewController {
     var studyPlanView = TitleWithContentView()
     var timeView = TitleWithContentView()
     var locationView = TitleWithContentView()
-    
+    var mapView = NMFMapView()
     
     var testView = UIView()
     override func viewDidLoad() {
@@ -63,6 +64,10 @@ class TempStudyDetailViewController: UIViewController {
         }
         locationView.do {
             $0.title.text = "장소"
+            $0.content.text = "네이버 본사"
+        }
+        mapView.do {
+            $0.isUserInteractionEnabled = false
         }
     }
     
@@ -70,7 +75,7 @@ class TempStudyDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, testView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, locationView, mapView, testView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -127,6 +132,20 @@ class TempStudyDetailViewController: UIViewController {
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: timeView.content.bottomAnchor).isActive = true
+        }
+        locationView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: locationView.content.bottomAnchor).isActive = true
+        }
+        mapView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 254)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 186)).isActive = true
         }
         
         
