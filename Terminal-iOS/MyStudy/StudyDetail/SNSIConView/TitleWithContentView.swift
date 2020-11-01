@@ -49,7 +49,10 @@ class TitleWithContentView: UIView {
             $0.setLineSpacing(lineSpacing: 13, lineHeightMultiple: 0)
         }
         textView.do {
-            $0.font?.withSize(10)
+            $0.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = false
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.text = contentText[1]
         }
     }
@@ -91,7 +94,7 @@ class TitleWithContentView: UIView {
             $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: textView.intrinsicContentSize.height + 75).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: textView.intrinsicContentSize.height + 100).isActive = true
         }
     }
     func titleHidden() {
