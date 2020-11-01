@@ -9,8 +9,9 @@
 import UIKit
 
 class StudyDetailView: UIViewController {
+    var beforeIndex: Int = 0
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
-    let childPageView = PageViewController()
+    let childPageView = PageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     
     lazy var tabSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
@@ -80,6 +81,7 @@ class StudyDetailView: UIViewController {
     }
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
+        
         let selectedIndex = CGFloat(sender.selectedSegmentIndex)
         
         // 탭바 애니메이션
@@ -96,32 +98,45 @@ class StudyDetailView: UIViewController {
             })
         }
         
-        // ScrollView ContentOffset 설정
-//        let xPosition = selectedIndex * view.frame.width
-//        let newOffset = CGPoint(x: xPosition, y: 0)
-//        scrollView.contentOffset = newOffset
+        // PageView paging
+        let currentView = childPageView.VCArr
+        let nextPage = Int(selectedIndex)
+//        beforeIndex = nextPage
+        print("다음 페이지 : \(nextPage)")
+        print("현재(이전) 페이지 : \(beforeIndex)")
+        // if 현재페이지 < 바뀔페이지
+        // else if 현재페이지 > 바뀔페이지
+        if beforeIndex < nextPage {
+            let nextVC = currentView[nextPage]
+            self.childPageView.setViewControllers([nextVC], direction: .forward, animated: true)
+        } else if beforeIndex > nextPage{
+            let prevVC = currentView[nextPage]
+            self.childPageView.setViewControllers([prevVC], direction: .reverse, animated: true)
+        }
+        
+        beforeIndex = nextPage
     }
 }
 
 // 스크롤뷰 애니메이션 delegate
 extension StudyDetailView: UIScrollViewDelegate {
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let index = targetContentOffset.pointee.x / view.frame.width
-
-        tabSege.selectedSegmentIndex = Int(index)
-        
-        // UnderLine animate
-        UIView.animate(withDuration: 0.5) {
-            self.selectedUnderLine.center.x = self.view.frame.width / 6 * ((index * 2) + 1)
-        }
-        
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
-            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1.6, y: 1)
-        } completion: { (finish) in
-            UIView.animate(withDuration: 0.4, animations: {
-                self.selectedUnderLine.transform = CGAffineTransform.identity
-            })
-        }
-    }
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        let index = targetContentOffset.pointee.x / view.frame.width
+//
+//        tabSege.selectedSegmentIndex = Int(index)
+//        
+//        // UnderLine animate
+//        UIView.animate(withDuration: 0.5) {
+//            self.selectedUnderLine.center.x = self.view.frame.width / 6 * ((index * 2) + 1)
+//        }
+//        
+//        UIView.animate(withDuration: 0.5) {
+//            self.view.layoutIfNeeded()
+//            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1.6, y: 1)
+//        } completion: { (finish) in
+//            UIView.animate(withDuration: 0.4, animations: {
+//                self.selectedUnderLine.transform = CGAffineTransform.identity
+//            })
+//        }
+//    }
 }
