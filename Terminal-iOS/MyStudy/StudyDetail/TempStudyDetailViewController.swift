@@ -21,6 +21,7 @@ class TempStudyDetailViewController: UIViewController {
     var memberView = MemeberView()
     var studyPlanView = TitleWithContentView()
     var timeView = TitleWithContentView()
+    var locationView = TitleWithContentView()
     
     
     var testView = UIView()
@@ -53,10 +54,15 @@ class TempStudyDetailViewController: UIViewController {
             $0.collectionView.dataSource = self
         }
         studyPlanView.do {
-            $0.title.font = UIFont.boldSystemFont(ofSize: 18)
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.content.text = "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "
             $0.content.font!.withSize(16)
+        }
+        timeView.do {
+            $0.title.text = "시간"
+            $0.content.text = "매주 토요일 오후 2시~ 4시"
+        }
+        locationView.do {
+            $0.title.text = "장소"
         }
     }
     
@@ -64,7 +70,7 @@ class TempStudyDetailViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, snsIconsView, studyIntroduceView, memberView, studyPlanView, testView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, testView].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -115,6 +121,14 @@ class TempStudyDetailViewController: UIViewController {
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyPlanView.content.bottomAnchor).isActive = true
         }
+        timeView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: studyPlanView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: timeView.content.bottomAnchor).isActive = true
+        }
+        
         
         
         

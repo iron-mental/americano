@@ -23,6 +23,9 @@ class TitleWithContentView: UIView {
     }
     
     func attribute() {
+        self.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         title.do {
             $0.font = UIFont.boldSystemFont(ofSize: 18)
             $0.text = "기본타이틀"
