@@ -13,7 +13,7 @@ class TitleWithContentView: UIView {
     var label = UILabel()
     var textView = UITextView()
     var state: State = .before
-    var contentText = "기본 텍스트" {
+    var contentText: [String] = ["기본 제목", "기본 텍스트"] {
         didSet {
             attribute()
         }
@@ -40,17 +40,17 @@ class TitleWithContentView: UIView {
         }
         title.do {
             $0.font = UIFont.boldSystemFont(ofSize: 18)
-            $0.text = "기본타이틀"
+            $0.text = contentText[0]
         }
         label.do {
             $0.font.withSize(16)
             $0.numberOfLines = 0
-            $0.text = contentText
+            $0.text = contentText[1]
             $0.setLineSpacing(lineSpacing: 13, lineHeightMultiple: 0)
         }
         textView.do {
             $0.font?.withSize(10)
-            $0.text = contentText
+            $0.text = contentText[1]
         }
     }
     
