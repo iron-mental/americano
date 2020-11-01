@@ -17,7 +17,6 @@ class NoticeCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         attribute()
         layout()
     }
@@ -26,7 +25,11 @@ class NoticeCell: UITableViewCell {
         noticeLabel.do {
             $0.backgroundColor = UIColor.appColor(.noticeColor)
             $0.dynamicFont(fontSize: 12, weight: .medium)
+            $0.text = "공지사항"
+            $0.textAlignment = .center
             $0.textColor = .white
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = 5
         }
         noticeTitle.do {
             $0.dynamicFont(fontSize: 14, weight: .semibold)
@@ -38,12 +41,15 @@ class NoticeCell: UITableViewCell {
         }
     }
     func layout() {
+        addSubview(noticeLabel)
+        addSubview(noticeTitle)
+        addSubview(date)
         noticeLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 41)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 50)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 25)).isActive = true
         }
         noticeTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
