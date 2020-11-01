@@ -8,7 +8,7 @@
 
 import UIKit
 
-class titleWithContentView: UIView {
+class TitleWithContentView: UIView {
     var title = UILabel()
     var content = UILabel()
     
@@ -24,14 +24,12 @@ class titleWithContentView: UIView {
     
     func attribute() {
         title.do {
-            $0.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.font = UIFont.boldSystemFont(ofSize: 18)
             $0.text = "기본타이틀"
         }
         content.do {
-            $0.text = "안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"
             $0.font.withSize(16)
             $0.numberOfLines = 0
-            $0.setLineSpacing(lineSpacing: 13, lineHeightMultiple: 0)
         }
     }
     
@@ -47,10 +45,10 @@ class titleWithContentView: UIView {
         }
         content.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 3)).isActive = true
+            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: content.intrinsicContentSize.height).isActive = true
+            $0.heightAnchor.constraint(equalTo: content.heightAnchor).isActive = true
         }
     }
     func titleHidden() {
@@ -60,7 +58,7 @@ class titleWithContentView: UIView {
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: content.intrinsicContentSize.height).isActive = true
+            $0.heightAnchor.constraint(equalTo: content.heightAnchor).isActive = true
         }
     }
 }
