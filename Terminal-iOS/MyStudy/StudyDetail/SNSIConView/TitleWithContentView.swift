@@ -91,12 +91,7 @@ class TitleWithContentView: UIView {
             $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: textView.heightAnchor).isActive = true
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: title.bottomAnchor,constant: (18/117) * frame.height).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-//            $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: (117/151) * frame.height).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: textView.intrinsicContentSize.height + 75).isActive = true
         }
     }
     func titleHidden() {
@@ -108,11 +103,6 @@ class TitleWithContentView: UIView {
                 $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
                 $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
                 $0.heightAnchor.constraint(equalTo: textView.heightAnchor).isActive = true
-//                $0.translatesAutoresizingMaskIntoConstraints = false
-//                $0.topAnchor.constraint(equalTo: title.bottomAnchor,constant: (18/117) * frame.height).isActive = true
-//                $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-//                $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-//                $0.heightAnchor.constraint(equalToConstant: (117/151) * frame.height).isActive = true
             }
         } else {
             label.do {

@@ -16,7 +16,7 @@ enum State {
 }
 
 class TempStudyDetailViewController: UIViewController {
-    var state: State = .before
+    var state: State = .edit
     
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
@@ -152,22 +152,21 @@ class TempStudyDetailViewController: UIViewController {
             $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,constant: Terminal.convertHeigt(value: 30)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyPlanView.label.bottomAnchor).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: studyPlanView.intrinsicContentSize.height).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyPlanView.textView.bottomAnchor).isActive = true
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyPlanView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: timeView.label.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: timeView.textView.bottomAnchor).isActive = true
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: locationView.label.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: locationView.textView.bottomAnchor).isActive = true
         }
         mapView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
