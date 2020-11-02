@@ -9,7 +9,6 @@
 import UIKit
 
 class ProfileModifyView: UIViewController {
-    
     var presenter: ProfileModifyPresenterProtocol?
     let scrollView = UIScrollView()
     let profile = ProfileView().then {

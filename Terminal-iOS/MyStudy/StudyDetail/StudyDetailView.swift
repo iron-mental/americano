@@ -9,10 +9,13 @@
 import UIKit
 
 class StudyDetailView: UIViewController {
-    var beforeIndex: Int = 0
-    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
-    let childPageView = PageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    var pageBeforeIndex: Int = 0
+    var tabBeforeIndex: Int = 0
     
+    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
+    let childPageView = PageViewController(transitionStyle: .scroll,
+                                           navigationOrientation: .horizontal,
+                                           options: nil)
     lazy var tabSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     
@@ -65,15 +68,15 @@ class StudyDetailView: UIViewController {
         }
         selectedUnderLine.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: tabSege.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: tabSege.bottomAnchor, constant: -1).isActive = true
             $0.centerXAnchor.constraint(equalTo: tabSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
         }
         
         childPageView.view.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: tabSege.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: tabSege.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -81,62 +84,33 @@ class StudyDetailView: UIViewController {
     }
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
+        let selectedIndex = sender.selectedSegmentIndex
+
+//        UIView.animate(withDuration: 0.5) {
+//            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 0.7, y: 1)
+//        } completion: { (finisih) in
+//            UIView.animate(withDuration: 0.4, animations: {
+//                self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1, y: 1)
+//            })
+//        }
         
-        let selectedIndex = CGFloat(sender.selectedSegmentIndex)
-        
-        // 탭바 애니메이션
         UIView.animate(withDuration: 0.5) {
-            self.selectedUnderLine.center.x = self.view.frame.width / 6 * ((selectedIndex * 2) + 1)
+            self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
         }
-        
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
-            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1.6, y: 1)
-        } completion: { (finish) in
-            UIView.animate(withDuration: 0.4, animations: {
-                self.selectedUnderLine.transform = CGAffineTransform.identity
-            })
-        }
-        
+
         // PageView paging
         let currentView = childPageView.VCArr
-        let nextPage = Int(selectedIndex)
-//        beforeIndex = nextPage
-        print("다음 페이지 : \(nextPage)")
-        print("현재(이전) 페이지 : \(beforeIndex)")
+        let nextPage = selectedIndex
+
         // if 현재페이지 < 바뀔페이지
         // else if 현재페이지 > 바뀔페이지
-        if beforeIndex < nextPage {
+        if pageBeforeIndex < nextPage {
             let nextVC = currentView[nextPage]
             self.childPageView.setViewControllers([nextVC], direction: .forward, animated: true)
-        } else if beforeIndex > nextPage{
+        } else if pageBeforeIndex > nextPage{
             let prevVC = currentView[nextPage]
             self.childPageView.setViewControllers([prevVC], direction: .reverse, animated: true)
         }
-        
-        beforeIndex = nextPage
+        pageBeforeIndex = nextPage
     }
-}
-
-// 스크롤뷰 애니메이션 delegate
-extension StudyDetailView: UIScrollViewDelegate {
-//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        let index = targetContentOffset.pointee.x / view.frame.width
-//
-//        tabSege.selectedSegmentIndex = Int(index)
-//        
-//        // UnderLine animate
-//        UIView.animate(withDuration: 0.5) {
-//            self.selectedUnderLine.center.x = self.view.frame.width / 6 * ((index * 2) + 1)
-//        }
-//        
-//        UIView.animate(withDuration: 0.5) {
-//            self.view.layoutIfNeeded()
-//            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1.6, y: 1)
-//        } completion: { (finish) in
-//            UIView.animate(withDuration: 0.4, animations: {
-//                self.selectedUnderLine.transform = CGAffineTransform.identity
-//            })
-//        }
-//    }
 }
