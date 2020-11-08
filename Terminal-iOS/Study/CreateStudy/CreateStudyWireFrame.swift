@@ -22,7 +22,6 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         
         presenter.view = view
         presenter.interactor = interactor
-        
         presenter.wireFrame = wireFrame
         
         interactor.presenter = presenter
@@ -34,9 +33,9 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
     }
     
     func goToSelectLocation(view: UIViewController) {
-        let selectLocationView =  SelectLocationWireFrame.selectLocationViewModul()
+        let searchLocationview =  SearchLocationWireFrame.searchLocationViewModul()
         //modal의 형태를 추후에 정하구요 dismiss 시켜주는 것 만으로 다시 원래 플로우인 스터디 생성 플로우로 돌아가게 하면 깔끔 할 것 같은 느낌
-        selectLocationView.modalPresentationStyle = .fullScreen
-        view.present(selectLocationView, animated: true, completion: nil)
+        searchLocationview.modalPresentationStyle = .fullScreen
+        view.present(searchLocationview, animated: true, completion: nil)
     }
 }

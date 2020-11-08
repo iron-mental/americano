@@ -9,6 +9,9 @@
 import UIKit
 
 class Terminal {
+    
+    //kakao
+    //bce7f6969838f58c8c27fa25722c220b
     static let screenSize = UIScreen.main.bounds
 
     static func convertHeigt(value: CGFloat) -> CGFloat{
