@@ -122,7 +122,10 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         return (91.7/667) * view.bounds.height
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let view = StudyDetailView()
         checkedArray.append(indexPath.row)
+        view.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(view, animated: true)
     }
 }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// 알림에 대한 구조체
 struct Noti {
     let title: String
     let explain: String
