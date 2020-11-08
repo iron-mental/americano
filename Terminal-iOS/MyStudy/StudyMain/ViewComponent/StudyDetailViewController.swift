@@ -15,7 +15,7 @@ enum State {
     case after
 }
 
-class TempStudyDetailViewController: UIViewController {
+class StudyDetailViewController: UIViewController {
     var state: State = .after
     
     var scrollView = UIScrollView()
@@ -202,7 +202,7 @@ class TempStudyDetailViewController: UIViewController {
     }
 }
 
-extension TempStudyDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension StudyDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
