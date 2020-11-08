@@ -6,4 +6,12 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class PinnedNoticeCell: NoticeCell {
+    override func attribute() {
+        super.attribute()
+        noticeBackground.backgroundColor = UIColor.appColor(.pinnedNoticeColor)
+        noticeLabel.text = "필독"
+    }
+}
