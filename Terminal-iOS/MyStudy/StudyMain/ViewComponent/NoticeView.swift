@@ -39,7 +39,6 @@ class NoticeView: UIViewController {
     func attribute() {
         notice.do {
             $0.register(NoticeCell.self, forCellReuseIdentifier: NoticeCell.noticeCellID)
-            $0.register(PinnedNoticeCell.self, forCellReuseIdentifier: PinnedNoticeCell.pinnedNoticeCellID)
             $0.delegate = self
             $0.dataSource = self
             $0.bounces = false
@@ -63,6 +62,18 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        if section == 0 {
+            headerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        } else if section == 1 {
+            headerView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        }
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
