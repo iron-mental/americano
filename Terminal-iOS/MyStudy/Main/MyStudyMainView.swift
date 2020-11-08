@@ -94,12 +94,14 @@ class MyStudyMainView: UIViewController {
         self.navigationItem.leftBarButtonItems?.removeAll()
         state = .normal
         layout()
+        tableView.reloadData()
     }
     
     @objc func editButtonAction() {
         self.navigationItem.rightBarButtonItems?.removeAll()
         state = .edit
         layout()
+        tableView.reloadData()
     }
     
     @objc func alarmButtonAction() {
@@ -129,6 +131,16 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyStudyMainTableViewCell.identifier) as! MyStudyMainTableViewCell
+        switch state {
+        case .normal:
+            cell.checkBox.isHidden = true
+            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = false }
+            break
+        case .edit:
+            cell.checkBox.isHidden = false
+            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
+            break
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

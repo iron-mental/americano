@@ -18,7 +18,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
     let newChatLabel = UILabel()
     let newNoticeLabel = UILabel()
     let newMemberLabel = UILabel()
-    var checkBox = UIView()
+    lazy var checkBox = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -72,7 +72,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
         checkBox.do {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.appColor(.mainColor).cgColor
-            $0.layer.cornerRadius = checkBox.frame.width / 2
+            $0.layer.cornerRadius = Terminal.convertWidth(value: 20) / 2
             $0.layer.masksToBounds = true
         }
     }
@@ -123,7 +123,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
         checkBox.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(14/375) * parentFrame.width).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Terminal.convertWidth(value: 28)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
         }
