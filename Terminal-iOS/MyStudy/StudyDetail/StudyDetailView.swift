@@ -11,7 +11,10 @@ import UIKit
 class StudyDetailView: UIViewController {
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
-    
+    let VCArr: [UIViewController] = [ NoticeView(),
+                                      DetailView(),
+                                      TempChatView()]
+
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = PageViewController(transitionStyle: .scroll,
                                            navigationOrientation: .horizontal,
@@ -26,6 +29,9 @@ class StudyDetailView: UIViewController {
     }
     
     func attribute() {
+        if let firstVC = VCArr.first{
+            childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+        }
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         
@@ -50,7 +56,10 @@ class StudyDetailView: UIViewController {
         selectedUnderLine.do {
             $0.backgroundColor = .white
         }
-        childPageView.view.backgroundColor = .red
+        childPageView.do {
+            $0.delegate = self
+            $0.dataSource = self
+        }
     }
     
     func layout() {
@@ -100,7 +109,7 @@ class StudyDetailView: UIViewController {
         }
 
         // PageView paging
-        let currentView = childPageView.VCArr
+        let currentView = VCArr
         let nextPage = selectedIndex
 
         // if 현재페이지 < 바뀔페이지
@@ -116,13 +125,28 @@ class StudyDetailView: UIViewController {
     }
 }
 
-extension PageViewController: UIPageViewControllerDelegate {
+extension StudyDetailView: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let index = VCArr.firstIndex(of: viewController), index > 0 else { return nil }
+        let previousIndex = index - 1
+        return VCArr[previousIndex]
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard let index = VCArr.firstIndex(of: viewController), index < (VCArr.count - 1) else { return nil }
+        let nextIndex = index + 1
+        return VCArr[nextIndex]
+    }
+    
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard completed else { return }
         
         if let viewControllers = pageViewController.viewControllers {
             if let viewControllerIndex = self.VCArr.firstIndex(of: viewControllers[0]) {
-                
+                UIView.animate(withDuration: 0.5) {
+                    self.selectedUnderLine.transform =
+                        CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(viewControllerIndex), y: 0)
+                }
             }
         }
     }
