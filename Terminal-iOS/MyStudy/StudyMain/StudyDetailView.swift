@@ -12,7 +12,7 @@ class StudyDetailView: UIViewController {
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
     let VCArr: [UIViewController] = [ NoticeView(),
-                                      DetailView(),
+                                      StudyDetailViewController(),
                                       TempChatView()]
 
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
