@@ -96,15 +96,19 @@ class StudyListView: UIViewController {
         }
     }
     @objc func late() {
+        print(self.selectedUnderline.center.x)
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
             self.selectedUnderline.center.x = self.lateButton.center.x
         }
+        print(self.selectedUnderline.center.x)
     }
     
     @objc func location() {
+        print(self.selectedUnderline.center.x)
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
             self.selectedUnderline.center.x = self.locationButton.center.x
         }
+        print(self.selectedUnderline.center.x)
     }
 }
 

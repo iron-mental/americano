@@ -16,6 +16,7 @@ enum AssetsColor {
     case InputViewColor
     case testColor
     case profileTextColor
+    case noticeColor
 }
 
 extension UIColor {
@@ -35,6 +36,8 @@ extension UIColor {
             return #colorLiteral(red: 0.09033346921, green: 0.08997825533, blue: 0.1030491814, alpha: 1)
         case .profileTextColor:
             return #colorLiteral(red: 0.8941176471, green: 0.8941176471, blue: 0.8941176471, alpha: 1)
+        case .noticeColor:
+            return #colorLiteral(red: 0.1333333333, green: 0.5294117647, blue: 0.6745098039, alpha: 1)
         }
         
     }
