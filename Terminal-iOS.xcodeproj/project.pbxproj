@@ -282,7 +282,7 @@
 		A52F00D724FD182B00DE3126 /* MyStudy */ = {
 			isa = PBXGroup;
 			children = (
-				A5BA1EE5254AA89A0089D4E9 /* StudyDetail */,
+				A5BA1EE5254AA89A0089D4E9 /* StudyMain */,
 				A5BA1ED4254A8E160089D4E9 /* Notification */,
 				CCAF0FD02532FFC70060A2F6 /* Main */,
 				CCA1FF6C24FD100F0026C3EA /* MyStudyViewController.swift */,
@@ -401,14 +401,14 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		A5BA1EE5254AA89A0089D4E9 /* StudyDetail */ = {
+		A5BA1EE5254AA89A0089D4E9 /* StudyMain */ = {
 			isa = PBXGroup;
 			children = (
 				A57C33D1254E8B28006CE9A2 /* ViewComponent */,
 				A5BA1EE9254AAC4B0089D4E9 /* Component */,
 				A5BA1EE6254AA8B70089D4E9 /* StudyDetailView.swift */,
 			);
-			path = StudyDetail;
+			path = StudyMain;
 			sourceTree = "<group>";
 		};
 		A5BA1EE9254AAC4B0089D4E9 /* Component */ = {
