@@ -46,6 +46,7 @@ class StudyDetailView: UIViewController {
             $0.selectedSegmentTintColor = .clear
             $0.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         }
+
         selectedUnderLine.do {
             $0.backgroundColor = .white
         }
@@ -112,5 +113,17 @@ class StudyDetailView: UIViewController {
             self.childPageView.setViewControllers([prevVC], direction: .reverse, animated: true)
         }
         pageBeforeIndex = nextPage
+    }
+}
+
+extension PageViewController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard completed else { return }
+        
+        if let viewControllers = pageViewController.viewControllers {
+            if let viewControllerIndex = self.VCArr.firstIndex(of: viewControllers[0]) {
+                
+            }
+        }
     }
 }

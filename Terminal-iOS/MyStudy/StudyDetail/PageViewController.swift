@@ -11,6 +11,7 @@ import UIKit
 class PageViewController: UIPageViewController {
 
     let VCArr: [UIViewController] = [ NoticeView(),
+                                      DetailView(),
                                       TempChatView()]
 
     override func viewDidLoad() {
@@ -25,7 +26,7 @@ class PageViewController: UIPageViewController {
     }
 }
 
-extension PageViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+extension PageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = VCArr.firstIndex(of: viewController), index > 0 else { return nil }
         let previousIndex = index - 1
