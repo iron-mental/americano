@@ -18,7 +18,8 @@ class MyStudyMainTableViewCell: UITableViewCell {
     let newChatLabel = UILabel()
     let newNoticeLabel = UILabel()
     let newMemberLabel = UILabel()
-    lazy var checkBox = UIView()
+    var checkBox = UIView()
+    var checkedFlag = false
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -72,6 +73,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
         checkBox.do {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.appColor(.mainColor).cgColor
+            $0.backgroundColor = checkedFlag ? UIColor.appColor(.testColor) : UIColor.systemBackground
             $0.layer.cornerRadius = Terminal.convertWidth(value: 20) / 2
             $0.layer.masksToBounds = true
         }
@@ -139,5 +141,9 @@ class MyStudyMainTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        checkedFlag.toggle()
+//        attribute()
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 }

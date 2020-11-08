@@ -26,6 +26,7 @@ class MyStudyMainView: UIViewController {
     var tempCountForBadge = 0
     var tempArrayForCheck: [Int] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -139,6 +140,12 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         case .edit:
             cell.checkBox.isHidden = false
             [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
+            
+            if tempArrayForCheck.contains(indexPath.row) {
+                    cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)
+                } else {
+                    cell.checkBox.backgroundColor = UIColor.appColor(.testColor)
+                }
             break
         }
         return cell
@@ -155,9 +162,14 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
             navigationController?.pushViewController(view, animated: true)
             break
         case .edit:
-            tempArrayForCheck.append(indexPath.row)
+            if tempArrayForCheck.contains(indexPath.row) {
+                tempArrayForCheck.remove(at: tempArrayForCheck.firstIndex(of: indexPath.row)!)
+            } else {
+                tempArrayForCheck.append(indexPath.row)
+            }
             break
         }
-        
+        print(tempArrayForCheck)
+        tableView.reloadData()
     }
 }
