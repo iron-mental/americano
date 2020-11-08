@@ -8,17 +8,23 @@
 
 import UIKit
 
+enum MyStudyMainViewState {
+    case normal
+    case edit
+}
+
 class MyStudyMainView: UIViewController {
     var presenter: MyStudyMainPresenterProtocol?
-    
+    var state: MyStudyMainViewState = .normal
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
     var alarmButton = badgeBarButtonItem()
     var tempButton: UIBarButtonItem?
     var rightBarButtomItem: UIBarButtonItem?
-    
+    var dismissEditViewButtonItem: UIBarButtonItem?
     //alarmbutton 쇼잉을 위한 임시 변수!! 곧 삭제됩니다.
     var tempCountForBadge = 0
+    var tempArrayForCheck: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +44,7 @@ class MyStudyMainView: UIViewController {
         tempButton = UIBarButtonItem(title: "임시버튼", style: .done, target: self, action: #selector(goToLoginAction(_ :)))
         self.do {
             $0.title = "내 스터디"
-            $0.navigationItem.rightBarButtonItems = [moreButton!, alarmButton, tempButton!]
             $0.navigationController?.navigationBar.backgroundColor = UIColor.appColor(.testColor)
-            
-            //임시로 이렇게 처리
-//            $0.navigationController?.navigationBar.prefersLargeTitles = true
         }
         tableView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -51,11 +53,21 @@ class MyStudyMainView: UIViewController {
             $0.dataSource = self
         }
         alarmButton.do {
-            $0.button.addTarget(self, action: #selector(alarmButtonAction(_:)), for: .touchUpInside)
+            $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
         }
+        dismissEditViewButtonItem = UIBarButtonItem(title: "나가기", style: .done, target: self, action: #selector(dismissEditViewButtonItemAction))
     }
     
     func layout() {
+        switch state {
+        case .edit:
+            self.navigationItem.leftBarButtonItems = [dismissEditViewButtonItem!]
+            break
+        case .normal:
+            self.navigationItem.rightBarButtonItems = [moreButton!, alarmButton, tempButton!]
+            break
+        }
+        
         view.addSubview(tableView)
         
         tableView.do {
@@ -69,7 +81,7 @@ class MyStudyMainView: UIViewController {
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
         let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let edit =  UIAlertAction(title: "스터디 편집", style: .default) {_ in }
+        let edit =  UIAlertAction(title: "스터디 편집", style: .default) { (action) in self.editButtonAction() }
         let temp =  UIAlertAction(title: "여긴뭐들어갑니까", style: .default) {_ in }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         [edit,temp,cancel].forEach {
@@ -78,10 +90,22 @@ class MyStudyMainView: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @objc func alarmButtonAction(_ sender: UIBarButtonItem) {
-//        alarmButton.badgeLabel.isHidden = false
-//        tempCountForBadge += 1
-//        alarmButton.badgeLabel.text = "\(tempCountForBadge)"
+    @objc func dismissEditViewButtonItemAction() {
+        self.navigationItem.leftBarButtonItems?.removeAll()
+        state = .normal
+        layout()
+    }
+    
+    @objc func editButtonAction() {
+        self.navigationItem.rightBarButtonItems?.removeAll()
+        state = .edit
+        layout()
+    }
+    
+    @objc func alarmButtonAction() {
+        alarmButton.badgeLabel.isHidden = false
+        tempCountForBadge += 1
+        alarmButton.badgeLabel.text = "\(tempCountForBadge)"
         let view = NotificationView()
         self.navigationController?.pushViewController(view, animated: true)
     }
@@ -101,7 +125,7 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
 
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 10
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyStudyMainTableViewCell.identifier) as! MyStudyMainTableViewCell
@@ -112,8 +136,16 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let view = StudyDetailView()
-        view.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(view, animated: true)
+        switch state {
+        case .normal:
+            let view = StudyDetailView()
+            view.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(view, animated: true)
+            break
+        case .edit:
+            tempArrayForCheck.append(indexPath.row)
+            break
+        }
+        
     }
 }
