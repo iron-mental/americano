@@ -16,7 +16,7 @@ class StudyDetailView: UIViewController {
                                       TempChatView()]
 
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
-    let childPageView = PageViewController(transitionStyle: .scroll,
+    let childPageView = UIPageViewController(transitionStyle: .scroll,
                                            navigationOrientation: .horizontal,
                                            options: nil)
     lazy var tabSege = UISegmentedControl(items: state)
