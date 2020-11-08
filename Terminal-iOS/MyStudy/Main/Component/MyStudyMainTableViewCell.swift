@@ -18,6 +18,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
     let newChatLabel = UILabel()
     let newNoticeLabel = UILabel()
     let newMemberLabel = UILabel()
+    var checkBox = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -68,15 +69,16 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.layer.masksToBounds = true
             $0.textAlignment = .center
         }
+        checkBox.do {
+            $0.layer.borderWidth = 1
+            $0.layer.borderColor = UIColor.appColor(.mainColor).cgColor
+            $0.layer.cornerRadius = checkBox.frame.width / 2
+            $0.layer.masksToBounds = true
+        }
     }
     
     func layout() {
-        addSubview(studyMainimage)
-        addSubview(locationLabel)
-        addSubview(titleLabel)
-        addSubview(newChatLabel)
-        addSubview(newNoticeLabel)
-        addSubview(newMemberLabel)
+        [studyMainimage, locationLabel, titleLabel, newChatLabel, newNoticeLabel, newMemberLabel, checkBox].forEach { addSubview($0) }
         
         studyMainimage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -117,7 +119,13 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(14/375) * parentFrame.width).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (50/375) * parentFrame.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (19/667) * parentFrame.height).isActive = true
-    
+        }
+        checkBox.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(14/375) * parentFrame.width).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
         }
     }
     
