@@ -12,14 +12,14 @@ class TitleWithContentView: UIView {
     var title = UILabel()
     var label = UILabel()
     var textView = UITextView()
-    var state: State = .before
+    var state: StudyDetailViewState = .before
     var contentText: [String] = ["기본 제목", "기본 텍스트"] {
         didSet {
             attribute()
         }
     }
     
-    init(state: State) {
+    init(state: StudyDetailViewState) {
         super.init(frame: CGRect.zero)
         attribute()
         self.state = state
@@ -59,6 +59,7 @@ class TitleWithContentView: UIView {
     
     func labelLayout() {
         [title, label, textView].forEach { addSubview($0) }
+        
         label.isHidden = false
         textView.isHidden = true
         title.do {

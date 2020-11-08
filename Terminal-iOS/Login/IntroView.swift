@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum state: String {
+enum IntroViewState: String {
     case emailInput
     case pwdInput
     case nickname
@@ -21,7 +21,7 @@ class IntroView: UIViewController {
     var guideLabel = UILabel()
     var emailTextfield = UITextField()
     var cancelButton = UIButton()
-    var state: state?
+    var state: IntroViewState?
     var rightBarButton: UIBarButtonItem?
     var leftBarButton: UIBarButtonItem?
     
