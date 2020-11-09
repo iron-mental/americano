@@ -31,7 +31,7 @@ class ProfileDetailView: UIViewController {
     
     // MARK: Set Attribute
     func attribute() {
-        let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"), style: .plain, target: nil, action: nil)
+        let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"), style: .plain, target: self, action: #selector(pushProfileModify))
         [carrer, project, sns, email, location].forEach {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
@@ -102,6 +102,11 @@ class ProfileDetailView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
+    }
+    
+    @objc func pushProfileModify() {
+        let view = ProfileModifyView()
+        navigationController?.pushViewController(view, animated: false)
     }
 }
 

@@ -54,7 +54,6 @@ class ProfileView: UIView {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
-        print(UIScreen.main.bounds.height * 0.15)
         name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20).isActive = true
