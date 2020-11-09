@@ -9,6 +9,7 @@
 import UIKit
 
 class ProfileDetailView: UIViewController {
+    // MARK: Init Property
     var presenter: ProfileDetailPresenterProtocol?
     let scrollView = UIScrollView()
     let profile = ProfileView()
@@ -21,12 +22,14 @@ class ProfileDetailView: UIViewController {
     
     let projectStack = UIStackView()
     
+    // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
     }
     
+    // MARK: Set Attribute
     func attribute() {
         let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"), style: .plain, target: nil, action: nil)
         [carrer, project, sns, email, location].forEach {
@@ -44,6 +47,7 @@ class ProfileDetailView: UIViewController {
         }
     }
     
+    // MARK: Set Layout
     func layout() {
         view.addSubview(scrollView)
         [profile, carrer, project, sns, email, location].forEach { scrollView.addSubview($0) }
