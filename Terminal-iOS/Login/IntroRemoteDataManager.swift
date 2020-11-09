@@ -19,16 +19,11 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         let urlComponents = URLComponents(string: "http://3.35.154.27:3000/v1/user/check-email")
         guard var url = urlComponents?.url else { return }
         url.appendPathComponent("\(input)")
-//        DispatchQueue.global(qos: .background).async {
             AF.request(url, encoding: JSONEncoding.default)
                 .responseJSON { response in
                     result = JSON(response.data)["result"].bool!
-                    print("이거받아온거",JSON(response.data)["result"].bool!)
                     completionHandler(result)
                 }.resume()
-        //        }
-        print("이건 나갈거",result)
-        
     }
     
     func getSignUpValidInfo(signUpMaterial: [String]) -> Bool {

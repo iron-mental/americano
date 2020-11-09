@@ -14,7 +14,6 @@ class IntroInteractor: IntroInteractorProtocol {
     
     func checkedEmailValid(input: String) {
         if input.contains("@") && input.contains(".") {
-            
             remoteDataManager?.getEmailValidInfo(input: input, completionHandler: { result in
                 if result {
                     self.presenter?.emailValidInfo(result: true)
