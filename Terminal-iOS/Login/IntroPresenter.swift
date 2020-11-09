@@ -15,7 +15,6 @@ class IntroPresenter: IntroPresenterProtocol {
     var interactor: IntroInteractorProtocol?
     
     func didClickedRightBarButton(input: String, state: IntroViewState) {
-        print(state)
         switch state {
         case .emailInput:
             interactor?.checkedEmailValid(input: input)

@@ -53,7 +53,7 @@ protocol IntroRemoteDataManagerProtocol: class {
 protocol IntroLocalDataManagerProtocol: class {
     var email: String { get set }
     var password: String { get set }
-    var nickname: String? { get set}
+    var nickname: String { get set}
     
     func signUp(nickname: String) -> [String]
 }

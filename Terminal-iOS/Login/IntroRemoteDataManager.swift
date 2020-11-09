@@ -24,7 +24,6 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         AF.request(url, encoding: JSONEncoding.default)
             .responseJSON { response in
                 result = JSON(response.data)["result"].bool!
-                print(JSON(response.data)["message"])
             }.resume()
         
         return result
@@ -42,7 +41,6 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         var url = URL(string: "http://3.35.154.27:3000/v1/user")!
         AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
             result = JSON(response.data)["result"].bool!
-            print("이거 결과아닙니까?",JSON(response.data)["message"].string!)
         }.resume()
         return result
     }

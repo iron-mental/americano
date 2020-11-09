@@ -11,11 +11,11 @@ import Foundation
 class IntroInteractor: IntroInteractorProtocol {
     var presenter: IntroPresenterProtocol?
     var remoteDataManager: IntroRemoteDataManagerProtocol?
-    var localDataManager: IntroLocalDataManagerProtocol?
     
     func checkedEmailValid(input: String) {
         if input.contains("@") && input.contains(".") {
-            if ((remoteDataManager?.getEmailValidInfo(input: input)) != nil) {
+            guard let result = remoteDataManager?.getEmailValidInfo(input: input) else { return }
+            if result {
                 presenter?.emailValidInfo(result: true)
                 IntroLocalDataManager.shared.email = input
             } else {

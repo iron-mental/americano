@@ -16,14 +16,6 @@ class IntroLocalDataManager: IntroLocalDataManagerProtocol {
     var nickname =  ""
     
     func signUp(nickname: String) -> [String] {
-        print(email)
-        print(password)
-        print(nickname)
-//        guard let finalEmail = self.email, let finalPassword = self.password, let finalNickname = self.nickname else {
-//            return []
-            
-//        }
-        print(IntroLocalDataManager.shared.email, IntroLocalDataManager.shared.password, IntroLocalDataManager.shared.nickname)
         return [IntroLocalDataManager.shared.email, IntroLocalDataManager.shared.password, IntroLocalDataManager.shared.nickname]
     }
 }
