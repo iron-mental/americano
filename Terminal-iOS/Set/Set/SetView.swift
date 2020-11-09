@@ -147,7 +147,7 @@ class SetView: UIViewController {
     }
     
     @objc func pushProfileModify(_ sender: UITapGestureRecognizer) {
-        let view = ProfileModifyView()
+        let view = ProfileDetailView()
         self.navigationController?.pushViewController(view, animated: true)
     }
 }

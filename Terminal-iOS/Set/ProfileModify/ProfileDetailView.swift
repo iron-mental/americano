@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ProfileModifyView: UIViewController {
-    var presenter: ProfileModifyPresenterProtocol?
+class ProfileDetailView: UIViewController {
+    var presenter: ProfileDetailPresenterProtocol?
     let scrollView = UIScrollView()
     let profile = ProfileView().then {
         $0.layer.cornerRadius = 10
@@ -100,6 +100,6 @@ class ProfileModifyView: UIViewController {
     }
 }
 
-extension ProfileModifyView: ProfileModifyViewProtocol {
+extension ProfileDetailView: ProfileDetailViewProtocol {
     
 }

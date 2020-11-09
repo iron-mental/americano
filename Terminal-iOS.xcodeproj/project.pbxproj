@@ -13,10 +13,10 @@
 		A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5172168252CFA90005AD11B /* SetInteractor.swift */; };
 		A517216D252CFAAA005AD11B /* SetProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A517216C252CFAAA005AD11B /* SetProtocols.swift */; };
 		A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D8BE025264DB9003BD1B9 /* AccountCell.swift */; };
-		A521DDED252DEA7E00F83DB3 /* ProfileModifyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDEC252DEA7E00F83DB3 /* ProfileModifyProtocols.swift */; };
-		A521DDF1252F0C9600F83DB3 /* ProfileModifyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF0252F0C9500F83DB3 /* ProfileModifyInteractor.swift */; };
-		A521DDF4252F0D6300F83DB3 /* ProfileModifyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF3252F0D6300F83DB3 /* ProfileModifyPresenter.swift */; };
-		A521DDF7252F107A00F83DB3 /* ProfileModifyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF6252F107A00F83DB3 /* ProfileModifyWireFrame.swift */; };
+		A521DDED252DEA7E00F83DB3 /* ProfileDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */; };
+		A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */; };
+		A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */; };
+		A521DDF7252F107A00F83DB3 /* ProfileDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */; };
 		A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */; };
 		A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */; };
 		A5686A452524F048005990DC /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A442524F048005990DC /* NotiCell.swift */; };
@@ -29,7 +29,7 @@
 		A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D6254E8C58006CE9A2 /* TempChatView.swift */; };
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
-		A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileModifyView.swift */; };
+		A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileDetailView.swift */; };
 		A5BA1ED6254A8E9C0089D4E9 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */; };
 		A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1ED9254A8FF00089D4E9 /* NotificationCell.swift */; };
 		A5BA1EE1254A99250089D4E9 /* Noti.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1EE0254A99250089D4E9 /* Noti.swift */; };
@@ -134,10 +134,10 @@
 		A5172168252CFA90005AD11B /* SetInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInteractor.swift; sourceTree = "<group>"; };
 		A517216C252CFAAA005AD11B /* SetProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProtocols.swift; sourceTree = "<group>"; };
 		A51D8BE025264DB9003BD1B9 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
-		A521DDEC252DEA7E00F83DB3 /* ProfileModifyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyProtocols.swift; sourceTree = "<group>"; };
-		A521DDF0252F0C9500F83DB3 /* ProfileModifyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyInteractor.swift; sourceTree = "<group>"; };
-		A521DDF3252F0D6300F83DB3 /* ProfileModifyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyPresenter.swift; sourceTree = "<group>"; };
-		A521DDF6252F107A00F83DB3 /* ProfileModifyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyWireFrame.swift; sourceTree = "<group>"; };
+		A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailProtocols.swift; sourceTree = "<group>"; };
+		A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailInteractor.swift; sourceTree = "<group>"; };
+		A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailPresenter.swift; sourceTree = "<group>"; };
+		A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailWireFrame.swift; sourceTree = "<group>"; };
 		A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Ext.swift"; path = "Terminal-iOS/Extensions-Utillities/UIColor+Ext.swift"; sourceTree = SOURCE_ROOT; };
 		A5686A442524F048005990DC /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		A57C33D6254E8C58006CE9A2 /* TempChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempChatView.swift; sourceTree = "<group>"; };
 		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
-		A5B78A95252B950600E0B440 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
+		A5B78A95252B950600E0B440 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
 		A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		A5BA1ED9254A8FF00089D4E9 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		A5BA1EE0254A99250089D4E9 /* Noti.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noti.swift; sourceTree = "<group>"; };
@@ -393,11 +393,11 @@
 			children = (
 				A521DDF9252F108400F83DB3 /* DataManager */,
 				A5A20EEC25418CE300060FFA /* Component */,
-				A5B78A95252B950600E0B440 /* ProfileModifyView.swift */,
-				A521DDEC252DEA7E00F83DB3 /* ProfileModifyProtocols.swift */,
-				A521DDF0252F0C9500F83DB3 /* ProfileModifyInteractor.swift */,
-				A521DDF3252F0D6300F83DB3 /* ProfileModifyPresenter.swift */,
-				A521DDF6252F107A00F83DB3 /* ProfileModifyWireFrame.swift */,
+				A5B78A95252B950600E0B440 /* ProfileDetailView.swift */,
+				A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */,
+				A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */,
+				A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */,
+				A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */,
 			);
 			path = ProfileModify;
 			sourceTree = "<group>";
@@ -683,7 +683,6 @@
 		CCBC88BB254B101A00C2A6C4 /* StudyDetail */ = {
 			isa = PBXGroup;
 			children = (
-				CCBC88CD254BEDD000C2A6C4 /* StudyDetailViewComponent */,
 			);
 			path = StudyDetail;
 			sourceTree = "<group>";
@@ -880,7 +879,7 @@
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
 				CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */,
 				CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */,
-				A521DDF1252F0C9600F83DB3 /* ProfileModifyInteractor.swift in Sources */,
+				A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CCB139AF2557EA0600410184 /* TempMyStudyList.swift in Sources */,
 				CCBC88BD254B104300C2A6C4 /* StudyDetailViewController.swift in Sources */,
@@ -895,7 +894,7 @@
 				CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */,
 				CC3F99202545448E00428B11 /* HomeView.swift in Sources */,
 				CC45F555254AA41600DC31C6 /* SearchLocationPresenter.swift in Sources */,
-				A521DDF7252F107A00F83DB3 /* ProfileModifyWireFrame.swift in Sources */,
+				A521DDF7252F107A00F83DB3 /* ProfileDetailWireFrame.swift in Sources */,
 				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
 				CC26AD58251B27B3006B11E9 /* LocationUIVIew.swift in Sources */,
 				A5BA1EE1254A99250089D4E9 /* Noti.swift in Sources */,
@@ -907,7 +906,7 @@
 				CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
 				CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */,
-				A521DDF4252F0D6300F83DB3 /* ProfileModifyPresenter.swift in Sources */,
+				A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */,
 				CCAF0FE6253303770060A2F6 /* MyStudyMainWireFrame.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,
@@ -921,7 +920,7 @@
 				A57097A6254D6B5F0001DE52 /* NoticeCell.swift in Sources */,
 				CC198E6F254C000A009D6CDF /* MemeberView.swift in Sources */,
 				CCBC88B6254ACF2500C2A6C4 /* BottomView.swift in Sources */,
-				A521DDED252DEA7E00F83DB3 /* ProfileModifyProtocols.swift in Sources */,
+				A521DDED252DEA7E00F83DB3 /* ProfileDetailProtocols.swift in Sources */,
 				A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */,
 				CCAF0FDC253303300060A2F6 /* MyStudyMainPresenter.swift in Sources */,
 				CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */,
@@ -931,7 +930,7 @@
 				CC3F992325454B5500428B11 /* Terminal.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
-				A5B78A96252B950600E0B440 /* ProfileModifyView.swift in Sources */,
+				A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */,
 				CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
 				CC45F558254AA42800DC31C6 /* SearchLocationRemoteDataManager.swift in Sources */,

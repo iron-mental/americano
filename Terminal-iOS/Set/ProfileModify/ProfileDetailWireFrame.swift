@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ProfileModifyWireFrame: ProfileModifyWireFrameProtocol {
+class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
     static func createModule() -> UIViewController {
-        let view = ProfileModifyView()
-        let presenter: ProfileModifyPresenterProtocol & ProfileModifyInteractorOutputProtocol = ProfileModifyPresenter()
+        let view = ProfileDetailView()
+        let presenter: ProfileDetailPresenterProtocol & ProfileDetailInteractorOutputProtocol = ProfileDetailPresenter()
         
-        let interactor: ProfileModifyInteractorInputProtocol & ProfileModifyRemoteDataManagerOutputProtocol = ProfileModifyInteractor()
+        let interactor: ProfileDetailInteractorInputProtocol & ProfileDetailRemoteDataManagerOutputProtocol = ProfileDetailInteractor()
         
-        let wireFrame: ProfileModifyWireFrameProtocol = ProfileModifyWireFrame()
+        let wireFrame: ProfileDetailWireFrameProtocol = ProfileDetailWireFrame()
         view.presenter = presenter
         
         presenter.view = view
@@ -24,7 +24,7 @@ class ProfileModifyWireFrame: ProfileModifyWireFrameProtocol {
         
         interactor.presenter = presenter
         
-        if let view = view as? ProfileModifyView {
+        if let view = view as? ProfileDetailView {
             return view
         } else {
             return UIViewController()
