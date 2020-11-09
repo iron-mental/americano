@@ -155,30 +155,7 @@ class IntroView: UIViewController {
     }
     
     @objc func didClickedNextButton() {
-        //추후에 optional한거 처리 해줘야함
         presenter?.didClickedRightBarButton(input: inputTextfield.text!, state: self.state!)
-        
-        let view = IntroView()
-        
-        switch state {
-        case .emailInput:
-            view.state = .pwdInput
-            self.inputTextfield.endEditing(true)
-            break
-        case .pwdInput:
-            view.state = .nickname
-            self.inputTextfield.endEditing(true)
-            break
-        case .nickname:
-            self.state = .nickname
-            dismiss(animated: true)
-            break
-        default:
-            print("none")
-        }
-        
-        navigationController?.pushViewController(view, animated: true) {
-        }
     }
     @objc func didClickedCancelButton() {
         switch state {
@@ -198,15 +175,49 @@ class IntroView: UIViewController {
 
 extension IntroView: IntroViewProtocol {
     func presentNextView() {
-        print("")
+        let view = IntroView()
+        let presenter = IntroPresenter()
+        let interactor = IntroInteractor()
+        let remoteDataManager = IntroRemoteDataManager()
+//        let localDataManager = IntroLocalDataManager()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.interactor = interactor
+        interactor.presenter = presenter
+        interactor.remoteDataManager = remoteDataManager
+//        interactor.localDataManager = localDataManager
+        
+        switch state {
+        case .emailInput:
+            view.state = .pwdInput
+            self.inputTextfield.endEditing(true)
+            break
+        case .pwdInput:
+            view.state = .nickname
+            self.inputTextfield.endEditing(true)
+            break
+        case .nickname:
+            self.state = .nickname
+            dismiss(animated: true)
+            break
+        default:
+            print("none")
+        }
+        navigationController?.pushViewController(view, animated: true) {
+        }
     }
     
     func presentCompleteView() {
-        print("")
+        dismiss(animated: true)
     }
     
     func showInvalidEmailAction() {
-        print("")
+        print("유효하지 않은 이메일입니다.")
+    }
+    
+    func showInvalidPasswordAction() {
+        print("유효하지 않은 비밀번호입니다.")
     }
     
     func showInvalidNickNameAction() {

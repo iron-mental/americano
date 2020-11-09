@@ -14,26 +14,36 @@ import SwiftyJSON
 
 
 class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
+    
     func getEmailValidInfo(input: String) -> Bool {
-        print(input)
-        let params : [String : Any] = [
-            "email" : input
-        ]
-        var urlComponents = URLComponents(string: "http://3.35.154.27:3000/v1/user/check-email")
+        var result = false
+        let urlComponents = URLComponents(string: "http://3.35.154.27:3000/v1/user/check-email")
         guard var url = urlComponents?.url else { return false }
-        
         url.appendPathComponent("\(input)")
+        
         AF.request(url, encoding: JSONEncoding.default)
             .responseJSON { response in
-//                let result: SocketMessage = try! JSONDecoder().decode(SocketMessage.self, from: "\(JSON(response.data))".data(using: .utf8))
-                
+                result = JSON(response.data)["result"].bool!
                 print(JSON(response.data)["message"])
-                print(JSON(response.data)["result"])
             }.resume()
-        return true
+        
+        return result
     }
     
-    func getSignUpValidInfo() {
-        print("signupvalid")
+    func getSignUpValidInfo(signUpMaterial: [String]) -> Bool {
+        var params: Parameters = [:]
+            params = [
+                "email" : signUpMaterial[0],
+                "password" : signUpMaterial[1],
+                "nickname" : signUpMaterial[2]
+            ]
+        
+        var result =  false
+        var url = URL(string: "http://3.35.154.27:3000/v1/user")!
+        AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
+            result = JSON(response.data)["result"].bool!
+            print("이거 결과아닙니까?",JSON(response.data)["message"].string!)
+        }.resume()
+        return result
     }
 }
