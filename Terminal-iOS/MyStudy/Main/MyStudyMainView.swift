@@ -58,13 +58,14 @@ class MyStudyMainView: UIViewController {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
         }
         dismissEditViewButtonItem = UIBarButtonItem(title: "나가기", style: .done, target: self, action: #selector(dismissEditViewButtonItemAction))
-        editDoneButton = UIBarButtonItem(title: nil, style: .done, target: self, action: #selector(editDoneButtonAction))
+        editDoneButton = UIBarButtonItem(title: "test", style: .done, target: self, action: #selector(editDoneButtonAction))
     }
     
     func layout() {
         switch state {
         case .edit:
             self.navigationItem.leftBarButtonItems = [dismissEditViewButtonItem!]
+            self.navigationItem.rightBarButtonItems = [editDoneButton!]
             break
         case .normal:
             self.navigationItem.rightBarButtonItems = [moreButton!, alarmButton, tempButton!]
@@ -95,6 +96,7 @@ class MyStudyMainView: UIViewController {
     
     @objc func dismissEditViewButtonItemAction() {
         self.navigationItem.leftBarButtonItems?.removeAll()
+        self.navigationItem.rightBarButtonItems?.removeAll()
         state = .normal
         layout()
         tempArrayForCheck.removeAll()
@@ -125,6 +127,10 @@ class MyStudyMainView: UIViewController {
     }
     
     @objc func editDoneButtonAction() {
+        tempArrayForCheck.forEach { checkedID in
+            print(checkedID)
+            TempMyStudyList.List.remove(at: TempMyStudyList.List.firstIndex(where: { $0.id == checkedID })!)
+        }
         dismissEditViewButtonItemAction()
     }
 }
@@ -147,11 +153,11 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         case .edit:
             cell.checkBox.isHidden = false
             [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
-            if tempArrayForCheck.contains(indexPath.row) {
-                    cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)
-                } else {
-                    cell.checkBox.backgroundColor = UIColor.appColor(.testColor)
-                }
+            if tempArrayForCheck.contains(TempMyStudyList.List[indexPath.row].id) {
+                cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)
+            } else {
+                cell.checkBox.backgroundColor = UIColor.appColor(.testColor)
+            }
             break
         }
         cell.locationLabel.text = TempMyStudyList.List[indexPath.row].location
@@ -171,10 +177,10 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
             navigationController?.pushViewController(view, animated: true)
             break
         case .edit:
-            if tempArrayForCheck.contains(indexPath.row) {
-                tempArrayForCheck.remove(at: tempArrayForCheck.firstIndex(of: indexPath.row)!)
+            if tempArrayForCheck.contains(TempMyStudyList.List[indexPath.row].id) {
+                tempArrayForCheck.remove(at: tempArrayForCheck.firstIndex(of: TempMyStudyList.List[indexPath.row].id)!)
             } else {
-                tempArrayForCheck.append(indexPath.row)
+                tempArrayForCheck.append(TempMyStudyList.List[indexPath.row].id)
             }
             break
         }
