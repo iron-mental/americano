@@ -9,14 +9,15 @@
 import UIKit
 import NMapsMap
 
-enum State {
+
+enum StudyDetailViewState {
     case before
     case edit
     case after
 }
 
 class StudyDetailViewController: UIViewController {
-    var state: State = .after
+    var state: StudyDetailViewState = .after
     
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
