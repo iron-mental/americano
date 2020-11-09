@@ -25,6 +25,7 @@ class MyStudyMainView: UIViewController {
     //alarmbutton 쇼잉을 위한 임시 변수!! 곧 삭제됩니다.
     var tempCountForBadge = 0
     var tempArrayForCheck: [Int] = []
+    var editDoneButton: UIBarButtonItem?
     
     
     override func viewDidLoad() {
@@ -57,6 +58,7 @@ class MyStudyMainView: UIViewController {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
         }
         dismissEditViewButtonItem = UIBarButtonItem(title: "나가기", style: .done, target: self, action: #selector(dismissEditViewButtonItemAction))
+        editDoneButton = UIBarButtonItem(title: nil, style: .done, target: self, action: #selector(editDoneButtonAction))
     }
     
     func layout() {
@@ -95,6 +97,7 @@ class MyStudyMainView: UIViewController {
         self.navigationItem.leftBarButtonItems?.removeAll()
         state = .normal
         layout()
+        tempArrayForCheck.removeAll()
         tableView.reloadData()
     }
     
@@ -120,6 +123,10 @@ class MyStudyMainView: UIViewController {
         view.state = .emailInput
         self.present(navigationController, animated: true)
     }
+    
+    @objc func editDoneButtonAction() {
+        dismissEditViewButtonItemAction()
+    }
 }
 
 extension MyStudyMainView: MyStudyMainViewProtocol {
@@ -128,7 +135,7 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
 
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return TempMyStudyList.List.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyStudyMainTableViewCell.identifier) as! MyStudyMainTableViewCell
@@ -140,7 +147,6 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         case .edit:
             cell.checkBox.isHidden = false
             [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
-            
             if tempArrayForCheck.contains(indexPath.row) {
                     cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)
                 } else {
@@ -148,6 +154,9 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
                 }
             break
         }
+        cell.locationLabel.text = TempMyStudyList.List[indexPath.row].location
+        cell.titleLabel.text = TempMyStudyList.List[indexPath.row].title
+        cell.studyMainimage.image = UIImage(named: TempMyStudyList.List[indexPath.row].image)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

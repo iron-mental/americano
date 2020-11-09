@@ -12,14 +12,13 @@ class MyStudyMainTableViewCell: UITableViewCell {
     static let identifier = "MyStudyMainTableViewCell"
     
     var parentFrame = UIScreen.main.bounds
-    let studyMainimage = UIImageView()
-    let locationLabel = UILabel()
-    let titleLabel = UILabel()
+    var studyMainimage = UIImageView()
+    var locationLabel = UILabel()
+    var titleLabel = UILabel()
     let newChatLabel = UILabel()
     let newNoticeLabel = UILabel()
     let newMemberLabel = UILabel()
     var checkBox = UIView()
-    var checkedFlag = false
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,7 +33,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
         }
         studyMainimage.do {
             $0.image = #imageLiteral(resourceName: "swiftmain")
-            $0.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * (53 / 375), height: UIScreen.main.bounds.height * (53 / 667))
             $0.contentMode = .scaleAspectFit
         }
         locationLabel.do {
@@ -73,7 +71,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
         checkBox.do {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.appColor(.mainColor).cgColor
-            $0.backgroundColor = checkedFlag ? UIColor.appColor(.testColor) : UIColor.systemBackground
+            $0.backgroundColor = UIColor.systemBackground
             $0.layer.cornerRadius = Terminal.convertWidth(value: 20) / 2
             $0.layer.masksToBounds = true
         }
@@ -86,6 +84,8 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: (24/375) * parentFrame.width).isActive = true
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 53)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 53)).isActive = true
         }
         locationLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -141,8 +141,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        checkedFlag.toggle()
-//        attribute()
         setNeedsLayout()
         layoutIfNeeded()
     }
