@@ -65,7 +65,7 @@ class ProfileDetailView: UIViewController {
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * (240 / 667)).isActive = true
+            $0.heightAnchor.constraint(equalTo: profile.heightAnchor).isActive = true
         }
         carrer.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +106,8 @@ class ProfileDetailView: UIViewController {
     
     @objc func pushProfileModify() {
         let view = ProfileModifyView()
+        view.nameModify.text = self.profile.name.text
+        view.descripModify.text = self.profile.descript.text
         navigationController?.pushViewController(view, animated: false)
     }
 }
