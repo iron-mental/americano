@@ -26,7 +26,7 @@ protocol IntroPresenterProtocol: class {
     var interactor: IntroInteractorProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func didClickedRightBarButton()
+    func didClickedRightBarButton(input: String, state: IntroViewState)
     
     //INTERACTOR -> PRESENTER
     func emailValidInfo(result: Bool)
@@ -38,11 +38,11 @@ protocol IntroInteractorProtocol: class {
     var remoteDataManager: IntroRemoteDataManagerProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
-    func checkedEmailValid()
+    func checkedEmailValid(input: String)
     func signUpValid()
 }
 
 protocol IntroRemoteDataManagerProtocol: class {
-    func getEmailValidInfo()
+    func getEmailValidInfo(input: String)
     func getSignUpValidInfo()
 }

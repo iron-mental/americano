@@ -15,6 +15,7 @@ enum IntroViewState: String {
 }
 
 class IntroView: UIViewController {
+    var presenter : IntroPresenterProtocol?
     
     var leftButton = UIButton()
     var rightbutton = UIButton()
@@ -154,6 +155,9 @@ class IntroView: UIViewController {
     }
     
     @objc func didClickedNextButton() {
+        //추후에 optional한거 처리 해줘야함
+        presenter?.didClickedRightBarButton(input: inputTextfield.text!, state: self.state!)
+        
         let view = IntroView()
         
         switch state {
@@ -191,3 +195,22 @@ class IntroView: UIViewController {
         }
     }
 }
+
+extension IntroView: IntroViewProtocol {
+    func presentNextView() {
+        <#code#>
+    }
+    
+    func presentCompleteView() {
+        <#code#>
+    }
+    
+    func showInvalidEmailAction() {
+        <#code#>
+    }
+    
+    func showInvalidNickNameAction() {
+        <#code#>
+    }
+}
+
