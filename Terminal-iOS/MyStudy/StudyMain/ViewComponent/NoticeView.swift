@@ -98,4 +98,9 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource {
         }
         return noticeCell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let view = NoticeDetailView()
+        navigationController?.pushViewController(view, animated: true)
+    }
 }
