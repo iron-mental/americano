@@ -289,7 +289,7 @@
 		A52F00D624FD182800DE3126 /* Set */ = {
 			isa = PBXGroup;
 			children = (
-				A5AB26FF252B6E9300A39240 /* ProfileModify */,
+				A5AB26FF252B6E9300A39240 /* MyProfile */,
 				A5AB26FD252B6C6400A39240 /* Set */,
 			);
 			path = Set;
@@ -388,7 +388,7 @@
 			path = Set;
 			sourceTree = "<group>";
 		};
-		A5AB26FF252B6E9300A39240 /* ProfileModify */ = {
+		A5AB26FF252B6E9300A39240 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
 				A521DDF9252F108400F83DB3 /* DataManager */,
@@ -399,7 +399,7 @@
 				A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */,
 				A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */,
 			);
-			path = ProfileModify;
+			path = MyProfile;
 			sourceTree = "<group>";
 		};
 		A5BA1ED4254A8E160089D4E9 /* Notification */ = {
