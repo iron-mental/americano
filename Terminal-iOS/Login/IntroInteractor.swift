@@ -14,16 +14,18 @@ class IntroInteractor: IntroInteractorProtocol {
     
     func checkedEmailValid(input: String) {
         if input.contains("@") && input.contains(".") {
-            guard let result = remoteDataManager?.getEmailValidInfo(input: input) else { return }
-            if result {
-                presenter?.emailValidInfo(result: true)
-                IntroLocalDataManager.shared.email = input
-            } else {
+            
+            remoteDataManager?.getEmailValidInfo(input: input, completionHandler: { result in
+                if result {
+                    self.presenter?.emailValidInfo(result: true)
+                    IntroLocalDataManager.shared.email = input
+                } else {
+                    self.presenter?.emailValidInfo(result: false)
+                }
+            }
+            )} else {
                 presenter?.emailValidInfo(result: false)
             }
-        } else {
-            presenter?.emailValidInfo(result: false)
-        }
     }
     
     func checkedPasswordValid(input: String) {
