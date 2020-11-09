@@ -10,9 +10,6 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-
-
-
 class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     func getEmailValidInfo(input: String,  completionHandler: @escaping (_ : Bool) -> ()) {
         var result = false
