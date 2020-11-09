@@ -11,11 +11,8 @@ import UIKit
 class ProfileDetailView: UIViewController {
     var presenter: ProfileDetailPresenterProtocol?
     let scrollView = UIScrollView()
-    let profile = ProfileView().then {
-        $0.layer.cornerRadius = 10
-        $0.backgroundColor = UIColor.appColor(.terminalBackground)
-        $0.profileImage.image = #imageLiteral(resourceName: "leehi")
-    }
+    let profile = ProfileView()
+    
     let carrer      = CarrerView()
     let project     = ProjectView()
     let sns         = SNSView()
@@ -40,6 +37,10 @@ class ProfileDetailView: UIViewController {
             $0.title = "프로필"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationItem.rightBarButtonItem = modifyBtn
+        }
+        profile.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.profileImage.image = #imageLiteral(resourceName: "leehi")
         }
     }
     
