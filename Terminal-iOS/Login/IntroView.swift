@@ -198,19 +198,19 @@ class IntroView: UIViewController {
 
 extension IntroView: IntroViewProtocol {
     func presentNextView() {
-        <#code#>
+        print("")
     }
     
     func presentCompleteView() {
-        <#code#>
+        print("")
     }
     
     func showInvalidEmailAction() {
-        <#code#>
+        print("")
     }
     
     func showInvalidNickNameAction() {
-        <#code#>
+        print("")
     }
 }
 

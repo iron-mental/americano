@@ -120,6 +120,16 @@ class MyStudyMainView: UIViewController {
     
     @objc func goToLoginAction(_ sender: UIBarButtonItem) {
         let view = IntroView()
+        let presenter = IntroPresenter()
+        let interactor = IntroInteractor()
+        let remoteDataManager = IntroRemoteDataManager()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.interactor = interactor
+        interactor.presenter = presenter
+        interactor.remoteDataManager = remoteDataManager
+        
         let navigationController = UINavigationController(rootViewController: view)
         navigationController.modalPresentationStyle = .fullScreen
         view.state = .emailInput

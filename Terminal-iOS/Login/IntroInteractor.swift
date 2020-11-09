@@ -13,12 +13,11 @@ class IntroInteractor: IntroInteractorProtocol {
     var remoteDataManager: IntroRemoteDataManagerProtocol?
     
     func checkedEmailValid(input: String) {
-        
         //이곳에서 이메일 유효성 검사를 마친 뒤 통과하면 이걸 해야댐
         remoteDataManager?.getEmailValidInfo(input: input)
     }
     
     func signUpValid() {
-        <#code#>
+        print("")
     }
 }

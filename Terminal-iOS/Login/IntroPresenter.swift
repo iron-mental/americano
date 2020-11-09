@@ -25,11 +25,11 @@ class IntroPresenter: IntroPresenterProtocol {
     }
     
     func emailValidInfo(result: Bool) {
-        <#code#>
+        print("")
     }
     
     func signUpValidInfo(result: Bool) {
-        <#code#>
+        print("")
     }
     
     

@@ -2,12 +2,14 @@ PODS:
   - Alamofire (5.2.2)
   - NMapsMap (3.8.0)
   - SwiftLint (0.39.2)
+  - SwiftyJSON (5.0.0)
   - Then (2.6.0)
 
 DEPENDENCIES:
   - Alamofire
   - NMapsMap
   - SwiftLint
+  - SwiftyJSON
   - Then
 
 SPEC REPOS:
@@ -15,14 +17,16 @@ SPEC REPOS:
     - Alamofire
     - NMapsMap
     - SwiftLint
+    - SwiftyJSON
     - Then
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
   NMapsMap: b3633ad688483a318be9293aeddd323a714fb08b
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 2d6ef1dfb9732a0c5868647f7cc252d6657b1099
+PODFILE CHECKSUM: 4ac18c5578052f1c3a1866e20db68f2dbf5604e0
 
 COCOAPODS: 1.9.1
