@@ -9,6 +9,8 @@
 import UIKit
 
 class SearchLocationPresenter: SearchLocationPresenterProtocol {
+   
+    
     var view: SearchLocationViewProtocol?
     var interactor: SearchLocationInteractorProtocol?
     var wireFrame: SearchLocationWireFrameProtocol?
@@ -16,4 +18,13 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
     func didSelectedItem(index: Int, view: UIViewController) {
         wireFrame?.goToSelectLocationView(view: view)
     }
+    
+    func didClickedSearchButton(text: String) {
+        interactor?.searchKeyWord(text: text)
+    }
+    
+    func searchResult(list: [searchLocationResult]) {
+        view?.showSearchResult(list: list)
+    }
+    
 }

@@ -10,7 +10,10 @@ import UIKit
 
 protocol SearchLocationViewProtocol: class {
     var presenter: SearchLocationPresenterProtocol? { get set }
+    
+    //PRESENTER -> VIEW
     func dismiss()
+    func showSearchResult(list: [searchLocationResult])
 }
 
 protocol SearchLocationPresenterProtocol: class {
@@ -21,14 +24,21 @@ protocol SearchLocationPresenterProtocol: class {
     //VIEW -> PRESENTER
     //추후에 index가 아닌 remoteDataManager로 부터 받아온 정보중 좌표값을 넘겨주어야 할듯 하네요
     func didSelectedItem(index: Int, view: UIViewController)
+    func didClickedSearchButton(text: String)
+    //INTERACTOR -> PRESENTER
+    func searchResult(list: [searchLocationResult])
 }
 
 protocol SearchLocationInteractorProtocol: class {
+    var presenter: SearchLocationPresenterProtocol? { get set }
     var remoteDataManager: SearchLocationRemoteDataManagerProtocol? { get set }
+    
+    //PRESENTER -> INTERACTOR
+    func searchKeyWord(text: String)
 }
 
 protocol SearchLocationRemoteDataManagerProtocol: class {
-    
+    func getSearchResult(text: String, completionHandler: @escaping (_: Bool, _ list: [searchLocationResult]) -> ())
 }
 
 protocol SearchLocationWireFrameProtocol: class {
