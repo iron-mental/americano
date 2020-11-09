@@ -41,6 +41,7 @@
 		A5C5B15325456E2800F4A86D /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B15225456E2800F4A86D /* EmailView.swift */; };
 		A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B155254573CD00F4A86D /* LocationView.swift */; };
 		A5D2A5F925373D180010AE1C /* HotKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */; };
+		A5E25C7425590DE40090E21E /* NoticeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E25C7325590DE40090E21E /* NoticeDetailView.swift */; };
 		CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */; };
 		CC198E6F254C000A009D6CDF /* MemeberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6E254C000A009D6CDF /* MemeberView.swift */; };
 		CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */; };
@@ -160,6 +161,7 @@
 		A5C5B15225456E2800F4A86D /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		A5C5B155254573CD00F4A86D /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeywordCell.swift; sourceTree = "<group>"; };
+		A5E25C7325590DE40090E21E /* NoticeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailView.swift; sourceTree = "<group>"; };
 		CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithContentView.swift; sourceTree = "<group>"; };
 		CC198E6E254C000A009D6CDF /* MemeberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeberView.swift; sourceTree = "<group>"; };
 		CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionView.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A5E25C7225590DC10090E21E /* NoticeViewComponent */,
 				CCBC88CD254BEDD000C2A6C4 /* StudyDetailViewComponent */,
 				A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */,
 				CCBC88BC254B104300C2A6C4 /* StudyDetailViewController.swift */,
@@ -437,6 +440,14 @@
 				A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		A5E25C7225590DC10090E21E /* NoticeViewComponent */ = {
+			isa = PBXGroup;
+			children = (
+				A5E25C7325590DE40090E21E /* NoticeDetailView.swift */,
+			);
+			path = NoticeViewComponent;
 			sourceTree = "<group>";
 		};
 		CC1BE0432511FD5400F88313 /* Component */ = {
@@ -876,6 +887,7 @@
 				CC26AD58251B27B3006B11E9 /* LocationUIVIew.swift in Sources */,
 				A5BA1EE1254A99250089D4E9 /* Noti.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
+				A5E25C7425590DE40090E21E /* NoticeDetailView.swift in Sources */,
 				CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */,
 				CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */,
 				CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */,

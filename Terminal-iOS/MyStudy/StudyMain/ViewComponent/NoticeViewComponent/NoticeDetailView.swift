@@ -28,12 +28,10 @@ class NoticeDetailView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         noticeBackground.do {
-            $0.backgroundColor = UIColor.appColor(.noticeColor)
             $0.layer.cornerRadius = 5
         }
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            $0.text = "공지"
             $0.textAlignment = .center
             $0.textColor = .white
             $0.clipsToBounds = true
