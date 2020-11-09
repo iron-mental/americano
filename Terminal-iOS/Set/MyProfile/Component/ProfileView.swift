@@ -62,10 +62,9 @@ class ProfileView: UIView {
         descript.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
-            $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         }
     }
     
