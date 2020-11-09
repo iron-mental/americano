@@ -27,7 +27,6 @@ class MyStudyMainView: UIViewController {
     var tempArrayForCheck: [Int] = []
     var editDoneButton: UIBarButtonItem?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -88,6 +87,7 @@ class MyStudyMainView: UIViewController {
         let edit =  UIAlertAction(title: "스터디 편집", style: .default) { (action) in self.editButtonAction() }
         let temp =  UIAlertAction(title: "여긴뭐들어갑니까", style: .default) {_ in }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
         [edit,temp,cancel].forEach {
             alert.addAction($0)
         }
@@ -135,10 +135,6 @@ class MyStudyMainView: UIViewController {
     }
 }
 
-extension MyStudyMainView: MyStudyMainViewProtocol {
-    
-}
-
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return TempMyStudyList.List.count
@@ -168,7 +164,6 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (91.7/667) * view.bounds.height
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch state {
         case .normal:
@@ -188,3 +183,8 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
     }
 }
+
+extension MyStudyMainView: MyStudyMainViewProtocol {
+    
+}
+

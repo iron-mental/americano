@@ -9,6 +9,7 @@
 import UIKit
 import NMapsMap
 
+
 enum StudyDetailViewState {
     case before
     case edit
