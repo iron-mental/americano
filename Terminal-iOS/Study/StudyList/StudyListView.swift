@@ -139,9 +139,11 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate {
         
         let study = studyList[indexPath.row]
         cell.setData(study)
-
-        
-        
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let view = StudyDetailViewController()
+        view.state = .before
+        self.present(view, animated: true)
     }
 }

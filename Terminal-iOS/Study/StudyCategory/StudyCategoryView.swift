@@ -16,6 +16,9 @@ class StudyCategoryView: UIViewController {
     lazy var tempButton = UIBarButtonItem(image: #imageLiteral(resourceName: "marker"), style: .plain, target: self, action: #selector(tempForStudyDetail))
     
     @objc func tempForStudyDetail() {
+         let view = StudyDetailViewController()
+        view.modalPresentationStyle = .fullScreen
+        present(view, animated: true)
     }
     
     let collectionView: UICollectionView = {
