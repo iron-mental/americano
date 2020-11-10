@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */; };
 		A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */; };
+		A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC912559613E009BE9A6 /* UITextView+Ext.swift */; };
 		A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AE2524952F00ACB241 /* SetPresenter.swift */; };
 		A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5172164252CFA47005AD11B /* SetWireFrame.swift */; };
 		A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5172168252CFA90005AD11B /* SetInteractor.swift */; };
@@ -132,6 +133,7 @@
 		0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
+		A510EC912559613E009BE9A6 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		A51438AE2524952F00ACB241 /* SetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPresenter.swift; sourceTree = "<group>"; };
 		A5172164252CFA47005AD11B /* SetWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWireFrame.swift; sourceTree = "<group>"; };
 		A5172168252CFA90005AD11B /* SetInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInteractor.swift; sourceTree = "<group>"; };
@@ -323,6 +325,13 @@
 			path = Study;
 			sourceTree = "<group>";
 		};
+		A55505BC255962E90089B919 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		A55C295B2535E9AB001E0A4D /* SearchStudy */ = {
 			isa = PBXGroup;
 			children = (
@@ -364,6 +373,7 @@
 				A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */,
 				A5BA1EF3254AE9900089D4E9 /* UISegmentControl+Ext.swift */,
 				A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */,
+				A510EC912559613E009BE9A6 /* UITextView+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -446,6 +456,7 @@
 		A5BBCEA925592A580098BB02 /* ProfileModify */ = {
 			isa = PBXGroup;
 			children = (
+				A55505BC255962E90089B919 /* Component */,
 				A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */,
 			);
 			path = ProfileModify;
@@ -947,6 +958,7 @@
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
 				A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */,
+				A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */,
 				CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
 				CC45F558254AA42800DC31C6 /* SearchLocationRemoteDataManager.swift in Sources */,

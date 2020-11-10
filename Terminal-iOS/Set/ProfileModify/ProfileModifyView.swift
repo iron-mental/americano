@@ -16,6 +16,10 @@ class ProfileModifyView: UIViewController {
     lazy var careerTitleModify = UITextField()
     lazy var careerDescriptModify = UITextView()
     
+    lazy var projectLabel = UILabel()
+    lazy var projectTitleModify = UITextField()
+    lazy var projectDescriptModify = UITextView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -68,6 +72,20 @@ class ProfileModifyView: UIViewController {
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
         }
+        projectLabel.do {
+            $0.text = "프로젝트"
+            $0.textColor = .white
+        }
+        projectTitleModify.do {
+            $0.text = "Terminal"
+            $0.textColor = .white
+            $0.dynamicFont(fontSize: 16, weight: .bold)
+            $0.textAlignment = .left
+            $0.backgroundColor = .blue
+        }
+        projectDescriptModify.do {
+            <#code#>
+        }
     }
     
     func layout() {
@@ -77,6 +95,9 @@ class ProfileModifyView: UIViewController {
         view.addSubview(careerLabel)
         view.addSubview(careerTitleModify)
         view.addSubview(careerDescriptModify)
+        view.addSubview(projectLabel)
+        view.addSubview(projectTitleModify)
+        view.addSubview(projectDescriptModify)
         
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -112,6 +133,25 @@ class ProfileModifyView: UIViewController {
         careerDescriptModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: careerTitleModify.bottomAnchor, constant: 4).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
+            $0.heightAnchor.constraint(lessThanOrEqualToConstant: 10).isActive = true
+        }
+        projectLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: careerDescriptModify.bottomAnchor, constant: 19).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
+        }
+        projectTitleModify.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: projectLabel.bottomAnchor, constant: 4).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
+        }
+        projectDescriptModify.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: projectTitleModify.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(lessThanOrEqualToConstant: 10).isActive = true
