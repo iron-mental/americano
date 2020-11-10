@@ -35,12 +35,12 @@ class EmailModifyView: UIView {
         emailLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 4).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
         }
         emailTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.emailLabel.bottomAnchor, constant: 4).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         }
     }

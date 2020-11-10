@@ -24,15 +24,23 @@ class ProfileModifyView: UIViewController {
     lazy var emailModify = EmailModifyView()
     lazy var locationModify = LocationModifyView()
     
+    // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         attribute()
         layout()
+        registerForKeyboardNotification()
         textViewDidChange(descripModify)
         textViewDidChange(careerDescriptModify)
         textViewDidChange(projectDescriptModify)
     }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        removeRegisterForKeyboardNotification()
+    }
     
+    // MARK: Set Attribute
     func attribute() {
         scrollView.do {
             $0.bounces = false
@@ -102,8 +110,10 @@ class ProfileModifyView: UIViewController {
             $0.layer.masksToBounds = true
             $0.isScrollEnabled = false
         }
+        
     }
     
+    // MARK: Set Layout
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
@@ -202,6 +212,60 @@ class ProfileModifyView: UIViewController {
             $0.heightAnchor.constraint(equalTo: locationModify.heightAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20).isActive = true
         }
+        snsModify.gitTextField.delegate = self
+        snsModify.linkedTextField.delegate = self
+        snsModify.webTextField.delegate = self
+        locationModify.locationTextField.delegate = self
+    }
+    
+    func registerForKeyboardNotification(){
+        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeRegisterForKeyboardNotification(){
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardHide(_ notification: Notification){
+        self.view.transform = .identity
+    }
+    
+    @objc func keyBoardShow(notification: NSNotification){
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        if projectTitleModify.isEditing == true{
+            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: projectTitleModify)
+        }
+        else if snsModify.gitTextField.isEditing == true{
+            print("sns1 호출")
+//            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: snsModify.gitTextField)
+        }
+        else if snsModify.linkedTextField.isEditing == true{
+            print("sns2 호출")
+//            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: snsModify.linkedTextField)
+        }
+        else if snsModify.webTextField.isEditing == true{
+            print("sns3 호출")
+//            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: snsModify.webTextField)
+        } else if locationModify.locationTextField.isEditing == true {
+            print("sns4 호출")
+//            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: locationModify.locationTextField)
+        }
+    }
+    
+    func keyboardAnimate(keyboardRectangle: CGRect ,textField: UITextField){
+//        print("전체 크기 :\(backgroundView.frame.height)")
+        print("전체 크기 :\(view.frame.height)")
+        print("키보드 크기 : \(keyboardRectangle.height)")
+        print("뷰 프레임크기 - 텍스트필드 y값 : \(self.view.frame.height - textField.frame.maxY)")
+        print("텍스트필드 값 : \(textField.frame.maxY)")
+//        self.view.frame.height
+        if keyboardRectangle.height > (self.view.frame.height - textField.frame.maxY){
+            self.view.transform = CGAffineTransform(translationX: 0, y: (view.frame.height - keyboardRectangle.height - textField.frame.maxY))
+        }
     }
 }
 
@@ -211,7 +275,6 @@ extension ProfileModifyView: UITextFieldDelegate {
         return true
     }
 }
-
 
 extension ProfileModifyView: UITextViewDelegate {
     //MARK: TextView Dynamic Height
