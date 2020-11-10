@@ -9,45 +9,44 @@
 import UIKit
 import NMapsMap
 
-protocol SelectLocationViewProtocols: class {
-    var presenter: SelectLocationPresenterProtocols? { get set }
+protocol SelectLocationViewProtocol: class {
+    var presenter: SelectLocationPresenterProtocol? { get set }
     //PRESENTER -> VIEW
-    func setViewWithResult(latLng: NMGLatLng, address: String)
+    func setViewWithResult(item: searchLocationResult)
 }
 
-protocol SelectLocationInteractorProtocols: class {
-    var presenter: SelectLocationPresenterProtocols? { get set }
-    var remoteDataManager: SelectLocationRemoteDataManagerProtocols? { get set }
-    var localDataManager: SelectLocationLocalDataManagerProtocols? { get set }
+protocol SelectLocationInteractorProtocol: class {
+    var presenter: SelectLocationPresenterProtocol? { get set }
+    var remoteDataManager: SelectLocationRemoteDataManagerProtocol? { get set }
+    var localDataManager: SelectLocationLocalDataManagerProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
-    func searchAddress(lat: Double?, Lng: Double?)
+    func searchAddress(item: searchLocationResult)
 }
 
-protocol SelectLocationPresenterProtocols: class {
-    var view: SelectLocationViewProtocols? { get set }
-    var interactor: SelectLocationInteractorProtocols? { get set }
-    var wireFrame: SelectLocationWireFrameProtocols? { get set }
+protocol SelectLocationPresenterProtocol: class {
+    var view: SelectLocationViewProtocol? { get set }
+    var interactor: SelectLocationInteractorProtocol? { get set }
+    var wireFrame: SelectLocationWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func getAddress(lat: Double?, Lng: Double?)
+    func getAddress(item: searchLocationResult)
     
     //INTERACTOR -> PRESENTER
-    func getAddressResult(latLng: NMGLatLng, address: String)
+    func getAddressResult(item: searchLocationResult)
 }
 
-protocol SelectLocationRemoteDataManagerProtocols: class {
+protocol SelectLocationRemoteDataManagerProtocol: class {
     //INTERACTOR -> REMOTEDATAMANAGER
-    func getAddressWithLatLng(latLng: NMGLatLng?) -> (NMGLatLng, String)
+    func getAddressInfo(lat: Double, lng: Double, completion: @escaping (_: Bool, _ item: searchLocationResult?) -> ())
 }
 
-protocol SelectLocationLocalDataManagerProtocols: class {
+protocol SelectLocationLocalDataManagerProtocol: class {
     //INTERACTOR -> LOCALDATAMANAGER
-    func getCurrentLocation() ->(NMGLatLng)
 }
 
-protocol SelectLocationWireFrameProtocols: class {
-    var presenter: SelectLocationPresenterProtocols? { get set }
+protocol SelectLocationWireFrameProtocol: class {
+    var presenter: SelectLocationPresenterProtocol? { get set }
     
     static func selectLocationViewModul(item: searchLocationResult) -> UIViewController
 }
