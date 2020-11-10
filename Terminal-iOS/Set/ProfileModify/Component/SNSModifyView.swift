@@ -40,8 +40,10 @@ class SNSModifyView: UIView {
         }
         gitTextField.do {
             $0.placeholder = "Github ID"
+            $0.textColor = .white
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.black.cgColor
+            $0.layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
+            $0.addLeftPadding()
         }
         linkedImage.do {
             $0.image = #imageLiteral(resourceName: "linkedin")
@@ -52,8 +54,10 @@ class SNSModifyView: UIView {
         }
         linkedTextField.do {
             $0.placeholder = "LinkedIn URL"
+            $0.textColor = .white
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.black.cgColor
+            $0.layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
+            $0.addLeftPadding()
         }
         webImage.do {
             $0.image = #imageLiteral(resourceName: "web")
@@ -64,13 +68,14 @@ class SNSModifyView: UIView {
         }
         webTextField.do {
             $0.placeholder = "URL"
+            $0.textColor = .white
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.black.cgColor
+            $0.layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
+            $0.addLeftPadding()
         }
     }
     
     func layout() {
-//
         [snsLabel, gitImage, gitLabel, gitTextField, linkedImage, linkedLabel, linkedTextField, webImage, webLabel, webTextField]
             .forEach { self.addSubview($0) }
         
