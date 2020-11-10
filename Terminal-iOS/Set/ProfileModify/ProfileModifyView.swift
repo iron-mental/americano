@@ -9,12 +9,8 @@
 import UIKit
 
 class ProfileModifyView: UIViewController {
-    lazy var scrollView = UIScrollView().then {
-        $0.backgroundColor = .red
-    }
-    lazy var backgroundView = UIView().then {
-        $0.backgroundColor = .blue
-    }
+    lazy var scrollView = UIScrollView()
+    lazy var backgroundView = UIView()
     lazy var profileImage = UIImageView()
     lazy var nameModify = UITextField()
     lazy var descripModify = UITextView()
@@ -208,6 +204,14 @@ class ProfileModifyView: UIViewController {
         }
     }
 }
+
+extension ProfileModifyView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
 
 extension ProfileModifyView: UITextViewDelegate {
     //MARK: TextView Dynamic Height
