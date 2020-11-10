@@ -10,7 +10,7 @@ import UIKit
 import NMapsMap
 
 class SelectLocationView: UIViewController {
-    var presenter: SelectLocationPresenterProtocols?
+    var presenter: SelectLocationPresenterProtocol?
     let pin = UIImageView()
     var task: DispatchWorkItem?
     var mapView = NMFMapView()
@@ -31,9 +31,8 @@ class SelectLocationView: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         bottomView.textField.becomeFirstResponder()
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
         mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng))))
+        
     }
     
     
@@ -62,9 +61,10 @@ class SelectLocationView: UIViewController {
         }
         bottomView.do {
             $0.completeButton.addTarget(self, action: #selector(didCompleteButtonClicked), for: .touchUpInside)
+            $0.Address.text = location?.address
         }
     }
-
+    
     func layout() {
         [mapView, pin, bottomView].forEach { view.addSubview($0) }
         
@@ -91,13 +91,6 @@ class SelectLocationView: UIViewController {
     }
 }
 
-extension SelectLocationView: SelectLocationViewProtocols {
-    
-    func setViewWithResult(latLng: NMGLatLng, address: String) {
-        print("setViewWithResult")
-    }
-}
-
 extension SelectLocationView: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
         task = DispatchWorkItem { [self] in
@@ -105,6 +98,9 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
             //추후에 여기서 mapView.cameraPosition.target.lat 으로 좌표알아내서 쏘면 됨
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                 self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
+                location?.lng = mapView.cameraPosition.target.lng
+                location?.lat = mapView.cameraPosition.target.lat
+                presenter?.getAddress(item: location!)
             })
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task!)
@@ -112,6 +108,7 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
     
     func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
         self.view.endEditing(true)
+        location?.placeName = nil
         task?.cancel()
         pin.alpha = 0.5
         UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
@@ -124,5 +121,13 @@ extension SelectLocationView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
+    }
+}
+
+extension SelectLocationView: SelectLocationViewProtocol {
+    func setViewWithResult(item: searchLocationResult) {
+        if item.address != "" {
+            bottomView.Address.text = item.address
+        }
     }
 }

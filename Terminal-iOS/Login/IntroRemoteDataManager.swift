@@ -18,6 +18,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         url.appendPathComponent("\(input)")
             AF.request(url, encoding: JSONEncoding.default)
                 .responseJSON { response in
+                    print(response)
                     result = JSON(response.data)["result"].bool!
                     completionHandler(result)
                 }.resume()

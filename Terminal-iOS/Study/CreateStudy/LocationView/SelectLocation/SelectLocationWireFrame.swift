@@ -8,8 +8,8 @@
 
 import UIKit
 
-class SelectLocationWireFrame: SelectLocationWireFrameProtocols {
-    var presenter: SelectLocationPresenterProtocols?
+class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
+    var presenter: SelectLocationPresenterProtocol?
     
     static func selectLocationViewModul(item: searchLocationResult) -> UIViewController {
         var view = SelectLocationView()

@@ -12,10 +12,13 @@ import SwiftyJSON
 
 struct searchLocationResult {
     var address: String
-    var placeName: String?
     var lat: Double
     var lng: Double
-    var category: String
+    var detailAddress: String?
+    var placeName: String?
+    var category: String?
+    var region_1depth_name: String?
+    var region_2depth_name: String?
 }
 
 class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
@@ -37,9 +40,9 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                             if let addressList = JSON(value)["documents"].array {
                                 for item in addressList {
                                     let item = searchLocationResult(address: item["road_address_name"].string! ,
-                                                                    placeName: item["place_name"].string! ,
                                                                     lat: Double(item["y"].string!) ?? 0,
                                                                     lng: Double(item["x"].string!) ?? 0,
+                                                                    placeName: item["place_name"].string! ,
                                                                     category: item["category_group_name"].string!)
                                     resultList.append(item)
                                 }
