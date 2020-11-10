@@ -15,8 +15,8 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
     var interactor: SearchLocationInteractorProtocol?
     var wireFrame: SearchLocationWireFrameProtocol?
     
-    func didSelectedItem(index: Int, view: UIViewController) {
-        wireFrame?.goToSelectLocationView(view: view)
+    func didSelectedItem(item: searchLocationResult, view: UIViewController) {
+        wireFrame?.goToSelectLocationView(item: item, view: view)
     }
     
     func didClickedSearchButton(text: String) {

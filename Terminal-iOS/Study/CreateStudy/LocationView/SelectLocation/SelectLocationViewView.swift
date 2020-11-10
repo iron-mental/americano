@@ -16,11 +16,14 @@ class SelectLocationView: UIViewController {
     var mapView = NMFMapView()
     var bottomView = BottomView()
     var keyboardHeight: CGFloat = 0
+    var location: searchLocationResult?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
+        
         bottomView.textField.delegate = self
         bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -30,7 +33,9 @@ class SelectLocationView: UIViewController {
         bottomView.textField.becomeFirstResponder()
         view.setNeedsLayout()
         view.layoutIfNeeded()
+        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng))))
     }
+    
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {

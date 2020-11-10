@@ -48,4 +48,6 @@ protocol SelectLocationLocalDataManagerProtocols: class {
 
 protocol SelectLocationWireFrameProtocols: class {
     var presenter: SelectLocationPresenterProtocols? { get set }
+    
+    static func selectLocationViewModul(item: searchLocationResult) -> UIViewController
 }

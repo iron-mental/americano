@@ -15,6 +15,7 @@ struct searchLocationResult {
     var placeName: String?
     var lat: Double
     var lng: Double
+    var category: String
 }
 
 class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
@@ -35,15 +36,11 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                         } else {
                             if let addressList = JSON(value)["documents"].array {
                                 for item in addressList {
-//                                    print(item)
-//                                    print(item["road_address_name"].string!)
-//                                    print(item["place_name"].string!)
-//                                    print(item["x"].string ?? "")
-//                                    print(item["y"].string ?? "")
                                     let item = searchLocationResult(address: item["road_address_name"].string! ,
                                                                     placeName: item["place_name"].string! ,
-                                                         lat: Double(item["x"].string!) ?? 0,
-                                                         lng: Double(item["y"].string!) ?? 0)
+                                                                    lat: Double(item["y"].string!) ?? 0,
+                                                                    lng: Double(item["x"].string!) ?? 0,
+                                                                    category: item["category_group_name"].string!)
                                     resultList.append(item)
                                 }
                             }

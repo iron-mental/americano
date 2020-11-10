@@ -17,7 +17,7 @@ class SearchLocationInteractor: SearchLocationInteractorProtocol {
             if result {
                 presenter?.searchResult(list: list)
             } else {
-                print(list)
+                presenter?.searchResult(list: [])
             }
         })
     }
