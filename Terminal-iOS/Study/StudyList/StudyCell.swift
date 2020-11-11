@@ -110,6 +110,8 @@ class StudyCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 13).isActive = true
             $0.leadingAnchor.constraint(equalTo: date.trailingAnchor, constant: 10).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
         
         mainImage.do {
