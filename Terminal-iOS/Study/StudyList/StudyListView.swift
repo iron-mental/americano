@@ -8,6 +8,8 @@
 
 import UIKit
 import Then
+import Alamofire
+import SwiftyJSON
 
 class StudyListView: UIViewController {
         
