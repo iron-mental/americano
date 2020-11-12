@@ -368,6 +368,7 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A5D058D0255D87420047CA9E /* New Group */,
 				A5E25C7225590DC10090E21E /* NoticeViewComponent */,
 				CCBC88CD254BEDD000C2A6C4 /* StudyDetailViewComponent */,
 				CCBC88BB254B101A00C2A6C4 /* StudyDetail */,
@@ -482,6 +483,13 @@
 				A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */,
 			);
 			path = ProfileModify;
+			sourceTree = "<group>";
+		};
+		A5D058D0255D87420047CA9E /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		A5D2A5F7253734310010AE1C /* Component */ = {

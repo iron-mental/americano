@@ -45,7 +45,6 @@ class TerminalNetwork {
                                 }
                             }
                         }
-                        print(studyArr)
                         completionHandler(studyArr)
                         completion(keyArr)
                     } catch {
