@@ -13,11 +13,13 @@ class StudyListPresenter: StudyListPresenterProtocol {
     var interactor: StudyListInteractorInputProtocol?
     var wireFrame: StudyListWireFrameProtocol?
     
-    func viewDidLoad() {
-        interactor?.retrieveStudyList()
+    func studyList(category: String, sort: String) {
+        interactor?.retrieveStudyList(category: "IOS", sort: "new")
     }
     
-    
+    func pagingStudyList() {
+        
+    }
 }
 
 extension StudyListPresenter: StudyListInteractorOutputProtocol {

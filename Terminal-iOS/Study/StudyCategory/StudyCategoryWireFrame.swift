@@ -42,7 +42,7 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
         let studyListViewController = StudyListWireFrame.createStudyListModule()
         
         if let sourceView = view as? UIViewController {
-           sourceView.navigationController?.pushViewController(studyListViewController, animated: true)
+            sourceView.navigationController?.pushViewController(studyListViewController, animated: true)
         }
     }
     

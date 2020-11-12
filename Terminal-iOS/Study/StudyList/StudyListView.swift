@@ -12,7 +12,8 @@ import Alamofire
 import SwiftyJSON
 
 class StudyListView: UIViewController {
-        
+    var category: String?
+    var sort: String?
     let tableView = UITableView()
     let aligmentView = UIView()
     let lateButton = UIButton()
@@ -25,7 +26,7 @@ class StudyListView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        presenter?.viewDidLoad()
+        presenter?.studyList(category: category!, sort: sort!)
     }
     
     func attribute() {
