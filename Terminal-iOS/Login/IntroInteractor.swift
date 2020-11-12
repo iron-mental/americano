@@ -44,7 +44,6 @@ class IntroInteractor: IntroInteractorProtocol {
     func signUpValid(input: String) {
         if input.count >= 2 && input.count <= 8 {
             IntroLocalDataManager.shared.nickname = input
-            
             if ((remoteDataManager?.getSignUpValidInfo(signUpMaterial: (IntroLocalDataManager.shared.signUp(nickname: input)))) != nil) {
                 presenter?.signUpValidInfo(result: true)
             }
@@ -53,10 +52,9 @@ class IntroInteractor: IntroInteractorProtocol {
         }
     }
     func checkedJoinValid(input: String) {
-        remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email,input], completionHandler: { (result, message) in
-            print(result)
-            print(message)
-            print("여기까지")
+        remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email,input], completionHandler: { [self] (result, data) in
+            
+            presenter?.joinValidInfo(result: result, joinInfo: "\(data)")
         })
     }
 }

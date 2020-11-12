@@ -40,4 +40,8 @@ class IntroPresenter: IntroPresenterProtocol {
     func signUpValidInfo(result: Bool) {
         view?.presentCompleteView()
     }
+    func joinValidInfo(result: Bool, joinInfo: String) {
+        result ? view?.presentCompleteView() : print(joinInfo)
+        
+    }
 }

@@ -33,6 +33,7 @@ protocol IntroPresenterProtocol: class {
     func emailValidInfo(result: Bool)
     func passwordValidInfo(result: Bool)
     func signUpValidInfo(result: Bool)
+    func joinValidInfo(result: Bool, joinInfo: String)
 }
 
 protocol IntroInteractorProtocol: class {
@@ -49,7 +50,7 @@ protocol IntroInteractorProtocol: class {
 protocol IntroRemoteDataManagerProtocol: class {
     func getEmailValidInfo(input: String, completionHandler: @escaping (_ : Bool) -> ())
     func getSignUpValidInfo(signUpMaterial: [String]) -> Bool
-    func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (_ result: Bool, _ message: String) -> ())
+    func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (_ result: Bool, _ message: Any) -> ())
 }
 
 protocol IntroLocalDataManagerProtocol: class {
