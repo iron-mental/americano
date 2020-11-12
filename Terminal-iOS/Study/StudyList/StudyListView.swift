@@ -154,6 +154,7 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
         
         let study = studyList[indexPath.row]
         cell.setData(study)
+        cell.mainImage.kf.setImage(with: URL(string: "http:/3.35.154.27:3000/images/study/1c345b04-b409-4330-917b-b6d27c73daf6.png"))
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

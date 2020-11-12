@@ -9,7 +9,7 @@ target 'Terminal-iOS' do
   pod 'NMapsMap'
   pod 'Alamofire'
   pod 'SwiftyJSON'
+  pod 'Kingfisher'
 # Pods for Terminal-iOS
 
 end
-
