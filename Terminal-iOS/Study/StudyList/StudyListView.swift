@@ -49,6 +49,7 @@ class StudyListView: UIViewController {
         tableView.do {
             $0.delegate = self
             $0.dataSource = self
+            $0.prefetchDataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
             $0.rowHeight = 105
@@ -131,7 +132,16 @@ extension StudyListView: StudyListViewProtocol {
     
 }
 
-extension StudyListView: UITableViewDataSource, UITableViewDelegate {
+extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if studyList.count == indexPath.row {
+                print(studyList.count)
+                print("끝이보인다앗!")
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studyList.count
     }

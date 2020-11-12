@@ -57,7 +57,10 @@ protocol StudyListRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func retrieveStudyList(completionHandler: @escaping ([Study]) -> ())
+//    func retrieveStudyList(completionHandler: @escaping ([Study]) -> ())
+    func retrieveStudyList(category: String, sort: String ,completionHandler: @escaping (([Study])) -> ())
+    func paginationRetrieveStudyList(keyValue: String, completionHandler: @escaping (([Study])) -> ())
+    
 }
 
 protocol StudyListRemoteDataManagerOutputProtocol: class {
