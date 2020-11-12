@@ -10,6 +10,10 @@ import UIKit
 import NMapsMap
 
 class SelectLocationPresenter: SelectLocationPresenterProtocol {
+    func didClickedCompletButton(item: searchLocationResult) {
+        print("접운채 이대로이렇게~ ㅠ힘껀안ㄴ아주겠어")
+    }
+    
     var view: SelectLocationViewProtocol?
     var interactor: SelectLocationInteractorProtocol?
     var wireFrame: SelectLocationWireFrameProtocol?

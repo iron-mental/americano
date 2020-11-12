@@ -9,6 +9,10 @@
 import UIKit
 
 class SelectLocationInteractor: SelectLocationInteractorProtocol {
+    func selectLocation(item: searchLocationResult) {
+        print("test")
+    }
+    
     var presenter: SelectLocationPresenterProtocol?
     var remoteDataManager: SelectLocationRemoteDataManagerProtocol?
     var localDataManager: SelectLocationLocalDataManagerProtocol?

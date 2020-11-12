@@ -22,6 +22,7 @@ protocol SelectLocationInteractorProtocol: class {
     
     //PRESENTER -> INTERACTOR
     func searchAddress(item: searchLocationResult)
+    func selectLocation(item: searchLocationResult)
 }
 
 protocol SelectLocationPresenterProtocol: class {
@@ -31,6 +32,7 @@ protocol SelectLocationPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func getAddress(item: searchLocationResult)
+    func didClickedCompletButton(item: searchLocationResult)
     
     //INTERACTOR -> PRESENTER
     func getAddressResult(item: searchLocationResult)

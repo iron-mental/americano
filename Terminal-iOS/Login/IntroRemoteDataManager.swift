@@ -39,4 +39,30 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         }.resume()
         return result
     }
+    
+    func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (_ result: Bool, _ message: String) -> ()) {
+        var params: Parameters = [
+            "email":"\(joinMaterial[0])",
+            "password":"\(joinMaterial[1])"
+        ]
+        var url = URL(string: "http://3.35.154.27:3000/v1/user/login")!
+        AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
+            var result = JSON(response.data)["result"].bool!
+//            var message = JSON(response.data)["data"].string!
+            switch result {
+            case true:
+                print(JSON(response.data)["result"])
+                break
+            case false:
+                print(JSON(response.data)["result"])
+                break
+            }
+            print(JSON(response.data)["result"])
+            print(JSON(response.data))
+//            var result = true
+            var message = "test"
+            completionHandler(result, message)
+        }.resume()
+        
+    }
 }

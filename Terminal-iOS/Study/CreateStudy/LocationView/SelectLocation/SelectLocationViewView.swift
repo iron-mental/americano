@@ -84,9 +84,9 @@ class SelectLocationView: UIViewController {
     }
     
     @objc func didCompleteButtonClicked() {
-        //추후에 로딩이미지 줍시다.
         presentingViewController?.dismiss(animated: false)
         self.presentingViewController?.presentingViewController?.dismiss(animated: false)
+//        presenter.
     }
 }
 
@@ -128,7 +128,6 @@ extension SelectLocationView: UITextFieldDelegate {
 
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: searchLocationResult) {
-
         if item.address != "" {
             bottomView.Address.text = item.address
         }
