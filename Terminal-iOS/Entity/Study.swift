@@ -13,8 +13,8 @@ struct Study {
     var subTitle: String
     var location: String
     var date: String
-    var managerImage: UIImage?
-    var mainImage: UIImage?
+    var managerImage: String?
+    var mainImage: String?
 }
 
 //이부분 테스트때매 만들었는데 윗부분 건드리기 애매해서 잠시 만들어놨습니다 ㅎㅎ

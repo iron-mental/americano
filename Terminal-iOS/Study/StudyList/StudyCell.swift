@@ -38,6 +38,8 @@ class StudyCell: UITableViewCell {
     }
     
     func setData(_ data: Study) {
+        guard let main = data.mainImage else { return }
+        guard let manager = data.managerImage else { return }
         mainTitle.do {
             $0.text = data.title
         }
@@ -53,14 +55,8 @@ class StudyCell: UITableViewCell {
         date.do {
             $0.text = data.date
         }
-        
-        managerImage.do {
-            $0.image = data.managerImage
-        }
-        
-        mainImage.do {
-            $0.image = data.mainImage
-        }
+        managerImage.kf.setImage(with: URL(string: manager))
+        mainImage.kf.setImage(with: URL(string: main))
     }
     
     func attribute() {

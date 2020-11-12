@@ -27,19 +27,7 @@ class TerminalNetwork {
                     do {
                         for index in data {
                             if index["title"].string != nil {
-//                                DispatchQueue.main.async {
-//                                    let url = URL(string: index["image"].string!)
-//                                    KingfisherManager.shared.retrieveImage(with: url as! Resource, options: nil, progressBlock: nil, completionHandler: { image, error, cacheType, imageURL in
-////                                        DispatchQueue.main.sync {
-//                                            temp = image!
-////                                        }
-//
-//                                    })
-////                                }
-////
-//                                let temp = Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: UIImage(named: "leehi")!, mainImage: temp)
-//                                studyArr.append(temp)
-                                let temp = try! Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: UIImage(named: "leehi")!, mainImage: UIImage(named: "mainImage")!)
+                                let temp = try! Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: index["leader_image"].string!, mainImage: index["image"].string!)
                                 studyArr.append(temp)
                             }
                             
@@ -91,7 +79,7 @@ class TerminalNetwork {
 //                                print(studyArr)
 //                            }
 //                        })
-                        let temp = Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: UIImage(named: "leehi")!, mainImage: UIImage(named: "swift")!)
+                        let temp = Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: index["leader_image"].string!, mainImage: index["image"].string!)
                         studyArr.append(temp)
                     }
                     completionHandler(studyArr)
