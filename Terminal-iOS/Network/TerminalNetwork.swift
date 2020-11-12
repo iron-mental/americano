@@ -63,8 +63,7 @@ class TerminalNetwork {
         let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"]).removeWhitespace()
         let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
         var studyArr: [Study] = []
-//        AF.request(<#T##convertible: URLConvertible##URLConvertible#>, method: <#T##HTTPMethod#>, parameters: ["study_id": 1])
-        
+
         AF.request(query).responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -79,5 +78,10 @@ class TerminalNetwork {
                 print("실패", err)
             }
         }
+    }
+    
+    // 키값으로 스터디 디테일을 구하는 플로우
+    static func getStudyDetail(_ keyValue: String, completionHandler: @escaping (StudyDetail) -> ()) {
+        
     }
 }

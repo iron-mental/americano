@@ -17,6 +17,7 @@ enum StudyDetailViewState {
 }
 
 class StudyDetailView: UIViewController {
+    var presenter: StudyDetailPresenterProtocol?
     var state: StudyDetailViewState = .after
     
     var scrollView = UIScrollView()
@@ -200,6 +201,25 @@ class StudyDetailView: UIViewController {
         //시뮬에서 앱죽는거 에러처리 해야함
         picker.sourceType = .camera
         present(picker, animated: true, completion: nil)
+    }
+}
+
+extension StudyDetailView: StudyDetailViewProtocol {
+    
+    func showStudyDetail(with studyDeatil: StudyDetail) {
+        
+    }
+    
+    func showError() {
+        
+    }
+    
+    func showLoading() {
+        
+    }
+    
+    func hideLoading() {
+        
     }
 }
 

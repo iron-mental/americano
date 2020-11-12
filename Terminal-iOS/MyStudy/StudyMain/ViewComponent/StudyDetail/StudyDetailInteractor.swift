@@ -7,3 +7,25 @@
 //
 
 import Foundation
+
+class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
+    var presenter: StudyDetailInteractorOutputProtocol?
+    
+    var localDatamanager: StudyDetailLocalDataManagerInputProtocol?
+    
+    var remoteDatamanager: StudyDetailRemoteDataManagerInputProtocol?
+    
+    func retrieveStudyCategory() {
+        
+    }
+}
+
+extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
+    func onStudyDetailRetrieved(_ studyDetail: StudyDetail) {
+        
+    }
+    
+    func onError() {
+        
+    }
+}

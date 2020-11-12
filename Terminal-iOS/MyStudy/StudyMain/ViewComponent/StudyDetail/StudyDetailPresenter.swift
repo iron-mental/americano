@@ -7,3 +7,35 @@
 //
 
 import Foundation
+
+class StudyDetailPresenter: StudyDetailPresenterProtocol {
+    var view: StudyDetailViewProtocol?
+    var interactor: StudyDetailInteractorInputProtocol?
+    var wireFrame: StudyDetailWireFrameProtocol?
+
+    func viewDidLoad() {
+        
+    }
+    
+    func showStudyListDetail() {
+        
+    }
+    
+    func goToStudyDetail(studyDetail: StudyDetail) {
+        
+    }
+    
+    func didClickedCreateButton() {
+        
+    }
+}
+
+extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
+    func didRetrieveStudyDetail(_ studyDetail: StudyDetail) {
+        
+    }
+    
+    func onError() {
+        
+    }
+}
