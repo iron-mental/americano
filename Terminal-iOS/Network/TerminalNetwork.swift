@@ -15,6 +15,7 @@ class TerminalNetwork {
         let url = "http://3.35.154.27:3000/v1/study?category=\(category)&sort=\(sort)"
         
         var studyArr: [Study] = []
+        var keyArr: [Int] = []
         AF.request(url).responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -24,6 +25,20 @@ class TerminalNetwork {
                             if index["title"].string != nil {
                                 let temp = try! Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: UIImage(named: "leehi")!, mainImage: UIImage(named: "mainImage")!)
                                 studyArr.append(temp)
+                            }
+                            
+                            // contents 들어있는 키값을 구할때
+                            if index["id"].int != nil {
+                                if let data = index["id"].int {
+                                    keyArr.append(data)
+                                }
+                            }
+                            
+                            // contents 없는 키값 구할때
+                            if index["title"].string == nil {
+                                if let data = index.int {
+                                    keyArr.append(data)
+                                }
                             }
                         }
                         completionHandler(studyArr)

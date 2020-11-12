@@ -10,14 +10,14 @@ import UIKit
 
 class StudyListPresenter: StudyListPresenterProtocol {
     var view: StudyListViewProtocol?
-    
     var interactor: StudyListInteractorInputProtocol?
-    
     var wireFrame: StudyListWireFrameProtocol?
     
     func viewDidLoad() {
         interactor?.retrieveStudyList()
     }
+    
+    
 }
 
 extension StudyListPresenter: StudyListInteractorOutputProtocol {

@@ -159,3 +159,22 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
         self.present(view, animated: true)
     }
 }
+
+extension StudyListView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let height: CGFloat = scrollView.frame.size.height
+        let contentYOffset: CGFloat = scrollView.contentOffset.y
+        let scrollViewHeight: CGFloat = scrollView.contentSize.height
+        let distanceFromBottom: CGFloat = scrollViewHeight - contentYOffset
+        
+        if distanceFromBottom < height {
+            let count: Int = studyList.count
+            for i in count..<(count + 5) {
+                studyList.append(Study(title: "gg", subTitle: "ㅎㅎ", location: "ㅎㅎ", date: "ㅎㅎ", managerImage: UIImage(named: "leehi")!, mainImage: UIImage(named: "mainImage")!))
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+}
