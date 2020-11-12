@@ -31,7 +31,7 @@ protocol StudyListPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func studyList(category: String, sort: String)
-    func pagingStudyList()
+    func pagingStudyList(keyValue: [Int])
     //    func showStudyDetail(forStudy study: Study)
 }
 
@@ -48,7 +48,7 @@ protocol StudyListInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func retrieveStudyList(category: String, sort: String)
-    func pagingRetrieveStudyList()
+    func pagingRetrieveStudyList(keyValue: [Int])
 }
 
 protocol StudyListDataManagerInputProtocol: class {
@@ -60,7 +60,7 @@ protocol StudyListRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func retrieveStudyList(category: String, sort: String ,completionHandler: @escaping (([Study])) -> ())
-    func paginationRetrieveStudyList(keyValue: String, completionHandler: @escaping (([Study])) -> ())
+    func paginationRetrieveStudyList(keyValue: [Int], completionHandler: @escaping (([Study])) -> ())
     
 }
 

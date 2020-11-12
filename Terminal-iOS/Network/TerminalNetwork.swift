@@ -52,8 +52,9 @@ class TerminalNetwork {
         }
     }
     
-    static func getNewStudyListForKey(_ keyValue: String, completionHandler: @escaping ([Study]) -> ()) {
-        let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(keyValue)"
+    static func getNewStudyListForKey(_ keyValue: [Int], completionHandler: @escaping ([Study]) -> ()) {
+        let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"])
+        let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
         var studyArr: [Study] = []
         AF.request(query).responseJSON { response in
             switch response.result {

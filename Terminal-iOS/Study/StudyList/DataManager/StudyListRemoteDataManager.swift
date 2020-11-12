@@ -17,7 +17,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
         TerminalNetwork.getNewStudyList(category, sort) { completionHandler($0) }
     }
     
-    func paginationRetrieveStudyList(keyValue: String, completionHandler: @escaping (([Study])) -> ()) {
+    func paginationRetrieveStudyList(keyValue: [Int], completionHandler: @escaping (([Study])) -> ()) {
         TerminalNetwork.getNewStudyListForKey(keyValue) { completionHandler($0) }
     }
 }

@@ -18,8 +18,8 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
             presenter?.didRetrieveStudies($0)
         })
     }
-    func pagingRetrieveStudyList() {
-        remoteDataManager?.paginationRetrieveStudyList(keyValue: "12,11,10,9,8,7,6,5,3,2", completionHandler: { [self] in
+    func pagingRetrieveStudyList(keyValue: [Int]) {
+        remoteDataManager?.paginationRetrieveStudyList(keyValue: keyValue, completionHandler: { [self] in
             presenter?.didRetrieveStudies($0)
         })
     }

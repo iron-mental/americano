@@ -14,11 +14,11 @@ class StudyListPresenter: StudyListPresenterProtocol {
     var wireFrame: StudyListWireFrameProtocol?
     
     func studyList(category: String, sort: String) {
-        interactor?.retrieveStudyList(category: "IOS", sort: "new")
+        interactor?.retrieveStudyList(category: category, sort: sort)
     }
     
-    func pagingStudyList() {
-        
+    func pagingStudyList(keyValue: [Int]) {
+        interactor?.pagingRetrieveStudyList(keyValue: keyValue)
     }
 }
 
