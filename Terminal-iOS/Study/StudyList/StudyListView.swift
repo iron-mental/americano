@@ -159,7 +159,7 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let view = StudyDetailViewController()
+        let view = StudyDetailView()
         view.state = .before
         self.present(view, animated: true)
     }

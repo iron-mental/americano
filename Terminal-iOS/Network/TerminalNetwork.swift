@@ -63,6 +63,7 @@ class TerminalNetwork {
         let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"]).removeWhitespace()
         let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
         var studyArr: [Study] = []
+//        AF.request(<#T##convertible: URLConvertible##URLConvertible#>, method: <#T##HTTPMethod#>, parameters: ["study_id": 1])
         
         AF.request(query).responseJSON { response in
             switch response.result {
