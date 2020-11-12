@@ -70,15 +70,6 @@ class TerminalNetwork {
             case .success(let value):
                 if let data = JSON(value)["data"].array {
                     for index in data {
-//                        var tempImage: UIImage?
-//                        let url = URL(string: index["image"].string!)
-//                        KingfisherManager.shared.retrieveImage(with: url as! Resource, options: nil, progressBlock: nil, completionHandler: { image, error, cacheType, imageURL in
-//                            if let mainImage = image {
-//                                let temp = Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: UIImage(named: "leehi")!, mainImage: mainImage)
-//                                studyArr.append(temp)
-//                                print(studyArr)
-//                            }
-//                        })
                         let temp = Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: index["leader_image"].string!, mainImage: index["image"].string!)
                         studyArr.append(temp)
                     }
@@ -88,9 +79,5 @@ class TerminalNetwork {
                 print("실패", err)
             }
         }
-    }
-    
-    static func getImage(completion: @escaping ([UIImage]) -> ()) {
-        
     }
 }

@@ -136,6 +136,8 @@ extension StudyListView: StudyListViewProtocol {
 }
 
 extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching {
+    
+    // 이거 안쓰는데 일단 나중을 위해 놔둠
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if studyList.count == indexPath.row {
