@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class TerminalNetwork {
-    static func getNewStudyList(_ category: String, _ sort: String, completionHandler: @escaping ([Study])->()) {
+    static func getNewStudyList(_ category: String, _ sort: String, completionHandler: @escaping ([Study])->(), completion: @escaping ([Int]) -> ()) {
         let url = "http://3.35.154.27:3000/v1/study?category=\(category)&sort=\(sort)"
         
         var studyArr: [Study] = []
@@ -42,6 +42,7 @@ class TerminalNetwork {
                             }
                         }
                         completionHandler(studyArr)
+                        completion(keyArr)
                     } catch {
                         print("error")
                     }
@@ -53,9 +54,10 @@ class TerminalNetwork {
     }
     
     static func getNewStudyListForKey(_ keyValue: [Int], completionHandler: @escaping ([Study]) -> ()) {
-        let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"])
+        let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"]).removeWhitespace()
         let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
         var studyArr: [Study] = []
+        
         AF.request(query).responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -67,7 +69,7 @@ class TerminalNetwork {
                     completionHandler(studyArr)
                 }
             case .failure(let err):
-                print(err)
+                print("실패")
             }
         }
     }

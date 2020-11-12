@@ -119,8 +119,10 @@ class StudyListView: UIViewController {
 extension StudyListView: StudyListViewProtocol {
     
     func showStudyList(with studies: [Study]) {
-        studyList = studies
-        tableView.reloadData()
+        for study in studies {
+            studyList.append(study)
+            tableView.reloadData()
+        }
     }
     
     func showLoading() {
@@ -169,13 +171,7 @@ extension StudyListView: UIScrollViewDelegate {
         let distanceFromBottom: CGFloat = scrollViewHeight - contentYOffset
         
         if distanceFromBottom < height {
-            let count: Int = studyList.count
-            for i in count..<(count + 5) {
-                studyList.append(Study(title: "gg", subTitle: "ㅎㅎ", location: "ㅎㅎ", date: "ㅎㅎ", managerImage: UIImage(named: "leehi")!, mainImage: UIImage(named: "mainImage")!))
-            }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            presenter?.pagingStudyList()
         }
     }
 }

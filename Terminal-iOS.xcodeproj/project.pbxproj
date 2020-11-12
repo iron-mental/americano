@@ -41,6 +41,7 @@
 		A5BA1EE7254AA8B70089D4E9 /* StudyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1EE6254AA8B70089D4E9 /* StudyDetailView.swift */; };
 		A5BA1EF4254AE9900089D4E9 /* UISegmentControl+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1EF3254AE9900089D4E9 /* UISegmentControl+Ext.swift */; };
 		A5BA4616255D0BC00061C511 /* TerminalNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA4615255D0BC00061C511 /* TerminalNetwork.swift */; };
+		A5BA4619255D38D30061C511 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA4618255D38D30061C511 /* String+Ext.swift */; };
 		A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */; };
 		A5C5B14A25455A4100F4A86D /* CarrerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14925455A4100F4A86D /* CarrerView.swift */; };
 		A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14C2545662600F4A86D /* ProjectView.swift */; };
@@ -169,6 +170,7 @@
 		A5BA1EE6254AA8B70089D4E9 /* StudyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailView.swift; sourceTree = "<group>"; };
 		A5BA1EF3254AE9900089D4E9 /* UISegmentControl+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentControl+Ext.swift"; sourceTree = "<group>"; };
 		A5BA4615255D0BC00061C511 /* TerminalNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalNetwork.swift; sourceTree = "<group>"; };
+		A5BA4618255D38D30061C511 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
 		A5C5B14925455A4100F4A86D /* CarrerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrerView.swift; sourceTree = "<group>"; };
 		A5C5B14C2545662600F4A86D /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				A5BA1EF3254AE9900089D4E9 /* UISegmentControl+Ext.swift */,
 				A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */,
 				A510EC912559613E009BE9A6 /* UITextView+Ext.swift */,
+				A5BA4618255D38D30061C511 /* String+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -897,6 +900,7 @@
 				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
 				CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */,
 				CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */,
+				A5BA4619255D38D30061C511 /* String+Ext.swift in Sources */,
 				CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */,
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,
 				CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */,

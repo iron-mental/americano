@@ -28,6 +28,15 @@ class StudyCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        mainTitle.text = nil
+        subTitle.text = nil
+        location.text = nil
+        date.text = nil
+        managerImage.image = nil
+        mainImage.image = nil
+    }
+    
     func setData(_ data: Study) {
         mainTitle.do {
             $0.text = data.title

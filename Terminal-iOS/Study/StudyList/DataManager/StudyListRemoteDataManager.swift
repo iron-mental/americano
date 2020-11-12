@@ -13,11 +13,31 @@ import SwiftyJSON
 class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
     var studyArr: [Study] = []
+    var keyValue: [Int] = []
+    var oldKeyValue: [Int] = []
+    var newKeyValue: [Int] = []
     func retrieveStudyList(category: String, sort: String ,completionHandler: @escaping (([Study])) -> ()) {
-        TerminalNetwork.getNewStudyList(category, sort) { completionHandler($0) }
+        TerminalNetwork.getNewStudyList(category, sort) { completionHandler($0)} completion: {
+            self.keyValue = $0
+        }
     }
     
-    func paginationRetrieveStudyList(keyValue: [Int], completionHandler: @escaping (([Study])) -> ()) {
-        TerminalNetwork.getNewStudyListForKey(keyValue) { completionHandler($0) }
+    func paginationRetrieveStudyList(completionHandler: @escaping (([Study])) -> ()) {
+        if keyValue.count >= 10 {
+            for i in 0..<10 {
+                newKeyValue.append(keyValue[0])
+                keyValue.remove(at: 0)
+            }
+        } else {
+            for i in 0..<keyValue.count{
+                newKeyValue.append(keyValue[0])
+                keyValue.remove(at: 0)
+            }
+        }
+        
+        if newKeyValue.count > 0 {
+            TerminalNetwork.getNewStudyListForKey(newKeyValue) { completionHandler($0) }
+        }
+        newKeyValue.removeAll()
     }
 }

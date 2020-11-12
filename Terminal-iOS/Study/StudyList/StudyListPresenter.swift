@@ -17,8 +17,8 @@ class StudyListPresenter: StudyListPresenterProtocol {
         interactor?.retrieveStudyList(category: category, sort: sort)
     }
     
-    func pagingStudyList(keyValue: [Int]) {
-        interactor?.pagingRetrieveStudyList(keyValue: keyValue)
+    func pagingStudyList() {
+        interactor?.pagingRetrieveStudyList()
     }
 }
 
