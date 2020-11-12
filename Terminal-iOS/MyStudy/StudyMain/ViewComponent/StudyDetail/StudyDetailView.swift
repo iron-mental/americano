@@ -39,6 +39,7 @@ class StudyDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        presenter?.showStudyListDetail(keyValue: "1")
     }
     
     func attribute() {
@@ -140,7 +141,6 @@ class StudyDetailView: UIViewController {
             $0.topAnchor.constraint(equalTo: snsIconsView.bottomAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 125).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyIntroduceView.label.isHidden == false ? studyIntroduceView.label.bottomAnchor : studyIntroduceView.textView.bottomAnchor ).isActive = true
         }
         memberView.do {

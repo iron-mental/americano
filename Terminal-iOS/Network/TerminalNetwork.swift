@@ -82,6 +82,15 @@ class TerminalNetwork {
     
     // 키값으로 스터디 디테일을 구하는 플로우
     static func getStudyDetail(_ keyValue: String, completionHandler: @escaping (StudyDetail) -> ()) {
+        let key = "http://3.35.154.27:3000/v1/study/\(keyValue)"
         
+        AF.request(key).responseJSON { response in
+            switch response.result {
+                case .success(let value):
+                    print(JSON(value))
+                case .failure(let err):
+                    print("실패", err)
+            }
+        }
     }
 }

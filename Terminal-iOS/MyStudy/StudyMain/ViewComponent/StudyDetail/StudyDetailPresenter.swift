@@ -17,8 +17,9 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
         
     }
     
-    func showStudyListDetail() {
-        
+    func showStudyListDetail(keyValue: String) {
+        print("presenter!!")
+        interactor?.retrieveStudyDetail(keyValue: keyValue)
     }
     
     func goToStudyDetail(studyDetail: StudyDetail) {

@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
+    var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
+    
+    func retrievePostList(keyValue: String, completionHandler: @escaping (StudyDetail) -> ()) {
+        TerminalNetwork.getStudyDetail(keyValue) {
+            print("Remote Manager")
+            completionHandler($0)
+        }
+    }
+}

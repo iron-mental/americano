@@ -167,7 +167,7 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch state {
         case .normal:
-            let view = StudyDetailView()
+            let view = MyStudyDetailView()
             view.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(view, animated: true)
             break
@@ -179,7 +179,6 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
             }
             break
         }
-        print(tempArrayForCheck)
         tableView.reloadData()
     }
 }

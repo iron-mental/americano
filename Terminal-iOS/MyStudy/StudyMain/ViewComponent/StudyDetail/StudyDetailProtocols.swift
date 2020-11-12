@@ -19,7 +19,7 @@ protocol StudyDetailViewProtocol: class {
 }
 
 protocol StudyDetailWireFrameProtocol: class {
-    static func createStudyCategory() -> UIViewController
+    static func createStudyDetail() -> UIViewController
     
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyDetailViewProtocol)
@@ -33,7 +33,7 @@ protocol StudyDetailPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    func showStudyListDetail()
+    func showStudyListDetail(keyValue: String)
     func goToStudyDetail(studyDetail: StudyDetail)
     func didClickedCreateButton()
 }
@@ -50,7 +50,7 @@ protocol StudyDetailInteractorInputProtocol: class {
     var remoteDatamanager: StudyDetailRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func retrieveStudyCategory()
+    func retrieveStudyDetail(keyValue: String)
 }
 
 protocol StudyDetailDataManagerInputProtocol: class {
@@ -61,7 +61,7 @@ protocol StudyDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func retrievePostList()
+    func retrievePostList(keyValue: String, completionHandler: @escaping (StudyDetail) -> ())
 }
 
 protocol StudyDetailRemoteDataManagerOutputProtocol: class {

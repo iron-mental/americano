@@ -20,6 +20,10 @@ class StudyListPresenter: StudyListPresenterProtocol {
     func pagingStudyList() {
         interactor?.pagingRetrieveStudyList()
     }
+    
+    func showStudyDetail(forStudy study: Study) {
+        wireFrame?.presentStudyDetailScreen(from: view!)
+    }
 }
 
 extension StudyListPresenter: StudyListInteractorOutputProtocol {

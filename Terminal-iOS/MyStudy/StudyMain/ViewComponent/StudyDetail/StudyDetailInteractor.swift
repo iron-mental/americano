@@ -10,13 +10,14 @@ import Foundation
 
 class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
     var presenter: StudyDetailInteractorOutputProtocol?
-    
     var localDatamanager: StudyDetailLocalDataManagerInputProtocol?
-    
     var remoteDatamanager: StudyDetailRemoteDataManagerInputProtocol?
     
-    func retrieveStudyCategory() {
-        
+    func retrieveStudyDetail(keyValue: String) {
+        remoteDatamanager?.retrievePostList(keyValue: keyValue, completionHandler: { [self] in
+            print("Interactor")
+            presenter?.didRetrieveStudyDetail($0)
+        })
     }
 }
 
