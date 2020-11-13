@@ -9,8 +9,6 @@
 import UIKit
 
 class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
-    
-    
     static func createStudyCategory() -> UIViewController {
         let view = StudyCategoryView()
         let presenter: StudyCategoryPresenterProtocol & StudyCategoryInteractorOutputProtocol = StudyCategoryPresenter()

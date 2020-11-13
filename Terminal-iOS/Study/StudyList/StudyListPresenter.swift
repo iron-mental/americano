@@ -21,7 +21,7 @@ class StudyListPresenter: StudyListPresenterProtocol {
         interactor?.pagingRetrieveStudyList()
     }
     
-    func showStudyDetail(forStudy study: Study) {
+    func showStudyDetail() {
         wireFrame?.presentStudyDetailScreen(from: view!)
     }
 }
