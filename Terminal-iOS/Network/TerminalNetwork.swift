@@ -27,9 +27,6 @@ class TerminalNetwork {
                     do {
                         for index in data {
                             if index["title"].string != nil {
-//                                print(index)
-//                                let temp = try! Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: index["leader_image"].string!, mainImage: index["image"].string!)
-
                                 let data = "\(index)".data(using: .utf8)
                                 let result = try! JSONDecoder().decode(Study.self, from: data!)
                                 studyArr.append(result)
@@ -73,7 +70,6 @@ class TerminalNetwork {
             case .success(let value):
                 if let data = JSON(value)["data"].array {
                     for index in data {
-//                        let temp = Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: index["leader_image"].string!, mainImage: index["image"].string!)
                         let data = "\(index)".data(using: .utf8)
                         let result = try! JSONDecoder().decode(Study.self, from: data!)
                         studyArr.append(result)
@@ -94,7 +90,6 @@ class TerminalNetwork {
             switch response.result {
                 case .success(let value):
                     let json = "\(JSON(value))".data(using: .utf8)
-//                    print("\(JSON(value))")
                     let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
                     completionHandler(result)
                 case .failure(let err):
