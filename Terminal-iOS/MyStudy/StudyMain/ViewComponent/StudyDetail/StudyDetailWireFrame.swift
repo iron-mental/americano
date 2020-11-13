@@ -26,6 +26,7 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         
         if let view = view as? StudyDetailView {
             view.keyValue = keyValue
+            view.state = .before
             return view
         } else {
             return UIViewController()

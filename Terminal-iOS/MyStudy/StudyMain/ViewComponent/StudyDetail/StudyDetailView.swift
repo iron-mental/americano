@@ -19,6 +19,7 @@ enum StudyDetailViewState {
 class StudyDetailView: UIViewController {
     var presenter: StudyDetailPresenterProtocol?
     var state: StudyDetailViewState = .after
+    var userData: [Participate] = []
     var keyValue: Int?
         
     var scrollView = UIScrollView()
@@ -41,6 +42,7 @@ class StudyDetailView: UIViewController {
         attribute()
         layout()
         presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
+        print("하하",userData)
     }
     
     func attribute() {
@@ -224,6 +226,8 @@ extension StudyDetailView: StudyDetailViewProtocol {
         timeView.do {
             $0.contentText = ["장소","\(studyDeatil.data.location.placeName)"]
         }
+        userData = studyDeatil.data.participate
+        memberView.collectionView.reloadData()
     }
     
     func showError() {
@@ -241,13 +245,15 @@ extension StudyDetailView: StudyDetailViewProtocol {
 
 extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return userData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
-        cell.profileImage.image = #imageLiteral(resourceName: "leehi")
-        cell.nickname.text = "이하이"
+        print(userData[indexPath.row].image)
+        print(userData[indexPath.row].nickname)
+        cell.profileImage.kf.setImage(with: URL(string: userData[indexPath.row].image))
+        cell.nickname.text = userData[indexPath.row].nickname
         return cell
     }
 

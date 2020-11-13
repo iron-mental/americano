@@ -35,7 +35,6 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
         }
     }
     
-    
     func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int) {
         let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(keyValue: keyValue)
         
