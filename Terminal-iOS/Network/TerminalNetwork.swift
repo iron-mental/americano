@@ -16,10 +16,9 @@ class TerminalNetwork {
     //스터디 리스트 초기화시 호출되는 플로우
     static func getNewStudyList(_ category: String, _ sort: String, completionHandler: @escaping ([Study])->(), completion: @escaping ([Int]) -> ()) {
         let url = "http://3.35.154.27:3000/v1/study?category=\(category)&sort=\(sort)"
-        
         var studyArr: [Study] = []
         var keyArr: [Int] = []
-        var temp: UIImage?
+        
         AF.request(url).responseJSON { response in
             switch response.result {
             case .success(let value):

@@ -19,7 +19,7 @@ protocol StudyDetailViewProtocol: class {
 }
 
 protocol StudyDetailWireFrameProtocol: class {
-    static func createStudyDetail() -> UIViewController
+    static func createStudyDetail(keyValue: Int) -> UIViewController
     
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyDetailViewProtocol)

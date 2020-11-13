@@ -160,8 +160,8 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        view.state = .before
-        
-        presenter?.showStudyDetail()
+        let keyValue = studyList[indexPath.row].id
+        presenter?.showStudyDetail(keyValue: keyValue)
     }
 }
 

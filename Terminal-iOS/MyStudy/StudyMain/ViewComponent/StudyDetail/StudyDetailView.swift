@@ -19,7 +19,7 @@ enum StudyDetailViewState {
 class StudyDetailView: UIViewController {
     var presenter: StudyDetailPresenterProtocol?
     var state: StudyDetailViewState = .after
-    var studyKey: String?
+    var keyValue: Int?
         
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
@@ -40,7 +40,7 @@ class StudyDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        presenter?.showStudyListDetail(keyValue: "1")
+        presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
     }
     
     func attribute() {

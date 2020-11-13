@@ -35,8 +35,9 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
         }
     }
     
-    func presentStudyDetailScreen(from view: StudyListViewProtocol) {
-        let studyDetailViewController = StudyDetailWireFrame.createStudyDetail()
+    
+    func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int) {
+        let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(keyValue: keyValue)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(studyDetailViewController, animated: true)

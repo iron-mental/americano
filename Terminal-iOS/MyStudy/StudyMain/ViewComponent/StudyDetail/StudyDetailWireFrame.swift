@@ -9,7 +9,7 @@
 import UIKit
 
 class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
-    static func createStudyDetail() -> UIViewController {
+    static func createStudyDetail(keyValue: Int) -> UIViewController {
         let view: StudyDetailViewProtocol = StudyDetailView()
         let presenter: StudyDetailPresenterProtocol & StudyDetailInteractorOutputProtocol = StudyDetailPresenter()
         let interactor: StudyDetailInteractorInputProtocol & StudyDetailRemoteDataManagerOutputProtocol = StudyDetailInteractor()
@@ -25,6 +25,7 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         remoteDataManager.remoteRequestHandler = interactor
         
         if let view = view as? StudyDetailView {
+            view.keyValue = keyValue
             return view
         } else {
             return UIViewController()
