@@ -139,12 +139,15 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     
     // 이거 안쓰는데 일단 나중을 위해 놔둠
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            if studyList.count == indexPath.row {
-                print(studyList.count)
-                print("끝이보인다앗!")
-            }
-        }
+
+        presenter?.pagingStudyList()
+//        for indexPath in indexPaths {
+//            if studyList.count == indexPath.row {
+////                print(studyList.count)
+////                print("끝이보인다앗!")
+//                presenter?.pagingStudyList()
+//            }
+//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -159,22 +162,21 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        view.state = .before
         let keyValue = studyList[indexPath.row].id
         presenter?.showStudyDetail(keyValue: keyValue)
     }
 }
 
-extension StudyListView: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let height: CGFloat = scrollView.frame.size.height
-        let contentYOffset: CGFloat = scrollView.contentOffset.y
-        let scrollViewHeight: CGFloat = scrollView.contentSize.height
-        let distanceFromBottom: CGFloat = scrollViewHeight - contentYOffset
-        
-        if distanceFromBottom < height {
-            presenter?.pagingStudyList()
-            tableView.reloadData()
-        }
-    }
-}
+//extension StudyListView: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let height: CGFloat = scrollView.frame.size.height
+//        let contentYOffset: CGFloat = scrollView.contentOffset.y
+//        let scrollViewHeight: CGFloat = scrollView.contentSize.height
+//        let distanceFromBottom: CGFloat = scrollViewHeight - contentYOffset
+//
+//        if distanceFromBottom < height {
+//            presenter?.pagingStudyList()
+//            tableView.reloadData()
+//        }
+//    }
+//}
