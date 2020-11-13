@@ -13,25 +13,37 @@ import SwiftyJSON
 class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
     var studyArr: [Study] = []
+    var studyKeyArr: [Study] = []
     var keyValue: [Int] = []
-    var oldKeyValue: [Int] = []
     var newKeyValue: [Int] = []
     func retrieveStudyList(category: String, sort: String ,completionHandler: @escaping (([Study])) -> ()) {
-        TerminalNetwork.getNewStudyList(category, sort) { completionHandler($0)} completion: {
-            self.keyValue = $0
+        TerminalNetwork.getNewStudyList(category, sort) {
+            for data in $0 {
+                if data.title == nil {
+                    self.studyKeyArr.append(data)
+                }
+            }
+            
+            for data in $0 {
+                if data.title != nil {
+                    self.studyArr.append(data)
+                }
+            }
+            
+            completionHandler(self.studyArr)
         }
     }
     
     func paginationRetrieveStudyList(completionHandler: @escaping (([Study])) -> ()) {
-        if keyValue.count >= 10 {
-            for i in 0..<10 {
-                newKeyValue.append(keyValue[0])
-                keyValue.remove(at: 0)
+        if studyKeyArr.count >= 10 {
+            for _ in 0..<10 {
+                newKeyValue.append(studyKeyArr[0].id)
+                studyKeyArr.remove(at: 0)
             }
         } else {
-            for i in 0..<keyValue.count{
-                newKeyValue.append(keyValue[0])
-                keyValue.remove(at: 0)
+            for _ in 0..<studyKeyArr.count {
+                newKeyValue.append(studyKeyArr[0].id)
+                studyKeyArr.remove(at: 0)
             }
         }
         

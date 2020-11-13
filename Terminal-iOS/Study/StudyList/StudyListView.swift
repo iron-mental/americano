@@ -174,6 +174,7 @@ extension StudyListView: UIScrollViewDelegate {
         
         if distanceFromBottom < height {
             presenter?.pagingStudyList()
+            tableView.reloadData()
         }
     }
 }

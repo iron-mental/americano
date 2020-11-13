@@ -53,10 +53,18 @@ class StudyCell: UITableViewCell {
         date.do {
             $0.text = data.createdAt
         }
-        
-        mainImage.kf.setImage(with: URL(string: data.image))
-        managerImage.kf.setImage(with: URL(string: data.leaderImage))
-
+        guard let main = data.image else {
+            mainImage.image = #imageLiteral(resourceName: "swiftmain")
+            return
+        }
+        guard let leader = data.leaderImage else {
+            managerImage.image = #imageLiteral(resourceName: "leehi")
+            return
+        }
+        DispatchQueue.main.async {
+            self.mainImage.kf.setImage(with: URL(string: main))
+            self.managerImage.kf.setImage(with: URL(string: leader))
+        }
     }
     
     func attribute() {

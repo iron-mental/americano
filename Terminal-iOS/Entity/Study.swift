@@ -10,10 +10,10 @@ import UIKit
 
 struct Study: Codable {
     let id: Int
-    let title, introduce, image, sigungu: String
-    let leaderImage, createdAt: String
-    let members: Int
-    
+    let title, introduce, image, sigungu: String?
+    let leaderImage, createdAt: String?
+    let members: Int?
+
     enum CodingKeys: String, CodingKey {
         case id, title, introduce, image, sigungu
         case leaderImage = "leader_image"
