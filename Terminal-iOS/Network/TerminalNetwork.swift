@@ -31,14 +31,7 @@ class TerminalNetwork {
                                 let result = try! JSONDecoder().decode(Study.self, from: data!)
                                 studyArr.append(result)
                             }
-                            
-                            // contents 들어있는 키값을 구할때
-                            if index["id"].int != nil {
-                                if let data = index["id"].int {
-                                    keyArr.append(data)
-                                }
-                            }
-                            
+                                                        
                             // contents 없는 키값 구할때
                             if index["title"].string == nil {
                                 if let data = index.int {
@@ -57,7 +50,6 @@ class TerminalNetwork {
             }
         }
     }
-    
     
     // 스터디 키값으로 가져오는 플로우
     static func getNewStudyListForKey(_ keyValue: [Int], completionHandler: @escaping ([Study]) -> ()) {
