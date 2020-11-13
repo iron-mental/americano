@@ -38,25 +38,25 @@ class StudyCell: UITableViewCell {
     }
     
     func setData(_ data: Study) {
-        guard let main = data.mainImage else { return }
-        guard let manager = data.managerImage else { return }
         mainTitle.do {
             $0.text = data.title
         }
         
         subTitle.do {
-            $0.text = data.subTitle
+            $0.text = data.introduce
         }
         
         location.do {
-            $0.text = data.location
+            $0.text = data.sigungu
         }
         
         date.do {
-            $0.text = data.date
+            $0.text = data.createdAt
         }
-        managerImage.kf.setImage(with: URL(string: manager))
-        mainImage.kf.setImage(with: URL(string: main))
+        
+        mainImage.kf.setImage(with: URL(string: data.image))
+        managerImage.kf.setImage(with: URL(string: data.leaderImage))
+
     }
     
     func attribute() {
