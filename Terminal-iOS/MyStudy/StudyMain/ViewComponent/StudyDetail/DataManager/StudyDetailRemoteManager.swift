@@ -13,7 +13,6 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     
     func retrievePostList(keyValue: String, completionHandler: @escaping (StudyDetail) -> ()) {
         TerminalNetwork.getStudyDetail(keyValue) {
-            print("Remote Manager")
             completionHandler($0)
         }
     }

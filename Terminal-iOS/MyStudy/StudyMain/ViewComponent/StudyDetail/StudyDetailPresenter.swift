@@ -18,7 +18,6 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
     }
     
     func showStudyListDetail(keyValue: String) {
-        print("presenter!!")
         interactor?.retrieveStudyDetail(keyValue: keyValue)
     }
     
@@ -33,7 +32,7 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
 
 extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
     func didRetrieveStudyDetail(_ studyDetail: StudyDetail) {
-        
+        view?.showStudyDetail(with: studyDetail)
     }
     
     func onError() {

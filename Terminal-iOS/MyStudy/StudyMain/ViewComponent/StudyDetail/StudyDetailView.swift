@@ -8,7 +8,7 @@
 
 import UIKit
 import NMapsMap
-
+import Kingfisher
 
 enum StudyDetailViewState {
     case before
@@ -19,7 +19,8 @@ enum StudyDetailViewState {
 class StudyDetailView: UIViewController {
     var presenter: StudyDetailPresenterProtocol?
     var state: StudyDetailViewState = .after
-    
+    var studyKey: String?
+        
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
     let picker = UIImagePickerController()
@@ -64,6 +65,8 @@ class StudyDetailView: UIViewController {
                 $0.isHidden = true
             }
         }
+        
+        //studyIntroduceView, studyPlanView, timeView, timeView
         studyIntroduceView.do {
             $0.titleHidden()
             $0.contentText = ["","안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"]
@@ -156,7 +159,6 @@ class StudyDetailView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyPlanView.label.isHidden == false ? studyPlanView.label.bottomAnchor : studyPlanView.textView.bottomAnchor ).isActive = true
-            
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -207,7 +209,21 @@ class StudyDetailView: UIViewController {
 extension StudyDetailView: StudyDetailViewProtocol {
     
     func showStudyDetail(with studyDeatil: StudyDetail) {
-        
+        mainImageView.do {
+            $0.kf.setImage(with: URL(string: studyDeatil.data.image)!)
+        }
+        studyIntroduceView.do {
+            $0.contentText = ["","\(studyDeatil.data.title)"]
+        }
+        studyPlanView.do {
+            $0.contentText = ["스터디 진행","\(studyDeatil.data.title)"]
+        }
+        timeView.do {
+            $0.contentText = ["시간","\(studyDeatil.data.studyTime)"]
+        }
+        timeView.do {
+            $0.contentText = ["장소","\(studyDeatil.data.location.placeName)"]
+        }
     }
     
     func showError() {

@@ -87,7 +87,10 @@ class TerminalNetwork {
         AF.request(key).responseJSON { response in
             switch response.result {
                 case .success(let value):
-                    print(JSON(value))
+                    let json = "\(JSON(value))".data(using: .utf8)
+//                    print("\(JSON(value))")
+                    let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
+                    completionHandler(result)
                 case .failure(let err):
                     print("실패", err)
             }
