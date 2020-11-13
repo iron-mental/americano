@@ -27,8 +27,12 @@ class TerminalNetwork {
                     do {
                         for index in data {
                             if index["title"].string != nil {
-                                let temp = try! Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: index["leader_image"].string!, mainImage: index["image"].string!)
-                                studyArr.append(temp)
+//                                print(index)
+//                                let temp = try! Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: index["leader_image"].string!, mainImage: index["image"].string!)
+
+                                let data = "\(index)".data(using: .utf8)
+                                let result = try! JSONDecoder().decode(Study.self, from: data!)
+                                studyArr.append(result)
                             }
                             
                             // contents 들어있는 키값을 구할때
@@ -69,8 +73,10 @@ class TerminalNetwork {
             case .success(let value):
                 if let data = JSON(value)["data"].array {
                     for index in data {
-                        let temp = Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: index["leader_image"].string!, mainImage: index["image"].string!)
-                        studyArr.append(temp)
+//                        let temp = Study(title: index["title"].string!, subTitle: index["introduce"].string!, location: "강남구", date: index["created_at"].string!, managerImage: index["leader_image"].string!, mainImage: index["image"].string!)
+                        let data = "\(index)".data(using: .utf8)
+                        let result = try! JSONDecoder().decode(Study.self, from: data!)
+                        studyArr.append(result)
                     }
                     completionHandler(studyArr)
                 }
