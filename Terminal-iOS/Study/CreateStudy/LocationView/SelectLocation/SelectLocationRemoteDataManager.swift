@@ -30,9 +30,6 @@ class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
                             completion(false, nil)
                         } else {
                             if let addressList = JSON(value)["documents"].array {
-                                
-                                
-                                
                                 for item in addressList {
                                     let addressValid = item["road_address"]["address_name"] != JSON.null
                                     
