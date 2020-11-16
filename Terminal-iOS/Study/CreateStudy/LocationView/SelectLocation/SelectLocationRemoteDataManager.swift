@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
     func getAddressInfo(lat: Double, lng: Double, completion: @escaping (Bool, searchLocationResult?) -> ()) {
-        //api ㅆ고
+        //api 쏘고
         let headers: HTTPHeaders = [ "Authorization": "KakaoAK 6cd40b04c090b1a033634e5051aab78c" ]
         let parameters: Parameters = [
             "x" : lng,
