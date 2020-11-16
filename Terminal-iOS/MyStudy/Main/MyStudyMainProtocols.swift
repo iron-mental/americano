@@ -10,21 +10,37 @@ import UIKit
 
 protocol MyStudyMainViewProtocol: class {
     var presenter: MyStudyMainPresenterProtocol? { get set }
+    
+    //PRESENTER -> VIEW
+    func showMyStudyList(myStudyList: [MyStudy])
+    func showErrMessage()
 }
 
 protocol MyStudyMainInteractorProtocol: class {
     var presenter: MyStudyMainPresenterProtocol? { get set }
     var remoteManager: MyStudyMainRemoteDataManagerProtocol? { get set }
     var localManager: MyStudyMainLocalDataManagerProtocol? { get set }
+    
+    //PRESENTER -> INTERACTOR
+    func getMyStudyList()
 }
 
 protocol MyStudyMainPresenterProtocol: class {
     var view: MyStudyMainViewProtocol? { get set }
     var wireFrame: MyStudyMainWireFrameProtocol? { get set }
     var interactor: MyStudyMainInteractorProtocol? { get set }
+    
+    //VIEW -> PRESENTER
+    func viewDidLoad()
+    
+    //INTERACTOR -> PRESENTER
+    func MyStudyListResult(result: Bool, itemList: [MyStudy]?)
 }
 
 protocol MyStudyMainRemoteDataManagerProtocol: class {
+    var interactor: MyStudyMainInteractorProtocol? { get set }
+    //INTERACTOR -> RemoteDataManager
+    func getMyStudyList(completion: @escaping (_: Bool, _: [MyStudy]?) -> ())
 
 }
 
@@ -33,6 +49,8 @@ protocol MyStudyMainLocalDataManagerProtocol: class {
 }
 
 protocol MyStudyMainWireFrameProtocol: class {
+    var presenter: MyStudyMainPresenter? { get set }
+    
     static func createMyStudyMainViewModul() -> UIViewController
     
     func goToAalrmView(view: UIViewController)
