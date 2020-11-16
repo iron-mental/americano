@@ -42,6 +42,5 @@ class IntroPresenter: IntroPresenterProtocol {
     }
     func joinValidInfo(result: Bool, joinInfo: String) {
         result ? view?.presentCompleteView() : print(joinInfo)
-        
     }
 }
