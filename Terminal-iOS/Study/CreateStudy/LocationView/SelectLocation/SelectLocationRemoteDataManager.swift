@@ -46,9 +46,6 @@ class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
 //                                        region1Depth = item["address"]["region_1depth_name"].string!
 //                                        region2Depth = item["address"]["region_2depth_name"].string!
 //                                    }
-                                    
-                                    
-                                    
                                     completion(true, searchLocationResult(address: address,
                                                                           lat: lat,
                                                                           lng: lng,
