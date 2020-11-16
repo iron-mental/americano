@@ -9,17 +9,21 @@
 import UIKit
 import NMapsMap
 
-class SelectLocationPresenter: SelectLocationPresenterProtocols {
-    var view: SelectLocationViewProtocols?
-    var interactor: SelectLocationInteractorProtocols?
-    var wireFrame: SelectLocationWireFrameProtocols?
-    
-    func getAddress(lat: Double?, Lng: Double?) {
-        print("getAddress")
-    }
-    func getAddressResult(latLng: NMGLatLng, address: String) {
-        print("getAddressResult")
+class SelectLocationPresenter: SelectLocationPresenterProtocol {
+    func didClickedCompletButton(item: searchLocationResult) {
+        print("접운채 이대로이렇게~ ㅠ힘껀안ㄴ아주겠어")
     }
     
-
+    var view: SelectLocationViewProtocol?
+    var interactor: SelectLocationInteractorProtocol?
+    var wireFrame: SelectLocationWireFrameProtocol?
+    
+    func getAddress(item: searchLocationResult) {
+        interactor?.searchAddress(item: item)
+    }
+    
+    func getAddressResult(item: searchLocationResult) {
+        print("presenter", item)
+        view?.setViewWithResult(item: item)
+    }
 }

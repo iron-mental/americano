@@ -14,13 +14,14 @@ class IntroPresenter: IntroPresenterProtocol {
     var view: IntroViewProtocol?
     var interactor: IntroInteractorProtocol?
     
-    func didClickedRightBarButton(input: String, state: IntroViewState) {
-        switch state {
+    func didClickedRightBarButton(input: String, introState: IntroViewState, beginState: BeginState) {
+        
+        switch introState {
         case .emailInput:
-            interactor?.checkedEmailValid(input: input)
+            interactor?.checkedEmailValid(input: input, beginState: beginState)
             break
         case .pwdInput:
-            interactor?.checkedPasswordValid(input: input)
+            beginState == .signUp ? interactor?.checkedPasswordValid(input: input) : interactor?.checkedJoinValid(input: input)
             break
         case .nickname:
             interactor?.signUpValid(input: input)
@@ -38,5 +39,8 @@ class IntroPresenter: IntroPresenterProtocol {
     
     func signUpValidInfo(result: Bool) {
         view?.presentCompleteView()
+    }
+    func joinValidInfo(result: Bool, joinInfo: String) {
+        result ? view?.presentCompleteView() : print(joinInfo)
     }
 }

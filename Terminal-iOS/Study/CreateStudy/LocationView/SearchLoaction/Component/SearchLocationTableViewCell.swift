@@ -32,6 +32,7 @@ class SearchLocationTableViewCell: UITableViewCell {
             $0.sizeToFit()
         }
         category.do {
+            $0.textAlignment = .right
             $0.text = "게임제작"
             $0.textColor = .gray
             $0.font.withSize(14)
@@ -51,14 +52,14 @@ class SearchLocationTableViewCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor,constant: Terminal.convertWidth(value: 15)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 48)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 200)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 17).isActive = true
         }
         category.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: title.centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: title.trailingAnchor, constant: Terminal.convertWidth(value: 21.9)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 100)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 21.9)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 200)).isActive = true
         }
         detailAddress.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

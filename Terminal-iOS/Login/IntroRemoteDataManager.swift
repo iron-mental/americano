@@ -18,6 +18,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         url.appendPathComponent("\(input)")
             AF.request(url, encoding: JSONEncoding.default)
                 .responseJSON { response in
+                    print(response)
                     result = JSON(response.data)["result"].bool!
                     completionHandler(result)
                 }.resume()
@@ -32,10 +33,35 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         ]
         
         var result =  false
-        var url = URL(string: "http://3.35.154.27:3000/v1/user")!
+        let url = URL(string: "http://3.35.154.27:3000/v1/user")!
         AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
             result = JSON(response.data)["result"].bool!
         }.resume()
         return result
+    }
+    
+    func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (_ result: Bool, _ message: Any) -> ()) {
+        var params: Parameters = [
+            "email":"\(joinMaterial[0])",
+            "password":"\(joinMaterial[1])"
+        ]
+        let url = URL(string: "http://3.35.154.27:3000/v1/user/login")!
+        AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
+            var result = JSON(response.data)["result"].bool!
+            switch result {
+            case true:
+                print(JSON(response.data)["data"]["id"])
+                var data = JSON(response.data)["data"]["id"].int!
+                completionHandler(result, data)
+                break
+            case false:
+                print(JSON(response.data)["result"])
+                var data = JSON(response.data)["message"].string!
+                completionHandler(result, data)
+                break
+            }
+//            completionHandler(result, data)
+        }.resume()
+        
     }
 }
