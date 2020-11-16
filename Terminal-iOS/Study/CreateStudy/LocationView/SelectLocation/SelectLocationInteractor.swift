@@ -8,12 +8,27 @@
 
 import UIKit
 
-class SelectLocationInteractor: SelectLocationInteractorProtocols {
-    var presenter: SelectLocationPresenterProtocols?
-    var remoteDataManager: SelectLocationRemoteDataManagerProtocols?
-    var localDataManager: SelectLocationLocalDataManagerProtocols?
+class SelectLocationInteractor: SelectLocationInteractorProtocol {
+    func selectLocation(item: searchLocationResult) {
+        print("test")
+    }
     
-    func searchAddress(lat: Double?, Lng: Double?) {
-        print("searchAddress")
+    var presenter: SelectLocationPresenterProtocol?
+    var remoteDataManager: SelectLocationRemoteDataManagerProtocol?
+    var localDataManager: SelectLocationLocalDataManagerProtocol?
+    
+    func searchAddress(item: searchLocationResult) {
+        let lat = item.lat
+        let lng = item.lng
+        remoteDataManager?.getAddressInfo(lat: lat, lng: lng, completion: { [self] (result, data) in
+            if result {
+                if let item = data {
+                    print("interactor", item)
+                    presenter?.getAddressResult(item: item)
+                }
+            } else {
+                print("통신 실패요")
+            }
+        })
     }
 }

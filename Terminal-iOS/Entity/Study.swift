@@ -37,4 +37,22 @@ struct StudyInfo {
     var notion: String?
     var everNote: String?
     var web: String?
+    
+//    "user_id" : studyInfo.userID,
+//    "category" : studyInfo.category,
+//    "title" : studyInfo.title,
+//    "introduce" : studyInfo.introduce,
+//    "progress" : studyInfo.progress,
+//    "study_time" : studyInfo.studyTime,
+//    "latitude" : studyInfo.notion,
+//    "longitude" : studyInfo.everNote,
+//    "region_1depth_name" : studyInfo.web,
+//    "region_2depth_name" : studyInfo.location,
+//    "address_name" : studyInfo.location,
+//    "locaion_detail" : studyInfo.location,
+//    "place_name" : studyInfo.location
+//    "sns_notion" : ,
+//    "sns_evernote" : ,
+//    "sns_web" : ,
+//    "image" :
 }

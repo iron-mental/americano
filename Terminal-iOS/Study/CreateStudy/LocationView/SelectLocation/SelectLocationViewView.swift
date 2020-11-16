@@ -10,12 +10,14 @@ import UIKit
 import NMapsMap
 
 class SelectLocationView: UIViewController {
-    var presenter: SelectLocationPresenterProtocols?
+    var presenter: SelectLocationPresenterProtocol?
     let pin = UIImageView()
     var task: DispatchWorkItem?
     var mapView = NMFMapView()
     var bottomView = BottomView()
     var keyboardHeight: CGFloat = 0
+    var location: searchLocationResult?
+    var preventPlaceNameFlag = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +29,11 @@ class SelectLocationView: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     override func viewDidAppear(_ animated: Bool) {
+        print("이거 실화야??",isBeingPresented)
         bottomView.textField.becomeFirstResponder()
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
+        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng))))
     }
+    
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -57,9 +60,10 @@ class SelectLocationView: UIViewController {
         }
         bottomView.do {
             $0.completeButton.addTarget(self, action: #selector(didCompleteButtonClicked), for: .touchUpInside)
+            $0.Address.text = location?.address
         }
     }
-
+    
     func layout() {
         [mapView, pin, bottomView].forEach { view.addSubview($0) }
         
@@ -80,16 +84,9 @@ class SelectLocationView: UIViewController {
     }
     
     @objc func didCompleteButtonClicked() {
-        //추후에 로딩이미지 줍시다.
         presentingViewController?.dismiss(animated: false)
         self.presentingViewController?.presentingViewController?.dismiss(animated: false)
-    }
-}
-
-extension SelectLocationView: SelectLocationViewProtocols {
-    
-    func setViewWithResult(latLng: NMGLatLng, address: String) {
-        print("setViewWithResult")
+//        presenter.
     }
 }
 
@@ -100,6 +97,12 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
             //추후에 여기서 mapView.cameraPosition.target.lat 으로 좌표알아내서 쏘면 됨
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                 self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
+                location?.lng = mapView.cameraPosition.target.lng
+                location?.lat = mapView.cameraPosition.target.lat
+                if preventPlaceNameFlag == true {
+                    presenter?.getAddress(item: location!)
+                }
+                preventPlaceNameFlag = true
             })
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task!)
@@ -107,6 +110,7 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
     
     func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
         self.view.endEditing(true)
+        location?.placeName = nil
         task?.cancel()
         pin.alpha = 0.5
         UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
@@ -119,5 +123,13 @@ extension SelectLocationView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
+    }
+}
+
+extension SelectLocationView: SelectLocationViewProtocol {
+    func setViewWithResult(item: searchLocationResult) {
+        if item.address != "" {
+            bottomView.Address.text = item.address
+        }
     }
 }

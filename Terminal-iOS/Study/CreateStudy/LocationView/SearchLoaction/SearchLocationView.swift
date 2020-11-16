@@ -15,6 +15,7 @@ class SearchLocationView: UIViewController {
     var searchTextField = UITextField()
     var searchButton = UIButton()
     var tableView = UITableView()
+    var searchResultList: [searchLocationResult] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +84,7 @@ class SearchLocationView: UIViewController {
         dismiss(animated: true)
     }
     @objc func didSearchButtonClicked() {
-        //do something
+        presenter?.didClickedSearchButton(text: searchTextField.text!)
     }
 }
 
@@ -91,19 +92,27 @@ extension SearchLocationView: SearchLocationViewProtocol {
     func dismiss() {
         dismiss(animated: true)
     }
+    
+    func showSearchResult(list: [searchLocationResult]) {
+        searchResultList = list
+        tableView.reloadData()
+    }
 }
 
 extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return searchResultList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchLocationTableViewCell.identifier, for: indexPath) as! SearchLocationTableViewCell
+        cell.detailAddress.text = searchResultList[indexPath.row].address
+        cell.title.text = searchResultList[indexPath.row].placeName
+        cell.category.text = searchResultList[indexPath.row].category
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectedItem(index: indexPath.row, view: self)
+        presenter?.didSelectedItem(item: searchResultList[indexPath.row], view: self)
     }
 }

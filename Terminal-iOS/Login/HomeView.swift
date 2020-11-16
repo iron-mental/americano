@@ -10,7 +10,7 @@ import UIKit
 
 class HomeView: UIViewController {
     var loginButton = UIButton()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
