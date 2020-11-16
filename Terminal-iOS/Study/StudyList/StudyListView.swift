@@ -137,17 +137,13 @@ extension StudyListView: StudyListViewProtocol {
 
 extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching {
     
-    // 이거 안쓰는데 일단 나중을 위해 놔둠
+    /// 페이징 첫번째 방법 이게 제일 효율 높음
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-
-        presenter?.pagingStudyList()
-//        for indexPath in indexPaths {
-//            if studyList.count == indexPath.row {
-////                print(studyList.count)
-////                print("끝이보인다앗!")
-//                presenter?.pagingStudyList()
-//            }
-//        }
+        for indexPath in indexPaths {
+            if studyList.count-1 == indexPath.row {
+                presenter?.pagingStudyList()
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -167,6 +163,8 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     }
 }
 
+
+/// 2번째 방법
 //extension StudyListView: UIScrollViewDelegate {
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        let height: CGFloat = scrollView.frame.size.height

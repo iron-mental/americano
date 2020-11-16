@@ -50,7 +50,7 @@ class StudyCategoryView: UIViewController {
             $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
-            $0.navigationItem.leftBarButtonItems = [tempButton]
+//            $0.navigationItem.leftBarButtonItems = [tempButton]
         }
         categoryCollectionView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)

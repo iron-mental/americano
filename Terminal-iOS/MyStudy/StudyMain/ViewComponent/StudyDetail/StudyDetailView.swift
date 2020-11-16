@@ -59,6 +59,7 @@ class StudyDetailView: UIViewController {
         joinButton.do {
             if state == .before {
                 $0.setTitle("스터디 참여하기", for: .normal)
+                $0.titleLabel?.font = UIFont.systemFont(ofSize: 13)
                 $0.setTitleColor(.white, for: .normal)
                 $0.backgroundColor = UIColor.appColor(.mainColor)
                 $0.layer.cornerRadius = 10
