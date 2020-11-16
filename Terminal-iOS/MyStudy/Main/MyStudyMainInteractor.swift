@@ -9,7 +9,15 @@
 import UIKit
 
 class MyStudyMainInteractor: MyStudyMainInteractorProtocol {
+    
     var presenter: MyStudyMainPresenterProtocol?
     var remoteManager: MyStudyMainRemoteDataManagerProtocol?
     var localManager: MyStudyMainLocalDataManagerProtocol?
+    
+    func getMyStudyList() {
+        remoteManager?.getMyStudyList(completion: { [self] (result, itemList) in
+            presenter?.MyStudyListResult(result: result, itemList: itemList ??  nil)
+        })
+    }
+    
 }

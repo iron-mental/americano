@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 enum MyStudyMainViewState {
     case normal
@@ -26,11 +27,12 @@ class MyStudyMainView: UIViewController {
     var tempCountForBadge = 0
     var tempArrayForCheck: [Int] = []
     var editDoneButton: UIBarButtonItem?
+    var myStudyList: [MyStudy] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        attribute()
-        layout()
+        presenter?.viewDidLoad()
+        
     }
     
     func attribute() {
@@ -140,8 +142,7 @@ class MyStudyMainView: UIViewController {
     
     @objc func editDoneButtonAction() {
         tempArrayForCheck.forEach { checkedID in
-            print(checkedID)
-            TempMyStudyList.List.remove(at: TempMyStudyList.List.firstIndex(where: { $0.id == checkedID })!)
+            myStudyList.remove(at: myStudyList.firstIndex(where: { $0.id == checkedID })!)
         }
         dismissEditViewButtonItemAction()
     }
@@ -149,7 +150,7 @@ class MyStudyMainView: UIViewController {
 
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TempMyStudyList.List.count
+        return myStudyList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyStudyMainTableViewCell.identifier) as! MyStudyMainTableViewCell
@@ -161,16 +162,29 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         case .edit:
             cell.checkBox.isHidden = false
             [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
-            if tempArrayForCheck.contains(TempMyStudyList.List[indexPath.row].id) {
+            if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
                 cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)
             } else {
                 cell.checkBox.backgroundColor = UIColor.appColor(.testColor)
             }
             break
         }
-        cell.locationLabel.text = TempMyStudyList.List[indexPath.row].location
-        cell.titleLabel.text = TempMyStudyList.List[indexPath.row].title
-        cell.studyMainimage.image = UIImage(named: TempMyStudyList.List[indexPath.row].image)
+        
+        cell.locationLabel.text = myStudyList[indexPath.row].sigungu
+        cell.titleLabel.text = myStudyList[indexPath.row].title
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.accessToken, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        if myStudyList[indexPath.row].image == "" || myStudyList[indexPath.row].image == "test" {
+            cell.studyMainimage.image = UIImage(named: "swiftmain")
+        } else {
+            print(myStudyList[indexPath.row].image!)
+            let url = URL(string: myStudyList[indexPath.row].image!)
+            cell.studyMainimage.kf.setImage(with: url, options: [.requestModifier(imageDownloadRequest)])
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -184,19 +198,27 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
             navigationController?.pushViewController(view, animated: true)
             break
         case .edit:
-            if tempArrayForCheck.contains(TempMyStudyList.List[indexPath.row].id) {
-                tempArrayForCheck.remove(at: tempArrayForCheck.firstIndex(of: TempMyStudyList.List[indexPath.row].id)!)
+            if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
+                tempArrayForCheck.remove(at: tempArrayForCheck.firstIndex(of: myStudyList[indexPath.row].id)!)
             } else {
-                tempArrayForCheck.append(TempMyStudyList.List[indexPath.row].id)
+                tempArrayForCheck.append(myStudyList[indexPath.row].id)
             }
             break
         }
-        print(tempArrayForCheck)
         tableView.reloadData()
     }
 }
 
 extension MyStudyMainView: MyStudyMainViewProtocol {
+    func showMyStudyList(myStudyList: [MyStudy]) {
+        self.myStudyList = myStudyList
+        attribute()
+        layout()
+        tableView.reloadData()
+    }
     
+    func showErrMessage() {
+        print("에러 떴습니다~~")
+    }
 }
 

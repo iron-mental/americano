@@ -9,6 +9,8 @@
 import UIKit
 
 class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
+    var presenter: MyStudyMainPresenter?
+
     static func createMyStudyMainViewModul() -> UIViewController {
         let view = MyStudyMainView()
         let presenter = MyStudyMainPresenter()

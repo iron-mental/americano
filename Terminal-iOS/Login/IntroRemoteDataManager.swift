@@ -50,17 +50,14 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             var result = JSON(response.data)["result"].bool!
             switch result {
             case true:
-                print(JSON(response.data)["data"]["id"])
                 var data = JSON(response.data)["data"]["id"].int!
                 completionHandler(result, data)
                 break
             case false:
-                print(JSON(response.data)["result"])
                 var data = JSON(response.data)["message"].string!
                 completionHandler(result, data)
                 break
             }
-//            completionHandler(result, data)
         }.resume()
         
     }

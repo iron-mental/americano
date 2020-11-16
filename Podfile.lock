@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (5.2.2)
+  - Kingfisher (5.15.7):
+    - Kingfisher/Core (= 5.15.7)
+  - Kingfisher/Core (5.15.7)
   - NMapsMap (3.8.0)
   - SwiftLint (0.39.2)
   - SwiftyJSON (5.0.0)
@@ -7,6 +10,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Kingfisher
   - NMapsMap
   - SwiftLint
   - SwiftyJSON
@@ -15,6 +19,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Kingfisher
     - NMapsMap
     - SwiftLint
     - SwiftyJSON
@@ -22,11 +27,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
   NMapsMap: b3633ad688483a318be9293aeddd323a714fb08b
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Then: 90cd104fd951cec1980a03f57704ad8f784d4d79
 
-PODFILE CHECKSUM: 4ac18c5578052f1c3a1866e20db68f2dbf5604e0
+PODFILE CHECKSUM: bdd4b4a6a624f9d29f24bc75e549da5668aee1cc
 
 COCOAPODS: 1.9.1
