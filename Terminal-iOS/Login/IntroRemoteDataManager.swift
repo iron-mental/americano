@@ -45,7 +45,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             "email":"\(joinMaterial[0])",
             "password":"\(joinMaterial[1])"
         ]
-        var url = URL(string: "http://3.35.154.27:3000/v1/user/login")!
+        let url = URL(string: "http://3.35.154.27:3000/v1/user/login")!
         AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
             var result = JSON(response.data)["result"].bool!
             switch result {
