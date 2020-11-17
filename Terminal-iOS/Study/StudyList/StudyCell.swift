@@ -19,6 +19,8 @@ class StudyCell: UITableViewCell {
     let date = UILabel()
     let managerImage = UIImageView()
     let mainImage = UIImageView()
+    let memberImage = UIImageView()
+    let memberCount = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -44,6 +46,7 @@ class StudyCell: UITableViewCell {
             requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
+        
         mainTitle.do {
             $0.text = data.title
         }
@@ -58,6 +61,9 @@ class StudyCell: UITableViewCell {
         
         date.do {
             $0.text = data.createdAt
+        }
+        memberCount.do {
+            $0.text = "\(data.members!)"
         }
         guard let main = data.image else {
             mainImage.image = #imageLiteral(resourceName: "swiftmain")
@@ -100,10 +106,18 @@ class StudyCell: UITableViewCell {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 10
         }
+        memberImage.do {
+            $0.image = UIImage(named: "member")
+        }
+        memberCount.do {
+            $0.textColor = .white
+            $0.font = UIFont(name: "NotoSansKR-Bold", size: 20)
+            $0.textAlignment = .center
+        }
     }
     
     func layout() {
-        [mainTitle, subTitle, date, managerImage, mainImage, location].forEach { self.contentView.addSubview($0)
+        [mainTitle, subTitle, date, managerImage, mainImage, location, memberImage, memberCount].forEach { self.contentView.addSubview($0)
         }
        
         mainTitle.do {
@@ -146,6 +160,20 @@ class StudyCell: UITableViewCell {
             $0.trailingAnchor.constraint(equalTo: mainImage.leadingAnchor, constant: -20).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 22).isActive = true
+        }
+        
+        memberImage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -7).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.location.leadingAnchor, constant: 5).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 25).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        }
+        
+        memberCount.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.memberImage.trailingAnchor, constant: 2).isActive = true
         }
     }
 }
