@@ -38,6 +38,7 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
     }
     
     func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy) {
-        <#code#>
+        let studyDetailView = StudyDetailWireFrame.createStudyDetailViewModul(study: selectedStudy)
+        view.navigationController?.pushViewController(studyDetailView, animated: true)
     }
 }
