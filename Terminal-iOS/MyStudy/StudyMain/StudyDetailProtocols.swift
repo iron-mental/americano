@@ -6,4 +6,28 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol StudyDetailViewProtocol {
+    
+}
+
+protocol StudyDetailInteractorProtocol {
+    
+}
+
+protocol StudyDetailPresenterProtocol {
+    
+}
+
+protocol StudyDetailRemoteDataManagerProtocol {
+    
+}
+
+protocol StudyDetailLocalDataManagerProtocol {
+    
+}
+
+protocol StudyDetailWireFrameProtocol {
+    static func createStudyDetailViewModul(study: MyStudy) -> UIViewController
+}
