@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+class StudyDetailViewControllerRemoteDataManager: StudyDetailViewControllerRemoteDataManagerProtocol {
+    func callStudyDetailInfoAPI(id: Int, completion: @escaping (Bool, StudyDetailInfo) -> ()) {
+        
+        TerminalAPI.getStudyDetailInfo(id: id) { (result, data) in
+            switch result {
+            case true:
+                completion(result, data!)
+                break
+            case false:
+                break
+            }
+        }
+    }
+    
+    
+}

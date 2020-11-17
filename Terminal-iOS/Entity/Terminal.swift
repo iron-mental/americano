@@ -14,9 +14,9 @@ class Terminal {
     
     static let screenSize = UIScreen.main.bounds
     
-    static let accessToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOjEyLCJlbWFpbCI6Im1vY2tAbmF2ZXIuY29tIiwiaWF0IjoxNjA1NTE3ODMxLCJleHAiOjE2MDY4MTM4MzEsImlzcyI6InRlcm1pbmFsLXNlcnZlciIsInN1YiI6InVzZXJJbmZvLWFjY2VzcyJ9.CXSLLq_8iIarsskid4-6WZPXG6C_Q_CAR4ieVeukMys"
+    static let accessToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJya2RjamYwMTIyQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S067OA6rK97ZWoIiwiaWF0IjoxNjA1NjA2ODQwLCJleHAiOjE2MDY5MDI4NDAsImlzcyI6InRlcm1pbmFsLXNlcnZlciIsInN1YiI6InVzZXJJbmZvLWFjY2VzcyJ9.hEgLgyJxYFAL1VoECYoeX0zvRrOpuNgS1Ol1s2sj6X0"
     
-    static let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOjEyLCJpYXQiOjE2MDU1MTc4MzEsImV4cCI6MTYwNjgxMzgzMSwiaXNzIjoidGVybWluYWwtc2VydmVyIiwic3ViIjoidXNlckluZm8tcmVmcmVzaCJ9.mW08UmE1qr9WC3PmPXHnXvEmD_438b4_BwlJA_8e7yE"
+    static let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA1NjAyMTQ2LCJleHAiOjE2MDY4OTgxNDYsImlzcyI6InRlcm1pbmFsLXNlcnZlciIsInN1YiI6InVzZXJJbmZvLXJlZnJlc2gifQ.bvyYvz22pjDZBGlu2ElQ1mGWYm1xqqoCEIsySXaI8q0"
 
     static func convertHeigt(value: CGFloat) -> CGFloat{
         return screenSize.height * (value / 667)

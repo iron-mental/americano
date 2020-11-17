@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+class StudyDetailViewControllerWireFrame: StudyDetailViewControllerWireFrameProtocol {
+    var presenter: StudyDetailViewControllerPresenterProtocol?
+}

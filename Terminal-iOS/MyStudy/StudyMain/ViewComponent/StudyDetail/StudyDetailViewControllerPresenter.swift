@@ -7,3 +7,26 @@
 //
 
 import Foundation
+
+class StudyDetailViewControllerPresenter: StudyDetailViewControllerPresenterProtocol {
+    
+    var view: StudyDetailViewControllerViewProtocol?
+    
+    var interactor: StudyDetailViewControllerInteractorProtocol?
+    
+    var wireFrame: StudyDetailViewControllerWireFrameProtocol?
+    
+    func viewDidLoad(study: MyStudy) {
+        interactor?.getStudyDetailInfo(study: study)
+    }
+    
+    func studyDetailInfoResult(result: Bool, studyInfo: StudyDetailInfo) {
+        switch result {
+        case true:
+            view?.showStudyDetailResult(studyInfo: studyInfo)
+            break
+        case false:
+            break
+        }
+    }
+}

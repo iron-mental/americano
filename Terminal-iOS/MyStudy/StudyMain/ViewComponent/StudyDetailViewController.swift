@@ -8,7 +8,7 @@
 
 import UIKit
 import NMapsMap
-
+import Kingfisher
 
 enum StudyDetailViewState {
     case before
@@ -16,10 +16,9 @@ enum StudyDetailViewState {
     case after
 }
 
-class StudyDetailViewController: UIViewController, StudyDetailViewControllerProtocol {
-    
-    var studyInfo: [TempStudyDetailStruct] = []
-    
+class StudyDetailViewController: UIViewController {
+    var presenter: StudyDetailViewControllerPresenterProtocol?
+    var studyInfo: MyStudy?
     var state: StudyDetailViewState = .after
     
     var scrollView = UIScrollView()
@@ -39,6 +38,7 @@ class StudyDetailViewController: UIViewController, StudyDetailViewControllerProt
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad(study: studyInfo!)
         attribute()
         layout()
     }
@@ -222,5 +222,26 @@ extension StudyDetailViewController: UICollectionViewDataSource, UICollectionVie
         print(indexPath.row)
         view.setNeedsLayout()
         view.layoutIfNeeded()
+    }
+}
+ 
+extension StudyDetailViewController: StudyDetailViewControllerViewProtocol {
+    func showStudyDetailResult(studyInfo: StudyDetailInfo) {
+        //이거 추후에 어떻게할지 ..계속 써야하니까
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.accessToken, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        mainImageView.kf.setImage(with: URL(string: studyInfo.data.image), options: [.requestModifier(imageDownloadRequest)])
+        
+        studyInfo.data.snsNotion == nil ? snsIconsView.notion.isHidden = true : nil
+        studyInfo.data.snsEvernote == nil ? snsIconsView.evernote.isHidden = true : nil
+        studyInfo.data.snsWeb == nil ? snsIconsView.web.isHidden = true : nil
+        studyIntroduceView.label.text =  studyInfo.data.introduce
+        studyPlanView.label.text = studyInfo.data.progress
+        timeView.label.text = studyInfo.data.studyTime
+        locationView.label.text = studyInfo.data.location.addressName
     }
 }

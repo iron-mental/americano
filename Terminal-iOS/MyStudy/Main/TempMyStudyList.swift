@@ -11,10 +11,10 @@ import Foundation
 
 
 struct MyStudy: Codable {
-    let id: Int
-    let title: String
-    let sigungu: String
-    let image: String?
+    var id: Int
+    var title: String
+    var sigungu: String
+    var image: String?
 }
 
 
