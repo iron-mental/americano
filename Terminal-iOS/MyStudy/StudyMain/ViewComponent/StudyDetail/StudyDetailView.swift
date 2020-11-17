@@ -8,7 +8,7 @@
 
 import UIKit
 import NMapsMap
-
+import Kingfisher
 
 enum StudyDetailViewState {
     case before
@@ -16,9 +16,12 @@ enum StudyDetailViewState {
     case after
 }
 
-class StudyDetailViewController: UIViewController {
+class StudyDetailView: UIViewController {
+    var presenter: StudyDetailPresenterProtocol?
     var state: StudyDetailViewState = .after
-    
+    var userData: [Participate] = []
+    var keyValue: Int?
+        
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
     let picker = UIImagePickerController()
@@ -38,6 +41,8 @@ class StudyDetailViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
+        print("하하",userData)
     }
     
     func attribute() {
@@ -54,6 +59,7 @@ class StudyDetailViewController: UIViewController {
         joinButton.do {
             if state == .before {
                 $0.setTitle("스터디 참여하기", for: .normal)
+                $0.titleLabel?.font = UIFont.systemFont(ofSize: 13)
                 $0.setTitleColor(.white, for: .normal)
                 $0.backgroundColor = UIColor.appColor(.mainColor)
                 $0.layer.cornerRadius = 10
@@ -62,6 +68,8 @@ class StudyDetailViewController: UIViewController {
                 $0.isHidden = true
             }
         }
+        
+        //studyIntroduceView, studyPlanView, timeView, timeView
         studyIntroduceView.do {
             $0.titleHidden()
             $0.contentText = ["","안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"]
@@ -139,7 +147,6 @@ class StudyDetailViewController: UIViewController {
             $0.topAnchor.constraint(equalTo: snsIconsView.bottomAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 125).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyIntroduceView.label.isHidden == false ? studyIntroduceView.label.bottomAnchor : studyIntroduceView.textView.bottomAnchor ).isActive = true
         }
         memberView.do {
@@ -155,7 +162,6 @@ class StudyDetailViewController: UIViewController {
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyPlanView.label.isHidden == false ? studyPlanView.label.bottomAnchor : studyPlanView.textView.bottomAnchor ).isActive = true
-            
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -203,15 +209,52 @@ class StudyDetailViewController: UIViewController {
     }
 }
 
-extension StudyDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension StudyDetailView: StudyDetailViewProtocol {
+    
+    func showStudyDetail(with studyDeatil: StudyDetail) {
+        mainImageView.do {
+            $0.kf.setImage(with: URL(string: studyDeatil.data.image)!)
+        }
+        studyIntroduceView.do {
+            $0.contentText = ["","\(studyDeatil.data.title)"]
+        }
+        studyPlanView.do {
+            $0.contentText = ["스터디 진행","\(studyDeatil.data.title)"]
+        }
+        timeView.do {
+            $0.contentText = ["시간","\(studyDeatil.data.studyTime)"]
+        }
+        timeView.do {
+            $0.contentText = ["장소","\(studyDeatil.data.location.placeName)"]
+        }
+        userData = studyDeatil.data.participate
+        memberView.collectionView.reloadData()
+    }
+    
+    func showError() {
+        
+    }
+    
+    func showLoading() {
+        
+    }
+    
+    func hideLoading() {
+        
+    }
+}
+
+extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return userData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
-        cell.profileImage.image = #imageLiteral(resourceName: "leehi")
-        cell.nickname.text = "이하이"
+        print(userData[indexPath.row].image)
+        print(userData[indexPath.row].nickname)
+        cell.profileImage.kf.setImage(with: URL(string: userData[indexPath.row].image))
+        cell.nickname.text = userData[indexPath.row].nickname
         return cell
     }
 

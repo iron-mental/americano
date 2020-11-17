@@ -8,9 +8,12 @@
 
 import UIKit
 import Then
+import Alamofire
+import SwiftyJSON
 
 class StudyListView: UIViewController {
-        
+    var category: String?
+    var sort: String?
     let tableView = UITableView()
     let aligmentView = UIView()
     let lateButton = UIButton()
@@ -23,7 +26,7 @@ class StudyListView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        presenter?.viewDidLoad()
+        presenter?.studyList(category: category!, sort: sort!)
     }
     
     func attribute() {
@@ -47,6 +50,7 @@ class StudyListView: UIViewController {
         tableView.do {
             $0.delegate = self
             $0.dataSource = self
+            $0.prefetchDataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
             $0.rowHeight = 105
@@ -115,8 +119,10 @@ class StudyListView: UIViewController {
 extension StudyListView: StudyListViewProtocol {
     
     func showStudyList(with studies: [Study]) {
-        studyList = studies
-        tableView.reloadData()
+        for study in studies {
+            studyList.append(study)
+            tableView.reloadData()
+        }
     }
     
     func showLoading() {
@@ -129,7 +135,17 @@ extension StudyListView: StudyListViewProtocol {
     
 }
 
-extension StudyListView: UITableViewDataSource, UITableViewDelegate {
+extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching {
+    
+    /// 페이징 첫번째 방법 이게 제일 효율 높음
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if studyList.count-1 == indexPath.row {
+                presenter?.pagingStudyList()
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studyList.count
     }
@@ -142,8 +158,23 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let view = StudyDetailViewController()
-        view.state = .before
-        self.present(view, animated: true)
+        let keyValue = studyList[indexPath.row].id
+        presenter?.showStudyDetail(keyValue: keyValue)
     }
 }
+
+
+/// 2번째 방법
+//extension StudyListView: UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let height: CGFloat = scrollView.frame.size.height
+//        let contentYOffset: CGFloat = scrollView.contentOffset.y
+//        let scrollViewHeight: CGFloat = scrollView.contentSize.height
+//        let distanceFromBottom: CGFloat = scrollViewHeight - contentYOffset
+//
+//        if distanceFromBottom < height {
+//            presenter?.pagingStudyList()
+//            tableView.reloadData()
+//        }
+//    }
+//}

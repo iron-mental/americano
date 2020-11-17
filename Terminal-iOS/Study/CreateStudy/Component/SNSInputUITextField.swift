@@ -41,9 +41,4 @@ class SNSInputUITextField: UITextField {
         self.workItem = workItem
         DispatchQueue.main.asyncAfter(deadline: .now() + self.delay, execute: workItem)
     }
-    func addLeftPadding() {
-      let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: self.frame.height))
-      self.leftView = paddingView
-      self.leftViewMode = ViewMode.always
-    }
 }

@@ -1,0 +1,56 @@
+//
+//  StudyDetail.swift
+//  Terminal-iOS
+//
+//  Created by once on 2020/11/13.
+//  Copyright © 2020 정재인. All rights reserved.
+//
+
+import Foundation
+
+struct StudyDetail: Codable {
+    let result: Bool
+    let data: DataClass
+}
+
+struct DataClass: Codable {
+    let participate: [Participate]
+    let id: Int
+    let category, title, introduce, image: String
+    let progress, studyTime, snsNotion, snsEvernote: String
+    let snsWeb: String
+    let location: Location
+
+    enum CodingKeys: String, CodingKey {
+        case participate, id, category, title, introduce, image, progress
+        case studyTime = "study_time"
+        case snsNotion = "sns_notion"
+        case snsEvernote = "sns_evernote"
+        case snsWeb = "sns_web"
+        case location
+    }
+}
+
+struct Location: Codable {
+    let latitude, longitude, addressName, placeName: String
+    let locationDetail: String
+
+    enum CodingKeys: String, CodingKey {
+        case latitude, longitude
+        case addressName = "address_name"
+        case placeName = "place_name"
+        case locationDetail = "location_detail"
+    }
+}
+
+struct Participate: Codable {
+    let id, userID: Int
+    let nickname, image: String
+    let leader: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userID = "user_id"
+        case nickname, image, leader
+    }
+}

@@ -9,14 +9,20 @@
 import UIKit
 
 class StudyListPresenter: StudyListPresenterProtocol {
+    func showStudyDetail(keyValue: Int) {
+        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue)
+    }
+    
     var view: StudyListViewProtocol?
-    
     var interactor: StudyListInteractorInputProtocol?
-    
     var wireFrame: StudyListWireFrameProtocol?
     
-    func viewDidLoad() {
-        interactor?.retrieveStudyList()
+    func studyList(category: String, sort: String) {
+        interactor?.retrieveStudyList(category: category, sort: sort)
+    }
+    
+    func pagingStudyList() {
+        interactor?.pagingRetrieveStudyList()
     }
 }
 

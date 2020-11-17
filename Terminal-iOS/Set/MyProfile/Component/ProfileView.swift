@@ -22,8 +22,8 @@ class ProfileView: UIView {
     func attribute() {
         profileImage.do {
             $0.contentMode = .scaleAspectFill
-            $0.frame.size.width = UIScreen.main.bounds.height * 0.15
-            $0.frame.size.height = UIScreen.main.bounds.height * 0.15
+            $0.frame.size.width = Terminal.convertHeigt(value: 100)
+            $0.frame.size.height = Terminal.convertHeigt(value: 100)
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
         }
@@ -34,7 +34,7 @@ class ProfileView: UIView {
             $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
         descript.do {
-            $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다.iOS를 공부하는 중입니다."
+            $0.text = "안녕하세요"
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.numberOfLines = 0
             $0.textAlignment = .left
@@ -51,8 +51,8 @@ class ProfileView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.15).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
         name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -62,10 +62,9 @@ class ProfileView: UIView {
         descript.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
-            $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         }
     }
     

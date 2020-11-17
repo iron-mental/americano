@@ -28,29 +28,42 @@ class StudyCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        mainTitle.text = nil
+        subTitle.text = nil
+        location.text = nil
+        date.text = nil
+        managerImage.image = nil
+        mainImage.image = nil
+    }
+    
     func setData(_ data: Study) {
         mainTitle.do {
             $0.text = data.title
         }
         
         subTitle.do {
-            $0.text = data.subTitle
+            $0.text = data.introduce
         }
         
         location.do {
-            $0.text = data.location
+            $0.text = data.sigungu
         }
         
         date.do {
-            $0.text = data.date
+            $0.text = data.createdAt
         }
-        
-        managerImage.do {
-            $0.image = data.managerImage
+        guard let main = data.image else {
+            mainImage.image = #imageLiteral(resourceName: "swiftmain")
+            return
         }
-        
-        mainImage.do {
-            $0.image = data.mainImage
+        guard let leader = data.leaderImage else {
+            managerImage.image = #imageLiteral(resourceName: "leehi")
+            return
+        }
+        DispatchQueue.main.async {
+            self.mainImage.kf.setImage(with: URL(string: main))
+            self.managerImage.kf.setImage(with: URL(string: leader))
         }
     }
     
@@ -110,6 +123,8 @@ class StudyCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 13).isActive = true
             $0.leadingAnchor.constraint(equalTo: date.trailingAnchor, constant: 10).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
         
         mainImage.do {

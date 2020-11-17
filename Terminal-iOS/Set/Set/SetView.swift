@@ -147,7 +147,8 @@ class SetView: UIViewController {
     }
     
     @objc func pushProfileModify(_ sender: UITapGestureRecognizer) {
-        let view = ProfileModifyView()
+        let view = ProfileDetailView()
+        view.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(view, animated: true)
     }
 }

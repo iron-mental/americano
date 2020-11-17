@@ -16,12 +16,12 @@ class StudyCategoryView: UIViewController {
     lazy var tempButton = UIBarButtonItem(image: #imageLiteral(resourceName: "marker"), style: .plain, target: self, action: #selector(tempForStudyDetail))
     
     @objc func tempForStudyDetail() {
-         let view = StudyDetailViewController()
+         let view = StudyDetailView()
         view.modalPresentationStyle = .fullScreen
         present(view, animated: true)
     }
     
-    let collectionView: UICollectionView = {
+    let categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
@@ -50,24 +50,23 @@ class StudyCategoryView: UIViewController {
             $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
-            $0.navigationItem.leftBarButtonItems = [tempButton]
+//            $0.navigationItem.leftBarButtonItems = [tempButton]
         }
-        collectionView.do {
+        categoryCollectionView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self
-            $0.isScrollEnabled = false
         }
     }
     
     func layout() {
-        view.addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        view.addSubview(categoryCollectionView)
+        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        categoryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        categoryCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
+        categoryCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
+        categoryCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     @objc func createStudy() {
         presenter?.didClickedCreateButton()
@@ -81,7 +80,7 @@ class StudyCategoryView: UIViewController {
 extension StudyCategoryView: StudyCategoryViewProtocol {
     func showCategoryList(with category: [Category]) {
         categoryList = category
-        collectionView.reloadData()
+        categoryCollectionView.reloadData()
     }
     
     func showError() {
@@ -97,14 +96,14 @@ extension StudyCategoryView: StudyCategoryViewProtocol {
     }
     func categoryDownAnimate() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-            self.collectionView.transform = self.collectionView.transform.translatedBy(x: 0, y: 60)
+            self.categoryCollectionView.transform = self.categoryCollectionView.transform.translatedBy(x: 0, y: 60)
         },completion: { _ in
             self.presenter?.goToCreateStudy(category: self.categoryList)
         })
     }
     
     func categoryUpAnimate() {
-        collectionView.transform = self.collectionView.transform.translatedBy(x: 0, y: -60)
+        categoryCollectionView.transform = self.categoryCollectionView.transform.translatedBy(x: 0, y: -60)
     }
 }
 
@@ -128,11 +127,10 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
+        let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
         
         let category = categoryList[indexPath.row]
         cell.imageView.image = category.name
-        
         return cell
     }
     
