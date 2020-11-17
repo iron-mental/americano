@@ -32,6 +32,8 @@
 		A57097AA254D74D90001DE52 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57097A9254D74D90001DE52 /* Notice.swift */; };
 		A57C33D3254E8B5A006CE9A2 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */; };
 		A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D6254E8C58006CE9A2 /* TempChatView.swift */; };
+		A5968F382563C35300013D2E /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */; };
+		A5968F392563C35300013D2E /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */; };
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
 		A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileDetailView.swift */; };
@@ -172,6 +174,8 @@
 		A57097A9254D74D90001DE52 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		A57C33D6254E8C58006CE9A2 /* TempChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempChatView.swift; sourceTree = "<group>"; };
+		A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Medium.otf"; path = "../../../../Desktop/NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Bold.otf"; path = "../../../../Desktop/NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
 		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		A5B78A95252B950600E0B440 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
@@ -635,6 +639,8 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */,
+				A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */,
 				A5BA460C255D09C80061C511 /* Network */,
 				A587CEC7251A428A00A2AD13 /* Extensions-Utillities */,
 				CCA3FF34251781E200F62627 /* Entity */,
@@ -771,13 +777,6 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		CCBC88BB254B101A00C2A6C4 /* StudyDetail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = StudyDetail;
-			sourceTree = "<group>";
-		};
 		CCBC88CD254BEDD000C2A6C4 /* StudyDetailViewComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -865,9 +864,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5968F382563C35300013D2E /* NotoSansKR-Medium.otf in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
+				A5968F392563C35300013D2E /* NotoSansKR-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -988,7 +989,7 @@
 				CCB139AF2557EA0600410184 /* TempMyStudyList.swift in Sources */,
 				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
 				CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */,
-				CCBC88BD254B104300C2A6C4 /* StudyDetailViewController.swift in Sources */,
+				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
 				CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,

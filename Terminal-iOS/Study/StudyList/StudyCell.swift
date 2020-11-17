@@ -76,22 +76,25 @@ class StudyCell: UITableViewCell {
     func attribute() {
         self.backgroundColor = UIColor.appColor(.terminalBackground)
         mainTitle.do {
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 17)
             $0.textColor = .white
         }
         subTitle.do {
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
             $0.textColor = UIColor.appColor(.studySubTitle)
         }
         location.do {
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.textColor = .white
-            $0.font = UIFont.boldSystemFont(ofSize: 14)
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
             $0.textAlignment = .center
             $0.sizeToFit()
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 7
         }
         date.do {
-            $0.textColor = .white
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
+            $0.textColor = UIColor.appColor(.studySubTitle)
         }
         managerImage.do {
             $0.clipsToBounds = true
@@ -100,13 +103,9 @@ class StudyCell: UITableViewCell {
     }
     
     func layout() {
-        addSubview(mainTitle)
-        addSubview(subTitle)
-        addSubview(date)
-        addSubview(managerImage)
-        addSubview(mainImage)
-        addSubview(location)
-        
+        [mainTitle, subTitle, date, managerImage, mainImage, location].forEach { self.contentView.addSubview($0)
+        }
+       
         mainTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
