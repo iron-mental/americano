@@ -8,6 +8,7 @@
 
 import UIKit
 import Then
+import Kingfisher
 
 class StudyCell: UITableViewCell {
     static let cellId = "cellId"
@@ -38,6 +39,11 @@ class StudyCell: UITableViewCell {
     }
     
     func setData(_ data: Study) {
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
         mainTitle.do {
             $0.text = data.title
         }
@@ -62,8 +68,8 @@ class StudyCell: UITableViewCell {
             return
         }
         DispatchQueue.main.async {
-            self.mainImage.kf.setImage(with: URL(string: main))
-            self.managerImage.kf.setImage(with: URL(string: leader))
+            self.mainImage.kf.setImage(with: URL(string: main), options: [.requestModifier(imageDownloadRequest)])
+            self.managerImage.kf.setImage(with: URL(string: leader), options: [.requestModifier(imageDownloadRequest)])
         }
     }
     

@@ -21,4 +21,6 @@ class Terminal {
     static func convertWidth(value: CGFloat) -> CGFloat {
         return screenSize.width * (value / 375)
     }
+    
+    static let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDUyNTg3MTcsImV4cCI6MTYwNjU1NDcxNywiaXNzIjoidGVybWluYWwtc2VydmVyIiwic3ViIjoidXNlckluZm8tYWNjZXNzIn0.ERdupceGRDZAJbnA6hgstoUUYwMoaxm_kqxXneJM6Xo"
 }
