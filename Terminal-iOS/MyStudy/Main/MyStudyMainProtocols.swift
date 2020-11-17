@@ -32,6 +32,7 @@ protocol MyStudyMainPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func viewDidLoad()
+    func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy)
     
     //INTERACTOR -> PRESENTER
     func MyStudyListResult(result: Bool, itemList: [MyStudy]?)
@@ -54,6 +55,7 @@ protocol MyStudyMainWireFrameProtocol: class {
     static func createMyStudyMainViewModul() -> UIViewController
     
     func goToAalrmView(view: UIViewController)
+    func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy)
 }
 
 

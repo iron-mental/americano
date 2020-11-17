@@ -14,7 +14,6 @@ class StudyDetailView: UIViewController {
     let VCArr: [UIViewController] = [ NoticeView(),
                                       StudyDetailViewController(),
                                       TempChatView()]
-
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
                                            navigationOrientation: .horizontal,

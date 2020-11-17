@@ -16,7 +16,10 @@ enum StudyDetailViewState {
     case after
 }
 
-class StudyDetailViewController: UIViewController {
+class StudyDetailViewController: UIViewController, StudyDetailViewControllerProtocol {
+    
+    var studyInfo: [TempStudyDetailStruct] = []
+    
     var state: StudyDetailViewState = .after
     
     var scrollView = UIScrollView()

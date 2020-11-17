@@ -9,6 +9,8 @@
 import UIKit
 
 class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
+    
+    
     var view: MyStudyMainViewProtocol?
     var wireFrame: MyStudyMainWireFrameProtocol?
     var interactor: MyStudyMainInteractorProtocol?
@@ -26,5 +28,9 @@ class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
             view?.showErrMessage()
             break
         }
+    }
+    
+    func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy) {
+        wireFrame?.goToStudyDetailView(view: view, selectedStudy: selectedStudy)
     }
 }

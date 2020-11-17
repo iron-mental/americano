@@ -181,7 +181,6 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         if myStudyList[indexPath.row].image == "" || myStudyList[indexPath.row].image == "test" {
             cell.studyMainimage.image = UIImage(named: "swiftmain")
         } else {
-            print(myStudyList[indexPath.row].image!)
             let url = URL(string: myStudyList[indexPath.row].image!)
             cell.studyMainimage.kf.setImage(with: url, options: [.requestModifier(imageDownloadRequest)])
         }
@@ -193,9 +192,11 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch state {
         case .normal:
-            let view = StudyDetailView()
-            view.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(view, animated: true)
+//            let view = StudyDetailView()
+//            view.hidesBottomBarWhenPushed = true
+//            (view.VCArr[1] as! StudyDetailViewControllerProtocol).studyInfo
+//            navigationController?.pushViewController(view, animated: true)
+            presenter?.didClickedCellForDetail(view: self, selectedStudy: myStudyList[indexPath.row])
             break
         case .edit:
             if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {

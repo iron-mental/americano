@@ -32,9 +32,12 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
         return view
         
     }
+    
     func goToAalrmView(view: UIViewController) {
         
     }
     
-
+    func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy) {
+        <#code#>
+    }
 }
