@@ -10,6 +10,7 @@ target 'Terminal-iOS' do
   pod 'Alamofire'
   pod 'SwiftyJSON'  
   pod 'Kingfisher'
+  pod 'Socket.IO-Client-Swift'
 # Pods for Terminal-iOS
 
 end
