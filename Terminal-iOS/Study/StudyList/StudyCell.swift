@@ -73,16 +73,33 @@ class StudyCell: UITableViewCell {
             managerImage.image = #imageLiteral(resourceName: "leehi")
             return
         }
-        DispatchQueue.main.async {
-            self.mainImage.kf.setImage(with: URL(string: main), options: [.requestModifier(imageDownloadRequest)])
-            self.managerImage.kf.setImage(with: URL(string: leader), options: [.requestModifier(imageDownloadRequest)])
-        }
+        
+        let processor = DownsamplingImageProcessor(size: mainImage.bounds.size)
+        self.mainImage.kf.indicatorType = .activity
+        self.mainImage.kf.setImage(
+            with: URL(string: main),
+            options: [.requestModifier(imageDownloadRequest),
+                      .processor(processor),
+                      .scaleFactor(UIScreen.main.scale),
+//                      .transition(.fade(1)),
+                      .cacheOriginalImage
+            ])
+//        { result in
+//            switch result {
+//            case .success(let value):
+//                print("성공",value)
+//            case .failure(let err):
+//                print("실패",err)
+//            }
+//        }
+        
+        self.managerImage.kf.setImage(with: URL(string: leader), options: [.requestModifier(imageDownloadRequest)])
     }
     
     func attribute() {
         self.backgroundColor = UIColor.appColor(.terminalBackground)
         mainTitle.do {
-            $0.font = UIFont(name: "NotoSansKR-Medium", size: 17)
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 20)
             $0.textColor = .white
         }
         subTitle.do {
@@ -130,6 +147,7 @@ class StudyCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: mainTitle.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.mainImage.leadingAnchor, constant: -10).isActive = true
         }
         
         date.do {

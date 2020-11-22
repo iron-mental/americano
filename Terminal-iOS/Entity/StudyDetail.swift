@@ -17,8 +17,8 @@ struct DataClass: Codable {
     let participate: [Participate]
     let id: Int
     let category, title, introduce, image: String
-    let progress, studyTime, snsNotion, snsEvernote: String
-    let snsWeb: String
+    let progress, studyTime: String
+    let snsWeb, snsNotion, snsEvernote: String?
     let location: Location
 
     enum CodingKeys: String, CodingKey {
@@ -32,8 +32,8 @@ struct DataClass: Codable {
 }
 
 struct Location: Codable {
-    let latitude, longitude, addressName, placeName: String
-    let locationDetail: String
+    let latitude, longitude, addressName: String
+    let locationDetail, placeName: String?
 
     enum CodingKeys: String, CodingKey {
         case latitude, longitude

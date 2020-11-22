@@ -26,6 +26,7 @@ class TerminalNetwork {
                 if let data = JSON(value)["data"].array {
                     do {
                         for index in data {
+                            print(index)
                             let data = "\(index)".data(using: .utf8)
                             let result = try! JSONDecoder().decode(Study.self, from: data!)
                             studyArr.append(result)
@@ -46,8 +47,6 @@ class TerminalNetwork {
         let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"]).removeWhitespace()
         let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
         var studyArr: [Study] = []
-        print(key)
-        print(query)
         AF.request(query, headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -72,9 +71,11 @@ class TerminalNetwork {
         AF.request(key, headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
+                print("띠용",JSON(value))
                 let json = "\(JSON(value))".data(using: .utf8)
                 let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
-                print(result)
+                print("get study detail:",result)
+                
                 completionHandler(result)
             case .failure(let err):
                 print("실패", err)

@@ -101,6 +101,7 @@ class StudyListView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
     }
+    
     @objc func late() {
         print(self.selectedUnderline.center.x)
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
@@ -159,12 +160,12 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
         cell.setData(study)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keyValue = studyList[indexPath.row].id
         presenter?.showStudyDetail(keyValue: keyValue)
     }
 }
-
 
 /// 2번째 방법
 //extension StudyListView: UIScrollViewDelegate {
