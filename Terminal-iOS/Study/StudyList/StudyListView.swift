@@ -8,8 +8,6 @@
 
 import UIKit
 import Then
-import Alamofire
-import SwiftyJSON
 
 class StudyListView: UIViewController {
     var category: String?
@@ -19,6 +17,8 @@ class StudyListView: UIViewController {
     let lateButton = UIButton()
     let locationButton = UIButton()
     let selectedUnderline = UIView()
+    let refreshControl = UIRefreshControl()
+
     var presenter: StudyListPresenterProtocol?
     var studyList: [Study] = []
     
@@ -56,11 +56,17 @@ class StudyListView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
             $0.rowHeight = 105
+            $0.refreshControl = refreshControl
         }
     }
     
     func layout() {
         view.addSubview(aligmentView)
+        aligmentView.addSubview(lateButton)
+        aligmentView.addSubview(locationButton)
+        aligmentView.addSubview(selectedUnderline)
+        view.addSubview(tableView)
+        
         aligmentView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -68,22 +74,16 @@ class StudyListView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * 0.29).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 45).isActive = true
         }
-        aligmentView.addSubview(lateButton)
-        aligmentView.addSubview(locationButton)
-        aligmentView.addSubview(selectedUnderline)
-        
         lateButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: aligmentView.leadingAnchor, constant: 20).isActive = true
             $0.centerYAnchor.constraint(equalTo: aligmentView.centerYAnchor).isActive = true
         }
-        
         locationButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: lateButton.trailingAnchor, constant: 20).isActive = true
             $0.centerYAnchor.constraint(equalTo: aligmentView.centerYAnchor).isActive = true
         }
-        
         selectedUnderline.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: lateButton.bottomAnchor).isActive = true
@@ -91,8 +91,6 @@ class StudyListView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: 35).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
         }
-        
-        view.addSubview(tableView)
         tableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: aligmentView.bottomAnchor).isActive = true
