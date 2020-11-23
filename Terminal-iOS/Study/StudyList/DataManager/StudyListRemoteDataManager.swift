@@ -30,6 +30,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 }
             }
             
+            print("remote")
             completionHandler(self.studyArr)
         }
     }

@@ -105,8 +105,9 @@ class StudyListView: UIViewController {
     }
     
     @objc func updateList() {
-        refreshControl.endRefreshing()
-        tableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
+            self.refreshControl.endRefreshing()
+        }
     }
     
     @objc func late() {

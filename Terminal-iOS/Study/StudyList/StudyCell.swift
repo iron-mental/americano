@@ -81,17 +81,8 @@ class StudyCell: UITableViewCell {
             options: [.requestModifier(imageDownloadRequest),
                       .processor(processor),
                       .scaleFactor(UIScreen.main.scale),
-//                      .transition(.fade(1)),
                       .cacheOriginalImage
             ])
-//        { result in
-//            switch result {
-//            case .success(let value):
-//                print("성공",value)
-//            case .failure(let err):
-//                print("실패",err)
-//            }
-//        }
         
         self.managerImage.kf.setImage(with: URL(string: leader), options: [.requestModifier(imageDownloadRequest)])
     }
