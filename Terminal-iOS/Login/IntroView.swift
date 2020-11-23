@@ -166,7 +166,6 @@ class IntroView: UIViewController {
         }
         invalidImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: invalidView.topAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: invalidLabel.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: invalidView.leadingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
