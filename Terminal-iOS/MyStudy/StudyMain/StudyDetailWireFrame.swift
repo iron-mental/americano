@@ -13,8 +13,6 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         
         let studyDetailView = StudyDetailView()
         
-        
-        
         let studyDetailViewControllerView = StudyDetailViewController()
         let studyDetailViewControllerPresenter = StudyDetailViewControllerPresenter()
         let studyDetailViewControllerInteractor = StudyDetailViewControllerInteractor()
@@ -43,4 +41,3 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         return studyDetailView
     }
 }
-
