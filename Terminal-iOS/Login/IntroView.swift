@@ -32,6 +32,10 @@ class IntroView: UIViewController {
     var rightBarButton: UIBarButtonItem?
     var leftBarButton: UIBarButtonItem?
     
+    var invalidView = UIView()
+    var invalidImage = UIImageView()
+    var invalidLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setting()
@@ -107,10 +111,22 @@ class IntroView: UIViewController {
             $0.setImage(#imageLiteral(resourceName: "cancel"), for: .normal)
             $0.addTarget(self, action: #selector(didClickedCancelButton), for: .touchUpInside)
         }
+        invalidLabel.do {
+            $0.textColor = .systemPink
+            $0.text = "아 좀 똑바로 입력하세용!!"
+        }
+        invalidView.do {
+            $0.backgroundColor = .none
+        }
+        invalidImage.do {
+            $0.image = #imageLiteral(resourceName: "invalid")
+            $0.contentMode = .scaleAspectFill
+        }
     }
     
     func layout() {
-        [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton].forEach { view.addSubview($0) }
+        [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton, invalidView].forEach { view.addSubview($0) }
+        [invalidImage, invalidLabel].forEach { invalidView.addSubview($0) }
         
         inputTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -140,6 +156,28 @@ class IntroView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
+        invalidView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        }
+        invalidImage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: invalidView.topAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: invalidLabel.centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: invalidView.leadingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        }
+        invalidLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: invalidImage.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: invalidImage.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
+        }
+        
     }
     @objc func didClickedBackButon() {
         self.inputTextfield.endEditing(true)

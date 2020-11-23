@@ -25,12 +25,12 @@ class TempChatView: UIViewController {
                     userID: 1,
                     nickname: "강철",
                     message: "이거되냐",
-                    date: "오후 06시 16분"),
+                    date: "오후: 06: 16"),
         ChatMessage(roomNumber: 1,
                     userID: 1,
                     nickname: "강철",
                     message: "이거되냐",
-                    date: "오후 06시 16분"),
+                    date: "오후: 08: 25"),
 //        ChatMessage(roomNumber: 1,
 //                    userID: 1,
 //                    nickname: "강철",
@@ -81,18 +81,12 @@ extension TempChatView: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ChatTableViewCell.id, for: indexPath) as! ChatTableViewCell
-        
-        
-        
         if indexPath.row == chatArray.count {
-//            cell.chatLabel.isHidden = true
-//            cell.textInput.isHidden = false
-//            cell.textInput.placeholder = "_"
-            cell.chatLabel.text = "[오후: 08: 13] 갓우석 $ 1시에 뵐게요~"
+            cell.chatLabel.isHidden = true
+            cell.textInput.isHidden = false
         } else {
             print(chatArray[indexPath.row].message)
-//            cell.chatLabel.text = chatArray[indexPath.row].message
-            cell.chatLabel.text =  "[오후: 08: 12] 용제리 $ 오늘 모임 몇시까지 인지 아시는 분 계신가요?"
+            cell.chatLabel.text =  "[\(chatArray[indexPath.row].date)] \(chatArray[indexPath.row].nickname) $ \(chatArray[indexPath.row].message)"
         }
         return cell
     }

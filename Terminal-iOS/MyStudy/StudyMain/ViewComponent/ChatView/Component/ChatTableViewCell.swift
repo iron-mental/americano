@@ -28,6 +28,8 @@ class ChatTableViewCell: UITableViewCell {
             $0.textColor = .white
             $0.font = UIFont.monospacedSystemFont(ofSize: chatLabel.font.pointSize, weight: UIFont.Weight.regular)
             $0.isHidden = true
+            $0.placeholder = "이것은 플레이스 홀더입니다."
+            $0.text = "이거되냐고요ㅛㅛㅛㅛ"
         }
     }
     
@@ -46,7 +48,8 @@ class ChatTableViewCell: UITableViewCell {
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
     }
     
