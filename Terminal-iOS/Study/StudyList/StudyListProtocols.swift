@@ -33,6 +33,7 @@ protocol StudyListPresenterProtocol: class {
     func studyList(category: String, sort: String)
     func pagingStudyList()
     func showStudyDetail(keyValue: Int)
+    func refreshStudyList()
 }
 
 protocol StudyListInteractorOutputProtocol: class {

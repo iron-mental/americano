@@ -42,7 +42,6 @@ class StudyDetailView: UIViewController {
         attribute()
         layout()
         presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
-        print("하하",userData)
     }
     
     func attribute() {
@@ -212,9 +211,16 @@ class StudyDetailView: UIViewController {
 extension StudyDetailView: StudyDetailViewProtocol {
     
     func showStudyDetail(with studyDeatil: StudyDetail) {
-        mainImageView.do {
-            $0.kf.setImage(with: URL(string: studyDeatil.data.image)!)
+        if studyDeatil.data.image == "" {
+            mainImageView.do {
+                $0.image = nil
+            }
+        } else {
+            mainImageView.do {
+                $0.kf.setImage(with: URL(string: studyDeatil.data.image)!)
+            }
         }
+        
         studyIntroduceView.do {
             $0.contentText = ["","\(studyDeatil.data.title)"]
         }
