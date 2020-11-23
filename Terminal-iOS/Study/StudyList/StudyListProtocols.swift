@@ -21,7 +21,7 @@ protocol StudyListWireFrameProtocol: class {
     static func createStudyListModule() -> UIViewController
     
     // PRESENT -> WIREFRAME
-    func presentStudyDetailScreen(from view: StudyListViewProtocol, forStudy study: Study)
+    func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int)
 }
 
 protocol StudyListPresenterProtocol: class {
@@ -30,8 +30,10 @@ protocol StudyListPresenterProtocol: class {
     var wireFrame: StudyListWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
-    func viewDidLoad()
-    //    func showStudyDetail(forStudy study: Study)
+    func studyList(category: String, sort: String)
+    func pagingStudyList()
+    func showStudyDetail(keyValue: Int)
+    func refreshStudyList()
 }
 
 protocol StudyListInteractorOutputProtocol: class {
@@ -46,7 +48,8 @@ protocol StudyListInteractorInputProtocol: class {
     var remoteDataManager: StudyListRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func retrieveStudyList()
+    func retrieveStudyList(category: String, sort: String)
+    func pagingRetrieveStudyList()
 }
 
 protocol StudyListDataManagerInputProtocol: class {
@@ -57,7 +60,9 @@ protocol StudyListRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func retrieveStudyList()
+    func retrieveStudyList(category: String, sort: String ,completionHandler: @escaping (([Study])) -> ())
+    func paginationRetrieveStudyList(completionHandler: @escaping (([Study])) -> ())
+    
 }
 
 protocol StudyListRemoteDataManagerOutputProtocol: class {

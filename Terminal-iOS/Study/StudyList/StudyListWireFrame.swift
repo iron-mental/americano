@@ -27,13 +27,19 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
         remoteDataManager.remoteRequestHandler = interactor
         
         if let view = view as? StudyListView {
+            view.category = "IOS"
+            view.sort = "new"
             return view
         } else {
             return UIViewController()
         }
     }
     
-    func presentStudyDetailScreen(from view: StudyListViewProtocol, forStudy study: Study) {
+    func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int) {
+        let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(keyValue: keyValue)
         
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(studyDetailViewController, animated: true)
+        }
     }
 }

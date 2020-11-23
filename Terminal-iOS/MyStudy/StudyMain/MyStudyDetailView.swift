@@ -8,11 +8,11 @@
 
 import UIKit
 
-class StudyDetailView: UIViewController {
+class MyStudyDetailView: UIViewController {
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
-    var VCArr: [UIViewController] = [NoticeView(),
-                                      StudyDetailViewController(),
+    let VCArr: [UIViewController] = [ NoticeView(),
+                                      StudyDetailView(),
                                       TempChatView()]
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
@@ -124,7 +124,7 @@ class StudyDetailView: UIViewController {
     }
 }
 
-extension StudyDetailView: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = VCArr.firstIndex(of: viewController), index > 0 else { return nil }
         let previousIndex = index - 1

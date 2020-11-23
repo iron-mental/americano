@@ -27,6 +27,16 @@ class StudyCategoryInteractor: StudyCategoryInteractorInputProtocol {
             Category(name: UIImage(named: "frontend")!),
             Category(name: UIImage(named: "node")!),
             Category(name: UIImage(named: "android")!),
+            Category(name: UIImage(named: "tensorflow")!),
+            Category(name: UIImage(named: "swift")!),
+            Category(name: UIImage(named: "frontend")!),
+            Category(name: UIImage(named: "node")!),
+            Category(name: UIImage(named: "android")!),
+            Category(name: UIImage(named: "tensorflow")!),
+            Category(name: UIImage(named: "swift")!),
+            Category(name: UIImage(named: "frontend")!),
+            Category(name: UIImage(named: "node")!),
+            Category(name: UIImage(named: "android")!),
             Category(name: UIImage(named: "tensorflow")!)
         ]
         presenter?.didRetrieveCategories(categoryList)

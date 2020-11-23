@@ -9,8 +9,6 @@
 import UIKit
 
 class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
-    
-    
     static func createStudyCategory() -> UIViewController {
         let view = StudyCategoryView()
         let presenter: StudyCategoryPresenterProtocol & StudyCategoryInteractorOutputProtocol = StudyCategoryPresenter()
@@ -42,7 +40,7 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
         let studyListViewController = StudyListWireFrame.createStudyListModule()
         
         if let sourceView = view as? UIViewController {
-           sourceView.navigationController?.pushViewController(studyListViewController, animated: true)
+            sourceView.navigationController?.pushViewController(studyListViewController, animated: true)
         }
     }
     

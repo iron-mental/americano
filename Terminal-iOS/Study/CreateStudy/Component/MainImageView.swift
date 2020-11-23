@@ -18,7 +18,6 @@ class MainImageView: UIImageView {
     
     func attribute() {
         self.do {
-            $0.image = #imageLiteral(resourceName: "swift")
             $0.isUserInteractionEnabled = true
         }
     }

@@ -8,13 +8,18 @@
 
 import UIKit
 
-struct Study {
-    var title: String
-    var subTitle: String
-    var location: String
-    var date: String
-    var managerImage: UIImage
-    var mainImage: UIImage
+struct Study: Codable {
+    let id: Int
+    let title, introduce, image, sigungu: String?
+    let leaderImage, createdAt: String?
+    let members: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id, title, introduce, image, sigungu
+        case leaderImage = "leader_image"
+        case createdAt = "created_at"
+        case members
+    }
 }
 
 //이부분 테스트때매 만들었는데 윗부분 건드리기 애매해서 잠시 만들어놨습니다 ㅎㅎ
