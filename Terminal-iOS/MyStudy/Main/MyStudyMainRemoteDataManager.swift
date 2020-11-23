@@ -16,7 +16,6 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
         TerminalAPI.getMyStudyList { (result, itemList) in
             switch result {
             case true:
-                print(itemList)
                 completion(result, itemList)
                 break
             case false:
