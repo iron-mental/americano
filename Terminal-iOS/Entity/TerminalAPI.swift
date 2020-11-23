@@ -33,7 +33,7 @@ class TerminalAPI {
                    })
     }
     
-    static func getStudyDetailInfo(id: Int, completion: @escaping (_: Bool, _: StudyDetailInfo?) -> ()) {
+    static func getStudyDetailInfo(id: Int, completion: @escaping (_: Bool, _: StudyDetail?) -> ()) {
         
         let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
         AF.request("http://3.35.154.27:3000/v1/study/\(id)",
@@ -41,7 +41,7 @@ class TerminalAPI {
                     switch response.result {
                     case .success(let value):
                         let json = "\(JSON(value))".data(using: .utf8)
-                        let result: StudyDetailInfo = try! JSONDecoder().decode(StudyDetailInfo.self, from: json!)
+                        let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
                         completion(result.result, result)
                     case .failure(let value):
                         print(value)
@@ -50,28 +50,3 @@ class TerminalAPI {
                    })
     }
 }
-//                        var studyInfo = StudyDetailInfo(participants: participants,
-//                                        id: json["id"].int!,
-//                                        category: json["category"].string!,
-//                                        title: json["title"].string!,
-//                                        introduce: json["introduce"].string!,
-//                                        image: json["image"].string!,
-//                                        progress: json["progress"].string!,
-//                                        studyTime: json["study_time"].string!,
-//                                        snsNotion: json["sns_notion"].string!,
-//                                        snsEvernote: json["sns_evernote"].string!,
-//                                        snsWeb: json["sns_web"].string!,
-//                                        latitude: json["location"]["latitude"].double!,
-//                                        longitude: json["location"]["longitude"].double!,
-//                                        addressName: json["location"]["address_name"].string!,
-//                                        placeName: json["location"]["place_name"].string!,
-//                                        locationDetail: json["location"]["location_detail"].string!,
-//                                        Authority: json["Authority"].int!)
-                        
-//                        completion(true, studyInfo)
-//                    case .failure(let err) :
-//                        print(err)
-//                        completion(false, nil)
-//                    }
-//                   })
-

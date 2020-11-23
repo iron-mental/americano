@@ -150,7 +150,3 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
         }
     }
 }
-
-extension StudyDetailView: StudyDetailViewProtocol {
-    
-}

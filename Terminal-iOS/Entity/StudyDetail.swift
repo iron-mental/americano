@@ -20,6 +20,7 @@ struct DataClass: Codable {
     let progress, studyTime: String
     let snsWeb, snsNotion, snsEvernote: String?
     let location: Location
+    let authority: String
 
     enum CodingKeys: String, CodingKey {
         case participate, id, category, title, introduce, image, progress
@@ -28,6 +29,7 @@ struct DataClass: Codable {
         case snsEvernote = "sns_evernote"
         case snsWeb = "sns_web"
         case location
+        case authority = "Authority"
     }
 }
 
