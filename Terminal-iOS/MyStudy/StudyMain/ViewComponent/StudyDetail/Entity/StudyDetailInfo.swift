@@ -21,7 +21,7 @@ struct DataClass: Codable {
     let progress, studyTime: String
     let snsNotion, snsEvernote, snsWeb: String?
     let location: Location
-    let authority: Int
+    let authority: String
     
     enum CodingKeys: String, CodingKey {
         case participate, id, category, title, introduce, image, progress

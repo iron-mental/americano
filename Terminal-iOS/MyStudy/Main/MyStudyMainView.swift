@@ -173,16 +173,11 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         cell.locationLabel.text = myStudyList[indexPath.row].sigungu
         cell.titleLabel.text = myStudyList[indexPath.row].title
         
-        
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
             requestBody.setValue(Terminal.accessToken, forHTTPHeaderField: "Authorization")
             return requestBody
         }
-        
-        
-        
-        
         
         if myStudyList[indexPath.row].image == "" || myStudyList[indexPath.row].image == "test" {
             cell.studyMainimage.image = UIImage(named: "swiftmain")
