@@ -33,6 +33,10 @@ class StudyListView: UIViewController {
         view.backgroundColor = UIColor.appColor(.terminalBackground)
         aligmentView.backgroundColor = UIColor.appColor(.terminalBackground)
         
+        refreshControl.do {
+            $0.addTarget(self, action: #selector(updateList), for: .valueChanged)
+        }
+        
         lateButton.do {
             $0.setTitle("최신", for: .normal)
             $0.titleLabel?.font = UIFont(name: "NotoSansKR-Medium", size: 17)
@@ -98,6 +102,11 @@ class StudyListView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
+    }
+    
+    @objc func updateList() {
+        refreshControl.endRefreshing()
+        tableView.reloadData()
     }
     
     @objc func late() {
