@@ -170,11 +170,6 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-<<<<<<< HEAD
-        let view = StudyDetailViewController()
-        view.state = .none
-        self.present(view, animated: true)
-=======
         let keyValue = studyList[indexPath.row].id
         presenter?.showStudyDetail(keyValue: keyValue)
     }
