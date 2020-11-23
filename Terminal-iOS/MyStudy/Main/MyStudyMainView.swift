@@ -32,7 +32,6 @@ class MyStudyMainView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
-        
     }
     
     func attribute() {
@@ -226,4 +225,3 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         print("에러 떴습니다~~")
     }
 }
-
