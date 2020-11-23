@@ -32,7 +32,6 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         
         studyDetailViewControllerWireFrame.presenter = studyDetailViewControllerPresenter
         
-        
         studyDetailViewControllerView.studyInfo = study
         studyDetailView.VCArr[1] = studyDetailViewControllerView
         studyDetailView.hidesBottomBarWhenPushed = true
