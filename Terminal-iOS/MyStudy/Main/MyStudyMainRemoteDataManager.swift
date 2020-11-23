@@ -20,7 +20,6 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
                 completion(result, itemList)
                 break
             case false:
-                print(result)
                 completion(result, nil)
                 break
             }
