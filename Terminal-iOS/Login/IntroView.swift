@@ -32,6 +32,10 @@ class IntroView: UIViewController {
     var rightBarButton: UIBarButtonItem?
     var leftBarButton: UIBarButtonItem?
     
+    var invalidView = UIView()
+    var invalidImage = UIImageView()
+    var invalidLabel = UILabel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setting()
@@ -107,10 +111,23 @@ class IntroView: UIViewController {
             $0.setImage(#imageLiteral(resourceName: "cancel"), for: .normal)
             $0.addTarget(self, action: #selector(didClickedCancelButton), for: .touchUpInside)
         }
+        invalidLabel.do {
+            $0.textColor = .systemPink
+            $0.text = "아 좀 똑바로 입력하세용!!"
+        }
+        invalidView.do {
+            $0.backgroundColor = .none
+            $0.isHidden = true
+        }
+        invalidImage.do {
+            $0.image = #imageLiteral(resourceName: "invalid")
+            $0.contentMode = .scaleAspectFill
+        }
     }
     
     func layout() {
-        [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton].forEach { view.addSubview($0) }
+        [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton, invalidView].forEach { view.addSubview($0) }
+        [invalidImage, invalidLabel].forEach { invalidView.addSubview($0) }
         
         inputTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -140,6 +157,27 @@ class IntroView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
+        invalidView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        }
+        invalidImage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: invalidLabel.centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: invalidView.leadingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 14).isActive = true
+        }
+        invalidLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: invalidImage.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: invalidImage.trailingAnchor,constant: 4).isActive = true
+            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
+        }
+        
     }
     @objc func didClickedBackButon() {
         self.inputTextfield.endEditing(true)
@@ -224,14 +262,53 @@ extension IntroView: IntroViewProtocol {
     }
     
     func showInvalidEmailAction() {
-        print("유효하지 않은 이메일입니다.")
+        invalidView.isHidden = false
+        invalidLabel.text = "유효하지 않은 이메일 입니다."
+        invalidGuideAnimation()
+        
     }
     
     func showInvalidPasswordAction() {
-        print("유효하지 않은 비밀번호입니다.")
+        invalidLabel.text = "유효하지 않은 비밀번호 입니다."
     }
     
     func showInvalidNickNameAction() {
         print("")
+    }
+    func invalidGuideAnimation() {
+        for i in 0...6 {
+            
+        }
+        UIView.animate(withDuration: 0.05) {
+            self.invalidView.transform = CGAffineTransform(translationX: -10, y: 0)
+        } completion: { _ in
+            UIView.animate(withDuration: 0.05) {
+                self.invalidView.transform = CGAffineTransform(translationX: 5, y: 0)
+            } completion: { _ in
+                UIView.animate(withDuration: 0.05) {
+                    self.invalidView.transform = CGAffineTransform(translationX: -2.5, y: 0)
+                } completion: { _ in
+                    UIView.animate(withDuration: 0.05) {
+                        self.invalidView.transform = CGAffineTransform(translationX: 1.25, y: 0)
+                    } completion: { _ in
+                        UIView.animate(withDuration: 0.05) {
+                            self.invalidView.transform = CGAffineTransform(translationX: -0.6125, y: 0)
+                        } completion: { _ in
+                            UIView.animate(withDuration: 0.05) {
+                                self.invalidView.transform = CGAffineTransform(translationX: 0, y: 0)
+                            } completion: { _ in
+                                print("됐겠지 머 ")
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
     }
 }

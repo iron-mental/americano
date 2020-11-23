@@ -9,7 +9,28 @@
 import UIKit
 
 class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
+    
+    
     var view: MyStudyMainViewProtocol?
     var wireFrame: MyStudyMainWireFrameProtocol?
     var interactor: MyStudyMainInteractorProtocol?
+    
+    func viewDidLoad() {
+        interactor?.getMyStudyList()
+    }
+    
+    func MyStudyListResult(result: Bool, itemList: [MyStudy]?) {
+        switch result {
+        case true:
+            view?.showMyStudyList(myStudyList: itemList!)
+            break
+        case false:
+            view?.showErrMessage()
+            break
+        }
+    }
+    
+    func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy) {
+        wireFrame?.goToStudyDetailView(view: view, selectedStudy: selectedStudy)
+    }
 }

@@ -14,7 +14,6 @@ class MyStudyDetailView: UIViewController {
     let VCArr: [UIViewController] = [ NoticeView(),
                                       StudyDetailView(),
                                       TempChatView()]
-
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
                                            navigationOrientation: .horizontal,
@@ -150,4 +149,8 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
             }
         }
     }
+}
+
+extension StudyDetailView: StudyDetailViewProtocol {
+    
 }

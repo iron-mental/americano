@@ -11,11 +11,21 @@ import NMapsMap
 import Kingfisher
 
 enum StudyDetailViewState {
-    case before
+    //클라단에서 처리할 친구들.. 처리?
     case edit
-    case after
+    //서버에서 내려올친구들
+    case host
+    case member
+    case applier
+    case reject
+    case none
 }
 
+class StudyDetailViewController: UIViewController {
+    var presenter: StudyDetailViewControllerPresenterProtocol?
+    var studyInfo: MyStudy?
+    var state: StudyDetailViewState = .member
+    
 class StudyDetailView: UIViewController {
     var presenter: StudyDetailPresenterProtocol?
     var state: StudyDetailViewState = .after
@@ -39,6 +49,7 @@ class StudyDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad(study: studyInfo!)
         attribute()
         layout()
         presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
@@ -56,7 +67,7 @@ class StudyDetailView: UIViewController {
             $0.addGestureRecognizer(mainImageViewTapGesture)
         }
         joinButton.do {
-            if state == .before {
+            if state == .none {
                 $0.setTitle("스터디 참여하기", for: .normal)
                 $0.titleLabel?.font = UIFont.systemFont(ofSize: 13)
                 $0.setTitleColor(.white, for: .normal)
@@ -72,7 +83,7 @@ class StudyDetailView: UIViewController {
         studyIntroduceView.do {
             $0.titleHidden()
             $0.contentText = ["","안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"]
-            if state == .before || state == .after {
+            if state == .none || state == .member {
             } else {
             }
         }
@@ -83,14 +94,14 @@ class StudyDetailView: UIViewController {
         studyPlanView.do {
             $0.title.text = "스터디 진행"
             $0.contentText = ["스터디 진행", "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "]
-            if state == .before || state == .after {
+            if state == .none || state == .member {
             } else {
             }
         }
         timeView.do {
             $0.title.text = "시간"
             $0.contentText = ["시간", "매주 토요일 오후 2시~ 4시"]
-            if state == .before || state == .after {
+            if state == .none || state == .member {
             } else {
             }
         }
@@ -268,5 +279,26 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
         print(indexPath.row)
         view.setNeedsLayout()
         view.layoutIfNeeded()
+    }
+}
+ 
+extension StudyDetailViewController: StudyDetailViewControllerViewProtocol {
+    func showStudyDetailResult(studyInfo: StudyDetailInfo) {
+        //이거 추후에 어떻게할지 ..계속 써야하니까
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.accessToken, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        mainImageView.kf.setImage(with: URL(string: studyInfo.data.image), options: [.requestModifier(imageDownloadRequest)])
+        
+        studyInfo.data.snsNotion == nil ? snsIconsView.notion.isHidden = true : nil
+        studyInfo.data.snsEvernote == nil ? snsIconsView.evernote.isHidden = true : nil
+        studyInfo.data.snsWeb == nil ? snsIconsView.web.isHidden = true : nil
+        studyIntroduceView.label.text =  studyInfo.data.introduce
+        studyPlanView.label.text = studyInfo.data.progress
+        timeView.label.text = studyInfo.data.studyTime
+        locationView.label.text = studyInfo.data.location.addressName
     }
 }
