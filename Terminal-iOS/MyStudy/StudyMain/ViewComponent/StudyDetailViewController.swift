@@ -11,15 +11,20 @@ import NMapsMap
 import Kingfisher
 
 enum StudyDetailViewState {
-    case before
+    //클라단에서 처리할 친구들.. 처리?
     case edit
-    case after
+    //서버에서 내려올친구들
+    case host
+    case member
+    case applier
+    case reject
+    case none
 }
 
 class StudyDetailViewController: UIViewController {
     var presenter: StudyDetailViewControllerPresenterProtocol?
     var studyInfo: MyStudy?
-    var state: StudyDetailViewState = .after
+    var state: StudyDetailViewState = .member
     
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
@@ -55,7 +60,7 @@ class StudyDetailViewController: UIViewController {
             $0.addGestureRecognizer(mainImageViewTapGesture)
         }
         joinButton.do {
-            if state == .before {
+            if state == .none {
                 $0.setTitle("스터디 참여하기", for: .normal)
                 $0.setTitleColor(.white, for: .normal)
                 $0.backgroundColor = UIColor.appColor(.mainColor)
@@ -68,7 +73,7 @@ class StudyDetailViewController: UIViewController {
         studyIntroduceView.do {
             $0.titleHidden()
             $0.contentText = ["","안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"]
-            if state == .before || state == .after {
+            if state == .none || state == .member {
             } else {
             }
         }
@@ -79,14 +84,14 @@ class StudyDetailViewController: UIViewController {
         studyPlanView.do {
             $0.title.text = "스터디 진행"
             $0.contentText = ["스터디 진행", "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "]
-            if state == .before || state == .after {
+            if state == .none || state == .member {
             } else {
             }
         }
         timeView.do {
             $0.title.text = "시간"
             $0.contentText = ["시간", "매주 토요일 오후 2시~ 4시"]
-            if state == .before || state == .after {
+            if state == .none || state == .member {
             } else {
             }
         }

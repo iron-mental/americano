@@ -22,7 +22,7 @@ class ChatTableViewCell: UITableViewCell {
     func attribute() {
         chatLabel.do {
             $0.textColor = .white
-            $0.font = UIFont.monospacedSystemFont(ofSize: chatLabel.font.pointSize, weight: UIFont.Weight.regular)
+            $0.font = UIFont.monospacedSystemFont(ofSize: chatLabel.font.pointSize-4, weight: UIFont.Weight.regular)
         }
         textInput.do {
             $0.textColor = .white

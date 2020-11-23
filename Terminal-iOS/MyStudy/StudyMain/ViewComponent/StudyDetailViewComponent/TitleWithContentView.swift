@@ -12,7 +12,7 @@ class TitleWithContentView: UIView {
     var title = UILabel()
     var label = UILabel()
     var textView = UITextView()
-    var state: StudyDetailViewState = .before
+    var state: StudyDetailViewState = .none
     var contentText: [String] = ["기본 제목", "기본 텍스트"] {
         didSet {
             attribute()
@@ -23,7 +23,7 @@ class TitleWithContentView: UIView {
         super.init(frame: CGRect.zero)
         attribute()
         self.state = state
-        if state == .before || state == .after{
+        if state == .none || state == .member{
             labelLayout()
         } else if state == .edit{
             textViewLayout()
