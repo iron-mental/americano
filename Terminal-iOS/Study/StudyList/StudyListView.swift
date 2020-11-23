@@ -177,7 +177,6 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
 =======
         let keyValue = studyList[indexPath.row].id
         presenter?.showStudyDetail(keyValue: keyValue)
->>>>>>> develop
     }
 }
 
