@@ -31,7 +31,7 @@ class SelectLocationView: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         print("이거 실화야??",isBeingPresented)
         bottomView.textField.becomeFirstResponder()
-        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng))))
+        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)),zoomTo: 17))
     }
     
     

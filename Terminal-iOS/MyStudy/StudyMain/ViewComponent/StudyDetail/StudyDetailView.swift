@@ -58,6 +58,7 @@ class StudyDetailView: UIViewController {
         }
         mainImageView.do {
             $0.addGestureRecognizer(mainImageViewTapGesture)
+            $0.image = #imageLiteral(resourceName: "swiftBackground")
         }
         joinButton.do {
             if state == .before {
@@ -215,13 +216,15 @@ class StudyDetailView: UIViewController {
 extension StudyDetailView: StudyDetailViewProtocol {
     
     func showStudyDetail(with studyDeatil: StudyDetail) {
-        if studyDeatil.data.image == "" {
+        if studyDeatil.data.image == "" || studyDeatil.data.image == nil {
             mainImageView.do {
-                $0.image = nil
+                $0.image = #imageLiteral(resourceName: "swift")
             }
         } else {
             mainImageView.do {
-                $0.kf.setImage(with: URL(string: studyDeatil.data.image)!)
+                print(studyDeatil.data.image)
+                guard let url = URL(string: studyDeatil.data.image!) else { return }
+                $0.kf.setImage(with: url)
             }
         }
         
@@ -235,7 +238,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
             $0.contentText = ["시간","\(studyDeatil.data.studyTime)"]
         }
         timeView.do {
-            $0.contentText = ["장소","\(studyDeatil.data.location.placeName)"]
+            $0.contentText = studyDeatil.data.location.placeName != nil ? ["장소","\(studyDeatil.data.location.placeName!)"] : ["장소",""]
         }
         userData = studyDeatil.data.participate
         memberView.collectionView.reloadData()
@@ -256,15 +259,18 @@ extension StudyDetailView: StudyDetailViewProtocol {
 
 extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userData.count
+//        return userData.count
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
-        print(userData[indexPath.row].image)
-        print(userData[indexPath.row].nickname)
-        cell.profileImage.kf.setImage(with: URL(string: userData[indexPath.row].image))
-        cell.nickname.text = userData[indexPath.row].nickname
+//        print(userData[indexPath.row].image)
+//        print(userData[indexPath.row].nickname)
+//        cell.profileImage.kf.setImage(with: URL(string: userData[indexPath.row].image))
+//        cell.nickname.text = userData[indexPath.row].nickname
+        cell.profileImage.image = #imageLiteral(resourceName: "leehi")
+        cell.nickname.text = "이하이"
         return cell
     }
 
