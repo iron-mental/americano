@@ -105,9 +105,14 @@ class StudyListView: UIViewController {
     }
     
     @objc func updateList() {
+//        studyList.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
             self.refreshControl.endRefreshing()
+//            self.studyList.insert(Study(id: 1111, title: "하이", introduce: "ㅎㅇ", image: nil, sigungu: "몰러", leaderImage: nil, createdAt: "fd", members: 2), at: 0)
+            
+            self.tableView.reloadData()
         }
+        
     }
     
     @objc func late() {
@@ -132,8 +137,8 @@ extension StudyListView: StudyListViewProtocol {
     func showStudyList(with studies: [Study]) {
         for study in studies {
             studyList.append(study)
-            tableView.reloadData()
         }
+        tableView.reloadData()
     }
     
     func showLoading() {

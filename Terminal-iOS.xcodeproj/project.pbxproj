@@ -33,6 +33,8 @@
 		A57C33D3254E8B5A006CE9A2 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */; };
 		A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D6254E8C58006CE9A2 /* TempChatView.swift */; };
 		A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */; };
+		A58A2CD6256D282700914275 /* DuplicateNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A2CD5256D282700914275 /* DuplicateNickname.swift */; };
+		A58A2CD9256D285700914275 /* DuplicateEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A2CD8256D285700914275 /* DuplicateEmail.swift */; };
 		A5968F382563C35300013D2E /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */; };
 		A5968F392563C35300013D2E /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */; };
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
@@ -190,6 +192,9 @@
 		A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		A57C33D6254E8C58006CE9A2 /* TempChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempChatView.swift; sourceTree = "<group>"; };
 		A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailRemoteManager.swift; sourceTree = "<group>"; };
+		A57ECA44256CF9CA001E9790 /* Terminal-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Terminal-iOSDebug.entitlements"; sourceTree = "<group>"; };
+		A58A2CD5256D282700914275 /* DuplicateNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateNickname.swift; sourceTree = "<group>"; };
+		A58A2CD8256D285700914275 /* DuplicateEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateEmail.swift; sourceTree = "<group>"; };
 		A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Medium.otf"; path = "../../../../Desktop/NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Bold.otf"; path = "../../../../Desktop/NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
 		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -667,6 +672,7 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A57ECA44256CF9CA001E9790 /* Terminal-iOSDebug.entitlements */,
 				A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */,
 				A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */,
 				A5BA460C255D09C80061C511 /* Network */,
@@ -700,6 +706,8 @@
 				CC84CF46256284650070E233 /* TerminalAPI.swift */,
 				A5D058F6255D95000047CA9E /* StudyDetail.swift */,
 				CC84CF9325642A390070E233 /* StudyDetailInfo.swift */,
+				A58A2CD5256D282700914275 /* DuplicateNickname.swift */,
+				A58A2CD8256D285700914275 /* DuplicateEmail.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -995,6 +1003,7 @@
 				CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */,
 				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
+				A58A2CD6256D282700914275 /* DuplicateNickname.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
 				CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */,
@@ -1040,6 +1049,7 @@
 				CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				CC84CF882563F1D30070E233 /* StudyDetailViewControllerLocalDataManager.swift in Sources */,
+				A58A2CD9256D285700914275 /* DuplicateEmail.swift in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,
 				A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */,
@@ -1265,6 +1275,7 @@
 			baseConfigurationReference = 0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Terminal-iOS/Terminal-iOSDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DH7PS64634;

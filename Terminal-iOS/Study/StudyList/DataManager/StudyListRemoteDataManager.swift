@@ -16,8 +16,9 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     var studyKeyArr: [Study] = []
     var keyValue: [Int] = []
     var newKeyValue: [Int] = []
-    func retrieveStudyList(category: String, sort: String ,completionHandler: @escaping (([Study])) -> ()) {
-        TerminalNetwork.getNewStudyList(category, sort) {
+    
+    func retrieveStudyList(category: String, sort: String) {
+        TerminalNetwork.getNewStudyList(category, sort) { [self] in
             for data in $0 {
                 if data.title == nil {
                     self.studyKeyArr.append(data)
@@ -30,12 +31,11 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 }
             }
             
-            print("remote")
-            completionHandler(self.studyArr)
+            remoteRequestHandler?.onStudiesRetrieved(self.studyArr)
         }
     }
     
-    func paginationRetrieveStudyList(completionHandler: @escaping (([Study])) -> ()) {
+    func paginationRetrieveStudyList() {
         if studyKeyArr.count >= 10 {
             for _ in 0..<10 {
                 newKeyValue.append(studyKeyArr[0].id)
@@ -49,7 +49,10 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
         }
         
         if newKeyValue.count > 0 {
-            TerminalNetwork.getNewStudyListForKey(newKeyValue) { completionHandler($0) }
+            TerminalNetwork.getNewStudyListForKey(newKeyValue) { [self] studyArr in
+                remoteRequestHandler?.onStudiesRetrieved(studyArr)
+                
+            }
         }
         newKeyValue.removeAll()
     }
