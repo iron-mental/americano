@@ -10,10 +10,10 @@ import UIKit
 
 //MARK : 스터디 리스트
 
-struct StudyList: Codable {
-    let result: Bool
-    let data: [Study]
-}
+//struct StudyList: Codable {
+//    let result: Bool
+//    let data: [Study]
+//}
 
 struct Study: Codable {
     let id: Int

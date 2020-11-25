@@ -26,7 +26,7 @@ class StudyListView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        presenter?.studyList(category: category!, sort: sort!)
+        presenter?.studyList(category: category!)
     }
     
     func attribute() {
@@ -108,8 +108,6 @@ class StudyListView: UIViewController {
 //        studyList.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
             self.refreshControl.endRefreshing()
-//            self.studyList.insert(Study(id: 1111, title: "하이", introduce: "ㅎㅇ", image: nil, sigungu: "몰러", leaderImage: nil, createdAt: "fd", members: 2), at: 0)
-            
             self.tableView.reloadData()
         }
     }
@@ -174,7 +172,7 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let keyValue = studyList[indexPath.row].id
+        let keyValue = studyList[indexPath.row].id 
         presenter?.showStudyDetail(keyValue: keyValue)
     }
 }

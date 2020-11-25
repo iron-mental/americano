@@ -28,7 +28,6 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
         
         if let view = view as? StudyListView {
             view.category = "IOS"
-            view.sort = "new"
             return view
         } else {
             return UIViewController()
