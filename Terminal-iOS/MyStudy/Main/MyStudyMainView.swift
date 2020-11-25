@@ -17,8 +17,10 @@ enum MyStudyMainViewState {
 class MyStudyMainView: UIViewController {
     var presenter: MyStudyMainPresenterProtocol?
     var state: MyStudyMainViewState = .normal
+    
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
+    
     var alarmButton = badgeBarButtonItem()
     var tempButton: UIBarButtonItem?
     var rightBarButtomItem: UIBarButtonItem?
@@ -156,11 +158,13 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         switch state {
         case .normal:
             cell.checkBox.isHidden = true
-            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = false }
+            cell.notiGuideView.isHidden = false
+//            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = false }
             break
         case .edit:
             cell.checkBox.isHidden = false
-            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
+//            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
+            cell.notiGuideView.isHidden = true
             if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
                 cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)
             } else {
