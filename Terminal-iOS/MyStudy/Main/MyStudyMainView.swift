@@ -193,10 +193,6 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch state {
         case .normal:
-//            let view = StudyDetailView()
-//            view.hidesBottomBarWhenPushed = true
-//            (view.VCArr[1] as! StudyDetailViewControllerProtocol).studyInfo
-//            navigationController?.pushViewController(view, animated: true)
             presenter?.didClickedCellForDetail(view: self, selectedStudy: myStudyList[indexPath.row])
             break
         case .edit:

@@ -26,7 +26,6 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         
         if let view = view as? StudyDetailView {
             view.keyValue = keyValue
-//            view.state = 
             view.hidesBottomBarWhenPushed = true
             return view
         } else {

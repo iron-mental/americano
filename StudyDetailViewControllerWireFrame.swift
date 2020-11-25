@@ -11,3 +11,6 @@ import Foundation
 class StudyDetailViewControllerWireFrame: StudyDetailViewControllerWireFrameProtocol {
     var presenter: StudyDetailViewControllerPresenterProtocol?
 }
+
+
+//지워도될듯

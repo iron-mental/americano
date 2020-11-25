@@ -38,9 +38,10 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
     }
     
     func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy) {
-        let studyDetailView = MyStudyDetailView()
-        
+        //wireframe 작업 해서 가야됨 스터디 정보 담아서
+//        let studyDetailView = MyStudyDetailView()
+        let myStudyDetailView =  MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: selectedStudy.id)
 //        let studyDetailView = StudyDetailWireFrame.createStudyDetail(keyValue: selectedStudy.id)
-        view.navigationController?.pushViewController(studyDetailView, animated: true)
+        view.navigationController?.pushViewController(myStudyDetailView, animated: true)
     }
 }

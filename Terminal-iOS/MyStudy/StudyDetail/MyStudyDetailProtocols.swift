@@ -6,10 +6,11 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol MyStudyDetailViewProtocol {
     var presenter: MyStudyDetailPresenterProtocol? { get set }
+    var studyID: Int? { get set}
 }
 
 protocol MyStudyDetailInteractorProtocol {
@@ -21,6 +22,7 @@ protocol MyStudyDetailInteractorProtocol {
 protocol MyStudyDetailPresenterProtocol {
     var view : MyStudyDetailViewProtocol? { get set }
     var interactor: MyStudyDetailInteractorProtocol? { get set }
+    var wireFrame: MyStudyDetailWireFrameProtocol? { get set }
 }
 
 protocol MyStudyDetailRemoteDataManagerProtocol {
@@ -33,4 +35,6 @@ protocol MyStudyDetailLocalDataManagerProtocol {
 
 protocol MyStudyDetailWireFrameProtocol {
     var presenter: MyStudyDetailPresenterProtocol? { get set }
+    
+    static func createMyStudyDetailModule(studyID: Int) -> UIViewController
 }
