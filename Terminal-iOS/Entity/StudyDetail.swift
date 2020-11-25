@@ -18,9 +18,9 @@ struct StudyDetail: Codable {
 struct DataClass: Codable {
     let participate: [Participate]
     let id: Int
-    let category, title, introduce, image: String
+    let category, title, introduce: String
     let progress, studyTime: String
-    let snsWeb, snsNotion, snsEvernote: String?
+    let snsWeb, snsNotion, snsEvernote, image: String?
     let location: Location
     let authority: String
 

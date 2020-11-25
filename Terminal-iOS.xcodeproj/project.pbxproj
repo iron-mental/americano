@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */; };
 		A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */; };
 		A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC912559613E009BE9A6 /* UITextView+Ext.swift */; };
 		A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AE2524952F00ACB241 /* SetPresenter.swift */; };
@@ -36,11 +35,6 @@
 		A57C33D3254E8B5A006CE9A2 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */; };
 		A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D6254E8C58006CE9A2 /* TempChatView.swift */; };
 		A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */; };
-		A58A2CD6256D282700914275 /* DuplicateNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A2CD5256D282700914275 /* DuplicateNickname.swift */; };
-		A58A2CD9256D285700914275 /* DuplicateEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A2CD8256D285700914275 /* DuplicateEmail.swift */; };
-		A58A2CDC256D29B500914275 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A2CDB256D29B500914275 /* UserInfo.swift */; };
-		A5968F382563C35300013D2E /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */; };
-		A5968F392563C35300013D2E /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */; };
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
 		A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileDetailView.swift */; };
@@ -104,12 +98,6 @@
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC84CF47256284650070E233 /* TerminalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF46256284650070E233 /* TerminalAPI.swift */; };
-		CC84CF522562A5630070E233 /* StudyDetailViewControllerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF512562A5630070E233 /* StudyDetailViewControllerProtocols.swift */; };
-		CC84CF7F2563F1720070E233 /* StudyDetailViewControllerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF7E2563F1720070E233 /* StudyDetailViewControllerPresenter.swift */; };
-		CC84CF822563F19C0070E233 /* StudyDetailViewControllerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF812563F19C0070E233 /* StudyDetailViewControllerInteractor.swift */; };
-		CC84CF852563F1B70070E233 /* StudyDetailViewControllerRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF842563F1B70070E233 /* StudyDetailViewControllerRemoteDataManager.swift */; };
-		CC84CF882563F1D30070E233 /* StudyDetailViewControllerLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF872563F1D30070E233 /* StudyDetailViewControllerLocalDataManager.swift */; };
-		CC84CF8B2563F2000070E233 /* StudyDetailViewControllerWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF8A2563F2000070E233 /* StudyDetailViewControllerWireFrame.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
 		CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
@@ -158,6 +146,19 @@
 		CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88D4254BEE2B00C2A6C4 /* SNSIconImageView.swift */; };
 		CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC4DA8025407E9100D9E674 /* IntroView.swift */; };
 		CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */; };
+		CCD51C69256CC13700D41771 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */; };
+		CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */; };
+		CCD51C73256D274A00D41771 /* MyStudyDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C72256D274A00D41771 /* MyStudyDetailProtocols.swift */; };
+		CCD51C77256D29BC00D41771 /* MyStudyDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C76256D29BC00D41771 /* MyStudyDetailInteractor.swift */; };
+		CCD51C7A256D29CC00D41771 /* MyStudyDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C79256D29CC00D41771 /* MyStudyDetailPresenter.swift */; };
+		CCD51C7D256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C7C256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift */; };
+		CCD51C80256D29F200D41771 /* MyStudyDetailLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C7F256D29F200D41771 /* MyStudyDetailLocalDataManager.swift */; };
+		CCD51C83256D2A0500D41771 /* MyStudyDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C82256D2A0500D41771 /* MyStudyDetailWireFrame.swift */; };
+		CCD51C9B256E247600D41771 /* NoticeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C9A256E247600D41771 /* NoticeInteractor.swift */; };
+		CCD51C9F256E248200D41771 /* NoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C9E256E248200D41771 /* NoticePresenter.swift */; };
+		CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */; };
+		CCD51CA5256E254B00D41771 /* NoticeLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA4256E254B00D41771 /* NoticeLocalDataManager.swift */; };
+		CCD51CA8256E257D00D41771 /* NoticeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */; };
 		CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */; };
 		CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709A256B9A510085B371 /* ChatInteractor.swift */; };
 		CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */; };
@@ -198,12 +199,6 @@
 		A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		A57C33D6254E8C58006CE9A2 /* TempChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempChatView.swift; sourceTree = "<group>"; };
 		A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailRemoteManager.swift; sourceTree = "<group>"; };
-		A57ECA44256CF9CA001E9790 /* Terminal-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Terminal-iOSDebug.entitlements"; sourceTree = "<group>"; };
-		A58A2CD5256D282700914275 /* DuplicateNickname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateNickname.swift; sourceTree = "<group>"; };
-		A58A2CD8256D285700914275 /* DuplicateEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuplicateEmail.swift; sourceTree = "<group>"; };
-		A58A2CDB256D29B500914275 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Medium.otf"; path = "../../../../Desktop/NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
-		A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Bold.otf"; path = "../../../../Desktop/NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
 		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		A5B78A95252B950600E0B440 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
@@ -267,12 +262,6 @@
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC84CF46256284650070E233 /* TerminalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAPI.swift; sourceTree = "<group>"; };
-		CC84CF512562A5630070E233 /* StudyDetailViewControllerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailViewControllerProtocols.swift; path = ../../../../../StudyDetailViewControllerProtocols.swift; sourceTree = "<group>"; };
-		CC84CF7E2563F1720070E233 /* StudyDetailViewControllerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailViewControllerPresenter.swift; path = ../../../../../StudyDetailViewControllerPresenter.swift; sourceTree = "<group>"; };
-		CC84CF812563F19C0070E233 /* StudyDetailViewControllerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailViewControllerInteractor.swift; path = ../../../../../StudyDetailViewControllerInteractor.swift; sourceTree = "<group>"; };
-		CC84CF842563F1B70070E233 /* StudyDetailViewControllerRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailViewControllerRemoteDataManager.swift; path = ../../../../../StudyDetailViewControllerRemoteDataManager.swift; sourceTree = "<group>"; };
-		CC84CF872563F1D30070E233 /* StudyDetailViewControllerLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailViewControllerLocalDataManager.swift; path = ../../../../../StudyDetailViewControllerLocalDataManager.swift; sourceTree = "<group>"; };
-		CC84CF8A2563F2000070E233 /* StudyDetailViewControllerWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StudyDetailViewControllerWireFrame.swift; path = ../../../../../StudyDetailViewControllerWireFrame.swift; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
 		CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = badgeBarButtonItem.swift; sourceTree = "<group>"; };
 		CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -323,6 +312,21 @@
 		CCBC88D4254BEE2B00C2A6C4 /* SNSIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSIconImageView.swift; sourceTree = "<group>"; };
 		CCC4DA8025407E9100D9E674 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithTextView.swift; sourceTree = "<group>"; };
+		CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Terminal-iOSDebug.entitlements"; sourceTree = "<group>"; };
+		CCD51C72256D274A00D41771 /* MyStudyDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyDetailProtocols.swift; sourceTree = "<group>"; };
+		CCD51C76256D29BC00D41771 /* MyStudyDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyDetailInteractor.swift; sourceTree = "<group>"; };
+		CCD51C79256D29CC00D41771 /* MyStudyDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyDetailPresenter.swift; sourceTree = "<group>"; };
+		CCD51C7C256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyDetailRemoteDataMananger.swift; sourceTree = "<group>"; };
+		CCD51C7F256D29F200D41771 /* MyStudyDetailLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyDetailLocalDataManager.swift; sourceTree = "<group>"; };
+		CCD51C82256D2A0500D41771 /* MyStudyDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyDetailWireFrame.swift; sourceTree = "<group>"; };
+		CCD51C9A256E247600D41771 /* NoticeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeInteractor.swift; sourceTree = "<group>"; };
+		CCD51C9E256E248200D41771 /* NoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticePresenter.swift; sourceTree = "<group>"; };
+		CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRemoteDataManager.swift; sourceTree = "<group>"; };
+		CCD51CA4256E254B00D41771 /* NoticeLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeLocalDataManager.swift; sourceTree = "<group>"; };
+		CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeProtocols.swift; sourceTree = "<group>"; };
+
 		CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewProtocols.swift; sourceTree = "<group>"; };
 		CCF4709A256B9A510085B371 /* ChatInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
 		CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
@@ -330,7 +334,6 @@
 		CCF470A4256B9A8A0085B371 /* ChatLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLocalDataManager.swift; sourceTree = "<group>"; };
 		CCF470A7256B9AA00085B371 /* ChatWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWireFrame.swift; sourceTree = "<group>"; };
 		CCF470AC256BA6710085B371 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
-		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,7 +341,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +350,6 @@
 		031FECECB36F7B6233EC27DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -376,7 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				CCAF0FD02532FFC70060A2F6 /* Main */,
-				A5BA1EE5254AA89A0089D4E9 /* StudyMain */,
+				A5BA1EE5254AA89A0089D4E9 /* StudyDetail */,
 				A5BA1ED4254A8E160089D4E9 /* Notification */,
 			);
 			path = MyStudy;
@@ -428,12 +429,9 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
-				CCF47095256B97D60085B371 /* ChatView */,
+				CCD51C86256E17B200D41771 /* Notice */,
 				A5D058D0255D87420047CA9E /* StudyDetail */,
-				A5E25C7225590DC10090E21E /* NoticeViewComponent */,
-				CCBC88CD254BEDD000C2A6C4 /* StudyDetailViewComponent */,
-				A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */,
-				A57C33D6254E8C58006CE9A2 /* TempChatView.swift */,
+				CCF47095256B97D60085B371 /* Chat */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -508,14 +506,20 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		A5BA1EE5254AA89A0089D4E9 /* StudyMain */ = {
+		A5BA1EE5254AA89A0089D4E9 /* StudyDetail */ = {
 			isa = PBXGroup;
 			children = (
+				A5BA1EE6254AA8B70089D4E9 /* MyStudyDetailView.swift */,
+				CCD51C76256D29BC00D41771 /* MyStudyDetailInteractor.swift */,
+				CCD51C79256D29CC00D41771 /* MyStudyDetailPresenter.swift */,
+				CCD51C7C256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift */,
+				CCD51C7F256D29F200D41771 /* MyStudyDetailLocalDataManager.swift */,
+				CCD51C82256D2A0500D41771 /* MyStudyDetailWireFrame.swift */,
+				CCD51C72256D274A00D41771 /* MyStudyDetailProtocols.swift */,
 				A57C33D1254E8B28006CE9A2 /* ViewComponent */,
 				A5BA1EE9254AAC4B0089D4E9 /* Component */,
-				A5BA1EE6254AA8B70089D4E9 /* MyStudyDetailView.swift */,
 			);
-			path = StudyMain;
+			path = StudyDetail;
 			sourceTree = "<group>";
 		};
 		A5BA1EE9254AAC4B0089D4E9 /* Component */ = {
@@ -547,18 +551,13 @@
 		A5D058D0255D87420047CA9E /* StudyDetail */ = {
 			isa = PBXGroup;
 			children = (
+				CCBC88CD254BEDD000C2A6C4 /* Component */,
 				A5D058F2255D93A50047CA9E /* DataManager */,
 				CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */,
 				A5D058D4255D90CE0047CA9E /* StudyDetailInteractor.swift */,
 				A5D058E9255D937F0047CA9E /* StudyDetailPresenter.swift */,
 				A5D058EC255D93910047CA9E /* StudyDetailWireFrame.swift */,
 				A5D058EF255D939C0047CA9E /* StudyDetailProtocols.swift */,
-				CC84CF512562A5630070E233 /* StudyDetailViewControllerProtocols.swift */,
-				CC84CF872563F1D30070E233 /* StudyDetailViewControllerLocalDataManager.swift */,
-				CC84CF8A2563F2000070E233 /* StudyDetailViewControllerWireFrame.swift */,
-				CC84CF7E2563F1720070E233 /* StudyDetailViewControllerPresenter.swift */,
-				CC84CF812563F19C0070E233 /* StudyDetailViewControllerInteractor.swift */,
-				CC84CF842563F1B70070E233 /* StudyDetailViewControllerRemoteDataManager.swift */,
 			);
 			path = StudyDetail;
 			sourceTree = "<group>";
@@ -665,6 +664,7 @@
 				CCA1FF5424FD0C930026C3EA /* Products */,
 				5ABD6AFD2D9CBF39ED6C88B5 /* Pods */,
 				031FECECB36F7B6233EC27DC /* Frameworks */,
+				CCD51CAB256E27EB00D41771 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -679,9 +679,9 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A57ECA44256CF9CA001E9790 /* Terminal-iOSDebug.entitlements */,
-				A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */,
-				A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */,
+				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
+				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
+				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
 				A5BA460C255D09C80061C511 /* Network */,
 				A587CEC7251A428A00A2AD13 /* Extensions-Utillities */,
 				CCA3FF34251781E200F62627 /* Entity */,
@@ -711,9 +711,6 @@
 				A5BA1EE0254A99250089D4E9 /* Noti.swift */,
 				A57097A9254D74D90001DE52 /* Notice2.swift */,
 				A5D058F6255D95000047CA9E /* StudyDetail.swift */,
-				A58A2CD5256D282700914275 /* DuplicateNickname.swift */,
-				A58A2CD8256D285700914275 /* DuplicateEmail.swift */,
-				A58A2CDB256D29B500914275 /* UserInfo.swift */,
 				A51F2356256E195600CBFC13 /* AccessToken.swift */,
 				A51F235B256E19E600CBFC13 /* ProjectList.swift */,
 				A51F235F256E1F8000CBFC13 /* Notice.swift */,
@@ -747,12 +744,12 @@
 		CCA3FF4D2517824900F62627 /* StudyCategory */ = {
 			isa = PBXGroup;
 			children = (
-				CCA3FF572517826B00F62627 /* CategoryCell.swift */,
+				CCA3FF582517826B00F62627 /* StudyCategoryView.swift */,
 				CCA3FF542517826B00F62627 /* StudyCategoryInteractor.swift */,
 				CCA3FF562517826B00F62627 /* StudyCategoryPresenter.swift */,
 				CCA3FF552517826B00F62627 /* StudyCategoryProtocols.swift */,
-				CCA3FF582517826B00F62627 /* StudyCategoryView.swift */,
 				CCA3FF532517826B00F62627 /* StudyCategoryWireFrame.swift */,
+				CCA3FF572517826B00F62627 /* CategoryCell.swift */,
 				CCA3FF4E2517825700F62627 /* DataManager */,
 			);
 			path = StudyCategory;
@@ -817,7 +814,7 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		CCBC88CD254BEDD000C2A6C4 /* StudyDetailViewComponent */ = {
+		CCBC88CD254BEDD000C2A6C4 /* Component */ = {
 			isa = PBXGroup;
 			children = (
 				CCBC88CE254BEDE200C2A6C4 /* SNSIconsView.swift */,
@@ -827,7 +824,7 @@
 				CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */,
 				CC198E74254C0367009D6CDF /* MemberCollectionViewCell.swift */,
 			);
-			path = StudyDetailViewComponent;
+			path = Component;
 			sourceTree = "<group>";
 		};
 		CCC4DA7F25407E5900D9E674 /* Login */ = {
@@ -844,10 +841,25 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		CCF47095256B97D60085B371 /* ChatView */ = {
+		CCD51C86256E17B200D41771 /* Notice */ = {
+			isa = PBXGroup;
+			children = (
+				A5E25C7225590DC10090E21E /* NoticeViewComponent */,
+				A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */,
+				CCD51C9A256E247600D41771 /* NoticeInteractor.swift */,
+				CCD51C9E256E248200D41771 /* NoticePresenter.swift */,
+				CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */,
+				CCD51CA4256E254B00D41771 /* NoticeLocalDataManager.swift */,
+				CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */,
+			);
+			path = Notice;
+			sourceTree = "<group>";
+		};
+		CCF47095256B97D60085B371 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
 				CCF470AB256BA65A0085B371 /* Component */,
+				A57C33D6254E8C58006CE9A2 /* TempChatView.swift */,
 				CCF4709A256B9A510085B371 /* ChatInteractor.swift */,
 				CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */,
 				CCF470A1256B9A710085B371 /* ChatRemoteDataManager.swift */,
@@ -855,7 +867,7 @@
 				CCF470A7256B9AA00085B371 /* ChatWireFrame.swift */,
 				CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */,
 			);
-			path = ChatView;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		CCF470AB256BA65A0085B371 /* Component */ = {
@@ -926,11 +938,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5968F382563C35300013D2E /* NotoSansKR-Medium.otf in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
+				CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
-				A5968F392563C35300013D2E /* NotoSansKR-Bold.otf in Resources */,
+				CCD51C69256CC13700D41771 /* NotoSansKR-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1000,6 +1012,7 @@
 				CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */,
 				CCA3FF4A2517823E00F62627 /* StudyListWireFrame.swift in Sources */,
 				A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */,
+				CCD51C9F256E248200D41771 /* NoticePresenter.swift in Sources */,
 				CC198E75254C0367009D6CDF /* MemberCollectionViewCell.swift in Sources */,
 				A5C5B15325456E2800F4A86D /* EmailView.swift in Sources */,
 				A5BA1EE7254AA8B70089D4E9 /* MyStudyDetailView.swift in Sources */,
@@ -1007,11 +1020,12 @@
 				A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */,
 				A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */,
 				CCB139CC2559289900410184 /* IntroProtocols.swift in Sources */,
+				CCD51C73256D274A00D41771 /* MyStudyDetailProtocols.swift in Sources */,
 				A5BA1ED6254A8E9C0089D4E9 /* NotificationView.swift in Sources */,
 				CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */,
 				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
-				A58A2CD6256D282700914275 /* DuplicateNickname.swift in Sources */,
+				A58A2CD6256D282700914275 /* (null) in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
 				CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */,
@@ -1020,10 +1034,12 @@
 				A5D058EA255D937F0047CA9E /* StudyDetailPresenter.swift in Sources */,
 				CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */,
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,
+				CCD51CA5256E254B00D41771 /* NoticeLocalDataManager.swift in Sources */,
 				CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */,
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				A5D058D5255D90CE0047CA9E /* StudyDetailInteractor.swift in Sources */,
+				CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */,
 				A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */,
@@ -1041,13 +1057,14 @@
 				CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */,
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,
-				CC84CF522562A5630070E233 /* StudyDetailViewControllerProtocols.swift in Sources */,
+				CCD51C83256D2A0500D41771 /* MyStudyDetailWireFrame.swift in Sources */,
 				A5C5B14A25455A4100F4A86D /* CarrerView.swift in Sources */,
 				A5686A452524F048005990DC /* NotiCell.swift in Sources */,
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
 				CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */,
 				A5D058F0255D939C0047CA9E /* StudyDetailProtocols.swift in Sources */,
 				CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */,
+				CCD51C80256D29F200D41771 /* MyStudyDetailLocalDataManager.swift in Sources */,
 				A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CCB139AF2557EA0600410184 /* TempMyStudyList.swift in Sources */,
@@ -1057,9 +1074,6 @@
 				A51F235C256E19E600CBFC13 /* ProjectList.swift in Sources */,
 				CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
-				CC84CF882563F1D30070E233 /* StudyDetailViewControllerLocalDataManager.swift in Sources */,
-				A58A2CD9256D285700914275 /* DuplicateEmail.swift in Sources */,
-				A58A2CDC256D29B500914275 /* UserInfo.swift in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,
 				A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */,
@@ -1079,27 +1093,28 @@
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				A5E25C7425590DE40090E21E /* NoticeDetailView.swift in Sources */,
 				CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */,
-				A51F2360256E1F8000CBFC13 /* Notice.swift in Sources */,
+				CCD51C77256D29BC00D41771 /* MyStudyDetailInteractor.swift in Sources */,
 				CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */,
 				CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */,
 				CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */,
+				CCD51C9B256E247600D41771 /* NoticeInteractor.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
+				CCD51CA8256E257D00D41771 /* NoticeProtocols.swift in Sources */,
 				CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */,
 				A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */,
 				A5D058F7255D95000047CA9E /* StudyDetail.swift in Sources */,
 				A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */,
 				CCAF0FE6253303770060A2F6 /* MyStudyMainWireFrame.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
+				CCD51C7A256D29CC00D41771 /* MyStudyDetailPresenter.swift in Sources */,
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,
 				CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */,
 				CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */,
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
 				CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */,
-				CC84CF8B2563F2000070E233 /* StudyDetailViewControllerWireFrame.swift in Sources */,
 				CCBC88CF254BEDE200C2A6C4 /* SNSIconsView.swift in Sources */,
 				CCB139CF25592D8300410184 /* IntroPresenter.swift in Sources */,
 				CC45F55B254AA44400DC31C6 /* SearchLocationProtocols.swift in Sources */,
-				CC84CF7F2563F1720070E233 /* StudyDetailViewControllerPresenter.swift in Sources */,
 				CCA3FF482517823E00F62627 /* StudyListView.swift in Sources */,
 				A5686A492524F49C005990DC /* Profile.swift in Sources */,
 				CCA3FF492517823E00F62627 /* StudyListPresenter.swift in Sources */,
@@ -1114,9 +1129,8 @@
 				A521DDED252DEA7E00F83DB3 /* ProfileDetailProtocols.swift in Sources */,
 				A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */,
 				CCAF0FDC253303300060A2F6 /* MyStudyMainPresenter.swift in Sources */,
-				CC84CF822563F19C0070E233 /* StudyDetailViewControllerInteractor.swift in Sources */,
 				CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */,
-				CC84CF852563F1B70070E233 /* StudyDetailViewControllerRemoteDataManager.swift in Sources */,
+				CCD51C7D256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */,
 				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,

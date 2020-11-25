@@ -9,10 +9,13 @@
 import UIKit
 
 class MyStudyDetailView: UIViewController {
+    var presenter: MyStudyDetailPresenterProtocol?
+    
+    var studyID: Int?
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
-    let VCArr: [UIViewController] = [ NoticeView(),
-                                      StudyDetailView(),
+    lazy var  VCArr: [UIViewController] = [ NoticeView(),
+                                      StudyDetailWireFrame.createStudyDetail(keyValue: studyID!),
                                       TempChatView()]
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
@@ -37,6 +40,7 @@ class MyStudyDetailView: UIViewController {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         tabSege.do {
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 14),
@@ -149,4 +153,7 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
             }
         }
     }
+}
+
+extension MyStudyDetailView: MyStudyDetailViewProtocol {
 }

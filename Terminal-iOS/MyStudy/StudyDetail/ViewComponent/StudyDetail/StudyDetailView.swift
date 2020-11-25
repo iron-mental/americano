@@ -11,7 +11,6 @@ import NMapsMap
 import Kingfisher
 
 enum StudyDetailViewState {
-    case before
     case edit
     case member
     case host
@@ -58,9 +57,10 @@ class StudyDetailView: UIViewController {
         }
         mainImageView.do {
             $0.addGestureRecognizer(mainImageViewTapGesture)
+            $0.image = #imageLiteral(resourceName: "swiftBackground")
         }
         joinButton.do {
-            if state == .before {
+            if state == .none {
                 $0.setTitle("스터디 참여하기", for: .normal)
                 $0.titleLabel?.font = UIFont.systemFont(ofSize: 13)
                 $0.setTitleColor(.white, for: .normal)
@@ -76,7 +76,7 @@ class StudyDetailView: UIViewController {
         studyIntroduceView.do {
             $0.titleHidden()
             $0.contentText = ["","안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"]
-            if state == .before || state == .member {
+            if state == .none || state == .member {
             } else {
             }
         }
@@ -87,14 +87,14 @@ class StudyDetailView: UIViewController {
         studyPlanView.do {
             $0.title.text = "스터디 진행"
             $0.contentText = ["스터디 진행", "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "]
-            if state == .before || state == .member {
+            if state == .none || state == .member {
             } else {
             }
         }
         timeView.do {
             $0.title.text = "시간"
             $0.contentText = ["시간", "매주 토요일 오후 2시~ 4시"]
-            if state == .before || state == .member {
+            if state == .none || state == .member {
             } else {
             }
         }
@@ -215,13 +215,15 @@ class StudyDetailView: UIViewController {
 extension StudyDetailView: StudyDetailViewProtocol {
     
     func showStudyDetail(with studyDeatil: StudyDetail) {
-        if studyDeatil.data.image == "" {
+        if studyDeatil.data.image == "" || studyDeatil.data.image == nil {
             mainImageView.do {
-                $0.image = nil
+                $0.image = #imageLiteral(resourceName: "swift")
             }
         } else {
             mainImageView.do {
-                $0.kf.setImage(with: URL(string: studyDeatil.data.image)!)
+                print(studyDeatil.data.image)
+                guard let url = URL(string: studyDeatil.data.image!) else { return }
+                $0.kf.setImage(with: url)
             }
         }
         
@@ -235,7 +237,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
             $0.contentText = ["시간","\(studyDeatil.data.studyTime)"]
         }
         timeView.do {
-            $0.contentText = ["장소","\(studyDeatil.data.location.placeName)"]
+            $0.contentText = studyDeatil.data.location.placeName != nil ? ["장소","\(studyDeatil.data.location.placeName!)"] : ["장소",""]
         }
         userData = studyDeatil.data.participate
         memberView.collectionView.reloadData()
@@ -256,15 +258,18 @@ extension StudyDetailView: StudyDetailViewProtocol {
 
 extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userData.count
+//        return userData.count
+        return 7
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
-        print(userData[indexPath.row].image)
-        print(userData[indexPath.row].nickname)
-        cell.profileImage.kf.setImage(with: URL(string: userData[indexPath.row].image))
-        cell.nickname.text = userData[indexPath.row].nickname
+//        print(userData[indexPath.row].image)
+//        print(userData[indexPath.row].nickname)
+//        cell.profileImage.kf.setImage(with: URL(string: userData[indexPath.row].image))
+//        cell.nickname.text = userData[indexPath.row].nickname
+        cell.profileImage.image = #imageLiteral(resourceName: "leehi")
+        cell.nickname.text = "이하이"
         return cell
     }
 

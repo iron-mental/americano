@@ -67,23 +67,5 @@ class TerminalNetwork {
         }
     }
     
-    // 키값으로 스터디 디테일을 구하는 플로우
-    static func getStudyDetail(_ keyValue: String,
-                               completionHandler: @escaping (StudyDetail) -> Void) {
-        let key = "http://3.35.154.27:3000/v1/study/\(keyValue)"
-        
-        AF.request(key, headers: headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                print("띠용",JSON(value))
-                let json = "\(JSON(value))".data(using: .utf8)
-                let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
-                print("get study detail:",result)
-                
-                completionHandler(result)
-            case .failure(let err):
-                print("실패", err)
-            }
-        }
-    }
+    
 }

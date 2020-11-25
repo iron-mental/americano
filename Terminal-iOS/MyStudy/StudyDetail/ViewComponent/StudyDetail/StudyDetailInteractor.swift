@@ -14,7 +14,7 @@ class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
     var remoteDatamanager: StudyDetailRemoteDataManagerInputProtocol?
     
     func retrieveStudyDetail(keyValue: String) {
-        remoteDatamanager?.retrievePostList(keyValue: keyValue, completionHandler: { [self] in
+        remoteDatamanager?.getStudyDetail(keyValue: keyValue, completionHandler: { [self] in
             presenter?.didRetrieveStudyDetail($0)
         })
     }

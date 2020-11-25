@@ -8,7 +8,7 @@ target 'Terminal-iOS' do
   pod 'Then'
   pod 'NMapsMap'
   pod 'Alamofire'
-  pod 'SwiftyJSON'  
+  pod 'SwiftyJSON'
   pod 'Kingfisher'
   pod 'Socket.IO-Client-Swift'
 # Pods for Terminal-iOS

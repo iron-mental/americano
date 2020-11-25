@@ -15,9 +15,10 @@ class MyStudyMainTableViewCell: UITableViewCell {
     var studyMainimage = UIImageView()
     var locationLabel = UILabel()
     var titleLabel = UILabel()
-    let newChatLabel = UILabel()
-    let newNoticeLabel = UILabel()
-    let newMemberLabel = UILabel()
+    lazy var notiGuideView = UIView()
+//    let newChatLabel = UILabel()
+//    let newNoticeLabel = UILabel()
+//    let newMemberLabel = UILabel()
     var checkBox = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -44,30 +45,35 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.text = "Swift 정복하기"
             $0.font = $0.font.withSize(16 * (parentFrame.height / 667))
         }
-        newChatLabel.do {
-            $0.text = "새 채팅"
-            $0.backgroundColor = UIColor.appColor(.mainColor)
-            $0.font = newChatLabel.font.withSize(13)
-            $0.layer.cornerRadius = 10
+        notiGuideView.do {
+            $0.layer.cornerRadius = Terminal.convertWidth(value: 10) / 2
+            $0.backgroundColor = .red
             $0.layer.masksToBounds = true
-            $0.textAlignment = .center
         }
-        newNoticeLabel.do {
-            $0.text = "새 공지"
-            $0.backgroundColor = UIColor.appColor(.mainColor)
-            $0.font = newNoticeLabel.font.withSize(13)
-            $0.layer.cornerRadius = 10
-            $0.layer.masksToBounds = true
-            $0.textAlignment = .center
-        }
-        newMemberLabel.do {
-            $0.text = "새 멤버"
-            $0.backgroundColor = UIColor.appColor(.mainColor)
-            $0.font = newMemberLabel.font.withSize(13)
-            $0.layer.cornerRadius = 10
-            $0.layer.masksToBounds = true
-            $0.textAlignment = .center
-        }
+//        newChatLabel.do {
+//            $0.text = "새 채팅"
+//            $0.backgroundColor = UIColor.appColor(.mainColor)
+//            $0.font = newChatLabel.font.withSize(13)
+//            $0.layer.cornerRadius = 10
+//            $0.layer.masksToBounds = true
+//            $0.textAlignment = .center
+//        }
+//        newNoticeLabel.do {
+//            $0.text = "새 공지"
+//            $0.backgroundColor = UIColor.appColor(.mainColor)
+//            $0.font = newNoticeLabel.font.withSize(13)
+//            $0.layer.cornerRadius = 10
+//            $0.layer.masksToBounds = true
+//            $0.textAlignment = .center
+//        }
+//        newMemberLabel.do {
+//            $0.text = "새 멤버"
+//            $0.backgroundColor = UIColor.appColor(.mainColor)
+//            $0.font = newMemberLabel.font.withSize(13)
+//            $0.layer.cornerRadius = 10
+//            $0.layer.masksToBounds = true
+//            $0.textAlignment = .center
+//        }
         checkBox.do {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.appColor(.mainColor).cgColor
@@ -78,7 +84,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
     }
     
     func layout() {
-        [studyMainimage, locationLabel, titleLabel, newChatLabel, newNoticeLabel, newMemberLabel, checkBox].forEach { addSubview($0) }
+        [studyMainimage, locationLabel, titleLabel, checkBox, notiGuideView].forEach { addSubview($0) }
         
         studyMainimage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -101,33 +107,20 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.heightAnchor.constraint(equalToConstant: (20/667) * parentFrame.height).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (200/375) * parentFrame.width).isActive = true
         }
-        newChatLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: newNoticeLabel.topAnchor, constant: -(4/667) * parentFrame.height).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(14/375) * parentFrame.width).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (50/375) * parentFrame.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (19/667) * parentFrame.height).isActive = true
-        }
-        newNoticeLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(14/375) * parentFrame.width).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (50/375) * parentFrame.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (19/667) * parentFrame.height).isActive = true
-        }
-        newMemberLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: newNoticeLabel.bottomAnchor, constant: (4/667) * parentFrame.height).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -(14/375) * parentFrame.width).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (50/375) * parentFrame.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (19/667) * parentFrame.height).isActive = true
-        }
         checkBox.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Terminal.convertWidth(value: 28)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
+        }
+        notiGuideView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Terminal.convertWidth(value: 28)).isActive = true
+            $0.centerXAnchor.constraint(equalTo: checkBox.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 10)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 10)).isActive = true
         }
     }
     

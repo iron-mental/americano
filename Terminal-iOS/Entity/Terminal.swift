@@ -14,7 +14,7 @@ class Terminal {
     
     static let screenSize = UIScreen.main.bounds
     
-    static let accessToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJya2RjamYwMTIyQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S067OA6rK97ZWo7JqUIiwiaWF0IjoxNjA2MDE5ODM3LCJleHAiOjEwNjA2MDE5ODM3LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.G912oIEzOuXCe8tMrtuQCbcfC-JrBhMH-KxI_takV5I"
+    static let accessToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJya2RjamYwMTIyQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S067OA6rK97ZWo7JqUIiwiaWF0IjoxNjA2Mjc4Njk2LCJleHAiOjEwNjA2Mjc4Njk2LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.XpAnYFUruanEckFStQrOkUOZ7ecijbOyHeGm6JH7oqM"
     
     static let tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJya2RjamYwMTIyQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S067OA6rK97ZWo7JqUIiwiaWF0IjoxNjA2MDE5ODM3LCJleHAiOjEwNjA2MDE5ODM3LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.G912oIEzOuXCe8tMrtuQCbcfC-JrBhMH-KxI_takV5I"
     
@@ -28,5 +28,5 @@ class Terminal {
         return screenSize.width * (value / 375)
     }
     
-    static let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJya2RjamYwMTIyQGdtYWlsLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S0IiwiaWF0IjoxNjA2MTMzNjcwLCJleHAiOjEwNjA2MTMzNjcwLCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.FcXxEdpssEV0UXLhKtr4MFVNkU3nfqKU2DWrh8862s4"
+    static let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJya2RjamYwMTIyQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S067OA6rK97ZWo7JqUIiwiaWF0IjoxNjA2Mjc4Njk2LCJleHAiOjEwNjA2Mjc4Njk2LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.XpAnYFUruanEckFStQrOkUOZ7ecijbOyHeGm6JH7oqM"
 }

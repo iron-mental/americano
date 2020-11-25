@@ -17,8 +17,10 @@ enum MyStudyMainViewState {
 class MyStudyMainView: UIViewController {
     var presenter: MyStudyMainPresenterProtocol?
     var state: MyStudyMainViewState = .normal
+    
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
+    
     var alarmButton = badgeBarButtonItem()
     var tempButton: UIBarButtonItem?
     var rightBarButtomItem: UIBarButtonItem?
@@ -46,7 +48,8 @@ class MyStudyMainView: UIViewController {
         tempButton = UIBarButtonItem(title: "임시버튼", style: .done, target: self, action: #selector(goToLoginAction(_ :)))
         self.do {
             $0.title = "내 스터디"
-            $0.navigationController?.navigationBar.backgroundColor = UIColor.appColor(.testColor)
+            $0.navigationController?.navigationBar.barTintColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         tableView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -156,11 +159,13 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         switch state {
         case .normal:
             cell.checkBox.isHidden = true
-            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = false }
+            cell.notiGuideView.isHidden = false
+//            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = false }
             break
         case .edit:
             cell.checkBox.isHidden = false
-            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
+//            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
+            cell.notiGuideView.isHidden = true
             if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
                 cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)
             } else {
@@ -193,10 +198,6 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch state {
         case .normal:
-//            let view = StudyDetailView()
-//            view.hidesBottomBarWhenPushed = true
-//            (view.VCArr[1] as! StudyDetailViewControllerProtocol).studyInfo
-//            navigationController?.pushViewController(view, animated: true)
             presenter?.didClickedCellForDetail(view: self, selectedStudy: myStudyList[indexPath.row])
             break
         case .edit:
