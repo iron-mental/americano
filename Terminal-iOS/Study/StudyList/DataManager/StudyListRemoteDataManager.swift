@@ -12,12 +12,7 @@ import SwiftyJSON
 
 class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
-    
-    var studyArr: [Study] = []
-    var studyKeyArr: [Study] = []
-    var keyValue: [Int] = []
-    var newKeyValue: [Int] = []
-    
+  
     //MARK: 리스트 검색시 초기 배열값
     
     func retrieveStudyList(category: String) {
@@ -38,6 +33,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     }
     
     //MARK: key 값을 통한 페이징
+    
     func paginationRetrieveStudyList(keyValue: [Int]) {
         if keyValue.count > 0 {
             let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"]).removeWhitespace()
