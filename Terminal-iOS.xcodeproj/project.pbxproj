@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */; };
 		A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */; };
 		A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC912559613E009BE9A6 /* UITextView+Ext.swift */; };
 		A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AE2524952F00ACB241 /* SetPresenter.swift */; };
@@ -36,11 +35,9 @@
 		A57C33D3254E8B5A006CE9A2 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */; };
 		A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D6254E8C58006CE9A2 /* TempChatView.swift */; };
 		A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */; };
-		A58A2CD6256D282700914275 /* DuplicateNickname.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A2CD5256D282700914275 /* DuplicateNickname.swift */; };
-		A58A2CD9256D285700914275 /* DuplicateEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A2CD8256D285700914275 /* DuplicateEmail.swift */; };
-		A58A2CDC256D29B500914275 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A2CDB256D29B500914275 /* UserInfo.swift */; };
-		A5968F382563C35300013D2E /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */; };
-		A5968F392563C35300013D2E /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */; };
+		A58A2CD6256D282700914275 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A58A2CD9256D285700914275 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		A58A2CDC256D29B500914275 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
 		A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileDetailView.swift */; };
@@ -158,8 +155,7 @@
 		CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88D4254BEE2B00C2A6C4 /* SNSIconImageView.swift */; };
 		CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC4DA8025407E9100D9E674 /* IntroView.swift */; };
 		CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */; };
-		CCD51C69256CC13700D41771 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */; };
-		CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */; };
+		CCD51CBF256E28DD00D41771 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CCD51CBE256E28DD00D41771 /* NotoSansKR-Medium.otf */; };
 		CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */; };
 		CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709A256B9A510085B371 /* ChatInteractor.swift */; };
 		CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */; };
@@ -321,6 +317,8 @@
 		CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithTextView.swift; sourceTree = "<group>"; };
 		CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
 		CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		CCD51CBB256E28D300D41771 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		CCD51CBE256E28DD00D41771 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewProtocols.swift; sourceTree = "<group>"; };
 		CCF4709A256B9A510085B371 /* ChatInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
 		CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
@@ -328,7 +326,6 @@
 		CCF470A4256B9A8A0085B371 /* ChatLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLocalDataManager.swift; sourceTree = "<group>"; };
 		CCF470A7256B9AA00085B371 /* ChatWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWireFrame.swift; sourceTree = "<group>"; };
 		CCF470AC256BA6710085B371 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
-		DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -336,7 +333,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C94E12D413E28FEE17676A0 /* Pods_Terminal_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +342,6 @@
 		031FECECB36F7B6233EC27DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DBCC80E590F7DC6C9A2F68E9 /* Pods_Terminal_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -663,6 +658,7 @@
 				CCA1FF5424FD0C930026C3EA /* Products */,
 				5ABD6AFD2D9CBF39ED6C88B5 /* Pods */,
 				031FECECB36F7B6233EC27DC /* Frameworks */,
+				CCD51CAB256E27EB00D41771 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -677,9 +673,8 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				A57ECA44256CF9CA001E9790 /* Terminal-iOSDebug.entitlements */,
-				A5968F372563C35300013D2E /* NotoSansKR-Bold.otf */,
-				A5968F362563C35300013D2E /* NotoSansKR-Medium.otf */,
+				CCD51CBE256E28DD00D41771 /* NotoSansKR-Medium.otf */,
+				CCD51CBB256E28D300D41771 /* NotoSansKR-Bold.otf */,
 				A5BA460C255D09C80061C511 /* Network */,
 				A587CEC7251A428A00A2AD13 /* Extensions-Utillities */,
 				CCA3FF34251781E200F62627 /* Entity */,
@@ -709,9 +704,6 @@
 				A5BA1EE0254A99250089D4E9 /* Noti.swift */,
 				A57097A9254D74D90001DE52 /* Notice2.swift */,
 				A5D058F6255D95000047CA9E /* StudyDetail.swift */,
-				A58A2CD5256D282700914275 /* DuplicateNickname.swift */,
-				A58A2CD8256D285700914275 /* DuplicateEmail.swift */,
-				A58A2CDB256D29B500914275 /* UserInfo.swift */,
 				A51F2356256E195600CBFC13 /* AccessToken.swift */,
 				A51F235B256E19E600CBFC13 /* ProjectList.swift */,
 				A51F235F256E1F8000CBFC13 /* Notice.swift */,
@@ -842,6 +834,15 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		CCD51CAB256E27EB00D41771 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
+				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		CCF47095256B97D60085B371 /* ChatView */ = {
 			isa = PBXGroup;
 			children = (
@@ -926,9 +927,8 @@
 			files = (
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
-				CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */,
+				CCD51CBF256E28DD00D41771 /* NotoSansKR-Medium.otf in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
-				CCD51C69256CC13700D41771 /* NotoSansKR-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1009,7 +1009,7 @@
 				CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */,
 				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
-				A58A2CD6256D282700914275 /* DuplicateNickname.swift in Sources */,
+				A58A2CD6256D282700914275 /* (null) in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
 				CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */,
@@ -1056,8 +1056,8 @@
 				CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				CC84CF882563F1D30070E233 /* StudyDetailViewControllerLocalDataManager.swift in Sources */,
-				A58A2CD9256D285700914275 /* DuplicateEmail.swift in Sources */,
-				A58A2CDC256D29B500914275 /* UserInfo.swift in Sources */,
+				A58A2CD9256D285700914275 /* (null) in Sources */,
+				A58A2CDC256D29B500914275 /* (null) in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,
 				A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */,
