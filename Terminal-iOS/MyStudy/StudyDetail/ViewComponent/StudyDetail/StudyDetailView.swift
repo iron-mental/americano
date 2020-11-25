@@ -11,6 +11,7 @@ import NMapsMap
 import Kingfisher
 
 enum StudyDetailViewState {
+    case edit
     case member
     case host
     case none

@@ -61,7 +61,7 @@ protocol StudyDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func retrievePostList(keyValue: String, completionHandler: @escaping (StudyDetail) -> ())
+    func getStudyDetail(keyValue: String, completionHandler: @escaping (StudyDetail) -> ())
 }
 
 protocol StudyDetailRemoteDataManagerOutputProtocol: class {
