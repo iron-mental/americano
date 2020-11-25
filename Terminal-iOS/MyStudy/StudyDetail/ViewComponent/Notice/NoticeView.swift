@@ -12,18 +12,19 @@ class NoticeView: UIViewController {
     var presenter: NoticePresenterProtocol?
     var studyID: Int?
     
-    let noticeTitleText = ["모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다","모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다"]
+//    let noticeTitleText = ["모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다","모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다"]
     
-    var noticeList: [Notice2] = [Notice2(title: "가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다", contents: "첫번모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다째", pinned: true),
-                                Notice2(title: "가이드 라인입니다", contents: "두번쨰", pinned: false),
-                                Notice2(title: "가이드 라인입니다", contents: "세번째", pinned: false),
-                                Notice2(title: "가이드 라인입니다", contents: "네번째", pinned: true),
-                                Notice2(title: "가이드 라인입니다", contents: "다섯번째", pinned: false),
-                                Notice2(title: "가이드 라인입니다", contents: "여섯번째", pinned: false),
-                                Notice2(title: "가이드 라인입니다", contents: "일곱번째", pinned: true),
-                                Notice2(title: "가이드 라인입니다", contents: "여덟번째", pinned: false)]
-    var pinnedNotiArr: [Notice2] = []
-    var notiArr: [Notice2] = []
+//    var noticeList: [Notice2] = [Notice2(title: "가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다", contents: "첫번모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다째", pinned: true),
+//                                Notice2(title: "가이드 라인입니다", contents: "두번쨰", pinned: false),
+//                                Notice2(title: "가이드 라인입니다", contents: "세번째", pinned: false),
+//                                Notice2(title: "가이드 라인입니다", contents: "네번째", pinned: true),
+//                                Notice2(title: "가이드 라인입니다", contents: "다섯번째", pinned: false),
+//                                Notice2(title: "가이드 라인입니다", contents: "여섯번째", pinned: false),
+//                                Notice2(title: "가이드 라인입니다", contents: "일곱번째", pinned: true),
+//                                Notice2(title: "가이드 라인입니다", contents: "여덟번째", pinned: false)]
+    var noticeList: [Notice] = []
+    var pinnedNotiArr: [Notice] = []
+    var notiArr: [Notice] = []
     lazy var notice = UITableView()
     
     override func viewDidLoad() {
@@ -37,8 +38,6 @@ class NoticeView: UIViewController {
     func sorted() {
         pinnedNotiArr = noticeList.filter { $0.pinned }
         notiArr = noticeList.filter { !$0.pinned }
-//        print(pinnedNotiArr)
-//        print(notiArr)
     }
     func attribute() {
         notice.do {
@@ -104,7 +103,7 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.section)
+//        print(indexPath.section)
         let view = NoticeDetailView()
         view.noticeBackground.backgroundColor = indexPath.section == 0 ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
         view.noticeLabel.text = indexPath.section == 0 ? "필독" : "공지"
@@ -114,7 +113,9 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource {
 
 extension NoticeView: NoticeViewProtocol {
     func showNoticeList(noticeList: NoticeList) {
-        print(noticeList)
+        self.noticeList = noticeList.data
+        sorted()
+        notice.reloadData()
     }
     
     func showMessage(message: String) {
