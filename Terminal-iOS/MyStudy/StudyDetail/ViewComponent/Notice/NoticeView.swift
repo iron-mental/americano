@@ -9,6 +9,9 @@
 import UIKit
 
 class NoticeView: UIViewController {
+    var presenter: NoticePresenterProtocol?
+    var studyID: Int?
+    
     let noticeTitleText = ["모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다","모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다"]
     
     var noticeList: [Notice2] = [Notice2(title: "가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다", contents: "첫번모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다째", pinned: true),
@@ -25,6 +28,7 @@ class NoticeView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad(studyID: studyID!)
         sorted()
         attribute()
         layout()
@@ -33,8 +37,8 @@ class NoticeView: UIViewController {
     func sorted() {
         pinnedNotiArr = noticeList.filter { $0.pinned }
         notiArr = noticeList.filter { !$0.pinned }
-        print(pinnedNotiArr)
-        print(notiArr)
+//        print(pinnedNotiArr)
+//        print(notiArr)
     }
     func attribute() {
         notice.do {
@@ -105,5 +109,15 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource {
         view.noticeBackground.backgroundColor = indexPath.section == 0 ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
         view.noticeLabel.text = indexPath.section == 0 ? "필독" : "공지"
         navigationController?.pushViewController(view, animated: true)
+    }
+}
+
+extension NoticeView: NoticeViewProtocol {
+    func showNoticeList(noticeList: NoticeList) {
+        print(noticeList)
+    }
+    
+    func showMessage(message: String) {
+        print(message)
     }
 }
