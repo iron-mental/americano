@@ -61,7 +61,7 @@ protocol StudyListRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func retrieveStudyList(category: String)
-    func paginationRetrieveStudyList()
+    func paginationRetrieveStudyList(keyValue: [Int])
     
 }
 

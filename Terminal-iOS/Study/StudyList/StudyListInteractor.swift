@@ -23,7 +23,22 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
     }
     
     func pagingRetrieveStudyList() {
-        remoteDataManager?.paginationRetrieveStudyList()
+        /// 스터디 키값이 10개가 넘을경우
+        if studyKeyArr.count >= 10 {
+            for _ in 0..<10 {
+                newKeyValue.append(studyKeyArr[0].id)
+                studyKeyArr.remove(at: 0)
+            }
+        } else {
+            for _ in 0..<studyKeyArr.count {
+                newKeyValue.append(studyKeyArr[0].id)
+                studyKeyArr.remove(at: 0)
+            }
+        }
+        
+        remoteDataManager?.paginationRetrieveStudyList(keyValue: newKeyValue)
+        
+        newKeyValue.removeAll()
     }
 }
 
