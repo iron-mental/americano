@@ -8,8 +8,6 @@
 
 import Foundation
 
-
-
 struct MyStudy: Codable {
     var id: Int
     var title: String
