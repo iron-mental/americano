@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: 이메일 중복
+
 struct duplicateEmail: Codable {
     let result: Bool
     let message: String

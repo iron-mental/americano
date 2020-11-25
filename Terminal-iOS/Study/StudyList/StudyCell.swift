@@ -63,7 +63,7 @@ class StudyCell: UITableViewCell {
             $0.text = data.createdAt
         }
         memberCount.do {
-            $0.text = "\(data.members!)"
+            $0.text = "\(data.members)"
         }
         guard let main = data.image else {
             mainImage.image = #imageLiteral(resourceName: "swiftmain")
@@ -88,6 +88,11 @@ class StudyCell: UITableViewCell {
     }
     
     func attribute() {
+        
+        mainTitle.font = UIFont(name: "NotoSansKR-Medium", size: 20)
+        
+        
+        
         self.backgroundColor = UIColor.appColor(.terminalBackground)
         mainTitle.do {
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 20)

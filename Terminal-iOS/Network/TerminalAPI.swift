@@ -19,7 +19,7 @@ class TerminalAPI {
                    method: .get,headers: headers).responseJSON(completionHandler: { [self] response in
                     switch response.result {
                     case .success(let value):
-                    let json = JSON(value)["data"]
+                        let json = JSON(value)["data"]
                         json.array?.forEach { data in
                             if let id = data["id"].int, let title = data["title"].string, let sigungu = data["sigungu"].string, let image = data["image"].string {
                                 TempMyStudyList.list.append(MyStudy(id: id, title: title, sigungu: sigungu, image: image))
@@ -46,7 +46,7 @@ class TerminalAPI {
                     case .failure(let value):
                         print(value)
                     }
-                        
+                    
                    })
     }
 }
