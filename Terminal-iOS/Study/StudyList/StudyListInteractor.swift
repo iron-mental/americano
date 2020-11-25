@@ -14,14 +14,10 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
     var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
     
     func retrieveStudyList(category: String, sort: String) {
-        remoteDataManager?.retrieveStudyList(category: category, sort: sort, completionHandler: { [self] in
-            presenter?.didRetrieveStudies($0)
-        })
+        remoteDataManager?.retrieveStudyList(category: category, sort: sort)
     }
     func pagingRetrieveStudyList() {
-        remoteDataManager?.paginationRetrieveStudyList(completionHandler: { [self] in
-            presenter?.didRetrieveStudies($0)
-        })
+        remoteDataManager?.paginationRetrieveStudyList()
     }
 }
 

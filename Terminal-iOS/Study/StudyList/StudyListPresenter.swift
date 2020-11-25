@@ -19,7 +19,6 @@ class StudyListPresenter: StudyListPresenterProtocol {
     
     func studyList(category: String, sort: String) {
         interactor?.retrieveStudyList(category: category, sort: sort)
-        print("presenter")
     }
     
     func pagingStudyList() {
@@ -33,7 +32,6 @@ class StudyListPresenter: StudyListPresenterProtocol {
 
 extension StudyListPresenter: StudyListInteractorOutputProtocol {
     func didRetrieveStudies(_ studies: [Study]) {
-        print("스터디목록",studies)
         view?.showStudyList(with: studies)
     }
     

@@ -19,14 +19,8 @@ class TerminalAPI {
                    method: .get,headers: headers).responseJSON(completionHandler: { [self] response in
                     switch response.result {
                     case .success(let value):
-                        
                         print(JSON(value))
-                        
                         print("이거는?",JSON(value)["result"])
-                        
-                        
-                        
-                        
                     let json = JSON(value)["data"]
                         json.array?.forEach { data in
                             if let id = data["id"].int, let title = data["title"].string, let sigungu = data["sigungu"].string, let image = data["image"].string {
@@ -58,7 +52,7 @@ class TerminalAPI {
                     case .failure(let value):
                         print(value)
                     }
-                        
+                    
                    })
     }
 }
