@@ -112,7 +112,6 @@ class StudyListView: UIViewController {
             
             self.tableView.reloadData()
         }
-        
     }
     
     @objc func late() {
@@ -138,10 +137,6 @@ extension StudyListView: StudyListViewProtocol {
         for study in studies {
             studyList.append(study)
         }
-        
-        let noti = Noti(title: "ff", explain: "Ff", action: "ff")
-        let view = ViewController()
-        
         tableView.reloadData()
     }
     

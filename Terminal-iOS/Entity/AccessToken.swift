@@ -15,7 +15,6 @@ struct AccessToken: Codable {
     let data: Token
 }
 
-
 struct Token: Codable {
     let accessToken: String
 

@@ -23,11 +23,8 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
         AF.request(key, headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
-                print("띠용",JSON(value))
                 let json = "\(JSON(value))".data(using: .utf8)
-                print(json)
                 let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
-                print("get study detail:",result)
                 
                 completionHandler(result)
             case .failure(let err):

@@ -1,5 +1,5 @@
 //
-//  NoticeDetail.swift
+//  Notice.swift
 //  Terminal-iOS
 //
 //  Created by once on 2020/11/25.
@@ -7,22 +7,6 @@
 //
 
 import Foundation
-
-// MARK: 스터디 상세
-
-struct NoticeDetail: Codable {
-    let result: Bool
-    let data: Notice
-}
-
-// MARK: 스터디 리스트
-
-struct NoticeList: Codable {
-    let result: Bool
-    let data: [Notice]
-}
-
-// MARK: 스터디 
 
 struct Notice: Codable {
     let id: Int
@@ -39,4 +23,3 @@ struct Notice: Codable {
         case updatedAt = "updated_at"
     }
 }
-
