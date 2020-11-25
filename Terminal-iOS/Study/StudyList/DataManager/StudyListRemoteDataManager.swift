@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
-  
+    
     //MARK: 리스트 검색시 초기 배열값
     
     func retrieveStudyList(category: String) {
@@ -36,7 +36,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
         if keyValue.count > 0 {
             let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"]).removeWhitespace()
             let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
-
+            
             AF.request(query, headers: TerminalNetwork.headers).responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -51,5 +51,5 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             }
         }
     }
-
+    
 }

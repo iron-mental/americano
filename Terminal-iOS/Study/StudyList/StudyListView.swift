@@ -105,11 +105,12 @@ class StudyListView: UIViewController {
     }
     
     @objc func updateList() {
-//        studyList.removeAll()
+        studyList.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
+            self.presenter?.studyList(category: self.category!)
             self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
         }
+        self.tableView.reloadData()
     }
     
     @objc func late() {
