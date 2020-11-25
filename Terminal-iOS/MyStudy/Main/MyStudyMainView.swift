@@ -48,7 +48,8 @@ class MyStudyMainView: UIViewController {
         tempButton = UIBarButtonItem(title: "임시버튼", style: .done, target: self, action: #selector(goToLoginAction(_ :)))
         self.do {
             $0.title = "내 스터디"
-            $0.navigationController?.navigationBar.backgroundColor = UIColor.appColor(.testColor)
+            $0.navigationController?.navigationBar.barTintColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         tableView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)

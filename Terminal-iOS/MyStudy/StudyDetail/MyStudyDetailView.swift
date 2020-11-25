@@ -40,6 +40,7 @@ class MyStudyDetailView: UIViewController {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         tabSege.do {
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 14),
