@@ -9,7 +9,6 @@
 import UIKit
 
 class StudyListInteractor: StudyListInteractorInputProtocol {
-    var studyArr: [Study] = []
     var studyKeyArr: [Study] = []
     var keyValue: [Int] = []
     var newKeyValue: [Int] = []
@@ -36,15 +35,16 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
             }
         }
         
-        remoteDataManager?.paginationRetrieveStudyList(keyValue: newKeyValue)
-        
-        newKeyValue.removeAll()
+        remoteDataManager?.paginationRetrieveStudyList(keyValue: newKeyValue, completion: {
+            self.newKeyValue.removeAll()
+        })
     }
 }
 
 extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
     func onStudiesRetrieved(_ studies: BaseResponse<[Study]>) {
         var resultArr: [Study] = []
+        var studyArr: [Study] = []
         
         if studies.result {
             guard let studyList = studies.data else { return }
@@ -68,6 +68,7 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
         }
         
         presenter?.didRetrieveStudies(studyArr)
+
     }
     
     func onError() {
