@@ -18,7 +18,7 @@ extension UISegmentedControl {
 }
 
 public extension UIImage {
-  public func imageWithColor(color: UIColor) -> UIImage {
+  func imageWithColor(color: UIColor) -> UIImage {
     let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
     UIGraphicsBeginImageContext(rect.size)
     guard let context = UIGraphicsGetCurrentContext() else { return UIImage()}
