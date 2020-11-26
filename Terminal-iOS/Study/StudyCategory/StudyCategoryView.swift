@@ -126,7 +126,6 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
-        
         let category = categoryList[indexPath.row]
         cell.imageView.image = category.name
         return cell

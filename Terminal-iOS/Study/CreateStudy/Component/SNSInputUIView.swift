@@ -30,12 +30,15 @@ class IdInputView: UIView {
         }
         notion!.do {
             $0.textField.text = "notion"
+            $0.icon.image = #imageLiteral(resourceName: "notion")
         }
         evernote!.do {
             $0.textField.text = "evernote"
+            $0.icon.image = #imageLiteral(resourceName: "evernote")
         }
         web!.do {
             $0.textField.text = "web"
+            $0.icon.image = #imageLiteral(resourceName: "web")
         }
     }
     func layout() {
