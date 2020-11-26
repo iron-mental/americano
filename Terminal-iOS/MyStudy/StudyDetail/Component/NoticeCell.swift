@@ -28,7 +28,7 @@ class NoticeCell: UITableViewCell {
         noticeLabel.text = "공지"
     }
     
-    func setData(_ data: Notice2){
+    func setData(_ data: Notice){
         noticeTitle.do {
             $0.text = data.title
         }

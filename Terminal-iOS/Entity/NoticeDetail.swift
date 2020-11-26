@@ -1,5 +1,5 @@
 //
-//  NoticeLocalDataManager.swift
+//  NoticeDetail.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2020/11/25.
@@ -8,6 +8,7 @@
 
 import Foundation
 
-class NoticeLocalDataManager: NoticeLocalDataManagerProtocol {
-    
+struct NoticeDetail: Codable {
+    let result: Bool
+    let data: Notice
 }

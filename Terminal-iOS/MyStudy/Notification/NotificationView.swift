@@ -19,8 +19,8 @@ class NotificationView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.prefersLargeTitles = false
+//        navigationController?.navigationBar.isTranslucent = false
+//        navigationController?.navigationBar.prefersLargeTitles = false
         attribute()
         layout()
     }

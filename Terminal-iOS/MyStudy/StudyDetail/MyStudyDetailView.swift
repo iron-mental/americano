@@ -14,7 +14,7 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int?
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
-    lazy var  VCArr: [UIViewController] = [ NoticeView(),
+    lazy var  VCArr: [UIViewController] = [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
                                       StudyDetailWireFrame.createStudyDetail(keyValue: studyID!),
                                       TempChatView()]
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]

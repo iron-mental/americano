@@ -1,28 +1,19 @@
 //
-//  NoticeDetail.swift
+//  Notice.swift
 //  Terminal-iOS
 //
-//  Created by once on 2020/11/25.
+//  Created by 정재인 on 2020/11/25.
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
 import Foundation
 
-// MARK: 스터디 상세
-
-struct NoticeDetail: Codable {
-    let result: Bool
-    let data: Notice
-}
 
 // MARK: 스터디 리스트
 
-struct NoticeList: Codable {
-    let result: Bool
-    let data: [Notice]
-}
 
-// MARK: 스터디 
+
+// MARK: 스터디
 
 struct Notice: Codable {
     let id: Int
