@@ -10,7 +10,6 @@ import Foundation
 
 // MARK: 스터디 상세
 
-
 struct StudyDetail: Codable {
     let participate: [Participate]
     let id: Int
