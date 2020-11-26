@@ -280,7 +280,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
                                        snsNotion: SNSInputView.notion?.textField.text,
                                        snsEvernote: SNSInputView.evernote?.textField.text,
                                        image: mainImageView.image!,
-                                       location: selectedLocation!)
+                                       location: selectedLocation ?? StudyDetailLocationPost())
         
         presenter?.clickCompleteButton(study: newStudy)
     }
@@ -307,6 +307,7 @@ extension CreateStudyView: UIScrollViewDelegate {
 
 extension CreateStudyView: selectLocationDelegate {
     func passLocation(location: StudyDetailLocationPost) {
-        print(location)
+        selectedLocation = location
+        locationView.detailAddress.text = "\(location.address) \(location.detailAddress ?? "" )"
     }
 }

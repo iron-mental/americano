@@ -137,8 +137,7 @@ extension SelectLocationView: UITextFieldDelegate {
 
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
-        if item.address != "" {
             bottomView.Address.text = item.address
-        }
+            location = item
     }
 }

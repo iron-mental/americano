@@ -37,11 +37,14 @@ class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
                                     let address = addressValid ? item["road_address"]["address_name"].string! : item["address"]["address_name"].string!
                                     let  region1Depth = addressValid ? item["road_address"]["region_1depth_name"].string! : item["address"]["region_1depth_name"].string!
                                     let region2Depth = addressValid ? item["road_address"]["region_2depth_name"].string! : item["address"]["region_2depth_name"].string!
-                                    completion(true, StudyDetailLocationPost(address: address,
-                                                                             lat: lat,
-                                                                             lng: lng,
-                                                                             sido: region1Depth,
-                                                                             sigungu: region2Depth))
+                                    
+                                    let location = StudyDetailLocationPost(address: address,
+                                                                           lat: lat,
+                                                                           lng: lng,
+                                                                           sido: region1Depth,
+                                                                           sigungu: region2Depth)
+                                    print(location)
+                                    completion(true, location)
                                 }
                             }
                         }
