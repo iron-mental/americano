@@ -277,8 +277,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
-        let newStudy = StudyDetailPost(id: 2,
-                                       category: selectedCategory!,
+        let newStudy = StudyDetailPost(category: selectedCategory!,
                                        title: studyTitleTextField.text ?? "",
                                        introduce: studyIntroduceView.textView.text,
                                        progress: studyInfoView.textView.text,
@@ -290,6 +289,9 @@ extension CreateStudyView: CreateStudyViewProtocols {
                                        location: selectedLocation!)
         
         presenter?.clickCompleteButton(study: newStudy)
+    }
+    func studyInfoInvalid(message: String) {
+        print("뷰에서 찎은 겁니다 ~~\(message)")
     }
 }
 

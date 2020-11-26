@@ -9,8 +9,6 @@
 import UIKit
 
 class CreateStudyPresenter: CreateStudyPresenterProtocols {
-    
-    
     var view: CreateStudyViewProtocols?
     var interactor: CreateStudyInteractorProtocols?
     var wireFrame: CreateStudyWireFrameProtocols?
@@ -67,5 +65,9 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
     func clickCompleteButton(study: StudyDetailPost) {
         view?.loading()
         interactor?.studyCreateComplete(study: study)
+    }
+    
+    func studyInfoInvalid(message: String) {
+        view?.studyInfoInvalid(message: message)
     }
 }

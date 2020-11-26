@@ -31,6 +31,7 @@ protocol CreateStudyViewProtocols: class {
     func notionInvalid()
     func evernoteInvalid()
     func webInvalid()
+    func studyInfoInvalid(message: String)
 }
 
 protocol CreateStudyInteractorProtocols: class {
@@ -61,6 +62,7 @@ protocol CreateStudyPresenterProtocols: class {
     func showNotionValidResult(result: Bool)
     func showEvernoteValidResult(result: Bool)
     func showWebValidResult(result: Bool)
+    func studyInfoInvalid(message: String)
 }
 
 protocol CreateStudyRemoteDataManagerProtocols: class {

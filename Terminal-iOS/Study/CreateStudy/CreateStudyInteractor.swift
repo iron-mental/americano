@@ -39,9 +39,37 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
         }
     }
     
+    func nullCheck(study: StudyDetailPost) -> String {
+        if study.category == nil || study.category == ""  {
+            return "카테고리 틀려쓰"
+        } else if study.title == nil || study.title == "" {
+            return "타이틀 틀려쓰"
+        } else if study.introduce == nil || study.introduce == "" {
+            return "소개 틀려쓰"
+        } else if study.progress == nil || study.progress == "" {
+            return "계획 틀려쓰"
+        } else if study.studyTime == nil || study.studyTime == "" {
+            return "시간 틀려쓰"
+        } else if study.location.lat == nil || study.location.lat.isZero {
+            return "lat 틀려쓰"
+        } else if study.location.lng == nil || study.location.lng.isZero {
+            return "lng 틀려쓰"
+        } else if study.location.sido == nil || study.location.sido == "" {
+            return "sido 틀려쓰"
+        } else if study.location.sigungu == nil || study.location.sigungu == "" {
+            return "sigungu 틀려쓰"
+        } else if study.location.address == nil || study.location.address == "" {
+            return "address 틀려쓰"
+        } else {
+            return "스터디가 등록 되었습니다."
+        }
+    }
+    
     func studyCreateComplete(study: StudyDetailPost) {
-        //remoteDataManager로 보내기 전에 비어있는 값이 있는 지 확인 후 있다면 remoteDataManager로 보내지말고 presenter에게 알려주어야 겠죠??
-        //그 처리는 나중에 해주도록 합시다
-        createStudyRemoteDataManager?.postStudy(study: study)
+        if nullCheck(study: study) == "스터디가 등록 되었습니다." {
+            createStudyRemoteDataManager?.postStudy(study: study)
+        } else {
+            presenter?.studyInfoInvalid(message: nullCheck(study: study))
+        }
     }
 }
