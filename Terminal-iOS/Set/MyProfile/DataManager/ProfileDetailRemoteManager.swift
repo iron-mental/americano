@@ -12,9 +12,8 @@ import SwiftyJSON
 
 class ProfileDetailRemoteManager: ProfileDetailRemoteDataManagerInputProtocol {
     func getUserInfo(id: Int) {
-        print("리모트")
         let url = "http://3.35.154.27:3000/v1/user/1"
-        AF.request(url).responseJSON { response in
+        AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
             switch response.result {
             case .success(let value):
                 print("성공")
