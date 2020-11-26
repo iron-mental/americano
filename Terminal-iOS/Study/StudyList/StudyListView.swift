@@ -19,8 +19,11 @@ class StudyListView: UIViewController {
     let selectedUnderline = UIView()
     let refreshControl = UIRefreshControl()
 
+    var sortState: SortState = .new
+    
     var presenter: StudyListPresenterProtocol?
     var studyList: [Study] = []
+    var lengthStudyList: [Study] = []
     
     // MARK: ViewDidLoad
     
@@ -46,13 +49,13 @@ class StudyListView: UIViewController {
         lateButton.do {
             $0.setTitle("최신", for: .normal)
             $0.titleLabel?.font = UIFont(name: "NotoSansKR-Medium", size: 17)
-            $0.addTarget(self, action: #selector(late), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(new), for: .touchUpInside)
         }
         
         locationButton.do {
             $0.setTitle("지역", for: .normal)
             $0.titleLabel?.font = UIFont(name: "NotoSansKR-Medium", size: 17)
-            $0.addTarget(self, action: #selector(location), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(length), for: .touchUpInside)
         }
         
         selectedUnderline.do {
@@ -113,7 +116,6 @@ class StudyListView: UIViewController {
     }
     
     
-    //
     @objc func updateList() {
         studyList.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
@@ -123,20 +125,18 @@ class StudyListView: UIViewController {
         self.tableView.reloadData()
     }
     
-    @objc func late() {
-        print(self.selectedUnderline.center.x)
+    @objc func new() {
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
             self.selectedUnderline.center.x = self.lateButton.center.x
         }
-        print(self.selectedUnderline.center.x)
+        sortState = .new
     }
     
-    @objc func location() {
-        print(self.selectedUnderline.center.x)
+    @objc func length() {
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
             self.selectedUnderline.center.x = self.locationButton.center.x
         }
-        print(self.selectedUnderline.center.x)
+        sortState = .length
     }
 }
 
@@ -146,7 +146,18 @@ extension StudyListView: StudyListViewProtocol {
         for study in studies {
             studyList.append(study)
         }
-        tableView.reloadData()
+        if sortState == .new {
+            tableView.reloadData()
+        }
+    }
+    
+    func saveLengthStudyList(with studies: [Study]) {
+        for study in studies {
+            lengthStudyList.append(study)
+        }
+        if sortState == .length {
+            tableView.reloadData()
+        }
     }
     
     func showLoading() {
