@@ -31,8 +31,12 @@ class StudyListPresenter: StudyListPresenterProtocol {
 }
 
 extension StudyListPresenter: StudyListInteractorOutputProtocol {
-    func didRetrieveStudies(_ studies: [Study]) {
+    func didRetrieveStudies(studies: [Study]) {
         view?.showStudyList(with: studies)
+    }
+    
+    func didRetrieveLengthStudies(studies: [Study]) {
+        
     }
       
     func onError() {
