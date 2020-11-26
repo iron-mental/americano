@@ -10,6 +10,9 @@ import UIKit
 
 protocol ProfileDetailViewProtocol: class {
     var presenter: ProfileDetailPresenterProtocol? { get set }
+    
+    // PRESENTER -> VIEW
+    
 }
 
 protocol ProfileDetailWireFrameProtocol: class {
@@ -21,12 +24,18 @@ protocol ProfileDetailPresenterProtocol: class {
     var view: ProfileDetailViewProtocol? { get set }
     var interactor: ProfileDetailInteractorInputProtocol? { get set }
     var wireFrame: ProfileDetailWireFrameProtocol? { get set }
+    
+    // VIEW -> PRESENTER
+    func viewDidLoad(id: Int)
 }
 
 protocol ProfileDetailInteractorInputProtocol: class {
     var presenter: ProfileDetailInteractorOutputProtocol? { get set }
     var localDataManager: ProfileDetailLocalDataManagerInputProtocol? { get set }
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol? { get set }
+    
+    // PRESENTER -> INTERACTOR
+    func getUserInfo()
 }
 
 protocol ProfileDetailInteractorOutputProtocol: class {
@@ -34,7 +43,8 @@ protocol ProfileDetailInteractorOutputProtocol: class {
 }
 
 protocol ProfileDetailRemoteDataManagerInputProtocol: class {
-    
+    // INTERACTOR -> REMOTEDATAMANAGER
+    func getUserInfo(id: Int)
 }
 
 protocol ProfileDetailRemoteDataManagerOutputProtocol: class {

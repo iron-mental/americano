@@ -13,7 +13,10 @@ class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     var localDataManager: ProfileDetailLocalDataManagerInputProtocol?
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol?
     
-    
+    func getUserInfo() {
+        print("인터렉터")
+        remoteDataManager?.getUserInfo(id: 1)
+    }
 }
 
 extension ProfileDetailInteractor: ProfileDetailRemoteDataManagerOutputProtocol {

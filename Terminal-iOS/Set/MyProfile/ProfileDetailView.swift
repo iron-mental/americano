@@ -27,6 +27,8 @@ class ProfileDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        print("viewdidload")
+        presenter?.viewDidLoad(id: 1)
     }
     
     // MARK: Set Attribute

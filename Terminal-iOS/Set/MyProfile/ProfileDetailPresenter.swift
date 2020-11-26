@@ -10,12 +10,13 @@ import Foundation
 
 class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     var view: ProfileDetailViewProtocol?
-    
     var interactor: ProfileDetailInteractorInputProtocol?
-    
     var wireFrame: ProfileDetailWireFrameProtocol?
     
-    
+    func viewDidLoad(id: Int) {
+        print("프ㅔ젠터")
+        interactor?.getUserInfo()
+    }
 }
 
 extension ProfileDetailPresenter: ProfileDetailInteractorOutputProtocol {
