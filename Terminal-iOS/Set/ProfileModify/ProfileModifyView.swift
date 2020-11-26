@@ -47,6 +47,7 @@ class ProfileModifyView: UIViewController {
             $0.delegate = self
             $0.bounces = false
         }
+        
         profileImage.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.image = #imageLiteral(resourceName: "leehi")
@@ -56,10 +57,12 @@ class ProfileModifyView: UIViewController {
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
         }
+        
         nameModify.do {
             $0.font = UIFont(name: nameModify.font!.fontName, size: 20)
             $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
+        
         descripModify.do {
             $0.delegate = self
             $0.dynamicFont(size: 16, weight: .regular)
@@ -68,10 +71,12 @@ class ProfileModifyView: UIViewController {
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
         }
+        
         careerLabel.do {
             $0.text = "경력"
             $0.textColor = .white
         }
+        
         careerTitleModify.do {
             $0.text = "OO대학교 4학년 재학중"
             $0.textColor = .white
@@ -79,6 +84,7 @@ class ProfileModifyView: UIViewController {
             $0.textAlignment = .left
             $0.delegate = self
         }
+        
         careerDescriptModify.do {
             $0.text = "경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다.경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다.MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정"
             $0.textColor = UIColor.appColor(.profileTextColor)
@@ -90,10 +96,12 @@ class ProfileModifyView: UIViewController {
             $0.layer.masksToBounds = true
             $0.isScrollEnabled = false
         }
+        
         projectLabel.do {
             $0.text = "프로젝트"
             $0.textColor = .white
         }
+        
         projectTitleModify.do {
             $0.text = "Terminal"
             $0.textColor = .white
@@ -101,6 +109,7 @@ class ProfileModifyView: UIViewController {
             $0.textAlignment = .left
             $0.delegate = self
         }
+        
         projectDescriptModify.do {
             $0.text = "MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정"
             $0.textColor = UIColor.appColor(.profileTextColor)
@@ -112,7 +121,6 @@ class ProfileModifyView: UIViewController {
             $0.layer.masksToBounds = true
             $0.isScrollEnabled = false
         }
-        
     }
     
     // MARK: Set Layout

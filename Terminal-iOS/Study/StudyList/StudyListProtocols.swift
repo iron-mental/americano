@@ -13,6 +13,7 @@ protocol StudyListViewProtocol: class {
     
     // PRESENTER -> VIEW
     func showStudyList(with studies: [Study])
+    func saveLengthStudyList(with studies: [Study])
     func showLoading()
     func hideLoading()
 }
@@ -32,13 +33,14 @@ protocol StudyListPresenterProtocol: class {
     // VIEW -> PRESENTER
     func studyList(category: String)
     func pagingStudyList()
+    func pagingLengthStudyList()
     func showStudyDetail(keyValue: Int)
-    func refreshStudyList()
 }
 
 protocol StudyListInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    func didRetrieveStudies(_ studies: [Study])
+    func didRetrieveStudies(studies: [Study])
+    func didRetrieveLengthStudies(studies: [Study])
     func onError()
 }
 
@@ -50,6 +52,7 @@ protocol StudyListInteractorInputProtocol: class {
     // PRESENTER -> INTERACTOR
     func retrieveStudyList(category: String)
     func pagingRetrieveStudyList()
+    func pagingRetrieveLengthStudyList()
 }
 
 protocol StudyListDataManagerInputProtocol: class {
@@ -61,13 +64,15 @@ protocol StudyListRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func retrieveStudyList(category: String)
+    func retrieveLengthStudyList(category: String)
     func paginationRetrieveStudyList(keyValue: [Int], completion: @escaping (() -> Void))
-    
+    func paginationRetrieveLengthStudyList(keyValue: [Int], completion: @escaping (() -> Void))
 }
 
 protocol StudyListRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    func onStudiesRetrieved(_ studies: BaseResponse<[Study]>)
+    func onStudiesRetrieved(studies: BaseResponse<[Study]>)
+    func onStudiesLengthRetrieved(studies: BaseResponse<[Study]>)
     func onError()
 }
 
