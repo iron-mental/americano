@@ -7,3 +7,23 @@
 //
 
 import Foundation
+
+class NoticeInteractor: NoticeInteractorProtocol {
+    var presenter: NoticePresenterProtocol?
+    var remoteDataManager: NoticeRemoteDataManagerProtocol?
+    var localDataManager: NoticeLocalDataManagerProtocol?
+    
+    func getNoticeList(studyID: Int) {
+        remoteDataManager?.getNoticeList(studyID: studyID, completion: { [self] (result, noticeList, message)  in
+            switch result {
+            case true:
+                presenter?.showResult(result: result, noticeList: noticeList!, message: nil )
+                break
+            case false:
+                presenter?.showResult(result: result, noticeList: nil, message: message! )
+                break
+            }
+        })
+    }
+    
+}

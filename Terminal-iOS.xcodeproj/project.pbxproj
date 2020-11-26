@@ -143,6 +143,7 @@
 		CCB139CF25592D8300410184 /* IntroPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139CE25592D8300410184 /* IntroPresenter.swift */; };
 		CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D225592DCF00410184 /* IntroInteractor.swift */; };
 		CCB139D625592E0300410184 /* IntroRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */; };
+		CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */; };
 		CCBC88B6254ACF2500C2A6C4 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */; };
 		CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */; };
 		CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */; };
@@ -163,6 +164,9 @@
 		CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */; };
 		CCD51CA5256E254B00D41771 /* NoticeLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA4256E254B00D41771 /* NoticeLocalDataManager.swift */; };
 		CCD51CA8256E257D00D41771 /* NoticeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */; };
+		CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279DE256E46BA00DB3246 /* NoticeList.swift */; };
+		CCE279EC256E46C600DB3246 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EB256E46C600DB3246 /* Notice.swift */; };
+		CCE279F0256E46D000DB3246 /* NoticeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EF256E46D000DB3246 /* NoticeDetail.swift */; };
 		CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */; };
 		CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709A256B9A510085B371 /* ChatInteractor.swift */; };
 		CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */; };
@@ -313,6 +317,7 @@
 		CCB139CE25592D8300410184 /* IntroPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPresenter.swift; sourceTree = "<group>"; };
 		CCB139D225592DCF00410184 /* IntroInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroInteractor.swift; sourceTree = "<group>"; };
 		CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroRemoteDataManager.swift; sourceTree = "<group>"; };
+		CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWireFrame.swift; sourceTree = "<group>"; };
 		CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailView.swift; sourceTree = "<group>"; };
 		CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageView.swift; sourceTree = "<group>"; };
@@ -334,6 +339,9 @@
 		CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCD51CA4256E254B00D41771 /* NoticeLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeLocalDataManager.swift; sourceTree = "<group>"; };
 		CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeProtocols.swift; sourceTree = "<group>"; };
+		CCE279DE256E46BA00DB3246 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
+		CCE279EB256E46C600DB3246 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		CCE279EF256E46D000DB3246 /* NoticeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetail.swift; sourceTree = "<group>"; };
 		CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewProtocols.swift; sourceTree = "<group>"; };
 		CCF4709A256B9A510085B371 /* ChatInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
 		CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
@@ -721,10 +729,10 @@
 				A5D058F6255D95000047CA9E /* StudyDetail.swift */,
 				A51F2356256E195600CBFC13 /* AccessToken.swift */,
 				A51F235B256E19E600CBFC13 /* ProjectList.swift */,
-				A51F2381256E460D00CBFC13 /* NoticeDetail.swift */,
-				A51F2384256E466500CBFC13 /* NoticeList.swift */,
-				A51F2387256E468500CBFC13 /* Notice.swift */,
 				A51F238B256E5A2200CBFC13 /* BaseResponse.swift */,
+				CCE279DE256E46BA00DB3246 /* NoticeList.swift */,
+				CCE279EB256E46C600DB3246 /* Notice.swift */,
+				CCE279EF256E46D000DB3246 /* NoticeDetail.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -861,6 +869,7 @@
 				CCD51C9E256E248200D41771 /* NoticePresenter.swift */,
 				CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */,
 				CCD51CA4256E254B00D41771 /* NoticeLocalDataManager.swift */,
+				CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */,
 				CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */,
 			);
 			path = Notice;
@@ -1056,6 +1065,7 @@
 				A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */,
 				A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
+				CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */,
 				A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */,
 				CCAF0FD6253300410060A2F6 /* MyStudyMainInteractor.swift in Sources */,
 				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */,
@@ -1110,9 +1120,9 @@
 				CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */,
 				CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */,
 				CCD51C9B256E247600D41771 /* NoticeInteractor.swift in Sources */,
-				A51F2385256E466500CBFC13 /* NoticeList.swift in Sources */,
+				CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
-				A51F2388256E468500CBFC13 /* Notice.swift in Sources */,
+				CCE279EC256E46C600DB3246 /* Notice.swift in Sources */,
 				CCD51CA8256E257D00D41771 /* NoticeProtocols.swift in Sources */,
 				CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */,
 				A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */,
@@ -1127,6 +1137,7 @@
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
 				CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */,
 				CCBC88CF254BEDE200C2A6C4 /* SNSIconsView.swift in Sources */,
+				CCE279F0256E46D000DB3246 /* NoticeDetail.swift in Sources */,
 				CCB139CF25592D8300410184 /* IntroPresenter.swift in Sources */,
 				CC45F55B254AA44400DC31C6 /* SearchLocationProtocols.swift in Sources */,
 				CCA3FF482517823E00F62627 /* StudyListView.swift in Sources */,

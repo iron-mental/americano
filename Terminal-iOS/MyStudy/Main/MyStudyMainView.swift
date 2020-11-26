@@ -37,6 +37,8 @@ class MyStudyMainView: UIViewController {
     }
     
     func attribute() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
         view.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
         }
@@ -48,6 +50,7 @@ class MyStudyMainView: UIViewController {
         tempButton = UIBarButtonItem(title: "임시버튼", style: .done, target: self, action: #selector(goToLoginAction(_ :)))
         self.do {
             $0.title = "내 스터디"
+            $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.navigationController?.navigationBar.barTintColor = UIColor.appColor(.terminalBackground)
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -119,6 +122,7 @@ class MyStudyMainView: UIViewController {
         tempCountForBadge += 1
         alarmButton.badgeLabel.text = "\(tempCountForBadge)"
         let view = NotificationView()
+        view.navigationController?.navigationBar.tintColor = UIColor.appColor(.terminalBackground)
         self.navigationController?.pushViewController(view, animated: true)
     }
     
