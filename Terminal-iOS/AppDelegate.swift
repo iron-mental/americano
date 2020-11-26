@@ -41,8 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         print("device 토큰 : ", deviceTokenString)
         
-//        MannaAPI.registerPushToken(pushToken: deviceTokenString)
     }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
