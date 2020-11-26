@@ -38,7 +38,8 @@ protocol StudyListPresenterProtocol: class {
 
 protocol StudyListInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    func didRetrieveStudies(_ studies: [Study])
+    func didRetrieveStudies(studies: [Study])
+    func didRetrieveLengthStudies(studies: [Study])
     func onError()
 }
 
@@ -61,13 +62,15 @@ protocol StudyListRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func retrieveStudyList(category: String)
+    func retrieveLengthStudyList(category: String)
     func paginationRetrieveStudyList(keyValue: [Int], completion: @escaping (() -> Void))
     
 }
 
 protocol StudyListRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    func onStudiesRetrieved(_ studies: BaseResponse<[Study]>)
+    func onStudiesRetrieved(studies: BaseResponse<[Study]>)
+    func onStudiesLengthRetrieved(studies: BaseResponse<[Study]>)
     func onError()
 }
 
