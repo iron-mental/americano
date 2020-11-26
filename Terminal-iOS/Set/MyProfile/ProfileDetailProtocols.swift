@@ -18,6 +18,8 @@ protocol ProfileDetailViewProtocol: class {
 protocol ProfileDetailWireFrameProtocol: class {
     static func createModule() -> UIViewController
     
+    func presentProfileDetailScreen(from view: ProfileDetailView)
+    
 }
 
 protocol ProfileDetailPresenterProtocol: class {

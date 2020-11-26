@@ -31,9 +31,6 @@ import Alamofire
 
 
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
-    
-    
-    
     func postStudy(study: StudyDetailPost) -> Bool {
         
         let params : [String : Any] = [
@@ -55,7 +52,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             "image" : study.image
         ]
         
-        var urlComponent = URLComponents(string: "http://3.35.154.27:3000/v1/study")
+        let urlComponent = URLComponents(string: "http://3.35.154.27:3000/v1/study")
         let header: HTTPHeaders = [ "Content-Type": "multipart/form-data" ]
         guard let url = urlComponent?.url else { return true }
         

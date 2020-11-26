@@ -10,9 +10,7 @@ import Foundation
 
 class SetPresenter: SetPresenterProtocol {
     var view: SetViewProtocol?
-    
     var interactor: SetInteractortInputProtocol?
-    
     var wireFrame: SetWireFrameProtocol?
     
     func viewDidLoad() {
@@ -20,7 +18,7 @@ class SetPresenter: SetPresenterProtocol {
     }
     
     func showProfileDetail() {
-        
+        wireFrame?.presentProfileDetailScreen(from: view!)
     }
     
 }

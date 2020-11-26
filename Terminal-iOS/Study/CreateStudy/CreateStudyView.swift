@@ -280,7 +280,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
                                        snsNotion: SNSInputView.notion?.textField.text,
                                        snsEvernote: SNSInputView.evernote?.textField.text,
                                        image: mainImageView.image!,
-                                       location: selectedLocation ?? StudyDetailLocationPost())
+                                       location: selectedLocation!)
         
         presenter?.clickCompleteButton(study: newStudy)
     }

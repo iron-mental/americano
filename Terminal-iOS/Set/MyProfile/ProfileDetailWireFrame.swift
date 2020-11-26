@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
     static func createModule() -> UIViewController {
-        let view = ProfileDetailView()
+        let view: ProfileDetailViewProtocol = ProfileDetailView()
         let presenter: ProfileDetailPresenterProtocol & ProfileDetailInteractorOutputProtocol = ProfileDetailPresenter()
         let interactor: ProfileDetailInteractorInputProtocol & ProfileDetailRemoteDataManagerOutputProtocol = ProfileDetailInteractor()
         let wireFrame: ProfileDetailWireFrameProtocol = ProfileDetailWireFrame()
@@ -24,10 +24,19 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteManager
-//        if let view = view as? ProfileDetailView {
-        return view
-//        } else {
-//            return UIViewController()
-//        }
+
+        if let view = view as? ProfileDetailView {
+            return view
+        } else {
+            return UIViewController()
+        }
+    }
+    
+    func presentProfileDetailScreen(from view: ProfileDetailView) {
+        let profileDetailView = ProfileDetailWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(profileDetailView, animated: true)
+        }
     }
 }
