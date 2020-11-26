@@ -22,16 +22,22 @@ class StudyListView: UIViewController {
     var presenter: StudyListPresenterProtocol?
     var studyList: [Study] = []
     
+    // MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        presenter?.studyList(category: category!, sort: sort!)
+        presenter?.studyList(category: category!)
     }
+    
+    // MARK: Attribute
     
     func attribute() {
         view.backgroundColor = UIColor.appColor(.terminalBackground)
-        aligmentView.backgroundColor = UIColor.appColor(.terminalBackground)
+        aligmentView.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         
         refreshControl.do {
             $0.addTarget(self, action: #selector(updateList), for: .valueChanged)
@@ -57,12 +63,14 @@ class StudyListView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.prefetchDataSource = self
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.rowHeight = 105
             $0.refreshControl = refreshControl
         }
     }
+    
+    // MARK: Layout
     
     func layout() {
         view.addSubview(aligmentView)
@@ -104,15 +112,15 @@ class StudyListView: UIViewController {
         }
     }
     
+    
+    //
     @objc func updateList() {
-//        studyList.removeAll()
+        studyList.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
+            self.presenter?.studyList(category: self.category!)
             self.refreshControl.endRefreshing()
-//            self.studyList.insert(Study(id: 1111, title: "하이", introduce: "ㅎㅇ", image: nil, sigungu: "몰러", leaderImage: nil, createdAt: "fd", members: 2), at: 0)
-            
-            self.tableView.reloadData()
         }
-        
+        self.tableView.reloadData()
     }
     
     @objc func late() {
@@ -138,10 +146,6 @@ extension StudyListView: StudyListViewProtocol {
         for study in studies {
             studyList.append(study)
         }
-        
-        let noti = Noti(title: "ff", explain: "Ff", action: "ff")
-        let view = ViewController()
-        
         tableView.reloadData()
     }
     

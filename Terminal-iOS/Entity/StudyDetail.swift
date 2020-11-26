@@ -23,7 +23,7 @@ struct DataClass: Codable {
     let snsWeb, snsNotion, snsEvernote, image: String?
     let location: Location
     let authority: String
-
+    
     enum CodingKeys: String, CodingKey {
         case participate, id, category, title, introduce, image, progress
         case studyTime = "study_time"
@@ -49,7 +49,8 @@ struct Location: Codable {
 
 struct Participate: Codable {
     let id, userID: Int
-    let nickname, image: String
+    let nickname : String
+    let image: String?
     let leader: Bool
 
     enum CodingKeys: String, CodingKey {

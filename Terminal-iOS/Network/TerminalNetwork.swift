@@ -12,9 +12,10 @@ import Kingfisher
 import SwiftyJSON
 
 class TerminalNetwork {
-    static private let headers: HTTPHeaders = [
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJya2RjamYwMTIyQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S067OA6rK97ZWo7JqUIiwiaWF0IjoxNjA2MjAyOTkyLCJleHAiOjEwNjA2MjAyOTkyLCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.E3gMKiM21Gu9J6tzAyYau7CEkwb5qAvXhGQapmSnM5o"
+    static let headers: HTTPHeaders = [
+        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJya2RjamYwMTIyQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S067OA6rK97ZWo7JqUIiwiaWF0IjoxNjA2MjkzNTk2LCJleHAiOjEwNjA2MjkzNTk2LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.3TmxWihrAsDedytyd_HkfUYoZ3MQwgReBNogwEcwVlg"
     ]
+    
     //스터디 리스트 초기화시 호출되는 플로우
     static func getNewStudyList(_ category: String,
                                 _ sort: String,

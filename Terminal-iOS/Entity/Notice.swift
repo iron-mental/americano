@@ -8,13 +8,6 @@
 
 import Foundation
 
-
-// MARK: 스터디 리스트
-
-
-
-// MARK: 스터디
-
 struct Notice: Codable {
     let id: Int
     let studyID: Int?
@@ -30,4 +23,3 @@ struct Notice: Codable {
         case updatedAt = "updated_at"
     }
 }
-

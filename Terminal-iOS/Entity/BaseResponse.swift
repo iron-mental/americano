@@ -1,5 +1,5 @@
 //
-//  freshAccessToken.swift
+//  BaseResponse.swift
 //  Terminal-iOS
 //
 //  Created by once on 2020/11/25.
@@ -8,17 +8,14 @@
 
 import Foundation
 
-// MARK: 엑세스 토큰
-
-struct AccessToken: Codable {
+struct BaseResponse<T: Codable>: Codable {
     let result: Bool
-    let data: Token
-}
-
-struct Token: Codable {
-    let accessToken: String
-
+    let type, label, message: String?
+    let data: T?
+    
     enum CodingKeys: String, CodingKey {
-        case accessToken = "access_token"
+        case result
+        case type, label, message
+        case data
     }
 }

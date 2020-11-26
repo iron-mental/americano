@@ -63,7 +63,7 @@ class StudyCell: UITableViewCell {
             $0.text = data.createdAt
         }
         memberCount.do {
-            $0.text = "\(data.members)"
+            $0.text = "\(data.members!)"
         }
         guard let main = data.image else {
             mainImage.image = #imageLiteral(resourceName: "swiftmain")

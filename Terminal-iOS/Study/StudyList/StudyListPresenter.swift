@@ -17,8 +17,8 @@ class StudyListPresenter: StudyListPresenterProtocol {
     var interactor: StudyListInteractorInputProtocol?
     var wireFrame: StudyListWireFrameProtocol?
     
-    func studyList(category: String, sort: String) {
-        interactor?.retrieveStudyList(category: category, sort: sort)
+    func studyList(category: String) {
+        interactor?.retrieveStudyList(category: category)
     }
     
     func pagingStudyList() {
@@ -34,7 +34,7 @@ extension StudyListPresenter: StudyListInteractorOutputProtocol {
     func didRetrieveStudies(_ studies: [Study]) {
         view?.showStudyList(with: studies)
     }
-    
+      
     func onError() {
         
     }

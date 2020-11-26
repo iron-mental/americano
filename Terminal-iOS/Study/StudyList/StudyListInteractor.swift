@@ -9,21 +9,66 @@
 import UIKit
 
 class StudyListInteractor: StudyListInteractorInputProtocol {
+    var studyKeyArr: [Study] = []
+    var keyValue: [Int] = []
+    var newKeyValue: [Int] = []
+    
     var presenter: StudyListInteractorOutputProtocol?
     var localDataManager: StudyListLocalDataManagerInputProtocol?
     var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
     
-    func retrieveStudyList(category: String, sort: String) {
-        remoteDataManager?.retrieveStudyList(category: category, sort: sort)
+    func retrieveStudyList(category: String) {
+        remoteDataManager?.retrieveStudyList(category: category)
     }
+    
     func pagingRetrieveStudyList() {
-        remoteDataManager?.paginationRetrieveStudyList()
+        /// 스터디 키값이 10개가 넘을경우
+        if studyKeyArr.count >= 10 {
+            for _ in 0..<10 {
+                newKeyValue.append(studyKeyArr[0].id)
+                studyKeyArr.remove(at: 0)
+            }
+        } else {
+            for _ in 0..<studyKeyArr.count {
+                newKeyValue.append(studyKeyArr[0].id)
+                studyKeyArr.remove(at: 0)
+            }
+        }
+        
+        remoteDataManager?.paginationRetrieveStudyList(keyValue: newKeyValue, completion: {
+            self.newKeyValue.removeAll()
+        })
     }
 }
 
 extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
-    func onStudiesRetrieved(_ studies: [Study]) {
-        presenter?.didRetrieveStudies(studies)
+    func onStudiesRetrieved(_ studies: BaseResponse<[Study]>) {
+        var resultArr: [Study] = []
+        var studyArr: [Study] = []
+        
+        if studies.result {
+            guard let studyList = studies.data else { return }
+            for study in studyList {
+                resultArr.append(study)
+            }
+            
+            /// 키값만 내려오는 배열
+            for data in resultArr {
+                if data.title == nil {
+                    studyKeyArr.append(data)
+                }
+            }
+            
+            /// 모든 데이터가 내려오는 배열
+            for data in resultArr {
+                if data.title != nil {
+                    studyArr.append(data)
+                }
+            }
+        }
+        
+        presenter?.didRetrieveStudies(studyArr)
+
     }
     
     func onError() {

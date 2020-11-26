@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B4ADB0EA58C194A4FD611CA /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */; };
 		A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */; };
 		A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC912559613E009BE9A6 /* UITextView+Ext.swift */; };
 		A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AE2524952F00ACB241 /* SetPresenter.swift */; };
@@ -16,6 +17,10 @@
 		A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D8BE025264DB9003BD1B9 /* AccountCell.swift */; };
 		A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F2356256E195600CBFC13 /* AccessToken.swift */; };
 		A51F235C256E19E600CBFC13 /* ProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F235B256E19E600CBFC13 /* ProjectList.swift */; };
+		A51F2382256E460D00CBFC13 /* NoticeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F2381256E460D00CBFC13 /* NoticeDetail.swift */; };
+		A51F2385256E466500CBFC13 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F2384256E466500CBFC13 /* NoticeList.swift */; };
+		A51F2388256E468500CBFC13 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F2387256E468500CBFC13 /* Notice.swift */; };
+		A51F238C256E5A2200CBFC13 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F238B256E5A2200CBFC13 /* BaseResponse.swift */; };
 		A521DDED252DEA7E00F83DB3 /* ProfileDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */; };
 		A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */; };
 		A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */; };
@@ -173,6 +178,7 @@
 
 /* Begin PBXFileReference section */
 		0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		A510EC912559613E009BE9A6 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
@@ -183,6 +189,10 @@
 		A51D8BE025264DB9003BD1B9 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		A51F2356256E195600CBFC13 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		A51F235B256E19E600CBFC13 /* ProjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectList.swift; sourceTree = "<group>"; };
+		A51F2381256E460D00CBFC13 /* NoticeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetail.swift; sourceTree = "<group>"; };
+		A51F2384256E466500CBFC13 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
+		A51F2387256E468500CBFC13 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
+		A51F238B256E5A2200CBFC13 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailProtocols.swift; sourceTree = "<group>"; };
 		A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailInteractor.swift; sourceTree = "<group>"; };
 		A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailPresenter.swift; sourceTree = "<group>"; };
@@ -346,6 +356,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B4ADB0EA58C194A4FD611CA /* Pods_Terminal_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +366,7 @@
 		031FECECB36F7B6233EC27DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -717,6 +729,7 @@
 				A5D058F6255D95000047CA9E /* StudyDetail.swift */,
 				A51F2356256E195600CBFC13 /* AccessToken.swift */,
 				A51F235B256E19E600CBFC13 /* ProjectList.swift */,
+				A51F238B256E5A2200CBFC13 /* BaseResponse.swift */,
 				CCE279DE256E46BA00DB3246 /* NoticeList.swift */,
 				CCE279EB256E46C600DB3246 /* Notice.swift */,
 				CCE279EF256E46D000DB3246 /* NoticeDetail.swift */,
@@ -1044,8 +1057,10 @@
 				CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */,
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
+				A51F2382256E460D00CBFC13 /* NoticeDetail.swift in Sources */,
 				A5D058D5255D90CE0047CA9E /* StudyDetailInteractor.swift in Sources */,
 				CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */,
+				A51F238C256E5A2200CBFC13 /* BaseResponse.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */,
 				A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */,
