@@ -31,8 +31,6 @@ class StudyCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-        
-    
     override func prepareForReuse() {
         mainTitle.text = nil
         subTitle.text = nil

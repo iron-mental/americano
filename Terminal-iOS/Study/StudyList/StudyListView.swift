@@ -149,6 +149,7 @@ extension StudyListView: StudyListViewProtocol {
         for study in studies {
             studyList.append(study)
         }
+        
         if sortState == .new {
             tableView.reloadData()
         }
@@ -158,7 +159,7 @@ extension StudyListView: StudyListViewProtocol {
         for study in studies {
             lengthStudyList.append(study)
         }
-        print("길이",lengthStudyList)
+        
         if sortState == .length {
             tableView.reloadData()
         }
@@ -180,19 +181,24 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if sortState == .new {
-                if studyList.count-1 == indexPath.row {
+                if studyList.count - 1 == indexPath.row {
                     presenter?.pagingStudyList()
                 }
-            } else {
-                if lengthStudyList.count-1 == indexPath.row {
-                    presenter?.pagingStudyList()
+            } else if sortState == .length {
+                if lengthStudyList.count - 1 == indexPath.row {
+                    presenter?.pagingLengthStudyList()
                 }
             }
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studyList.count
+        if sortState == .new {
+            return studyList.count
+        } else if sortState == .length {
+            return lengthStudyList.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -200,8 +206,6 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
         if sortState == .new {
             cell.setData(studyList[indexPath.row])
         } else if sortState == .length {
-            print("index",indexPath.row)
-            print("data",lengthStudyList[indexPath.row])
             cell.setData(lengthStudyList[indexPath.row])
         }
 

@@ -66,7 +66,7 @@ protocol StudyListRemoteDataManagerInputProtocol: class {
     func retrieveStudyList(category: String)
     func retrieveLengthStudyList(category: String)
     func paginationRetrieveStudyList(keyValue: [Int], completion: @escaping (() -> Void))
-    
+    func paginationRetrieveLengthStudyList(keyValue: [Int], completion: @escaping (() -> Void))
 }
 
 protocol StudyListRemoteDataManagerOutputProtocol: class {

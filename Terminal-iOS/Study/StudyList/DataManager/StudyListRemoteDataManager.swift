@@ -70,4 +70,30 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
         }
     }
     
+    // MARK: key 값을 통한 지역순 페이징
+    
+    func paginationRetrieveLengthStudyList(keyValue: [Int], completion: @escaping (() -> Void)) {
+        if keyValue.count > 0 {
+            let key = "\(keyValue)"
+                .trimmingCharacters(in: ["["])
+                .trimmingCharacters(in: ["]"])
+                .removeWhitespace()
+            
+            let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
+            
+            AF.request(query, headers: TerminalNetwork.headers).responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
+                    print("이게 된겨냐", result)
+                    self.remoteRequestHandler?.onStudiesLengthRetrieved(studies: result)
+                    completion()
+                case .failure(let err):
+                    print(err)
+                }
+            }
+        }
+    }
 }
