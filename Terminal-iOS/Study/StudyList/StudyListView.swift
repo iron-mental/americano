@@ -22,6 +22,8 @@ class StudyListView: UIViewController {
     var presenter: StudyListPresenterProtocol?
     var studyList: [Study] = []
     
+    // MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -29,9 +31,13 @@ class StudyListView: UIViewController {
         presenter?.studyList(category: category!)
     }
     
+    // MARK: Attribute
+    
     func attribute() {
         view.backgroundColor = UIColor.appColor(.terminalBackground)
-        aligmentView.backgroundColor = UIColor.appColor(.terminalBackground)
+        aligmentView.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         
         refreshControl.do {
             $0.addTarget(self, action: #selector(updateList), for: .valueChanged)
@@ -57,12 +63,14 @@ class StudyListView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.prefetchDataSource = self
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.rowHeight = 105
             $0.refreshControl = refreshControl
         }
     }
+    
+    // MARK: Layout
     
     func layout() {
         view.addSubview(aligmentView)
@@ -104,6 +112,8 @@ class StudyListView: UIViewController {
         }
     }
     
+    
+    //
     @objc func updateList() {
         studyList.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {

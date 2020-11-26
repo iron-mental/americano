@@ -14,7 +14,7 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int?
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
-    lazy var  VCArr: [UIViewController] = [ NoticeView(),
+    lazy var VCArr: [UIViewController] = [ NoticeView(),
                                       StudyDetailWireFrame.createStudyDetail(keyValue: studyID!),
                                       TempChatView()]
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
@@ -98,14 +98,6 @@ class MyStudyDetailView: UIViewController {
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
-
-//        UIView.animate(withDuration: 0.5) {
-//            self.selectedUnderLine.transform = CGAffineTransform(scaleX: 0.7, y: 1)
-//        } completion: { (finisih) in
-//            UIView.animate(withDuration: 0.4, animations: {
-//                self.selectedUnderLine.transform = CGAffineTransform(scaleX: 1, y: 1)
-//            })
-//        }
         
         UIView.animate(withDuration: 0.5) {
             self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
@@ -156,4 +148,5 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 }
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
+    
 }
