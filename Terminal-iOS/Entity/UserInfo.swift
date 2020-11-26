@@ -2,30 +2,25 @@
 //  UserInfo.swift
 //  Terminal-iOS
 //
-//  Created by once on 2020/11/24.
+//  Created by once on 2020/11/26.
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
 import Foundation
 
-// MARK: 유저 정보 조회
+// MARK: 유저 정보
 
 struct UserInfo: Codable {
-    let result: Bool
-    let data: [Datum]
-}
-
-struct Datum: Codable {
     let id: Int
     let nickname, email: String
-    let image: String?
-    let introduce, location, careerTitle, careerContents: String?
-    let snsGithub, snsLinkedin, snsWeb: String?
-    let emailVerified: Bool?
+    let image, introduce: String?
+    let address, careerTitle, careerContents: String?
+    let snsLinkedin, snsWeb, snsGithub: String?
+    let emailVerified: Bool
     let createdAt: String
 
     enum CodingKeys: String, CodingKey {
-        case id, nickname, email, image, introduce, location
+        case id, nickname, email, image, introduce, address
         case careerTitle = "career_title"
         case careerContents = "career_contents"
         case snsGithub = "sns_github"
