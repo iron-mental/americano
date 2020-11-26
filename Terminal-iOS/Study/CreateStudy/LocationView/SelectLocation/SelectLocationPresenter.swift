@@ -11,7 +11,6 @@ import NMapsMap
 
 class SelectLocationPresenter: SelectLocationPresenterProtocol {
     func didClickedCompletButton(item: StudyDetailLocationPost) {
-        print("접운채 이대로이렇게~ ㅠ힘껀안ㄴ아주겠어")
     }
     
     var view: SelectLocationViewProtocol?
@@ -22,8 +21,7 @@ class SelectLocationPresenter: SelectLocationPresenterProtocol {
         interactor?.searchAddress(item: item)
     }
     
-    func getAddressResult(item: searchLocationResult) {
-        print("presenter", item)
+    func getAddressResult(item: StudyDetailLocationPost) {
         view?.setViewWithResult(item: item)
     }
 }

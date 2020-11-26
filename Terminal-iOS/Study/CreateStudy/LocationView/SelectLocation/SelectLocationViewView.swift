@@ -9,6 +9,10 @@
 import UIKit
 import NMapsMap
 
+protocol selectLocationDelegate {
+    func passLocation(location: StudyDetailLocationPost)
+}
+
 class SelectLocationView: UIViewController {
     var presenter: SelectLocationPresenterProtocol?
     let pin = UIImageView()
@@ -18,6 +22,7 @@ class SelectLocationView: UIViewController {
     var keyboardHeight: CGFloat = 0
     var location: StudyDetailLocationPost?
     var preventPlaceNameFlag = false
+    var delegate: selectLocationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,9 +89,10 @@ class SelectLocationView: UIViewController {
     }
     
     @objc func didCompleteButtonClicked() {
+        location?.detailAddress = bottomView.detailAddress.text ?? ""
+        delegate?.passLocation(location: location!)
         presentingViewController?.dismiss(animated: false)
         self.presentingViewController?.presentingViewController?.dismiss(animated: false)
-        
     }
 }
 
@@ -100,9 +106,12 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
                 location?.lng = mapView.cameraPosition.target.lng
                 location?.lat = mapView.cameraPosition.target.lat
                 if preventPlaceNameFlag == true {
+                    location?.placeName = ""
+                    location?.category = ""
                     presenter?.getAddress(item: location!)
+                } else {
+                    preventPlaceNameFlag = true
                 }
-                preventPlaceNameFlag = true
             })
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task!)
@@ -127,7 +136,7 @@ extension SelectLocationView: UITextFieldDelegate {
 }
 
 extension SelectLocationView: SelectLocationViewProtocol {
-    func setViewWithResult(item: searchLocationResult) {
+    func setViewWithResult(item: StudyDetailLocationPost) {
         if item.address != "" {
             bottomView.Address.text = item.address
         }

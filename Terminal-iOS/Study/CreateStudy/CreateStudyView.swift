@@ -304,3 +304,9 @@ extension CreateStudyView: UIScrollViewDelegate {
         view.endEditing(true)
     }
 }
+
+extension CreateStudyView: selectLocationDelegate {
+    func passLocation(location: StudyDetailLocationPost) {
+        print(location)
+    }
+}

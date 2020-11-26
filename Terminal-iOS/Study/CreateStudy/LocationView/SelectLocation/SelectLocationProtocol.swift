@@ -11,8 +11,9 @@ import NMapsMap
 
 protocol SelectLocationViewProtocol: class {
     var presenter: SelectLocationPresenterProtocol? { get set }
+    var delegate: selectLocationDelegate? { get set }
     //PRESENTER -> VIEW
-    func setViewWithResult(item: searchLocationResult)
+    func setViewWithResult(item: StudyDetailLocationPost)
 }
 
 protocol SelectLocationInteractorProtocol: class {
@@ -35,12 +36,12 @@ protocol SelectLocationPresenterProtocol: class {
     func didClickedCompletButton(item: StudyDetailLocationPost)
     
     //INTERACTOR -> PRESENTER
-    func getAddressResult(item: searchLocationResult)
+    func getAddressResult(item: StudyDetailLocationPost)
 }
 
 protocol SelectLocationRemoteDataManagerProtocol: class {
     //INTERACTOR -> REMOTEDATAMANAGER
-    func getAddressInfo(lat: Double, lng: Double, completion: @escaping (_: Bool, _ item: searchLocationResult?) -> ())
+    func getAddressInfo(lat: Double, lng: Double, completion: @escaping (_: Bool, _ item: StudyDetailLocationPost?) -> ())
 }
 
 protocol SelectLocationLocalDataManagerProtocol: class {
@@ -50,5 +51,5 @@ protocol SelectLocationLocalDataManagerProtocol: class {
 protocol SelectLocationWireFrameProtocol: class {
     var presenter: SelectLocationPresenterProtocol? { get set }
     
-    static func selectLocationViewModul(item: StudyDetailLocationPost) -> UIViewController
+    static func selectLocationViewModul(item: StudyDetailLocationPost, parentView: UIViewController) -> UIViewController
 }

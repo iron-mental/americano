@@ -23,7 +23,6 @@ class SelectLocationInteractor: SelectLocationInteractorProtocol {
         remoteDataManager?.getAddressInfo(lat: lat, lng: lng, completion: { [self] (result, data) in
             if result {
                 if let item = data {
-                    print("interactor", item)
                     presenter?.getAddressResult(item: item)
                 }
             } else {
