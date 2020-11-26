@@ -10,6 +10,7 @@ import UIKit
 
 class StudyListInteractor: StudyListInteractorInputProtocol {
     var studyKeyArr: [Study] = []
+    var lengthStudyKeyArr: [Study] = []
     var keyValue: [Int] = []
     var newKeyValue: [Int] = []
     
@@ -42,7 +43,7 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
 }
 
 extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
-    func onStudiesRetrieved(_ studies: BaseResponse<[Study]>) {
+    func onStudiesRetrieved(studies: BaseResponse<[Study]>) {
         var resultArr: [Study] = []
         var studyArr: [Study] = []
         
@@ -67,8 +68,34 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
             }
         }
         
-        presenter?.didRetrieveStudies(studyArr)
-
+        presenter?.didRetrieveStudies(studies: studyArr)
+    }
+    
+    func onStudiesLengthRetrieved(studies: BaseResponse<[Study]>) {
+        var resultArr: [Study] = []
+        var studyArr: [Study] = []
+        
+        if studies.result {
+            guard let studyList = studies.data else { return }
+            for study in studyList {
+                resultArr.append(study)
+            }
+            
+            /// 키값만 내려오는 배열
+            for data in resultArr {
+                if data.title == nil {
+                    lengthStudyKeyArr.append(data)
+                }
+            }
+            
+            /// 모든 데이터가 내려오는 배열
+            for data in resultArr {
+                if data.title != nil {
+                    studyArr.append(data)
+                }
+            }
+        }
+        presenter?.didRetrieveLengthStudies(studies: studyArr)
     }
     
     func onError() {
