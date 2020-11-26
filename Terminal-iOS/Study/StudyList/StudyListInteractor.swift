@@ -13,6 +13,7 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
     var lengthStudyKeyArr: [Study] = []
     var keyValue: [Int] = []
     var newKeyValue: [Int] = []
+    var lengthNewKeyValue: [Int] = []
     
     var presenter: StudyListInteractorOutputProtocol?
     var localDataManager: StudyListLocalDataManagerInputProtocol?
@@ -20,8 +21,10 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
     
     func retrieveStudyList(category: String) {
         remoteDataManager?.retrieveStudyList(category: category)
+        remoteDataManager?.retrieveLengthStudyList(category: category)
     }
     
+    /// 최신순 스터디 리스트 페이징
     func pagingRetrieveStudyList() {
         /// 스터디 키값이 10개가 넘을경우
         if studyKeyArr.count >= 10 {
@@ -40,6 +43,26 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
             self.newKeyValue.removeAll()
         })
     }
+    
+    /// 지역순 스터디 리스트 페이징
+    func pagingRetrieveLengthStudyList() {
+        /// 스터디 키값이 10개가 넘을경우
+        if lengthStudyKeyArr.count >= 10 {
+            for _ in 0..<10 {
+                lengthNewKeyValue.append(lengthStudyKeyArr[0].id)
+                lengthStudyKeyArr.remove(at: 0)
+            }
+        } else {
+            for _ in 0..<lengthStudyKeyArr.count {
+                lengthNewKeyValue.append(lengthStudyKeyArr[0].id)
+                lengthStudyKeyArr.remove(at: 0)
+            }
+        }
+        
+        remoteDataManager?.paginationRetrieveStudyList(keyValue: lengthNewKeyValue, completion: {
+            self.lengthNewKeyValue.removeAll()
+        })
+    }  
 }
 
 extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {

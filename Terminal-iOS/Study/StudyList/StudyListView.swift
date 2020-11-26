@@ -115,7 +115,6 @@ class StudyListView: UIViewController {
         }
     }
     
-    
     @objc func updateList() {
         studyList.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
@@ -126,17 +125,21 @@ class StudyListView: UIViewController {
     }
     
     @objc func new() {
-        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
-            self.selectedUnderline.center.x = self.lateButton.center.x
-        }
         sortState = .new
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+            self.selectedUnderline.center.x = self.lateButton.center.x
+            
+        }
+        self.tableView.reloadData()
     }
     
     @objc func length() {
-        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
-            self.selectedUnderline.center.x = self.locationButton.center.x
-        }
         sortState = .length
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+            self.selectedUnderline.center.x = self.locationButton.center.x
+            
+        }
+        self.tableView.reloadData()
     }
 }
 
@@ -155,6 +158,7 @@ extension StudyListView: StudyListViewProtocol {
         for study in studies {
             lengthStudyList.append(study)
         }
+        print("길이",lengthStudyList)
         if sortState == .length {
             tableView.reloadData()
         }
@@ -175,8 +179,14 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     /// 페이징 첫번째 방법 이게 제일 효율 높음
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            if studyList.count-1 == indexPath.row {
-                presenter?.pagingStudyList()
+            if sortState == .new {
+                if studyList.count-1 == indexPath.row {
+                    presenter?.pagingStudyList()
+                }
+            } else {
+                if lengthStudyList.count-1 == indexPath.row {
+                    presenter?.pagingStudyList()
+                }
             }
         }
     }
@@ -187,9 +197,14 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StudyCell.cellId, for: indexPath) as! StudyCell
-        
-        let study = studyList[indexPath.row]
-        cell.setData(study)
+        if sortState == .new {
+            cell.setData(studyList[indexPath.row])
+        } else if sortState == .length {
+            print("index",indexPath.row)
+            print("data",lengthStudyList[indexPath.row])
+            cell.setData(lengthStudyList[indexPath.row])
+        }
+
         return cell
     }
     

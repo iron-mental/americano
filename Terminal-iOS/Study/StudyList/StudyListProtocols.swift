@@ -13,6 +13,7 @@ protocol StudyListViewProtocol: class {
     
     // PRESENTER -> VIEW
     func showStudyList(with studies: [Study])
+    func saveLengthStudyList(with studies: [Study])
     func showLoading()
     func hideLoading()
 }
@@ -32,8 +33,8 @@ protocol StudyListPresenterProtocol: class {
     // VIEW -> PRESENTER
     func studyList(category: String)
     func pagingStudyList()
+    func pagingLengthStudyList()
     func showStudyDetail(keyValue: Int)
-    func refreshStudyList()
 }
 
 protocol StudyListInteractorOutputProtocol: class {
@@ -51,6 +52,7 @@ protocol StudyListInteractorInputProtocol: class {
     // PRESENTER -> INTERACTOR
     func retrieveStudyList(category: String)
     func pagingRetrieveStudyList()
+    func pagingRetrieveLengthStudyList()
 }
 
 protocol StudyListDataManagerInputProtocol: class {

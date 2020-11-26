@@ -25,8 +25,8 @@ class StudyListPresenter: StudyListPresenterProtocol {
         interactor?.pagingRetrieveStudyList()
     }
     
-    func refreshStudyList() {
-        
+    func pagingLengthStudyList() {
+        interactor?.pagingRetrieveLengthStudyList()
     }
 }
 
@@ -36,7 +36,7 @@ extension StudyListPresenter: StudyListInteractorOutputProtocol {
     }
     
     func didRetrieveLengthStudies(studies: [Study]) {
-        
+        view?.saveLengthStudyList(with: studies)
     }
       
     func onError() {
