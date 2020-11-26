@@ -39,10 +39,9 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
         }
     }
     
-    func studyCreateComplete(image: UIImage, userID: Int, category: String, title: String, introduce: String, progress: String, studyTime: String, location: String, notion: String, everNote: String, web: String) {
+    func studyCreateComplete(study: StudyDetailPost) {
         //remoteDataManager로 보내기 전에 비어있는 값이 있는 지 확인 후 있다면 remoteDataManager로 보내지말고 presenter에게 알려주어야 겠죠??
         //그 처리는 나중에 해주도록 합시다
-        let studyInfo = StudyInfo(image: image, userID: userID, category: category, title: title, introduce: introduce, progress: progress, studyTime: studyTime, location: location, notion: notion, everNote: everNote, web: web)
-        createStudyRemoteDataManager?.postStudy(studyInfo: studyInfo)
+        createStudyRemoteDataManager?.postStudy(study: study)
     }
 }

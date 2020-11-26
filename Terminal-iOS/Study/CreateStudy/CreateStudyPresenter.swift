@@ -64,8 +64,8 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
             view?.webInvalid()
         }
     }
-    func clickCompleteButton(image: UIImage, userID: Int, category: String, title: String, introduce: String, progress: String, studyTime: String, location: String, notion: String, everNote: String, web: String) {
+    func clickCompleteButton(study: StudyDetailPost) {
         view?.loading()
-        interactor?.studyCreateComplete(image: image, userID: userID, category: category, title: title, introduce: introduce, progress: progress, studyTime: studyTime, location: location, notion: notion, everNote: everNote, web: web)
+        interactor?.studyCreateComplete(study: study)
     }
 }

@@ -8,14 +8,18 @@
 
 import UIKit
 
+
+
+
 class SearchLocationView: UIViewController {
     var presenter: SearchLocationPresenterProtocol?
-    
+    var parentView: UIViewController?
     var closeButton = UIButton()
     var searchTextField = UITextField()
     var searchButton = UIButton()
     var tableView = UITableView()
-    var searchResultList: [searchLocationResult] = []
+    var searchResultList: [StudyDetailLocationPost] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +88,7 @@ class SearchLocationView: UIViewController {
         dismiss(animated: true)
     }
     @objc func didSearchButtonClicked() {
+        
         presenter?.didClickedSearchButton(text: searchTextField.text!)
     }
 }
@@ -93,7 +98,7 @@ extension SearchLocationView: SearchLocationViewProtocol {
         dismiss(animated: true)
     }
     
-    func showSearchResult(list: [searchLocationResult]) {
+    func showSearchResult(list: [StudyDetailLocationPost]) {
         searchResultList = list
         tableView.reloadData()
     }
@@ -113,6 +118,6 @@ extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectedItem(item: searchResultList[indexPath.row], view: self)
+        presenter?.didSelectedItem(item: searchResultList[indexPath.row], view: self, parentView: parentView!)
     }
 }
