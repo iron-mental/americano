@@ -13,7 +13,12 @@ class CreateStudyView: UIViewController{
     
     let screenSize = UIScreen.main.bounds
     var selectedCategory: String?
-    var selectedLocation: StudyDetailLocationPost?
+    var selectedLocation: StudyDetailLocationPost? {
+        didSet {
+            self.button.alpha = 1
+            self.button.isUserInteractionEnabled = true
+        }
+    }
     let picker = UIImagePickerController()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
@@ -82,6 +87,8 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor(named: "key")
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
+            $0.isUserInteractionEnabled = false
+            self.button.alpha = 0.5
         }
     }
     
@@ -280,7 +287,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
                                        snsNotion: SNSInputView.notion?.textField.text,
                                        snsEvernote: SNSInputView.evernote?.textField.text,
                                        image: mainImageView.image!,
-                                       location: selectedLocation ?? StudyDetailLocationPost())
+                                       location: selectedLocation!)
         
         presenter?.clickCompleteButton(study: newStudy)
     }
