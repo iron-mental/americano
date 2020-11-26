@@ -31,35 +31,41 @@ import Alamofire
 
 
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
-    func postStudy(studyInfo: StudyInfo) -> Bool {
+    
+    
+    
+    func postStudy(study: StudyDetailPost) -> Bool {
+        
         let params : [String : Any] = [
-            "user_id" : studyInfo.userID,
-            "category" : studyInfo.category,
-            "title" : studyInfo.title,
-            "introduce" : studyInfo.introduce,
-            "progress" : studyInfo.progress,
-            "study_time" : studyInfo.studyTime,
-            "latitude" : studyInfo.notion,
-            "longitude" : studyInfo.everNote,
-            "region_1depth_name" : studyInfo.web,
-            "region_2depth_name" : studyInfo.location,
-            "address_name" : studyInfo.location,
-            "locaion_detail" : studyInfo.location,
-            "place_name" : studyInfo.location,
-            "sns_notion" : studyInfo.notion ,
-            "sns_evernote" : studyInfo.everNote,
-            "sns_web" : studyInfo.web,
-            "image" : studyInfo.image
+            "category" : study.category,
+            "title" : study.title,
+            "introduce" : study.introduce,
+            "progress" : study.progress,
+            "study_time" : study.studyTime,
+            "latitude" : study.location.lat,
+            "longitude" : study.location.lng,
+            "sido" : study.location.sido,
+            "sigungu" : study.location,
+            "address_name" : study.location.address,
+            "locaion_detail" : study.location.detailAddress,
+            "place_name" : study.location,
+            "sns_notion" : study.snsNotion ,
+            "sns_evernote" : study.snsEvernote,
+            "sns_web" : study.snsWeb,
+            "image" : study.image
         ]
+        
         var urlComponent = URLComponents(string: "http://3.35.154.27:3000/v1/study")
         let header: HTTPHeaders = [ "Content-Type": "multipart/form-data" ]
         guard let url = urlComponent?.url else { return true }
-        let imageData = studyInfo.image.jpegData(compressionQuality: 1.0)
+        
+        let imageData = study.image!.jpegData(compressionQuality: 1.0)
+        
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
             }
-            multipartFormData.append(imageData!, withName: "image", fileName: "\(studyInfo.userID).jpg", mimeType: "image/jpeg")
+            multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
         }, to: url, method: .post, headers: header) { result in
             dump(result)
         }.resume()

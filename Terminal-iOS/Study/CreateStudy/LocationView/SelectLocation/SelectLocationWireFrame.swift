@@ -11,7 +11,7 @@ import UIKit
 class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
     var presenter: SelectLocationPresenterProtocol?
     
-    static func selectLocationViewModul(item: searchLocationResult) -> UIViewController {
+    static func selectLocationViewModul(item: StudyDetailLocationPost) -> UIViewController {
         var view = SelectLocationView()
         view.location = item
         let interactor = SelectLocationInteractor()

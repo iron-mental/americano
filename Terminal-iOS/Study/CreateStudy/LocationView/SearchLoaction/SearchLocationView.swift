@@ -15,7 +15,7 @@ class SearchLocationView: UIViewController {
     var searchTextField = UITextField()
     var searchButton = UIButton()
     var tableView = UITableView()
-    var searchResultList: [searchLocationResult] = []
+    var searchResultList: [StudyDetailLocationPost] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +93,7 @@ extension SearchLocationView: SearchLocationViewProtocol {
         dismiss(animated: true)
     }
     
-    func showSearchResult(list: [searchLocationResult]) {
+    func showSearchResult(list: [StudyDetailLocationPost]) {
         searchResultList = list
         tableView.reloadData()
     }

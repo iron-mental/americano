@@ -16,7 +16,7 @@ class SelectLocationView: UIViewController {
     var mapView = NMFMapView()
     var bottomView = BottomView()
     var keyboardHeight: CGFloat = 0
-    var location: searchLocationResult?
+    var location: StudyDetailLocationPost?
     var preventPlaceNameFlag = false
     
     override func viewDidLoad() {
@@ -86,7 +86,7 @@ class SelectLocationView: UIViewController {
     @objc func didCompleteButtonClicked() {
         presentingViewController?.dismiss(animated: false)
         self.presentingViewController?.presentingViewController?.dismiss(animated: false)
-//        presenter.
+        
     }
 }
 

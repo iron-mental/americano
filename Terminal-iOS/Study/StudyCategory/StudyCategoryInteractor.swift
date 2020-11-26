@@ -18,26 +18,26 @@ class StudyCategoryInteractor: StudyCategoryInteractorInputProtocol {
     func retrieveStudyCategory() {
 
         let categoryList = [
-            Category(name: UIImage(named: "swift")!),
-            Category(name: UIImage(named: "frontend")!),
-            Category(name: UIImage(named: "node")!),
-            Category(name: UIImage(named: "android")!),
-            Category(name: UIImage(named: "tensorflow")!),
-            Category(name: UIImage(named: "swift")!),
-            Category(name: UIImage(named: "frontend")!),
-            Category(name: UIImage(named: "node")!),
-            Category(name: UIImage(named: "android")!),
-            Category(name: UIImage(named: "tensorflow")!),
-            Category(name: UIImage(named: "swift")!),
-            Category(name: UIImage(named: "frontend")!),
-            Category(name: UIImage(named: "node")!),
-            Category(name: UIImage(named: "android")!),
-            Category(name: UIImage(named: "tensorflow")!),
-            Category(name: UIImage(named: "swift")!),
-            Category(name: UIImage(named: "frontend")!),
-            Category(name: UIImage(named: "node")!),
-            Category(name: UIImage(named: "android")!),
-            Category(name: UIImage(named: "tensorflow")!)
+            Category(image: UIImage(named: "swift")!, name: "swift"),
+            Category(image: UIImage(named: "frontend")!, name: "frontend"),
+            Category(image: UIImage(named: "node")!, name: "node"),
+            Category(image: UIImage(named: "android")!, name: "node"),
+            Category(image: UIImage(named: "tensorflow")!, name: "node"),
+            Category(image: UIImage(named: "swift")!, name: "node"),
+            Category(image: UIImage(named: "frontend")!, name: "node"),
+            Category(image: UIImage(named: "node")!, name: "node"),
+            Category(image: UIImage(named: "android")!, name: "node"),
+            Category(image: UIImage(named: "tensorflow")!, name: "node"),
+            Category(image: UIImage(named: "swift")!, name: "node"),
+            Category(image: UIImage(named: "frontend")!, name: "node"),
+            Category(image: UIImage(named: "node")!, name: "node"),
+            Category(image: UIImage(named: "android")!, name: "node"),
+            Category(image: UIImage(named: "tensorflow")!, name: "node"),
+            Category(image: UIImage(named: "swift")!, name: "node"),
+            Category(image: UIImage(named: "frontend")!, name: "node"),
+            Category(image: UIImage(named: "node")!, name: "node"),
+            Category(image: UIImage(named: "android")!, name:  "node"),
+            Category(image: UIImage(named: "tensorflow")!, name: "node")
         ]
         presenter?.didRetrieveCategories(categoryList)
     }

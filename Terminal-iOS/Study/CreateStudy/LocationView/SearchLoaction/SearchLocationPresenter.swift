@@ -15,7 +15,7 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
     var interactor: SearchLocationInteractorProtocol?
     var wireFrame: SearchLocationWireFrameProtocol?
     
-    func didSelectedItem(item: searchLocationResult, view: UIViewController) {
+    func didSelectedItem(item: StudyDetailLocationPost, view: UIViewController) {
         wireFrame?.goToSelectLocationView(item: item, view: view)
     }
     
@@ -23,7 +23,7 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
         interactor?.searchKeyWord(text: text)
     }
     
-    func searchResult(list: [searchLocationResult]) {
+    func searchResult(list: [StudyDetailLocationPost]) {
         view?.showSearchResult(list: list)
     }
     

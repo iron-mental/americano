@@ -11,7 +11,7 @@ import UIKit
 class SearchLocationWireFrame: SearchLocationWireFrameProtocol {
     var presenter: SearchLocationPresenterProtocol?
     
-    func goToSelectLocationView(item: searchLocationResult, view: UIViewController) {
+    func goToSelectLocationView(item: StudyDetailLocationPost, view: UIViewController) {
         let selectLocationView = SelectLocationWireFrame.selectLocationViewModul(item: item)
         
         selectLocationView.modalPresentationStyle = .fullScreen

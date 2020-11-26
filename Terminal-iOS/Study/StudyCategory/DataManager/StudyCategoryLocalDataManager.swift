@@ -11,7 +11,18 @@ import UIKit
 class StudyCategoryLocalDataManager: StudyCategoryLocalDataManagerInputProtocol {
     func retrieveStudyCategory() -> [Category] {
         let arr = [
-            Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!), Category(name: UIImage(named: "set")!)
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set"),
+            Category(image: UIImage(named: "set")!,name: "set")
         ]
         return arr
     }

@@ -48,7 +48,7 @@ class TerminalAPI {
                     case .success(let value):
                         let json = "\(JSON(value))".data(using: .utf8)
                         let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
-                        completion(result.result, result)
+//                        completion(result.result, result)
                     case .failure(let value):
                         print(value)
                     }
