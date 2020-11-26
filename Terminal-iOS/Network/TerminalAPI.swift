@@ -16,7 +16,7 @@ class TerminalAPI {
         var tempUserID = 1
         
         AF.request("http://3.35.154.27:3000/v1/user/\(tempUserID)/study",
-                   method: .get,headers: headers).responseJSON(completionHandler: { [self] response in
+                   method: .get,headers: headers).responseJSON(completionHandler: { response in
                     switch response.result {
                     case .success(let value):
                         print(JSON(value))
@@ -26,10 +26,6 @@ class TerminalAPI {
                             if let id = data["id"].int, let title = data["title"].string, let sigungu = data["sigungu"].string, let image = data["image"].string {
                                 TempMyStudyList.list.append(MyStudy(id: id, title: title, sigungu: sigungu, image: image))
                             }
-                            
-                            
-                            
-                            
                         }
                         completion(true, TempMyStudyList.list)
                     case .failure(let err) :
@@ -43,12 +39,12 @@ class TerminalAPI {
         
         let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
         AF.request("http://3.35.154.27:3000/v1/study/\(id)",
-                   method: .get,headers: headers).responseJSON(completionHandler: { [self] response in
+                   method: .get,headers: headers).responseJSON(completionHandler: { response in
                     switch response.result {
                     case .success(let value):
                         let json = "\(JSON(value))".data(using: .utf8)
                         let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
-//                        completion(result.result, result)
+                    //                        completion(result.result, result)
                     case .failure(let value):
                         print(value)
                     }
