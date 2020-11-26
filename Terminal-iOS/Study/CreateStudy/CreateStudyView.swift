@@ -12,7 +12,8 @@ class CreateStudyView: UIViewController{
     var presenter: CreateStudyPresenterProtocols?
     
     let screenSize = UIScreen.main.bounds
-    var selectedCategory: Category?
+    var selectedCategory: String?
+    var selectedLocation: StudyDetailLocationPost?
     let picker = UIImagePickerController()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
@@ -20,8 +21,8 @@ class CreateStudyView: UIViewController{
     let mainImageView = MainImageView(frame: CGRect.zero)
     
     let studyTitleTextField = UITextField()
-    var seletedCategory: Category?
-    var studyOverView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")
+    var seletedCategory: String?
+    var studyIntroduceView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")
     var SNSInputView = IdInputView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (118/667) * UIScreen.main.bounds.height))
     var studyInfoView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
     var locationView = LocationUIVIew(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
@@ -58,7 +59,7 @@ class CreateStudyView: UIViewController{
             $0.textColor = .white
             $0.layer.cornerRadius = 10
         }
-        studyOverView.do {
+        studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.textView.text = "테스트 들어가ㅏㄴ안들어가나"
         }
@@ -87,7 +88,7 @@ class CreateStudyView: UIViewController{
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
-        [mainImageView, studyTitleTextField, studyOverView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { backgroundView.addSubview($0)}
+        [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { backgroundView.addSubview($0)}
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -118,16 +119,16 @@ class CreateStudyView: UIViewController{
             $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
         }
-        studyOverView.do {
+        studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor,constant: (18/667) * screenSize.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyOverView.textView.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyIntroduceView.textView.bottomAnchor).isActive = true
         }
         SNSInputView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyOverView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
+            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: $0.web!.bottomAnchor).isActive = true
@@ -269,7 +270,19 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
-        presenter?.clickCompleteButton(image: mainImageView.image!, userID: 1, category: "1", title: "1", introduce: "1", progress: "1", studyTime: "1", location: "1", notion: "1", everNote: "1", web: "1")
+        let newStudy = StudyDetailPost(id: 2,
+                                       category: selectedCategory!,
+                                       title: studyTitleTextField.text ?? "",
+                                       introduce: studyIntroduceView.textView.text,
+                                       progress: studyInfoView.textView.text,
+                                       studyTime: timeView.detailTime.text ?? "",
+                                       snsWeb: SNSInputView.web?.textField.text,
+                                       snsNotion: SNSInputView.notion?.textField.text,
+                                       snsEvernote: SNSInputView.evernote?.textField.text,
+                                       image: mainImageView.image!,
+                                       location: selectedLocation ?? StudyDetailLocationPost())
+        
+        presenter?.clickCompleteButton(study: newStudy)
     }
 }
 
@@ -289,5 +302,12 @@ extension CreateStudyView: UITextFieldDelegate {
 extension CreateStudyView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         view.endEditing(true)
+    }
+}
+
+extension CreateStudyView: selectLocationDelegate {
+    func passLocation(location: StudyDetailLocationPost) {
+        selectedLocation = location
+        locationView.detailAddress.text = "\(location.address) \(location.detailAddress ?? "" )"
     }
 }

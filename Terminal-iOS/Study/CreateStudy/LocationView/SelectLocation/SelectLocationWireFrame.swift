@@ -11,9 +11,10 @@ import UIKit
 class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
     var presenter: SelectLocationPresenterProtocol?
     
-    static func selectLocationViewModul(item: searchLocationResult) -> UIViewController {
+    static func selectLocationViewModul(item: StudyDetailLocationPost, parentView: UIViewController) -> UIViewController {
         var view = SelectLocationView()
         view.location = item
+        view.delegate = parentView as! selectLocationDelegate
         let interactor = SelectLocationInteractor()
         let presenter = SelectLocationPresenter()
         let remoteDataManager = SelectLocationRemoteDataManager()

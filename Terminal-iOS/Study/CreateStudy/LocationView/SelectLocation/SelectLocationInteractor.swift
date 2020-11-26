@@ -9,7 +9,7 @@
 import UIKit
 
 class SelectLocationInteractor: SelectLocationInteractorProtocol {
-    func selectLocation(item: searchLocationResult) {
+    func selectLocation(item: StudyDetailLocationPost) {
         print("test")
     }
     
@@ -17,13 +17,12 @@ class SelectLocationInteractor: SelectLocationInteractorProtocol {
     var remoteDataManager: SelectLocationRemoteDataManagerProtocol?
     var localDataManager: SelectLocationLocalDataManagerProtocol?
     
-    func searchAddress(item: searchLocationResult) {
+    func searchAddress(item: StudyDetailLocationPost) {
         let lat = item.lat
         let lng = item.lng
         remoteDataManager?.getAddressInfo(lat: lat, lng: lng, completion: { [self] (result, data) in
             if result {
                 if let item = data {
-                    print("interactor", item)
                     presenter?.getAddressResult(item: item)
                 }
             } else {
