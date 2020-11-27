@@ -216,32 +216,31 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func showStudyDetail(with studyDeatil: StudyDetail) {
         
-        
         if studyDeatil.image == "" || studyDeatil.image == nil {
             mainImageView.do {
                 $0.image = #imageLiteral(resourceName: "swift")
             }
         } else {
             mainImageView.do {
-                print(studyDeatil.data.image)
-                guard let url = URL(string: studyDeatil.data.image!) else { return }
+                print(studyDeatil.image)
+                guard let url = URL(string: studyDeatil.image!) else { return }
                 $0.kf.setImage(with: url)
             }
         }
         
         studyIntroduceView.do {
-            $0.contentText = ["","\(studyDeatil.data.title)"]
+            $0.contentText = ["","\(studyDeatil.title)"]
         }
         studyPlanView.do {
-            $0.contentText = ["스터디 진행","\(studyDeatil.data.title)"]
+            $0.contentText = ["스터디 진행","\(studyDeatil.title)"]
         }
         timeView.do {
-            $0.contentText = ["시간","\(studyDeatil.data.studyTime)"]
+            $0.contentText = ["시간","\(studyDeatil.studyTime)"]
         }
-        timeView.do {
-            $0.contentText = studyDeatil.data.location.placeName != nil ? ["장소","\(studyDeatil.data.location.placeName!)"] : ["장소",""]
+        locationView.do {
+            $0.contentText[1] = "\(studyDeatil.location.addressName) \(studyDeatil.location.placeName ?? "")"
         }
-        userData = studyDeatil.data.participate
+        userData = studyDeatil.participate
         memberView.collectionView.reloadData()
     }
     
