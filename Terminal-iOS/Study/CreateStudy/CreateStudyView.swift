@@ -13,7 +13,12 @@ class CreateStudyView: UIViewController{
     
     let screenSize = UIScreen.main.bounds
     var selectedCategory: String?
-    var selectedLocation: StudyDetailLocationPost?
+    var selectedLocation: StudyDetailLocationPost? {
+        didSet {
+            self.button.alpha = 1
+            self.button.isUserInteractionEnabled = true
+        }
+    }
     let picker = UIImagePickerController()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
@@ -82,6 +87,8 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor(named: "key")
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
+            $0.isUserInteractionEnabled = false
+            self.button.alpha = 0.5
         }
     }
     
@@ -270,8 +277,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
-        let newStudy = StudyDetailPost(id: 2,
-                                       category: selectedCategory!,
+        let newStudy = StudyDetailPost(category: selectedCategory!,
                                        title: studyTitleTextField.text ?? "",
                                        introduce: studyIntroduceView.textView.text,
                                        progress: studyInfoView.textView.text,
@@ -283,6 +289,13 @@ extension CreateStudyView: CreateStudyViewProtocols {
                                        location: selectedLocation!)
         
         presenter?.clickCompleteButton(study: newStudy)
+    }
+    func studyInfoInvalid(message: String) {
+        print("뷰에서 찎은 겁니다 ~~\(message)")
+    }
+    func studyInfoValid(message: String) {
+        print("뷰에서 찍은 겁니다~~ \(message)")
+        navigationController?.popViewController(animated: true)
     }
 }
 

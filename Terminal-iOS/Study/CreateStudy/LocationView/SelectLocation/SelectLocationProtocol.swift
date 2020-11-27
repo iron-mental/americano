@@ -14,6 +14,7 @@ protocol SelectLocationViewProtocol: class {
     var delegate: selectLocationDelegate? { get set }
     //PRESENTER -> VIEW
     func setViewWithResult(item: StudyDetailLocationPost)
+    
 }
 
 protocol SelectLocationInteractorProtocol: class {

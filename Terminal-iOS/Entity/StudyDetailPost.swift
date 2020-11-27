@@ -16,7 +16,6 @@ import UIKit
 //}
 
 struct StudyDetailPost {
-    let id: Int
     let category, title, introduce: String
     let progress, studyTime: String
     let snsWeb, snsNotion, snsEvernote: String?
