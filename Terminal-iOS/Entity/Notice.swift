@@ -10,16 +10,23 @@ import Foundation
 
 struct Notice: Codable {
     let id: Int
+    let leaderID: Int?
     var studyID: Int?
     let title, contents: String
     let pinned: Bool
-    let createdAt, updatedAt: String
-
+    let updatedAt: String
+    let leaderImage: String?
+    let leaderNickname: String?
+    let createAt: String?
+    
     enum CodingKeys: String, CodingKey {
         case id
         case studyID = "study_id"
         case title, contents, pinned
-        case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case createAt = "create_at"
+        case leaderID = "leader_id"
+        case leaderImage = "leader_image"
+        case leaderNickname = "leader_nickname"
     }
 }

@@ -67,13 +67,13 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         }
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            $0.text = "\(notice?.id)"
+            $0.text = "\(notice?.leaderNickname)"
             $0.textColor = .white
             $0.textAlignment = .center
         }
         noticeDate.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            $0.text = notice?.createdAt
+            $0.text = notice?.updatedAt
             $0.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             $0.textAlignment = .center
         }
@@ -142,6 +142,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         var view = AddNoticeWireFrame.createAddNoticeModule(studyID: (notice?.studyID)!)
         var modifyView = view as! AddNoticeViewProtocol
         modifyView.notice = self.notice!
+        modifyView.state = .edit
         self.present(modifyView as! UIViewController, animated: true, completion: {
         })
     }

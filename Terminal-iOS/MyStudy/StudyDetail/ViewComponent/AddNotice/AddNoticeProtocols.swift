@@ -12,6 +12,7 @@ protocol AddNoticeViewProtocol {
     var presenter: AddNoticePresenterProtocol? { get set }
     var studyID: Int? { get set }
     var notice: Notice? { get set }
+    var state: AddNoticeState? { get set }
     
     func showNewNotice()
 }
@@ -21,7 +22,7 @@ protocol AddNoticeInteractorProtocol {
     var remoteDataManager: AddNoticeRemoteDataManagerProtocol? { get set }
     var localDataManager: AddNoticeLocalDataManagerProtocol? { get set }
     //PRESENTER -> INTERACTOR
-    func postNotice(studyID: Int, notice: NoticePost)
+    func postNotice(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?)
 }
 
 protocol AddNoticePresenterProtocol {
@@ -30,7 +31,7 @@ protocol AddNoticePresenterProtocol {
     var interactor: AddNoticeInteractorProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func completeButtonDidTap(studyID: Int, notice: NoticePost)
+    func completeButtonDidTap(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?)
     
     //INTERACTOR -> PRESENTER
     func addNoticeResult(result: Bool, notice: String)
@@ -39,6 +40,7 @@ protocol AddNoticePresenterProtocol {
 protocol AddNoticeRemoteDataManagerProtocol {
     //INTERACTOR -> REMOTE
     func postNotice(studyID: Int, notice:  NoticePost, completion: @escaping (_: Bool, _: String) -> Void)
+    func putNotice(studyID: Int, notice: NoticePost, noticeID: Int, completion: @escaping(_: Bool, _: String) -> Void)
 }
 
 protocol AddNoticeLocalDataManagerProtocol {

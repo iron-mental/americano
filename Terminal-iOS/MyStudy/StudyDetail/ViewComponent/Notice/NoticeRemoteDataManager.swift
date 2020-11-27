@@ -25,6 +25,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                     case .success(let value):
                         if JSON(value)["result"].bool! {
                         let json = "\(JSON(value))".data(using: .utf8)
+                            
                         let result: NoticeList = try! JSONDecoder().decode(NoticeList.self, from: json!)
                             completion(true, result, nil)
                         } else {

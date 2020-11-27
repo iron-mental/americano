@@ -13,8 +13,9 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
     var wireFrame: AddNoticeWireFrameProtocol?
     var interactor: AddNoticeInteractorProtocol?
     
-    func completeButtonDidTap(studyID: Int, notice: NoticePost) {
-        interactor?.postNotice(studyID: studyID, notice: notice)
+    func completeButtonDidTap(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?) {
+        
+        interactor?.postNotice(studyID: studyID, notice: notice, state: state, noticeID: noticeID ?? nil)
     }
     
     func addNoticeResult(result: Bool, notice: String) {

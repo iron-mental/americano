@@ -11,11 +11,12 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
+        
     let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
+    
     
     func postNotice(studyID: Int, notice: NoticePost, completion: @escaping (Bool, String) -> Void) {
         let url = URL(string: "http://3.35.154.27:3000/v1/study/\(studyID)/notice")
-        
         let params: Parameters = [
             "title" : notice.title,
             "contents" : notice.contents,
@@ -26,9 +27,27 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             case .success(let value):
                 completion(JSON(value)["result"].bool!, JSON(value)["message"].string!)
                 break
-            case .failure(let err):
+            case .failure(let _):
                 break
             }
         }
     }
+    func putNotice(studyID: Int, notice: NoticePost, noticeID: Int, completion: @escaping (Bool, String) -> Void) {
+        let url = URL(string: "http://3.35.154.27:3000/v1/study/\(studyID)/notice/\(noticeID)")
+        let params: Parameters = [
+            "title" : notice.title,
+            "contents" : notice.contents,
+            "pinned" : notice.pinned
+        ]
+        AF.request(url!, method: .put, parameters: params, encoding: JSONEncoding.default ,headers: headers).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                completion(JSON(value)["result"].bool!, JSON(value)["message"].string!)
+                break
+            case .failure(let _):
+                break
+            }
+        }
+    }
+
 }
