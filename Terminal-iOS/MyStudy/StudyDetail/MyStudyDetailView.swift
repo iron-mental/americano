@@ -29,7 +29,6 @@ class MyStudyDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        print("방번호",studyID)
     }
     
     func attribute() {

@@ -36,6 +36,7 @@ class AddNoticeView: UIViewController {
             $0.setTitle("필독", for: .normal)
             $0.layer.cornerRadius = 3
             $0.layer.masksToBounds = true
+            $0.addTarget(self, action: #selector(pinButtonDidTap(_: )), for: .touchUpInside)
         }
         titleTextField.do {
             $0.placeholder = "제목을 입력하세요"
@@ -56,6 +57,7 @@ class AddNoticeView: UIViewController {
             $0.setTitle("완료", for: .normal)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
+            $0.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         }
     }
     
@@ -100,13 +102,29 @@ class AddNoticeView: UIViewController {
     }
     @objc func dismissButtonTap() {
         dismiss(animated: true) {
-//
+            
         }
+    }
+    @objc func pinButtonDidTap(_ sender: UIButton) {
+        if sender.currentTitle == "필독" {
+            sender.setTitle("일반", for: .normal)
+            sender.backgroundColor = UIColor.appColor(.noticeColor)
+        } else {
+            sender.setTitle("필독", for: .normal)
+            sender.backgroundColor = UIColor.appColor(.pinnedNoticeColor)
+        }
+    }
+    @objc func completeButtonDidTap() {
+        let newNoticePost = NoticePost(title: titleTextField.text ?? "",
+                                       contents: contentTextField.text ?? "",
+                                       pinned: pinButton.currentTitle == "필독" ? true : false)
+        
+        presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost)
     }
 }
 
 extension AddNoticeView: AddNoticeViewProtocol {
     func showNewNotice() {
-//        <#code#>
+        dismiss(animated: true)
     }
 }

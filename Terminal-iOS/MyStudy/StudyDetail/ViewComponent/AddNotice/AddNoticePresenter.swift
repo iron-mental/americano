@@ -14,11 +14,15 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
     var interactor: AddNoticeInteractorProtocol?
     
     func completeButtonDidTap(studyID: Int, notice: NoticePost) {
-//        <#code#>
+        interactor?.postNotice(studyID: studyID, notice: notice)
     }
     
-    func addNoticeResult(result: Bool, notice: NoticePost) {
-//        <#code#>
+    func addNoticeResult(result: Bool, notice: String) {
+        if result {
+            view?.showNewNotice()
+        } else {
+            print("에러 처리해라")
+        }
     }
     
     

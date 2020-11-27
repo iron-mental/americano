@@ -32,12 +32,12 @@ protocol AddNoticePresenterProtocol {
     func completeButtonDidTap(studyID: Int, notice: NoticePost)
     
     //INTERACTOR -> PRESENTER
-    func addNoticeResult(result: Bool, notice: NoticePost)
+    func addNoticeResult(result: Bool, notice: String)
 }
 
 protocol AddNoticeRemoteDataManagerProtocol {
     //INTERACTOR -> REMOTE
-    func postNotice(studyID: Int, notice:  NoticePost, completion: @escaping (_: Bool, _: NoticePost) -> Void)
+    func postNotice(studyID: Int, notice:  NoticePost, completion: @escaping (_: Bool, _: String) -> Void)
 }
 
 protocol AddNoticeLocalDataManagerProtocol {
