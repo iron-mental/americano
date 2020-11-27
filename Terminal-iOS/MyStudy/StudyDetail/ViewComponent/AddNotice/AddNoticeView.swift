@@ -12,6 +12,7 @@ class AddNoticeView: UIViewController {
     var presenter: AddNoticePresenterProtocol?
     var studyID: Int?
     
+    var dismissButton = UIButton()
     var pinButton = UIButton()
     var titleTextField = UITextField()
     var contentTextField = UITextView()
@@ -23,6 +24,13 @@ class AddNoticeView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
+        dismissButton.do {
+            $0.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            $0.addTarget(self, action: #selector(dismissButtonTap), for: .touchUpInside)
+        }
         pinButton.do {
             $0.backgroundColor = UIColor.appColor(.pinnedNoticeColor)
             $0.setTitle("필독", for: .normal)
@@ -33,10 +41,15 @@ class AddNoticeView: UIViewController {
             $0.placeholder = "제목을 입력하세요"
             $0.textColor = .white
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+            $0.addLeftPadding()
         }
         contentTextField.do {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.textColor = .white
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
         }
         completeButton.do {
             $0.backgroundColor = UIColor.appColor(.mainColor)
@@ -47,8 +60,15 @@ class AddNoticeView: UIViewController {
     }
     
     func layout() {
-        [pinButton, titleTextField, contentTextField, completeButton].forEach { view.addSubview($0) }
+        [dismissButton, pinButton, titleTextField, contentTextField, completeButton].forEach { view.addSubview($0) }
         
+//        dismissButton.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 9).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: Terminal.convertWidth(value: 5)).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
+//        }
         pinButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
@@ -76,6 +96,11 @@ class AddNoticeView: UIViewController {
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 335)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
+        }
+    }
+    @objc func dismissButtonTap() {
+        dismiss(animated: true) {
+//
         }
     }
 }
