@@ -23,6 +23,7 @@ class MyStudyDetailView: UIViewController {
                                            options: nil)
     lazy var tabSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
+    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(didClickecmoreButton))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,7 @@ class MyStudyDetailView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.navigationItem.rightBarButtonItems = [moreButton]
         }
         tabSege.do {
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 14),
@@ -118,6 +120,20 @@ class MyStudyDetailView: UIViewController {
             self.childPageView.setViewControllers([prevVC], direction: .reverse, animated: true)
         }
         pageBeforeIndex = nextPage
+    }
+    @objc func didClickecmoreButton() {
+        let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let edit =  UIAlertAction(title: "공지사항 추가", style: .default) { (action) in self.addNoticeButtonAction() }
+        let temp =  UIAlertAction(title: "여긴뭐들어갑니까", style: .default) {_ in }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        [edit,temp,cancel].forEach {
+            alert.addAction($0)
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    func addNoticeButtonAction() {
+        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
     }
 }
 
