@@ -17,12 +17,13 @@ class ProfileDetailView: UIViewController {
     let profile     = ProfileView()
     
     let carrer      = CarrerView()
-    let project     = ProjectView()
+    let projectStack = UIStackView()
     let sns         = SNSView()
     let email       = EmailView()
     let location    = LocationView()
     
-    let projectStack = UIStackView()
+    
+    var projectArr: [UIView] = []
     
     // MARK: ViewDidLoad
     
@@ -37,7 +38,7 @@ class ProfileDetailView: UIViewController {
     
     func attribute() {
         let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"), style: .plain, target: self, action: #selector(pushProfileModify))
-        [carrer, project, sns, email, location].forEach {
+        [carrer, sns, projectStack,email, location].forEach {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
         }
@@ -49,13 +50,20 @@ class ProfileDetailView: UIViewController {
         profile.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
+        
+        projectStack.do {
+//            $0.backgroundColor = .red
+            $0.axis = .vertical
+            $0.distribution = .fillEqually
+            $0.spacing = 20
+        }
     }
     
     // MARK: Set Layout
     
     func layout() {
         view.addSubview(scrollView)
-        [profile, carrer, project, sns, email, location].forEach { scrollView.addSubview($0) }
+        [profile, carrer, sns, email, location, projectStack].forEach { scrollView.addSubview($0) }
         
         // 스크롤뷰 오토레이아웃
         scrollView.do {
@@ -79,16 +87,16 @@ class ProfileDetailView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: carrer.heightAnchor).isActive = true
         }
-        project.do {
+        projectStack.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: carrer.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-            $0.heightAnchor.constraint(equalTo: project.heightAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: projectStack.heightAnchor).isActive = true
         }
         sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: project.bottomAnchor, constant: 15).isActive = true
+            $0.topAnchor.constraint(equalTo: projectStack.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: sns.heightAnchor).isActive = true
@@ -109,6 +117,10 @@ class ProfileDetailView: UIViewController {
         }
     }
     
+    func addProjectToStackView() {
+        
+    }
+    
     @objc func pushProfileModify() {
         let view = ProfileModifyView()
         view.nameModify.text = self.profile.name.text
@@ -120,7 +132,7 @@ class ProfileDetailView: UIViewController {
 extension ProfileDetailView: ProfileDetailViewProtocol {
     func showUserInfo(with userInfo: UserInfo) {
         
-        /// Kingfisher token
+        /// Kingfisher auth token
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
             requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
@@ -148,5 +160,16 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
         /// 활동지역
         guard let address = userInfo.address else { return }
         location.location.text = address
+    }
+    
+    func addProjectToStackView(with project: [Project]) {
+        for data in project {
+            let title = data.title
+            let contents = data.contents
+            
+            let projectView = ProjectView(title: title, contents: contents, frame: CGRect.zero)
+            
+            projectStack.addArrangedSubview(projectView)
+        }
     }
 }
