@@ -20,7 +20,7 @@ class Terminal {
     
     static let tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoibW9ja0BuYXZlci5jb20iLCJuaWNrbmFtZSI6IuuqqeyXheuLieuEpOyehCIsImlhdCI6MTYwNjQ0OTYwMCwiZXhwIjoxMDYwNjQ0OTYwMCwiaXNzIjoidGVybWluYWwtc2VydmVyIiwic3ViIjoidXNlckluZm8tYWNjZXNzIn0.Zq7_8wRz2Y1LoRqhM1oJccfoS0Jx0Vzc0HEDG7hvsTA"
     
-    static let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjA1NjAyMTQ2LCJleHAiOjE2MDY4OTgxNDYsImlzcyI6InRlcm1pbmFsLXNlcnZlciIsInN1YiI6InVzZXJJbmZvLXJlZnJlc2gifQ.bvyYvz22pjDZBGlu2ElQ1mGWYm1xqqoCEIsySXaI8q0"
+    static let refreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImlhdCI6MTYwNjQ0OTYwMCwiZXhwIjoxNjA3NzQ1NjAwLCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1yZWZyZXNoIn0.Rnk7_wsHb3UiymDt3gAHE_wAFgfZd9SnC0t-i1krwQE"
 
     static func convertHeigt(value: CGFloat) -> CGFloat{
         return screenSize.height * (value / 667)
