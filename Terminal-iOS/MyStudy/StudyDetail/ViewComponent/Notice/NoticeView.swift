@@ -11,17 +11,6 @@ import UIKit
 class NoticeView: UIViewController {
     var presenter: NoticePresenterProtocol?
     var studyID: Int?
-    
-//    let noticeTitleText = ["모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다","모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다", "모임 진행시 가이드 라인입니다"]
-    
-//    var noticeList: [Notice2] = [Notice2(title: "가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다가이드 라인입니다", contents: "첫번모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다모임 진행시 가이드 라인입니다째", pinned: true),
-//                                Notice2(title: "가이드 라인입니다", contents: "두번쨰", pinned: false),
-//                                Notice2(title: "가이드 라인입니다", contents: "세번째", pinned: false),
-//                                Notice2(title: "가이드 라인입니다", contents: "네번째", pinned: true),
-//                                Notice2(title: "가이드 라인입니다", contents: "다섯번째", pinned: false),
-//                                Notice2(title: "가이드 라인입니다", contents: "여섯번째", pinned: false),
-//                                Notice2(title: "가이드 라인입니다", contents: "일곱번째", pinned: true),
-//                                Notice2(title: "가이드 라인입니다", contents: "여덟번째", pinned: false)]
     var noticeList: [Notice] = []
     var pinnedNotiArr: [Notice] = []
     var notiArr: [Notice] = []
