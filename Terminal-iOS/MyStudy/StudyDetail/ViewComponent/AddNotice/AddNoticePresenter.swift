@@ -24,6 +24,4 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
             print("에러 처리해라")
         }
     }
-    
-    
 }
