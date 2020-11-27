@@ -209,9 +209,11 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 accountCell.accessoryView = accountButton
             }
+            accountCell.selectionStyle = .none
             return accountCell
         } else if indexPath.section == 1 {
             notiCell.title.text = noti[0]
+            notiCell.selectionStyle = .none
             return notiCell
         } else if indexPath.section == 2 {
             let data = tempData[indexPath.row]
@@ -219,6 +221,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             if tempData[indexPath.row].status == nil {
                 defaultCell.accessoryType = .disclosureIndicator
             }
+            defaultCell.selectionStyle = .none
             return defaultCell
         } else {
             return UITableViewCell()

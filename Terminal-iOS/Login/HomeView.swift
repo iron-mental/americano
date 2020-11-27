@@ -27,5 +27,4 @@ class HomeView: UIViewController {
     func layout() {
         view.addSubview(loginButton)
     }
-    
 }
