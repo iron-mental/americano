@@ -956,7 +956,7 @@
 				CCA1FF4F24FD0C930026C3EA /* Sources */,
 				CCA1FF5024FD0C930026C3EA /* Frameworks */,
 				CCA1FF5124FD0C930026C3EA /* Resources */,
-				C782E0649B9B4B73DCAE348D /* [CP] Embed Pods Frameworks */,
+				F80092817FAFE98D14C317C9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1038,7 +1038,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C782E0649B9B4B73DCAE348D /* [CP] Embed Pods Frameworks */ = {
+		F80092817FAFE98D14C317C9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

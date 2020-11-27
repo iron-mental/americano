@@ -16,7 +16,7 @@ class AddNoticeInteractor: AddNoticeInteractorProtocol {
     func postNotice(studyID: Int, notice: NoticePost) {
         remoteDataManager?.postNotice(studyID: studyID, notice: notice, completion: { result, message in
             
-            presenter?.addNoticeResult(result: result, notice: message)
+            self.presenter?.addNoticeResult(result: result, notice: message)
         })
     }
 }
