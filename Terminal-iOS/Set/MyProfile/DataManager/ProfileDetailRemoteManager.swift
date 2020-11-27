@@ -42,8 +42,7 @@ class ProfileDetailRemoteManager: ProfileDetailRemoteDataManagerInputProtocol {
                 let json = JSON(value)
                 let data = "\(json)".data(using: .utf8)
                 let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
-                print(result)
-//                self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
+                self.remoteRequestHandler?.onProjectRetrieved(project: result)
             case .failure(let err):
                 print("실패")
                 print(err)
