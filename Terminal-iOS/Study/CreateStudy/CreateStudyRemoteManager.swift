@@ -11,7 +11,8 @@ import Alamofire
 import SwiftyJSON
 
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
-    func postStudy(study: StudyDetailPost) -> Bool {
+    
+    func postStudy(study: StudyDetailPost, completion: @escaping (Bool, String) -> Void) {
         let params : [String : Any] = [
             "category" : study.category,
             "title" : study.title,
@@ -45,14 +46,13 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             
             switch response.result {
             case .success(let value):
-                print(JSON(value)["message"].string!)
+                completion(JSON(value)["result"].bool!, JSON(value)["message"].string!)
                 break
             case .failure(let err):
-                print(err)
+                completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)
                 break
             }
         }
-        return true
         
 //        AF.upload(
 //               multipartFormData: { multipartFormData in

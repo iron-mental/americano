@@ -67,7 +67,16 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
     
     func studyCreateComplete(study: StudyDetailPost) {
         if nullCheck(study: study) == "스터디가 등록 되었습니다." {
-            createStudyRemoteDataManager?.postStudy(study: study)
+            createStudyRemoteDataManager?.postStudy(study: study, completion: { result, message in
+                switch result {
+                case true:
+                    self.presenter?.studyInfoValid(message: message)
+                    break
+                case false:
+                    self.presenter?.studyInfoInvalid(message: message)
+                    break
+                }
+            })
         } else {
             presenter?.studyInfoInvalid(message: nullCheck(study: study))
         }

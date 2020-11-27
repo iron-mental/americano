@@ -70,4 +70,8 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
     func studyInfoInvalid(message: String) {
         view?.studyInfoInvalid(message: message)
     }
+    
+    func studyInfoValid(message: String) {
+        view?.studyInfoValid(message: message)
+    }
 }

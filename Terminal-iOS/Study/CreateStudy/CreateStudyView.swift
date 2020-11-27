@@ -293,6 +293,10 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func studyInfoInvalid(message: String) {
         print("뷰에서 찎은 겁니다 ~~\(message)")
     }
+    func studyInfoValid(message: String) {
+        print("뷰에서 찍은 겁니다~~ \(message)")
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
