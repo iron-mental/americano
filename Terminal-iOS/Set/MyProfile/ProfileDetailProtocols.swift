@@ -13,13 +13,13 @@ protocol ProfileDetailViewProtocol: class {
     
     // PRESENTER -> VIEW
     func showUserInfo(with userInfo: UserInfo)
+    func addProjectToStackView(with project: [Project])
 }
 
 protocol ProfileDetailWireFrameProtocol: class {
     static func createModule() -> UIViewController
     
     func presentProfileDetailScreen(from view: ProfileDetailView)
-    
 }
 
 protocol ProfileDetailPresenterProtocol: class {
@@ -38,6 +38,7 @@ protocol ProfileDetailInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func getUserInfo()
+    func getProjectList()
 }
 
 protocol ProfileDetailInteractorOutputProtocol: class {
@@ -49,6 +50,7 @@ protocol ProfileDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
     func getUserInfo(id: Int)
+    func getProjectList(id: Int)
 }
 
 protocol ProfileDetailRemoteDataManagerOutputProtocol: class {
