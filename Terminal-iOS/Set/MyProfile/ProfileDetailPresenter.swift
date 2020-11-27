@@ -15,11 +15,15 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     
     func viewDidLoad(id: Int) {
         interactor?.getUserInfo()
+        interactor?.getProjectList()
     }
 }
 
 extension ProfileDetailPresenter: ProfileDetailInteractorOutputProtocol {
     func didRetrievedUserInfo(userInfo: UserInfo) {
         view?.showUserInfo(with: userInfo)
+    }
+    func didRetrievedProject(project: [Project]) {
+        view?.addProjectToStackView(with: project)
     }
 }
