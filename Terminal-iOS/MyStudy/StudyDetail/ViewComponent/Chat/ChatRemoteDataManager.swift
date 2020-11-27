@@ -16,7 +16,7 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     init() {
         chatSocket = manager.socket(forNamespace: "/android")
         chatSocket.connect()
-        chatSocket.on("message") { [self] (array, ack) in
+        chatSocket.on("message") { array, ack in
             
             //여기서 바로 인터렉터로 넘겨줘야겠죠?
 

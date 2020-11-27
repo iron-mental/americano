@@ -16,7 +16,7 @@
 		A517216D252CFAAA005AD11B /* SetProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A517216C252CFAAA005AD11B /* SetProtocols.swift */; };
 		A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D8BE025264DB9003BD1B9 /* AccountCell.swift */; };
 		A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F2356256E195600CBFC13 /* AccessToken.swift */; };
-		A51F235C256E19E600CBFC13 /* ProjectList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F235B256E19E600CBFC13 /* ProjectList.swift */; };
+		A51F235C256E19E600CBFC13 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F235B256E19E600CBFC13 /* Project.swift */; };
 		A51F238C256E5A2200CBFC13 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F238B256E5A2200CBFC13 /* BaseResponse.swift */; };
 		A521DDED252DEA7E00F83DB3 /* ProfileDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */; };
 		A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */; };
@@ -38,6 +38,8 @@
 		A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */; };
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5A5F6C2256F843600405C71 /* SortState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6C1256F843600405C71 /* SortState.swift */; };
+		A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */; };
+		A5A5F6E2256FEF0A00405C71 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6E1256FEF0A00405C71 /* UserInfo.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
 		A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileDetailView.swift */; };
 		A5BA1ED6254A8E9C0089D4E9 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */; };
@@ -48,7 +50,7 @@
 		A5BA4616255D0BC00061C511 /* TerminalNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA4615255D0BC00061C511 /* TerminalNetwork.swift */; };
 		A5BA4619255D38D30061C511 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA4618255D38D30061C511 /* String+Ext.swift */; };
 		A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */; };
-		A5C5B14A25455A4100F4A86D /* CarrerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14925455A4100F4A86D /* CarrerView.swift */; };
+		A5C5B14A25455A4100F4A86D /* CareerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14925455A4100F4A86D /* CareerView.swift */; };
 		A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14C2545662600F4A86D /* ProjectView.swift */; };
 		A5C5B1502545699700F4A86D /* SNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14F2545699700F4A86D /* SNSView.swift */; };
 		A5C5B15325456E2800F4A86D /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B15225456E2800F4A86D /* EmailView.swift */; };
@@ -186,7 +188,7 @@
 		A517216C252CFAAA005AD11B /* SetProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProtocols.swift; sourceTree = "<group>"; };
 		A51D8BE025264DB9003BD1B9 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		A51F2356256E195600CBFC13 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
-		A51F235B256E19E600CBFC13 /* ProjectList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectList.swift; sourceTree = "<group>"; };
+		A51F235B256E19E600CBFC13 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		A51F2381256E460D00CBFC13 /* NoticeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetail.swift; sourceTree = "<group>"; };
 		A51F238B256E5A2200CBFC13 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailProtocols.swift; sourceTree = "<group>"; };
@@ -209,6 +211,8 @@
 		A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailRemoteManager.swift; sourceTree = "<group>"; };
 		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A5A5F6C1256F843600405C71 /* SortState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortState.swift; sourceTree = "<group>"; };
+		A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailRemoteManager.swift; sourceTree = "<group>"; };
+		A5A5F6E1256FEF0A00405C71 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		A5B78A95252B950600E0B440 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
 		A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -219,7 +223,7 @@
 		A5BA4615255D0BC00061C511 /* TerminalNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalNetwork.swift; sourceTree = "<group>"; };
 		A5BA4618255D38D30061C511 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
-		A5C5B14925455A4100F4A86D /* CarrerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrerView.swift; sourceTree = "<group>"; };
+		A5C5B14925455A4100F4A86D /* CareerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerView.swift; sourceTree = "<group>"; };
 		A5C5B14C2545662600F4A86D /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		A5C5B14F2545699700F4A86D /* SNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSView.swift; sourceTree = "<group>"; };
 		A5C5B15225456E2800F4A86D /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
@@ -377,14 +381,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		A51116DF256F79B70067A2B8 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				A51F2381256E460D00CBFC13 /* NoticeDetail.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		A52F00D624FD182800DE3126 /* Set */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,7 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				A5A20EED25418D2A00060FFA /* ProfileView.swift */,
-				A5C5B14925455A4100F4A86D /* CarrerView.swift */,
+				A5C5B14925455A4100F4A86D /* CareerView.swift */,
 				A5C5B14C2545662600F4A86D /* ProjectView.swift */,
 				A5C5B14F2545699700F4A86D /* SNSView.swift */,
 				A5C5B15225456E2800F4A86D /* EmailView.swift */,
@@ -485,11 +481,12 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		A5A5F6C4256FD36E00405C71 /* New Group */ = {
+		A5A5F6DC256FEAAF00405C71 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */,
 			);
-			path = "New Group";
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 		A5AB26FD252B6C6400A39240 /* Set */ = {
@@ -508,8 +505,8 @@
 		A5AB26FF252B6E9300A39240 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
-				A5A5F6C4256FD36E00405C71 /* New Group */,
 				A5A20EEC25418CE300060FFA /* Component */,
+				A5A5F6DC256FEAAF00405C71 /* DataManager */,
 				A5B78A95252B950600E0B440 /* ProfileDetailView.swift */,
 				A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */,
 				A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */,
@@ -743,11 +740,12 @@
 				A5D058F6255D95000047CA9E /* StudyDetail.swift */,
 				CCF71AA6256F959000EC83C6 /* StudyDetailPost.swift */,
 				A51F2356256E195600CBFC13 /* AccessToken.swift */,
-				A51F235B256E19E600CBFC13 /* ProjectList.swift */,
+				A51F235B256E19E600CBFC13 /* Project.swift */,
 				A51F238B256E5A2200CBFC13 /* BaseResponse.swift */,
 				CCE279DE256E46BA00DB3246 /* NoticeList.swift */,
 				CCE279EB256E46C600DB3246 /* Notice.swift */,
 				A5A5F6C1256F843600405C71 /* SortState.swift */,
+				A5A5F6E1256FEF0A00405C71 /* UserInfo.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1094,6 +1092,7 @@
 				CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
 				CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */,
+				A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
 				CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */,
 				A5BA1EF4254AE9900089D4E9 /* UISegmentControl+Ext.swift in Sources */,
@@ -1102,7 +1101,7 @@
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,
 				CCD51C83256D2A0500D41771 /* MyStudyDetailWireFrame.swift in Sources */,
-				A5C5B14A25455A4100F4A86D /* CarrerView.swift in Sources */,
+				A5C5B14A25455A4100F4A86D /* CareerView.swift in Sources */,
 				A5686A452524F048005990DC /* NotiCell.swift in Sources */,
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
 				CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */,
@@ -1115,7 +1114,7 @@
 				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
 				CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */,
 				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
-				A51F235C256E19E600CBFC13 /* ProjectList.swift in Sources */,
+				A51F235C256E19E600CBFC13 /* Project.swift in Sources */,
 				CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
@@ -1135,6 +1134,7 @@
 				CC21A7952559504600E31F77 /* IntroLocalDataManager.swift in Sources */,
 				CC26AD58251B27B3006B11E9 /* LocationUIVIew.swift in Sources */,
 				A5BA1EE1254A99250089D4E9 /* Noti.swift in Sources */,
+				A5A5F6E2256FEF0A00405C71 /* UserInfo.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				A5E25C7425590DE40090E21E /* NoticeDetailView.swift in Sources */,
 				CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */,

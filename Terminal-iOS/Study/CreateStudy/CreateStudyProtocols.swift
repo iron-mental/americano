@@ -71,7 +71,7 @@ protocol CreateStudyRemoteDataManagerProtocols: class {
     func getNotionValid(id: String?) -> Bool
     func getEvernoteValid(url: String?) -> Bool
     func getWebValid(url: String?) -> Bool
-    func postStudy(study: StudyDetailPost, completion: @escaping (result: Bool, message: String ) -> Void)
+    func postStudy(study: StudyDetailPost, completion: @escaping (_ result: Bool, _ message: String) -> Void)
 }
 
 protocol CreateStudyLocalDataManagerProtocols: class {

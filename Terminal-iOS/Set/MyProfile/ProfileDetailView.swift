@@ -8,49 +8,93 @@
 
 import UIKit
 
+import Kingfisher
+
 class ProfileDetailView: UIViewController {
     // MARK: Init Property
     var presenter: ProfileDetailPresenterProtocol?
-    let scrollView = UIScrollView()
-    let profile = ProfileView()
+    let scrollView      = UIScrollView()
+    let profile         = ProfileView()
     
-    let carrer      = CarrerView()
-    let project     = ProjectView()
-    let sns         = SNSView()
-    let email       = EmailView()
-    let location    = LocationView()
+    let careerLabel     = UILabel()
+    let career          = CareerView()
+    let projectLabel    = UILabel()
+    let projectStack    = UIStackView()
+    let snsLabel        = UILabel()
+    let sns             = SNSView()
+    let emailLabel      = UILabel()
+    let email           = EmailView()
+    let locationLabel   = UILabel()
+    let location        = LocationView()
     
-    let projectStack = UIStackView()
+    var projectArr: [UIView] = []
     
     // MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
+        presenter?.viewDidLoad(id: 1)
     }
     
     // MARK: Set Attribute
+    
     func attribute() {
-        let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"), style: .plain, target: self, action: #selector(pushProfileModify))
-        [carrer, project, sns, email, location].forEach {
+        let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"),
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(pushProfileModify))
+        
+        [profile, career, sns, projectStack,email, location].forEach {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
         }
+        
         self.do {
             $0.title = "프로필"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationItem.rightBarButtonItem = modifyBtn
         }
-        profile.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.profileImage.image = #imageLiteral(resourceName: "leehi")
+
+        careerLabel.do {
+            $0.text = "경력"
+            $0.textColor = .white
+        }
+        
+        projectLabel.do {
+            $0.text = "프로젝트"
+            $0.textColor = .white
+        }
+        
+        snsLabel.do {
+            $0.text = "SNS"
+            $0.textColor = .white
+        }
+        
+        emailLabel.do {
+            $0.text = "Email"
+            $0.textColor = .white
+        }
+        
+        locationLabel.do {
+            $0.text = "활동지역"
+            $0.textColor = .white
+        }
+        
+        projectStack.do {
+            $0.axis = .vertical
+            $0.distribution = .fillEqually
+            $0.spacing = 10
         }
     }
     
     // MARK: Set Layout
+    
     func layout() {
         view.addSubview(scrollView)
-        [profile, carrer, project, sns, email, location].forEach { scrollView.addSubview($0) }
+        [profile, careerLabel, career, projectLabel, projectStack, snsLabel, sns, emailLabel,email, locationLabel, location]
+            .forEach { scrollView.addSubview($0) }
         
         // 스크롤뷰 오토레이아웃
         scrollView.do {
@@ -67,41 +111,75 @@ class ProfileDetailView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: profile.heightAnchor).isActive = true
         }
-        carrer.do {
+        careerLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profile.bottomAnchor, constant: 15).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-            $0.heightAnchor.constraint(equalTo: carrer.heightAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.heightAnchor.constraint(equalTo: careerLabel.heightAnchor).isActive = true
         }
-        project.do {
+        career.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: carrer.bottomAnchor, constant: 15).isActive = true
+            $0.topAnchor.constraint(equalTo: careerLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-            $0.heightAnchor.constraint(equalTo: project.heightAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: career.heightAnchor).isActive = true
+        }
+        projectLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: career.bottomAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
+        }
+        projectStack.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: projectLabel.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+            $0.heightAnchor.constraint(equalTo: projectStack.heightAnchor).isActive = true
+        }
+        snsLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: projectStack.bottomAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
         sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: project.bottomAnchor, constant: 15).isActive = true
+            $0.topAnchor.constraint(equalTo: snsLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: sns.heightAnchor).isActive = true
         }
-        email.do {
+        emailLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: sns.bottomAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
+        }
+        email.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: email.heightAnchor).isActive = true
         }
-        location.do {
+        locationLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
+        }
+        location.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
+    }
+    
+    func addProjectToStackView() {
+        
     }
     
     @objc func pushProfileModify() {
@@ -113,5 +191,46 @@ class ProfileDetailView: UIViewController {
 }
 
 extension ProfileDetailView: ProfileDetailViewProtocol {
+    func showUserInfo(with userInfo: UserInfo) {
+        
+        /// Kingfisher auth token
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        // MARK: Set User Info
+        
+        /// 프로필
+        profile.name.text = userInfo.nickname
+        guard let image = userInfo.image else { return }
+        guard let introduce = userInfo.introduce else { return }
+        profile.profileImage.kf.setImage(with: URL(string: image), options: [.requestModifier(imageDownloadRequest)])
+        profile.descript.text = introduce
+        
+        /// 경력
+        guard let careerTitle = userInfo.careerTitle else { return }
+        guard let careerContents = userInfo.careerContents else { return }
+        career.careerTitle.text = careerTitle
+        career.careerContents.text = careerContents
+        
+        /// 이메일
+        email.email.text = userInfo.email
+        
+        /// 활동지역
+        guard let address = userInfo.address else { return }
+        location.location.text = address
+    }
     
+    func addProjectToStackView(with project: [Project]) {
+        for data in project {
+            let title = data.title
+            let contents = data.contents
+            
+            let projectView = ProjectView(title: title, contents: contents, frame: CGRect.zero)
+            
+            projectStack.addArrangedSubview(projectView)
+        }
+    }
 }

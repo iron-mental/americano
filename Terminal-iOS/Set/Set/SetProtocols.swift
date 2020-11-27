@@ -13,10 +13,10 @@ protocol SetViewProtocol: class {
 }
 
 protocol SetWireFrameProtocol: class {
-    static func createModule() -> UIViewController
+    static func setCreateModule() -> UIViewController
     
     // PRESENT -> WIREFRAME
-    func presentMenuDetailScreen(from view: SetViewProtocol)
+    func presentProfileDetailScreen(from view: SetViewProtocol)
 }
 
 protocol SetPresenterProtocol: class {

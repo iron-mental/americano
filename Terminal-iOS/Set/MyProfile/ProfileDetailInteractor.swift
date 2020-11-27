@@ -13,9 +13,24 @@ class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     var localDataManager: ProfileDetailLocalDataManagerInputProtocol?
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol?
     
+    func getUserInfo() {
+        remoteDataManager?.getUserInfo(id: 1)
+    }
     
+    func getProjectList() {
+        remoteDataManager?.getProjectList(id: 1)
+    }
 }
 
 extension ProfileDetailInteractor: ProfileDetailRemoteDataManagerOutputProtocol {
+    func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
+        guard let result = userInfo.data else { return }
+        presenter?.didRetrievedUserInfo(userInfo: result)
+    }
+    
+    func onProjectRetrieved(project: BaseResponse<[Project]>) {
+        guard let result = project.data else { return }
+        presenter?.didRetrievedProject(project: result)
+    }
     
 }
