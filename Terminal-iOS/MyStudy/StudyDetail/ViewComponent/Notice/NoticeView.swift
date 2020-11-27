@@ -92,11 +92,14 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(indexPath.section)
-        let view = NoticeDetailView()
-        view.noticeBackground.backgroundColor = indexPath.section == 0 ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
-        view.noticeLabel.text = indexPath.section == 0 ? "필독" : "공지"
-        navigationController?.pushViewController(view, animated: true)
+        var selectedNotice: Notice?
+        if indexPath.section == 0 {
+            selectedNotice = pinnedNotiArr[indexPath.row]
+        } else {
+            selectedNotice = notiArr[indexPath.row]
+        }
+        selectedNotice!.studyID = studyID
+        presenter?.celldidTap(notice: selectedNotice!, parentView: self)
     }
 }
 
