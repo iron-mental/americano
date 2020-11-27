@@ -11,7 +11,11 @@ import UIKit
 class AddNoticeView: UIViewController {
     var presenter: AddNoticePresenterProtocol?
     var studyID: Int?
-    
+    var notice: Notice? {
+        didSet {
+            attribute()
+        }
+    }
     var dismissButton = UIButton()
     var pinButton = UIButton()
     var titleTextField = UITextField()
@@ -40,6 +44,7 @@ class AddNoticeView: UIViewController {
         }
         titleTextField.do {
             $0.placeholder = "제목을 입력하세요"
+            $0.text = notice == nil ? nil : notice?.title
             $0.textColor = .white
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
@@ -51,6 +56,7 @@ class AddNoticeView: UIViewController {
             $0.textColor = .white
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
+            $0.text = notice == nil ? nil : notice?.contents
         }
         completeButton.do {
             $0.backgroundColor = UIColor.appColor(.mainColor)

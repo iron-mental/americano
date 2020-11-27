@@ -11,6 +11,7 @@ import UIKit
 protocol AddNoticeViewProtocol {
     var presenter: AddNoticePresenterProtocol? { get set }
     var studyID: Int? { get set }
+    var notice: Notice? { get set }
     
     func showNewNotice()
 }

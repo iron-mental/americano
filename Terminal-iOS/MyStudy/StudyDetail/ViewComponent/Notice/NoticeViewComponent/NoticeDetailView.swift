@@ -42,6 +42,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.setTitle("수정하러 가기", for: .normal)
             $0.tintColor = UIColor.appColor(.mainColor)
             $0.setTitleColor(UIColor.appColor(.mainColor), for: .normal)
+            $0.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
         }
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
@@ -136,5 +137,12 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
             $0.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor).isActive = true
         }
+    }
+    @objc func modifyButtonDidTap() {
+        var view = AddNoticeWireFrame.createAddNoticeModule(studyID: (notice?.studyID)!)
+        var modifyView = view as! AddNoticeViewProtocol
+        modifyView.notice = self.notice!
+        self.present(modifyView as! UIViewController, animated: true, completion: {
+        })
     }
 }
