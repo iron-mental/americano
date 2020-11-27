@@ -132,13 +132,11 @@ class MyStudyMainView: UIViewController {
         let presenter = IntroPresenter()
         let interactor = IntroInteractor()
         let remoteDataManager = IntroRemoteDataManager()
-//        let localDataManager = IntroLocalDataManager()
         view.presenter = presenter
         presenter.view = view
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
-//        interactor.localDataManager = localDataManager
         
         let navigationController = UINavigationController(rootViewController: view)
         navigationController.modalPresentationStyle = .fullScreen
@@ -164,11 +162,9 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         case .normal:
             cell.checkBox.isHidden = true
             cell.notiGuideView.isHidden = false
-//            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = false }
             break
         case .edit:
             cell.checkBox.isHidden = false
-//            [cell.newMemberLabel, cell.newChatLabel, cell.newNoticeLabel].forEach { $0.isHidden = true }
             cell.notiGuideView.isHidden = true
             if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
                 cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)

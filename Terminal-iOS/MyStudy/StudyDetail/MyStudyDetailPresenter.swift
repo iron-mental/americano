@@ -6,11 +6,14 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     var view: MyStudyDetailViewProtocol?
     var interactor: MyStudyDetailInteractorProtocol?
     var wireFrame: MyStudyDetailWireFrameProtocol?
-    
+        
+    func addNoticeButtonDidTap(studyID: Int, parentView: UIViewController) {
+        wireFrame?.goToAddNotice(studyID: studyID, parentView: parentView)
+    }
 }

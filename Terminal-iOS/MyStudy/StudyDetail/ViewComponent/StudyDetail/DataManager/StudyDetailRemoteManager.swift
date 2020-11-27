@@ -24,18 +24,13 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             switch response.result {
             case .success(let value):
                 let json = "\(JSON(value))".data(using: .utf8)
-                let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
+                print(value)
+                let result = try! JSONDecoder().decode(BaseResponse<StudyDetail>.self, from: json!)
                 
-                completionHandler(result)
+                completionHandler(result.data!)
             case .failure(let err):
                 print("실패", err)
             }
         }
     }
-    
-//    func retrievePostList(keyValue: String, completionHandler: @escaping (StudyDetail) -> ()) {
-//        TerminalNetwork.getStudyDetail(keyValue) {
-//            completionHandler($0)
-//        }
-//    }
 }
