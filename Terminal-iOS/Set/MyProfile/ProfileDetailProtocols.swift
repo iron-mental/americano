@@ -44,6 +44,7 @@ protocol ProfileDetailInteractorInputProtocol: class {
 protocol ProfileDetailInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrievedUserInfo(userInfo: UserInfo)
+    func didRetrievedProject(project: [Project])
 }
 
 protocol ProfileDetailRemoteDataManagerInputProtocol: class {
@@ -56,6 +57,7 @@ protocol ProfileDetailRemoteDataManagerInputProtocol: class {
 protocol ProfileDetailRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
+    func onProjectRetrieved(project: BaseResponse<[Project]>)
 }
 
 protocol ProfileDetailLocalDataManagerInputProtocol: class {
