@@ -14,15 +14,15 @@ class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
     var remoteDatamanager: StudyDetailRemoteDataManagerInputProtocol?
     
     func retrieveStudyDetail(keyValue: String) {
-        remoteDatamanager?.getStudyDetail(keyValue: keyValue, completionHandler: { [self] in
-            presenter?.didRetrieveStudyDetail($0)
+        remoteDatamanager?.getStudyDetail(keyValue: keyValue, completionHandler: {
+            self.presenter?.didRetrieveStudyDetail($0)
         })
     }
 }
 
 extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
     func onStudyDetailRetrieved(_ studyDetail: StudyDetail) {
-        
+        presenter?.didRetrieveStudyDetail(studyDetail)
     }
     
     func onError() {

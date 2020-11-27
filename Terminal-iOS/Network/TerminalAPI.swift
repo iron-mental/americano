@@ -47,7 +47,7 @@ class TerminalAPI {
                     switch response.result {
                     case .success(let value):
                         let json = "\(JSON(value))".data(using: .utf8)
-                        let result: StudyDetail = try! JSONDecoder().decode(StudyDetail.self, from: json!)
+                        let result: BaseResponse<[StudyDetail]> = try! JSONDecoder().decode(BaseResponse<[StudyDetail]>.self, from: json!)
 //                        completion(result.result, result)
                     case .failure(let value):
                         print(value)
