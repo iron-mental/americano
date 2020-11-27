@@ -222,7 +222,6 @@ extension StudyDetailView: StudyDetailViewProtocol {
             }
         } else {
             mainImageView.do {
-                print(studyDeatil.image)
                 guard let url = URL(string: studyDeatil.image!) else { return }
                 $0.kf.setImage(with: url)
             }
