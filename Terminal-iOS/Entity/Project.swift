@@ -8,13 +8,6 @@
 
 import Foundation
 
-// MARK: 프로젝트 리스트
-
-struct ProjectList: Codable {
-    let result: Bool
-    let data: [Project]
-}
-
 // MARK: 프로젝트
 
 struct Project: Codable {

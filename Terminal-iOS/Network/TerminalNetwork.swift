@@ -13,60 +13,6 @@ import SwiftyJSON
 
 class TerminalNetwork {
     static let headers: HTTPHeaders = [
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJya2RjamYwMTIyQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S067OA6rK97ZWo7JqUIiwiaWF0IjoxNjA2MjkzNTk2LCJleHAiOjEwNjA2MjkzNTk2LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.3TmxWihrAsDedytyd_HkfUYoZ3MQwgReBNogwEcwVlg"
+        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJya2RjamYwMTIyQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S067OA6rK97ZWo7JqUIiwiaWF0IjoxNjA2NDA1NDAxLCJleHAiOjEwNjA2NDA1NDAxLCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.FgCJIyemTA0YGkVA2qlRhPgjvm3CrDH0enqX_u9JPmc"
     ]
-    
-    //스터디 리스트 초기화시 호출되는 플로우
-    static func getNewStudyList(_ category: String,
-                                _ sort: String,
-                                completionHandler: @escaping ([Study]) -> Void) {
-        let url = "http://3.35.154.27:3000/v1/study?category=\(category)&sort=\(sort)"
-        var studyArr: [Study] = []
-        
-        AF.request(url, headers: headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                if let data = JSON(value)["data"].array {
-                    do {
-                        for index in data {
-                            print(index)
-                            let data = "\(index)".data(using: .utf8)
-                            let result = try! JSONDecoder().decode(Study.self, from: data!)
-                            studyArr.append(result)
-                        }
-                        completionHandler(studyArr)
-                    } catch {
-                        print("error")
-                    }
-                }
-            case .failure(let err):
-                print(err)
-            }
-        }
-    }
-    
-    // 스터디 키값으로 가져오는 플로우
-    static func getNewStudyListForKey(_ keyValue: [Int],
-                                      completionHandler: @escaping ([Study]) -> Void) {
-        let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"]).removeWhitespace()
-        let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
-        var studyArr: [Study] = []
-        AF.request(query, headers: headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                if let data = JSON(value)["data"].array {
-                    for index in data {
-                        let data = "\(index)".data(using: .utf8)
-                        let result = try! JSONDecoder().decode(Study.self, from: data!)
-                        studyArr.append(result)
-                    }
-                    completionHandler(studyArr)
-                }
-            case .failure(let err):
-                print("실패", err)
-            }
-        }
-    }
-    
-    
 }

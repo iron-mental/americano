@@ -9,8 +9,6 @@
 import UIKit
 
 class EmailView: UIView {
-    
-    let emailLabel = UILabel()
     let email = UILabel()
     
     override init(frame: CGRect) {
@@ -20,27 +18,16 @@ class EmailView: UIView {
     }
     
     func attribute() {
-        emailLabel.do {
-            $0.text = "Email"
-            $0.textColor = .white
-        }
         email.do {
-            $0.text = "unicornCaredoc@care.com"
             $0.textColor = UIColor.appColor(.profileTextColor)
         }
     }
     func layout() {
-        addSubview(emailLabel)
         addSubview(email)
-        
-        emailLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 4).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-        }
+      
         email.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.emailLabel.bottomAnchor, constant: 4).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         }

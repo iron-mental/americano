@@ -1,5 +1,5 @@
 //
-//  LocationView.swift
+//  CarrerView.swift
 //  Terminal-iOS
 //
 //  Created by once on 2020/10/25.
@@ -8,27 +8,40 @@
 
 import UIKit
 
-class LocationView: UIView {
-    let location = UILabel()
+class CareerView: UIView {
+    let careerTitle = UILabel()
+    let careerContents = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         attribute()
         layout()
     }
-    
+   
     func attribute() {
-        location.do {
+        careerTitle.do {
+            $0.textColor = .white
+            $0.dynamicFont(fontSize: 16, weight: .bold)
+        }
+        careerContents.do {
             $0.numberOfLines = 0
             $0.textColor = UIColor.appColor(.profileTextColor)
+            $0.dynamicFont(fontSize: 14, weight: .regular)
         }
     }
+    
     func layout() {
-        addSubview(location)
+        addSubview(careerTitle)
+        addSubview(careerContents)
         
-        location.do {
+        careerTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+        }
+        careerContents.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: careerTitle.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true

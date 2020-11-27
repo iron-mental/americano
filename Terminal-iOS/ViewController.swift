@@ -12,7 +12,8 @@ class ViewController: UITabBarController {
     
     let studyViewController = StudyCategoryWireFrame.createStudyCategory()
     let myStudyViewController = MyStudyMainWireFrame.createMyStudyMainViewModul()
-    let setViewController = SetView()
+    let setViewController =
+        SetWireFrame.setCreateModule()
     
     enum Tab: Int {
         case study

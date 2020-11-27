@@ -10,35 +10,54 @@ import UIKit
 
 protocol ProfileDetailViewProtocol: class {
     var presenter: ProfileDetailPresenterProtocol? { get set }
+    
+    // PRESENTER -> VIEW
+    func showUserInfo(with userInfo: UserInfo)
+    func addProjectToStackView(with project: [Project])
 }
 
 protocol ProfileDetailWireFrameProtocol: class {
     static func createModule() -> UIViewController
     
+    func presentProfileDetailScreen(from view: ProfileDetailView)
 }
 
 protocol ProfileDetailPresenterProtocol: class {
     var view: ProfileDetailViewProtocol? { get set }
     var interactor: ProfileDetailInteractorInputProtocol? { get set }
     var wireFrame: ProfileDetailWireFrameProtocol? { get set }
+    
+    // VIEW -> PRESENTER
+    func viewDidLoad(id: Int)
 }
 
 protocol ProfileDetailInteractorInputProtocol: class {
     var presenter: ProfileDetailInteractorOutputProtocol? { get set }
     var localDataManager: ProfileDetailLocalDataManagerInputProtocol? { get set }
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol? { get set }
+    
+    // PRESENTER -> INTERACTOR
+    func getUserInfo()
+    func getProjectList()
 }
 
 protocol ProfileDetailInteractorOutputProtocol: class {
-    
+    // INTERACTOR -> PRESENTER
+    func didRetrievedUserInfo(userInfo: UserInfo)
+    func didRetrievedProject(project: [Project])
 }
 
 protocol ProfileDetailRemoteDataManagerInputProtocol: class {
-    
+    var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol? { get set }
+    // INTERACTOR -> REMOTEDATAMANAGER
+    func getUserInfo(id: Int)
+    func getProjectList(id: Int)
 }
 
 protocol ProfileDetailRemoteDataManagerOutputProtocol: class {
-    
+    // REMOTEDATAMANAGER -> INTERACTOR
+    func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
+    func onProjectRetrieved(project: BaseResponse<[Project]>)
 }
 
 protocol ProfileDetailLocalDataManagerInputProtocol: class {

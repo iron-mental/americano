@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             if let error = error {
                 print(error)
             }
-            print("success : ", success)
             
             DispatchQueue.main.async {
                 application.registerForRemoteNotifications()
@@ -39,8 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
-        print("device 토큰 : ", deviceTokenString)
-        
+        print("push device 토큰 :", deviceTokenString)
     }
     
     // MARK: UISceneSession Lifecycle
@@ -56,7 +54,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
-
-
 }
 
