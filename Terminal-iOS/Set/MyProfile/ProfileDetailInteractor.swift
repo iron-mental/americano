@@ -16,6 +16,10 @@ class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     func getUserInfo() {
         remoteDataManager?.getUserInfo(id: 1)
     }
+    
+    func getProjectList() {
+        remoteDataManager?.getProjectList(id: 1)
+    }
 }
 
 extension ProfileDetailInteractor: ProfileDetailRemoteDataManagerOutputProtocol {
