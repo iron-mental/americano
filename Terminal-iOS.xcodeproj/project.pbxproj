@@ -50,7 +50,7 @@
 		A5BA4616255D0BC00061C511 /* TerminalNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA4615255D0BC00061C511 /* TerminalNetwork.swift */; };
 		A5BA4619255D38D30061C511 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA4618255D38D30061C511 /* String+Ext.swift */; };
 		A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */; };
-		A5C5B14A25455A4100F4A86D /* CarrerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14925455A4100F4A86D /* CarrerView.swift */; };
+		A5C5B14A25455A4100F4A86D /* CareerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14925455A4100F4A86D /* CareerView.swift */; };
 		A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14C2545662600F4A86D /* ProjectView.swift */; };
 		A5C5B1502545699700F4A86D /* SNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14F2545699700F4A86D /* SNSView.swift */; };
 		A5C5B15325456E2800F4A86D /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B15225456E2800F4A86D /* EmailView.swift */; };
@@ -223,7 +223,7 @@
 		A5BA4615255D0BC00061C511 /* TerminalNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalNetwork.swift; sourceTree = "<group>"; };
 		A5BA4618255D38D30061C511 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
-		A5C5B14925455A4100F4A86D /* CarrerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarrerView.swift; sourceTree = "<group>"; };
+		A5C5B14925455A4100F4A86D /* CareerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerView.swift; sourceTree = "<group>"; };
 		A5C5B14C2545662600F4A86D /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		A5C5B14F2545699700F4A86D /* SNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSView.swift; sourceTree = "<group>"; };
 		A5C5B15225456E2800F4A86D /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
@@ -472,7 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				A5A20EED25418D2A00060FFA /* ProfileView.swift */,
-				A5C5B14925455A4100F4A86D /* CarrerView.swift */,
+				A5C5B14925455A4100F4A86D /* CareerView.swift */,
 				A5C5B14C2545662600F4A86D /* ProjectView.swift */,
 				A5C5B14F2545699700F4A86D /* SNSView.swift */,
 				A5C5B15225456E2800F4A86D /* EmailView.swift */,
@@ -1101,7 +1101,7 @@
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,
 				CCD51C83256D2A0500D41771 /* MyStudyDetailWireFrame.swift in Sources */,
-				A5C5B14A25455A4100F4A86D /* CarrerView.swift in Sources */,
+				A5C5B14A25455A4100F4A86D /* CareerView.swift in Sources */,
 				A5686A452524F048005990DC /* NotiCell.swift in Sources */,
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
 				CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */,

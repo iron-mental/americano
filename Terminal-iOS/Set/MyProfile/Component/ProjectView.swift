@@ -12,6 +12,7 @@ class ProjectView: UIView {
     
     init(title: String, contents: String ,frame: CGRect) {
         super.init(frame: frame)
+        
         let projectTitle = UILabel().then {
             $0.text = title
             $0.textColor = .white
@@ -19,6 +20,7 @@ class ProjectView: UIView {
         }
         let projectContents = UILabel().then {
             $0.text = contents
+            $0.lineBreakMode = .byCharWrapping
             $0.numberOfLines = 0
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.dynamicFont(fontSize: 16, weight: .regular)
