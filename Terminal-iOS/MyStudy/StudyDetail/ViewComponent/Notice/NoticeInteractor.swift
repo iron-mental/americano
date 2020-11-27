@@ -6,9 +6,11 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NoticeInteractor: NoticeInteractorProtocol {
+    
+    
     var presenter: NoticePresenterProtocol?
     var remoteDataManager: NoticeRemoteDataManagerProtocol?
     var localDataManager: NoticeLocalDataManagerProtocol?
@@ -25,5 +27,12 @@ class NoticeInteractor: NoticeInteractorProtocol {
             }
         })
     }
-    
+    func getNoticeDetail(notice: Notice, parentView: UIViewController) {
+        print(notice)
+        let studyID = notice.studyID
+        let noticeID = notice.id
+        remoteDataManager?.getNoticeDetail(studyID: studyID!, noticeID: noticeID, completion: { result, data in
+            self.presenter?.noticeDetailResult(result: result, notice: data, parentView: parentView)
+        })
+    }
 }

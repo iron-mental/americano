@@ -23,6 +23,7 @@ protocol NoticeInteractorProtocol {
     
     //PRESENTER -> INTERACTOR
     func getNoticeList(studyID: Int)
+    func getNoticeDetail(notice: Notice, parentView: UIViewController)
 }
 
 protocol NoticePresenterProtocol {
@@ -32,13 +33,16 @@ protocol NoticePresenterProtocol {
     
     //VIEW -> PRESENTER
     func viewDidLoad(studyID: Int)
+    func celldidTap(notice: Notice, parentView: UIViewController)
     //INTERACTOR -> PRESENTER
     func showResult(result: Bool, noticeList: NoticeList?, message: String?)
+    func noticeDetailResult(result: Bool, notice: Notice, parentView: UIViewController)
 }
 
 protocol NoticeRemoteDataManagerProtocol {
 
-    func getNoticeList(studyID: Int, completion: @escaping (_: Bool ,_: NoticeList?, _: String?) -> Void)
+    func getNoticeList(studyID: Int, completion: @escaping (_: Bool , _: NoticeList?, _: String?) -> Void)
+    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping (_: Bool, _: Notice) -> Void)
 }
 
 protocol NoticeLocalDataManagerProtocol {
@@ -49,4 +53,5 @@ protocol NoticeWireFrameProtocol {
     var presenter: NoticePresenterProtocol? { get set }
     
     static func createNoticeModule(studyID: Int) -> UIViewController
+    func goToNoticeDetail(notice: Notice, parentView: UIViewController)
 }

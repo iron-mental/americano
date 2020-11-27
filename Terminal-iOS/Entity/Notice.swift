@@ -10,7 +10,7 @@ import Foundation
 
 struct Notice: Codable {
     let id: Int
-    let studyID: Int?
+    var studyID: Int?
     let title, contents: String
     let pinned: Bool
     let createdAt, updatedAt: String

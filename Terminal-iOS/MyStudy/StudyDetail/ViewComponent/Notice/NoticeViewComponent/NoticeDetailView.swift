@@ -8,7 +8,13 @@
 
 import UIKit
 
-class NoticeDetailView: UIViewController {
+protocol NoticeDetailViewProtocol {
+    var notice: Notice? { get set }
+}
+
+class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
+    var notice: Notice?
+    var noticeID: Int?
     lazy var noticeBackground = UIView()
     lazy var noticeLabel = UILabel()
     lazy var noticeTitle = UILabel()
@@ -29,6 +35,7 @@ class NoticeDetailView: UIViewController {
         }
         noticeBackground.do {
             $0.layer.cornerRadius = 5
+            $0.backgroundColor = notice!.pinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
         }
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
@@ -36,11 +43,12 @@ class NoticeDetailView: UIViewController {
             $0.textColor = .white
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 5
+            $0.text = notice!.pinned ? "필독" : "공지"
         }
         noticeTitle.do {
             $0.dynamicFont(fontSize: 14, weight: .semibold)
             $0.textColor = .white
-            $0.text = "모임 진행시 가이드 라인입니다!"
+            $0.text = notice?.title
         }
         profileImage.do {
             $0.image = #imageLiteral(resourceName: "leehi")
@@ -52,20 +60,20 @@ class NoticeDetailView: UIViewController {
         }
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            $0.text = "윤여울"
+            $0.text = "\(notice?.id)"
             $0.textColor = .white
             $0.textAlignment = .center
         }
         noticeDate.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            $0.text = "2020.8.27 목요일 오후 10:00"
+            $0.text = notice?.createdAt
             $0.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             $0.textAlignment = .center
         }
         noticeContents.do {
             $0.dynamicFont(fontSize: 12, weight: .regular)
             $0.numberOfLines = 0
-            $0.text = "[모임 진행시 가이드 라인]\n\n1. 스터디를 진행할 때 휴대폰은 매너모드로 설정해주세요\n\n2. 코로나 19 감염자가 급증함에 따라 정부에서 사회적 거리두기를 권장하고 있습니다. 스터디 참여시 마스크를 꼭 착용해 주세요\n\n3. 노트북 가져오세요"
+            $0.text = notice?.contents
         }
     }
     

@@ -31,4 +31,23 @@ class NoticeWireFrame: NoticeWireFrameProtocol {
         
         return view
     }
+    func goToNoticeDetail(notice: Notice, parentView: UIViewController) {
+        var view = NoticeDetailView() as NoticeDetailViewProtocol
+        
+        view.notice = notice
+        
+//        view.noticeTitle.text = notice.title
+//        view.noticeDate.text = notice.createdAt
+//        view.noticeID = notice.id
+//        view.noticeContents.text = notice.contents
+//        view.profileName.text = "방장이름"
+//        view.noticeBackground.backgroundColor = notice.pinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+//        view.noticeLabel.text = notice.pinned ? "필독" : "공지"
+//        얘는 쓸데가 더있을 듯 분명히
+//        notice.studyID
+//        view.modalPresentationStyle = .fullScreen
+        parentView.present(view as! UIViewController, animated: true) {
+//            나중에 쓰겠죠
+        }
+    }
 }

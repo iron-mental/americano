@@ -6,9 +6,11 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NoticePresenter: NoticePresenterProtocol {
+    
+    
     
     
     var view: NoticeViewProtocol?
@@ -28,5 +30,16 @@ class NoticePresenter: NoticePresenterProtocol {
             break
         }
     }
+    func celldidTap(notice: Notice, parentView: UIViewController) {
+        interactor?.getNoticeDetail(notice: notice, parentView: parentView)
+    }
     
+    func noticeDetailResult(result: Bool, notice: Notice, parentView: UIViewController) {
+        switch result {
+        case true:
+            wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView)
+        case false:
+            print("실패니까 대처해 얼릉")
+        }
+    }
 }
