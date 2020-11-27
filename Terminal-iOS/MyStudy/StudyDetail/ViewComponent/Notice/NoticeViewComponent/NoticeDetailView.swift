@@ -15,6 +15,7 @@ protocol NoticeDetailViewProtocol {
 class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     var notice: Notice?
     var noticeID: Int?
+    var modifyButton = UIButton()
     lazy var noticeBackground = UIView()
     lazy var noticeLabel = UILabel()
     lazy var noticeTitle = UILabel()
@@ -36,6 +37,11 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         noticeBackground.do {
             $0.layer.cornerRadius = 5
             $0.backgroundColor = notice!.pinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+        }
+        modifyButton.do {
+            $0.setTitle("수정하러 가기", for: .normal)
+            $0.tintColor = UIColor.appColor(.mainColor)
+            $0.setTitleColor(UIColor.appColor(.mainColor), for: .normal)
         }
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
@@ -78,7 +84,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     }
     
     func layout() {
-        [noticeBackground, noticeTitle, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
+        [modifyButton,noticeBackground, noticeTitle, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
         noticeBackground.addSubview(noticeLabel)
         
         noticeBackground.do {
@@ -93,10 +99,17 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.centerXAnchor.constraint(equalTo: noticeBackground.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
         }
+        modifyButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: noticeLabel.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -10)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 90)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
+        }
         noticeTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: self.noticeBackground.trailingAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
-            $0.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10).isActive = true
+            $0.trailingAnchor.constraint(lessThanOrEqualTo: modifyButton.leadingAnchor, constant: -5).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
         }
         profileImage.do {

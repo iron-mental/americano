@@ -28,7 +28,6 @@ class NoticeInteractor: NoticeInteractorProtocol {
         })
     }
     func getNoticeDetail(notice: Notice, parentView: UIViewController) {
-        print(notice)
         let studyID = notice.studyID
         let noticeID = notice.id
         remoteDataManager?.getNoticeDetail(studyID: studyID!, noticeID: noticeID, completion: { result, data in
