@@ -22,7 +22,7 @@ class SetWireFrame: SetWireFrameProtocol {
         presenter.interactor = interactor
         
         interactor.presenter = presenter
-        print("여긴되냐?")
+        
         if let view = view as? SetView {
             return view
         } else {

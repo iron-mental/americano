@@ -14,11 +14,13 @@ class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol?
     
     func getUserInfo() {
-        print("인터렉터")
         remoteDataManager?.getUserInfo(id: 1)
     }
 }
 
 extension ProfileDetailInteractor: ProfileDetailRemoteDataManagerOutputProtocol {
-    
+    func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
+        guard let result = userInfo.data else { return }
+        presenter?.didRetrievedUserInfo(userInfo: result)
+    }    
 }

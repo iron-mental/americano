@@ -14,11 +14,12 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     var wireFrame: ProfileDetailWireFrameProtocol?
     
     func viewDidLoad(id: Int) {
-        print("프ㅔ젠터")
         interactor?.getUserInfo()
     }
 }
 
 extension ProfileDetailPresenter: ProfileDetailInteractorOutputProtocol {
-    
+    func didRetrievedUserInfo(userInfo: UserInfo) {
+        view?.showUserInfo(with: userInfo)
+    }
 }

@@ -93,7 +93,6 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
-                    print("이게 된겨냐", result)
                     self.remoteRequestHandler?.onStudiesLengthRetrieved(studies: result)
                     completion()
                 case .failure(let err):

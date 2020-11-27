@@ -11,7 +11,7 @@ import UIKit
 class CarrerView: UIView {
     let careerLabel = UILabel()
     let careerTitle = UILabel()
-    let careerDescript = UILabel()
+    let careerContents = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,12 +25,12 @@ class CarrerView: UIView {
             $0.textColor = .white
         }
         careerTitle.do {
-            $0.text = "OO대학교 4학년 재학중"
+//            $0.text = "OO대학교 4학년 재학중"
             $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .bold)
         }
-        careerDescript.do {
-            $0.text = "경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다.경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다."
+        careerContents.do {
+//            $0.text = "경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다.경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다."
             $0.numberOfLines = 0
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.dynamicFont(fontSize: 14, weight: .regular)
@@ -40,7 +40,7 @@ class CarrerView: UIView {
     func layout() {
         addSubview(careerLabel)
         addSubview(careerTitle)
-        addSubview(careerDescript)
+        addSubview(careerContents)
         
         careerLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +52,7 @@ class CarrerView: UIView {
             $0.topAnchor.constraint(equalTo: self.careerLabel.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         }
-        careerDescript.do {
+        careerContents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: careerTitle.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true

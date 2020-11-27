@@ -28,13 +28,11 @@ class ProfileView: UIView {
             $0.clipsToBounds = true
         }
         name.do {
-            $0.text = "이하이"
             $0.textColor = .white
             $0.textAlignment = .center
             $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
         descript.do {
-            $0.text = "안녕하세요"
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.numberOfLines = 0
             $0.textAlignment = .left

@@ -25,6 +25,8 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteManager
 
+        remoteManager.remoteRequestHandler = interactor
+        
         if let view = view as? ProfileDetailView {
             return view
         } else {

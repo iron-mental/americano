@@ -505,8 +505,8 @@
 		A5AB26FF252B6E9300A39240 /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
-				A5A5F6DC256FEAAF00405C71 /* DataManager */,
 				A5A20EEC25418CE300060FFA /* Component */,
+				A5A5F6DC256FEAAF00405C71 /* DataManager */,
 				A5B78A95252B950600E0B440 /* ProfileDetailView.swift */,
 				A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */,
 				A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */,

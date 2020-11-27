@@ -8,11 +8,13 @@
 
 import UIKit
 
+import Kingfisher
+
 class ProfileDetailView: UIViewController {
     // MARK: Init Property
     var presenter: ProfileDetailPresenterProtocol?
-    let scrollView = UIScrollView()
-    let profile = ProfileView()
+    let scrollView  = UIScrollView()
+    let profile     = ProfileView()
     
     let carrer      = CarrerView()
     let project     = ProjectView()
@@ -23,15 +25,16 @@ class ProfileDetailView: UIViewController {
     let projectStack = UIStackView()
     
     // MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        print("viewdidload")
         presenter?.viewDidLoad(id: 1)
     }
     
     // MARK: Set Attribute
+    
     func attribute() {
         let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"), style: .plain, target: self, action: #selector(pushProfileModify))
         [carrer, project, sns, email, location].forEach {
@@ -45,11 +48,11 @@ class ProfileDetailView: UIViewController {
         }
         profile.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.profileImage.image = #imageLiteral(resourceName: "leehi")
         }
     }
     
     // MARK: Set Layout
+    
     func layout() {
         view.addSubview(scrollView)
         [profile, carrer, project, sns, email, location].forEach { scrollView.addSubview($0) }
@@ -115,5 +118,35 @@ class ProfileDetailView: UIViewController {
 }
 
 extension ProfileDetailView: ProfileDetailViewProtocol {
-    
+    func showUserInfo(with userInfo: UserInfo) {
+        
+        /// Kingfisher token
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        // MARK: Set User Info
+        
+        /// 프로필
+        profile.name.text = userInfo.nickname
+        guard let image = userInfo.image else { return }
+        guard let introduce = userInfo.introduce else { return }
+        profile.profileImage.kf.setImage(with: URL(string: image), options: [.requestModifier(imageDownloadRequest)])
+        profile.descript.text = introduce
+        
+        /// 경력
+        guard let careerTitle = userInfo.careerTitle else { return }
+        guard let careerContents = userInfo.careerContents else { return }
+        carrer.careerTitle.text = careerTitle
+        carrer.careerContents.text = careerContents
+        
+        /// 이메일
+        email.email.text = userInfo.email
+        
+        /// 활동지역
+        guard let address = userInfo.address else { return }
+        location.location.text = address
+    }
 }
