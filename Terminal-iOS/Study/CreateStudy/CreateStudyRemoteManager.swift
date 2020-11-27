@@ -8,34 +8,11 @@
 
 import UIKit
 import Alamofire
-
-
-
-//user_id: 방장 id (require)
-//category: 분류 (require)
-//title: 길이 2~10 (require)
-//introduce: 길이 ~200 (require)
-//progress: 길이 ~100 (require)
-//study_time: 길이 ~100 (require)
-//latitude: 숫자 (require)
-//longitude: 숫자 (require)
-//region_1depth_name: 길이 ~20 (require)
-//region_2depth_name: 길이 ~20 (require)
-//address_name: 길이 ~100 (require)
-//locaion_detail: 길이 ~30
-//place_name: 길이 ~30
-//sns_notion: 길이 ~150
-//sns_evernote: 길이 ~60
-//sns_web: 길이 ~200
-//image: jpg, jpeg, png 외 불가
-
+import SwiftyJSON
 
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
     
-    
-    
-    func postStudy(study: StudyDetailPost) -> Bool {
-        
+    func postStudy(study: StudyDetailPost, completion: @escaping (Bool, String) -> Void) {
         let params : [String : Any] = [
             "category" : study.category,
             "title" : study.title,
@@ -44,20 +21,19 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             "study_time" : study.studyTime,
             "latitude" : study.location.lat,
             "longitude" : study.location.lng,
-            "sido" : study.location.sido,
-            "sigungu" : study.location,
+            "sido" : study.location.sido!,
+            "sigungu" : study.location.sigungu!,
             "address_name" : study.location.address,
-            "locaion_detail" : study.location.detailAddress,
-            "place_name" : study.location,
-            "sns_notion" : study.snsNotion ,
-            "sns_evernote" : study.snsEvernote,
-            "sns_web" : study.snsWeb,
-            "image" : study.image
+            "location_detail" : study.location.detailAddress,
+            "place_name" : study.location.placeName,
+            "sns_notion" : study.snsNotion! ?? "" ,
+            "sns_evernote" : study.snsEvernote! ?? "",
+            "sns_web" : study.snsWeb! ?? "",
+            "image" : study.image!
         ]
         
-        var urlComponent = URLComponents(string: "http://3.35.154.27:3000/v1/study")
-        let header: HTTPHeaders = [ "Content-Type": "multipart/form-data" ]
-        guard let url = urlComponent?.url else { return true }
+        let header: HTTPHeaders = [ "Content-Type": "multipart/form-data",
+                                    "Authorization": Terminal.accessToken]
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
         
@@ -66,10 +42,27 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
                 multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
             }
             multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
-        }, to: url, method: .post, headers: header) { result in
-            dump(result)
-        }.resume()
-        return true
+        }, to: "http://3.35.154.27:3000/v1/study", method: .post, headers: header).responseJSON { response in
+            
+            switch response.result {
+            case .success(let value):
+                completion(JSON(value)["result"].bool!, JSON(value)["message"].string!)
+                break
+            case .failure(let err):
+                completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)
+                break
+            }
+        }
+        
+//        AF.upload(
+//               multipartFormData: { multipartFormData in
+//                for (key, value) in params {
+//                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+//                }
+//                multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
+//               },
+//            to:  "http://3.35.154.27:3000/v1/study", method: .post, headers: header)
+//        )
     }
     func getNotionValid(id: String?) -> Bool {
         return true
