@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 application.registerForRemoteNotifications()
             }
         }
+        
+        TerminalNetwork.authRequest(urlRequest: "Test")
+        
         return true
     }
     
