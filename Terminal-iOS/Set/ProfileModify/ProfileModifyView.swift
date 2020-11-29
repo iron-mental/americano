@@ -9,6 +9,8 @@
 import UIKit
 
 class ProfileModifyView: UIViewController {
+    var presenter: ProfileModifyPresenterProtocol?
+    
     var keyHeight: CGFloat?
     lazy var scrollView = UIScrollView()
     lazy var backgroundView = UIView()
@@ -238,10 +240,6 @@ class ProfileModifyView: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    //    @objc func keyboardHide(_ notification: Notification){
-    //        self.view.transform = .identity
-    //    }
-    
     @objc func keyboardWillHide(_ sender: Notification) {
         self.view.frame.origin.y += keyHeight!
     }
@@ -282,7 +280,7 @@ class ProfileModifyView: UIViewController {
     //        }
     //    }
     
-    func keyboardAnimate(keyboardRectangle: CGRect ,textField: UITextField){
+    func keyboardAnimate(keyboardRectangle: CGRect ,textField: UITextField) {
         //        print("전체 크기 :\(backgroundView.frame.height)")
         print("전체 크기 :\(view.frame.height)")
         print("키보드 크기 : \(keyboardRectangle.height)")
@@ -293,6 +291,11 @@ class ProfileModifyView: UIViewController {
             self.view.transform = CGAffineTransform(translationX: 0, y: (view.frame.height - keyboardRectangle.height - textField.frame.maxY))
         }
     }
+}
+
+
+extension ProfileModifyView: ProfileModifyViewProtocol {
+    
 }
 
 extension ProfileModifyView: UITextFieldDelegate {
