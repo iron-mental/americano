@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
+    var remoteRequestHandler: ProfileModifyRemoteDataManagerOutputProtocol?
+    
+    
+}
