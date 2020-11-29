@@ -18,14 +18,14 @@ class IntroInteractor: IntroInteractorProtocol {
                 IntroLocalDataManager.shared.email = input
                 self.presenter?.emailValidInfo(result: true)
             } else {
-                remoteDataManager?.getEmailValidInfo(input: input, completionHandler: { result in
+                remoteDataManager?.getEmailValidInfo(input: input) { result in
                     if result {
                         self.presenter?.emailValidInfo(result: true)
                         IntroLocalDataManager.shared.email = input
                     } else {
                         self.presenter?.emailValidInfo(result: false)
                     }
-                })
+                }
             }
         } else {
             presenter?.emailValidInfo(result: false)
@@ -51,6 +51,7 @@ class IntroInteractor: IntroInteractorProtocol {
             presenter?.signUpValidInfo(result: false)
         }
     }
+    
     func checkedJoinValid(input: String) {
         remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email,input], completionHandler: { [self] (result, data) in
             

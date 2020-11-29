@@ -9,13 +9,11 @@
 import Foundation
 
 class IntroPresenter: IntroPresenterProtocol {
-    
-    
     var view: IntroViewProtocol?
     var interactor: IntroInteractorProtocol?
+    var wireFrame: IntroWireFrameProtocol?
     
     func didClickedRightBarButton(input: String, introState: IntroViewState, beginState: BeginState) {
-        
         switch introState {
         case .emailInput:
             interactor?.checkedEmailValid(input: input, beginState: beginState)
@@ -42,5 +40,20 @@ class IntroPresenter: IntroPresenterProtocol {
     }
     func joinValidInfo(result: Bool, joinInfo: String) {
         result ? view?.presentCompleteView() : print(joinInfo)
+    }
+    
+    
+    func didNextButton(input: String, introState: IntroViewState, beginState: BeginState) {
+        switch introState {
+        case .emailInput:
+            interactor?.checkedEmailValid(input: input, beginState: beginState)
+            break
+        case .pwdInput:
+            beginState == .signUp ? interactor?.checkedPasswordValid(input: input) : interactor?.checkedJoinValid(input: input)
+            break
+        case .nickname:
+            interactor?.signUpValid(input: input)
+            break
+        }
     }
 }

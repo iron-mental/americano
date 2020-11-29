@@ -61,6 +61,8 @@
 		A5D058F0255D939C0047CA9E /* StudyDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058EF255D939C0047CA9E /* StudyDetailProtocols.swift */; };
 		A5D058F7255D95000047CA9E /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058F6255D95000047CA9E /* StudyDetail.swift */; };
 		A5D2A5F925373D180010AE1C /* HotKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */; };
+		A5D5AE572573CE1B003BB277 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5AE562573CE1B003BB277 /* Authorization.swift */; };
+		A5D5AE5A2573DAFB003BB277 /* IntroWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5AE592573DAFB003BB277 /* IntroWireFrame.swift */; };
 		A5E25C7425590DE40090E21E /* NoticeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E25C7325590DE40090E21E /* NoticeDetailView.swift */; };
 		CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */; };
 		CC198E6F254C000A009D6CDF /* MemeberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6E254C000A009D6CDF /* MemeberView.swift */; };
@@ -242,6 +244,8 @@
 		A5D058EF255D939C0047CA9E /* StudyDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailProtocols.swift; sourceTree = "<group>"; };
 		A5D058F6255D95000047CA9E /* StudyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetail.swift; sourceTree = "<group>"; };
 		A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeywordCell.swift; sourceTree = "<group>"; };
+		A5D5AE562573CE1B003BB277 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
+		A5D5AE592573DAFB003BB277 /* IntroWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroWireFrame.swift; sourceTree = "<group>"; };
 		A5E25C7325590DE40090E21E /* NoticeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailView.swift; sourceTree = "<group>"; };
 		CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithContentView.swift; sourceTree = "<group>"; };
 		CC198E6E254C000A009D6CDF /* MemeberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeberView.swift; sourceTree = "<group>"; };
@@ -778,6 +782,7 @@
 				CC5794F72570C63C00DF96AB /* NoticePost.swift */,
 				A5A5F6C1256F843600405C71 /* SortState.swift */,
 				A5A5F6E1256FEF0A00405C71 /* UserInfo.swift */,
+				A5D5AE562573CE1B003BB277 /* Authorization.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -895,12 +900,13 @@
 			isa = PBXGroup;
 			children = (
 				CCC4DA8025407E9100D9E674 /* IntroView.swift */,
+				CCB139CE25592D8300410184 /* IntroPresenter.swift */,
 				CC3F991F2545448E00428B11 /* HomeView.swift */,
 				CCB139CB2559289900410184 /* IntroProtocols.swift */,
-				CCB139CE25592D8300410184 /* IntroPresenter.swift */,
 				CCB139D225592DCF00410184 /* IntroInteractor.swift */,
 				CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */,
 				CC21A7942559504600E31F77 /* IntroLocalDataManager.swift */,
+				A5D5AE592573DAFB003BB277 /* IntroWireFrame.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1125,6 +1131,7 @@
 				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */,
 				CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
+				A5D5AE5A2573DAFB003BB277 /* IntroWireFrame.swift in Sources */,
 				CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */,
 				A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
@@ -1175,6 +1182,7 @@
 				CCD51C77256D29BC00D41771 /* MyStudyDetailInteractor.swift in Sources */,
 				CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */,
 				CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */,
+				A5D5AE572573CE1B003BB277 /* Authorization.swift in Sources */,
 				CC5794F82570C63C00DF96AB /* NoticePost.swift in Sources */,
 				CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */,
 				CCD51C9B256E247600D41771 /* NoticeInteractor.swift in Sources */,

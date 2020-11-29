@@ -41,6 +41,8 @@ class IntroView: UIViewController {
         setting()
         attribute()
         layout()
+        print(beginState)
+        print(introState)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -200,6 +202,11 @@ class IntroView: UIViewController {
     @objc func didClickedNextButton() {
         presenter?.didClickedRightBarButton(input: inputTextfield.text!, introState: self.introState!, beginState: self.beginState!)
     }
+    
+    @objc func testNextButton() {
+        presenter?.didNextButton(input: inputTextfield.text!, introState: self.introState!, beginState: self.beginState!)
+    }
+    
     @objc func didClickedCancelButton() {
         switch introState {
         case .emailInput:

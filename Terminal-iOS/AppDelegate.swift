@@ -27,8 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
         
-        TerminalNetwork.authRequest(urlRequest: "Test")
-        
         return true
     }
     
