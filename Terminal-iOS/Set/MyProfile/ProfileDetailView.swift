@@ -183,10 +183,11 @@ class ProfileDetailView: UIViewController {
     }
     
     @objc func pushProfileModify() {
-        let view = ProfileModifyView()
-        view.nameModify.text = self.profile.name.text
-        view.descripModify.text = self.profile.descript.text
-        navigationController?.pushViewController(view, animated: false)
+//        let view = ProfileModifyView()
+//        view.nameModify.text = self.profile.name.text
+//        view.descripModify.text = self.profile.descript.text
+//        navigationController?.pushViewController(view, animated: false)
+        presenter?.showProfileModify()
     }
 }
 

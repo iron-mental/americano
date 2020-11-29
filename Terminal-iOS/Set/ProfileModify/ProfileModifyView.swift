@@ -80,7 +80,7 @@ class ProfileModifyView: UIViewController {
         }
         
         careerTitleModify.do {
-            $0.text = "OO대학교 4학년 재학중"
+//            $0.text = "OO대학교 4학년 재학중"
             $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .bold)
             $0.textAlignment = .left

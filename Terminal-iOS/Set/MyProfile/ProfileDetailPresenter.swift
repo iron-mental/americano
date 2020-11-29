@@ -17,6 +17,10 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
         interactor?.getUserInfo()
         interactor?.getProjectList()
     }
+    
+    func showProfileModify() {
+        wireFrame?.presentProfileModifyScreen(from: view!)
+    }
 }
 
 extension ProfileDetailPresenter: ProfileDetailInteractorOutputProtocol {
