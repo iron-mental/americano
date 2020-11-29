@@ -6,4 +6,28 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class ProfileModifyWireFrame: ProfileModifyWireFrameProtocol {
+    static func createProfileModifyModule() -> UIViewController {
+        let view: ProfileModifyViewProtocol = ProfileModifyView()
+        let presenter: ProfileModifyPresenterProtocol & ProfileModifyInteractorOutputProtocol = ProfileModifyPresenter()
+        let interactor: ProfileModifyInteractorInputProtocol & ProfileModifyRemoteDataManagerOutputProtocol = ProfileModifyInteractor()
+        let remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol = ProfileModifyRemoteManager()
+        let wireFrame: ProfileModifyWireFrameProtocol = ProfileModifyWireFrame()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.wireFrame = wireFrame
+        interactor.presenter = presenter
+        interactor.remoteDataManager = remoteDataManager
+        remoteDataManager.remoteRequestHandler = interactor
+        
+        if let view = view as? ProfileModifyView {
+            return view
+        } else {
+            return UIViewController()
+        }
+    }
+}
