@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
+    var presenter: ProfileModifyInteractorOutputProtocol?
+    var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol?
+}
+
+extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol {
+    
+}
