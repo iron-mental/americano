@@ -12,7 +12,10 @@ class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
     var view: ProfileModifyViewProtocol?
     var interactor: ProfileModifyInteractorInputProtocol?
     var wireFrame: ProfileModifyWireFrameProtocol?
-    
+
+    func completeModifyButton(userInfo: UserInfoPut) {
+        interactor?.completeModify(userInfo: userInfo)
+    }
 }
 
 extension ProfileModifyPresenter: ProfileModifyInteractorOutputProtocol {

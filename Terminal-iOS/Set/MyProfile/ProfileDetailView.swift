@@ -180,7 +180,6 @@ class ProfileDetailView: UIViewController {
     
     @objc func pushProfileModify() {
         guard let userInfo = self.userInfo else { return }
-        print("히아",userInfo)
         presenter?.showProfileModify(userInfo: userInfo)
     }
 }

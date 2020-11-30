@@ -18,6 +18,7 @@ protocol ProfileModifyWireFrameProtocol: class {
     static func createProfileModifyModule(userInfo: UserInfo) -> UIViewController
     
     // PRESENTER -> WIREFRAME
+    
 }
 
 protocol ProfileModifyPresenterProtocol: class {
@@ -26,6 +27,7 @@ protocol ProfileModifyPresenterProtocol: class {
     var wireFrame: ProfileModifyWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
+    func completeModifyButton(userInfo: UserInfoPut)
 }
 
 protocol ProfileModifyInteractorOutputProtocol: class {
@@ -38,13 +40,14 @@ protocol ProfileModifyInteractorInputProtocol: class {
     var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    
+    func completeModify(userInfo: UserInfoPut)
 }
 
 protocol ProfileModifyRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: ProfileModifyRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
+    func validProfileModify(userInfo: UserInfoPut)
 }
 
 protocol ProfileModifyRemoteDataManagerOutputProtocol: class {

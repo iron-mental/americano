@@ -46,6 +46,13 @@ class ProfileModifyView: UIViewController {
     
     // MARK: Set Attribute
     func attribute() {
+        let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "Vaild"),
+                                        style: .plain,
+                                        target: self,
+                                        action: #selector(completeButton))
+        self.do {
+            $0.navigationItem.rightBarButtonItem = modifyBtn
+        }
         scrollView.do {
             $0.delegate = self
             $0.bounces = false
@@ -87,7 +94,6 @@ class ProfileModifyView: UIViewController {
         careerTitleModify.do {
             guard let career = userInfo?.careerTitle else { return }
             $0.text = career
-//            $0.text = "OO대학교 4학년 재학중"
             $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .bold)
             $0.textAlignment = .left
@@ -139,6 +145,7 @@ class ProfileModifyView: UIViewController {
     }
     
     // MARK: Set Layout
+    
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
@@ -251,6 +258,11 @@ class ProfileModifyView: UIViewController {
     func removeRegisterForKeyboardNotification(){
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func completeButton() {
+        let userInfo = UserInfoPut(image: nil, nickname: "허허", introduce: nil, careerTitle: nil, careerContents: nil, snsGithub: nil, snsLinkedin: nil, snsWeb: nil, latitude: nil, longitude: nil, sido: nil, sigungu: nil)
+        presenter?.completeModifyButton(userInfo: userInfo)
     }
     
     @objc func keyboardWillHide(_ sender: Notification) {
