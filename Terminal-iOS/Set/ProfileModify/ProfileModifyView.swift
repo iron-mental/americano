@@ -12,6 +12,7 @@ import Kingfisher
 class ProfileModifyView: UIViewController {
     var presenter: ProfileModifyPresenterProtocol?
     var userInfo: UserInfo?
+    let picker = UIImagePickerController()
     
     var keyHeight: CGFloat?
     lazy var scrollView = UIScrollView()
@@ -54,6 +55,11 @@ class ProfileModifyView: UIViewController {
         self.do {
             $0.navigationItem.rightBarButtonItem = modifyBtn
         }
+        
+        picker.do {
+            $0.delegate = self
+        }
+        
         scrollView.do {
             $0.delegate = self
             $0.bounces = false
@@ -65,6 +71,7 @@ class ProfileModifyView: UIViewController {
             return requestBody
         }
         
+        let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
         profileImage.do {
             if let image = userInfo?.image {
                 $0.kf.setImage(with: URL(string: image),
@@ -78,6 +85,8 @@ class ProfileModifyView: UIViewController {
             $0.frame.size.height = Terminal.convertHeigt(value: 100)
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
+            $0.isUserInteractionEnabled = true
+            $0.addGestureRecognizer(profileTapGesture)
         }
         
         nameModify.do {
@@ -212,7 +221,6 @@ class ProfileModifyView: UIViewController {
             $0.topAnchor.constraint(equalTo: careerLabel.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
         careerDescriptModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -268,6 +276,29 @@ class ProfileModifyView: UIViewController {
         locationModify.locationTextField.delegate = self
     }
     
+    @objc func didImageViewClicked() {
+        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
+        let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(library)
+        alert.addAction(camera)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func openLibrary() {
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
+    }
+    func openCamera() {
+        //시뮬에서 앱죽는거 에러처리 해야함
+        picker.sourceType = .camera
+        present(picker, animated: true, completion: nil)
+    }
+    
     func registerForKeyboardNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -279,13 +310,14 @@ class ProfileModifyView: UIViewController {
     }
     
     @objc func completeButton() {
-        guard let nickname = nameModify.text,
+        guard let image = profileImage.image,
+              let nickname = nameModify.text,
               let introduce = descripModify.text,
               let careerTitle = careerTitleModify.text,
               let careerContents = careerDescriptModify.text
         else { return }
-        print(careerContents)
-        let userInfo = UserInfoPut(image: nil,
+        
+        let userInfo = UserInfoPut(image: image,
                                    nickname: nickname,
                                    introduce: introduce,
                                    careerTitle: careerTitle,
@@ -357,6 +389,17 @@ class ProfileModifyView: UIViewController {
 extension ProfileModifyView: ProfileModifyViewProtocol {
     
 }
+
+
+extension ProfileModifyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            profileImage.image = image
+        }
+        dismiss(animated: true, completion: nil)
+    }
+}
+
 
 extension ProfileModifyView: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

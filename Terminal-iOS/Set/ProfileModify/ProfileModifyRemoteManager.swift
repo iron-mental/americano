@@ -15,7 +15,10 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     
     func validProfileModify(userInfo: UserInfoPut) {
         let url = "http://3.35.154.27:3000/v1/user/23"
+        let headers: HTTPHeaders = [ "Content-Type": "multipart/form-data",
+                                     "Authorization": Terminal.accessToken]
         let params: Parameters = [
+            "image": userInfo.image!,
             "nickname": userInfo.nickname!,
             "introduce": userInfo.introduce!,
             "career_title": userInfo.careerTitle!,
@@ -28,17 +31,34 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             "sigungu": userInfo.sigungu!
         ]
         
-        AF.request(url,
-                   method: .put,
-                   parameters: params,
-                   encoding: JSONEncoding.default,
-                   headers: TerminalNetwork.headers).responseJSON { response in
+        let uploadImage = userInfo.image!.jpegData(compressionQuality: 0.5)
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            for (key, value) in params {
+                let data = "\(value)".data(using: .utf8)!
+                multipartFormData.append(data, withName: key, mimeType: "text/plain")
+            }
+            multipartFormData.append(uploadImage!, withName: "image", fileName: "\(userInfo.nickname!).jpg", mimeType: "image/jpeg")
+        }, to: url, method: .put, headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
                 print(JSON(value))
-            case .failure(let error):
-                print(error)
+            case .failure(let err):
+                print(err)
             }
         }
+        
+//        AF.request(url,
+//                   method: .put,
+//                   parameters: params,
+//                   encoding: JSONEncoding.default,
+//                   headers: TerminalNetwork.headers).responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//                print(JSON(value))
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
 }

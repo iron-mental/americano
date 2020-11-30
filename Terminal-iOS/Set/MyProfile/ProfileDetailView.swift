@@ -13,7 +13,6 @@ import Kingfisher
 class ProfileDetailView: UIViewController {
     // MARK: Init Property
     var presenter: ProfileDetailPresenterProtocol?
-    let picker = UIImagePickerController()
     
     let scrollView      = UIScrollView()
     let profile         = ProfileView()
@@ -52,8 +51,6 @@ class ProfileDetailView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
         }
-        
-        picker.delegate = self
         
         self.do {
             $0.title = "프로필"
@@ -185,38 +182,6 @@ class ProfileDetailView: UIViewController {
     @objc func pushProfileModify() {
         guard let userInfo = self.userInfo else { return }
         presenter?.showProfileModify(userInfo: userInfo)
-    }
-    
-    @objc func didImageViewClicked() {
-        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
-        let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        alert.addAction(library)
-        alert.addAction(camera)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func openLibrary() {
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
-    }
-    func openCamera() {
-        //시뮬에서 앱죽는거 에러처리 해야함
-        picker.sourceType = .camera
-        present(picker, animated: true, completion: nil)
-    }
-}
-
-extension ProfileDetailView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            profile.profileImage.image = image
-        }
-        dismiss(animated: true, completion: nil)
     }
 }
 
