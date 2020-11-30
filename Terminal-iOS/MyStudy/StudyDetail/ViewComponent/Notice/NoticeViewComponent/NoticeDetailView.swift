@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 protocol NoticeDetailViewProtocol {
     var notice: Notice? { get set }
@@ -16,6 +18,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     var notice: Notice?
     var noticeID: Int?
     var modifyButton = UIButton()
+    var removeButton = UIButton()
     lazy var noticeBackground = UIView()
     lazy var noticeLabel = UILabel()
     lazy var noticeTitle = UILabel()
@@ -37,6 +40,11 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         noticeBackground.do {
             $0.layer.cornerRadius = 5
             $0.backgroundColor = notice!.pinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+        }
+        removeButton.do {
+            $0.setTitle("삭제", for: .normal)
+            $0.setTitleColor(.red, for: .normal)
+            $0.addTarget(self, action: #selector(removeButtonDidTap), for: .touchUpInside)
         }
         modifyButton.do {
             $0.setTitle("수정하러 가기", for: .normal)
@@ -82,10 +90,11 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.numberOfLines = 0
             $0.text = notice?.contents
         }
+        
     }
     
     func layout() {
-        [modifyButton,noticeBackground, noticeTitle, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
+        [removeButton, modifyButton,noticeBackground, noticeTitle, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
         noticeBackground.addSubview(noticeLabel)
         
         noticeBackground.do {
@@ -99,6 +108,13 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: noticeBackground.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
+        }
+        removeButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: noticeLabel.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: modifyButton.trailingAnchor, constant: -10).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 90)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
         }
         modifyButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -145,5 +161,8 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         modifyView.state = .edit
         self.present(modifyView as! UIViewController, animated: true, completion: {
         })
+    }
+    @objc func removeButtonDidTap() {
+        
     }
 }
