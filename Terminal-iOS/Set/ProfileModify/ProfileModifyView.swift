@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileModifyView: UIViewController {
     var presenter: ProfileModifyPresenterProtocol?
+    var userInfo: UserInfo?
     
     var keyHeight: CGFloat?
     lazy var scrollView = UIScrollView()
@@ -61,11 +62,15 @@ class ProfileModifyView: UIViewController {
         }
         
         nameModify.do {
+            guard let name = userInfo?.nickname else { return }
+            $0.text = name
             $0.font = UIFont(name: nameModify.font!.fontName, size: 20)
             $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
         
         descripModify.do {
+            guard let descript = userInfo?.introduce else { return }
+            $0.text = descript
             $0.delegate = self
             $0.dynamicFont(size: 16, weight: .regular)
             $0.textColor = .white
@@ -80,6 +85,8 @@ class ProfileModifyView: UIViewController {
         }
         
         careerTitleModify.do {
+            guard let career = userInfo?.careerTitle else { return }
+            $0.text = career
 //            $0.text = "OO대학교 4학년 재학중"
             $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .bold)
@@ -88,7 +95,8 @@ class ProfileModifyView: UIViewController {
         }
         
         careerDescriptModify.do {
-            $0.text = "경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다.경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다. 경력에 대한 짧은 소개가 들어가는 중입니다.MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정"
+            guard let career = userInfo?.careerContents else { return }
+            $0.text = career
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.dynamicFont(size: 14, weight: .regular)
             $0.delegate = self
@@ -113,7 +121,6 @@ class ProfileModifyView: UIViewController {
         }
         
         projectDescriptModify.do {
-            $0.text = "MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정MANNA는 어떠 어떠한 프로젝트이며 이러 이러 합니다. 저러 저러한 사람들이 쉽게 이러 이러하고 요로요로 어쩌고 저쩌고 하여 만들어진 프로젝트입니다. 이러이러한 걸 맡았고 어쩌고 저쩌고 하였습니다. 아래 github 링크에서 자세한 내용 확인하실 수 있습니다. 이하이 이쁩니다. 인정"
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.dynamicFont(size: 14, weight: .regular)
             $0.delegate = self
@@ -123,6 +130,12 @@ class ProfileModifyView: UIViewController {
             $0.layer.masksToBounds = true
             $0.isScrollEnabled = false
         }
+        
+        guard let email = userInfo?.email else { return }
+        emailModify.emailTextField.text = email
+        
+        guard let location = userInfo?.address else { return }
+        locationModify.locationTextField.text = location
     }
     
     // MARK: Set Layout

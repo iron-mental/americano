@@ -15,7 +15,7 @@ protocol ProfileModifyViewProtocol: class {
 }
 
 protocol ProfileModifyWireFrameProtocol: class {
-    static func createProfileModifyModule() -> UIViewController
+    static func createProfileModifyModule(userInfo: UserInfo) -> UIViewController
     
     // PRESENTER -> WIREFRAME
 }

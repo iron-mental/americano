@@ -24,7 +24,6 @@ class LocationModifyView: UIView {
             $0.textColor = .white
         }
         locationTextField.do {
-            $0.text = "서울 마포구 주민입니다. 서울 모든 곳 가능합니다."
             $0.textColor = UIColor.appColor(.profileTextColor)
             
         }

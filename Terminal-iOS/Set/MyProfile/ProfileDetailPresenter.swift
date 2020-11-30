@@ -18,8 +18,8 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
         interactor?.getProjectList()
     }
     
-    func showProfileModify() {
-        wireFrame?.presentProfileModifyScreen(from: view!)
+    func showProfileModify(userInfo: UserInfo) {
+        wireFrame?.presentProfileModifyScreen(from: view!, userInfo: userInfo)
     }
 }
 

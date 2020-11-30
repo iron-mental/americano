@@ -34,11 +34,11 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         }
     }
     
-    func presentProfileModifyScreen(from view: ProfileDetailViewProtocol) {
-        let profileModifyView = ProfileModifyWireFrame.createProfileModifyModule()
+    func presentProfileModifyScreen(from view: ProfileDetailViewProtocol, userInfo: UserInfo) {
+        let profileModifyView = ProfileModifyWireFrame.createProfileModifyModule(userInfo: userInfo)
         
         if let sourceView = view as? UIViewController {
-            sourceView.navigationController?.pushViewController(profileModifyView, animated: true)
+            sourceView.navigationController?.pushViewController(profileModifyView, animated: false)
         }
     }
 }

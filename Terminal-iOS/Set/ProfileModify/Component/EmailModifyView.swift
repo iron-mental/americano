@@ -24,7 +24,6 @@ class EmailModifyView: UIView {
             $0.textColor = .white
         }
         emailTextField.do {
-            $0.text = "unicornCaredoc@care.com"
             $0.textColor = UIColor.appColor(.profileTextColor)
         }
     }

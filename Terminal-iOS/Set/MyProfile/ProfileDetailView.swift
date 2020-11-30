@@ -28,7 +28,7 @@ class ProfileDetailView: UIViewController {
     let location        = LocationView()
     
     var projectArr: [UIView] = []
-    
+    var userInfo: UserInfo?
     // MARK: ViewDidLoad
     
     override func viewDidLoad() {
@@ -178,22 +178,16 @@ class ProfileDetailView: UIViewController {
         }
     }
     
-    func addProjectToStackView() {
-        
-    }
-    
     @objc func pushProfileModify() {
-//        let view = ProfileModifyView()
-//        view.nameModify.text = self.profile.name.text
-//        view.descripModify.text = self.profile.descript.text
-//        navigationController?.pushViewController(view, animated: false)
-        presenter?.showProfileModify()
+        guard let userInfo = self.userInfo else { return }
+        print("히아",userInfo)
+        presenter?.showProfileModify(userInfo: userInfo)
     }
 }
 
 extension ProfileDetailView: ProfileDetailViewProtocol {
     func showUserInfo(with userInfo: UserInfo) {
-        
+        self.userInfo = userInfo
         /// Kingfisher auth token
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
