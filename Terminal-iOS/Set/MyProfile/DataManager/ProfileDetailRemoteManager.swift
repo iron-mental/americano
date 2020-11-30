@@ -17,7 +17,7 @@ class ProfileDetailRemoteManager: ProfileDetailRemoteDataManagerInputProtocol {
     // MARK: 유저정보
     
     func getUserInfo(id: Int) {
-        let url = "http://3.35.154.27:3000/v1/user/1"
+        let url = "http://3.35.154.27:3000/v1/user/\(id)"
         AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -35,7 +35,7 @@ class ProfileDetailRemoteManager: ProfileDetailRemoteDataManagerInputProtocol {
     // MARK: 유저 프로젝트
     
     func getProjectList(id: Int) {
-        let url = "http://3.35.154.27:3000/v1/user/1/project"
+        let url = "http://3.35.154.27:3000/v1/user/\(id)/project"
         AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
             switch response.result {
             case .success(let value):

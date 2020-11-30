@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileModifyView: UIViewController {
     var presenter: ProfileModifyPresenterProtocol?
@@ -58,9 +59,20 @@ class ProfileModifyView: UIViewController {
             $0.bounces = false
         }
         
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
         profileImage.do {
+            if let image = userInfo?.image {
+                $0.kf.setImage(with: URL(string: image),
+                               options: [.requestModifier(imageDownloadRequest)])
+            } else {
+                $0.image = #imageLiteral(resourceName: "member")
+            }
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.image = #imageLiteral(resourceName: "leehi")
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = Terminal.convertHeigt(value: 100)
             $0.frame.size.height = Terminal.convertHeigt(value: 100)
@@ -76,8 +88,9 @@ class ProfileModifyView: UIViewController {
         }
         
         descripModify.do {
-            guard let descript = userInfo?.introduce else { return }
-            $0.text = descript
+            if let descript = userInfo?.introduce {
+                $0.text = descript
+            }
             $0.delegate = self
             $0.dynamicFont(size: 16, weight: .regular)
             $0.textColor = .white
@@ -92,8 +105,10 @@ class ProfileModifyView: UIViewController {
         }
         
         careerTitleModify.do {
-            guard let career = userInfo?.careerTitle else { return }
-            $0.text = career
+            if let career = userInfo?.careerTitle {
+                $0.text = career
+            }
+            $0.backgroundColor = .red
             $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .bold)
             $0.textAlignment = .left
@@ -101,8 +116,10 @@ class ProfileModifyView: UIViewController {
         }
         
         careerDescriptModify.do {
-            guard let career = userInfo?.careerContents else { return }
-            $0.text = career
+            if let career = userInfo?.careerContents {
+                $0.text = career
+            }
+            $0.backgroundColor = .red
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.dynamicFont(size: 14, weight: .regular)
             $0.delegate = self
@@ -195,6 +212,7 @@ class ProfileModifyView: UIViewController {
             $0.topAnchor.constraint(equalTo: careerLabel.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
         careerDescriptModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -261,12 +279,29 @@ class ProfileModifyView: UIViewController {
     }
     
     @objc func completeButton() {
-        let userInfo = UserInfoPut(image: nil, nickname: "허허", introduce: nil, careerTitle: nil, careerContents: nil, snsGithub: nil, snsLinkedin: nil, snsWeb: nil, latitude: nil, longitude: nil, sido: nil, sigungu: nil)
+        guard let nickname = nameModify.text,
+              let introduce = descripModify.text,
+              let careerTitle = careerTitleModify.text,
+              let careerContents = careerDescriptModify.text
+        else { return }
+        print(careerContents)
+        let userInfo = UserInfoPut(image: nil,
+                                   nickname: nickname,
+                                   introduce: introduce,
+                                   careerTitle: careerTitle,
+                                   careerContents: careerContents,
+                                   snsGithub: "https://github.com/feelsodev",
+                                   snsLinkedin: "",
+                                   snsWeb: "",
+                                   latitude: 37.602500,
+                                   longitude: 126.929340,
+                                   sido: "서울시",
+                                   sigungu: "은평구")
         presenter?.completeModifyButton(userInfo: userInfo)
     }
     
     @objc func keyboardWillHide(_ sender: Notification) {
-        self.view.frame.origin.y += keyHeight!
+//        self.view.frame.origin.y += keyHeight!
     }
     
     @objc func keyboardWillShow(_ sender: Notification) {
@@ -276,7 +311,7 @@ class ProfileModifyView: UIViewController {
         let keyboardHeight = keyboardRectangle.height
         keyHeight = keyboardHeight
         
-        self.view.frame.origin.y -= keyboardHeight
+//        self.view.frame.origin.y -= keyboardHeight
     }
     //    @objc func keyBoardShow(notification: NSNotification){
     //        let userInfo: NSDictionary = notification.userInfo! as NSDictionary

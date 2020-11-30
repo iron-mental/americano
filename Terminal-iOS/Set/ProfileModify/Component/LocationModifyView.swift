@@ -25,7 +25,7 @@ class LocationModifyView: UIView {
         }
         locationTextField.do {
             $0.textColor = UIColor.appColor(.profileTextColor)
-            
+            $0.backgroundColor = .red
         }
     }
     func layout() {

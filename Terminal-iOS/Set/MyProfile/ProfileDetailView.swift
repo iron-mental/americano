@@ -198,23 +198,26 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
         
         /// 프로필
         profile.name.text = userInfo.nickname
-        guard let image = userInfo.image else { return }
-        guard let introduce = userInfo.introduce else { return }
-        profile.profileImage.kf.setImage(with: URL(string: image), options: [.requestModifier(imageDownloadRequest)])
-        profile.descript.text = introduce
         
+        if let image = userInfo.image, let introduce = userInfo.introduce {
+            profile.descript.text = introduce
+            profile.profileImage.kf.setImage(with: URL(string: image),
+                                             options: [.requestModifier(imageDownloadRequest)])
+        }
+      
         /// 경력
-        guard let careerTitle = userInfo.careerTitle else { return }
-        guard let careerContents = userInfo.careerContents else { return }
-        career.careerTitle.text = careerTitle
-        career.careerContents.text = careerContents
+        if let careerTitle = userInfo.careerTitle, let careerContents = userInfo.careerContents {
+            career.careerTitle.text = careerTitle
+            career.careerContents.text = careerContents
+        }
         
         /// 이메일
         email.email.text = userInfo.email
         
         /// 활동지역
-        guard let address = userInfo.address else { return }
-        location.location.text = address
+        if let address = userInfo.address {
+            location.location.text = address
+        }
     }
     
     func addProjectToStackView(with project: [Project]) {

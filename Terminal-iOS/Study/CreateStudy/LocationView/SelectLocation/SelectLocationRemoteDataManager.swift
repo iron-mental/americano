@@ -23,7 +23,8 @@ class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
         
         AF.request("https://dapi.kakao.com/v2/local/geo/coord2address.json",
                    method: .get,
-                   parameters: parameters, headers: headers).responseJSON(completionHandler: { [self] response in
+                   parameters: parameters,
+                   headers: headers).responseJSON(completionHandler: { [self] response in
                     
                     switch response.result {
                     case .success(let value):
