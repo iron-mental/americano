@@ -17,11 +17,11 @@ class AddNoticeInteractor: AddNoticeInteractorProtocol {
         
         if state == .edit {
             remoteDataManager?.putNotice(studyID: studyID, notice: notice, noticeID: noticeID!, completion: { result, message in
-                print(result, message)
+                print(result, message
             })
         } else if state == .new {
             remoteDataManager?.postNotice(studyID: studyID, notice: notice, completion: { result, message in
-                
+
                 self.presenter?.addNoticeResult(result: result, notice: message)
             })
         } else {

@@ -12,9 +12,11 @@ import SwiftyJSON
 
 protocol NoticeDetailViewProtocol {
     var notice: Notice? { get set }
+    var parentView: NoticeViewProtocol? { get set }
 }
 
 class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
+    var parentView: NoticeViewProtocol?
     var notice: Notice?
     var noticeID: Int?
     var modifyButton = UIButton()
@@ -172,8 +174,11 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             switch result.result {
             case .success(let value):
                 print(JSON(value)["message"].string!)
+                self.dismiss(animated: true) {
+                    self.parentView?.presenter?.viewDidLoad(studyID: sID)
+                }
                 break
-            case .failure(let err):
+            case .failure( _):
                 break
             }
         }

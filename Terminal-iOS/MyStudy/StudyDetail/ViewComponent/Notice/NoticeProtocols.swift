@@ -11,9 +11,11 @@ import UIKit
 protocol NoticeViewProtocol {
     var studyID: Int? { get set }
     var presenter: NoticePresenterProtocol? { get set }
+    var notice: UITableView { get set }
     
     func showNoticeList(noticeList: NoticeList)
     func showMessage(message: String)
+    func noticeReloadData()
 }
 
 protocol NoticeInteractorProtocol {

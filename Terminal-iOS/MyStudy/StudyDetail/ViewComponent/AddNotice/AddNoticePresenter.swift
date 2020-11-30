@@ -18,7 +18,7 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
         interactor?.postNotice(studyID: studyID, notice: notice, state: state, noticeID: noticeID ?? nil)
     }
     
-    func addNoticeResult(result: Bool, notice: String) {
+    func addNoticeResult(result: Bool, notice: Int) {
         if result {
             view?.showNewNotice()
         } else {

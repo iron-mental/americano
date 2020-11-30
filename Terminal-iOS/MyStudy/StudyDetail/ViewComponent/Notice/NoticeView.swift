@@ -110,6 +110,11 @@ extension NoticeView: NoticeViewProtocol {
         notice.reloadData()
     }
     
+    func noticeReloadData() {
+        notice.reloadData()
+        view.layoutIfNeeded()
+    }
+    
     func showMessage(message: String) {
         print(message)
     }
