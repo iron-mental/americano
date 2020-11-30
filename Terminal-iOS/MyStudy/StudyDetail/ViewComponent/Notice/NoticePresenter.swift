@@ -9,10 +9,6 @@
 import UIKit
 
 class NoticePresenter: NoticePresenterProtocol {
-    
-    
-    
-    
     var view: NoticeViewProtocol?
     var wireFrame: NoticeWireFrameProtocol?
     var interactor: NoticeInteractorProtocol?
@@ -20,7 +16,7 @@ class NoticePresenter: NoticePresenterProtocol {
     func viewDidLoad(studyID: Int) {
         interactor?.getNoticeList(studyID: studyID)
     }
-    func showResult(result: Bool, noticeList: NoticeList?, message: String?) {
+    func showResult(result: Bool, noticeList: [Notice]?, message: String?) {
         switch result {
         case true:
             view?.showNoticeList(noticeList: noticeList!)
@@ -41,5 +37,19 @@ class NoticePresenter: NoticePresenterProtocol {
         case false:
             print("실패니까 대처해 얼릉")
         }
+    }
+    func didScrollEnded(studyID: Int) {
+        interactor?.getNoticeListPagination(studyID: studyID)
+    }
+    
+    func showNoticePaginationResult(result: Bool, notice: [Notice]?, message: String?) {
+        switch result {
+        case true:
+            view?.showNoticeList(noticeList: notice!)
+            break
+        case false:
+            break
+        }
+        
     }
 }

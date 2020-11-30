@@ -25,14 +25,15 @@ class NoticeView: UIViewController {
     }
     
     func sorted() {
-        pinnedNotiArr = noticeList.filter { $0.pinned }
-        notiArr = noticeList.filter { !$0.pinned }
+        pinnedNotiArr = noticeList.filter { $0.pinned! }
+        notiArr = noticeList.filter { !$0.pinned! }
     }
     func attribute() {
         notice.do {
             $0.register(NoticeCell.self, forCellReuseIdentifier: NoticeCell.noticeCellID)
             $0.delegate = self
             $0.dataSource = self
+            $0.prefetchDataSource = self
             $0.bounces = false
             $0.rowHeight = Terminal.convertHeigt(value: 123)
         }
@@ -50,7 +51,7 @@ class NoticeView: UIViewController {
     }
 }
 
-extension NoticeView: UITableViewDelegate, UITableViewDataSource {
+extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -101,20 +102,25 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource {
         selectedNotice!.studyID = studyID
         presenter?.celldidTap(notice: selectedNotice!, parentView: self)
     }
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { indexPath in
+            if noticeList.count - 1 == indexPath.row {
+                presenter?.didScrollEnded(studyID: studyID!)
+            }
+        }
+    }
 }
 
 extension NoticeView: NoticeViewProtocol {
-    func showNoticeList(noticeList: NoticeList) {
-        self.noticeList = noticeList.data
+    func showNoticeList(noticeList: [Notice]) {
+        self.noticeList += noticeList
         sorted()
         notice.reloadData()
     }
-    
     func noticeReloadData() {
         notice.reloadData()
         view.layoutIfNeeded()
     }
-    
     func showMessage(message: String) {
         print(message)
     }

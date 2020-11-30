@@ -41,7 +41,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         }
         noticeBackground.do {
             $0.layer.cornerRadius = 5
-            $0.backgroundColor = notice!.pinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+            $0.backgroundColor = notice!.pinned! ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
         }
         removeButton.do {
             $0.setTitle("삭제", for: .normal)
@@ -60,7 +60,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.textColor = .white
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 5
-            $0.text = notice!.pinned ? "필독" : "공지"
+            $0.text = notice!.pinned! ? "필독" : "공지"
         }
         noticeTitle.do {
             $0.dynamicFont(fontSize: 14, weight: .semibold)

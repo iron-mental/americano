@@ -10,11 +10,11 @@ import Foundation
 
 struct Notice: Codable {
     let id: Int
+    let title, contents: String?
     let leaderID: Int?
     var studyID: Int?
-    let title, contents: String
-    let pinned: Bool
-    let updatedAt: String
+    let pinned: Bool?
+    let updatedAt: String?
     let leaderImage: String?
     let leaderNickname: String?
     let createAt: String?

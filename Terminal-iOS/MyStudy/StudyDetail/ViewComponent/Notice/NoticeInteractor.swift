@@ -10,7 +10,8 @@ import UIKit
 
 class NoticeInteractor: NoticeInteractorProtocol {
     
-    
+    var resultNoticeList: [Notice] = []
+    var nextNoticeID: [Int] = []
     var presenter: NoticePresenterProtocol?
     var remoteDataManager: NoticeRemoteDataManagerProtocol?
     var localDataManager: NoticeLocalDataManagerProtocol?
@@ -19,7 +20,10 @@ class NoticeInteractor: NoticeInteractorProtocol {
         remoteDataManager?.getNoticeList(studyID: studyID, completion: { [self] (result, noticeList, message)  in
             switch result {
             case true:
-                presenter?.showResult(result: result, noticeList: noticeList!, message: nil )
+                noticeList?.forEach {
+                    $0.title != nil ? resultNoticeList.append($0) : nextNoticeID.append($0.id)
+                }
+                presenter?.showResult(result: result, noticeList: resultNoticeList, message: nil )
                 break
             case false:
                 presenter?.showResult(result: result, noticeList: nil, message: message! )
@@ -27,11 +31,25 @@ class NoticeInteractor: NoticeInteractorProtocol {
             }
         })
     }
+    
     func getNoticeDetail(notice: Notice, parentView: UIViewController) {
         let studyID = notice.studyID
         let noticeID = notice.id
         remoteDataManager?.getNoticeDetail(studyID: studyID!, noticeID: noticeID, completion: { result, data in
             self.presenter?.noticeDetailResult(result: result, notice: data, parentView: parentView)
+        })
+    }
+    func getNoticeListPagination(studyID: Int) {
+        let nextNoticeListIDs = nextNoticeID.count > 10 ? Array(nextNoticeID[...10]) : nextNoticeID
+        remoteDataManager?.getNoticeListPagination(studyID: studyID, noticeListIDs: nextNoticeListIDs, completion: { result, data, message in
+            switch result {
+            case true:
+                self.presenter?.showNoticePaginationResult(result: result, notice: data, message: nil)
+                break
+            case false:
+                self.presenter?.showNoticePaginationResult(result: result, notice: nil, message: message)
+                break
+            }
         })
     }
 }

@@ -13,7 +13,7 @@ protocol NoticeViewProtocol {
     var presenter: NoticePresenterProtocol? { get set }
     var notice: UITableView { get set }
     
-    func showNoticeList(noticeList: NoticeList)
+    func showNoticeList(noticeList: [Notice])
     func showMessage(message: String)
     func noticeReloadData()
 }
@@ -22,10 +22,11 @@ protocol NoticeInteractorProtocol {
     var presenter: NoticePresenterProtocol? { get set }
     var remoteDataManager: NoticeRemoteDataManagerProtocol? { get set }
     var localDataManager: NoticeLocalDataManagerProtocol? { get set }
-    
+
     //PRESENTER -> INTERACTOR
     func getNoticeList(studyID: Int)
     func getNoticeDetail(notice: Notice, parentView: UIViewController)
+    func getNoticeListPagination(studyID: Int)
 }
 
 protocol NoticePresenterProtocol {
@@ -36,15 +37,18 @@ protocol NoticePresenterProtocol {
     //VIEW -> PRESENTER
     func viewDidLoad(studyID: Int)
     func celldidTap(notice: Notice, parentView: UIViewController)
+    func didScrollEnded(studyID: Int)
+    
     //INTERACTOR -> PRESENTER
-    func showResult(result: Bool, noticeList: NoticeList?, message: String?)
+    func showResult(result: Bool, noticeList: [Notice]?, message: String?)
     func noticeDetailResult(result: Bool, notice: Notice, parentView: UIViewController)
+    func showNoticePaginationResult(result: Bool, notice: [Notice]?, message: String?)
 }
 
 protocol NoticeRemoteDataManagerProtocol {
-
-    func getNoticeList(studyID: Int, completion: @escaping (_: Bool , _: NoticeList?, _: String?) -> Void)
-    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping (_: Bool, _: Notice) -> Void)
+    func getNoticeList(studyID: Int, completion: @escaping (_ result: Bool, _ data: [Notice]?, _ message: String?) -> Void)
+    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping (_ result: Bool, _ data: Notice) -> Void)
+    func getNoticeListPagination(studyID: Int, noticeListIDs: [Int], completion: @escaping (_ result: Bool, _ data: [Notice]?, _ message: String?) -> Void)
 }
 
 protocol NoticeLocalDataManagerProtocol {
