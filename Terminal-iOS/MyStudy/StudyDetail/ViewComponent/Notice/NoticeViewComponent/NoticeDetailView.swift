@@ -112,7 +112,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         removeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: noticeLabel.centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: modifyButton.trailingAnchor, constant: -10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: modifyButton.leadingAnchor, constant: -10).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 90)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
         }
@@ -155,7 +155,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         }
     }
     @objc func modifyButtonDidTap() {
-        var view = AddNoticeWireFrame.createAddNoticeModule(studyID: (notice?.studyID)!)
+        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: (notice?.studyID)!)
         var modifyView = view as! AddNoticeViewProtocol
         modifyView.notice = self.notice!
         modifyView.state = .edit
@@ -163,6 +163,19 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         })
     }
     @objc func removeButtonDidTap() {
-        
+        guard let sID = notice?.studyID, let nID = notice?.id else { return }
+        let url = "http://3.35.154.27:3000/v1/study/\(sID)/notice/\(nID)"
+        let headers: HTTPHeaders = [
+            "Authorization" : Terminal.accessToken
+        ]
+        AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers ).responseJSON { result in
+            switch result.result {
+            case .success(let value):
+                print(JSON(value)["message"].string!)
+                break
+            case .failure(let err):
+                break
+            }
+        }
     }
 }
