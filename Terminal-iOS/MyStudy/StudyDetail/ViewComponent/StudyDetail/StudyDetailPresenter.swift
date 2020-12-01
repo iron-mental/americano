@@ -32,9 +32,6 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
         interactor?.postStudyJoin(studyID: studyID, message: message)
     }
     
-    func studyJoinResult(result: Bool, message: String) {
-//        <#code#>
-    }
 }
 
 extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
@@ -44,5 +41,8 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
     
     func onError() {
         
+    }
+    func studyJoinResult(result: Bool, message: String) {
+        view?.studyJoinResult(message: message)
     }
 }

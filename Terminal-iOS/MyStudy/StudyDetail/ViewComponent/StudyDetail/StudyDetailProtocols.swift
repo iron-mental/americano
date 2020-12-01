@@ -41,7 +41,7 @@ protocol StudyDetailPresenterProtocol: class {
     func joinButtonDidTap(studyID: Int, message: String)
     
     //INTERACTOR -> PRESENTER
-    func studyJoinResult(result: Bool, message: String)
+    
 }
 
 protocol StudyDetailInteractorInputProtocol: class {
@@ -57,6 +57,7 @@ protocol StudyDetailInteractorInputProtocol: class {
 protocol StudyDetailInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func didRetrieveStudyDetail(_ studyDetail: StudyDetail)
+    func studyJoinResult(result: Bool, message: String)
     func onError()
 }
 

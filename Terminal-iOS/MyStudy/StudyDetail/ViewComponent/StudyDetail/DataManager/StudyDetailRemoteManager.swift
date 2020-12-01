@@ -43,7 +43,9 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
         AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
-                print(JSON(value))
+                let message = JSON(value)["message"].string!
+                let result = JSON(value)["result"].bool!
+                completion(result, message)
                 break
             case .failure(let err):
                 print(err)

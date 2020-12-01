@@ -28,7 +28,11 @@ class StudyDetailView: UIViewController {
     }
     var userData: [Participate] = []
     var keyValue: Int?
-    var studyInfo: StudyDetail?
+    var studyInfo: StudyDetail? {
+        didSet {
+            attribute()
+        }
+    }
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
     let picker = UIImagePickerController()
@@ -83,6 +87,7 @@ class StudyDetailView: UIViewController {
         studyIntroduceView.do {
             $0.titleHidden()
             $0.contentText = ["",String(studyInfo?.introduce ?? "")]
+            
             if state == .none || state == .member {
             } else {
             }
@@ -224,40 +229,15 @@ class StudyDetailView: UIViewController {
 
 extension StudyDetailView: StudyDetailViewProtocol {
     func studyJoinResult(message: String) {
-//        <#code#>
+        print("뷰에서찎는거구요", message)
     }
     
     
     func showStudyDetail(with studyDetail: StudyDetail) {
         self.studyInfo = studyDetail
-        
-//        if studyDetail.image == "" || studyDetail.image == nil {
-//            mainImageView.do {
-//                $0.image = #imageLiteral(resourceName: "swift")
-//            }
-//        } else {
-//            mainImageView.do {
-//                guard let url = URL(string: studyDetail.image!) else { return }
-//                $0.kf.setImage(with: url)
-//            }
-//        }
-//
-//        studyIntroduceView.do {
-//            $0.contentText = ["","\(studyDetail.title)"]
-//        }
-//        studyPlanView.do {
-//            $0.contentText = ["스터디 진행","\(studyDetail.title)"]
-//        }
-//        timeView.do {
-//            $0.contentText = ["시간","\(studyDetail.studyTime)"]
-//        }
-//        locationView.do {
-//            $0.contentText[1] = "\(studyDetail.location.addressName) \(studyDetail.location.placeName ?? "")"
-//        }
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
-        
     }
     
     func showError() {
