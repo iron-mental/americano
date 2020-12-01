@@ -10,12 +10,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-protocol NoticeDetailViewProtocol {
-    var notice: Notice? { get set }
-    var parentView: NoticeViewProtocol? { get set }
-}
+
 
 class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
+    var presenter: NoticeDetailPresenterProtocol?
+    
     var parentView: NoticeViewProtocol?
     var notice: Notice?
     var noticeID: Int?
@@ -31,7 +30,8 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        attribute()
+        presenter?.viewDidLoad(notice: notice!)
+//        attribute()
         layout()
     }
     
@@ -170,10 +170,10 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         let headers: HTTPHeaders = [
             "Authorization" : Terminal.accessToken
         ]
+        
         AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers ).responseJSON { result in
             switch result.result {
-            case .success(let value):
-                print(JSON(value)["message"].string!)
+            case .success(let _):
                 self.dismiss(animated: true) {
                     self.parentView?.presenter?.viewDidLoad(studyID: sID)
                 }
@@ -182,5 +182,9 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
                 break
             }
         }
+    }
+    func showNoticeDetail(notice: Notice) {
+        self.notice = notice
+        attribute()
     }
 }

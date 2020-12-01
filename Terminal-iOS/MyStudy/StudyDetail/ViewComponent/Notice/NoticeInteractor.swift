@@ -31,16 +31,15 @@ class NoticeInteractor: NoticeInteractorProtocol {
         })
     }
     
-    func getNoticeDetail(notice: Notice, parentView: UIViewController) {
-        let studyID = notice.studyID
-        let noticeID = notice.id
-        remoteDataManager?.getNoticeDetail(studyID: studyID!, noticeID: noticeID, completion: { result, data in
-            self.presenter?.noticeDetailResult(result: result, notice: data, parentView: parentView)
-        })
-    }
+//    func getNoticeDetail(notice: Notice, parentView: UIViewController) {
+//        let studyID = notice.studyID
+//        let noticeID = notice.id
+//        remoteDataManager?.getNoticeDetail(studyID: studyID!, noticeID: noticeID, completion: { result, data in
+//            self.presenter?.noticeDetailResult(result: result, notice: data, parentView: parentView)
+//        })
+//    }
     func getNoticeListPagination(studyID: Int) {
         var nextNoticeListIDs: [Int] = []
-        
         if nextNoticeID.count > 9 {
             nextNoticeListIDs = Array(nextNoticeID[0...9])
             nextNoticeID.removeSubrange(Range(0...9))

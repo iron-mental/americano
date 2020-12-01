@@ -28,6 +28,7 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             case .success(let value):
                 let result = JSON(value)["result"].bool!
                 if result {
+                    print(JSON(value))
                     let noticeID = JSON(value)["data"]["notice_id"].int!
                     completion(result, noticeID)
                 }
@@ -37,17 +38,23 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             }
         }
     }
-    func putNotice(studyID: Int, notice: NoticePost, noticeID: Int, completion: @escaping (Bool, String) -> Void) {
+    func putNotice(studyID: Int, notice: NoticePost, noticeID: Int, completion: @escaping (Bool, Int) -> Void) {
         let url = URL(string: "http://3.35.154.27:3000/v1/study/\(studyID)/notice/\(noticeID)")
         let params: Parameters = [
             "title" : notice.title,
             "contents" : notice.contents,
             "pinned" : notice.pinned
         ]
+        
         AF.request(url!, method: .put, parameters: params, encoding: JSONEncoding.default ,headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
-                completion(JSON(value)["result"].bool!, JSON(value)["message"].string!)
+                let result = JSON(value)["result"].bool!
+                if result {
+                    print(JSON(value))
+//                    print(JSON(value)["message"].string!)
+                    completion(result, noticeID)
+                }
                 break
             case .failure( _):
                 break

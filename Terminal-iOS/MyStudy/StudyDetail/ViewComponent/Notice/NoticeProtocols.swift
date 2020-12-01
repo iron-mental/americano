@@ -11,11 +11,9 @@ import UIKit
 protocol NoticeViewProtocol {
     var studyID: Int? { get set }
     var presenter: NoticePresenterProtocol? { get set }
-    var notice: UITableView { get set }
     
     func showNoticeList(noticeList: [Notice])
     func showMessage(message: String)
-    func noticeReloadData()
 }
 
 protocol NoticeInteractorProtocol {
@@ -25,7 +23,7 @@ protocol NoticeInteractorProtocol {
 
     //PRESENTER -> INTERACTOR
     func getNoticeList(studyID: Int)
-    func getNoticeDetail(notice: Notice, parentView: UIViewController)
+//    func getNoticeDetail(notice: Notice, parentView: UIViewController)
     func getNoticeListPagination(studyID: Int)
 }
 
@@ -47,7 +45,7 @@ protocol NoticePresenterProtocol {
 
 protocol NoticeRemoteDataManagerProtocol {
     func getNoticeList(studyID: Int, completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void)
-    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping ( _ result: Bool, _ data: Notice) -> Void)
+//    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping ( _ result: Bool, _ data: Notice) -> Void)
     func getNoticeListPagination(studyID: Int, noticeListIDs: [Int], completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void)
 }
 

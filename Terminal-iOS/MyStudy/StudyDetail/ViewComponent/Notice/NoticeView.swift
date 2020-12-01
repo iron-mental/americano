@@ -117,10 +117,6 @@ extension NoticeView: NoticeViewProtocol {
         sorted()
         notice.reloadData()
     }
-    func noticeReloadData() {
-        notice.reloadData()
-        view.layoutIfNeeded()
-    }
     func showMessage(message: String) {
         print(message)
     }

@@ -27,7 +27,8 @@ class NoticePresenter: NoticePresenterProtocol {
         }
     }
     func celldidTap(notice: Notice, parentView: UIViewController) {
-        interactor?.getNoticeDetail(notice: notice, parentView: parentView)
+        wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView)
+//        interactor?.getNoticeDetail(notice: notice, parentView: parentView)
     }
     
     func noticeDetailResult(result: Bool, notice: Notice, parentView: UIViewController) {
