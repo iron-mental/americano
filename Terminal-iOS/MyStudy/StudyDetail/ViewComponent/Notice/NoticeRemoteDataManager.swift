@@ -51,7 +51,6 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
             valuesString += "\($0),"
         }
         valuesString.remove(at: valuesString.index(before: valuesString.endIndex))
-        
         let url = URL(string: "http://3.35.154.27:3000/v1/study/\(studyID)/notice/paging/list?values=\(valuesString)")
         AF.request(url!, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             switch response.result {
