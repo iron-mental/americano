@@ -31,10 +31,8 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         return view
     }
     func goToAddNotice(studyID: Int, parentView: UIViewController) {
-        var view = AddNoticeWireFrame.createAddNoticeModule(studyID: studyID, parentView: parentView)
-        var addNoticeView = view as! AddNoticeViewProtocol
-        addNoticeView.state = .new
-        parentView.present(addNoticeView as! UIViewController, animated: true) {
+        var view = AddNoticeWireFrame.createAddNoticeModule(studyID: studyID, parentView: parentView, state: .new)
+        parentView.present(view, animated: true) {
             print("뷰 띄움")
         }
     }

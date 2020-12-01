@@ -6,7 +6,7 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
     
@@ -28,8 +28,8 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
         interactor?.postNoticeRemove(notice: notice)
     }
     
-    func modifyButtonDidTap(state: AddNoticeState, notice: Notice) {
-        
+    func modifyButtonDidTap(state: AddNoticeState, notice: Notice, parentView: NoticeDetailViewProtocol) {
+        wireFrame?.goToNoticeEdit(state: state, notice: notice, parentView: parentView)
     }
     
     func noticeRemoveResult(result: Bool, message: String) {

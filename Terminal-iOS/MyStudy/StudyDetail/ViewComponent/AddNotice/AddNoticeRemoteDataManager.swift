@@ -28,7 +28,6 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             case .success(let value):
                 let result = JSON(value)["result"].bool!
                 if result {
-                    print(JSON(value))
                     let noticeID = JSON(value)["data"]["notice_id"].int!
                     completion(result, noticeID)
                 }
@@ -51,8 +50,6 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             case .success(let value):
                 let result = JSON(value)["result"].bool!
                 if result {
-                    print(JSON(value))
-//                    print(JSON(value)["message"].string!)
                     completion(result, noticeID)
                 }
                 break

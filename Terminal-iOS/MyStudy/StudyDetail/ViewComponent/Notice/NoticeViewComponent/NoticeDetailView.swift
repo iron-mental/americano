@@ -14,9 +14,7 @@ import SwiftyJSON
 
 class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     
-    
     var presenter: NoticeDetailPresenterProtocol?
-    
     var parentView: NoticeViewProtocol?
     var notice: Notice?
     var noticeID: Int?
@@ -159,14 +157,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     }
     
     @objc func modifyButtonDidTap() {
-        presenter?.modifyButtonDidTap(state: .edit, notice: notice!)
-        
-        //        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: (notice?.studyID)!)
-        //        var modifyView = view as! AddNoticeViewProtocol
-        //        modifyView.notice = self.notice!
-        //        modifyView.state = .edit
-        //        self.present(modifyView as! UIViewController, animated: true, completion: {
-        //        })
+        presenter?.modifyButtonDidTap(state: .edit, notice: notice!, parentView: self)
     }
     
     @objc func removeButtonDidTap() {

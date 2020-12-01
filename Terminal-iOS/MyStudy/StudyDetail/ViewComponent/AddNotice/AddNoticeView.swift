@@ -27,7 +27,7 @@ class AddNoticeView: UIViewController {
     var titleTextField = UITextField()
     var contentTextField = UITextView()
     var completeButton = UIButton()
-    var parentView: NoticeViewProtocol?
+    var parentView: UIViewController?
     
     override func viewDidLoad() {
         attribute()
@@ -138,7 +138,7 @@ class AddNoticeView: UIViewController {
 extension AddNoticeView: AddNoticeViewProtocol {
     func showNewNotice() {
         dismiss(animated: true) {
-            self.parentView?.viewLoad()
+            (self.parentView as! NoticeViewProtocol).viewLoad()
         }
     }
 }
