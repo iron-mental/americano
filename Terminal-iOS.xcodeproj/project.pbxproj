@@ -107,6 +107,12 @@
 		CC5795042570C9E600DF96AB /* AddNoticeRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5795032570C9E600DF96AB /* AddNoticeRemoteDataManager.swift */; };
 		CC5795072570C9F200DF96AB /* AddNoticeLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5795062570C9F200DF96AB /* AddNoticeLocalDataManager.swift */; };
 		CC57950A2570C9FE00DF96AB /* AddNoticeWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5795092570C9FE00DF96AB /* AddNoticeWireFrame.swift */; };
+		CC60446E2576253F000D11C7 /* NoticeDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC60446D2576253F000D11C7 /* NoticeDetailProtocols.swift */; };
+		CC6044712576262C000D11C7 /* NoticeDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6044702576262C000D11C7 /* NoticeDetailInteractor.swift */; };
+		CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC60447D2576263F000D11C7 /* NoticeDetailPresenter.swift */; };
+		CC6044812576265A000D11C7 /* NoticeDetailRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6044802576265A000D11C7 /* NoticeDetailRemoteDataManager.swift */; };
+		CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604483257626CF000D11C7 /* NoticeDetailLocalDataManager.swift */; };
+		CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC84CF47256284650070E233 /* TerminalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF46256284650070E233 /* TerminalAPI.swift */; };
@@ -288,6 +294,12 @@
 		CC5795032570C9E600DF96AB /* AddNoticeRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoticeRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC5795062570C9F200DF96AB /* AddNoticeLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoticeLocalDataManager.swift; sourceTree = "<group>"; };
 		CC5795092570C9FE00DF96AB /* AddNoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoticeWireFrame.swift; sourceTree = "<group>"; };
+		CC60446D2576253F000D11C7 /* NoticeDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailProtocols.swift; sourceTree = "<group>"; };
+		CC6044702576262C000D11C7 /* NoticeDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailInteractor.swift; sourceTree = "<group>"; };
+		CC60447D2576263F000D11C7 /* NoticeDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailPresenter.swift; sourceTree = "<group>"; };
+		CC6044802576265A000D11C7 /* NoticeDetailRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailRemoteDataManager.swift; sourceTree = "<group>"; };
+		CC604483257626CF000D11C7 /* NoticeDetailLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailLocalDataManager.swift; sourceTree = "<group>"; };
+		CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailWireFrame.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC84CF46256284650070E233 /* TerminalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAPI.swift; sourceTree = "<group>"; };
@@ -626,6 +638,12 @@
 			isa = PBXGroup;
 			children = (
 				A5E25C7325590DE40090E21E /* NoticeDetailView.swift */,
+				CC6044702576262C000D11C7 /* NoticeDetailInteractor.swift */,
+				CC60447D2576263F000D11C7 /* NoticeDetailPresenter.swift */,
+				CC6044802576265A000D11C7 /* NoticeDetailRemoteDataManager.swift */,
+				CC604483257626CF000D11C7 /* NoticeDetailLocalDataManager.swift */,
+				CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */,
+				CC60446D2576253F000D11C7 /* NoticeDetailProtocols.swift */,
 			);
 			path = NoticeViewComponent;
 			sourceTree = "<group>";
@@ -1078,6 +1096,7 @@
 				CCA3FF3F2517823000F62627 /* StudyListLocalDataManager.swift in Sources */,
 				CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */,
 				CCA1FF6F24FD10290026C3EA /* SetView.swift in Sources */,
+				CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */,
 				CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */,
 				A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */,
 				CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */,
@@ -1110,10 +1129,12 @@
 				CCD51CA5256E254B00D41771 /* NoticeLocalDataManager.swift in Sources */,
 				CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */,
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
+				CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				A5D058D5255D90CE0047CA9E /* StudyDetailInteractor.swift in Sources */,
 				CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */,
 				CC5795072570C9F200DF96AB /* AddNoticeLocalDataManager.swift in Sources */,
+				CC6044812576265A000D11C7 /* NoticeDetailRemoteDataManager.swift in Sources */,
 				A51F238C256E5A2200CBFC13 /* BaseResponse.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */,
@@ -1132,6 +1153,8 @@
 				A5BA1EF4254AE9900089D4E9 /* UISegmentControl+Ext.swift in Sources */,
 				A5C5B1502545699700F4A86D /* SNSView.swift in Sources */,
 				CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */,
+				CC60446E2576253F000D11C7 /* NoticeDetailProtocols.swift in Sources */,
+				CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */,
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,
 				CCD51C83256D2A0500D41771 /* MyStudyDetailWireFrame.swift in Sources */,
@@ -1178,6 +1201,7 @@
 				CC5794F82570C63C00DF96AB /* NoticePost.swift in Sources */,
 				CC29FB3825207E8E00C1BDCE /* SelectLocationLocalDataManager.swift in Sources */,
 				CCD51C9B256E247600D41771 /* NoticeInteractor.swift in Sources */,
+				CC6044712576262C000D11C7 /* NoticeDetailInteractor.swift in Sources */,
 				CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
 				CCE279EC256E46C600DB3246 /* Notice.swift in Sources */,

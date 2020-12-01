@@ -18,6 +18,12 @@ class NoticeView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewLoad()
+    }
+    func viewLoad() {
+        noticeList.removeAll()
+        pinnedNotiArr.removeAll()
+        notiArr.removeAll()
         presenter?.viewDidLoad(studyID: studyID!)
         sorted()
         attribute()
@@ -25,14 +31,15 @@ class NoticeView: UIViewController {
     }
     
     func sorted() {
-        pinnedNotiArr = noticeList.filter { $0.pinned }
-        notiArr = noticeList.filter { !$0.pinned }
+        pinnedNotiArr = noticeList.filter { $0.pinned! }
+        notiArr = noticeList.filter { !$0.pinned! }
     }
     func attribute() {
         notice.do {
             $0.register(NoticeCell.self, forCellReuseIdentifier: NoticeCell.noticeCellID)
             $0.delegate = self
             $0.dataSource = self
+            $0.prefetchDataSource = self
             $0.bounces = false
             $0.rowHeight = Terminal.convertHeigt(value: 123)
         }
@@ -50,7 +57,7 @@ class NoticeView: UIViewController {
     }
 }
 
-extension NoticeView: UITableViewDelegate, UITableViewDataSource {
+extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -92,22 +99,31 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(indexPath.section)
-        let view = NoticeDetailView()
-        view.noticeBackground.backgroundColor = indexPath.section == 0 ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
-        view.noticeLabel.text = indexPath.section == 0 ? "필독" : "공지"
-        navigationController?.pushViewController(view, animated: true)
+        var selectedNotice: Notice?
+        if indexPath.section == 0 {
+            selectedNotice = pinnedNotiArr[indexPath.row]
+        } else {
+            selectedNotice = notiArr[indexPath.row]
+        }
+        selectedNotice!.studyID = studyID
+        presenter?.celldidTap(notice: selectedNotice!, parentView: self)
+    }
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach { indexPath in
+            if noticeList.count - 1 == indexPath.row {
+                presenter?.didScrollEnded(studyID: studyID!)
+            }
+        }
     }
 }
 
 extension NoticeView: NoticeViewProtocol {
-    func showNoticeList(noticeList: NoticeList) {
-        self.noticeList = noticeList.data
+    
+    func showNoticeList(noticeList: [Notice]) {
+        self.noticeList += noticeList
         sorted()
         notice.reloadData()
     }
-    
     func showMessage(message: String) {
-        print(message)
     }
 }
