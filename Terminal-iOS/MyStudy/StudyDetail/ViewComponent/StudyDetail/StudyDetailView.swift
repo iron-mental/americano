@@ -230,6 +230,7 @@ class StudyDetailView: UIViewController {
 extension StudyDetailView: StudyDetailViewProtocol {
     func studyJoinResult(message: String) {
         print("뷰에서찎는거구요", message)
+        presenter?.showStudyListDetail(keyValue: "\(studyInfo!.id)")
     }
     
     
