@@ -6,7 +6,7 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class AddNoticePresenter: AddNoticePresenterProtocol {
     var view: AddNoticeViewProtocol?
@@ -20,7 +20,7 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
     func addNoticeResult(result: Bool, notice: Int, studyID: Int) {
         if result {
             view?.showNewNotice()
-            wireFrame?.goToNoticeDetailView(noticeID: notice, studyID: studyID)
+            wireFrame?.goToNoticeDetailView(noticeID: notice, studyID: studyID, parentView: UIViewController())
         } else {
         }
     }

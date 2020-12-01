@@ -13,6 +13,8 @@ import SwiftyJSON
 
 
 class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
+    
+    
     var presenter: NoticeDetailPresenterProtocol?
     
     var parentView: NoticeViewProtocol?
@@ -31,7 +33,6 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad(notice: notice!)
-//        attribute()
         layout()
     }
     
@@ -156,35 +157,29 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor).isActive = true
         }
     }
+    
     @objc func modifyButtonDidTap() {
-        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: (notice?.studyID)!)
-        var modifyView = view as! AddNoticeViewProtocol
-        modifyView.notice = self.notice!
-        modifyView.state = .edit
-        self.present(modifyView as! UIViewController, animated: true, completion: {
-        })
-    }
-    @objc func removeButtonDidTap() {
-        guard let sID = notice?.studyID, let nID = notice?.id else { return }
-        let url = "http://3.35.154.27:3000/v1/study/\(sID)/notice/\(nID)"
-        let headers: HTTPHeaders = [
-            "Authorization" : Terminal.accessToken
-        ]
+        presenter?.modifyButtonDidTap(state: .edit, notice: notice!)
         
-        AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers ).responseJSON { result in
-            switch result.result {
-            case .success(let _):
-                self.dismiss(animated: true) {
-                    self.parentView?.presenter?.viewDidLoad(studyID: sID)
-                }
-                break
-            case .failure( _):
-                break
-            }
-        }
+        //        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: (notice?.studyID)!)
+        //        var modifyView = view as! AddNoticeViewProtocol
+        //        modifyView.notice = self.notice!
+        //        modifyView.state = .edit
+        //        self.present(modifyView as! UIViewController, animated: true, completion: {
+        //        })
+    }
+    
+    @objc func removeButtonDidTap() {
+        presenter?.removeButtonDidTap(notice: notice!)
     }
     func showNoticeDetail(notice: Notice) {
         self.notice = notice
         attribute()
+    }
+    
+    func showNoticeRemove(message: String) {
+        self.dismiss(animated: true) { [self] in
+            self.parentView?.viewLoad()
+        }
     }
 }

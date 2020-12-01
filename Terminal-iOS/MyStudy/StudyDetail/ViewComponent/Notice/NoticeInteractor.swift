@@ -16,6 +16,8 @@ class NoticeInteractor: NoticeInteractorProtocol {
     var localDataManager: NoticeLocalDataManagerProtocol?
     
     func getNoticeList(studyID: Int) {
+        resultNoticeList.removeAll()
+        nextNoticeID.removeAll()
         remoteDataManager?.getNoticeList(studyID: studyID, completion: { [self] (result, noticeList, message)  in
             switch result {
             case true:
@@ -30,14 +32,6 @@ class NoticeInteractor: NoticeInteractorProtocol {
             }
         })
     }
-    
-//    func getNoticeDetail(notice: Notice, parentView: UIViewController) {
-//        let studyID = notice.studyID
-//        let noticeID = notice.id
-//        remoteDataManager?.getNoticeDetail(studyID: studyID!, noticeID: noticeID, completion: { result, data in
-//            self.presenter?.noticeDetailResult(result: result, notice: data, parentView: parentView)
-//        })
-//    }
     func getNoticeListPagination(studyID: Int) {
         var nextNoticeListIDs: [Int] = []
         if nextNoticeID.count > 9 {

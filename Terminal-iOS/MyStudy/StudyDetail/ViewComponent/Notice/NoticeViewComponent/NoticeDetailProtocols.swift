@@ -16,6 +16,7 @@ protocol NoticeDetailViewProtocol {
     
     //PRESENTER -> VIEW
     func showNoticeDetail(notice: Notice)
+    func showNoticeRemove(message: String)
 }
 
 protocol NoticeDetailInteractorProtocol {
@@ -23,7 +24,9 @@ protocol NoticeDetailInteractorProtocol {
     var remoteDataManager: NoticeDetailRemoteDataManagerProtocol? { get set }
     var localDataManager: NoticeDetailLocalDataManagerProtocol? { get set }
     
+    //PRESENTER -> INTERACTOR
     func getNoticeDetail(notice: Notice)
+    func postNoticeRemove(notice: Notice)
 }
 
 protocol NoticeDetailPresenterProtocol {
@@ -33,13 +36,19 @@ protocol NoticeDetailPresenterProtocol {
     
     //VIEW -> PRESENTER
     func viewDidLoad(notice: Notice)
+    func removeButtonDidTap(notice: Notice)
+    func modifyButtonDidTap(state: AddNoticeState, notice: Notice)
+    
     //INTERACTOR -> PRESENTER
     func noticeDetailResult(result: Bool, notice: Notice)
+    func noticeRemoveResult(result: Bool, message: String)
 }
 
 protocol NoticeDetailRemoteDataManagerProtocol {
-    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping ( _ result: Bool, _ data: Notice) -> Void)
+    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping ( _ result: Bool, _ data: Notice ) -> Void)
+    func postNoticeRemove(studyID: Int, noticeID: Int, completion: @escaping ( _ result: Bool, _ message: String ) -> Void)
 }
+
 
 protocol NoticeDetailLocalDataManagerProtocol {
     
@@ -48,5 +57,5 @@ protocol NoticeDetailLocalDataManagerProtocol {
 protocol NoticeDetailWireFrameProtocol {
     var presenter: NoticeDetailPresenterProtocol? { get set }
     
-    static func createNoticeDetailModule( notice: Int, studyID: Int? ) -> UIViewController
+    static func createNoticeDetailModule( notice: Int, studyID: Int?, parentView: UIViewController? ) -> UIViewController
 }

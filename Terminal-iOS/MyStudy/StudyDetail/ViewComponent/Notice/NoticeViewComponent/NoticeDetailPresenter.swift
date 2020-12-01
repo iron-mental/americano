@@ -9,15 +9,31 @@
 import Foundation
 
 class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
+    
+    
+    
     var view: NoticeDetailViewProtocol?
     var interactor: NoticeDetailInteractorProtocol?
     var wireFrame: NoticeDetailWireFrameProtocol?
     
     func viewDidLoad(notice: Notice) {
+        
         interactor?.getNoticeDetail(notice: notice)
     }
     
     func noticeDetailResult(result: Bool, notice: Notice) {
         view?.showNoticeDetail(notice: notice)
+    }
+    func removeButtonDidTap(notice: Notice) {
+        interactor?.postNoticeRemove(notice: notice)
+    }
+    
+    func modifyButtonDidTap(state: AddNoticeState, notice: Notice) {
+        
+    }
+    
+    func noticeRemoveResult(result: Bool, message: String) {
+        
+        view?.showNoticeRemove(message: message)
     }
 }

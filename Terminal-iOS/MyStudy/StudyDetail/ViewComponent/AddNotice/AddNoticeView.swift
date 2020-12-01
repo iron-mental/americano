@@ -27,6 +27,7 @@ class AddNoticeView: UIViewController {
     var titleTextField = UITextField()
     var contentTextField = UITextView()
     var completeButton = UIButton()
+    var parentView: UIViewController?
     
     override func viewDidLoad() {
         attribute()

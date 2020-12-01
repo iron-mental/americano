@@ -29,4 +29,21 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
         }
     }
     
+    func postNoticeRemove(studyID: Int, noticeID: Int, completion: @escaping (Bool, String) -> Void) {
+        let url = "http://3.35.154.27:3000/v1/study/\(studyID)/notice/\(noticeID)"
+        let headers: HTTPHeaders = [
+            "Authorization" : Terminal.accessToken
+        ]
+        
+        AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers ).responseJSON { result in
+            switch result.result {
+            case .success(let value):
+                completion( true, "테스트")
+                break
+            case .failure( _):
+                break
+            }
+        }
+    }
+    
 }

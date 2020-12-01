@@ -13,6 +13,7 @@ protocol AddNoticeViewProtocol {
     var studyID: Int? { get set }
     var notice: Notice? { get set }
     var state: AddNoticeState? { get set }
+    var parentView: UIViewController? { get set }
     
     func showNewNotice()
 }
@@ -50,6 +51,6 @@ protocol AddNoticeLocalDataManagerProtocol {
 protocol AddNoticeWireFrameProtocol {
     var presenter: AddNoticePresenterProtocol? { get set }
     
-    static func createAddNoticeModule(studyID: Int) -> UIViewController
-    func goToNoticeDetailView(noticeID: Int, studyID: Int)
+    static func createAddNoticeModule(studyID: Int, parentView: UIViewController) -> UIViewController
+    func goToNoticeDetailView(noticeID: Int, studyID: Int, parentView: UIViewController?)
 }

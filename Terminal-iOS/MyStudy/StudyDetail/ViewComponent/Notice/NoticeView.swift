@@ -18,6 +18,15 @@ class NoticeView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewLoad()
+    }
+    func viewLoad() {
+        noticeList.removeAll()
+        pinnedNotiArr.removeAll()
+        notiArr.removeAll()
+        print(noticeList)
+        print(pinnedNotiArr)
+        print(notiArr)
         presenter?.viewDidLoad(studyID: studyID!)
         sorted()
         attribute()
@@ -112,12 +121,12 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 }
 
 extension NoticeView: NoticeViewProtocol {
+    
     func showNoticeList(noticeList: [Notice]) {
         self.noticeList += noticeList
         sorted()
         notice.reloadData()
     }
     func showMessage(message: String) {
-        print(message)
     }
 }

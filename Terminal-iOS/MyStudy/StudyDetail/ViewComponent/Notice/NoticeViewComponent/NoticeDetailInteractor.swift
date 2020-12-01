@@ -24,4 +24,16 @@ class NoticeDetailInteractor: NoticeDetailInteractorProtocol {
             }
         })
     }
+    
+    func postNoticeRemove(notice: Notice) {
+        remoteDataManager?.postNoticeRemove(studyID: notice.studyID!, noticeID: notice.id, completion: { result, message in
+            switch result {
+            case true:
+                self.presenter?.noticeRemoveResult(result: result, message: message)
+                break
+            case false:
+                break
+            }
+        })
+    }
 }
