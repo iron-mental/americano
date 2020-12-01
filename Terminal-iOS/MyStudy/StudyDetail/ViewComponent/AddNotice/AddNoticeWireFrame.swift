@@ -21,7 +21,9 @@ class AddNoticeWireFrame: AddNoticeWireFrameProtocol {
         
         view.presenter = presenter
         view.studyID = studyID
-        view.parentView = parentView
+        print(parentView)
+        view.parentView = parentView != nil ? (parentView as! NoticeViewProtocol) : nil
+        
         presenter.view = view
         presenter.wireFrame = wireFrame
         presenter.interactor = interactor

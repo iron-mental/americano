@@ -13,7 +13,7 @@ protocol AddNoticeViewProtocol {
     var studyID: Int? { get set }
     var notice: Notice? { get set }
     var state: AddNoticeState? { get set }
-    var parentView: UIViewController? { get set }
+    var parentView: NoticeViewProtocol? { get set }
     
     func showNewNotice()
 }

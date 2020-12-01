@@ -132,7 +132,7 @@ class MyStudyDetailView: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     func addNoticeButtonAction() {
-        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
+        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: VCArr[0])
     }
 }
 
