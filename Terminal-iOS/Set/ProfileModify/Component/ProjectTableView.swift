@@ -9,17 +9,24 @@
 
 import UIKit
 
-class ProjectView: UITableView {
-  var maxHeight: CGFloat = UIScreen.main.bounds.size.height
-  
-  override func reloadData() {
-    super.reloadData()
-    self.invalidateIntrinsicContentSize()
-    self.layoutIfNeeded()
-  }
-  
-  override var intrinsicContentSize: CGSize {
-    let height = min(contentSize.height, maxHeight)
-    return CGSize(width: contentSize.width, height: height)
-  }
+class ProjectTableView: UITableView {
+    var maxHeight: CGFloat = UIScreen.main.bounds.size.height
+    
+    override var contentSize:CGSize {
+        didSet {
+            invalidateIntrinsicContentSize()
+        }
+    }
+    
+    override func reloadData() {
+        super.reloadData()
+        self.invalidateIntrinsicContentSize()
+        self.layoutIfNeeded()
+    }
+    
+    override var intrinsicContentSize: CGSize {
+        let height = min(contentSize.height, maxHeight)
+        print("이거",height)
+        return CGSize(width: contentSize.width, height: height)
+    }
 }

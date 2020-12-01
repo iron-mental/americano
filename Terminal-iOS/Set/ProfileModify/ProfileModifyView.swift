@@ -14,6 +14,9 @@ class ProfileModifyView: UIViewController {
     var userInfo: UserInfo?
     let picker = UIImagePickerController()
     
+    let projectView = ProjectTableView()
+    let projectAddButton = UIButton()
+    
     var keyHeight: CGFloat?
     lazy var scrollView = UIScrollView()
     lazy var backgroundView = UIView()
@@ -30,10 +33,12 @@ class ProfileModifyView: UIViewController {
     lazy var emailModify = EmailModifyView()
     lazy var locationModify = LocationModifyView()
     
+    var projectArr: [Project] = [Project(id: 1, title: "터미널", contents: "ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;러아님;러아ㅣㄴㅁ;", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd"),
+                                 Project(id: 1, title: "하하하", contents: "ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd")]
+    
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         attribute()
         layout()
         registerForKeyboardNotification()
@@ -163,6 +168,13 @@ class ProfileModifyView: UIViewController {
             $0.isScrollEnabled = false
         }
         
+        projectView.do {
+            $0.delegate = self
+            $0.dataSource = self
+            $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
+            $0.backgroundColor = .red
+        }
+        
         guard let email = userInfo?.email else { return }
         emailModify.emailTextField.text = email
         
@@ -175,7 +187,7 @@ class ProfileModifyView: UIViewController {
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
-        [profileImage, nameModify, descripModify, careerLabel, careerTitleModify, careerDescriptModify, projectLabel, projectTitleModify, projectDescriptModify, snsModify, emailModify, locationModify].forEach { backgroundView.addSubview($0) }
+        [profileImage, nameModify, descripModify, careerLabel, careerTitleModify, careerDescriptModify, projectLabel, projectView , snsModify, emailModify, locationModify].forEach { backgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -235,22 +247,15 @@ class ProfileModifyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
         }
-        projectTitleModify.do {
+        projectView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectLabel.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
         }
-        projectDescriptModify.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectTitleModify.bottomAnchor, constant: 4).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(lessThanOrEqualToConstant: 400).isActive = true
-        }
         snsModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectDescriptModify.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: projectView.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalTo: snsModify.heightAnchor).isActive = true
@@ -294,7 +299,6 @@ class ProfileModifyView: UIViewController {
         present(picker, animated: true, completion: nil)
     }
     func openCamera() {
-        //시뮬에서 앱죽는거 에러처리 해야함
         picker.sourceType = .camera
         present(picker, animated: true, completion: nil)
     }
@@ -329,6 +333,7 @@ class ProfileModifyView: UIViewController {
                                    longitude: 126.929340,
                                    sido: "서울시",
                                    sigungu: "은평구")
+        
         presenter?.completeModifyButton(userInfo: userInfo)
     }
     
@@ -390,6 +395,34 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
     
 }
 
+// MARK: 테이블뷰
+
+extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let title = projectArr[indexPath.row].title.heightWithConstrainedWidth(width: projectView.frame.width,
+                                                                               font: UIFont.systemFont(ofSize: 16))
+        let contents = projectArr[indexPath.row].contents.heightWithConstrainedWidth(width: projectView.frame.width,
+                                                                                     font: UIFont.systemFont(ofSize: 14))
+        print(title)
+        return title + contents
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return projectArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
+        
+        cell.title.text = projectArr[indexPath.row].title
+        cell.contents.text = projectArr[indexPath.row].contents
+        
+        return cell
+    }
+}
+
+// MARK: 이미지 픽커
 
 extension ProfileModifyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -400,6 +433,7 @@ extension ProfileModifyView:  UIImagePickerControllerDelegate & UINavigationCont
     }
 }
 
+// MARK: 텍스트 필드
 
 extension ProfileModifyView: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -444,12 +478,12 @@ extension ProfileModifyView: UIScrollViewDelegate {
         //        careerDescriptModify.frame.miny
         
         if scrollView.contentOffset.y > projectLabel.frame.minY {
-            print("위에 짤린다.")
+//            print("위에 짤린다.")
         } else if ((690 - (280 + 60 )) + scrollView.contentOffset.y) < projectLabel.frame.maxY {
-            print("밑에 짤린다.")
-            print("위로 올려줘야하는 만큼이 이정도",projectLabel.frame.maxY - ((690 - (280 + 60 )) + scrollView.contentOffset.y))
+//            print("밑에 짤린다.")
+//            print("위로 올려줘야하는 만큼이 이정도",projectLabel.frame.maxY - ((690 - (280 + 60 )) + scrollView.contentOffset.y))
         } else {
-            print("안짤린다.")
+//            print("안짤린다.")
         }
     }
 }
