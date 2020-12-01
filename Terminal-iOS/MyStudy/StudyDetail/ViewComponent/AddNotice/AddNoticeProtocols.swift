@@ -39,8 +39,8 @@ protocol AddNoticePresenterProtocol {
 
 protocol AddNoticeRemoteDataManagerProtocol {
     //INTERACTOR -> REMOTE
-    func postNotice(studyID: Int, notice:  NoticePost, completion: @escaping (_: Bool, _: Int) -> Void)
-    func putNotice(studyID: Int, notice: NoticePost, noticeID: Int, completion: @escaping(_: Bool, _: String) -> Void)
+    func postNotice(studyID: Int, notice:  NoticePost, completion: @escaping (_ result: Bool, _ noticeID : Int) -> Void)
+    func putNotice(studyID: Int, notice: NoticePost, noticeID: Int, completion: @escaping(_ result: Bool, _ noticeID: String) -> Void)
 }
 
 protocol AddNoticeLocalDataManagerProtocol {

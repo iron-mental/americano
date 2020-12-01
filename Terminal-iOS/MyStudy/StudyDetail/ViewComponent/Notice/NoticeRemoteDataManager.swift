@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
     let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
-    func getNoticeList(studyID: Int, completion: @escaping (_: Bool, _: [Notice]?, _: String?) -> Void) {
+    func getNoticeList(studyID: Int, completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void) {
         AF.request("http://3.35.154.27:3000/v1/study/\(studyID)/notice",
                    method: .get,headers: headers).responseJSON(completionHandler: { [self] response in
                     switch response.result {
@@ -20,7 +20,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                         if JSON(value)["result"].bool! {
                             let json = "\(JSON(value))".data(using: .utf8)
                             let result: BaseResponse<[Notice]> = try! JSONDecoder().decode(BaseResponse<[Notice]>.self, from: json!)
-                            completion(true, result.data, nil)
+                            completion( true, result.data, nil)
                         } else {
                             completion(false, nil, JSON(value)["message"].string!)
                         }
@@ -30,7 +30,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                     }
                    })
     }
-    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping (Bool, Notice) -> Void) {
+    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping ( _ result: Bool, _ data: Notice) -> Void) {
         
         AF.request("http://3.35.154.27:3000/v1/study/\(studyID)/notice/\(noticeID)", method: .get, headers: headers).responseJSON { response in
             switch response.result {
@@ -40,12 +40,12 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                 guard  let notice = result.data else { return }
                 completion(result.result, notice)
                 break
-            case .failure(let _):
+            case .failure( _):
                 break
             }
         }
     }
-    func getNoticeListPagination(studyID: Int, noticeListIDs: [Int], completion: @escaping (Bool, [Notice]?, String?) -> Void) {
+    func getNoticeListPagination(studyID: Int, noticeListIDs: [Int], completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void) {
         var valuesString = ""
         noticeListIDs.forEach {
             valuesString += "\($0),"
@@ -53,7 +53,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
         valuesString.remove(at: valuesString.index(before: valuesString.endIndex))
         
         let url = URL(string: "http://3.35.154.27:3000/v1/study/\(studyID)/notice/paging/list?values=\(valuesString)")
-        AF.request(url as! URLConvertible, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+        AF.request(url!, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
                 if JSON(value)["result"].bool! {
