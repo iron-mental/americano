@@ -131,14 +131,21 @@ class AddNoticeView: UIViewController {
         let newNoticePost = NoticePost(title: titleTextField.text ?? "",
                                        contents: contentTextField.text ?? "",
                                        pinned: pinButton.currentTitle == "필독" ? true : false)
-            presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
+        presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
     }
 }
 
 extension AddNoticeView: AddNoticeViewProtocol {
     func showNewNotice() {
-        dismiss(animated: true) {
-            (self.parentView as! NoticeViewProtocol).viewLoad()
+        dismiss(animated: true) { [self] in
+            if state == .new {
+                (self.parentView as! NoticeViewProtocol).viewLoad()
+            } else {
+                (self.parentView as! NoticeDetailViewProtocol).parentView?.viewLoad()
+                self.parentView?.dismiss(animated: true, completion: {
+                    print("끝")
+                })
+            }
         }
     }
 }

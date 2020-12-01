@@ -48,7 +48,7 @@ class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
         return view
     }
     func goToNoticeEdit(state: AddNoticeState, notice: Notice, parentView: NoticeDetailViewProtocol) {
-        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: notice.studyID!, parentView: parentView as! UIViewController, state: state)
+        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: notice.studyID!,notice: notice, parentView: parentView as! UIViewController, state: state)
         (parentView as! UIViewController).present(view, animated: true) {
             print("킴")
         }
