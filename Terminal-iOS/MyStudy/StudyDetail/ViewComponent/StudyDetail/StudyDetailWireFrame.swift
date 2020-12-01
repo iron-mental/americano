@@ -9,6 +9,10 @@
 import UIKit
 
 class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
+//    func postStudyJoin(studyID: Int, message: String) {
+//        <#code#>
+//    }
+    
     static func createStudyDetail(keyValue: Int) -> UIViewController {
         let view: StudyDetailViewProtocol = StudyDetailView()
         let presenter: StudyDetailPresenterProtocol & StudyDetailInteractorOutputProtocol = StudyDetailPresenter()

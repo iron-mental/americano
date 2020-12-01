@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     private let headers: HTTPHeaders = [
-        "authorization": Terminal.accessToken
+        "Authorization": Terminal.accessToken
     ]
     
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
@@ -30,6 +30,24 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
                 completionHandler(result.data!)
             case .failure(let err):
                 print("실패", err)
+            }
+        }
+    }
+    
+    func postStudyJoin(studyID: Int, message: String, completion: @escaping (Bool, String) -> Void) {
+        let url = "http://3.35.154.27:3000/v1/study/\(studyID)/apply"
+        
+        let params: Parameters = [
+            "message" : message
+        ]
+        AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                print(JSON(value))
+                break
+            case .failure(let err):
+                print(err)
+                break
             }
         }
     }

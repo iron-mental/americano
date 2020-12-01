@@ -14,9 +14,11 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int?
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
+    
     lazy var  VCArr: [UIViewController] = [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
                                       StudyDetailWireFrame.createStudyDetail(keyValue: studyID!),
                                       ChatWireFrame.createChatModule()]
+    
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
                                            navigationOrientation: .horizontal,
@@ -24,7 +26,7 @@ class MyStudyDetailView: UIViewController {
     lazy var tabSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(didClickecmoreButton))
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()

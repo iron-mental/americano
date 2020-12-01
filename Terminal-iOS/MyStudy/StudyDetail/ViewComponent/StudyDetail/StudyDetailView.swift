@@ -28,7 +28,7 @@ class StudyDetailView: UIViewController {
     }
     var userData: [Participate] = []
     var keyValue: Int?
-        
+    var studyInfo: StudyDetail?
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
     let picker = UIImagePickerController()
@@ -46,13 +46,12 @@ class StudyDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        attribute()
+//        attribute()
         layout()
         presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
     }
     
     func attribute() {
-        print("current state",state)
         mainImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didimageViewClicked))
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -64,6 +63,7 @@ class StudyDetailView: UIViewController {
             $0.addGestureRecognizer(mainImageViewTapGesture)
             $0.image = #imageLiteral(resourceName: "swiftBackground")
         }
+        
         joinButton.do {
             if state == .none || state == .rejected {
                 $0.isHidden = false
@@ -72,10 +72,9 @@ class StudyDetailView: UIViewController {
                 $0.setTitleColor(.white, for: .normal)
                 $0.backgroundColor = UIColor.appColor(.mainColor)
                 $0.layer.cornerRadius = 10
-                
                 $0.clipsToBounds = false
+                $0.addTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
             } else {
-                
                 $0.isHidden = true
             }
         }
@@ -83,7 +82,7 @@ class StudyDetailView: UIViewController {
         //studyIntroduceView, studyPlanView, timeView, timeView
         studyIntroduceView.do {
             $0.titleHidden()
-            $0.contentText = ["","안녕하세요 Swift를 정복하기 위한\n스터디에 함께 할 분을 모집중입니다.\n열심히 하실 분이라면 언제든 환영합니다.\n위의 노션링크도 참고해주세요"]
+            $0.contentText = ["",String(studyInfo?.introduce ?? "")]
             if state == .none || state == .member {
             } else {
             }
@@ -94,21 +93,21 @@ class StudyDetailView: UIViewController {
         }
         studyPlanView.do {
             $0.title.text = "스터디 진행"
-            $0.contentText = ["스터디 진행", "진행은 이렇게 저렇게 합니다\n1주차 : 어쩌고저쩌고\n2주차 : 어쩌고 저쩌고 얄라얄라 얄라셩\n3주차 : "]
+            $0.contentText = ["스터디 진행", String(studyInfo?.progress ?? "")]
             if state == .none || state == .member {
             } else {
             }
         }
         timeView.do {
             $0.title.text = "시간"
-            $0.contentText = ["시간", "매주 토요일 오후 2시~ 4시"]
+            $0.contentText = ["시간", String(studyInfo?.studyTime ?? "")]
             if state == .none || state == .member {
             } else {
             }
         }
         locationView.do {
             $0.title.text = "장소"
-            $0.contentText = ["장소", "네이버 본사"]
+            $0.contentText = ["장소",  String(studyInfo?.location.addressName ?? "")]
         }
     }
     
@@ -218,38 +217,47 @@ class StudyDetailView: UIViewController {
         picker.sourceType = .camera
         present(picker, animated: true, completion: nil)
     }
+    @objc func joinButtonDidTap() {
+        presenter?.joinButtonDidTap(studyID: studyInfo!.id, message: "테스트신청매ㅐㅔ세지~~")
+    }
 }
 
 extension StudyDetailView: StudyDetailViewProtocol {
+    func studyJoinResult(message: String) {
+//        <#code#>
+    }
     
-    func showStudyDetail(with studyDeatil: StudyDetail) {
+    
+    func showStudyDetail(with studyDetail: StudyDetail) {
+        self.studyInfo = studyDetail
         
-        if studyDeatil.image == "" || studyDeatil.image == nil {
-            mainImageView.do {
-                $0.image = #imageLiteral(resourceName: "swift")
-            }
-        } else {
-            mainImageView.do {
-                guard let url = URL(string: studyDeatil.image!) else { return }
-                $0.kf.setImage(with: url)
-            }
-        }
-        
-        studyIntroduceView.do {
-            $0.contentText = ["","\(studyDeatil.title)"]
-        }
-        studyPlanView.do {
-            $0.contentText = ["스터디 진행","\(studyDeatil.title)"]
-        }
-        timeView.do {
-            $0.contentText = ["시간","\(studyDeatil.studyTime)"]
-        }
-        locationView.do {
-            $0.contentText[1] = "\(studyDeatil.location.addressName) \(studyDeatil.location.placeName ?? "")"
-        }
-        userData = studyDeatil.participate
-        state = StudyDetailViewState.init(rawValue: studyDeatil.authority)!
+//        if studyDetail.image == "" || studyDetail.image == nil {
+//            mainImageView.do {
+//                $0.image = #imageLiteral(resourceName: "swift")
+//            }
+//        } else {
+//            mainImageView.do {
+//                guard let url = URL(string: studyDetail.image!) else { return }
+//                $0.kf.setImage(with: url)
+//            }
+//        }
+//
+//        studyIntroduceView.do {
+//            $0.contentText = ["","\(studyDetail.title)"]
+//        }
+//        studyPlanView.do {
+//            $0.contentText = ["스터디 진행","\(studyDetail.title)"]
+//        }
+//        timeView.do {
+//            $0.contentText = ["시간","\(studyDetail.studyTime)"]
+//        }
+//        locationView.do {
+//            $0.contentText[1] = "\(studyDetail.location.addressName) \(studyDetail.location.placeName ?? "")"
+//        }
+        userData = studyDetail.participate
+        state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
+        
     }
     
     func showError() {

@@ -28,6 +28,13 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
     func didClickedCreateButton() {
         
     }
+    func joinButtonDidTap(studyID: Int, message: String) {
+        interactor?.postStudyJoin(studyID: studyID, message: message)
+    }
+    
+    func studyJoinResult(result: Bool, message: String) {
+//        <#code#>
+    }
 }
 
 extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
