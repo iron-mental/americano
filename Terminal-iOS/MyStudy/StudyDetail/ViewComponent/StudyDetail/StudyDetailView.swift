@@ -10,7 +10,7 @@ import UIKit
 import NMapsMap
 import Kingfisher
 
-enum StudyDetailViewState {
+enum StudyDetailViewState: String {
     case edit
     case member
     case host
@@ -21,7 +21,11 @@ enum StudyDetailViewState {
 
 class StudyDetailView: UIViewController {
     var presenter: StudyDetailPresenterProtocol?
-    var state: StudyDetailViewState = .member
+    var state: StudyDetailViewState = .member {
+        didSet {
+            attribute()
+        }
+    }
     var userData: [Participate] = []
     var keyValue: Int?
         
@@ -48,6 +52,7 @@ class StudyDetailView: UIViewController {
     }
     
     func attribute() {
+        print("current state",state)
         mainImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didimageViewClicked))
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -60,14 +65,17 @@ class StudyDetailView: UIViewController {
             $0.image = #imageLiteral(resourceName: "swiftBackground")
         }
         joinButton.do {
-            if state == .none {
+            if state == .none || state == .rejected {
+                $0.isHidden = false
                 $0.setTitle("스터디 참여하기", for: .normal)
                 $0.titleLabel?.font = UIFont.systemFont(ofSize: 13)
                 $0.setTitleColor(.white, for: .normal)
                 $0.backgroundColor = UIColor.appColor(.mainColor)
                 $0.layer.cornerRadius = 10
+                
                 $0.clipsToBounds = false
             } else {
+                
                 $0.isHidden = true
             }
         }
@@ -240,6 +248,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
             $0.contentText[1] = "\(studyDeatil.location.addressName) \(studyDeatil.location.placeName ?? "")"
         }
         userData = studyDeatil.participate
+        state = StudyDetailViewState.init(rawValue: studyDeatil.authority)!
         memberView.collectionView.reloadData()
     }
     
@@ -274,7 +283,6 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }
