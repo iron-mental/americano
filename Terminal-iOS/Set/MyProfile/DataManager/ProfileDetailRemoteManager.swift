@@ -13,7 +13,6 @@ import SwiftyJSON
 class ProfileDetailRemoteManager: ProfileDetailRemoteDataManagerInputProtocol {
     var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol?
     
-    
     // MARK: 유저정보
     
     func getUserInfo(id: Int) {

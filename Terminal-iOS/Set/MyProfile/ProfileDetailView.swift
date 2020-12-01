@@ -29,6 +29,7 @@ class ProfileDetailView: UIViewController {
     let location        = LocationView()
     
     var projectArr: [UIView] = []
+    var projectData: [Project] = []
     var userInfo: UserInfo?
     // MARK: ViewDidLoad
     
@@ -222,6 +223,8 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
     }
     
     func addProjectToStackView(with project: [Project]) {
+        projectData = project
+        
         for data in project {
             let title = data.title
             let contents = data.contents

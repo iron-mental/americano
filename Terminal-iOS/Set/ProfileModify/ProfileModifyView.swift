@@ -33,7 +33,7 @@ class ProfileModifyView: UIViewController {
     lazy var emailModify = EmailModifyView()
     lazy var locationModify = LocationModifyView()
     
-    var projectArr: [Project] = [Project(id: 1, title: "터미널", contents: "ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;러아님;러아ㅣㄴㅁ;", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd"),
+    var projectArr: [Project] = [Project(id: 1, title: "터미널", contents: "ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁㄴㅁ;", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd"),
                                  Project(id: 1, title: "하하하", contents: "ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd")]
     
     // MARK: viewDidLoad
@@ -149,30 +149,19 @@ class ProfileModifyView: UIViewController {
             $0.textColor = .white
         }
         
-        projectTitleModify.do {
-            $0.text = "Terminal"
-            $0.textColor = .white
-            $0.dynamicFont(fontSize: 16, weight: .bold)
-            $0.textAlignment = .left
-            $0.delegate = self
-        }
-        
-        projectDescriptModify.do {
-            $0.textColor = UIColor.appColor(.profileTextColor)
-            $0.dynamicFont(size: 14, weight: .regular)
-            $0.delegate = self
-            $0.sizeToFit()
-            $0.textContainer.lineFragmentPadding = 0
-            $0.textContainerInset = .zero
-            $0.layer.masksToBounds = true
-            $0.isScrollEnabled = false
-        }
-        
         projectView.do {
             $0.delegate = self
             $0.dataSource = self
             $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
             $0.backgroundColor = .red
+            $0.estimatedRowHeight = 60
+        }
+        
+        projectAddButton.do {
+            $0.setTitle(" + 프로젝트 추가", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.addTarget(self, action: #selector(addProject), for: .touchUpInside)
         }
         
         guard let email = userInfo?.email else { return }
@@ -187,7 +176,7 @@ class ProfileModifyView: UIViewController {
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
-        [profileImage, nameModify, descripModify, careerLabel, careerTitleModify, careerDescriptModify, projectLabel, projectView , snsModify, emailModify, locationModify].forEach { backgroundView.addSubview($0) }
+        [profileImage, nameModify, descripModify, careerLabel, careerTitleModify, careerDescriptModify, projectLabel, projectView, projectAddButton, snsModify, emailModify, locationModify].forEach { backgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -253,9 +242,17 @@ class ProfileModifyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
         }
-        snsModify.do {
+        
+        projectAddButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectView.bottomAnchor, constant: 10).isActive = true
+            $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 130).isActive = true
+        }
+        snsModify.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: projectAddButton.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalTo: snsModify.heightAnchor).isActive = true
@@ -279,6 +276,12 @@ class ProfileModifyView: UIViewController {
         snsModify.linkedTextField.delegate = self
         snsModify.webTextField.delegate = self
         locationModify.locationTextField.delegate = self
+    }
+    
+    @objc func addProject() {
+        let project = Project(id: 1, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
+        projectArr.append(project)
+        projectView.reloadData()
     }
     
     @objc func didImageViewClicked() {
@@ -404,7 +407,6 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
                                                                                font: UIFont.systemFont(ofSize: 16))
         let contents = projectArr[indexPath.row].contents.heightWithConstrainedWidth(width: projectView.frame.width,
                                                                                      font: UIFont.systemFont(ofSize: 14))
-        print(title)
         return title + contents
     }
     
@@ -416,6 +418,7 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
         
         cell.title.text = projectArr[indexPath.row].title
+        cell.contents.delegate = self
         cell.contents.text = projectArr[indexPath.row].contents
         
         return cell

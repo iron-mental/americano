@@ -14,7 +14,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
     
     let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
     
-    func getNoticeList(studyID: Int, completion: @escaping (_: Bool, _: NoticeList?, _: String?) -> Void) {
+    func getNoticeList(studyID: Int, completion: @escaping (Bool, NoticeList?, String?) -> Void) {
         
         AF.request("http://3.35.154.27:3000/v1/study/\(studyID)/notice",
                    method: .get,headers: headers).responseJSON(completionHandler: { [self] response in

@@ -47,18 +47,5 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                 print(err)
             }
         }
-        
-//        AF.request(url,
-//                   method: .put,
-//                   parameters: params,
-//                   encoding: JSONEncoding.default,
-//                   headers: TerminalNetwork.headers).responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                print(JSON(value))
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
     }
 }

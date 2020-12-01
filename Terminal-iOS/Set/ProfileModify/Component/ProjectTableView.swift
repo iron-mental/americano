@@ -26,7 +26,6 @@ class ProjectTableView: UITableView {
     
     override var intrinsicContentSize: CGSize {
         let height = min(contentSize.height, maxHeight)
-        print("이거",height)
         return CGSize(width: contentSize.width, height: height)
     }
 }

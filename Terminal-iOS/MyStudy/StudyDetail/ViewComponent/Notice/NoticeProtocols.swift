@@ -38,7 +38,7 @@ protocol NoticePresenterProtocol {
 
 protocol NoticeRemoteDataManagerProtocol {
 
-    func getNoticeList(studyID: Int, completion: @escaping (_: Bool ,_: NoticeList?, _: String?) -> Void)
+    func getNoticeList(studyID: Int, completion: @escaping (Bool, NoticeList?, String?) -> Void)
 }
 
 protocol NoticeLocalDataManagerProtocol {
