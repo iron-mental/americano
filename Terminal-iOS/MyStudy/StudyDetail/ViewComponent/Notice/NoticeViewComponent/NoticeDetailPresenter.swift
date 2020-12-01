@@ -17,7 +17,6 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
     var wireFrame: NoticeDetailWireFrameProtocol?
     
     func viewDidLoad(notice: Notice) {
-        
         interactor?.getNoticeDetail(notice: notice)
     }
     
@@ -33,7 +32,6 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
     }
     
     func noticeRemoveResult(result: Bool, message: String) {
-        
         view?.showNoticeRemove(message: message)
     }
 }

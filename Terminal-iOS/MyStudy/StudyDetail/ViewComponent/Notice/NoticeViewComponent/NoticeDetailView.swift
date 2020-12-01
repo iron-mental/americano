@@ -157,7 +157,6 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     }
     
     @objc func modifyButtonDidTap() {
-        print("보내는 친구",notice)
         presenter?.modifyButtonDidTap(state: .edit, notice: notice!, parentView: self)
     }
     
