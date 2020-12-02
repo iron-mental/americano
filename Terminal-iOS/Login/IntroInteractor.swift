@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class IntroInteractor: IntroInteractorProtocol {
     var presenter: IntroPresenterProtocol?
@@ -75,8 +76,18 @@ class IntroInteractor: IntroInteractorProtocol {
                                             completionHandler: { result in
         switch result.result {
           case true:
-            self.presenter?.joinValidInfo(result: result.result,
-                                          joinInfo: String(describing: result.data?.id))
+            guard let refreshToken = result.data?.refreshToken else { return }
+            guard let accessToken = result.data?.accessToken else { return }
+            guard let userID = result.data?.id else { return }
+            let refreshResult = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
+            let accessResult = KeychainWrapper.standard.set("Bearer "+accessToken, forKey: "accessToken")
+            let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
+            print("\(userID)")
+            print("저장 결과 :", refreshResult && accessResult && idResult)
+            if refreshResult && accessResult && idResult {
+                self.presenter?.joinValidInfo(result: result.result, joinInfo: String(describing: result.data?.id))
+            }
+            
           case false:
             self.presenter?.joinValidInfo(result: result.result,
                                           joinInfo: "실패")
