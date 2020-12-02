@@ -41,4 +41,12 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
             sourceView.navigationController?.pushViewController(studyDetailViewController, animated: true)
         }
     }
+    
+    func presentMyStudyDetail(from view: StudyListViewProtocol, keyValue: Int) {
+        let myStudyDetailViewController = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: keyValue)
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(myStudyDetailViewController, animated: true)
+        }
+    }
 }

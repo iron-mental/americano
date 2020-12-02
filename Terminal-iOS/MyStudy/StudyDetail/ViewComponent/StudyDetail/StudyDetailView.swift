@@ -56,6 +56,11 @@ class StudyDetailView: UIViewController {
     }
     
     func attribute() {
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
         mainImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didimageViewClicked))
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -65,7 +70,11 @@ class StudyDetailView: UIViewController {
         }
         mainImageView.do {
             $0.addGestureRecognizer(mainImageViewTapGesture)
-            $0.image = #imageLiteral(resourceName: "swiftBackground")
+            if let imageURL =  studyInfo?.image {
+                $0.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
+            } else {
+                $0.image = nil
+            }
         }
         
         joinButton.do {

@@ -13,6 +13,8 @@ class ChatPresenter: ChatPresenterProtocol {
     
     
     
+    
+    
     var view: ChatViewProtocol?
     var wireFrame: ChatWireFrameProtocol?
     var interactor: ChatInteractorProtocol?
@@ -25,5 +27,8 @@ class ChatPresenter: ChatPresenterProtocol {
     }
     func viewWillDisappear() {
         interactor?.disconnectSocket()
+    }
+    func showReceiveMessage(message: String) {
+        view?.showMessage(message: message)
     }
 }

@@ -11,7 +11,7 @@ target 'Terminal-iOS' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'Kingfisher'
-  pod 'Socket.IO-Client-Swift'
+  pod 'Socket.IO-Client-Swift', '~> 13.0.0'
 # Pods for Terminal-iOS
   
 post_install do |installer|

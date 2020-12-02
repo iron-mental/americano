@@ -46,7 +46,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             
             switch response.result {
             case .success(let value):
-                completion(JSON(value)["result"].bool!, JSON(value)["message"].string!)
+                completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
                 break
             case .failure(let err):
                 completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)

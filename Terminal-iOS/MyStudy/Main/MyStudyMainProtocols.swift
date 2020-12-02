@@ -42,7 +42,7 @@ protocol MyStudyMainRemoteDataManagerProtocol: class {
     var interactor: MyStudyMainInteractorProtocol? { get set }
     //INTERACTOR -> RemoteDataManager
     func getMyStudyList(completion: @escaping (_: Bool, _: [MyStudy]?) -> ())
-
+//    func getStudyDetail
 }
 
 protocol MyStudyMainLocalDataManagerProtocol: class {

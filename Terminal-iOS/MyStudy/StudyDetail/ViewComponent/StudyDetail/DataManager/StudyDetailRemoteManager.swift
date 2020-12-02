@@ -17,7 +17,7 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
     
-    func getStudyDetail(keyValue: String, completionHandler: @escaping (StudyDetail) -> ()) {
+     func getStudyDetail(keyValue: String, completionHandler: @escaping (StudyDetail) -> ()) {
         let key = "http://3.35.154.27:3000/v1/study/\(keyValue)"
         
         AF.request(key, headers: headers).responseJSON { response in

@@ -10,7 +10,10 @@ import Foundation
 import SocketIO
 
 class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
-    lazy var manager = SocketManager(socketURL: URL(string: "http://3.35.154.27:3000")!, config: [.log(false), .compress, .connectParams(["token": Terminal.tempToken, "study_id":1])])
+    var interactor: ChatInteractorProtocol?
+    
+    lazy var manager = SocketManager(socketURL: URL(string: "http://3.35.154.27:3000")!, config: [.log(true), .compress, .connectParams(["token": Terminal.tempToken,
+                                                                                                                                          "study_id":1])])
     var chatSocket: SocketIOClient!
     
     init() {
@@ -18,19 +21,23 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     }
     
     func emit(message: String) {
-        print("쏘는거",message)
+        print("쏘는거", message)
+        print("연결상태", chatSocket.status)
         chatSocket.emit("chat", message)
     }
     
     func connectSocket() {
-        chatSocket = manager.defaultSocket
+        chatSocket = manager.socket(forNamespace: "/terminal")
+        
         chatSocket.connect()
         
         chatSocket.on("message") { array, ack in
             print(array)
+            self.interactor?.receiveMessage(message: "\(array)")
         }
     }
     func disconnectSocket() {
         chatSocket.disconnect()
+        print("디스커넥되면?", chatSocket.status)
     }
 }

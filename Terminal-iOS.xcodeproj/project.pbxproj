@@ -804,10 +804,10 @@
 			isa = PBXGroup;
 			children = (
 				CCA3FF452517823E00F62627 /* StudyCell.swift */,
+				CCA3FF422517823E00F62627 /* StudyListView.swift */,
 				CCA3FF462517823E00F62627 /* StudyListInteractor.swift */,
 				CCA3FF432517823E00F62627 /* StudyListPresenter.swift */,
 				CCA3FF412517823E00F62627 /* StudyListProtocols.swift */,
-				CCA3FF422517823E00F62627 /* StudyListView.swift */,
 				CCA3FF442517823E00F62627 /* StudyListWireFrame.swift */,
 				CCA3FF3C2517822400F62627 /* DataManager */,
 			);
