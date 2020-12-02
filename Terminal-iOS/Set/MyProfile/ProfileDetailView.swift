@@ -12,6 +12,7 @@ import Kingfisher
 
 class ProfileDetailView: UIViewController {
     // MARK: Init Property
+    
     var presenter: ProfileDetailPresenterProtocol?
     let scrollView      = UIScrollView()
     let profile         = ProfileView()

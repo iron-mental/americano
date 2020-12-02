@@ -274,6 +274,12 @@ extension IntroView: IntroViewProtocol {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
+    func completeJoin() {
+        let view = ViewController()
+        view.modalPresentationStyle = .fullScreen
+        present(view, animated: true, completion: nil)
+    }
+    
     func showInvalidEmailAction() {
         invalidView.isHidden = false
         invalidLabel.text = "유효하지 않은 이메일 입니다."

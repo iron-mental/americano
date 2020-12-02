@@ -18,14 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             let home = HomeView()
-
             
-//            KeychainWrapper.standard.remove(forKey: "refreshToken")
-//            KeychainWrapper.standard.remove(forKey: "accessToken")
-//
-//            
-            
-//            /// 리프레쉬 토큰이 없으면 -> 로그인
+            /// 리프레쉬 토큰이 없으면 -> 로그인
             if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
                 let howView = UINavigationController(rootViewController: home)
                 window.rootViewController = howView

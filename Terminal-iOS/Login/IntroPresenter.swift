@@ -46,8 +46,10 @@ class IntroPresenter: IntroPresenterProtocol {
     func signUpValidInfo(result: Bool) {
         view?.presentCompleteView()
     }
+    
+    /// 로그인 유효성 확인
     func joinValidInfo(result: Bool, joinInfo: String) {
-        result ? view?.presentCompleteView() : print(joinInfo)
+        result ? view?.completeJoin() : print(joinInfo)
     }
     
     func didNextButton(input: String, introState: IntroViewState, beginState: BeginState) {

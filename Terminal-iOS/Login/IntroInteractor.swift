@@ -82,7 +82,7 @@ class IntroInteractor: IntroInteractorProtocol {
             let refreshResult = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
             let accessResult = KeychainWrapper.standard.set("Bearer "+accessToken, forKey: "accessToken")
             let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
-            print("\(userID)")
+            
             print("저장 결과 :", refreshResult && accessResult && idResult)
             if refreshResult && accessResult && idResult {
                 self.presenter?.joinValidInfo(result: result.result, joinInfo: String(describing: result.data?.id))

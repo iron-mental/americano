@@ -15,6 +15,7 @@ protocol IntroViewProtocol: class {
         //success
     func presentNextView()
     func presentCompleteView()
+    func completeJoin()
         //false
     func showInvalidEmailAction()
     func showInvalidPasswordAction()
