@@ -11,7 +11,7 @@ import UIKit
 class SetView: UIViewController {
     
     // 섹션
-    var sections: [String] = ["계정", "알림", "정보"]
+    var sections: [String] = ["계정", "알림", "정보", ""]
     
     var account: [String] = ["이메일", "SNS"]
     var noti: [String] = ["알림"]
@@ -84,7 +84,7 @@ class SetView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.sectionHeaderHeight = 40
+            $0.sectionHeaderHeight = 30
             $0.separatorColor = .clear
             $0.register(DefaultCell.self, forCellReuseIdentifier: DefaultCell.defalutCellId)
             $0.register(NotiCell.self, forCellReuseIdentifier: NotiCell.notiCellId)
@@ -167,7 +167,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         }
         headerView.addSubview(label)
         label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 13).isActive = true
+        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 11).isActive = true
         
         if section == 0 {
             label.text = sections[0]
@@ -194,6 +194,15 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             return userManage.count
         } else {
             return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 3 && indexPath.row == 0 {
+            let view = HomeView()
+            view.modalPresentationStyle = .fullScreen
+            self.present(view, animated: false, completion: nil)
+//            self.navigationController?.pushViewController(view, animated: true)
         }
     }
     

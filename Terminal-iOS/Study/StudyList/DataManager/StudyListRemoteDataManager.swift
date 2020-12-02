@@ -22,7 +22,9 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     func retrieveStudyList(category: String) {
         let url = "http://3.35.154.27:3000/v1/study?category=ios&sort=new"
         
-        AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
+        AF.request(url, headers: TerminalNetwork.headers, interceptor: TerminalNetworkManager.shared.interceptors)
+            .validate()
+            .responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
