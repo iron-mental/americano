@@ -12,6 +12,8 @@ class IntroInteractor: IntroInteractorProtocol {
     var presenter: IntroPresenterProtocol?
     var remoteDataManager: IntroRemoteDataManagerProtocol?
     
+    // MARK: 이메일 유효성 검사
+    
     func checkedEmailValid(input: String, beginState: BeginState) {
         if input.contains("@") && input.contains(".") {
             if beginState == .join {
@@ -19,10 +21,11 @@ class IntroInteractor: IntroInteractorProtocol {
                 self.presenter?.emailValidInfo(result: true)
             } else {
                 remoteDataManager?.getEmailValidInfo(input: input) { result in
-                    if result {
+                    switch result.result {
+                    case true:
                         self.presenter?.emailValidInfo(result: true)
                         IntroLocalDataManager.shared.email = input
-                    } else {
+                    case false:
                         self.presenter?.emailValidInfo(result: false)
                     }
                 }
@@ -31,6 +34,9 @@ class IntroInteractor: IntroInteractorProtocol {
             presenter?.emailValidInfo(result: false)
         }
     }
+    
+    
+    // MARK: 로그인 패스워드 체크
     
     func checkedPasswordValid(input: String) {
         if input.count >= 8 && input.count <= 20 {
@@ -41,21 +47,41 @@ class IntroInteractor: IntroInteractorProtocol {
         }
     }
     
+    
+    // MARK: 회원가입 결과 처리
+    
     func signUpValid(input: String) {
         if input.count >= 2 && input.count <= 8 {
             IntroLocalDataManager.shared.nickname = input
-            if ((remoteDataManager?.getSignUpValidInfo(signUpMaterial: (IntroLocalDataManager.shared.signUp(nickname: input)))) != nil) {
-                presenter?.signUpValidInfo(result: true)
-            }
+            remoteDataManager?.getSignUpValidInfo(signUpMaterial: (IntroLocalDataManager.shared.signUp(nickname: input)),
+                                                  completionHandler: { result in
+            switch result.result {
+            case true:
+              self.presenter?.signUpValidInfo(result: true)
+            case false:
+                print("실패이유 :", result.message!)
+                }
+              }
+            )
         } else {
             presenter?.signUpValidInfo(result: false)
         }
     }
     
+    // MARK: 로그인 결과 처리
+
     func checkedJoinValid(input: String) {
-        remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email,input], completionHandler: { [self] (result, data) in
-            
-            presenter?.joinValidInfo(result: result, joinInfo: "\(data)")
-        })
-    }
+        remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email, input],
+                                            completionHandler: { result in
+        switch result.result {
+          case true:
+            self.presenter?.joinValidInfo(result: result.result,
+                                          joinInfo: String(describing: result.data?.id))
+          case false:
+            self.presenter?.joinValidInfo(result: result.result,
+                                          joinInfo: "실패")
+            }
+          }
+        )
+      }
 }
