@@ -12,23 +12,33 @@ import SwiftyJSON
 
 class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     
+    // MARK: 회원가입 이메일 유효성 검사
     
-    func getEmailValidInfo(input: String, completionHandler: @escaping (_ : Bool) -> Void) {
+    func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<String>) -> Void) {
         var result = false
-        let urlComponents = URLComponents(string: "http://3.35.154.27:3000/v1/user/check-email")
-        guard var url = urlComponents?.url else { return }
-        url.appendPathComponent("\(input)")
-        AF.request(url, encoding: JSONEncoding.default)
-            .responseJSON { response in
-                print(response)
-                result = JSON(response.data)["result"].bool!
+//        let urlComponents = URLComponents(string: "http://3.35.154.27:3000/v1/user/check-email")
+//        guard var url = urlComponents?.url else { return }
+//        url.appendPathComponent("\(input)")
+        
+        let url = URL(string: "http://3.35.154.27:3000/v1/user/check-email/\(input)")!
+        
+        AF.request(url, encoding: JSONEncoding.default).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                print(JSON(value))
+                let json = JSON(value)
+                let data = "\(json)".data(using: .utf8)
+                let result = try! JSONDecoder().decode(BaseResponse<String>.self, from: data!)
                 completionHandler(result)
-            }.resume()
+            case .failure(let err):
+                print(err)
+            }
+            }
     }
     
+    // MARK: 회원가입 유효성 검사
     
-    
-    func getSignUpValidInfo(signUpMaterial: [String]) -> Bool {
+    func getSignUpValidInfo(signUpMaterial: [String], completionHandler: @escaping (BaseResponse<String>) -> Void) {
         var params: Parameters = [:]
         params = [
             "email" : signUpMaterial[0],
@@ -36,34 +46,41 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             "nickname" : signUpMaterial[2]
         ]
         
-        var result =  false
         let url = URL(string: "http://3.35.154.27:3000/v1/user")!
         AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
-            result = JSON(response.data)["result"].bool!
-        }.resume()
-        return result
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let data = "\(json)".data(using: .utf8)
+                let result = try! JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                completionHandler(result)
+            case .failure(let error):
+                print("에러:",error)
+            }
+        }
     }
+
+    // MARK: 로그인 유효성 검사
     
-    func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (_ result: Bool, _ message: Any) -> ()) {
+    func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (BaseResponse<JoinResult>) -> Void) {
         var params: Parameters = [
             "email":"\(joinMaterial[0])",
-            "password":"\(joinMaterial[1])"
+            "password":"\(joinMaterial[1])",
+            "push_token": "blah"
         ]
+        
         let url = URL(string: "http://3.35.154.27:3000/v1/user/login")!
         AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
-            var result = JSON(response.data)["result"].bool!
-            switch result {
-            case true:
-                var data = JSON(response.data)["data"]["id"].int!
-                completionHandler(result, data)
-                break
-            case false:
-                var data = JSON(response.data)["message"].string!
-                completionHandler(result, data)
-                break
+            
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let data = "\(json)".data(using: .utf8)
+                let result = try! JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data!)
+                completionHandler(result)
+            case .failure(let error):
+                print("에러:",error)
             }
-        }.resume()
-        
+        }
     }
-    
 }
