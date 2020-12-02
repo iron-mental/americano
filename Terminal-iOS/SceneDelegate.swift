@@ -18,26 +18,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             let view = ViewController()
+            let home = HomeView()
+            let howView = UINavigationController(rootViewController: home)
+            window.rootViewController = howView
 //            let view2 = IntroView()
-            let view2 = IntroWireFrame.createIntroModule(beginState: .signUp, introState: .emailInput)
-            
-            /// 리프레쉬 토큰이 없으면 -> 로그인
-            if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
-                let view3 = UINavigationController(rootViewController: view2)
-                window.rootViewController = view3
-            } else {
-                if let token = KeychainWrapper.standard.string(forKey: "refreshToken"),
-                   let access = KeychainWrapper.standard.string(forKey: "accessToken") {
-                    TerminalNetwork.authRequest(refreshToken: token, accessToken: access) { response in
-                        
-                        if response.result {
-                            print("성공띠")
-                        } else {
-                            print("실패띠")
-                        }
-                    }
-                }
-            }
+//            let view2 = IntroWireFrame.createIntroModule(beginState: .signUp, introState: .emailInput)
+//
+//            /// 리프레쉬 토큰이 없으면 -> 로그인
+//            if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
+//                let view3 = UINavigationController(rootViewController: view2)
+//                window.rootViewController = view3
+//            } else {
+//                if let token = KeychainWrapper.standard.string(forKey: "refreshToken"),
+//                   let access = KeychainWrapper.standard.string(forKey: "accessToken") {
+//                    TerminalNetwork.authRequest(refreshToken: token, accessToken: access) { response in
+//
+//                        if response.result {
+//                            print("성공띠")
+//                        } else {
+//                            print("실패띠")
+//                        }
+//                    }
+//                }
+//            }
             
             self.window = window
             window.makeKeyAndVisible()

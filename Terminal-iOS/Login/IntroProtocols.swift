@@ -58,7 +58,6 @@ protocol IntroInteractorProtocol: class {
 }
 
 protocol IntroRemoteDataManagerProtocol: class {
-    
     func getEmailValidInfo(input: String, completionHandler: @escaping (_ : Bool) -> ())
     func getSignUpValidInfo(signUpMaterial: [String]) -> Bool
     func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (_ result: Bool, _ message: Any) -> ())

@@ -11,19 +11,21 @@ import Alamofire
 import SwiftyJSON
 
 class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
+    
+    
     func getEmailValidInfo(input: String, completionHandler: @escaping (_ : Bool) -> Void) {
         var result = false
         let urlComponents = URLComponents(string: "http://3.35.154.27:3000/v1/user/check-email")
         guard var url = urlComponents?.url else { return }
         url.appendPathComponent("\(input)")
-            AF.request(url, encoding: JSONEncoding.default)
-                .responseJSON { response in
-                    print(response)
-                    result = JSON(response.data)["result"].bool!
-                    completionHandler(result)
-                }.resume()
-        }
+        AF.request(url, encoding: JSONEncoding.default)
+            .responseJSON { response in
+                print(response)
+                result = JSON(response.data)["result"].bool!
+                completionHandler(result)
+            }.resume()
     }
+    
     
     
     func getSignUpValidInfo(signUpMaterial: [String]) -> Bool {
@@ -61,13 +63,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                 break
             }
         }.resume()
-
+        
     }
-    
-    
-    
-    
-    
-    
     
 }
