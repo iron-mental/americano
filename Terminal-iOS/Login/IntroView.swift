@@ -41,8 +41,6 @@ class IntroView: UIViewController {
         setting()
         attribute()
         layout()
-        print(beginState)
-        print(introState)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -82,6 +80,8 @@ class IntroView: UIViewController {
             break
         }
     }
+    
+    // MARK: Attribute
     
     func attribute() {
         rightBarButton = UIBarButtonItem(customView: rightbutton)
@@ -126,6 +126,8 @@ class IntroView: UIViewController {
             $0.contentMode = .scaleAspectFill
         }
     }
+    
+    // MARK: Layout
     
     func layout() {
         [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton, invalidView].forEach { view.addSubview($0) }
@@ -181,11 +183,13 @@ class IntroView: UIViewController {
         }
         
     }
+    
+    
     @objc func didClickedBackButon() {
         self.inputTextfield.endEditing(true)
         switch introState {
         case .emailInput:
-            dismiss(animated: true)
+            navigationController?.popViewController(animated: true)
             break
         case .pwdInput:
             navigationController?.popViewController(animated: true)
@@ -198,6 +202,8 @@ class IntroView: UIViewController {
         }
         self.inputTextfield.endEditing(true)
     }
+    
+    // MARK: Next Button
     
     @objc func didClickedNextButton() {
         presenter?.didClickedRightBarButton(input: inputTextfield.text!, introState: self.introState!, beginState: self.beginState!)
@@ -229,13 +235,13 @@ extension IntroView: IntroViewProtocol {
         let presenter = IntroPresenter()
         let interactor = IntroInteractor()
         let remoteDataManager = IntroRemoteDataManager()
-        
+
         view.presenter = presenter
         presenter.view = view
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
-        
+
         switch introState {
         case .emailInput:
             view.introState = .pwdInput
@@ -260,19 +266,18 @@ extension IntroView: IntroViewProtocol {
         default:
             print("none")
         }
-        navigationController?.pushViewController(view, animated: true) {
-        }
+        
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     func presentCompleteView() {
-        dismiss(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func showInvalidEmailAction() {
         invalidView.isHidden = false
         invalidLabel.text = "유효하지 않은 이메일 입니다."
         invalidGuideAnimation()
-        
     }
     
     func showInvalidPasswordAction() {
@@ -280,12 +285,10 @@ extension IntroView: IntroViewProtocol {
     }
     
     func showInvalidNickNameAction() {
-        print("")
+        invalidLabel.text = "중복된 닉네임 입니다."
     }
+    
     func invalidGuideAnimation() {
-        for i in 0...6 {
-            
-        }
         UIView.animate(withDuration: 0.05) {
             self.invalidView.transform = CGAffineTransform(translationX: -10, y: 0)
         } completion: { _ in

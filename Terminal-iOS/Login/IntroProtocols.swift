@@ -42,6 +42,7 @@ protocol IntroPresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func emailValidInfo(result: Bool)
     func passwordValidInfo(result: Bool)
+    func nicknameValidInfo(result: Bool)
     func signUpValidInfo(result: Bool)
     func joinValidInfo(result: Bool, joinInfo: String)
 }

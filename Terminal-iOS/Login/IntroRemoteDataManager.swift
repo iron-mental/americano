@@ -15,11 +15,6 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     // MARK: 회원가입 이메일 유효성 검사
     
     func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<String>) -> Void) {
-        var result = false
-//        let urlComponents = URLComponents(string: "http://3.35.154.27:3000/v1/user/check-email")
-//        guard var url = urlComponents?.url else { return }
-//        url.appendPathComponent("\(input)")
-        
         let url = URL(string: "http://3.35.154.27:3000/v1/user/check-email/\(input)")!
         
         AF.request(url, encoding: JSONEncoding.default).responseJSON { response in
@@ -33,7 +28,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             case .failure(let err):
                 print(err)
             }
-            }
+        }
     }
     
     // MARK: 회원가입 유효성 검사
@@ -50,6 +45,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
             switch response.result {
             case .success(let value):
+                print(JSON(value))
                 let json = JSON(value)
                 let data = "\(json)".data(using: .utf8)
                 let result = try! JSONDecoder().decode(BaseResponse<String>.self, from: data!)

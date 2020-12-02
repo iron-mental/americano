@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9B4ADB0EA58C194A4FD611CA /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */; };
+		A500482025775ADC00E37FAE /* JoinResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500481F25775ADC00E37FAE /* JoinResult.swift */; };
 		A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */; };
 		A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC912559613E009BE9A6 /* UITextView+Ext.swift */; };
 		A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AE2524952F00ACB241 /* SetPresenter.swift */; };
@@ -196,6 +197,7 @@
 		0842ED214CBB94B870702CC2 /* Pods-Terminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		A500481F25775ADC00E37FAE /* JoinResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinResult.swift; sourceTree = "<group>"; };
 		A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		A510EC912559613E009BE9A6 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		A51438AE2524952F00ACB241 /* SetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPresenter.swift; sourceTree = "<group>"; };
@@ -801,6 +803,7 @@
 				A5A5F6C1256F843600405C71 /* SortState.swift */,
 				A5A5F6E1256FEF0A00405C71 /* UserInfo.swift */,
 				A5D5AE562573CE1B003BB277 /* Authorization.swift */,
+				A500481F25775ADC00E37FAE /* JoinResult.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -917,9 +920,9 @@
 		CCC4DA7F25407E5900D9E674 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				CC3F991F2545448E00428B11 /* HomeView.swift */,
 				CCC4DA8025407E9100D9E674 /* IntroView.swift */,
 				CCB139CE25592D8300410184 /* IntroPresenter.swift */,
-				CC3F991F2545448E00428B11 /* HomeView.swift */,
 				CCB139CB2559289900410184 /* IntroProtocols.swift */,
 				CCB139D225592DCF00410184 /* IntroInteractor.swift */,
 				CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */,
@@ -1126,6 +1129,7 @@
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
 				CC5795042570C9E600DF96AB /* AddNoticeRemoteDataManager.swift in Sources */,
+				A500482025775ADC00E37FAE /* JoinResult.swift in Sources */,
 				CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */,
 				CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */,
 				A5BA4619255D38D30061C511 /* String+Ext.swift in Sources */,

@@ -27,21 +27,28 @@ class IntroPresenter: IntroPresenterProtocol {
         }
     }
     
+    
+    /// 이메일 유효성 확인 
     func emailValidInfo(result: Bool) {
         result ? view?.presentNextView() : view?.showInvalidEmailAction()
     }
     
+    /// 패스워드 유효성 확인
     func passwordValidInfo(result: Bool) {
         result ? view?.presentNextView() : view?.showInvalidPasswordAction()
     }
     
+    func nicknameValidInfo(result: Bool) {
+        
+    }
+    
+    /// 회원가입 유효성 확인
     func signUpValidInfo(result: Bool) {
         view?.presentCompleteView()
     }
     func joinValidInfo(result: Bool, joinInfo: String) {
         result ? view?.presentCompleteView() : print(joinInfo)
     }
-    
     
     func didNextButton(input: String, introState: IntroViewState, beginState: BeginState) {
         switch introState {
