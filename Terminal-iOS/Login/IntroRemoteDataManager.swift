@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     
@@ -62,7 +63,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         var params: Parameters = [
             "email":"\(joinMaterial[0])",
             "password":"\(joinMaterial[1])",
-            "push_token": "blah"
+            "push_token": KeychainWrapper.standard.string(forKey: "pushToken")
         ]
         
         let url = URL(string: "http://3.35.154.27:3000/v1/user/login")!

@@ -21,6 +21,7 @@ class SetView: UIViewController {
                                Setting(title: "문의하기"),
                                Setting(title: "이용약관"),
                                Setting(title: "개인정보 취급방침")]
+    var userManage: [String] = ["로그아웃", "회원탈퇴"]
     
     var presenter: SetPresenterProtocol?
     
@@ -79,7 +80,7 @@ class SetView: UIViewController {
             $0.font = $0.font.withSize(13)
         }
         settingList.do {
-            $0.alwaysBounceVertical = false
+//            $0.alwaysBounceVertical = false
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -88,6 +89,7 @@ class SetView: UIViewController {
             $0.register(DefaultCell.self, forCellReuseIdentifier: DefaultCell.defalutCellId)
             $0.register(NotiCell.self, forCellReuseIdentifier: NotiCell.notiCellId)
             $0.register(AccountCell.self, forCellReuseIdentifier: AccountCell.accountCellId)
+            $0.register(UserManageCell.self, forCellReuseIdentifier: UserManageCell.userManageCellId)
         }
         accountButton.do {
             $0.setTitle("인증", for: .normal)
@@ -188,6 +190,8 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             return noti.count
         } else if section == 2{
             return tempData.count
+        } else if section == 3 {
+            return userManage.count
         } else {
             return 0
         }
@@ -203,6 +207,9 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         
         let defaultCell = tableView.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId,
                                                         for: indexPath) as! DefaultCell
+        
+        let userManageCell = tableView.dequeueReusableCell(withIdentifier: UserManageCell.userManageCellId,
+                                                           for: indexPath) as! UserManageCell
         
         if indexPath.section == 0 {
             accountCell.title.text = account[indexPath.row]
@@ -223,6 +230,10 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             }
             defaultCell.selectionStyle = .none
             return defaultCell
+        } else if indexPath.section == 3 {
+            let data = userManage[indexPath.row]
+            userManageCell.title.text = data
+            return userManageCell
         } else {
             return UITableViewCell()
         }

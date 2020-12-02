@@ -15,6 +15,7 @@
 		A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5172164252CFA47005AD11B /* SetWireFrame.swift */; };
 		A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5172168252CFA90005AD11B /* SetInteractor.swift */; };
 		A517216D252CFAAA005AD11B /* SetProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A517216C252CFAAA005AD11B /* SetProtocols.swift */; };
+		A51BA0A52577C93700B9673F /* UserManageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BA0A42577C93700B9673F /* UserManageCell.swift */; };
 		A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D8BE025264DB9003BD1B9 /* AccountCell.swift */; };
 		A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F2356256E195600CBFC13 /* AccessToken.swift */; };
 		A51F235C256E19E600CBFC13 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F235B256E19E600CBFC13 /* Project.swift */; };
@@ -204,6 +205,7 @@
 		A5172164252CFA47005AD11B /* SetWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWireFrame.swift; sourceTree = "<group>"; };
 		A5172168252CFA90005AD11B /* SetInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInteractor.swift; sourceTree = "<group>"; };
 		A517216C252CFAAA005AD11B /* SetProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProtocols.swift; sourceTree = "<group>"; };
+		A51BA0A42577C93700B9673F /* UserManageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManageCell.swift; sourceTree = "<group>"; };
 		A51D8BE025264DB9003BD1B9 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		A51F2356256E195600CBFC13 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		A51F235B256E19E600CBFC13 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 				A5686A4F2525D6FC005990DC /* DefaultCell.swift */,
 				A51D8BE025264DB9003BD1B9 /* AccountCell.swift */,
 				A5AB2704252B6F2300A39240 /* ProfileCell.swift */,
+				A51BA0A42577C93700B9673F /* UserManageCell.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1206,6 +1209,7 @@
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				A5E25C7425590DE40090E21E /* NoticeDetailView.swift in Sources */,
 				CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */,
+				A51BA0A52577C93700B9673F /* UserManageCell.swift in Sources */,
 				CCD51C77256D29BC00D41771 /* MyStudyDetailInteractor.swift in Sources */,
 				CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */,
 				CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */,

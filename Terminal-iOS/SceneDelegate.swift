@@ -23,11 +23,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
                 let howView = UINavigationController(rootViewController: home)
                 window.rootViewController = howView
-            }
-            else {
+            } else {
                 guard let refresh = KeychainWrapper.standard.string(forKey: "refreshToken") else { return }
                 guard let access = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
-
+                print(refresh)
+                print(access)
                 /// 토큰이 유효한지 조회
                 TerminalNetwork.checkToekn(accessToken: access) { response in
                     if response.result {
@@ -41,12 +41,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         TerminalNetwork.authRequest(refreshToken: refresh, accessToken: access) { response in
                             if response.result {
                                 print("갱신 성공")
-                                guard let access = response.data?.accessToken else { return }
-                                guard let refresh = response.data?.refreshToken else { return }
-
-                                KeychainWrapper.standard.set(access, forKey: "accessToken")
-                                KeychainWrapper.standard.set(refresh, forKey: "refreshToken")
-
+                                if let access = response.data?.accessToken {
+                                    KeychainWrapper.standard.set(access, forKey: "accessToken")
+                                }
+                                
+                                if let refresh = response.data?.refreshToken {
+                                    KeychainWrapper.standard.set(refresh, forKey: "refreshToken")
+                                }
+                                
                                 let main = ViewController()
                                 let view = UINavigationController(rootViewController: main)
                                 window.rootViewController = view
