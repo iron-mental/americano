@@ -133,10 +133,10 @@ extension AddNoticeView: AddNoticeViewProtocol {
             if state == .new {
                 (self.parentView as! NoticeViewProtocol).viewLoad()
             } else {
-                (self.parentView as! NoticeDetailViewProtocol).parentView?.viewLoad()
-                self.parentView?.dismiss(animated: true, completion: {
-                    print("끝")
-                })
+                (self.parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
+//                (self.parentView as! NoticeDetailViewProtocol).parentView?.viewLoad()
+//                self.parentView?.dismiss(animated: true, completion: {
+//                })
             }
         }
     }
