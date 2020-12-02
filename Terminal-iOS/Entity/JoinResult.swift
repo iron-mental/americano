@@ -14,7 +14,7 @@ struct JoinResult: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
-        case accessToken
-        case refreshToken
+        case accessToken = "access_token"
+        case refreshToken = "refresh_token"
     }
 }
