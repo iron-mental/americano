@@ -21,6 +21,7 @@ class NoticeView: UIViewController {
         viewLoad()
     }
     func viewLoad() {
+        print("스터디아이디",studyID)
         noticeList.removeAll()
         pinnedNotiArr.removeAll()
         notiArr.removeAll()

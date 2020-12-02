@@ -53,16 +53,6 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
                 break
             }
         }
-        
-//        AF.upload(
-//               multipartFormData: { multipartFormData in
-//                for (key, value) in params {
-//                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
-//                }
-//                multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
-//               },
-//            to:  "http://3.35.154.27:3000/v1/study", method: .post, headers: header)
-//        )
     }
     func getNotionValid(id: String?) -> Bool {
         return true

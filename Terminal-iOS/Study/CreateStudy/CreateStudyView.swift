@@ -232,7 +232,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
         setDelegate()
     }
     func loading() {
-        print("전체 화면 로딩 중 ")
+        LoadingRainbowCat.show()
     }
     func getBackgroundImage() {
         print("getBackgroundImage")
@@ -288,15 +288,19 @@ extension CreateStudyView: CreateStudyViewProtocols {
                                        snsEvernote: SNSInputView.evernote?.textField.text,
                                        image: mainImageView.image!,
                                        location: selectedLocation!)
-        
         presenter?.clickCompleteButton(study: newStudy)
     }
     func studyInfoInvalid(message: String) {
-        print("뷰에서 찎은 겁니다 ~~\(message)")
+        LoadingRainbowCat.hide() {
+            print("뷰에서 찍은 겁니다~~ \(message)")
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     func studyInfoValid(message: String) {
-        print("뷰에서 찍은 겁니다~~ \(message)")
-        navigationController?.popViewController(animated: true)
+        LoadingRainbowCat.hide() {
+            print("뷰에서 찍은 겁니다~~ \(message)")
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

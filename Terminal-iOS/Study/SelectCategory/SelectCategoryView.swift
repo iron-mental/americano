@@ -175,6 +175,6 @@ extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter?.go(selected: categoryList[indexPath[1]])
+        presenter?.go(selected: categoryList[indexPath.row])
     }
 }
