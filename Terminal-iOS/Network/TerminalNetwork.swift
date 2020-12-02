@@ -12,15 +12,7 @@ import Kingfisher
 import SwiftyJSON
 import SwiftKeychainWrapper
 
-class TerminalNetwork: RequestInterceptor{
-    func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        AF.request(urlRequest as! URLConvertible, method: .get)
-    }
-    
-    func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        print("f")
-    }
-    
+class TerminalNetwork{    
     static var headers: HTTPHeaders = [
         "authorization": KeychainWrapper.standard.string(forKey: "accessToken")!
     ]
@@ -37,7 +29,6 @@ class TerminalNetwork: RequestInterceptor{
         AF.request(url,
                    method: .get,
                    headers: header)
-            .validate()
             .responseJSON { response in
             switch response.result {
             case .success(let value):
