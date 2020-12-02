@@ -3,6 +3,7 @@ PODS:
   - Kingfisher (5.15.7):
     - Kingfisher/Core (= 5.15.7)
   - Kingfisher/Core (5.15.7)
+  - lottie-ios (3.1.9)
   - NMapsMap (3.10.1)
   - Socket.IO-Client-Swift (13.0.1):
     - Starscream (~> 3.0.2)
@@ -14,6 +15,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Kingfisher
+  - lottie-ios
   - NMapsMap
   - Socket.IO-Client-Swift (~> 13.0.0)
   - SwiftLint
@@ -24,6 +26,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - Kingfisher
+    - lottie-ios
     - NMapsMap
     - Socket.IO-Client-Swift
     - Starscream
@@ -34,6 +37,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 3b6a534a3df22db367e4dedeeca73d1ddfcf0e2f
   Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
+  lottie-ios: 3a3758ef5a008e762faec9c9d50a39842f26d124
   NMapsMap: 1dc27ca06eac287ce1f001a972172766dca2abe1
   Socket.IO-Client-Swift: 7055c89b7a9926b343194c4cac75998329c4a95a
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
@@ -41,6 +45,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: a4b57229f15d27bed87d297f963bdcbb8f9fb814
+PODFILE CHECKSUM: ebf1f77675b0fb46ec46caab60944833acae597a
 
 COCOAPODS: 1.9.1
