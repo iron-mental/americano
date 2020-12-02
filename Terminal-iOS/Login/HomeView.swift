@@ -21,6 +21,11 @@ class HomeView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.navigationController?.navigationBar.shadowImage = UIImage()
+            $0.navigationController?.navigationBar.isTranslucent = false
+            $0.navigationController?.navigationBar.backgroundColor = UIColor.white
+        }
         loginButton.do {
             $0.setTitle("로그인", for: .normal)
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
