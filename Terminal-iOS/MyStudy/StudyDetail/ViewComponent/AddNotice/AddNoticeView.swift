@@ -8,15 +8,26 @@
 
 import UIKit
 
+enum AddNoticeState {
+    case edit
+    case new
+}
+
 class AddNoticeView: UIViewController {
     var presenter: AddNoticePresenterProtocol?
     var studyID: Int?
-    
+    var notice: Notice? {
+        didSet {
+            attribute()
+        }
+    }
+    var state: AddNoticeState?
     var dismissButton = UIButton()
     var pinButton = UIButton()
     var titleTextField = UITextField()
     var contentTextField = UITextView()
     var completeButton = UIButton()
+    var parentView: UIViewController?
     
     override func viewDidLoad() {
         attribute()
@@ -40,6 +51,7 @@ class AddNoticeView: UIViewController {
         }
         titleTextField.do {
             $0.placeholder = "제목을 입력하세요"
+            $0.text = notice == nil ? nil : notice?.title
             $0.textColor = .white
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
@@ -51,6 +63,7 @@ class AddNoticeView: UIViewController {
             $0.textColor = .white
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
+            $0.text = notice == nil ? nil : notice?.contents
         }
         completeButton.do {
             $0.backgroundColor = UIColor.appColor(.mainColor)
@@ -63,14 +76,6 @@ class AddNoticeView: UIViewController {
     
     func layout() {
         [dismissButton, pinButton, titleTextField, contentTextField, completeButton].forEach { view.addSubview($0) }
-        
-//        dismissButton.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 9).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: Terminal.convertWidth(value: 5)).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
-//        }
         pinButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
@@ -118,13 +123,21 @@ class AddNoticeView: UIViewController {
         let newNoticePost = NoticePost(title: titleTextField.text ?? "",
                                        contents: contentTextField.text ?? "",
                                        pinned: pinButton.currentTitle == "필독" ? true : false)
-        
-        presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost)
+        presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
     }
 }
 
 extension AddNoticeView: AddNoticeViewProtocol {
     func showNewNotice() {
-        dismiss(animated: true)
+        dismiss(animated: true) { [self] in
+            if state == .new {
+                (self.parentView as! NoticeViewProtocol).viewLoad()
+            } else {
+                (self.parentView as! NoticeDetailViewProtocol).parentView?.viewLoad()
+                self.parentView?.dismiss(animated: true, completion: {
+                    print("끝")
+                })
+            }
+        }
     }
 }

@@ -7,8 +7,19 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class NoticeDetailView: UIViewController {
+
+
+class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
+    
+    var presenter: NoticeDetailPresenterProtocol?
+    var parentView: NoticeViewProtocol?
+    var notice: Notice?
+    var noticeID: Int?
+    var modifyButton = UIButton()
+    var removeButton = UIButton()
     lazy var noticeBackground = UIView()
     lazy var noticeLabel = UILabel()
     lazy var noticeTitle = UILabel()
@@ -19,7 +30,7 @@ class NoticeDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        attribute()
+        presenter?.viewDidLoad(notice: notice!)
         layout()
     }
     
@@ -29,6 +40,18 @@ class NoticeDetailView: UIViewController {
         }
         noticeBackground.do {
             $0.layer.cornerRadius = 5
+            $0.backgroundColor = notice!.pinned! ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+        }
+        removeButton.do {
+            $0.setTitle("삭제", for: .normal)
+            $0.setTitleColor(.red, for: .normal)
+            $0.addTarget(self, action: #selector(removeButtonDidTap), for: .touchUpInside)
+        }
+        modifyButton.do {
+            $0.setTitle("수정하러 가기", for: .normal)
+            $0.tintColor = UIColor.appColor(.mainColor)
+            $0.setTitleColor(UIColor.appColor(.mainColor), for: .normal)
+            $0.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
         }
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
@@ -36,11 +59,12 @@ class NoticeDetailView: UIViewController {
             $0.textColor = .white
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 5
+            $0.text = notice!.pinned! ? "필독" : "공지"
         }
         noticeTitle.do {
             $0.dynamicFont(fontSize: 14, weight: .semibold)
             $0.textColor = .white
-            $0.text = "모임 진행시 가이드 라인입니다!"
+            $0.text = notice?.title
         }
         profileImage.do {
             $0.image = #imageLiteral(resourceName: "leehi")
@@ -52,25 +76,26 @@ class NoticeDetailView: UIViewController {
         }
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            $0.text = "윤여울"
+            $0.text = "\(notice?.leaderNickname)"
             $0.textColor = .white
             $0.textAlignment = .center
         }
         noticeDate.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            $0.text = "2020.8.27 목요일 오후 10:00"
+            $0.text = notice?.updatedAt
             $0.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             $0.textAlignment = .center
         }
         noticeContents.do {
             $0.dynamicFont(fontSize: 12, weight: .regular)
             $0.numberOfLines = 0
-            $0.text = "[모임 진행시 가이드 라인]\n\n1. 스터디를 진행할 때 휴대폰은 매너모드로 설정해주세요\n\n2. 코로나 19 감염자가 급증함에 따라 정부에서 사회적 거리두기를 권장하고 있습니다. 스터디 참여시 마스크를 꼭 착용해 주세요\n\n3. 노트북 가져오세요"
+            $0.text = notice?.contents
         }
+        
     }
     
     func layout() {
-        [noticeBackground, noticeTitle, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
+        [removeButton, modifyButton,noticeBackground, noticeTitle, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
         noticeBackground.addSubview(noticeLabel)
         
         noticeBackground.do {
@@ -85,10 +110,24 @@ class NoticeDetailView: UIViewController {
             $0.centerXAnchor.constraint(equalTo: noticeBackground.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
         }
+        removeButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: noticeLabel.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: modifyButton.leadingAnchor, constant: -10).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 90)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
+        }
+        modifyButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: noticeLabel.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -10)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 90)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
+        }
         noticeTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: self.noticeBackground.trailingAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
-            $0.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -10).isActive = true
+            $0.trailingAnchor.constraint(lessThanOrEqualTo: modifyButton.leadingAnchor, constant: -5).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
         }
         profileImage.do {
@@ -114,6 +153,24 @@ class NoticeDetailView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 13)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
             $0.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor).isActive = true
+        }
+    }
+    
+    @objc func modifyButtonDidTap() {
+        presenter?.modifyButtonDidTap(state: .edit, notice: notice!, parentView: self)
+    }
+    
+    @objc func removeButtonDidTap() {
+        presenter?.removeButtonDidTap(notice: notice!)
+    }
+    func showNoticeDetail(notice: Notice) {
+        self.notice = notice
+        attribute()
+    }
+    
+    func showNoticeRemove(message: String) {
+        self.dismiss(animated: true) { [self] in
+            self.parentView?.viewLoad()
         }
     }
 }

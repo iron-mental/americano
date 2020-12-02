@@ -6,11 +6,9 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class NoticePresenter: NoticePresenterProtocol {
-    
-    
     var view: NoticeViewProtocol?
     var wireFrame: NoticeWireFrameProtocol?
     var interactor: NoticeInteractorProtocol?
@@ -18,7 +16,7 @@ class NoticePresenter: NoticePresenterProtocol {
     func viewDidLoad(studyID: Int) {
         interactor?.getNoticeList(studyID: studyID)
     }
-    func showResult(result: Bool, noticeList: NoticeList?, message: String?) {
+    func showResult(result: Bool, noticeList: [Notice]?, message: String?) {
         switch result {
         case true:
             view?.showNoticeList(noticeList: noticeList!)
@@ -29,4 +27,30 @@ class NoticePresenter: NoticePresenterProtocol {
         }
     }
     
+    func celldidTap(notice: Notice, parentView: UIViewController) {
+        wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView)
+    }
+    
+    func noticeDetailResult(result: Bool, notice: Notice, parentView: UIViewController) {
+        switch result {
+        case true:
+            wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView)
+        case false:
+            print("실패니까 대처해 얼릉")
+        }
+    }
+    func didScrollEnded(studyID: Int) {
+        interactor?.getNoticeListPagination(studyID: studyID)
+    }
+    
+    func showNoticePaginationResult(result: Bool, notice: [Notice]?, message: String?) {
+        switch result {
+        case true:
+            view?.showNoticeList(noticeList: notice!)
+            break
+        case false:
+            break
+        }
+        
+    }
 }

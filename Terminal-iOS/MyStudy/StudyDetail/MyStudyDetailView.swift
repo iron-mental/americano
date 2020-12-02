@@ -16,7 +16,7 @@ class MyStudyDetailView: UIViewController {
     var tabBeforeIndex: Int = 0
     lazy var  VCArr: [UIViewController] = [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
                                       StudyDetailWireFrame.createStudyDetail(keyValue: studyID!),
-                                      TempChatView()]
+                                      ChatWireFrame.createChatModule()]
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
                                            navigationOrientation: .horizontal,
@@ -132,7 +132,7 @@ class MyStudyDetailView: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     func addNoticeButtonAction() {
-        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
+        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: VCArr[0])
     }
 }
 
