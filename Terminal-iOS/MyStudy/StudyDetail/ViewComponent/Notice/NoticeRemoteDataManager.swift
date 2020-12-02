@@ -48,6 +48,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                     let json = "\(JSON(value))".data(using: .utf8)
                     let result: BaseResponse<[Notice]> = try! JSONDecoder().decode(BaseResponse<[Notice]>.self, from: json!)
                     completion(true, result.data, nil)
+                    completion(true,nil, nil)
                 } else {
                     completion(false, nil, JSON(value)["message"].string!)
                 }

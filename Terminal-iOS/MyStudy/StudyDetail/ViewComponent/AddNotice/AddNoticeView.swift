@@ -125,18 +125,30 @@ class AddNoticeView: UIViewController {
                                        pinned: pinButton.currentTitle == "필독" ? true : false)
         presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        print("너 어ㅣㅆ는데 ㅋㅋ", presentingViewController!)
+    }
 }
 
 extension AddNoticeView: AddNoticeViewProtocol {
-    func showNewNotice() {
-        dismiss(animated: true) { [self] in
+    func showNewNotice(noticeID: Int) {
+        dismiss(animated: false) { [self] in
             if state == .new {
+                notice = Notice(id: noticeID,
+                                         title: nil,
+                                         contents: nil,
+                                         leaderID: nil,
+                                         studyID: studyID,
+                                         pinned: nil,
+                                         updatedAt: nil,
+                                         leaderImage: nil,
+                                         leaderNickname: nil,
+                                         createAt: nil)
+                (self.parentView as! NoticeViewProtocol).presenter?.celldidTap(notice: notice!, parentView: parentView!)
                 (self.parentView as! NoticeViewProtocol).viewLoad()
             } else {
+                (self.parentView as! NoticeDetailViewProtocol).parentView?.viewLoad()
                 (self.parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
-//                (self.parentView as! NoticeDetailViewProtocol).parentView?.viewLoad()
-//                self.parentView?.dismiss(animated: true, completion: {
-//                })
             }
         }
     }

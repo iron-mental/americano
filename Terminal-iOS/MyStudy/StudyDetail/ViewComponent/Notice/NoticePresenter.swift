@@ -40,6 +40,7 @@ class NoticePresenter: NoticePresenterProtocol {
         }
     }
     func didScrollEnded(studyID: Int) {
+        
         interactor?.getNoticeListPagination(studyID: studyID)
     }
     
