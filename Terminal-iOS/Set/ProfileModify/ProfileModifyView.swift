@@ -17,6 +17,8 @@ class ProfileModifyView: UIViewController {
     let projectView = ProjectTableView()
     let projectAddButton = UIButton()
     
+//    var background = UITapGestureRecognizer()
+    
     var keyHeight: CGFloat?
     lazy var scrollView = UIScrollView()
     lazy var backgroundView = UIView()
@@ -33,15 +35,21 @@ class ProfileModifyView: UIViewController {
     lazy var emailModify = EmailModifyView()
     lazy var locationModify = LocationModifyView()
     
-    var projectArr: [Project] = [Project(id: 1, title: "터미널", contents: "ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁㄴㅁ;", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd"),
-                                 Project(id: 1, title: "하하하", contents: "ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㄹ어라일머아ㅣ;ㅁ러아ㅣㄴ;ㅁ러아ㅣ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;ㅁ러아ㅣ;ㄴㅁ러아님;러아ㅣㄴㅁ;", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd")]
+    var projectArr: [Project] = [Project(id: 1, title: "터미널", contents: " 안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd"),
+                                 Project(id: 1, title: "하하하", contents: " 안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd"),
+                                 Project(id: 1, title: "하하하", contents: " 안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd")]
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerForKeyboardNotification()
+    }
     
     // MARK: viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        registerForKeyboardNotification()
         textViewDidChange(descripModify)
         textViewDidChange(careerDescriptModify)
         textViewDidChange(projectDescriptModify)
@@ -60,7 +68,6 @@ class ProfileModifyView: UIViewController {
         self.do {
             $0.navigationItem.rightBarButtonItem = modifyBtn
         }
-        
         picker.do {
             $0.delegate = self
         }
@@ -70,13 +77,20 @@ class ProfileModifyView: UIViewController {
             $0.bounces = false
         }
         
+        backgroundView.do {
+            let background = UITapGestureRecognizer(target: self, action: #selector(taptap))
+            background.numberOfTapsRequired = 1
+            background.isEnabled = true
+            background.cancelsTouchesInView = false
+            $0.addGestureRecognizer(background)
+        }
+        
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
             requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
         
-        let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
         profileImage.do {
             if let image = userInfo?.image {
                 $0.kf.setImage(with: URL(string: image),
@@ -84,6 +98,8 @@ class ProfileModifyView: UIViewController {
             } else {
                 $0.image = #imageLiteral(resourceName: "member")
             }
+            let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
+            $0.addGestureRecognizer(profileTapGesture)
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = Terminal.convertHeigt(value: 100)
@@ -91,13 +107,14 @@ class ProfileModifyView: UIViewController {
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
-            $0.addGestureRecognizer(profileTapGesture)
+            $0.backgroundColor = .blue
         }
         
         nameModify.do {
             guard let name = userInfo?.nickname else { return }
             $0.text = name
             $0.font = UIFont(name: nameModify.font!.fontName, size: 20)
+            $0.placeholder = "닉네임"
             $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
         
@@ -112,6 +129,9 @@ class ProfileModifyView: UIViewController {
             $0.sizeToFit()
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
         }
         
         careerLabel.do {
@@ -123,11 +143,15 @@ class ProfileModifyView: UIViewController {
             if let career = userInfo?.careerTitle {
                 $0.text = career
             }
+            $0.placeholder = "타이틀"
+            $0.addLeftPadding()
             $0.backgroundColor = .red
             $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .bold)
             $0.textAlignment = .left
             $0.delegate = self
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
         }
         
         careerDescriptModify.do {
@@ -143,6 +167,9 @@ class ProfileModifyView: UIViewController {
             $0.textContainerInset = .zero
             $0.layer.masksToBounds = true
             $0.isScrollEnabled = false
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
         }
         
         projectLabel.do {
@@ -153,22 +180,31 @@ class ProfileModifyView: UIViewController {
         projectView.do {
             $0.delegate = self
             $0.dataSource = self
+            $0.separatorStyle = .none
             $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
-//            $0.rowHeight = 200
         }
         
         projectAddButton.do {
-            $0.setTitle(" + 프로젝트 추가", for: .normal)
             $0.setTitleColor(.white, for: .normal)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            if projectArr.count == 3 {
+                $0.setTitle("프로젝트 ", for: .normal)
+                $0.backgroundColor = .darkGray
+            } else {
+                $0.setTitle(" + 프로젝트 추가", for: .normal)
+                $0.backgroundColor = UIColor.appColor(.mainColor)
+            }
+            $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(addProject), for: .touchUpInside)
         }
         
         guard let email = userInfo?.email else { return }
-        emailModify.emailTextField.text = email
-        
+        emailModify.do {
+            $0.emailTextField.text = email
+        }
         guard let location = userInfo?.address else { return }
-        locationModify.locationTextField.text = location
+        locationModify.do {
+            $0.locationTextField.text = location
+        }
     }
     
     // MARK: Set Layout
@@ -259,15 +295,15 @@ class ProfileModifyView: UIViewController {
         emailModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: snsModify.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalTo: emailModify.heightAnchor).isActive = true
         }
         locationModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: emailModify.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalTo: locationModify.heightAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20).isActive = true
         }
@@ -277,10 +313,16 @@ class ProfileModifyView: UIViewController {
         locationModify.locationTextField.delegate = self
     }
     
+    @objc func taptap() {
+        self.view.endEditing(true)
+    }
+    
     @objc func addProject() {
-        let project = Project(id: 1, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
-        projectArr.append(project)
-        projectView.reloadData()
+        if projectArr.count < 3 {
+            let project = Project(id: 1, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
+            projectArr.append(project)
+            projectView.reloadData()
+        }
     }
     
     @objc func didImageViewClicked() {
@@ -349,9 +391,9 @@ class ProfileModifyView: UIViewController {
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         keyHeight = keyboardHeight
-        
-//        self.view.frame.origin.y -= keyboardHeight
     }
+//        self.view.frame.origin.y -= keyboardHeight
+//    }
     //    @objc func keyBoardShow(notification: NSNotification){
     //        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
     //        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
@@ -402,8 +444,7 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200
-    }
+        return 240    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return projectArr.count
@@ -411,7 +452,7 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
-        
+        cell.selectionStyle = .none
         cell.title.text = projectArr[indexPath.row].title
         cell.contents.delegate = self
         cell.contents.text = projectArr[indexPath.row].contents
@@ -435,9 +476,6 @@ extension ProfileModifyView:  UIImagePickerControllerDelegate & UINavigationCont
 // MARK: 텍스트 필드
 
 extension ProfileModifyView: UITextFieldDelegate {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -445,6 +483,16 @@ extension ProfileModifyView: UITextFieldDelegate {
 }
 
 extension ProfileModifyView: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
+        
+        print(changedText.count)
+        return changedText.count <= 199
+    }
     
     //MARK: TextView Dynamic Height
     
@@ -460,6 +508,10 @@ extension ProfileModifyView: UITextViewDelegate {
 }
 
 extension ProfileModifyView: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
+        self.view.endEditing(true)
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //        if scrollView.contentOffset.y - careerDescriptModify.frame.minY < 0 {
         //            scrollView.contentOffset.y = careerDescriptModify.frame.minY

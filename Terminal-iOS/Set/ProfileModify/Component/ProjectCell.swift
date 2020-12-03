@@ -28,6 +28,9 @@ class ProjectCell: UITableViewCell {
             $0.textColor = .white
             $0.textAlignment = .left
             $0.placeholder = "프로젝트 타이틀"
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.addLeftPadding()
         }
         
         contents.do {
@@ -37,17 +40,19 @@ class ProjectCell: UITableViewCell {
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
             $0.dynamicFont(size: 13, weight: .regular)
-            $0.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
         }
     }
     
     func layout() {
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4).isActive = true
+            $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
         contents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +60,7 @@ class ProjectCell: UITableViewCell {
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 4).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         }
     }
     

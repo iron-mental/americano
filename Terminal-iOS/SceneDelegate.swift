@@ -12,16 +12,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        if let windowScene = scene as? UIWindowScene {
-            let window = UIWindow(windowScene: windowScene)
-            let view = ProfileModifyWireFrame.createProfileModifyModule(userInfo: UserInfo(id: 1, nickname: "시발", email: "ㄹㅇㄹㅇ", image: "ㄹㅇㄹㅇㄹㅇ", introduce: "ㄹㅇㄹㅇㄹ", address: "ㄹㅇㄹㅇ", careerTitle: "ㄹㅇㄹㅇㄹㅇ", careerContents: "ㄹㅇ", snsLinkedin: "ㄹㅇ", snsWeb: "ㄹㅇ", snsGithub: "ㄹㅇ", emailVerified: true, createdAt: "dfdfdfdfd"))
-            window.rootViewController = view
-            self.window = window
-            window.makeKeyAndVisible()
-        }
+//        if let windowScene = scene as? UIWindowScene {
+//            let window = UIWindow(windowScene: windowScene)
+////            let view = ProfileModifyWireFrame.createProfileModifyModule(userInfo: UserInfo(id: 1, nickname: "시발", email: "ㄹㅇㄹㅇ", image: "ㄹㅇㄹㅇㄹㅇ", introduce: "ㄹㅇㄹㅇㄹ", address: "ㄹㅇㄹㅇ", careerTitle: "ㄹㅇㄹㅇㄹㅇ", careerContents: "ㄹㅇ", snsLinkedin: "ㄹㅇ", snsWeb: "ㄹㅇ", snsGithub: "ㄹㅇ", emailVerified: true, createdAt: "dfdfdfdfd"))
+////            window.rootViewController = view
+//
+//            self.window = window
+//            window.makeKeyAndVisible()
+//        }
             
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.

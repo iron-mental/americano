@@ -41,8 +41,8 @@ class SNSModifyView: UIView {
         gitTextField.do {
             $0.placeholder = "Github ID"
             $0.textColor = .white
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.addLeftPadding()
         }
         linkedImage.do {
@@ -55,8 +55,8 @@ class SNSModifyView: UIView {
         linkedTextField.do {
             $0.placeholder = "LinkedIn URL"
             $0.textColor = .white
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.addLeftPadding()
         }
         webImage.do {
@@ -69,8 +69,8 @@ class SNSModifyView: UIView {
         webTextField.do {
             $0.placeholder = "URL"
             $0.textColor = .white
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = #colorLiteral(red: 0.4392156863, green: 0.4392156863, blue: 0.4392156863, alpha: 1)
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.addLeftPadding()
         }
     }
@@ -102,7 +102,7 @@ class SNSModifyView: UIView {
             $0.centerYAnchor.constraint(equalTo: gitImage.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: gitLabel.trailingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 28)).isActive = true
         }
         linkedImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -122,7 +122,7 @@ class SNSModifyView: UIView {
             $0.centerYAnchor.constraint(equalTo: linkedImage.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: linkedLabel.trailingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 28)).isActive = true
         }
         webImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -144,7 +144,7 @@ class SNSModifyView: UIView {
             $0.centerYAnchor.constraint(equalTo: webImage.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: webLabel.trailingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 28)).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         }
     }

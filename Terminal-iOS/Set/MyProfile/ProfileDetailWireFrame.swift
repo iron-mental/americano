@@ -28,6 +28,7 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         remoteManager.remoteRequestHandler = interactor
         
         if let view = view as? ProfileDetailView {
+            view.hidesBottomBarWhenPushed = true
             return view
         } else {
             return UIViewController()
