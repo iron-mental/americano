@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CreateStudyView: UIViewController{
     var presenter: CreateStudyPresenterProtocols?
@@ -41,6 +42,11 @@ class CreateStudyView: UIViewController{
         }
     }
     var studyDetailPost: StudyDetailPost?
+    let imageDownloadRequest = AnyModifier { request in
+        var requestBody = request
+        requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+        return requestBody
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +68,7 @@ class CreateStudyView: UIViewController{
             $0.image = #imageLiteral(resourceName: "swift")
             mainImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(mainImageTapGesture)
+            $0.kf.setImage(with: URL(string: (study?.image!)!), options: [.requestModifier(imageDownloadRequest)])
         }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
@@ -97,7 +104,7 @@ class CreateStudyView: UIViewController{
         }
         timeView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-            $0.detailTime.text = study?.studyTime
+            $0.detailTime.text = study?.studyTime ?? nil
         }
         button.do {
             $0.setTitle("완료", for: .normal)
