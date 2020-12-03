@@ -11,6 +11,7 @@ import UIKit
 class ProjectCell: UITableViewCell {
     static let projectCellID = "ProjectCellID"
     
+    let remove = UIButton()
     let title = UITextField()
     let contents = UITextView()
     
@@ -21,8 +22,11 @@ class ProjectCell: UITableViewCell {
     }
     
     func attribute() {
-        self.contentView.addSubview(title)
-        self.contentView.addSubview(contents)
+        remove.do {
+            $0.setTitle("-", for: .normal)
+            $0.backgroundColor = .red
+            $0.layer.cornerRadius = 15
+        }
         
         title.do {
             $0.textColor = .white
@@ -47,11 +51,22 @@ class ProjectCell: UITableViewCell {
     }
     
     func layout() {
+        self.contentView.addSubview(remove)
+        self.contentView.addSubview(title)
+        self.contentView.addSubview(contents)
+        
+        remove.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        }
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.remove.leadingAnchor, constant: -5).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
         contents.do {
