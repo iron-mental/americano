@@ -200,9 +200,9 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 3 && indexPath.row == 0 {
             let view = HomeView()
-            view.modalPresentationStyle = .fullScreen
-            self.present(view, animated: false, completion: nil)
-//            self.navigationController?.pushViewController(view, animated: true)
+            view.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(view, animated: false)
+//            self.present(view, animated: false, completion: nil)
         }
     }
     

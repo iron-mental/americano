@@ -14,6 +14,12 @@ class HomeView: UIViewController {
     var signUpButton = UIButton()
     var mainImage = UIImageView()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
