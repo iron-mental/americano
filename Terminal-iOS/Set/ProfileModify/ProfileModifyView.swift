@@ -462,9 +462,18 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
         cell.selectionStyle = .none
-        cell.title.text = projectArr[indexPath.row].title
         cell.contents.delegate = self
+        cell.title.text = projectArr[indexPath.row].title
         cell.contents.text = projectArr[indexPath.row].contents
+        
+        cell.tapped = { [unowned self] in
+            let index = indexPath.row
+            projectArr.remove(at: index)
+            projectView.reloadData()
+            if projectArr.count < 3 {
+                projectAddButton.backgroundColor = UIColor.appColor(.mainColor)
+            }
+        }
         
         return cell
     }

@@ -10,7 +10,7 @@ import UIKit
 
 class ProjectCell: UITableViewCell {
     static let projectCellID = "ProjectCellID"
-    
+    var tapped: (() -> ())?
     let remove = UIButton()
     let title = UITextField()
     let contents = UITextView()
@@ -26,6 +26,7 @@ class ProjectCell: UITableViewCell {
             $0.setTitle("-", for: .normal)
             $0.backgroundColor = .red
             $0.layer.cornerRadius = 15
+            $0.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
         }
         
         title.do {
@@ -79,6 +80,11 @@ class ProjectCell: UITableViewCell {
         }
     }
     
+    
+    @objc func tapButton(_ sender: UIButton) {
+        tapped?()
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
