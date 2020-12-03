@@ -36,7 +36,6 @@ class ProfileModifyView: UIViewController {
     lazy var locationModify = LocationModifyView()
     
     var projectArr: [Project] = [Project(id: 1, title: "터미널", contents: " 안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd"),
-                                 Project(id: 1, title: "하하하", contents: " 안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd"),
                                  Project(id: 1, title: "하하하", contents: " 안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd")]
     
     
@@ -187,12 +186,11 @@ class ProfileModifyView: UIViewController {
         projectAddButton.do {
             $0.setTitleColor(.white, for: .normal)
             if projectArr.count == 3 {
-                $0.setTitle("프로젝트 ", for: .normal)
                 $0.backgroundColor = .darkGray
             } else {
-                $0.setTitle(" + 프로젝트 추가", for: .normal)
                 $0.backgroundColor = UIColor.appColor(.mainColor)
             }
+            $0.setTitle(" + 프로젝트 추가", for: .normal)
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(addProject), for: .touchUpInside)
         }
@@ -321,7 +319,18 @@ class ProfileModifyView: UIViewController {
         if projectArr.count < 3 {
             let project = Project(id: 1, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
             projectArr.append(project)
+            if projectArr.count == 3 {
+                projectAddButton.backgroundColor = .darkGray
+            }
             projectView.reloadData()
+        } else {
+            let alert = UIAlertController(title: "알림",
+                                          message: "프로젝트는 최대 3개입니다.",
+                                          preferredStyle: UIAlertController.Style.alert)
+            let okAction = UIAlertAction(title: "확인", style: .default, handler : nil )
+
+            alert.addAction(okAction)
+            present(alert, animated: true)
         }
     }
     
@@ -490,7 +499,6 @@ extension ProfileModifyView: UITextViewDelegate {
         
         let changedText = currentText.replacingCharacters(in: stringRange, with: text)
         
-        print(changedText.count)
         return changedText.count <= 199
     }
     
