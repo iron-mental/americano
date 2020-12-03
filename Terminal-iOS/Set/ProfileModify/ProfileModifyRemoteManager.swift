@@ -48,4 +48,24 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             }
         }
     }
+    
+    func remoteProjectList(completion: @escaping ([Project]) -> Void) {
+        let url = "http://3.35.154.27:3000/v1/user/44/project"
+        
+        AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let data = "\(json)".data(using: .utf8)
+                do {
+                    let result = try JSONDecoder().decode([Project].self, from: data!)
+                    completion(result)
+                } catch {
+                    print("에러")
+                }
+            case .failure(let error):
+                print("에러:", error)
+            }
+        }
+    }
 }

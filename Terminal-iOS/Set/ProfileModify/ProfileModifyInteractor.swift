@@ -9,11 +9,15 @@
 import Foundation
 
 class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
+   
+    
     var presenter: ProfileModifyInteractorOutputProtocol?
     var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol?
     
-    func completeModify(userInfo: UserInfoPut) {
+    func completeModify(userInfo: UserInfoPut, project: [Project]) {
         remoteDataManager?.validProfileModify(userInfo: userInfo)
+        
+        
     }
 }
 

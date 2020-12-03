@@ -12,12 +12,11 @@ import Kingfisher
 class ProfileModifyView: UIViewController {
     var presenter: ProfileModifyPresenterProtocol?
     var userInfo: UserInfo?
+    var projectArr: [Project] = []
     let picker = UIImagePickerController()
     
     let projectView = ProjectTableView()
     let projectAddButton = UIButton()
-    
-//    var background = UITapGestureRecognizer()
     
     var keyHeight: CGFloat?
     lazy var scrollView = UIScrollView()
@@ -35,8 +34,7 @@ class ProfileModifyView: UIViewController {
     lazy var emailModify = EmailModifyView()
     lazy var locationModify = LocationModifyView()
     
-    var projectArr: [Project] = [Project(id: 1, title: "터미널", contents: " 안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd"),
-                                 Project(id: 1, title: "하하하", contents: " 안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요", snsGithub: "feelsonce", snsAppstore: "헤헤", snsPlaystore: "fd", createAt: "Fd")]
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -387,7 +385,9 @@ class ProfileModifyView: UIViewController {
                                    sido: "서울시",
                                    sigungu: "은평구")
         
-        presenter?.completeModifyButton(userInfo: userInfo)
+        let project = projectArr
+        
+        presenter?.completeModifyButton(userInfo: userInfo, project: project)
     }
     
     @objc func keyboardWillHide(_ sender: Notification) {
@@ -453,7 +453,8 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 240    }
+        return 240
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return projectArr.count

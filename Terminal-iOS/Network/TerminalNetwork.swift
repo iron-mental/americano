@@ -13,6 +13,6 @@ import SwiftyJSON
 
 class TerminalNetwork {
     static let headers: HTTPHeaders = [
-        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjMsImVtYWlsIjoic3Nzc0Bzc3Nzcy5jb20iLCJuaWNrbmFtZSI6IuqzoOyWkeydtOufrOyWtCIsImlhdCI6MTYwNjgyNzk3OCwiZXhwIjoxMDYwNjgyNzk3OCwiaXNzIjoidGVybWluYWwtc2VydmVyIiwic3ViIjoidXNlckluZm8tYWNjZXNzIn0.x0vKrkzEsN3-Qejhd8Rso6rdxeM2CwwSqCsfnCVlB9Q"
+        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDQsImVtYWlsIjoic3dkb3Jpc0BnbWFpbC5jb20iLCJuaWNrbmFtZSI6IuycpOyDgeybkCIsImlhdCI6MTYwNzAxNjE5NSwiZXhwIjoxMDYwNzAxNjE5NSwiaXNzIjoidGVybWluYWwtc2VydmVyIiwic3ViIjoidXNlckluZm8tYWNjZXNzIn0.kECVw4OWHq6XmT3TAkXsBVfXvvQjdS6-G4G_7j1Wpys"
     ]
 }

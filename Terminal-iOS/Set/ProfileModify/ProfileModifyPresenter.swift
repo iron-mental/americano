@@ -9,12 +9,14 @@
 import Foundation
 
 class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
+    
+    
     var view: ProfileModifyViewProtocol?
     var interactor: ProfileModifyInteractorInputProtocol?
     var wireFrame: ProfileModifyWireFrameProtocol?
-
-    func completeModifyButton(userInfo: UserInfoPut) {
-        interactor?.completeModify(userInfo: userInfo)
+    
+    func completeModifyButton(userInfo: UserInfoPut, project: [Project]) {
+        interactor?.completeModify(userInfo: userInfo, project: project)
     }
 }
 
