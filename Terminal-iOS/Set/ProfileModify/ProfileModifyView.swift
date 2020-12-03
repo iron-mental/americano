@@ -154,7 +154,7 @@ class ProfileModifyView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
-            $0.rowHeight = 200
+//            $0.rowHeight = 200
         }
         
         projectAddButton.do {
@@ -401,6 +401,10 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 
 extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return projectArr.count
     }

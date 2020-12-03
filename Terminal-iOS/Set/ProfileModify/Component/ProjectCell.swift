@@ -36,7 +36,8 @@ class ProjectCell: UITableViewCell {
             $0.sizeToFit()
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
-            $0.bounces = false
+            $0.dynamicFont(size: 13, weight: .regular)
+            $0.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         }
     }
     
@@ -54,30 +55,11 @@ class ProjectCell: UITableViewCell {
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 4).isActive = true 
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 4).isActive = true
         }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-extension ProjectCell: UITextViewDelegate {
-//    func textViewDidChange(_ textView: UITextView) {
-//        let size = CGSize(width: self.frame.width, height: .infinity)
-//        let estimatedSize = contents.sizeThatFits(size)
-//        contents.constraints.forEach { (constraint) in
-//            if constraint.firstAttribute == .height {
-//                constraint.constant = estimatedSize.height
-//            }
-//        }
-//    }
-    
-//    let fixedWidth = textView.frame.size.width
-//         textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-//         let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-//         var newFrame = textView.frame
-//         newFrame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
-//         textView.frame = newFrame
 }
