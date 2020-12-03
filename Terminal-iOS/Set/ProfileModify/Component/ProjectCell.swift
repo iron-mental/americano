@@ -36,7 +36,7 @@ class ProjectCell: UITableViewCell {
             $0.sizeToFit()
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
-//            $0.isScrollEnabled = false
+            $0.bounces = false
         }
     }
     
@@ -53,9 +53,8 @@ class ProjectCell: UITableViewCell {
             $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//            $0.heightAnchor.constraint(lessThanOrEqualToConstant: 400).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 4).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 4).isActive = true 
         }
     }
     
@@ -65,15 +64,15 @@ class ProjectCell: UITableViewCell {
 }
 
 extension ProjectCell: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        let size = CGSize(width: self.frame.width, height: .infinity)
-        let estimatedSize = contents.sizeThatFits(size)
-        contents.constraints.forEach { (constraint) in
-            if constraint.firstAttribute == .height {
-                constraint.constant = estimatedSize.height
-            }
-        }
-    }
+//    func textViewDidChange(_ textView: UITextView) {
+//        let size = CGSize(width: self.frame.width, height: .infinity)
+//        let estimatedSize = contents.sizeThatFits(size)
+//        contents.constraints.forEach { (constraint) in
+//            if constraint.firstAttribute == .height {
+//                constraint.constant = estimatedSize.height
+//            }
+//        }
+//    }
     
 //    let fixedWidth = textView.frame.size.width
 //         textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))

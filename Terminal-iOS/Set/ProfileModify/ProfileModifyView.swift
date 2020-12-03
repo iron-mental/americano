@@ -102,6 +102,7 @@ class ProfileModifyView: UIViewController {
         }
         
         descripModify.do {
+            $0.backgroundColor = .darkGray
             if let descript = userInfo?.introduce {
                 $0.text = descript
             }
@@ -153,8 +154,7 @@ class ProfileModifyView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
-            $0.backgroundColor = .red
-            $0.estimatedRowHeight = 60
+            $0.rowHeight = 200
         }
         
         projectAddButton.do {
@@ -209,7 +209,7 @@ class ProfileModifyView: UIViewController {
             $0.topAnchor.constraint(equalTo: nameModify.bottomAnchor, constant: 7).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 400).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
         careerLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -242,7 +242,6 @@ class ProfileModifyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
         }
-        
         projectAddButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectView.bottomAnchor, constant: 10).isActive = true
@@ -401,15 +400,7 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 // MARK: 테이블뷰
 
 extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let title = projectArr[indexPath.row].title.heightWithConstrainedWidth(width: projectView.frame.width,
-                                                                               font: UIFont.systemFont(ofSize: 16))
-        let contents = projectArr[indexPath.row].contents.heightWithConstrainedWidth(width: projectView.frame.width,
-                                                                                     font: UIFont.systemFont(ofSize: 14))
-        return title + contents
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return projectArr.count
     }
@@ -428,7 +419,8 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
 // MARK: 이미지 픽커
 
 extension ProfileModifyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             profileImage.image = image
         }
@@ -449,7 +441,9 @@ extension ProfileModifyView: UITextFieldDelegate {
 }
 
 extension ProfileModifyView: UITextViewDelegate {
+    
     //MARK: TextView Dynamic Height
+    
     func textViewDidChange(_ textView: UITextView) {
         let size = CGSize(width: view.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
