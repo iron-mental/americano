@@ -19,7 +19,6 @@ class HomeView: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

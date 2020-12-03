@@ -10,6 +10,8 @@ import UIKit
 
 protocol SetViewProtocol: class {
     var presenter: SetPresenterProtocol? { get set }
+    
+    func loggedOut()
 }
 
 protocol SetWireFrameProtocol: class {
@@ -27,6 +29,7 @@ protocol SetPresenterProtocol: class {
     // VIEW -> PRESENTER
     func viewDidLoad()
     func showProfileDetail()
+    func loggedOut()
 }
 
 protocol SetInteractorOutputProtocol: class {

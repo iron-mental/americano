@@ -21,12 +21,13 @@ class SetPresenter: SetPresenterProtocol {
         wireFrame?.presentProfileDetailScreen(from: view!)
     }
     
+    func loggedOut() {
+        view?.loggedOut()
+    }
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {
     func onError() {
         
     }
-    
-    
 }

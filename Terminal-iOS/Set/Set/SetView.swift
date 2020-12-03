@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class SetView: UIViewController {
     
@@ -80,7 +81,7 @@ class SetView: UIViewController {
             $0.font = $0.font.withSize(13)
         }
         settingList.do {
-//            $0.alwaysBounceVertical = false
+            $0.alwaysBounceVertical = false
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -154,7 +155,15 @@ class SetView: UIViewController {
 }
 
 extension SetView: SetViewProtocol {
-    
+    func loggedOut() {
+        let view = HomeView()
+        view.hidesBottomBarWhenPushed = true
+        
+        /// 로그아웃과 동시에  토큰 삭제
+        KeychainWrapper.standard.remove(forKey: "refreshToken")
+        KeychainWrapper.standard.remove(forKey: "accessToken")
+        navigationController?.pushViewController(view, animated: false)
+    }
 }
 
 extension SetView: UITableViewDelegate, UITableViewDataSource {
@@ -199,10 +208,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 3 && indexPath.row == 0 {
-            let view = HomeView()
-            view.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(view, animated: false)
-//            self.present(view, animated: false, completion: nil)
+            presenter?.loggedOut()
         }
     }
     
