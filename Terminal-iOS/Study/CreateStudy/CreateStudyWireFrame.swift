@@ -19,7 +19,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         
         view.presenter = presenter
         view.selectedCategory = category
-        
+        view.study = studyDetail ?? nil
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame

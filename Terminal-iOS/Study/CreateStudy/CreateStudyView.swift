@@ -35,7 +35,11 @@ class CreateStudyView: UIViewController{
     var button = UIButton()
     var mainImageTapGesture = UITapGestureRecognizer()
     var locationTapGesture = UITapGestureRecognizer()
-    var study: StudyDetail?
+    var study: StudyDetail? {
+        didSet {
+            setView()
+        }
+    }
     var studyDetailPost: StudyDetailPost?
     
     override func viewDidLoad() {
@@ -64,25 +68,36 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.textAlignment = .center
             $0.textColor = .white
+            $0.text = study?.title ?? nil
             $0.layer.cornerRadius = 10
         }
+        
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-            $0.textView.text = "테스트 들어가ㅏㄴ안들어가나"
+            $0.textView.text = study?.introduce ?? nil
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.notion?.textField.text = study?.snsNotion ?? nil
+            $0.web?.textField.text = study?.snsNotion ?? nil
+            $0.evernote?.textField.text = study?.snsNotion ?? nil
         }
         studyInfoView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.textView.text = study?.introduce ?? nil
         }
         locationView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
+            $0.detailAddress.text = (study?.location.addressName)!
+            if let detail = study?.location.locationDetail {
+                $0.detailAddress.text! += detail
+            }
         }
         timeView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.detailTime.text = study?.studyTime
         }
         button.do {
             $0.setTitle("완료", for: .normal)
@@ -233,6 +248,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
         attribute()
         layout()
         setDelegate()
+        
     }
     func loading() {
         LoadingRainbowCat.show()
