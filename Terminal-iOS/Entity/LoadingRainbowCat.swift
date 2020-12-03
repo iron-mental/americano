@@ -21,7 +21,7 @@ class LoadingRainbowCat: NSObject {
         if let window = UIApplication.shared.keyWindow {
             window.addSubview(backgroundView)
             window.addSubview(popupView)
-            popupView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+            popupView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
             backgroundView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX, height: window.frame.maxY)
             backgroundView.backgroundColor = .black
             backgroundView.alpha = 0.6

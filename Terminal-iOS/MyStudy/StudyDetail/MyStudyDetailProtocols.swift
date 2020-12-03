@@ -26,6 +26,7 @@ protocol MyStudyDetailPresenterProtocol {
     
     //VIEW -> PRESENTER
     func addNoticeButtonDidTap(studyID: Int, parentView: UIViewController)
+    func editStudyButtonDidTap(study: StudyDetail, parentView: UIViewController)
 }
 
 protocol MyStudyDetailRemoteDataManagerProtocol {
@@ -40,6 +41,6 @@ protocol MyStudyDetailWireFrameProtocol {
     var presenter: MyStudyDetailPresenterProtocol? { get set }
     
     static func createMyStudyDetailModule(studyID: Int) -> UIViewController
-    
     func goToAddNotice(studyID: Int, parentView: UIViewController)
+    func goToEditStudy(study: StudyDetail, parentView: UIViewController)
 }

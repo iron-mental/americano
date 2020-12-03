@@ -35,7 +35,8 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
     }
     
     func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int) {
-        let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(keyValue: keyValue)
+        //state 값 이렇게 줄게 아니라 athority 받아와서 분기후에 정확하게 그에맞는걸로 해야댐
+        let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(keyValue: keyValue, state: .none)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(studyDetailViewController, animated: true)

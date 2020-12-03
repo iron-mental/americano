@@ -9,6 +9,8 @@
 import UIKit
 
 class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
+    
+    
     var presenter: MyStudyDetailPresenterProtocol?
     
     static func createMyStudyDetailModule(studyID: Int) -> UIViewController {
@@ -22,18 +24,28 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         view.presenter = presenter
         view.studyID = studyID
         presenter.view = view
+        print(view)
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame
         interactor.presenter = presenter
         interactor.remoteDatamanager = remoteDataManager
         interactor.localDatamanager = localDataManager
+        wireFrame.presenter = presenter
         
         return view
     }
+    
     func goToAddNotice(studyID: Int, parentView: UIViewController) {
-        var view = AddNoticeWireFrame.createAddNoticeModule(studyID: studyID, notice: nil, parentView: parentView, state: .new)
+        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: studyID, notice: nil, parentView: parentView, state: .new)
         parentView.present(view, animated: true) {
             print("뷰 띄움")
+        }
+    }
+    
+    func goToEditStudy(study: StudyDetail, parentView: UIViewController) {
+        let view = StudyDetailWireFrame.createStudyDetail(keyValue: study.id, state: .edit)
+        parentView.present(view, animated: true) {
+            print("뷰띄워줌")
         }
     }
 }

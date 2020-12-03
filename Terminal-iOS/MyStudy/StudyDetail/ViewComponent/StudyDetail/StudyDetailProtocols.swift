@@ -10,7 +10,8 @@ import UIKit
 
 protocol StudyDetailViewProtocol: class {
     var presenter: StudyDetailPresenterProtocol? { get set }
-    
+    var state: StudyDetailViewState { get set }
+    var keyValue: Int? { get set }
     // PRESENT -> VIEW
     func showStudyDetail(with studyDetail: StudyDetail)
     func showError()
@@ -20,7 +21,7 @@ protocol StudyDetailViewProtocol: class {
 }
 
 protocol StudyDetailWireFrameProtocol: class {
-    static func createStudyDetail(keyValue: Int) -> UIViewController
+    static func createStudyDetail(keyValue: Int, state: StudyDetailViewState) -> UIViewController
     
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyDetailViewProtocol)
@@ -32,6 +33,7 @@ protocol StudyDetailPresenterProtocol: class {
     var view: StudyDetailViewProtocol? { get set }
     var interactor: StudyDetailInteractorInputProtocol? { get set }
     var wireFrame: StudyDetailWireFrameProtocol? { get set }
+    
     
     // VIEW -> PRESENTER
     func viewDidLoad()

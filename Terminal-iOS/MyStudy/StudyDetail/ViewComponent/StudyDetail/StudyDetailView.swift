@@ -27,7 +27,11 @@ class StudyDetailView: UIViewController {
         }
     }
     var userData: [Participate] = []
-    var keyValue: Int?
+    var keyValue: Int? {
+        didSet {
+            test()
+        }
+    }
     var studyInfo: StudyDetail? {
         didSet {
             attribute()
@@ -50,8 +54,10 @@ class StudyDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        attribute()
         layout()
+        
+    }
+    func test() {
         presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
     }
     
@@ -238,7 +244,6 @@ class StudyDetailView: UIViewController {
 
 extension StudyDetailView: StudyDetailViewProtocol {
     func studyJoinResult(message: String) {
-        print("뷰에서찎는거구요", message)
         presenter?.showStudyListDetail(keyValue: "\(studyInfo!.id)")
     }
     

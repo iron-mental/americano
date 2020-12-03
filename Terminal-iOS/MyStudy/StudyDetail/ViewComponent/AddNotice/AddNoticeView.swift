@@ -144,7 +144,7 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                          leaderImage: nil,
                                          leaderNickname: nil,
                                          createAt: nil)
-                (self.parentView as! NoticeViewProtocol).presenter?.celldidTap(notice: notice!, parentView: parentView!)
+//                (self.parentView.VCArr as! NoticeViewProtocol).presenter?.celldidTap(notice: notice!, parentView: parentView!)
                 (self.parentView as! NoticeViewProtocol).viewLoad()
             } else {
                 (self.parentView as! NoticeDetailViewProtocol).parentView?.viewLoad()
