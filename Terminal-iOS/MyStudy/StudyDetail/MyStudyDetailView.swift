@@ -16,7 +16,6 @@ class MyStudyDetailView: UIViewController {
     var tabBeforeIndex: Int = 0
     
     lazy var  VCArr: [UIViewController] = [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                                            
                                             StudyDetailWireFrame.createStudyDetail(keyValue: studyID!, state: .member),
                                       ChatWireFrame.createChatModule()]
     

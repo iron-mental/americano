@@ -17,7 +17,7 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         let wireFrame: StudyDetailWireFrameProtocol = StudyDetailWireFrame()
         
         view.presenter = presenter
-        view.state = .edit
+        view.state = state
         view.keyValue = keyValue
         
         presenter.view = view

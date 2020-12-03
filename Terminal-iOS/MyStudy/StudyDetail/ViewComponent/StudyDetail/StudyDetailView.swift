@@ -29,7 +29,7 @@ class StudyDetailView: UIViewController {
     var userData: [Participate] = []
     var keyValue: Int? {
         didSet {
-            test()
+            presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
         }
     }
     var studyInfo: StudyDetail? {
@@ -56,9 +56,6 @@ class StudyDetailView: UIViewController {
         super.viewDidLoad()
         layout()
         
-    }
-    func test() {
-        presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
     }
     
     func attribute() {
