@@ -10,7 +10,8 @@ import UIKit
 
 protocol CreateStudyViewProtocols: class {
     var presenter: CreateStudyPresenterProtocols? { get set }
-    
+    var study: StudyDetail? { get set }
+    var studyDetailPost: StudyDetailPost? { get set }
     //VIew -> PRESENTER
     func didClickButton()
     
@@ -80,7 +81,7 @@ protocol CreateStudyLocalDataManagerProtocols: class {
 }
 
 protocol CreateStudyWireFrameProtocols: class {
-    static func createStudyViewModul(category: Category) -> UIViewController
+    static func createStudyViewModul(category: String, studyDetail: StudyDetail?) -> UIViewController
     //추후에 스터디 모델이 들어가야겠네용?
     func goToSelectLocation(view: UIViewController)
 }

@@ -35,6 +35,8 @@ class CreateStudyView: UIViewController{
     var button = UIButton()
     var mainImageTapGesture = UITapGestureRecognizer()
     var locationTapGesture = UITapGestureRecognizer()
+    var study: StudyDetail?
+    var studyDetailPost: StudyDetailPost?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -226,6 +228,7 @@ class CreateStudyView: UIViewController{
 }
 
 extension CreateStudyView: CreateStudyViewProtocols {
+    
     func setView() {
         attribute()
         layout()
@@ -278,7 +281,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
-        let newStudy = StudyDetailPost(category: selectedCategory!,
+        studyDetailPost = StudyDetailPost(category: selectedCategory!,
                                        title: studyTitleTextField.text ?? "",
                                        introduce: studyIntroduceView.textView.text,
                                        progress: studyInfoView.textView.text,
@@ -288,7 +291,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
                                        snsEvernote: SNSInputView.evernote?.textField.text,
                                        image: mainImageView.image!,
                                        location: selectedLocation!)
-        presenter?.clickCompleteButton(study: newStudy)
+        presenter?.clickCompleteButton(study: studyDetailPost!)
     }
     func studyInfoInvalid(message: String) {
         LoadingRainbowCat.hide() {

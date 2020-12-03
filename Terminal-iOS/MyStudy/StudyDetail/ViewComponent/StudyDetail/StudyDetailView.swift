@@ -52,7 +52,7 @@ class StudyDetailView: UIViewController {
     lazy var locationView = TitleWithContentView(state: state)
     var mapView = NMFMapView()
     var joinButton = UIButton()
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
