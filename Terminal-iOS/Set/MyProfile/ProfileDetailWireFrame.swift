@@ -35,8 +35,8 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         }
     }
     
-    func presentProfileModifyScreen(from view: ProfileDetailViewProtocol, userInfo: UserInfo) {
-        let profileModifyView = ProfileModifyWireFrame.createProfileModifyModule(userInfo: userInfo)
+    func presentProfileModifyScreen(from view: ProfileDetailViewProtocol, userInfo: UserInfo, project: [Project]) {
+        let profileModifyView = ProfileModifyWireFrame.createProfileModifyModule(userInfo: userInfo, project: project)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(profileModifyView, animated: false)
