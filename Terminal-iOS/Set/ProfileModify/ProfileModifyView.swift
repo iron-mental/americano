@@ -184,7 +184,8 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             $0.dataSource = self
             $0.separatorStyle = .none
             $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
-            $0.estimatedRowHeight = 150
+//            $0.estimatedRowHeight = 150
+//            $0.rowHeight = UITableView.automaticDimension
         }
         
         projectAddButton.do {
@@ -417,7 +418,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
                                    sido: "서울시",
                                    sigungu: "은평구")
         
-        
+        print("text", projectArr)
         presenter?.completeModifyButton(userInfo: userInfo, project: projectArr)
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -484,13 +485,8 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 
 extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 380
-//    }
-    
-    func tableView(tableView: UITableView,
-                   heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 360
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
