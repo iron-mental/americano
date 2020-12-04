@@ -34,9 +34,6 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     lazy var emailModify = EmailModifyView()
     lazy var locationModify = LocationModifyView()
     
-    
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registerForKeyboardNotification()
@@ -46,6 +43,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(projectArr)
         attribute()
         layout()
         textViewDidChange(descripModify)
@@ -365,22 +363,27 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func completeButton() {
-        guard let image = profileImage.image,
-              let nickname = nameModify.text,
-              let introduce = descripModify.text,
-              let careerTitle = careerTitleModify.text,
-              let careerContents = careerDescriptModify.text else { return }
-        
+    func getCellData() {
         for index in 0..<projectArr.count {
             let indexpath = IndexPath(row: index, section: 0)
             let cell = projectView.cellForRow(at: indexpath) as! ProjectCell
             let title = cell.title.text!
             let contents = cell.contents.text!
-            
-            projectArr.append(Project(id: nil, title: title, contents: contents, snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: ""))
+        
+            projectArr[index] = Project(id: nil, title: title, contents: contents, snsGithub: nil, snsAppstore: nil,snsPlaystore: nil, createAt: "")
         }
-       
+    }
+
+    // MARK: - 프로필 수정 완료 버튼
+    
+    @objc func completeButton() {
+        getCellData()
+        
+        guard let image = profileImage.image,
+              let nickname = nameModify.text,
+              let introduce = descripModify.text,
+              let careerTitle = careerTitleModify.text,
+              let careerContents = careerDescriptModify.text else { return }
         
         let userInfo = UserInfoPut(image: image,
                                    nickname: nickname,
@@ -395,9 +398,8 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
                                    sido: "서울시",
                                    sigungu: "은평구")
         
-        let project = projectArr
         
-        presenter?.completeModifyButton(userInfo: userInfo, project: project)
+        presenter?.completeModifyButton(userInfo: userInfo, project: projectArr)
     }
     
     @objc func keyboardWillHide(_ sender: Notification) {
@@ -490,7 +492,6 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
         
         projectArr.remove(at: index)
         projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
-        
     }
 }
 

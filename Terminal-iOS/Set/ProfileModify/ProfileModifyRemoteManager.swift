@@ -48,10 +48,10 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             }
         }
     }
-    
+  
     func remoteProjectList(completion: @escaping (BaseResponse<[Project]>) -> Void) {
         let url = "http://3.35.154.27:3000/v1/user/44/project"
-        
+
         AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -81,12 +81,16 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
                     if result.result {
                         completion(true)
+                    } else {
+                        completion(false)
                     }
                 } catch {
                     print("에러")
+                    completion(false)
                 }
             case .failure(let error):
                 print("에러:", error)
+                completion(false)
             }
         }
     }
@@ -96,10 +100,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         
         let params: Parameters = [
             "title": project.title,
-            "contents": project.contents,
-            "sns_github": "test",
-            "sns_appstore": "test",
-            "sns_playstore": "test"
+            "contents": project.contents
         ]
         
         AF.request(url, method: .post, parameters: params, headers: TerminalNetwork.headers).responseJSON { response in
@@ -110,13 +111,9 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                 do {
                     let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
                     if result.result {
-//                        if let message = result.message {
-                            print(result)
-//                        }
+                        print("성공",result)
                     } else {
-//                        if let message = result.message {
-                            print(result)
-//                        }
+                        print("실패",result)
                     }
                 } catch {
                     print("에러")
