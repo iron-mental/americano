@@ -11,6 +11,8 @@ import UIKit
 protocol MyStudyDetailViewProtocol {
     var presenter: MyStudyDetailPresenterProtocol? { get set }
     var studyID: Int? { get set}
+    var VCArr: [UIViewController] { get set }
+    
 }
 
 protocol MyStudyDetailInteractorProtocol {
@@ -27,6 +29,7 @@ protocol MyStudyDetailPresenterProtocol {
     //VIEW -> PRESENTER
     func addNoticeButtonDidTap(studyID: Int, parentView: UIViewController)
     func editStudyButtonDidTap(study: StudyDetail, parentView: UIViewController)
+    func addNoticeFinished(notice: Int, studyID: Int, parentView: UIViewController)
 }
 
 protocol MyStudyDetailRemoteDataManagerProtocol {
@@ -43,4 +46,5 @@ protocol MyStudyDetailWireFrameProtocol {
     static func createMyStudyDetailModule(studyID: Int) -> UIViewController
     func goToAddNotice(studyID: Int, parentView: UIViewController)
     func goToEditStudy(study: StudyDetail, parentView: UIViewController)
+    func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController)
 }

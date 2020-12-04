@@ -144,11 +144,13 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                          leaderImage: nil,
                                          leaderNickname: nil,
                                          createAt: nil)
-//                (self.parentView.VCArr as! NoticeViewProtocol).presenter?.celldidTap(notice: notice!, parentView: parentView!)
-                (self.parentView as! NoticeViewProtocol).viewLoad()
+                ((self.parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
+//                (self.parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: notice?.id, studyID: notice?.studyID, parentView: parentView)
+                (self.parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
             } else {
-                (self.parentView as! NoticeDetailViewProtocol).parentView?.viewLoad()
+                //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
                 (self.parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
+                ((self.parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
             }
         }
     }

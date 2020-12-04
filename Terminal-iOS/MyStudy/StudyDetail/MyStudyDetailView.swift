@@ -11,13 +11,17 @@ import UIKit
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
     
-    var studyID: Int?
+    var studyID: Int? {
+        didSet {
+            VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
+                       StudyDetailWireFrame.createStudyDetail(keyValue: studyID!, state: .member),
+                 ChatWireFrame.createChatModule()]
+        }
+    }
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
     
-    lazy var  VCArr: [UIViewController] = [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                                            StudyDetailWireFrame.createStudyDetail(keyValue: studyID!, state: .member),
-                                      ChatWireFrame.createChatModule()]
+    var  VCArr: [UIViewController] = []
     
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
@@ -135,12 +139,13 @@ class MyStudyDetailView: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     func addNoticeButtonAction() {
-        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: VCArr[0])
+//        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: VCArr[0])
+        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
     }
     func editStudyButtonDidTap() {
         if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
-            print(targetStudy.id)
-            presenter?.editStudyButtonDidTap(study: targetStudy, parentView: VCArr[1])
+//            presenter?.editStudyButtonDidTap(study: targetStudy, parentView: VCArr[1])
+            presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
         }
     }
 }

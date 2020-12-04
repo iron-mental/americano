@@ -49,4 +49,11 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
             print("뷰띄워줌")
         }
     }
+    
+    func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController) {
+        let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice, studyID: studyID, parentView: parentView)
+        parentView.present(view, animated: true) {
+            print("아무화면에서나 공지사항 추가하면 뜰거임")
+        }
+    }
 }

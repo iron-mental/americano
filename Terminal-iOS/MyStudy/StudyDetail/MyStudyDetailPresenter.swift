@@ -20,4 +20,8 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     func editStudyButtonDidTap(study: StudyDetail, parentView: UIViewController) {
         wireFrame?.goToEditStudy(study: study, parentView: parentView)
     }
+    
+    func addNoticeFinished(notice: Int, studyID: Int, parentView: UIViewController) {
+        wireFrame?.goToNoticeDetail(notice: notice, studyID: studyID, parentView: parentView)
+    }
 }
