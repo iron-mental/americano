@@ -389,16 +389,19 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
               let nickname = nameModify.text,
               let introduce = descripModify.text,
               let careerTitle = careerTitleModify.text,
-              let careerContents = careerDescriptModify.text else { return }
+              let careerContents = careerDescriptModify.text,
+              let snsGithub = snsModify.gitTextField.text,
+              let snsLinkedIn = snsModify.linkedTextField.text,
+              let snsWeb = snsModify.webTextField.text else { return }
         
         let userInfo = UserInfoPut(image: image,
                                    nickname: nickname,
                                    introduce: introduce,
                                    careerTitle: careerTitle,
                                    careerContents: careerContents,
-                                   snsGithub: "https://github.com/feelsodev",
-                                   snsLinkedin: "",
-                                   snsWeb: "",
+                                   snsGithub: snsGithub,
+                                   snsLinkedIn: snsLinkedIn,
+                                   snsWeb: snsWeb,
                                    latitude: 37.602500,
                                    longitude: 126.929340,
                                    sido: "서울시",

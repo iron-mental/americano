@@ -15,7 +15,7 @@ struct UserInfoPut {
     let careerTitle: String?
     let careerContents: String?
     let snsGithub: String?
-    let snsLinkedin: String?
+    let snsLinkedIn: String?
     let snsWeb: String?
     let latitude: Double?
     let longitude: Double?

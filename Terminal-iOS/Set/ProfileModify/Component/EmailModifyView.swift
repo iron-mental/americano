@@ -28,6 +28,7 @@ class EmailModifyView: UIView {
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.addLeftPadding()
+            $0.isEnabled = false
         }
     }
     func layout() {
