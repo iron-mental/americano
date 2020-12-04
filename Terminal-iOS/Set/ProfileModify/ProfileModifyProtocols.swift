@@ -50,6 +50,7 @@ protocol ProfileModifyRemoteDataManagerInputProtocol: class {
     func validProfileModify(userInfo: UserInfoPut)
     func remoteProjectList(completion: @escaping ([Project]) -> Void)
     func removeProject(projectID: Int, completion: @escaping (Bool) -> Void)
+    func registerProject(project: Project)
 }
 
 protocol ProfileModifyRemoteDataManagerOutputProtocol: class {

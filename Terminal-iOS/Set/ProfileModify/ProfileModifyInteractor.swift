@@ -28,9 +28,8 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
         })
         
         for data in project {
-            
-        }
-        
+            remoteDataManager?.registerProject(project: data)
+        }   
     }
 }
 

@@ -91,7 +91,35 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         }
     }
     
-    func registerProject() {
+    func registerProject(project: Project) {
+        let url = "http://3.35.154.27:3000/v1/user/44/project"
         
+        let params: Parameters = [
+            "title": project.title,
+            "contents": project.contents,
+            "sns_github": "test",
+            "sns_appstore": "test",
+            "sns_playstore": "test"
+        ]
+        
+        AF.request(url, method: .post, parameters: params, headers: TerminalNetwork.headers).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                let data = "\(json)".data(using: .utf8)
+                do {
+                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                    if result.result {
+                        print(result.message!)
+                    } else {
+                        print(result.message!)
+                    }
+                } catch {
+                    print("에러")
+                }
+            case .failure(let error):
+                print("에러:", error)
+            }
+        }
     }
 }
