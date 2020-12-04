@@ -14,9 +14,10 @@ protocol CellSubclassDelegate: class {
 
 class ProjectCell: UITableViewCell {
     static let projectCellID = "ProjectCellID"
-    let remove = UIButton()
-    let title = UITextField()
-    let contents = UITextView()
+    lazy var remove = UIButton()
+    lazy var title = UITextField()
+    lazy var contents = UITextView()
+    lazy var sns = ProjectSNSView()
     
     var delegate: CellSubclassDelegate?
  
@@ -29,6 +30,14 @@ class ProjectCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.delegate = nil
+    }
+    
+    func setData(data: Project) {
+        self.title.text = data.title
+        self.contents.text = data.contents
+        self.sns.firstTextFeield.text = data.snsGithub
+        self.sns.secondTextField.text = data.snsAppstore
+        self.sns.thirdTextField.text = data.snsPlaystore
     }
     
     func attribute() {
@@ -65,28 +74,36 @@ class ProjectCell: UITableViewCell {
         self.contentView.addSubview(remove)
         self.contentView.addSubview(title)
         self.contentView.addSubview(contents)
+        self.contentView.addSubview(sns)
         
         remove.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
         }
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.remove.leadingAnchor, constant: -5).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
         contents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 4).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        }
+        sns.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.contents.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 10).isActive = true
         }
     }
     

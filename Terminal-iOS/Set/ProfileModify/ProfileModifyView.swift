@@ -16,6 +16,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     let picker = UIImagePickerController()
     
     let projectView = ProjectTableView()
+
     let projectAddButton = UIButton()
     
     var keyHeight: CGFloat?
@@ -178,10 +179,12 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         }
         
         projectView.do {
+            $0.isScrollEnabled = false
             $0.delegate = self
             $0.dataSource = self
             $0.separatorStyle = .none
             $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
+            $0.estimatedRowHeight = 150
         }
         
         projectAddButton.do {
@@ -274,19 +277,19 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         projectView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectLabel.bottomAnchor, constant: 4).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -10).isActive = true
         }
         projectAddButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectView.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: projectView.bottomAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 130).isActive = true
         }
         snsModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectAddButton.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: projectAddButton.bottomAnchor, constant: 30).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalTo: snsModify.heightAnchor).isActive = true
@@ -373,8 +376,17 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             let cell = projectView.cellForRow(at: indexpath) as! ProjectCell
             let title = cell.title.text!
             let contents = cell.contents.text!
+            let github = cell.sns.firstTextFeield.text!
+            let appStore = cell.sns.secondTextField.text!
+            let playStore = cell.sns.secondTextField.text!
         
-            projectArr[index] = Project(id: nil, title: title, contents: contents, snsGithub: nil, snsAppstore: nil,snsPlaystore: nil, createAt: "")
+            projectArr[index] = Project(id: nil,
+                                        title: title,
+                                        contents: contents,
+                                        snsGithub: github,
+                                        snsAppstore: appStore,
+                                        snsPlaystore: playStore,
+                                        createAt: "")
         }
     }
 
@@ -472,8 +484,13 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 
 extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 240
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 380
+//    }
+    
+    func tableView(tableView: UITableView,
+                   heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -485,8 +502,11 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         cell.delegate = self
         cell.contents.delegate = self
-        cell.title.text = projectArr[indexPath.row].title
-        cell.contents.text = projectArr[indexPath.row].contents
+        
+        let result = projectArr[indexPath.row]
+        cell.setData(data: result)
+//        cell.title.text = projectArr[indexPath.row].title
+//        cell.contents.text = projectArr[indexPath.row].contents
         
         return cell
     }
@@ -500,6 +520,7 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
         
         projectArr.remove(at: index)
         projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+        projectAddButton.backgroundColor = projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
     }
 }
 

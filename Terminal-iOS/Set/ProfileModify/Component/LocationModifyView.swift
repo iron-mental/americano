@@ -9,8 +9,8 @@
 import UIKit
 
 final class LocationModifyView: UIView {
-    let locationLabel = UILabel()
-    let locationTextField = UITextField()
+    lazy var locationLabel = UILabel()
+    lazy var locationTextField = UITextField()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

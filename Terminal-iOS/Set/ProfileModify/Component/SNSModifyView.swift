@@ -9,7 +9,7 @@
 import UIKit
 
 class SNSModifyView: UIView {
-    lazy var snsLabel = UILabel()
+//    lazy var snsLabel = UILabel()
     lazy var firstImage = UIImageView()
     lazy var firstTextFeield = UITextField()
     
@@ -26,28 +26,15 @@ class SNSModifyView: UIView {
     }
   
     func attribute() {
-        snsLabel.do {
-            $0.text = "SNS"
-        }
+//        snsLabel.do {
+//            $0.text = "SNS"
+//        }
         firstImage.do {
             $0.backgroundColor = .white
             $0.layer.cornerRadius = Terminal.convertWidth(value: 11)
         }
-        firstTextFeield.do {
-            $0.textColor = .white
-            $0.layer.cornerRadius = 10
-            $0.backgroundColor = UIColor.appColor(.cellBackground)
-            $0.addLeftPadding()
-        }
-
-        secondTextField.do {
-            $0.textColor = .white
-            $0.layer.cornerRadius = 10
-            $0.backgroundColor = UIColor.appColor(.cellBackground)
-            $0.addLeftPadding()
-        }
-
-        thirdTextField.do {
+        
+        [firstTextFeield, secondTextField, thirdTextField].forEach {
             $0.textColor = .white
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
@@ -56,17 +43,17 @@ class SNSModifyView: UIView {
     }
     
     func layout() {
-        [snsLabel, firstImage, firstTextFeield, secondImage, secondTextField, thirdImage, thirdTextField]
+        [firstImage, firstTextFeield, secondImage, secondTextField, thirdImage, thirdTextField]
             .forEach { self.addSubview($0) }
         
-        snsLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
-        }
+//        snsLabel.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
+//        }
         firstImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: snsLabel.bottomAnchor, constant: 5).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true

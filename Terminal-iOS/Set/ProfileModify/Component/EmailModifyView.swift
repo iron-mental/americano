@@ -9,8 +9,8 @@ import UIKit
 
 final class EmailModifyView: UIView {
     
-    let emailLabel = UILabel()
-    let emailTextField = UITextField()
+    lazy var emailLabel = UILabel()
+    lazy var emailTextField = UITextField()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -101,7 +101,10 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         
         let params: Parameters = [
             "title": project.title,
-            "contents": project.contents
+            "contents": project.contents,
+            "sns_github": project.snsGithub!,
+            "sns_appstore": project.snsAppstore!,
+            "sns_playstore": project.snsPlaystore!
         ]
         
         AF.request(url, method: .post, parameters: params, headers: TerminalNetwork.headers).responseJSON { response in
