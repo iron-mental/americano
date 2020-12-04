@@ -318,7 +318,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
         studyDetailPost = StudyDetailPost(category: selectedCategory!,
-                                       title: studyTitleTextField.text ?? "",
+                                        title: studyTitleTextField.text == study?.title ? "notTheSameTitle" : "notSame" ,
                                        introduce: studyIntroduceView.textView.text,
                                        progress: studyInfoView.textView.text,
                                        studyTime: timeView.detailTime.text ?? "",

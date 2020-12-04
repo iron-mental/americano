@@ -55,6 +55,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
     }
     
     func putStudy(study: StudyDetailPost, studyID: Int, completion: @escaping (Bool, String) -> Void) {
+        
         let params : [String : String] = [
             "category" : study.category != nil ? study.category : "",
             "title" : study.title != nil ? study.title : "",
@@ -75,17 +76,19 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         ]
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
+        
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {
-                if value != nil && value != "" && value != "nil" {
+                if value != nil && value != "" && value != "nil" && value != "notTheSameTitle" {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
             }
             multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
-        }, to: "http://3.35.154.27:3000/v1/study/\(studyID)", method: .post, headers: header).responseJSON { response in
+        }, to: "http://3.35.154.27:3000/v1/study/\(studyID)", method: .put, headers: header).responseJSON { response in
             switch response.result {
             case .success(let value):
-                completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
+                print(JSON(value))
+//                completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
                 break
             case .failure(let err):
                 completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)

@@ -85,7 +85,18 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
                 })
                 break
             case .edit:
-//                <#code#>
+                createStudyRemoteDataManager?.putStudy(study: study, studyID: studyID!, completion: { result, message in
+                switch result {
+                case true:
+                    print(message)
+                    self.presenter?.studyInfoValid(message: message)
+                    break
+                case false:
+                    print(message)
+                    self.presenter?.studyInfoInvalid(message: message)
+                    break
+                }
+            })
                 break
             }
             
