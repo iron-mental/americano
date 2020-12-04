@@ -48,7 +48,7 @@ protocol ProfileModifyRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func validProfileModify(userInfo: UserInfoPut)
-    func remoteProjectList(completion: @escaping ([Project]) -> Void)
+    func remoteProjectList(completion: @escaping (BaseResponse<[Project]>) -> Void)
     func removeProject(projectID: Int, completion: @escaping (Bool) -> Void)
     func registerProject(project: Project)
 }

@@ -7,18 +7,27 @@
 //
 
 import UIKit
+protocol CellSubclassDelegate: class {
+    func buttonTapped(cell: ProjectCell)
+}
 
 class ProjectCell: UITableViewCell {
     static let projectCellID = "ProjectCellID"
-    var tapped: (() -> ())?
     let remove = UIButton()
     let title = UITextField()
     let contents = UITextView()
+    
+    var delegate: CellSubclassDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         attribute()
         layout()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.delegate = nil
     }
     
     func attribute() {
@@ -80,11 +89,10 @@ class ProjectCell: UITableViewCell {
         }
     }
     
-    
     @objc func tapButton(_ sender: UIButton) {
-        tapped?()
+        self.delegate?.buttonTapped(cell: self)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

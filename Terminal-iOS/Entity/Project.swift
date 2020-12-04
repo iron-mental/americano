@@ -11,7 +11,7 @@ import Foundation
 // MARK: 프로젝트
 
 struct Project: Codable {
-    let id: Int
+    let id: Int?
     let title, contents: String
     let snsGithub, snsAppstore, snsPlaystore: String?
     let createAt: String

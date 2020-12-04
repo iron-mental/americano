@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class ProfileModifyView: UIViewController {
+class ProfileModifyView: UIViewController, CellSubclassDelegate {
     var presenter: ProfileModifyPresenterProtocol?
     var userInfo: UserInfo?
     var projectArr: [Project] = []
@@ -43,6 +43,7 @@ class ProfileModifyView: UIViewController {
     }
     
     // MARK: viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -315,12 +316,12 @@ class ProfileModifyView: UIViewController {
     
     @objc func addProject() {
         if projectArr.count < 3 {
-            let project = Project(id: 1, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
+            let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
             projectArr.append(project)
+            projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .right)
             if projectArr.count == 3 {
                 projectAddButton.backgroundColor = .darkGray
             }
-            projectView.reloadData()
         } else {
             let alert = UIAlertController(title: "알림",
                                           message: "프로젝트는 최대 3개입니다.",
@@ -369,8 +370,17 @@ class ProfileModifyView: UIViewController {
               let nickname = nameModify.text,
               let introduce = descripModify.text,
               let careerTitle = careerTitleModify.text,
-              let careerContents = careerDescriptModify.text
-        else { return }
+              let careerContents = careerDescriptModify.text else { return }
+        
+        for index in 0..<projectArr.count {
+            let indexpath = IndexPath(row: index, section: 0)
+            let cell = projectView.cellForRow(at: indexpath) as! ProjectCell
+            let title = cell.title.text!
+            let contents = cell.contents.text!
+            
+            projectArr.append(Project(id: nil, title: title, contents: contents, snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: ""))
+        }
+       
         
         let userInfo = UserInfoPut(image: image,
                                    nickname: nickname,
@@ -463,20 +473,24 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
         cell.selectionStyle = .none
+        cell.delegate = self
         cell.contents.delegate = self
         cell.title.text = projectArr[indexPath.row].title
         cell.contents.text = projectArr[indexPath.row].contents
         
-        cell.tapped = { [unowned self] in
-            let index = indexPath.row
-            projectArr.remove(at: index)
-            projectView.reloadData()
-            if projectArr.count < 3 {
-                projectAddButton.backgroundColor = UIColor.appColor(.mainColor)
-            }
+        return cell
+    }
+    
+    func buttonTapped(cell: ProjectCell) {
+        guard let indexPath = self.projectView.indexPath(for: cell) else {
+            return
         }
         
-        return cell
+        let index = indexPath.row
+        
+        projectArr.remove(at: index)
+        projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+        
     }
 }
 
