@@ -34,7 +34,6 @@ class SNSModifyView: UIView {
             $0.layer.cornerRadius = Terminal.convertWidth(value: 11)
         }
         firstTextFeield.do {
-//            $0.placeholder = "Github ID"
             $0.textColor = .white
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
@@ -42,17 +41,13 @@ class SNSModifyView: UIView {
         }
 
         secondTextField.do {
-//            $0.placeholder = "LinkedIn URL"
             $0.textColor = .white
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.addLeftPadding()
         }
-//        thirdImage.do {
-//            $0.image = #imageLiteral(resourceName: "web")
-//        }
+
         thirdTextField.do {
-//            $0.placeholder = "URL"
             $0.textColor = .white
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
