@@ -32,6 +32,7 @@ class CreateStudyView: UIViewController{
     var SNSInputView = IdInputView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (118/667) * UIScreen.main.bounds.height))
     var studyInfoView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
     var locationView = LocationUIVIew(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
+    var locationdetailTextField = UITextField()
     var timeView = TimeUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
     var button = UIButton()
     var mainImageTapGesture = UITapGestureRecognizer()
@@ -102,11 +103,15 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor.appColor(.testColor)
             locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
-            $0.detailAddress.text = study?.location.addressName ?? nil
-            if let detail = study?.location.locationDetail {
-//                $0.detailAddress.text! += detail
-                
-            }
+            $0.detailAddress.text = study?.location.addressName ?? "주소 입력"
+            
+        }
+        locationdetailTextField.do {
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.placeholder = "상세주소를 입력하세요"
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+            $0.text =  study?.location.locationDetail ?? nil
         }
         timeView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -126,7 +131,7 @@ class CreateStudyView: UIViewController{
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
-        [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { backgroundView.addSubview($0)}
+        [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, locationdetailTextField, timeView, button].forEach { backgroundView.addSubview($0)}
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -185,9 +190,16 @@ class CreateStudyView: UIViewController{
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
         }
+        locationdetailTextField.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor, constant: (13/667) * screenSize.height).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: (14/667) * screenSize.height).isActive = true
+        }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
+            $0.topAnchor.constraint(equalTo: locationdetailTextField.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
             $0.bottomAnchor.constraint(equalTo: timeView.detailTime.bottomAnchor).isActive = true
@@ -199,7 +211,6 @@ class CreateStudyView: UIViewController{
             $0.widthAnchor.constraint(equalToConstant: (335/375) * screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (43/667) * screenSize.height).isActive = true
         }
-        
     }
     
     func setDelegate() {
