@@ -51,6 +51,10 @@ class CreateStudyView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
+        if let detail = study?.location.locationDetail {
+            print("이거 디테일 주소",detail)
+        }
+        print(study?.location.locationDetail)
     }
     
     func attribute() {
@@ -68,7 +72,8 @@ class CreateStudyView: UIViewController{
             $0.image = #imageLiteral(resourceName: "swift")
             mainImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(mainImageTapGesture)
-            $0.kf.setImage(with: URL(string: (study?.image!)!), options: [.requestModifier(imageDownloadRequest)])
+            //추후에 수정일때인지 새로작성인지 분기해서 처리 ~(철이형 얘기하는거 아님)
+//            $0.kf.setImage(with: URL(string: (study?.image!)!), options: [.requestModifier(imageDownloadRequest)])
         }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
@@ -97,9 +102,10 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor.appColor(.testColor)
             locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
-            $0.detailAddress.text = (study?.location.addressName)!
+            $0.detailAddress.text = study?.location.addressName ?? nil
             if let detail = study?.location.locationDetail {
-                $0.detailAddress.text! += detail
+//                $0.detailAddress.text! += detail
+                
             }
         }
         timeView.do {
@@ -319,7 +325,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func studyInfoInvalid(message: String) {
         LoadingRainbowCat.hide() {
             print("뷰에서 찍은 겁니다~~ \(message)")
-            self.navigationController?.popViewController(animated: true)
+//            self.navigationController?.popViewController(animated: true)
         }
     }
     func studyInfoValid(message: String) {
@@ -352,6 +358,6 @@ extension CreateStudyView: UIScrollViewDelegate {
 extension CreateStudyView: selectLocationDelegate {
     func passLocation(location: StudyDetailLocationPost) {
         selectedLocation = location
-        locationView.detailAddress.text = "\(location.address) \(location.detailAddress ?? "" )"
+        locationView.detailAddress.text = "\(location.address) \(location.detailAddress ?? "")"
     }
 }

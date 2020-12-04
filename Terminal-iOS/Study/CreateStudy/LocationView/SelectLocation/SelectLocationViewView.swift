@@ -21,17 +21,19 @@ class SelectLocationView: UIViewController {
     var bottomView = BottomView()
     var keyboardHeight: CGFloat = 0
     var location: StudyDetailLocationPost?
-    var preventPlaceNameFlag = false
+    var preventPlaceNameFlag = true
     var delegate: selectLocationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        presenter?.viewDidLoad(item: location!)
         attribute()
         layout()
         bottomView.textField.delegate = self
         bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         bottomView.textField.becomeFirstResponder()
@@ -40,7 +42,9 @@ class SelectLocationView: UIViewController {
         location?.lat = mapView.cameraPosition.target.lat
         presenter?.getAddress(item: location!)
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        preventPlaceNameFlag = isBeingPresented
+    }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -91,7 +95,6 @@ class SelectLocationView: UIViewController {
     }
     
     @objc func didCompleteButtonClicked() {
-        location?.detailAddress = bottomView.detailAddress.text ?? ""
         delegate?.passLocation(location: location!)
         presentingViewController?.dismiss(animated: false)
         self.presentingViewController?.presentingViewController?.dismiss(animated: false)
@@ -107,13 +110,15 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
                 self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
                 location?.lng = mapView.cameraPosition.target.lng
                 location?.lat = mapView.cameraPosition.target.lat
-                if preventPlaceNameFlag == true {
-                    location?.placeName = ""
+//                if preventPlaceNameFlag == false {
+//                    location?.placeName = ""
                     location?.category = ""
                     presenter?.getAddress(item: location!)
-                } else {
-                    preventPlaceNameFlag = true
-                }
+//                } else {
+                    
+                    
+//                }
+                
             })
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task!)
@@ -121,12 +126,14 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
     
     func mapView(_ mapView: NMFMapView, cameraWillChangeByReason reason: Int, animated: Bool) {
         self.view.endEditing(true)
-        location?.placeName = nil
         task?.cancel()
         pin.alpha = 0.5
         UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
             self.pin.transform = CGAffineTransform(translationX: 0, y: -10)
         })
+    }
+    func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
+        print(location?.placeName)
     }
 }
 
@@ -140,6 +147,8 @@ extension SelectLocationView: UITextFieldDelegate {
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
             bottomView.Address.text = item.address
+        print("할당전",location)
             location = item
+        print("할당후",location)
     }
 }

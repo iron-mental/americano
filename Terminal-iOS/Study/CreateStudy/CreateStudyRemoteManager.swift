@@ -13,35 +13,42 @@ import SwiftyJSON
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
     
     func postStudy(study: StudyDetailPost, completion: @escaping (Bool, String) -> Void) {
-        let params : [String : Any] = [
-            "category" : study.category,
-            "title" : study.title,
-            "introduce" : study.introduce,
-            "progress" : study.progress,
-            "study_time" : study.studyTime,
-            "latitude" : study.location.lat,
-            "longitude" : study.location.lng,
-            "sido" : study.location.sido!,
-            "sigungu" : study.location.sigungu!,
-            "address_name" : study.location.address,
-            "location_detail" : study.location.detailAddress,
-            "place_name" : study.location.placeName,
-            "sns_notion" : study.snsNotion! ?? "" ,
-            "sns_evernote" : study.snsEvernote! ?? "",
-            "sns_web" : study.snsWeb! ?? "",
-            "image" : study.image!
+        
+        
+        //placename nil로 들어옴 
+        print("리모트에서 찍은거 ", study.location.detailAddress)
+
+        let params : [String : String] = [
+            "category" : study.category != nil ? study.category : "",
+            "title" : study.title != nil ? study.title : "",
+            "introduce" : study.introduce != nil ? study.introduce : "",
+            "progress" : study.progress != nil ? study.progress : "",
+            "study_time" : study.studyTime != nil ? study.studyTime : "",
+            "latitude" : study.location.lat != nil ? String(study.location.lat) : "",
+            "longitude" : study.location.lng != nil ? String(study.location.lng) : "",
+            "sido" : study.location.sido != nil ? study.location.sido! : "",
+            "sigungu" : study.location.sigungu != nil ? study.location.sigungu! : "",
+            "address_name" : study.location.address != nil ? study.location.address : "",
+            "location_detail" : study.location.detailAddress != nil ? study.location.detailAddress! : "",
+            "place_name" : study.location.placeName != nil ? study.location.placeName! : "",
+            "sns_notion" : study.snsNotion != nil ? study.snsNotion! : "",
+            "sns_evernote" : study.snsEvernote != nil ? study.snsEvernote! : "",
+            "sns_web" : study.snsWeb != nil ? study.snsWeb! : "",
+            "image" : "\(study.image)"
         ]
+        
         
         let header: HTTPHeaders = [ "Content-Type": "multipart/form-data",
                                     "Authorization": Terminal.accessToken]
-        
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
-        
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {
-                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+                if value != nil && value != "" && value != "nil" {
+                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+                }
             }
             multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
+            
         }, to: "http://3.35.154.27:3000/v1/study", method: .post, headers: header).responseJSON { response in
             
             switch response.result {

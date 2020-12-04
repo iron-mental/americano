@@ -65,8 +65,14 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
         }
     }
     
+    func studyInfoOptionalBinding() {
+        
+    }
+    
     func studyCreateComplete(study: StudyDetailPost) {
         if nullCheck(study: study) == "스터디가 등록 되었습니다." {
+            
+            print("스터디 디테일 주소가 어떻게 찍히나?\(study)")
             createStudyRemoteDataManager?.postStudy(study: study, completion: { result, message in
                 switch result {
                 case true:

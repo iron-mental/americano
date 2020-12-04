@@ -145,7 +145,6 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                          leaderNickname: nil,
                                          createAt: nil)
                 ((self.parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
-//                (self.parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: notice?.id, studyID: notice?.studyID, parentView: parentView)
                 (self.parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
             } else {
                 //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중

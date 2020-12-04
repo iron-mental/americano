@@ -214,6 +214,7 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
 
 extension MyStudyMainView: MyStudyMainViewProtocol {
     func showMyStudyList(myStudyList: [MyStudy]) {
+        print(myStudyList)
         self.myStudyList = myStudyList
         attribute()
         layout()
