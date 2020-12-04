@@ -30,9 +30,7 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
                         guard let id = data.id else { return }
                         
                         /// 프로젝트의 ID 추출해서 다 삭제
-                        self.remoteDataManager?.removeProject(projectID: id, completion: { result in
-                            print("삭제결과", result)
-                        })
+                        self.remoteDataManager?.removeProject(projectID: id, completion: { _ in })
                     }
                     
                     for data in project {
@@ -46,8 +44,6 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
                 }
             }
         })
-        
-        print("현재 프로젝트 :",project)
     }
 }
 

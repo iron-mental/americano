@@ -22,5 +22,3 @@ struct UserInfoPut {
     let sido: String?
     let sigungu: String?
 }
-
-

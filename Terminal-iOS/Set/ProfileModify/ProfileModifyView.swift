@@ -34,25 +34,31 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     lazy var emailModify = EmailModifyView()
     lazy var locationModify = LocationModifyView()
     
+    
+    // MARK: Navigation Bar hide Control
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registerForKeyboardNotification()
+//        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        removeRegisterForKeyboardNotification()
+//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
     // MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(projectArr)
+        view.backgroundColor = .black
+        
         attribute()
         layout()
         textViewDidChange(descripModify)
         textViewDidChange(careerDescriptModify)
         textViewDidChange(projectDescriptModify)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        removeRegisterForKeyboardNotification()
     }
     
     // MARK: Set Attribute
@@ -400,6 +406,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         
         
         presenter?.completeModifyButton(userInfo: userInfo, project: projectArr)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func keyboardWillHide(_ sender: Notification) {

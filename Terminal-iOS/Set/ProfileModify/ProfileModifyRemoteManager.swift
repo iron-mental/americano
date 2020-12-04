@@ -14,7 +14,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     var remoteRequestHandler: ProfileModifyRemoteDataManagerOutputProtocol?
     
     func validProfileModify(userInfo: UserInfoPut) {
-        let url = "http://3.35.154.27:3000/v1/user/23"
+        let url = "http://3.35.154.27:3000/v1/user/44"
         let headers: HTTPHeaders = [ "Content-Type": "multipart/form-data",
                                      "Authorization": Terminal.accessToken]
         let params: Parameters = [
@@ -42,7 +42,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         }, to: url, method: .put, headers: headers).responseJSON { response in
             switch response.result {
             case .success(let value):
-                print(JSON(value))
+                print("여기닷:",JSON(value))
             case .failure(let err):
                 print(err)
             }

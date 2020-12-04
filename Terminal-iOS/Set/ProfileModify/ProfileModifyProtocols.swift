@@ -18,7 +18,7 @@ protocol ProfileModifyWireFrameProtocol: class {
     static func createProfileModifyModule(userInfo: UserInfo, project: [Project]) -> UIViewController
     
     // PRESENTER -> WIREFRAME
-    
+    func removeParentProfileModify(from view: ProfileModifyViewProtocol)
 }
 
 protocol ProfileModifyPresenterProtocol: class {
