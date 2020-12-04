@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class EmailModifyView: UIView {
+final class EmailModifyView: UIView {
     
     let emailLabel = UILabel()
     let emailTextField = UITextField()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationModifyView: UIView {
+final class LocationModifyView: UIView {
     let locationLabel = UILabel()
     let locationTextField = UITextField()
     

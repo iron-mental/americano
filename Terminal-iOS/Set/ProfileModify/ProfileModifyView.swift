@@ -30,7 +30,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     lazy var projectLabel = UILabel()
     lazy var projectTitleModify = UITextField()
     lazy var projectDescriptModify = UITextView()
-    lazy var snsModify = SNSModifyView()
+    lazy var snsModify = ProfileSNSView()
     lazy var emailModify = EmailModifyView()
     lazy var locationModify = LocationModifyView()
     
@@ -40,12 +40,10 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         registerForKeyboardNotification()
-//        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         removeRegisterForKeyboardNotification()
-//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     // MARK: viewDidLoad
@@ -308,9 +306,9 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             $0.heightAnchor.constraint(equalTo: locationModify.heightAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20).isActive = true
         }
-        snsModify.gitTextField.delegate = self
-        snsModify.linkedTextField.delegate = self
-        snsModify.webTextField.delegate = self
+        snsModify.firstTextFeield.delegate = self
+        snsModify.secondTextField.delegate = self
+        snsModify.thirdTextField.delegate = self
         locationModify.locationTextField.delegate = self
     }
     
@@ -390,9 +388,9 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
               let introduce = descripModify.text,
               let careerTitle = careerTitleModify.text,
               let careerContents = careerDescriptModify.text,
-              let snsGithub = snsModify.gitTextField.text,
-              let snsLinkedIn = snsModify.linkedTextField.text,
-              let snsWeb = snsModify.webTextField.text else { return }
+              let snsGithub = snsModify.firstTextFeield.text,
+              let snsLinkedIn = snsModify.secondTextField.text,
+              let snsWeb = snsModify.thirdTextField.text else { return }
         
         let userInfo = UserInfoPut(image: image,
                                    nickname: nickname,

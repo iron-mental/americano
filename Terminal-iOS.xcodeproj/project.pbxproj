@@ -44,6 +44,8 @@
 		A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */; };
 		A5A5F6E2256FEF0A00405C71 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6E1256FEF0A00405C71 /* UserInfo.swift */; };
 		A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AB2704252B6F2300A39240 /* ProfileCell.swift */; };
+		A5B700B1257A9B14001F62A0 /* ProejctSNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B700B0257A9B14001F62A0 /* ProejctSNSView.swift */; };
+		A5B700B4257A9F27001F62A0 /* ProfileSNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B700B3257A9F27001F62A0 /* ProfileSNSView.swift */; };
 		A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B78A95252B950600E0B440 /* ProfileDetailView.swift */; };
 		A5BA1ED6254A8E9C0089D4E9 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */; };
 		A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA1ED9254A8FF00089D4E9 /* NotificationCell.swift */; };
@@ -233,6 +235,8 @@
 		A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailRemoteManager.swift; sourceTree = "<group>"; };
 		A5A5F6E1256FEF0A00405C71 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		A5AB2704252B6F2300A39240 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		A5B700B0257A9B14001F62A0 /* ProejctSNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProejctSNSView.swift; sourceTree = "<group>"; };
+		A5B700B3257A9F27001F62A0 /* ProfileSNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSNSView.swift; sourceTree = "<group>"; };
 		A5B78A95252B950600E0B440 /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
 		A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		A5BA1ED9254A8FF00089D4E9 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -454,6 +458,8 @@
 				A547275E255A67C700076DBD /* LocationModifyView.swift */,
 				A5753448257669DE00FD7D0C /* ProjectCell.swift */,
 				A575344C257697A000FD7D0C /* ProjectTableView.swift */,
+				A5B700B0257A9B14001F62A0 /* ProejctSNSView.swift */,
+				A5B700B3257A9F27001F62A0 /* ProfileSNSView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1129,6 +1135,7 @@
 				CC5795042570C9E600DF96AB /* AddNoticeRemoteDataManager.swift in Sources */,
 				CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */,
 				CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */,
+				A5B700B1257A9B14001F62A0 /* ProejctSNSView.swift in Sources */,
 				A5BA4619255D38D30061C511 /* String+Ext.swift in Sources */,
 				A5D058EA255D937F0047CA9E /* StudyDetailPresenter.swift in Sources */,
 				CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */,
@@ -1199,6 +1206,7 @@
 				A5A5F6E2256FEF0A00405C71 /* UserInfo.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				A5E25C7425590DE40090E21E /* NoticeDetailView.swift in Sources */,
+				A5B700B4257A9F27001F62A0 /* ProfileSNSView.swift in Sources */,
 				CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */,
 				CCD51C77256D29BC00D41771 /* MyStudyDetailInteractor.swift in Sources */,
 				A5031EB32574F5DE0009AD77 /* UserInfoPut.swift in Sources */,

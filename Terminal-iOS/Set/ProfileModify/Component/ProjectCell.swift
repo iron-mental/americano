@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 protocol CellSubclassDelegate: class {
     func buttonTapped(cell: ProjectCell)
 }

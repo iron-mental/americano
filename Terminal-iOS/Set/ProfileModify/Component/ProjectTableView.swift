@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ProjectTableView: UITableView {
+final class ProjectTableView: UITableView {
     var maxHeight: CGFloat = UIScreen.main.bounds.size.height
     
     override var contentSize:CGSize {
