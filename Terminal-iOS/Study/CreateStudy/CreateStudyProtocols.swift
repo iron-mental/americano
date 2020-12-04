@@ -8,10 +8,16 @@
 
 import UIKit
 
+enum WriteStudyViewState {
+    case create
+    case edit
+}
+
 protocol CreateStudyViewProtocols: class {
     var presenter: CreateStudyPresenterProtocols? { get set }
     var study: StudyDetail? { get set }
     var studyDetailPost: StudyDetailPost? { get set }
+    var state: WriteStudyViewState? { get set }
     //VIew -> PRESENTER
     func didClickButton()
     
@@ -59,6 +65,7 @@ protocol CreateStudyPresenterProtocols: class {
     func URLInputFinish(url: String?)
     func clickLocationView(currentView: UIViewController)
     func clickCompleteButton(study: StudyDetailPost)
+
     
     //INTERACTOR -> PRESENTER
     func showNotionValidResult(result: Bool)

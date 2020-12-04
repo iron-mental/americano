@@ -23,7 +23,7 @@ class CreateStudyView: UIViewController{
     let picker = UIImagePickerController()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
-    
+    var state: WriteStudyViewState?
     let mainImageView = MainImageView(frame: CGRect.zero)
     
     let studyTitleTextField = UITextField()
@@ -52,10 +52,6 @@ class CreateStudyView: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
-        if let detail = study?.location.locationDetail {
-            print("이거 디테일 주소",detail)
-        }
-        print(study?.location.locationDetail)
     }
     
     func attribute() {
@@ -336,7 +332,6 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func studyInfoInvalid(message: String) {
         LoadingRainbowCat.hide() {
             print("뷰에서 찍은 겁니다~~ \(message)")
-//            self.navigationController?.popViewController(animated: true)
         }
     }
     func studyInfoValid(message: String) {

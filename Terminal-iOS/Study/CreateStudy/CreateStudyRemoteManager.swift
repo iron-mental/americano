@@ -13,11 +13,6 @@ import SwiftyJSON
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
     
     func postStudy(study: StudyDetailPost, completion: @escaping (Bool, String) -> Void) {
-        
-        
-        //placename nil로 들어옴 
-        print("리모트에서 찍은거 ", study.location.detailAddress)
-
         let params : [String : String] = [
             "category" : study.category != nil ? study.category : "",
             "title" : study.title != nil ? study.title : "",

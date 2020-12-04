@@ -876,8 +876,8 @@
 				CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */,
 				CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */,
 				CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */,
-				CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */,
 				CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */,
+				CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */,
 				CC1BE0432511FD5400F88313 /* Component */,
 			);
 			path = CreateStudy;
