@@ -327,7 +327,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
                                        snsEvernote: SNSInputView.evernote?.textField.text,
                                        image: mainImageView.image!,
                                        location: selectedLocation!)
-        presenter?.clickCompleteButton(study: studyDetailPost!)
+        presenter?.clickCompleteButton(study: studyDetailPost!, state: state!, studyID: study?.id ?? nil)
     }
     func studyInfoInvalid(message: String) {
         LoadingRainbowCat.hide() {

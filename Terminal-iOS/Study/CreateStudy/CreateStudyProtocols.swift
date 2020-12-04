@@ -50,7 +50,7 @@ protocol CreateStudyInteractorProtocols: class {
     func searchNotionID(id: String?)
     func searchEvernoteURL(url: String?)
     func searchWebURL(url: String?)
-    func studyCreateComplete(study: StudyDetailPost)
+    func studyCreateComplete(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?)
 }
 
 protocol CreateStudyPresenterProtocols: class {
@@ -64,7 +64,7 @@ protocol CreateStudyPresenterProtocols: class {
     func everNoteInputFinish(url: String?)
     func URLInputFinish(url: String?)
     func clickLocationView(currentView: UIViewController)
-    func clickCompleteButton(study: StudyDetailPost)
+    func clickCompleteButton(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?)
 
     
     //INTERACTOR -> PRESENTER
@@ -79,8 +79,8 @@ protocol CreateStudyRemoteDataManagerProtocols: class {
     func getNotionValid(id: String?) -> Bool
     func getEvernoteValid(url: String?) -> Bool
     func getWebValid(url: String?) -> Bool
-    func postStudy(study: StudyDetailPost, completion: @escaping (_: Bool, _: String ) -> Void)
-
+    func postStudy(study: StudyDetailPost, completion: @escaping (_ result: Bool, _ data: String ) -> Void)
+    func putStudy(study: StudyDetailPost, studyID: Int, completion: @escaping (_ result: Bool, _ data: String) -> Void)
 }
 
 protocol CreateStudyLocalDataManagerProtocols: class {

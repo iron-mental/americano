@@ -61,7 +61,7 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
         } else if study.location.address == nil || study.location.address == "" {
             return "address 틀려쓰"
         } else {
-            return "스터디가 등록 되었습니다."
+            return "성공"
         }
     }
     
@@ -69,20 +69,26 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
         
     }
     
-    func studyCreateComplete(study: StudyDetailPost) {
-        if nullCheck(study: study) == "스터디가 등록 되었습니다." {
+    func studyCreateComplete(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?) {
+        if nullCheck(study: study) == "성공" {
+            switch state {
+            case .create:
+                createStudyRemoteDataManager?.postStudy(study: study, completion: { result, message in
+                    switch result {
+                    case true:
+                        self.presenter?.studyInfoValid(message: message)
+                        break
+                    case false:
+                        self.presenter?.studyInfoInvalid(message: message)
+                        break
+                    }
+                })
+                break
+            case .edit:
+//                <#code#>
+                break
+            }
             
-            print("스터디 디테일 주소가 어떻게 찍히나?\(study)")
-            createStudyRemoteDataManager?.postStudy(study: study, completion: { result, message in
-                switch result {
-                case true:
-                    self.presenter?.studyInfoValid(message: message)
-                    break
-                case false:
-                    self.presenter?.studyInfoInvalid(message: message)
-                    break
-                }
-            })
         } else {
             presenter?.studyInfoInvalid(message: nullCheck(study: study))
         }
