@@ -42,7 +42,7 @@ class ProjectCell: UITableViewCell {
     
     func attribute() {
         remove.do {
-            $0.setTitle("-", for: .normal)
+            $0.setTitle("ㅡ", for: .normal)
             $0.backgroundColor = .red
             $0.layer.cornerRadius = 15
             $0.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
@@ -60,13 +60,15 @@ class ProjectCell: UITableViewCell {
         contents.do {
             $0.backgroundColor = .darkGray
             $0.textColor = UIColor.appColor(.profileTextColor)
-//            $0.sizeToFit()
+            $0.sizeToFit()
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
             $0.dynamicFont(size: 13, weight: .regular)
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
+            $0.delegate = self
+            $0.isScrollEnabled = false
         }
     }
     
@@ -95,8 +97,7 @@ class ProjectCell: UITableViewCell {
             $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
         }
         sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -113,5 +114,16 @@ class ProjectCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension ProjectCell: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        
+        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
+        
+        return changedText.count <= 199
     }
 }

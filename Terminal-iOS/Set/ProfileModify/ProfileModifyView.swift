@@ -485,10 +485,6 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 
 extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
 
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 360
-//    }
-//
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return projectArr.count
     }
