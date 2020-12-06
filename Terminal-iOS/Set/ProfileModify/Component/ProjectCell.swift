@@ -60,7 +60,6 @@ class ProjectCell: UITableViewCell {
         contents.do {
             $0.backgroundColor = .darkGray
             $0.textColor = UIColor.appColor(.profileTextColor)
-            $0.sizeToFit()
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
             $0.dynamicFont(size: 13, weight: .regular)
@@ -97,7 +96,6 @@ class ProjectCell: UITableViewCell {
             $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
         }
         sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -121,9 +119,7 @@ extension ProjectCell: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
-        
         let changedText = currentText.replacingCharacters(in: stringRange, with: text)
-        
         return changedText.count <= 199
     }
 }

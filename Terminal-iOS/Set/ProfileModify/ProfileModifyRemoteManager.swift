@@ -56,14 +56,15 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
             switch response.result {
             case .success(let value):
+                print("성공:",JSON(value))
                 let json = JSON(value)
                 let data = "\(json)".data(using: .utf8)
-                do {
-                    let result = try JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
+//                do {
+                    let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
                     completion(result)
-                } catch {
-                    print("에러")
-                }
+//                } catch {
+//                    print("에러")
+//                }
             case .failure(let error):
                 print("에러:", error)
             }
@@ -99,17 +100,23 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     func registerProject(project: Project) {
         let url = "http://3.35.154.27:3000/v1/user/44/project"
         
-        let params: Parameters = [
+        let params = [
             "title": project.title,
             "contents": project.contents,
-            "sns_github": project.snsGithub!,
-            "sns_appstore": project.snsAppstore!,
-            "sns_playstore": project.snsPlaystore!
+//            "sns_github": project.snsGithub!,
+//            "sns_appstore": project.snsAppstore!,
+//            "sns_playstore": project.snsPlaystore!
+//            "sns_github": nil,
+//            "sns_appstore": nil,
+//            "sns_playstore": nil
         ]
+        print(project)
         
-        AF.request(url, method: .post, parameters: params, headers: TerminalNetwork.headers).responseJSON { response in
+        
+        AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: TerminalNetwork.headers).responseJSON { response in
             switch response.result {
             case .success(let value):
+                print(JSON(value))
                 let json = JSON(value)
                 let data = "\(json)".data(using: .utf8)
                 do {

@@ -377,16 +377,16 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             let cell = projectView.cellForRow(at: indexpath) as! ProjectCell
             let title = cell.title.text!
             let contents = cell.contents.text!
-            let github = cell.sns.firstTextFeield.text!
-            let appStore = cell.sns.secondTextField.text!
-            let playStore = cell.sns.secondTextField.text!
+            let github = cell.sns.firstTextFeield.text
+            let appStore = cell.sns.secondTextField.text
+            let playStore = cell.sns.secondTextField.text
         
             projectArr[index] = Project(id: nil,
                                         title: title,
                                         contents: contents,
-                                        snsGithub: github,
-                                        snsAppstore: appStore,
-                                        snsPlaystore: playStore,
+                                        snsGithub: github!,
+                                        snsAppstore: appStore!,
+                                        snsPlaystore: playStore!,
                                         createAt: "")
         }
     }
