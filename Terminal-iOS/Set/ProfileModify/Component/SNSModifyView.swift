@@ -46,11 +46,6 @@ class SNSModifyView: UIView {
         [firstImage, firstTextFeield, secondImage, secondTextField, thirdImage, thirdTextField]
             .forEach { self.addSubview($0) }
         
-//        snsLabel.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
-//        }
         firstImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
@@ -93,7 +88,7 @@ class SNSModifyView: UIView {
             $0.leadingAnchor.constraint(equalTo: thirdImage.trailingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 28)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -2).isActive = true
         }
     }
     

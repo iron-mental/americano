@@ -60,7 +60,7 @@ class ProjectCell: UITableViewCell {
         contents.do {
             $0.backgroundColor = .darkGray
             $0.textColor = UIColor.appColor(.profileTextColor)
-            $0.sizeToFit()
+//            $0.sizeToFit()
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
             $0.dynamicFont(size: 13, weight: .regular)
@@ -78,33 +78,32 @@ class ProjectCell: UITableViewCell {
         
         remove.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+            $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
         }
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+            $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.remove.leadingAnchor, constant: -5).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
         contents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 4).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+            $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
 //            $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
         sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.contents.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
         }
     }
     

@@ -184,8 +184,8 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             $0.dataSource = self
             $0.separatorStyle = .none
             $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
-//            $0.estimatedRowHeight = 150
-//            $0.rowHeight = UITableView.automaticDimension
+            $0.estimatedRowHeight = 44
+            $0.rowHeight = UITableView.automaticDimension
         }
         
         projectAddButton.do {
@@ -485,10 +485,10 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 
 extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 360
-    }
-    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 360
+//    }
+//
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return projectArr.count
     }
@@ -497,12 +497,9 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
         cell.selectionStyle = .none
         cell.delegate = self
-        cell.contents.delegate = self
         
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
-//        cell.title.text = projectArr[indexPath.row].title
-//        cell.contents.text = projectArr[indexPath.row].contents
         
         return cell
     }
