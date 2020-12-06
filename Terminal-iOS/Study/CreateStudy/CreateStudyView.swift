@@ -362,8 +362,11 @@ extension CreateStudyView: UIScrollViewDelegate {
 }
 
 extension CreateStudyView: selectLocationDelegate {
-    func passLocation(location: StudyDetailLocationPost) {
+    func
+    passLocation(location: StudyDetailLocationPost) {
         selectedLocation = location
-        locationView.detailAddress.text = "\(location.address) \(location.detailAddress ?? "")"
+        locationView.detailAddress.text = "\(location.address)"
+        guard let detail = location.detailAddress else { return }
+        locationdetailTextField.text = detail
     }
 }

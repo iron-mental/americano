@@ -95,6 +95,10 @@ class SelectLocationView: UIViewController {
     }
     
     @objc func didCompleteButtonClicked() {
+        if let detailAddress = bottomView.detailAddress.text {
+            location?.detailAddress = detailAddress
+        }
+        print("디테일 넣은 후 ",location?.detailAddress!)
         delegate?.passLocation(location: location!)
         presentingViewController?.dismiss(animated: false)
         self.presentingViewController?.presentingViewController?.dismiss(animated: false)
@@ -110,14 +114,8 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
                 self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
                 location?.lng = mapView.cameraPosition.target.lng
                 location?.lat = mapView.cameraPosition.target.lat
-//                if preventPlaceNameFlag == false {
-//                    location?.placeName = ""
                     location?.category = ""
                     presenter?.getAddress(item: location!)
-//                } else {
-                    
-                    
-//                }
                 
             })
         }
@@ -147,8 +145,6 @@ extension SelectLocationView: UITextFieldDelegate {
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
             bottomView.Address.text = item.address
-        print("할당전",location)
             location = item
-        print("할당후",location)
     }
 }
