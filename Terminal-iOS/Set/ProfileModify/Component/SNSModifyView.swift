@@ -9,7 +9,6 @@
 import UIKit
 
 class SNSModifyView: UIView {
-//    lazy var snsLabel = UILabel()
     lazy var firstImage = UIImageView()
     lazy var firstTextFeield = UITextField()
     
@@ -26,9 +25,6 @@ class SNSModifyView: UIView {
     }
   
     func attribute() {
-//        snsLabel.do {
-//            $0.text = "SNS"
-//        }
         firstImage.do {
             $0.backgroundColor = .white
             $0.layer.cornerRadius = Terminal.convertWidth(value: 11)

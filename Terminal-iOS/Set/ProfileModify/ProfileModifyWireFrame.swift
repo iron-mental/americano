@@ -32,15 +32,4 @@ class ProfileModifyWireFrame: ProfileModifyWireFrameProtocol {
             return UIViewController()
         }
     }
-    func removeParentProfileModify(from view: ProfileModifyViewProtocol) {
-        if let sourceView = view as? UIViewController {
-            sourceView.willMove(toParent: nil)
-            // Remove Constraint.
-            // 제약사항 제거
-            sourceView.view.removeFromSuperview()
-            // Remove the relationship of the child connected to the parent.
-            // 부모에 연결된 자식의 관계를 제거합니다.
-            sourceView.removeFromParent()
-        }
-    }
 }

@@ -97,7 +97,8 @@ class SetView: UIViewController {
     }
     
     func layout() {
-        view.addSubview(frameView)
+        [frameView, profile, name, descript, location, settingList].forEach { self.view.addSubview($0) }
+        
         frameView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -105,13 +106,6 @@ class SetView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.13).isActive = true
         }
-        
-        view.addSubview(profile)
-        view.addSubview(name)
-        view.addSubview(descript)
-        view.addSubview(location)
-        view.addSubview(settingList)
-        
         profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: frameView.centerYAnchor).isActive = true
@@ -150,6 +144,9 @@ class SetView: UIViewController {
 }
 
 extension SetView: SetViewProtocol {
+    
+    // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신
+    
     func showUserInfo(with userInfo: UserInfo) {
         
         /// Kingfisher auth token

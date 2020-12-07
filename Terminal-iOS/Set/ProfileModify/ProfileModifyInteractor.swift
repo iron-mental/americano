@@ -59,7 +59,6 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
                                 params.updateValue(data.snsPlaystore!, forKey: "sns_playstore")
                             }
                             
-                            print(params)
                             self.remoteDataManager?.registerProject(project: params)
                         }
                     } else {

@@ -99,7 +99,6 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         AF.request(url, method: .post, parameters: project, encoding: JSONEncoding.default, headers: TerminalNetwork.headers).responseJSON { response in
             switch response.result {
             case .success(let value):
-                print(JSON(value))
                 let json = JSON(value)
                 let data = "\(json)".data(using: .utf8)
                 do {
