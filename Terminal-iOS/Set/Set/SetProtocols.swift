@@ -37,14 +37,19 @@ protocol SetInteractortInputProtocol: class {
     var presenter: SetInteractorOutputProtocol? { get set }
     var localDatamanager: SetLocalDataManagerInputProtocol? { get set }
     var remoteDatamanager: SetRemoteDataManagerInputProtocol? { get set }
+    
+    func getUserInfo()
 }
 
 protocol SetDataManagerInputProtocol: class {
     // INTERACOTER -> DATAMANAGER
+    
 }
 
 protocol SetRemoteDataManagerInputProtocol: class {
-    
+    var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol? { get set }
+    // INTERACTOR -> REMOTEDATAMANAGER
+    func getUserInfo(id: Int)
 }
 
 protocol SetRemoteDataManagerOutputProtocol: class {

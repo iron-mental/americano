@@ -399,6 +399,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
                                    sigungu: "은평구")
         
         presenter?.completeModifyButton(userInfo: userInfo, project: projectArr)
+        
         self.navigationController?.popToRootViewController(animated: true)
     }
 }

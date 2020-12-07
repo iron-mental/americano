@@ -23,6 +23,7 @@
 		A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */; };
 		A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */; };
 		A521DDF7252F107A00F83DB3 /* ProfileDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */; };
+		A53613B2257E6DEE0001ABCC /* SetRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */; };
 		A5472759255A4B7900076DBD /* SNSModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5472758255A4B7900076DBD /* SNSModifyView.swift */; };
 		A547275C255A668600076DBD /* EmailModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547275B255A668600076DBD /* EmailModifyView.swift */; };
 		A547275F255A67C700076DBD /* LocationModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547275E255A67C700076DBD /* LocationModifyView.swift */; };
@@ -214,6 +215,7 @@
 		A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailInteractor.swift; sourceTree = "<group>"; };
 		A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailPresenter.swift; sourceTree = "<group>"; };
 		A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailWireFrame.swift; sourceTree = "<group>"; };
+		A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRemoteManager.swift; sourceTree = "<group>"; };
 		A5472758255A4B7900076DBD /* SNSModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSModifyView.swift; sourceTree = "<group>"; };
 		A547275B255A668600076DBD /* EmailModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModifyView.swift; sourceTree = "<group>"; };
 		A547275E255A67C700076DBD /* LocationModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModifyView.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 				A5172164252CFA47005AD11B /* SetWireFrame.swift */,
 				A5172168252CFA90005AD11B /* SetInteractor.swift */,
 				A517216C252CFAAA005AD11B /* SetProtocols.swift */,
+				A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */,
 				A5686A472524F056005990DC /* Component */,
 			);
 			path = Set;
@@ -1144,6 +1147,7 @@
 				CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */,
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
+				A53613B2257E6DEE0001ABCC /* SetRemoteManager.swift in Sources */,
 				A5D058D5255D90CE0047CA9E /* StudyDetailInteractor.swift in Sources */,
 				CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */,
 				CC5795072570C9F200DF96AB /* AddNoticeLocalDataManager.swift in Sources */,

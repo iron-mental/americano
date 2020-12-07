@@ -37,6 +37,7 @@ class SetView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
         attribute()
         layout()
     }
