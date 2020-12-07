@@ -14,6 +14,10 @@ protocol selectLocationDelegate {
 }
 
 class SelectLocationView: UIViewController {
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     var presenter: SelectLocationPresenterProtocol?
     let pin = UIImageView()
     var task: DispatchWorkItem?
@@ -26,14 +30,12 @@ class SelectLocationView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        presenter?.viewDidLoad(item: location!)
         attribute()
         layout()
         bottomView.textField.delegate = self
         bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         bottomView.textField.becomeFirstResponder()
