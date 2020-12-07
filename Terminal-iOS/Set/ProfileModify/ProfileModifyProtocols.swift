@@ -10,7 +10,6 @@ import UIKit
 
 protocol ProfileModifyViewProtocol: class {
     var presenter: ProfileModifyPresenterProtocol? { get set }
-    
     // PRESENTER -> VIEW
 }
 

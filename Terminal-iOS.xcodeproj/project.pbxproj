@@ -61,6 +61,7 @@
 		A5C5B1502545699700F4A86D /* SNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14F2545699700F4A86D /* SNSView.swift */; };
 		A5C5B15325456E2800F4A86D /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B15225456E2800F4A86D /* EmailView.swift */; };
 		A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B155254573CD00F4A86D /* LocationView.swift */; };
+		A5CF046D257E92800078BA67 /* UINavigation+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CF046C257E92800078BA67 /* UINavigation+Ext.swift */; };
 		A5D058D5255D90CE0047CA9E /* StudyDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058D4255D90CE0047CA9E /* StudyDetailInteractor.swift */; };
 		A5D058EA255D937F0047CA9E /* StudyDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058E9255D937F0047CA9E /* StudyDetailPresenter.swift */; };
 		A5D058ED255D93910047CA9E /* StudyDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058EC255D93910047CA9E /* StudyDetailWireFrame.swift */; };
@@ -253,6 +254,7 @@
 		A5C5B14F2545699700F4A86D /* SNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSView.swift; sourceTree = "<group>"; };
 		A5C5B15225456E2800F4A86D /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
 		A5C5B155254573CD00F4A86D /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		A5CF046C257E92800078BA67 /* UINavigation+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigation+Ext.swift"; sourceTree = "<group>"; };
 		A5D058D4255D90CE0047CA9E /* StudyDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailInteractor.swift; sourceTree = "<group>"; };
 		A5D058E9255D937F0047CA9E /* StudyDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailPresenter.swift; sourceTree = "<group>"; };
 		A5D058EC255D93910047CA9E /* StudyDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailWireFrame.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */,
 				A510EC912559613E009BE9A6 /* UITextView+Ext.swift */,
 				A5BA4618255D38D30061C511 /* String+Ext.swift */,
+				A5CF046C257E92800078BA67 /* UINavigation+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -1268,6 +1271,7 @@
 				CC3F992325454B5500428B11 /* Terminal.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
+				A5CF046D257E92800078BA67 /* UINavigation+Ext.swift in Sources */,
 				A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */,
 				A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */,
 				A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */,

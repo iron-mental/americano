@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UITabBarController {
-    
+    let temp = "fdfdfd"
     let studyViewController = StudyCategoryWireFrame.createStudyCategory()
     let myStudyViewController = MyStudyMainWireFrame.createMyStudyMainViewModul()
     let setViewController = SetWireFrame.setCreateModule(id: 44)

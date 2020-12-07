@@ -39,7 +39,6 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        
         attribute()
         layout()
         textViewDidChange(descripModify)
@@ -375,7 +374,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     
     @objc func completeButton() {
         getCellData()
-        
+
         guard let image = profileImage.image,
               let nickname = nameModify.text,
               let introduce = descripModify.text,
@@ -384,7 +383,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
               let snsGithub = snsModify.firstTextFeield.text,
               let snsLinkedIn = snsModify.secondTextField.text,
               let snsWeb = snsModify.thirdTextField.text else { return }
-        
+
         let userInfo = UserInfoPut(image: image,
                                    nickname: nickname,
                                    introduce: introduce,
@@ -397,16 +396,20 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
                                    longitude: 126.929340,
                                    sido: "서울시",
                                    sigungu: "은평구")
-        
+
         presenter?.completeModifyButton(userInfo: userInfo, project: projectArr)
         
-        self.navigationController?.popToRootViewController(animated: true)
+        let view = self.navigationController?.rootViewController as? SetViewProtocol
+        
+        self.navigationController?.popToRootViewController(animated: true, completion: {
+            view!.presenter?.viewDidLoad(id: 44)
+        })
     }
 }
 
 
 extension ProfileModifyView: ProfileModifyViewProtocol {
-    
+
 }
 
 // MARK: 테이블뷰

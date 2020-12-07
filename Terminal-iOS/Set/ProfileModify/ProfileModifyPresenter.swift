@@ -9,8 +9,6 @@
 import Foundation
 
 class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
-    
-    
     var view: ProfileModifyViewProtocol?
     var interactor: ProfileModifyInteractorInputProtocol?
     var wireFrame: ProfileModifyWireFrameProtocol?
