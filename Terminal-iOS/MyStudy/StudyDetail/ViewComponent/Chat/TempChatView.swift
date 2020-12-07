@@ -78,7 +78,6 @@ class TempChatView: UIViewController {
     }
     
     func layout() {
-//        [chatTableView,inputTextField,emitButton].forEach { view.addSubview($0) }
         [inputTextField, emitButton, textLabel].forEach { view.addSubview($0) }
 //        chatTableView.do {
 //            $0.translatesAutoresizingMaskIntoConstraints = false
