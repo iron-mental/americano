@@ -13,7 +13,7 @@ protocol SetViewProtocol: class {
 }
 
 protocol SetWireFrameProtocol: class {
-    static func setCreateModule() -> UIViewController
+    static func setCreateModule(id: Int) -> UIViewController
     
     // PRESENT -> WIREFRAME
     func presentProfileDetailScreen(from view: SetViewProtocol)
@@ -25,7 +25,7 @@ protocol SetPresenterProtocol: class {
     var wireFrame: SetWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
-    func viewDidLoad()
+    func viewDidLoad(id: Int)
     func showProfileDetail()
 }
 
@@ -38,7 +38,7 @@ protocol SetInteractortInputProtocol: class {
     var localDatamanager: SetLocalDataManagerInputProtocol? { get set }
     var remoteDatamanager: SetRemoteDataManagerInputProtocol? { get set }
     
-    func getUserInfo()
+    func getUserInfo(id: Int)
 }
 
 protocol SetDataManagerInputProtocol: class {

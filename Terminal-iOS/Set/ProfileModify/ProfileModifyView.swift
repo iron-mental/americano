@@ -400,7 +400,10 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         
         presenter?.completeModifyButton(userInfo: userInfo, project: projectArr)
         
-        self.navigationController?.popToRootViewController(animated: true)
+        if let pvc = presentingViewController as? SetViewProtocol {
+            pvc.presenter?.viewDidLoad(id: 44)
+        }
+
     }
 }
 

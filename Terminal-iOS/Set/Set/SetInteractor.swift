@@ -8,12 +8,12 @@
 
 import Foundation
 
-class SetInteractor: SetInteractortInputProtocol {
+class SetInteractor: SetInteractortInputProtocol {    
     var presenter: SetInteractorOutputProtocol?
     var localDatamanager: SetLocalDataManagerInputProtocol?
     var remoteDatamanager: SetRemoteDataManagerInputProtocol?
     
-    func getUserInfo() {
+    func getUserInfo(id: Int) {
         remoteDatamanager?.getUserInfo(id: 44)
     }
 }
