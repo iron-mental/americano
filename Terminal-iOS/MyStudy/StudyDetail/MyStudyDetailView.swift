@@ -143,7 +143,6 @@ class MyStudyDetailView: UIViewController {
     }
     func editStudyButtonDidTap() {
         if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
-//            presenter?.editStudyButtonDidTap(study: targetStudy, parentView: VCArr[1])
             presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
         }
     }
