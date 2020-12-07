@@ -93,23 +93,10 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         }
     }
     
-    func registerProject(project: Project) {
+    func registerProject(project: [String: String]) {
         let url = "http://3.35.154.27:3000/v1/user/44/project"
         
-        let params = [
-            "title": project.title,
-            "contents": project.contents,
-//            "sns_github": project.snsGithub!,
-//            "sns_appstore": project.snsAppstore!,
-//            "sns_playstore": project.snsPlaystore!
-//            "sns_github": nil,
-//            "sns_appstore": nil,
-//            "sns_playstore": nil
-        ]
-        print(project)
-        
-        
-        AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: TerminalNetwork.headers).responseJSON { response in
+        AF.request(url, method: .post, parameters: project, encoding: JSONEncoding.default, headers: TerminalNetwork.headers).responseJSON { response in
             switch response.result {
             case .success(let value):
                 print(JSON(value))

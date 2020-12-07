@@ -66,7 +66,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         }
         
         backgroundView.do {
-            let background = UITapGestureRecognizer(target: self, action: #selector(taptap))
+            let background = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
             background.numberOfTapsRequired = 1
             background.isEnabled = true
             background.cancelsTouchesInView = false
@@ -191,9 +191,16 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         emailModify.do {
             $0.emailTextField.text = email
         }
+        
         guard let location = userInfo?.address else { return }
         locationModify.do {
             $0.locationTextField.text = location
+            $0.locationTextField.delegate = self
+        }
+        snsModify.do {
+            $0.firstTextFeield.delegate = self
+            $0.secondTextField.delegate = self
+            $0.thirdTextField.delegate = self
         }
     }
     
@@ -297,13 +304,9 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             $0.heightAnchor.constraint(equalTo: locationModify.heightAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20).isActive = true
         }
-        snsModify.firstTextFeield.delegate = self
-        snsModify.secondTextField.delegate = self
-        snsModify.thirdTextField.delegate = self
-        locationModify.locationTextField.delegate = self
     }
     
-    @objc func taptap() {
+    @objc func backgroundTap() {
         self.view.endEditing(true)
     }
     
@@ -361,9 +364,9 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             projectArr[index] = Project(id: nil,
                                         title: title,
                                         contents: contents,
-                                        snsGithub: github!,
-                                        snsAppstore: appStore!,
-                                        snsPlaystore: playStore!,
+                                        snsGithub: github,
+                                        snsAppstore: appStore,
+                                        snsPlaystore: playStore,
                                         createAt: "")
         }
     }

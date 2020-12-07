@@ -67,7 +67,6 @@ class ProjectCell: UITableViewCell {
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
             $0.delegate = self
-            $0.isScrollEnabled = false
         }
     }
     
@@ -96,6 +95,7 @@ class ProjectCell: UITableViewCell {
             $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
         }
         sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
