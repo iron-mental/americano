@@ -43,7 +43,7 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
     }
     
     func goToEditStudy(study: StudyDetail, parentView: UIViewController) {
-        let view = CreateStudyWireFrame.createStudyViewModul(category: study.category, studyDetail: study, state: .edit)
+        let view = CreateStudyWireFrame.createStudyViewModul(category: study.category, studyDetail: study, state: .edit, parentView: parentView)
         parentView.present(view, animated: true) {
             print("뷰띄워줌")
         }

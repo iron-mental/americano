@@ -12,6 +12,7 @@ import Kingfisher
 class CreateStudyView: UIViewController{
     var presenter: CreateStudyPresenterProtocols?
     
+    var parentView: UIViewController?
     let screenSize = UIScreen.main.bounds
     var selectedCategory: String?
     var selectedLocation: StudyDetailLocationPost? {
@@ -59,7 +60,7 @@ class CreateStudyView: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("이친구의 부모가 누구입니까?", presentingViewController)
+
     }
     
     func attribute() {
@@ -277,11 +278,6 @@ extension CreateStudyView: CreateStudyViewProtocols {
         attribute()
         layout()
         setDelegate()
-//        if state == .edit {
-//            selectedLocation = StudyDetailLocationPost(address: study?.location.addressName,
-//                                                       lat: study?.location.latitude,
-//                                                       lng: study?.location.longitude,)
-//        }
     }
     func loading() {
         LoadingRainbowCat.show()
@@ -379,7 +375,9 @@ extension CreateStudyView: CreateStudyViewProtocols {
                 self.navigationController?.popViewController(animated: true)
                 break
             case .edit:
-//
+                self.dismiss(animated: true) { [self] in
+                    ((parentView as! MyStudyDetailViewProtocol).VCArr[1] as! StudyDetailViewProtocol).presenter?.showStudyListDetail(keyValue: String(study!.id))
+                }
                 break
             case .none:
                 break

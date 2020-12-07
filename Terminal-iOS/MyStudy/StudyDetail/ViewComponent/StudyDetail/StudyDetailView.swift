@@ -254,7 +254,6 @@ extension StudyDetailView: StudyDetailViewProtocol {
         presenter?.showStudyListDetail(keyValue: "\(studyInfo!.id)")
     }
     
-    
     func showStudyDetail(with studyDetail: StudyDetail) {
         self.studyInfo = studyDetail
         userData = studyDetail.participate

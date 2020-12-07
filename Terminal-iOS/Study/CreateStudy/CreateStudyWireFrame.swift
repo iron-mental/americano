@@ -10,7 +10,7 @@ import UIKit
 
 class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
     
-    static func createStudyViewModul(category: String, studyDetail: StudyDetail?, state: WriteStudyViewState) -> UIViewController {
+    static func createStudyViewModul(category: String, studyDetail: StudyDetail?, state: WriteStudyViewState, parentView: UIViewController?) -> UIViewController {
         
         let view = CreateStudyView()
         let presenter = CreateStudyPresenter()
@@ -21,17 +21,9 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         view.presenter = presenter
         view.selectedCategory = category
         view.study = studyDetail ?? nil
-        print(state)
         view.state = state
+        view.parentView = parentView ?? nil
         
-//        view.selectedLocation?.address
-//        view.selectedLocation?.category
-//        view.selectedLocation?.detailAddress
-//        view.selectedLocation?.lat
-//        view.selectedLocation?.lng
-//        view.selectedLocation?.placeName
-//        view.selectedLocation?.sido
-//        view.selectedLocation.
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame
