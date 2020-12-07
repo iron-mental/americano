@@ -19,7 +19,6 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
 
     let projectAddButton = UIButton()
     
-    var keyHeight: CGFloat?
     lazy var scrollView = UIScrollView()
     lazy var backgroundView = UIView()
     lazy var profileImage = UIImageView()
@@ -34,18 +33,6 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     lazy var snsModify = ProfileSNSView()
     lazy var emailModify = EmailModifyView()
     lazy var locationModify = LocationModifyView()
-    
-    
-    // MARK: Navigation Bar hide Control
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        registerForKeyboardNotification()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        removeRegisterForKeyboardNotification()
-    }
 
     // MARK: viewDidLoad
     
@@ -361,16 +348,6 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         present(picker, animated: true, completion: nil)
     }
     
-    func registerForKeyboardNotification(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    func removeRegisterForKeyboardNotification(){
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
     func getCellData() {
         for index in 0..<projectArr.count {
             let indexpath = IndexPath(row: index, section: 0)
@@ -418,61 +395,8 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
                                    sido: "서울시",
                                    sigungu: "은평구")
         
-        print("text", projectArr)
         presenter?.completeModifyButton(userInfo: userInfo, project: projectArr)
         self.navigationController?.popToRootViewController(animated: true)
-    }
-    
-    @objc func keyboardWillHide(_ sender: Notification) {
-//        self.view.frame.origin.y += keyHeight!
-    }
-    
-    @objc func keyboardWillShow(_ sender: Notification) {
-        let userInfo:NSDictionary = sender.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
-        let keyboardRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keyboardRectangle.height
-        keyHeight = keyboardHeight
-    }
-//        self.view.frame.origin.y -= keyboardHeight
-//    }
-    //    @objc func keyBoardShow(notification: NSNotification){
-    //        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
-    //        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
-    //        let keyboardRectangle = keyboardFrame.cgRectValue
-    //        if projectTitleModify.isEditing == true{
-    //            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: projectTitleModify)
-    //        }
-    //        else if nameModify.isEditing == true {
-    //            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: nameModify)
-    //        }
-    //        else if snsModify.gitTextField.isEditing == true{
-    //            print("sns1 호출")
-    //            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: snsModify.gitTextField)
-    //        }
-    //        else if snsModify.linkedTextField.isEditing == true{
-    //            print("sns2 호출")
-    //            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: snsModify.linkedTextField)
-    //        }
-    //        else if snsModify.webTextField.isEditing == true{
-    //            print("sns3 호출")
-    //            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: snsModify.webTextField)
-    //        } else if locationModify.locationTextField.isEditing == true {
-    //            print("sns4 호출")
-    //            keyboardAnimate(keyboardRectangle: keyboardRectangle, textField: locationModify.locationTextField)
-    //        }
-    //    }
-    
-    func keyboardAnimate(keyboardRectangle: CGRect ,textField: UITextField) {
-        //        print("전체 크기 :\(backgroundView.frame.height)")
-        print("전체 크기 :\(view.frame.height)")
-        print("키보드 크기 : \(keyboardRectangle.height)")
-        print("뷰 프레임크기 - 텍스트필드 y값 : \(self.view.frame.height - textField.frame.maxY)")
-        print("텍스트필드 값 : \(textField.frame.maxY)")
-        //        self.view.frame.height
-        if keyboardRectangle.height > (self.view.frame.height - textField.frame.maxY){
-            self.view.transform = CGAffineTransform(translationX: 0, y: (view.frame.height - keyboardRectangle.height - textField.frame.maxY))
-        }
     }
 }
 
@@ -507,9 +431,10 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
         
         let index = indexPath.row
         
-        projectArr.remove(at: index)
-        projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
-        projectAddButton.backgroundColor = projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
+        self.projectArr.remove(at: index)
+        self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+        self.projectAddButton.backgroundColor =
+            self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
     }
 }
 
@@ -519,7 +444,7 @@ extension ProfileModifyView:  UIImagePickerControllerDelegate & UINavigationCont
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            profileImage.image = image
+            self.profileImage.image = image
         }
         dismiss(animated: true, completion: nil)
     }
@@ -535,15 +460,6 @@ extension ProfileModifyView: UITextFieldDelegate {
 }
 
 extension ProfileModifyView: UITextViewDelegate {
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentText = textView.text ?? ""
-        guard let stringRange = Range(range, in: currentText) else { return false }
-        
-        let changedText = currentText.replacingCharacters(in: stringRange, with: text)
-        
-        return changedText.count <= 199
-    }
     
     //MARK: TextView Dynamic Height
     
@@ -561,33 +477,5 @@ extension ProfileModifyView: UITextViewDelegate {
 extension ProfileModifyView: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
         self.view.endEditing(true)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //        if scrollView.contentOffset.y - careerDescriptModify.frame.minY < 0 {
-        //            scrollView.contentOffset.y = careerDescriptModify.frame.minY
-        //        }
-        //        print(scrollView.contentOffset.y - careerDescriptModify.frame.minY)
-        //        print(scrollView.contentOffset.y - projectDescriptModify.frame.minY)
-        //scrolloffy = 0
-        
-        //        let userInfo:NSDictionary = sender.userInfo! as NSDictionary
-        //        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
-        //        let keyboardRectangle = keyboardFrame.cgRectValue
-        //        let keyboardHeight = keyboardRectangle.height
-        //        keyHeight = keyboardHeight
-        
-        //        if let height = keyHeight {
-        //        print("맨위",scrollView.contentOffset.y)
-        //        careerDescriptModify.frame.miny
-        
-        if scrollView.contentOffset.y > projectLabel.frame.minY {
-//            print("위에 짤린다.")
-        } else if ((690 - (280 + 60 )) + scrollView.contentOffset.y) < projectLabel.frame.maxY {
-//            print("밑에 짤린다.")
-//            print("위로 올려줘야하는 만큼이 이정도",projectLabel.frame.maxY - ((690 - (280 + 60 )) + scrollView.contentOffset.y))
-        } else {
-//            print("안짤린다.")
-        }
     }
 }

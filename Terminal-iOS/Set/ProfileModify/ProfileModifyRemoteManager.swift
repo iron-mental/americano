@@ -59,12 +59,8 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                 print("성공:",JSON(value))
                 let json = JSON(value)
                 let data = "\(json)".data(using: .utf8)
-//                do {
-                    let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
-                    completion(result)
-//                } catch {
-//                    print("에러")
-//                }
+                let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
+                completion(result)
             case .failure(let error):
                 print("에러:", error)
             }
