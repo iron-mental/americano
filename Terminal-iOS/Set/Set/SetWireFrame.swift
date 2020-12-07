@@ -14,6 +14,7 @@ class SetWireFrame: SetWireFrameProtocol {
         let presenter: SetPresenterProtocol & SetInteractorOutputProtocol = SetPresenter()
         let interactor: SetInteractortInputProtocol & SetRemoteDataManagerOutputProtocol = SetInteractor()
         let wireFrame: SetWireFrameProtocol = SetWireFrame()
+        let remoteDataManager: SetRemoteDataManagerInputProtocol = SetRemoteManager()
         
         view.presenter = presenter
         
@@ -22,6 +23,9 @@ class SetWireFrame: SetWireFrameProtocol {
         presenter.interactor = interactor
         
         interactor.presenter = presenter
+        interactor.remoteDataManager = remoteDataManager
+        
+        remoteDataManager.remoteRequestHandler = interactor
         
         if let view = view as? SetView {
             view.id = id

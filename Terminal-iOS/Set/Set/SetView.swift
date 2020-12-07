@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SetView: UIViewController {
     var id: Int?
@@ -60,23 +61,19 @@ class SetView: UIViewController {
         }
         profile.do {
             $0.contentMode = .scaleAspectFill
-            $0.image = #imageLiteral(resourceName: "leehi")
             $0.layer.cornerRadius = $0.frame.size.width/2
             $0.clipsToBounds = true
         }
         name.do {
-            $0.text = "이하이"
             $0.textColor = .white
             $0.textAlignment = .center
             $0.font = $0.font.withSize(20)
         }
         descript.do {
-            $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다."
             $0.numberOfLines = 1
             $0.font = $0.font.withSize(16)
         }
         location.do {
-            $0.text = "서울시 마포구"
             $0.font = $0.font.withSize(13)
         }
         settingList.do {
@@ -153,7 +150,25 @@ class SetView: UIViewController {
 }
 
 extension SetView: SetViewProtocol {
-    
+    func showUserInfo(with userInfo: UserInfo) {
+        
+        /// Kingfisher auth token
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        let imageURL = userInfo.image ?? ""
+        self.profile.kf.setImage(with: URL(string: imageURL),
+                                 options: [.requestModifier(imageDownloadRequest)])
+        
+        
+        self.name.text = userInfo.nickname
+        self.descript.text = userInfo.introduce ?? ""
+        self.location.text = userInfo.address ?? ""
+        
+    }
 }
 
 extension SetView: UITableViewDelegate, UITableViewDataSource {

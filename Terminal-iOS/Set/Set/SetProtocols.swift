@@ -10,6 +10,8 @@ import UIKit
 
 protocol SetViewProtocol: class {
     var presenter: SetPresenterProtocol? { get set }
+    
+    func showUserInfo(with userInfo: UserInfo)
 }
 
 protocol SetWireFrameProtocol: class {
@@ -30,13 +32,14 @@ protocol SetPresenterProtocol: class {
 }
 
 protocol SetInteractorOutputProtocol: class {
+    func didRetrievedUserInfo(userInfo: UserInfo)
     func onError()
 }
 
 protocol SetInteractortInputProtocol: class {
     var presenter: SetInteractorOutputProtocol? { get set }
-    var localDatamanager: SetLocalDataManagerInputProtocol? { get set }
-    var remoteDatamanager: SetRemoteDataManagerInputProtocol? { get set }
+    var localDataManager: SetLocalDataManagerInputProtocol? { get set }
+    var remoteDataManager: SetRemoteDataManagerInputProtocol? { get set }
     
     func getUserInfo(id: Int)
 }
@@ -47,13 +50,13 @@ protocol SetDataManagerInputProtocol: class {
 }
 
 protocol SetRemoteDataManagerInputProtocol: class {
-    var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol? { get set }
+    var remoteRequestHandler: SetRemoteDataManagerOutputProtocol? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
     func getUserInfo(id: Int)
 }
 
 protocol SetRemoteDataManagerOutputProtocol: class {
-    
+    func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
 }
 
 protocol SetLocalDataManagerInputProtocol: class {

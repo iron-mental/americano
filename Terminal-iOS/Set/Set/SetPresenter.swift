@@ -24,9 +24,11 @@ class SetPresenter: SetPresenterProtocol {
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {
+    func didRetrievedUserInfo(userInfo: UserInfo) {
+        view?.showUserInfo(with: userInfo)
+    }
+    
     func onError() {
         
     }
-    
-    
 }

@@ -39,9 +39,6 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         let profileModifyView = ProfileModifyWireFrame.createProfileModifyModule(userInfo: userInfo, project: project)
         
         if let sourceView = view as? UIViewController {
-//            sourceView.addChild(profileModifyView)
-//            sourceView.view.addSubview(profileModifyView.view)
-//            profileModifyView.didMove(toParent: sourceView)
             sourceView.navigationController?.pushViewController(profileModifyView, animated: true)
         }
     }
