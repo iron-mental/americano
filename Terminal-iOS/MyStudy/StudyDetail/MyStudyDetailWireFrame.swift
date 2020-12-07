@@ -24,7 +24,6 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         view.presenter = presenter
         view.studyID = studyID
         presenter.view = view
-        print(view)
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame
         interactor.presenter = presenter
