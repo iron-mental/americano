@@ -30,7 +30,6 @@ class CreateStudyView: UIViewController{
         }
     }
     let mainImageView = MainImageView(frame: CGRect.zero)
-    
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
     var studyIntroduceView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")

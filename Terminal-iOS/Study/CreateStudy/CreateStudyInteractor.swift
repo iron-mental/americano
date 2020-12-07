@@ -61,12 +61,6 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
         } else if study.location.lng == nil || study.location.lng.isZero {
             print(study.title)
             return "lng 틀려쓰"
-//        } else if study.location.sido == nil || study.location.sido == "" {
-//            print(study.title)
-//            return "sido 틀려쓰"
-//        } else if study.location.sigungu == nil || study.location.sigungu == "" {
-//            print(study.title)
-//            return "sigungu 틀려쓰"
         } else if study.location.address == nil || study.location.address == "" {
             print(study.title)
             return "address 틀려쓰"
