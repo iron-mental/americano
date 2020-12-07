@@ -41,24 +41,34 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
     
     func nullCheck(study: StudyDetailPost) -> String {
         if study.category == nil || study.category == ""  {
+            print(study.title)
             return "카테고리 틀려쓰"
         } else if study.title == nil || study.title == "" {
+            print(study.title)
             return "타이틀 틀려쓰"
         } else if study.introduce == nil || study.introduce == "" {
+            print(study.title)
             return "소개 틀려쓰"
         } else if study.progress == nil || study.progress == "" {
+            print(study.title)
             return "계획 틀려쓰"
         } else if study.studyTime == nil || study.studyTime == "" {
+            print(study.title)
             return "시간 틀려쓰"
         } else if study.location.lat == nil || study.location.lat.isZero {
+            print(study.title)
             return "lat 틀려쓰"
         } else if study.location.lng == nil || study.location.lng.isZero {
+            print(study.title)
             return "lng 틀려쓰"
         } else if study.location.sido == nil || study.location.sido == "" {
+            print(study.title)
             return "sido 틀려쓰"
         } else if study.location.sigungu == nil || study.location.sigungu == "" {
+            print(study.title)
             return "sigungu 틀려쓰"
         } else if study.location.address == nil || study.location.address == "" {
+            print(study.title)
             return "address 틀려쓰"
         } else {
             return "성공"
@@ -88,11 +98,9 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
                 createStudyRemoteDataManager?.putStudy(study: study, studyID: studyID!, completion: { result, message in
                 switch result {
                 case true:
-                    print(message)
                     self.presenter?.studyInfoValid(message: message)
                     break
                 case false:
-                    print(message)
                     self.presenter?.studyInfoInvalid(message: message)
                     break
                 }

@@ -15,6 +15,10 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
                                 "Authorization": Terminal.accessToken]
     
     func postStudy(study: StudyDetailPost, completion: @escaping (Bool, String) -> Void) {
+        
+        
+        print("여기서. 체크",study)
+        
         let params : [String : String] = [
             "category" : study.category != nil ? study.category : "",
             "title" : study.title != nil ? study.title : "",
@@ -88,7 +92,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             switch response.result {
             case .success(let value):
                 print(JSON(value))
-//                completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
+                completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
                 break
             case .failure(let err):
                 completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)

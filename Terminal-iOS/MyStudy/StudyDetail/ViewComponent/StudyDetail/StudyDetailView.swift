@@ -126,10 +126,15 @@ class StudyDetailView: UIViewController {
             } else {
             }
         }
-        print("리모트에서 찍은거 ", studyInfo?.location.locationDetail)
         locationView.do {
+            var detailAddress = ""
+            if let item = studyInfo?.location.locationDetail {
+                detailAddress = item
+            }
+            print(detailAddress)
+            
             $0.title.text = "장소"
-            $0.contentText = ["장소",  String(studyInfo?.location.addressName ?? "") + String(studyInfo?.location.locationDetail ?? "") ]
+            $0.contentText = ["장소",  String(studyInfo?.location.addressName ?? "") +  detailAddress]
         }
     }
     

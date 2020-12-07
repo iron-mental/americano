@@ -54,6 +54,10 @@ class CreateStudyView: UIViewController{
         self.presenter?.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("이친구의 부모가 누구입니까?", presentingViewController)
+    }
+    
     func attribute() {
         view.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -119,8 +123,8 @@ class CreateStudyView: UIViewController{
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
             $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
-            $0.isUserInteractionEnabled = false
-            self.button.alpha = 0.5
+            $0.isUserInteractionEnabled = state == .create ? false : true
+            self.button.alpha =  state == .create ?  0.5 : 1
         }
     }
     
@@ -317,8 +321,14 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
+        var tempTitle = ""
+        if state == .edit {
+            tempTitle =  studyTitleTextField.text == study?.title ? "notTheSameTitle" : "notSame"
+        } else {
+            tempTitle = studyTitleTextField.text ?? ""
+        }
         studyDetailPost = StudyDetailPost(category: selectedCategory!,
-                                        title: studyTitleTextField.text == study?.title ? "notTheSameTitle" : "notSame" ,
+                                        title: tempTitle,
                                        introduce: studyIntroduceView.textView.text,
                                        progress: studyInfoView.textView.text,
                                        studyTime: timeView.detailTime.text ?? "",
@@ -336,8 +346,18 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     func studyInfoValid(message: String) {
         LoadingRainbowCat.hide() {
-            print("뷰에서 찍은 겁니다~~ \(message)")
-            self.navigationController?.popViewController(animated: true)
+            switch self.state {
+            case .create:
+                self.navigationController?.popViewController(animated: true)
+                break
+            case .edit:
+//
+                break
+            case .none:
+                break
+//                <#code#>
+            }
+            
         }
     }
 }
