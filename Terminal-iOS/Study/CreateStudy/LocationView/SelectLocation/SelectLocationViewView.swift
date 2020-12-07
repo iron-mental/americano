@@ -98,7 +98,6 @@ class SelectLocationView: UIViewController {
         if let detailAddress = bottomView.detailAddress.text {
             location?.detailAddress = detailAddress
         }
-        print("디테일 넣은 후 ",location?.detailAddress!)
         delegate?.passLocation(location: location!)
         presentingViewController?.dismiss(animated: false)
         self.presentingViewController?.presentingViewController?.dismiss(animated: false)

@@ -17,7 +17,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
     func postStudy(study: StudyDetailPost, completion: @escaping (Bool, String) -> Void) {
         
         
-        print("여기서. 체크",study)
+        print("여기서", study)
         
         let params : [String : String] = [
             "category" : study.category != nil ? study.category : "",
@@ -83,7 +83,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {
-                if value != nil && value != "" && value != "nil" && value != "notTheSameTitle" {
+                if value != nil && value != "" && value != "nil" && value != "same" {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
             }

@@ -23,7 +23,11 @@ class CreateStudyView: UIViewController{
     let picker = UIImagePickerController()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
-    var state: WriteStudyViewState?
+    var state: WriteStudyViewState? {
+        didSet {
+            attribute()
+        }
+    }
     let mainImageView = MainImageView(frame: CGRect.zero)
     
     let studyTitleTextField = UITextField()
@@ -117,14 +121,15 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.detailTime.text = study?.studyTime ?? nil
         }
+        
         button.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor(named: "key")
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
             $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
-            $0.isUserInteractionEnabled = state == .create ? false : true
-            self.button.alpha =  state == .create ?  0.5 : 1
+            $0.isUserInteractionEnabled = state == .edit ? true : false
+            self.button.alpha =  state == .edit ?  1 : 0.5
         }
     }
     
@@ -272,7 +277,11 @@ extension CreateStudyView: CreateStudyViewProtocols {
         attribute()
         layout()
         setDelegate()
-        
+//        if state == .edit {
+//            selectedLocation = StudyDetailLocationPost(address: study?.location.addressName,
+//                                                       lat: study?.location.latitude,
+//                                                       lng: study?.location.longitude,)
+//        }
     }
     func loading() {
         LoadingRainbowCat.show()
@@ -323,10 +332,29 @@ extension CreateStudyView: CreateStudyViewProtocols {
         //하드로 넣어주고 추후에 손을 봅시다.
         var tempTitle = ""
         if state == .edit {
-            tempTitle =  studyTitleTextField.text == study?.title ? "notTheSameTitle" : "notSame"
+            tempTitle =  studyTitleTextField.text == study?.title ? "same" : "notSame"
+            
+            if let currentLocation = study?.location {
+                selectedLocation = StudyDetailLocationPost(address: currentLocation.addressName,
+                                        lat: Double(currentLocation.latitude)!,
+                                        lng: Double(currentLocation.longitude)!,
+                                        detailAddress: nil,
+                                        placeName: nil,
+                                        category: nil,
+                                        sido: nil,
+                                        sigungu: nil)
+                if let detailAddress = study?.location.addressName {
+                    selectedLocation?.detailAddress = detailAddress
+                }
+                if let placeName = study?.location.placeName {
+                    selectedLocation?.placeName = placeName
+                }
+                
+            }
         } else {
             tempTitle = studyTitleTextField.text ?? ""
         }
+        
         studyDetailPost = StudyDetailPost(category: selectedCategory!,
                                         title: tempTitle,
                                        introduce: studyIntroduceView.textView.text,
@@ -382,8 +410,7 @@ extension CreateStudyView: UIScrollViewDelegate {
 }
 
 extension CreateStudyView: selectLocationDelegate {
-    func
-    passLocation(location: StudyDetailLocationPost) {
+    func passLocation(location: StudyDetailLocationPost) {
         selectedLocation = location
         locationView.detailAddress.text = "\(location.address)"
         guard let detail = location.detailAddress else { return }
