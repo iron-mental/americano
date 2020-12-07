@@ -13,6 +13,8 @@ class ChatInteractor: ChatInteractorProtocol {
     
     
     
+    
+    
     var presenter: ChatPresenterProtocol?
     var remoteDataManager: ChatRemoteDataManagerProtocol?
     var localDataManager: ChatLocalDataManagerProtocol?
@@ -25,5 +27,8 @@ class ChatInteractor: ChatInteractorProtocol {
     }
     func disconnectSocket() {
         remoteDataManager?.disconnectSocket()
+    }
+    func receiveMessage(message: String) {
+        presenter?.showReceiveMessage(message: message)
     }
 }

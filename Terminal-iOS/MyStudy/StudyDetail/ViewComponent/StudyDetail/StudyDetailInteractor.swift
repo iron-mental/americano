@@ -18,6 +18,17 @@ class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
             self.presenter?.didRetrieveStudyDetail($0)
         })
     }
+    func postStudyJoin(studyID: Int, message: String) {
+        remoteDatamanager?.postStudyJoin(studyID: studyID, message: message, completion: { [self] result, message in
+            switch result {
+            case true:
+                presenter?.studyJoinResult(result: result, message: message)
+                break
+            case false:
+                break
+            }
+        })
+    }
 }
 
 extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {

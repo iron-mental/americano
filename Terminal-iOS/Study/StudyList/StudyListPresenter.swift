@@ -9,10 +9,6 @@
 import UIKit
 
 class StudyListPresenter: StudyListPresenterProtocol {
-    func showStudyDetail(keyValue: Int) {
-        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue)
-    }
-    
     var view: StudyListViewProtocol?
     var interactor: StudyListInteractorInputProtocol?
     var wireFrame: StudyListWireFrameProtocol?
@@ -27,6 +23,10 @@ class StudyListPresenter: StudyListPresenterProtocol {
     
     func pagingLengthStudyList() {
         interactor?.pagingRetrieveLengthStudyList()
+    }
+    func showStudyDetail(keyValue: Int) {
+//        StudyDetailRemoteManager.getStudyDetail(keyValue: <#T##String#>, completionHandler: <#T##(StudyDetail) -> ()#>)
+//        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue)
     }
 }
 

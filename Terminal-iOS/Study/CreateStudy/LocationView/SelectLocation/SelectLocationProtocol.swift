@@ -35,6 +35,7 @@ protocol SelectLocationPresenterProtocol: class {
     //VIEW -> PRESENTER
     func getAddress(item: StudyDetailLocationPost)
     func didClickedCompletButton(item: StudyDetailLocationPost)
+    func viewDidLoad(item: StudyDetailLocationPost)
     
     //INTERACTOR -> PRESENTER
     func getAddressResult(item: StudyDetailLocationPost)

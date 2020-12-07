@@ -40,7 +40,7 @@ class TempChatView: UIViewController {
     ]
     var inputTextField = UITextField()
     var emitButton = UIButton()
-    
+    var textLabel = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
@@ -68,11 +68,17 @@ class TempChatView: UIViewController {
             $0.setTitle("방출", for: .normal)
             $0.addTarget(self, action: #selector(didEmitButtonClicked), for: .touchUpInside)
         }
+        textLabel.do {
+            $0.text = ""
+            $0.textColor = .red
+            $0.layer.borderWidth = 2
+            $0.layer.borderColor = UIColor.white.cgColor
+            $0.textAlignment = .center
+        }
     }
     
     func layout() {
-//        [chatTableView,inputTextField,emitButton].forEach { view.addSubview($0) }
-        [inputTextField,emitButton].forEach { view.addSubview($0) }
+        [inputTextField, emitButton, textLabel].forEach { view.addSubview($0) }
 //        chatTableView.do {
 //            $0.translatesAutoresizingMaskIntoConstraints = false
 //            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -94,14 +100,26 @@ class TempChatView: UIViewController {
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
         }
+        textLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: emitButton.centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: emitButton.bottomAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        }
     }
     
     @objc func didEmitButtonClicked(_ sender: UIButton) {
+        inputTextField.text = ""
         presenter?.emitButtonDidTap(message: inputTextField.text!)
     }
 }
 
 extension TempChatView: ChatViewProtocol {
+    func showMessage(message: String) {
+        inputTextField.text = message
+    }
+    
     
 }
 extension TempChatView: UITableViewDelegate, UITableViewDataSource {

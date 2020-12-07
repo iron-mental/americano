@@ -31,7 +31,8 @@ class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
                                createAt: nil)
         view.presenter = presenter
         view.notice = newNotice
-        view.parentView = parentView != nil ? (parentView as! NoticeViewProtocol) : nil
+        view.parentView = parentView != nil ? parentView : nil
+        
         if studyID != nil {
             view.notice?.studyID = studyID
         }

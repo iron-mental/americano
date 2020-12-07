@@ -11,7 +11,7 @@ import UIKit
 protocol NoticeDetailViewProtocol {
     var presenter: NoticeDetailPresenterProtocol? { get set }
     var notice: Notice? { get set }
-    var parentView: NoticeViewProtocol? { get set }
+    var parentView: UIViewController? { get set }
     var noticeID: Int? { get set }
     
     //PRESENTER -> VIEW

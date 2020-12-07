@@ -30,8 +30,9 @@ class CategoryCell: UICollectionViewCell {
     private func attribute() {
         imageView.do {
             $0.layer.cornerRadius = 10
-            $0.contentMode = .scaleAspectFill
+            $0.contentMode = .scaleAspectFit
             $0.clipsToBounds = true
+            $0.layer.masksToBounds = true
         }
     }
     
