@@ -23,6 +23,7 @@ protocol StudyListWireFrameProtocol: class {
     
     // PRESENT -> WIREFRAME
     func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int)
+    func presentMyStudyDetail(from view: StudyListViewProtocol, keyValue: Int)
 }
 
 protocol StudyListPresenterProtocol: class {

@@ -10,27 +10,34 @@ import Foundation
 import SocketIO
 
 class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
-    lazy var manager = SocketManager(socketURL: URL(string: "http://3.35.154.27:3000/v1/chat")!, config: [.log(false), .compress, .connectParams(["token": Terminal.tempToken, "room":10])])
+    var interactor: ChatInteractorProtocol?
+    
+    lazy var manager = SocketManager(socketURL: URL(string: "http://3.35.154.27:3000")!, config: [ .log(false), .compress, .forceWebsockets(true), .connectParams(["token": Terminal.tempToken,
+                                                                                                                                          "study_id":1])])
     var chatSocket: SocketIOClient!
     
     init() {
-        chatSocket = manager.socket(forNamespace: "/android")
-        chatSocket.connect()
-        chatSocket.on("message") { array, ack in
-            
-            //여기서 바로 인터렉터로 넘겨줘야겠죠?
-
-//            JSON(array).array?.forEach {
-//                receiveLabel.text = $0.string!
-//                print("이거 제깍제깍오면 내잘못",$0)
-//            }
-            
-
-        }
         
     }
-    func emit(_ message: String) {
+    
+    func emit(message: String) {
+        print("쏘는거", message)
+        print("연결상태", chatSocket.status)
         chatSocket.emit("chat", message)
     }
     
+    func connectSocket() {
+        chatSocket = manager.socket(forNamespace: "/terminal")
+        
+        chatSocket.connect()
+        
+        chatSocket.on("message") { array, ack in
+            print(array)
+            self.interactor?.receiveMessage(message: "\(array)")
+        }
+    }
+    func disconnectSocket() {
+        chatSocket.disconnect()
+        print("디스커넥되면?", chatSocket.status)
+    }
 }

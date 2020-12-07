@@ -44,7 +44,6 @@ class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
                                                                            lng: lng,
                                                                            sido: region1Depth,
                                                                            sigungu: region2Depth)
-                                    print(location)
                                     completion(true, location)
                                 }
                             }

@@ -55,6 +55,7 @@ class StudyCategoryView: UIViewController {
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self
+            $0.showsVerticalScrollIndicator = false
         }
     }
     

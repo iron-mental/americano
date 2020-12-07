@@ -13,7 +13,6 @@ class SearchLocationWireFrame: SearchLocationWireFrameProtocol {
     
     func goToSelectLocationView(item: StudyDetailLocationPost, view: UIViewController, parentView: UIViewController) {
         let selectLocationView = SelectLocationWireFrame.selectLocationViewModul(item: item, parentView: parentView)
-        
         selectLocationView.modalPresentationStyle = .fullScreen
         view.present(selectLocationView, animated: false)
     }

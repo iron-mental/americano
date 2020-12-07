@@ -11,12 +11,18 @@ import UIKit
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
     
-    var studyID: Int?
+    var studyID: Int? {
+        didSet {
+            VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
+                       StudyDetailWireFrame.createStudyDetail(keyValue: studyID!, state: .member),
+                 ChatWireFrame.createChatModule()]
+        }
+    }
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
-    lazy var  VCArr: [UIViewController] = [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                                      StudyDetailWireFrame.createStudyDetail(keyValue: studyID!),
-                                      TempChatView()]
+    
+    var  VCArr: [UIViewController] = []
+    
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
                                            navigationOrientation: .horizontal,
@@ -24,7 +30,7 @@ class MyStudyDetailView: UIViewController {
     lazy var tabSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(didClickecmoreButton))
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -61,6 +67,7 @@ class MyStudyDetailView: UIViewController {
         selectedUnderLine.do {
             $0.backgroundColor = .white
         }
+        
         childPageView.do {
             $0.delegate = self
             $0.dataSource = self
@@ -122,17 +129,22 @@ class MyStudyDetailView: UIViewController {
     }
     @objc func didClickecmoreButton() {
         let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let edit =  UIAlertAction(title: "공지사항 추가", style: .default) { (action) in self.addNoticeButtonAction() }
-        let temp =  UIAlertAction(title: "여긴뭐들어갑니까", style: .default) {_ in }
+        let noticeAdd =  UIAlertAction(title: "공지사항 추가", style: .default) { (action) in self.addNoticeButtonAction() }
+        let studyEdit =  UIAlertAction(title: "스터디 정보 수정", style: .default) { (action) in self.editStudyButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [edit,temp,cancel].forEach {
+        [noticeAdd,studyEdit,cancel].forEach {
             alert.addAction($0)
         }
         present(alert, animated: true, completion: nil)
     }
     func addNoticeButtonAction() {
         presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
+    }
+    func editStudyButtonDidTap() {
+        if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
+            presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
+        }
     }
 }
 

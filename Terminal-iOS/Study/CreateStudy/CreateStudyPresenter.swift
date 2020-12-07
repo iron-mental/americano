@@ -62,9 +62,9 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
             view?.webInvalid()
         }
     }
-    func clickCompleteButton(study: StudyDetailPost) {
+    func clickCompleteButton(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?) {
         view?.loading()
-        interactor?.studyCreateComplete(study: study)
+        interactor?.studyCreateComplete(study: study, state: state, studyID: studyID ?? nil)
     }
     
     func studyInfoInvalid(message: String) {

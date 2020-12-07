@@ -9,9 +9,26 @@
 import Foundation
 
 class ChatInteractor: ChatInteractorProtocol {
+    
+    
+    
+    
+    
+    
     var presenter: ChatPresenterProtocol?
     var remoteDataManager: ChatRemoteDataManagerProtocol?
     var localDataManager: ChatLocalDataManagerProtocol?
     
-    
+    func connectSocket() {
+        remoteDataManager?.connectSocket()
+    }
+    func emit(message: String) {
+        remoteDataManager?.emit(message: message)
+    }
+    func disconnectSocket() {
+        remoteDataManager?.disconnectSocket()
+    }
+    func receiveMessage(message: String) {
+        presenter?.showReceiveMessage(message: message)
+    }
 }

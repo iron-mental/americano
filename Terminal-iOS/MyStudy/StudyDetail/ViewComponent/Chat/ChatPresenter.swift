@@ -9,9 +9,26 @@
 import Foundation
 
 class ChatPresenter: ChatPresenterProtocol {
+    
+    
+    
+    
+    
+    
     var view: ChatViewProtocol?
     var wireFrame: ChatWireFrameProtocol?
     var interactor: ChatInteractorProtocol?
     
-    
+    func viewDidLoad() {
+        interactor?.connectSocket()
+    }
+    func emitButtonDidTap(message: String) {
+        interactor?.emit(message: message)
+    }
+    func viewWillDisappear() {
+        interactor?.disconnectSocket()
+    }
+    func showReceiveMessage(message: String) {
+        view?.showMessage(message: message)
+    }
 }

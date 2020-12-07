@@ -13,7 +13,7 @@ import SwiftyJSON
 class TerminalAPI {
     static func getMyStudyList(completion: @escaping (Bool, [MyStudy]?) -> ()) {
         let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
-        var tempUserID = 12
+        var tempUserID = 9
         
         AF.request("http://3.35.154.27:3000/v1/user/\(tempUserID)/study",
                    method: .get,headers: headers).responseJSON(completionHandler: { response in
