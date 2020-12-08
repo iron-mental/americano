@@ -28,7 +28,8 @@ class ProfileDetailView: UIViewController {
     let location        = LocationView()
     
     var projectArr: [UIView] = []
-    
+    var projectData: [Project] = []
+    var userInfo: UserInfo?
     // MARK: ViewDidLoad
     
     override func viewDidLoad() {
@@ -178,21 +179,15 @@ class ProfileDetailView: UIViewController {
         }
     }
     
-    func addProjectToStackView() {
-        
-    }
-    
     @objc func pushProfileModify() {
-        let view = ProfileModifyView()
-        view.nameModify.text = self.profile.name.text
-        view.descripModify.text = self.profile.descript.text
-        navigationController?.pushViewController(view, animated: false)
+        guard let userInfo = self.userInfo else { return }
+        presenter?.showProfileModify(userInfo: userInfo, project: projectData)
     }
 }
 
 extension ProfileDetailView: ProfileDetailViewProtocol {
     func showUserInfo(with userInfo: UserInfo) {
-        
+        self.userInfo = userInfo
         /// Kingfisher auth token
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
@@ -204,26 +199,31 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
         
         /// 프로필
         profile.name.text = userInfo.nickname
-        guard let image = userInfo.image else { return }
-        guard let introduce = userInfo.introduce else { return }
-        profile.profileImage.kf.setImage(with: URL(string: image), options: [.requestModifier(imageDownloadRequest)])
-        profile.descript.text = introduce
         
+        if let image = userInfo.image, let introduce = userInfo.introduce {
+            profile.descript.text = introduce
+            profile.profileImage.kf.setImage(with: URL(string: image),
+                                             options: [.requestModifier(imageDownloadRequest)])
+        }
+      
         /// 경력
-        guard let careerTitle = userInfo.careerTitle else { return }
-        guard let careerContents = userInfo.careerContents else { return }
-        career.careerTitle.text = careerTitle
-        career.careerContents.text = careerContents
+        if let careerTitle = userInfo.careerTitle, let careerContents = userInfo.careerContents {
+            career.careerTitle.text = careerTitle
+            career.careerContents.text = careerContents
+        }
         
         /// 이메일
         email.email.text = userInfo.email
         
         /// 활동지역
-        guard let address = userInfo.address else { return }
-        location.location.text = address
+        if let address = userInfo.address {
+            location.location.text = address
+        }
     }
     
     func addProjectToStackView(with project: [Project]) {
+        projectData = project
+        
         for data in project {
             let title = data.title
             let contents = data.contents

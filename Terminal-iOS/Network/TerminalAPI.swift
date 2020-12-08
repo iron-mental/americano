@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class TerminalAPI {
-    static func getMyStudyList(completion: @escaping (_:Bool, _: [MyStudy]?) -> ()) {
+    static func getMyStudyList(completion: @escaping (Bool, [MyStudy]?) -> ()) {
         let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
         var tempUserID = 9
         
@@ -19,8 +19,6 @@ class TerminalAPI {
                    method: .get,headers: headers).responseJSON(completionHandler: { response in
                     switch response.result {
                     case .success(let value):
-                        
-                        print(JSON(value))
                     let json = JSON(value)["data"]
                         json.array?.forEach { data in
                             if let id = data["id"].int, let title = data["title"].string, let sigungu = data["sigungu"].string, let image = data["image"].string {

@@ -28,17 +28,18 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         remoteManager.remoteRequestHandler = interactor
         
         if let view = view as? ProfileDetailView {
+            view.hidesBottomBarWhenPushed = true
             return view
         } else {
             return UIViewController()
         }
     }
     
-    func presentProfileDetailScreen(from view: ProfileDetailView) {
-        let profileDetailView = ProfileDetailWireFrame.createModule()
+    func presentProfileModifyScreen(from view: ProfileDetailViewProtocol, userInfo: UserInfo, project: [Project]) {
+        let profileModifyView = ProfileModifyWireFrame.createProfileModifyModule(userInfo: userInfo, project: project)
         
         if let sourceView = view as? UIViewController {
-            sourceView.navigationController?.pushViewController(profileDetailView, animated: true)
+            sourceView.navigationController?.pushViewController(profileModifyView, animated: true)
         }
     }
 }

@@ -13,8 +13,8 @@ class SetPresenter: SetPresenterProtocol {
     var interactor: SetInteractortInputProtocol?
     var wireFrame: SetWireFrameProtocol?
     
-    func viewDidLoad() {
-        
+    func viewDidLoad(id: Int) {
+        interactor?.getUserInfo(id: id)
     }
     
     func showProfileDetail() {
@@ -24,9 +24,11 @@ class SetPresenter: SetPresenterProtocol {
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {
+    func didRetrievedUserInfo(userInfo: UserInfo) {
+        view?.showUserInfo(with: userInfo)
+    }
+    
     func onError() {
         
     }
-    
-    
 }

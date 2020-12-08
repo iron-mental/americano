@@ -8,9 +8,9 @@
 
 import UIKit
 
-class LocationModifyView: UIView {
-    let locationLabel = UILabel()
-    let locationTextField = UITextField()
+final class LocationModifyView: UIView {
+    lazy var locationLabel = UILabel()
+    lazy var locationTextField = UITextField()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,9 +24,10 @@ class LocationModifyView: UIView {
             $0.textColor = .white
         }
         locationTextField.do {
-            $0.text = "서울 마포구 주민입니다. 서울 모든 곳 가능합니다."
             $0.textColor = UIColor.appColor(.profileTextColor)
-            
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.addLeftPadding()
         }
     }
     func layout() {
@@ -36,13 +37,14 @@ class LocationModifyView: UIView {
         locationLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 4).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         }
         locationTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.locationLabel.bottomAnchor, constant: 4).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+            $0.topAnchor.constraint(equalTo: self.locationLabel.bottomAnchor, constant: 7).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         }
     }

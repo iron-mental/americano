@@ -31,7 +31,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
         ]
         AF.request("https://dapi.kakao.com/v2/local/search/keyword.json",
                    method: .get,
-                   parameters: parameters, headers: headers).responseJSON(completionHandler: { [self] response in
+                   parameters: parameters, headers: headers).responseJSON(completionHandler: { response in
                     switch response.result {
                     case .success(let value):
                         if JSON(value)["documents"].count == 0 {

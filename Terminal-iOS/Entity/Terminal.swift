@@ -16,7 +16,7 @@ class Terminal {
     
     static let githubKey = "3e5f8c2c78dffa5dd1d4fdf729060ca9bb703a65"
     
-    static let accessToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJya2RjamYwMTIyQGdtYWlsLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S0IiwiaWF0IjoxNjA3MTAwMjI5LCJleHAiOjEwNjA3MTAwMjI5LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.fYLA_ZAW85Q42NWHjXNDqzFrYqa3PqSdMwL6oAL6LGk"
+    static let accessToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDQsImVtYWlsIjoic3dkb3Jpc0BnbWFpbC5jb20iLCJuaWNrbmFtZSI6IuycpOyDgeybkCIsImlhdCI6MTYwNzA4NzQ5NSwiZXhwIjoxMDYwNzA4NzQ5NSwiaXNzIjoidGVybWluYWwtc2VydmVyIiwic3ViIjoidXNlckluZm8tYWNjZXNzIn0.b3dYBzHr9ll524AVLeJ5sB678l1fiBQev9CCTeYl9AE"
     
     static let tempToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJya2RjamYwMTIyQGdtYWlsLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S0IiwiaWF0IjoxNjA3MTAwMjI5LCJleHAiOjEwNjA3MTAwMjI5LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.fYLA_ZAW85Q42NWHjXNDqzFrYqa3PqSdMwL6oAL6LGk"
     
@@ -30,5 +30,5 @@ class Terminal {
         return screenSize.width * (value / 375)
     }
     
-    static let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJya2RjamYwMTIyQGdtYWlsLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S0IiwiaWF0IjoxNjA3MTAwMjI5LCJleHAiOjEwNjA3MTAwMjI5LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.fYLA_ZAW85Q42NWHjXNDqzFrYqa3PqSdMwL6oAL6LGk"
+    static let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDQsImVtYWlsIjoic3dkb3Jpc0BnbWFpbC5jb20iLCJuaWNrbmFtZSI6IuycpOyDgeybkCIsImlhdCI6MTYwNzA4NzQ5NSwiZXhwIjoxMDYwNzA4NzQ5NSwiaXNzIjoidGVybWluYWwtc2VydmVyIiwic3ViIjoidXNlckluZm8tYWNjZXNzIn0.b3dYBzHr9ll524AVLeJ5sB678l1fiBQev9CCTeYl9AE"
 }

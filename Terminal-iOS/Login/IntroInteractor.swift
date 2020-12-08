@@ -51,10 +51,12 @@ class IntroInteractor: IntroInteractorProtocol {
             presenter?.signUpValidInfo(result: false)
         }
     }
+    
     func checkedJoinValid(input: String) {
-        remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email,input], completionHandler: { [self] (result, data) in
+        remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email,input],
+                                            completionHandler: { result, data in
             
-            presenter?.joinValidInfo(result: result, joinInfo: "\(data)")
+            self.presenter?.joinValidInfo(result: result, joinInfo: "\(data)")
         })
     }
 }
