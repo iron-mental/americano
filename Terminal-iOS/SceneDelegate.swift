@@ -19,54 +19,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             let home = HomeView()
 
-            /// 리프레쉬 토큰이 없으면 -> 로그인
-//            if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
-//                let howView = UINavigationController(rootViewController: home)
-//                window.rootViewController = howView
-//            } else {
-//                print("토큰이 유효합니다..")
-//                print("로그인 완료")
-//                let main = ViewController()
-//                window.rootViewController = main
-//                guard let refresh = KeychainWrapper.standard.string(forKey: "refreshToken") else { return }
-//                guard let access = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
+            // 리프레쉬 토큰이 없으면 -> 로그인
+            if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
+                let howView = UINavigationController(rootViewController: home)
+                window.rootViewController = howView
+            } else {
+                print("토큰이 유효합니다..")
+                print("로그인 완료")
+                let main = ViewController()
+                window.rootViewController = main
+            }
 //
-//                ///토큰이 유효한지 조회
-//                TerminalNetwork.checkToekn(accessToken: access) { response in
-//                    if response.result {
-//                        print("토큰이 유효합니다..")
-//                        print("로그인 완료")
-//                        let main = ViewController()
-//                        window.rootViewController = main
-//                    }
-//                    else {
-//                        print("토큰 유효성이 만료 되었습니다.")
-//                        TerminalNetwork.authRequest(refreshToken: refresh, accessToken: access) { response in
-//                            if response.result {
-//                                print("갱신 성공")
-//                                if let access = response.data?.accessToken {
-//                                    KeychainWrapper.standard.set(access, forKey: "accessToken")
-//                                }
-//
-//                                if let refresh = response.data?.refreshToken {
-//                                    KeychainWrapper.standard.set(refresh, forKey: "refreshToken")
-//                                }
-//
-//                                let main = ViewController()
-//                                let view = UINavigationController(rootViewController: main)
-//                                window.rootViewController = view
-//                            } else {
-//                                let howView = UINavigationController(rootViewController: home)
-//                                window.rootViewController = howView
-//                                print("실패띠 다시 로그인")
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-
-            let view = TestViewController()
-            window.rootViewController = view
+//            let view = TestViewController()
+//            window.rootViewController = view
 
             self.window = window
             window.makeKeyAndVisible()

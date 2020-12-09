@@ -14,39 +14,39 @@ enum TerminalRouter: URLRequestConvertible {
     // MARK: router case init
     
     // 유저 - 회원가입 로그인 비밀번호 찾기 일단 안넣음
-    case nicknameCheck(nickname: String)
-    case eamilCheck(email: String)
-    case userInfo(id: String)
-    case userInfoUpdate(id: String)
-    case userWithdrawal(id: String, email: String, password: String)
-    case emailVerify(id: String)
-    case reissuanceToken(refreshToken: String)
+    case nicknameCheck      (nickname: String)
+    case eamilCheck         (email: String)
+    case userInfo           (id: String)
+    case userInfoUpdate     (id: String)
+    case userWithdrawal     (id: String, email: String, password: String)
+    case emailVerify        (id: String)
+    case reissuanceToken    (refreshToken: String)
     
     // 프로젝트
-    case projectRegister(id: String, project: [String: String])
-    case projectList(id: String)
-    case projectUpdate(id: String, projectID: String)
-    case projectDelete(id: String, projectID: String)
+    case projectRegister    (id: String, project: [String: String])
+    case projectList        (id: String)
+    case projectUpdate      (id: String, projectID: String)
+    case projectDelete      (id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
-    case studyCreate(path: [String: String])
-    case studyDetail(studyID: String)
-    case studyUpdate(studyID: String)
-    case studyDelete(studyID: String)
-    case studyList(category: String, sort: String)
-    case studyListForKey(value: [Int])
-    case myStudyList(id: String)
+    case studyCreate        (path: [String: String])
+    case studyDetail        (studyID: String)
+    case studyUpdate        (studyID: String)
+    case studyDelete        (studyID: String)
+    case studyList          (category: String, sort: String)
+    case studyListForKey    (value: [Int])
+    case myStudyList        (id: String)
     
     // 신청부분
-    case studyApply(studyID: String)
+    case studyApply         (studyID: String)
     
     // 공지사항
-    case createNotice(studyID: String, notice: [String: String])
-    case noticeDetail(studyID: String, noticeID: String)
-    case noticeList(studyID: String)
-    case noticeListForKey(studyID: String, value: [Int])
-    case noticeUpdate(studyID: String, noticeID: String)
-    case noticeDelete(studyID: String, noticeID: String)
+    case createNotice       (studyID: String, notice: [String: String])
+    case noticeDetail       (studyID: String, noticeID: String)
+    case noticeList         (studyID: String)
+    case noticeListForKey   (studyID: String, value: [Int])
+    case noticeUpdate       (studyID: String, noticeID: String)
+    case noticeDelete       (studyID: String, noticeID: String)
     
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
