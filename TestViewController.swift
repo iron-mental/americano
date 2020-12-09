@@ -50,16 +50,29 @@ class TestViewController: UIViewController {
 //                 debugPrint(response)
 //            }
 //
+        let params: [String: String] = [
+            "email": "swdoris@gmail.com",
+            "password": "qwer1234",
+            "push_token": KeychainWrapper.standard.string(forKey: "pushToken")!
+        ]
+        
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.createNotice(studyID: "222", notice: ["title" : "첫 번째 공지사항",
-                                                                         "contents" : "마스크 지참하세요",
-                                                                         "pinned" : "true"]))
-            .validate(statusCode: 200...299)
+            .request(TerminalRouter.login(userData: params))
             .responseJSON { response in
-                 debugPrint(response)
+                debugPrint(response)
             }
+//        TerminalNetworkManager
+//            .shared
+//            .session
+//            .request(TerminalRouter.createNotice(studyID: "222", notice: ["title" : "첫 번째 공지사항",
+//                                                                         "contents" : "마스크 지참하세요",
+//                                                                         "pinned" : "true"]))
+//            .validate(statusCode: 200...299)
+//            .responseJSON { response in
+//                 debugPrint(response)
+//            }
 //        let url = "http://3.35.154.27:3000/v1/study"
 //
         
