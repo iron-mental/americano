@@ -63,8 +63,8 @@ enum TerminalRouter: URLRequestConvertible {
             return ["category": category, "sort": sort]
         case .reissuanceToken(let accessToken, let refreshToken):
             return [
-                "refreshToken": refreshToken,
-                "accessToken": accessToken
+                "access_token": accessToken,
+                "refresh_token": refreshToken
             ]
         }
     }
@@ -78,11 +78,9 @@ enum TerminalRouter: URLRequestConvertible {
         
         if method == .get {
           request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
-            print(API.ACCESS_TOKEN)
         } else if method == .post {
           request = try JSONParameterEncoder().encode(parameters, into: request)
           request.setValue("application/json", forHTTPHeaderField: "Accept")
-//          request.setValue("Bearer "+API.ACCESS_TOKEN, forHTTPHeaderField: "authorization")
         }
 
         return request
