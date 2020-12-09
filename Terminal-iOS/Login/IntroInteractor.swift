@@ -95,11 +95,4 @@ class IntroInteractor: IntroInteractorProtocol {
           }
         )
       }
-    // func checkedJoinValid(input: String) {
-    //     remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email,input],
-    //                                         completionHandler: { result, data in
-            
-    //         self.presenter?.joinValidInfo(result: result, joinInfo: "\(data)")
-    //     })
-    // }
 }

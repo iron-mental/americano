@@ -14,18 +14,23 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
     var remoteRequestHandler: SetRemoteDataManagerOutputProtocol?
     
     func getUserInfo(id: Int) {
-        let url = "http://3.35.154.27:3000/v1/user/\(id)"
-        AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let data = "\(json)".data(using: .utf8)
-                let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
-                self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
-            case .failure(let err):
-                print("실패")
-                print(err)
+        
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.userInfo(id: String(id)))
+            .validate(statusCode: 200..<299)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                    self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
+                case .failure(let err):
+                    print("실패")
+                    print(err)
+                }
             }
-        }
     }
 }
