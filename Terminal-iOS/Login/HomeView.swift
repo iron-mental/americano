@@ -43,6 +43,7 @@ class HomeView: UIViewController {
             $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.addTarget(self, action: #selector(goSignUp), for: .touchUpInside)
+            $0.layer.cornerRadius = 10
         }
         mainImage.do {
             $0.image = UIImage(named: "homeImage")
