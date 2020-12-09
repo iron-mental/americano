@@ -80,7 +80,7 @@ class IntroInteractor: IntroInteractorProtocol {
             guard let accessToken = result.data?.accessToken else { return }
             guard let userID = result.data?.id else { return }
             let refreshResult = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
-            let accessResult = KeychainWrapper.standard.set("Bearer "+accessToken, forKey: "accessToken")
+            let accessResult = KeychainWrapper.standard.set(accessToken, forKey: "accessToken")
             let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
             
             print("저장 결과 :", refreshResult && accessResult && idResult)

@@ -14,6 +14,8 @@ enum TerminalRouter: URLRequestConvertible {
     case userGet(path: String)
     case studyPost(path: String)
     case studyGet(path: String)
+    case studyListGet(category: String, sort: String)
+    case reissuanceToken(accessToken: String, refreshToken: String)
     
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
@@ -29,6 +31,10 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .userPost:
             return .post
+        case .studyListGet:
+            return .get
+        case .reissuanceToken:
+            return .post
         }
     }
     
@@ -38,10 +44,14 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/"
         case let .userGet(path), let .userPost(path):
             return "user/\(path)"
+        case .studyListGet:
+            return "study"
+        case .reissuanceToken:
+            return "user/reissuance"
         }
     }
     
-    var parameters: [String: String] {
+    var parameters: [String: String]? {
         switch self {
         case let .studyGet(path), let .studyPost(path):
             return ["query": path]
@@ -49,18 +59,32 @@ enum TerminalRouter: URLRequestConvertible {
             return ["query": path]
         case .userGet(path: let path):
             return ["query": path]
+        case .studyListGet(let category, let sort):
+            return ["category": category, "sort": sort]
+        case .reissuanceToken(let accessToken, let refreshToken):
+            return [
+                "refreshToken": refreshToken,
+                "accessToken": accessToken
+            ]
         }
     }
     
     func asURLRequest() throws -> URLRequest {
         
         let url = baseURL.appendingPathComponent(endPoint)
-        print("url :", url)
+
         var request = URLRequest(url: url)
         request.method = method
         
-        request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
-        
+        if method == .get {
+          request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
+            print(API.ACCESS_TOKEN)
+        } else if method == .post {
+          request = try JSONParameterEncoder().encode(parameters, into: request)
+          request.setValue("application/json", forHTTPHeaderField: "Accept")
+//          request.setValue("Bearer "+API.ACCESS_TOKEN, forHTTPHeaderField: "authorization")
+        }
+
         return request
     }
 }

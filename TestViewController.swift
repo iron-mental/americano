@@ -8,20 +8,46 @@
 
 import UIKit
 import Alamofire
+import SwiftKeychainWrapper
+import SwiftyJSON
 
 class TestViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let url = API.BASE_URL+"/user/1"
-        print("히바", TerminalRouter.userGet(path: "1"))
+    
+//        print(KeychainWrapper.standard.string(forKey: "accessToken"))
+//        print(KeychainWrapper.standard.string(forKey: "refreshToken"))
+//        let parameters: Parameters = [
+//            "category": "ios",
+//            "sort": "new",
+//        ]
+        
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.userGet(path: "1"))
-            .validate()
+            .request(TerminalRouter.studyListGet(category: "ios", sort: "new"))
+            .validate(statusCode: 200...299)
             .responseJSON { response in
                  debugPrint(response)
             }
+        
+//        let url = "http://3.35.154.27:3000/v1/study"
+//
+        
+//
+//        AF.request(url,
+//                   method: .get,
+//                   parameters: parameters,
+//                   encoding: URLEncoding.queryString,
+//                   headers: TerminalNetwork.headers)
+//            .responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//                print(JSON(value))
+//            case .failure(let err):
+//                print(err)
+//            }
+//        }
     }
 }
