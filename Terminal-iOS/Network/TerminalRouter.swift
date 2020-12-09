@@ -17,7 +17,7 @@ enum TerminalRouter: URLRequestConvertible {
     case nicknameCheck      (nickname: String)
     case eamilCheck         (email: String)
     case userInfo           (id: String)
-    case userInfoUpdate     (id: String)
+    case userInfoUpdate     (id: String, userData: Parameters)
     case userWithdrawal     (id: String, email: String, password: String)
     case emailVerify        (id: String)
     case reissuanceToken    (refreshToken: String)
@@ -134,7 +134,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/check-nickname/\(nickname)"
         case let .eamilCheck(email):
             return "user/check-email/\(email)"
-        case let .userInfo(id), let .userInfoUpdate(id):
+        case let .userInfo(id), let .userInfoUpdate(id, _):
             return "user/\(id)"
         case let .userWithdrawal(id, _, _):
             return "user/\(id)"
@@ -190,8 +190,8 @@ enum TerminalRouter: URLRequestConvertible {
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
             return nil
-        case .userInfoUpdate: // 수정해야함
-            return nil
+        case let .userInfoUpdate(_, userData): // 수정해야함
+            return userData
         case let .userWithdrawal(_, email, password):
             return [
                 "email": email,
@@ -249,12 +249,14 @@ enum TerminalRouter: URLRequestConvertible {
         var request = URLRequest(url: url)
         request.method = method
         
-        if method == .get {
+        switch method {
+        case .get:
             request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
-
-        } else if method == .post {
+        case .post, .put, .delete:
             request = try JSONParameterEncoder().encode(parameters, into: request)
             request.setValue("application/json", forHTTPHeaderField: "Accept")
+        default:
+            break
         }
         
         return request

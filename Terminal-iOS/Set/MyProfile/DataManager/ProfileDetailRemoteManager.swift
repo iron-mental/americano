@@ -22,6 +22,7 @@ class ProfileDetailRemoteManager: ProfileDetailRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userInfo(id: userID))
+            .validate(statusCode: 200..<299)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
