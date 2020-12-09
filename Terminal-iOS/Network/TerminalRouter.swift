@@ -21,6 +21,7 @@ enum TerminalRouter: URLRequestConvertible {
     case userWithdrawal     (id: String, email: String, password: String)
     case emailVerify        (id: String)
     case reissuanceToken    (refreshToken: String)
+    case login              (userData: [String: String])
     
     // 프로젝트
     case projectRegister    (id: String, project: [String: String])
@@ -71,6 +72,8 @@ enum TerminalRouter: URLRequestConvertible {
         case .emailVerify:
             return .get
         case .reissuanceToken:
+            return .post
+        case .login:
             return .post
             
         // 프로젝트
@@ -137,6 +140,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/\(id)/emailVerify"
         case .reissuanceToken:
             return "user/reissuance"
+        case .login:
+            return "user/login"
             
         // 프로젝트
         case let .projectRegister(id, _), let .projectList(id):
@@ -191,6 +196,9 @@ enum TerminalRouter: URLRequestConvertible {
             return [
                 "refresh_token": refreshToken
             ]
+        case let .login(userData):
+            print(userData)
+            return userData
             
         // 스터디
         case .studyDetail, .studyDelete, .studyListForKey, .myStudyList:

@@ -59,25 +59,47 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     // MARK: 로그인 유효성 검사
     
     func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (BaseResponse<JoinResult>) -> Void) {
-        var params: Parameters = [
+        let params: [String: String] = [
             "email":"\(joinMaterial[0])",
             "password":"\(joinMaterial[1])",
-            "push_token": KeychainWrapper.standard.string(forKey: "pushToken")
+            "push_token": KeychainWrapper.standard.string(forKey: "pushToken")!
         ]
         
-        let url = URL(string: "http://3.35.154.27:3000/v1/user/login")!
-        AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
-            
-            switch response.result {
-            case .success(let value):
-                print("토큰 : ",JSON(value))
-                let json = JSON(value)
-                let data = "\(json)".data(using: .utf8)
-                let result = try! JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data!)
-                completionHandler(result)
-            case .failure(let error):
-                print("에러:",error)
+        print(KeychainWrapper.standard.string(forKey: "pushToken")!)
+        
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.login(userData: params))
+            .responseJSON { response in
+                debugPrint(response)
+//                print(response)
+//                switch response.result {
+//                case .success(let value):
+//                    print("토큰 : ",JSON(value))
+//                    let json = JSON(value)
+//                    let data = "\(json)".data(using: .utf8)
+//                    let result = try! JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data!)
+//                    completionHandler(result)
+//                case .failure(let error):
+//                    print("에러:",error)
+//                }
             }
-        }
+        
+        let url = URL(string: "http://3.35.154.27:3000/v1/user/login")!
+//        AF.request(url, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON { response in
+//
+//            switch response.result {
+//            case .success(let value):
+//                print("토큰 : ",JSON(value))
+//                let json = JSON(value)
+//                let data = "\(json)".data(using: .utf8)
+//                let result = try! JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data!)
+//                completionHandler(result)
+//            case .failure(let error):
+//                print("에러:",error)
+//            }
+//        }
+        
     }
 }

@@ -407,7 +407,6 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     }
 }
 
-
 extension ProfileModifyView: ProfileModifyViewProtocol {
 
 }
