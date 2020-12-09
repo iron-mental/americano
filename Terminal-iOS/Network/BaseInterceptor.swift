@@ -12,9 +12,8 @@ import SwiftKeychainWrapper
 import SwiftyJSON
 
 class BaseInterceptor: RequestInterceptor {
-//    var validToken: String = ""
     let retryLimit = 5
-    let retryDelay: TimeInterval = 10
+    let retryDelay: TimeInterval = 1
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var request = urlRequest
@@ -35,9 +34,9 @@ class BaseInterceptor: RequestInterceptor {
             completion(.doNotRetry)
         default:
             if request.retryCount < retryLimit {
-                refreshToken { success in
+                refreshToken { [self] success in
                     print("성공여부 :",success)
-                    return completion(.retryWithDelay(5))
+                    return completion(.retryWithDelay(retryDelay))
                 }
             }
         }
