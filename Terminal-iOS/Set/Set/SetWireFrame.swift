@@ -9,7 +9,7 @@
 import UIKit
 
 class SetWireFrame: SetWireFrameProtocol {
-    static func setCreateModule(id: Int) -> UIViewController {
+    static func setCreateModule() -> UIViewController {
         let view: SetViewProtocol = SetView()
         let presenter: SetPresenterProtocol & SetInteractorOutputProtocol = SetPresenter()
         let interactor: SetInteractortInputProtocol & SetRemoteDataManagerOutputProtocol = SetInteractor()
@@ -28,7 +28,6 @@ class SetWireFrame: SetWireFrameProtocol {
         remoteDataManager.remoteRequestHandler = interactor
         
         if let view = view as? SetView {
-            view.id = id
             return view
         } else {
             return UIViewController()

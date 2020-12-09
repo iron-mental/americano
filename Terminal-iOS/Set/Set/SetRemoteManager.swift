@@ -7,18 +7,20 @@
 //
 
 import Foundation
+
 import Alamofire
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 class SetRemoteManager: SetRemoteDataManagerInputProtocol {
     var remoteRequestHandler: SetRemoteDataManagerOutputProtocol?
     
-    func getUserInfo(id: Int) {
-        
+    func getUserInfo() {
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.userInfo(id: String(id)))
+            .request(TerminalRouter.userInfo(id: userID))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
                 switch response.result {

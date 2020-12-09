@@ -402,7 +402,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         let view = self.navigationController?.rootViewController as? SetViewProtocol
         
         self.navigationController?.popToRootViewController(animated: true, completion: {
-            view!.presenter?.viewDidLoad(id: 44)
+            view!.presenter?.viewDidLoad()
         })
     }
 }

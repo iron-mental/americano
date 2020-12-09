@@ -11,7 +11,6 @@ import SwiftKeychainWrapper
 import Kingfisher
 
 class SetView: UIViewController {
-    var id: Int?
     // 섹션
     var sections: [String] = ["계정", "알림", "정보", ""]
     
@@ -40,7 +39,7 @@ class SetView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad(id: self.id!)
+        presenter?.viewDidLoad()
         attribute()
         layout()
     }
