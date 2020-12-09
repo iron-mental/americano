@@ -19,8 +19,14 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
     
     func addNoticeResult(result: Bool, notice: Int, studyID: Int) {
         if result {
-            view?.showNewNotice()
-            wireFrame?.goToNoticeDetailView(noticeID: notice, studyID: studyID, parentView: UIViewController())
+            switch result {
+            case true:
+                view?.showNewNotice(noticeID: notice)
+                wireFrame?.goToNoticeDetailView(noticeID: notice, studyID: studyID, parentView: UIViewController())
+                break
+            case false:
+                break
+            }
         } else {
         }
     }

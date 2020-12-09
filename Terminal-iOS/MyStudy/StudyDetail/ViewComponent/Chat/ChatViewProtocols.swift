@@ -10,6 +10,9 @@ import UIKit
 
 protocol ChatViewProtocol: UIViewController {
     var presenter: ChatPresenterProtocol? { get set }
+    
+    //PRESENTER -> VIEW
+    func showMessage(message: String)
 }
 
 protocol ChatInteractorProtocol {
@@ -21,6 +24,9 @@ protocol ChatInteractorProtocol {
     func connectSocket()
     func emit(message: String)
     func disconnectSocket()
+    
+    //remoteDataManager -> Interactor
+    func receiveMessage(message: String)
 }
 
 protocol ChatPresenterProtocol {
@@ -32,9 +38,13 @@ protocol ChatPresenterProtocol {
     func viewDidLoad()
     func emitButtonDidTap(message: String)
     func viewWillDisappear()
+    
+    //INTERACTOR -> PRESENTER
+    func showReceiveMessage(message: String)
 }
 
 protocol ChatRemoteDataManagerProtocol {
+    var interactor: ChatInteractorProtocol? { get set }
     func connectSocket()
     func emit(message: String)
     func disconnectSocket()

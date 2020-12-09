@@ -15,7 +15,7 @@ import SwiftyJSON
 class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     
     var presenter: NoticeDetailPresenterProtocol?
-    var parentView: NoticeViewProtocol?
+    var parentView: UIViewController?
     var notice: Notice?
     var noticeID: Int?
     var modifyButton = UIButton()
@@ -170,7 +170,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     
     func showNoticeRemove(message: String) {
         self.dismiss(animated: true) { [self] in
-            self.parentView?.viewLoad()
+            (self.parentView as! NoticeViewProtocol) .viewLoad()
         }
     }
 }

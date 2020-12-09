@@ -10,14 +10,18 @@ import Foundation
 
 class SetInteractor: SetInteractortInputProtocol {
     var presenter: SetInteractorOutputProtocol?
-    
-    var localDatamanager: SetLocalDataManagerInputProtocol?
-    
-    var remoteDatamanager: SetRemoteDataManagerInputProtocol?
+    var localDataManager: SetLocalDataManagerInputProtocol?
+    var remoteDataManager: SetRemoteDataManagerInputProtocol?
     
     
+    func getUserInfo(id: Int) {
+        remoteDataManager?.getUserInfo(id: id)
+    }
 }
 
 extension SetInteractor: SetRemoteDataManagerOutputProtocol {
-    
+    func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
+        guard let result = userInfo.data else { return }
+        presenter?.didRetrievedUserInfo(userInfo: result)
+    }
 }

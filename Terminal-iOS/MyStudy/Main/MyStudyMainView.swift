@@ -128,7 +128,7 @@ class MyStudyMainView: UIViewController {
     
     @objc func goToLoginAction(_ sender: UIBarButtonItem) {
         let view = IntroView()
-        view.beginState = .join
+        view.beginState = .signUp
         let presenter = IntroPresenter()
         let interactor = IntroInteractor()
         let remoteDataManager = IntroRemoteDataManager()
@@ -216,6 +216,7 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
 
 extension MyStudyMainView: MyStudyMainViewProtocol {
     func showMyStudyList(myStudyList: [MyStudy]) {
+        print(myStudyList)
         self.myStudyList = myStudyList
         attribute()
         layout()

@@ -8,9 +8,10 @@
 
 import UIKit
 import SwiftKeychainWrapper
+import Kingfisher
 
 class SetView: UIViewController {
-    
+    var id: Int?
     // 섹션
     var sections: [String] = ["계정", "알림", "정보", ""]
     
@@ -39,6 +40,7 @@ class SetView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad(id: self.id!)
         attribute()
         layout()
     }
@@ -61,23 +63,19 @@ class SetView: UIViewController {
         }
         profile.do {
             $0.contentMode = .scaleAspectFill
-            $0.image = #imageLiteral(resourceName: "leehi")
             $0.layer.cornerRadius = $0.frame.size.width/2
             $0.clipsToBounds = true
         }
         name.do {
-            $0.text = "이하이"
             $0.textColor = .white
             $0.textAlignment = .center
             $0.font = $0.font.withSize(20)
         }
         descript.do {
-            $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다."
             $0.numberOfLines = 1
             $0.font = $0.font.withSize(16)
         }
         location.do {
-            $0.text = "서울시 마포구"
             $0.font = $0.font.withSize(13)
         }
         settingList.do {
@@ -102,7 +100,8 @@ class SetView: UIViewController {
     }
     
     func layout() {
-        view.addSubview(frameView)
+        [frameView, profile, name, descript, location, settingList].forEach { self.view.addSubview($0) }
+        
         frameView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -110,13 +109,6 @@ class SetView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.13).isActive = true
         }
-        
-        view.addSubview(profile)
-        view.addSubview(name)
-        view.addSubview(descript)
-        view.addSubview(location)
-        view.addSubview(settingList)
-        
         profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: frameView.centerYAnchor).isActive = true
@@ -163,6 +155,27 @@ extension SetView: SetViewProtocol {
         KeychainWrapper.standard.remove(forKey: "refreshToken")
         KeychainWrapper.standard.remove(forKey: "accessToken")
         navigationController?.pushViewController(view, animated: false)
+    
+    // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신
+    
+    func showUserInfo(with userInfo: UserInfo) {
+        
+        /// Kingfisher auth token
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        let imageURL = userInfo.image ?? ""
+        self.profile.kf.setImage(with: URL(string: imageURL),
+                                 options: [.requestModifier(imageDownloadRequest)])
+        
+        
+        self.name.text = userInfo.nickname
+        self.descript.text = userInfo.introduce ?? ""
+        self.location.text = userInfo.address ?? ""
+        
     }
 }
 

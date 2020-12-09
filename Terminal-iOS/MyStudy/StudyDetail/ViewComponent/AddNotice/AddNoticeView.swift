@@ -125,18 +125,31 @@ class AddNoticeView: UIViewController {
                                        pinned: pinButton.currentTitle == "필독" ? true : false)
         presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
     }
+    override func viewWillAppear(_ animated: Bool) {
+        print("너 어ㅣㅆ는데 ㅋㅋ", presentingViewController!)
+    }
 }
 
 extension AddNoticeView: AddNoticeViewProtocol {
-    func showNewNotice() {
-        dismiss(animated: true) { [self] in
+    func showNewNotice(noticeID: Int) {
+        dismiss(animated: false) { [self] in
             if state == .new {
-                (self.parentView as! NoticeViewProtocol).viewLoad()
+                notice = Notice(id: noticeID,
+                                         title: nil,
+                                         contents: nil,
+                                         leaderID: nil,
+                                         studyID: studyID,
+                                         pinned: nil,
+                                         updatedAt: nil,
+                                         leaderImage: nil,
+                                         leaderNickname: nil,
+                                         createAt: nil)
+                ((self.parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
+                (self.parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
             } else {
-                (self.parentView as! NoticeDetailViewProtocol).parentView?.viewLoad()
-                self.parentView?.dismiss(animated: true, completion: {
-                    print("끝")
-                })
+                //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
+                (self.parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
+                ((self.parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
             }
         }
     }

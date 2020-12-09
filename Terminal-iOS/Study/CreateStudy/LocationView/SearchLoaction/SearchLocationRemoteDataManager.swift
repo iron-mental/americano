@@ -31,7 +31,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
         ]
         AF.request("https://dapi.kakao.com/v2/local/search/keyword.json",
                    method: .get,
-                   parameters: parameters, headers: headers).responseJSON(completionHandler: { [self] response in
+                   parameters: parameters, headers: headers).responseJSON(completionHandler: { response in
                     switch response.result {
                     case .success(let value):
                         if JSON(value)["documents"].count == 0 {
@@ -39,11 +39,13 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                         } else {
                             if let addressList = JSON(value)["documents"].array {
                                 for item in addressList {
+                                    print(item["place_name"])
                                     let item = StudyDetailLocationPost(address: item["road_address_name"].string! ,
                                                                     lat: Double(item["y"].string!) ?? 0,
                                                                     lng: Double(item["x"].string!) ?? 0,
-                                                                    placeName: item["place_name"].string! ,
+                                                                    placeName: item["place_name"].string ?? nil ,
                                                                     category: item["category_group_name"].string!)
+                                    print("이건들어가있나?",item)
                                     resultList.append(item)
                                 }
                             }

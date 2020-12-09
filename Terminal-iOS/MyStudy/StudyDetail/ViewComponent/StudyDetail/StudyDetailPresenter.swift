@@ -9,6 +9,7 @@
 import Foundation
 
 class StudyDetailPresenter: StudyDetailPresenterProtocol {
+    
     var view: StudyDetailViewProtocol?
     var interactor: StudyDetailInteractorInputProtocol?
     var wireFrame: StudyDetailWireFrameProtocol?
@@ -28,6 +29,10 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
     func didClickedCreateButton() {
         
     }
+    func joinButtonDidTap(studyID: Int, message: String) {
+        interactor?.postStudyJoin(studyID: studyID, message: message)
+    }
+    
 }
 
 extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
@@ -37,5 +42,8 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
     
     func onError() {
         
+    }
+    func studyJoinResult(result: Bool, message: String) {
+        view?.studyJoinResult(message: message)
     }
 }

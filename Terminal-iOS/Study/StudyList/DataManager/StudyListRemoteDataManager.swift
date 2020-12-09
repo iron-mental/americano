@@ -30,6 +30,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 let json = JSON(value)
                 let data = "\(json)".data(using: .utf8)
                 let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
+                
                 self.remoteRequestHandler?.onStudiesRetrieved(studies: result)
             case .failure(let err):
                 print(err)

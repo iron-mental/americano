@@ -15,7 +15,7 @@ protocol AddNoticeViewProtocol {
     var state: AddNoticeState? { get set }
     var parentView: UIViewController? { get set }
     
-    func showNewNotice()
+    func showNewNotice(noticeID: Int)
 }
 
 protocol AddNoticeInteractorProtocol {

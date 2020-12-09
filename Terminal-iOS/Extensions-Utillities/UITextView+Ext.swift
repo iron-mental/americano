@@ -27,7 +27,7 @@ extension UITextView {
             self.font = UIFont.systemFont(ofSize: size * 1.2, weight: weight)
             break
         default:
-            print("not an iPhone")
+            print("not an iPhone", UIScreen.main.bounds.height)
             break
         }
     }

@@ -10,20 +10,24 @@ import UIKit
 
 protocol StudyDetailViewProtocol: class {
     var presenter: StudyDetailPresenterProtocol? { get set }
-    
+    var state: StudyDetailViewState { get set }
+    var keyValue: Int? { get set }
+    var parentView: UIViewController? { get set }
     // PRESENT -> VIEW
-    func showStudyDetail(with studyDeatil: StudyDetail)
+    func showStudyDetail(with studyDetail: StudyDetail)
     func showError()
     func showLoading()
     func hideLoading()
+    func studyJoinResult(message: String)
 }
 
 protocol StudyDetailWireFrameProtocol: class {
-    static func createStudyDetail(keyValue: Int) -> UIViewController
+    static func createStudyDetail(keyValue: Int, state: StudyDetailViewState) -> UIViewController
     
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyDetailViewProtocol)
     func goToSelectCategory(from view: StudyDetailViewProtocol, category: [Category])
+    
 }
 
 protocol StudyDetailPresenterProtocol: class {
@@ -31,17 +35,16 @@ protocol StudyDetailPresenterProtocol: class {
     var interactor: StudyDetailInteractorInputProtocol? { get set }
     var wireFrame: StudyDetailWireFrameProtocol? { get set }
     
+    
     // VIEW -> PRESENTER
     func viewDidLoad()
     func showStudyListDetail(keyValue: String)
     func goToStudyDetail(studyDetail: StudyDetail)
     func didClickedCreateButton()
-}
-
-protocol StudyDetailInteractorOutputProtocol: class {
+    func joinButtonDidTap(studyID: Int, message: String)
+    
     //INTERACTOR -> PRESENTER
-    func didRetrieveStudyDetail(_ studyDetail: StudyDetail)
-    func onError()
+    
 }
 
 protocol StudyDetailInteractorInputProtocol: class {
@@ -51,17 +54,22 @@ protocol StudyDetailInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func retrieveStudyDetail(keyValue: String)
+    func postStudyJoin(studyID: Int, message: String)
 }
 
-protocol StudyDetailDataManagerInputProtocol: class {
-    // INTERACTOR -> DATAMANAGER
+protocol StudyDetailInteractorOutputProtocol: class {
+    //INTERACTOR -> PRESENTER
+    func didRetrieveStudyDetail(_ studyDetail: StudyDetail)
+    func studyJoinResult(result: Bool, message: String)
+    func onError()
 }
 
 protocol StudyDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func getStudyDetail(keyValue: String, completionHandler: @escaping (StudyDetail) -> ())
+    func getStudyDetail(keyValue: String, completionHandler: @escaping (StudyDetail) -> Void)
+    func postStudyJoin(studyID: Int, message: String, completion: @escaping (_ result: Bool, _ data: String) -> Void)
 }
 
 protocol StudyDetailRemoteDataManagerOutputProtocol: class {

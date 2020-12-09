@@ -110,8 +110,14 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
     }
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach { indexPath in
-            if noticeList.count - 1 == indexPath.row {
-                presenter?.didScrollEnded(studyID: studyID!)
+            if indexPath.section == 0 {
+                if pinnedNotiArr.count - 1 == indexPath.row {
+                    presenter?.didScrollEnded(studyID: studyID!)
+                }
+            } else {
+                if notiArr.count - 1 == indexPath.row {
+                    presenter?.didScrollEnded(studyID: studyID!)
+                }
             }
         }
     }

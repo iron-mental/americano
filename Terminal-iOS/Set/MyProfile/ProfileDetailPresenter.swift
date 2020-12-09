@@ -17,12 +17,17 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
         interactor?.getUserInfo()
         interactor?.getProjectList()
     }
+    
+    func showProfileModify(userInfo: UserInfo, project: [Project]) {
+        wireFrame?.presentProfileModifyScreen(from: view!, userInfo: userInfo, project: project)
+    }
 }
 
 extension ProfileDetailPresenter: ProfileDetailInteractorOutputProtocol {
     func didRetrievedUserInfo(userInfo: UserInfo) {
         view?.showUserInfo(with: userInfo)
     }
+    
     func didRetrievedProject(project: [Project]) {
         view?.addProjectToStackView(with: project)
     }
