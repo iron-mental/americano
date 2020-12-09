@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 enum TerminalRouter: URLRequestConvertible {
-    
+    typealias Parameters = [String: String]
     // MARK: router case init
     
     // 유저 - 회원가입 로그인 비밀번호 찾기 일단 안넣음
@@ -21,10 +21,11 @@ enum TerminalRouter: URLRequestConvertible {
     case userWithdrawal     (id: String, email: String, password: String)
     case emailVerify        (id: String)
     case reissuanceToken    (refreshToken: String)
-    case login              (userData: [String: String])
+    case login              (userData: Parameters)
+    case signUp             (userData: Parameters)
     
     // 프로젝트
-    case projectRegister    (id: String, project: [String: String])
+    case projectRegister    (id: String, project: Parameters)
     case projectList        (id: String)
     case projectUpdate      (id: String, projectID: String)
     case projectDelete      (id: String, projectID: String)
@@ -42,7 +43,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studyApply         (studyID: String)
     
     // 공지사항
-    case createNotice       (studyID: String, notice: [String: String])
+    case createNotice       (studyID: String, notice: Parameters)
     case noticeDetail       (studyID: String, noticeID: String)
     case noticeList         (studyID: String)
     case noticeListForKey   (studyID: String, value: [Int])
@@ -73,7 +74,7 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .reissuanceToken:
             return .post
-        case .login:
+        case .login, .signUp:
             return .post
             
         // 프로젝트
@@ -119,6 +120,7 @@ enum TerminalRouter: URLRequestConvertible {
             return .put
         case .noticeDelete:
             return .delete
+        
         }
     }
     
@@ -142,6 +144,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/reissuance"
         case .login:
             return "user/login"
+        case .signUp:
+            return "user"
             
         // 프로젝트
         case let .projectRegister(id, _), let .projectList(id):
@@ -176,10 +180,11 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/notice/\(noticeID)"
         case let .noticeDelete(studyID, noticeID):
             return "study/\(studyID)/notice/\(noticeID)"
+        
         }
     }
     
-    var parameters: [String: String]? {
+    var parameters: Parameters? {
         switch self {
         
         // 유저
@@ -197,6 +202,8 @@ enum TerminalRouter: URLRequestConvertible {
                 "refresh_token": refreshToken
             ]
         case let .login(userData):
+            return userData
+        case let .signUp(userData):
             print(userData)
             return userData
             
