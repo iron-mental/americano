@@ -26,7 +26,7 @@ class TestViewController: UIViewController {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.studyListGet(category: "ios", sort: "new"))
+            .request(TerminalRouter.studyList(category: "ios", sort: "new"))
             .validate(statusCode: 200...299)
             .responseJSON { response in
                  debugPrint(response)

@@ -10,12 +10,41 @@ import Foundation
 import Alamofire
 
 enum TerminalRouter: URLRequestConvertible {
-    case userPost(path: String)
-    case userGet(path: String)
-    case studyPost(path: String)
-    case studyGet(path: String)
-    case studyListGet(category: String, sort: String)
-    case reissuanceToken(accessToken: String, refreshToken: String)
+    
+    // 유저 - 회원가입 로그인 비밀번호 찾기 일단 안넣음
+    case nicknameCheck(nickname: String)
+    case eamilCheck(email: String)
+    case userInfo(id: String)
+    case userInfoUpdate(id: String)
+    case userWithdrawal(id: String, email: String, password: String)
+    case emailVerify(id: String)
+    case reissuanceToken(refreshToken: String)
+    
+    // 프로젝트
+    case projectRegister(path: String, project: Project)
+    case projectList(path: String)
+    case projectUpdate(id: String, projectID: String)
+    case projectDelete(id: String, projectID: String)
+    
+    // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
+    case studyCreate(path: Parameters)
+    case studyDetail(studyID: String)
+    case studyUpdate(studyID: String)
+    case studyDelete(studyID: String)
+    case studyList(category: String, sort: String)
+    case studyListForKey(value: [Int])
+    case myStudyList(id: String)
+    
+    // 신청부분
+    case studyApply(studyID: String)
+    
+    // 공지사항
+    case createNotice(studyID: String, notice: Notice2)
+    case noticeDetail(studyID: String, noticeID: String)
+    case noticeList(studyID: String)
+    case noticeListForKey(studyID: String, value: [Int])
+    case noticeUpdate(studyID: String, noticeID: String)
+    case noticeDelete(studyID: String, noticeID: String)
     
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
@@ -23,18 +52,61 @@ enum TerminalRouter: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-        case .studyGet:
+        
+        // 유저
+        case .nicknameCheck:
             return .get
-        case .studyPost:
-            return .post
-        case .userGet:
+        case .eamilCheck:
+            return .get
+        case .userWithdrawal:
+            return .delete
+        case .emailVerify:
+            return .get
+        case .userInfo:
             return .get
         case .userPost:
             return .post
-        case .studyListGet:
-            return .get
         case .reissuanceToken:
             return .post
+        case .studyDetail:
+            return .get
+        
+            
+        
+        case .projectRegister:
+            return .post
+        case .projectList:
+            <#code#>
+        case .projectUpdate:
+            <#code#>
+        case .projectDelete:
+            <#code#>
+        case .studyCreate:
+            <#code#>
+        case .studyUpdate:
+            <#code#>
+        case .studyDelete:
+            <#code#>
+        case .studyList:
+            <#code#>
+        case .studyListForKey:
+            <#code#>
+        case .myStudyList:
+            <#code#>
+        case .studyApply:
+            <#code#>
+        case .createNotice:
+            <#code#>
+        case .noticeDetail:
+            <#code#>
+        case .noticeList:
+            <#code#>
+        case .noticeListForKey:
+            <#code#>
+        case .noticeUpdate:
+            <#code#>
+        case .noticeDelete:
+            <#code#>
         }
     }
     
@@ -48,24 +120,56 @@ enum TerminalRouter: URLRequestConvertible {
             return "study"
         case .reissuanceToken:
             return "user/reissuance"
+        case let .studyDetail(path):
+            return "study/\(path)"
+            
+            
+        case .nicknameCheck(path: let path):
+            return "study/\(path)"
+        case .eamilCheck(path: let path):
+            return "study/\(path)"
+        case .userWithdrawal(path: let path, email: let email, password: let password):
+            return "study/\(path)"
+        case .emailVerify(path: let path):
+            return "study/\(path)"
+        case .projectRegister(path: let path, project: let project):
+            return "study/\(path)"
         }
     }
     
     var parameters: [String: String]? {
         switch self {
-        case let .studyGet(path), let .studyPost(path):
-            return ["query": path]
+        
+        /// 유저
         case .userPost(path: let path):
             return ["query": path]
-        case .userGet(path: let path):
+        case .userGet:
+            return nil
+        case .reissuanceToken(let refreshToken):
+            return [
+//                "access_token": accessToken,
+                "refresh_token": refreshToken
+            ]
+        
+        //스터디
+        case let .studyGet(path), let .studyPost(path):
             return ["query": path]
         case .studyListGet(let category, let sort):
             return ["category": category, "sort": sort]
-        case .reissuanceToken(let accessToken, let refreshToken):
-            return [
-                "access_token": accessToken,
-                "refresh_token": refreshToken
-            ]
+        case .studyDetail:
+            return nil
+            
+            
+        case .nicknameCheck(path: let path):
+            return nil
+        case .eamilCheck(path: let path):
+            return nil
+        case .userWithdrawal(path: let path, email: let email, password: let password):
+            return nil
+        case .emailVerify(path: let path):
+            return nil
+        case .projectRegister(path: let path, project: let project):
+            return nil
         }
     }
     

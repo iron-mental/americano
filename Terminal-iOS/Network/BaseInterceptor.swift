@@ -41,13 +41,12 @@ class BaseInterceptor: RequestInterceptor {
     }
     
     func refreshToken(completion: @escaping (_ isSuccess: Bool) -> Void) {
-        guard let refreshToken = KeychainWrapper.standard.string(forKey: "refreshToken"),
-            let accessToken = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
+        guard let refreshToken = KeychainWrapper.standard.string(forKey: "refreshToken") else { return }
         
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.reissuanceToken(accessToken: "Bearer "+accessToken, refreshToken: refreshToken))
+            .request(TerminalRouter.reissuanceToken(refreshToken: refreshToken))
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
