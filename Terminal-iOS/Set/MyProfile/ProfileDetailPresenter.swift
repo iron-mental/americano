@@ -13,7 +13,7 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     var interactor: ProfileDetailInteractorInputProtocol?
     var wireFrame: ProfileDetailWireFrameProtocol?
     
-    func viewDidLoad(id: Int) {
+    func viewDidLoad() {
         interactor?.getUserInfo()
         interactor?.getProjectList()
     }

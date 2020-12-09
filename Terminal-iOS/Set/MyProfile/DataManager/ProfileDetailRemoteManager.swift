@@ -16,7 +16,7 @@ class ProfileDetailRemoteManager: ProfileDetailRemoteDataManagerInputProtocol {
     
     // MARK: 유저정보
     
-    func getUserInfo(id: Int) {
+    func getUserInfo() {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         TerminalNetworkManager
             .shared
@@ -38,7 +38,7 @@ class ProfileDetailRemoteManager: ProfileDetailRemoteDataManagerInputProtocol {
     
     // MARK: 유저 프로젝트
     
-    func getProjectList(id: Int) {
+    func getProjectList() {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         TerminalNetworkManager
             .shared
