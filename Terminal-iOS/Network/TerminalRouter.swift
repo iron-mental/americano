@@ -11,6 +11,8 @@ import Alamofire
 
 enum TerminalRouter: URLRequestConvertible {
     
+    // MARK: case init
+    
     // 유저 - 회원가입 로그인 비밀번호 찾기 일단 안넣음
     case nicknameCheck(nickname: String)
     case eamilCheck(email: String)
@@ -50,6 +52,8 @@ enum TerminalRouter: URLRequestConvertible {
         return URL(string: API.BASE_URL)!
     }
     
+    // MARK: method init
+    
     var method: HTTPMethod {
         switch self {
         
@@ -58,55 +62,61 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .eamilCheck:
             return .get
+        case .userInfo:
+            return .get
+        case .userInfoUpdate:
+            return .put
         case .userWithdrawal:
             return .delete
         case .emailVerify:
             return .get
-        case .userInfo:
-            return .get
-        case .userPost:
-            return .post
         case .reissuanceToken:
             return .post
-        case .studyDetail:
-            return .get
-        
-            
-        
+     
+        // 프로젝트
         case .projectRegister:
             return .post
         case .projectList:
-            <#code#>
+            return .get
         case .projectUpdate:
-            <#code#>
+            return .put
         case .projectDelete:
-            <#code#>
+            return .delete
+            
+        // 스터디
         case .studyCreate:
-            <#code#>
+            return .post
+        case .studyDetail:
+            return .get
         case .studyUpdate:
-            <#code#>
+            return .put
         case .studyDelete:
-            <#code#>
+            return .delete
         case .studyList:
-            <#code#>
+            return .get
         case .studyListForKey:
-            <#code#>
+            return .get
         case .myStudyList:
-            <#code#>
+            return .get
+
+        // 신청
         case .studyApply:
-            <#code#>
+            return .post
+            
+            
+        // 공지사항
         case .createNotice:
-            <#code#>
+            return .post
         case .noticeDetail:
-            <#code#>
+            return .get
         case .noticeList:
-            <#code#>
+            return .get
         case .noticeListForKey:
-            <#code#>
+            return .get
         case .noticeUpdate:
-            <#code#>
+            return .put
         case .noticeDelete:
-            <#code#>
+            return .delete
         }
     }
     
