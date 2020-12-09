@@ -23,13 +23,13 @@ enum TerminalRouter: URLRequestConvertible {
     case reissuanceToken(refreshToken: String)
     
     // 프로젝트
-    case projectRegister(id: String, project: Project)
+    case projectRegister(id: String, project: [String: String])
     case projectList(id: String)
     case projectUpdate(id: String, projectID: String)
     case projectDelete(id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
-    case studyCreate(path: Parameters)
+    case studyCreate(path: [String: String])
     case studyDetail(studyID: String)
     case studyUpdate(studyID: String)
     case studyDelete(studyID: String)
@@ -41,7 +41,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studyApply(studyID: String)
     
     // 공지사항
-    case createNotice(studyID: String, notice: Notice2)
+    case createNotice(studyID: String, notice: [String: String])
     case noticeDetail(studyID: String, noticeID: String)
     case noticeList(studyID: String)
     case noticeListForKey(studyID: String, value: [Int])
@@ -72,7 +72,7 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .reissuanceToken:
             return .post
-     
+            
         // 프로젝트
         case .projectRegister:
             return .post
@@ -98,7 +98,7 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .myStudyList:
             return .get
-
+            
         // 신청
         case .studyApply:
             return .post
@@ -143,7 +143,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/\(id)/project"
         case let .projectUpdate(id, projectID), let .projectDelete(id, projectID):
             return "user/\(id)/project/\(projectID)"
-        
+            
         // 스터디
         case .studyCreate, .studyList:
             return "study"
@@ -153,11 +153,11 @@ enum TerminalRouter: URLRequestConvertible {
             return "study"
         case let .myStudyList(id):
             return "user/\(id)/study"
-        
+            
         // 신청
         case let .studyApply(studyID):
             return "study/\(studyID)/apply"
-        
+            
         // 공지사항
         case let .createNotice(studyID, _):
             return "study/\(studyID)/notice"
@@ -177,81 +177,71 @@ enum TerminalRouter: URLRequestConvertible {
     var parameters: [String: String]? {
         switch self {
         
-        /// 유저
-      
+        // 유저
+        case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
+            return nil
+        case .userInfoUpdate: // 수정해야함
+            return nil
+        case let .userWithdrawal(_, email, password):
+            return [
+                "email": email,
+                "password": password
+            ]
         case .reissuanceToken(let refreshToken):
-            return ["refresh_token": refreshToken]
-        
-        //스터디
-       
-        case .studyDetail:
+            return [
+                "refresh_token": refreshToken
+            ]
+            
+        // 스터디
+        case .studyDetail, .studyDelete, .studyListForKey, .myStudyList:
+            return nil
+        case let .studyList(category, sort):
+            return [
+                "category": category,
+                "sort": sort
+            ]
+        case .studyCreate: // 파라미터 지정해야함
+            return nil
+        case .studyUpdate:// 파라미터 지정해야함
             return nil
             
+        // 신청
+        case .studyApply:
+            return nil
+        
+        // 프로젝트
+        case .projectList, .projectDelete:
+            return nil
+        case .projectRegister: // 수정해야함
+            return nil
+        case .projectUpdate: // 수정해야함
+            return nil
             
-       
-        case .nicknameCheck(nickname: let nickname):
-            <#code#>
-        case .eamilCheck(email: let email):
-            <#code#>
-        case .userInfo(id: let id):
-            <#code#>
-        case .userInfoUpdate(id: let id):
-            <#code#>
-        case .userWithdrawal(id: let id, email: let email, password: let password):
-            <#code#>
-        case .emailVerify(id: let id):
-            <#code#>
-        case .projectRegister(id: let id, project: let project):
-            <#code#>
-        case .projectList(id: let id):
-            <#code#>
-        case .projectUpdate(id: let id, projectID: let projectID):
-            <#code#>
-        case .projectDelete(id: let id, projectID: let projectID):
-            <#code#>
-        case .studyCreate(path: let path):
-            <#code#>
-        case .studyUpdate(studyID: let studyID):
-            <#code#>
-        case .studyDelete(studyID: let studyID):
-            <#code#>
-        case .studyList(category: let category, sort: let sort):
-            <#code#>
-        case .studyListForKey(value: let value):
-            <#code#>
-        case .myStudyList(id: let id):
-            <#code#>
-        case .studyApply(studyID: let studyID):
-            <#code#>
-        case .createNotice(studyID: let studyID, notice: let notice):
-            <#code#>
-        case .noticeDetail(studyID: let studyID, noticeID: let noticeID):
-            <#code#>
-        case .noticeList(studyID: let studyID):
-            <#code#>
-        case .noticeListForKey(studyID: let studyID, value: let value):
-            <#code#>
-        case .noticeUpdate(studyID: let studyID, noticeID: let noticeID):
-            <#code#>
-        case .noticeDelete(studyID: let studyID, noticeID: let noticeID):
-            <#code#>
+        // 공지사항
+        case let .createNotice(_, notice):
+            return notice
+        case .noticeDetail, .noticeList, .noticeListForKey, .noticeDelete:
+            return nil
+        case let .noticeUpdate(_, _): // 수정해야함
+            return nil
         }
     }
     
     func asURLRequest() throws -> URLRequest {
         
         let url = baseURL.appendingPathComponent(endPoint)
-
+        
         var request = URLRequest(url: url)
         request.method = method
         
         if method == .get {
-          request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
-        } else if method == .post {
-          request = try JSONParameterEncoder().encode(parameters, into: request)
-          request.setValue("application/json", forHTTPHeaderField: "Accept")
-        }
+            request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
 
+        } else if method == .post {
+            request = try JSONParameterEncoder().encode(parameters, into: request)
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+        }
+        
         return request
     }
 }

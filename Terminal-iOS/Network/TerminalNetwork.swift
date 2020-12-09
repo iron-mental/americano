@@ -17,6 +17,10 @@ class TerminalNetwork{
         "authorization": KeychainWrapper.standard.string(forKey: "accessToken")!
     ]
     
+    static var temp22: HTTPHeaders = [
+        "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiZW1haWwiOiJya2RjamYwMTIyQGdtYWlsLmNvbSIsIm5pY2tuYW1lIjoi64uJ64S0IiwiaWF0IjoxNjA3MTAwMjI5LCJleHAiOjEwNjA3MTAwMjI5LCJpc3MiOiJ0ZXJtaW5hbC1zZXJ2ZXIiLCJzdWIiOiJ1c2VySW5mby1hY2Nlc3MifQ.fYLA_ZAW85Q42NWHjXNDqzFrYqa3PqSdMwL6oAL6LGk"
+    ]
+    
     // 자동로그인시에 유저조회를 통해서 엑세스 토큰 확인
     static func checkToekn(accessToken: String, completion: @escaping (BaseResponse<UserInfo>) -> Void) {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
