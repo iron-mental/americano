@@ -11,6 +11,5 @@ import UIKit
 class StudyListLocalDataManager: StudyListLocalDataManagerInputProtocol {
     func retrieveStudyList() throws -> [Study] {
         return [Study(id: 0, title: "", introduce: "", image: "", sigungu: "", leaderImage: "", createdAt: "", members: 0)]
-//        return [Study(id: 0, title: "", introduce: "", image: "", sigungu: "", leaderImage: "", createdAt: "", members: 0)]
     }
 }

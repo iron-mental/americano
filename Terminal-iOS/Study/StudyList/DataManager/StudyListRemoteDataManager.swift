@@ -68,8 +68,10 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     
     func paginationRetrieveStudyList(keyValue: [Int], completion: @escaping (() -> Void)) {
         if keyValue.count > 0 {
-            let key = "\(keyValue)".trimmingCharacters(in: ["["]).trimmingCharacters(in: ["]"]).removeWhitespace()
-//            let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
+            let key = "\(keyValue)"
+                .trimmingCharacters(in: ["["])
+                .trimmingCharacters(in: ["]"])
+                .removeWhitespace()
             
             TerminalNetworkManager
                 .shared
@@ -100,9 +102,6 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .trimmingCharacters(in: ["]"])
                 .removeWhitespace()
             
-//            let query = "http://3.35.154.27:3000/v1/study/paging/list?values=\(key)"
-            
-            
             TerminalNetworkManager
                 .shared
                 .session
@@ -120,20 +119,6 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                         print(err)
                     }
                 }
-            
-//
-//            AF.request(query, headers: TerminalNetwork.headers).responseJSON { response in
-//                switch response.result {
-//                case .success(let value):
-//                    let json = JSON(value)
-//                    let data = "\(json)".data(using: .utf8)
-//                    let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
-//                    self.remoteRequestHandler?.onStudiesLengthRetrieved(studies: result)
-//                    completion()
-//                case .failure(let err):
-//                    print(err)
-//                }
-//            }
         }
     }
 }
