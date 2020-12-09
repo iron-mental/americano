@@ -11,7 +11,7 @@ import Alamofire
 
 enum TerminalRouter: URLRequestConvertible {
     
-    // MARK: case init
+    // MARK: router case init
     
     // 유저 - 회원가입 로그인 비밀번호 찾기 일단 안넣음
     case nicknameCheck(nickname: String)
@@ -23,8 +23,8 @@ enum TerminalRouter: URLRequestConvertible {
     case reissuanceToken(refreshToken: String)
     
     // 프로젝트
-    case projectRegister(path: String, project: Project)
-    case projectList(path: String)
+    case projectRegister(id: String, project: Project)
+    case projectList(id: String)
     case projectUpdate(id: String, projectID: String)
     case projectDelete(id: String, projectID: String)
     
@@ -103,7 +103,6 @@ enum TerminalRouter: URLRequestConvertible {
         case .studyApply:
             return .post
             
-            
         // 공지사항
         case .createNotice:
             return .post
@@ -120,30 +119,58 @@ enum TerminalRouter: URLRequestConvertible {
         }
     }
     
+    // MARK: URL endPoint init
+    
     var endPoint: String {
         switch self {
-        case .studyGet, .studyPost:
-            return "study/"
-        case let .userGet(path), let .userPost(path):
-            return "user/\(path)"
-        case .studyListGet:
-            return "study"
+        
+        // 유저
+        case let .nicknameCheck(nickname):
+            return "user/check-nickname/\(nickname)"
+        case let .eamilCheck(email):
+            return "user/check-email/\(email)"
+        case let .userInfo(id), let .userInfoUpdate(id):
+            return "user/\(id)"
+        case let .userWithdrawal(id, _, _):
+            return "user/\(id)"
+        case let .emailVerify(id):
+            return "user/\(id)/emailVerify"
         case .reissuanceToken:
             return "user/reissuance"
-        case let .studyDetail(path):
-            return "study/\(path)"
             
-            
-        case .nicknameCheck(path: let path):
-            return "study/\(path)"
-        case .eamilCheck(path: let path):
-            return "study/\(path)"
-        case .userWithdrawal(path: let path, email: let email, password: let password):
-            return "study/\(path)"
-        case .emailVerify(path: let path):
-            return "study/\(path)"
-        case .projectRegister(path: let path, project: let project):
-            return "study/\(path)"
+        // 프로젝트
+        case let .projectRegister(id, _), let .projectList(id):
+            return "user/\(id)/project"
+        case let .projectUpdate(id, projectID), let .projectDelete(id, projectID):
+            return "user/\(id)/project/\(projectID)"
+        
+        // 스터디
+        case .studyCreate, .studyList:
+            return "study"
+        case let .studyDetail(studyID), let .studyUpdate(studyID), let .studyDelete(studyID):
+            return "study/\(studyID)"
+        case .studyListForKey:
+            return "study"
+        case let .myStudyList(id):
+            return "user/\(id)/study"
+        
+        // 신청
+        case let .studyApply(studyID):
+            return "study/\(studyID)/apply"
+        
+        // 공지사항
+        case let .createNotice(studyID, _):
+            return "study/\(studyID)/notice"
+        case let .noticeDetail(studyID, noticeID):
+            return "study/\(studyID)/notice/\(noticeID)"
+        case let .noticeList(studyID):
+            return "study/\(studyID)/notice"
+        case let .noticeListForKey(studyID, _):
+            return "study/\(studyID)/notice/paging/list"
+        case let .noticeUpdate(studyID, noticeID):
+            return "study/\(studyID)/notice/\(noticeID)"
+        case let .noticeDelete(studyID, noticeID):
+            return "study/\(studyID)/notice/\(noticeID)"
         }
     }
     
@@ -151,35 +178,63 @@ enum TerminalRouter: URLRequestConvertible {
         switch self {
         
         /// 유저
-        case .userPost(path: let path):
-            return ["query": path]
-        case .userGet:
-            return nil
+      
         case .reissuanceToken(let refreshToken):
-            return [
-//                "access_token": accessToken,
-                "refresh_token": refreshToken
-            ]
+            return ["refresh_token": refreshToken]
         
         //스터디
-        case let .studyGet(path), let .studyPost(path):
-            return ["query": path]
-        case .studyListGet(let category, let sort):
-            return ["category": category, "sort": sort]
+       
         case .studyDetail:
             return nil
             
             
-        case .nicknameCheck(path: let path):
-            return nil
-        case .eamilCheck(path: let path):
-            return nil
-        case .userWithdrawal(path: let path, email: let email, password: let password):
-            return nil
-        case .emailVerify(path: let path):
-            return nil
-        case .projectRegister(path: let path, project: let project):
-            return nil
+       
+        case .nicknameCheck(nickname: let nickname):
+            <#code#>
+        case .eamilCheck(email: let email):
+            <#code#>
+        case .userInfo(id: let id):
+            <#code#>
+        case .userInfoUpdate(id: let id):
+            <#code#>
+        case .userWithdrawal(id: let id, email: let email, password: let password):
+            <#code#>
+        case .emailVerify(id: let id):
+            <#code#>
+        case .projectRegister(id: let id, project: let project):
+            <#code#>
+        case .projectList(id: let id):
+            <#code#>
+        case .projectUpdate(id: let id, projectID: let projectID):
+            <#code#>
+        case .projectDelete(id: let id, projectID: let projectID):
+            <#code#>
+        case .studyCreate(path: let path):
+            <#code#>
+        case .studyUpdate(studyID: let studyID):
+            <#code#>
+        case .studyDelete(studyID: let studyID):
+            <#code#>
+        case .studyList(category: let category, sort: let sort):
+            <#code#>
+        case .studyListForKey(value: let value):
+            <#code#>
+        case .myStudyList(id: let id):
+            <#code#>
+        case .studyApply(studyID: let studyID):
+            <#code#>
+        case .createNotice(studyID: let studyID, notice: let notice):
+            <#code#>
+        case .noticeDetail(studyID: let studyID, noticeID: let noticeID):
+            <#code#>
+        case .noticeList(studyID: let studyID):
+            <#code#>
+        case .noticeListForKey(studyID: let studyID, value: let value):
+            <#code#>
+        case .noticeUpdate(studyID: let studyID, noticeID: let noticeID):
+            <#code#>
+        case .noticeDelete(studyID: let studyID, noticeID: let noticeID):
+            <#code#>
         }
     }
     
