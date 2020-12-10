@@ -27,39 +27,45 @@ class SearchStudyView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.becomeFirstResponder()
         didload()
-        view.backgroundColor = UIColor.appColor(.terminalBackground)
         attribute()
         layout()
     }
     
     func attribute() {
-        backBtn.do {
+        self.view.do {
+            let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.addGestureRecognizer(event)
+        }
+    
+        self.backBtn.do {
             $0.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
             $0.addTarget(self, action: #selector(back), for: .touchUpInside)
         }
-        searchBar.do {
+        self.searchBar.do {
             $0.placeholder = "스터디명, 분류(키워드) 등"
             $0.barTintColor = UIColor.appColor(.terminalBackground)
         }
-        placeSearch.do {
+        self.placeSearch.do {
             $0.setTitle("장소로 검색", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.layer.cornerRadius = 10
         }
-        hotLable.do {
+        self.hotLable.do {
             $0.text = "핫 등록 키워드"
             $0.textColor = .white
             $0.dynamicFont(fontSize: 14, weight: .semibold)
         }
-        collectionView.do {
+        self.collectionView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(HotKeywordCell.self, forCellWithReuseIdentifier: HotKeywordCell.cellId)
             $0.delegate = self
             $0.dataSource = self
         }
-        tempView.do {
+        self.tempView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }
@@ -73,7 +79,6 @@ class SearchStudyView: UIViewController {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    print(JSON(value))
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[HotKeyword]>.self, from: data!)
@@ -135,10 +140,13 @@ class SearchStudyView: UIViewController {
     @objc func back() {
         dismiss(animated: true, completion: nil)
     }
+    @objc func backgroundTap() {
+        self.view.endEditing(true)
+    }
 }
 
 
-extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
     }
@@ -165,6 +173,11 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
         cell.keyword.setTitle(title, for: .normal)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let text = keyword[indexPath.row].word
+        self.searchBar.text = text
     }
     
     class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
