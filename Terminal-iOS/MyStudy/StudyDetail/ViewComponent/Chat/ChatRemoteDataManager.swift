@@ -21,8 +21,6 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     }
     
     func emit(message: String) {
-        print("쏘는거", message)
-        print("연결상태", chatSocket.status)
         chatSocket.emit("chat", message)
     }
     
@@ -38,6 +36,5 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     }
     func disconnectSocket() {
         chatSocket.disconnect()
-        print("디스커넥되면?", chatSocket.status)
     }
 }
