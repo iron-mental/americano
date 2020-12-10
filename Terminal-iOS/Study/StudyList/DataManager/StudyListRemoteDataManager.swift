@@ -10,10 +10,6 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-extension URLComponents {
-    
-}
-
 class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
     

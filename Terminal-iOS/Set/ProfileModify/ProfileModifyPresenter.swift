@@ -13,6 +13,10 @@ class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
     var interactor: ProfileModifyInteractorInputProtocol?
     var wireFrame: ProfileModifyWireFrameProtocol?
     
+    func viewDidLoad() {
+        interactor?.viewDidLoad()
+    }
+    
     func completeModifyButton(userInfo: UserInfoPut, project: [Project]) {
         interactor?.completeModify(userInfo: userInfo, project: project)
     }

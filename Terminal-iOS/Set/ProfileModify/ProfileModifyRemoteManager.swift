@@ -14,6 +14,29 @@ import SwiftKeychainWrapper
 class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     var remoteRequestHandler: ProfileModifyRemoteDataManagerOutputProtocol?
     
+    func authCheck(completion: @escaping () -> Void) {
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.userInfo(id: userID))
+            .validate(statusCode: 200..<299)
+            .responseJSON { [weak self] response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                    if result.result {
+                        completion()
+                    }
+                case .failure(let err):
+                    print("실패")
+                    print(err)
+                }
+            }
+    }
+    
     func validProfileModify(userInfo: UserInfoPut) {
         let url = "http://3.35.154.27:3000/v1/user/44"
         let headers: HTTPHeaders = [ "Content-Type": "multipart/form-data",
@@ -35,12 +58,6 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         
         let uploadImage = userInfo.image!.jpegData(compressionQuality: 0.5)
         
-//        TerminalNetworkManager
-//            .shared
-//            .session
-//            .request(TerminalRouter.userInfoUpdate(id: <#T##String#>))
-        
-        
         AF.upload(multipartFormData: { multipartFormData in
             for (key, value) in params {
                 let data = "\(value)".data(using: .utf8)!
@@ -55,15 +72,11 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                 print(err)
             }
         }
-        
-        
-        
     }
-  
+    
     func remoteProjectList(completion: @escaping (BaseResponse<[Project]>) -> Void) {
-        
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        
+
         TerminalNetworkManager
             .shared
             .session
@@ -81,26 +94,9 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     print("에러:", error)
                 }
             }
-//        let url = "http://3.35.154.27:3000/v1/user/44/project"
-//
-//
-//        AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                print("성공:",JSON(value))
-//                let json = JSON(value)
-//                let data = "\(json)".data(using: .utf8)
-//                let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
-//                completion(result)
-//            case .failure(let error):
-//                print("에러:", error)
-//            }
-//        }
     }
     
     func removeProject(projectID: Int, completion: @escaping (Bool) -> Void) {
-//        let url = "http://3.35.154.27:3000/v1/user/44/project/\(projectID)"
-        
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         
         TerminalNetworkManager
@@ -132,9 +128,8 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     }
     
     func registerProject(project: [String: String]) {
-        
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        
+        print(project)
         TerminalNetworkManager
             .shared
             .session

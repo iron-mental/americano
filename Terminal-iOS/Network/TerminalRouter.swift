@@ -12,6 +12,8 @@ import Alamofire
 enum TerminalRouter: URLRequestConvertible {
     typealias Parameters = [String: String]
     // MARK: router case init
+
+    case authCheck          (id: String)
     
     // 유저 - 회원가입 로그인 비밀번호 찾기 일단 안넣음
     case nicknameCheck      (nickname: String)
@@ -59,6 +61,10 @@ enum TerminalRouter: URLRequestConvertible {
     var method: HTTPMethod {
         switch self {
         
+        // 토큰 최신화용
+        case .authCheck:
+            return .get
+            
         // 유저
         case .nicknameCheck:
             return .get
@@ -121,6 +127,7 @@ enum TerminalRouter: URLRequestConvertible {
         case .noticeDelete:
             return .delete
         
+      
         }
     }
     
@@ -128,6 +135,9 @@ enum TerminalRouter: URLRequestConvertible {
     
     var endPoint: String {
         switch self {
+        
+        case let .authCheck(id):
+            return "user/\(id)"
         
         // 유저
         case let .nicknameCheck(nickname):
@@ -180,12 +190,16 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/notice/\(noticeID)"
         case let .noticeDelete(studyID, noticeID):
             return "study/\(studyID)/notice/\(noticeID)"
-        
+
+        // 어떻게 정리하면 좋을지 생각해봐야할듯 뭔가 다닥다닥 있는뎀
         }
     }
     
     var parameters: Parameters? {
         switch self {
+        
+        case .authCheck:
+            return nil
         
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
@@ -198,9 +212,7 @@ enum TerminalRouter: URLRequestConvertible {
                 "password": password
             ]
         case .reissuanceToken(let refreshToken):
-            return [
-                "refresh_token": refreshToken
-            ]
+            return ["refresh_token": refreshToken]
         case let .login(userData):
             return userData
         case let .signUp(userData):

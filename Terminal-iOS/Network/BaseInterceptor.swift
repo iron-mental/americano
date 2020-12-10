@@ -53,6 +53,7 @@ class BaseInterceptor: RequestInterceptor {
                 switch response.result {
                 
                 case .success(let value):
+                    print(JSON(value))
                     let json = JSON(value)
                     
                     let data = "\(json)".data(using: .utf8)

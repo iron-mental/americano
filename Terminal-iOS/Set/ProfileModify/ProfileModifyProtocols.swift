@@ -26,6 +26,7 @@ protocol ProfileModifyPresenterProtocol: class {
     var wireFrame: ProfileModifyWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
+    func viewDidLoad()
     func completeModifyButton(userInfo: UserInfoPut, project: [Project])
 }
 
@@ -39,6 +40,7 @@ protocol ProfileModifyInteractorInputProtocol: class {
     var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
+    func viewDidLoad()
     func completeModify(userInfo: UserInfoPut, project: [Project])
 }
 
@@ -46,6 +48,7 @@ protocol ProfileModifyRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: ProfileModifyRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
+    func authCheck(completion: @escaping () -> Void)
     func validProfileModify(userInfo: UserInfoPut)
     func remoteProjectList(completion: @escaping (BaseResponse<[Project]>) -> Void)
     func removeProject(projectID: Int, completion: @escaping (Bool) -> Void)

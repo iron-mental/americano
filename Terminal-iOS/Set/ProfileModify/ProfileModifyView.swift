@@ -39,6 +39,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        presenter?.viewDidLoad()
         attribute()
         layout()
         textViewDidChange(descripModify)
