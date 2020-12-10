@@ -155,11 +155,14 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
             attributes?.forEach { layoutAttribute in
                 if layoutAttribute.frame.origin.y >= maxY {
                     leftMargin = sectionInset.left
+                    print("포문",leftMargin)
+                    
                 }
 
                 layoutAttribute.frame.origin.x = leftMargin
 
                 leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
+                print("박,", leftMargin)
                 maxY = max(layoutAttribute.frame.maxY , maxY)
             }
 
