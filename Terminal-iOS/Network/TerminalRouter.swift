@@ -56,7 +56,7 @@ enum TerminalRouter: URLRequestConvertible {
         return URL(string: API.BASE_URL)!
     }
     
-    // MARK: method init
+    // MARK: Method init
     
     var method: HTTPMethod {
         switch self {
@@ -131,7 +131,7 @@ enum TerminalRouter: URLRequestConvertible {
         }
     }
     
-    // MARK: URL endPoint init
+    // MARK: URL EndPoint init
     
     var endPoint: String {
         switch self {
@@ -194,6 +194,8 @@ enum TerminalRouter: URLRequestConvertible {
         // 어떻게 정리하면 좋을지 생각해봐야할듯 뭔가 다닥다닥 있는뎀
         }
     }
+    
+    // MARK: Parameter init
     
     var parameters: Parameters? {
         switch self {

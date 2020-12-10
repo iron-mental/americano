@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class TerminalNetworkManager {
+final class TerminalNetworkManager {
     static let shared = TerminalNetworkManager()
     
     /// 인터셉터

@@ -11,7 +11,7 @@ import Alamofire
 import SwiftKeychainWrapper
 import SwiftyJSON
 
-class BaseInterceptor: RequestInterceptor {
+final class BaseInterceptor: RequestInterceptor {
     let retryLimit = 3
     let retryDelay: TimeInterval = 0.5
     
