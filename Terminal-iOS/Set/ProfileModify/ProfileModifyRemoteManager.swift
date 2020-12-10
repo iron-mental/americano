@@ -9,9 +9,33 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import SwiftKeychainWrapper
 
 class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     var remoteRequestHandler: ProfileModifyRemoteDataManagerOutputProtocol?
+    
+    func authCheck(completion: @escaping () -> Void) {
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.userInfo(id: userID))
+            .validate(statusCode: 200..<299)
+            .responseJSON { [weak self] response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                    if result.result {
+                        completion()
+                    }
+                case .failure(let err):
+                    print("실패")
+                    print(err)
+                }
+            }
+    }
     
     func validProfileModify(userInfo: UserInfoPut) {
         let url = "http://3.35.154.27:3000/v1/user/44"
@@ -49,71 +73,87 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             }
         }
     }
-  
+    
     func remoteProjectList(completion: @escaping (BaseResponse<[Project]>) -> Void) {
-        let url = "http://3.35.154.27:3000/v1/user/44/project"
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
 
-        AF.request(url, headers: TerminalNetwork.headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                print("성공:",JSON(value))
-                let json = JSON(value)
-                let data = "\(json)".data(using: .utf8)
-                let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
-                completion(result)
-            case .failure(let error):
-                print("에러:", error)
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.projectList(id: userID))
+            .validate(statusCode: 200..<299)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print("성공:",JSON(value))
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
+                    completion(result)
+                case .failure(let error):
+                    print("에러:", error)
+                }
             }
-        }
     }
     
     func removeProject(projectID: Int, completion: @escaping (Bool) -> Void) {
-        let url = "http://3.35.154.27:3000/v1/user/44/project/\(projectID)"
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         
-        AF.request(url, method: .delete, headers: TerminalNetwork.headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let data = "\(json)".data(using: .utf8)
-                do {
-                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    if result.result {
-                        completion(true)
-                    } else {
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.projectDelete(id: userID, projectID: String(projectID)))
+            .validate(statusCode: 200..<299)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        if result.result {
+                            completion(true)
+                        } else {
+                            completion(false)
+                        }
+                    } catch {
+                        print("에러")
                         completion(false)
                     }
-                } catch {
-                    print("에러")
+                case .failure(let error):
+                    print("에러:", error)
                     completion(false)
                 }
-            case .failure(let error):
-                print("에러:", error)
-                completion(false)
             }
-        }
     }
     
     func registerProject(project: [String: String]) {
-        let url = "http://3.35.154.27:3000/v1/user/44/project"
-        
-        AF.request(url, method: .post, parameters: project, encoding: JSONEncoding.default, headers: TerminalNetwork.headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let data = "\(json)".data(using: .utf8)
-                do {
-                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    if result.result {
-                        print("성공",result)
-                    } else {
-                        print("실패",result)
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        print(project)
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.projectRegister(id: userID, project: project))
+            .validate(statusCode: 200..<299)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print(JSON(value))
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        if result.result {
+                            print("성공",result)
+                        } else {
+                            print("실패",result)
+                        }
+                    } catch {
+                        print("에러")
                     }
-                } catch {
-                    print("에러")
+                case .failure(let error):
+                    print("에러:", error)
                 }
-            case .failure(let error):
-                print("에러:", error)
             }
-        }
     }
 }

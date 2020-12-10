@@ -14,22 +14,42 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
     let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
     
     func getNoticeList(studyID: Int, completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void) {
-        AF.request("http://3.35.154.27:3000/v1/study/\(studyID)/notice",
-                   method: .get,headers: headers).responseJSON(completionHandler: { [self] response in
-                    switch response.result {
-                    case .success(let value):
-                        if JSON(value)["result"].bool! {
-                            let json = "\(JSON(value))".data(using: .utf8)
-                            let result: BaseResponse<[Notice]> = try! JSONDecoder().decode(BaseResponse<[Notice]>.self, from: json!)
-                            completion( true, result.data, nil)
-                        } else {
-                            completion(false, nil, JSON(value)["message"].string!)
-                        }
-                    case .failure(let value):
-                        print("에러@@@@@@@@@@@@2")
-                        print(value)
-                    }
-                   })
+        
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.noticeList(studyID: "\(studyID)"))
+            .responseJSON(completionHandler: { response in
+             switch response.result {
+             case .success(let value):
+                 if JSON(value)["result"].bool! {
+                     let json = "\(JSON(value))".data(using: .utf8)
+                     let result = try! JSONDecoder().decode(BaseResponse<[Notice]>.self, from: json!)
+                     completion(true, result.data, nil)
+                 } else {
+                     completion(false, nil, JSON(value)["message"].string!)
+                 }
+             case .failure(let error):
+                 print(error)
+             }
+            })
+        
+        
+//        AF.request("http://3.35.154.27:3000/v1/study/\(studyID)/notice",
+//                   method: .get,headers: headers).responseJSON(completionHandler: { response in
+//                    switch response.result {
+//                    case .success(let value):
+//                        if JSON(value)["result"].bool! {
+//                            let json = "\(JSON(value))".data(using: .utf8)
+//                            let result = try! JSONDecoder().decode(BaseResponse<[Notice]>.self, from: json!)
+//                            completion(true, result.data, nil)
+//                        } else {
+//                            completion(false, nil, JSON(value)["message"].string!)
+//                        }
+//                    case .failure(let error):
+//                        print(error)
+//                    }
+//                   })
     }
     
     func getNoticeListPagination(studyID: Int, noticeListIDs: [Int], completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void) {

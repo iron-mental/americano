@@ -28,7 +28,7 @@ protocol ProfileDetailPresenterProtocol: class {
     var wireFrame: ProfileDetailWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
-    func viewDidLoad(id: Int)
+    func viewDidLoad()
     func showProfileModify(userInfo: UserInfo, project: [Project])
 }
 
@@ -51,8 +51,8 @@ protocol ProfileDetailInteractorOutputProtocol: class {
 protocol ProfileDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
-    func getUserInfo(id: Int)
-    func getProjectList(id: Int)
+    func getUserInfo()
+    func getProjectList()
 }
 
 protocol ProfileDetailRemoteDataManagerOutputProtocol: class {

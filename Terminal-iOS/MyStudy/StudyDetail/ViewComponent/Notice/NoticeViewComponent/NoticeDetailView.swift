@@ -74,9 +74,12 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
         }
+        
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            $0.text = "\(notice?.leaderNickname)"
+            // 옵셔널로 들어와서 일단 넣어놈
+            guard let name = notice?.leaderNickname else { return }
+            $0.text = name
             $0.textColor = .white
             $0.textAlignment = .center
         }

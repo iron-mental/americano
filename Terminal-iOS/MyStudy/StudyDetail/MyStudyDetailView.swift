@@ -14,7 +14,7 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int? {
         didSet {
             VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                       StudyDetailWireFrame.createStudyDetail(keyValue: studyID!, state: .member),
+                       StudyDetailWireFrame.createStudyDetail(studyID: studyID!, state: .member),
                  ChatWireFrame.createChatModule()]
         }
     }

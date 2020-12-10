@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 import Kingfisher
 
 class SetView: UIViewController {
-    var id: Int?
     // 섹션
-    var sections: [String] = ["계정", "알림", "정보"]
+    var sections: [String] = ["계정", "알림", "정보", ""]
     
     var account: [String] = ["이메일", "SNS"]
     var noti: [String] = ["알림"]
@@ -22,6 +22,7 @@ class SetView: UIViewController {
                                Setting(title: "문의하기"),
                                Setting(title: "이용약관"),
                                Setting(title: "개인정보 취급방침")]
+    var userManage: [String] = ["로그아웃", "회원탈퇴"]
     
     var presenter: SetPresenterProtocol?
     
@@ -38,7 +39,7 @@ class SetView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad(id: self.id!)
+        presenter?.viewDidLoad()
         attribute()
         layout()
     }
@@ -81,11 +82,12 @@ class SetView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.sectionHeaderHeight = 40
+            $0.sectionHeaderHeight = 30
             $0.separatorColor = .clear
             $0.register(DefaultCell.self, forCellReuseIdentifier: DefaultCell.defalutCellId)
             $0.register(NotiCell.self, forCellReuseIdentifier: NotiCell.notiCellId)
             $0.register(AccountCell.self, forCellReuseIdentifier: AccountCell.accountCellId)
+            $0.register(UserManageCell.self, forCellReuseIdentifier: UserManageCell.userManageCellId)
         }
         accountButton.do {
             $0.setTitle("인증", for: .normal)
@@ -144,7 +146,15 @@ class SetView: UIViewController {
 }
 
 extension SetView: SetViewProtocol {
-    
+    func loggedOut() {
+        let view = HomeView()
+        view.hidesBottomBarWhenPushed = true
+        
+        /// 로그아웃과 동시에  토큰 삭제
+        KeychainWrapper.standard.remove(forKey: "refreshToken")
+//        KeychainWrapper.standard.remove(forKey: "accessToken")
+        navigationController?.pushViewController(view, animated: false)
+    }
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신
     
     func showUserInfo(with userInfo: UserInfo) {
@@ -178,7 +188,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         }
         headerView.addSubview(label)
         label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 13).isActive = true
+        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 11).isActive = true
         
         if section == 0 {
             label.text = sections[0]
@@ -201,8 +211,16 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             return noti.count
         } else if section == 2{
             return tempData.count
+        } else if section == 3 {
+            return userManage.count
         } else {
             return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 3 && indexPath.row == 0 {
+            presenter?.loggedOut()
         }
     }
     
@@ -216,6 +234,9 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         
         let defaultCell = tableView.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId,
                                                         for: indexPath) as! DefaultCell
+        
+        let userManageCell = tableView.dequeueReusableCell(withIdentifier: UserManageCell.userManageCellId,
+                                                           for: indexPath) as! UserManageCell
         
         if indexPath.section == 0 {
             accountCell.title.text = account[indexPath.row]
@@ -236,6 +257,10 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             }
             defaultCell.selectionStyle = .none
             return defaultCell
+        } else if indexPath.section == 3 {
+            let data = userManage[indexPath.row]
+            userManageCell.title.text = data
+            return userManageCell
         } else {
             return UITableViewCell()
         }

@@ -153,9 +153,11 @@ class MyStudyMainView: UIViewController {
 }
 
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return myStudyList.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyStudyMainTableViewCell.identifier) as! MyStudyMainTableViewCell
         switch state {
@@ -192,9 +194,11 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return (91.7/667) * view.bounds.height
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch state {
         case .normal:
@@ -214,7 +218,6 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
 
 extension MyStudyMainView: MyStudyMainViewProtocol {
     func showMyStudyList(myStudyList: [MyStudy]) {
-        print(myStudyList)
         self.myStudyList = myStudyList
         attribute()
         layout()

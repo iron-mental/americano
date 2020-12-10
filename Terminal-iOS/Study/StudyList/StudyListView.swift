@@ -215,10 +215,12 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if sortState == .new {
             let keyValue = studyList[indexPath.row].id
-            presenter?.showStudyDetail(keyValue: keyValue)
+            guard let state = studyList[indexPath.row].isMember else { return }
+            presenter?.showStudyDetail(keyValue: keyValue, state: state)
         } else {
             let lengthKeyValue = lengthStudyList[indexPath.row].id
-            presenter?.showStudyDetail(keyValue: lengthKeyValue)
+            guard let state = studyList[indexPath.row].isMember else { return }
+            presenter?.showStudyDetail(keyValue: lengthKeyValue, state: state)
         }
     }
 }

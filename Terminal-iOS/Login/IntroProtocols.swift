@@ -6,8 +6,7 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
-
+import UIKit
 
 protocol IntroViewProtocol: class {
     var presenter: IntroPresenterProtocol? { get set }
@@ -16,22 +15,35 @@ protocol IntroViewProtocol: class {
         //success
     func presentNextView()
     func presentCompleteView()
+    func completeJoin()
         //false
     func showInvalidEmailAction()
     func showInvalidPasswordAction()
     func showInvalidNickNameAction()
 }
 
+protocol IntroWireFrameProtocol: class {
+    static func createIntroModule(beginState: BeginState, introState: IntroViewState) -> UIViewController
+    
+    // PRESENT -> WIREFRAME
+
+}
+
 protocol IntroPresenterProtocol: class {
     var view: IntroViewProtocol? { get set }
     var interactor: IntroInteractorProtocol? { get set }
+    var wireFrame: IntroWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
     func didClickedRightBarButton(input: String, introState: IntroViewState, beginState: BeginState)
     
+    //test
+    func didNextButton(input: String, introState: IntroViewState, beginState: BeginState)
+    
     //INTERACTOR -> PRESENTER
     func emailValidInfo(result: Bool)
     func passwordValidInfo(result: Bool)
+    func nicknameValidInfo(result: Bool)
     func signUpValidInfo(result: Bool)
     func joinValidInfo(result: Bool, joinInfo: String)
 }
@@ -48,9 +60,9 @@ protocol IntroInteractorProtocol: class {
 }
 
 protocol IntroRemoteDataManagerProtocol: class {
-    func getEmailValidInfo(input: String, completionHandler: @escaping (_ : Bool) -> ())
-    func getSignUpValidInfo(signUpMaterial: [String]) -> Bool
-    func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (_ result: Bool, _ message: Any) -> ())
+    func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<String>) -> Void)
+    func getSignUpValidInfo(signUpMaterial: [String], completionHandler: @escaping (BaseResponse<String>) -> Void)
+    func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (BaseResponse<JoinResult>) -> Void)
 }
 
 protocol IntroLocalDataManagerProtocol: class {

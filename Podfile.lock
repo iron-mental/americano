@@ -8,6 +8,7 @@ PODS:
   - Socket.IO-Client-Swift (13.0.1):
     - Starscream (~> 3.0.2)
   - Starscream (3.0.6)
+  - SwiftKeychainWrapper (4.0.1)
   - SwiftLint (0.41.0)
   - SwiftyJSON (5.0.0)
   - Then (2.7.0)
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - lottie-ios
   - NMapsMap
   - Socket.IO-Client-Swift (~> 13.0.0)
+  - SwiftKeychainWrapper
   - SwiftLint
   - SwiftyJSON
   - Then
@@ -30,6 +32,7 @@ SPEC REPOS:
     - NMapsMap
     - Socket.IO-Client-Swift
     - Starscream
+    - SwiftKeychainWrapper
     - SwiftLint
     - SwiftyJSON
     - Then
@@ -41,10 +44,11 @@ SPEC CHECKSUMS:
   NMapsMap: 1dc27ca06eac287ce1f001a972172766dca2abe1
   Socket.IO-Client-Swift: 7055c89b7a9926b343194c4cac75998329c4a95a
   Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
+  SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
   SwiftLint: c585ebd615d9520d7fbdbe151f527977b0534f1e
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: ebf1f77675b0fb46ec46caab60944833acae597a
+PODFILE CHECKSUM: 78c1b3aae46636ead269897c3b33cd1811e77564
 
 COCOAPODS: 1.9.1

@@ -39,6 +39,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        presenter?.viewDidLoad()
         attribute()
         layout()
         textViewDidChange(descripModify)
@@ -402,11 +403,10 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         let view = self.navigationController?.rootViewController as? SetViewProtocol
         
         self.navigationController?.popToRootViewController(animated: true, completion: {
-            view!.presenter?.viewDidLoad(id: 44)
+            view!.presenter?.viewDidLoad()
         })
     }
 }
-
 
 extension ProfileModifyView: ProfileModifyViewProtocol {
 

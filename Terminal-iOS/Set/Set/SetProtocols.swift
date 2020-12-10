@@ -11,11 +11,12 @@ import UIKit
 protocol SetViewProtocol: class {
     var presenter: SetPresenterProtocol? { get set }
     
+    func loggedOut()
     func showUserInfo(with userInfo: UserInfo)
 }
 
 protocol SetWireFrameProtocol: class {
-    static func setCreateModule(id: Int) -> UIViewController
+    static func setCreateModule() -> UIViewController
     
     // PRESENT -> WIREFRAME
     func presentProfileDetailScreen(from view: SetViewProtocol)
@@ -27,8 +28,9 @@ protocol SetPresenterProtocol: class {
     var wireFrame: SetWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
-    func viewDidLoad(id: Int)
+    func viewDidLoad()
     func showProfileDetail()
+    func loggedOut()
 }
 
 protocol SetInteractorOutputProtocol: class {
@@ -41,7 +43,7 @@ protocol SetInteractortInputProtocol: class {
     var localDataManager: SetLocalDataManagerInputProtocol? { get set }
     var remoteDataManager: SetRemoteDataManagerInputProtocol? { get set }
     
-    func getUserInfo(id: Int)
+    func getUserInfo()
 }
 
 protocol SetDataManagerInputProtocol: class {
@@ -52,7 +54,7 @@ protocol SetDataManagerInputProtocol: class {
 protocol SetRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: SetRemoteDataManagerOutputProtocol? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
-    func getUserInfo(id: Int)
+    func getUserInfo()
 }
 
 protocol SetRemoteDataManagerOutputProtocol: class {

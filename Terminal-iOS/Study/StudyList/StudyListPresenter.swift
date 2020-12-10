@@ -24,9 +24,9 @@ class StudyListPresenter: StudyListPresenterProtocol {
     func pagingLengthStudyList() {
         interactor?.pagingRetrieveLengthStudyList()
     }
-    func showStudyDetail(keyValue: Int) {
+    func showStudyDetail(keyValue: Int, state: Bool) {
 //        StudyDetailRemoteManager.getStudyDetail(keyValue: <#T##String#>, completionHandler: <#T##(StudyDetail) -> ()#>)
-//        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue)
+        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
     }
 }
 

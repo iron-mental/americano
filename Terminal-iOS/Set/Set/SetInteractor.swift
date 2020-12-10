@@ -14,8 +14,8 @@ class SetInteractor: SetInteractortInputProtocol {
     var remoteDataManager: SetRemoteDataManagerInputProtocol?
     
     
-    func getUserInfo(id: Int) {
-        remoteDataManager?.getUserInfo(id: id)
+    func getUserInfo() {
+        remoteDataManager?.getUserInfo()
     }
 }
 
