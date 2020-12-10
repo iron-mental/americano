@@ -14,7 +14,7 @@ class SearchStudyView: UIViewController {
     
     var keyword: [HotKeyword] = []
     
-    let backgroundView = UIView()
+//    let backgroundView = UIView()
     let backBtn = UIButton()
     let searchBar = UISearchBar()
     let placeSearch = UIButton()
@@ -36,14 +36,17 @@ class SearchStudyView: UIViewController {
     
     func attribute() {
         self.view.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
-        }
-        self.backgroundView.do{
             let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
             event.cancelsTouchesInView = false
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.addGestureRecognizer(event)
         }
+//        self.backgroundView.do{
+//            let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
+//            event.cancelsTouchesInView = false
+//            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+//            $0.addGestureRecognizer(event)
+//        }
         self.backBtn.do {
             $0.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
             $0.addTarget(self, action: #selector(back), for: .touchUpInside)
@@ -97,17 +100,17 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        self.view.addSubview(backgroundView)
+//        self.view.addSubview(backgroundView)
         [backBtn, searchBar,placeSearch, hotLable, tempView, collectionView]
-            .forEach { self.backgroundView.addSubview($0) }
+            .forEach { self.view.addSubview($0) }
         
-        backgroundView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        }
+//        backgroundView.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+//        }
         backBtn.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
