@@ -35,7 +35,7 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     func postStudyJoin(studyID: Int, message: String, completion: @escaping (Bool, String) -> Void) {
         
         let params: [String: String] = [
-            "message" : message
+            "message": message
         ]
         
         TerminalNetworkManager

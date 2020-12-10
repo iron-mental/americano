@@ -32,6 +32,7 @@
 		A521DDF7252F107A00F83DB3 /* ProfileDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */; };
 		A53613B2257E6DEE0001ABCC /* SetRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */; };
 		A53BC1972582506600C7EC20 /* TerminalLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BC1962582506600C7EC20 /* TerminalLogger.swift */; };
+		A53BC19A2582604300C7EC20 /* HotKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BC1992582604300C7EC20 /* HotKeyword.swift */; };
 		A5472759255A4B7900076DBD /* SNSModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5472758255A4B7900076DBD /* SNSModifyView.swift */; };
 		A547275C255A668600076DBD /* EmailModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547275B255A668600076DBD /* EmailModifyView.swift */; };
 		A547275F255A67C700076DBD /* LocationModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A547275E255A67C700076DBD /* LocationModifyView.swift */; };
@@ -243,6 +244,7 @@
 		A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailWireFrame.swift; sourceTree = "<group>"; };
 		A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRemoteManager.swift; sourceTree = "<group>"; };
 		A53BC1962582506600C7EC20 /* TerminalLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalLogger.swift; sourceTree = "<group>"; };
+		A53BC1992582604300C7EC20 /* HotKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyword.swift; sourceTree = "<group>"; };
 		A5472758255A4B7900076DBD /* SNSModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSModifyView.swift; sourceTree = "<group>"; };
 		A547275B255A668600076DBD /* EmailModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModifyView.swift; sourceTree = "<group>"; };
 		A547275E255A67C700076DBD /* LocationModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModifyView.swift; sourceTree = "<group>"; };
@@ -875,6 +877,7 @@
 				A500481F25775ADC00E37FAE /* JoinResult.swift */,
 				A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */,
 				CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */,
+				A53BC1992582604300C7EC20 /* HotKeyword.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1209,6 +1212,7 @@
 				A500482025775ADC00E37FAE /* JoinResult.swift in Sources */,
 				CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */,
 				CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */,
+				A53BC19A2582604300C7EC20 /* HotKeyword.swift in Sources */,
 				A5B700B1257A9B14001F62A0 /* ProjectSNSView.swift in Sources */,
 				A5BA4619255D38D30061C511 /* String+Ext.swift in Sources */,
 				A5D058EA255D937F0047CA9E /* StudyDetailPresenter.swift in Sources */,

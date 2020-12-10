@@ -8,10 +8,11 @@
 
 import UIKit
 import Then
+import SwiftyJSON
 
 class SearchStudyView: UIViewController {
     
-    var keyword: [String] = ["안드로이드ㅇㅇㅇㅇㅇㅇㅇ", "node.js", "코드리뷰", "취업스터디", "프로젝트", "Swift", "갓우석님", "예비유니콘케어닥fffff", "뭐지??왜안나옴"]
+    var keyword: [HotKeyword] = []
         
     let backBtn = UIButton()
     let searchBar = UISearchBar()
@@ -26,6 +27,7 @@ class SearchStudyView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        didload()
         view.backgroundColor = UIColor.appColor(.terminalBackground)
         attribute()
         layout()
@@ -62,13 +64,31 @@ class SearchStudyView: UIViewController {
         }
     }
     
+    func didload() {
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.hotKeyword)
+            .validate(statusCode: 200..<299)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print(JSON(value))
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<[HotKeyword]>.self, from: data!)
+                    if let keyword = result.data {
+                        self.keyword = keyword
+                        self.collectionView.reloadData()
+                    }
+                case .failure(let err):
+                    print(err)
+                }
+            }
+    }
+    
     func layout() {
-        view.addSubview(backBtn)
-        view.addSubview(searchBar)
-        view.addSubview(placeSearch)
-        view.addSubview(hotLable)
-        view.addSubview(tempView)
-        view.addSubview(collectionView)
+        [backBtn, searchBar,placeSearch, hotLable, tempView, collectionView].forEach { view.addSubview($0) }
         
         backBtn.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -124,7 +144,7 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let key = keyword[indexPath.row]
+        let key = keyword[indexPath.row].word
         
         let height = UIScreen.main.bounds.height * 0.045
         let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
@@ -141,7 +161,8 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotKeywordCell.cellId, for: indexPath) as! HotKeywordCell
         
-        cell.keyword.setTitle(keyword[indexPath.row], for: .normal)
+        let title = keyword[indexPath.row].word
+        cell.keyword.setTitle(title, for: .normal)
         
         return cell
     }

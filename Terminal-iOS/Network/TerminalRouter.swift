@@ -40,6 +40,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studyList          (category: String, sort: String)
     case studyListForKey    (value: String)
     case myStudyList        (id: String)
+    case hotKeyword         
     
     // 신청부분
     case studyApply         (studyID: String, message: Parameters)
@@ -108,6 +109,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .myStudyList:
             return .get
+        case .hotKeyword:
+            return .get
             
         // 신청
         case .studyApply:
@@ -126,8 +129,6 @@ enum TerminalRouter: URLRequestConvertible {
             return .put
         case .noticeDelete:
             return .delete
-        
-      
         }
     }
     
@@ -172,6 +173,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/paging/list"
         case let .myStudyList(id):
             return "user/\(id)/study"
+        case .hotKeyword:
+            return "study/ranking"
             
         // 신청
         case let .studyApply(studyID, _):
@@ -192,6 +195,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/notice/\(noticeID)"
 
         // 어떻게 정리하면 좋을지 생각해봐야할듯 뭔가 다닥다닥 있는뎀
+        
         }
     }
     
@@ -221,7 +225,7 @@ enum TerminalRouter: URLRequestConvertible {
             return userData
             
         // 스터디
-        case .studyDetail, .studyDelete, .myStudyList:
+        case .studyDetail, .studyDelete, .myStudyList, .hotKeyword:
             return nil
         case let .studyListForKey(value):
             return [

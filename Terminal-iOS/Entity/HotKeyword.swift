@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct HotKeyword: Codable {
+    let word: String
+    
+    enum CodingKeys: String, CodingKey {
+        case word
+    }
+}
