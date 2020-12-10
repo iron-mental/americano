@@ -14,7 +14,6 @@ class SearchStudyView: UIViewController {
     
     var keyword: [HotKeyword] = []
     
-//    let backgroundView = UIView()
     let backBtn = UIButton()
     let searchBar = UISearchBar()
     let placeSearch = UIButton()
@@ -41,12 +40,6 @@ class SearchStudyView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.addGestureRecognizer(event)
         }
-//        self.backgroundView.do{
-//            let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
-//            event.cancelsTouchesInView = false
-//            $0.backgroundColor = UIColor.appColor(.terminalBackground)
-//            $0.addGestureRecognizer(event)
-//        }
         self.backBtn.do {
             $0.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
             $0.addTarget(self, action: #selector(back), for: .touchUpInside)
@@ -100,56 +93,48 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-//        self.view.addSubview(backgroundView)
         [backBtn, searchBar,placeSearch, hotLable, tempView, collectionView]
             .forEach { self.view.addSubview($0) }
         
-//        backgroundView.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-//        }
-        backBtn.do {
+        self.backBtn.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                     constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,
                                         constant: 10).isActive = true
         }
-        searchBar.do {
+        self.searchBar.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backBtn.trailingAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.backBtn.trailingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
-        placeSearch.do {
+        self.placeSearch.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor, constant: 20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 115).isActive = true
         }
-        hotLable.do {
+        self.hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: placeSearch.bottomAnchor, constant: 20).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.placeSearch.bottomAnchor, constant: 20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         }
-        tempView.do {
+        self.tempView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: hotLable.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.hotLable.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 200).isActive = true
         }
-        collectionView.do {
+        self.collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: tempView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: tempView.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: tempView.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.tempView.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.tempView.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.tempView.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.tempView.bottomAnchor).isActive = true
         }
     }
     

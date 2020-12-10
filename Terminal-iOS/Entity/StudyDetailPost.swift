@@ -10,11 +10,6 @@ import UIKit
 
 // MARK: 스터디 상세
 
-//struct StudyDetail: Codable {
-//    let result: Bool
-//    let data: DataClass
-//}
-
 struct StudyDetailPost {
     let category, title, introduce: String
     let progress, studyTime: String

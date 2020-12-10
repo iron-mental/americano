@@ -133,26 +133,26 @@ class StudyCell: UITableViewCell {
         [mainTitle, subTitle, date, managerImage, mainImage, location, memberImage, memberCount].forEach { self.contentView.addSubview($0)
         }
        
-        mainTitle.do {
+        self.mainTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         }
         
-        subTitle.do {
+        self.subTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: mainTitle.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.mainImage.leadingAnchor, constant: -10).isActive = true
         }
         
-        date.do {
+        self.date.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         }
         
-        managerImage.do {
+        self.managerImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 13).isActive = true
             $0.leadingAnchor.constraint(equalTo: date.trailingAnchor, constant: 10).isActive = true
@@ -160,7 +160,7 @@ class StudyCell: UITableViewCell {
             $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
         
-        mainImage.do {
+        self.mainImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
@@ -168,7 +168,7 @@ class StudyCell: UITableViewCell {
             $0.widthAnchor.constraint(equalToConstant: 112).isActive = true
         }
         
-        location.do {
+        self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: mainImage.leadingAnchor, constant: -20).isActive = true
@@ -176,7 +176,7 @@ class StudyCell: UITableViewCell {
             $0.heightAnchor.constraint(equalToConstant: 22).isActive = true
         }
         
-        memberImage.do {
+        self.memberImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -7).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.location.leadingAnchor, constant: 5).isActive = true
@@ -184,7 +184,7 @@ class StudyCell: UITableViewCell {
             $0.heightAnchor.constraint(equalToConstant: 25).isActive = true
         }
         
-        memberCount.do {
+        self.memberCount.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.memberImage.trailingAnchor, constant: 2).isActive = true
