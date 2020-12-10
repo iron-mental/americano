@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 import SwiftyJSON
 
 class BaseInterceptor: RequestInterceptor {
-    let retryLimit = 5
+    let retryLimit = 3
     let retryDelay: TimeInterval = 1
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {

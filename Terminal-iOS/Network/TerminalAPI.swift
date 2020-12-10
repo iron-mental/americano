@@ -11,6 +11,8 @@ import Alamofire
 import SwiftyJSON
 
 class TerminalAPI {
+    
+    
     static func getMyStudyList(completion: @escaping (Bool, [MyStudy]?) -> ()) {
         let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
         var tempUserID = 9
