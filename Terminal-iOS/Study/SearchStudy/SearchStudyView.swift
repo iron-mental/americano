@@ -13,7 +13,8 @@ import SwiftyJSON
 class SearchStudyView: UIViewController {
     
     var keyword: [HotKeyword] = []
-        
+    
+    let backgroundView = UIView()
     let backBtn = UIButton()
     let searchBar = UISearchBar()
     let placeSearch = UIButton()
@@ -35,11 +36,14 @@ class SearchStudyView: UIViewController {
     
     func attribute() {
         self.view.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
+        self.backgroundView.do{
             let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
+            event.cancelsTouchesInView = false
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.addGestureRecognizer(event)
         }
-    
         self.backBtn.do {
             $0.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
             $0.addTarget(self, action: #selector(back), for: .touchUpInside)
@@ -93,8 +97,17 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [backBtn, searchBar,placeSearch, hotLable, tempView, collectionView].forEach { view.addSubview($0) }
+        self.view.addSubview(backgroundView)
+        [backBtn, searchBar,placeSearch, hotLable, tempView, collectionView]
+            .forEach { self.backgroundView.addSubview($0) }
         
+        backgroundView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        }
         backBtn.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
@@ -126,7 +139,7 @@ class SearchStudyView: UIViewController {
             $0.topAnchor.constraint(equalTo: hotLable.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 400).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 200).isActive = true
         }
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -138,7 +151,7 @@ class SearchStudyView: UIViewController {
     }
     
     @objc func back() {
-        dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     @objc func backgroundTap() {
         self.view.endEditing(true)
@@ -177,6 +190,7 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let text = keyword[indexPath.row].word
+        print(text)
         self.searchBar.text = text
     }
     
