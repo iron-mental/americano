@@ -56,6 +56,7 @@ class AddNoticeView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
+            $0.delegate = self
             $0.addLeftPadding()
         }
         contentTextField.do {
@@ -107,9 +108,9 @@ class AddNoticeView: UIViewController {
     }
     @objc func dismissButtonTap() {
         dismiss(animated: true) {
-            
         }
     }
+    
     @objc func pinButtonDidTap(_ sender: UIButton) {
         if sender.currentTitle == "필독" {
             sender.setTitle("일반", for: .normal)
@@ -152,5 +153,12 @@ extension AddNoticeView: AddNoticeViewProtocol {
                 ((self.parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
             }
         }
+    }
+}
+
+
+extension AddNoticeView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(true)
     }
 }

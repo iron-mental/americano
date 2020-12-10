@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class BaseInterceptor: RequestInterceptor {
     let retryLimit = 3
-    let retryDelay: TimeInterval = 1
+    let retryDelay: TimeInterval = 0.5
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var request = urlRequest

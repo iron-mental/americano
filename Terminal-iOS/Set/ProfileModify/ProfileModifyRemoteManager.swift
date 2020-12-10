@@ -129,28 +129,6 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     completion(false)
                 }
             }
-        
-//        AF.request(url, method: .delete, headers: TerminalNetwork.headers).responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                let data = "\(json)".data(using: .utf8)
-//                do {
-//                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-//                    if result.result {
-//                        completion(true)
-//                    } else {
-//                        completion(false)
-//                    }
-//                } catch {
-//                    print("에러")
-//                    completion(false)
-//                }
-//            case .failure(let error):
-//                print("에러:", error)
-//                completion(false)
-//            }
-//        }
     }
     
     func registerProject(project: [String: String]) {
@@ -182,28 +160,5 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     print("에러:", error)
                 }
             }
-        
-//        AF.request(url, method: .post, parameters: project, encoding: JSONEncoding.default, headers: TerminalNetwork.headers).responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                let data = "\(json)".data(using: .utf8)
-//                do {
-//                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-//                    if result.result {
-//                        print("성공",result)
-//                    } else {
-//                        print("실패",result)
-//                    }
-//                } catch {
-//                    print("에러")
-//                }
-//            case .failure(let error):
-//                print("에러:", error)
-//            }
-//        }
-        
-        
-        
     }
 }

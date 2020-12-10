@@ -18,7 +18,7 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
     func getMyStudyList(completion: @escaping (_: Bool, _: [MyStudy]?) -> Void) {
         
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        print(userID)
+        
         TerminalNetworkManager
             .shared
             .session
@@ -27,7 +27,6 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    print(JSON(value))
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[MyStudy]>.self, from: data!)
@@ -36,19 +35,5 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
                     print("error :", error )
                 }
             }
-        
-        
-//        TerminalAPI.getMyStudyList { (result, itemList) in
-//            switch result {
-//            case true:
-//                completion(result, itemList)
-//                break
-//            case false:
-//                completion(result, nil)
-//                break
-//            }
-//        }
-//        
-        
     }
 }

@@ -47,7 +47,7 @@ enum TerminalRouter: URLRequestConvertible {
     case noticeDetail       (studyID: String, noticeID: String)
     case noticeList         (studyID: String)
     case noticeListForKey   (studyID: String, value: [Int])
-    case noticeUpdate       (studyID: String, noticeID: String)
+    case noticeUpdate       (studyID: String, noticeID: String, notice: Parameters)
     case noticeDelete       (studyID: String, noticeID: String)
     
     var baseURL: URL {
@@ -176,7 +176,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/notice"
         case let .noticeListForKey(studyID, _):
             return "study/\(studyID)/notice/paging/list"
-        case let .noticeUpdate(studyID, noticeID):
+        case let .noticeUpdate(studyID, noticeID, _):
             return "study/\(studyID)/notice/\(noticeID)"
         case let .noticeDelete(studyID, noticeID):
             return "study/\(studyID)/notice/\(noticeID)"
@@ -236,11 +236,9 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 공지사항
-        case let .createNotice(_, notice):
+        case let .createNotice(_, notice), let .noticeUpdate(_, _, notice):
             return notice
         case .noticeDetail, .noticeList, .noticeListForKey, .noticeDelete:
-            return nil
-        case let .noticeUpdate(_, _): // 수정해야함
             return nil
         }
     }
