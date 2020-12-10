@@ -119,7 +119,6 @@ class TempChatView: UIViewController {
 
 extension TempChatView: ChatViewProtocol {
     func showMessage(message: String) {
-//        inputTextField.text = message
     }
     
     
@@ -131,15 +130,13 @@ extension TempChatView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let inputCell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id, for: indexPath) as! ChatInputTableViewCell
         let outputCell = tableView.dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id, for: indexPath) as! ChatOutputTableViewCell
+        
         if indexPath.row == chatArray.count {
             return outputCell
-            return inputCell
         } else {
             inputCell.chatLabel.text =  "[\(chatArray[indexPath.row].date)] \(chatArray[indexPath.row].nickname) $ \(chatArray[indexPath.row].message)"
             return inputCell
-            return outputCell
         }
-        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
