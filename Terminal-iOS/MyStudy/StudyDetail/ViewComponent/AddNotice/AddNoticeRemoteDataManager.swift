@@ -12,8 +12,6 @@ import Alamofire
 import SwiftyJSON
 
 class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
-        
-    let headers: HTTPHeaders = [ "Authorization": Terminal.accessToken]
     
     func postNotice(studyID: Int, notice: NoticePost, completion: @escaping (Bool, Int) -> Void) {
         let params: [String: String] = [
@@ -44,7 +42,6 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
     
     
     func putNotice(studyID: Int, notice: NoticePost, noticeID: Int, completion: @escaping (Bool, Int) -> Void) {
-        let url = URL(string: "http://3.35.154.27:3000/v1/study/\(studyID)/notice/\(noticeID)")
         let params: [String: String] = [
             "title": notice.title,
             "contents": notice.contents,

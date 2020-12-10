@@ -40,7 +40,7 @@ enum TerminalRouter: URLRequestConvertible {
     case myStudyList        (id: String)
     
     // 신청부분
-    case studyApply         (studyID: String)
+    case studyApply         (studyID: String, message: Parameters)
     
     // 공지사항
     case createNotice       (studyID: String, notice: Parameters)
@@ -164,7 +164,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/\(id)/study"
             
         // 신청
-        case let .studyApply(studyID):
+        case let .studyApply(studyID, _):
             return "study/\(studyID)/apply"
             
         // 공지사항
@@ -224,8 +224,8 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 신청
-        case .studyApply:
-            return nil
+        case let .studyApply(_, message):
+            return message
         
         // 프로젝트
         case .projectList, .projectDelete:

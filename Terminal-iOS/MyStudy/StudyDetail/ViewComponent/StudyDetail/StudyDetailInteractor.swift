@@ -13,11 +13,12 @@ class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
     var localDatamanager: StudyDetailLocalDataManagerInputProtocol?
     var remoteDatamanager: StudyDetailRemoteDataManagerInputProtocol?
     
-    func retrieveStudyDetail(keyValue: String) {
-        remoteDatamanager?.getStudyDetail(keyValue: keyValue, completionHandler: {
+    func retrieveStudyDetail(studyID: String) {
+        remoteDatamanager?.getStudyDetail(studyID: studyID, completionHandler: {
             self.presenter?.didRetrieveStudyDetail($0)
         })
     }
+    
     func postStudyJoin(studyID: Int, message: String) {
         remoteDatamanager?.postStudyJoin(studyID: studyID, message: message, completion: { [self] result, message in
             switch result {

@@ -27,9 +27,9 @@ class StudyDetailView: UIViewController {
         }
     }
     var userData: [Participate] = []
-    var keyValue: Int? {
+    var studyID: Int? {
         didSet {
-            presenter?.showStudyListDetail(keyValue: "\(keyValue!)")
+            presenter?.showStudyListDetail(studyID: "\(studyID!)")
         }
     }
     var studyInfo: StudyDetail? {
@@ -251,7 +251,7 @@ class StudyDetailView: UIViewController {
 
 extension StudyDetailView: StudyDetailViewProtocol {
     func studyJoinResult(message: String) {
-        presenter?.showStudyListDetail(keyValue: "\(studyInfo!.id)")
+        presenter?.showStudyListDetail(studyID: "\(studyInfo!.id)")
     }
     
     func showStudyDetail(with studyDetail: StudyDetail) {

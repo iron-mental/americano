@@ -375,7 +375,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
                 break
             case .edit:
                 self.dismiss(animated: true) { [self] in
-                    ((parentView as! MyStudyDetailViewProtocol).VCArr[1] as! StudyDetailViewProtocol).presenter?.showStudyListDetail(keyValue: String(study!.id))
+                    ((parentView as! MyStudyDetailViewProtocol).VCArr[1] as! StudyDetailViewProtocol).presenter?.showStudyListDetail(studyID: String(study!.id))
                 }
                 break
             case .none:

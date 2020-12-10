@@ -11,7 +11,7 @@ import UIKit
 protocol StudyDetailViewProtocol: class {
     var presenter: StudyDetailPresenterProtocol? { get set }
     var state: StudyDetailViewState { get set }
-    var keyValue: Int? { get set }
+    var studyID: Int? { get set }
     var parentView: UIViewController? { get set }
     // PRESENT -> VIEW
     func showStudyDetail(with studyDetail: StudyDetail)
@@ -22,7 +22,7 @@ protocol StudyDetailViewProtocol: class {
 }
 
 protocol StudyDetailWireFrameProtocol: class {
-    static func createStudyDetail(keyValue: Int, state: StudyDetailViewState) -> UIViewController
+    static func createStudyDetail(studyID: Int, state: StudyDetailViewState) -> UIViewController
     
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyDetailViewProtocol)
@@ -38,7 +38,7 @@ protocol StudyDetailPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    func showStudyListDetail(keyValue: String)
+    func showStudyListDetail(studyID: String)
     func goToStudyDetail(studyDetail: StudyDetail)
     func didClickedCreateButton()
     func joinButtonDidTap(studyID: Int, message: String)
@@ -53,7 +53,7 @@ protocol StudyDetailInteractorInputProtocol: class {
     var remoteDatamanager: StudyDetailRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func retrieveStudyDetail(keyValue: String)
+    func retrieveStudyDetail(studyID: String)
     func postStudyJoin(studyID: Int, message: String)
 }
 
@@ -68,7 +68,7 @@ protocol StudyDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func getStudyDetail(keyValue: String, completionHandler: @escaping (StudyDetail) -> Void)
+    func getStudyDetail(studyID: String, completionHandler: @escaping (StudyDetail) -> Void)
     func postStudyJoin(studyID: Int, message: String, completion: @escaping (_ result: Bool, _ data: String) -> Void)
 }
 
