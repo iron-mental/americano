@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
+    var presenter: MyApplyListInteractorOutputProtocol?
+    
+    func getApplyList() {
+        
+    }
+}
