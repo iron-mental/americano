@@ -1,5 +1,5 @@
 //
-//  UserApplyView.swift
+//  MyApplyListView.swift
 //  Terminal-iOS
 //
 //  Created by once on 2020/12/11.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserApplyView: UIViewController {
+class MyApplyListView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
