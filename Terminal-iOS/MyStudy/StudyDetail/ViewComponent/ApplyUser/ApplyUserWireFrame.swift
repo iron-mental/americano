@@ -6,4 +6,29 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
+    static func createUserListModule() -> UIViewController {
+        let view: ApplyUserViewProtocol = ApplyUserView()
+        let presenter: ApplyUserPresenterProtocol & ApplyUserInteractorOutputProtocol = ApplyUserPresenter()
+        let interactor: ApplyUserInteractorInputProtocol = ApplyUserInteractor()
+        let wireFrame: ApplyUserWireFrameProtocol = ApplyUserWireFrame()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.wireFrame = wireFrame
+        presenter.interactor = interactor
+        interactor.presenter = presenter
+        
+        if let view = view as? ApplyUserView {
+            return view
+        } else {
+            return UIViewController()
+        }
+    }
+    
+    func presentUserInfoDetailScreen(from view: ApplyUserViewProtocol) {
+        
+    }
+}
