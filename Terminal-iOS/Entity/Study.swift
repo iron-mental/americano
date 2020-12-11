@@ -65,8 +65,10 @@ public class TestStudy: NSObject, NSCoding {
         coder.encode(id, forKey: Key.id.rawValue)
     }
     public required convenience init?(coder: NSCoder) {
-        let studyID = coder.decodeObject(forKey: Key.id.rawValue)
-        
-        self.init(id: studyID as! Int)
+        if let studyID = coder.decodeObject(forKey: Key.id.rawValue) {
+            self.init(id: studyID as! Int)
+        } else {
+            self.init(id: 1)
+        }
     }
 }

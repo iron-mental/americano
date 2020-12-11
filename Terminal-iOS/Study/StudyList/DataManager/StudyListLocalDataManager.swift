@@ -18,29 +18,26 @@ class StudyListLocalDataManager: StudyListLocalDataManagerInputProtocol {
         return [Study(id: 0, title: "", introduce: "", image: "", sigungu: "", leaderImage: "", createdAt: "", members: 0, isMember: true)]
     }
     func saveStudylist(studyList: [Study]) {
-        print(appDelegate)
-        print(appDelegate?.persistentContainer)
-        print(appDelegate?.persistentContainer.viewContext)
-        let test = LocalStudyList(context: context!)
-        var result: [Any]?
-        test.list = [TestStudy(id: 10), TestStudy(id: 9999)]
-        test.list = []
-        do {
-            try self.context?.save()
-//            print("위",test)
-        }
-        catch {
-//            print("아래",test)
-        }
-        
-        
-        do {
-            result = try self.context?.fetch(LocalStudyList.fetchRequest())
-            print("여기서 1,3 나오면 찐", result)
-        }
-        catch {
-            
-        }
+        print(CoreDataManager.shared.context)
+//        CoreDataManager.shared.context
+//        let test = LocalStudyList(context: context!)
+//        var result: [Any]?
+//        test.list = [TestStudy(id: 93333999), TestStudy(id: 333333)]
+//
+//        do {
+//            try self.context?.save()
+//        }
+//        catch {
+//        }
+//
+//        do {
+//            result = try self.context?.fetch(LocalStudyList.fetchRequest())
+//            print("여기서 1,3 나오면 찐", result)
+//            print(type(of: result))
+//        }
+//        catch {
+//
+//        }
         
     }
 }
