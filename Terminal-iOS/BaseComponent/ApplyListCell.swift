@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Kingfisher
+import Then
 
 class ApplyListCell: UITableViewCell {
     static let cellID = "fdfdfdfd"
@@ -20,22 +22,38 @@ class ApplyListCell: UITableViewCell {
         layout()
     }
     
+    func setData(studies: ApplyStudy) {
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        if let imageURL = studies.image {
+            self.mainImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
+        }
+        
+        self.title.text = studies.title
+        self.contents.text = studies.message
+    }
+    
     func attribute() {
         self.mainImage.do {
-            $0.image = #imageLiteral(resourceName: "ai")
+            $0.image = #imageLiteral(resourceName: "mystudy")
             $0.contentMode = .scaleAspectFit
         }
         self.title.do {
             $0.numberOfLines = 0
-            $0.textColor = UIColor.appColor(.mainColor)
+            $0.textColor = .white
             $0.dynamicFont(fontSize: 18, weight: .semibold)
         }
         self.contents.do {
             $0.numberOfLines = 3
-            $0.textColor = UIColor.appColor(.mainColor)
+            $0.textColor = UIColor.appColor(.studySubTitle)
             $0.dynamicFont(fontSize: 14, weight: .regular)
         }
     }
+    
     func layout() {
         [mainImage, title, contents].forEach{ self.contentView.addSubview($0)}
         self.mainImage.do {
