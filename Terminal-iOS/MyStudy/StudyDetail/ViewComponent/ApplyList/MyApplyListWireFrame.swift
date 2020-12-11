@@ -6,4 +6,29 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class MyApplyListWireFrame: MyApplyListWireFrameProtocol {
+    static func createStudyListModule() -> UIViewController {
+        let view: MyApplyListViewProtocol = MyApplyListView()
+        let presenter: MyApplyListPresenterProtocol & MyApplyListInteractorOutputProtocol = MyApplyListPresenter()
+        let interactor: MyApplyListInteractorInputProtocol = MyApplyListInteractor()
+        let wireFrame: MyApplyListWireFrameProtocol = MyApplyListWireFrame()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.wireFrame = wireFrame
+        presenter.interactor = interactor
+        interactor.presenter = presenter
+        
+        if let view = view as? MyApplyListView {
+            return view
+        } else {
+            return UIViewController()
+        }
+    }
+    
+    func presentStudyDetailScreen(from view: MyApplyListViewProtocol) {
+        
+    }
+}
