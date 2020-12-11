@@ -43,7 +43,9 @@ enum TerminalRouter: URLRequestConvertible {
     case hotKeyword         
     
     // 신청부분
-    case studyApply         (studyID: String, message: Parameters)
+    case applyStudy         (studyID: String, message: Parameters)
+    case applyStudyList     (id: String)
+    case applyUserList      (studyID: String)
     
     // 공지사항
     case createNotice       (studyID: String, notice: Parameters)
@@ -113,8 +115,12 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
             
         // 신청
-        case .studyApply:
+        case .applyStudy:
             return .post
+        case .applyStudyList:
+            return .get
+        case .applyUserList:
+            return .get
             
         // 공지사항
         case .createNotice:
@@ -177,7 +183,11 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/ranking"
             
         // 신청
-        case let .studyApply(studyID, _):
+        case let .applyStudy(studyID, _):
+            return "study/\(studyID)/apply"
+        case let .applyStudyList(id):
+            return "user/\(id)/apply"
+        case let .applyUserList(studyID):
             return "study/\(studyID)/apply"
             
         // 공지사항
@@ -242,8 +252,11 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 신청
-        case let .studyApply(_, message):
+        case let .applyStudy(_, message):
             return message
+        case .applyStudyList, .applyUserList:
+            return nil
+            
         
         // 프로젝트
         case .projectList, .projectDelete:
