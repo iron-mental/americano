@@ -14,11 +14,14 @@ import SwiftyJSON
 final class BaseInterceptor: RequestInterceptor {
     let retryLimit = 3
     let retryDelay: TimeInterval = 0.5
+    var access: String = ""
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var request = urlRequest
 
-        guard let access = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
+        if let access = KeychainWrapper.standard.string(forKey: "accessToken") {
+            self.access = access
+        }
         request.setValue("Bearer \(access)", forHTTPHeaderField: "authorization")
 
         completion(.success(request))

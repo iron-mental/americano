@@ -19,7 +19,7 @@ enum TerminalRouter: URLRequestConvertible {
     case nicknameCheck      (nickname: String)
     case eamilCheck         (email: String)
     case userInfo           (id: String)
-    case userInfoUpdate     (id: String, userData: Parameters)
+    case userInfoUpdate     (id: String, image: Data, userInfo: Parameters)
     case userWithdrawal     (id: String, email: String, password: String)
     case emailVerify        (id: String)
     case reissuanceToken    (refreshToken: String)
@@ -33,7 +33,7 @@ enum TerminalRouter: URLRequestConvertible {
     case projectDelete      (id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
-    case studyCreate        (path: [String: String])
+    case studyCreate        (image: Data, Study: Parameters)
     case studyDetail        (studyID: String)
     case studyUpdate        (studyID: String)
     case studyDelete        (studyID: String)
@@ -145,7 +145,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/check-nickname/\(nickname)"
         case let .eamilCheck(email):
             return "user/check-email/\(email)"
-        case let .userInfo(id), let .userInfoUpdate(id, _):
+        case let .userInfo(id), let .userInfoUpdate(id, _, _):
             return "user/\(id)"
         case let .userWithdrawal(id, _, _):
             return "user/\(id)"
@@ -210,8 +210,8 @@ enum TerminalRouter: URLRequestConvertible {
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
             return nil
-        case let .userInfoUpdate(_, userData): // 수정해야함
-            return userData
+        case let .userInfoUpdate(_, _, userInfo): // 수정해야함
+            return userInfo
         case let .userWithdrawal(_, email, password):
             return [
                 "email": email,
@@ -236,7 +236,7 @@ enum TerminalRouter: URLRequestConvertible {
                 "category": category,
                 "sort": sort
             ]
-        case .studyCreate: // 파라미터 지정해야함
+        case let .studyCreate: // 파라미터 지정해야함
             return nil
         case .studyUpdate:// 파라미터 지정해야함
             return nil
@@ -280,4 +280,15 @@ enum TerminalRouter: URLRequestConvertible {
         
         return request
     }
+    
+//    var multipartFormData: MultipartFormData {
+//            let multipartFormData = MultipartFormData()
+//            switch self {
+//            case let .userInfoUpdate(id, image, userInfo)
+//                multipartFormData.append(data, withName: "file", fileName: "file.png", mimeType: "image/png")
+//            default: ()
+//            }
+//
+//            return multipartFormData
+//        }
 }
