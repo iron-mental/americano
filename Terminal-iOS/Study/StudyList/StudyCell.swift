@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 import Then
 import Kingfisher
 
@@ -41,9 +42,10 @@ class StudyCell: UITableViewCell {
     }
     
     func setData(_ data: Study) {
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
-            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            requestBody.setValue(token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
         

@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SwiftKeychainWrapper
 
 enum MyStudyMainViewState {
     case normal
@@ -167,9 +168,10 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         cell.locationLabel.text = myStudyList[indexPath.row].sigungu
         cell.titleLabel.text = myStudyList[indexPath.row].title
         
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
-            requestBody.setValue(Terminal.accessToken, forHTTPHeaderField: "Authorization")
+            requestBody.setValue(token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
         

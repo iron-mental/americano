@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
 import Kingfisher
+import SwiftKeychainWrapper
 
 class ProfileDetailView: UIViewController {
     // MARK: Init Property
@@ -190,9 +190,10 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
     func showUserInfo(with userInfo: UserInfo) {
         self.userInfo = userInfo
         /// Kingfisher auth token
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
-            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            requestBody.setValue(token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
         
