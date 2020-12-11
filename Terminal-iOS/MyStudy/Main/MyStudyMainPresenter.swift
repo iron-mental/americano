@@ -9,14 +9,16 @@
 import UIKit
 
 class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
-    
-    
     var view: MyStudyMainViewProtocol?
     var wireFrame: MyStudyMainWireFrameProtocol?
     var interactor: MyStudyMainInteractorProtocol?
     
     func viewDidLoad() {
         interactor?.getMyStudyList()
+    }
+    
+    func showApplyList() {
+        wireFrame?.goToApplyList(from: view!)
     }
     
     func MyStudyListResult(result: Bool, itemList: [MyStudy]?) {

@@ -120,7 +120,7 @@ class MyStudyMainView: UIViewController {
     }
     
     @objc func applyList() {
-        
+        presenter?.showApplyList()
     }
     
     @objc func alarmButtonAction() {

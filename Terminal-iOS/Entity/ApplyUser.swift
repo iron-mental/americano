@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+struct ApplyUser: Codable {
+    let id, studyID: Int
+    let message, title: String
+    let image: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case studyID
+        case message, title, image
+    }
+}

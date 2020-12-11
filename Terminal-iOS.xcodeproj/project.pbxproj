@@ -10,6 +10,8 @@
 		9B4ADB0EA58C194A4FD611CA /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */; };
 		A500482025775ADC00E37FAE /* JoinResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500481F25775ADC00E37FAE /* JoinResult.swift */; };
 		A5031EB32574F5DE0009AD77 /* UserInfoPut.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */; };
+		A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D0258387DE0084559C /* ApplyUser.swift */; };
+		A510B9D62583892B0084559C /* ApplyStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D52583892B0084559C /* ApplyStudy.swift */; };
 		A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */; };
 		A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC912559613E009BE9A6 /* UITextView+Ext.swift */; };
 		A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AE2524952F00ACB241 /* SetPresenter.swift */; };
@@ -244,8 +246,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				A56605BA2583341B002C4A77 /* Service.appex in Embed App Extensions */,
-				A56605A8258333ED002C4A77 /* Content.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,6 +258,8 @@
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A500481F25775ADC00E37FAE /* JoinResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinResult.swift; sourceTree = "<group>"; };
 		A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPut.swift; sourceTree = "<group>"; };
+		A510B9D0258387DE0084559C /* ApplyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUser.swift; sourceTree = "<group>"; };
+		A510B9D52583892B0084559C /* ApplyStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyStudy.swift; sourceTree = "<group>"; };
 		A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		A510EC912559613E009BE9A6 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		A51438AE2524952F00ACB241 /* SetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPresenter.swift; sourceTree = "<group>"; };
@@ -477,8 +479,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A566059E258333ED002C4A77 /* UserNotificationsUI.framework in Frameworks */,
-				A566059C258333ED002C4A77 /* UserNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,8 +504,6 @@
 			isa = PBXGroup;
 			children = (
 				6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */,
-				A566059B258333ED002C4A77 /* UserNotifications.framework */,
-				A566059D258333ED002C4A77 /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -899,8 +897,6 @@
 			children = (
 				A51BA0BA2577F4BF00B9673F /* TestViewController.swift */,
 				CCA1FF5524FD0C930026C3EA /* Terminal-iOS */,
-				A566059F258333ED002C4A77 /* Content */,
-				A56605B42583341B002C4A77 /* Service */,
 				CCA1FF5424FD0C930026C3EA /* Products */,
 				5ABD6AFD2D9CBF39ED6C88B5 /* Pods */,
 				031FECECB36F7B6233EC27DC /* Frameworks */,
@@ -912,8 +908,6 @@
 			isa = PBXGroup;
 			children = (
 				CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */,
-				A566059A258333ED002C4A77 /* Content.appex */,
-				A56605B32583341B002C4A77 /* Service.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -969,6 +963,8 @@
 				A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */,
 				CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */,
 				A53BC1992582604300C7EC20 /* HotKeyword.swift */,
+				A510B9D0258387DE0084559C /* ApplyUser.swift */,
+				A510B9D52583892B0084559C /* ApplyStudy.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1162,7 +1158,6 @@
 			);
 			name = Content;
 			productName = Content;
-			productReference = A566059A258333ED002C4A77 /* Content.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		A56605B22583341B002C4A77 /* Service */ = {
@@ -1179,7 +1174,6 @@
 			);
 			name = Service;
 			productName = Service;
-			productReference = A56605B32583341B002C4A77 /* Service.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		CCA1FF5224FD0C930026C3EA /* Terminal-iOS */ = {
@@ -1250,7 +1244,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A56605A4258333ED002C4A77 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1323,7 +1316,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A56605A1258333ED002C4A77 /* NotificationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1331,7 +1323,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A56605B62583341B002C4A77 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1346,6 +1337,7 @@
 				CCCC89B92577DBF900F93928 /* LoadingRainbowCat.swift in Sources */,
 				A5D058ED255D93910047CA9E /* StudyDetailWireFrame.swift in Sources */,
 				CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */,
+				A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */,
 				A51BA0A82577E38900B9673F /* BaseInterceptor.swift in Sources */,
 				CCA3FF472517823E00F62627 /* StudyListProtocols.swift in Sources */,
 				CCA3FF3F2517823000F62627 /* StudyListLocalDataManager.swift in Sources */,
@@ -1396,6 +1388,7 @@
 				A5C81C5825836D19008F2B09 /* MyApplyListView.swift in Sources */,
 				A5D058D5255D90CE0047CA9E /* StudyDetailInteractor.swift in Sources */,
 				CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */,
+				A510B9D62583892B0084559C /* ApplyStudy.swift in Sources */,
 				CC5795072570C9F200DF96AB /* AddNoticeLocalDataManager.swift in Sources */,
 				CC6044812576265A000D11C7 /* NoticeDetailRemoteDataManager.swift in Sources */,
 				A51F238C256E5A2200CBFC13 /* BaseResponse.swift in Sources */,
@@ -1533,7 +1526,6 @@
 				A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */,
 				A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */,
 				CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */,
-				A5BA4616255D0BC00061C511 /* TerminalNetwork.swift in Sources */,
 				A5C81C5B25836D32008F2B09 /* MyApplyListProtocols.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
 				CCF470A8256B9AA00085B371 /* ChatWireFrame.swift in Sources */,
@@ -1565,14 +1557,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A56605A2258333ED002C4A77 /* MainInterface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A56605A3258333ED002C4A77 /* Base */,
-			);
-			name = MainInterface.storyboard;
-			sourceTree = "<group>";
-		};
 		CCA1FF5C24FD0C930026C3EA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

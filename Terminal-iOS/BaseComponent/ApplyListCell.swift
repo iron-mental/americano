@@ -58,7 +58,6 @@ class ApplyListCell: UITableViewCell {
             $0.leadingAnchor.constraint(equalTo: self.title.trailingAnchor,
                                         constant: Terminal.convertWidth(value: 20)).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 50)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 200)).isActive = true
         }
     }

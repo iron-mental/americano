@@ -16,6 +16,16 @@ protocol MyStudyMainViewProtocol: class {
     func showErrMessage()
 }
 
+protocol MyStudyMainWireFrameProtocol: class {
+    var presenter: MyStudyMainPresenter? { get set }
+    
+    static func createMyStudyMainViewModul() -> UIViewController
+    
+    func goToAalrmView(view: UIViewController)
+    func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy)
+    func goToApplyList(from view: MyStudyMainViewProtocol)
+}
+
 protocol MyStudyMainInteractorProtocol: class {
     var presenter: MyStudyMainPresenterProtocol? { get set }
     var remoteManager: MyStudyMainRemoteDataManagerProtocol? { get set }
@@ -32,10 +42,13 @@ protocol MyStudyMainPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func viewDidLoad()
+    func showApplyList()
     func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy)
     
     //INTERACTOR -> PRESENTER
     func MyStudyListResult(result: Bool, itemList: [MyStudy]?)
+    
+    
 }
 
 protocol MyStudyMainRemoteDataManagerProtocol: class {
@@ -49,13 +62,6 @@ protocol MyStudyMainLocalDataManagerProtocol: class {
 
 }
 
-protocol MyStudyMainWireFrameProtocol: class {
-    var presenter: MyStudyMainPresenter? { get set }
-    
-    static func createMyStudyMainViewModul() -> UIViewController
-    
-    func goToAalrmView(view: UIViewController)
-    func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy)
-}
+
 
 
