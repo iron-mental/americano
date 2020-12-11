@@ -17,15 +17,15 @@ extension LocalStudy {
         return NSFetchRequest<LocalStudy>(entityName: "LocalStudy")
     }
 
-    @NSManaged public var id: Int64
-    @NSManaged public var title: String?
-    @NSManaged public var introduce: String?
-    @NSManaged public var image: String?
-    @NSManaged public var sigungu: String?
-    @NSManaged public var leaderImage: String?
     @NSManaged public var createAt: String?
-    @NSManaged public var members: Int64
+    @NSManaged public var id: Int64
+    @NSManaged public var image: String?
+    @NSManaged public var introduce: String?
     @NSManaged public var isMember: Bool
+    @NSManaged public var leaderImage: String?
+    @NSManaged public var members: Int64
+    @NSManaged public var sigungu: String?
+    @NSManaged public var title: String?
 
 }
 

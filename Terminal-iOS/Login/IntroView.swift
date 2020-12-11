@@ -280,6 +280,7 @@ extension IntroView: IntroViewProtocol {
     }
     
     func completeJoin() {
+        
         let view = ViewController()
         view.modalPresentationStyle = .fullScreen
         present(view, animated: true, completion: nil)

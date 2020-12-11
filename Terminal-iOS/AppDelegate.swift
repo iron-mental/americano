@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         
@@ -35,15 +36,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
+        
         /// 앱이 foreground  상태일 때 Push 받으면 alert를 띄워준다
         completionHandler([.alert, .sound])
       }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         let pushToken = KeychainWrapper.standard.set(deviceTokenString, forKey: "pushToken")
-//        print("push token 저장 여부 :", pushToken)
-//        print("pushToken: ",KeychainWrapper.standard.string(forKey: "pushToken"))
+        print("push token 저장 여부 :", pushToken)
+        
+        print("pushToken: ",KeychainWrapper.standard.string(forKey: "pushToken"))
     }
     
     // MARK: UISceneSession Lifecycle

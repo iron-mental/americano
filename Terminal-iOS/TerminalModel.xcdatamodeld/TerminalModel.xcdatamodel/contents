@@ -11,7 +11,16 @@
         <attribute name="sigungu" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="LocalStudyList" representedClassName="LocalStudyList" syncable="YES" codeGenerationType="class">
+        <attribute name="studyList" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="testString" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="TestForCoreData" representedClassName="TestForCoreData" syncable="YES">
+        <attribute name="stringTest" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="LocalStudy" positionX="-63" positionY="-18" width="128" height="178"/>
+        <element name="LocalStudyList" positionX="-54" positionY="63" width="128" height="73"/>
+        <element name="TestForCoreData" positionX="-54" positionY="54" width="128" height="58"/>
     </elements>
 </model>

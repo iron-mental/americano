@@ -19,6 +19,7 @@ class IntroPresenter: IntroPresenterProtocol {
             interactor?.checkedEmailValid(input: input, beginState: beginState)
             break
         case .pwdInput:
+            
             beginState == .signUp ? interactor?.checkedPasswordValid(input: input) : interactor?.checkedJoinValid(input: input)
             break
         case .nickname:
@@ -58,6 +59,7 @@ class IntroPresenter: IntroPresenterProtocol {
             interactor?.checkedEmailValid(input: input, beginState: beginState)
             break
         case .pwdInput:
+            
             beginState == .signUp ? interactor?.checkedPasswordValid(input: input) : interactor?.checkedJoinValid(input: input)
             break
         case .nickname:

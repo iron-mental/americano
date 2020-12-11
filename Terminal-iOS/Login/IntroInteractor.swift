@@ -72,23 +72,26 @@ class IntroInteractor: IntroInteractorProtocol {
     // MARK: 로그인 결과 처리
 
     func checkedJoinValid(input: String) {
+        
         remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email, input],
                                             completionHandler: { result in
         switch result.result {
           case true:
+            
             guard let refreshToken = result.data?.refreshToken else { return }
             guard let accessToken = result.data?.accessToken else { return }
             guard let userID = result.data?.id else { return }
             let refreshResult = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
             let accessResult = KeychainWrapper.standard.set(accessToken, forKey: "accessToken")
             let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
-            
             print("저장 결과 :", refreshResult && accessResult && idResult)
+            
             if refreshResult && accessResult && idResult {
                 self.presenter?.joinValidInfo(result: result.result, joinInfo: String(describing: result.data?.id))
             }
             
           case false:
+            
             self.presenter?.joinValidInfo(result: result.result,
                                           joinInfo: "실패")
             }

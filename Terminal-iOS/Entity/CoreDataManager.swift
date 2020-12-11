@@ -7,10 +7,15 @@
 //
 
 import CoreData
-import Foundation
+import UIKit
 
 
 class CoreDataManager {
     static let shared: CoreDataManager = CoreDataManager()
-    let 
+    let appDelegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
+    lazy var context = appDelegate?.persistentContainer.viewContext
+    
+    let modelName: String = ""
+    
+
 }

@@ -63,6 +63,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     // MARK: 로그인 유효성 검사
     
     func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (BaseResponse<JoinResult>) -> Void) {
+        print(KeychainWrapper.standard.string(forKey: "pushToken")!)
         let params: [String: String] = [
             "email":"\(joinMaterial[0])",
             "password":"\(joinMaterial[1])",
@@ -74,6 +75,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             .session
             .request(TerminalRouter.login(userData: params))
             .responseJSON { response in
+                
                 switch response.result {
                 case .success(let value):
                     print("토큰 : ",JSON(value))
@@ -83,6 +85,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                     completionHandler(result)
                 case .failure(let error):
                     print("에러:",error)
+                    
                 }
             }        
     }
