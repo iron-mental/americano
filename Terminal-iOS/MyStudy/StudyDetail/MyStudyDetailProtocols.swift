@@ -8,21 +8,21 @@
 
 import UIKit
 
-protocol MyStudyDetailViewProtocol {
+protocol MyStudyDetailViewProtocol: class {
     var presenter: MyStudyDetailPresenterProtocol? { get set }
     var studyID: Int? { get set}
     var VCArr: [UIViewController] { get set }
     
 }
 
-protocol MyStudyDetailInteractorProtocol {
+protocol MyStudyDetailInteractorProtocol: class {
     var presenter: MyStudyDetailPresenterProtocol? { get set }
     var remoteDatamanager: MyStudyDetailRemoteDataManagerProtocol? { get set }
     var localDatamanager: MyStudyDetailLocalDataManagerProtocol? { get set }
 }
 
-protocol MyStudyDetailPresenterProtocol {
-    var view : MyStudyDetailViewProtocol? { get set }
+protocol MyStudyDetailPresenterProtocol: class {
+    var view: MyStudyDetailViewProtocol? { get set }
     var interactor: MyStudyDetailInteractorProtocol? { get set }
     var wireFrame: MyStudyDetailWireFrameProtocol? { get set }
     
@@ -30,21 +30,23 @@ protocol MyStudyDetailPresenterProtocol {
     func addNoticeButtonDidTap(studyID: Int, parentView: UIViewController)
     func editStudyButtonDidTap(study: StudyDetail, parentView: UIViewController)
     func addNoticeFinished(notice: Int, studyID: Int, parentView: UIViewController)
+    func showApplyUserList(studyID: Int)
 }
 
-protocol MyStudyDetailRemoteDataManagerProtocol {
+protocol MyStudyDetailRemoteDataManagerProtocol: class {
     
 }
 
-protocol MyStudyDetailLocalDataManagerProtocol {
+protocol MyStudyDetailLocalDataManagerProtocol: class {
     
 }
 
-protocol MyStudyDetailWireFrameProtocol {
+protocol MyStudyDetailWireFrameProtocol: class {
     var presenter: MyStudyDetailPresenterProtocol? { get set }
     
     static func createMyStudyDetailModule(studyID: Int) -> UIViewController
     func goToAddNotice(studyID: Int, parentView: UIViewController)
     func goToEditStudy(study: StudyDetail, parentView: UIViewController)
     func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController)
+    func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int)
 }
