@@ -9,13 +9,12 @@
 import Foundation
 
 struct ApplyUser: Codable {
-    let id, studyID: Int
-    let message, title: String
-    let image: String?
+    let id, userID: Int
+    let image, message, nickname: String
 
     enum CodingKeys: String, CodingKey {
         case id
-        case studyID
-        case message, title, image
+        case userID = "user_id"
+        case image, message, nickname
     }
 }
