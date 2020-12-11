@@ -50,4 +50,13 @@ extension TestViewController: UITableViewDelegate, UITableViewDataSource {
         cell.contents.text = tempArr[indexPath.row].content
         return cell
     }
+    
+    func handleNotifData() {
+            let pref = UserDefaults.init(suiteName: "group.id.gits.notifserviceextension")
+            let notifData = pref?.object(forKey: "NOTIF_DATA") as? NSDictionary
+            let aps = notifData?["aps"] as? NSDictionary
+            let alert = aps?["alert"] as? NSDictionary
+            let body = alert?["body"] as? String
+            
+        }
 }

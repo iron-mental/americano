@@ -21,17 +21,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             // 리프레쉬 토큰이 없으면 -> 로그인
             if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
+//                KeychainWrapper.standard.set("tempToken", forKey: "accessToken")
                 let howView = UINavigationController(rootViewController: home)
                 window.rootViewController = howView
             } else {
                 print("토큰이 유효합니다..")
                 print("로그인 완료")
+                print("accessToken : ", KeychainWrapper.standard.string(forKey: "accessToken")!)
                 let main = ViewController()
                 window.rootViewController = main
             }
-
-//            let view = TestViewController()
-//            window.rootViewController = view
 
             self.window = window
             window.makeKeyAndVisible()

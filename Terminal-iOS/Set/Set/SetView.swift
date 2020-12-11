@@ -152,7 +152,7 @@ extension SetView: SetViewProtocol {
         
         /// 로그아웃과 동시에  토큰 삭제
         KeychainWrapper.standard.remove(forKey: "refreshToken")
-//        KeychainWrapper.standard.remove(forKey: "accessToken")
+
         navigationController?.pushViewController(view, animated: false)
     }
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신

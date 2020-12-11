@@ -41,8 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         let pushToken = KeychainWrapper.standard.set(deviceTokenString, forKey: "pushToken")
-//        print("push token 저장 여부 :", pushToken)
-//        print("pushToken: ",KeychainWrapper.standard.string(forKey: "pushToken"))
+        print("pushToken: ",KeychainWrapper.standard.string(forKey: "pushToken"))
     }
     
     // MARK: UISceneSession Lifecycle
