@@ -18,7 +18,7 @@ class MyStudyMainView: UIViewController {
     var presenter: MyStudyMainPresenterProtocol?
     var state: MyStudyMainViewState = .normal
     
-    let context = ((UIApplication.shared.delegate) as! AppDelegate).persistentContainer.viewContext
+    
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
     

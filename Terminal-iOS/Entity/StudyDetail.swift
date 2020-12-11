@@ -5,11 +5,8 @@
 //  Created by once on 2020/11/13.
 //  Copyright © 2020 정재인. All rights reserved.
 //
-
 import Foundation
-
 // MARK: 스터디 상세
-
 struct StudyDetail: Codable {
     let participate: [Participate]
     let id: Int
@@ -18,7 +15,6 @@ struct StudyDetail: Codable {
     let snsWeb, snsNotion, snsEvernote, image: String?
     let location: Location
     let authority: String
-    
     enum CodingKeys: String, CodingKey {
         case participate, id, category, title, introduce, image, progress
         case studyTime = "study_time"
@@ -29,11 +25,9 @@ struct StudyDetail: Codable {
         case authority = "Authority"
     }
 }
-
 struct Location: Codable {
     let latitude, longitude, addressName: String
     let locationDetail, placeName: String?
-
     enum CodingKeys: String, CodingKey {
         case latitude, longitude
         case addressName = "address_name"
@@ -41,16 +35,17 @@ struct Location: Codable {
         case locationDetail = "location_detail"
     }
 }
-
 struct Participate: Codable {
     let id, userID: Int
     let nickname : String
     let image: String?
     let leader: Bool
-
     enum CodingKeys: String, CodingKey {
         case id
         case userID = "user_id"
         case nickname, image, leader
     }
 }
+
+
+
