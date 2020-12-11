@@ -14,6 +14,7 @@ protocol MyApplyListViewProtocol: class {
     var presenter: MyApplyListPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func showStudyList(studies: [ApplyStudy]?)
     func showLoading()
     func hideLoading()
 }
@@ -37,7 +38,7 @@ protocol MyApplyListPresenterProtocol: class {
 
 protocol MyApplyListInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    func didRetrieveStudies(studies: [Study])
+    func didRetrieveStudies(studies: [ApplyStudy]?)
     func onError()
 }
 

@@ -23,7 +23,7 @@ class MyApplyListPresenter: MyApplyListPresenterProtocol {
 }
 
 extension MyApplyListPresenter: MyApplyListInteractorOutputProtocol {
-    func didRetrieveStudies(studies: [Study]) {
+    func didRetrieveStudies(studies: [ApplyStudy]?) {
         
     }
     

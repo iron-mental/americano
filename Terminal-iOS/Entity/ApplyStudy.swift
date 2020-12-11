@@ -1,5 +1,5 @@
 //
-//  MyApplyListCell.swift
+//  ApplyStudy.swift
 //  Terminal-iOS
 //
 //  Created by once on 2020/12/11.
@@ -7,9 +7,3 @@
 //
 
 import Foundation
-
-class MyApplyListCell: ApplyListCell {
-    static let myApplyListCellID = "MyApplyListCell"
-    
-    
-}

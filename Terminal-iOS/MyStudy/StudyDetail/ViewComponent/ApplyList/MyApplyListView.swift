@@ -10,7 +10,7 @@ import UIKit
 
 final class MyApplyListView: UIViewController {
     var presenter: MyApplyListPresenterProtocol?
-    var studyList: [Study] = []
+    var studyList: [ApplyStudy] = []
     lazy var applyList = UITableView()
     
     override func viewDidLoad() {
@@ -41,6 +41,18 @@ final class MyApplyListView: UIViewController {
 }
 
 extension MyApplyListView: MyApplyListViewProtocol {
+    func showStudyList(studies: [ApplyStudy]?) {
+        if let tempStudies = studies {
+            self.studyList = tempStudies
+            applyList.reloadData()
+        }
+        
+    }
+    
+    func showStudyList() {
+        
+    }
+    
     func showLoading() {
         
     }
