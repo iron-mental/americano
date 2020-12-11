@@ -30,6 +30,7 @@ final class MyApplyListView: UIViewController {
     }
     
     private func layout() {
+        self.view.addSubview(applyList)
         self.applyList.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -46,20 +47,10 @@ extension MyApplyListView: MyApplyListViewProtocol {
             self.studyList = tempStudies
             applyList.reloadData()
         }
-        
     }
     
-    func showStudyList() {
-        
-    }
-    
-    func showLoading() {
-        
-    }
-    
-    func hideLoading() {
-        
-    }
+    func showLoading() { }
+    func hideLoading() { }
 }
 
 extension MyApplyListView: UITableViewDelegate, UITableViewDataSource {
@@ -70,6 +61,8 @@ extension MyApplyListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = applyList.dequeueReusableCell(withIdentifier: MyApplyListCell.myApplyListCellID,
                                                  for: indexPath) as! MyApplyListCell
+        let data = studyList[indexPath.row]
+        cell.setData(studies: data)
         
         return cell
     }

@@ -10,6 +10,4 @@ import Foundation
 
 class MyApplyListCell: ApplyListCell {
     static let myApplyListCellID = "MyApplyListCell"
-    
-    
 }

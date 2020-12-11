@@ -24,7 +24,7 @@ class MyApplyListPresenter: MyApplyListPresenterProtocol {
 
 extension MyApplyListPresenter: MyApplyListInteractorOutputProtocol {
     func didRetrieveStudies(studies: [ApplyStudy]?) {
-        
+        view?.showStudyList(studies: studies)
     }
     
     func onError() {
