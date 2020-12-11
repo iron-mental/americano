@@ -245,7 +245,7 @@ class StudyDetailView: UIViewController {
         present(picker, animated: true, completion: nil)
     }
     @objc func joinButtonDidTap() {
-        presenter?.joinButtonDidTap(studyID: studyInfo!.id, message: "테스트신청매ㅐㅔ세지~~")
+        presenter?.joinButtonDidTap(studyID: studyInfo!.id, message: "테스트신청매세지~~")
     }
 }
 

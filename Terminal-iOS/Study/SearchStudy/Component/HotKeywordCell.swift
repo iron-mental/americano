@@ -23,6 +23,7 @@ class HotKeywordCell: UICollectionViewCell {
     }
     
     private func attribute() {
+        self.contentView.isUserInteractionEnabled = false
         keyword.do {
             $0.layer.borderWidth = 1
             $0.setTitleColor(.white, for: .normal)
@@ -32,7 +33,7 @@ class HotKeywordCell: UICollectionViewCell {
     }
     
     private func layout() {
-        addSubview(keyword)
+        self.contentView.addSubview(keyword)
         keyword.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true

@@ -47,8 +47,8 @@ class DefaultCell: UITableViewCell {
     }
     
     func layout() {
-        addSubview(title)
-        addSubview(rightLabel)
+        self.contentView.addSubview(title)
+        self.contentView.addSubview(rightLabel)
         
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

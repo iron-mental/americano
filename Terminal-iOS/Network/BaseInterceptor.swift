@@ -11,15 +11,19 @@ import Alamofire
 import SwiftKeychainWrapper
 import SwiftyJSON
 
-class BaseInterceptor: RequestInterceptor {
+final class BaseInterceptor: RequestInterceptor {
     let retryLimit = 3
     let retryDelay: TimeInterval = 0.5
+    var accessToken: String = ""
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         var request = urlRequest
 
-        guard let access = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
-        request.setValue("Bearer \(access)", forHTTPHeaderField: "authorization")
+        if let token = KeychainWrapper.standard.string(forKey: "accessToken") {
+            self.accessToken = token
+        }
+        
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
 
         completion(.success(request))
     }

@@ -37,13 +37,13 @@ class CategoryCell: UICollectionViewCell {
     }
     
     private func layout() {
-        addSubview(imageView)
-        imageView.do {
+        self.contentView.addSubview(imageView)
+        self.imageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         }
     }
 }
