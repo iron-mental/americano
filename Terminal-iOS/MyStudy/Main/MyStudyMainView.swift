@@ -39,9 +39,7 @@ class MyStudyMainView: UIViewController {
     func attribute() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        view.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
-        }
+        
         moreButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
         moreButton?.do {
             $0.image = #imageLiteral(resourceName: "more")
@@ -63,8 +61,14 @@ class MyStudyMainView: UIViewController {
         alarmButton.do {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
         }
-        dismissEditViewButtonItem = UIBarButtonItem(title: "나가기", style: .done, target: self, action: #selector(dismissEditViewButtonItemAction))
-        editDoneButton = UIBarButtonItem(title: "test", style: .done, target: self, action: #selector(editDoneButtonAction))
+        dismissEditViewButtonItem = UIBarButtonItem(title: "나가기",
+                                                    style: .done,
+                                                    target: self,
+                                                    action: #selector(dismissEditViewButtonItemAction))
+        editDoneButton = UIBarButtonItem(title: "test",
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(editDoneButtonAction))
     }
     
     func layout() {
@@ -153,9 +157,9 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
             cell.checkBox.isHidden = false
             cell.notiGuideView.isHidden = true
             if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
-                cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)
+                cell.checkBox.backgroundColor = .appColor(.mainColor)
             } else {
-                cell.checkBox.backgroundColor = UIColor.appColor(.testColor)
+                cell.checkBox.backgroundColor = .appColor(.testColor)
             }
             break
         }

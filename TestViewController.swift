@@ -11,84 +11,43 @@ import Alamofire
 import SwiftKeychainWrapper
 import SwiftyJSON
 
-class TestViewController: UIViewController {
+struct Apply {
+    let title: String
+    let content: String
+}
 
+class TestViewController: UIViewController {
+    let testView = UITableView()
+    let tempArr: [Apply] = [Apply(title: "안녕하세여", content: "후후후후후후ㅜ후후후후후후후후후ㅜ후후후ㅜ훟후후후후후후ㅜ후후후ㅜ훟후후후후후후ㅜ후후후ㅜ훟ㅜ훟"),
+                            Apply(title: "안녕하세여", content: "후후후후후후ㅜ후후후ㅜ훟"),
+                            Apply(title: "안녕하세여", content: "후후후후후후ㅜ후후후ㅜ훟"),
+                            Apply(title: "안녕하세여", content: "후후후후후후ㅜ후후후ㅜ훟")]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let tese2: Parameters = [
-            "title": "첫 번째 공지사항",
-            "contents": "마스크 지참하세요",
-            "pinned": "true"
-        ]
-        
-//        let url = "http://3.35.154.27:3000/v1/study/222/notice"
-////        (url, method: .post, parameters: tese2, encoding: URLEncoding.default, headers: TerminalNetwork.temp22)
-//        AF.request(url, method: .post, parameters: tese2, encoding: JSONEncoding.default, headers: TerminalNetwork.temp22)
-//            .responseJSON { response in
-//                switch response.result {
-//                case .success(let value):
-//                    print(JSON(value))
-//                case .failure(let err):
-//                    print(err)
-//            }
-//        }
-                
-//        print(KeychainWrapper.standard.string(forKey: "accessToken"))
-//        print(KeychainWrapper.standard.string(forKey: "refreshToken"))
-//        let parameters: Parameters = [
-//            "category": "ios",
-//            "sort": "new",
-//        ]
-        
-//        TerminalNetworkManager
-//            .shared
-//            .session
-//            .request(TerminalRouter.studyList(category: "ios", sort: "new"))
-//            .validate(statusCode: 200...299)
-//            .responseJSON { response in
-//                 debugPrint(response)
-//            }
-//
-        let params: [String: String] = [
-            "email": "swdoris@gmail.com",
-            "password": "qwer1234",
-            "push_token": KeychainWrapper.standard.string(forKey: "pushToken")!
-        ]
-        
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.login(userData: params))
-            .responseJSON { response in
-                debugPrint(response)
-            }
-//        TerminalNetworkManager
-//            .shared
-//            .session
-//            .request(TerminalRouter.createNotice(studyID: "222", notice: ["title" : "첫 번째 공지사항",
-//                                                                         "contents" : "마스크 지참하세요",
-//                                                                         "pinned" : "true"]))
-//            .validate(statusCode: 200...299)
-//            .responseJSON { response in
-//                 debugPrint(response)
-//            }
-//        let url = "http://3.35.154.27:3000/v1/study"
-//
-        
-//
-//        AF.request(url,
-//                   method: .get,
-//                   parameters: parameters,
-//                   encoding: URLEncoding.queryString,
-//                   headers: TerminalNetwork.headers)
-//            .responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                print(JSON(value))
-//            case .failure(let err):
-//                print(err)
-//            }
-//        }
+        view.addSubview(testView)
+        testView.do {
+            $0.rowHeight = 80
+            $0.register(ApplyListCell.self, forCellReuseIdentifier: ApplyListCell.cellID)
+            $0.delegate = self
+            $0.dataSource = self
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        }
+    }
+}
+
+extension TestViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tempArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.testView.dequeueReusableCell(withIdentifier: ApplyListCell.cellID, for: indexPath) as! ApplyListCell
+        cell.title.text = tempArr[indexPath.row].title
+        cell.contents.text = tempArr[indexPath.row].content
+        return cell
     }
 }
