@@ -12,7 +12,7 @@ import Then
 class SearchStudyView: UIViewController {
     
     var keyword: [String] = ["안드로이드ㅇㅇㅇㅇㅇㅇㅇ", "node.js", "코드리뷰", "취업스터디", "프로젝트", "Swift", "갓우석님", "예비유니콘케어닥fffff", "뭐지??왜안나옴"]
-        
+    
     let backBtn = UIButton()
     let searchBar = UISearchBar()
     let placeSearch = UIButton()
@@ -149,7 +149,7 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
         override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
             let attributes = super.layoutAttributesForElements(in: rect)
-
+            
             var leftMargin = sectionInset.left
             var maxY: CGFloat = -1.0
             attributes?.forEach { layoutAttribute in
@@ -158,14 +158,14 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
                     print("포문",leftMargin)
                     
                 }
-
+                
                 layoutAttribute.frame.origin.x = leftMargin
-
+                
                 leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
                 print("박,", leftMargin)
                 maxY = max(layoutAttribute.frame.maxY , maxY)
             }
-
+            
             return attributes
         }
     }

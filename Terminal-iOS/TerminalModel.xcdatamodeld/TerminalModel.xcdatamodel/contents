@@ -15,6 +15,9 @@
         <attribute name="studyList" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="testString" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Please" representedClassName="Please" syncable="YES" codeGenerationType="class">
+        <attribute name="test" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="TestForCoreData" representedClassName="TestForCoreData" syncable="YES">
         <attribute name="stringTest" optional="YES" attributeType="String"/>
     </entity>
@@ -22,5 +25,6 @@
         <element name="LocalStudy" positionX="-63" positionY="-18" width="128" height="178"/>
         <element name="LocalStudyList" positionX="-54" positionY="63" width="128" height="73"/>
         <element name="TestForCoreData" positionX="-54" positionY="54" width="128" height="58"/>
+        <element name="Please" positionX="-54" positionY="54" width="128" height="58"/>
     </elements>
 </model>

@@ -111,7 +111,6 @@
 		CC3F99202545448E00428B11 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F991F2545448E00428B11 /* HomeView.swift */; };
 		CC3F992325454B5500428B11 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F992225454B5500428B11 /* Terminal.swift */; };
 		CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F99252545765500428B11 /* UINavigationController+Ext.swift */; };
-		CC43B7D225827B6300A4A418 /* TerminalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC43B7D025827B6300A4A418 /* TerminalModel.xcdatamodeld */; };
 		CC43B8232582922900A4A418 /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058F6255D95000047CA9E /* StudyDetail.swift */; };
 		CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F54D254AA3A200DC31C6 /* SearchLocationView.swift */; };
 		CC45F552254AA3BF00DC31C6 /* SearchLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F551254AA3BF00DC31C6 /* SearchLocationInteractor.swift */; };
@@ -181,6 +180,11 @@
 		CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D225592DCF00410184 /* IntroInteractor.swift */; };
 		CCB139D625592E0300410184 /* IntroRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */; };
 		CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */; };
+		CCBBEEC12583630E00177E25 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEBF2583630E00177E25 /* CoreDataModel.xcdatamodeld */; };
+		CCBBEECB258363B500177E25 /* LocalStudyList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEC9258363B500177E25 /* LocalStudyList+CoreDataClass.swift */; };
+		CCBBEECC258363B500177E25 /* LocalStudyList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEECA258363B500177E25 /* LocalStudyList+CoreDataProperties.swift */; };
+		CCBBEEDD258369D000177E25 /* LocalStudy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEDB258369D000177E25 /* LocalStudy+CoreDataClass.swift */; };
+		CCBBEEDE258369D000177E25 /* LocalStudy+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEDC258369D000177E25 /* LocalStudy+CoreDataProperties.swift */; };
 		CCBC88B6254ACF2500C2A6C4 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */; };
 		CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */; };
 		CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */; };
@@ -324,7 +328,6 @@
 		CC3F991F2545448E00428B11 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CC3F992225454B5500428B11 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
 		CC3F99252545765500428B11 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
-		CC43B7D125827B6300A4A418 /* TerminalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TerminalModel.xcdatamodel; sourceTree = "<group>"; };
 		CC45F54D254AA3A200DC31C6 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
 		CC45F551254AA3BF00DC31C6 /* SearchLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationInteractor.swift; sourceTree = "<group>"; };
 		CC45F554254AA41600DC31C6 /* SearchLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationPresenter.swift; sourceTree = "<group>"; };
@@ -351,12 +354,6 @@
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC84CF46256284650070E233 /* TerminalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAPI.swift; sourceTree = "<group>"; };
 		CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewOutputCell.swift; sourceTree = "<group>"; };
-		CC9109DC258359490071A86F /* LocalStudyList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudyList+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		CC9109DD258359490071A86F /* LocalStudyList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudyList+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		CC9109DE258359490071A86F /* LocalStudy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudy+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		CC9109DF258359490071A86F /* LocalStudy+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudy+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
-		CC9109E0258359490071A86F /* TestForCoreData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestForCoreData+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
-		CC9109E1258359490071A86F /* TestForCoreData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestForCoreData+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
 		CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = badgeBarButtonItem.swift; sourceTree = "<group>"; };
 		CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -401,6 +398,11 @@
 		CCB139D225592DCF00410184 /* IntroInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroInteractor.swift; sourceTree = "<group>"; };
 		CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWireFrame.swift; sourceTree = "<group>"; };
+		CCBBEEC02583630E00177E25 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		CCBBEEC9258363B500177E25 /* LocalStudyList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudyList+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		CCBBEECA258363B500177E25 /* LocalStudyList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudyList+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		CCBBEEDB258369D000177E25 /* LocalStudy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudy+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		CCBBEEDC258369D000177E25 /* LocalStudy+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudy+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailView.swift; sourceTree = "<group>"; };
 		CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageView.swift; sourceTree = "<group>"; };
@@ -742,19 +744,6 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
-		CC1DDE8425832DF1000CCC15 /* CoreDataModel */ = {
-			isa = PBXGroup;
-			children = (
-				CC9109DC258359490071A86F /* LocalStudyList+CoreDataClass.swift */,
-				CC9109DD258359490071A86F /* LocalStudyList+CoreDataProperties.swift */,
-				CC9109DE258359490071A86F /* LocalStudy+CoreDataClass.swift */,
-				CC9109DF258359490071A86F /* LocalStudy+CoreDataProperties.swift */,
-				CC9109E0258359490071A86F /* TestForCoreData+CoreDataClass.swift */,
-				CC9109E1258359490071A86F /* TestForCoreData+CoreDataProperties.swift */,
-			);
-			path = CoreDataModel;
-			sourceTree = "<group>";
-		};
 		CC29FB2425207B4500C1BDCE /* SelectLocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -847,7 +836,7 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				CC1DDE8425832DF1000CCC15 /* CoreDataModel */,
+				CCBBEEC32583631900177E25 /* CoreDataModel */,
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
 				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
 				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
@@ -867,7 +856,7 @@
 				CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */,
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
-				CC43B7D025827B6300A4A418 /* TerminalModel.xcdatamodeld */,
+				CCBBEEBF2583630E00177E25 /* CoreDataModel.xcdatamodeld */,
 			);
 			path = "Terminal-iOS";
 			sourceTree = "<group>";
@@ -986,6 +975,17 @@
 				CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */,
 			);
 			path = SelectCategory;
+			sourceTree = "<group>";
+		};
+		CCBBEEC32583631900177E25 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				CCBBEEDB258369D000177E25 /* LocalStudy+CoreDataClass.swift */,
+				CCBBEEDC258369D000177E25 /* LocalStudy+CoreDataProperties.swift */,
+				CCBBEEC9258363B500177E25 /* LocalStudyList+CoreDataClass.swift */,
+				CCBBEECA258363B500177E25 /* LocalStudyList+CoreDataProperties.swift */,
+			);
+			path = CoreDataModel;
 			sourceTree = "<group>";
 		};
 		CCBC88B4254ACF0B00C2A6C4 /* Component */ = {
@@ -1243,6 +1243,7 @@
 				CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				A53613B2257E6DEE0001ABCC /* SetRemoteManager.swift in Sources */,
+				CCBBEEC12583630E00177E25 /* CoreDataModel.xcdatamodeld in Sources */,
 				A5D058D5255D90CE0047CA9E /* StudyDetailInteractor.swift in Sources */,
 				CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */,
 				CC5795072570C9F200DF96AB /* AddNoticeLocalDataManager.swift in Sources */,
@@ -1261,6 +1262,7 @@
 				A5D5AE5A2573DAFB003BB277 /* IntroWireFrame.swift in Sources */,
 				CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */,
 				A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */,
+				CCBBEEDE258369D000177E25 /* LocalStudy+CoreDataProperties.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
 				CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */,
 				A5BA1EF4254AE9900089D4E9 /* UISegmentControl+Ext.swift in Sources */,
@@ -1280,7 +1282,6 @@
 				CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */,
 				CCD51C80256D29F200D41771 /* MyStudyDetailLocalDataManager.swift in Sources */,
 				A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */,
-				CC43B7D225827B6300A4A418 /* TerminalModel.xcdatamodeld in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CCB139AF2557EA0600410184 /* TempMyStudyList.swift in Sources */,
 				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
@@ -1315,6 +1316,7 @@
 				A51BA0B02577F0E300B9673F /* Contents.swift in Sources */,
 				A51BA0A52577C93700B9673F /* UserManageCell.swift in Sources */,
 				CC8FF5FC257E80D000947FB3 /* ChatTableViewOutputCell.swift in Sources */,
+				CCBBEECB258363B500177E25 /* LocalStudyList+CoreDataClass.swift in Sources */,
 				CCD51C77256D29BC00D41771 /* MyStudyDetailInteractor.swift in Sources */,
 				A5031EB32574F5DE0009AD77 /* UserInfoPut.swift in Sources */,
 				CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */,
@@ -1375,6 +1377,7 @@
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
 				A5CF046D257E92800078BA67 /* UINavigation+Ext.swift in Sources */,
 				A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */,
+				CCBBEECC258363B500177E25 /* LocalStudyList+CoreDataProperties.swift in Sources */,
 				A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */,
 				A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */,
 				CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */,
@@ -1382,6 +1385,7 @@
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
 				CCF470A8256B9AA00085B371 /* ChatWireFrame.swift in Sources */,
 				CC45F558254AA42800DC31C6 /* SearchLocationRemoteDataManager.swift in Sources */,
+				CCBBEEDD258369D000177E25 /* LocalStudy+CoreDataClass.swift in Sources */,
 				CCA3FF5C2517826B00F62627 /* StudyCategoryPresenter.swift in Sources */,
 				CC5795012570C9D400DF96AB /* AddNoticePresenter.swift in Sources */,
 				A57C33D3254E8B5A006CE9A2 /* NoticeView.swift in Sources */,
@@ -1602,13 +1606,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		CC43B7D025827B6300A4A418 /* TerminalModel.xcdatamodeld */ = {
+		CCBBEEBF2583630E00177E25 /* CoreDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				CC43B7D125827B6300A4A418 /* TerminalModel.xcdatamodel */,
+				CCBBEEC02583630E00177E25 /* CoreDataModel.xcdatamodel */,
 			);
-			currentVersion = CC43B7D125827B6300A4A418 /* TerminalModel.xcdatamodel */;
-			path = TerminalModel.xcdatamodeld;
+			currentVersion = CCBBEEC02583630E00177E25 /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
