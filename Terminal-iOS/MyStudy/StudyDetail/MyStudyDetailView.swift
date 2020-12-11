@@ -146,7 +146,7 @@ class MyStudyDetailView: UIViewController {
         }
     }
     func showApplyList() {
-        
+        presenter?.showApplyUserList(studyID: studyID!)
     }
 }
 
