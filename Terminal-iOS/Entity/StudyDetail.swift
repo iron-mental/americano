@@ -15,6 +15,7 @@ struct StudyDetail: Codable {
     let snsWeb, snsNotion, snsEvernote, image: String?
     let location: Location
     let authority: String
+    
     enum CodingKeys: String, CodingKey {
         case participate, id, category, title, introduce, image, progress
         case studyTime = "study_time"
@@ -28,6 +29,7 @@ struct StudyDetail: Codable {
 struct Location: Codable {
     let latitude, longitude, addressName: String
     let locationDetail, placeName: String?
+    
     enum CodingKeys: String, CodingKey {
         case latitude, longitude
         case addressName = "address_name"

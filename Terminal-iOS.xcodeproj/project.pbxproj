@@ -96,6 +96,9 @@
 		CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */; };
 		CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */; };
 		CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0482512286B00F88313 /* SNSCollectionView.swift */; };
+		CC1DDE9E25833577000CCC15 /* LocalStudy+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1DDE9C25833577000CCC15 /* LocalStudy+CoreDataClass.swift */; };
+		CC1DDE9F25833577000CCC15 /* LocalStudy+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1DDE9D25833577000CCC15 /* LocalStudy+CoreDataProperties.swift */; };
+		CC1DDEA225833769000CCC15 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1DDEA125833769000CCC15 /* CoreDataManager.swift */; };
 		CC21A7952559504600E31F77 /* IntroLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC21A7942559504600E31F77 /* IntroLocalDataManager.swift */; };
 		CC26AD58251B27B3006B11E9 /* LocationUIVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD57251B27B3006B11E9 /* LocationUIVIew.swift */; };
 		CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */; };
@@ -112,8 +115,6 @@
 		CC3F992325454B5500428B11 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F992225454B5500428B11 /* Terminal.swift */; };
 		CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F99252545765500428B11 /* UINavigationController+Ext.swift */; };
 		CC43B7D225827B6300A4A418 /* TerminalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC43B7D025827B6300A4A418 /* TerminalModel.xcdatamodeld */; };
-		CC43B8112582919400A4A418 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC43B8102582919400A4A418 /* Location.swift */; };
-		CC43B814258291AB00A4A418 /* Participate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC43B813258291AB00A4A418 /* Participate.swift */; };
 		CC43B8232582922900A4A418 /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058F6255D95000047CA9E /* StudyDetail.swift */; };
 		CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F54D254AA3A200DC31C6 /* SearchLocationView.swift */; };
 		CC45F552254AA3BF00DC31C6 /* SearchLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F551254AA3BF00DC31C6 /* SearchLocationInteractor.swift */; };
@@ -310,6 +311,9 @@
 		CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyView.swift; sourceTree = "<group>"; };
 		CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC1BE0482512286B00F88313 /* SNSCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionView.swift; sourceTree = "<group>"; };
+		CC1DDE9C25833577000CCC15 /* LocalStudy+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudy+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CC1DDE9D25833577000CCC15 /* LocalStudy+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalStudy+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CC1DDEA125833769000CCC15 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CC21A7942559504600E31F77 /* IntroLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroLocalDataManager.swift; sourceTree = "<group>"; };
 		CC26AD57251B27B3006B11E9 /* LocationUIVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUIVIew.swift; sourceTree = "<group>"; };
 		CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUIView.swift; sourceTree = "<group>"; };
@@ -326,8 +330,6 @@
 		CC3F992225454B5500428B11 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
 		CC3F99252545765500428B11 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		CC43B7D125827B6300A4A418 /* TerminalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TerminalModel.xcdatamodel; sourceTree = "<group>"; };
-		CC43B8102582919400A4A418 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		CC43B813258291AB00A4A418 /* Participate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Participate.swift; sourceTree = "<group>"; };
 		CC45F54D254AA3A200DC31C6 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
 		CC45F551254AA3BF00DC31C6 /* SearchLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationInteractor.swift; sourceTree = "<group>"; };
 		CC45F554254AA41600DC31C6 /* SearchLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationPresenter.swift; sourceTree = "<group>"; };
@@ -742,6 +744,8 @@
 		CC1DDE8425832DF1000CCC15 /* CoreDataModel */ = {
 			isa = PBXGroup;
 			children = (
+				CC1DDE9C25833577000CCC15 /* LocalStudy+CoreDataClass.swift */,
+				CC1DDE9D25833577000CCC15 /* LocalStudy+CoreDataProperties.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -873,8 +877,6 @@
 				CC3F992225454B5500428B11 /* Terminal.swift */,
 				A5BA1EE0254A99250089D4E9 /* Noti.swift */,
 				A5D058F6255D95000047CA9E /* StudyDetail.swift */,
-				CC43B8102582919400A4A418 /* Location.swift */,
-				CC43B813258291AB00A4A418 /* Participate.swift */,
 				CCF71AA6256F959000EC83C6 /* StudyDetailPost.swift */,
 				A51F2356256E195600CBFC13 /* AccessToken.swift */,
 				A51F235B256E19E600CBFC13 /* Project.swift */,
@@ -888,6 +890,7 @@
 				A500481F25775ADC00E37FAE /* JoinResult.swift */,
 				A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */,
 				CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */,
+				CC1DDEA125833769000CCC15 /* CoreDataManager.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1217,7 +1220,6 @@
 				CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */,
 				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
-				CC43B814258291AB00A4A418 /* Participate.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
 				A51BA0C92578132B00B9673F /* TerminalRouter.swift in Sources */,
@@ -1236,6 +1238,7 @@
 				CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				A53613B2257E6DEE0001ABCC /* SetRemoteManager.swift in Sources */,
+				CC1DDEA225833769000CCC15 /* CoreDataManager.swift in Sources */,
 				A5D058D5255D90CE0047CA9E /* StudyDetailInteractor.swift in Sources */,
 				CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */,
 				CC5795072570C9F200DF96AB /* AddNoticeLocalDataManager.swift in Sources */,
@@ -1259,6 +1262,7 @@
 				A5BA1EF4254AE9900089D4E9 /* UISegmentControl+Ext.swift in Sources */,
 				A5C5B1502545699700F4A86D /* SNSView.swift in Sources */,
 				CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */,
+				CC1DDE9F25833577000CCC15 /* LocalStudy+CoreDataProperties.swift in Sources */,
 				CC60446E2576253F000D11C7 /* NoticeDetailProtocols.swift in Sources */,
 				CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */,
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
@@ -1318,7 +1322,6 @@
 				CCD51C9B256E247600D41771 /* NoticeInteractor.swift in Sources */,
 				CC6044712576262C000D11C7 /* NoticeDetailInteractor.swift in Sources */,
 				CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */,
-				CC43B8112582919400A4A418 /* Location.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
 				CCE279EC256E46C600DB3246 /* Notice.swift in Sources */,
 				CCD51CA8256E257D00D41771 /* NoticeProtocols.swift in Sources */,
@@ -1351,6 +1354,7 @@
 				A547275C255A668600076DBD /* EmailModifyView.swift in Sources */,
 				A57097A6254D6B5F0001DE52 /* NoticeCell.swift in Sources */,
 				A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */,
+				CC1DDE9E25833577000CCC15 /* LocalStudy+CoreDataClass.swift in Sources */,
 				CC198E6F254C000A009D6CDF /* MemeberView.swift in Sources */,
 				A5472759255A4B7900076DBD /* SNSModifyView.swift in Sources */,
 				CCBC88B6254ACF2500C2A6C4 /* BottomView.swift in Sources */,
