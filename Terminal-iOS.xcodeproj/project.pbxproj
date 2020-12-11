@@ -12,6 +12,12 @@
 		A5031EB32574F5DE0009AD77 /* UserInfoPut.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */; };
 		A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D0258387DE0084559C /* ApplyUser.swift */; };
 		A510B9D62583892B0084559C /* ApplyStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D52583892B0084559C /* ApplyStudy.swift */; };
+		A510B9FE2583BB190084559C /* ApplyUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9FD2583BB190084559C /* ApplyUserView.swift */; };
+		A510BA112583BB230084559C /* ApplyUserPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510BA102583BB230084559C /* ApplyUserPresenter.swift */; };
+		A510BA162583BB340084559C /* ApplyUserInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510BA152583BB340084559C /* ApplyUserInteractor.swift */; };
+		A510BA1B2583BB3E0084559C /* ApplyUserProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510BA1A2583BB3E0084559C /* ApplyUserProtocols.swift */; };
+		A510BA202583BB500084559C /* ApplyUserWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510BA1F2583BB500084559C /* ApplyUserWireFrame.swift */; };
+		A510BA252583BB590084559C /* ApplyUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510BA242583BB590084559C /* ApplyUserCell.swift */; };
 		A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */; };
 		A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510EC912559613E009BE9A6 /* UITextView+Ext.swift */; };
 		A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51438AE2524952F00ACB241 /* SetPresenter.swift */; };
@@ -260,6 +266,12 @@
 		A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPut.swift; sourceTree = "<group>"; };
 		A510B9D0258387DE0084559C /* ApplyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUser.swift; sourceTree = "<group>"; };
 		A510B9D52583892B0084559C /* ApplyStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyStudy.swift; sourceTree = "<group>"; };
+		A510B9FD2583BB190084559C /* ApplyUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserView.swift; sourceTree = "<group>"; };
+		A510BA102583BB230084559C /* ApplyUserPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserPresenter.swift; sourceTree = "<group>"; };
+		A510BA152583BB340084559C /* ApplyUserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserInteractor.swift; sourceTree = "<group>"; };
+		A510BA1A2583BB3E0084559C /* ApplyUserProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserProtocols.swift; sourceTree = "<group>"; };
+		A510BA1F2583BB500084559C /* ApplyUserWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserWireFrame.swift; sourceTree = "<group>"; };
+		A510BA242583BB590084559C /* ApplyUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserCell.swift; sourceTree = "<group>"; };
 		A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		A510EC912559613E009BE9A6 /* UITextView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+Ext.swift"; sourceTree = "<group>"; };
 		A51438AE2524952F00ACB241 /* SetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetPresenter.swift; sourceTree = "<group>"; };
@@ -517,6 +529,19 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A510B9FC2583BB050084559C /* ApplyUser */ = {
+			isa = PBXGroup;
+			children = (
+				A510B9FD2583BB190084559C /* ApplyUserView.swift */,
+				A510BA102583BB230084559C /* ApplyUserPresenter.swift */,
+				A510BA152583BB340084559C /* ApplyUserInteractor.swift */,
+				A510BA1A2583BB3E0084559C /* ApplyUserProtocols.swift */,
+				A510BA1F2583BB500084559C /* ApplyUserWireFrame.swift */,
+				A510BA242583BB590084559C /* ApplyUserCell.swift */,
+			);
+			path = ApplyUser;
+			sourceTree = "<group>";
+		};
 		A51BA0AE2577F0CA00B9673F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -538,7 +563,6 @@
 		A52F00D724FD182B00DE3126 /* MyStudy */ = {
 			isa = PBXGroup;
 			children = (
-				A56605D42583575A002C4A77 /* StudyApply */,
 				CCAF0FD02532FFC70060A2F6 /* Main */,
 				A5BA1EE5254AA89A0089D4E9 /* StudyDetail */,
 				A5BA1ED4254A8E160089D4E9 /* Notification */,
@@ -582,21 +606,6 @@
 			path = SearchStudy;
 			sourceTree = "<group>";
 		};
-		A56605D42583575A002C4A77 /* StudyApply */ = {
-			isa = PBXGroup;
-			children = (
-				A56605D8258357A5002C4A77 /* Component */,
-			);
-			path = StudyApply;
-			sourceTree = "<group>";
-		};
-		A56605D8258357A5002C4A77 /* Component */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Component;
-			sourceTree = "<group>";
-		};
 		A56605E025835873002C4A77 /* BaseComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +629,7 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				A510B9FC2583BB050084559C /* ApplyUser */,
 				A5C81C3F25836436008F2B09 /* ApplyList */,
 				CC5794F22570C21D00DF96AB /* AddNotice */,
 				CCD51C86256E17B200D41771 /* Notice */,
@@ -1359,6 +1369,7 @@
 				A5D6A78825743090007D6409 /* ProfileModifyProtocols.swift in Sources */,
 				CCA3FF4B2517823E00F62627 /* StudyCell.swift in Sources */,
 				A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */,
+				A510BA252583BB590084559C /* ApplyUserCell.swift in Sources */,
 				A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */,
 				CCB139CC2559289900410184 /* IntroProtocols.swift in Sources */,
 				CCD51C73256D274A00D41771 /* MyStudyDetailProtocols.swift in Sources */,
@@ -1432,9 +1443,11 @@
 				A56605E3258358A2002C4A77 /* ApplyListCell.swift in Sources */,
 				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
 				A51F235C256E19E600CBFC13 /* Project.swift in Sources */,
+				A510BA202583BB500084559C /* ApplyUserWireFrame.swift in Sources */,
 				CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				A5C81C6725837243008F2B09 /* MyApplyListCell.swift in Sources */,
+				A510BA1B2583BB3E0084559C /* ApplyUserProtocols.swift in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,
 				A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */,
@@ -1454,6 +1467,7 @@
 				A5D6A794257430C9007D6409 /* ProfileModifyRemoteManager.swift in Sources */,
 				A5BA1EE1254A99250089D4E9 /* Noti.swift in Sources */,
 				A5A5F6E2256FEF0A00405C71 /* UserInfo.swift in Sources */,
+				A510BA162583BB340084559C /* ApplyUserInteractor.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				A5E25C7425590DE40090E21E /* NoticeDetailView.swift in Sources */,
 				A5B700B4257A9F27001F62A0 /* ProfileSNSView.swift in Sources */,
@@ -1521,8 +1535,10 @@
 				CC3F992325454B5500428B11 /* Terminal.swift in Sources */,
 				CCA1FF5924FD0C930026C3EA /* SceneDelegate.swift in Sources */,
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
+				A510B9FE2583BB190084559C /* ApplyUserView.swift in Sources */,
 				A5CF046D257E92800078BA67 /* UINavigation+Ext.swift in Sources */,
 				A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */,
+				A510BA112583BB230084559C /* ApplyUserPresenter.swift in Sources */,
 				A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */,
 				A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */,
 				CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */,

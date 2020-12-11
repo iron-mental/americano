@@ -9,7 +9,7 @@
 import UIKit
 
 class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
-    static func createUserListModule() -> UIViewController {
+    static func createUserListModule(studyID: Int) -> UIViewController {
         let view: ApplyUserViewProtocol = ApplyUserView()
         let presenter: ApplyUserPresenterProtocol & ApplyUserInteractorOutputProtocol = ApplyUserPresenter()
         let interactor: ApplyUserInteractorInputProtocol = ApplyUserInteractor()
@@ -22,6 +22,7 @@ class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
         interactor.presenter = presenter
         
         if let view = view as? ApplyUserView {
+            view.studyID = studyID
             return view
         } else {
             return UIViewController()

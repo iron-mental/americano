@@ -7,12 +7,9 @@
 //
 
 import UIKit
-import SwiftKeychainWrapper
-import Kingfisher
 import Then
 
 class ApplyListCell: UITableViewCell {
-    static let cellID = "fdfdfdfd"
     lazy var mainImage = UIImageView()
     lazy var title = UILabel()
     lazy var contents = UILabel()
@@ -21,22 +18,6 @@ class ApplyListCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         attribute()
         layout()
-    }
-    
-    func setData(studies: ApplyStudy) {
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue(token, forHTTPHeaderField: "Authorization")
-            return requestBody
-        }
-        
-        if let imageURL = studies.image {
-            self.mainImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
-        }
-        
-        self.title.text = studies.title
-        self.contents.text = studies.message
     }
     
     func attribute() {

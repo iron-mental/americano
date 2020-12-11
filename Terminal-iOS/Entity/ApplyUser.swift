@@ -10,7 +10,8 @@ import Foundation
 
 struct ApplyUser: Codable {
     let id, userID: Int
-    let image, message, nickname: String
+    let message, nickname: String
+    let image: String?
 
     enum CodingKeys: String, CodingKey {
         case id

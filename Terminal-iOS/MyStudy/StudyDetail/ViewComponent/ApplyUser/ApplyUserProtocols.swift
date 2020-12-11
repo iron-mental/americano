@@ -12,13 +12,13 @@ protocol ApplyUserViewProtocol: class {
     var presenter: ApplyUserPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
-    func showStudyList(studies: [ApplyStudy]?)
+    func showUserList(userList: [ApplyUser]?)
     func showLoading()
     func hideLoading()
 }
 
 protocol ApplyUserWireFrameProtocol: class {
-    static func createStudyListModule() -> UIViewController
+    static func createUserListModule(studyID: Int) -> UIViewController
     
     // PRESENT -> WIREFRAME
     func presentUserInfoDetailScreen(from view: ApplyUserViewProtocol)
@@ -30,19 +30,19 @@ protocol ApplyUserPresenterProtocol: class {
     var wireFrame: ApplyUserWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
-    func viewDidLoad()
-    func showStudyDetail(keyValue: Int, state: Bool)
+    func viewDidLoad(studyID: Int)
+    func showUserInfoDetail(userID: Int, state: Bool)
 }
 
 protocol ApplyUserInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    func didRetrieveStudies(studies: [ApplyStudy]?)
+    func didRetrieveUser(userList: [ApplyUser]?)
     func onError()
 }
 
 protocol ApplyUserInteractorInputProtocol: class {
-    var presenter: MyApplyListInteractorOutputProtocol? { get set }
+    var presenter: ApplyUserInteractorOutputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func getApplyList()
+    func getApplyList(studyID: Int)
 }

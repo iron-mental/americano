@@ -8,23 +8,65 @@
 
 import UIKit
 
-class ApplyUserView: UIViewController {
-
+final class ApplyUserView: UIViewController {
+    var studyID: Int?
+    var presenter: ApplyUserPresenterProtocol?
+    var userList: [ApplyUser] = []
+    lazy var applyUserList = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        presenter?.viewDidLoad(studyID: studyID!)
+        attribute()
+        layout()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func attribute() {
+        self.applyUserList.do {
+            $0.rowHeight = 80
+            $0.register(ApplyUserCell.self, forCellReuseIdentifier: ApplyUserCell.applyUserCellID)
+            $0.delegate = self
+            $0.dataSource = self
+        }
     }
-    */
+    
+    private func layout() {
+        self.view.addSubview(applyUserList)
+        self.applyUserList.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        }
+    }
+}
 
+extension ApplyUserView: ApplyUserViewProtocol {
+    func showUserList(userList: [ApplyUser]?) {
+        if let result = userList {
+            self.userList = result
+            applyUserList.reloadData()
+        }
+    }
+    
+    func showLoading() { }
+    func hideLoading() { }
+}
+
+extension ApplyUserView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return userList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = applyUserList.dequeueReusableCell(withIdentifier: ApplyUserCell.applyUserCellID,
+                                                 for: indexPath) as! ApplyUserCell
+        let data = userList[indexPath.row]
+        cell.setData(userList: data)
+        
+        return cell
+    }
+    
+    
 }

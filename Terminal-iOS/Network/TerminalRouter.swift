@@ -257,7 +257,6 @@ enum TerminalRouter: URLRequestConvertible {
         case .applyStudyList, .applyUserList:
             return nil
             
-        
         // 프로젝트
         case .projectList, .projectDelete:
             return nil

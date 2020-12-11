@@ -27,7 +27,7 @@ class TestViewController: UIViewController {
         view.addSubview(testView)
         testView.do {
             $0.rowHeight = 80
-            $0.register(ApplyListCell.self, forCellReuseIdentifier: ApplyListCell.cellID)
+//            $0.register(ApplyListCell.self, forCellReuseIdentifier: ApplyListCell.cellID)
             $0.delegate = self
             $0.dataSource = self
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -45,10 +45,10 @@ extension TestViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.testView.dequeueReusableCell(withIdentifier: ApplyListCell.cellID, for: indexPath) as! ApplyListCell
-        cell.title.text = tempArr[indexPath.row].title
-        cell.contents.text = tempArr[indexPath.row].content
-        return cell
+//        let cell = self.testView.dequeueReusableCell(withIdentifier: ApplyListCell.cellID, for: indexPath) as! ApplyListCell
+//        cell.title.text = tempArr[indexPath.row].title
+//        cell.contents.text = tempArr[indexPath.row].content
+        return UITableViewCell()
     }
     
     func handleNotifData() {
