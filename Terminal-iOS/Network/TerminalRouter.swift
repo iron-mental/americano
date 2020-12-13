@@ -19,7 +19,7 @@ enum TerminalRouter: URLRequestConvertible {
     case nicknameCheck      (nickname: String)
     case eamilCheck         (email: String)
     case userInfo           (id: String)
-    case userInfoUpdate     (id: String, image: Data, userInfo: Parameters)
+    case userInfoUpdate     (id: String)
     case userWithdrawal     (id: String, email: String, password: String)
     case emailVerify        (id: String)
     case reissuanceToken    (refreshToken: String)
@@ -151,7 +151,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/check-nickname/\(nickname)"
         case let .eamilCheck(email):
             return "user/check-email/\(email)"
-        case let .userInfo(id), let .userInfoUpdate(id, _, _):
+        case let .userInfo(id), let .userInfoUpdate(id):
             return "user/\(id)"
         case let .userWithdrawal(id, _, _):
             return "user/\(id)"
@@ -220,8 +220,8 @@ enum TerminalRouter: URLRequestConvertible {
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
             return nil
-        case let .userInfoUpdate(_, _, userInfo): // 수정해야함
-            return userInfo
+        case .userInfoUpdate: // 수정해야함
+            return nil
         case let .userWithdrawal(_, email, password):
             return [
                 "email": email,
@@ -246,7 +246,7 @@ enum TerminalRouter: URLRequestConvertible {
                 "category": category,
                 "sort": sort
             ]
-        case let .studyCreate: // 파라미터 지정해야함
+        case .studyCreate: // 파라미터 지정해야함
             return nil
         case .studyUpdate:// 파라미터 지정해야함
             return nil
@@ -296,9 +296,15 @@ enum TerminalRouter: URLRequestConvertible {
 //    var multipartFormData: MultipartFormData {
 //            let multipartFormData = MultipartFormData()
 //            switch self {
-//            case let .userInfoUpdate(id, image, userInfo)
-//                multipartFormData.append(data, withName: "file", fileName: "file.png", mimeType: "image/png")
-//            default: ()
+//            case let .userInfoUpdate(_, image, userInfo):
+//                for (key, value) in userInfo {
+//                    let data = "\(value)".data(using: .utf8)!
+//                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
+//                }
+//                multipartFormData.append(image, withName: "file", fileName: "file.png", mimeType: "image/png")
+//                
+//            default:
+//                break
 //            }
 //
 //            return multipartFormData
