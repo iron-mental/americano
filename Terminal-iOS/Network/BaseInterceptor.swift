@@ -38,9 +38,9 @@ final class BaseInterceptor: RequestInterceptor {
             completion(.doNotRetry)
         default:
             if request.retryCount < retryLimit {
-                refreshToken { [self] success in
-                    print("성공여부 :",success)
-                    return completion(.retryWithDelay(retryDelay))
+                refreshToken { success in
+                    print("성공여부 :", success)
+                    return completion(.retryWithDelay(self.retryDelay))
                 }
             }
         }

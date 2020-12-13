@@ -38,11 +38,10 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     }
     
     func validProfileModify(userInfo: UserInfoPut) {
-        let url = "http://3.35.154.27:3000/v1/user/44"
+        var uploadImage: Data?
         let headers: HTTPHeaders = [ "Content-Type": "multipart/form-data",
                                      "Authorization": Terminal.accessToken]
-        let params: Parameters = [
-            "image": userInfo.image!,
+        let params: [String: String] = [
             "nickname": userInfo.nickname!,
             "introduce": userInfo.introduce!,
             "career_title": userInfo.careerTitle!,
@@ -50,28 +49,58 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             "sns_github": userInfo.snsGithub!,
             "sns_linkedin": userInfo.snsLinkedIn!,
             "sns_web": userInfo.snsWeb!,
-            "latitude": userInfo.latitude!,
-            "longitude": userInfo.longitude!,
+            "latitude": "\(userInfo.latitude!)",
+            "longitude": "\(userInfo.longitude!)",
             "sido": userInfo.sido!,
             "sigungu": userInfo.sigungu!
         ]
         
-        let uploadImage = userInfo.image!.jpegData(compressionQuality: 0.5)
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+//        if let image = userInfo.image!.jpegData(compressionQuality: 0.5)
         
-        AF.upload(multipartFormData: { multipartFormData in
-            for (key, value) in params {
-                let data = "\(value)".data(using: .utf8)!
-                multipartFormData.append(data, withName: key, mimeType: "text/plain")
+//        if let image = userInfo.image
+        
+        let route: URLConvertible = TerminalRouter.userInfoUpdate(id: userID) as! URLConvertible
+        
+        TerminalNetworkManager
+            .shared
+            .session
+            .upload(multipartFormData: { multipartFormData in
+                for (key, value) in params {
+                    let data = "\(value)".data(using: .utf8)!
+                    multipartFormData.append(data,
+                                             withName: key,
+                                             mimeType: "text/plain")
+                }
+                multipartFormData.append(uploadImage!,
+                                         withName: "image",
+                                         fileName: "\(userInfo.nickname!).jpg",
+                                         mimeType: "image/jpeg")
+            }, to: route).responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print("여기닷:",JSON(value))
+                case .failure(let err):
+                    print(err)
+                }
             }
-            multipartFormData.append(uploadImage!, withName: "image", fileName: "\(userInfo.nickname!).jpg", mimeType: "image/jpeg")
-        }, to: url, method: .put, headers: headers).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                print("여기닷:",JSON(value))
-            case .failure(let err):
-                print(err)
-            }
-        }
+            
+        
+        
+//        AF.upload(multipartFormData: { multipartFormData in
+//            for (key, value) in params {
+//                let data = "\(value)".data(using: .utf8)!
+//                multipartFormData.append(data, withName: key, mimeType: "text/plain")
+//            }
+//            multipartFormData.append(uploadImage!, withName: "image", fileName: "\(userInfo.nickname!).jpg", mimeType: "image/jpeg")
+//        }, to: url, method: .put, headers: headers).responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//                print("여기닷:",JSON(value))
+//            case .failure(let err):
+//                print(err)
+//            }
+//        }
     }
     
     func remoteProjectList(completion: @escaping (BaseResponse<[Project]>) -> Void) {
