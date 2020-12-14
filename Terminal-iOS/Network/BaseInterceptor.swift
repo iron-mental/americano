@@ -33,17 +33,32 @@ final class BaseInterceptor: RequestInterceptor {
             completion(.doNotRetry)
             return
         }
+        print("status:",statusCode)
         switch statusCode {
         case 200...299:
             completion(.doNotRetry)
-        default:
+        case 404:
+            completion(.doNotRetry)
+        case 401:
             if request.retryCount < retryLimit {
                 refreshToken { success in
                     print("성공여부 :", success)
                     return completion(.retryWithDelay(self.retryDelay))
                 }
             }
+        default:
+            break
         }
+        
+//        case 401:
+//            completion(.doNotRetry)
+//        default:
+//            if request.retryCount < retryLimit {
+//                refreshToken { success in
+//                    print("성공여부 :", success)
+//                    return completion(.retryWithDelay(self.retryDelay))
+//                }
+//            }
     }
     
     func refreshToken(completion: @escaping (_ isSuccess: Bool) -> Void) {

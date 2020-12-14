@@ -38,7 +38,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     }
     
     func validProfileModify(userInfo: UserInfoPut) {
-        var uploadImage: Data?
+//        var uploadImage: Data?
         let headers: HTTPHeaders = [ "Content-Type": "multipart/form-data",
                                      "Authorization": Terminal.accessToken]
         let params: [String: String] = [
@@ -56,7 +56,8 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         ]
         
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-//        if let image = userInfo.image!.jpegData(compressionQuality: 0.5)
+        print(userID)
+        let uploadImage = userInfo.image!.jpegData(compressionQuality: 0.5)
         
 //        if let image = userInfo.image
         
@@ -76,7 +77,10 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                                          withName: "image",
                                          fileName: "\(userInfo.nickname!).jpg",
                                          mimeType: "image/jpeg")
-            }, to: route).responseJSON { response in
+            }, to: route)
+            .validate(statusCode: 200..<299)
+            .responseJSON { response in
+                print(response.response?.statusCode)
                 switch response.result {
                 case .success(let value):
                     print("여기닷:",JSON(value))

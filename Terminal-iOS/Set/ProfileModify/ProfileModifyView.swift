@@ -77,7 +77,7 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
-            requestBody.setValue(token, forHTTPHeaderField: "Authorization")
+            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
         
