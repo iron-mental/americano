@@ -34,7 +34,6 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
              }
             })
         
-        
 //        AF.request("http://3.35.154.27:3000/v1/study/\(studyID)/notice",
 //                   method: .get,headers: headers).responseJSON(completionHandler: { response in
 //                    switch response.result {

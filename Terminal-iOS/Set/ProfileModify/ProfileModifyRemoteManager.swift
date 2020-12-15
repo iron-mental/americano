@@ -21,7 +21,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.userInfo(id: userID))
             .validate(statusCode: 200..<299)
-            .responseJSON { [weak self] response in
+            .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
@@ -56,7 +56,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
         ]
         
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        print(userID)
+        print("userID:",userID)
         let uploadImage = userInfo.image!.jpegData(compressionQuality: 0.5)
         
 //        if let image = userInfo.image

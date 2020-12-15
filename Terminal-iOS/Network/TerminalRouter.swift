@@ -285,6 +285,7 @@ enum TerminalRouter: URLRequestConvertible {
             request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
         case .post, .put, .delete:
             request = try JSONParameterEncoder().encode(parameters, into: request)
+//            request = try URLEncoding.default.encode(request, with: <#T##Parameters?#>)
             request.setValue("application/json", forHTTPHeaderField: "Accept")
         default:
             break

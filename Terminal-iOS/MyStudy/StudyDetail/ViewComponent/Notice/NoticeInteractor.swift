@@ -18,16 +18,17 @@ class NoticeInteractor: NoticeInteractorProtocol {
     func getNoticeList(studyID: Int) {
         resultNoticeList.removeAll()
         nextNoticeID.removeAll()
-        remoteDataManager?.getNoticeList(studyID: studyID, completion: { [self] (result, noticeList, message)  in
+        remoteDataManager?.getNoticeList(studyID: studyID, completion: { result, noticeList, message in
             switch result {
             case true:
                 noticeList?.forEach {
-                    $0.title != nil ? resultNoticeList.append($0) : nextNoticeID.append($0.id)
+                    $0.title != nil ? self.resultNoticeList.append($0) : self.nextNoticeID.append($0.id)
                 }
-                presenter?.showResult(result: result, noticeList: resultNoticeList, message: nil )
+                print("resultNoticeList:",self.resultNoticeList)
+                self.presenter?.showResult(result: result, noticeList: self.resultNoticeList, message: nil )
                 break
             case false:
-                presenter?.showResult(result: result, noticeList: nil, message: message! )
+                self.presenter?.showResult(result: result, noticeList: nil, message: message! )
                 break
             }
         })
