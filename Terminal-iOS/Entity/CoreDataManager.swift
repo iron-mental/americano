@@ -14,18 +14,20 @@ class CoreDataManager {
     let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
     lazy var context = appDelegate.persistentContainer.viewContext
     
+    func createUserInfo(userInfo: UserInfo) {
+        
+    }
+    
     func putUserInfo(userInfo: UserInfo) {
         do {
             var coreUserInfo = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest()) as! [CoreUserInfo]
+            print(coreUserInfo)
         }
         catch {
             
         }
-        
-        let predicate = NSPredicate(format: "id == %@", userInfo.id)
-        
+//        let predicate = NSPredicate(format: "id == %@", userInfo.id)
         let newUserInfo = CoreUserInfo(context: context)
-        
         newUserInfo.id = Int64(userInfo.id)
         newUserInfo.nickname = userInfo.nickname ?? nil
         newUserInfo.email = userInfo.email ?? nil
@@ -52,7 +54,6 @@ class CoreDataManager {
         
         do {
             let result = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest()) as! [CoreUserInfo]
-            
             
             for record in result {
 

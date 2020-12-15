@@ -23,7 +23,15 @@ class SetView: UIViewController {
                                Setting(title: "개인정보 취급방침")]
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
     
+    
+    
+    
     var presenter: SetPresenterProtocol?
+    
+    
+    
+    
+    
     let frameView = UIView()
     let profile = UIImageView(frame: CGRect(x: 0, y: 0,
                                             width: UIScreen.main.bounds.height * 0.1,
@@ -49,11 +57,11 @@ class SetView: UIViewController {
 //                }
 //            }
 //            try CoreDataManager.shared.context.save()
-//            
+//
 //            //            var afterDelete = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest())
 //            //            try CoreDataManager.shared.context.excute(CoreUserInfo.fetchRequest())
 //        } catch {
-//            
+//
 //        }
     }
     
@@ -187,7 +195,6 @@ extension SetView: SetViewProtocol {
         self.name.text = userInfo.nickname
         self.descript.text = userInfo.introduce ?? ""
         self.location.text = userInfo.address ?? ""
-        
     }
 }
 
