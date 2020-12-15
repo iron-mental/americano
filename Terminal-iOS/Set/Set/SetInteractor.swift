@@ -15,6 +15,7 @@ class SetInteractor: SetInteractortInputProtocol {
     
     
     func getUserInfo() {
+        CoreDataManager.shared.getUserinfo()
         remoteDataManager?.getUserInfo()
     }
 }
@@ -22,6 +23,11 @@ class SetInteractor: SetInteractortInputProtocol {
 extension SetInteractor: SetRemoteDataManagerOutputProtocol {
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
         guard let result = userInfo.data else { return }
+        CoreDataManager.shared.putUserInfo(userInfo: result)
         presenter?.didRetrievedUserInfo(userInfo: result)
+    }
+    func error() {
+        
+//        presenter?.didRetrievedUserInfo(userInfo: CoreDataManager.shared.getUserinfo())
     }
 }

@@ -14,6 +14,7 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
     var interactor: AddNoticeInteractorProtocol?
     
     func completeButtonDidTap(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?) {
+        
         interactor?.postNotice(studyID: studyID, notice: notice, state: state, noticeID: noticeID ?? nil)
     }
     

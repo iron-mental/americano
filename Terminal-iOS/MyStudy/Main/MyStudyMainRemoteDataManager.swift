@@ -23,15 +23,18 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.myStudyList(id: userID))
-            .validate(statusCode: 200..<299)
+            .validate(statusCode: 200..<405)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
+
                     let result = try! JSONDecoder().decode(BaseResponse<[MyStudy]>.self, from: data!)
                     completion(result.result, result.data)
                 case .failure(let error):
+                    
                     print("error :", error )
                 }
             }

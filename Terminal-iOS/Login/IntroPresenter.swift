@@ -19,7 +19,6 @@ class IntroPresenter: IntroPresenterProtocol {
             interactor?.checkedEmailValid(input: input, beginState: beginState)
             break
         case .pwdInput:
-            
             beginState == .signUp ? interactor?.checkedPasswordValid(input: input) : interactor?.checkedJoinValid(input: input)
             break
         case .nickname:
@@ -40,7 +39,7 @@ class IntroPresenter: IntroPresenterProtocol {
     }
     
     func nicknameValidInfo(result: Bool) {
-        
+        result ? view?.presentNextView() : view?.showInvalidNickNameAction()
     }
     
     /// 회원가입 유효성 확인
@@ -59,7 +58,6 @@ class IntroPresenter: IntroPresenterProtocol {
             interactor?.checkedEmailValid(input: input, beginState: beginState)
             break
         case .pwdInput:
-            
             beginState == .signUp ? interactor?.checkedPasswordValid(input: input) : interactor?.checkedJoinValid(input: input)
             break
         case .nickname:

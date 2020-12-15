@@ -137,6 +137,7 @@
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC84CF47256284650070E233 /* TerminalAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84CF46256284650070E233 /* TerminalAPI.swift */; };
+		CC8DE8FA2588979500B7D236 /* DAOTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8DE8F92588979500B7D236 /* DAOTest.swift */; };
 		CC8FF5FC257E80D000947FB3 /* ChatTableViewOutputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
 		CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */; };
@@ -183,6 +184,8 @@
 		CCBBEEFB2583A30A00177E25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */; };
 		CCBBEEFF2583A38E00177E25 /* TerminalCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */; };
 		CCBBEF082583BAFC00177E25 /* LocalUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEF072583BAFC00177E25 /* LocalUserInfo.swift */; };
+		CCBBEF352583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEF332583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift */; };
+		CCBBEF362583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEF342583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift */; };
 		CCBC88B6254ACF2500C2A6C4 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */; };
 		CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */; };
 		CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */; };
@@ -350,6 +353,7 @@
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC84CF46256284650070E233 /* TerminalAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAPI.swift; sourceTree = "<group>"; };
+		CC8DE8F92588979500B7D236 /* DAOTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAOTest.swift; sourceTree = "<group>"; };
 		CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewOutputCell.swift; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
 		CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = badgeBarButtonItem.swift; sourceTree = "<group>"; };
@@ -398,6 +402,8 @@
 		CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CCBBEEFE2583A38E00177E25 /* TerminalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TerminalCoreData.xcdatamodel; sourceTree = "<group>"; };
 		CCBBEF072583BAFC00177E25 /* LocalUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserInfo.swift; sourceTree = "<group>"; };
+		CCBBEF332583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreUserInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		CCBBEF342583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreUserInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailView.swift; sourceTree = "<group>"; };
 		CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageView.swift; sourceTree = "<group>"; };
@@ -831,6 +837,8 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				CCBBEF332583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift */,
+				CCBBEF342583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift */,
 				CCBBEEC32583631900177E25 /* CoreDataModel */,
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
 				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
@@ -881,6 +889,7 @@
 				A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */,
 				CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */,
 				CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */,
+				CC8DE8F92588979500B7D236 /* DAOTest.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1237,8 +1246,10 @@
 				A5D058EA255D937F0047CA9E /* StudyDetailPresenter.swift in Sources */,
 				CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */,
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,
+				CC8DE8FA2588979500B7D236 /* DAOTest.swift in Sources */,
 				CCD51CA5256E254B00D41771 /* NoticeLocalDataManager.swift in Sources */,
 				CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */,
+				CCBBEF352583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift in Sources */,
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
@@ -1340,6 +1351,7 @@
 				CC5794F42570C29300DF96AB /* AddNoticeProtocols.swift in Sources */,
 				A51BA0B42577F1B700B9673F /* TerminalNetworkManager.swift in Sources */,
 				CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */,
+				CCBBEF362583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift in Sources */,
 				CC57950A2570C9FE00DF96AB /* AddNoticeWireFrame.swift in Sources */,
 				CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */,
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,

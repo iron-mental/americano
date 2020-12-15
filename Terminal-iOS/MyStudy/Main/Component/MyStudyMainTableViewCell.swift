@@ -16,9 +16,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
     var locationLabel = UILabel()
     var titleLabel = UILabel()
     lazy var notiGuideView = UIView()
-//    let newChatLabel = UILabel()
-//    let newNoticeLabel = UILabel()
-//    let newMemberLabel = UILabel()
     var checkBox = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

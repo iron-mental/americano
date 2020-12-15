@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class LocalUserInfo: NSObject, NSCoding {
+public class LocalUserInfo: NSObject, NSCoding {
     let id: Int
     let nickname, email: String
     let image, introduce: String?

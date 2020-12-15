@@ -280,7 +280,6 @@ extension IntroView: IntroViewProtocol {
     }
     
     func completeJoin() {
-        
         let view = ViewController()
         view.modalPresentationStyle = .fullScreen
         present(view, animated: true, completion: nil)
@@ -293,11 +292,15 @@ extension IntroView: IntroViewProtocol {
     }
     
     func showInvalidPasswordAction() {
+        invalidView.isHidden = false
         invalidLabel.text = "유효하지 않은 비밀번호 입니다."
+        invalidGuideAnimation()
     }
     
     func showInvalidNickNameAction() {
+        invalidView.isHidden = false
         invalidLabel.text = "중복된 닉네임 입니다."
+        invalidGuideAnimation()
     }
     
     func invalidGuideAnimation() {

@@ -121,9 +121,11 @@ class AddNoticeView: UIViewController {
         }
     }
     @objc func completeButtonDidTap() {
+        
         let newNoticePost = NoticePost(title: titleTextField.text ?? "",
                                        contents: contentTextField.text ?? "",
                                        pinned: pinButton.currentTitle == "필독" ? true : false)
+        
         presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
     }
     override func viewWillAppear(_ animated: Bool) {
