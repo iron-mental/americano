@@ -15,22 +15,11 @@ class CoreDataManager {
     lazy var context = appDelegate.persistentContainer.viewContext
     
     func createUserInfo(userInfo: UserInfo) {
-        
-    }
-    
-    func putUserInfo(userInfo: UserInfo) {
-        do {
-            var coreUserInfo = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest()) as! [CoreUserInfo]
-            print(coreUserInfo)
-        }
-        catch {
-            
-        }
-//        let predicate = NSPredicate(format: "id == %@", userInfo.id)
         let newUserInfo = CoreUserInfo(context: context)
+        
         newUserInfo.id = Int64(userInfo.id)
-        newUserInfo.nickname = userInfo.nickname ?? nil
-        newUserInfo.email = userInfo.email ?? nil
+        newUserInfo.nickname = userInfo.nickname
+        newUserInfo.email = userInfo.email
         newUserInfo.image = userInfo.image ?? nil
         newUserInfo.introduce = userInfo.introduce ?? nil
         newUserInfo.address = userInfo.address ?? nil
@@ -40,7 +29,8 @@ class CoreDataManager {
         newUserInfo.snsWeb = userInfo.snsWeb ?? nil
         newUserInfo.snsGithub = userInfo.snsGithub ?? nil
         newUserInfo.emailVerified = userInfo.emailVerified
-        newUserInfo.createdAt = userInfo.createdAt ?? nil
+        newUserInfo.createdAt = userInfo.createdAt
+        
         do {
             try context.save()
             print("CoreData 저장 성공")
@@ -48,6 +38,31 @@ class CoreDataManager {
             print("삐빅 CoreUserInfo 에러~~")
         }
     }
+    
+    func putUserInfo(userInfo: UserInfo) {
+        var updatingUserInfo: CoreUserInfo
+        do {
+            //userInfo.id와 매칭 되는 애만 불러와야함
+            let coreUserInfo = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest()) as! [CoreUserInfo]
+            updatingUserInfo = coreUserInfo.first!
+            updatingUserInfo.nickname = userInfo.nickname
+            updatingUserInfo.email = userInfo.email
+            updatingUserInfo.image = userInfo.image ?? nil
+            updatingUserInfo.introduce = userInfo.introduce ?? nil
+            updatingUserInfo.address = userInfo.address ?? nil
+            updatingUserInfo.careerTitle = userInfo.careerTitle ?? nil
+            updatingUserInfo.careerContents = userInfo.careerContents ?? nil
+            updatingUserInfo.snsLinkedin = userInfo.snsLinkedin ?? nil
+            updatingUserInfo.snsWeb = userInfo.snsWeb ?? nil
+            updatingUserInfo.snsGithub = userInfo.snsGithub ?? nil
+            updatingUserInfo.emailVerified = userInfo.emailVerified
+            updatingUserInfo.createdAt = userInfo.createdAt
+            try context.save()
+            
+        }
+        catch {
+            print("putUserInfo 오류")
+        }    }
     
     func getUserinfo() -> UserInfo? {
         var userInfo: UserInfo?
