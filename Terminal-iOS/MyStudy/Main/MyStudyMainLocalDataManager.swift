@@ -7,7 +7,8 @@
 //
 
 import UIKit
+import CoreData
 
 class MyStudyMainLocalDataManager: MyStudyMainLocalDataManagerProtocol {
-
+    let context = ((UIApplication.shared.delegate) as! AppDelegate).persistentContainer.viewContext
 }

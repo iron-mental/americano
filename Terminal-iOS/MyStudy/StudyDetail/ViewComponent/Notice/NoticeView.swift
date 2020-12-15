@@ -99,6 +99,7 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         var selectedNotice: Notice?
         if indexPath.section == 0 {
             selectedNotice = pinnedNotiArr[indexPath.row]
@@ -126,6 +127,7 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 extension NoticeView: NoticeViewProtocol {
     
     func showNoticeList(noticeList: [Notice]) {
+        
         self.noticeList += noticeList
         sorted()
         notice.reloadData()

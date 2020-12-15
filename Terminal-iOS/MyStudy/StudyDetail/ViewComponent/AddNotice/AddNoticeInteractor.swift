@@ -14,6 +14,7 @@ class AddNoticeInteractor: AddNoticeInteractorProtocol {
     var localDataManager: AddNoticeLocalDataManagerProtocol?
     
     func postNotice(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?) {
+        
         if state == .edit {
             remoteDataManager?.putNotice(studyID: studyID, notice: notice, noticeID: noticeID!, completion: { result, notice in
                 self.presenter?.addNoticeResult(result: result, notice: notice, studyID: studyID)

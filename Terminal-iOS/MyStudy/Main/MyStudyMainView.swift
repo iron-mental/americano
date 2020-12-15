@@ -14,9 +14,11 @@ enum MyStudyMainViewState {
     case edit
 }
 
+// 마이스터디 탭에 들어갈 메인 뷰 입니다.
 class MyStudyMainView: UIViewController {
     var presenter: MyStudyMainPresenterProtocol?
     var state: MyStudyMainViewState = .normal
+    
     
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()

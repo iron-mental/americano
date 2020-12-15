@@ -80,5 +80,6 @@ protocol StudyListRemoteDataManagerOutputProtocol: class {
 protocol StudyListLocalDataManagerInputProtocol: class {
     // INTERACTOR -> LOCALDATAMANAGER
     func retrieveStudyList() throws -> [Study]
+    func saveStudylist(studyList: [Study])
 //    func savePost(id: Int, title: String, imageUrl: String, thumbImageUrl: String) throws
 }

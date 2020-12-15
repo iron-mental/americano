@@ -59,6 +59,7 @@ protocol SetRemoteDataManagerInputProtocol: class {
 
 protocol SetRemoteDataManagerOutputProtocol: class {
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
+    func error()
 }
 
 protocol SetLocalDataManagerInputProtocol: class {

@@ -38,9 +38,11 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
         AF.request(url, method: .delete, encoding: JSONEncoding.default, headers: headers ).responseJSON { result in
             switch result.result {
             case .success(let value):
+                
                 completion( true, "테스트")
                 break
             case .failure( _):
+                
                 break
             }
         }
