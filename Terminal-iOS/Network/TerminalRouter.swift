@@ -51,7 +51,7 @@ enum TerminalRouter: URLRequestConvertible {
     case createNotice       (studyID: String, notice: Parameters)
     case noticeDetail       (studyID: String, noticeID: String)
     case noticeList         (studyID: String)
-    case noticeListForKey   (studyID: String, value: [Int])
+    case noticeListForKey   (studyID: String, value: String)
     case noticeUpdate       (studyID: String, noticeID: String, notice: Parameters)
     case noticeDelete       (studyID: String, noticeID: String)
     
@@ -189,7 +189,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/\(id)/apply"
         case let .applyUserList(studyID):
             return "study/\(studyID)/apply"
-            
+        
         // 공지사항
         case let .createNotice(studyID, _):
             return "study/\(studyID)/notice"
@@ -238,9 +238,7 @@ enum TerminalRouter: URLRequestConvertible {
         case .studyDetail, .studyDelete, .myStudyList, .hotKeyword:
             return nil
         case let .studyListForKey(value):
-            return [
-                "values" : value
-            ]
+            return ["values": value]
         case let .studyList(category, sort):
             return [
                 "category": category,
@@ -268,7 +266,9 @@ enum TerminalRouter: URLRequestConvertible {
         // 공지사항
         case let .createNotice(_, notice), let .noticeUpdate(_, _, notice):
             return notice
-        case .noticeDetail, .noticeList, .noticeListForKey, .noticeDelete:
+        case let .noticeListForKey(_, value):
+            return ["values": value]
+        case .noticeDetail, .noticeList, .noticeDelete:
             return nil
         }
     }

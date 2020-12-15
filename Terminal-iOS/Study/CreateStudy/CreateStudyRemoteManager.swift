@@ -12,13 +12,9 @@ import SwiftyJSON
 
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
     let header: HTTPHeaders = [ "Content-Type": "multipart/form-data",
-                                "Authorization": Terminal.accessToken]
+                                "Authorization": "test"]
     
     func postStudy(study: StudyDetailPost, completion: @escaping (Bool, String) -> Void) {
-        
-        
-        print("여기서", study)
-        
         let params : [String : String] = [
             "category" : study.category != nil ? study.category : "",
             "title" : study.title != nil ? study.title : "",

@@ -38,9 +38,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     }
     
     func validProfileModify(userInfo: UserInfoPut) {
-//        var uploadImage: Data?
-        let headers: HTTPHeaders = [ "Content-Type": "multipart/form-data",
-                                     "Authorization": Terminal.accessToken]
+        
         let params: [String: String] = [
             "nickname": userInfo.nickname!,
             "introduce": userInfo.introduce!,
