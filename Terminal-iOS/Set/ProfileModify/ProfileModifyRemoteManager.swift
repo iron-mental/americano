@@ -112,6 +112,8 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
                         if result.result {
+                            print("프로젝트 삭제완료")
+                            debugPrint(response)
                             completion(true)
                         } else {
                             completion(false)
@@ -129,7 +131,6 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     
     func registerProject(project: [String: String]) {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        print(project)
         TerminalNetworkManager
             .shared
             .session
@@ -138,7 +139,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    print(JSON(value))
+                    debugPrint(response)
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {

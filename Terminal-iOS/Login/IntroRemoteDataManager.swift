@@ -70,6 +70,9 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             "push_token": KeychainWrapper.standard.string(forKey: "pushToken") ?? "1"
         ]
         
+        print(KeychainWrapper.standard.string(forKey: "accessToken"))
+        print(KeychainWrapper.standard.string(forKey: "refreshToken"))
+        
         TerminalNetworkManager
             .shared
             .session
