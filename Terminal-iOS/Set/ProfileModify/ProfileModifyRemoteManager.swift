@@ -75,7 +75,6 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             }, with: TerminalRouter.userInfoUpdate(id: userID))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
-                print("상태코드?:",response.response?.statusCode)
                 switch response.result {
                 case .success(let value):
                     print("여기닷:",JSON(value))

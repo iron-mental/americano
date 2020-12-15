@@ -32,8 +32,6 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
     func completeModify(userInfo: UserInfoPut, project: [Project]) {
         remoteDataManager?.validProfileModify(userInfo: userInfo)
         
-        
-            
             /// 서버의 내 프로젝트 데이터 받아옴
 //            self.remoteDataManager?.remoteProjectList(completion: { result in
 //                if result.result {
