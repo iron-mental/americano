@@ -48,6 +48,7 @@ class SetView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
+        //임시 주석입니다 곧 삭제할게용
 //        do {
 //            let results = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest())
 //            for managedObject in results {

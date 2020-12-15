@@ -25,7 +25,7 @@ extension SetInteractor: SetRemoteDataManagerOutputProtocol {
         //기존의 내용을 수정
         if let coreUserInfo = CoreDataManager.shared.getUserinfo() {
             //core에 있다는소리
-            //put 하는 함수 ( 내용이 다르다면 )
+            //put 하는 함수
             CoreDataManager.shared.putUserInfo(userInfo: result)
         } else {
             //core가 nil 이라는 소리
