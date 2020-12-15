@@ -20,12 +20,6 @@ enum AssetsColor {
     case pinnedNoticeColor
 }
 
-
-
-
-
-
-
 extension UIColor {
     static func appColor(_ name: AssetsColor) -> UIColor {
         switch name {
