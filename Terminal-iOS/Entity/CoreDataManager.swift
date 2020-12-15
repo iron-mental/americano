@@ -15,7 +15,17 @@ class CoreDataManager {
     lazy var context = appDelegate.persistentContainer.viewContext
     
     func putUserInfo(userInfo: UserInfo) {
+        do {
+            var coreUserInfo = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest()) as! [CoreUserInfo]
+        }
+        catch {
+            
+        }
+        
+        let predicate = NSPredicate(format: "id == %@", userInfo.id)
+        
         let newUserInfo = CoreUserInfo(context: context)
+        
         newUserInfo.id = Int64(userInfo.id)
         newUserInfo.nickname = userInfo.nickname ?? nil
         newUserInfo.email = userInfo.email ?? nil
@@ -37,16 +47,34 @@ class CoreDataManager {
         }
     }
     
-    func getUserinfo() {
+    func getUserinfo() -> UserInfo? {
+        var userInfo: UserInfo?
+        
         do {
             let result = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest()) as! [CoreUserInfo]
+            
+            
             for record in result {
-                print(record.id)
+
+                userInfo = UserInfo(id: Int(record.id),
+                                    nickname: record.nickname ?? "nicknameTemp",
+                                    email: record.email ?? "emailTemp",
+                                    image: record.image,
+                                    introduce: record.introduce,
+                                    address: record.address,
+                                    careerTitle: record.careerTitle,
+                                    careerContents: record.careerContents,
+                                    snsLinkedin: record.snsLinkedin,
+                                    snsWeb: record.snsWeb,
+                                    snsGithub: record.snsGithub,
+                                    emailVerified: true,
+                                    createdAt: record.createdAt ?? "createdAt Temp")
+                break
             }
+            return userInfo! ?? nil
         }
         catch {
-            
+            return nil
         }
-//        return []
     }
 }

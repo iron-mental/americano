@@ -9,11 +9,10 @@
 import UIKit
 import SwiftKeychainWrapper
 import Kingfisher
-
+import CoreData
 class SetView: UIViewController {
     // 섹션
     var sections: [String] = ["계정", "알림", "정보", ""]
-    
     var account: [String] = ["이메일", "SNS"]
     var noti: [String] = ["알림"]
     var tempData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
@@ -25,7 +24,6 @@ class SetView: UIViewController {
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
     
     var presenter: SetPresenterProtocol?
-    
     let frameView = UIView()
     let profile = UIImageView(frame: CGRect(x: 0, y: 0,
                                             width: UIScreen.main.bounds.height * 0.1,
@@ -42,8 +40,23 @@ class SetView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
+        
+//        do {
+//            let results = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest())
+//            for managedObject in results {
+//                if let managedObjectData: NSManagedObject = managedObject as? NSManagedObject {
+//                    CoreDataManager.shared.context.delete(managedObjectData)
+//                }
+//            }
+//            try CoreDataManager.shared.context.save()
+//            
+//            //            var afterDelete = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest())
+//            //            try CoreDataManager.shared.context.excute(CoreUserInfo.fetchRequest())
+//        } catch {
+//            
+//        }
     }
-
+    
     func attribute() {
         let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
                                                                      action: #selector(pushProfileModify(_:)))
@@ -152,7 +165,7 @@ extension SetView: SetViewProtocol {
         
         /// 로그아웃과 동시에  토큰 삭제
         KeychainWrapper.standard.remove(forKey: "refreshToken")
-//        KeychainWrapper.standard.remove(forKey: "accessToken")
+        //        KeychainWrapper.standard.remove(forKey: "accessToken")
         navigationController?.pushViewController(view, animated: false)
     }
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신
