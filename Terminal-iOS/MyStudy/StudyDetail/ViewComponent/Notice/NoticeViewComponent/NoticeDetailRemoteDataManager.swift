@@ -24,7 +24,7 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
                 case .success(let value):
                     let json = "\(JSON(value))".data(using: .utf8)
                     let result: BaseResponse<Notice> = try! JSONDecoder().decode(BaseResponse<Notice>.self, from: json!)
-                    guard  let notice = result.data else { return }
+                    guard let notice = result.data else { return }
                     completion(result.result, notice)
                     break
                 case .failure( _):

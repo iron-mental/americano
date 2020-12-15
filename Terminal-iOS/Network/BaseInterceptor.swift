@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 import SwiftyJSON
 
 final class BaseInterceptor: RequestInterceptor {
-    let retryLimit = 3
+    let retryLimit = 5
     let retryDelay: TimeInterval = 0.5
     var accessToken: String = ""
     
@@ -37,8 +37,6 @@ final class BaseInterceptor: RequestInterceptor {
         print("ststus")
         switch statusCode {
         case 200...299:
-            completion(.doNotRetry)
-        case 404:
             completion(.doNotRetry)
         case 401:
             if request.retryCount < retryLimit {

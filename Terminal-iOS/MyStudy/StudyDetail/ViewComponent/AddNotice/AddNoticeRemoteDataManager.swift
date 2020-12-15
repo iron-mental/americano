@@ -23,7 +23,7 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.createNotice(studyID: "\(studyID)", notice: params))
+            .request(TerminalRouter.noticeCreate(studyID: "\(studyID)", notice: params))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
                 switch response.result {

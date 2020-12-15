@@ -33,7 +33,7 @@ enum TerminalRouter: URLRequestConvertible {
     case projectDelete      (id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
-    case studyCreate        (image: Data, Study: Parameters)
+    case studyCreate        (study: Parameters)
     case studyDetail        (studyID: String)
     case studyUpdate        (studyID: String)
     case studyDelete        (studyID: String)
@@ -48,7 +48,7 @@ enum TerminalRouter: URLRequestConvertible {
     case applyUserList      (studyID: String)
     
     // 공지사항
-    case createNotice       (studyID: String, notice: Parameters)
+    case noticeCreate       (studyID: String, notice: Parameters)
     case noticeDetail       (studyID: String, noticeID: String)
     case noticeList         (studyID: String)
     case noticeListForKey   (studyID: String, value: String)
@@ -123,7 +123,7 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
             
         // 공지사항
-        case .createNotice:
+        case .noticeCreate:
             return .post
         case .noticeDetail:
             return .get
@@ -191,7 +191,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/apply"
         
         // 공지사항
-        case let .createNotice(studyID, _):
+        case let .noticeCreate(studyID, _):
             return "study/\(studyID)/notice"
         case let .noticeDetail(studyID, noticeID):
             return "study/\(studyID)/notice/\(noticeID)"
@@ -244,8 +244,8 @@ enum TerminalRouter: URLRequestConvertible {
                 "category": category,
                 "sort": sort
             ]
-        case .studyCreate: // 파라미터 지정해야함
-            return nil
+        case let .studyCreate(study):
+            return study
         case .studyUpdate:// 파라미터 지정해야함
             return nil
             
@@ -264,7 +264,7 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 공지사항
-        case let .createNotice(_, notice), let .noticeUpdate(_, _, notice):
+        case let .noticeCreate(_, notice), let .noticeUpdate(_, _, notice):
             return notice
         case let .noticeListForKey(_, value):
             return ["values": value]

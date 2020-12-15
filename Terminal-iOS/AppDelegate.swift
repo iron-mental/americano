@@ -35,10 +35,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
             let userInfo = notification.request.content.userInfo
             print("Receive notification in the foreground \(userInfo)")
-//            let pref = UserDefaults.init(suiteName: "group.id.gits.notifserviceextension")
-//            pref?.set(userInfo, forKey: "NOTIF_DATA")
-//            guard let vc = UIApplication.shared.windows.first?.rootViewController as? ViewController else { return }
-//            vc.handleNotifData()
+            let pref = UserDefaults.init(suiteName: "terminal_notification")
+            pref?.set(userInfo, forKey: "NOTIFI_DATA")
+
             completionHandler([.alert, .badge, .sound])
         }
 
