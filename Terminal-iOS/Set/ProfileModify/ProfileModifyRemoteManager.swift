@@ -55,13 +55,8 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             "sigungu": userInfo.sigungu!
         ]
         
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        print("userID:",userID)
         let uploadImage = userInfo.image!.jpegData(compressionQuality: 0.5)
-        
-//        if let image = userInfo.image
-        
-        let route: URLConvertible = TerminalRouter.userInfoUpdate(id: userID) as! URLConvertible
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         
         TerminalNetworkManager
             .shared
@@ -77,10 +72,10 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                                          withName: "image",
                                          fileName: "\(userInfo.nickname!).jpg",
                                          mimeType: "image/jpeg")
-            }, to: route)
+            }, with: TerminalRouter.userInfoUpdate(id: userID))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
-                print(response.response?.statusCode)
+                print("상태코드?:",response.response?.statusCode)
                 switch response.result {
                 case .success(let value):
                     print("여기닷:",JSON(value))
@@ -88,23 +83,6 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     print(err)
                 }
             }
-            
-        
-        
-//        AF.upload(multipartFormData: { multipartFormData in
-//            for (key, value) in params {
-//                let data = "\(value)".data(using: .utf8)!
-//                multipartFormData.append(data, withName: key, mimeType: "text/plain")
-//            }
-//            multipartFormData.append(uploadImage!, withName: "image", fileName: "\(userInfo.nickname!).jpg", mimeType: "image/jpeg")
-//        }, to: url, method: .put, headers: headers).responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                print("여기닷:",JSON(value))
-//            case .failure(let err):
-//                print(err)
-//            }
-//        }
     }
     
     func remoteProjectList(completion: @escaping (BaseResponse<[Project]>) -> Void) {
