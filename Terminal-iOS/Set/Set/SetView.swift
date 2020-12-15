@@ -48,7 +48,6 @@ class SetView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
-        
 //        do {
 //            let results = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest())
 //            for managedObject in results {
