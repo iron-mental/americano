@@ -29,8 +29,9 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
                     self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
-                case .failure(let _):
-                    self.remoteRequestHandler?.error()
+                case .failure(let err):
+                    print("실패")
+                    print(err)
                 }
             }
     }

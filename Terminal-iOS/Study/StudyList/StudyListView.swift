@@ -18,7 +18,7 @@ class StudyListView: UIViewController {
     let locationButton = UIButton()
     let selectedUnderline = UIView()
     let refreshControl = UIRefreshControl()
-
+    var enumValue: AssetsColor = .testColor
     var sortState: SortState = .new
     
     var presenter: StudyListPresenterProtocol?

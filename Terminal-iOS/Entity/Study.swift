@@ -16,7 +16,7 @@ struct Study: Codable {
     let leaderImage, createdAt: String?
     let members: Int?
     let isMember: Bool?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, title, introduce, image, sigungu, isMember
         case leaderImage = "leader_image"
@@ -25,21 +25,44 @@ struct Study: Codable {
     }
 }
 
+public class TestStudyList: NSObject, NSCoding {
 
+    public var testList: [TestStudy] = []
+    
+    enum Key: String {
+        case testList = "testList"
+    }
+    init(list: [TestStudy]) {
+        self.testList = list
+    }
+    public func encode(with coder: NSCoder) {
+        coder.encode(testList, forKey: Key.testList.rawValue)
+    }
+    
+    public required convenience init?(coder: NSCoder) {
+        let list = coder.decodeObject(forKey: Key.testList.rawValue) as! [TestStudy]
+        
+        self.init(list: list)
+    }
+}
 
-//이부분 테스트때매 만들었는데 윗부분 건드리기 애매해서 잠시 만들어놨습니다 ㅎㅎ
-//SNS에 대한 구조체를 만든뒤  따로 빼서 쓸까 고민이 되는
-
-struct StudyInfo {
-    var image: UIImage
-    var userID: Int
-    var category: String
-    var title: String
-    var introduce: String
-    var progress: String
-    var studyTime: String
-    var location: String
-    var notion: String?
-    var everNote: String?
-    var web: String?
+public class TestStudy: NSObject, NSCoding {
+    public var id = 0
+    
+    enum Key: String {
+        case id = "id"
+    }
+    init(id: Int) {
+        self.id = id
+    }
+    public func encode(with coder: NSCoder) {
+        coder.encode(id, forKey: Key.id.rawValue)
+    }
+    public required convenience init?(coder: NSCoder) {
+        if let studyID = coder.decodeObject(forKey: Key.id.rawValue) {
+            self.init(id: studyID as! Int)
+        } else {
+            self.init(id: 1)
+        }
+    }
 }

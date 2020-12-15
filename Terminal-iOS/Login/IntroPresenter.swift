@@ -39,7 +39,7 @@ class IntroPresenter: IntroPresenterProtocol {
     }
     
     func nicknameValidInfo(result: Bool) {
-        
+        result ? view?.presentNextView() : view?.showInvalidNickNameAction()
     }
     
     /// 회원가입 유효성 확인

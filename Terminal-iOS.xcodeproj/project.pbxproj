@@ -88,7 +88,6 @@
 		A5D058EA255D937F0047CA9E /* StudyDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058E9255D937F0047CA9E /* StudyDetailPresenter.swift */; };
 		A5D058ED255D93910047CA9E /* StudyDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058EC255D93910047CA9E /* StudyDetailWireFrame.swift */; };
 		A5D058F0255D939C0047CA9E /* StudyDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058EF255D939C0047CA9E /* StudyDetailProtocols.swift */; };
-		A5D058F7255D95000047CA9E /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058F6255D95000047CA9E /* StudyDetail.swift */; };
 		A5D2A5F925373D180010AE1C /* HotKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */; };
 		A5D5AE572573CE1B003BB277 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5AE562573CE1B003BB277 /* Authorization.swift */; };
 		A5D5AE5A2573DAFB003BB277 /* IntroWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5AE592573DAFB003BB277 /* IntroWireFrame.swift */; };
@@ -128,6 +127,7 @@
 		CC3F99202545448E00428B11 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F991F2545448E00428B11 /* HomeView.swift */; };
 		CC3F992325454B5500428B11 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F992225454B5500428B11 /* Terminal.swift */; };
 		CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F99252545765500428B11 /* UINavigationController+Ext.swift */; };
+		CC43B8232582922900A4A418 /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058F6255D95000047CA9E /* StudyDetail.swift */; };
 		CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F54D254AA3A200DC31C6 /* SearchLocationView.swift */; };
 		CC45F552254AA3BF00DC31C6 /* SearchLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F551254AA3BF00DC31C6 /* SearchLocationInteractor.swift */; };
 		CC45F555254AA41600DC31C6 /* SearchLocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F554254AA41600DC31C6 /* SearchLocationPresenter.swift */; };
@@ -195,6 +195,11 @@
 		CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D225592DCF00410184 /* IntroInteractor.swift */; };
 		CCB139D625592E0300410184 /* IntroRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */; };
 		CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */; };
+		CCBBEEFB2583A30A00177E25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */; };
+		CCBBEEFF2583A38E00177E25 /* TerminalCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */; };
+		CCBBEF082583BAFC00177E25 /* LocalUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEF072583BAFC00177E25 /* LocalUserInfo.swift */; };
+		CCBBEF352583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEF332583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift */; };
+		CCBBEF362583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEF342583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift */; };
 		CCBC88B6254ACF2500C2A6C4 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */; };
 		CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */; };
 		CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */; };
@@ -452,6 +457,11 @@
 		CCB139D225592DCF00410184 /* IntroInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroInteractor.swift; sourceTree = "<group>"; };
 		CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWireFrame.swift; sourceTree = "<group>"; };
+		CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		CCBBEEFE2583A38E00177E25 /* TerminalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TerminalCoreData.xcdatamodel; sourceTree = "<group>"; };
+		CCBBEF072583BAFC00177E25 /* LocalUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalUserInfo.swift; sourceTree = "<group>"; };
+		CCBBEF332583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreUserInfo+CoreDataClass.swift"; path = "Terminal-iOS/CoreDataModel/CoreUserInfo+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		CCBBEF342583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreUserInfo+CoreDataProperties.swift"; path = "Terminal-iOS/CoreDataModel/CoreUserInfo+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 		CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailView.swift; sourceTree = "<group>"; };
 		CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageView.swift; sourceTree = "<group>"; };
@@ -923,6 +933,7 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				CCBBEEC32583631900177E25 /* CoreDataModel */,
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
 				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
 				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
@@ -931,6 +942,7 @@
 				A56605E025835873002C4A77 /* BaseComponent */,
 				A5BA460C255D09C80061C511 /* Network */,
 				A587CEC7251A428A00A2AD13 /* Extensions-Utillities */,
+				CCBBEF012583A7F500177E25 /* CoreDataEntity */,
 				CCA3FF34251781E200F62627 /* Entity */,
 				A52F00D824FD182C00DE3126 /* Study */,
 				A52F00D724FD182B00DE3126 /* MyStudy */,
@@ -944,6 +956,7 @@
 				CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */,
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
+				CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */,
 			);
 			path = "Terminal-iOS";
 			sourceTree = "<group>";
@@ -971,6 +984,7 @@
 				A500481F25775ADC00E37FAE /* JoinResult.swift */,
 				A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */,
 				CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */,
+				CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */,
 				A53BC1992582604300C7EC20 /* HotKeyword.swift */,
 				A510B9D0258387DE0084559C /* ApplyUser.swift */,
 				A510B9D52583892B0084559C /* ApplyStudy.swift */,
@@ -1065,6 +1079,23 @@
 				CC1BE0322510CC0000F88313 /* SelectCategoryProtocols.swift */,
 			);
 			path = SelectCategory;
+			sourceTree = "<group>";
+		};
+		CCBBEEC32583631900177E25 /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				CCBBEF332583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift */,
+				CCBBEF342583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift */,
+			);
+			path = CoreDataModel;
+			sourceTree = "<group>";
+		};
+		CCBBEF012583A7F500177E25 /* CoreDataEntity */ = {
+			isa = PBXGroup;
+			children = (
+				CCBBEF072583BAFC00177E25 /* LocalUserInfo.swift */,
+			);
+			path = CoreDataEntity;
 			sourceTree = "<group>";
 		};
 		CCBC88B4254ACF0B00C2A6C4 /* Component */ = {
@@ -1340,6 +1371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC43B8232582922900A4A418 /* StudyDetail.swift in Sources */,
 				CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */,
 				CC1BE0392510D8AD00F88313 /* CreateStudyWireFrame.swift in Sources */,
 				CCB139D625592E0300410184 /* IntroRemoteDataManager.swift in Sources */,
@@ -1392,6 +1424,7 @@
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,
 				CCD51CA5256E254B00D41771 /* NoticeLocalDataManager.swift in Sources */,
 				CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */,
+				CCBBEF352583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift in Sources */,
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
@@ -1406,6 +1439,7 @@
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */,
 				A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */,
+				CCBBEF082583BAFC00177E25 /* LocalUserInfo.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
 				CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */,
 				A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */,
@@ -1469,6 +1503,7 @@
 				A5BA1EE1254A99250089D4E9 /* Noti.swift in Sources */,
 				A5A5F6E2256FEF0A00405C71 /* UserInfo.swift in Sources */,
 				A510BA162583BB340084559C /* ApplyUserInteractor.swift in Sources */,
+				CCBBEEFB2583A30A00177E25 /* CoreDataManager.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				A5E25C7425590DE40090E21E /* NoticeDetailView.swift in Sources */,
 				A5B700B4257A9F27001F62A0 /* ProfileSNSView.swift in Sources */,
@@ -1492,7 +1527,6 @@
 				CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */,
 				A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */,
 				CC5794FB2570C9BA00DF96AB /* AddNoticeView.swift in Sources */,
-				A5D058F7255D95000047CA9E /* StudyDetail.swift in Sources */,
 				A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */,
 				CCAF0FE6253303770060A2F6 /* MyStudyMainWireFrame.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
@@ -1501,6 +1535,7 @@
 				CC5794F42570C29300DF96AB /* AddNoticeProtocols.swift in Sources */,
 				A51BA0B42577F1B700B9673F /* TerminalNetworkManager.swift in Sources */,
 				CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */,
+				CCBBEF362583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift in Sources */,
 				CC57950A2570C9FE00DF96AB /* AddNoticeWireFrame.swift in Sources */,
 				CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */,
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
@@ -1530,6 +1565,7 @@
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				CC5794FE2570C9C600DF96AB /* AddNoticeInteractor.swift in Sources */,
 				A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */,
+				CCBBEEFF2583A38E00177E25 /* TerminalCoreData.xcdatamodeld in Sources */,
 				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,
 				A5753449257669DE00FD7D0C /* ProjectCell.swift in Sources */,
 				CC3F992325454B5500428B11 /* Terminal.swift in Sources */,
@@ -1882,6 +1918,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CCBBEEFE2583A38E00177E25 /* TerminalCoreData.xcdatamodel */,
+			);
+			currentVersion = CCBBEEFE2583A38E00177E25 /* TerminalCoreData.xcdatamodel */;
+			path = TerminalCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CCA1FF4B24FD0C930026C3EA /* Project object */;
 }

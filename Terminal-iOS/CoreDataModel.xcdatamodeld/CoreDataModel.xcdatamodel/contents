@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LocalStudy" representedClassName="LocalStudy" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="studyList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalStudyList" inverseName="study" inverseEntity="LocalStudyList"/>
+    </entity>
+    <entity name="LocalStudyList" representedClassName="LocalStudyList" syncable="YES">
+        <attribute name="list" optional="YES" attributeType="Transformable" customClassName="[TestStudy]"/>
+        <relationship name="study" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LocalStudy" inverseName="studyList" inverseEntity="LocalStudy"/>
+    </entity>
+    <elements>
+        <element name="LocalStudyList" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="LocalStudy" positionX="-45" positionY="9" width="128" height="73"/>
+    </elements>
+</model>

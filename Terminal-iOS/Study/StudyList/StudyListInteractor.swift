@@ -20,6 +20,7 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
     var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
     
     func retrieveStudyList(category: String) {
+        localDataManager?.saveStudylist(studyList: [Study(id: 4, title: "test", introduce: "zzzz", image: "zcxvzx", sigungu: "dddd", leaderImage: "imagetest", createdAt: "creatAt column", members: 1, isMember: true)])
         remoteDataManager?.retrieveStudyList(category: category)
         remoteDataManager?.retrieveLengthStudyList(category: category)
     }
@@ -118,7 +119,7 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
                 }
             }
         }
-        
+//        localDataManager?.saveStudylist(studyList: resultArr)
         presenter?.didRetrieveLengthStudies(studies: studyArr)
     }
     

@@ -16,6 +16,7 @@ class SetWireFrame: SetWireFrameProtocol {
         let wireFrame: SetWireFrameProtocol = SetWireFrame()
         let remoteDataManager: SetRemoteDataManagerInputProtocol = SetRemoteManager()
         
+    
         view.presenter = presenter
         
         presenter.view = view

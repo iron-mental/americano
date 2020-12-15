@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LocalStudy" representedClassName="LocalStudy" syncable="YES">
+        <attribute name="createAt" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="introduce" optional="YES" attributeType="String"/>
+        <attribute name="isMember" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="leaderImage" optional="YES" attributeType="String"/>
+        <attribute name="members" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sigungu" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="LocalStudyList" representedClassName="LocalStudyList" syncable="YES" codeGenerationType="class">
+        <attribute name="studyList" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="testString" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Please" representedClassName="Please" syncable="YES" codeGenerationType="class">
+        <attribute name="test" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="TestForCoreData" representedClassName="TestForCoreData" syncable="YES">
+        <attribute name="stringTest" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="LocalStudy" positionX="-63" positionY="-18" width="128" height="178"/>
+        <element name="LocalStudyList" positionX="-54" positionY="63" width="128" height="73"/>
+        <element name="TestForCoreData" positionX="-54" positionY="54" width="128" height="58"/>
+        <element name="Please" positionX="-54" positionY="54" width="128" height="58"/>
+    </elements>
+</model>

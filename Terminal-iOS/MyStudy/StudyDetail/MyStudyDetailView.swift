@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
     

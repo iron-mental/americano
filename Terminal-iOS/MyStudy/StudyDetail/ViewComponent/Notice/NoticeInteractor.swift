@@ -24,7 +24,6 @@ class NoticeInteractor: NoticeInteractorProtocol {
                 noticeList?.forEach {
                     $0.title != nil ? self.resultNoticeList.append($0) : self.nextNoticeID.append($0.id)
                 }
-                print("resultNoticeList:",self.resultNoticeList)
                 self.presenter?.showResult(result: result, noticeList: self.resultNoticeList, message: nil )
                 break
             case false:
