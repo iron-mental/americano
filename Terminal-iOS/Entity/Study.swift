@@ -52,7 +52,6 @@ public class TestStudyList: NSObject, NSCoding {
 }
 
 public class TestStudy: NSObject, NSCoding {
-//    public var testStudy: TestStudy?
     public var id = 0
     
     enum Key: String {
