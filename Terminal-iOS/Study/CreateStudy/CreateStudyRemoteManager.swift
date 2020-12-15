@@ -81,24 +81,29 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
         
-//        AF.upload(multipartFormData: { multipartFormData in
-//            for (key, value) in params {
-//                if value != nil && value != "" && value != "nil" && value != "same" {
-//                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
-//                }
-//            }
-//            multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
-//        }, to: "http://3.35.154.27:3000/v1/study/\(studyID)", method: .put, headers: header).responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                print(JSON(value))
-//                completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
-//                break
-//            case .failure(let err):
-//                completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)
-//                break
-//            }
-//        }
+TerminalNetworkManager
+            .shared
+            .session
+            .upload(multipartFormData: { multipartFormData in
+                for (key, value) in params {
+                    if value != nil && value != "" && value != "nil" && value != "same" {
+                        multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+                    }
+                }
+                multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
+            }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)"))
+            .validate(statusCode: 200..<299)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    print(JSON(value))
+                    completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
+                    break
+                case .failure(let err):
+                    completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)
+                    break
+                }
+            }
     }
     
     func getNotionValid(id: String?) -> Bool {
