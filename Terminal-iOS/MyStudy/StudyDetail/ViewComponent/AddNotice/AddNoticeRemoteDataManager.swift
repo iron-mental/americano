@@ -14,10 +14,10 @@ import SwiftyJSON
 class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
     
     func postNotice(studyID: Int, notice: NoticePost, completion: @escaping (Bool, Int) -> Void) {
-        let params: [String: String] = [
+        let params: [String: Any] = [
             "title": notice.title,
             "contents": notice.contents,
-            "pinned": "\(notice.pinned)"
+            "pinned": notice.pinned
         ]
         
         TerminalNetworkManager

@@ -173,7 +173,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     
     func showNoticeRemove(message: String) {
         self.dismiss(animated: true) { [self] in
-            (self.parentView as! NoticeViewProtocol) .viewLoad()
+            (self.parentView as! NoticeViewProtocol).viewLoad()
         }
     }
 }

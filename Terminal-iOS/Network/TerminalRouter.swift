@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 enum TerminalRouter: URLRequestConvertible {
-    typealias Parameters = [String: String]
+    typealias Parameters = [String: Any]
     // MARK: router case init
 
     case authCheck          (id: String)
@@ -282,10 +282,10 @@ enum TerminalRouter: URLRequestConvertible {
         
         switch method {
         case .get:
-            request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
+            request = try URLEncoding.default.encode(request, with: parameters)
         case .post, .put, .delete:
-            request = try JSONParameterEncoder().encode(parameters, into: request)
-//            request = try URLEncoding.default.encode(request, with: <#T##Parameters?#>)
+            request = try JSONEncoding.default.encode(request, with: parameters)
+            
             request.setValue("application/json", forHTTPHeaderField: "Accept")
         default:
             break

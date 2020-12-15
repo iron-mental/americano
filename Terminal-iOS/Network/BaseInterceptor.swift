@@ -34,6 +34,7 @@ final class BaseInterceptor: RequestInterceptor {
             return
         }
         print("status:",statusCode)
+        print("ststus")
         switch statusCode {
         case 200...299:
             completion(.doNotRetry)
