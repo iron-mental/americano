@@ -8,6 +8,7 @@
 
 import UIKit
 import NMapsMap
+import SwiftKeychainWrapper
 import Kingfisher
 
 enum StudyDetailViewState: String {
@@ -63,9 +64,10 @@ class StudyDetailView: UIViewController {
     }
     
     func attribute() {
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
-            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
         mainImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didimageViewClicked))

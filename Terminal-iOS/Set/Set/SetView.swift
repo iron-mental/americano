@@ -178,11 +178,11 @@ extension SetView: SetViewProtocol {
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신
     
     func showUserInfo(with userInfo: UserInfo) {
-        
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         /// Kingfisher auth token
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
-            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
         

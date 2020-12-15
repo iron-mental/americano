@@ -105,7 +105,6 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
                 resultArr.append(study)
             }
             
-            
             /// 키값만 내려오는 배열
             for data in resultArr {
                 if data.title == nil {

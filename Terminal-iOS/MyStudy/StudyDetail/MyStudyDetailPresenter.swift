@@ -24,4 +24,8 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     func addNoticeFinished(notice: Int, studyID: Int, parentView: UIViewController) {
         wireFrame?.goToNoticeDetail(notice: notice, studyID: studyID, parentView: parentView)
     }
+    
+    func showApplyUserList(studyID: Int) {
+        wireFrame?.goToApplyUser(from: view!, studyID: studyID)
+    }
 }

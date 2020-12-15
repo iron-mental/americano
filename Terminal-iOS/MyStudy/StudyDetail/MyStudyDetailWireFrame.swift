@@ -9,17 +9,15 @@
 import UIKit
 
 class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
-    
-    
     var presenter: MyStudyDetailPresenterProtocol?
     
     static func createMyStudyDetailModule(studyID: Int) -> UIViewController {
-        let view = MyStudyDetailView()
-        let presenter = MyStudyDetailPresenter()
-        let interactor = MyStudyDetailInteractor()
-        let remoteDataManager = MyStudyDetailRemoteDataManager()
-        let localDataManager = MyStudyDetailLocalManager()
-        let wireFrame = MyStudyDetailWireFrame()
+        let view: MyStudyDetailViewProtocol = MyStudyDetailView()
+        let presenter: MyStudyDetailPresenterProtocol = MyStudyDetailPresenter()
+        let interactor: MyStudyDetailInteractorProtocol = MyStudyDetailInteractor()
+        let remoteDataManager: MyStudyDetailRemoteDataManagerProtocol = MyStudyDetailRemoteDataManager()
+        let localDataManager: MyStudyDetailLocalDataManagerProtocol = MyStudyDetailLocalManager()
+        let wireFrame: MyStudyDetailWireFrameProtocol = MyStudyDetailWireFrame()
         
         view.presenter = presenter
         view.studyID = studyID
@@ -31,27 +29,33 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         interactor.localDatamanager = localDataManager
         wireFrame.presenter = presenter
         
-        return view
+        if let view = view as? MyStudyDetailView {
+            return view
+        } else {
+            return UIViewController()
+        }
     }
     
     func goToAddNotice(studyID: Int, parentView: UIViewController) {
         let view = AddNoticeWireFrame.createAddNoticeModule(studyID: studyID, notice: nil, parentView: parentView, state: .new)
-        parentView.present(view, animated: true) {
-            print("뷰 띄움")
-        }
+        parentView.present(view, animated: true)
     }
     
     func goToEditStudy(study: StudyDetail, parentView: UIViewController) {
         let view = CreateStudyWireFrame.createStudyViewModul(category: study.category, studyDetail: study, state: .edit, parentView: parentView)
-        parentView.present(view, animated: true) {
-            print("뷰띄워줌")
-        }
+        parentView.present(view, animated: true)
     }
     
     func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController) {
         let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice, studyID: studyID, parentView: parentView)
-        parentView.present(view, animated: true) {
-            print("아무화면에서나 공지사항 추가하면 뜰거임")
+        parentView.present(view, animated: true)
+    }
+    
+    func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int) {
+        let applyUserView = ApplyUserWireFrame.createUserListModule(studyID: studyID)
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(applyUserView, animated: true)
         }
     }
 }

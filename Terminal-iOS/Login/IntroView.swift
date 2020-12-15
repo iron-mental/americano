@@ -171,7 +171,7 @@ class IntroView: UIViewController {
             $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
         invalidImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

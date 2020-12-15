@@ -12,8 +12,7 @@ import SocketIO
 class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     var interactor: ChatInteractorProtocol?
     
-    lazy var manager = SocketManager(socketURL: URL(string: "http://3.35.154.27:3000")!, config: [ .log(false), .compress, .forceWebsockets(true), .connectParams(["token": Terminal.accessToken,
-                                                                                                                                          "study_id":1])])
+    lazy var manager = SocketManager(socketURL: URL(string: "http://3.35.154.27:3000")!, config: [ .log(false), .compress, .forceWebsockets(true), .connectParams(["token": "ff", "study_id":1])])
     var chatSocket: SocketIOClient!
     
     init() {
