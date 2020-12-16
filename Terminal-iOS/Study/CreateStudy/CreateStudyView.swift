@@ -41,6 +41,9 @@ class CreateStudyView: UIViewController{
     var mainImageTapGesture = UITapGestureRecognizer()
     var locationTapGesture = UITapGestureRecognizer()
     var studyDetailPost: StudyDetailPost?
+    var keyboardHeight: CGFloat = 0.0
+    var currentScrollViewMinY: CGFloat = 0
+    var currentScrollViewMaxY: CGFloat = 0
     let imageDownloadRequest = AnyModifier { request in
         var requestBody = request
         requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
@@ -56,9 +59,13 @@ class CreateStudyView: UIViewController{
         self.presenter?.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
+        
     }
-    @objc func keyboardWillShow() {
+    @objc func keyboardWillShow(notification:NSNotification) {
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        keyboardHeight = keyboardRectangle.height
         
     }
     
@@ -101,7 +108,7 @@ class CreateStudyView: UIViewController{
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.textView.text = study?.introduce ?? nil
-            
+            $0.textView.delegate = self
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -112,12 +119,13 @@ class CreateStudyView: UIViewController{
         studyInfoView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.textView.text = study?.introduce ?? nil
+            $0.textView.delegate = self
         }
         locationView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
-//            $0.address.text = "    \(study?.location.addressName ?? "주소 입력 하러가기")"
+            //            $0.address.text = "    \(study?.location.addressName ?? "주소 입력 하러가기")"
             $0.address.text = study?.location.addressName != nil ? ". \(study?.location.addressName)" : "  주소입력"
             $0.detailAddress.text =  study?.location.locationDetail ?? nil
         }
@@ -269,6 +277,7 @@ class CreateStudyView: UIViewController{
     @objc func didLocationViewClicked() {
         //SelectLocationView를 띄우는 게 맞습니다.
         presenter?.clickLocationView(currentView: self)
+        
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary
@@ -282,6 +291,14 @@ class CreateStudyView: UIViewController{
 }
 
 extension CreateStudyView: CreateStudyViewProtocols {
+    func viewToTop() {
+        print("위족에 맞추는 함수")
+    }
+    
+    func viewToBottom() {
+        print("아래족에 맞추는 함수")
+    }
+    
     
     func setView() {
         attribute()
@@ -394,6 +411,9 @@ extension CreateStudyView: CreateStudyViewProtocols {
             
         }
     }
+    @objc func viewDidTap(_ sender: UITextView) {
+        print(sender)
+    }
 }
 
 extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -409,9 +429,20 @@ extension CreateStudyView: UITextFieldDelegate {
     
 }
 
+extension CreateStudyView: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        scrollView.scrollToView(view: textView, animated: true)
+    }
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        presenter?.viewDidTap(textView: textView, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+    }
+}
+
 extension CreateStudyView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         view.endEditing(true)
+        currentScrollViewMinY = scrollView.contentOffset.y
+        currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
     }
 }
 

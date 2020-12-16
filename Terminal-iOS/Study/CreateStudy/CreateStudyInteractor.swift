@@ -11,6 +11,8 @@ import UIKit
 class CreateStudyInteractor: CreateStudyInteractorProtocols {
     
     
+    
+    
     var presenter: CreateStudyPresenterProtocols?
     var createStudyRemoteDataManager: CreateStudyRemoteDataManagerProtocols?
     
@@ -105,5 +107,23 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
         } else {
             presenter?.studyInfoInvalid(message: nullCheck(study: study))
         }
+    }
+    func viewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
+        print(textView.superview?.frame.minY)
+        print(viewMinY)
+        print(textView.superview?.frame.maxY)
+        print(viewMaxY)
+        
+        if viewMinY >= (textView.superview?.frame.minY)! {
+            presenter?.viewDidTapResult(result: true, topOrBottom: true)
+            
+        } else if viewMaxY <= (textView.superview?.frame.maxY)!{
+            presenter?.viewDidTapResult(result: true, topOrBottom: false)
+            
+        } else {
+            presenter?.viewDidTapResult(result: false, topOrBottom: nil)
+            
+        }
+        
     }
 }
