@@ -59,7 +59,7 @@ class CreateStudyView: UIViewController{
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        
     }
     
     func attribute() {
@@ -78,7 +78,7 @@ class CreateStudyView: UIViewController{
             mainImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(mainImageTapGesture)
             //추후에 수정일때인지 새로작성인지 분기해서 처리 ~(철이형 얘기하는거 아님)
-//            $0.kf.setImage(with: URL(string: (study?.image!)!), options: [.requestModifier(imageDownloadRequest)])
+            //            $0.kf.setImage(with: URL(string: (study?.image!)!), options: [.requestModifier(imageDownloadRequest)])
         }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
@@ -87,11 +87,13 @@ class CreateStudyView: UIViewController{
             $0.textColor = .white
             $0.text = study?.title ?? nil
             $0.layer.cornerRadius = 10
+            $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
         }
         
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.textView.text = study?.introduce ?? nil
+            
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -331,13 +333,13 @@ extension CreateStudyView: CreateStudyViewProtocols {
             
             if let currentLocation = study?.location {
                 selectedLocation = StudyDetailLocationPost(address: currentLocation.addressName,
-                                        lat: Double(currentLocation.latitude)!,
-                                        lng: Double(currentLocation.longitude)!,
-                                        detailAddress: nil,
-                                        placeName: nil,
-                                        category: nil,
-                                        sido: nil,
-                                        sigungu: nil)
+                                                           lat: Double(currentLocation.latitude)!,
+                                                           lng: Double(currentLocation.longitude)!,
+                                                           detailAddress: nil,
+                                                           placeName: nil,
+                                                           category: nil,
+                                                           sido: nil,
+                                                           sigungu: nil)
                 if let detailAddress = study?.location.addressName {
                     selectedLocation?.detailAddress = detailAddress
                 }
@@ -349,17 +351,16 @@ extension CreateStudyView: CreateStudyViewProtocols {
         } else {
             tempTitle = studyTitleTextField.text ?? ""
         }
-        
         studyDetailPost = StudyDetailPost(category: selectedCategory!,
-                                        title: tempTitle,
-                                       introduce: studyIntroduceView.textView.text,
-                                       progress: studyInfoView.textView.text,
-                                       studyTime: timeView.detailTime.text ?? "",
-                                       snsWeb: SNSInputView.web?.textField.text,
-                                       snsNotion: SNSInputView.notion?.textField.text,
-                                       snsEvernote: SNSInputView.evernote?.textField.text,
-                                       image: mainImageView.image!,
-                                       location: selectedLocation!)
+                                          title: tempTitle,
+                                          introduce: studyIntroduceView.textView.text,
+                                          progress: studyInfoView.textView.text,
+                                          studyTime: timeView.detailTime.text ?? "",
+                                          snsWeb: SNSInputView.web?.textField.text,
+                                          snsNotion: SNSInputView.notion?.textField.text,
+                                          snsEvernote: SNSInputView.evernote?.textField.text,
+                                          image: mainImageView.image!,
+                                          location: selectedLocation!)
         presenter?.clickCompleteButton(study: studyDetailPost!, state: state!, studyID: study?.id ?? nil)
     }
     func studyInfoInvalid(message: String) {
@@ -380,7 +381,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
                 break
             case .none:
                 break
-//                <#code#>
+            //                <#code#>
             }
             
         }
