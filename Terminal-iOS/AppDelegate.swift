@@ -13,14 +13,16 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
+    
     var window: UIWindow?
+    var studyID: String?
+    var pushEvent: String?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow()
         let home = HomeView()
-
+        
         // 리프레쉬 토큰이 없으면 -> 로그인
         if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
             KeychainWrapper.standard.set("temp", forKey: "accessToken")
@@ -33,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let main = ViewController()
             window?.rootViewController = main
         }
-
+        
         window?.makeKeyAndVisible()
         
         let center = UNUserNotificationCenter.current()
@@ -54,14 +56,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-            let userInfo = notification.request.content.userInfo
-            print("Receive notification in the foreground \(userInfo)")
-            let pref = UserDefaults.init(suiteName: "terminal_notification")
-            pref?.set(userInfo, forKey: "NOTIFI_DATA")
+        let userInfo = notification.request.content.userInfo
 
-            completionHandler([.alert, .badge, .sound])
+        let destination = userInfo["destination"] as? NSDictionary
+        let pushEvent = userInfo["pushEvent"] as? String
+        
+        if let studyID = destination!["study_id"] as? String,
+           let pushEvent = pushEvent {
+            self.studyID = studyID
+            self.pushEvent = pushEvent
         }
-
+        
+        completionHandler([.alert, .badge, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print(self.studyID)
+        print(self.pushEvent)
+        
+        guard let goView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: 236) as? MyStudyDetailView else { return }
+        
+        if let tabVC = self.window?.rootViewController as? UITabBarController,
+           let navVC = tabVC.selectedViewController as? UINavigationController {
+            navVC.pushViewController(goView, animated: true)
+        }
+    }
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
@@ -71,20 +92,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     // MARK: - Core Data stack
-
+    
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
-        */
+         */
         let container = NSPersistentContainer(name: "TerminalCoreData")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+                
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -100,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }()
     
     // MARK: - Core Data Saving support
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

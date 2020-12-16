@@ -35,12 +35,17 @@ class ViewController: UITabBarController {
             image: #imageLiteral(resourceName: "set"),
             selectedImage: #imageLiteral(resourceName: "set_clicked")
         )
-        
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
+    }
+    
+    func temp(pushEvent: String?, keyID: String?) {
+        print("pushEvent:",pushEvent)
+        let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: 236)
+        self.navigationController?.pushViewController(view, animated: false)
     }
     
     func attribute() {
