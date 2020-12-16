@@ -12,8 +12,8 @@ class TimeUIView: UIView {
     var title = UILabel()
     var detailTime = UITextField()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
         attribute()
         layout()
     }

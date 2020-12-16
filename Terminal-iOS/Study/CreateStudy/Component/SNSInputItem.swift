@@ -24,7 +24,7 @@ class SNSInputItem: UIView {
             $0.contentMode = .scaleAspectFit
         }
         textField.do {
-            $0.placeholder = "이거 플레이스홀더에연"
+            $0.placeholder = "default placeholder"
             $0.sizeToFit()
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10

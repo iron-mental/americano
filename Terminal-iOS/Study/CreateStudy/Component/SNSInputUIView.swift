@@ -26,15 +26,15 @@ class IdInputView: UIView {
             $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
         }
         notion.do {
-            $0.textField.text = "notion"
+            $0.textField.placeholder = "예) notion.so/example1234"
             $0.icon.image = #imageLiteral(resourceName: "notion")
         }
         evernote.do {
-            $0.textField.text = "evernote"
+            $0.textField.placeholder = "예) evernote/example1234"
             $0.icon.image = #imageLiteral(resourceName: "evernote")
         }
         web.do {
-            $0.textField.text = "web"
+            $0.textField.placeholder = "예) tistory/example1234"
             $0.icon.image = #imageLiteral(resourceName: "web")
         }
     }
