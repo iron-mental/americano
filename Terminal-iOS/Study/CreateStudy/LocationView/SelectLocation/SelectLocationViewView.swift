@@ -53,7 +53,6 @@ class SelectLocationView: UIViewController {
         let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
-        
     }
     
     @objc func keyboardWillHide() {
@@ -79,10 +78,17 @@ class SelectLocationView: UIViewController {
     func layout() {
         [mapView, pin, bottomView].forEach { view.addSubview($0) }
         
+        mapView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
+        }
         pin.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: mapView.centerYAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 50)).isActive = true
         }
