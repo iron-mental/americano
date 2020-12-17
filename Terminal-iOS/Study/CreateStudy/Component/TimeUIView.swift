@@ -42,8 +42,6 @@ class TimeUIView: UIView {
         title.do {
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: $0.intrinsicContentSize.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
         }
         detailTime.do {
             $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 17)).isActive = true
@@ -56,4 +54,3 @@ class TimeUIView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
