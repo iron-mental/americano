@@ -42,8 +42,10 @@ class CreateStudyView: UIViewController{
     var locationTapGesture = UITapGestureRecognizer()
     var studyDetailPost: StudyDetailPost?
     var keyboardHeight: CGFloat = 0.0
+    var clickedView: UIView?
     var currentScrollViewMinY: CGFloat = 0
     var currentScrollViewMaxY: CGFloat = 0
+    var textViewTapFlag = false
     let imageDownloadRequest = AnyModifier { request in
         var requestBody = request
         requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
@@ -66,11 +68,9 @@ class CreateStudyView: UIViewController{
         let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
-        
     }
     
     @objc func keyboardWillHide() {
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         
@@ -291,14 +291,24 @@ class CreateStudyView: UIViewController{
 }
 
 extension CreateStudyView: CreateStudyViewProtocols {
-    func viewToTop() {
-        print("위족에 맞추는 함수")
+    func viewToTop(distance: CGFloat) {
+        UIView.animate(withDuration: 0.1) {
+            self.scrollView.contentOffset.y += distance
+        } completion: { _ in
+            self.clickedView?.becomeFirstResponder()
+            self.textViewTapFlag = false
+        }
     }
     
-    func viewToBottom() {
-        print("아래족에 맞추는 함수")
+    func viewToBottom(distance: CGFloat) {
+        
+        UIView.animate(withDuration: 0.1) {
+            self.scrollView.contentOffset.y += distance
+        } completion: { _ in
+            self.clickedView?.becomeFirstResponder()
+            self.textViewTapFlag = false
+        }  
     }
-    
     
     func setView() {
         attribute()
@@ -430,17 +440,18 @@ extension CreateStudyView: UITextFieldDelegate {
 }
 
 extension CreateStudyView: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        scrollView.scrollToView(view: textView, animated: true)
-    }
     func textViewDidBeginEditing(_ textView: UITextView) {
-        presenter?.viewDidTap(textView: textView, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        textViewTapFlag = true
+        clickedView = textView
+        presenter?.viewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
 
 extension CreateStudyView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        view.endEditing(true)
+        if textViewTapFlag == false {
+            view.endEditing(true)
+        }
         currentScrollViewMinY = scrollView.contentOffset.y
         currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
     }

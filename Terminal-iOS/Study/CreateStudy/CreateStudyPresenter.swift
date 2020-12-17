@@ -80,12 +80,13 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
         interactor?.viewDidTap(textView: textView, viewMinY: viewMinY, viewMaxY: viewMaxY)
     }
     
-    func viewDidTapResult(result: Bool, topOrBottom: Bool?) {
+    func viewDidTapResult(result: Bool, topOrBottom: Bool?, distance: CGFloat?) {
         switch result {
         case true:
-            topOrBottom == true ? view?.viewToTop() : view?.viewToBottom()
+            topOrBottom == true ? view?.viewToTop(distance: distance!) : view?.viewToBottom(distance: distance!)
         case false:
-            print("클릭된 뷰가 움직일 필요가 없답니다")
+            //flag를 위해 임시로 호출
+            view?.viewToTop(distance: 0)
         }
     }
 }

@@ -23,10 +23,10 @@ class SelectLocationView: UIViewController {
     var task: DispatchWorkItem?
     var mapView = NMFMapView()
     var bottomView = BottomView()
-    var keyboardHeight: CGFloat = 0
     var location: StudyDetailLocationPost?
     var preventPlaceNameFlag = true
     var delegate: selectLocationDelegate?
+    var keyboardHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,17 +48,16 @@ class SelectLocationView: UIViewController {
         preventPlaceNameFlag = isBeingPresented
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardHeight).isActive = true
-            view.setNeedsLayout()
-            view.layoutIfNeeded()
-        }
+    @objc func keyboardWillShow(notification:NSNotification) {
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        keyboardHeight = keyboardRectangle.height
+        
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        bottomView.frame.origin.y = UIScreen.main.bounds.height - bottomView.frame.height
+    @objc func keyboardWillHide() {
+        
     }
     
     func attribute() {

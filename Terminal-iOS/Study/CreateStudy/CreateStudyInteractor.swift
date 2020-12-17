@@ -109,19 +109,16 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
         }
     }
     func viewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
-        print(textView.superview?.frame.minY)
-        print(viewMinY)
-        print(textView.superview?.frame.maxY)
-        print(viewMaxY)
-        
         if viewMinY >= (textView.superview?.frame.minY)! {
-            presenter?.viewDidTapResult(result: true, topOrBottom: true)
+            let distance = (textView.superview?.frame.minY)! - viewMinY + Terminal.convertHeigt(value: -10)
+            presenter?.viewDidTapResult(result: true, topOrBottom: true, distance: distance)
             
         } else if viewMaxY <= (textView.superview?.frame.maxY)!{
-            presenter?.viewDidTapResult(result: true, topOrBottom: false)
+            let distance = (textView.superview?.frame.maxY)! - viewMaxY + Terminal.convertHeigt(value: 10)
+            presenter?.viewDidTapResult(result: true, topOrBottom: false, distance: distance)
             
         } else {
-            presenter?.viewDidTapResult(result: false, topOrBottom: nil)
+            presenter?.viewDidTapResult(result: false, topOrBottom: nil, distance: nil)
             
         }
         

@@ -41,8 +41,8 @@ protocol CreateStudyViewProtocols: class {
     func webInvalid()
     func studyInfoInvalid(message: String)
     func studyInfoValid(message: String)
-    func viewToTop()
-    func viewToBottom()
+    func viewToTop(distance: CGFloat)
+    func viewToBottom(distance: CGFloat)
 }
 
 protocol CreateStudyInteractorProtocols: class {
@@ -77,7 +77,7 @@ protocol CreateStudyPresenterProtocols: class {
     func showWebValidResult(result: Bool)
     func studyInfoInvalid(message: String)
     func studyInfoValid(message: String)
-    func viewDidTapResult(result: Bool, topOrBottom: Bool?)
+    func viewDidTapResult(result: Bool, topOrBottom: Bool?, distance: CGFloat?)
 }
 
 protocol CreateStudyRemoteDataManagerProtocols: class {

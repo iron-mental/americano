@@ -136,6 +136,7 @@
 		CC5795042570C9E600DF96AB /* AddNoticeRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5795032570C9E600DF96AB /* AddNoticeRemoteDataManager.swift */; };
 		CC5795072570C9F200DF96AB /* AddNoticeLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5795062570C9F200DF96AB /* AddNoticeLocalDataManager.swift */; };
 		CC57950A2570C9FE00DF96AB /* AddNoticeWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC5795092570C9FE00DF96AB /* AddNoticeWireFrame.swift */; };
+		CC5912A0258A35EA00C1A24C /* UIScrollView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC59129F258A35EA00C1A24C /* UIScrollView+Ext.swift */; };
 		CC60446E2576253F000D11C7 /* NoticeDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC60446D2576253F000D11C7 /* NoticeDetailProtocols.swift */; };
 		CC6044712576262C000D11C7 /* NoticeDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6044702576262C000D11C7 /* NoticeDetailInteractor.swift */; };
 		CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC60447D2576263F000D11C7 /* NoticeDetailPresenter.swift */; };
@@ -392,6 +393,7 @@
 		CC5795032570C9E600DF96AB /* AddNoticeRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoticeRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC5795062570C9F200DF96AB /* AddNoticeLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoticeLocalDataManager.swift; sourceTree = "<group>"; };
 		CC5795092570C9FE00DF96AB /* AddNoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoticeWireFrame.swift; sourceTree = "<group>"; };
+		CC59129F258A35EA00C1A24C /* UIScrollView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Ext.swift"; sourceTree = "<group>"; };
 		CC60446D2576253F000D11C7 /* NoticeDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailProtocols.swift; sourceTree = "<group>"; };
 		CC6044702576262C000D11C7 /* NoticeDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailInteractor.swift; sourceTree = "<group>"; };
 		CC60447D2576263F000D11C7 /* NoticeDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailPresenter.swift; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 				A510EC912559613E009BE9A6 /* UITextView+Ext.swift */,
 				A5BA4618255D38D30061C511 /* String+Ext.swift */,
 				A5CF046C257E92800078BA67 /* UINavigation+Ext.swift */,
+				CC59129F258A35EA00C1A24C /* UIScrollView+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -1384,6 +1387,7 @@
 				A51438AF2524952F00ACB241 /* SetPresenter.swift in Sources */,
 				CCD51C9F256E248200D41771 /* NoticePresenter.swift in Sources */,
 				CC198E75254C0367009D6CDF /* MemberCollectionViewCell.swift in Sources */,
+				CC5912A0258A35EA00C1A24C /* UIScrollView+Ext.swift in Sources */,
 				A5C5B15325456E2800F4A86D /* EmailView.swift in Sources */,
 				A5BA1EE7254AA8B70089D4E9 /* MyStudyDetailView.swift in Sources */,
 				A5D6A78825743090007D6409 /* ProfileModifyProtocols.swift in Sources */,
