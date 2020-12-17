@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         window = UIWindow()
         let home = HomeView()
         let main = ViewController()
-      
+        
         // 리프레쉬 토큰이 없으면 -> 로그인
         if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
             KeychainWrapper.standard.set("temp", forKey: "accessToken")
@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("토큰이 유효합니다..")
             print("로그인 완료")
             print("accessToken : ", KeychainWrapper.standard.string(forKey: "accessToken")!)
-            
+
             if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
                 let destination = notification["destination"] as? NSDictionary
                 let pushEvent = notification["pushEvent"] as? String
@@ -44,11 +44,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     self.pushEvent = pushEvent
                 }
                 main.selectedIndex = 1
-                main
-                window?.rootViewController = main
-            } else {
-                window?.rootViewController = main
             }
+            window?.rootViewController = main
         }
         
         window?.makeKeyAndVisible()
@@ -90,36 +87,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let event = self.pushEvent
         let studyID = Int(self.studyID)!
-
+        
         switch event {
         case "apply_new":
             if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
                 as? MyStudyDetailView {
                 view.getPushEvent = true
+                view.applyState = true
                 goView = view
+                if let tabVC = self.window?.rootViewController as? UITabBarController,
+                   let navVC = tabVC.selectedViewController as? UINavigationController {
+                    
+                    navVC.pushViewController(goView!, animated: true)
+                }
             }
         case "study_update", "study_delegate":
             if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
                 as? MyStudyDetailView {
+                view.getPushEvent = true
                 goView = view
+                if let tabVC = self.window?.rootViewController as? UITabBarController,
+                   let navVC = tabVC.selectedViewController as? UINavigationController {
+                    
+                    navVC.pushViewController(goView!, animated: true)
+                }
             }
         case "notice_new", "notice_update":
             if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
                 as? MyStudyDetailView {
-                view.getPushEvent = true
                 goView = view
+                if let tabVC = self.window?.rootViewController as? UITabBarController,
+                   let navVC = tabVC.selectedViewController as? UINavigationController {
+                    navVC.pushViewController(goView!, animated: true)
+                }
             }
         default:
             break
         }
-
-
-        if let tabVC = self.window?.rootViewController as? UITabBarController,
-           let navVC = tabVC.selectedViewController as? UINavigationController {
-
-            navVC.pushViewController(goView!, animated: true)
-        }
-        
         completionHandler()
     }
     

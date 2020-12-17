@@ -12,7 +12,7 @@ class ViewController: UITabBarController {
     let studyViewController = StudyCategoryWireFrame.createStudyCategory()
     let myStudyViewController = MyStudyMainWireFrame.createMyStudyMainViewModul()
     let setViewController = SetWireFrame.setCreateModule()
-    var temp: String = ""
+    
     enum Tab: Int {
         case study
         case mystudy
@@ -21,7 +21,7 @@ class ViewController: UITabBarController {
     
     lazy var tabBarItems: [Tab: UITabBarItem] = [
         .study: UITabBarItem(
-            title: self.temp,
+            title: "스터디",
             image: #imageLiteral(resourceName: "study"),
             selectedImage: #imageLiteral(resourceName: "study_clicked")
         ),

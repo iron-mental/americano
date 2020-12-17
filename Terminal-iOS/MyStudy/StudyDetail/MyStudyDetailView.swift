@@ -12,6 +12,7 @@ import UIKit
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
     var getPushEvent: Bool = false
+    var applyState: Bool = false
     var studyID: Int? {
         didSet {
             VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
@@ -36,7 +37,13 @@ class MyStudyDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        getPushEvent ? goNoticePage(): nil
+        getPushEvent ? goDetailPage(): nil
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        applyState ? presenter?.showApplyUserList(studyID: studyID!) : nil
+        applyState = false
     }
     
     func attribute() {
@@ -106,7 +113,7 @@ class MyStudyDetailView: UIViewController {
         }
     }
     
-    func goNoticePage() {
+    func goDetailPage() {
         tapSege.selectedSegmentIndex = 1
         UIView.animate(withDuration: 0.2) {
             self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(1), y: 0)
