@@ -32,8 +32,6 @@ class StudyCategoryView: UIViewController {
         attirbute()
         layout()
         presenter?.viewDidLoad()
-        
-        
     }
     
     func attirbute() {
