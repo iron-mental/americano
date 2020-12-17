@@ -15,14 +15,16 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
-    var studyID: String?
-    var pushEvent: String?
+    var goView: MyStudyDetailView?
+    var studyID: String = ""
+    var pushEvent: String = ""
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow()
         let home = HomeView()
-        
+        let main = ViewController()
+      
         // 리프레쉬 토큰이 없으면 -> 로그인
         if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
             KeychainWrapper.standard.set("temp", forKey: "accessToken")
@@ -32,8 +34,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("토큰이 유효합니다..")
             print("로그인 완료")
             print("accessToken : ", KeychainWrapper.standard.string(forKey: "accessToken")!)
-            let main = ViewController()
-            window?.rootViewController = main
+            
+            if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
+                let destination = notification["destination"] as? NSDictionary
+                let pushEvent = notification["pushEvent"] as? String
+                if let studyID = destination!["study_id"] as? String,
+                   let pushEvent = pushEvent {
+                    self.studyID = studyID
+                    self.pushEvent = pushEvent
+                }
+                main.selectedIndex = 1
+                main
+                window?.rootViewController = main
+            } else {
+                window?.rootViewController = main
+            }
         }
         
         window?.makeKeyAndVisible()
@@ -57,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-
+        
         let destination = userInfo["destination"] as? NSDictionary
         let pushEvent = userInfo["pushEvent"] as? String
         
@@ -71,16 +86,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        sleep(1)
         
-        print(self.studyID)
-        print(self.pushEvent)
-        
-        guard let goView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: 236) as? MyStudyDetailView else { return }
-        
+        let event = self.pushEvent
+        let studyID = Int(self.studyID)!
+
+        switch event {
+        case "apply_new":
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
+                as? MyStudyDetailView {
+                view.getPushEvent = true
+                goView = view
+            }
+        case "study_update", "study_delegate":
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
+                as? MyStudyDetailView {
+                goView = view
+            }
+        case "notice_new", "notice_update":
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
+                as? MyStudyDetailView {
+                view.getPushEvent = true
+                goView = view
+            }
+        default:
+            break
+        }
+
+
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
-            navVC.pushViewController(goView, animated: true)
+
+            navVC.pushViewController(goView!, animated: true)
         }
+        
+        completionHandler()
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

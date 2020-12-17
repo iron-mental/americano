@@ -12,16 +12,16 @@ class ViewController: UITabBarController {
     let studyViewController = StudyCategoryWireFrame.createStudyCategory()
     let myStudyViewController = MyStudyMainWireFrame.createMyStudyMainViewModul()
     let setViewController = SetWireFrame.setCreateModule()
-    
+    var temp: String = ""
     enum Tab: Int {
         case study
         case mystudy
         case set
     }
     
-    let tabBarItems: [Tab: UITabBarItem] = [
+    lazy var tabBarItems: [Tab: UITabBarItem] = [
         .study: UITabBarItem(
-            title: "스터디",
+            title: self.temp,
             image: #imageLiteral(resourceName: "study"),
             selectedImage: #imageLiteral(resourceName: "study_clicked")
         ),
@@ -42,14 +42,9 @@ class ViewController: UITabBarController {
         attribute()
     }
     
-    func temp(pushEvent: String?, keyID: String?) {
-        print("pushEvent:",pushEvent)
-        let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: 236)
-        self.navigationController?.pushViewController(view, animated: false)
-    }
     
     func attribute() {
-        tabBar.do {
+        self.tabBar.do {
             $0.tintColor = UIColor(named: "key")
             $0.barTintColor = UIColor.appColor(.testColor)
             $0.isTranslucent = false
@@ -57,19 +52,19 @@ class ViewController: UITabBarController {
             $0.standardAppearance.backgroundColor = .white
         }
 
-        studyViewController.tabBarItem = tabBarItems[.study]
-        studyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        self.studyViewController.tabBarItem = tabBarItems[.study]
+        self.studyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
-        myStudyViewController.tabBarItem = tabBarItems[.mystudy]
-        myStudyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        self.myStudyViewController.tabBarItem = tabBarItems[.mystudy]
+        self.myStudyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
-        setViewController.tabBarItem = tabBarItems[.set]
-        setViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        self.setViewController.tabBarItem = tabBarItems[.set]
+        self.setViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
         self.viewControllers = [
-            UINavigationController(rootViewController: studyViewController),
-            UINavigationController(rootViewController: myStudyViewController),
-            UINavigationController(rootViewController: setViewController)
+            UINavigationController(rootViewController: self.studyViewController),
+            UINavigationController(rootViewController: self.myStudyViewController),
+            UINavigationController(rootViewController: self.setViewController)
         ]
     }
 }
