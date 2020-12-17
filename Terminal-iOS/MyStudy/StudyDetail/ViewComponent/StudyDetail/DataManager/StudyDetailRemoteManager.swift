@@ -41,7 +41,7 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.studyApply(studyID: String(studyID), message: params))
+            .request(TerminalRouter.applyStudy(studyID: String(studyID), message: params))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
                 switch response.result {

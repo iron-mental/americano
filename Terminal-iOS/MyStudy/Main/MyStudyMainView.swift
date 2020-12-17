@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SwiftKeychainWrapper
 
 enum MyStudyMainViewState {
     case normal
@@ -41,15 +42,13 @@ class MyStudyMainView: UIViewController {
     func attribute() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        view.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
-        }
+        
         moreButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
         moreButton?.do {
             $0.image = #imageLiteral(resourceName: "more")
             $0.tintColor = .white
         }
-        tempButton = UIBarButtonItem(title: "임시버튼", style: .done, target: self, action: #selector(goToLoginAction(_ :)))
+        
         self.do {
             $0.title = "내 스터디"
             $0.navigationController?.navigationBar.standardAppearance = appearance
@@ -65,8 +64,14 @@ class MyStudyMainView: UIViewController {
         alarmButton.do {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
         }
-        dismissEditViewButtonItem = UIBarButtonItem(title: "나가기", style: .done, target: self, action: #selector(dismissEditViewButtonItemAction))
-        editDoneButton = UIBarButtonItem(title: "test", style: .done, target: self, action: #selector(editDoneButtonAction))
+        dismissEditViewButtonItem = UIBarButtonItem(title: "나가기",
+                                                    style: .done,
+                                                    target: self,
+                                                    action: #selector(dismissEditViewButtonItemAction))
+        editDoneButton = UIBarButtonItem(title: "test",
+                                         style: .done,
+                                         target: self,
+                                         action: #selector(editDoneButtonAction))
     }
     
     func layout() {
@@ -76,31 +81,29 @@ class MyStudyMainView: UIViewController {
             self.navigationItem.rightBarButtonItems = [editDoneButton!]
             break
         case .normal:
-            self.navigationItem.rightBarButtonItems = [moreButton!, alarmButton, tempButton!]
+            self.navigationItem.rightBarButtonItems = [moreButton!, alarmButton]
             break
         }
         
-        view.addSubview(tableView)
+        self.view.addSubview(self.tableView)
         
-        tableView.do {
+        self.tableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
         let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let edit =  UIAlertAction(title: "스터디 편집", style: .default) { (action) in self.editButtonAction() }
-        let temp =  UIAlertAction(title: "여긴뭐들어갑니까", style: .default) {_ in }
+        let edit =  UIAlertAction(title: "스터디 편집", style: .default) { _ in self.editButtonAction() }
+        let applyList =  UIAlertAction(title: "스터디 신청 목록", style: .default) {_ in self.applyList() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [edit,temp,cancel].forEach {
-            alert.addAction($0)
-        }
-        present(alert, animated: true, completion: nil)
+        [edit,applyList,cancel].forEach { alert.addAction($0) }
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc func dismissEditViewButtonItemAction() {
@@ -119,6 +122,10 @@ class MyStudyMainView: UIViewController {
         tableView.reloadData()
     }
     
+    @objc func applyList() {
+        presenter?.showApplyList()
+    }
+    
     @objc func alarmButtonAction() {
         alarmButton.badgeLabel.isHidden = false
         tempCountForBadge += 1
@@ -126,24 +133,6 @@ class MyStudyMainView: UIViewController {
         let view = NotificationView()
         view.navigationController?.navigationBar.tintColor = UIColor.appColor(.terminalBackground)
         self.navigationController?.pushViewController(view, animated: true)
-    }
-    
-    @objc func goToLoginAction(_ sender: UIBarButtonItem) {
-        let view = IntroView()
-        view.beginState = .signUp
-        let presenter = IntroPresenter()
-        let interactor = IntroInteractor()
-        let remoteDataManager = IntroRemoteDataManager()
-        view.presenter = presenter
-        presenter.view = view
-        presenter.interactor = interactor
-        interactor.presenter = presenter
-        interactor.remoteDataManager = remoteDataManager
-        
-        let navigationController = UINavigationController(rootViewController: view)
-        navigationController.modalPresentationStyle = .fullScreen
-        view.introState = .emailInput
-        self.present(navigationController, animated: true)
     }
     
     @objc func editDoneButtonAction() {
@@ -171,9 +160,9 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
             cell.checkBox.isHidden = false
             cell.notiGuideView.isHidden = true
             if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
-                cell.checkBox.backgroundColor = UIColor.appColor(.mainColor)
+                cell.checkBox.backgroundColor = .appColor(.mainColor)
             } else {
-                cell.checkBox.backgroundColor = UIColor.appColor(.testColor)
+                cell.checkBox.backgroundColor = .appColor(.testColor)
             }
             break
         }
@@ -181,9 +170,10 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         cell.locationLabel.text = myStudyList[indexPath.row].sigungu
         cell.titleLabel.text = myStudyList[indexPath.row].title
         
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
-            requestBody.setValue(Terminal.accessToken, forHTTPHeaderField: "Authorization")
+            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
         

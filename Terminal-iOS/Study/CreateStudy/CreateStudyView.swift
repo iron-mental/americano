@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SwiftKeychainWrapper
 
 class CreateStudyView: UIViewController{
     var presenter: CreateStudyPresenterProtocols?
@@ -62,6 +63,7 @@ class CreateStudyView: UIViewController{
             setView()
         }
     }
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
@@ -83,6 +85,12 @@ class CreateStudyView: UIViewController{
     }
     
     func attribute() {
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
         view.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
         }

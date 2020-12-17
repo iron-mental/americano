@@ -129,14 +129,13 @@ class MyStudyDetailView: UIViewController {
         pageBeforeIndex = nextPage
     }
     @objc func didClickecmoreButton() {
-        let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let noticeAdd =  UIAlertAction(title: "공지사항 추가", style: .default) { (action) in self.addNoticeButtonAction() }
-        let studyEdit =  UIAlertAction(title: "스터디 정보 수정", style: .default) { (action) in self.editStudyButtonDidTap() }
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let noticeAdd = UIAlertAction(title: "공지사항 추가", style: .default) { _ in self.addNoticeButtonAction() }
+        let studyEdit = UIAlertAction(title: "스터디 정보 수정", style: .default) { _ in self.editStudyButtonDidTap() }
+        let applyList = UIAlertAction(title: "스터디 신청 목록", style: .default) { _ in self.showApplyList() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [noticeAdd,studyEdit,cancel].forEach {
-            alert.addAction($0)
-        }
+        [noticeAdd,studyEdit,applyList,cancel].forEach { alert.addAction($0) }
         present(alert, animated: true, completion: nil)
     }
     func addNoticeButtonAction() {
@@ -146,6 +145,9 @@ class MyStudyDetailView: UIViewController {
         if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
             presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
         }
+    }
+    func showApplyList() {
+        presenter?.showApplyUserList(studyID: studyID!)
     }
 }
 

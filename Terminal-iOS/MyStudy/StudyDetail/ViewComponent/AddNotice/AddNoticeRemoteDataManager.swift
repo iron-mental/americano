@@ -14,16 +14,16 @@ import SwiftyJSON
 class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
     
     func postNotice(studyID: Int, notice: NoticePost, completion: @escaping (Bool, Int) -> Void) {
-        let params: [String: String] = [
+        let params: [String: Any] = [
             "title": notice.title,
             "contents": notice.contents,
-            "pinned": "\(notice.pinned)"
+            "pinned": notice.pinned
         ]
         
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.createNotice(studyID: String(studyID), notice: params))
+            .request(TerminalRouter.noticeCreate(studyID: "\(studyID)", notice: params))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
                 switch response.result {

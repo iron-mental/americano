@@ -15,7 +15,6 @@ struct MyStudy: Codable {
     var image: String?
 }
 
-
 class TempMyStudyList {
     static var list: [MyStudy] = []
 }

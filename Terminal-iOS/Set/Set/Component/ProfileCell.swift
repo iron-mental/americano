@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import Kingfisher
+import SwiftKeychainWrapper
 
 class ProfileCell: UITableViewCell {
-    let profile = UIImageView()
+    static let profileCellId = "profileCell"
+    let profile = UIImageView(frame: CGRect(x: 0, y: 0,
+                                            width: UIScreen.main.bounds.height * 0.1,
+                                            height: UIScreen.main.bounds.height * 0.1))
     let name = UILabel()
     let descript = UILabel()
     let location = UILabel()
@@ -20,26 +25,42 @@ class ProfileCell: UITableViewCell {
         layout()
     }
     
+    func setData(data: UserInfo) {
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
+        /// Kingfisher auth token
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        let imageURL = data.image ?? ""
+        self.profile.kf.setImage(with: URL(string: imageURL),
+                                 options: [.requestModifier(imageDownloadRequest)])
+        
+        
+        self.name.text = data.nickname
+        self.descript.text = data.introduce ?? ""
+        self.location.text = data.address ?? ""
+    }
+    
     func attribute() {
+        self.backgroundColor = UIColor.appColor(.terminalBackground)
         profile.do {
             $0.contentMode = .scaleAspectFill
-            $0.image = #imageLiteral(resourceName: "leehi")
             $0.layer.cornerRadius = $0.frame.size.width/2
             $0.clipsToBounds = true
         }
         name.do {
-            $0.text = "이하이"
             $0.textColor = .white
             $0.textAlignment = .center
             $0.font = $0.font.withSize(20)
         }
         descript.do {
-            $0.text = "iOS를 공부하는 중입니다. 잘 부탁드립니다."
             $0.numberOfLines = 0
             $0.font = $0.font.withSize(16)
         }
         location.do {
-            $0.text = "서울시 마포구"
             $0.font = $0.font.withSize(13)
         }
     }
@@ -47,17 +68,16 @@ class ProfileCell: UITableViewCell {
     func layout() {
         [profile, name, descript, location].forEach{ self.contentView.addSubview($0)}
         
-        
         self.profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.1).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * 0.1).isActive = true
         }
         self.name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 30).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
         }
         self.descript.do {
@@ -68,7 +88,7 @@ class ProfileCell: UITableViewCell {
         }
         self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 30).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
         }
     }
@@ -76,5 +96,4 @@ class ProfileCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

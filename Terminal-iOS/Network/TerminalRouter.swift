@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 enum TerminalRouter: URLRequestConvertible {
-    typealias Parameters = [String: String]
+    typealias Parameters = [String: Any]
     // MARK: router case init
 
     case authCheck          (id: String)
@@ -19,7 +19,7 @@ enum TerminalRouter: URLRequestConvertible {
     case nicknameCheck      (nickname: String)
     case eamilCheck         (email: String)
     case userInfo           (id: String)
-    case userInfoUpdate     (id: String, image: Data, userInfo: Parameters)
+    case userInfoUpdate     (id: String)
     case userWithdrawal     (id: String, email: String, password: String)
     case emailVerify        (id: String)
     case reissuanceToken    (refreshToken: String)
@@ -33,7 +33,7 @@ enum TerminalRouter: URLRequestConvertible {
     case projectDelete      (id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
-    case studyCreate        (image: Data, Study: Parameters)
+    case studyCreate        (study: Parameters)
     case studyDetail        (studyID: String)
     case studyUpdate        (studyID: String)
     case studyDelete        (studyID: String)
@@ -43,13 +43,15 @@ enum TerminalRouter: URLRequestConvertible {
     case hotKeyword         
     
     // 신청부분
-    case studyApply         (studyID: String, message: Parameters)
+    case applyStudy         (studyID: String, message: Parameters)
+    case applyStudyList     (id: String)
+    case applyUserList      (studyID: String)
     
     // 공지사항
-    case createNotice       (studyID: String, notice: Parameters)
+    case noticeCreate       (studyID: String, notice: Parameters)
     case noticeDetail       (studyID: String, noticeID: String)
     case noticeList         (studyID: String)
-    case noticeListForKey   (studyID: String, value: [Int])
+    case noticeListForKey   (studyID: String, value: String)
     case noticeUpdate       (studyID: String, noticeID: String, notice: Parameters)
     case noticeDelete       (studyID: String, noticeID: String)
     
@@ -113,11 +115,15 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
             
         // 신청
-        case .studyApply:
+        case .applyStudy:
             return .post
+        case .applyStudyList:
+            return .get
+        case .applyUserList:
+            return .get
             
         // 공지사항
-        case .createNotice:
+        case .noticeCreate:
             return .post
         case .noticeDetail:
             return .get
@@ -145,7 +151,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/check-nickname/\(nickname)"
         case let .eamilCheck(email):
             return "user/check-email/\(email)"
-        case let .userInfo(id), let .userInfoUpdate(id, _, _):
+        case let .userInfo(id), let .userInfoUpdate(id):
             return "user/\(id)"
         case let .userWithdrawal(id, _, _):
             return "user/\(id)"
@@ -177,11 +183,15 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/ranking"
             
         // 신청
-        case let .studyApply(studyID, _):
+        case let .applyStudy(studyID, _):
             return "study/\(studyID)/apply"
-            
+        case let .applyStudyList(id):
+            return "user/\(id)/apply"
+        case let .applyUserList(studyID):
+            return "study/\(studyID)/apply"
+        
         // 공지사항
-        case let .createNotice(studyID, _):
+        case let .noticeCreate(studyID, _):
             return "study/\(studyID)/notice"
         case let .noticeDetail(studyID, noticeID):
             return "study/\(studyID)/notice/\(noticeID)"
@@ -210,8 +220,8 @@ enum TerminalRouter: URLRequestConvertible {
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
             return nil
-        case let .userInfoUpdate(_, _, userInfo): // 수정해야함
-            return userInfo
+        case .userInfoUpdate: // 수정해야함
+            return nil
         case let .userWithdrawal(_, email, password):
             return [
                 "email": email,
@@ -228,23 +238,23 @@ enum TerminalRouter: URLRequestConvertible {
         case .studyDetail, .studyDelete, .myStudyList, .hotKeyword:
             return nil
         case let .studyListForKey(value):
-            return [
-                "values" : value
-            ]
+            return ["values": value]
         case let .studyList(category, sort):
             return [
                 "category": category,
                 "sort": sort
             ]
-        case let .studyCreate: // 파라미터 지정해야함
-            return nil
+        case let .studyCreate(study):
+            return study
         case .studyUpdate:// 파라미터 지정해야함
             return nil
             
         // 신청
-        case let .studyApply(_, message):
+        case let .applyStudy(_, message):
             return message
-        
+        case .applyStudyList, .applyUserList:
+            return nil
+            
         // 프로젝트
         case .projectList, .projectDelete:
             return nil
@@ -254,9 +264,11 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 공지사항
-        case let .createNotice(_, notice), let .noticeUpdate(_, _, notice):
+        case let .noticeCreate(_, notice), let .noticeUpdate(_, _, notice):
             return notice
-        case .noticeDetail, .noticeList, .noticeListForKey, .noticeDelete:
+        case let .noticeListForKey(_, value):
+            return ["values": value]
+        case .noticeDetail, .noticeList, .noticeDelete:
             return nil
         }
     }
@@ -270,9 +282,9 @@ enum TerminalRouter: URLRequestConvertible {
         
         switch method {
         case .get:
-            request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
+            request = try URLEncoding.default.encode(request, with: parameters)
         case .post, .put, .delete:
-            request = try JSONParameterEncoder().encode(parameters, into: request)
+            request = try JSONEncoding.default.encode(request, with: parameters)
             request.setValue("application/json", forHTTPHeaderField: "Accept")
         default:
             break
@@ -284,9 +296,15 @@ enum TerminalRouter: URLRequestConvertible {
 //    var multipartFormData: MultipartFormData {
 //            let multipartFormData = MultipartFormData()
 //            switch self {
-//            case let .userInfoUpdate(id, image, userInfo)
-//                multipartFormData.append(data, withName: "file", fileName: "file.png", mimeType: "image/png")
-//            default: ()
+//            case let .userInfoUpdate(_, image, userInfo):
+//                for (key, value) in userInfo {
+//                    let data = "\(value)".data(using: .utf8)!
+//                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
+//                }
+//                multipartFormData.append(image, withName: "file", fileName: "file.png", mimeType: "image/png")
+//                
+//            default:
+//                break
 //            }
 //
 //            return multipartFormData

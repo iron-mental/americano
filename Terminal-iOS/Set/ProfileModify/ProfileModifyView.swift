@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SwiftKeychainWrapper
 
 class ProfileModifyView: UIViewController, CellSubclassDelegate {
     var presenter: ProfileModifyPresenterProtocol?
@@ -73,9 +74,10 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             $0.addGestureRecognizer(background)
         }
         
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
-            requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
         

@@ -12,12 +12,12 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
     var presenter: MyStudyMainPresenter?
 
     static func createMyStudyMainViewModul() -> UIViewController {
-        let view = MyStudyMainView()
-        let presenter = MyStudyMainPresenter()
-        let interactor = MyStudyMainInteractor()
-        let remoteDataManager = MyStudyMainRemoteDataManager()
-        let localDataManager = MyStudyMainLocalDataManager()
-        let wireFrame = MyStudyMainWireFrame()
+        let view: MyStudyMainViewProtocol = MyStudyMainView()
+        let presenter: MyStudyMainPresenterProtocol = MyStudyMainPresenter()
+        let interactor: MyStudyMainInteractorProtocol = MyStudyMainInteractor()
+        let remoteDataManager: MyStudyMainRemoteDataManagerProtocol = MyStudyMainRemoteDataManager()
+        let localDataManager: MyStudyMainLocalDataManagerProtocol = MyStudyMainLocalDataManager()
+        let wireFrame: MyStudyMainWireFrameProtocol = MyStudyMainWireFrame()
         
         view.presenter = presenter
         
@@ -29,8 +29,20 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
         interactor.remoteManager = remoteDataManager
         interactor.localManager = localDataManager
         
-        return view
+        if let view = view as? MyStudyMainView {
+            return view
+        } else {
+            return UIViewController()
+        }
         
+    }
+    
+    func goToApplyList(from view: MyStudyMainViewProtocol) {
+        let myApplyListViewController = MyApplyListWireFrame.createStudyListModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(myApplyListViewController, animated: true)
+        }
     }
     
     func goToAalrmView(view: UIViewController) {
@@ -38,7 +50,6 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
     }
     
     func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy) {
-        print("이게 없는건가?",selectedStudy.id)
         let myStudyDetailView =  MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: selectedStudy.id)
         view.navigationController?.pushViewController(myStudyDetailView, animated: true)
     }
