@@ -87,7 +87,7 @@ class CoreDataManager {
                                     createdAt: record.createdAt ?? "createdAt Temp")
                 break
             }
-            return userInfo! ?? nil
+            return userInfo
         }
         catch {
             return nil

@@ -23,22 +23,23 @@ class SelectLocationView: UIViewController {
     var task: DispatchWorkItem?
     var mapView = NMFMapView()
     var bottomView = BottomView()
-    var keyboardHeight: CGFloat = 0
     var location: StudyDetailLocationPost?
     var preventPlaceNameFlag = true
     var delegate: selectLocationDelegate?
+    var keyboardHeight: CGFloat = 0.0
+    var bottomAnchor: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        bottomView.textField.delegate = self
         bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     override func viewDidAppear(_ animated: Bool) {
-        bottomView.textField.becomeFirstResponder()
+        bottomView.detailAddress.becomeFirstResponder()
         mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)),zoomTo: 17))
         location?.lng = mapView.cameraPosition.target.lng
         location?.lat = mapView.cameraPosition.target.lat
@@ -48,17 +49,27 @@ class SelectLocationView: UIViewController {
         preventPlaceNameFlag = isBeingPresented
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            keyboardHeight = keyboardSize.height
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -keyboardHeight).isActive = true
-            view.setNeedsLayout()
+    @objc func keyboardWillShow(notification:NSNotification) {
+        
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        keyboardHeight = keyboardRectangle.height
+        if preventPlaceNameFlag == false {
+            bottomAnchor?.constant -= keyboardHeight
+            bottomAnchor?.isActive = true
             view.layoutIfNeeded()
         }
+        bottomView.detailAddress.becomeFirstResponder()
+        preventPlaceNameFlag = false
+        
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        bottomView.frame.origin.y = UIScreen.main.bounds.height - bottomView.frame.height
+    @objc func keyboardWillHide() {
+        if preventPlaceNameFlag == false {
+            bottomAnchor?.constant = 0
+            view.layoutIfNeeded()
+        }
     }
     
     func attribute() {
@@ -80,17 +91,25 @@ class SelectLocationView: UIViewController {
     func layout() {
         [mapView, pin, bottomView].forEach { view.addSubview($0) }
         
+        mapView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
+        }
         pin.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: mapView.centerYAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 50)).isActive = true
         }
+        bottomAnchor = bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         bottomView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            bottomAnchor?.isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 202)).isActive = true
         }

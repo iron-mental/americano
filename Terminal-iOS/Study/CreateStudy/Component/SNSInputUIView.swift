@@ -10,16 +10,12 @@ import UIKit
 
 class IdInputView: UIView {
     var titleLabel = UILabel()
-    var notion: SNSInputItem?
-    var evernote: SNSInputItem?
-    var web: SNSInputItem?
+    var notion = SNSInputItem()
+    var evernote = SNSInputItem()
+    var web = SNSInputItem()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        notion = SNSInputItem(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: (25/118) * frame.size.height))
-        evernote = SNSInputItem(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: (25/118) * frame.size.height))
-        web = SNSInputItem(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: (25/118) * frame.size.height))
-        
+    init() {
+        super.init(frame: .zero)
         attribute()
         layout()
     }
@@ -27,56 +23,50 @@ class IdInputView: UIView {
     func attribute() {
         titleLabel.do {
             $0.text = "SNS"
+            $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
         }
-        notion!.do {
-            $0.textField.text = "notion"
+        notion.do {
+            $0.textField.placeholder = "예) notion.so/example1234"
             $0.icon.image = #imageLiteral(resourceName: "notion")
         }
-        evernote!.do {
-            $0.textField.text = "evernote"
+        evernote.do {
+            $0.textField.placeholder = "예) evernote/example1234"
             $0.icon.image = #imageLiteral(resourceName: "evernote")
         }
-        web!.do {
-            $0.textField.text = "web"
+        web.do {
+            $0.textField.placeholder = "예) tistory/example1234"
             $0.icon.image = #imageLiteral(resourceName: "web")
         }
     }
     func layout() {
-        addSubview(titleLabel)
-        addSubview(notion!)
-        addSubview(evernote!)
-        addSubview(web!)
+        [titleLabel, notion, evernote, web].forEach {
+            addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         titleLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (18/117) * frame.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (31/352) * frame.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: $0.intrinsicContentSize.height).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
         }
-        notion!.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (18/107) * frame.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        notion.do {
+            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: Terminal.convertHeigt(value: 17)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
         }
-        evernote!.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: notion!.bottomAnchor, constant: (10/121) * frame.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        evernote.do {
+            $0.topAnchor.constraint(equalTo: notion.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
         }
-        web!.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: evernote!.bottomAnchor, constant: (10/121) * frame.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        web.do {
+            $0.topAnchor.constraint(equalTo: evernote.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (22/121) * frame.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (22/352) * frame.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
         }
     }
     

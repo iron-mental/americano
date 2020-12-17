@@ -8,9 +8,6 @@
 
 import UIKit
 
-
-
-
 class SearchLocationView: UIViewController {
     var presenter: SearchLocationPresenterProtocol?
     var parentView: UIViewController?
@@ -19,7 +16,6 @@ class SearchLocationView: UIViewController {
     var searchButton = UIButton()
     var tableView = UITableView()
     var searchResultList: [StudyDetailLocationPost] = []
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +38,8 @@ class SearchLocationView: UIViewController {
         searchTextField.do {
             $0.textColor = .white
             $0.placeholder = "장소를 검색하세요"
+            $0.becomeFirstResponder()
+            $0.delegate = self
         }
         tableView.do {
             $0.delegate = self
@@ -87,8 +85,8 @@ class SearchLocationView: UIViewController {
     @objc func didCloseButtonClicked() {
         dismiss(animated: true)
     }
+    
     @objc func didSearchButtonClicked() {
-        
         presenter?.didClickedSearchButton(text: searchTextField.text!)
     }
 }
@@ -101,6 +99,7 @@ extension SearchLocationView: SearchLocationViewProtocol {
     func showSearchResult(list: [StudyDetailLocationPost]) {
         searchResultList = list
         tableView.reloadData()
+        searchTextField.endEditing(true)
     }
 }
 
@@ -119,5 +118,17 @@ extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.didSelectedItem(item: searchResultList[indexPath.row], view: self, parentView: parentView!)
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        searchTextField.endEditing(true)
+    }
+}
+
+extension SearchLocationView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let keyword = searchTextField.text {
+            presenter?.didClickedSearchButton(text: keyword)
+        }
+        return true
     }
 }

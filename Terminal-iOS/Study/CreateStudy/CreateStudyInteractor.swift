@@ -11,6 +11,8 @@ import UIKit
 class CreateStudyInteractor: CreateStudyInteractorProtocols {
     
     
+    
+    
     var presenter: CreateStudyPresenterProtocols?
     var createStudyRemoteDataManager: CreateStudyRemoteDataManagerProtocols?
     
@@ -90,20 +92,38 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
                 break
             case .edit:
                 createStudyRemoteDataManager?.putStudy(study: study, studyID: studyID!, completion: { result, message in
-                switch result {
-                case true:
-                    self.presenter?.studyInfoValid(message: message)
-                    break
-                case false:
-                    self.presenter?.studyInfoInvalid(message: message)
-                    break
-                }
-            })
+                    switch result {
+                    case true:
+                        self.presenter?.studyInfoValid(message: message)
+                        break
+                    case false:
+                        self.presenter?.studyInfoInvalid(message: message)
+                        break
+                    }
+                })
                 break
             }
             
         } else {
             presenter?.studyInfoInvalid(message: nullCheck(study: study))
+        }
+    }
+    func viewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
+        var parentView = UIView()
+        
+        if type(of: textView) == SNSInputUITextField.self {
+            parentView = (textView.superview?.superview)!
+        } else {
+            parentView = textView.superview!
+        }
+        if viewMinY >= (parentView.frame.minY) {
+            let distance = (parentView.frame.minY) - viewMinY
+            presenter?.viewDidTapResult(result: true, topOrBottom: true, distance: distance)
+        } else if viewMaxY <= (parentView.frame.maxY){
+            let distance = (parentView.frame.maxY) - viewMaxY
+            presenter?.viewDidTapResult(result: true, topOrBottom: false, distance: distance)
+        } else {
+            presenter?.viewDidTapResult(result: false, topOrBottom: nil, distance: nil)
         }
     }
 }

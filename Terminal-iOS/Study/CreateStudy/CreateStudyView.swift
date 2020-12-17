@@ -33,29 +33,55 @@ class CreateStudyView: UIViewController{
     let mainImageView = MainImageView(frame: CGRect.zero)
     let studyTitleTextField = UITextField()
     var seletedCategory: String?
-    var studyIntroduceView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 소개")
-    var SNSInputView = IdInputView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (118/667) * UIScreen.main.bounds.height))
-    var studyInfoView = TitleWithTextView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (121/667) * UIScreen.main.bounds.height),title: "스터디 진행")
-    var locationView = LocationUIVIew(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
-    var locationdetailTextField = UITextField()
-    var timeView = TimeUIView(frame: CGRect(x: 0, y: 0, width: (352/375) * UIScreen.main.bounds.width, height: (53/667) * UIScreen.main.bounds.height))
+    var studyIntroduceView = TitleWithTextView(title: "스터디 소개")
+    var SNSInputView = IdInputView()
+    var studyInfoView = TitleWithTextView(title: "스터디 진행")
+    var locationView = LocationUIView()
+    var timeView = TimeUIView()
     var button = UIButton()
     var mainImageTapGesture = UITapGestureRecognizer()
     var locationTapGesture = UITapGestureRecognizer()
+    var studyDetailPost: StudyDetailPost?
+    var keyboardHeight: CGFloat = 0.0
+    var clickedView: UIView?
+    var currentScrollViewMinY: CGFloat = 0
+    var currentScrollViewMaxY: CGFloat = 0
+    var textViewTapFlag = false
+    var keyboardLine: UIView {
+        var view = UIView()
+        view.backgroundColor = .red
+        view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 291 , width: UIScreen.main.bounds.width, height: 1)
+        return view
+    }
+    let imageDownloadRequest = AnyModifier { request in
+        var requestBody = request
+        requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
+        return requestBody
+    }
     var study: StudyDetail? {
         didSet {
             setView()
         }
     }
-    var studyDetailPost: StudyDetailPost?
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func keyboardWillShow(notification:NSNotification) {
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        keyboardHeight = keyboardRectangle.height
     }
     
+    @objc func keyboardWillHide() {
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
-
+        
     }
     
     func attribute() {
@@ -70,6 +96,7 @@ class CreateStudyView: UIViewController{
         }
         scrollView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.showsVerticalScrollIndicator = false
         }
         backgroundView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -80,7 +107,7 @@ class CreateStudyView: UIViewController{
             mainImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(mainImageTapGesture)
             //추후에 수정일때인지 새로작성인지 분기해서 처리 ~(철이형 얘기하는거 아님)
-//            $0.kf.setImage(with: URL(string: (study?.image!)!), options: [.requestModifier(imageDownloadRequest)])
+            //            $0.kf.setImage(with: URL(string: (study?.image!)!), options: [.requestModifier(imageDownloadRequest)])
         }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
@@ -89,6 +116,7 @@ class CreateStudyView: UIViewController{
             $0.textColor = .white
             $0.text = study?.title ?? nil
             $0.layer.cornerRadius = 10
+            $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
         }
         
         studyIntroduceView.do {
@@ -97,9 +125,9 @@ class CreateStudyView: UIViewController{
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-            $0.notion?.textField.text = study?.snsNotion ?? nil
-            $0.web?.textField.text = study?.snsNotion ?? nil
-            $0.evernote?.textField.text = study?.snsNotion ?? nil
+            $0.notion.textField.text = study?.snsNotion ?? nil
+            $0.web.textField.text = study?.snsNotion ?? nil
+            $0.evernote.textField.text = study?.snsNotion ?? nil
         }
         studyInfoView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -109,15 +137,8 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor.appColor(.testColor)
             locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
-            $0.detailAddress.text = study?.location.addressName ?? "주소 입력"
-            
-        }
-        locationdetailTextField.do {
-            $0.backgroundColor = UIColor.appColor(.InputViewColor)
-            $0.placeholder = "상세주소를 입력하세요"
-            $0.layer.cornerRadius = 10
-            $0.layer.masksToBounds = true
-            $0.text =  study?.location.locationDetail ?? nil
+            $0.address.text = study?.location.addressName != nil ? ". \(study?.location.addressName)" : "  주소입력"
+            $0.detailAddress.text =  study?.location.locationDetail ?? nil
         }
         timeView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -137,8 +158,9 @@ class CreateStudyView: UIViewController{
     
     func layout() {
         view.addSubview(scrollView)
+        view.addSubview(keyboardLine)
         scrollView.addSubview(backgroundView)
-        [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, locationdetailTextField, timeView, button].forEach { backgroundView.addSubview($0)}
+        [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { backgroundView.addSubview($0)}
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -152,13 +174,13 @@ class CreateStudyView: UIViewController{
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 400).isActive = true
-            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 600).isActive = true
+            $0.bottomAnchor.constraint(equalTo: button.bottomAnchor).isActive = true
         }
         mainImageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (170/667) * screenSize.height).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 170)).isActive = true
             $0.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
         }
@@ -171,80 +193,89 @@ class CreateStudyView: UIViewController{
         }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor,constant: (18/667) * screenSize.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyIntroduceView.textView.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 141)).isActive = true
         }
         SNSInputView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: $0.web!.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 141)).isActive = true
         }
         studyInfoView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor, constant: (13/667) * screenSize.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: $0.textView.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 141)).isActive = true
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: locationView.detailAddress.bottomAnchor).isActive = true
-        }
-        locationdetailTextField.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor, constant: (13/667) * screenSize.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (14/667) * screenSize.height).isActive = true
+            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 141)).isActive = true
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationdetailTextField.bottomAnchor,constant: (13/667) * screenSize.height).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: -(18/375) * screenSize.width ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: (18/375) * screenSize.width ).isActive = true
-            $0.bottomAnchor.constraint(equalTo: timeView.detailTime.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
         button.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: (26/667) * screenSize.height).isActive = true
-            $0.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (335/375) * screenSize.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (43/667) * screenSize.height).isActive = true
+            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 50)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
     }
     
-    func setDelegate() {
+    func setDelegate(completion: @escaping () -> Void) {
         scrollView.delegate = self
         studyTitleTextField.delegate = self
-        SNSInputView.notion?.textField.delegate = self
-        SNSInputView.evernote?.textField.delegate = self
-        SNSInputView.web?.textField.delegate = self
+        studyIntroduceView.textView.delegate = self
+        studyInfoView.textView.delegate = self
+        SNSInputView.notion.textField.delegate = self
+        SNSInputView.evernote.textField.delegate = self
+        SNSInputView.web.textField.delegate = self
+        locationView.detailAddress.delegate = self
+        timeView.detailTime.delegate = self
         picker.delegate = self
-        SNSInputView.notion!.textField.debounce(delay: 1) { [weak self] text in
+        
+        SNSInputView.notion.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             self!.presenter?.notionInputFinish(id: text ?? "")
-            self!.SNSInputView.notion!.textField.layer.borderColor = UIColor.blue.cgColor
+            if self!.SNSInputView.notion.textField.text == "" {
+                self!.SNSInputView.notion.textField.layer.borderColor = .none
+            } else {
+                self!.SNSInputView.notion.textField.layer.borderColor = UIColor.blue.cgColor
+            }
         }
-        SNSInputView.evernote!.textField.debounce(delay: 1) { [weak self] text in
+        SNSInputView.evernote.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             self!.presenter?.everNoteInputFinish(url: text ?? "")
-            self!.SNSInputView.evernote!.textField.layer.borderColor = UIColor.blue.cgColor
+            if self!.SNSInputView.evernote.textField.text == "" {
+                self!.SNSInputView.evernote.textField.layer.borderColor = .none
+            } else {
+                self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.blue.cgColor
+            }
         }
-        SNSInputView.web!.textField.debounce(delay: 1) { [weak self] text in
+        SNSInputView.web.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             self!.presenter?.URLInputFinish(url: text ?? "")
-            self!.SNSInputView.web!.textField.layer.borderColor = UIColor.blue.cgColor
+            if self!.SNSInputView.web.textField.text == "" {
+                self!.SNSInputView.web.textField.layer.borderColor = .none
+            } else {
+                self!.SNSInputView.web.textField.layer.borderColor = UIColor.blue.cgColor
+            }
         }
     }
-    
-    // FUNCTION
     
     @objc func didImageViewClicked() {
         let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
@@ -274,11 +305,45 @@ class CreateStudyView: UIViewController{
 }
 
 extension CreateStudyView: CreateStudyViewProtocols {
+    func viewToTop(distance: CGFloat) {
+        UIView.animate(withDuration: 0.1) {
+            self.scrollView.contentOffset.y += distance
+            
+        } completion: { _ in
+            self.textViewTapFlag = false
+            if self.textViewTapFlag == false {
+                self.clickedView?.becomeFirstResponder()
+            }
+            
+        }
+        
+    }
+    
+    func viewToBottom(distance: CGFloat) {
+        UIView.animate(withDuration: 0.1) {
+            self.scrollView.contentOffset.y += distance
+            
+        } completion: { _ in
+            self.textViewTapFlag = false
+            if self.textViewTapFlag == false {
+                self.clickedView?.becomeFirstResponder()
+            }
+            
+        }
+        
+    }
+    func viewTapFlagToggle() {
+        textViewTapFlag = false
+    }
     
     func setView() {
         attribute()
         layout()
-        setDelegate()
+        setDelegate(completion: {
+            LoadingRainbowCat.hide {
+//
+            }
+        })
     }
     func loading() {
         LoadingRainbowCat.show()
@@ -290,40 +355,58 @@ extension CreateStudyView: CreateStudyViewProtocols {
         print("setVackgroundImage")
     }
     func showLoadingToNotionInput() {
-        print("노션 로딩중")
+        LoadingRainbowCat.show()
     }
     func showLoadingToEvernoteInput() {
-        print("에버노트 로딩중")
+        LoadingRainbowCat.show()
     }
     func showLoadingToWebInput() {
-        print("웹 로딩중")
+        LoadingRainbowCat.show()
     }
     func hideLoadingToNotionInput() {
-        print("hideLoadingToNotionInput")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func hideLoadingToEvernoteInput() {
-        print("hideLoadingToEvernoteInput")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func hideLoadingToWebInput() {
-        print("hideLoadingToWebInput")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func notionValid() {
-        print("notionValid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func evernoteValid() {
-        print("evernoteValid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func webValid() {
-        print("webValid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func notionInvalid() {
-        print("notionInvalid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func evernoteInvalid() {
-        print("evernoteInvalid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func webInvalid() {
-        print("webInvalid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
@@ -333,13 +416,13 @@ extension CreateStudyView: CreateStudyViewProtocols {
             
             if let currentLocation = study?.location {
                 selectedLocation = StudyDetailLocationPost(address: currentLocation.addressName,
-                                        lat: Double(currentLocation.latitude)!,
-                                        lng: Double(currentLocation.longitude)!,
-                                        detailAddress: nil,
-                                        placeName: nil,
-                                        category: nil,
-                                        sido: nil,
-                                        sigungu: nil)
+                                                           lat: Double(currentLocation.latitude)!,
+                                                           lng: Double(currentLocation.longitude)!,
+                                                           detailAddress: nil,
+                                                           placeName: nil,
+                                                           category: nil,
+                                                           sido: nil,
+                                                           sigungu: nil)
                 if let detailAddress = study?.location.addressName {
                     selectedLocation?.detailAddress = detailAddress
                 }
@@ -351,17 +434,16 @@ extension CreateStudyView: CreateStudyViewProtocols {
         } else {
             tempTitle = studyTitleTextField.text ?? ""
         }
-        
         studyDetailPost = StudyDetailPost(category: selectedCategory!,
-                                        title: tempTitle,
-                                       introduce: studyIntroduceView.textView.text,
-                                       progress: studyInfoView.textView.text,
-                                       studyTime: timeView.detailTime.text ?? "",
-                                       snsWeb: SNSInputView.web?.textField.text,
-                                       snsNotion: SNSInputView.notion?.textField.text,
-                                       snsEvernote: SNSInputView.evernote?.textField.text,
-                                       image: mainImageView.image!,
-                                       location: selectedLocation!)
+                                          title: tempTitle,
+                                          introduce: studyIntroduceView.textView.text,
+                                          progress: studyInfoView.textView.text,
+                                          studyTime: timeView.detailTime.text ?? "",
+                                          snsWeb: SNSInputView.web.textField.text,
+                                          snsNotion: SNSInputView.notion.textField.text,
+                                          snsEvernote: SNSInputView.evernote.textField.text,
+                                          image: mainImageView.image!,
+                                          location: selectedLocation!)
         presenter?.clickCompleteButton(study: studyDetailPost!, state: state!, studyID: study?.id ?? nil)
     }
     func studyInfoInvalid(message: String) {
@@ -382,9 +464,8 @@ extension CreateStudyView: CreateStudyViewProtocols {
                 break
             case .none:
                 break
-//                <#code#>
+            //                <#code#>
             }
-            
         }
     }
 }
@@ -399,20 +480,42 @@ extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationContro
 }
 
 extension CreateStudyView: UITextFieldDelegate {
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewTapFlag = true
+        clickedView = textField
+        presenter?.viewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+    }
+}
+
+extension CreateStudyView: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textViewTapFlag = true
+        clickedView = textView
+        presenter?.viewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+    }
 }
 
 extension CreateStudyView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        view.endEditing(true)
+        if textViewTapFlag == false {
+            view.endEditing(true)
+        }
+        currentScrollViewMinY = scrollView.contentOffset.y
+        currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
     }
 }
 
 extension CreateStudyView: selectLocationDelegate {
     func passLocation(location: StudyDetailLocationPost) {
         selectedLocation = location
-        locationView.detailAddress.text = "\(location.address)"
+        locationView.address.text = "\(location.address)"
         guard let detail = location.detailAddress else { return }
-        locationdetailTextField.text = detail
+        locationView.detailAddress.text = detail
+    }
+}
+
+extension CreateStudyView: KeyboardManagerDelegate {
+    func keyboardWillChangeFrame(endFrame: CGRect?, duration: TimeInterval, animationCurve: UIView.AnimationOptions) {
+//        <#code#>
     }
 }

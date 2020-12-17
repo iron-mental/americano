@@ -41,6 +41,9 @@ protocol CreateStudyViewProtocols: class {
     func webInvalid()
     func studyInfoInvalid(message: String)
     func studyInfoValid(message: String)
+    func viewToTop(distance: CGFloat)
+    func viewToBottom(distance: CGFloat)
+    func viewTapFlagToggle()
 }
 
 protocol CreateStudyInteractorProtocols: class {
@@ -52,6 +55,7 @@ protocol CreateStudyInteractorProtocols: class {
     func searchEvernoteURL(url: String?)
     func searchWebURL(url: String?)
     func studyCreateComplete(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?)
+    func viewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat)
 }
 
 protocol CreateStudyPresenterProtocols: class {
@@ -66,7 +70,7 @@ protocol CreateStudyPresenterProtocols: class {
     func URLInputFinish(url: String?)
     func clickLocationView(currentView: UIViewController)
     func clickCompleteButton(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?)
-
+    func viewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat)
     
     //INTERACTOR -> PRESENTER
     func showNotionValidResult(result: Bool)
@@ -74,6 +78,7 @@ protocol CreateStudyPresenterProtocols: class {
     func showWebValidResult(result: Bool)
     func studyInfoInvalid(message: String)
     func studyInfoValid(message: String)
+    func viewDidTapResult(result: Bool, topOrBottom: Bool?, distance: CGFloat?)
 }
 
 protocol CreateStudyRemoteDataManagerProtocols: class {
