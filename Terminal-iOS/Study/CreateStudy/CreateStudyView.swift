@@ -129,7 +129,6 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor.appColor(.testColor)
             locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
-            //            $0.address.text = "    \(study?.location.addressName ?? "주소 입력 하러가기")"
             $0.address.text = study?.location.addressName != nil ? ". \(study?.location.addressName)" : "  주소입력"
             $0.detailAddress.text =  study?.location.locationDetail ?? nil
         }
@@ -313,7 +312,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     
     func viewToBottom(distance: CGFloat) {
-        UIView.animate(withDuration: 0) {
+        UIView.animate(withDuration: 0.1) {
             self.scrollView.contentOffset.y += distance
             
         } completion: { _ in
@@ -459,11 +458,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
                 break
             //                <#code#>
             }
-            
         }
-    }
-    @objc func viewDidTap(_ sender: UITextView) {
-        print(sender)
     }
 }
 
@@ -478,15 +473,9 @@ extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationContro
 
 extension CreateStudyView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("textField minY",textField.frame.minY)
-        print("textField maxY",textField.frame.maxY)
-        print("scrollview MinY",currentScrollViewMinY)
-        print("scrollview MaxY",currentScrollViewMaxY)
-        
         textViewTapFlag = true
         clickedView = textField
         presenter?.viewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
-        
     }
 }
 
@@ -495,7 +484,6 @@ extension CreateStudyView: UITextViewDelegate {
         textViewTapFlag = true
         clickedView = textView
         presenter?.viewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
-        
     }
 }
 

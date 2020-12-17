@@ -83,10 +83,8 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
     func viewDidTapResult(result: Bool, topOrBottom: Bool?, distance: CGFloat?) {
         switch result {
         case true:
-            
             topOrBottom == true ? view?.viewToTop(distance: distance!) : view?.viewToBottom(distance: distance!)
         case false:
-            //flag를 위해 임시로 호출
             view?.viewTapFlagToggle()
         }
     }

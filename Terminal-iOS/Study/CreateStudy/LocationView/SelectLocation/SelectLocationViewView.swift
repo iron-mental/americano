@@ -33,14 +33,13 @@ class SelectLocationView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        bottomView.textField.delegate = self
         bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        bottomView.textField.becomeFirstResponder()
+        bottomView.detailAddress.becomeFirstResponder()
         mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)),zoomTo: 17))
         location?.lng = mapView.cameraPosition.target.lng
         location?.lat = mapView.cameraPosition.target.lat
