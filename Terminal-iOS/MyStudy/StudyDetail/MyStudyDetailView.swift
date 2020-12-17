@@ -22,13 +22,13 @@ class MyStudyDetailView: UIViewController {
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
     
-    var  VCArr: [UIViewController] = []
+    var VCArr: [UIViewController] = []
     
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
                                            navigationOrientation: .horizontal,
                                            options: nil)
-    lazy var tabSege = UISegmentedControl(items: state)
+    lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(didClickecmoreButton))
 
@@ -52,7 +52,7 @@ class MyStudyDetailView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationItem.rightBarButtonItems = [moreButton]
         }
-        tabSege.do {
+        tapSege.do {
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 14),
                                        .foregroundColor: UIColor.gray], for: .normal)
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),
@@ -77,13 +77,13 @@ class MyStudyDetailView: UIViewController {
     }
     
     func layout() {
-        view.addSubview(tabSege)
+        view.addSubview(tapSege)
         view.addSubview(selectedUnderLine)
         addChild(childPageView)
         view.addSubview(childPageView.view)
         childPageView.didMove(toParent: self)
         
-        tabSege.do {
+        tapSege.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -92,14 +92,14 @@ class MyStudyDetailView: UIViewController {
         }
         selectedUnderLine.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: tabSege.bottomAnchor, constant: -1).isActive = true
-            $0.centerXAnchor.constraint(equalTo: tabSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
+            $0.bottomAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: -1).isActive = true
+            $0.centerXAnchor.constraint(equalTo: tapSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
             $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
         }
         childPageView.view.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: tabSege.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -107,7 +107,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     func goNoticePage() {
-        tabSege.selectedSegmentIndex = 1
+        tapSege.selectedSegmentIndex = 1
         UIView.animate(withDuration: 0.2) {
             self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(1), y: 0)
         }
@@ -178,7 +178,7 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
         
         if let viewControllers = pageViewController.viewControllers {
             if let viewControllerIndex = self.VCArr.firstIndex(of: viewControllers[0]) {
-                self.tabSege.selectedSegmentIndex = viewControllerIndex
+                self.tapSege.selectedSegmentIndex = viewControllerIndex
                 UIView.animate(withDuration: 0.2) {
                     self.selectedUnderLine.transform =
                         CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(viewControllerIndex), y: 0)
