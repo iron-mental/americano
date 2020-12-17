@@ -11,7 +11,7 @@ import UIKit
 
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
-    
+    var getPushEvent: Bool = false
     var studyID: Int? {
         didSet {
             VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
@@ -36,6 +36,7 @@ class MyStudyDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        getPushEvent ? goNoticePage(): nil
     }
     
     func attribute() {
@@ -96,7 +97,6 @@ class MyStudyDetailView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
             $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
         }
-        
         childPageView.view.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: tabSege.bottomAnchor, constant: 10).isActive = true
@@ -106,10 +106,19 @@ class MyStudyDetailView: UIViewController {
         }
     }
     
+    func goNoticePage() {
+        tabSege.selectedSegmentIndex = 1
+        UIView.animate(withDuration: 0.2) {
+            self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(1), y: 0)
+        }
+        self.childPageView.setViewControllers([VCArr[1]], direction: .forward, animated: false, completion: nil)
+        self.getPushEvent = false
+    }
+    
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.2) {
             self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
         }
 
@@ -169,7 +178,7 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
         
         if let viewControllers = pageViewController.viewControllers {
             if let viewControllerIndex = self.VCArr.firstIndex(of: viewControllers[0]) {
-                UIView.animate(withDuration: 0.5) {
+                UIView.animate(withDuration: 0.2) {
                     self.selectedUnderLine.transform =
                         CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(viewControllerIndex), y: 0)
                 }
