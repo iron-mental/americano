@@ -19,21 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        
         center.requestAuthorization(options: [.alert, .badge, .sound]) { (success, error) in
             if let error = error {
                 print(error)
             }
-            
             DispatchQueue.main.async {
                 application.registerForRemoteNotifications()
             }
         }
-        
         return true
     }
-    
-    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         

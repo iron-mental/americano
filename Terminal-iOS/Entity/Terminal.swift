@@ -29,4 +29,5 @@ class Terminal {
     }
     
     static let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDQsImVtYWlsIjoic3dkb3Jpc0BnbWFpbC5jb20iLCJuaWNrbmFtZSI6IuycpOyDgeybkCIsImlhdCI6MTYwNzA4NzQ5NSwiZXhwIjoxMDYwNzA4NzQ5NSwiaXNzIjoidGVybWluYWwtc2VydmVyIiwic3ViIjoidXNlckluZm8tYWNjZXNzIn0.b3dYBzHr9ll524AVLeJ5sB678l1fiBQev9CCTeYl9AE"
+    static var keyboardHeight: CGFloat = 0.0
 }

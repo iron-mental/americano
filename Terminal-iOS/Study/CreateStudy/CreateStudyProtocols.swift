@@ -43,6 +43,7 @@ protocol CreateStudyViewProtocols: class {
     func studyInfoValid(message: String)
     func viewToTop(distance: CGFloat)
     func viewToBottom(distance: CGFloat)
+    func viewTapFlagToggle()
 }
 
 protocol CreateStudyInteractorProtocols: class {

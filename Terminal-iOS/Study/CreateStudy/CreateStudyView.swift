@@ -46,6 +46,12 @@ class CreateStudyView: UIViewController{
     var currentScrollViewMinY: CGFloat = 0
     var currentScrollViewMaxY: CGFloat = 0
     var textViewTapFlag = false
+    var keyboardLine: UIView {
+        var view = UIView()
+        view.backgroundColor = .red
+        view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 291 , width: UIScreen.main.bounds.width, height: 1)
+        return view
+    }
     let imageDownloadRequest = AnyModifier { request in
         var requestBody = request
         requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
@@ -61,7 +67,6 @@ class CreateStudyView: UIViewController{
         self.presenter?.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     @objc func keyboardWillShow(notification:NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
@@ -71,6 +76,7 @@ class CreateStudyView: UIViewController{
     }
     
     @objc func keyboardWillHide() {
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         
@@ -108,7 +114,6 @@ class CreateStudyView: UIViewController{
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.textView.text = study?.introduce ?? nil
-            $0.textView.delegate = self
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -119,7 +124,6 @@ class CreateStudyView: UIViewController{
         studyInfoView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.textView.text = study?.introduce ?? nil
-            $0.textView.delegate = self
         }
         locationView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -147,6 +151,7 @@ class CreateStudyView: UIViewController{
     
     func layout() {
         view.addSubview(scrollView)
+        view.addSubview(keyboardLine)
         scrollView.addSubview(backgroundView)
         [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { backgroundView.addSubview($0)}
         
@@ -168,7 +173,7 @@ class CreateStudyView: UIViewController{
         mainImageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (170/667) * screenSize.height).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 170)).isActive = true
             $0.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
         }
@@ -212,7 +217,7 @@ class CreateStudyView: UIViewController{
             $0.topAnchor.constraint(equalTo: locationView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 141))
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
         button.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -224,13 +229,18 @@ class CreateStudyView: UIViewController{
         }
     }
     
-    func setDelegate() {
+    func setDelegate(completion: @escaping () -> Void) {
         scrollView.delegate = self
         studyTitleTextField.delegate = self
+        studyIntroduceView.textView.delegate = self
+        studyInfoView.textView.delegate = self
         SNSInputView.notion.textField.delegate = self
         SNSInputView.evernote.textField.delegate = self
         SNSInputView.web.textField.delegate = self
+        locationView.detailAddress.delegate = self
+        timeView.detailTime.delegate = self
         picker.delegate = self
+        
         SNSInputView.notion.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             self!.presenter?.notionInputFinish(id: text ?? "")
@@ -260,8 +270,6 @@ class CreateStudyView: UIViewController{
         }
     }
     
-    // FUNCTION
-    
     @objc func didImageViewClicked() {
         let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
         let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
@@ -277,7 +285,6 @@ class CreateStudyView: UIViewController{
     @objc func didLocationViewClicked() {
         //SelectLocationView를 띄우는 게 맞습니다.
         presenter?.clickLocationView(currentView: self)
-        
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary
@@ -294,26 +301,42 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func viewToTop(distance: CGFloat) {
         UIView.animate(withDuration: 0.1) {
             self.scrollView.contentOffset.y += distance
+            
         } completion: { _ in
-            self.clickedView?.becomeFirstResponder()
             self.textViewTapFlag = false
+            if self.textViewTapFlag == false {
+                self.clickedView?.becomeFirstResponder()
+            }
+            
         }
+        
     }
     
     func viewToBottom(distance: CGFloat) {
-        
-        UIView.animate(withDuration: 0.1) {
+        UIView.animate(withDuration: 0) {
             self.scrollView.contentOffset.y += distance
+            
         } completion: { _ in
-            self.clickedView?.becomeFirstResponder()
             self.textViewTapFlag = false
-        }  
+            if self.textViewTapFlag == false {
+                self.clickedView?.becomeFirstResponder()
+            }
+            
+        }
+        
+    }
+    func viewTapFlagToggle() {
+        textViewTapFlag = false
     }
     
     func setView() {
         attribute()
         layout()
-        setDelegate()
+        setDelegate(completion: {
+            LoadingRainbowCat.hide {
+//
+            }
+        })
     }
     func loading() {
         LoadingRainbowCat.show()
@@ -325,40 +348,58 @@ extension CreateStudyView: CreateStudyViewProtocols {
         print("setVackgroundImage")
     }
     func showLoadingToNotionInput() {
-        print("노션 로딩중")
+        LoadingRainbowCat.show()
     }
     func showLoadingToEvernoteInput() {
-        print("에버노트 로딩중")
+        LoadingRainbowCat.show()
     }
     func showLoadingToWebInput() {
-        print("웹 로딩중")
+        LoadingRainbowCat.show()
     }
     func hideLoadingToNotionInput() {
-        print("hideLoadingToNotionInput")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func hideLoadingToEvernoteInput() {
-        print("hideLoadingToEvernoteInput")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func hideLoadingToWebInput() {
-        print("hideLoadingToWebInput")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func notionValid() {
-        print("notionValid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func evernoteValid() {
-        print("evernoteValid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func webValid() {
-        print("webValid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func notionInvalid() {
-        print("notionInvalid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func evernoteInvalid() {
-        print("evernoteInvalid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     func webInvalid() {
-        print("webInvalid")
+        LoadingRainbowCat.hide(completion: {
+//
+        })
     }
     @objc func didClickButton() {
         //하드로 넣어주고 추후에 손을 봅시다.
@@ -436,7 +477,17 @@ extension CreateStudyView:  UIImagePickerControllerDelegate & UINavigationContro
 }
 
 extension CreateStudyView: UITextFieldDelegate {
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("textField minY",textField.frame.minY)
+        print("textField maxY",textField.frame.maxY)
+        print("scrollview MinY",currentScrollViewMinY)
+        print("scrollview MaxY",currentScrollViewMaxY)
+        
+        textViewTapFlag = true
+        clickedView = textField
+        presenter?.viewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        
+    }
 }
 
 extension CreateStudyView: UITextViewDelegate {
@@ -444,6 +495,7 @@ extension CreateStudyView: UITextViewDelegate {
         textViewTapFlag = true
         clickedView = textView
         presenter?.viewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        
     }
 }
 
@@ -463,5 +515,11 @@ extension CreateStudyView: selectLocationDelegate {
         locationView.address.text = "\(location.address)"
         guard let detail = location.detailAddress else { return }
         locationView.detailAddress.text = detail
+    }
+}
+
+extension CreateStudyView: KeyboardManagerDelegate {
+    func keyboardWillChangeFrame(endFrame: CGRect?, duration: TimeInterval, animationCurve: UIView.AnimationOptions) {
+//        <#code#>
     }
 }

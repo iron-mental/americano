@@ -39,6 +39,7 @@ class LoadingRainbowCat: NSObject {
         popupView.play()
         popupView.loopMode = .loop
         
+        
     }
     
     class func hide(completion: @escaping () -> Void) {
@@ -49,5 +50,6 @@ class LoadingRainbowCat: NSObject {
             popupView.removeFromSuperview()
         }
         completion()
+        
     }
 }
