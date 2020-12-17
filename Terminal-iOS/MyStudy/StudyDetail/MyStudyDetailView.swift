@@ -178,6 +178,7 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
         
         if let viewControllers = pageViewController.viewControllers {
             if let viewControllerIndex = self.VCArr.firstIndex(of: viewControllers[0]) {
+                self.tabSege.selectedSegmentIndex = viewControllerIndex
                 UIView.animate(withDuration: 0.2) {
                     self.selectedUnderLine.transform =
                         CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(viewControllerIndex), y: 0)
