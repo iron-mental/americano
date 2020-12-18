@@ -17,8 +17,8 @@ class MyApplyListPresenter: MyApplyListPresenterProtocol {
         interactor?.getApplyList()
     }
     
-    func showStudyDetail(keyValue: Int, state: Bool) {
-        
+    func showStudyDetail(keyValue: Int) {
+        wireFrame?.presentStudyDetailScreen(from: view!, studyID: keyValue)
     }
 }
 
