@@ -36,7 +36,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     
     func attribute() {
         self.do {
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = UIColor.appColor(.testColor)
         }
         noticeBackground.do {
             $0.layer.cornerRadius = 5

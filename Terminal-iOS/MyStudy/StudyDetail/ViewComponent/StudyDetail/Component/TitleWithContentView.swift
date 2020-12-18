@@ -36,7 +36,7 @@ class TitleWithContentView: UIView {
     
     func attribute() {
         self.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
         }
         title.do {
             $0.font = UIFont.boldSystemFont(ofSize: 18)
@@ -59,8 +59,10 @@ class TitleWithContentView: UIView {
     
     func labelLayout() {
         [title, label, textView].forEach { addSubview($0) }
+        
         label.isHidden = false
         textView.isHidden = true
+        
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true

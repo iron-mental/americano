@@ -77,12 +77,14 @@ class StudyDetailView: UIViewController {
         tempBackgroundView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
+        
+        
         mainImageView.do {
             $0.addGestureRecognizer(mainImageViewTapGesture)
             if let imageURL =  studyInfo?.image {
                 $0.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
             } else {
-                $0.image = nil
+                $0.image = #imageLiteral(resourceName: "ios")
             }
         }
         
@@ -258,6 +260,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func showStudyDetail(with studyDetail: StudyDetail) {
         self.studyInfo = studyDetail
+        
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
