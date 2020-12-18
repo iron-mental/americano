@@ -14,46 +14,48 @@ class TitleWithTextView: UIView {
     var title: String?
     var textView = UITextView()
     
-    init(frame: CGRect,title: String) {
-        super.init(frame: frame)
+    init(title: String) {
+        super.init(frame: .zero)
         self.title = title
         attribute()
         layout()
     }
     
     func attribute() {
-//        self.do {
-//            $0.backgroundColor = .white
-//            
-//        }
         titleLabel.do {
             $0.text = title
-            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
         }
         textView.do {
             $0.text = "test"
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
+            $0.dynamicFont(size: $0.font!.pointSize, weight: .regular)
         }
     }
     
     func layout() {
-        addSubview(titleLabel)
-        addSubview(textView)
-
-        titleLabel.do {
+        [titleLabel, textView].forEach {
+            addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (18/117) * frame.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (76/352) * frame.width).isActive = true
+        }
+        
+        titleLabel.do {
+            NSLayoutConstraint.activate([
+                $0.topAnchor.constraint(equalTo: topAnchor),
+                $0.leadingAnchor.constraint(equalTo: leadingAnchor),
+                $0.heightAnchor.constraint(equalToConstant: $0.intrinsicContentSize.height),
+                $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width)
+            ])
         }
         textView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: (18/117) * frame.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (117/151) * frame.height).isActive = true
+            NSLayoutConstraint.activate([
+                $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: Terminal.convertHeigt(value: 17)),
+                $0.leadingAnchor.constraint(equalTo: leadingAnchor),
+                $0.widthAnchor.constraint(equalTo: widthAnchor),
+                $0.bottomAnchor.constraint(equalTo: bottomAnchor)
+            ])
         }
     }
     

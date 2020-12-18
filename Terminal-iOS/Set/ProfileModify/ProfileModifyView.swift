@@ -424,6 +424,7 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
+        cell.title.delegate = self
         cell.selectionStyle = .none
         cell.delegate = self
         
@@ -488,3 +489,4 @@ extension ProfileModifyView: UIScrollViewDelegate {
         self.view.endEditing(true)
     }
 }
+

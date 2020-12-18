@@ -21,12 +21,12 @@ class ViewController: UITabBarController {
     
     lazy var tabBarItems: [Tab: UITabBarItem] = [
         .study: UITabBarItem(
-            title: "스터디",
+            title: "",
             image: #imageLiteral(resourceName: "study"),
             selectedImage: #imageLiteral(resourceName: "study_clicked")
         ),
         .mystudy: UITabBarItem(
-            title: "내스터디",
+            title: "",
             image: #imageLiteral(resourceName: "mystudy"),
             selectedImage: #imageLiteral(resourceName: "mystudy_clicked")
         ),
@@ -41,7 +41,6 @@ class ViewController: UITabBarController {
         super.viewDidLoad()
         attribute()
     }
-    
     
     func attribute() {
         self.tabBar.do {
