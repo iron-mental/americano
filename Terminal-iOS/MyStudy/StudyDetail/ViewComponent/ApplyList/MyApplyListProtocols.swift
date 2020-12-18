@@ -21,7 +21,7 @@ protocol MyApplyListWireFrameProtocol: class {
     static func createStudyListModule() -> UIViewController
     
     // PRESENT -> WIREFRAME
-    func presentStudyDetailScreen(from view: MyApplyListViewProtocol)
+    func presentStudyDetailScreen(from view: MyApplyListViewProtocol, studyID: Int)
 }
 
 protocol MyApplyListPresenterProtocol: class {
@@ -31,7 +31,7 @@ protocol MyApplyListPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    func showStudyDetail(keyValue: Int, state: Bool)
+    func showStudyDetail(keyValue: Int)
 }
 
 protocol MyApplyListInteractorOutputProtocol: class {
