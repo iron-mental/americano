@@ -21,6 +21,22 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     func showProfileModify(userInfo: UserInfo, project: [Project]) {
         wireFrame?.presentProfileModifyScreen(from: view!, userInfo: userInfo, project: project)
     }
+    
+    func showEmailModify() {
+        wireFrame?.presentEmailModify(from: view!)
+    }
+    
+    func showSNSModify() {
+        wireFrame?.presentSNSModify(from: view!)
+    }
+    
+    func showLocationModify() {
+        wireFrame?.presentLocationModify(from: view!)
+    }
+    
+    func showCareerModify() {
+        wireFrame?.presentCareerModify(from: view!)
+    }
 }
 
 extension ProfileDetailPresenter: ProfileDetailInteractorOutputProtocol {
