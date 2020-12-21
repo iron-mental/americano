@@ -42,4 +42,43 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
             sourceView.navigationController?.pushViewController(profileModifyView, animated: true)
         }
     }
+    
+    func presentEmailModify(from view: ProfileDetailViewProtocol) {
+        let emailModifyView = EmailModifyWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(emailModifyView, animated: true)
+        }
+    }
+    
+    func presentSNSModify(from view: ProfileDetailViewProtocol) {
+        let snsModifyView = SNSModifyWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(snsModifyView, animated: true)
+        }
+    }
+    func presentProfileModify(from view: ProfileDetailViewProtocol) {
+//        let profileModifyView = ProfileModifyWireFrame.createModule()
+//        
+//        if let sourceView = view as? UIViewController {
+//            sourceView.navigationController?.pushViewController(profileModifyView, animated: true)
+//        }
+    }
+    
+    func presentLocationModify(from view: ProfileDetailViewProtocol) {
+        let locationModifyView = LocationModifyWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(locationModifyView, animated: true)
+        }
+    }
+    
+    func presentCareerModify(from view: ProfileDetailViewProtocol) {
+        let careerModifyView = CareerModifyWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(careerModifyView, animated: true)
+        }
+    }
 }
