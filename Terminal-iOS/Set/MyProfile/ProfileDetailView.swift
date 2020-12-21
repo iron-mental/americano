@@ -48,7 +48,7 @@ class ProfileDetailView: UIViewController {
                                         target: self,
                                         action: #selector(pushProfileModify))
         
-        [profile, career, sns, projectStack,email, location].forEach {
+        [profile, career, sns, projectStack, email, location].forEach {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
         }
@@ -59,32 +59,37 @@ class ProfileDetailView: UIViewController {
             $0.navigationItem.rightBarButtonItem = modifyBtn
         }
 
-        careerLabel.do {
+        self.careerLabel.do {
             $0.text = "경력"
             $0.textColor = .white
         }
         
-        projectLabel.do {
+        self.projectLabel.do {
             $0.text = "프로젝트"
             $0.textColor = .white
         }
         
-        snsLabel.do {
+        self.snsLabel.do {
             $0.text = "SNS"
             $0.textColor = .white
         }
         
-        emailLabel.do {
+        self.emailLabel.do {
             $0.text = "Email"
             $0.textColor = .white
         }
         
-        locationLabel.do {
+        self.career.modify.addTarget(self, action: #selector(modifyCareer), for: .touchUpInside)
+        self.sns.modify.addTarget(self, action: #selector(modifySNS), for: .touchUpInside)
+        self.email.modify.addTarget(self, action: #selector(modifyEmail), for: .touchUpInside)
+        self.location.modify.addTarget(self, action: #selector(modifyLocation), for: .touchUpInside)
+        
+        self.locationLabel.do {
             $0.text = "활동지역"
             $0.textColor = .white
         }
         
-        projectStack.do {
+        self.projectStack.do {
             $0.axis = .vertical
             $0.distribution = .fillEqually
             $0.spacing = 10
@@ -94,84 +99,84 @@ class ProfileDetailView: UIViewController {
     // MARK: Set Layout
     
     func layout() {
-        view.addSubview(scrollView)
+        self.view.addSubview(scrollView)
         [profile, careerLabel, career, projectLabel, projectStack, snsLabel, sns, emailLabel,email, locationLabel, location]
-            .forEach { scrollView.addSubview($0) }
+            .forEach { self.scrollView.addSubview($0) }
         
         // 스크롤뷰 오토레이아웃
-        scrollView.do {
+        self.scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         }
-        profile.do {
+        self.profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: profile.heightAnchor).isActive = true
         }
-        careerLabel.do {
+        self.careerLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profile.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: careerLabel.heightAnchor).isActive = true
         }
-        career.do {
+        self.career.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: careerLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: career.heightAnchor).isActive = true
         }
-        projectLabel.do {
+        self.projectLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: career.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
-        projectStack.do {
+        self.projectStack.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: projectStack.heightAnchor).isActive = true
         }
-        snsLabel.do {
+        self.snsLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectStack.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
-        sns.do {
+        self.sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: snsLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: sns.heightAnchor).isActive = true
         }
-        emailLabel.do {
+        self.emailLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: sns.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
-        email.do {
+        self.email.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: email.heightAnchor).isActive = true
         }
-        locationLabel.do {
+        self.locationLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
-        location.do {
+        self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
@@ -183,6 +188,22 @@ class ProfileDetailView: UIViewController {
     @objc func pushProfileModify() {
         guard let userInfo = self.userInfo else { return }
         presenter?.showProfileModify(userInfo: userInfo, project: projectData)
+    }
+    
+    @objc func modifyProfile() {
+        
+    }
+    @objc func modifyCareer() {
+        presenter?.showCareerModify()
+    }
+    @objc func modifySNS() {
+        presenter?.showSNSModify()
+    }
+    @objc func modifyEmail() {
+        presenter?.showEmailModify()
+    }
+    @objc func modifyLocation() {
+        presenter?.showLocationModify()
     }
 }
 
