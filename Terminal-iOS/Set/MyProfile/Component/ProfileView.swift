@@ -12,6 +12,7 @@ class ProfileView: UIView {
     let profileImage = UIImageView()
     let name = UILabel()
     let descript = UILabel()
+    let modify = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,31 +39,40 @@ class ProfileView: UIView {
             $0.textAlignment = .left
             $0.dynamicFont(fontSize: 16, weight: .regular)
         }
+        modify.do {
+            $0.setTitle("수정", for: .normal)
+            $0.setTitleColor(.appColor(.mainColor), for: .normal)
+        }
     }
     
     func layout() {
-        addSubview(profileImage)
-        addSubview(name)
-        addSubview(descript)
+        [profileImage, name, descript, modify].forEach{ self.addSubview($0) }
         
-        profileImage.do {
+        self.profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
-        name.do {
+        self.name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: self.profileImage.bottomAnchor, constant: 20).isActive = true
             $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         }
-        descript.do {
+        self.descript.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 7).isActive = true
+            $0.topAnchor.constraint(equalTo: self.name.bottomAnchor, constant: 7).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        }
+        self.modify.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
     }
     
