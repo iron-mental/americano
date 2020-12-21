@@ -27,9 +27,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
-                    if result.result {
-                        completion()
-                    }
+                    if result.result { completion() }
                 case .failure(let err):
                     print("실패")
                     print(err)

@@ -190,9 +190,9 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
         }
         
         guard let email = userInfo?.email else { return }
-        emailModify.do {
-            $0.emailTextField.text = email
-        }
+//        emailModify.do {
+//            $0.emailTextField.text = email
+//        }
         
         guard let location = userInfo?.address else { return }
         locationModify.do {
@@ -211,7 +211,8 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
-        [profileImage, nameModify, descripModify, careerLabel, careerTitleModify, careerDescriptModify, projectLabel, projectView, projectAddButton, snsModify, emailModify, locationModify].forEach { backgroundView.addSubview($0) }
+        [profileImage, nameModify, descripModify, careerLabel, careerTitleModify, careerDescriptModify, projectLabel, projectView, projectAddButton]
+            .forEach { backgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -284,28 +285,28 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 130).isActive = true
         }
-        snsModify.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectAddButton.bottomAnchor, constant: 30).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: snsModify.heightAnchor).isActive = true
-        }
-        emailModify.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: snsModify.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalTo: emailModify.heightAnchor).isActive = true
-        }
-        locationModify.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: emailModify.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalTo: locationModify.heightAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20).isActive = true
-        }
+//        snsModify.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: projectAddButton.bottomAnchor, constant: 30).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+//            $0.heightAnchor.constraint(equalTo: snsModify.heightAnchor).isActive = true
+//        }
+//        emailModify.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: snsModify.bottomAnchor, constant: 10).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
+//            $0.heightAnchor.constraint(equalTo: emailModify.heightAnchor).isActive = true
+//        }
+//        locationModify.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: projectAddButton.bottomAnchor, constant: 10).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: 25).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -25).isActive = true
+//            $0.heightAnchor.constraint(equalTo: locationModify.heightAnchor).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor, constant: -20).isActive = true
+//        }
     }
     
     @objc func backgroundTap() {
@@ -359,16 +360,16 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
             let cell = projectView.cellForRow(at: indexpath) as! ProjectCell
             let title = cell.title.text!
             let contents = cell.contents.text!
-            let github = cell.sns.firstTextFeield.text
-            let appStore = cell.sns.secondTextField.text
-            let playStore = cell.sns.secondTextField.text
+//            let github = cell.sns.firstTextFeield.text
+//            let appStore = cell.sns.secondTextField.text
+//            let playStore = cell.sns.secondTextField.text
         
             projectArr[index] = Project(id: nil,
                                         title: title,
                                         contents: contents,
-                                        snsGithub: github,
-                                        snsAppstore: appStore,
-                                        snsPlaystore: playStore,
+                                        snsGithub: "github",
+                                        snsAppstore: "appStore",
+                                        snsPlaystore: "playStore",
                                         createAt: "")
         }
     }
@@ -382,19 +383,20 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
               let nickname = nameModify.text,
               let introduce = descripModify.text,
               let careerTitle = careerTitleModify.text,
-              let careerContents = careerDescriptModify.text,
-              let snsGithub = snsModify.firstTextFeield.text,
-              let snsLinkedIn = snsModify.secondTextField.text,
-              let snsWeb = snsModify.thirdTextField.text else { return }
+              let careerContents = careerDescriptModify.text
+//              let snsGithub = snsModify.firstTextFeield.text,
+//              let snsLinkedIn = snsModify.secondTextField.text,
+//              let snsWeb = snsModify.thirdTextField.text
+        else { return }
 
         let userInfo = UserInfoPut(image: image,
                                    nickname: nickname,
                                    introduce: introduce,
                                    careerTitle: careerTitle,
                                    careerContents: careerContents,
-                                   snsGithub: snsGithub,
-                                   snsLinkedIn: snsLinkedIn,
-                                   snsWeb: snsWeb,
+                                   snsGithub: "snsGithub",
+                                   snsLinkedIn: "snsLinkedIn",
+                                   snsWeb: "snsWeb",
                                    latitude: 37.602500,
                                    longitude: 126.929340,
                                    sido: "서울시",

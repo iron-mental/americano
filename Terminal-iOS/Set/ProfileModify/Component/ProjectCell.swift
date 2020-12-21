@@ -17,7 +17,7 @@ class ProjectCell: UITableViewCell {
     lazy var remove = UIButton()
     lazy var title = UITextField()
     lazy var contents = UITextView()
-    lazy var sns = ProjectSNSView()
+//    lazy var sns = ProjectSNSView()
     
     var delegate: CellSubclassDelegate?
  
@@ -35,9 +35,9 @@ class ProjectCell: UITableViewCell {
     func setData(data: Project) {
         self.title.text = data.title
         self.contents.text = data.contents
-        self.sns.firstTextFeield.text = data.snsGithub
-        self.sns.secondTextField.text = data.snsAppstore
-        self.sns.thirdTextField.text = data.snsPlaystore
+//        self.sns.firstTextFeield.text = "data.snsGithub"
+//        self.sns.secondTextField.text = "data.snsAppstore"
+//        self.sns.thirdTextField.text = "data.snsPlaystore"
     }
     
     func attribute() {
@@ -74,7 +74,7 @@ class ProjectCell: UITableViewCell {
         self.contentView.addSubview(remove)
         self.contentView.addSubview(title)
         self.contentView.addSubview(contents)
-        self.contentView.addSubview(sns)
+//        self.contentView.addSubview(sns)
         
         remove.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -97,13 +97,13 @@ class ProjectCell: UITableViewCell {
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
         }
-        sns.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.contents.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
-        }
+//        sns.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: self.contents.bottomAnchor, constant: 5).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
+//        }
     }
     
     @objc func tapButton(_ sender: UIButton) {

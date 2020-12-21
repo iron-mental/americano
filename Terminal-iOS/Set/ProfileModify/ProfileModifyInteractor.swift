@@ -25,8 +25,7 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
     }
     
     func viewDidLoad() {
-        remoteDataManager?.authCheck {
-        }
+        remoteDataManager?.authCheck {}
     }
     
     func completeModify(userInfo: UserInfoPut, project: [Project]) {
