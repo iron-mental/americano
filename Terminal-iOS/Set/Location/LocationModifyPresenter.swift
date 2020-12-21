@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+class LocationModifyPresenter: LocationModifyPresenterProtocol {
+    var view: LocationModifyViewProtocol?
+    var interactor: LocationModifyInteractorInputProtocol?
+    var wireFrame: LocationModifyWireFrameProtocol?
+    
+}
+
+extension LocationModifyPresenter: LocationModifyInteractorOutputProtocol {
+    
+}

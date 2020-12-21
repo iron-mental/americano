@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+class LocationModifyInteractor: LocationModifyInteractorInputProtocol {
+    var presenter: LocationModifyInteractorOutputProtocol?
+}
