@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+class SNSModifyInteractor: SNSModifyInteractorInputProtocol {
+    var presenter: SNSModifyInteractorOutputProtocol?
+    
+}

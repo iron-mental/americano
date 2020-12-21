@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+class SNSModifyPresenter: SNSModifyPresenterProtocol {
+    var view: SNSModifyViewProtocol?
+    var interactor: SNSModifyInteractorInputProtocol?
+    var wireFrame: SNSModifyWireFrameProtocol?
+    
+}
+
+extension SNSModifyPresenter: SNSModifyInteractorOutputProtocol {
+    
+}
