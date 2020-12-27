@@ -34,7 +34,6 @@ final class BaseInterceptor: RequestInterceptor {
             return
         }
         print("status:",statusCode)
-        print("ststus")
         switch statusCode {
         case 200...299:
             completion(.doNotRetry)
@@ -48,16 +47,6 @@ final class BaseInterceptor: RequestInterceptor {
         default:
             break
         }
-        
-//        case 401:
-//            completion(.doNotRetry)
-//        default:
-//            if request.retryCount < retryLimit {
-//                refreshToken { success in
-//                    print("성공여부 :", success)
-//                    return completion(.retryWithDelay(self.retryDelay))
-//                }
-//            }
     }
     
     func refreshToken(completion: @escaping (_ isSuccess: Bool) -> Void) {
@@ -69,11 +58,8 @@ final class BaseInterceptor: RequestInterceptor {
             .request(TerminalRouter.reissuanceToken(refreshToken: refreshToken))
             .responseJSON { response in
                 switch response.result {
-                
                 case .success(let value):
-                    print(JSON(value))
                     let json = JSON(value)
-                    
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<Authorization>.self, from: data!)
