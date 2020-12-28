@@ -26,7 +26,8 @@ class SNSModifyView: UIViewController {
     }
     
     func attribute() {
-        self.firstImage.do {
+        self.view.backgroundColor = .appColor(.terminalBackground)
+        [firstImage, secondImage, thirdImage].forEach {
             $0.backgroundColor = .white
             $0.layer.cornerRadius = Terminal.convertWidth(value: 11)
         }
@@ -45,7 +46,7 @@ class SNSModifyView: UIViewController {
         
         self.firstImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 5).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
@@ -77,7 +78,6 @@ class SNSModifyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -5).isActive = true
         }
         self.thirdTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +85,6 @@ class SNSModifyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: self.thirdImage.trailingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 28)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -2).isActive = true
         }
     }
 }

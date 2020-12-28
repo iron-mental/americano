@@ -17,11 +17,13 @@ class CareerModifyView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        attribute()
+        layout()
         // Do any additional setup after loading the view.
     }
     
     func attribute() {
+        self.view.backgroundColor = .appColor(.terminalBackground)
         self.careerLabel.do {
             $0.text = "경력"
             $0.textColor = .white
@@ -72,7 +74,7 @@ class CareerModifyView: UIViewController {
             $0.topAnchor.constraint(equalTo: careerTitleModify.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(lessThanOrEqualToConstant: 400).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 400).isActive = true
         }
     }
 }
