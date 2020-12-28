@@ -102,7 +102,9 @@ extension TempChatView: UITableViewDelegate, UITableViewDataSource {
 
 extension TempChatView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        print(textField.text)
+        guard let inputChatMessage = textField.text else { return true }
+        presenter?.emitButtonDidTap(message: inputChatMessage)
+        
         return true
     }
 }

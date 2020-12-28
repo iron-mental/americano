@@ -9,12 +9,6 @@
 import Foundation
 
 class ChatPresenter: ChatPresenterProtocol {
-    
-    
-    
-    
-    
-    
     var view: ChatViewProtocol?
     var wireFrame: ChatWireFrameProtocol?
     var interactor: ChatInteractorProtocol?

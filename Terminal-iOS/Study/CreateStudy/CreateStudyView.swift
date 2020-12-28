@@ -69,6 +69,12 @@ class CreateStudyView: UIViewController{
         self.presenter?.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        let rect: CGRect = CGRectMake(path.bounds.minX, path.bounds.minY, path.bounds.width, path.bounds.height)
+//
+//        // Create bitmap image from context using the rect
+//        let imageRef: CGImageRef = CGImageCreateWithImageInRect(image.CGImage, rect)
+//        ImgView.bounds = rect
+//        ImgView.image = UIImage(CGImage: imageRef)
     }
     @objc func keyboardWillShow(notification:NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
