@@ -21,9 +21,9 @@ class LoadingRainbowCat: NSObject {
         if let window = UIApplication.shared.keyWindow {
             window.addSubview(backgroundView)
             window.addSubview(popupView)
+            window.backgroundColor = UIColor.appColor(.terminalBackground)
             popupView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
             backgroundView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX, height: window.frame.maxY)
-            backgroundView.backgroundColor = .black
             backgroundView.alpha = 0.6
             backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
             
@@ -34,12 +34,9 @@ class LoadingRainbowCat: NSObject {
             sharedInstance.backgroundView = backgroundView
             sharedInstance.popupView = popupView
         }
-        
         popupView.contentMode = .scaleAspectFit
         popupView.play()
         popupView.loopMode = .loop
-        
-        
     }
     
     class func hide(completion: @escaping () -> Void) {

@@ -27,7 +27,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
     func attribute() {
         self.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-            
         }
         studyMainimage.do {
             $0.image = #imageLiteral(resourceName: "swiftmain")
