@@ -27,6 +27,7 @@ class CareerModifyView: UIViewController {
     lazy var careerLabel = UILabel()
     lazy var careerTitleModify = UITextField()
     lazy var careerDescriptModify = UITextView()
+    lazy var completeButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,28 +66,46 @@ class CareerModifyView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
         }
+        
+        self.completeButton.do {
+            $0.backgroundColor = .appColor(.mainColor)
+            $0.setTitle("수정완료", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.layer.cornerRadius = 10
+        }
     }
     
     func layout() {
-        [careerLabel, careerTitleModify, careerDescriptModify].forEach { self.view.addSubview($0) }
+        [careerLabel, careerTitleModify, careerDescriptModify, completeButton].forEach { self.view.addSubview($0) }
         self.careerLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 18).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
         }
+        
         self.careerTitleModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: careerLabel.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
+        
         self.careerDescriptModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: careerTitleModify.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        }
+        
+        self.completeButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.careerDescriptModify.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
     }
 }
