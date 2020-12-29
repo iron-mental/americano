@@ -224,18 +224,3 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
         }
     }
 }
-
-/// 2번째 방법
-//extension StudyListView: UIScrollViewDelegate {
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let height: CGFloat = scrollView.frame.size.height
-//        let contentYOffset: CGFloat = scrollView.contentOffset.y
-//        let scrollViewHeight: CGFloat = scrollView.contentSize.height
-//        let distanceFromBottom: CGFloat = scrollViewHeight - contentYOffset
-//
-//        if distanceFromBottom < height {
-//            presenter?.pagingStudyList()
-//            tableView.reloadData()
-//        }
-//    }
-//}

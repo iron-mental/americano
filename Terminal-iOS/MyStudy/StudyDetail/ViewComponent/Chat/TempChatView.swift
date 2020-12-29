@@ -41,6 +41,7 @@ class TempChatView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         presenter?.viewDidLoad()
         attribute()
         layout()

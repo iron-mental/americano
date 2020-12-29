@@ -194,6 +194,7 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch state {
         case .normal:
+            
             presenter?.didClickedCellForDetail(view: self, selectedStudy: myStudyList[indexPath.row])
             break
         case .edit:
