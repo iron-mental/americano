@@ -10,7 +10,20 @@ import UIKit
 
 class CareerModifyView: UIViewController {
     var presenter: CareerModifyPresenterProtocol?
-    
+    var careerTitle: String? {
+        didSet{
+            if let title = self.careerTitle {
+                self.careerTitleModify.text = title
+            }
+        }
+    }
+    var careerContents: String? {
+        didSet{
+            if let contents = self.careerTitle {
+                self.careerTitleModify.text = contents
+            }
+        }
+    }
     lazy var careerLabel = UILabel()
     lazy var careerTitleModify = UITextField()
     lazy var careerDescriptModify = UITextView()
@@ -19,7 +32,6 @@ class CareerModifyView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        // Do any additional setup after loading the view.
     }
     
     func attribute() {

@@ -194,7 +194,9 @@ class ProfileDetailView: UIViewController {
         
     }
     @objc func modifyCareer() {
-        presenter?.showCareerModify()
+        let title = career.careerTitle.text ?? ""
+        let contents = career.careerContents.text ?? ""
+        presenter?.showCareerModify(title: title, contents: contents)
     }
     @objc func modifySNS() {
         presenter?.showSNSModify()

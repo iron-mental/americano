@@ -15,7 +15,7 @@ protocol CareerModifyViewProtocol: class {
 }
 
 protocol CareerModifyWireFrameProtocol: class {
-    static func createModule() -> UIViewController
+    static func createModule(title: String, contents: String) -> UIViewController
 }
 
 protocol CareerModifyPresenterProtocol: class {

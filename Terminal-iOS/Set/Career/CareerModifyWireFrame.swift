@@ -9,7 +9,7 @@
 import UIKit
 
 class CareerModifyWireFrame: CareerModifyWireFrameProtocol {
-    static func createModule() -> UIViewController {
+    static func createModule(title: String, contents: String) -> UIViewController {
         let view: CareerModifyViewProtocol = CareerModifyView()
         let presenter: CareerModifyPresenterProtocol & CareerModifyInteractorOutputProtocol = CareerModifyPresenter()
         let interactor: CareerModifyInteractorInputProtocol = CareerModifyInteractor()
@@ -21,6 +21,8 @@ class CareerModifyWireFrame: CareerModifyWireFrameProtocol {
         interactor.presenter = presenter
        
         if let view = view as? CareerModifyView {
+            view.careerTitle = title
+            view.careerContents = contents
             return view
         } else {
             return UIViewController()

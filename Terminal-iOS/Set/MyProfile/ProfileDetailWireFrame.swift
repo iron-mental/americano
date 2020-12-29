@@ -74,8 +74,8 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         }
     }
     
-    func presentCareerModify(from view: ProfileDetailViewProtocol) {
-        let careerModifyView = CareerModifyWireFrame.createModule()
+    func presentCareerModify(from view: ProfileDetailViewProtocol, title: String, Contents: String) {
+        let careerModifyView = CareerModifyWireFrame.createModule(title: title, contents: Contents)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(careerModifyView, animated: true)
