@@ -68,7 +68,7 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         if section == 0 {
-            headerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            headerView.backgroundColor = UIColor.appColor(.terminalBackground)
         } else if section == 1 {
             headerView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         }
