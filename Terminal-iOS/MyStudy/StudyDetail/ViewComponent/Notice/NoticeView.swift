@@ -24,10 +24,11 @@ class NoticeView: UIViewController {
         noticeList.removeAll()
         pinnedNotiArr.removeAll()
         notiArr.removeAll()
-        presenter?.viewDidLoad(studyID: studyID!)
-        sorted()
         attribute()
         layout()
+        presenter?.viewDidLoad(studyID: studyID!)
+        sorted()
+        
     }
     
     func sorted() {
@@ -125,12 +126,17 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 }
 
 extension NoticeView: NoticeViewProtocol {
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
     
     func showNoticeList(noticeList: [Notice]) {
-        
         self.noticeList += noticeList
         sorted()
         notice.reloadData()
+        LoadingRainbowCat.hide {
+            print("로딩 끝")
+        }
     }
     func showMessage(message: String) {
     }

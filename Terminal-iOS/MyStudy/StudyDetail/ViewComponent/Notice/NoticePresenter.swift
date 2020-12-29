@@ -14,6 +14,7 @@ class NoticePresenter: NoticePresenterProtocol {
     var interactor: NoticeInteractorProtocol?
     
     func viewDidLoad(studyID: Int) {
+        view?.showLoading()
         interactor?.getNoticeList(studyID: studyID)
     }
     func showResult(result: Bool, noticeList: [Notice]?, message: String?) {
