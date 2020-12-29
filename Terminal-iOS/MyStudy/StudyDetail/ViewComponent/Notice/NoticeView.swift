@@ -28,7 +28,6 @@ class NoticeView: UIViewController {
         layout()
         presenter?.viewDidLoad(studyID: studyID!)
         sorted()
-        
     }
     
     func sorted() {
@@ -36,6 +35,9 @@ class NoticeView: UIViewController {
         notiArr = noticeList.filter { !$0.pinned! }
     }
     func attribute() {
+        self.do {
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         notice.do {
             $0.register(NoticeCell.self, forCellReuseIdentifier: NoticeCell.noticeCellID)
             $0.delegate = self
@@ -43,6 +45,7 @@ class NoticeView: UIViewController {
             $0.prefetchDataSource = self
             $0.bounces = false
             $0.rowHeight = Terminal.convertHeigt(value: 123)
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }
     
@@ -71,7 +74,7 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
         if section == 0 {
             headerView.backgroundColor = UIColor.appColor(.terminalBackground)
         } else if section == 1 {
-            headerView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            headerView.backgroundColor = noticeList.isEmpty ? UIColor.appColor(.terminalBackground) : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1) 
         }
         return headerView
     }
@@ -139,5 +142,8 @@ extension NoticeView: NoticeViewProtocol {
         }
     }
     func showMessage(message: String) {
+        LoadingRainbowCat.hide {
+            print("로딩 끝")
+        }
     }
 }
