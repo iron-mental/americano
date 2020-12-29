@@ -63,18 +63,12 @@ class CreateStudyView: UIViewController{
             setView()
         }
     }
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-//        let rect: CGRect = CGRectMake(path.bounds.minX, path.bounds.minY, path.bounds.width, path.bounds.height)
-//
-//        // Create bitmap image from context using the rect
-//        let imageRef: CGImageRef = CGImageCreateWithImageInRect(image.CGImage, rect)
-//        ImgView.bounds = rect
-//        ImgView.image = UIImage(CGImage: imageRef)
     }
     @objc func keyboardWillShow(notification:NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
@@ -347,7 +341,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
         layout()
         setDelegate(completion: {
             LoadingRainbowCat.hide {
-//
+                //
             }
         })
     }
@@ -371,47 +365,47 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     func hideLoadingToNotionInput() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func hideLoadingToEvernoteInput() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func hideLoadingToWebInput() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func notionValid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func evernoteValid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func webValid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func notionInvalid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func evernoteInvalid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func webInvalid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     @objc func didClickButton() {
@@ -522,6 +516,6 @@ extension CreateStudyView: selectLocationDelegate {
 
 extension CreateStudyView: KeyboardManagerDelegate {
     func keyboardWillChangeFrame(endFrame: CGRect?, duration: TimeInterval, animationCurve: UIView.AnimationOptions) {
-//        <#code#>
+        //        <#code#>
     }
 }
