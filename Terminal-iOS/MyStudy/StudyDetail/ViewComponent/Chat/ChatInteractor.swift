@@ -30,6 +30,6 @@ class ChatInteractor: ChatInteractorProtocol {
     }
     func receiveMessage(message: String) {
         presenter?.showReceiveMessage(message: message)
-        // 대충 코어데이터에 조져준다는 내용 ㅇㅇ
+        // 대충 코어데이터에 넣어봅시다 ^^ 바른말고운말
     }
 }
