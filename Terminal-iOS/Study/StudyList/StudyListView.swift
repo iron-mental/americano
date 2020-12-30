@@ -208,7 +208,6 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
         } else if sortState == .length {
             cell.setData(lengthStudyList[indexPath.row])
         }
-
         return cell
     }
     
