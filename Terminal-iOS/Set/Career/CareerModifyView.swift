@@ -119,5 +119,14 @@ class CareerModifyView: UIViewController {
 }
 
 extension CareerModifyView: CareerModifyViewProtocol {
-    
+    func modifyResultHandle(result: Bool, message: String) {
+        if result {
+            let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
+            self.navigationController?.popViewController(animated: true, completion: {
+                parent?.presenter?.viewDidLoad()
+            })
+        } else {
+            
+        }
+    }
 }

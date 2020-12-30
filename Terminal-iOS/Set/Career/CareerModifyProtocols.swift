@@ -12,6 +12,7 @@ protocol CareerModifyViewProtocol: class {
     var presenter: CareerModifyPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func modifyResultHandle(result: Bool, message: String)
 }
 
 protocol CareerModifyWireFrameProtocol: class {
@@ -36,5 +37,5 @@ protocol CareerModifyInteractorInputProtocol: class {
 
 protocol CareerModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    
+    func didCompleteModify(result: Bool, message: String)
 }

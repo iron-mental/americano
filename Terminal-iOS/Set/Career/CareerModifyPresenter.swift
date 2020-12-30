@@ -19,5 +19,7 @@ class CareerModifyPresenter: CareerModifyPresenterProtocol {
 }
 
 extension CareerModifyPresenter: CareerModifyInteractorOutputProtocol {
-    
+    func didCompleteModify(result: Bool, message: String) {
+        self.view?.modifyResultHandle(result: result, message: message)
+    }
 }
