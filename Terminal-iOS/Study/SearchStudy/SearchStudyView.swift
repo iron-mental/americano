@@ -13,7 +13,7 @@ import SwiftyJSON
 class SearchStudyView: UIViewController {
     
     var keyword: [HotKeyword] = []
-    
+    var presenter: SearchStudyPresenterProtocol?
     let backBtn = UIButton()
     let searchBar = UISearchBar()
     let placeSearch = UIButton()
@@ -178,7 +178,6 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let text = keyword[indexPath.row].word
-        print(text)
         self.searchBar.text = text
     }
     
@@ -191,18 +190,16 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
             attributes?.forEach { layoutAttribute in
                 if layoutAttribute.frame.origin.y >= maxY {
                     leftMargin = sectionInset.left
-                    print("포문",leftMargin)
-                    
                 }
-                
                 layoutAttribute.frame.origin.x = leftMargin
-                
                 leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
-                print("박,", leftMargin)
                 maxY = max(layoutAttribute.frame.maxY , maxY)
             }
-            
             return attributes
         }
     }
+}
+
+extension SearchStudyView: SearchStudyViewProtocol {
+    
 }

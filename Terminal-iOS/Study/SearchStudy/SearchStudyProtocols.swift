@@ -9,18 +9,19 @@
 import UIKit
 
 protocol SearchStudyViewProtocol {
-    var presenter: SearchStudyPresenterProtocol { get set }
+    var presenter: SearchStudyPresenterProtocol? { get set }
 }
 
 protocol SearchStudyInteractorProtocol {
-    var presenter: SearchStudyPresenterProtocol { get set }
-    var remoteDataManager: SearchStudyRemoteDataManagerProtocol { get set }
-    var localDataManager: SearchStudyLocalDataManagerProtocol { get set }
+    var presenter: SearchStudyPresenterProtocol? { get set }
+    var remoteDataManager: SearchStudyRemoteDataManagerProtocol? { get set }
+    var localDataManager: SearchStudyLocalDataManagerProtocol? { get set }
 }
 
 protocol SearchStudyPresenterProtocol {
-    var view: SearchStudyViewProtocol { get set }
-    var interactor: SearchStudyInteractorProtocol { get set }
+    var view: SearchStudyViewProtocol? { get set }
+    var interactor: SearchStudyInteractorProtocol? { get set }
+    var wireFrame: SearchStudyWireFrameProtocol? { get set }
 }
 
 protocol SearchStudyRemoteDataManagerProtocol {
@@ -32,7 +33,7 @@ protocol SearchStudyLocalDataManagerProtocol {
 }
 
 protocol SearchStudyWireFrameProtocol {
-    var presenter: SearchStudyPresenterProtocol { get set }
+    var presenter: SearchStudyPresenterProtocol? { get set }
     
     static func createSearchStudyModule() -> UIViewController
 }

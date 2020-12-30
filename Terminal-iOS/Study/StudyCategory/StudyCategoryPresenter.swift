@@ -28,6 +28,9 @@ class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
         view?.categoryDownAnimate()
     }
 
+    func goToSearchStudy() {
+        wireFrame?.goToSearchStudy(from: view!)
+    }
 }
 
 extension StudyCategoryPresenter: StudyCategoryInteractorOutputProtocol {

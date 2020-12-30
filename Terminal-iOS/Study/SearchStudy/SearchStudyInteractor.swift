@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class SearchStudyInteractor: SearchStudyInteractorProtocol {
+    var presenter: SearchStudyPresenterProtocol?
+    var remoteDataManager: SearchStudyRemoteDataManagerProtocol?
+    var localDataManager: SearchStudyLocalDataManagerProtocol?
+}

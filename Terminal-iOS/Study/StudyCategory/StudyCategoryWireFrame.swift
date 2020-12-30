@@ -47,4 +47,12 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
            sourceView.navigationController?.pushViewController(selectCategoryView, animated: false)
         }
     }
+    
+    func goToSearchStudy(from view: StudyCategoryViewProtocol) {
+        let searchStudyView = SearchStudyWireFrame.createSearchStudyModule()
+        
+        if let parentView = view as? UIViewController {
+            parentView.navigationController?.pushViewController(searchStudyView, animated: false)
+        }
+    }
 }
