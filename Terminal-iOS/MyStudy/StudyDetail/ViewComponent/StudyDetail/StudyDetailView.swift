@@ -43,7 +43,6 @@ class StudyDetailView: UIViewController {
     var tempBackgroundView = UIView()
     let picker = UIImagePickerController()
     var mainImageViewTapGesture = UITapGestureRecognizer()
-    
     var mainImageView = MainImageView(frame: CGRect.zero)
     var snsIconsView = SNSIconsView(frame: CGRect.zero)
     lazy var studyIntroduceView = TitleWithContentView(state: state)
@@ -53,7 +52,7 @@ class StudyDetailView: UIViewController {
     lazy var locationView = TitleWithContentView(state: state)
     var mapView = NMFMapView()
     var joinButton = UIButton()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
@@ -70,15 +69,12 @@ class StudyDetailView: UIViewController {
             requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
-        mainImageViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(didimageViewClicked))
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         tempBackgroundView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
-        
-        
         mainImageView.do {
             $0.isUserInteractionEnabled = false
             if let imageURL =  studyInfo?.image {
@@ -102,10 +98,7 @@ class StudyDetailView: UIViewController {
                 $0.isHidden = true
             }
         }
-        
-        //studyIntroduceView, studyPlanView, timeView, timeView
         studyIntroduceView.do {
-//            $0.titleHidden()
             $0.contentText = ["스터디 소개",String(studyInfo?.introduce ?? "")]
             if state == .none || state == .member {
             } else {
@@ -226,27 +219,6 @@ class StudyDetailView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: tempBackgroundView.bottomAnchor).isActive = true
         }
     }
-    @objc func didimageViewClicked() {
-        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
-        let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        alert.addAction(library)
-        alert.addAction(camera)
-        alert.addAction(cancel)
-        
-        present(alert, animated: true, completion: nil)
-    }
-    func openLibrary() {
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
-    }
-    func openCamera() {
-        //시뮬에서 앱죽는거 에러처리 해야함
-        picker.sourceType = .camera
-        present(picker, animated: true, completion: nil)
-    }
     @objc func joinButtonDidTap() {
         presenter?.joinButtonDidTap(studyID: studyInfo!.id, message: "테스트신청매세지~~")
     }
@@ -259,10 +231,10 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func showStudyDetail(with studyDetail: StudyDetail) {
         self.studyInfo = studyDetail
-        
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
+        
     }
     
     func showError() {
@@ -289,7 +261,7 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
         cell.nickname.text = "이하이"
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         view.setNeedsLayout()
         view.layoutIfNeeded()

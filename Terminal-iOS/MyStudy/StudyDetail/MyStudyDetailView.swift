@@ -124,6 +124,7 @@ class MyStudyDetailView: UIViewController {
         }
         pageBeforeIndex = nextPage
     }
+    
     @objc func didClickecmoreButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let noticeAdd = UIAlertAction(title: "공지사항 추가", style: .default) { _ in self.addNoticeButtonAction() }
@@ -134,14 +135,17 @@ class MyStudyDetailView: UIViewController {
         [noticeAdd,studyEdit,applyList,cancel].forEach { alert.addAction($0) }
         present(alert, animated: true, completion: nil)
     }
+    
     func addNoticeButtonAction() {
         presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
     }
+    
     func editStudyButtonDidTap() {
         if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
             presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
         }
     }
+    
     func showApplyList() {
         presenter?.showApplyUserList(studyID: studyID!)
     }

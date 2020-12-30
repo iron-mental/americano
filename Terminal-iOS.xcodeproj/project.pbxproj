@@ -791,12 +791,12 @@
 			isa = PBXGroup;
 			children = (
 				CCBC88CD254BEDD000C2A6C4 /* Component */,
-				A5D058F2255D93A50047CA9E /* DataManager */,
 				CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */,
 				A5D058D4255D90CE0047CA9E /* StudyDetailInteractor.swift */,
 				A5D058E9255D937F0047CA9E /* StudyDetailPresenter.swift */,
 				A5D058EC255D93910047CA9E /* StudyDetailWireFrame.swift */,
 				A5D058EF255D939C0047CA9E /* StudyDetailProtocols.swift */,
+				A5D058F2255D93A50047CA9E /* DataManager */,
 			);
 			path = StudyDetail;
 			sourceTree = "<group>";
