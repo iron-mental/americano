@@ -80,8 +80,7 @@ class StudyDetailView: UIViewController {
         
         
         mainImageView.do {
-            $0.addGestureRecognizer(mainImageViewTapGesture)
-            
+            $0.isUserInteractionEnabled = false
             if let imageURL =  studyInfo?.image {
                 $0.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
             } else {
