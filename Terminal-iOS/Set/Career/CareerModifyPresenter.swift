@@ -13,6 +13,9 @@ class CareerModifyPresenter: CareerModifyPresenterProtocol {
     var interactor: CareerModifyInteractorInputProtocol?
     var wireFrame: CareerModifyWireFrameProtocol?
     
+    func completeModify(title: String, contents: String) {
+        interactor?.completeModify(title: title, contents: contents)
+    }
 }
 
 extension CareerModifyPresenter: CareerModifyInteractorOutputProtocol {

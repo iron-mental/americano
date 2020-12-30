@@ -18,6 +18,7 @@ class CareerModifyWireFrame: CareerModifyWireFrameProtocol {
         view.presenter = presenter
         presenter.view = view
         presenter.wireFrame = wireFrame
+        presenter.interactor = interactor
         interactor.presenter = presenter
        
         if let view = view as? CareerModifyView {

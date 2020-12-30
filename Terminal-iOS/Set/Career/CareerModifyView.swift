@@ -19,11 +19,12 @@ class CareerModifyView: UIViewController {
     }
     var careerContents: String? {
         didSet{
-            if let contents = self.careerTitle {
-                self.careerTitleModify.text = contents
+            if let contents = self.careerContents {
+                self.careerDescriptModify.text = contents
             }
         }
     }
+    
     lazy var careerLabel = UILabel()
     lazy var careerTitleModify = UITextField()
     lazy var careerDescriptModify = UITextView()
@@ -72,6 +73,7 @@ class CareerModifyView: UIViewController {
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
     
@@ -97,7 +99,7 @@ class CareerModifyView: UIViewController {
             $0.topAnchor.constraint(equalTo: careerTitleModify.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 400).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 200).isActive = true
         }
         
         self.completeButton.do {
@@ -107,6 +109,12 @@ class CareerModifyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
+    }
+    
+    @objc func completeModify() {
+        let title = careerTitleModify.text!
+        let contents = careerDescriptModify.text!
+        presenter?.completeModify(title: title, contents: contents)
     }
 }
 

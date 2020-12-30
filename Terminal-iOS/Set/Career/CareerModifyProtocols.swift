@@ -24,13 +24,14 @@ protocol CareerModifyPresenterProtocol: class {
     var wireFrame: CareerModifyWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
+    func completeModify(title: String, contents: String)
 }
 
 protocol CareerModifyInteractorInputProtocol: class {
     var presenter: CareerModifyInteractorOutputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-   
+    func completeModify(title: String, contents: String)
 }
 
 protocol CareerModifyInteractorOutputProtocol: class {

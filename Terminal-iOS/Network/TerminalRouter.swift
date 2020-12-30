@@ -13,47 +13,54 @@ enum TerminalRouter: URLRequestConvertible {
     typealias Parameters = [String: Any]
     // MARK: router case init
 
-    case authCheck          (id: String)
+    case authCheck              (id: String)
     
     // 유저 - 회원가입 로그인 비밀번호 찾기 일단 안넣음
-    case nicknameCheck      (nickname: String)
-    case eamilCheck         (email: String)
-    case userInfo           (id: String)
-    case userInfoUpdate     (id: String)
-    case userWithdrawal     (id: String, email: String, password: String)
-    case emailVerify        (id: String)
-    case reissuanceToken    (refreshToken: String)
-    case login              (userData: Parameters)
-    case signUp             (userData: Parameters)
+    case nicknameCheck          (nickname: String)
+    case eamilCheck             (email: String)
+    case userInfo               (id: String)
+//    case userInfoUpdate         (id: String)
+    
+    case userImageUpdate        (id: String)
+    case userInfoUpdate         (id: String)
+    case userSNSUpdate          (id: String)
+    case userCareerUpdate       (id: String, title: String, contents: String)
+    case userLocationUpdate     (id: String)
+    
+    case userWithdrawal         (id: String, email: String, password: String)
+    case emailVerify            (id: String)
+    case reissuanceToken        (refreshToken: String)
+    case login                  (userData: Parameters)
+    case signUp                 (userData: Parameters)
     
     // 프로젝트
-    case projectRegister    (id: String, project: Parameters)
-    case projectList        (id: String)
-    case projectUpdate      (id: String, projectID: String)
-    case projectDelete      (id: String, projectID: String)
+    case projectRegister        (id: String, project: Parameters)
+    case projectList            (id: String)
+    case projectUpdate          (id: String, projectID: String)
+    case projectDelete          (id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
-    case studyCreate        (study: Parameters)
-    case studyDetail        (studyID: String)
-    case studyUpdate        (studyID: String)
-    case studyDelete        (studyID: String)
-    case studyList          (category: String, sort: String)
-    case studyListForKey    (value: String)
-    case myStudyList        (id: String)
+    case studyCreate            (study: Parameters)
+    case studyDetail            (studyID: String)
+    case studyUpdate            (studyID: String)
+    case studyDelete            (studyID: String)
+    case studyList              (category: String, sort: String)
+    case studyListForKey        (value: String)
+    case myStudyList            (id: String)
     case hotKeyword         
     
     // 신청부분
-    case applyStudy         (studyID: String, message: Parameters)
-    case applyStudyList     (id: String)
-    case applyUserList      (studyID: String)
+    case applyStudy             (studyID: String, message: Parameters)
+    case applyStudyList         (id: String)
+    case applyUserList          (studyID: String)
     
     // 공지사항
-    case noticeCreate       (studyID: String, notice: Parameters)
-    case noticeDetail       (studyID: String, noticeID: String)
-    case noticeList         (studyID: String)
-    case noticeListForKey   (studyID: String, value: String)
-    case noticeUpdate       (studyID: String, noticeID: String, notice: Parameters)
-    case noticeDelete       (studyID: String, noticeID: String)
+    case noticeCreate           (studyID: String, notice: Parameters)
+    case noticeDetail           (studyID: String, noticeID: String)
+    case noticeList             (studyID: String)
+    case noticeListForKey       (studyID: String, value: String)
+    case noticeUpdate           (studyID: String, noticeID: String, notice: Parameters)
+    case noticeDelete           (studyID: String, noticeID: String)
     
     var baseURL: URL {
         return URL(string: API.BASE_URL)!
@@ -75,8 +82,18 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .userInfo:
             return .get
+
+        case .userImageUpdate:
+            return .put
         case .userInfoUpdate:
             return .put
+        case .userSNSUpdate:
+            return .put
+        case .userCareerUpdate:
+            return .put
+        case .userLocationUpdate:
+            return .put
+            
         case .userWithdrawal:
             return .delete
         case .emailVerify:
@@ -151,8 +168,20 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/check-nickname/\(nickname)"
         case let .eamilCheck(email):
             return "user/check-email/\(email)"
-        case let .userInfo(id), let .userInfoUpdate(id):
+        case let .userInfo(id):
             return "user/\(id)"
+            
+        case let .userImageUpdate(id):
+            return "user/\(id)/image"
+        case let .userInfoUpdate(id):
+            return "user/\(id)/info"
+        case let .userSNSUpdate(id):
+            return "user/\(id)/sns"
+        case let .userCareerUpdate(id, _, _):
+            return "user/\(id)/career"
+        case let .userLocationUpdate(id):
+            return "user/\(id)/location"
+            
         case let .userWithdrawal(id, _, _):
             return "user/\(id)"
         case let .emailVerify(id):
@@ -205,7 +234,6 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/notice/\(noticeID)"
 
         // 어떻게 정리하면 좋을지 생각해봐야할듯 뭔가 다닥다닥 있는뎀
-        
         }
     }
     
@@ -220,7 +248,12 @@ enum TerminalRouter: URLRequestConvertible {
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
             return nil
-        case .userInfoUpdate: // 수정해야함
+        case let .userCareerUpdate(_, title, contents):
+            return [
+                "career_title": title,
+                "career_contents": contents
+            ]
+        case .userInfoUpdate, .userImageUpdate, .userSNSUpdate, .userLocationUpdate: // 수정해야함
             return nil
         case let .userWithdrawal(_, email, password):
             return [
@@ -292,21 +325,4 @@ enum TerminalRouter: URLRequestConvertible {
         
         return request
     }
-    
-//    var multipartFormData: MultipartFormData {
-//            let multipartFormData = MultipartFormData()
-//            switch self {
-//            case let .userInfoUpdate(_, image, userInfo):
-//                for (key, value) in userInfo {
-//                    let data = "\(value)".data(using: .utf8)!
-//                    multipartFormData.append(data, withName: key, mimeType: "text/plain")
-//                }
-//                multipartFormData.append(image, withName: "file", fileName: "file.png", mimeType: "image/png")
-//                
-//            default:
-//                break
-//            }
-//
-//            return multipartFormData
-//        }
 }
