@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class SearchStudyPresenter: SearchStudyPresenterProtocol {
+    var view: SearchStudyViewProtocol?
+    var interactor: SearchStudyInteractorProtocol?
+    var wireFrame: SearchStudyWireFrameProtocol?
+}
