@@ -189,7 +189,6 @@ class ProfileDetailView: UIViewController {
         guard let userInfo = self.userInfo else { return }
         presenter?.showProfileModify(userInfo: userInfo, project: projectData)
     }
-    
     @objc func modifyProfile() {
         
     }
