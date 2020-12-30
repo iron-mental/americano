@@ -36,6 +36,8 @@ class MyStudyMainView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        attribute()
+        layout()
         presenter?.viewDidLoad()
     }
     
@@ -58,6 +60,7 @@ class MyStudyMainView: UIViewController {
         tableView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.register(MyStudyMainTableViewCell.self, forCellReuseIdentifier: MyStudyMainTableViewCell.identifier)
+            $0.separatorColor = myStudyList.isEmpty ? .clear : .none
             $0.delegate = self
             $0.dataSource = self
         }
@@ -209,11 +212,19 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension MyStudyMainView: MyStudyMainViewProtocol {
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
     func showMyStudyList(myStudyList: [MyStudy]) {
+        
         self.myStudyList = myStudyList
         attribute()
         layout()
         tableView.reloadData()
+        LoadingRainbowCat.hide {
+            print("로딩 끝")
+        }
     }
     
     func showErrMessage() {

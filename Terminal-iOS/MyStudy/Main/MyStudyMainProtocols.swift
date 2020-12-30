@@ -14,6 +14,7 @@ protocol MyStudyMainViewProtocol: class {
     //PRESENTER -> VIEW
     func showMyStudyList(myStudyList: [MyStudy])
     func showErrMessage()
+    func showLoading()
 }
 
 protocol MyStudyMainWireFrameProtocol: class {

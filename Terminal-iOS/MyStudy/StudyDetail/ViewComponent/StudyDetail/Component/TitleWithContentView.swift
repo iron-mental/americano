@@ -47,20 +47,32 @@ class TitleWithContentView: UIView {
             $0.numberOfLines = 0
             $0.text = contentText[1]
             $0.setLineSpacing(lineSpacing: 13, lineHeightMultiple: 0)
+            $0.setMargins()
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.sizeToFit()
+            let insets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+            $0.frame.inset(by: insets)
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
         }
         textView.do {
             $0.font = UIFont.boldSystemFont(ofSize: 16)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = false
-            $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.text = contentText[1]
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.sizeToFit()
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
         }
     }
     
     func labelLayout() {
         [title, label, textView].forEach { addSubview($0) }
+        
         label.isHidden = false
         textView.isHidden = true
+        
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -73,7 +85,7 @@ class TitleWithContentView: UIView {
             $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: label.heightAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: label.intrinsicContentSize.height + 40).isActive = true
         }
     }
     func textViewLayout() {
@@ -102,7 +114,7 @@ class TitleWithContentView: UIView {
         if self.state == .edit{
             textView.do {
                 $0.translatesAutoresizingMaskIntoConstraints = false
-                $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+                $0.topAnchor.constraint(equalTo: title.bottomAnchor).isActive = true
                 $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
                 $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
                 $0.heightAnchor.constraint(equalTo: textView.heightAnchor).isActive = true
@@ -112,7 +124,7 @@ class TitleWithContentView: UIView {
                 $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
                 $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
                 $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-                $0.heightAnchor.constraint(equalTo: label.heightAnchor).isActive = true
+                $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
             }
         }
     }

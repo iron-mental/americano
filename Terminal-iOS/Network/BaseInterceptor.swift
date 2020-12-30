@@ -21,6 +21,7 @@ final class BaseInterceptor: RequestInterceptor {
 
         if let token = KeychainWrapper.standard.string(forKey: "accessToken") {
             self.accessToken = token
+            
         }
         
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")

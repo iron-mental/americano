@@ -27,11 +27,12 @@ class MyStudyMainTableViewCell: UITableViewCell {
     func attribute() {
         self.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-            
         }
         studyMainimage.do {
             $0.image = #imageLiteral(resourceName: "swiftmain")
             $0.contentMode = .scaleAspectFit
+            $0.layer.masksToBounds = true
+            $0.layer.cornerRadius = 5
         }
         locationLabel.do {
             $0.text = "사당역 스타벅스"
@@ -47,30 +48,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.backgroundColor = .red
             $0.layer.masksToBounds = true
         }
-//        newChatLabel.do {
-//            $0.text = "새 채팅"
-//            $0.backgroundColor = UIColor.appColor(.mainColor)
-//            $0.font = newChatLabel.font.withSize(13)
-//            $0.layer.cornerRadius = 10
-//            $0.layer.masksToBounds = true
-//            $0.textAlignment = .center
-//        }
-//        newNoticeLabel.do {
-//            $0.text = "새 공지"
-//            $0.backgroundColor = UIColor.appColor(.mainColor)
-//            $0.font = newNoticeLabel.font.withSize(13)
-//            $0.layer.cornerRadius = 10
-//            $0.layer.masksToBounds = true
-//            $0.textAlignment = .center
-//        }
-//        newMemberLabel.do {
-//            $0.text = "새 멤버"
-//            $0.backgroundColor = UIColor.appColor(.mainColor)
-//            $0.font = newMemberLabel.font.withSize(13)
-//            $0.layer.cornerRadius = 10
-//            $0.layer.masksToBounds = true
-//            $0.textAlignment = .center
-//        }
         checkBox.do {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.appColor(.mainColor).cgColor
@@ -114,7 +91,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
         notiGuideView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Terminal.convertWidth(value: 28)).isActive = true
             $0.centerXAnchor.constraint(equalTo: checkBox.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 10)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 10)).isActive = true

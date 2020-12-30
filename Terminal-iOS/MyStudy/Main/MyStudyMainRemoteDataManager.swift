@@ -27,14 +27,11 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-
                     let result = try! JSONDecoder().decode(BaseResponse<[MyStudy]>.self, from: data!)
                     completion(result.result, result.data)
                 case .failure(let error):
-                    
                     print("error :", error )
                 }
             }

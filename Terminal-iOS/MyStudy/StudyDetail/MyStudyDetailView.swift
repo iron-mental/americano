@@ -22,7 +22,7 @@ class MyStudyDetailView: UIViewController {
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
     
-    var  VCArr: [UIViewController] = []
+    var VCArr: [UIViewController] = []
     
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
@@ -48,7 +48,6 @@ class MyStudyDetailView: UIViewController {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationItem.rightBarButtonItems = [moreButton]
         }
         tabSege.do {
@@ -76,10 +75,8 @@ class MyStudyDetailView: UIViewController {
     }
     
     func layout() {
-        view.addSubview(tabSege)
-        view.addSubview(selectedUnderLine)
+        [ tabSege, selectedUnderLine, childPageView.view ].forEach { view.addSubview($0) }
         addChild(childPageView)
-        view.addSubview(childPageView.view)
         childPageView.didMove(toParent: self)
         
         tabSege.do {
@@ -96,7 +93,6 @@ class MyStudyDetailView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
             $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
         }
-        
         childPageView.view.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: tabSege.bottomAnchor, constant: 10).isActive = true
@@ -128,6 +124,7 @@ class MyStudyDetailView: UIViewController {
         }
         pageBeforeIndex = nextPage
     }
+    
     @objc func didClickecmoreButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let noticeAdd = UIAlertAction(title: "공지사항 추가", style: .default) { _ in self.addNoticeButtonAction() }
@@ -138,14 +135,17 @@ class MyStudyDetailView: UIViewController {
         [noticeAdd,studyEdit,applyList,cancel].forEach { alert.addAction($0) }
         present(alert, animated: true, completion: nil)
     }
+    
     func addNoticeButtonAction() {
         presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
     }
+    
     func editStudyButtonDidTap() {
         if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
             presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
         }
     }
+    
     func showApplyList() {
         presenter?.showApplyUserList(studyID: studyID!)
     }

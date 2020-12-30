@@ -24,10 +24,10 @@ class NoticeView: UIViewController {
         noticeList.removeAll()
         pinnedNotiArr.removeAll()
         notiArr.removeAll()
-        presenter?.viewDidLoad(studyID: studyID!)
-        sorted()
         attribute()
         layout()
+        presenter?.viewDidLoad(studyID: studyID!)
+        sorted()
     }
     
     func sorted() {
@@ -35,6 +35,9 @@ class NoticeView: UIViewController {
         notiArr = noticeList.filter { !$0.pinned! }
     }
     func attribute() {
+        self.do {
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         notice.do {
             $0.register(NoticeCell.self, forCellReuseIdentifier: NoticeCell.noticeCellID)
             $0.delegate = self
@@ -42,6 +45,7 @@ class NoticeView: UIViewController {
             $0.prefetchDataSource = self
             $0.bounces = false
             $0.rowHeight = Terminal.convertHeigt(value: 123)
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }
     
@@ -68,9 +72,9 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         if section == 0 {
-            headerView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+            headerView.backgroundColor = UIColor.appColor(.terminalBackground)
         } else if section == 1 {
-            headerView.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            headerView.backgroundColor = noticeList.isEmpty ? UIColor.appColor(.terminalBackground) : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1) 
         }
         return headerView
     }
@@ -125,13 +129,21 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 }
 
 extension NoticeView: NoticeViewProtocol {
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
     
     func showNoticeList(noticeList: [Notice]) {
-        
         self.noticeList += noticeList
         sorted()
         notice.reloadData()
+        LoadingRainbowCat.hide {
+            print("로딩 끝")
+        }
     }
     func showMessage(message: String) {
+        LoadingRainbowCat.hide {
+            print("로딩 끝")
+        }
     }
 }

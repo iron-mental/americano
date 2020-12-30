@@ -426,10 +426,8 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
         cell.selectionStyle = .none
         cell.delegate = self
-        
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
-        
         return cell
     }
     
