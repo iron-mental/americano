@@ -65,10 +65,6 @@ extension UILabel {
         self.attributedText = attributedString
     }
     
-    func addMargin() {
-        
-    }
-    
     func setMargins(margin: CGFloat = 20) {
             if let textString = self.text {
                 var paragraphStyle = NSMutableParagraphStyle()
