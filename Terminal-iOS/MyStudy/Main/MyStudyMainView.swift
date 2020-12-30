@@ -214,7 +214,6 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
 extension MyStudyMainView: MyStudyMainViewProtocol {
     func showLoading() {
         LoadingRainbowCat.show()
-        
     }
     
     func showMyStudyList(myStudyList: [MyStudy]) {
