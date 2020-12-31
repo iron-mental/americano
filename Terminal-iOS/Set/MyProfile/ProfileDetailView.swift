@@ -222,27 +222,29 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
         // MARK: Set User Info
         
         /// 프로필
-        profile.name.text = userInfo.nickname
+        self.profile.name.text = userInfo.nickname
         
         if let image = userInfo.image, let introduce = userInfo.introduce {
-            profile.descript.text = introduce
-            profile.profileImage.kf.setImage(with: URL(string: image),
+            self.profile.descript.text = introduce
+            self.profile.profileImage.kf.setImage(with: URL(string: image),
                                              options: [.requestModifier(imageDownloadRequest)])
         }
       
         /// 경력
         if let careerTitle = userInfo.careerTitle, let careerContents = userInfo.careerContents {
-            career.careerTitle.text = careerTitle
-            career.careerContents.text = careerContents
+            self.career.careerTitle.text = careerTitle
+            self.career.careerContents.text = careerContents
         }
         
         /// 이메일
-        email.email.text = userInfo.email
+        self.email.email.text = userInfo.email
         
         /// 활동지역
         if let address = userInfo.address {
-            location.location.text = address
+            self.location.location.text = address
         }
+        
+        
     }
     
     func addProjectToStackView(with project: [Project]) {

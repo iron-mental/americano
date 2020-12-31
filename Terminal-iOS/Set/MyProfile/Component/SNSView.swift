@@ -17,11 +17,17 @@ class SNSView: UIView {
         super.init(frame: frame)
         attribute()
         layout()
+        addstack()
     }
     
     func attribute() {
         snsImage.do {
             $0.image = #imageLiteral(resourceName: "github")
+        }
+        snsStack.do {
+            $0.axis = .horizontal
+            $0.distribution = .fillEqually
+            $0.spacing = 10
         }
         modify.do {
             $0.setTitle("수정", for: .normal)
@@ -31,6 +37,7 @@ class SNSView: UIView {
     
     func layout() {
         self.addSubview(self.snsImage)
+        self.addSubview(self.snsStack)
         self.addSubview(self.modify)
         
         self.snsImage.do {
@@ -41,6 +48,13 @@ class SNSView: UIView {
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         }
+        self.snsStack.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.snsImage.trailingAnchor, constant: 10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 110).isActive = true
+        }
         self.modify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
@@ -48,6 +62,22 @@ class SNSView: UIView {
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
+    }
+    
+    func addstack() {
+        let github = UIButton().then {
+            $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
+        }
+        let linked = UIButton().then {
+            $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
+        }
+        let web = UIButton().then {
+            $0.setImage(#imageLiteral(resourceName: "blog"), for: .normal)
+        }
+        
+        snsStack.addArrangedSubview(github)
+        snsStack.addArrangedSubview(linked)
+        snsStack.addArrangedSubview(web)
     }
     
     required init?(coder: NSCoder) {
