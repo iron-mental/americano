@@ -35,16 +35,9 @@ final class BaseInterceptor: RequestInterceptor {
         }
         print("status:",statusCode)
         switch statusCode {
-        case 200...299, 404:
+        case 200...299, 422:
             completion(.doNotRetry)
-        case 401:
-            if request.retryCount < retryLimit {
-                refreshToken { success in
-                    print("성공여부 :", success)
-                    return completion(.retryWithDelay(self.retryDelay))
-                }
-            }
-        case 102:
+        case 401, 403:
             if request.retryCount < retryLimit {
                 refreshToken { success in
                     print("성공여부 :", success)
@@ -52,7 +45,7 @@ final class BaseInterceptor: RequestInterceptor {
                 }
             }
         default:
-            break
+           break
         }
     }
     

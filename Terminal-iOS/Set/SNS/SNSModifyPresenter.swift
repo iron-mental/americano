@@ -13,8 +13,13 @@ class SNSModifyPresenter: SNSModifyPresenterProtocol {
     var interactor: SNSModifyInteractorInputProtocol?
     var wireFrame: SNSModifyWireFrameProtocol?
     
+    func completeModify(github: String, linkedIn: String, web: String) {
+        self.interactor?.completeModify(github: github, linkedIn: linkedIn, web: web)
+    }
 }
 
 extension SNSModifyPresenter: SNSModifyInteractorOutputProtocol {
-    
+    func didCompleteModify(result: Bool, message: String) {
+        self.view?.modifyResultHandle(result: result, message: message)
+    }
 }

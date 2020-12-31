@@ -21,14 +21,13 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.studyList(category: category, sort: "new"))
-            .validate(statusCode: 200..<299)
+            .validate(statusCode: 200..<500)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
-                    
                     self.remoteRequestHandler?.onStudiesRetrieved(studies: result)
                 case .failure(let err):
                     print(err)

@@ -23,7 +23,7 @@ enum TerminalRouter: URLRequestConvertible {
     
     case userImageUpdate        (id: String)
     case userInfoUpdate         (id: String)
-    case userSNSUpdate          (id: String)
+    case userSNSUpdate          (id: String, sns: Parameters)
     case userCareerUpdate       (id: String, title: String, contents: String)
     case userLocationUpdate     (id: String)
     
@@ -175,7 +175,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/\(id)/image"
         case let .userInfoUpdate(id):
             return "user/\(id)/info"
-        case let .userSNSUpdate(id):
+        case let .userSNSUpdate(id, _):
             return "user/\(id)/sns"
         case let .userCareerUpdate(id, _, _):
             return "user/\(id)/career"
@@ -253,7 +253,9 @@ enum TerminalRouter: URLRequestConvertible {
                 "career_title": title,
                 "career_contents": contents
             ]
-        case .userInfoUpdate, .userImageUpdate, .userSNSUpdate, .userLocationUpdate: // 수정해야함
+        case let .userSNSUpdate(_, sns):
+            return sns
+        case .userInfoUpdate, .userImageUpdate, .userLocationUpdate: // 수정해야함
             return nil
         case let .userWithdrawal(_, email, password):
             return [

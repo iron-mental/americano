@@ -19,9 +19,9 @@ class CareerModifyInteractor: CareerModifyInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userCareerUpdate(id: userID, title: title, contents: contents))
-            .validate(statusCode: 200..<299)
-            .responseJSON { reponse in
-                switch reponse.result {
+            .validate()
+            .responseJSON { response in
+                switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
