@@ -75,6 +75,10 @@
 		A581494B25912DF000BF3C2A /* CareerModifyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581494A25912DF000BF3C2A /* CareerModifyWireFrame.swift */; };
 		A581495025912DFC00BF3C2A /* CareerModifyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581494F25912DFC00BF3C2A /* CareerModifyProtocols.swift */; };
 		A58F9014259F44C5007777B4 /* ProjectModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F9013259F44C5007777B4 /* ProjectModifyView.swift */; };
+		A58F9019259F4500007777B4 /* ProjectModifyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F9018259F4500007777B4 /* ProjectModifyPresenter.swift */; };
+		A58F901E259F450A007777B4 /* ProjectModifyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F901D259F450A007777B4 /* ProjectModifyInteractor.swift */; };
+		A58F9023259F4514007777B4 /* ProjectModifyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F9022259F4514007777B4 /* ProjectModifyWireFrame.swift */; };
+		A58F9028259F451D007777B4 /* ProjectModifyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F9027259F451D007777B4 /* ProjectModifyProtocols.swift */; };
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5A5F6C2256F843600405C71 /* SortState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6C1256F843600405C71 /* SortState.swift */; };
 		A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */; };
@@ -355,6 +359,10 @@
 		A581494A25912DF000BF3C2A /* CareerModifyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerModifyWireFrame.swift; sourceTree = "<group>"; };
 		A581494F25912DFC00BF3C2A /* CareerModifyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerModifyProtocols.swift; sourceTree = "<group>"; };
 		A58F9013259F44C5007777B4 /* ProjectModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModifyView.swift; sourceTree = "<group>"; };
+		A58F9018259F4500007777B4 /* ProjectModifyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModifyPresenter.swift; sourceTree = "<group>"; };
+		A58F901D259F450A007777B4 /* ProjectModifyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModifyInteractor.swift; sourceTree = "<group>"; };
+		A58F9022259F4514007777B4 /* ProjectModifyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModifyWireFrame.swift; sourceTree = "<group>"; };
+		A58F9027259F451D007777B4 /* ProjectModifyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModifyProtocols.swift; sourceTree = "<group>"; };
 		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A5A5F6C1256F843600405C71 /* SortState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortState.swift; sourceTree = "<group>"; };
 		A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailRemoteManager.swift; sourceTree = "<group>"; };
@@ -603,6 +611,7 @@
 		A52F00D624FD182800DE3126 /* Set */ = {
 			isa = PBXGroup;
 			children = (
+				A55505BC255962E90089B919 /* Component */,
 				A581493A25912CE100BF3C2A /* Career */,
 				A58149122591249700BF3C2A /* Location */,
 				A58149112591249100BF3C2A /* Project */,
@@ -719,6 +728,10 @@
 			isa = PBXGroup;
 			children = (
 				A58F9013259F44C5007777B4 /* ProjectModifyView.swift */,
+				A58F9018259F4500007777B4 /* ProjectModifyPresenter.swift */,
+				A58F901D259F450A007777B4 /* ProjectModifyInteractor.swift */,
+				A58F9022259F4514007777B4 /* ProjectModifyWireFrame.swift */,
+				A58F9027259F451D007777B4 /* ProjectModifyProtocols.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -857,7 +870,6 @@
 		A5BBCEA925592A580098BB02 /* ProfileModify */ = {
 			isa = PBXGroup;
 			children = (
-				A55505BC255962E90089B919 /* Component */,
 				A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */,
 				A5D6A78725743090007D6409 /* ProfileModifyProtocols.swift */,
 				A5D6A78A2574309D007D6409 /* ProfileModifyPresenter.swift */,
@@ -1501,8 +1513,10 @@
 				CC5912A0258A35EA00C1A24C /* UIScrollView+Ext.swift in Sources */,
 				A5C5B15325456E2800F4A86D /* EmailView.swift in Sources */,
 				A5BA1EE7254AA8B70089D4E9 /* MyStudyDetailView.swift in Sources */,
+				A58F9019259F4500007777B4 /* ProjectModifyPresenter.swift in Sources */,
 				A58149142591290E00BF3C2A /* LocationModifyView.swift in Sources */,
 				A5D6A78825743090007D6409 /* ProfileModifyProtocols.swift in Sources */,
+				A58F901E259F450A007777B4 /* ProjectModifyInteractor.swift in Sources */,
 				CCA3FF4B2517823E00F62627 /* StudyCell.swift in Sources */,
 				A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */,
 				A581491C259129BF00BF3C2A /* LocationModifyPresenter.swift in Sources */,
@@ -1587,6 +1601,7 @@
 				A56605E3258358A2002C4A77 /* ApplyListCell.swift in Sources */,
 				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
 				A58148F425910EAC00BF3C2A /* SNSModifyPresenter.swift in Sources */,
+				A58F9023259F4514007777B4 /* ProjectModifyWireFrame.swift in Sources */,
 				A51F235C256E19E600CBFC13 /* Project.swift in Sources */,
 				A510BA202583BB500084559C /* ApplyUserWireFrame.swift in Sources */,
 				CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */,
@@ -1603,6 +1618,7 @@
 				A58148972591050600BF3C2A /* EmailModifyPresenter.swift in Sources */,
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,
 				CCF470A2256B9A710085B371 /* ChatRemoteDataManager.swift in Sources */,
+				A58F9028259F451D007777B4 /* ProjectModifyProtocols.swift in Sources */,
 				CCAF0FDF2533034B0060A2F6 /* MyStudyMainRemoteDataManager.swift in Sources */,
 				CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */,
 				CC3F99202545448E00428B11 /* HomeView.swift in Sources */,
