@@ -36,24 +36,16 @@ class SNSView: UIView {
     }
     
     func layout() {
-        self.addSubview(self.snsImage)
         self.addSubview(self.snsStack)
         self.addSubview(self.modify)
-        
-        self.snsImage.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
-        }
+
         self.snsStack.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.snsImage.trailingAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 110).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         }
         self.modify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
