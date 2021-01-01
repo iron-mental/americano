@@ -7,3 +7,20 @@
 //
 
 import Foundation
+
+class ProjectModifyPresenter: ProjectModifyPresenterProtocol {
+    var view: ProjectModifyViewProtocol?
+    var interactor: ProjectModifyInteractorInputProtocol?
+    var wireFrame: ProjectModifyWireFrameProtocol?
+    
+    func completeModify(title: String, contents: String) {
+        
+    }
+    
+}
+
+extension ProjectModifyPresenter: ProjectModifyInteractorOutputProtocol {
+    func didCompleteModify(result: Bool, message: String) {
+        
+    }
+}
