@@ -250,6 +250,15 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
     func addProjectToStackView(with project: [Project]) {
         projectData = project
         
+        if project.isEmpty {
+            let label = UILabel().then {
+                $0.text = "\n추가된 프로젝트가 없습니다."
+                $0.numberOfLines = 0
+                $0.textAlignment = .center
+            }
+            projectStack.addArrangedSubview(label)
+        }
+        
         for data in project {
             let title = data.title
             let contents = data.contents
@@ -258,5 +267,11 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
             
             projectStack.addArrangedSubview(projectView)
         }
+        
+        let addProjectButton = UIButton().then {
+            $0.setTitle("프로젝트 수정", for: .normal)
+            $0.setTitleColor(.appColor(.mainColor), for: .normal)
+        }
+        projectStack.addArrangedSubview(addProjectButton)
     }
 }

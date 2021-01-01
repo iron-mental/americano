@@ -74,6 +74,7 @@
 		A581494625912DE600BF3C2A /* CareerModifyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581494525912DE600BF3C2A /* CareerModifyInteractor.swift */; };
 		A581494B25912DF000BF3C2A /* CareerModifyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581494A25912DF000BF3C2A /* CareerModifyWireFrame.swift */; };
 		A581495025912DFC00BF3C2A /* CareerModifyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A581494F25912DFC00BF3C2A /* CareerModifyProtocols.swift */; };
+		A58F9014259F44C5007777B4 /* ProjectModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F9013259F44C5007777B4 /* ProjectModifyView.swift */; };
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5A5F6C2256F843600405C71 /* SortState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6C1256F843600405C71 /* SortState.swift */; };
 		A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */; };
@@ -353,6 +354,7 @@
 		A581494525912DE600BF3C2A /* CareerModifyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerModifyInteractor.swift; sourceTree = "<group>"; };
 		A581494A25912DF000BF3C2A /* CareerModifyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerModifyWireFrame.swift; sourceTree = "<group>"; };
 		A581494F25912DFC00BF3C2A /* CareerModifyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerModifyProtocols.swift; sourceTree = "<group>"; };
+		A58F9013259F44C5007777B4 /* ProjectModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModifyView.swift; sourceTree = "<group>"; };
 		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A5A5F6C1256F843600405C71 /* SortState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortState.swift; sourceTree = "<group>"; };
 		A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailRemoteManager.swift; sourceTree = "<group>"; };
@@ -716,6 +718,7 @@
 		A58149112591249100BF3C2A /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				A58F9013259F44C5007777B4 /* ProjectModifyView.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -1654,6 +1657,7 @@
 				A5814926259129D200BF3C2A /* LocationModifyWireFrame.swift in Sources */,
 				CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */,
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
+				A58F9014259F44C5007777B4 /* ProjectModifyView.swift in Sources */,
 				CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */,
 				A5814921259129C800BF3C2A /* LocationModifyInteractor.swift in Sources */,
 				CCBC88CF254BEDE200C2A6C4 /* SNSIconsView.swift in Sources */,
