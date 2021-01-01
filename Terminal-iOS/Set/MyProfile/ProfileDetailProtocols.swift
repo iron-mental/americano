@@ -25,6 +25,7 @@ protocol ProfileDetailWireFrameProtocol: class {
     func presentProfileModify(from view: ProfileDetailViewProtocol)
     func presentLocationModify(from view: ProfileDetailViewProtocol)
     func presentCareerModify(from view: ProfileDetailViewProtocol, title: String, Contents: String)
+    func presentProjectModify(from view: ProfileDetailViewProtocol)
 }
 
 protocol ProfileDetailPresenterProtocol: class {
@@ -39,6 +40,7 @@ protocol ProfileDetailPresenterProtocol: class {
     func showSNSModify()
     func showLocationModify()
     func showCareerModify(title: String, contents: String)
+    func showProjectModify()
 }
 
 protocol ProfileDetailInteractorInputProtocol: class {

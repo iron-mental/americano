@@ -81,4 +81,12 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
             sourceView.navigationController?.pushViewController(careerModifyView, animated: true)
         }
     }
+    
+    func presentProjectModify(from view: ProfileDetailViewProtocol) {
+        let projectModifyView = ProjectModifyWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(projectModifyView, animated: true)
+        }
+    }
 }

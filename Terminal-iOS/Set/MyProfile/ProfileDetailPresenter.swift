@@ -9,8 +9,6 @@
 import Foundation
 
 class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
-    
-    
     var view: ProfileDetailViewProtocol?
     var interactor: ProfileDetailInteractorInputProtocol?
     var wireFrame: ProfileDetailWireFrameProtocol?
@@ -38,6 +36,10 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     
     func showCareerModify(title: String, contents: String) {
         wireFrame?.presentCareerModify(from: view!, title: title, Contents: contents)
+    }
+    
+    func showProjectModify() {
+        wireFrame?.presentProjectModify(from: view!)
     }
 }
 

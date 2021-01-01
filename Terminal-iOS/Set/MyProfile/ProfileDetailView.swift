@@ -197,6 +197,9 @@ class ProfileDetailView: UIViewController {
         let contents = career.careerContents.text ?? ""
         presenter?.showCareerModify(title: title, contents: contents)
     }
+    @objc func modifyProject() {
+        presenter?.showProjectModify()
+    }
     @objc func modifySNS() {
         presenter?.showSNSModify()
     }
@@ -271,6 +274,7 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
         let addProjectButton = UIButton().then {
             $0.setTitle("프로젝트 수정", for: .normal)
             $0.setTitleColor(.appColor(.mainColor), for: .normal)
+            $0.addTarget(self, action: #selector(modifyProject), for: .touchUpInside)
         }
         projectStack.addArrangedSubview(addProjectButton)
     }
