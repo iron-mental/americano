@@ -28,7 +28,6 @@
 		A51BA0A82577E38900B9673F /* BaseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BA0A72577E38900B9673F /* BaseInterceptor.swift */; };
 		A51BA0B02577F0E300B9673F /* Contents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BA0AF2577F0E300B9673F /* Contents.swift */; };
 		A51BA0B42577F1B700B9673F /* TerminalNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BA0B32577F1B700B9673F /* TerminalNetworkManager.swift */; };
-		A51BA0BB2577F4BF00B9673F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BA0BA2577F4BF00B9673F /* TestViewController.swift */; };
 		A51BA0C92578132B00B9673F /* TerminalRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BA0C82578132B00B9673F /* TerminalRouter.swift */; };
 		A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51D8BE025264DB9003BD1B9 /* AccountCell.swift */; };
 		A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51F2356256E195600CBFC13 /* AccessToken.swift */; };
@@ -311,7 +310,6 @@
 		A51BA0A72577E38900B9673F /* BaseInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterceptor.swift; sourceTree = "<group>"; };
 		A51BA0AF2577F0E300B9673F /* Contents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contents.swift; sourceTree = "<group>"; };
 		A51BA0B32577F1B700B9673F /* TerminalNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalNetworkManager.swift; sourceTree = "<group>"; };
-		A51BA0BA2577F4BF00B9673F /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		A51BA0C82578132B00B9673F /* TerminalRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalRouter.swift; sourceTree = "<group>"; };
 		A51D8BE025264DB9003BD1B9 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		A51F2356256E195600CBFC13 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
@@ -1062,7 +1060,6 @@
 				CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */,
 				CCA1FF5824FD0C930026C3EA /* SceneDelegate.swift */,
 				CCA1FF5A24FD0C930026C3EA /* ViewController.swift */,
-				A51BA0BA2577F4BF00B9673F /* TestViewController.swift */,
 				CCA1FF5C24FD0C930026C3EA /* Main.storyboard */,
 				CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */,
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
@@ -1588,7 +1585,6 @@
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
 				CCA3FF662517829D00F62627 /* CreateStudyViewController.swift in Sources */,
 				A5D058F0255D939C0047CA9E /* StudyDetailProtocols.swift in Sources */,
-				A51BA0BB2577F4BF00B9673F /* TestViewController.swift in Sources */,
 				CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */,
 				CCD51C80256D29F200D41771 /* MyStudyDetailLocalDataManager.swift in Sources */,
 				A5C81C6125836D4C008F2B09 /* MyApplyListInteractor.swift in Sources */,
