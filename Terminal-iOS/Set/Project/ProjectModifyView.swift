@@ -10,10 +10,11 @@ import UIKit
 
 class ProjectModifyView: UIViewController, CellSubclassDelegate {
     var presenter: ProjectModifyPresenterProtocol?
-    var projectArr: [Project] = [Project(id: 1, title: "dfdfd", contents: "fdfd", snsGithub: "fdfd", snsAppstore: "fdfdd", snsPlaystore: "f", createAt: "fd"),
-                                 Project(id: 1, title: "dfdfd", contents: "fdfd", snsGithub: "fdfd", snsAppstore: "fdfdd", snsPlaystore: "f", createAt: "fd"),Project(id: 1, title: "dfdfd", contents: "fdfd", snsGithub: "fdfd", snsAppstore: "fdfdd", snsPlaystore: "f", createAt: "fd"),Project(id: 1, title: "dfdfd", contents: "fdfd", snsGithub: "fdfd", snsAppstore: "fdfdd", snsPlaystore: "f", createAt: "fd")]
-    let projectView = ProjectTableView()
-    let projectAddButton = UIButton()
+    var projectArr: [Project] = []
+    
+    lazy var projectView = ProjectTableView()
+    lazy var projectAddButton = UIButton()
+    lazy var completeButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         self.view.backgroundColor = .black
         
         self.projectView.do {
-//            $0.isScrollEnabled = false
             $0.delegate = self
             $0.dataSource = self
             $0.separatorStyle = .none
@@ -45,25 +45,43 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(addProject), for: .touchUpInside)
         }
+        
+        self.completeButton.do {
+            $0.backgroundColor = .appColor(.mainColor)
+            $0.setTitle("수정완료", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.layer.cornerRadius = 10
+//            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+        }
     }
     
     private func layout() {
         self.view.addSubview(projectView)
         self.view.addSubview(projectAddButton)
+        self.view.addSubview(completeButton)
         
         self.projectView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-            $0.heightAnchor.constraint(lessThanOrEqualToConstant: 650).isActive = true
+//            $0.heightAnchor.constraint(lessThanOrEqualToConstant: 650).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.projectAddButton.topAnchor, constant: -10).isActive = true
         }
         self.projectAddButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.projectView.bottomAnchor, constant: 10).isActive = true
+//            $0.topAnchor.constraint(equalTo: self.projectView.bottomAnchor, constant: 10).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 130).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.completeButton.topAnchor, constant: -10).isActive = true
+        }
+        self.completeButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
     }
     
@@ -74,6 +92,10 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .right)
             if projectArr.count == 3 {
                 projectAddButton.backgroundColor = .darkGray
+            }
+            if !projectArr.isEmpty {
+                let index = IndexPath(row: projectArr.count - 1, section: 0)
+                self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
             }
         } else {
             let alert = UIAlertController(title: "알림",
@@ -117,7 +139,7 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         let index = indexPath.row
         
         self.projectArr.remove(at: index)
-        self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .none)
+        self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         self.projectAddButton.backgroundColor =
             self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
     }

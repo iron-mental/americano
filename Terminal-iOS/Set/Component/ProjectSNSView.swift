@@ -25,7 +25,7 @@ final class ProjectSNSView: UIView {
     }
   
     func attribute() {
-        firstImage.do {
+        [firstImage, secondImage, thirdImage].forEach {
             $0.backgroundColor = .white
             $0.layer.cornerRadius = Terminal.convertWidth(value: 11)
         }
