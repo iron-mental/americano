@@ -65,12 +65,10 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-//            $0.heightAnchor.constraint(lessThanOrEqualToConstant: 650).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.projectAddButton.topAnchor, constant: -10).isActive = true
         }
         self.projectAddButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: self.projectView.bottomAnchor, constant: 10).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 130).isActive = true
