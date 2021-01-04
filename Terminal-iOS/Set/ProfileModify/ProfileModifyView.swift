@@ -12,8 +12,7 @@ import SwiftKeychainWrapper
 
 class ProfileModifyView: UIViewController {
     var presenter: ProfileModifyPresenterProtocol?
-    var userInfo: UserInfo?
-    var projectArr: [Project] = []
+    var profile: Profile?
     let picker = UIImagePickerController()
 
     let projectAddButton = UIButton()
@@ -21,6 +20,7 @@ class ProfileModifyView: UIViewController {
     lazy var profileImage = UIImageView()
     lazy var nameModify = UITextField()
     lazy var descripModify = UITextView()
+    lazy var completeButton = UIButton()
     
     // MARK: viewDidLoad
     
@@ -38,29 +38,18 @@ class ProfileModifyView: UIViewController {
 //                                        style: .plain,
 //                                        target: self,
 //                                        action: #selector(completeButton))
-        self.view.backgroundColor = .black
+        //        self.do {
+        //            $0.navigationItem.rightBarButtonItem = modifyBtn
+        //        }
         
-//        self.do {
-//            $0.navigationItem.rightBarButtonItem = modifyBtn
-//        }
+        self.view.backgroundColor = .black
+
         self.picker.do {
             $0.delegate = self
         }
-        
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-            return requestBody
-        }
-        
-        profileImage.do {
-            if let image = userInfo?.image {
-                $0.kf.setImage(with: URL(string: image),
-                               options: [.requestModifier(imageDownloadRequest)])
-            } else {
-                $0.image = #imageLiteral(resourceName: "member")
-            }
+
+        self.profileImage.do {
+            $0.image = self.profile?.profileImage
             let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(profileTapGesture)
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -73,19 +62,16 @@ class ProfileModifyView: UIViewController {
             $0.backgroundColor = .blue
         }
         
-        nameModify.do {
-            guard let name = userInfo?.nickname else { return }
-            $0.text = name
+        self.nameModify.do {
+            $0.text = self.profile?.nickname
             $0.font = UIFont(name: nameModify.font!.fontName, size: 20)
             $0.placeholder = "닉네임"
             $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
         
-        descripModify.do {
+        self.descripModify.do {
             $0.backgroundColor = .darkGray
-            if let descript = userInfo?.introduce {
-                $0.text = descript
-            }
+            $0.text = self.profile?.introduction
             $0.delegate = self
             $0.dynamicFont(size: 16, weight: .regular)
             $0.textColor = .white
@@ -96,12 +82,25 @@ class ProfileModifyView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
         }
+        
+        self.completeButton.do {
+            $0.backgroundColor = .appColor(.mainColor)
+            $0.setTitle("수정완료", for: .normal)
+            $0.setTitleColor(.white, for: .normal)
+            $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+        }
     }
     
+    @objc func completeModify() {
+        
+    }
+
     // MARK: Set Layout
     
     func layout() {
-        [profileImage, nameModify, descripModify].forEach { self.view.addSubview($0) }
+        [self.profileImage, self.nameModify, self.descripModify, self.completeButton]
+            .forEach { self.view.addSubview($0) }
         
         self.profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -110,17 +109,27 @@ class ProfileModifyView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
+        
         self.nameModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.profileImage.bottomAnchor, constant: 20).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         }
+        
         self.descripModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.nameModify.bottomAnchor, constant: 7).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        }
+        
+        self.completeButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.descripModify.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
     }
     
@@ -160,9 +169,9 @@ class ProfileModifyView: UIViewController {
 //              let introduce = descripModify.text,
 //              let careerTitle = careerTitleModify.text,
 //              let careerContents = careerDescriptModify.text
-////              let snsGithub = snsModify.firstTextFeield.text,
-////              let snsLinkedIn = snsModify.secondTextField.text,
-////              let snsWeb = snsModify.thirdTextField.text
+//              let snsGithub = snsModify.firstTextFeield.text,
+//              let snsLinkedIn = snsModify.secondTextField.text,
+//              let snsWeb = snsModify.thirdTextField.text
 //        else { return }
 //
 //        let userInfo = UserInfoPut(image: image,
