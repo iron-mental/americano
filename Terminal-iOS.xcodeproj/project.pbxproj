@@ -615,7 +615,7 @@
 				A58149112591249100BF3C2A /* Project */,
 				A58148ED25910E8900BF3C2A /* SNS */,
 				A58148882590C22700BF3C2A /* Email */,
-				A5BBCEA925592A580098BB02 /* ProfileModify */,
+				A5BBCEA925592A580098BB02 /* Profile */,
 				A5AB26FF252B6E9300A39240 /* MyProfile */,
 				A5AB26FD252B6C6400A39240 /* Set */,
 			);
@@ -865,7 +865,7 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		A5BBCEA925592A580098BB02 /* ProfileModify */ = {
+		A5BBCEA925592A580098BB02 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */,
@@ -875,7 +875,7 @@
 				A5D6A790257430B4007D6409 /* ProfileModifyWireFrame.swift */,
 				A5D6A793257430C9007D6409 /* ProfileModifyRemoteManager.swift */,
 			);
-			path = ProfileModify;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		A5C81C3F25836436008F2B09 /* ApplyList */ = {
