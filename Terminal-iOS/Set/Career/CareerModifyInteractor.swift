@@ -14,11 +14,17 @@ class CareerModifyInteractor: CareerModifyInteractorInputProtocol {
     var presenter: CareerModifyInteractorOutputProtocol?
     
     func completeModify(title: String, contents: String) {
+        let params = [
+            "career_title": title,
+            "career_contents": contents
+        ]
+        
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.userCareerUpdate(id: userID, title: title, contents: contents))
+            .request(TerminalRouter.userCareerUpdate(id: userID, career: params))
             .validate()
             .responseJSON { response in
                 switch response.result {
