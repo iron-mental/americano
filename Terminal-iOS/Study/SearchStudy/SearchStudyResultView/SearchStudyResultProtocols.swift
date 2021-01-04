@@ -36,6 +36,7 @@ protocol SearchStudyResultPresenterProtocol {
     
     //VIEW -> PRESENTER
     func returnDidTap(keyWord: String)
+    func didTapCell(keyValue: Int, state: Bool)
     
     //INTERACTOR -> PRESENTER
     func showSearchStudyResult(result: [Study])
@@ -51,8 +52,11 @@ protocol SearchStudyResultLocalDataManagerProtocol {
 }
 
 protocol SearchStudyResultWireFrameProtocol {
-    var presenter: SearchStudyResultPresenterProtocol? { get set }
     
     static func createSearchStudyResultModule() -> UIViewController
+    
+    //PRESENTER -> WIREFRAME
+    func presentStudyDetailScreen(from view: SearchStudyResultViewProtocol, keyValue: Int, state: Bool)
+    func presentMyStudyDetail(from view: SearchStudyResultViewProtocol, keyValue: Int)
 }
 

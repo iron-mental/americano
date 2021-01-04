@@ -22,4 +22,13 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
         view?.hideLoading()
         view?.showSearchStudyResult(result: result)
     }
+    
+    func didTapCell(keyValue: Int, state: Bool) {
+        
+        if state {
+            wireFrame?.presentMyStudyDetail(from: view!, keyValue: keyValue)
+        } else {
+            wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
+        }
+    }
 }

@@ -87,10 +87,19 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: StudyCell.cellId, for: indexPath) as! StudyCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: StudyCell.cellId, for: indexPath) as! StudyCell
         cell.setData(searchResult[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let keyValue = searchResult[indexPath.row].id
+        guard let state = searchResult[indexPath.row].isMember else { return }
+        
+        presenter?.didTapCell(keyValue: keyValue, state: state)
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         view.endEditing(true)
     }
@@ -109,7 +118,9 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
     }
     
     func showSearchStudyResult(result: [Study]) {
+        
         searchResult = result
+        
         studyListTableView.reloadData()
     }
 }
@@ -118,5 +129,6 @@ extension SearchStudyResultView: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         presenter?.returnDidTap(keyWord: searchBar.text!)
+        view.endEditing(true)
     }
 }

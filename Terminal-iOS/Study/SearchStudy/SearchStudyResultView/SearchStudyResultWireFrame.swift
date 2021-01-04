@@ -9,7 +9,6 @@
 import UIKit
 
 class SearchStudyResultWireFrame: SearchStudyResultWireFrameProtocol {
-    var presenter: SearchStudyResultPresenterProtocol?
     
     static func createSearchStudyResultModule() -> UIViewController{
         let view = SearchStudyResultView()
@@ -27,8 +26,24 @@ class SearchStudyResultWireFrame: SearchStudyResultWireFrameProtocol {
         interactor.remoteDataManager = remoteDataManager
         interactor.localDataManager = localDataManager
         remoteDataManager.interactor = interactor
-        wireFrame.presenter = presenter
         
         return view
+    }
+    func presentStudyDetailScreen(from view: SearchStudyResultViewProtocol, keyValue: Int, state: Bool) {
+        
+        //state 값 이렇게 줄게 아니라 athority 받아와서 분기후에 정확하게 그에맞는걸로 해야댐
+        let studyState: StudyDetailViewState = state ? .member : .none
+        let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(studyID: keyValue, state: studyState)
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(studyDetailViewController, animated: true)
+        }
+    }
+    
+    func presentMyStudyDetail(from view: SearchStudyResultViewProtocol, keyValue: Int) {
+        
+        let myStudyDetailViewController = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: keyValue)
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(myStudyDetailViewController, animated: true)
+        }
     }
 }
