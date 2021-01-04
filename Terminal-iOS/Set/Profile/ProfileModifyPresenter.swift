@@ -17,8 +17,8 @@ class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
         interactor?.viewDidLoad()
     }
     
-    func completeModifyButton(userInfo: UserInfoPut, project: [Project]) {
-        interactor?.completeModify(userInfo: userInfo, project: project)
+    func completeModify(profile: Profile) {
+        interactor?.completeModify(profile: profile)
     }
 }
 

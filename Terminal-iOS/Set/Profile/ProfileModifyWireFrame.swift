@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileModifyWireFrame: ProfileModifyWireFrameProtocol {
-    static func createProfileModifyModule(userInfo: UserInfo, project: [Project]) -> UIViewController {
+    static func createProfileModifyModule(profile: Profile) -> UIViewController {
         let view: ProfileModifyViewProtocol = ProfileModifyView()
         let presenter: ProfileModifyPresenterProtocol & ProfileModifyInteractorOutputProtocol = ProfileModifyPresenter()
         let interactor: ProfileModifyInteractorInputProtocol & ProfileModifyRemoteDataManagerOutputProtocol = ProfileModifyInteractor()
@@ -25,8 +25,7 @@ class ProfileModifyWireFrame: ProfileModifyWireFrameProtocol {
         remoteDataManager.remoteRequestHandler = interactor
         
         if let view = view as? ProfileModifyView {
-            view.userInfo = userInfo
-            view.projectArr = project
+            view.profile = profile
             return view
         } else {
             return UIViewController()

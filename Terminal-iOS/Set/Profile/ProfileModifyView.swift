@@ -18,8 +18,8 @@ class ProfileModifyView: UIViewController {
     let projectAddButton = UIButton()
     
     lazy var profileImage = UIImageView()
-    lazy var nameModify = UITextField()
-    lazy var descripModify = UITextView()
+    lazy var name = UITextField()
+    lazy var introduction = UITextView()
     lazy var completeButton = UIButton()
     
     // MARK: viewDidLoad
@@ -29,19 +29,11 @@ class ProfileModifyView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
-        textViewDidChange(descripModify)
+        textViewDidChange(introduction)
     }
     
     // MARK: Set Attribute
     func attribute() {
-//        let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "Vaild"),
-//                                        style: .plain,
-//                                        target: self,
-//                                        action: #selector(completeButton))
-        //        self.do {
-        //            $0.navigationItem.rightBarButtonItem = modifyBtn
-        //        }
-        
         self.view.backgroundColor = .black
 
         self.picker.do {
@@ -62,14 +54,14 @@ class ProfileModifyView: UIViewController {
             $0.backgroundColor = .blue
         }
         
-        self.nameModify.do {
+        self.name.do {
             $0.text = self.profile?.nickname
-            $0.font = UIFont(name: nameModify.font!.fontName, size: 20)
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 20)
             $0.placeholder = "닉네임"
             $0.dynamicFont(fontSize: 20, weight: .semibold)
         }
         
-        self.descripModify.do {
+        self.introduction.do {
             $0.backgroundColor = .darkGray
             $0.text = self.profile?.introduction
             $0.delegate = self
@@ -93,13 +85,19 @@ class ProfileModifyView: UIViewController {
     }
     
     @objc func completeModify() {
+        let nickname        = self.name.text!
+        let introduction    = self.introduction.text!
+        let image           = profileImage.image!
         
+        let profile         = Profile(profileImage: image, nickname: nickname, introduction: introduction)
+        
+        presenter?.completeModify(profile: profile)
     }
 
     // MARK: Set Layout
     
     func layout() {
-        [self.profileImage, self.nameModify, self.descripModify, self.completeButton]
+        [self.profileImage, self.name, self.introduction, self.completeButton]
             .forEach { self.view.addSubview($0) }
         
         self.profileImage.do {
@@ -110,15 +108,15 @@ class ProfileModifyView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
         
-        self.nameModify.do {
+        self.name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.profileImage.bottomAnchor, constant: 20).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         }
         
-        self.descripModify.do {
+        self.introduction.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.nameModify.bottomAnchor, constant: 7).isActive = true
+            $0.topAnchor.constraint(equalTo: self.name.bottomAnchor, constant: 7).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -126,7 +124,7 @@ class ProfileModifyView: UIViewController {
         
         self.completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.descripModify.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.introduction.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
