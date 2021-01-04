@@ -34,6 +34,7 @@ class SearchStudyView: UIViewController {
     }
     
     func attribute() {
+        navigationController?.isNavigationBarHidden = true
         self.view.do {
             let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
             event.cancelsTouchesInView = false
@@ -94,7 +95,7 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [backBtn, searchBar,placeSearch, hotLable, tempView, collectionView]
+        [backBtn, searchBar, placeSearch, hotLable, tempView, collectionView]
             .forEach { self.view.addSubview($0) }
         
         self.backBtn.do {
@@ -140,7 +141,8 @@ class SearchStudyView: UIViewController {
     }
     
     @objc func back() {
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        navigationController?.isNavigationBarHidden = false
     }
     @objc func backgroundTap() {
         self.view.endEditing(true)

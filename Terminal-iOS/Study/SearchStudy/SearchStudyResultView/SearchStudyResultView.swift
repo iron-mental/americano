@@ -14,7 +14,6 @@ class SearchStudyResultView: UIViewController {
     var studyListTableView = UITableView()
     var searchResult: [Study] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.returnDidTap(keyWord: keyWord!)
@@ -29,8 +28,7 @@ class SearchStudyResultView: UIViewController {
         studyListTableView.do {
             $0.delegate = self
             $0.dataSource = self
-//            $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.backgroundColor = .red
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
             $0.rowHeight = 105
         }
@@ -50,6 +48,7 @@ class SearchStudyResultView: UIViewController {
         }
     }
 }
+
 extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResult.count
@@ -57,12 +56,12 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: StudyCell.cellId, for: indexPath) as! StudyCell
-        cell.mainTitle.text = searchResult[indexPath.row].title
+        cell.setData(searchResult[indexPath.row])
         return cell
     }
 }
+
 extension SearchStudyResultView: SearchStudyResultViewProtocol {
-    
     func showLoading() {
         LoadingRainbowCat.show()
     }

@@ -51,7 +51,7 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
     
     func goToSearchStudy(from view: StudyCategoryViewProtocol) {
         let searchStudyView = SearchStudyWireFrame.createSearchStudyModule()
-        
+        searchStudyView.hidesBottomBarWhenPushed = true
         if let parentView = view as? UIViewController {
             parentView.navigationController?.pushViewController(searchStudyView, animated: false)
         }
