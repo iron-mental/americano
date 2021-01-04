@@ -19,6 +19,7 @@ class ProjectCell: UITableViewCell {
     lazy var contents = UITextView()
     lazy var sns = ProjectSNSView()
     
+    var projectID: Int?
     var delegate: CellSubclassDelegate?
  
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -33,22 +34,23 @@ class ProjectCell: UITableViewCell {
     }
     
     func setData(data: Project) {
+        self.projectID = data.id
         self.title.text = data.title
         self.contents.text = data.contents
-        self.sns.firstTextFeield.text = "data.snsGithub"
-        self.sns.secondTextField.text = "data.snsAppstore"
-        self.sns.thirdTextField.text = "data.snsPlaystore"
+        self.sns.firstTextFeield.text = data.snsGithub ?? ""
+        self.sns.secondTextField.text = data.snsAppstore ?? ""
+        self.sns.thirdTextField.text = data.snsPlaystore ?? ""
     }
     
     func attribute() {
-        remove.do {
+        self.remove.do {
             $0.setTitle("ㅡ", for: .normal)
             $0.backgroundColor = .red
             $0.layer.cornerRadius = 15
             $0.addTarget(self, action: #selector(tapButton(_:)), for: .touchUpInside)
         }
         
-        title.do {
+        self.title.do {
             $0.textColor = .white
             $0.textAlignment = .left
             $0.placeholder = "프로젝트 타이틀"
@@ -57,7 +59,7 @@ class ProjectCell: UITableViewCell {
             $0.addLeftPadding()
         }
         
-        contents.do {
+        self.contents.do {
             $0.backgroundColor = .darkGray
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.textContainer.lineFragmentPadding = 0
@@ -71,33 +73,30 @@ class ProjectCell: UITableViewCell {
     }
     
     func layout() {
-        self.contentView.addSubview(remove)
-        self.contentView.addSubview(title)
-        self.contentView.addSubview(contents)
-        self.contentView.addSubview(sns)
+        [remove, title, contents, sns].forEach { self.contentView.addSubview($0) }
         
-        remove.do {
+        self.remove.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
         }
-        title.do {
+        self.title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.remove.leadingAnchor, constant: -5).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
-        contents.do {
+        self.contents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
         }
-        sns.do {
+        self.sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.contents.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
