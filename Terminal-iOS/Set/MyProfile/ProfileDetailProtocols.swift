@@ -19,13 +19,13 @@ protocol ProfileDetailViewProtocol: class {
 protocol ProfileDetailWireFrameProtocol: class {
     static func createModule() -> UIViewController
     
-    func presentProfileModifyScreen(from view: ProfileDetailViewProtocol, userInfo: UserInfo, project: [Project])
+//    func presentProfileModifyScreen(from view: ProfileDetailViewProtocol, userInfo: UserInfo, project: [Project])
     func presentEmailModify(from view: ProfileDetailViewProtocol)
     func presentSNSModify(from view: ProfileDetailViewProtocol)
-    func presentProfileModify(from view: ProfileDetailViewProtocol)
+    func presentProfileModify(from view: ProfileDetailViewProtocol, profile: Profile)
     func presentLocationModify(from view: ProfileDetailViewProtocol)
     func presentCareerModify(from view: ProfileDetailViewProtocol, title: String, Contents: String)
-    func presentProjectModify(from view: ProfileDetailViewProtocol)
+    func presentProjectModify(from view: ProfileDetailViewProtocol, project: [Project])
 }
 
 protocol ProfileDetailPresenterProtocol: class {
@@ -35,12 +35,12 @@ protocol ProfileDetailPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    func showProfileModify(userInfo: UserInfo, project: [Project])
+    func showProfileModify(profile: Profile)
     func showEmailModify()
     func showSNSModify()
     func showLocationModify()
     func showCareerModify(title: String, contents: String)
-    func showProjectModify()
+    func showProjectModify(project: [Project])
 }
 
 protocol ProfileDetailInteractorInputProtocol: class {
