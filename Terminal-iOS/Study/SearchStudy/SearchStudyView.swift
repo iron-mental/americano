@@ -47,6 +47,7 @@ class SearchStudyView: UIViewController {
         self.searchBar.do {
             $0.placeholder = "스터디명, 분류(키워드) 등"
             $0.barTintColor = UIColor.appColor(.terminalBackground)
+            $0.delegate = self
         }
         self.placeSearch.do {
             $0.setTitle("장소로 검색", for: .normal)
@@ -202,4 +203,10 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
 
 extension SearchStudyView: SearchStudyViewProtocol {
     
+}
+
+extension SearchStudyView: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("clicked!")
+    }
 }
