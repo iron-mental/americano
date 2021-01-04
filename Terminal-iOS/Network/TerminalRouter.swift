@@ -19,12 +19,11 @@ enum TerminalRouter: URLRequestConvertible {
     case nicknameCheck          (nickname: String)
     case eamilCheck             (email: String)
     case userInfo               (id: String)
-//    case userInfoUpdate         (id: String)
     
     case userImageUpdate        (id: String)
-    case userInfoUpdate         (id: String)
+    case userInfoUpdate         (id: String, profile: Parameters)
     case userSNSUpdate          (id: String, sns: Parameters)
-    case userCareerUpdate       (id: String, title: String, contents: String)
+    case userCareerUpdate       (id: String, career: Parameters)
     case userLocationUpdate     (id: String)
     
     case userWithdrawal         (id: String, email: String, password: String)
@@ -44,7 +43,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studyDetail            (studyID: String)
     case studyUpdate            (studyID: String)
     case studyDelete            (studyID: String)
-    case studyList              (category: String, sort: String)
+    case studyList              (sort: Parameters)
     case studyListForKey        (value: String)
     case myStudyList            (id: String)
     case hotKeyword         
@@ -173,11 +172,11 @@ enum TerminalRouter: URLRequestConvertible {
             
         case let .userImageUpdate(id):
             return "user/\(id)/image"
-        case let .userInfoUpdate(id):
+        case let .userInfoUpdate(id, _):
             return "user/\(id)/info"
         case let .userSNSUpdate(id, _):
             return "user/\(id)/sns"
-        case let .userCareerUpdate(id, _, _):
+        case let .userCareerUpdate(id,_):
             return "user/\(id)/career"
         case let .userLocationUpdate(id):
             return "user/\(id)/location"
@@ -250,15 +249,15 @@ enum TerminalRouter: URLRequestConvertible {
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
             return nil
-        case let .userCareerUpdate(_, title, contents):
-            return [
-                "career_title": title,
-                "career_contents": contents
-            ]
+        case let .userCareerUpdate(_, career):
+            return career
+        case let .userInfoUpdate(_, profile):
+            return profile
         case let .userSNSUpdate(_, sns):
             return sns
-        case .userInfoUpdate, .userImageUpdate, .userLocationUpdate: // 수정해야함
+        case .userImageUpdate, .userLocationUpdate: // 수정해야함
             return nil
+       
         case let .userWithdrawal(_, email, password):
             return [
                 "email": email,
@@ -276,11 +275,8 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
         case let .studyListForKey(value):
             return ["values": value]
-        case let .studyList(category, sort):
-            return [
-                "category": category,
-                "sort": sort
-            ]
+        case let .studyList(sort):
+            return sort
         case let .studyCreate(study):
             return study
         case .studyUpdate:// 파라미터 지정해야함
