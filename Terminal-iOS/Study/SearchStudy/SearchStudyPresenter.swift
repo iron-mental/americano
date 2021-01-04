@@ -12,4 +12,8 @@ class SearchStudyPresenter: SearchStudyPresenterProtocol {
     var view: SearchStudyViewProtocol?
     var interactor: SearchStudyInteractorProtocol?
     var wireFrame: SearchStudyWireFrameProtocol?
+    
+    func didSearchButtonClicked(keyWord: String) {
+        wireFrame?.goToSearchStudyRestult(keyWord: keyWord)
+    }
 }

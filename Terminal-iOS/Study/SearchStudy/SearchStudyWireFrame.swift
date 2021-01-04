@@ -11,6 +11,13 @@ import UIKit
 class SearchStudyWireFrame: SearchStudyWireFrameProtocol {
     var presenter: SearchStudyPresenterProtocol?
     
+    func goToSearchStudyRestult(keyWord: String) {
+        let view = SearchStudyResultWireFrame.createSearchStudyResultModule()
+        var searchView = (view as! SearchStudyResultViewProtocol)
+        searchView.keyWord = keyWord
+        (presenter?.view as! UIViewController).navigationController?.pushViewController(searchView as! UIViewController, animated: true)
+    }
+    
     static func createSearchStudyModule() -> UIViewController {
         let view = SearchStudyView()
         let interactor = SearchStudyInteractor()

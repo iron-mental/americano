@@ -207,6 +207,6 @@ extension SearchStudyView: SearchStudyViewProtocol {
 
 extension SearchStudyView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("clicked!")
+        presenter?.didSearchButtonClicked(keyWord: searchBar.text!)
     }
 }
