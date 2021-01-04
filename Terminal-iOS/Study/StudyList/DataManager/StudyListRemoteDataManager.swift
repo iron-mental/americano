@@ -23,7 +23,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.studyList(category: category, sort: "new"))
+            .request(TerminalRouter.studyList(sort: params))
             .validate(statusCode: 200..<500)
             .responseJSON { response in
                 switch response.result {
@@ -48,7 +48,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.studyList(category: category, sort: "length"))
+            .request(TerminalRouter.studyList(sort: params))
             .validate(statusCode: 200..<500)
             .responseJSON { response in
                 switch response.result {
