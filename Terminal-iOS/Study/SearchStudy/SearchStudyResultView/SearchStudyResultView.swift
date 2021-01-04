@@ -96,7 +96,6 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
         
         let keyValue = searchResult[indexPath.row].id
         guard let state = searchResult[indexPath.row].isMember else { return }
-        
         presenter?.didTapCell(keyValue: keyValue, state: state)
     }
     
@@ -118,9 +117,7 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
     }
     
     func showSearchStudyResult(result: [Study]) {
-        
         searchResult = result
-        
         studyListTableView.reloadData()
     }
 }

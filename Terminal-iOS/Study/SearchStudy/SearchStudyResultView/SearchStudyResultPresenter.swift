@@ -24,7 +24,6 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     }
     
     func didTapCell(keyValue: Int, state: Bool) {
-        
         if state {
             wireFrame?.presentMyStudyDetail(from: view!, keyValue: keyValue)
         } else {
