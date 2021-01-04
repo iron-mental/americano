@@ -12,5 +12,4 @@ struct Profile {
     var profileImage: UIImage
     var nickname: String
     var introduction: String
-    var location: String
 }
