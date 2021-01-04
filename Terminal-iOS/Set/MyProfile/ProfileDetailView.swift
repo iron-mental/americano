@@ -11,6 +11,7 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class ProfileDetailView: UIViewController {
+    
     // MARK: Init Property
     
     var presenter: ProfileDetailPresenterProtocol?
@@ -29,8 +30,9 @@ class ProfileDetailView: UIViewController {
     let location        = LocationView()
     
     var projectArr: [UIView] = []
-    var projectData: [Project] = []
+    var projectData: [Project] = [] 
     var userInfo: UserInfo?
+    
     // MARK: ViewDidLoad
     
     override func viewDidLoad() {
@@ -79,6 +81,7 @@ class ProfileDetailView: UIViewController {
             $0.textColor = .white
         }
         
+        self.profile.modify.addTarget(self, action: #selector(modifyProfile), for: .touchUpInside)
         self.career.modify.addTarget(self, action: #selector(modifyCareer), for: .touchUpInside)
         self.sns.modify.addTarget(self, action: #selector(modifySNS), for: .touchUpInside)
         self.email.modify.addTarget(self, action: #selector(modifyEmail), for: .touchUpInside)
@@ -93,6 +96,15 @@ class ProfileDetailView: UIViewController {
             $0.axis = .vertical
             $0.distribution = .fillEqually
             $0.spacing = 10
+        }
+        
+        if projectData.isEmpty {
+            let label = UILabel().then {
+                $0.text = "\n추가된 프로젝트가 없습니다."
+                $0.numberOfLines = 0
+                $0.textAlignment = .center
+            }
+            projectStack.addArrangedSubview(label)
         }
     }
     
@@ -186,26 +198,38 @@ class ProfileDetailView: UIViewController {
     }
     
     @objc func pushProfileModify() {
-        guard let userInfo = self.userInfo else { return }
-        presenter?.showProfileModify(userInfo: userInfo, project: projectData)
+//        guard let userInfo = self.userInfo else { return }
+//        presenter?.showProfileModify(userInfo: userInfo, project: projectData)
     }
+    
     @objc func modifyProfile() {
+        let profileImage = profile.profileImage.image!
+        let name = profile.name.text!
+        let introduction = profile.descript.text!
+        let profile = Profile(profileImage: profileImage, nickname: name, introduction: introduction)
         
+        presenter?.showProfileModify(profile: profile)
     }
+    
     @objc func modifyCareer() {
         let title = career.careerTitle.text ?? ""
         let contents = career.careerContents.text ?? ""
         presenter?.showCareerModify(title: title, contents: contents)
     }
+    
     @objc func modifyProject() {
-        presenter?.showProjectModify()
+        let project: [Project] = projectData
+        presenter?.showProjectModify(project: project)
     }
+    
     @objc func modifySNS() {
         presenter?.showSNSModify()
     }
+    
     @objc func modifyEmail() {
         presenter?.showEmailModify()
     }
+    
     @objc func modifyLocation() {
         presenter?.showLocationModify()
     }
@@ -252,15 +276,6 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
     
     func addProjectToStackView(with project: [Project]) {
         projectData = project
-        
-        if project.isEmpty {
-            let label = UILabel().then {
-                $0.text = "\n추가된 프로젝트가 없습니다."
-                $0.numberOfLines = 0
-                $0.textAlignment = .center
-            }
-            projectStack.addArrangedSubview(label)
-        }
         
         for data in project {
             let title = data.title
