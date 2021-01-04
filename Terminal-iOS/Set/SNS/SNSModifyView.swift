@@ -33,7 +33,7 @@ class SNSModifyView: UIViewController {
             $0.layer.cornerRadius = Terminal.convertWidth(value: 11)
         }
         
-        [firstTextFeield, secondTextField, thirdTextField].forEach {
+        [self.firstTextFeield, self.secondTextField, self.thirdTextField].forEach {
             $0.textColor = .white
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
@@ -124,7 +124,8 @@ extension SNSModifyView: SNSModifyViewProtocol {
             self.navigationController?.popViewController(animated: true, completion: {
                 parent?.presenter?.viewDidLoad()
             })
+        } else {
+            print("message",message)
         }
-        print("message",message)
     }
 }

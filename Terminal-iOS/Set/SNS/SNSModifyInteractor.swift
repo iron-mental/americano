@@ -25,11 +25,11 @@ class SNSModifyInteractor: SNSModifyInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userSNSUpdate(id: userID, sns: params))
-            .validate()
+            .validate(statusCode: 200..<500)
             .responseJSON { response in
-                print("response:",response)
                 switch response.result {
                 case .success(let value):
+                    print(JSON(value))
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
