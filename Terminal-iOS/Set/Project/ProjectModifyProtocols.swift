@@ -16,7 +16,7 @@ protocol ProjectModifyViewProtocol: class {
 }
 
 protocol ProjectModifyWireFrameProtocol: class {
-    static func createModule() -> UIViewController
+    static func createModule(project: [Project]) -> UIViewController
 }
 
 protocol ProjectModifyPresenterProtocol: class {
