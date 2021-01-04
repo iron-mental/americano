@@ -36,7 +36,7 @@ enum TerminalRouter: URLRequestConvertible {
     // 프로젝트
     case projectRegister        (id: String, project: Parameters)
     case projectList            (id: String)
-    case projectUpdate          (id: String, projectID: String)
+    case projectUpdate          (id: String, project: Parameters)
     case projectDelete          (id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
@@ -109,7 +109,7 @@ enum TerminalRouter: URLRequestConvertible {
         case .projectList:
             return .get
         case .projectUpdate:
-            return .put
+            return .post
         case .projectDelete:
             return .delete
             
@@ -196,7 +196,9 @@ enum TerminalRouter: URLRequestConvertible {
         // 프로젝트
         case let .projectRegister(id, _), let .projectList(id):
             return "user/\(id)/project"
-        case let .projectUpdate(id, projectID), let .projectDelete(id, projectID):
+        case let .projectUpdate(id, _):
+            return "user/\(id)/project"
+        case let .projectDelete(id, projectID):
             return "user/\(id)/project/\(projectID)"
             
         // 스터디
@@ -295,7 +297,7 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
         case .projectRegister: // 수정해야함
             return nil
-        case .projectUpdate: // 수정해야함
+        case let .projectUpdate(_, _): // 수정해야함
             return nil
             
         // 공지사항
