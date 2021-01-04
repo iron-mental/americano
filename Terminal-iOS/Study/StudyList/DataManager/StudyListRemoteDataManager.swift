@@ -16,7 +16,10 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     // MARK: 최신순 리스트 검색시 초기 배열값
     
     func retrieveStudyList(category: String) {
-        
+        let params: [String: String] = [
+            "category": category,
+            "sort": "new"
+        ]
         TerminalNetworkManager
             .shared
             .session
@@ -38,12 +41,15 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     // MARK: 지역순 리스트 검색시 초기 배열값
     
     func retrieveLengthStudyList(category: String) {
-        
+        let params: [String: String] = [
+            "category": category,
+            "sort": "length"
+        ]
         TerminalNetworkManager
             .shared
             .session
             .request(TerminalRouter.studyList(category: category, sort: "length"))
-            .validate(statusCode: 200..<299)
+            .validate(statusCode: 200..<500)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
