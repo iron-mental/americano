@@ -15,7 +15,7 @@ class SearchStudyWireFrame: SearchStudyWireFrameProtocol {
         let view = SearchStudyResultWireFrame.createSearchStudyResultModule()
         var searchView = (view as! SearchStudyResultViewProtocol)
         searchView.keyWord = keyWord
-        (presenter?.view as! UIViewController).navigationController?.pushViewController(searchView as! UIViewController, animated: true)
+        (presenter?.view as! UIViewController).navigationController?.pushViewController(searchView as! UIViewController, animated: false)
     }
     
     static func createSearchStudyModule() -> UIViewController {
