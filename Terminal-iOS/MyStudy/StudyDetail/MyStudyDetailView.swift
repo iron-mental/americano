@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftKeychainWrapper
 
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
@@ -36,7 +36,6 @@ class MyStudyDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        
     }
     
     func attribute() {

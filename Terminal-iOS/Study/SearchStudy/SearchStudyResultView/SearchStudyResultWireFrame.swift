@@ -26,6 +26,7 @@ class SearchStudyResultWireFrame: SearchStudyResultWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         interactor.localDataManager = localDataManager
+        remoteDataManager.interactor = interactor
         wireFrame.presenter = presenter
         
         return view

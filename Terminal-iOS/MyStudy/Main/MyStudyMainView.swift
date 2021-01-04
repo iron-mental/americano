@@ -228,6 +228,8 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
     }
     
     func showErrMessage() {
-        print("에러 떴습니다~~")
+        LoadingRainbowCat.hide {
+            print("에러 떴습니다~")
+        }
     }
 }

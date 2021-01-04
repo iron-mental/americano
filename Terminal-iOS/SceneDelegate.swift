@@ -25,7 +25,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let howView = UINavigationController(rootViewController: home)
                 window.rootViewController = howView
             } else {
-                print("토큰이 유효합니다..")
                 print("로그인 완료")
                 print("accessToken : ", KeychainWrapper.standard.string(forKey: "accessToken")!)
                 let main = ViewController()

@@ -918,8 +918,8 @@
 			isa = PBXGroup;
 			children = (
 				CC56396E259CB85800DA1479 /* SearchStudyResultView.swift */,
-				CCF632C625A2E80B004B80B3 /* SearchStudyResultPresenter.swift */,
 				CCF632CB25A2E841004B80B3 /* SearchStudyResultInteractor.swift */,
+				CCF632C625A2E80B004B80B3 /* SearchStudyResultPresenter.swift */,
 				CCF632D025A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift */,
 				CCF632D525A2E880004B80B3 /* SearchStudyResultLocalDataManager.swift */,
 				CCF632DA25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift */,

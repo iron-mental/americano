@@ -12,5 +12,14 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     var view: SearchStudyResultViewProtocol?
     var interactor: SearchStudyResultInteractorProtocol?
     var wireFrame: SearchStudyResultWireFrameProtocol?
-
+    
+    func returnDidTap(keyWord: String) {
+        view?.showLoading()
+        interactor?.getSearchStudyResult(keyWord: keyWord)
+    }
+    
+    func showSearchStudyResult(result: [Study]) {
+        view?.hideLoading()
+        view?.showSearchStudyResult(result: result)
+    }
 }
