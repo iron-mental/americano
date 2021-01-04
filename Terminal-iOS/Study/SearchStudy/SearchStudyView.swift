@@ -182,7 +182,9 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let text = keyword[indexPath.row].word
         self.searchBar.text = text
+        presenter?.didSearchButtonClicked(keyWord: text)
     }
+    
     
     class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
         override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
