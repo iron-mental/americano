@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchStudyResultView: StudyListView {
+class SearchStudyResultView: UIViewController {
     var presenter: SearchStudyResultPresenterProtocol?
 }
 

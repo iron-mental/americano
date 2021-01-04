@@ -34,5 +34,7 @@ protocol SearchStudyResultLocalDataManagerProtocol {
 
 protocol SearchStudyResultWireFrameProtocol {
     var presenter: SearchStudyResultPresenterProtocol? { get set }
+    
+    static func createSearchStudyResultModule() -> UIViewController
 }
 
