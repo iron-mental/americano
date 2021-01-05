@@ -22,11 +22,10 @@ class ProjectModifyWireFrame: ProjectModifyWireFrameProtocol {
         interactor.presenter = presenter
         
         if let view = view as? ProjectModifyView {
+            view.projectArr = project
             return view
         } else {
             return UIViewController()
         }
     }
-    
-    
 }

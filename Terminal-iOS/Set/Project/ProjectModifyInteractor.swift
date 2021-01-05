@@ -14,13 +14,16 @@ class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
     var presenter: ProjectModifyInteractorOutputProtocol?
     
     func completeModify(project: [Project]) {
-        var projectArr: [[String: Any]] = []
+        var projectArr: [[String: Any?]] = []
         
         for data in project {
-            let param: [String: Any] = [
+            let param: [String: Any?] = [
                 "id": data.id ?? nil,
                 "title": data.title,
-                "contents": data.contents
+                "contents": data.contents,
+                "sns_github": data.snsGithub ?? nil,
+                "sns_appstore": data.snsAppstore ?? nil,
+                "sns_playstore": data.snsPlaystore ?? nil
             ]
             projectArr.append(param)
         }
@@ -37,7 +40,15 @@ class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
             .request(TerminalRouter.projectUpdate(id: userID, project: params))
             .validate(statusCode: 200..<500)
             .responseJSON { response in
-                
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                    self.presenter?.didCompleteModify(result: result.result, message: result.message!)
+                case .failure(let error):
+                    print(error)
+                }
             }
     }
 }

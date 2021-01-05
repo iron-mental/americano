@@ -137,7 +137,14 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
 
 extension ProjectModifyView: ProjectModifyViewProtocol {
     func modifyResultHandle(result: Bool, message: String) {
-        
+        if result {
+            print("수정 여부:", result)
+            print("메시지 : ", message)
+            let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
+            self.navigationController?.popViewController(animated: true, completion: {
+                parent?.presenter?.viewDidLoad()
+            })
+        }
     }
 }
 

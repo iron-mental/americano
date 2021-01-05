@@ -20,6 +20,6 @@ class ProjectModifyPresenter: ProjectModifyPresenterProtocol {
 
 extension ProjectModifyPresenter: ProjectModifyInteractorOutputProtocol {
     func didCompleteModify(result: Bool, message: String) {
-        
+        self.view?.modifyResultHandle(result: result, message: message)
     }
 }
