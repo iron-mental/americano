@@ -293,8 +293,8 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
         case .projectRegister: // 수정해야함
             return nil
-        case let .projectUpdate(_, _): // 수정해야함
-            return nil
+        case let .projectUpdate(_, project): // 수정해야함
+            return project
             
         // 공지사항
         case let .noticeCreate(_, notice), let .noticeUpdate(_, _, notice):
