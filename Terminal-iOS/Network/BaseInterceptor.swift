@@ -30,13 +30,14 @@ final class BaseInterceptor: RequestInterceptor {
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        
         guard let statusCode = request.response?.statusCode else {
             completion(.doNotRetry)
             return
         }
+        
         print("status:",statusCode)
         print("ststus")
-        
         switch statusCode {
         case 200...299:
             completion(.doNotRetry)

@@ -15,8 +15,8 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
     var interactor: MyStudyMainInteractorProtocol?
     
     func getMyStudyList(completion: @escaping (_: Bool, _: [MyStudy]?) -> Void) {
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         TerminalNetworkManager
             .shared
             .session

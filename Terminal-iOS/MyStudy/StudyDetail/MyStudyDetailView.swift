@@ -208,11 +208,11 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     }
     
     func showLeaveStudyComplete() {
-//        <#code#>
+        print("스터디 나가기 성공")
     }
     
     func showLeaveStudyFailed() {
-//        <#code#>
+        print("스터디 나가기 실패")
     }
     
     func showDeleteStudyComplete() {

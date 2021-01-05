@@ -38,7 +38,11 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     }
     
     func leaveStudyResult(result: Bool, message: String) {
-//        <#code#>
+        if result {
+            view?.showLeaveStudyComplete()
+        } else {
+            view?.showLeaveStudyFailed()
+        }
     }
     
     func deleteStudyResult(result: Bool, message: String) {
