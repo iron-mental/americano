@@ -133,7 +133,7 @@ class MyStudyDetailView: UIViewController {
         let delegateHost = UIAlertAction(title: "방장 위임하기", style: .default) { _ in self.delegateHostButtonDidTap() }
         let deleteStudy = UIAlertAction(title: "스터디 삭제하기", style: .default) { _ in self.deleteStudyButtonDidTap() }
         
-        let leaveStudy = UIAlertAction(title: "스터디 나가기", style: .default) { _ in self.leaveStudyButtonDidTap() }
+        let leaveStudy = UIAlertAction(title: "스터디 나가기", style: .destructive) { _ in self.leaveStudyButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         if authority == .host {

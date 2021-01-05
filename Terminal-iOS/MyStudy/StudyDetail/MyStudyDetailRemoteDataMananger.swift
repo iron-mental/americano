@@ -9,5 +9,5 @@
 import Foundation
 
 class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
-    
+    var interactor: MyStudyDetailInteractorProtocol?
 }
