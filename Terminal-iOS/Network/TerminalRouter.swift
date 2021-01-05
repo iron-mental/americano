@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 enum TerminalRouter: URLRequestConvertible {
-    typealias Parameters = [String: Any?]
+    typealias Parameters = [String: Any]
     
     // MARK: router case init
 
