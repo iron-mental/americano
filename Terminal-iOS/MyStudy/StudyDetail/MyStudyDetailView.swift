@@ -36,6 +36,7 @@ class MyStudyDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        
     }
     
     func attribute() {
@@ -208,10 +209,8 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     }
     
     func showLeaveStudyComplete() {
-        print("스터디 나가기 성공")
         navigationController?.popViewController(animated: true)
         (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
-
     }
     
     func showLeaveStudyFailed() {
@@ -219,7 +218,8 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     }
     
     func showDeleteStudyComplete() {
-        print("스터디 삭제 성공")
+        navigationController?.popViewController(animated: true)
+        (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
     }
     
     func showDeleteStudyFailed() {

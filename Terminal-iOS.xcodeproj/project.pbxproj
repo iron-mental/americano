@@ -162,6 +162,7 @@
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC84456A258B4BC500882308 /* KeyboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC844569258B4BC500882308 /* KeyboardManager.swift */; };
+		CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */; };
 		CC8FF5FC257E80D000947FB3 /* ChatTableViewOutputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
 		CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */; };
@@ -436,6 +437,7 @@
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC844569258B4BC500882308 /* KeyboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardManager.swift; sourceTree = "<group>"; };
+		CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertUIView.swift; sourceTree = "<group>"; };
 		CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewOutputCell.swift; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
 		CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = badgeBarButtonItem.swift; sourceTree = "<group>"; };
@@ -673,6 +675,7 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				CC84850525A47FD700C792BC /* AlertView */,
 				A510B9FC2583BB050084559C /* ApplyUser */,
 				A5C81C3F25836436008F2B09 /* ApplyList */,
 				CC5794F22570C21D00DF96AB /* AddNotice */,
@@ -942,6 +945,14 @@
 			path = AddNotice;
 			sourceTree = "<group>";
 		};
+		CC84850525A47FD700C792BC /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
 		CC99A0CA25342D400027BA24 /* Component */ = {
 			isa = PBXGroup;
 			children = (
@@ -1032,13 +1043,13 @@
 				A5D5AE562573CE1B003BB277 /* Authorization.swift */,
 				A500481F25775ADC00E37FAE /* JoinResult.swift */,
 				A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */,
-				CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */,
 				CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */,
 				A53BC1992582604300C7EC20 /* HotKeyword.swift */,
 				CC844569258B4BC500882308 /* KeyboardManager.swift */,
 				A510B9D0258387DE0084559C /* ApplyUser.swift */,
 				A510B9D52583892B0084559C /* ApplyStudy.swift */,
 				A54AD2312588FBFF00BC6558 /* CategoryState.swift */,
+				CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1542,6 +1553,7 @@
 				CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
 				A5C81C6725837243008F2B09 /* MyApplyListCell.swift in Sources */,
+				CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */,
 				A510BA1B2583BB3E0084559C /* ApplyUserProtocols.swift in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,

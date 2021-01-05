@@ -15,7 +15,7 @@ class NoticeView: UIViewController {
     var pinnedNotiArr: [Notice] = []
     var notiArr: [Notice] = []
     lazy var notice = UITableView()
-    
+    var testAlert = TerminalAlertUIView()
     override func viewDidLoad() {
         super.viewDidLoad()
         viewLoad()
@@ -28,6 +28,14 @@ class NoticeView: UIViewController {
         layout()
         presenter?.viewDidLoad(studyID: studyID!)
         sorted()
+        view.addSubview(testAlert)
+        testAlert.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 200)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 300)).isActive = true
+        }
     }
     
     func sorted() {
