@@ -209,6 +209,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     
     func showLeaveStudyComplete() {
         print("스터디 나가기 성공")
+        navigationController?.popViewController(animated: true)
+        (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
+
     }
     
     func showLeaveStudyFailed() {
