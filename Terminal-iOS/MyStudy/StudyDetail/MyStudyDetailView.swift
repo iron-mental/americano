@@ -11,6 +11,7 @@ import UIKit
 
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
+    var noticePushEvent: Bool = false
     var getPushEvent: Bool = false
     var applyState: Bool = false
     var studyID: Int? {
@@ -38,6 +39,7 @@ class MyStudyDetailView: UIViewController {
         attribute()
         layout()
         getPushEvent ? goDetailPage(): nil
+        noticePushEvent ? goNoticePage(): nil
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,7 +61,7 @@ class MyStudyDetailView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationItem.rightBarButtonItems = [moreButton]
         }
-        tapSege.do {
+        self.tapSege.do {
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 14),
                                        .foregroundColor: UIColor.gray], for: .normal)
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),
@@ -73,38 +75,38 @@ class MyStudyDetailView: UIViewController {
             $0.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         }
 
-        selectedUnderLine.do {
+        self.selectedUnderLine.do {
             $0.backgroundColor = .white
         }
         
-        childPageView.do {
+        self.childPageView.do {
             $0.delegate = self
             $0.dataSource = self
         }
     }
     
     func layout() {
-        view.addSubview(tapSege)
-        view.addSubview(selectedUnderLine)
-        addChild(childPageView)
-        view.addSubview(childPageView.view)
-        childPageView.didMove(toParent: self)
+        self.view.addSubview(tapSege)
+        self.view.addSubview(selectedUnderLine)
+        self.addChild(childPageView)
+        self.view.addSubview(childPageView.view)
+        self.childPageView.didMove(toParent: self)
         
-        tapSege.do {
+        self.tapSege.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 38)).isActive = true
         }
-        selectedUnderLine.do {
+        self.selectedUnderLine.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: -1).isActive = true
             $0.centerXAnchor.constraint(equalTo: tapSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
             $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
         }
-        childPageView.view.do {
+        self.childPageView.view.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -113,6 +115,7 @@ class MyStudyDetailView: UIViewController {
         }
     }
     
+    /// 푸쉬 이벤트가 스터디 관련일때 스터디 탭으로 초기 화면 구성
     func goDetailPage() {
         tapSege.selectedSegmentIndex = 1
         UIView.animate(withDuration: 0.2) {
@@ -120,6 +123,13 @@ class MyStudyDetailView: UIViewController {
         }
         self.childPageView.setViewControllers([VCArr[1]], direction: .forward, animated: false, completion: nil)
         self.getPushEvent = false
+    }
+    
+    /// 푸쉬 이벤트가 공지 관련일때 공지 탭으로 초기 화면 구성
+    func goNoticePage() {
+        tapSege.selectedSegmentIndex = 0
+        self.childPageView.setViewControllers([VCArr[0]], direction: .forward, animated: false, completion: nil)
+        self.noticePushEvent = false
     }
     
     @objc func indexChanged(_ sender: UISegmentedControl) {

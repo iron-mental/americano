@@ -130,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         case "notice_new", "notice_update":
             if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
                 as? MyStudyDetailView {
+                view.noticePushEvent = true
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
