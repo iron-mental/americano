@@ -118,6 +118,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .hotKeyword:
             return .get
+        case .studyLeave:
+            return .post
             
         // 신청
         case .applyStudy:
@@ -188,6 +190,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/search"
         case .hotKeyword:
             return "study/ranking"
+        case let .studyLeave(studyID):
+            return "study/\(studyID)/leave"
             
         // 신청
         case let .applyStudy(studyID, _):
@@ -257,6 +261,8 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
         case let .studySearch(keyword):
             return ["word": keyword]
+        case .studyLeave:
+            return nil
             
         // 신청
         case let .applyStudy(_, message):
