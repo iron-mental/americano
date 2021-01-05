@@ -45,11 +45,6 @@ class ProfileDetailView: UIViewController {
     // MARK: Set Attribute
     
     func attribute() {
-        let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"),
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(pushProfileModify))
-        
         [profile, career, sns, projectStack, email, location].forEach {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
@@ -58,7 +53,6 @@ class ProfileDetailView: UIViewController {
         self.do {
             $0.title = "프로필"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.navigationItem.rightBarButtonItem = modifyBtn
         }
 
         self.careerLabel.do {
@@ -195,11 +189,6 @@ class ProfileDetailView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
-    }
-    
-    @objc func pushProfileModify() {
-//        guard let userInfo = self.userInfo else { return }
-//        presenter?.showProfileModify(userInfo: userInfo, project: projectData)
     }
     
     @objc func modifyProfile() {
