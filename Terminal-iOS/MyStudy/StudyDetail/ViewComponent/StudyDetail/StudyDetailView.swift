@@ -230,7 +230,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
-        
+        parentView?.setting()
     }
     
     func showError() {
