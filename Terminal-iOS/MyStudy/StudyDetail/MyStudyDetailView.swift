@@ -131,13 +131,13 @@ class MyStudyDetailView: UIViewController {
         let studyEdit = UIAlertAction(title: "스터디 정보 수정", style: .default) { _ in self.editStudyButtonDidTap() }
         let applyList = UIAlertAction(title: "스터디 신청 목록", style: .default) { _ in self.applyListButtonDidTap() }
         let delegateHost = UIAlertAction(title: "방장 위임하기", style: .default) { _ in self.delegateHostButtonDidTap() }
-        let deleteStudy = UIAlertAction(title: "스터디 삭제하기", style: .default) { _ in self.deleteStudyButtonDidTap() }
+        let deleteStudy = UIAlertAction(title: "스터디 삭제하기", style: .destructive) { _ in self.deleteStudyButtonDidTap() }
         
         let leaveStudy = UIAlertAction(title: "스터디 나가기", style: .destructive) { _ in self.leaveStudyButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         if authority == .host {
-            [ noticeAdd, studyEdit, applyList, delegateHost, deleteStudy, cancel ].forEach { alert.addAction($0) }
+            [ noticeAdd, studyEdit, applyList, delegateHost, deleteStudy, leaveStudy, cancel ].forEach { alert.addAction($0) }
         } else if authority == .member {
             [ leaveStudy, cancel ].forEach { alert.addAction($0) }
         }
@@ -160,14 +160,16 @@ class MyStudyDetailView: UIViewController {
     
     func leaveStudyButtonDidTap() {
         //스터디 나가기
+        presenter?.leaveStudyButtonDidTap(studyID: studyID!)
     }
     
     func delegateHostButtonDidTap() {
-        //방장 위임하기
+        //방장 위임하는 뷰로 가보자
     }
     
     func deleteStudyButtonDidTap() {
         //스터디 삭제하기
+        presenter?.deleteStudyButtonDidTap(studyID: studyID!)
     }
 }
 
@@ -203,5 +205,21 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         authority = (VCArr[1] as! StudyDetailViewProtocol).state
         attribute()
         layout()
+    }
+    
+    func showLeaveStudyComplete() {
+//        <#code#>
+    }
+    
+    func showLeaveStudyFailed() {
+//        <#code#>
+    }
+    
+    func showDeleteStudyComplete() {
+        print("스터디 삭제 성공")
+    }
+    
+    func showDeleteStudyFailed() {
+        print("스터디 삭제 실패")
     }
 }

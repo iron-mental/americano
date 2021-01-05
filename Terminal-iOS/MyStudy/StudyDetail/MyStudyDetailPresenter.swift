@@ -28,4 +28,24 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     func showApplyUserList(studyID: Int) {
         wireFrame?.goToApplyUser(from: view!, studyID: studyID)
     }
+    
+    func leaveStudyButtonDidTap(studyID: Int) {
+        interactor?.postLeaveStudyAPI(studyID: studyID)
+    }
+    
+    func deleteStudyButtonDidTap(studyID: Int) {
+        interactor?.callDeleteStudyAPI(studyID: studyID)
+    }
+    
+    func leaveStudyResult(result: Bool, message: String) {
+//        <#code#>
+    }
+    
+    func deleteStudyResult(result: Bool, message: String) {
+        if result {
+            view?.showDeleteStudyComplete()
+        } else {
+            view?.showDeleteStudyFailed()
+        }
+    }
 }

@@ -54,7 +54,6 @@ protocol MyStudyDetailPresenterProtocol: class {
     
     //INTERACTOR -> PRESENTER
     func leaveStudyResult(result: Bool, message: String)
-    func delegateHostResult(result: Bool, message: String)
     func deleteStudyResult(result: Bool, message: String)
 }
 

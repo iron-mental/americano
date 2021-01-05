@@ -41,7 +41,9 @@ enum TerminalRouter: URLRequestConvertible {
     case studyListForKey    (value: String)
     case myStudyList        (id: String)
     case studySearch        (keyword: String)
-    case hotKeyword         
+    case hotKeyword
+    case studyLeave         (studyID: String)
+    
     
     // 신청부분
     case applyStudy         (studyID: String, message: Parameters)
