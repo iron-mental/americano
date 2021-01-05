@@ -39,7 +39,7 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
         //state 값 이렇게 줄게 아니라 athority 받아와서 분기후에 정확하게 그에맞는걸로 해야댐
         
         let studyState: StudyDetailViewState = state ? .member : .none
-        let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(studyID: keyValue, state: studyState)
+        let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(parent: nil, studyID: keyValue, state: studyState)
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(studyDetailViewController, animated: true)
         }

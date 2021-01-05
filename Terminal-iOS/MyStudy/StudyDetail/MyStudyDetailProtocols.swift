@@ -13,6 +13,7 @@ protocol MyStudyDetailViewProtocol: class {
     var studyID: Int? { get set}
     var VCArr: [UIViewController] { get set }
     
+    func setting()
 }
 
 protocol MyStudyDetailInteractorProtocol: class {

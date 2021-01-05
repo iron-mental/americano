@@ -15,23 +15,23 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int? {
         didSet {
             VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                       StudyDetailWireFrame.createStudyDetail(studyID: studyID!, state: .member),
-                 ChatWireFrame.createChatModule()]
+                       StudyDetailWireFrame.createStudyDetail(parent: self, studyID: studyID!, state: .member),
+                       ChatWireFrame.createChatModule()]
         }
     }
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
     
     var VCArr: [UIViewController] = []
-    
+    var authority: StudyDetailViewState = .member
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
-                                           navigationOrientation: .horizontal,
-                                           options: nil)
+                                             navigationOrientation: .horizontal,
+                                             options: nil)
     lazy var tabSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(didClickecmoreButton))
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -63,7 +63,7 @@ class MyStudyDetailView: UIViewController {
             $0.selectedSegmentTintColor = .clear
             $0.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         }
-
+        
         selectedUnderLine.do {
             $0.backgroundColor = .white
         }
@@ -108,11 +108,11 @@ class MyStudyDetailView: UIViewController {
         UIView.animate(withDuration: 0.5) {
             self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
         }
-
+        
         // PageView paging
         let currentView = VCArr
         let nextPage = selectedIndex
-
+        
         // if 현재페이지 < 바뀔페이지
         // else if 현재페이지 > 바뀔페이지
         if pageBeforeIndex < nextPage {
@@ -127,16 +127,16 @@ class MyStudyDetailView: UIViewController {
     
     @objc func didClickecmoreButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let noticeAdd = UIAlertAction(title: "공지사항 추가", style: .default) { _ in self.addNoticeButtonAction() }
+        let noticeAdd = UIAlertAction(title: "공지사항 추가", style: .default) { _ in self.addNoticeButtonDidTap() }
         let studyEdit = UIAlertAction(title: "스터디 정보 수정", style: .default) { _ in self.editStudyButtonDidTap() }
-        let applyList = UIAlertAction(title: "스터디 신청 목록", style: .default) { _ in self.showApplyList() }
+        let applyList = UIAlertAction(title: "스터디 신청 목록", style: .default) { _ in self.applyListButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         [noticeAdd,studyEdit,applyList,cancel].forEach { alert.addAction($0) }
         present(alert, animated: true, completion: nil)
     }
     
-    func addNoticeButtonAction() {
+    func addNoticeButtonDidTap() {
         presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
     }
     
@@ -146,8 +146,16 @@ class MyStudyDetailView: UIViewController {
         }
     }
     
-    func showApplyList() {
+    func applyListButtonDidTap() {
         presenter?.showApplyUserList(studyID: studyID!)
+    }
+    
+    func leaveStudyButtonDidTap() {
+        
+    }
+    
+    func delegateStudyButtonDidTap() {
+        
     }
 }
 
@@ -179,5 +187,7 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 }
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
-    
+    func setting() {
+        authority = (VCArr[1] as! StudyDetailViewProtocol).state
+    }
 }

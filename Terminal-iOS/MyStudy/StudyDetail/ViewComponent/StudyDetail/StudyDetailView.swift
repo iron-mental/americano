@@ -38,7 +38,7 @@ class StudyDetailView: UIViewController {
             attribute()
         }
     }
-    var parentView: UIViewController?
+    var parentView: MyStudyDetailViewProtocol?
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
     let picker = UIImagePickerController()
@@ -56,10 +56,6 @@ class StudyDetailView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        parentView = presentingViewController
     }
     
     func attribute() {
