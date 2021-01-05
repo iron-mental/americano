@@ -51,28 +51,22 @@ class SearchStudyResultView: UIViewController {
         
         backBtn.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10)
-            ])
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         }
         searchBar.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5),
-                $0.leadingAnchor.constraint(equalTo: self.backBtn.trailingAnchor, constant: 10),
-                $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-                $0.heightAnchor.constraint(equalToConstant: 40)
-            ])
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.backBtn.trailingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
         studyListTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate ([
-                $0.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20),
-                $0.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                $0.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                $0.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+            $0.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
     }
     
