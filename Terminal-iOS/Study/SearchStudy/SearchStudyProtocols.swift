@@ -36,10 +36,8 @@ protocol SearchStudyLocalDataManagerProtocol {
 }
 
 protocol SearchStudyWireFrameProtocol {
-    var presenter: SearchStudyPresenterProtocol? { get set }
-    
     static func createSearchStudyModule() -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func goToSearchStudyRestult(keyWord: String)
+    func goToSearchStudyRestult(from view: SearchStudyViewProtocol, keyWord: String)
 }

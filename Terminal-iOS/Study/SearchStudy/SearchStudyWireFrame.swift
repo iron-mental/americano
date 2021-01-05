@@ -9,13 +9,13 @@
 import UIKit
 
 class SearchStudyWireFrame: SearchStudyWireFrameProtocol {
-    var presenter: SearchStudyPresenterProtocol?
     
-    func goToSearchStudyRestult(keyWord: String) {
-        let view = SearchStudyResultWireFrame.createSearchStudyResultModule()
-        var searchView = (view as! SearchStudyResultViewProtocol)
+    func goToSearchStudyRestult(from view: SearchStudyViewProtocol, keyWord: String) {
+        var newView = SearchStudyResultWireFrame.createSearchStudyResultModule()
+        var searchView = (newView as! SearchStudyResultViewProtocol)
         searchView.keyWord = keyWord
-        (presenter?.view as! UIViewController).navigationController?.pushViewController(searchView as! UIViewController, animated: false)
+        
+        (view as! UIViewController).navigationController?.pushViewController(searchView as! UIViewController, animated: false)
     }
     
     static func createSearchStudyModule() -> UIViewController {
@@ -35,8 +35,6 @@ class SearchStudyWireFrame: SearchStudyWireFrameProtocol {
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame
-        
-        wireFrame.presenter = presenter
         
         return view
     }
