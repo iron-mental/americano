@@ -33,12 +33,12 @@ class StudyCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        mainTitle.text = nil
-        subTitle.text = nil
-        location.text = nil
-        date.text = nil
-        managerImage.image = nil
-        mainImage.image = nil
+        self.mainTitle.text = nil
+        self.subTitle.text = nil
+        self.location.text = nil
+        self.date.text = nil
+        self.managerImage.image = nil
+        self.mainImage.image = nil
     }
     
     func setData(_ data: Study) {
@@ -49,22 +49,22 @@ class StudyCell: UITableViewCell {
             return requestBody
         }
         
-        mainTitle.do {
+        self.mainTitle.do {
             $0.text = data.title
         }
         
-        subTitle.do {
+        self.subTitle.do {
             $0.text = data.introduce
         }
         
-        location.do {
+        self.location.do {
             $0.text = data.sigungu
         }
         
-        date.do {
+        self.date.do {
             $0.text = data.createdAt
         }
-        memberCount.do {
+        self.memberCount.do {
             $0.text = "\(data.members!)"
         }
         guard let main = data.image else {
@@ -90,18 +90,17 @@ class StudyCell: UITableViewCell {
     }
     
     func attribute() {
-        mainTitle.font = UIFont(name: "NotoSansKR-Medium", size: 20)
-        
         self.backgroundColor = UIColor.appColor(.terminalBackground)
-        mainTitle.do {
+        
+        self.mainTitle.do {
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 20)
             $0.textColor = .white
         }
-        subTitle.do {
+        self.subTitle.do {
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
             $0.textColor = UIColor.appColor(.studySubTitle)
         }
-        location.do {
+        self.location.do {
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.textColor = .white
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
@@ -110,18 +109,18 @@ class StudyCell: UITableViewCell {
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 7
         }
-        date.do {
+        self.date.do {
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
             $0.textColor = UIColor.appColor(.studySubTitle)
         }
-        managerImage.do {
+        self.managerImage.do {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 10
         }
-        memberImage.do {
+        self.memberImage.do {
             $0.image = UIImage(named: "member")
         }
-        memberCount.do {
+        self.memberCount.do {
             $0.textColor = .white
             $0.font = UIFont(name: "NotoSansKR-Bold", size: 20)
             $0.textAlignment = .center
@@ -134,43 +133,44 @@ class StudyCell: UITableViewCell {
        
         self.mainTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.location.leadingAnchor, constant: -5).isActive = true
         }
         
         self.subTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: mainTitle.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.mainTitle.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.mainImage.leadingAnchor, constant: -10).isActive = true
         }
         
         self.date.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.subTitle.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         }
         
         self.managerImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: subTitle.bottomAnchor, constant: 13).isActive = true
-            $0.leadingAnchor.constraint(equalTo: date.trailingAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.subTitle.bottomAnchor, constant: 13).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.date.trailingAnchor, constant: 10).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 20).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
         
         self.mainImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 75).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 112).isActive = true
         }
         
         self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: mainImage.leadingAnchor, constant: -20).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.mainImage.leadingAnchor, constant: -20).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 22).isActive = true
         }
