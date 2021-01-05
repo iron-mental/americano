@@ -13,10 +13,9 @@ class ProjectModifyPresenter: ProjectModifyPresenterProtocol {
     var interactor: ProjectModifyInteractorInputProtocol?
     var wireFrame: ProjectModifyWireFrameProtocol?
     
-    func completeModify(title: String, contents: String) {
-        
+    func completeModify(project: [Project]) {
+        interactor?.completeModify(project: project)
     }
-    
 }
 
 extension ProjectModifyPresenter: ProjectModifyInteractorOutputProtocol {

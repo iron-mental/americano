@@ -25,14 +25,14 @@ protocol ProjectModifyPresenterProtocol: class {
     var wireFrame: ProjectModifyWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
-    func completeModify(title: String, contents: String)
+    func completeModify(project: [Project])
 }
 
 protocol ProjectModifyInteractorInputProtocol: class {
     var presenter: ProjectModifyInteractorOutputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func completeModify(title: String, contents: String)
+    func completeModify(project: [Project])
 }
 
 protocol ProjectModifyInteractorOutputProtocol: class {

@@ -51,7 +51,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
-//            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
     
@@ -81,6 +81,34 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
+    }
+    
+    func getCellData() {
+        for index in 0..<projectArr.count {
+            let indexpath = IndexPath(row: index, section: 0)
+            let cell = projectView.cellForRow(at: indexpath) as! ProjectCell
+            
+            let id = cell.projectID ?? nil
+            let title = cell.title.text!
+            let contents = cell.contents.text!
+            let github = cell.sns.firstTextFeield.text ?? ""
+            let appStore = cell.sns.secondTextField.text ?? ""
+            let playStore = cell.sns.secondTextField.text ?? ""
+        
+            projectArr[index] = Project(id: id,
+                                        title: title,
+                                        contents: contents,
+                                        snsGithub: github,
+                                        snsAppstore: appStore,
+                                        snsPlaystore: playStore,
+                                        createAt: "")
+        }
+    }
+    
+    @objc func completeModify() {
+        getCellData()
+        print("projectArr", projectArr)
+        presenter?.completeModify(project: projectArr)
     }
     
     @objc func addProject() {
@@ -140,5 +168,11 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         self.projectAddButton.backgroundColor =
             self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
+    }
+}
+
+extension ProjectModifyView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }
