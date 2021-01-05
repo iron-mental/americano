@@ -10,7 +10,8 @@ import Foundation
 import Alamofire
 
 enum TerminalRouter: URLRequestConvertible {
-    typealias Parameters = [String: Any]
+    typealias Parameters = [String: Any?]
+    
     // MARK: router case init
 
     case authCheck              (id: String)
@@ -26,7 +27,7 @@ enum TerminalRouter: URLRequestConvertible {
     case userCareerUpdate       (id: String, career: Parameters)
     case userLocationUpdate     (id: String)
     
-    case userWithdrawal         (id: String, email: String, password: String)
+    case userWithdrawal         (id: String, userData: Parameters)
     case emailVerify            (id: String)
     case reissuanceToken        (refreshToken: String)
     case login                  (userData: Parameters)
@@ -181,7 +182,7 @@ enum TerminalRouter: URLRequestConvertible {
         case let .userLocationUpdate(id):
             return "user/\(id)/location"
             
-        case let .userWithdrawal(id, _, _):
+        case let .userWithdrawal(id, _):
             return "user/\(id)"
         case let .emailVerify(id):
             return "user/\(id)/emailVerify"
@@ -234,7 +235,6 @@ enum TerminalRouter: URLRequestConvertible {
         case let .noticeDelete(studyID, noticeID):
             return "study/\(studyID)/notice/\(noticeID)"
 
-        // 어떻게 정리하면 좋을지 생각해봐야할듯 뭔가 다닥다닥 있는뎀
         }
     }
     
@@ -258,11 +258,8 @@ enum TerminalRouter: URLRequestConvertible {
         case .userImageUpdate, .userLocationUpdate: // 수정해야함
             return nil
        
-        case let .userWithdrawal(_, email, password):
-            return [
-                "email": email,
-                "password": password
-            ]
+        case let .userWithdrawal(_, userData):
+            return userData
         case .reissuanceToken(let refreshToken):
             return ["refresh_token": refreshToken]
         case let .login(userData):
