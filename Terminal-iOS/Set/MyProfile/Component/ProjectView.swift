@@ -16,18 +16,23 @@ class ProjectView: UIView {
         let projectTitle = UILabel().then {
             $0.text = title
             $0.textColor = .white
-            $0.dynamicFont(fontSize: 20, weight: .bold)
+            $0.dynamicFont(fontSize: 18, weight: .bold)
         }
         let projectContents = UILabel().then {
             $0.text = contents
             $0.lineBreakMode = .byCharWrapping
             $0.numberOfLines = 0
             $0.textColor = UIColor.appColor(.profileTextColor)
-            $0.dynamicFont(fontSize: 16, weight: .regular)
+            $0.dynamicFont(fontSize: 14, weight: .regular)
         }
         
-        addSubview(projectTitle)
-        addSubview(projectContents)
+        let sns = SNSView().then {
+            $0.modify.isHidden = true
+        }
+        
+        self.addSubview(projectTitle)
+        self.addSubview(projectContents)
+        self.addSubview(sns)
         
         projectTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -39,6 +44,11 @@ class ProjectView: UIView {
             $0.topAnchor.constraint(equalTo: projectTitle.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        }
+        sns.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: projectContents.bottomAnchor, constant: 4).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         }
     }
