@@ -39,7 +39,7 @@ final class BaseInterceptor: RequestInterceptor {
         switch statusCode {
         case 200...299:
             completion(.doNotRetry)
-        case 401:
+        case 401, 403:
             if request.retryCount < retryLimit {
                 refreshToken { success in
                     print("성공여부 :", success)
@@ -49,16 +49,6 @@ final class BaseInterceptor: RequestInterceptor {
         default:
             break
         }
-        
-//        case 401:
-//            completion(.doNotRetry)
-//        default:
-//            if request.retryCount < retryLimit {
-//                refreshToken { success in
-//                    print("성공여부 :", success)
-//                    return completion(.retryWithDelay(self.retryDelay))
-//                }
-//            }
     }
     
     func refreshToken(completion: @escaping (_ isSuccess: Bool) -> Void) {
@@ -72,12 +62,11 @@ final class BaseInterceptor: RequestInterceptor {
                 switch response.result {
                 
                 case .success(let value):
-                    print(JSON(value))
                     let json = JSON(value)
-                    
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<Authorization>.self, from: data!)
+                        
                         if result.result {
                             if let refresh = result.data?.refreshToken {
                                 let result = KeychainWrapper.standard.set(refresh, forKey: "refreshToken")
@@ -92,11 +81,13 @@ final class BaseInterceptor: RequestInterceptor {
                             }
                         }
                     } catch {
+                        
                         print("error")
                     }
                     
                 case .failure(let error):
                     print("에러입니다.",error)
+                    
                 }
             }
     }

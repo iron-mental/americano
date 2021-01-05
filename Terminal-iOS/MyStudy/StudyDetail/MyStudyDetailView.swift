@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftKeychainWrapper
 
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?

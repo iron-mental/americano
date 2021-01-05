@@ -70,8 +70,10 @@ class StudyCategoryView: UIViewController {
         presenter?.didClickedCreateButton()
     }
     @objc func searchStudy() {
-        let view = SearchStudyView()
-        present(view, animated: true, completion: nil)
+        //presenter를 통해 wireFrame통해 searchStudy로 가야됨
+        presenter?.goToSearchStudy()
+//        let view = SearchStudyView()
+//        present(view, animated: true, completion: nil)
     }
 }
 
