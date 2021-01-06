@@ -24,10 +24,10 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     }
     
     func didTapCell(keyValue: Int, state: Bool) {
-        if state {
-            wireFrame?.presentMyStudyDetail(from: view!, keyValue: keyValue)
-        } else {
+//        if state {
+//            wireFrame?.presentMyStudyDetail(from: view!, keyValue: keyValue)
+//        } else {
             wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
-        }
+//        }
     }
 }

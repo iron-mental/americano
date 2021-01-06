@@ -57,6 +57,14 @@ class StudyDetailView: UIViewController {
         super.viewDidLoad()
         layout()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.isNavigationBarHidden = false
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationController?.isNavigationBarHidden = true
+    }
     
     func attribute() {
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!

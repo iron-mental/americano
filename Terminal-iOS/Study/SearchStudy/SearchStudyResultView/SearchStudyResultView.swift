@@ -71,7 +71,7 @@ class SearchStudyResultView: UIViewController {
     }
     
     @objc func back() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
 }
 
@@ -89,8 +89,9 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let keyValue = searchResult[indexPath.row].id
-        guard let state = searchResult[indexPath.row].isMember else { return }
-        presenter?.didTapCell(keyValue: keyValue, state: state)
+        //후에 서버에서 member처리해주면 그때 대응
+//        guard let state = searchResult[indexPath.row].isMember else { return }
+        presenter?.didTapCell(keyValue: keyValue, state: false)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
