@@ -14,7 +14,6 @@ class SearchStudyView: UIViewController {
     
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
-    let backBtn = UIButton()
     let placeSearch = UIButton()
     let hotLable = UILabel()
     let tempView = UIView()
@@ -28,29 +27,26 @@ class SearchStudyView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchBar.becomeFirstResponder()
+        searchController.searchBar.becomeFirstResponder()
         didload()
         attribute()
         layout()
     }
     
     func attribute() {
-        searchController.do {
+        self.searchController.do {
             $0.searchResultsUpdater = self
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false
             $0.hidesNavigationBarDuringPresentation = false
             navigationItem.titleView = searchController.searchBar
+            $0.searchBar.delegate = self
         }
         self.view.do {
             let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
             event.cancelsTouchesInView = false
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.addGestureRecognizer(event)
-        }
-        self.backBtn.do {
-            $0.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
-            $0.addTarget(self, action: #selector(back), for: .touchUpInside)
         }
         self.placeSearch.do {
             $0.setTitle("장소로 검색", for: .normal)
@@ -98,15 +94,7 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [backBtn, placeSearch, hotLable, tempView, collectionView].forEach { self.view.addSubview($0) }
-        
-        self.backBtn.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                    constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                        constant: 10).isActive = true
-        }
+        [ placeSearch, hotLable, tempView, collectionView ].forEach { self.view.addSubview($0) }
         self.placeSearch.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
