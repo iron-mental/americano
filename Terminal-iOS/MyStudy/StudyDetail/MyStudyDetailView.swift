@@ -36,7 +36,7 @@ class MyStudyDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        
+        TerminalAlertMessage.show()
     }
     
     func attribute() {

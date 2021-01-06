@@ -29,6 +29,7 @@ class TerminalAlertUIView: UIView {
             $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
             $0.layer.cornerRadius = 5
             $0.layer.masksToBounds = true
+            $0.alpha = 0.5
         }
         topBar.do {
             $0.backgroundColor = UIColor.appColor(.alertTopBarColor)
@@ -36,6 +37,7 @@ class TerminalAlertUIView: UIView {
             $0.layer.masksToBounds = true
         }
         bottomBar.do {
+//            $0.backgroundColor = .black
             $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
         }
         redButton.do {
@@ -56,11 +58,17 @@ class TerminalAlertUIView: UIView {
             $0.backgroundColor = UIColor.appColor(.greenButtonColor)
             $0.setTitle("", for: .normal)
         }
+        guideLabel.do {
+            $0.text = "leave study?"
+            $0.textColor = UIColor.appColor(.alertTextcolor)
+            $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize-4, weight: UIFont.Weight.regular)
+        }
     }
     
     func layout() {
-        [ topBar, bottomBar, guideLabel, dismissButton, completeButton ].forEach { addSubview($0) }
+        [ topBar, bottomBar ].forEach { addSubview($0) }
         [ redButton, yellowButton, greenButton ].forEach { topBar.addSubview($0) }
+        [ guideLabel, dismissButton, completeButton ].forEach { bottomBar.addSubview($0) }
         
         topBar.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -97,12 +105,14 @@ class TerminalAlertUIView: UIView {
             $0.leadingAnchor.constraint(equalTo: yellowButton.trailingAnchor, constant: 13).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 10).isActive = true
         }
-//        guideLabel.do {
+        guideLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor).isActive = true
+        }
+//        dismissButton.do {
 //            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
 //        }
-        
     }
     
     
