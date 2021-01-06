@@ -33,6 +33,7 @@ class SearchStudyResultView: UIViewController {
             $0.hidesNavigationBarDuringPresentation = false
             $0.searchBar.text = keyWord
             navigationItem.titleView = searchController.searchBar
+            $0.searchBar.delegate = self
         }
         self.studyListTableView.do {
             $0.delegate = self
