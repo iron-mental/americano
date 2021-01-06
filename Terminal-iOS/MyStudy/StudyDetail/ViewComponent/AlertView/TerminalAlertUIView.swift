@@ -63,6 +63,18 @@ class TerminalAlertUIView: UIView {
             $0.textColor = UIColor.appColor(.alertTextcolor)
             $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize-4, weight: UIFont.Weight.regular)
         }
+        dismissButton.do {
+            $0.setTitle("no", for: .normal)
+            $0.setTitleColor(UIColor.appColor(.alertTextcolor), for: .normal)
+            $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
+            $0.titleLabel?.font = UIFont.monospacedSystemFont(ofSize: $0.titleLabel!.font.pointSize-4, weight: UIFont.Weight.regular)
+        }
+        completeButton.do {
+            $0.setTitle("yes", for: .normal)
+            $0.setTitleColor(UIColor.appColor(.alertTextcolor), for: .normal)
+            $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
+            $0.titleLabel?.font = UIFont.monospacedSystemFont(ofSize: $0.titleLabel!.font.pointSize-4, weight: UIFont.Weight.regular)
+        }
     }
     
     func layout() {
@@ -110,9 +122,20 @@ class TerminalAlertUIView: UIView {
             $0.centerXAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor).isActive = true
         }
-//        dismissButton.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//        }
+        dismissButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
+        }
+        completeButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: dismissButton.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor).isActive = true
+        }
     }
     
     
