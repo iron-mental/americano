@@ -10,14 +10,15 @@ import UIKit
 
 protocol ProfileModifyViewProtocol: class {
     var presenter: ProfileModifyPresenterProtocol? { get set }
+    
     // PRESENTER -> VIEW
+    func modifyResultHandle(result: Bool, message: String)
 }
 
 protocol ProfileModifyWireFrameProtocol: class {
     static func createProfileModifyModule(profile: Profile) -> UIViewController
     
     // PRESENTER -> WIREFRAME
-
 }
 
 protocol ProfileModifyPresenterProtocol: class {
@@ -27,12 +28,13 @@ protocol ProfileModifyPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
+    func completeImageModify(image: UIImage)
     func completeModify(profile: Profile)
 }
 
 protocol ProfileModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    
+    func didCompleteModify(result: Bool, message: String)
 }
 
 protocol ProfileModifyInteractorInputProtocol: class {
@@ -41,6 +43,7 @@ protocol ProfileModifyInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func viewDidLoad()
+    func completeImageModify(image: UIImage)
     func completeModify(profile: Profile)
 }
 
@@ -49,13 +52,15 @@ protocol ProfileModifyRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func authCheck(completion: @escaping () -> Void)
-    func validProfileModify(userInfo: UserInfoPut)
-    func remoteProjectList(completion: @escaping (BaseResponse<[Project]>) -> Void)
-    func removeProject(projectID: Int, completion: @escaping (Bool) -> Void)
-    func registerProject(project: [String: String])
+    func retrieveImageModify(image: UIImage)
+    func retrieveNicknameModify(profile: [String: String])
 }
 
 protocol ProfileModifyRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
+    
+    func imageModifyRetrieved(result: BaseResponse<Bool>)
+    func nicknameModifyRetrieved(result: BaseResponse<Bool>)
+    func mergeProfileModifyResult()
 }
 
