@@ -9,13 +9,66 @@
 import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
+import SwiftyJSON
 import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
+    
+    var window: UIWindow?
+    var goView: MyStudyDetailView?
+    var studyID: String = ""
+    var pushEvent: String = ""
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow()
+        let home = HomeView()
+        let main = ViewController()
+        
+        // 리프레쉬 토큰이 없으면 -> 로그인
+        if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
+            KeychainWrapper.standard.set("temp", forKey: "accessToken")
+            let howView = UINavigationController(rootViewController: home)
+            window?.rootViewController = howView
+        } else {
+            print("토큰이 유효합니다..")
+            print("로그인 완료")
+            print("accessToken : ", KeychainWrapper.standard.string(forKey: "accessToken")!)
+            window?.rootViewController = main
+            if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
+                let destination = notification["destination"] as? NSDictionary
+                let pushEvent = notification["pushEvent"] as? String
+                if let studyID = destination!["study_id"] as? String,
+                   let pushEvent = pushEvent {
+                    self.studyID = studyID
+                    self.pushEvent = pushEvent
+                }
+                main.selectedIndex = 1
+            }
+            
+            /// 유저정보 조회를 통해서 리프레쉬 토큰 유효성 검사
+            let userID = KeychainWrapper.standard.string(forKey: "userID")
+            TerminalNetworkManager
+                .shared
+                .session
+                .request(TerminalRouter.userInfo(id: userID!))
+                .responseJSON { response in
+                    switch response.result {
+                    case .success:
+                        if let status = response.response?.statusCode {
+                            if status == 401 {
+                                let howView = UINavigationController(rootViewController: home)
+                                self.window?.rootViewController = howView
+                            }
+                        }
+                    case .failure(let err):
+                        print("실패:", err)
+                    }
+                }
+        }
+        
+        window?.makeKeyAndVisible()
         
         let center = UNUserNotificationCenter.current()
         center.delegate = self
@@ -30,14 +83,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return true
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-            let userInfo = notification.request.content.userInfo
-            print("Receive notification in the foreground \(userInfo)")
-            let pref = UserDefaults.init(suiteName: "terminal_notification")
-            pref?.set(userInfo, forKey: "NOTIFI_DATA")
-
-            completionHandler([.alert, .badge, .sound])
+        let userInfo = notification.request.content.userInfo
+        
+        let destination = userInfo["destination"] as? NSDictionary
+        let pushEvent = userInfo["pushEvent"] as? String
+        
+        if let studyID = destination!["study_id"] as? String,
+           let pushEvent = pushEvent {
+            self.studyID = studyID
+            self.pushEvent = pushEvent
         }
-
+        
+        completionHandler([.alert, .badge, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        sleep(1)
+        
+        let event = self.pushEvent
+        let studyID = Int(self.studyID)!
+        
+        switch event {
+        case "apply_new":
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
+                as? MyStudyDetailView {
+                view.getPushEvent = true
+                view.applyState = true
+                goView = view
+                if let tabVC = self.window?.rootViewController as? UITabBarController,
+                   let navVC = tabVC.selectedViewController as? UINavigationController {
+                    
+                    navVC.pushViewController(goView!, animated: true)
+                }
+            }
+        case "study_update", "study_delegate":
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
+                as? MyStudyDetailView {
+                view.getPushEvent = true
+                goView = view
+                if let tabVC = self.window?.rootViewController as? UITabBarController,
+                   let navVC = tabVC.selectedViewController as? UINavigationController {
+                    
+                    navVC.pushViewController(goView!, animated: true)
+                }
+            }
+        case "notice_new", "notice_update":
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
+                as? MyStudyDetailView {
+                view.noticePushEvent = true
+                goView = view
+                if let tabVC = self.window?.rootViewController as? UITabBarController,
+                   let navVC = tabVC.selectedViewController as? UINavigationController {
+                    navVC.pushViewController(goView!, animated: true)
+                }
+            }
+        default:
+            break
+        }
+        completionHandler()
+    }
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
@@ -46,35 +151,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("pushToken:",KeychainWrapper.standard.string(forKey: "pushToken")!)
     }
     
-    // MARK: UISceneSession Lifecycle
-
-    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
-        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
-    }
-
-    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
-    }
-    
     // MARK: - Core Data stack
-
+    
     lazy var persistentContainer: NSPersistentContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
-        */
+         */
         let container = NSPersistentContainer(name: "TerminalCoreData")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
+                
                 /*
                  Typical reasons for an error here include:
                  * The parent directory does not exist, cannot be created, or disallows writing.
@@ -90,7 +181,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }()
     
     // MARK: - Core Data Saving support
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

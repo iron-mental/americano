@@ -68,5 +68,8 @@ extension ApplyUserView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.showUserInfoDetail(userID: 44, state: true)
+    }
     
 }

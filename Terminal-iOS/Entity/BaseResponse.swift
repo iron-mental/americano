@@ -11,11 +11,13 @@ import Foundation
 struct BaseResponse<T: Codable>: Codable {
     let result: Bool
     let type, label, message: String?
+    let code: Int?
     let data: T?
     
     enum CodingKeys: String, CodingKey {
         case result
         case type, label, message
+        case code
         case data
     }
 }
