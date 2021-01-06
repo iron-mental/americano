@@ -30,7 +30,7 @@ class MyStudyDetailView: UIViewController {
     let childPageView = UIPageViewController(transitionStyle: .scroll,
                                              navigationOrientation: .horizontal,
                                              options: nil)
-    lazy var tabSege = UISegmentedControl(items: state)
+    lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(didClickecmoreButton))
     
@@ -46,7 +46,6 @@ class MyStudyDetailView: UIViewController {
         super.viewDidAppear(animated)
         applyState ? presenter?.showApplyUserList(studyID: studyID!) : nil
         applyState = false
-        
     }
     
     func attribute() {
@@ -86,7 +85,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     func layout() {
-        [ tabSege, selectedUnderLine, childPageView.view ].forEach { view.addSubview($0) }
+        [tapSege, selectedUnderLine, childPageView.view].forEach { view.addSubview($0) }
         self.addChild(childPageView)
         self.childPageView.didMove(toParent: self)
         
