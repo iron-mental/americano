@@ -84,16 +84,6 @@ class ProfileModifyView: UIViewController {
         }
     }
     
-    @objc func completeModify() {
-        let nickname        = self.name.text!
-        let introduction    = self.introduction.text!
-        let image           = profileImage.image!
-        
-        let profile         = Profile(profileImage: image, nickname: nickname, introduction: introduction)
-        
-        presenter?.completeModify(profile: profile)
-    }
-
     // MARK: Set Layout
     
     func layout() {
@@ -157,46 +147,48 @@ class ProfileModifyView: UIViewController {
         present(picker, animated: true, completion: nil)
     }
     
-    
-
     // MARK: - 프로필 수정 완료 버튼
     
-//    @objc func completeButton() {
-//        guard let image = profileImage.image,
-//              let nickname = nameModify.text,
-//              let introduce = descripModify.text,
-//              let careerTitle = careerTitleModify.text,
-//              let careerContents = careerDescriptModify.text
-//              let snsGithub = snsModify.firstTextFeield.text,
-//              let snsLinkedIn = snsModify.secondTextField.text,
-//              let snsWeb = snsModify.thirdTextField.text
-//        else { return }
-//
-//        let userInfo = UserInfoPut(image: image,
-//                                   nickname: nickname,
-//                                   introduce: introduce,
-//                                   careerTitle: careerTitle,
-//                                   careerContents: careerContents,
-//                                   snsGithub: "snsGithub",
-//                                   snsLinkedIn: "snsLinkedIn",
-//                                   snsWeb: "snsWeb",
-//                                   latitude: 37.602500,
-//                                   longitude: 126.929340,
-//                                   sido: "서울시",
-//                                   sigungu: "은평구")
-//
-//        presenter?.completeModifyButton(userInfo: userInfo, project: projectArr)
-//
-//        let view = self.navigationController?.rootViewController as? SetViewProtocol
-//
-//        self.navigationController?.popToRootViewController(animated: true, completion: {
-//            view!.presenter?.viewDidLoad()
-//        })
-//    }
+    @objc func completeModify() {
+        var nickname: String = ""
+        
+        // 현재 내가 가지고있는 닉네임과 완료를 누르기전 변경된 닉네임 비교
+        let currentNickname = (self.profile?.nickname)!
+        let changedNickname = self.name.text!
+        
+        
+        // 닉네임이 같으면 변경 안했으므로 공백, 다르면 변경된 값 적용
+        if currentNickname == changedNickname {
+            nickname = ""
+        } else {
+            nickname = self.name.text!
+        }
+        
+        let introduction    = self.introduction.text!
+        let image           = profileImage.image!
+        
+        let profile         = Profile(profileImage: image, nickname: nickname, introduction: introduction)
+        
+        presenter?.completeImageModify(image: image)
+        presenter?.completeModify(profile: profile)
+    }
+
 }
 
 extension ProfileModifyView: ProfileModifyViewProtocol {
-
+    func modifyResultHandle(result: Bool, message: String) {
+        if result {
+            print("수정 여부:", result)
+            print("메시지 : ", message)
+            let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
+            self.navigationController?.popViewController(animated: true, completion: {
+                parent?.presenter?.viewDidLoad()
+            })
+            
+            let rootParent = self.navigationController?.viewControllers[0] as? SetView
+            rootParent?.presenter?.viewDidLoad()
+        }
+    }
 }
 
 // MARK: 이미지 픽커
