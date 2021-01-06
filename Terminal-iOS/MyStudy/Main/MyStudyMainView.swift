@@ -15,11 +15,12 @@ enum MyStudyMainViewState {
     case edit
 }
 
-// 마이스터디 탭에 들어갈 메인 뷰 입니다.
+// MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
 class MyStudyMainView: UIViewController {
+    var applyState: Bool = false
+    
     var presenter: MyStudyMainPresenterProtocol?
     var state: MyStudyMainViewState = .normal
-    
     
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
@@ -39,6 +40,11 @@ class MyStudyMainView: UIViewController {
         attribute()
         layout()
         presenter?.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        applyState ? presenter?.showApplyList(): nil
     }
     
     func attribute() {

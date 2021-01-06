@@ -19,7 +19,7 @@ class ViewController: UITabBarController {
         case set
     }
     
-    let tabBarItems: [Tab: UITabBarItem] = [
+    lazy var tabBarItems: [Tab: UITabBarItem] = [
         .study: UITabBarItem(
             title: "",
             image: #imageLiteral(resourceName: "study"),
@@ -35,7 +35,6 @@ class ViewController: UITabBarController {
             image: #imageLiteral(resourceName: "set"),
             selectedImage: #imageLiteral(resourceName: "set_clicked")
         )
-        
     ]
     
     override func viewDidLoad() {
@@ -44,7 +43,7 @@ class ViewController: UITabBarController {
     }
     
     func attribute() {
-        tabBar.do {
+        self.tabBar.do {
             $0.tintColor = UIColor(named: "key")
             $0.barTintColor = UIColor.appColor(.testColor)
             $0.isTranslucent = false
@@ -52,19 +51,19 @@ class ViewController: UITabBarController {
             $0.standardAppearance.backgroundColor = .white
         }
 
-        studyViewController.tabBarItem = tabBarItems[.study]
-        studyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        self.studyViewController.tabBarItem = tabBarItems[.study]
+        self.studyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
-        myStudyViewController.tabBarItem = tabBarItems[.mystudy]
-        myStudyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        self.myStudyViewController.tabBarItem = tabBarItems[.mystudy]
+        self.myStudyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
-        setViewController.tabBarItem = tabBarItems[.set]
-        setViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
+        self.setViewController.tabBarItem = tabBarItems[.set]
+        self.setViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
         self.viewControllers = [
-            UINavigationController(rootViewController: studyViewController),
-            UINavigationController(rootViewController: myStudyViewController),
-            UINavigationController(rootViewController: setViewController)
+            UINavigationController(rootViewController: self.studyViewController),
+            UINavigationController(rootViewController: self.myStudyViewController),
+            UINavigationController(rootViewController: self.setViewController)
         ]
     }
 }
