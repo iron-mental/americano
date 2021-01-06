@@ -15,13 +15,13 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
     var interactor: MyStudyMainInteractorProtocol?
     
     func getMyStudyList(completion: @escaping (_: Bool, _: [MyStudy]?) -> Void) {
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         TerminalNetworkManager
             .shared
             .session
             .request(TerminalRouter.myStudyList(id: userID))
-            .validate(statusCode: 200..<500)
+            .validate(statusCode: 200..<400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

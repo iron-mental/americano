@@ -38,28 +38,24 @@ class StudyDetailView: UIViewController {
             attribute()
         }
     }
-    var parentView: UIViewController?
+    var parentView: MyStudyDetailViewProtocol?
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
     let picker = UIImagePickerController()
     var mainImageViewTapGesture = UITapGestureRecognizer()
     var mainImageView = MainImageView(frame: CGRect.zero)
     var snsIconsView = SNSIconsView(frame: CGRect.zero)
-    lazy var studyIntroduceView = TitleWithContentView(state: state)
+    lazy var studyIntroduceView = TitleWithContentView()
     var memberView = MemeberView()
-    lazy var studyPlanView = TitleWithContentView(state: state)
-    lazy var timeView = TitleWithContentView(state: state)
-    lazy var locationView = TitleWithContentView(state: state)
+    lazy var studyPlanView = TitleWithContentView()
+    lazy var timeView = TitleWithContentView()
+    lazy var locationView = TitleWithContentView()
     var mapView = NMFMapView()
     var joinButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        parentView = presentingViewController
     }
     
     func attribute() {
@@ -180,7 +176,7 @@ class StudyDetailView: UIViewController {
             $0.topAnchor.constraint(equalTo: snsIconsView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyIntroduceView.label.isHidden == false ? studyIntroduceView.label.bottomAnchor : studyIntroduceView.textView.bottomAnchor ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyIntroduceView.label.isHidden == false ? studyIntroduceView.label.bottomAnchor : studyIntroduceView.label.bottomAnchor ).isActive = true
         }
         memberView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -194,21 +190,21 @@ class StudyDetailView: UIViewController {
             $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyPlanView.label.isHidden == false ? studyPlanView.label.bottomAnchor : studyPlanView.textView.bottomAnchor ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyPlanView.label.isHidden == false ? studyPlanView.label.bottomAnchor : studyPlanView.label.bottomAnchor ).isActive = true
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyPlanView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: timeView.label.isHidden == false ? timeView.label.bottomAnchor : timeView.textView.bottomAnchor ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: timeView.label.isHidden == false ? timeView.label.bottomAnchor : timeView.label.bottomAnchor ).isActive = true
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: locationView.label.isHidden == false ? locationView.label.bottomAnchor : locationView.textView.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: locationView.label.isHidden == false ? locationView.label.bottomAnchor : locationView.label.bottomAnchor).isActive = true
         }
         mapView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -234,7 +230,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
-        
+        parentView?.setting()
     }
     
     func showError() {

@@ -217,7 +217,6 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
     }
     
     func showMyStudyList(myStudyList: [MyStudy]) {
-        
         self.myStudyList = myStudyList
         attribute()
         layout()

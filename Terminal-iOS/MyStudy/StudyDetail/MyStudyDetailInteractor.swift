@@ -12,4 +12,20 @@ class MyStudyDetailInteractor: MyStudyDetailInteractorProtocol {
     var presenter: MyStudyDetailPresenterProtocol?
     var remoteDatamanager: MyStudyDetailRemoteDataManagerProtocol?
     var localDatamanager: MyStudyDetailLocalDataManagerProtocol?
+    
+    func postLeaveStudyAPI(studyID: Int) {
+        remoteDatamanager?.postLeaveStudyAPI(studyID: studyID)
+    }
+    
+    func callDeleteStudyAPI(studyID: Int) {
+        remoteDatamanager?.callDeleteStudyAPI(studyID: studyID)
+    }
+    
+    func leaveStudyResult(result: Bool, message: String) {
+        presenter?.leaveStudyResult(result: result, message: message)
+    }
+    
+    func deleteStudyResult(result: Bool, message: String) {
+        presenter?.deleteStudyResult(result: result, message: message)
+    }
 }

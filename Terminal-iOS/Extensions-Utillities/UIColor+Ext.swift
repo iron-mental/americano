@@ -18,6 +18,11 @@ enum AssetsColor {
     case profileTextColor
     case noticeColor
     case pinnedNoticeColor
+    case redButtonColor
+    case yellowButtonColor
+    case greenButtonColor
+    case alertBackgroundColor
+    case alertTopBarColor
 }
 
 extension UIColor {
@@ -41,7 +46,16 @@ extension UIColor {
             return #colorLiteral(red: 0.1333333333, green: 0.5294117647, blue: 0.6745098039, alpha: 1)
         case .pinnedNoticeColor:
             return #colorLiteral(red: 0.9882352941, green: 0.5058823529, blue: 0.2431372549, alpha: 1)
+        case .redButtonColor:
+            return #colorLiteral(red: 0.9254901961, green: 0.3960784314, blue: 0.3529411765, alpha: 1)
+        case .yellowButtonColor:
+            return #colorLiteral(red: 0.8784313725, green: 0.7529411765, blue: 0.2980392157, alpha: 1)
+        case .greenButtonColor:
+            return #colorLiteral(red: 0.4470588235, green: 0.7450980392, blue: 0.2784313725, alpha: 1)
+        case .alertBackgroundColor:
+            return #colorLiteral(red: 0.1176470588, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
+        case .alertTopBarColor:
+            return #colorLiteral(red: 0.2392156863, green: 0.2352941176, blue: 0.2352941176, alpha: 1)
         }
-        
     }
 }

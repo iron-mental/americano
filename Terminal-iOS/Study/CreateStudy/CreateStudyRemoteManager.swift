@@ -38,6 +38,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             .shared
             .session
             .upload(multipartFormData: { multipartFormData in
+                
                 for (key, value) in params {
                     if value != nil && value != "" && value != "nil" {
                         multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
@@ -47,6 +48,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             }, with: TerminalRouter.studyCreate(study: params))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
+                
                 switch response.result {
                 case .success(let value):
                     completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
@@ -81,7 +83,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
         
-TerminalNetworkManager
+        TerminalNetworkManager
             .shared
             .session
             .upload(multipartFormData: { multipartFormData in

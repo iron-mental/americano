@@ -346,7 +346,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
         })
     }
     func loading() {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
     }
     func getBackgroundImage() {
         print("getBackgroundImage")
@@ -355,13 +355,13 @@ extension CreateStudyView: CreateStudyViewProtocols {
         print("setVackgroundImage")
     }
     func showLoadingToNotionInput() {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
     }
     func showLoadingToEvernoteInput() {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
     }
     func showLoadingToWebInput() {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
     }
     func hideLoadingToNotionInput() {
         LoadingRainbowCat.hide(completion: {
