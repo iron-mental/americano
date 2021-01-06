@@ -156,12 +156,9 @@ class ProfileModifyView: UIViewController {
         let currentNickname = (self.profile?.nickname)!
         let changedNickname = self.name.text!
         
-        
         // 닉네임이 같으면 변경 안했으므로 공백, 다르면 변경된 값 적용
-        if currentNickname == changedNickname {
-            nickname = ""
-        } else {
-            nickname = self.name.text!
+        if currentNickname != changedNickname {
+            nickname = changedNickname
         }
         
         let introduction    = self.introduction.text!
