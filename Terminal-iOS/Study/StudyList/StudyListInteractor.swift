@@ -59,7 +59,6 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
                 lengthStudyKeyArr.remove(at: 0)
             }
         }
-        
         remoteDataManager?.paginationRetrieveLengthStudyList(keyValue: lengthNewKeyValue, completion: {
             self.lengthNewKeyValue.removeAll()
         })

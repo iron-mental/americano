@@ -9,7 +9,8 @@
 import UIKit
 
 class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
-    static func createStudyDetail(studyID: Int, state: StudyDetailViewState) -> UIViewController {
+    static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState) -> UIViewController {
+        
         let view: StudyDetailViewProtocol = StudyDetailView()
         let presenter: StudyDetailPresenterProtocol & StudyDetailInteractorOutputProtocol = StudyDetailPresenter()
         let interactor: StudyDetailInteractorInputProtocol & StudyDetailRemoteDataManagerOutputProtocol = StudyDetailInteractor()
@@ -18,6 +19,7 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         
         view.presenter = presenter
         view.state = state
+        view.parentView = parent
         
         presenter.view = view
         presenter.interactor = interactor

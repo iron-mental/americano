@@ -16,6 +16,7 @@ protocol NoticeViewProtocol {
     func showNoticeList(noticeList: [Notice])
     func showMessage(message: String)
     func viewLoad()
+    func showLoading()
 }
 
 protocol NoticeInteractorProtocol {

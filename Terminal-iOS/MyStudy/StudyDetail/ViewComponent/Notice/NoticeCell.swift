@@ -38,6 +38,9 @@ class NoticeCell: UITableViewCell {
     }
     
     func attribute() {
+        self.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         noticeBackground.do {
             $0.backgroundColor = UIColor.appColor(.noticeColor)
             $0.layer.cornerRadius = 5

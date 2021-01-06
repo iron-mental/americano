@@ -14,7 +14,7 @@ import Kingfisher
 class StudyCell: UITableViewCell {
     static let cellId = "cellId"
     
-    let mainTitle = UILabel()
+    var mainTitle = UILabel()
     let location = UILabel()
     let subTitle = UILabel()
     let date = UILabel()

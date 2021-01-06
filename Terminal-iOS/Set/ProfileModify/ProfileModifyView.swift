@@ -427,10 +427,8 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
         cell.title.delegate = self
         cell.selectionStyle = .none
         cell.delegate = self
-        
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
-        
         return cell
     }
     

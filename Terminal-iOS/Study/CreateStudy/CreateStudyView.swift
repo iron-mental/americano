@@ -63,7 +63,7 @@ class CreateStudyView: UIViewController{
             setView()
         }
     }
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
@@ -341,12 +341,12 @@ extension CreateStudyView: CreateStudyViewProtocols {
         layout()
         setDelegate(completion: {
             LoadingRainbowCat.hide {
-//
+                //
             }
         })
     }
     func loading() {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
     }
     func getBackgroundImage() {
         print("getBackgroundImage")
@@ -355,57 +355,57 @@ extension CreateStudyView: CreateStudyViewProtocols {
         print("setVackgroundImage")
     }
     func showLoadingToNotionInput() {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
     }
     func showLoadingToEvernoteInput() {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
     }
     func showLoadingToWebInput() {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
     }
     func hideLoadingToNotionInput() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func hideLoadingToEvernoteInput() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func hideLoadingToWebInput() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func notionValid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func evernoteValid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func webValid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func notionInvalid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func evernoteInvalid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     func webInvalid() {
         LoadingRainbowCat.hide(completion: {
-//
+            //
         })
     }
     @objc func didClickButton() {
@@ -516,6 +516,6 @@ extension CreateStudyView: selectLocationDelegate {
 
 extension CreateStudyView: KeyboardManagerDelegate {
     func keyboardWillChangeFrame(endFrame: CGRect?, duration: TimeInterval, animationCurve: UIView.AnimationOptions) {
-//        <#code#>
+        //        <#code#>
     }
 }

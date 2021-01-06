@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SwiftKeychainWrapper
 
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
@@ -17,23 +17,23 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int? {
         didSet {
             VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                       StudyDetailWireFrame.createStudyDetail(studyID: studyID!, state: .member),
-                 ChatWireFrame.createChatModule()]
+                       StudyDetailWireFrame.createStudyDetail(parent: self, studyID: studyID!, state: .member),
+                       ChatWireFrame.createChatModule()]
         }
     }
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
     
     var VCArr: [UIViewController] = []
-    
+    var authority: StudyDetailViewState = .member
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let childPageView = UIPageViewController(transitionStyle: .scroll,
-                                           navigationOrientation: .horizontal,
-                                           options: nil)
-    lazy var tapSege = UISegmentedControl(items: state)
+                                             navigationOrientation: .horizontal,
+                                             options: nil)
+    lazy var tabSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(didClickecmoreButton))
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -46,6 +46,7 @@ class MyStudyDetailView: UIViewController {
         super.viewDidAppear(animated)
         applyState ? presenter?.showApplyUserList(studyID: studyID!) : nil
         applyState = false
+        
     }
     
     func attribute() {
@@ -58,7 +59,6 @@ class MyStudyDetailView: UIViewController {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationItem.rightBarButtonItems = [moreButton]
         }
         self.tapSege.do {
@@ -86,10 +86,8 @@ class MyStudyDetailView: UIViewController {
     }
     
     func layout() {
-        self.view.addSubview(tapSege)
-        self.view.addSubview(selectedUnderLine)
+        [ tabSege, selectedUnderLine, childPageView.view ].forEach { view.addSubview($0) }
         self.addChild(childPageView)
-        self.view.addSubview(childPageView.view)
         self.childPageView.didMove(toParent: self)
         
         self.tapSege.do {
@@ -138,11 +136,11 @@ class MyStudyDetailView: UIViewController {
         UIView.animate(withDuration: 0.2) {
             self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
         }
-
+        
         // PageView paging
         let currentView = VCArr
         let nextPage = selectedIndex
-
+        
         // if 현재페이지 < 바뀔페이지
         // else if 현재페이지 > 바뀔페이지
         if pageBeforeIndex < nextPage {
@@ -154,26 +152,52 @@ class MyStudyDetailView: UIViewController {
         }
         pageBeforeIndex = nextPage
     }
+    
     @objc func didClickecmoreButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let noticeAdd = UIAlertAction(title: "공지사항 추가", style: .default) { _ in self.addNoticeButtonAction() }
+        let noticeAdd = UIAlertAction(title: "공지사항 추가", style: .default) { _ in self.addNoticeButtonDidTap() }
         let studyEdit = UIAlertAction(title: "스터디 정보 수정", style: .default) { _ in self.editStudyButtonDidTap() }
-        let applyList = UIAlertAction(title: "스터디 신청 목록", style: .default) { _ in self.showApplyList() }
+        let applyList = UIAlertAction(title: "스터디 신청 목록", style: .default) { _ in self.applyListButtonDidTap() }
+        let delegateHost = UIAlertAction(title: "방장 위임하기", style: .default) { _ in self.delegateHostButtonDidTap() }
+        let deleteStudy = UIAlertAction(title: "스터디 삭제하기", style: .destructive) { _ in self.deleteStudyButtonDidTap() }
+        
+        let leaveStudy = UIAlertAction(title: "스터디 나가기", style: .destructive) { _ in self.leaveStudyButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [noticeAdd,studyEdit,applyList,cancel].forEach { alert.addAction($0) }
+        if authority == .host {
+            [ noticeAdd, studyEdit, applyList, delegateHost, deleteStudy, leaveStudy, cancel ].forEach { alert.addAction($0) }
+        } else if authority == .member {
+            [ leaveStudy, cancel ].forEach { alert.addAction($0) }
+        }
         present(alert, animated: true, completion: nil)
     }
-    func addNoticeButtonAction() {
+    
+    func addNoticeButtonDidTap() {
         presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
     }
+    
     func editStudyButtonDidTap() {
         if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
             presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
         }
     }
-    func showApplyList() {
+    
+    func applyListButtonDidTap() {
         presenter?.showApplyUserList(studyID: studyID!)
+    }
+    
+    func leaveStudyButtonDidTap() {
+        //스터디 나가기
+        presenter?.leaveStudyButtonDidTap(studyID: studyID!)
+    }
+    
+    func delegateHostButtonDidTap() {
+        //방장 위임하는 뷰로 가보자
+    }
+    
+    func deleteStudyButtonDidTap() {
+        //스터디 삭제하기
+        presenter?.deleteStudyButtonDidTap(studyID: studyID!)
     }
 }
 
@@ -206,5 +230,27 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 }
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
+    func setting() {
+        authority = (VCArr[1] as! StudyDetailViewProtocol).state
+        attribute()
+        layout()
+    }
     
+    func showLeaveStudyComplete() {
+        navigationController?.popViewController(animated: true)
+        (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
+    }
+    
+    func showLeaveStudyFailed() {
+        print("스터디 나가기 실패")
+    }
+    
+    func showDeleteStudyComplete() {
+        navigationController?.popViewController(animated: true)
+        (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
+    }
+    
+    func showDeleteStudyFailed() {
+        print("스터디 삭제 실패")
+    }
 }

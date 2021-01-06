@@ -337,3 +337,10 @@ extension IntroView: IntroViewProtocol {
 
     }
 }
+
+extension IntroView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        didClickedNextButton()
+        return true
+    }
+}
