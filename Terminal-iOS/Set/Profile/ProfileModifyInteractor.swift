@@ -14,63 +14,48 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
     var presenter: ProfileModifyInteractorOutputProtocol?
     var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol?
     
+    var imageResult: Bool = false
+    var nicknameResult: Bool = false
+    
     func viewDidLoad() {
         remoteDataManager?.authCheck {}
     }
     
+    func completeImageModify(image: UIImage) {
+        remoteDataManager?.retrieveImageModify(image: image)
+    }
+        
     func completeModify(profile: Profile) {
-        let params: [String: String] = [
-            "nickname": profile.nickname,
+        var params: [String: String] = [
             "introduce": profile.introduction
         ]
         
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        // 닉네임이 비어있으면 닉네임 변경되지 않음, but 변경되었으면 파라미터 추가
+        if !profile.nickname.isEmpty {
+            params.updateValue(profile.nickname, forKey: "nickname")
+        }
         
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.userInfoUpdate(id: userID, profile: params))
-            .validate(statusCode: 200..<500)
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    print(JSON(value))
-                case .failure(let error):
-                    print(error)
-                }
-            }
-//        let uploadImage = userInfo.image!.jpegData(compressionQuality: 0.5)
-//        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-//
-//        TerminalNetworkManager
-//            .shared
-//            .session
-//            .upload(multipartFormData: { multipartFormData in
-//                for (key, value) in params {
-//                    let data = "\(value)".data(using: .utf8)!
-//                    multipartFormData.append(data,
-//                                             withName: key,
-//                                             mimeType: "text/plain")
-//                }
-//                multipartFormData.append(uploadImage!,
-//                                         withName: "image",
-//                                         fileName: "\(userInfo.nickname!).jpg",
-//                                         mimeType: "image/jpeg")
-//            }, with: TerminalRouter.userInfoUpdate(id: userID))
-//            .validate(statusCode: 200..<299)
-//            .responseJSON { response in
-//                switch response.result {
-//                case .success(let value):
-//                    print("여기닷:",JSON(value))
-//                case .failure(let err):
-//                    print(err)
-//                }
-//            }
-        
-        
+        remoteDataManager?.retrieveNicknameModify(profile: params)
     }
 }
 
 extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol {
+    func mergeProfileModifyResult() {
+        if imageResult && nicknameResult {
+            let message = "프로필 수정 성공"
+            self.presenter?.didCompleteModify(result: true, message: message)
+            self.imageResult = false
+            self.nicknameResult = false
+        }
+    }
     
+    func imageModifyRetrieved(result: BaseResponse<Bool>) {
+        self.imageResult = result.result
+        mergeProfileModifyResult()
+    }
+    
+    func nicknameModifyRetrieved(result: BaseResponse<Bool>) {
+        self.nicknameResult = result.result
+        mergeProfileModifyResult()
+    }
 }
