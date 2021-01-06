@@ -59,7 +59,7 @@ class TerminalAlertUIView: UIView {
     }
     
     func layout() {
-        [ topBar, bottomBar, guideLabel, dismissButton, completeButton,  ].forEach { addSubview($0) }
+        [ topBar, bottomBar, guideLabel, dismissButton, completeButton ].forEach { addSubview($0) }
         [ redButton, yellowButton, greenButton ].forEach { topBar.addSubview($0) }
         
         topBar.do {
