@@ -9,8 +9,15 @@
 import UIKit
 
 class ProjectView: UIView {
+    var snsList: [String: String] = [:]
     
-    init(title: String, contents: String ,frame: CGRect) {
+    init(title: String,
+         contents: String,
+         snsGithub: String,
+         snsAppStore: String,
+         snsPlayStore: String,
+         frame: CGRect
+    ){
         super.init(frame: frame)
         
         let projectTitle = UILabel().then {
@@ -18,6 +25,7 @@ class ProjectView: UIView {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 18, weight: .bold)
         }
+        
         let projectContents = UILabel().then {
             $0.text = contents
             $0.lineBreakMode = .byCharWrapping
@@ -26,9 +34,7 @@ class ProjectView: UIView {
             $0.dynamicFont(fontSize: 14, weight: .regular)
         }
         
-        let sns = SNSView().then {
-            $0.modify.isHidden = true
-        }
+        let sns = ProjectSNSView()
         
         self.addSubview(projectTitle)
         self.addSubview(projectContents)
@@ -50,6 +56,23 @@ class ProjectView: UIView {
             $0.topAnchor.constraint(equalTo: projectContents.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
+        }
+
+        checkSNSList(snsGithub: snsGithub, snsAppStore: snsAppStore, snsPlayStore: snsPlayStore)
+        sns.addstack(snsList: snsList)
+    }
+    
+    private func checkSNSList(snsGithub: String, snsAppStore: String, snsPlayStore: String) {
+        if !snsGithub.isEmpty {
+            snsList.updateValue(snsGithub, forKey: "github")
+        }
+        
+        if !snsAppStore.isEmpty {
+            snsList.updateValue(snsAppStore, forKey: "appStore")
+        }
+        
+        if !snsPlayStore.isEmpty {
+            snsList.updateValue(snsPlayStore, forKey: "playStore")
         }
     }
    
