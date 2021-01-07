@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProjectSNSView: UIView {
+final class ProjectSNSModifyView: UIView {
     lazy var firstImage = UIImageView()
     lazy var firstTextFeield = UITextField()
     

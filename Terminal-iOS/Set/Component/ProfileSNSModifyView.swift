@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProfileSNSView: SNSModifyView {
+final class ProfileSNSModifyView: SNSModifyView {
     
     override func attribute() {
         super.attribute()
