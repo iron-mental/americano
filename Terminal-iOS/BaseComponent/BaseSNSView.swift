@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SNSView: UIView {
+class BaseSNSView: UIView {
     
     let snsStack = UIStackView()
     let snsImage = UIImageView()
