@@ -29,7 +29,6 @@ class ProfileDetailView: UIViewController {
     let locationLabel   = UILabel()
     let location        = LocationView()
     
-    var projectArr: [UIView] = []
     var projectData: [Project] = [] 
     var userInfo: UserInfo?
     
@@ -88,17 +87,8 @@ class ProfileDetailView: UIViewController {
         
         self.projectStack.do {
             $0.axis = .vertical
-            $0.distribution = .fillEqually
+            $0.distribution = .fill
             $0.spacing = 10
-        }
-        
-        if projectData.isEmpty {
-            let label = UILabel().then {
-                $0.text = "\n추가된 프로젝트가 없습니다."
-                $0.numberOfLines = 0
-                $0.textAlignment = .center
-            }
-            projectStack.addArrangedSubview(label)
         }
     }
     
@@ -106,7 +96,8 @@ class ProfileDetailView: UIViewController {
     
     func layout() {
         self.view.addSubview(scrollView)
-        [profile, careerLabel, career, projectLabel, projectStack, snsLabel, sns, emailLabel,email, locationLabel, location]
+        [profile, careerLabel, career, projectLabel, projectStack,
+         snsLabel, sns, emailLabel,email, locationLabel, location]
             .forEach { self.scrollView.addSubview($0) }
         
         // 스크롤뷰 오토레이아웃
@@ -192,7 +183,7 @@ class ProfileDetailView: UIViewController {
     }
     
     @objc func modifyProfile() {
-        let profileImage = profile.profileImage.image!
+        let profileImage = profile.profileImage.image ?? UIImage(named: "managerImage")!
         let name = profile.name.text!
         let introduction = profile.descript.text!
         let profile = Profile(profileImage: profileImage, nickname: name, introduction: introduction)
@@ -259,12 +250,13 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
         if let address = userInfo.address {
             self.location.location.text = address
         }
-        
-        
     }
     
     func addProjectToStackView(with project: [Project]) {
         projectData = project
+        
+        /// 기존의 프로젝트 스택뷰에 요소들을 셋팅 전에 모두 제거
+        projectStack.removeAllArrangedSubviews()
         
         for data in project {
             let title = data.title
