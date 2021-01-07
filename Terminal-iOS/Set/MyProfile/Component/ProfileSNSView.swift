@@ -13,15 +13,34 @@ class ProfileSNSView: SNSView {
     let github = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
     }
+    
     let linkedin = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
     }
+    
     let web = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "blog"), for: .normal)
     }
     
-    override func addstack(snsList: [String : String]) {
+    let modify = UIButton().then {
+        $0.setTitle("수정", for: .normal)
+        $0.setTitleColor(.appColor(.mainColor), for: .normal)
+    }
+    
+    override func layout() {
+        super.layout()
+        self.addSubview(modify)
         
+        self.modify.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        }
+    }
+    
+    override func addstack(snsList: [String : String]) {
         /// 추가된 SNS 갯수
         var count = 0
         
