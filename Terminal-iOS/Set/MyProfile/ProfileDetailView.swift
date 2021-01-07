@@ -88,7 +88,7 @@ class ProfileDetailView: UIViewController {
         self.projectStack.do {
             $0.axis = .vertical
             $0.distribution = .fill
-            $0.spacing = 10
+            $0.spacing = 5
         }
     }
     
@@ -282,7 +282,6 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
             let title = data.title
             let contents = data.contents
             
-//            let projectView = ProjectView(title: title, contents: contents, frame: CGRect.zero)
             let projectView = ProjectView(title: title,
                                           contents: contents,
                                           snsGithub: data.snsGithub ?? "",

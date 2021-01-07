@@ -55,7 +55,7 @@ class ProjectView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectContents.bottomAnchor, constant: 4).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         }
 
         checkSNSList(snsGithub: snsGithub, snsAppStore: snsAppStore, snsPlayStore: snsPlayStore)

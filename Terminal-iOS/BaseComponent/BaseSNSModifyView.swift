@@ -36,16 +36,6 @@ class BaseSNSModifyView: UIView {
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.addLeftPadding()
         }
-//        
-//        firstImage.do {
-//            $0.image = UIImage(named: "github")
-//        }
-//        secondImage.do {
-//            $0.image = UIImage(named: "app-store")
-//        }
-//        thirdImage.do {
-//            $0.image = UIImage(named: "playstore")
-//        }
     }
     
     func layout() {
