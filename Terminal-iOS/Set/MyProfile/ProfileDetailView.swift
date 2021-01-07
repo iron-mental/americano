@@ -23,7 +23,7 @@ class ProfileDetailView: UIViewController {
     let projectLabel    = UILabel()
     let projectStack    = UIStackView()
     let snsLabel        = UILabel()
-    let sns             = SNSView()
+    let sns             = ProfileSNSView()
     let emailLabel      = UILabel()
     let email           = EmailView()
     let locationLabel   = UILabel()
@@ -217,6 +217,7 @@ class ProfileDetailView: UIViewController {
 
 extension ProfileDetailView: ProfileDetailViewProtocol {
     func showUserInfo(with userInfo: UserInfo) {
+        var snsList: [String: String] = [:]
         self.userInfo = userInfo
         /// Kingfisher auth token
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
@@ -243,6 +244,25 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
             self.career.careerContents.text = careerContents
         }
         
+        /// SNS
+        if let github = userInfo.snsGithub,
+           let linkedin = userInfo.snsLinkedin,
+           let web = userInfo.snsWeb {
+            if !github.isEmpty {
+                snsList.updateValue(github, forKey: "github")
+            }
+            
+            if !linkedin.isEmpty {
+                snsList.updateValue(linkedin, forKey: "linkedin")
+            }
+            
+            if !web.isEmpty {
+                snsList.updateValue(web, forKey: "web")
+            }
+        }
+        
+        self.sns.addstack(snsList: snsList)
+        
         /// 이메일
         self.email.email.text = userInfo.email
         
@@ -253,18 +273,24 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
     }
     
     func addProjectToStackView(with project: [Project]) {
-        projectData = project
+        self.projectData = project
         
         /// 기존의 프로젝트 스택뷰에 요소들을 셋팅 전에 모두 제거
-        projectStack.removeAllArrangedSubviews()
+        self.projectStack.removeAllArrangedSubviews()
         
         for data in project {
             let title = data.title
             let contents = data.contents
             
-            let projectView = ProjectView(title: title, contents: contents, frame: CGRect.zero)
+//            let projectView = ProjectView(title: title, contents: contents, frame: CGRect.zero)
+            let projectView = ProjectView(title: title,
+                                          contents: contents,
+                                          snsGithub: data.snsGithub ?? "",
+                                          snsAppStore: data.snsAppstore ?? "",
+                                          snsPlayStore: data.snsPlaystore ?? "",
+                                          frame: CGRect.zero)
             
-            projectStack.addArrangedSubview(projectView)
+            self.projectStack.addArrangedSubview(projectView)
         }
         
         let addProjectButton = UIButton().then {
@@ -272,6 +298,6 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
             $0.setTitleColor(.appColor(.mainColor), for: .normal)
             $0.addTarget(self, action: #selector(modifyProject), for: .touchUpInside)
         }
-        projectStack.addArrangedSubview(addProjectButton)
+        self.projectStack.addArrangedSubview(addProjectButton)
     }
 }

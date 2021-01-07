@@ -17,7 +17,7 @@ class ProjectCell: UITableViewCell {
     lazy var remove = UIButton()
     lazy var title = UITextField()
     lazy var contents = UITextView()
-    lazy var sns = ProjectSNSView()
+    lazy var sns = ProjectSNSModifyView()
     
     var projectID: Int?
     var delegate: CellSubclassDelegate?
