@@ -9,27 +9,40 @@
 import UIKit
 
 class SNSView: UIView {
+    
+    let github = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
+    }
+    let linkedin = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
+    }
+    let web = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "blog"), for: .normal)
+    }
+    
     let snsStack = UIStackView()
     let snsImage = UIImageView()
     let modify = UIButton()
+    var firstWidth: NSLayoutConstraint!
+    var secondWidth: NSLayoutConstraint!
+    var thirdWidth: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         attribute()
         layout()
-        addstack()
     }
     
     func attribute() {
-        snsImage.do {
+        self.snsImage.do {
             $0.image = #imageLiteral(resourceName: "github")
         }
-        snsStack.do {
+        self.snsStack.do {
             $0.axis = .horizontal
             $0.distribution = .fillEqually
             $0.spacing = 10
         }
-        modify.do {
+        self.modify.do {
             $0.setTitle("수정", for: .normal)
             $0.setTitleColor(.appColor(.mainColor), for: .normal)
         }
@@ -54,22 +67,44 @@ class SNSView: UIView {
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
+        
+        self.firstWidth = self.snsStack.widthAnchor.constraint(equalToConstant: 30)
+        self.firstWidth.isActive = false
+        
+        self.secondWidth = self.snsStack.widthAnchor.constraint(equalToConstant: 70)
+        self.secondWidth.isActive = false
+        
+        self.thirdWidth = self.snsStack.widthAnchor.constraint(equalToConstant: 110)
+        self.thirdWidth.isActive = false
     }
     
-    func addstack() {
-        let github = UIButton().then {
-            $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
-        }
-        let linked = UIButton().then {
-            $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
-        }
-        let web = UIButton().then {
-            $0.setImage(#imageLiteral(resourceName: "blog"), for: .normal)
+    func addstack(snsList: [String: String]) {
+        var count = 0
+        if let _ = snsList["github"] {
+            self.snsStack.addArrangedSubview(self.github)
+            count += 1
         }
         
-        snsStack.addArrangedSubview(github)
-        snsStack.addArrangedSubview(linked)
-        snsStack.addArrangedSubview(web)
+        if let _ = snsList["linkedin"] {
+            self.snsStack.addArrangedSubview(self.linkedin)
+            count += 1
+        }
+        
+        if let _ = snsList["web"] {
+            self.snsStack.addArrangedSubview(self.web)
+            count += 1
+        }
+        
+        switch count {
+        case 1:
+            self.firstWidth.isActive = true
+        case 2:
+            self.secondWidth.isActive = true
+        case 3:
+            self.thirdWidth.isActive = true
+        default:
+            break
+        }
     }
     
     required init?(coder: NSCoder) {
