@@ -14,10 +14,12 @@ class StudyApplyMessageView: TerminalAlertUIView {
     
     override init() {
         super.init()
+        super.attribute()
         attribute()
         layout()
     }
     override func attribute() {
+        super.attribute()
         applyGuideLabel.do {
             $0.text = "스터디 신청하기"
             $0.textColor = UIColor.appColor(.alertTextcolor)
@@ -25,6 +27,7 @@ class StudyApplyMessageView: TerminalAlertUIView {
         }
     }
     override func layout() {
+        super.layout()
         [bottomBar, applyGuideLabel].forEach { addSubview($0) }
         
         applyGuideLabel.do {
