@@ -44,6 +44,8 @@ class ProfileSNSView: BaseSNSView {
         /// 추가된 SNS 갯수
         var count = 0
         
+        self.snsStack.removeAllArrangedSubviews()
+        
         if let _ = snsList["github"] {
             self.snsStack.addArrangedSubview(self.github)
                     count += 1
