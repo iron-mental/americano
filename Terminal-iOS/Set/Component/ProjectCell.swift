@@ -123,3 +123,9 @@ extension ProjectCell: UITextViewDelegate {
         return changedText.count <= 199
     }
 }
+
+extension ProjectCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.endEditing(true)
+    }
+}

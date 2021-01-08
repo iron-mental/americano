@@ -15,11 +15,12 @@ enum MyStudyMainViewState {
     case edit
 }
 
-// 마이스터디 탭에 들어갈 메인 뷰 입니다.
+// MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
 class MyStudyMainView: UIViewController {
+    var applyState: Bool = false
+    
     var presenter: MyStudyMainPresenterProtocol?
     var state: MyStudyMainViewState = .normal
-    
     
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
@@ -36,7 +37,14 @@ class MyStudyMainView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        attribute()
+        layout()
         presenter?.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        applyState ? presenter?.showApplyList(): nil
     }
     
     func attribute() {
@@ -58,6 +66,7 @@ class MyStudyMainView: UIViewController {
         tableView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.register(MyStudyMainTableViewCell.self, forCellReuseIdentifier: MyStudyMainTableViewCell.identifier)
+            $0.separatorColor = myStudyList.isEmpty ? .clear : .none
             $0.delegate = self
             $0.dataSource = self
         }
@@ -209,14 +218,23 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension MyStudyMainView: MyStudyMainViewProtocol {
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
     func showMyStudyList(myStudyList: [MyStudy]) {
         self.myStudyList = myStudyList
         attribute()
         layout()
         tableView.reloadData()
+        LoadingRainbowCat.hide {
+            print("로딩 끝")
+        }
     }
     
     func showErrMessage() {
-        print("에러 떴습니다~~")
+        LoadingRainbowCat.hide {
+            print("에러 떴습니다~")
+        }
     }
 }

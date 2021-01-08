@@ -47,7 +47,9 @@ enum TerminalRouter: URLRequestConvertible {
     case studyList              (sort: Parameters)
     case studyListForKey        (value: String)
     case myStudyList            (id: String)
-    case hotKeyword         
+    case studySearch            (keyword: String)
+    case hotKeyword
+    case studyLeave             (studyID: String)
     
     // 신청부분
     case applyStudy             (studyID: String, message: Parameters)
@@ -126,10 +128,14 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .studyListForKey:
             return .get
+        case .studySearch:
+            return .get
         case .myStudyList:
             return .get
         case .hotKeyword:
             return .get
+        case .studyLeave:
+            return .post
             
         // 신청
         case .applyStudy:
@@ -210,8 +216,12 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/paging/list"
         case let .myStudyList(id):
             return "user/\(id)/study"
+        case .studySearch:
+            return "study/search"
         case .hotKeyword:
             return "study/ranking"
+        case let .studyLeave(studyID):
+            return "study/\(studyID)/leave"
             
         // 신청
         case let .applyStudy(studyID, _):
@@ -277,6 +287,10 @@ enum TerminalRouter: URLRequestConvertible {
         case let .studyCreate(study):
             return study
         case .studyUpdate:// 파라미터 지정해야함
+            return nil
+        case let .studySearch(keyword):
+            return ["word": keyword]
+        case .studyLeave:
             return nil
             
         // 신청

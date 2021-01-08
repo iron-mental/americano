@@ -28,7 +28,11 @@ class MyApplyListWireFrame: MyApplyListWireFrameProtocol {
         }
     }
     
-    func presentStudyDetailScreen(from view: MyApplyListViewProtocol) {
+    func presentStudyDetailScreen(from view: MyApplyListViewProtocol, studyID: Int) {
+        let studyDetailViewController = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
         
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(studyDetailViewController, animated: true)
+        }
     }
 }

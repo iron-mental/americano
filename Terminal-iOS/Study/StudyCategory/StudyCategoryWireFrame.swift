@@ -9,6 +9,7 @@
 import UIKit
 
 class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
+    
     static func createStudyCategory() -> UIViewController {
         let view = StudyCategoryView()
         let presenter: StudyCategoryPresenterProtocol & StudyCategoryInteractorOutputProtocol = StudyCategoryPresenter()
@@ -45,6 +46,14 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
         
         if let sourceView = view as? UIViewController {
            sourceView.navigationController?.pushViewController(selectCategoryView, animated: false)
+        }
+    }
+    
+    func goToSearchStudy(from view: StudyCategoryViewProtocol) {
+        let searchStudyView = SearchStudyWireFrame.createSearchStudyModule()
+        searchStudyView.hidesBottomBarWhenPushed = true
+        if let parentView = view as? UIViewController {
+            parentView.navigationController?.pushViewController(searchStudyView, animated: false)
         }
     }
 }

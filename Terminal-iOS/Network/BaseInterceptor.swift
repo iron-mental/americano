@@ -21,6 +21,7 @@ final class BaseInterceptor: RequestInterceptor {
 
         if let token = KeychainWrapper.standard.string(forKey: "accessToken") {
             self.accessToken = token
+            
         }
         
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
@@ -29,10 +30,12 @@ final class BaseInterceptor: RequestInterceptor {
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        
         guard let statusCode = request.response?.statusCode else {
             completion(.doNotRetry)
             return
         }
+        
         print("status:",statusCode)
         switch statusCode {
         case 200...299:
@@ -58,11 +61,8 @@ final class BaseInterceptor: RequestInterceptor {
             .request(TerminalRouter.reissuanceToken(refreshToken: refreshToken))
             .responseJSON { response in
                 switch response.result {
-                
                 case .success(let value):
-                    print(JSON(value))
                     let json = JSON(value)
-                    
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<Authorization>.self, from: data!)
@@ -71,20 +71,19 @@ final class BaseInterceptor: RequestInterceptor {
                                 let result = KeychainWrapper.standard.set(refresh, forKey: "refreshToken")
                                 print("리프레쉬 토큰 갱신 여부 :", result)
                             }
-                            
                             if let access = result.data?.accessToken {
                                 let result = KeychainWrapper.standard.set(access, forKey: "accessToken")
                                 print("엑세스 토큰 갱신 여부 :", result)
-                                
                                 completion(result)
                             }
                         }
                     } catch {
+                        
                         print("error")
                     }
-                    
                 case .failure(let error):
                     print("에러입니다.",error)
+                    
                 }
             }
     }

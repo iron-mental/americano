@@ -13,7 +13,7 @@ import SwiftyJSON
 class SearchStudyView: UIViewController {
     
     var keyword: [HotKeyword] = []
-    
+    var presenter: SearchStudyPresenterProtocol?
     let backBtn = UIButton()
     let searchBar = UISearchBar()
     let placeSearch = UIButton()
@@ -34,6 +34,7 @@ class SearchStudyView: UIViewController {
     }
     
     func attribute() {
+        navigationController?.isNavigationBarHidden = true
         self.view.do {
             let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
             event.cancelsTouchesInView = false
@@ -47,6 +48,7 @@ class SearchStudyView: UIViewController {
         self.searchBar.do {
             $0.placeholder = "스터디명, 분류(키워드) 등"
             $0.barTintColor = UIColor.appColor(.terminalBackground)
+            $0.delegate = self
         }
         self.placeSearch.do {
             $0.setTitle("장소로 검색", for: .normal)
@@ -93,7 +95,7 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [backBtn, searchBar,placeSearch, hotLable, tempView, collectionView]
+        [backBtn, searchBar, placeSearch, hotLable, tempView, collectionView]
             .forEach { self.view.addSubview($0) }
         
         self.backBtn.do {
@@ -139,7 +141,8 @@ class SearchStudyView: UIViewController {
     }
     
     @objc func back() {
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        navigationController?.isNavigationBarHidden = false
     }
     @objc func backgroundTap() {
         self.view.endEditing(true)
@@ -178,9 +181,10 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let text = keyword[indexPath.row].word
-        print(text)
         self.searchBar.text = text
+        presenter?.didSearchButtonClicked(keyWord: text)
     }
+    
     
     class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
         override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -191,18 +195,22 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
             attributes?.forEach { layoutAttribute in
                 if layoutAttribute.frame.origin.y >= maxY {
                     leftMargin = sectionInset.left
-                    print("포문",leftMargin)
-                    
                 }
-                
                 layoutAttribute.frame.origin.x = leftMargin
-                
                 leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
-                print("박,", leftMargin)
                 maxY = max(layoutAttribute.frame.maxY , maxY)
             }
-            
             return attributes
         }
+    }
+}
+
+extension SearchStudyView: SearchStudyViewProtocol {
+    
+}
+
+extension SearchStudyView: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        presenter?.didSearchButtonClicked(keyWord: searchBar.text!)
     }
 }

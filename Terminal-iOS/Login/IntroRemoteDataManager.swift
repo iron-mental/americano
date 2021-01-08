@@ -77,7 +77,6 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             .session
             .request(TerminalRouter.login(userData: params))
             .responseJSON { response in
-                
                 switch response.result {
                 case .success(let value):
                     print("토큰 : ",JSON(value))

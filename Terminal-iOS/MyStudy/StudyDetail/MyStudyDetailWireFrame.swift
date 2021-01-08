@@ -27,6 +27,7 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDatamanager = remoteDataManager
         interactor.localDatamanager = localDataManager
+        remoteDataManager.interactor = interactor
         wireFrame.presenter = presenter
         
         if let view = view as? MyStudyDetailView {
