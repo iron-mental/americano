@@ -22,7 +22,7 @@ enum AlertType {
 class TerminalAlertMessage: NSObject {
     private static let sharedInstance = TerminalAlertMessage()
     private var backgroundView: UIView?
-    var alertView: UIView?
+    static var alertView: UIView?
     
     class func show(type: AlertType) {
         
@@ -39,16 +39,16 @@ class TerminalAlertMessage: NSObject {
             alertView.center = window.center
             
             sharedInstance.backgroundView?.removeFromSuperview()
-            sharedInstance.alertView?.removeFromSuperview()
+            TerminalAlertMessage.alertView?.removeFromSuperview()
             sharedInstance.backgroundView = backgroundView
-            sharedInstance.alertView = alertView
+            TerminalAlertMessage.alertView = alertView
             
             (alertView as! TerminalAlertUIView).dismissButton.addTarget(self, action: #selector(hide), for: .touchUpInside)
         }
     }
     
     @objc class func hide() {
-        if let alertView = sharedInstance.alertView,
+        if let alertView = TerminalAlertMessage.alertView,
            let backgroundView = sharedInstance.backgroundView {
             backgroundView.removeFromSuperview()
             alertView.removeFromSuperview()
