@@ -10,7 +10,9 @@ import UIKit
 
 
 class StudyApplyMessageView: TerminalAlertUIView {
+    var applyTitleLabel = UILabel()
     var applyGuideLabel = UILabel()
+    var editMessageTextField = UITextField()
     
     override init() {
         super.init()
@@ -20,20 +22,36 @@ class StudyApplyMessageView: TerminalAlertUIView {
     }
     override func attribute() {
         super.attribute()
-        applyGuideLabel.do {
+        applyTitleLabel.do {
             $0.text = "스터디 신청하기"
-            $0.textColor = UIColor.appColor(.alertTextcolor)
             $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize + 5, weight: UIFont.Weight.regular)
+        }
+        applyGuideLabel.do {
+            $0.text = "가입 인사를 작성해보세요"
+            $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize, weight: UIFont.Weight.regular)
+        }
+        editMessageTextField.do {
+            $0.placeholder = "스터디 참여를 희망합니다."
         }
     }
     override func layout() {
         super.layout()
-        [bottomBar, applyGuideLabel].forEach { addSubview($0) }
+        [bottomBar, applyTitleLabel, applyGuideLabel, editMessageTextField].forEach { addSubview($0) }
         
-        applyGuideLabel.do {
+        applyTitleLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: bottomBar.topAnchor, constant: 8).isActive = true
             $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        }
+        applyGuideLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.topAnchor.constraint(equalTo: applyTitleLabel.bottomAnchor, constant: 8).isActive = true
+        }
+        editMessageTextField.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.topAnchor.constraint(equalTo: applyGuideLabel.bottomAnchor, constant: 16).isActive = true
         }
     }
     

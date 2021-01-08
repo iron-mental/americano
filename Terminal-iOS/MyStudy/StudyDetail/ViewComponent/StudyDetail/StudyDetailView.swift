@@ -218,6 +218,7 @@ class StudyDetailView: UIViewController {
     @objc func joinButtonDidTap() {
 //        presenter?.joinButtonDidTap(studyID: studyInfo!.id, message: "테스트신청매세지~~")
         TerminalAlertMessage.show(type: .StudyApplyView)
+        
     }
 }
 

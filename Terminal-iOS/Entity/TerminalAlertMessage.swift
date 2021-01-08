@@ -10,7 +10,7 @@ import UIKit
 
 enum AlertType {
     case StudyApplyView
-    
+
     var view: UIView {
         switch self {
         case .StudyApplyView:
@@ -42,11 +42,12 @@ class TerminalAlertMessage: NSObject {
             sharedInstance.alertView?.removeFromSuperview()
             sharedInstance.backgroundView = backgroundView
             sharedInstance.alertView = alertView
+            
+            (alertView as! TerminalAlertUIView).dismissButton.addTarget(self, action: #selector(hide), for: .touchUpInside)
         }
     }
     
-    
-    class func hide() {
+    @objc class func hide() {
         if let alertView = sharedInstance.alertView,
            let backgroundView = sharedInstance.backgroundView {
             backgroundView.removeFromSuperview()
