@@ -8,14 +8,26 @@
 
 import UIKit
 
+enum AlertType {
+    case StudyApplyView
+    
+    var view: UIView {
+        switch self {
+        case .StudyApplyView:
+            return StudyApplyMessageView()
+        }
+    }
+}
+
 class TerminalAlertMessage: NSObject {
     private static let sharedInstance = TerminalAlertMessage()
     private var backgroundView: UIView?
-    var alertView: TerminalAlertUIView?
+    var alertView: UIView?
     
-    class func show() {
+    class func show(type: AlertType) {
+        
         let backgroundView = UIView()
-        let alertView = TerminalAlertUIView()
+        let alertView = type.view
         
         if let window = UIApplication.shared.keyWindow {
             window.addSubview(backgroundView)
@@ -32,6 +44,7 @@ class TerminalAlertMessage: NSObject {
             sharedInstance.alertView = alertView
         }
     }
+    
     
     class func hide() {
         if let alertView = sharedInstance.alertView,

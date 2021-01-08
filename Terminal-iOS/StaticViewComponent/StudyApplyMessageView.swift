@@ -25,7 +25,7 @@ class StudyApplyMessageView: TerminalAlertUIView {
         }
     }
     override func layout() {
-        [applyGuideLabel].forEach { addSubview($0) }
+        [bottomBar, applyGuideLabel].forEach { addSubview($0) }
         
         applyGuideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
