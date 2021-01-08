@@ -27,7 +27,7 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
         remoteDataManager.remoteRequestHandler = interactor
         
         if let view = view as? StudyListView {
-            view.category = "IOS"
+            view.category = "ios"
             return view
         } else {
             return UIViewController()

@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 import SwiftyJSON
 
 final class BaseInterceptor: RequestInterceptor {
-    let retryLimit = 5
+    let retryLimit = 10
     let retryDelay: TimeInterval = 0.5
     var accessToken: String = ""
     
@@ -41,17 +41,14 @@ final class BaseInterceptor: RequestInterceptor {
         case 200...299:
             completion(.doNotRetry)
         case 401, 403:
-            
             if request.retryCount < retryLimit {
-                
                 refreshToken { success in
-                    
                     print("성공여부 :", success)
                     return completion(.retryWithDelay(self.retryDelay))
                 }
             }
         default:
-            break
+           break
         }
     }
     
