@@ -216,13 +216,13 @@ class StudyDetailView: UIViewController {
         }
     }
     @objc func joinButtonDidTap() {
-//        presenter?.joinButtonDidTap(studyID: studyInfo!.id, message: "테스트신청매세지~~")
         TerminalAlertMessage.show(type: .StudyApplyView)
         (TerminalAlertMessage.alertView as! TerminalAlertUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
-        
     }
     @objc func studyApplyMessageEndEditing() {
-        print("Test")
+        guard let message = (TerminalAlertMessage.alertView as! StudyApplyMessageView).editMessageTextField.text else { return }
+        presenter?.joinButtonDidTap(studyID: studyID!, message: message)
+        TerminalAlertMessage.hide()
     }
 }
 
