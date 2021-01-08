@@ -14,7 +14,7 @@ class TerminalAlertUIView: UIView {
     var greenButton = UIButton()
     var topBar = UIView()
     var bottomBar = UIView()
-    var guideLabel = UILabel()
+//    var guideLabel = UILabel()
     var dismissButton = UIButton()
     var completeButton = UIButton()
     
@@ -29,7 +29,7 @@ class TerminalAlertUIView: UIView {
             $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
             $0.layer.cornerRadius = 5
             $0.layer.masksToBounds = true
-            $0.alpha = 0.5
+            $0.alpha = 1
         }
         topBar.do {
             $0.backgroundColor = UIColor.appColor(.alertTopBarColor)
@@ -37,7 +37,6 @@ class TerminalAlertUIView: UIView {
             $0.layer.masksToBounds = true
         }
         bottomBar.do {
-//            $0.backgroundColor = .black
             $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
         }
         redButton.do {
@@ -58,11 +57,11 @@ class TerminalAlertUIView: UIView {
             $0.backgroundColor = UIColor.appColor(.greenButtonColor)
             $0.setTitle("", for: .normal)
         }
-        guideLabel.do {
-            $0.text = "leave study?"
-            $0.textColor = UIColor.appColor(.alertTextcolor)
-            $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize-4, weight: UIFont.Weight.regular)
-        }
+//        guideLabel.do {
+//            $0.text = "leave study?"
+//            $0.textColor = UIColor.appColor(.alertTextcolor)
+//            $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize-4, weight: UIFont.Weight.regular)
+//        }
         dismissButton.do {
             $0.setTitle("no", for: .normal)
             $0.setTitleColor(UIColor.appColor(.alertTextcolor), for: .normal)
@@ -80,7 +79,8 @@ class TerminalAlertUIView: UIView {
     func layout() {
         [ topBar, bottomBar ].forEach { addSubview($0) }
         [ redButton, yellowButton, greenButton ].forEach { topBar.addSubview($0) }
-        [ guideLabel, dismissButton, completeButton ].forEach { bottomBar.addSubview($0) }
+//        [ guideLabel, dismissButton, completeButton ].forEach { bottomBar.addSubview($0) }
+        [ dismissButton, completeButton ].forEach { bottomBar.addSubview($0) }
         
         topBar.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -117,11 +117,11 @@ class TerminalAlertUIView: UIView {
             $0.leadingAnchor.constraint(equalTo: yellowButton.trailingAnchor, constant: 13).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 10).isActive = true
         }
-        guideLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor).isActive = true
-        }
+//        guideLabel.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.centerXAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
+//            $0.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor).isActive = true
+//        }
         dismissButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true

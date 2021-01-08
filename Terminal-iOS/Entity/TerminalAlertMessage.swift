@@ -11,7 +11,7 @@ import UIKit
 class TerminalAlertMessage: NSObject {
     private static let sharedInstance = TerminalAlertMessage()
     private var backgroundView: UIView?
-    private var alertView: TerminalAlertUIView?
+    var alertView: TerminalAlertUIView?
     
     class func show() {
         let backgroundView = UIView()
@@ -23,7 +23,7 @@ class TerminalAlertMessage: NSObject {
             window.backgroundColor = UIColor.appColor(.terminalBackground)
             alertView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX * 0.8, height: 300)
             backgroundView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX, height: window.frame.maxY)
-            backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.7)
+            backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9)
             alertView.center = window.center
             
             sharedInstance.backgroundView?.removeFromSuperview()

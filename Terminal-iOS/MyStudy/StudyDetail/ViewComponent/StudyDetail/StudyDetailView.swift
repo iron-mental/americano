@@ -52,6 +52,7 @@ class StudyDetailView: UIViewController {
     lazy var locationView = TitleWithContentView()
     var mapView = NMFMapView()
     var joinButton = UIButton()
+    var panddingButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +80,6 @@ class StudyDetailView: UIViewController {
                 $0.image = #imageLiteral(resourceName: "ios")
             }
         }
-        
         joinButton.do {
             if state == .none || state == .rejected {
                 $0.isHidden = false
@@ -216,7 +216,8 @@ class StudyDetailView: UIViewController {
         }
     }
     @objc func joinButtonDidTap() {
-        presenter?.joinButtonDidTap(studyID: studyInfo!.id, message: "테스트신청매세지~~")
+//        presenter?.joinButtonDidTap(studyID: studyInfo!.id, message: "테스트신청매세지~~")
+        TerminalAlertMessage.show()
     }
 }
 
