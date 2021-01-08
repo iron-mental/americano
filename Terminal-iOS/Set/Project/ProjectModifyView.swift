@@ -93,7 +93,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             let contents = cell.contents.text!
             let github = cell.sns.firstTextFeield.text ?? ""
             let appStore = cell.sns.secondTextField.text ?? ""
-            let playStore = cell.sns.secondTextField.text ?? ""
+            let playStore = cell.sns.thirdTextField.text ?? ""
         
             projectArr[index] = Project(id: id,
                                         title: title,
@@ -107,7 +107,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     @objc func completeModify() {
         getCellData()
-        print("projectArr", projectArr)
         presenter?.completeModify(project: projectArr)
     }
     
@@ -144,6 +143,9 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
             self.navigationController?.popViewController(animated: true, completion: {
                 parent?.presenter?.viewDidLoad()
             })
+        } else {
+            // 실패시 에러처리 부분
+            
         }
     }
 }

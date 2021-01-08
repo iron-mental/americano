@@ -21,7 +21,7 @@ class SNSModifyView: UIViewController {
     }
     
     func attribute() {
-        self.view.backgroundColor = .appColor(.terminalBackground)
+        self.view.backgroundColor = .black
 
         self.completeButton.do {
             $0.backgroundColor = .appColor(.mainColor)
