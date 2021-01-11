@@ -260,6 +260,7 @@
 		CCE279EC256E46C600DB3246 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EB256E46C600DB3246 /* Notice.swift */; };
 		CCE4E51D25A57A6D00DEFC3C /* TerminalAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */; };
 		CCEEB43525AC2FAC00F522C4 /* nyancat_big1610346923.json in Resources */ = {isa = PBXBuildFile; fileRef = CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */; };
+		CCEEB45B25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB45A25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift */; };
 		CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */; };
 		CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709A256B9A510085B371 /* ChatInteractor.swift */; };
 		CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */; };
@@ -565,6 +566,7 @@
 		CCE279EB256E46C600DB3246 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertMessage.swift; sourceTree = "<group>"; };
 		CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nyancat_big1610346923.json; sourceTree = "<group>"; };
+		CCEEB45A25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyDetailProtocols.swift; sourceTree = "<group>"; };
 		CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewProtocols.swift; sourceTree = "<group>"; };
 		CCF4709A256B9A510085B371 /* ChatInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
 		CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				CCEEB45925AC4C9600F522C4 /* MyApplyStudyDetail */,
 				A53B11AD258CB6CB00498A96 /* ApplyUserDetail */,
 				CC84850525A47FD700C792BC /* AlertView */,
 				A510B9FC2583BB050084559C /* ApplyUser */,
@@ -1356,6 +1359,14 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		CCEEB45925AC4C9600F522C4 /* MyApplyStudyDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CCEEB45A25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift */,
+			);
+			path = MyApplyStudyDetail;
+			sourceTree = "<group>";
+		};
 		CCF47095256B97D60085B371 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1705,6 +1716,7 @@
 				A510BA202583BB500084559C /* ApplyUserWireFrame.swift in Sources */,
 				CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */,
 				CC1BE0332510CC0000F88313 /* SelectCategoryProtocols.swift in Sources */,
+				CCEEB45B25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift in Sources */,
 				A5C81C6725837243008F2B09 /* MyApplyListCell.swift in Sources */,
 				CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */,
 				A510BA1B2583BB3E0084559C /* ApplyUserProtocols.swift in Sources */,
@@ -1790,7 +1802,6 @@
 				CCA3FF492517823E00F62627 /* StudyListPresenter.swift in Sources */,
 				CCF470A5256B9A8A0085B371 /* ChatLocalDataManager.swift in Sources */,
 				CCF71AA7256F959000EC83C6 /* StudyDetailPost.swift in Sources */,
-				A547275C255A668600076DBD /* EmailModifyView.swift in Sources */,
 				CCF632D625A2E880004B80B3 /* SearchStudyResultLocalDataManager.swift in Sources */,
 				A57097A6254D6B5F0001DE52 /* NoticeCell.swift in Sources */,
 				A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */,
