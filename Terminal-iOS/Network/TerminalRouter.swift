@@ -33,6 +33,8 @@ enum TerminalRouter: URLRequestConvertible {
     case login                  (userData: Parameters)
     case signUp                 (userData: Parameters)
     
+    case address
+    
     // 프로젝트
     case projectRegister        (id: String, project: Parameters)
     case projectList            (id: String)
@@ -104,6 +106,10 @@ enum TerminalRouter: URLRequestConvertible {
             return .post
         case .login, .signUp:
             return .post
+        
+        case .address:
+            return .get
+        
             
         // 프로젝트
         case .projectRegister:
@@ -199,6 +205,9 @@ enum TerminalRouter: URLRequestConvertible {
         case .signUp:
             return "user"
             
+        case .address:
+            return "user/address"
+            
         // 프로젝트
         case let .projectRegister(id, _), let .projectList(id):
             return "user/\(id)/project"
@@ -244,7 +253,6 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/notice/\(noticeID)"
         case let .noticeDelete(studyID, noticeID):
             return "study/\(studyID)/notice/\(noticeID)"
-
         }
     }
     
@@ -276,6 +284,9 @@ enum TerminalRouter: URLRequestConvertible {
             return userData
         case let .signUp(userData):
             return userData
+            
+        case .address:
+            return nil
             
         // 스터디
         case .studyDetail, .studyDelete, .myStudyList, .hotKeyword:
