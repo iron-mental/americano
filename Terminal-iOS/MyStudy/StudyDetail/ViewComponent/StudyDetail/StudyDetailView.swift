@@ -259,8 +259,8 @@ class StudyDetailView: UIViewController {
     }
     
     @objc func modifyJoinButtonDidTap() {
-        //신청 상세 조회 들어가야합니다.
-        print(studyID)
+        guard let id = studyID else { return }
+        presenter?.modifyStudyMessageButtonDidTap(studyID: id)
     }
     
     @objc func studyApplyMessageEndEditing() {

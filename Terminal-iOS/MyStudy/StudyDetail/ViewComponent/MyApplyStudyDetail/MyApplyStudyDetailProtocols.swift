@@ -17,6 +17,7 @@ protocol MyApplyStudyDetailPresenterInputProtocol {
     var view: MyApplyStudyDetailViewProtocol? { get set }
     var interactor: MyApplyStudyDetailInteractorInputProtocol? { get set }
     var wireFrame: MyApplyStudyDetailWireFrameProtocol? { get set }
+    
 }
 
 protocol MyApplyStudyDetailInteractorInputProtocol {
