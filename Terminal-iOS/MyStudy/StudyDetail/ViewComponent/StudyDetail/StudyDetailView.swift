@@ -81,9 +81,19 @@ class StudyDetailView: UIViewController {
             }
         }
         joinButton.do {
+            print(state)
             if state == .none || state == .rejected {
                 $0.isHidden = false
                 $0.setTitle("스터디 참여하기", for: .normal)
+                $0.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+                $0.setTitleColor(.white, for: .normal)
+                $0.backgroundColor = UIColor.appColor(.mainColor)
+                $0.layer.cornerRadius = 10
+                $0.clipsToBounds = false
+                $0.addTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
+            } else if state == .applier {
+                $0.isHidden = false
+                $0.setTitle("신청 대기중", for: .normal)
                 $0.titleLabel?.font = UIFont.systemFont(ofSize: 13)
                 $0.setTitleColor(.white, for: .normal)
                 $0.backgroundColor = UIColor.appColor(.mainColor)
