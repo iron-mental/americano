@@ -11,6 +11,7 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class ProfileDetailView: UIViewController {
+    
     // MARK: Init Property
     
     var presenter: ProfileDetailPresenterProtocol?
@@ -22,15 +23,15 @@ class ProfileDetailView: UIViewController {
     let projectLabel    = UILabel()
     let projectStack    = UIStackView()
     let snsLabel        = UILabel()
-    let sns             = SNSView()
+    let sns             = ProfileSNSView()
     let emailLabel      = UILabel()
     let email           = EmailView()
     let locationLabel   = UILabel()
     let location        = LocationView()
     
-    var projectArr: [UIView] = []
-    var projectData: [Project] = []
+    var projectData: [Project] = [] 
     var userInfo: UserInfo?
+    
     // MARK: ViewDidLoad
     
     override func viewDidLoad() {
@@ -43,12 +44,7 @@ class ProfileDetailView: UIViewController {
     // MARK: Set Attribute
     
     func attribute() {
-        let modifyBtn = UIBarButtonItem(image: #imageLiteral(resourceName: "modifiy"),
-                                        style: .plain,
-                                        target: self,
-                                        action: #selector(pushProfileModify))
-        
-        [profile, career, sns, projectStack,email, location].forEach {
+        [profile, career, sns, projectStack, email, location].forEach {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
         }
@@ -56,122 +52,128 @@ class ProfileDetailView: UIViewController {
         self.do {
             $0.title = "프로필"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.navigationItem.rightBarButtonItem = modifyBtn
         }
 
-        careerLabel.do {
+        self.careerLabel.do {
             $0.text = "경력"
             $0.textColor = .white
         }
         
-        projectLabel.do {
+        self.projectLabel.do {
             $0.text = "프로젝트"
             $0.textColor = .white
         }
         
-        snsLabel.do {
+        self.snsLabel.do {
             $0.text = "SNS"
             $0.textColor = .white
         }
         
-        emailLabel.do {
+        self.emailLabel.do {
             $0.text = "Email"
             $0.textColor = .white
         }
         
-        locationLabel.do {
+        self.profile.modify.addTarget(self, action: #selector(modifyProfile), for: .touchUpInside)
+        self.career.modify.addTarget(self, action: #selector(modifyCareer), for: .touchUpInside)
+        self.sns.modify.addTarget(self, action: #selector(modifySNS), for: .touchUpInside)
+        self.email.modify.addTarget(self, action: #selector(modifyEmail), for: .touchUpInside)
+        self.location.modify.addTarget(self, action: #selector(modifyLocation), for: .touchUpInside)
+        
+        self.locationLabel.do {
             $0.text = "활동지역"
             $0.textColor = .white
         }
         
-        projectStack.do {
+        self.projectStack.do {
             $0.axis = .vertical
-            $0.distribution = .fillEqually
-            $0.spacing = 10
+            $0.distribution = .fill
+            $0.spacing = 5
         }
     }
     
     // MARK: Set Layout
     
     func layout() {
-        view.addSubview(scrollView)
-        [profile, careerLabel, career, projectLabel, projectStack, snsLabel, sns, emailLabel,email, locationLabel, location]
-            .forEach { scrollView.addSubview($0) }
+        self.view.addSubview(scrollView)
+        [profile, careerLabel, career, projectLabel, projectStack,
+         snsLabel, sns, emailLabel,email, locationLabel, location]
+            .forEach { self.scrollView.addSubview($0) }
         
         // 스크롤뷰 오토레이아웃
-        scrollView.do {
+        self.scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         }
-        profile.do {
+        self.profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: profile.heightAnchor).isActive = true
         }
-        careerLabel.do {
+        self.careerLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profile.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: careerLabel.heightAnchor).isActive = true
         }
-        career.do {
+        self.career.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: careerLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: career.heightAnchor).isActive = true
         }
-        projectLabel.do {
+        self.projectLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: career.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
-        projectStack.do {
+        self.projectStack.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: projectStack.heightAnchor).isActive = true
         }
-        snsLabel.do {
+        self.snsLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectStack.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
-        sns.do {
+        self.sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: snsLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: sns.heightAnchor).isActive = true
         }
-        emailLabel.do {
+        self.emailLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: sns.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
-        email.do {
+        self.email.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: email.heightAnchor).isActive = true
         }
-        locationLabel.do {
+        self.locationLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
-        location.do {
+        self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
@@ -180,14 +182,42 @@ class ProfileDetailView: UIViewController {
         }
     }
     
-    @objc func pushProfileModify() {
-        guard let userInfo = self.userInfo else { return }
-        presenter?.showProfileModify(userInfo: userInfo, project: projectData)
+    @objc func modifyProfile() {
+        let profileImage = profile.profileImage.image ?? UIImage(named: "managerImage")!
+        let name = profile.name.text!
+        let introduction = profile.descript.text!
+        let profile = Profile(profileImage: profileImage, nickname: name, introduction: introduction)
+        
+        presenter?.showProfileModify(profile: profile)
+    }
+    
+    @objc func modifyCareer() {
+        let title = career.careerTitle.text ?? ""
+        let contents = career.careerContents.text ?? ""
+        presenter?.showCareerModify(title: title, contents: contents)
+    }
+    
+    @objc func modifyProject() {
+        let project: [Project] = projectData
+        presenter?.showProjectModify(project: project)
+    }
+    
+    @objc func modifySNS() {
+        presenter?.showSNSModify()
+    }
+    
+    @objc func modifyEmail() {
+        presenter?.showEmailModify()
+    }
+    
+    @objc func modifyLocation() {
+        presenter?.showLocationModify()
     }
 }
 
 extension ProfileDetailView: ProfileDetailViewProtocol {
     func showUserInfo(with userInfo: UserInfo) {
+        var snsList: [String: String] = [:]
         self.userInfo = userInfo
         /// Kingfisher auth token
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
@@ -200,39 +230,73 @@ extension ProfileDetailView: ProfileDetailViewProtocol {
         // MARK: Set User Info
         
         /// 프로필
-        profile.name.text = userInfo.nickname
+        self.profile.name.text = userInfo.nickname
         
         if let image = userInfo.image, let introduce = userInfo.introduce {
-            profile.descript.text = introduce
-            profile.profileImage.kf.setImage(with: URL(string: image),
+            self.profile.descript.text = introduce
+            self.profile.profileImage.kf.setImage(with: URL(string: image),
                                              options: [.requestModifier(imageDownloadRequest)])
         }
       
         /// 경력
         if let careerTitle = userInfo.careerTitle, let careerContents = userInfo.careerContents {
-            career.careerTitle.text = careerTitle
-            career.careerContents.text = careerContents
+            self.career.careerTitle.text = careerTitle
+            self.career.careerContents.text = careerContents
         }
         
+        /// SNS
+        if let github = userInfo.snsGithub,
+           let linkedin = userInfo.snsLinkedin,
+           let web = userInfo.snsWeb {
+            if !github.isEmpty {
+                snsList.updateValue(github, forKey: "github")
+            }
+            
+            if !linkedin.isEmpty {
+                snsList.updateValue(linkedin, forKey: "linkedin")
+            }
+            
+            if !web.isEmpty {
+                snsList.updateValue(web, forKey: "web")
+            }
+        }
+        
+        self.sns.addstack(snsList: snsList)
+        
         /// 이메일
-        email.email.text = userInfo.email
+        self.email.email.text = userInfo.email
         
         /// 활동지역
         if let address = userInfo.address {
-            location.location.text = address
+            self.location.location.text = address
         }
     }
     
     func addProjectToStackView(with project: [Project]) {
-        projectData = project
+        self.projectData = project
+        
+        /// 기존의 프로젝트 스택뷰에 요소들을 셋팅 전에 모두 제거
+        self.projectStack.removeAllArrangedSubviews()
         
         for data in project {
             let title = data.title
             let contents = data.contents
             
-            let projectView = ProjectView(title: title, contents: contents, frame: CGRect.zero)
+            let projectView = ProjectView(title: title,
+                                          contents: contents,
+                                          snsGithub: data.snsGithub ?? "",
+                                          snsAppStore: data.snsAppstore ?? "",
+                                          snsPlayStore: data.snsPlaystore ?? "",
+                                          frame: CGRect.zero)
             
-            projectStack.addArrangedSubview(projectView)
+            self.projectStack.addArrangedSubview(projectView)
         }
+        
+        let addProjectButton = UIButton().then {
+            $0.setTitle("프로젝트 수정", for: .normal)
+            $0.setTitleColor(.appColor(.mainColor), for: .normal)
+            $0.addTarget(self, action: #selector(modifyProject), for: .touchUpInside)
+        }
+        self.projectStack.addArrangedSubview(addProjectButton)
     }
 }

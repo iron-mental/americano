@@ -35,11 +35,51 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         }
     }
     
-    func presentProfileModifyScreen(from view: ProfileDetailViewProtocol, userInfo: UserInfo, project: [Project]) {
-        let profileModifyView = ProfileModifyWireFrame.createProfileModifyModule(userInfo: userInfo, project: project)
+    func presentEmailModify(from view: ProfileDetailViewProtocol) {
+        let emailModifyView = EmailModifyWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(emailModifyView, animated: true)
+        }
+    }
+    
+    func presentSNSModify(from view: ProfileDetailViewProtocol) {
+        let snsModifyView = SNSModifyWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(snsModifyView, animated: true)
+        }
+    }
+    
+    func presentProfileModify(from view: ProfileDetailViewProtocol, profile: Profile) {
+        let profileModifyView = ProfileModifyWireFrame.createProfileModifyModule(profile: profile)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(profileModifyView, animated: true)
+        }
+    }
+
+    func presentLocationModify(from view: ProfileDetailViewProtocol) {
+        let locationModifyView = LocationModifyWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(locationModifyView, animated: true)
+        }
+    }
+    
+    func presentCareerModify(from view: ProfileDetailViewProtocol, title: String, Contents: String) {
+        let careerModifyView = CareerModifyWireFrame.createModule(title: title, contents: Contents)
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(careerModifyView, animated: true)
+        }
+    }
+
+    func presentProjectModify(from view: ProfileDetailViewProtocol, project: [Project]) {
+        let projectModifyView = ProjectModifyWireFrame.createModule(project: project)
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(projectModifyView, animated: true)
         }
     }
 }
