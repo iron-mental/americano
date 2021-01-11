@@ -8,20 +8,20 @@
 
 import UIKit
 
+
 protocol MyApplyStudyDetailViewProtocol {
-    
+    var presenter: MyApplyStudyDetailPresenterInputProtocol? { get set }
 }
 
 protocol MyApplyStudyDetailPresenterInputProtocol {
-    
-}
-
-protocol MyApplyStudyDetailPresenterOutputProtocol {
-    
+    var view: MyApplyStudyDetailViewProtocol? { get set }
+    var interactor: MyApplyStudyDetailInteractorInputProtocol? { get set }
+    var wireFrame: MyApplyStudyDetailWireFrameProtocol? { get set }
 }
 
 protocol MyApplyStudyDetailInteractorInputProtocol {
-    
+    var presenter: MyApplyStudyDetailInteractorOutputProtocol? { get set }
+    var remoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol? { get set }
 }
 
 protocol MyApplyStudyDetailInteractorOutputProtocol {
@@ -29,7 +29,7 @@ protocol MyApplyStudyDetailInteractorOutputProtocol {
 }
 
 protocol MyApplyStudyDetailRemoteDataManagerInputProtocol {
-    
+    var interactor: MyApplyStudyDetailRemoteDataManagerOutputProtocol? { get set }
 }
 
 protocol MyApplyStudyDetailRemoteDataManagerOutputProtocol {
@@ -37,5 +37,5 @@ protocol MyApplyStudyDetailRemoteDataManagerOutputProtocol {
 }
 
 protocol MyApplyStudyDetailWireFrameProtocol {
-    
+    static func createMyApplyStudyDetailModule(studyID: Int) -> UIViewController
 }
