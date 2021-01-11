@@ -10,6 +10,7 @@ import UIKit
 import NMapsMap
 import SwiftKeychainWrapper
 import Kingfisher
+import Lottie
 
 enum StudyDetailViewState: String {
     case edit
@@ -53,6 +54,8 @@ class StudyDetailView: UIViewController {
     var mapView = NMFMapView()
     var joinButton = UIButton()
     var panddingButton = UIButton()
+//    var joinProgressCat = AnimationView(name: "nyancat_big1610346923")
+    var joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,11 +84,10 @@ class StudyDetailView: UIViewController {
             }
         }
         joinButton.do {
-            print(state)
             if state == .none || state == .rejected {
                 $0.isHidden = false
                 $0.setTitle("스터디 참여하기", for: .normal)
-                $0.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+                $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
                 $0.setTitleColor(.white, for: .normal)
                 $0.backgroundColor = UIColor.appColor(.mainColor)
                 $0.layer.cornerRadius = 10
@@ -93,12 +95,14 @@ class StudyDetailView: UIViewController {
                 $0.addTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
             } else if state == .applier {
                 $0.isHidden = false
-                $0.setTitle("신청 대기중", for: .normal)
-                $0.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-                $0.setTitleColor(.white, for: .normal)
-                $0.backgroundColor = UIColor.appColor(.mainColor)
+                $0.setTitle("가입 진행중", for: .normal)
+                $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+                $0.backgroundColor = .white
+                $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+                $0.setTitleColor(.black, for: .normal)
                 $0.layer.cornerRadius = 10
                 $0.clipsToBounds = false
+                $0.contentHorizontalAlignment = .right
                 $0.addTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
             } else {
                 $0.isHidden = true
@@ -133,18 +137,31 @@ class StudyDetailView: UIViewController {
             if let item = studyInfo?.location.locationDetail {
                 detailAddress = item
             }
-            print(detailAddress)
-            
             $0.title.text = "장소"
             $0.contentText = ["장소",  String(studyInfo?.location.addressName ?? "") +  detailAddress]
         }
+        joinProgressCat.do {
+            if state == .none || state == .rejected {
+                $0.isHidden = true
+                $0.stop()
+            } else if state == .applier {
+                $0.isHidden = false
+                $0.play()
+                $0.loopMode = .loop
+            } else {
+                print(state)
+                $0.isHidden = true
+            }
+        }
+        
     }
     
     func layout() {
+        
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, joinButton, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, locationView, mapView].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, joinButton, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, locationView, mapView, joinProgressCat].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -179,7 +196,7 @@ class StudyDetailView: UIViewController {
             $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 113)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 18)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 36)).isActive = true
         }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -223,6 +240,13 @@ class StudyDetailView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 254)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 186)).isActive = true
             $0.bottomAnchor.constraint(equalTo: tempBackgroundView.bottomAnchor).isActive = true
+        }
+        joinProgressCat.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: joinButton.centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: joinButton.leadingAnchor, constant: 5).isActive = true
+            $0.widthAnchor.constraint(equalTo: joinButton.widthAnchor, multiplier: 0.45).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 72)).isActive = true
         }
     }
     @objc func joinButtonDidTap() {

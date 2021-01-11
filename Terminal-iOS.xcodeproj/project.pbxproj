@@ -234,6 +234,7 @@
 		CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279DE256E46BA00DB3246 /* NoticeList.swift */; };
 		CCE279EC256E46C600DB3246 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EB256E46C600DB3246 /* Notice.swift */; };
 		CCE4E51D25A57A6D00DEFC3C /* TerminalAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */; };
+		CCEEB43525AC2FAC00F522C4 /* nyancat_big1610346923.json in Resources */ = {isa = PBXBuildFile; fileRef = CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */; };
 		CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */; };
 		CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709A256B9A510085B371 /* ChatInteractor.swift */; };
 		CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */; };
@@ -513,6 +514,7 @@
 		CCE279DE256E46BA00DB3246 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
 		CCE279EB256E46C600DB3246 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertMessage.swift; sourceTree = "<group>"; };
+		CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nyancat_big1610346923.json; sourceTree = "<group>"; };
 		CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewProtocols.swift; sourceTree = "<group>"; };
 		CCF4709A256B9A510085B371 /* ChatInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInteractor.swift; sourceTree = "<group>"; };
 		CCF4709E256B9A5D0085B371 /* ChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
@@ -1011,6 +1013,7 @@
 				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
 				A51BA0AE2577F0CA00B9673F /* Utils */,
 				CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */,
+				CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */,
 				A56605E025835873002C4A77 /* BaseComponent */,
 				A5BA460C255D09C80061C511 /* Network */,
 				A587CEC7251A428A00A2AD13 /* Extensions-Utillities */,
@@ -1384,6 +1387,7 @@
 				CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
 				CC465ED42577F113008448C3 /* 14476-rainbow-cat-remix.json in Resources */,
+				CCEEB43525AC2FAC00F522C4 /* nyancat_big1610346923.json in Resources */,
 				CCD51C69256CC13700D41771 /* NotoSansKR-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
