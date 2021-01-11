@@ -219,6 +219,7 @@ class StudyDetailView: UIViewController {
         TerminalAlertMessage.show(type: .StudyApplyView)
         (TerminalAlertMessage.alertView as! TerminalAlertUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
     }
+    
     @objc func studyApplyMessageEndEditing() {
         guard let message = (TerminalAlertMessage.alertView as! StudyApplyMessageView).editMessageTextField.text else { return }
         presenter?.joinButtonDidTap(studyID: studyID!, message: message)

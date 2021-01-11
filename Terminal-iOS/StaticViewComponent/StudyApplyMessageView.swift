@@ -36,6 +36,7 @@ class StudyApplyMessageView: TerminalAlertUIView {
     }
     override func layout() {
         super.layout()
+        
         [bottomBar, applyTitleLabel, applyGuideLabel, editMessageTextField].forEach { addSubview($0) }
         
         applyTitleLabel.do {
@@ -46,12 +47,12 @@ class StudyApplyMessageView: TerminalAlertUIView {
         applyGuideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
-            $0.topAnchor.constraint(equalTo: applyTitleLabel.bottomAnchor, constant: 8).isActive = true
+            $0.topAnchor.constraint(equalTo: applyTitleLabel.bottomAnchor, constant: 16).isActive = true
         }
         editMessageTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
-            $0.topAnchor.constraint(equalTo: applyGuideLabel.bottomAnchor, constant: 16).isActive = true
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         }
     }
     
