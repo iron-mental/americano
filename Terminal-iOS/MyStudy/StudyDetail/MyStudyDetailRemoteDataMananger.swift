@@ -49,7 +49,6 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
                     self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
                     break
                 case .failure(let err):
-                    
                     break
                 }
             }

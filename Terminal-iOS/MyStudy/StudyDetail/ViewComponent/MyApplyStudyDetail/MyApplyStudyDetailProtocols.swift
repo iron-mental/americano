@@ -11,6 +11,11 @@ import UIKit
 
 protocol MyApplyStudyDetailViewProtocol {
     var presenter: MyApplyStudyDetailPresenterInputProtocol? { get set }
+    var studyID: Int? { get set }
+    
+//    PRESENTER -> VIEW
+    func showMyApplyStudyDetail(message: String)
+    func showError()
 }
 
 protocol MyApplyStudyDetailPresenterInputProtocol {
@@ -18,23 +23,35 @@ protocol MyApplyStudyDetailPresenterInputProtocol {
     var interactor: MyApplyStudyDetailInteractorInputProtocol? { get set }
     var wireFrame: MyApplyStudyDetailWireFrameProtocol? { get set }
     
+//    VIEW -> PRESENTER
+    func viewDidLoad(studyID: Int)
 }
 
 protocol MyApplyStudyDetailInteractorInputProtocol {
     var presenter: MyApplyStudyDetailInteractorOutputProtocol? { get set }
     var remoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol? { get set }
+    
+//    PRESENTER -> INTERACTOR
+    func getMyApplyStudyDetail(studyID: Int)
 }
 
 protocol MyApplyStudyDetailInteractorOutputProtocol {
     
+//    INTERACTOR -> PRESENTER
+    func retriveMyApplyStudyDetail(result: Bool, message: String)
 }
 
 protocol MyApplyStudyDetailRemoteDataManagerInputProtocol {
     var interactor: MyApplyStudyDetailRemoteDataManagerOutputProtocol? { get set }
+    
+//    INTERACTOR -> REMOTEDATAMANAGER
+    func getMyApplyStudyDetail(studyID: Int, userID: Int)
 }
 
 protocol MyApplyStudyDetailRemoteDataManagerOutputProtocol {
     
+//    REMOTEDATAMANAGER -> INTERACTOR
+    func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult)
 }
 
 protocol MyApplyStudyDetailWireFrameProtocol {

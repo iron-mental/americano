@@ -17,6 +17,7 @@ class MyApplyStudyDetailWireFrame: MyApplyStudyDetailWireFrameProtocol {
         let wireFrame = MyApplyStudyDetailWireFrame()
         
         view.presenter = presenter
+        view.studyID = studyID
         
         presenter.view = view
         presenter.wireFrame = wireFrame

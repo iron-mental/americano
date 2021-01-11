@@ -16,10 +16,6 @@ struct StudyDetailPost {
     let snsWeb, snsNotion, snsEvernote: String?
     let image: UIImage?
     let location: StudyDetailLocationPost
-    
-    func test() {
-        
-    }
 }
 
 struct StudyDetailLocationPost {

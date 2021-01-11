@@ -17,6 +17,7 @@ final class BaseInterceptor: RequestInterceptor {
     var accessToken: String = ""
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        
         var request = urlRequest
 
         if let token = KeychainWrapper.standard.string(forKey: "accessToken") {
@@ -27,6 +28,7 @@ final class BaseInterceptor: RequestInterceptor {
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
 
         completion(.success(request))
+        
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
