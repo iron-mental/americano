@@ -29,6 +29,7 @@ final class BaseInterceptor: RequestInterceptor {
 
         completion(.success(request))
         
+        
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {

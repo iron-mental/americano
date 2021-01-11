@@ -11,11 +11,15 @@ import UIKit
 class MyApplyStudyDetailView: UIViewController {
     var presenter: MyApplyStudyDetailPresenterInputProtocol?
     var studyID: Int?
+    var inputBackgroundView = UIView()
+    var applyTextField = UITextField()
+    var guideLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard  let id = studyID else { return }
-        presenter?.viewDidLoad(studyID: id )
+        guard let id = studyID else { return }
+        presenter?.viewDidLoad(studyID: id)
+        layout()
     }
     
     func attribute() {
@@ -25,12 +29,53 @@ class MyApplyStudyDetailView: UIViewController {
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
+        inputBackgroundView.do {
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.layer.cornerRadius = 20
+            $0.layer.masksToBounds = true
+            
+        }
+        applyTextField.do {
+            $0.addLeftPadding()
+            $0.placeholder = "안녕하세요"
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+        }
+        guideLabel.do {
+            $0.text = "가입 인사를 작성해보세요"
+            $0.numberOfLines = 0
+            $0.font = UIFont.boldSystemFont(ofSize: 30)
+        }
+    }
+    
+    func layout() {
+        [inputBackgroundView, guideLabel].forEach { view.addSubview($0) }
+        [applyTextField].forEach { inputBackgroundView.addSubview($0) }
+        
+        inputBackgroundView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -Terminal.convertHeigt(value: 100)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 75).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        }
+        guideLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
+        }
+        
+        applyTextField.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.leadingAnchor.constraint(equalTo: inputBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
+            $0.centerYAnchor.constraint(equalTo: inputBackgroundView.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: inputBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 30)).isActive = true
+        }
     }
 }
 
 extension MyApplyStudyDetailView: MyApplyStudyDetailViewProtocol {
     func showMyApplyStudyDetail(message: String) {
-        print(message)
+        applyTextField.text = message
         attribute()
     }
     
