@@ -12,6 +12,7 @@ protocol LocationModifyViewProtocol: class {
     var presenter: LocationModifyPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func showAddress(address: [Address])
 }
 
 protocol LocationModifyWireFrameProtocol: class {
@@ -24,16 +25,18 @@ protocol LocationModifyPresenterProtocol: class {
     var wireFrame: LocationModifyWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
+    func viewDidLoad()
 }
 
 protocol LocationModifyInteractorInputProtocol: class {
     var presenter: LocationModifyInteractorOutputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-   
+   func address()
 }
 
 protocol LocationModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     
+    func retrievedAddress(result: Bool, address: [Address])
 }
