@@ -93,6 +93,7 @@ class StudyDetailView: UIViewController {
                 $0.backgroundColor = UIColor.appColor(.mainColor)
                 $0.layer.cornerRadius = 10
                 $0.clipsToBounds = false
+                $0.removeTarget(self, action: #selector(modifyJoinButtonDidTap), for: .touchUpInside)
                 $0.addTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
             } else if state == .applier {
                 $0.isHidden = false
@@ -104,6 +105,7 @@ class StudyDetailView: UIViewController {
                 $0.layer.cornerRadius = 10
                 $0.clipsToBounds = false
                 $0.contentHorizontalAlignment = .right
+                $0.removeTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
                 $0.addTarget(self, action: #selector(modifyJoinButtonDidTap), for: .touchUpInside)
             } else {
                 $0.isHidden = true
@@ -257,8 +259,8 @@ class StudyDetailView: UIViewController {
     }
     
     @objc func modifyJoinButtonDidTap() {
-        TerminalAlertMessage.show(type: .StudyApplyView)
-        (TerminalAlertMessage.alertView as! TerminalAlertUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
+        //신청 상세 조회 들어가야합니다.
+        print(studyID)
     }
     
     @objc func studyApplyMessageEndEditing() {

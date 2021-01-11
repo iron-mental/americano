@@ -8,27 +8,35 @@
 
 import UIKit
 
+enum StudyApplyMessageType {
+    case apply
+    case modify
+}
+
 
 class StudyApplyMessageView: TerminalAlertUIView {
+    var type: StudyApplyMessageType = .apply
     var applyTitleLabel = UILabel()
     var applyGuideLabel = UILabel()
     var editMessageTextField = UITextField()
     
-    override init() {
+    init(type: StudyApplyMessageType) {
         super.init()
+        self.type = type
         super.attribute()
         attribute()
         layout()
     }
     override func attribute() {
         super.attribute()
+        
         applyTitleLabel.do {
-            $0.text = "스터디 신청하기"
             $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize + 5, weight: UIFont.Weight.regular)
+            $0.text = type == .apply ? "스터디 신청하기" : "신청 메세지 수정하기"
         }
         applyGuideLabel.do {
-            $0.text = "가입 인사를 작성해보세요"
             $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize, weight: UIFont.Weight.regular)
+            $0.text = type == .apply ? "가입 인사를 작성해보세요" : "수정할 메세지를 작성하세요"
         }
         editMessageTextField.do {
             $0.placeholder = "스터디 참여를 희망합니다."

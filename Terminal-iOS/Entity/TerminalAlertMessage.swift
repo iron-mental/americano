@@ -15,9 +15,9 @@ enum AlertType {
     var view: UIView {
         switch self {
         case .StudyApplyView:
-            return StudyApplyMessageView()
+            return StudyApplyMessageView(type: .apply)
         case .ModifyStudyApplyView:
-            return StudyApplyMessageView()
+            return StudyApplyMessageView(type: .modify)
         }
     }
 }
