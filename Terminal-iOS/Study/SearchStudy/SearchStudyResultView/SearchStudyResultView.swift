@@ -75,9 +75,10 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let keyValue = searchResult[indexPath.row].id
+        
         //후에 서버에서 member처리해주면 그때 대응
 //        guard let state = searchResult[indexPath.row].isMember else { return }
-        presenter?.didTapCell(keyValue: keyValue, state: false)
+        presenter?.didTapCell(keyValue: keyValue, state: searchResult[indexPath.row].isMember!)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

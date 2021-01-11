@@ -10,10 +10,13 @@ import UIKit
 
 enum AlertType {
     case StudyApplyView
+    case ModifyStudyApplyView
 
     var view: UIView {
         switch self {
         case .StudyApplyView:
+            return StudyApplyMessageView()
+        case .ModifyStudyApplyView:
             return StudyApplyMessageView()
         }
     }

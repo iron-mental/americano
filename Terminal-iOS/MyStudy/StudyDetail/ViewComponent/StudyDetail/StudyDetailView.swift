@@ -54,7 +54,7 @@ class StudyDetailView: UIViewController {
     var mapView = NMFMapView()
     var joinButton = UIButton()
     var panddingButton = UIButton()
-//    var joinProgressCat = AnimationView(name: "nyancat_big1610346923")
+    let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
     var joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
     
     override func viewDidLoad() {
@@ -84,6 +84,7 @@ class StudyDetailView: UIViewController {
             }
         }
         joinButton.do {
+            $0.tag = 0
             if state == .none || state == .rejected {
                 $0.isHidden = false
                 $0.setTitle("스터디 참여하기", for: .normal)
@@ -103,7 +104,7 @@ class StudyDetailView: UIViewController {
                 $0.layer.cornerRadius = 10
                 $0.clipsToBounds = false
                 $0.contentHorizontalAlignment = .right
-                $0.addTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
+                $0.addTarget(self, action: #selector(modifyJoinButtonDidTap), for: .touchUpInside)
             } else {
                 $0.isHidden = true
             }
@@ -141,6 +142,8 @@ class StudyDetailView: UIViewController {
             $0.contentText = ["장소",  String(studyInfo?.location.addressName ?? "") +  detailAddress]
         }
         joinProgressCat.do {
+            $0.addGestureRecognizer(joinProgressCatTapGesture)
+            $0.isUserInteractionEnabled = false
             if state == .none || state == .rejected {
                 $0.isHidden = true
                 $0.stop()
@@ -153,7 +156,6 @@ class StudyDetailView: UIViewController {
                 $0.isHidden = true
             }
         }
-        
     }
     
     func layout() {
@@ -250,6 +252,11 @@ class StudyDetailView: UIViewController {
         }
     }
     @objc func joinButtonDidTap() {
+        TerminalAlertMessage.show(type: .StudyApplyView)
+        (TerminalAlertMessage.alertView as! TerminalAlertUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
+    }
+    
+    @objc func modifyJoinButtonDidTap() {
         TerminalAlertMessage.show(type: .StudyApplyView)
         (TerminalAlertMessage.alertView as! TerminalAlertUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
     }
