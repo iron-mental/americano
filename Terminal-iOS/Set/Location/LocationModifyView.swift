@@ -98,7 +98,8 @@ class LocationModifyView: UIViewController {
     }
     
     @objc func completeModify() {
-        
+        let location = self.selectedLoaction
+        presenter?.completeModify(location: location)
     }
 }
 

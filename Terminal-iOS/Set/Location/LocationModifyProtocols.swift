@@ -26,17 +26,33 @@ protocol LocationModifyPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
+    func completeModify(location: String)
 }
 
 protocol LocationModifyInteractorInputProtocol: class {
     var presenter: LocationModifyInteractorOutputProtocol? { get set }
+    var remoteDataManager: LocationModifyRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-   func address()
+    func retrieveAddress()
 }
 
 protocol LocationModifyInteractorOutputProtocol: class {
-    // INTERACTOR -> PRESENTER
     
+    // INTERACTOR -> PRESENTER
     func retrievedAddress(result: Bool, address: [Address])
+}
+
+protocol LocationModifyRemoteDataManagerInputProtocol: class {
+    var remoteRequestHandler: LocationModifyRemoteDataManagerOutputProtocol? { get set }
+    
+    // INTERACTOR -> REMOTEDATAMANAGER
+    func retrieveAddress()
+    
+}
+
+protocol LocationModifyRemoteDataManagerOutputProtocol: class {
+    
+    // REMOTEDATAMANAGER -> INTERACTOR
+    func onRetrieveAddress(result: BaseResponse<[Address]>)
 }

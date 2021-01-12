@@ -14,7 +14,11 @@ class LocationModifyPresenter: LocationModifyPresenterProtocol {
     var wireFrame: LocationModifyWireFrameProtocol?
     
     func viewDidLoad() {
-        interactor?.address()
+        interactor?.retrieveAddress()
+    }
+    
+    func completeModify(location: String) {
+        
     }
 }
 

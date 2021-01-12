@@ -106,6 +106,7 @@
 		A5C7B8F525AC4FCD00016D5B /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B8F425AC4FCD00016D5B /* Address.swift */; };
 		A5C7B8FA25AC6B7000016D5B /* AddressState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B8F925AC6B7000016D5B /* AddressState.swift */; };
 		A5C7B90525ADB23000016D5B /* LocationModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B90425ADB23000016D5B /* LocationModifyView.swift */; };
+		A5C7B90D25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C7B90C25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift */; };
 		A5C81C5825836D19008F2B09 /* MyApplyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C81C5725836D19008F2B09 /* MyApplyListView.swift */; };
 		A5C81C5B25836D32008F2B09 /* MyApplyListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C81C5A25836D32008F2B09 /* MyApplyListProtocols.swift */; };
 		A5C81C5E25836D41008F2B09 /* MyApplyListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C81C5D25836D41008F2B09 /* MyApplyListPresenter.swift */; };
@@ -410,6 +411,7 @@
 		A5C7B8F425AC4FCD00016D5B /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		A5C7B8F925AC6B7000016D5B /* AddressState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressState.swift; sourceTree = "<group>"; };
 		A5C7B90425ADB23000016D5B /* LocationModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModifyView.swift; sourceTree = "<group>"; };
+		A5C7B90C25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModifyRemoteDataManager.swift; sourceTree = "<group>"; };
 		A5C81C5725836D19008F2B09 /* MyApplyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyListView.swift; sourceTree = "<group>"; };
 		A5C81C5A25836D32008F2B09 /* MyApplyListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyListProtocols.swift; sourceTree = "<group>"; };
 		A5C81C5D25836D41008F2B09 /* MyApplyListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyListPresenter.swift; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 				A5814920259129C800BF3C2A /* LocationModifyInteractor.swift */,
 				A581492A259129DA00BF3C2A /* LocationModifyProtocols.swift */,
 				A5814925259129D200BF3C2A /* LocationModifyWireFrame.swift */,
+				A5C7B90C25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift */,
 				A541800425A8919F005B884F /* LocationCell.swift */,
 			);
 			path = Location;
@@ -1675,6 +1678,7 @@
 				CC60446E2576253F000D11C7 /* NoticeDetailProtocols.swift in Sources */,
 				A5C7B8F525AC4FCD00016D5B /* Address.swift in Sources */,
 				CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */,
+				A5C7B90D25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift in Sources */,
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				A5417FD325A77E3F005B884F /* ProjectSNSView.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,

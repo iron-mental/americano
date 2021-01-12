@@ -7,3 +7,28 @@
 //
 
 import Foundation
+import SwiftyJSON
+import SwiftKeychainWrapper
+
+class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProtocol {
+    var remoteRequestHandler: LocationModifyRemoteDataManagerOutputProtocol?
+
+    func retrieveAddress() {
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.address)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<[Address]>.self, from: data!)
+                    self.remoteRequestHandler?.onRetrieveAddress(result: result)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+}

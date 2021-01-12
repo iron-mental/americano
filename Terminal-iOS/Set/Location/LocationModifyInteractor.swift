@@ -11,25 +11,17 @@ import SwiftyJSON
 
 class LocationModifyInteractor: LocationModifyInteractorInputProtocol {
     var presenter: LocationModifyInteractorOutputProtocol?
+    var remoteDataManager: LocationModifyRemoteDataManagerInputProtocol?
     
-    func address() {
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.address)
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<[Address]>.self, from: data!)
-                    let isSuccess = result.result
-                    let addressList = result.data!
-                    self.presenter?.retrievedAddress(result: isSuccess, address: addressList)
-                case .failure(let error):
-                    print(error)
-                }
-            }
+    func retrieveAddress() {
+        remoteDataManager?.retrieveAddress()
+    }
+}
+
+extension LocationModifyInteractor: LocationModifyRemoteDataManagerOutputProtocol {
+    func onRetrieveAddress(result: BaseResponse<[Address]>) {
+        let isSuccess: Bool = result.result
+        let address: [Address] = result.data!  // 일단 강제 언래핑
+        self.presenter?.retrievedAddress(result: isSuccess, address: address)
     }
 }

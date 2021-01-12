@@ -20,6 +20,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             "category": category,
             "sort": "new"
         ]
+        
         TerminalNetworkManager
             .shared
             .session
@@ -45,6 +46,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             "category": category,
             "sort": "length"
         ]
+        
         TerminalNetworkManager
             .shared
             .session
