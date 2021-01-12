@@ -26,4 +26,8 @@ extension LocationModifyPresenter: LocationModifyInteractorOutputProtocol {
     func retrievedAddress(result: Bool, address: [Address]) {
         self.view?.showAddress(address: address)
     }
+    
+    func didCompleteModify(result: Bool, message: String) {
+        self.view?.modifyResultHandle(result: result, message: message)
+    }
 }

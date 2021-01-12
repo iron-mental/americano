@@ -13,6 +13,7 @@ protocol LocationModifyViewProtocol: class {
     
     // PRESENTER -> VIEW
     func showAddress(address: [Address])
+    func modifyResultHandle(result: Bool, message: String)
 }
 
 protocol LocationModifyWireFrameProtocol: class {
@@ -42,6 +43,7 @@ protocol LocationModifyInteractorOutputProtocol: class {
     
     // INTERACTOR -> PRESENTER
     func retrievedAddress(result: Bool, address: [Address])
+    func didCompleteModify(result: Bool, message: String)
 }
 
 protocol LocationModifyRemoteDataManagerInputProtocol: class {
@@ -57,4 +59,5 @@ protocol LocationModifyRemoteDataManagerOutputProtocol: class {
     
     // REMOTEDATAMANAGER -> INTERACTOR
     func onRetrieveAddress(result: BaseResponse<[Address]>)
+    func didCompleteModify(result: BaseResponse<Bool>)
 }

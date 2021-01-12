@@ -39,4 +39,11 @@ extension LocationModifyInteractor: LocationModifyRemoteDataManagerOutputProtoco
         let address: [Address] = result.data!  // 일단 강제 언래핑
         self.presenter?.retrievedAddress(result: isSuccess, address: address)
     }
+    
+    func didCompleteModify(result: BaseResponse<Bool>) {
+        if result.result {
+            self.presenter?.didCompleteModify(result: result.result,
+                                              message: result.message!)
+        }
+    }
 }

@@ -59,7 +59,23 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
     }
     
     func completeModify(params: [String: Any]) {
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         
-    
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.userLocationUpdate(id: userID, location: params))
+            .validate(statusCode: 200..<500)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                    self.remoteRequestHandler?.didCompleteModify(result: result)
+                case .failure(let error):
+                    print(error)
+                }
+            }
     }
 }

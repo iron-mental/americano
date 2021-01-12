@@ -36,10 +36,10 @@ enum TerminalRouter: URLRequestConvertible {
     case address
     
     // 프로젝트
-    case projectRegister        (id: String, project: Parameters)
+//    case projectRegister        (id: String, project: Parameters)
     case projectList            (id: String)
     case projectUpdate          (id: String, project: Parameters)
-    case projectDelete          (id: String, projectID: String)
+//    case projectDelete          (id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
     case studyCreate            (study: Parameters)
@@ -112,14 +112,14 @@ enum TerminalRouter: URLRequestConvertible {
         
             
         // 프로젝트
-        case .projectRegister:
-            return .post
+//        case .projectRegister:
+//            return .post
         case .projectList:
             return .get
         case .projectUpdate:
             return .post
-        case .projectDelete:
-            return .delete
+//        case .projectDelete:
+//            return .delete
             
         // 스터디
         case .studyCreate:
@@ -209,12 +209,10 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/address"
             
         // 프로젝트
-        case let .projectRegister(id, _), let .projectList(id):
+        case let .projectList(id):
             return "user/\(id)/project"
         case let .projectUpdate(id, _):
             return "user/\(id)/project"
-        case let .projectDelete(id, projectID):
-            return "user/\(id)/project/\(projectID)"
             
         // 스터디
         case .studyCreate, .studyList:
@@ -273,9 +271,9 @@ enum TerminalRouter: URLRequestConvertible {
             return profile
         case let .userSNSUpdate(_, sns):
             return sns
-        case let ..userLocationUpdate(_, location):
+        case let .userLocationUpdate(_, location):
             return location
-        case .userImageUpdate: // 수정해야함
+        case .userImageUpdate:
             return nil
        
         case let .userWithdrawal(_, userData):
@@ -299,7 +297,7 @@ enum TerminalRouter: URLRequestConvertible {
             return sort
         case let .studyCreate(study):
             return study
-        case .studyUpdate:// 파라미터 지정해야함
+        case .studyUpdate:
             return nil
         case let .studySearch(keyword):
             return ["word": keyword]
@@ -313,11 +311,9 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 프로젝트
-        case .projectList, .projectDelete:
+        case .projectList:
             return nil
-        case .projectRegister: // 수정해야함
-            return nil
-        case let .projectUpdate(_, project): // 수정해야함
+        case let .projectUpdate(_, project):
             return project
             
         // 공지사항
