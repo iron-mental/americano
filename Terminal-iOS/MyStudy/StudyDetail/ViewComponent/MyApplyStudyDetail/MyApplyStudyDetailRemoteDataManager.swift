@@ -10,6 +10,33 @@ import Foundation
 import SwiftyJSON
 
 class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol {
+    func putNewApplyMessage(studyID: Int, applyID: Int, newMessage: String) {
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.applyModify(studyID: studyID, applyID: applyID, message: newMessage))
+            .validate(statusCode: 200..<500)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        if let message = result.message {
+                            self.interactor?.retriveModifyApplyMessage(result: result.result, message: message)
+                        }
+                    } catch {
+                        print("error")
+                    }
+                    break
+                case .failure(let err):
+                    
+                    break
+                }
+            }
+    }
+    
     var interactor: MyApplyStudyDetailRemoteDataManagerOutputProtocol?
     
     func getMyApplyStudyDetail(studyID: Int, userID: Int) {

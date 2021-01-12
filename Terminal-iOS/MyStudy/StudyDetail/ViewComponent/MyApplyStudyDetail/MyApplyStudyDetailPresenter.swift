@@ -17,10 +17,30 @@ class MyApplyStudyDetailPresenter: MyApplyStudyDetailPresenterInputProtocol {
         LoadingRainbowCat.show()
         interactor?.getMyApplyStudyDetail(studyID: studyID)
     }
-
+    
+    func admitButtonDidTap(newMessage: String) {
+        LoadingRainbowCat.show()
+        interactor?.putNewApplyMessage(newMessage: newMessage)
+    }
 }
 
 extension MyApplyStudyDetailPresenter: MyApplyStudyDetailInteractorOutputProtocol {
+    func retriveModifyApplyMessage(result: Bool, message: String) {
+        switch result {
+        
+        case true:
+            LoadingRainbowCat.hide {
+                self.view?.showModifyApplyMessageResult(message: message)
+            }
+            break
+        case false:
+            LoadingRainbowCat.hide {
+                self.view?.showError()
+            }
+            break
+        }
+    }
+    
     func retriveMyApplyStudyDetail(result: Bool, message: String) {
         switch result {
         case true:

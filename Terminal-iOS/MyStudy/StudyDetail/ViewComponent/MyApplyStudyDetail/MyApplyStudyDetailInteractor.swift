@@ -12,9 +12,18 @@ class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
     var presenter: MyApplyStudyDetailInteractorOutputProtocol?
     var remoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol?
     var applyID: Int?
+    var studyID: Int?
+    
     func getMyApplyStudyDetail(studyID: Int) {
+        self.studyID = studyID
         if let userInfo = CoreDataManager.shared.getUserinfo() {
             remoteDataManager?.getMyApplyStudyDetail(studyID: studyID, userID: userInfo.id)
+        }
+    }
+    
+    func putNewApplyMessage(newMessage: String) {
+        if let sID = studyID, let aID = applyID {
+            remoteDataManager?.putNewApplyMessage(studyID: sID, applyID: aID, newMessage: newMessage)
         }
     }
 }
@@ -26,6 +35,16 @@ extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutpu
             applyID = data.id
             let message = data.message
             presenter?.retriveMyApplyStudyDetail(result: result, message: message)
+        case false:
+            print("MyApplyStudyDetailInteractor 에서 에러남")
+        }
+    }
+    
+    func retriveModifyApplyMessage(result: Bool, message: String) {
+        switch result {
+        case true:
+            
+            presenter?.retriveModifyApplyMessage(result: result, message: message)
         case false:
             print("MyApplyStudyDetailInteractor 에서 에러남")
         }

@@ -42,7 +42,7 @@ protocol MyApplyStudyDetailInteractorOutputProtocol {
     
 //    INTERACTOR -> PRESENTER
     func retriveMyApplyStudyDetail(result: Bool, message: String)
-    func retriveModifyApplyMessage(result: Bool, Message: String)
+    func retriveModifyApplyMessage(result: Bool, message: String)
 }
 
 protocol MyApplyStudyDetailRemoteDataManagerInputProtocol {
@@ -57,7 +57,7 @@ protocol MyApplyStudyDetailRemoteDataManagerOutputProtocol {
     
 //    REMOTEDATAMANAGER -> INTERACTOR
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult)
-    func retriveModifyApplyMessage(result: Bool, Message: String)
+    func retriveModifyApplyMessage(result: Bool, message: String)
 }
 
 protocol MyApplyStudyDetailWireFrameProtocol {

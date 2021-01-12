@@ -1375,8 +1375,8 @@
 		CCEEB45925AC4C9600F522C4 /* MyApplyStudyDetail */ = {
 			isa = PBXGroup;
 			children = (
-				CCEEB46725AC50DF00F522C4 /* MyApplyStudyDetailPresenter.swift */,
 				CCEEB46225AC509D00F522C4 /* MyApplyStudyDetailView.swift */,
+				CCEEB46725AC50DF00F522C4 /* MyApplyStudyDetailPresenter.swift */,
 				CCEEB46C25AC50F000F522C4 /* MyApplyStudyDetailInteractor.swift */,
 				CCEEB47125AC510400F522C4 /* MyApplyStudyDetailRemoteDataManager.swift */,
 				CCEEB47625AC51A100F522C4 /* MyApplyStudyDetailWireFrame.swift */,

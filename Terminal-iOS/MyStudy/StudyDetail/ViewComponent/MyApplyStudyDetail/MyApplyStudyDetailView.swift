@@ -14,6 +14,7 @@ class MyApplyStudyDetailView: UIViewController {
     var inputBackgroundView = UIView()
     var applyTextField = UITextField()
     var guideLabel = UILabel()
+    var admitButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +42,21 @@ class MyApplyStudyDetailView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
         }
         guideLabel.do {
-            $0.text = "가입 인사를 작성해보세요"
+            $0.text = "가입 인사를 수정해보세요"
             $0.numberOfLines = 0
             $0.font = UIFont.boldSystemFont(ofSize: 30)
+        }
+        admitButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor(named: "key")
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+            $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
         }
     }
     
     func layout() {
-        [inputBackgroundView, guideLabel].forEach { view.addSubview($0) }
+        [inputBackgroundView, guideLabel, admitButton].forEach { view.addSubview($0) }
         [applyTextField].forEach { inputBackgroundView.addSubview($0) }
         
         inputBackgroundView.do {
@@ -70,10 +78,28 @@ class MyApplyStudyDetailView: UIViewController {
             $0.centerYAnchor.constraint(equalTo: inputBackgroundView.centerYAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: inputBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 30)).isActive = true
         }
+        
+        admitButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: inputBackgroundView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 50)).isActive = true
+        }
+    }
+    @objc func didClickButton() {
+        if let newMessage = applyTextField.text {
+            presenter?.admitButtonDidTap(newMessage: newMessage)
+        }
     }
 }
 
 extension MyApplyStudyDetailView: MyApplyStudyDetailViewProtocol {
+    func showModifyApplyMessageResult(message: String) {
+        //토스트 메세지를 띄워주며 << 요놈 개발해야겠음!!
+        navigationController?.popViewController(animated: true)
+    }
+    
     func showMyApplyStudyDetail(message: String) {
         applyTextField.text = message
         attribute()
