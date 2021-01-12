@@ -56,6 +56,7 @@ enum TerminalRouter: URLRequestConvertible {
     case applyStudyList         (id: String)
     case applyUserList          (studyID: String)
     case applyStudyDetail       (studyID: Int, userID: Int)
+    case applyModify            (studyID: Int, applyID: Int, message: String)
     
     // 공지사항
     case noticeCreate           (studyID: String, notice: Parameters)
@@ -147,6 +148,9 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .applyStudyDetail:
             return .get
+        case .applyModify:
+            return .put
+        
             
         // 공지사항
         case .noticeCreate:
@@ -161,9 +165,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .put
         case .noticeDelete:
             return .delete
-        }
     }
-    
+}
     // MARK: URL EndPoint init
     
     var endPoint: String {
@@ -235,7 +238,9 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/apply"
         case let .applyStudyDetail(studyID, userID):
             return "study/\(studyID)/applyUser/\(userID)"
-        
+        case let .applyModify(studyID, applyID, _):
+            return "study/\(studyID)/apply/\(applyID)"
+            
         // 공지사항
         case let .noticeCreate(studyID, _):
             return "study/\(studyID)/notice"
@@ -249,7 +254,6 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/notice/\(noticeID)"
         case let .noticeDelete(studyID, noticeID):
             return "study/\(studyID)/notice/\(noticeID)"
-
         }
     }
     
@@ -305,6 +309,8 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
         case .applyStudyDetail:
             return nil
+        case let .applyModify(_, _, message):
+            return ["message": message]
             
         // 프로젝트
         case .projectList, .projectDelete:
