@@ -16,6 +16,21 @@ class LocationModifyInteractor: LocationModifyInteractorInputProtocol {
     func retrieveAddress() {
         remoteDataManager?.retrieveAddress()
     }
+    
+    func retrieveCoordinates(sido: String, sigungu: String) {
+        let location = sido + " " + sigungu
+        
+        remoteDataManager?.retrieveCoordinates(location: location) { x, y in
+            let params: [String: Any] = [
+                "latitude": y,
+                "longitude": x,
+                "sido": sido,
+                "sigungu": sigungu
+            ]
+            
+            self.remoteDataManager?.completeModify(params: params)
+        }
+    }
 }
 
 extension LocationModifyInteractor: LocationModifyRemoteDataManagerOutputProtocol {

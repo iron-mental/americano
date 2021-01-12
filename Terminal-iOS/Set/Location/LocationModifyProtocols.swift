@@ -26,7 +26,7 @@ protocol LocationModifyPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    func completeModify(location: String)
+    func completeModify(sido: String, sigungu: String)
 }
 
 protocol LocationModifyInteractorInputProtocol: class {
@@ -35,6 +35,7 @@ protocol LocationModifyInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func retrieveAddress()
+    func retrieveCoordinates(sido: String, sigungu: String)
 }
 
 protocol LocationModifyInteractorOutputProtocol: class {
@@ -48,7 +49,8 @@ protocol LocationModifyRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func retrieveAddress()
-    
+    func retrieveCoordinates(location: String, completion: @escaping (_ x: Double, _ y: Double) -> Void)
+    func completeModify(params: [String: Any])
 }
 
 protocol LocationModifyRemoteDataManagerOutputProtocol: class {

@@ -16,21 +16,14 @@ class LocationModifyView: UIViewController {
     var address1depth: [Address] = []
     var address2depth: [String] = []
     
-    var selectedLoaction: String = "" {
-        didSet {
-            self.attribute()
-        }
-    }
     var the1depth: String = "" {
         didSet {
-            self.selectedLoaction
-                = self.the1depth + " " + self.the2depth
+            attribute()
         }
     }
     var the2depth: String = "" {
         didSet {
-            self.selectedLoaction
-                = self.the1depth + " " + self.the2depth
+            attribute()
         }
     }
     
@@ -52,7 +45,7 @@ class LocationModifyView: UIViewController {
     private func attribute() {
         self.locationLabel.do {
             $0.textColor = .white
-            $0.text = self.selectedLoaction
+            $0.text = self.the1depth + " " + self.the2depth
         }
         self.locationCollectionView.do {
             $0.backgroundColor = .systemBackground
@@ -98,8 +91,9 @@ class LocationModifyView: UIViewController {
     }
     
     @objc func completeModify() {
-        let location = self.selectedLoaction
-        presenter?.completeModify(location: location)
+        let sido = self.the1depth
+        let sigungu = self.the2depth
+        presenter?.completeModify(sido: sido, sigungu: sigungu)
     }
 }
 

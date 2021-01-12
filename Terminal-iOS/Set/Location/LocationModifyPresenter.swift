@@ -17,8 +17,8 @@ class LocationModifyPresenter: LocationModifyPresenterProtocol {
         interactor?.retrieveAddress()
     }
     
-    func completeModify(location: String) {
-        
+    func completeModify(sido: String, sigungu: String) {
+        interactor?.retrieveCoordinates(sido: sido, sigungu: sigungu)
     }
 }
 
