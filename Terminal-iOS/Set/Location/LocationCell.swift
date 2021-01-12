@@ -25,6 +25,7 @@ class LocationCell: UICollectionViewCell {
     }
     
     private func attribute() {
+        self.contentView.isUserInteractionEnabled = false
         address.do {
             $0.setTitleColor(UIColor.black, for: .normal)
             $0.backgroundColor = .white
