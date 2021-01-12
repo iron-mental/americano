@@ -13,8 +13,13 @@ class LocationModifyPresenter: LocationModifyPresenterProtocol {
     var interactor: LocationModifyInteractorInputProtocol?
     var wireFrame: LocationModifyWireFrameProtocol?
     
+    func viewDidLoad() {
+        interactor?.address()
+    }
 }
 
 extension LocationModifyPresenter: LocationModifyInteractorOutputProtocol {
-    
+    func retrievedAddress(result: Bool, address: [Address]) {
+        self.view?.showAddress(address: address)
+    }
 }
