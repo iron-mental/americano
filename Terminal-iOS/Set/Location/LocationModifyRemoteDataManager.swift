@@ -59,6 +59,7 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
     }
     
     func completeModify(params: [String: Any]) {
-        print("params",params)
+        
+    
     }
 }

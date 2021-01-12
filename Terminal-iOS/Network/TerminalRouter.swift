@@ -25,7 +25,7 @@ enum TerminalRouter: URLRequestConvertible {
     case userInfoUpdate         (id: String, profile: Parameters)
     case userSNSUpdate          (id: String, sns: Parameters)
     case userCareerUpdate       (id: String, career: Parameters)
-    case userLocationUpdate     (id: String)
+    case userLocationUpdate     (id: String, location: Parameters)
     
     case userWithdrawal         (id: String, userData: Parameters)
     case emailVerify            (id: String)
@@ -191,7 +191,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/\(id)/sns"
         case let .userCareerUpdate(id,_):
             return "user/\(id)/career"
-        case let .userLocationUpdate(id):
+        case let .userLocationUpdate(id, _):
             return "user/\(id)/location"
             
         case let .userWithdrawal(id, _):
@@ -273,7 +273,9 @@ enum TerminalRouter: URLRequestConvertible {
             return profile
         case let .userSNSUpdate(_, sns):
             return sns
-        case .userImageUpdate, .userLocationUpdate: // 수정해야함
+        case let ..userLocationUpdate(_, location):
+            return location
+        case .userImageUpdate: // 수정해야함
             return nil
        
         case let .userWithdrawal(_, userData):
@@ -329,7 +331,6 @@ enum TerminalRouter: URLRequestConvertible {
     }
     
     func asURLRequest() throws -> URLRequest {
-        
         let url = baseURL.appendingPathComponent(endPoint)
         
         var request = URLRequest(url: url)
