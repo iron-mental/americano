@@ -67,6 +67,7 @@ extension SNSModifyView: SNSModifyViewProtocol {
         if result {
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
             self.navigationController?.popViewController(animated: true, completion: {
+                parent?.showToast(controller: parent!, message: "SNS 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
             })
         } else {
