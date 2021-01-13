@@ -9,5 +9,6 @@
 import Foundation
 
 enum API {
-    static let BASE_URL: String = "https://www.terminal-study.tk/v1/"
+    static let BASE_URL: String = "https://www.terminal-study.tk/v1"
 }
+

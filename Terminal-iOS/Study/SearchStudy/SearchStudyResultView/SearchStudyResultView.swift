@@ -13,8 +13,7 @@ class SearchStudyResultView: UIViewController {
     var keyWord: String?
     var studyListTableView = UITableView()
     var searchResult: [Study] = []
-    let backBtn = UIButton()
-    let searchBar = UISearchBar()
+    var searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,43 +26,30 @@ class SearchStudyResultView: UIViewController {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
-        studyListTableView.do {
+        self.searchController.do {
+            $0.searchResultsUpdater = self
+            $0.obscuresBackgroundDuringPresentation = false
+            $0.searchBar.showsCancelButton = false
+            $0.hidesNavigationBarDuringPresentation = false
+            $0.searchBar.text = keyWord
+            navigationItem.titleView = searchController.searchBar
+            $0.searchBar.delegate = self
+        }
+        self.studyListTableView.do {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
             $0.rowHeight = 105
         }
-        backBtn.do {
-            $0.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
-            $0.addTarget(self, action: #selector(back), for: .touchUpInside)
-        }
-        searchBar.do {
-            $0.placeholder = "스터디명, 분류(키워드) 등"
-            $0.barTintColor = UIColor.appColor(.terminalBackground)
-            $0.delegate = self
-            $0.text = keyWord
-        }
     }
     
     func layout() {
-        [studyListTableView, backBtn, searchBar].forEach { view.addSubview($0) }
-        
-        backBtn.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        }
-        searchBar.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.backBtn.trailingAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        }
+        [studyListTableView ].forEach { view.addSubview($0) }
+
         studyListTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -71,7 +57,7 @@ class SearchStudyResultView: UIViewController {
     }
     
     @objc func back() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: false)
     }
 }
 
@@ -89,8 +75,10 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let keyValue = searchResult[indexPath.row].id
-        guard let state = searchResult[indexPath.row].isMember else { return }
-        presenter?.didTapCell(keyValue: keyValue, state: state)
+        
+        //후에 서버에서 member처리해주면 그때 대응
+//        guard let state = searchResult[indexPath.row].isMember else { return }
+        presenter?.didTapCell(keyValue: keyValue, state: searchResult[indexPath.row].isMember!)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -117,9 +105,14 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
 }
 
 extension SearchStudyResultView: UISearchBarDelegate {
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         presenter?.returnDidTap(keyWord: searchBar.text!)
         view.endEditing(true)
+    }
+}
+
+extension SearchStudyResultView: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+//        <#code#>
     }
 }

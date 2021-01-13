@@ -53,7 +53,7 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
         let searchStudyView = SearchStudyWireFrame.createSearchStudyModule()
         searchStudyView.hidesBottomBarWhenPushed = true
         if let parentView = view as? UIViewController {
-            parentView.navigationController?.pushViewController(searchStudyView, animated: false)
+            parentView.navigationController?.pushViewController(searchStudyView, animated: true)
         }
     }
 }

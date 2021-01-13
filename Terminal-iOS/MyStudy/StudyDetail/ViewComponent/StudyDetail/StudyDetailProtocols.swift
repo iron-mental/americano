@@ -27,7 +27,7 @@ protocol StudyDetailWireFrameProtocol: class {
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyDetailViewProtocol)
     func goToSelectCategory(from view: StudyDetailViewProtocol, category: [Category])
-    
+    func goToApplyStudyDetail(from view: StudyDetailViewProtocol, studyID: Int)
 }
 
 protocol StudyDetailPresenterProtocol: class {
@@ -35,14 +35,13 @@ protocol StudyDetailPresenterProtocol: class {
     var interactor: StudyDetailInteractorInputProtocol? { get set }
     var wireFrame: StudyDetailWireFrameProtocol? { get set }
     
-    
     // VIEW -> PRESENTER
     func viewDidLoad()
     func showStudyListDetail(studyID: String)
     func goToStudyDetail(studyDetail: StudyDetail)
     func didClickedCreateButton()
     func joinButtonDidTap(studyID: Int, message: String)
-    
+    func modifyStudyMessageButtonDidTap(studyID: Int)
     //INTERACTOR -> PRESENTER
     
 }
@@ -58,6 +57,7 @@ protocol StudyDetailInteractorInputProtocol: class {
 }
 
 protocol StudyDetailInteractorOutputProtocol: class {
+
     //INTERACTOR -> PRESENTER
     func didRetrieveStudyDetail(_ studyDetail: StudyDetail)
     func studyJoinResult(result: Bool, message: String)
@@ -74,11 +74,11 @@ protocol StudyDetailRemoteDataManagerInputProtocol: class {
 
 protocol StudyDetailRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-       func onStudyDetailRetrieved(_ studyDetail: StudyDetail)
-       func onError()
+    func onStudyDetailRetrieved(_ studyDetail: StudyDetail)
+    func onError()
 }
 
 protocol StudyDetailLocalDataManagerInputProtocol: class {
-     // INTERACTOR -> LOCALDATAMANAGER
+    // INTERACTOR -> LOCALDATAMANAGER
     func retrieveStudyDetail() -> StudyDetail
 }

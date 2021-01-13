@@ -9,7 +9,6 @@
 import Foundation
 
 class StudyDetailPresenter: StudyDetailPresenterProtocol {
-    
     var view: StudyDetailViewProtocol?
     var interactor: StudyDetailInteractorInputProtocol?
     var wireFrame: StudyDetailWireFrameProtocol?
@@ -32,7 +31,9 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
     func joinButtonDidTap(studyID: Int, message: String) {
         interactor?.postStudyJoin(studyID: studyID, message: message)
     }
-    
+    func modifyStudyMessageButtonDidTap(studyID: Int) {
+        wireFrame?.goToApplyStudyDetail(from: view!, studyID: studyID)
+    }
 }
 
 extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {

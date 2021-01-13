@@ -66,12 +66,9 @@ class CoreDataManager {
     
     func getUserinfo() -> UserInfo? {
         var userInfo: UserInfo?
-        
         do {
             let result = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest()) as! [CoreUserInfo]
-            
             for record in result {
-
                 userInfo = UserInfo(id: Int(record.id),
                                     nickname: record.nickname ?? "nicknameTemp",
                                     email: record.email ?? "emailTemp",

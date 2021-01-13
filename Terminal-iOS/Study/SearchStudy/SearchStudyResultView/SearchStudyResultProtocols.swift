@@ -57,6 +57,5 @@ protocol SearchStudyResultWireFrameProtocol {
     
     //PRESENTER -> WIREFRAME
     func presentStudyDetailScreen(from view: SearchStudyResultViewProtocol, keyValue: Int, state: Bool)
-    func presentMyStudyDetail(from view: SearchStudyResultViewProtocol, keyValue: Int)
 }
 

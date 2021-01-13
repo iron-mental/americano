@@ -23,6 +23,7 @@ enum AssetsColor {
     case greenButtonColor
     case alertBackgroundColor
     case alertTopBarColor
+    case alertTextcolor
 }
 
 extension UIColor {
@@ -56,6 +57,8 @@ extension UIColor {
             return #colorLiteral(red: 0.1176470588, green: 0.1176470588, blue: 0.1215686275, alpha: 1)
         case .alertTopBarColor:
             return #colorLiteral(red: 0.2392156863, green: 0.2352941176, blue: 0.2352941176, alpha: 1)
+        case .alertTextcolor:
+            return #colorLiteral(red: 0.5098039216, green: 0.8509803922, blue: 0.4549019608, alpha: 1)
         }
     }
 }

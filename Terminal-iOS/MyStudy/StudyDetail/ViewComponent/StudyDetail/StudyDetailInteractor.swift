@@ -31,7 +31,9 @@ class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
         })
     }
 }
-
+//if let coreUserInfo = CoreDataManager.shared.getUserinfo() {
+//presenter?.didRetrievedUserInfo(userInfo: coreUserInfo)
+//}
 extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
     func onStudyDetailRetrieved(_ studyDetail: StudyDetail) {
         presenter?.didRetrieveStudyDetail(studyDetail)

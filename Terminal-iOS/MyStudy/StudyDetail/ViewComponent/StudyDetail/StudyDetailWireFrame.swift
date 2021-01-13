@@ -9,6 +9,8 @@
 import UIKit
 
 class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
+   
+    
     static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState) -> UIViewController {
         
         let view: StudyDetailViewProtocol = StudyDetailView()
@@ -44,5 +46,10 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
     
     func goToSelectCategory(from view: StudyDetailViewProtocol, category: [Category]) {
         
+    }
+    
+    func goToApplyStudyDetail(from view: StudyDetailViewProtocol, studyID: Int) {
+        let applyStudyDetailView = MyApplyStudyDetailWireFrame.createMyApplyStudyDetailModule(studyID: studyID)
+        (view as! UIViewController).navigationController?.pushViewController(applyStudyDetailView, animated: true)
     }
 }
