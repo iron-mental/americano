@@ -99,7 +99,7 @@ class LocationModifyView: UIViewController {
         self.locationTab.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.locationLabel.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 3 * 2).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
