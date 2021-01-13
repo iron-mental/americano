@@ -21,14 +21,15 @@ class LocationCell: UICollectionViewCell {
     func setData(data: String) {
         self.address.do {
             $0.setTitle(data, for: .normal)
+            $0.titleLabel?.font = UIFont(name: "NotoSansKR-Medium", size: 13)
         }
     }
     
     private func attribute() {
         self.contentView.isUserInteractionEnabled = false
         address.do {
-            $0.setTitleColor(UIColor.black, for: .normal)
-            $0.backgroundColor = .white
+            $0.setTitleColor(UIColor.white, for: .normal)
+            $0.backgroundColor = .appColor(.cellBackground)
             $0.layer.cornerRadius = 10
             $0.clipsToBounds = true
             $0.layer.masksToBounds = true

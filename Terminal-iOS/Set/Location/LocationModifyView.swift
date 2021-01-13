@@ -28,7 +28,9 @@ class LocationModifyView: UIViewController {
     }
     
     lazy var locationLabel = UILabel()
+    lazy var locationTab = UISegmentedControl(items: ["광역시도","시군구"])
     lazy var completeButton = UIButton()
+    
     let locationCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -43,12 +45,28 @@ class LocationModifyView: UIViewController {
     }
     
     private func attribute() {
+        self.do {
+            $0.title = "활동지역 설정"
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+        }
+        self.locationTab.do {
+            $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),
+                                       .foregroundColor: UIColor.gray], for: .normal)
+            $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 18),
+                                       .foregroundColor: UIColor.white], for: .selected)
+            $0.selectedSegmentIndex = 0
+            $0.layer.cornerRadius = 0
+            $0.backgroundColor = .clear
+            $0.clearBG()
+            $0.selectedSegmentTintColor = .clear
+        }
         self.locationLabel.do {
+            $0.textAlignment = .center
             $0.textColor = .white
             $0.text = self.the1depth + " " + self.the2depth
         }
         self.locationCollectionView.do {
-            $0.backgroundColor = .systemBackground
+            $0.backgroundColor = .appColor(.terminalBackground)
             $0.register(LocationCell.self, forCellWithReuseIdentifier: LocationCell.cellID)
             $0.delegate = self
             $0.dataSource = self
@@ -63,6 +81,7 @@ class LocationModifyView: UIViewController {
     }
     
     private func layout() {
+        self.view.addSubview(locationTab)
         self.view.addSubview(locationLabel)
         self.view.addSubview(locationCollectionView)
         self.view.addSubview(completeButton)
@@ -70,12 +89,18 @@ class LocationModifyView: UIViewController {
         self.locationLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         }
-        
-        self.locationCollectionView.do {
+        self.locationTab.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.locationLabel.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width / 3 * 2).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        }
+        self.locationCollectionView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.locationTab.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.completeButton.topAnchor).isActive = true
