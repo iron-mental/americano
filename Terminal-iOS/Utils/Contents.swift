@@ -12,3 +12,4 @@ enum API {
     static let BASE_URL: String = "https://www.terminal-study.tk/v1/"
     static let KAKAO_BASE_URL: String = "https://dapi.kakao.com/v2/local/search/address.json"
 }
+

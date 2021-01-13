@@ -14,7 +14,6 @@ class TerminalAlertUIView: UIView {
     var greenButton = UIButton()
     var topBar = UIView()
     var bottomBar = UIView()
-    var guideLabel = UILabel()
     var dismissButton = UIButton()
     var completeButton = UIButton()
     
@@ -29,6 +28,7 @@ class TerminalAlertUIView: UIView {
             $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
             $0.layer.cornerRadius = 5
             $0.layer.masksToBounds = true
+            $0.alpha = 1
         }
         topBar.do {
             $0.backgroundColor = UIColor.appColor(.alertTopBarColor)
@@ -56,11 +56,24 @@ class TerminalAlertUIView: UIView {
             $0.backgroundColor = UIColor.appColor(.greenButtonColor)
             $0.setTitle("", for: .normal)
         }
+        dismissButton.do {
+            $0.setTitle("no", for: .normal)
+            $0.setTitleColor(UIColor.appColor(.alertTextcolor), for: .normal)
+            $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
+            $0.titleLabel?.font = UIFont.monospacedSystemFont(ofSize: $0.titleLabel!.font.pointSize, weight: UIFont.Weight.regular)
+        }
+        completeButton.do {
+            $0.setTitle("yes", for: .normal)
+            $0.setTitleColor(UIColor.appColor(.alertTextcolor), for: .normal)
+            $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
+            $0.titleLabel?.font = UIFont.monospacedSystemFont(ofSize: $0.titleLabel!.font.pointSize, weight: UIFont.Weight.regular)
+        }
     }
     
     func layout() {
-        [ topBar, bottomBar, guideLabel, dismissButton, completeButton ].forEach { addSubview($0) }
+        [ topBar, bottomBar ].forEach { addSubview($0) }
         [ redButton, yellowButton, greenButton ].forEach { topBar.addSubview($0) }
+        [ dismissButton, completeButton ].forEach { bottomBar.addSubview($0) }
         
         topBar.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -97,12 +110,20 @@ class TerminalAlertUIView: UIView {
             $0.leadingAnchor.constraint(equalTo: yellowButton.trailingAnchor, constant: 13).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 10).isActive = true
         }
-//        guideLabel.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-//            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-//        }
-        
+        dismissButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
+        }
+        completeButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: dismissButton.bottomAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor).isActive = true
+        }
     }
     
     

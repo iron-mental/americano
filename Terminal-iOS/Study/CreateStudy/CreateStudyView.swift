@@ -514,8 +514,3 @@ extension CreateStudyView: selectLocationDelegate {
     }
 }
 
-extension CreateStudyView: KeyboardManagerDelegate {
-    func keyboardWillChangeFrame(endFrame: CGRect?, duration: TimeInterval, animationCurve: UIView.AnimationOptions) {
-        //        <#code#>
-    }
-}

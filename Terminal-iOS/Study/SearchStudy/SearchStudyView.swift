@@ -14,41 +14,39 @@ class SearchStudyView: UIViewController {
     
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
-    let backBtn = UIButton()
-    let searchBar = UISearchBar()
     let placeSearch = UIButton()
     let hotLable = UILabel()
     let tempView = UIView()
+    var searchController = UISearchController(searchResultsController: nil)
     let collectionView: UICollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.becomeFirstResponder()
+        searchController.searchBar.becomeFirstResponder()
         didload()
         attribute()
         layout()
     }
     
     func attribute() {
-        navigationController?.isNavigationBarHidden = true
+        self.searchController.do {
+            $0.searchResultsUpdater = self
+            $0.obscuresBackgroundDuringPresentation = false
+            $0.searchBar.showsCancelButton = false
+            $0.hidesNavigationBarDuringPresentation = false
+            navigationItem.titleView = searchController.searchBar
+            $0.searchBar.delegate = self
+        }
         self.view.do {
             let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
             event.cancelsTouchesInView = false
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.addGestureRecognizer(event)
-        }
-        self.backBtn.do {
-            $0.setImage(#imageLiteral(resourceName: "backButton"), for: .normal)
-            $0.addTarget(self, action: #selector(back), for: .touchUpInside)
-        }
-        self.searchBar.do {
-            $0.placeholder = "스터디명, 분류(키워드) 등"
-            $0.barTintColor = UIColor.appColor(.terminalBackground)
-            $0.delegate = self
         }
         self.placeSearch.do {
             $0.setTitle("장소로 검색", for: .normal)
@@ -72,6 +70,7 @@ class SearchStudyView: UIViewController {
         }
     }
     
+    //나중에 옮겨야함
     func didload() {
         TerminalNetworkManager
             .shared
@@ -95,26 +94,10 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [backBtn, searchBar, placeSearch, hotLable, tempView, collectionView]
-            .forEach { self.view.addSubview($0) }
-        
-        self.backBtn.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                    constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                        constant: 10).isActive = true
-        }
-        self.searchBar.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.backBtn.trailingAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        }
+        [ placeSearch, hotLable, tempView, collectionView ].forEach { self.view.addSubview($0) }
         self.placeSearch.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 115).isActive = true
@@ -181,7 +164,7 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let text = keyword[indexPath.row].word
-        self.searchBar.text = text
+        self.searchController.searchBar.text = text
         presenter?.didSearchButtonClicked(keyWord: text)
     }
     
@@ -211,5 +194,11 @@ extension SearchStudyView: SearchStudyViewProtocol {
 extension SearchStudyView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         presenter?.didSearchButtonClicked(keyWord: searchBar.text!)
+    }
+}
+
+extension SearchStudyView: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+//        <#code#>
     }
 }

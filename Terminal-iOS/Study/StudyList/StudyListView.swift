@@ -26,7 +26,6 @@ class StudyListView: UIViewController {
     var lengthStudyList: [Study] = []
     
     // MARK: ViewDidLoad
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -35,7 +34,6 @@ class StudyListView: UIViewController {
     }
     
     // MARK: Attribute
-    
     func attribute() {
         view.backgroundColor = UIColor.appColor(.terminalBackground)
         aligmentView.do {
