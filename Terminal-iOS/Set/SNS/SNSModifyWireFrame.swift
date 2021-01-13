@@ -8,7 +8,7 @@
 import UIKit
 
 class SNSModifyWireFrame: SNSModifyWireFrameProtocol {
-    static func createModule() -> UIViewController {
+    static func createModule(github: String, linkedin: String, web: String) -> UIViewController {
         let view: SNSModifyViewProtocol = SNSModifyView()
         let presenter: SNSModifyPresenterProtocol & SNSModifyInteractorOutputProtocol = SNSModifyPresenter()
         let interactor: SNSModifyInteractorInputProtocol = SNSModifyInteractor()
@@ -21,6 +21,9 @@ class SNSModifyWireFrame: SNSModifyWireFrameProtocol {
         interactor.presenter = presenter
        
         if let view = view as? SNSModifyView {
+            view.github = github
+            view.linkedin = linkedin
+            view.web = web
             return view
         } else {
             return UIViewController()

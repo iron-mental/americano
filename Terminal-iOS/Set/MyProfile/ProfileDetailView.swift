@@ -203,7 +203,10 @@ class ProfileDetailView: UIViewController {
     }
     
     @objc func modifySNS() {
-        presenter?.showSNSModify()
+        let github = userInfo?.snsGithub ?? ""
+        let linkedin = userInfo?.snsLinkedin ?? ""
+        let web = userInfo?.snsWeb ?? ""
+        presenter?.showSNSModify(github: github, linkedin: linkedin, web: web)
     }
     
     @objc func modifyEmail() {

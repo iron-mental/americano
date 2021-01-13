@@ -43,8 +43,11 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         }
     }
     
-    func presentSNSModify(from view: ProfileDetailViewProtocol) {
-        let snsModifyView = SNSModifyWireFrame.createModule()
+    func presentSNSModify(from view: ProfileDetailViewProtocol,
+                          github: String,
+                          linkedin: String,
+                          web: String) {
+        let snsModifyView = SNSModifyWireFrame.createModule(github: github, linkedin: linkedin, web: web)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(snsModifyView, animated: true)

@@ -16,7 +16,7 @@ protocol SNSModifyViewProtocol: class {
 }
 
 protocol SNSModifyWireFrameProtocol: class {
-    static func createModule() -> UIViewController
+    static func createModule(github: String, linkedin: String, web: String) -> UIViewController
     
     func presentProfileModifyScreen(from view: SNSModifyViewProtocol, userInfo: UserInfo, project: [Project])
 }

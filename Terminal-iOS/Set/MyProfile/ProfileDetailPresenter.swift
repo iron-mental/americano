@@ -26,8 +26,8 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
         wireFrame?.presentEmailModify(from: view!)
     }
     
-    func showSNSModify() {
-        wireFrame?.presentSNSModify(from: view!)
+    func showSNSModify(github: String, linkedin: String, web: String) {
+        wireFrame?.presentSNSModify(from: view!, github: github, linkedin: linkedin, web: web)
     }
  
     func showLocationModify() {

@@ -11,6 +11,10 @@ import UIKit
 class SNSModifyView: UIViewController {
     var presenter: SNSModifyPresenterProtocol?
     
+    var github: String = ""
+    var linkedin: String = ""
+    var web: String = ""
+    
     lazy var snsModifyView = ProfileSNSModifyView()
     lazy var completeButton = UIButton()
     
@@ -19,10 +23,14 @@ class SNSModifyView: UIViewController {
         attribute()
         layout()
     }
-    
+
     func attribute() {
         self.view.backgroundColor = .black
 
+        self.snsModifyView.firstTextFeield.text = self.github
+        self.snsModifyView.secondTextField.text = self.linkedin
+        self.snsModifyView.thirdTextField.text = self.web
+        
         self.completeButton.do {
             $0.backgroundColor = .appColor(.mainColor)
             $0.setTitle("수정완료", for: .normal)
