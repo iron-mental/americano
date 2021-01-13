@@ -37,13 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("accessToken : ", KeychainWrapper.standard.string(forKey: "accessToken")!)
             window?.rootViewController = main
             if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-                let destination = notification["destination"] as? NSDictionary
-                let pushEvent = notification["pushEvent"] as? String
-                if let studyID = destination!["study_id"] as? String,
-                   let pushEvent = pushEvent {
+                if let studyID = notification["study_id"] as? String,
+                   let pushEvent = notification["pushEvent"] as? String {
                     self.studyID = studyID
                     self.pushEvent = pushEvent
                 }
+                
                 main.selectedIndex = 1
             }
             
@@ -85,15 +84,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         
-        let destination = userInfo["destination"] as? NSDictionary
-        let pushEvent = userInfo["pushEvent"] as? String
-        
-        if let studyID = destination!["study_id"] as? String,
-           let pushEvent = pushEvent {
+        if let studyID = userInfo["study_id"] as? String,
+           let pushEvent = userInfo["pushEvent"] as? String {
             self.studyID = studyID
             self.pushEvent = pushEvent
         }
-        
+
         completionHandler([.alert, .badge, .sound])
     }
     
