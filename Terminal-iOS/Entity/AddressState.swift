@@ -9,6 +9,6 @@
 import Foundation
 
 enum AddressState {
-    case si
-    case gunGu
+    case sido
+    case sigungu
 }

@@ -9,11 +9,11 @@
 import Foundation
 
 struct Address: Codable {
-    let si: String
-    let gunGu: [String]
+    let sido: String
+    let sigungu: [String]
 
     enum CodingKeys: String, CodingKey {
-        case si
-        case gunGu
+        case sido = "si"
+        case sigungu = "gunGu"
     }
 }

@@ -12,20 +12,13 @@ import Then
 class LocationModifyView: UIViewController {
     var presenter: LocationModifyPresenterProtocol?
     
-    var addressState: AddressState = .si
+    var addressState: AddressState = .sido
     var address1depth: [Address] = []
     var address2depth: [String] = []
     
-    var the1depth: String = "" {
-        didSet {
-            attribute()
-        }
-    }
-    var the2depth: String = "" {
-        didSet {
-            attribute()
-        }
-    }
+    var the1depth: String = ""          { didSet { attribute() } }
+    var the2depth: String = ""          { didSet { attribute() } }
+    var selectedSegmentIndex: Int = 0   { didSet { attribute() } }
     
     lazy var locationLabel = UILabel()
     lazy var locationTab = UISegmentedControl(items: ["광역시도","시군구"])
@@ -37,12 +30,21 @@ class LocationModifyView: UIViewController {
         return collectionView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        // 뷰 진입시 제일 초기에 시군구 탭 비활성화
+        self.locationTab.setEnabled(false, forSegmentAt: 1)
+    }
+    
+    // MARK: viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
         presenter?.viewDidLoad()
     }
+    
+    // MARK: attribute set
     
     private func attribute() {
         self.do {
@@ -54,11 +56,12 @@ class LocationModifyView: UIViewController {
                                        .foregroundColor: UIColor.gray], for: .normal)
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 18),
                                        .foregroundColor: UIColor.white], for: .selected)
-            $0.selectedSegmentIndex = 0
+            $0.selectedSegmentIndex = self.selectedSegmentIndex
             $0.layer.cornerRadius = 0
             $0.backgroundColor = .clear
             $0.clearBG()
             $0.selectedSegmentTintColor = .clear
+            $0.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         }
         self.locationLabel.do {
             $0.textAlignment = .center
@@ -79,6 +82,8 @@ class LocationModifyView: UIViewController {
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
+    
+    // MARK: layout set
     
     private func layout() {
         self.view.addSubview(locationTab)
@@ -120,6 +125,26 @@ class LocationModifyView: UIViewController {
         let sigungu = self.the2depth
         presenter?.completeModify(sido: sido, sigungu: sigungu)
     }
+    
+    
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+        let selectedIndex = sender.selectedSegmentIndex
+        
+        // 0번째 탭을 클릭시 시군구의 데이터는 모두 지움
+        if selectedIndex == 0 {
+            self.addressState = .sido
+            self.address2depth.removeAll()
+            self.locationTab.setEnabled(false, forSegmentAt: 1)
+            self.the1depth = ""
+            self.the2depth = ""
+            self.selectedSegmentIndex = 0
+            self.locationCollectionView.reloadData()
+        } else if selectedIndex == 1
+                    && !self.address2depth.isEmpty{
+            self.addressState = .sigungu
+            self.locationCollectionView.reloadData()
+        }
+    }
 }
 
 extension LocationModifyView: LocationModifyViewProtocol {
@@ -143,7 +168,7 @@ extension LocationModifyView: LocationModifyViewProtocol {
 extension LocationModifyView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return addressState == .si ? address1depth.count : address2depth.count
+        return addressState == .sido ? address1depth.count : address2depth.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -154,11 +179,12 @@ extension LocationModifyView: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = locationCollectionView.dequeueReusableCell(withReuseIdentifier: LocationCell.cellID, for: indexPath) as! LocationCell
         
+        // 주소 상태에 따른 뷰 재사용
         switch addressState {
-        case .si:
-            let data = address1depth[indexPath.row].si
+        case .sido:
+            let data = address1depth[indexPath.row].sido
             cell.setData(data: data)
-        case .gunGu:
+        case .sigungu:
             let data = address2depth[indexPath.row]
             cell.setData(data: data)
         }
@@ -167,13 +193,17 @@ extension LocationModifyView: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if addressState == .si {
-            let gungu = address1depth[indexPath.row].gunGu
+        
+        // 광역시도 item 클릭시 탭 상태변경 및 시군구 셋팅
+        if addressState == .sido {
+            let gungu = address1depth[indexPath.row].sigungu
             self.address2depth = gungu
             
-            self.the1depth = address1depth[indexPath.row].si
+            self.the1depth = address1depth[indexPath.row].sido
             
-            self.addressState = .gunGu
+            self.addressState = .sigungu
+            self.selectedSegmentIndex = 1
+            self.locationTab.setEnabled(true, forSegmentAt: 1)
             self.locationCollectionView.reloadData()
         } else {
             let gungu = address2depth[indexPath.row]
