@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TerminalAlertUIView: UIView {
+class AlertBaseUIView: UIView {
     var redButton = UIButton()
     var yellowButton = UIButton()
     var greenButton = UIButton()
@@ -16,6 +16,7 @@ class TerminalAlertUIView: UIView {
     var bottomBar = UIView()
     var dismissButton = UIButton()
     var completeButton = UIButton()
+    
     
     init() {
         super.init(frame: CGRect.zero)

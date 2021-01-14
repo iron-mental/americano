@@ -9,6 +9,7 @@
 import Foundation
 
 class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
+    
     var presenter: MyApplyStudyDetailInteractorOutputProtocol?
     var remoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol?
     var applyID: Int?
@@ -27,6 +28,13 @@ class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
         if let sID = studyID, let aID = applyID {
             remoteDataManager?.putNewApplyMessage(studyID: sID, applyID: aID, newMessage: newMessage)
         }
+    }
+    
+    func deleteApply() {
+        if let sID = studyID, let aID = applyID {
+            remoteDataManager?.deleteApply(studyID: sID, applyID: aID)
+        }
+        
     }
 }
 
@@ -47,10 +55,19 @@ extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutpu
         
         switch result {
         case true:
-            
             presenter?.retriveModifyApplyMessage(result: result, message: message)
         case false:
             print("MyApplyStudyDetailInteractor 에서 에러남")
         }
     }
+    
+    func retriveDeleteApplyResult(result: Bool, message: String) {
+        switch result {
+        case true:
+            presenter?.retriveDeleteApplyResult(result: result, message: message)
+        case false:
+            print("MyApplyStudyDetailInteractor 에서 에러남")
+        }
+    }
+    
 }

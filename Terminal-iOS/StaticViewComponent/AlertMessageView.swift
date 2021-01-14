@@ -6,4 +6,38 @@
 //  Copyright © 2021 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class AlertMessageView: AlertBaseUIView {
+    var alertMessageLabel = UILabel()
+    var alertMessage = ""
+    
+    init(message: String) {
+        super.init()
+        alertMessage = message
+        attribute()
+        layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func attribute() {
+        super.attribute()
+        alertMessageLabel.do {
+            $0.textColor = UIColor.appColor(.alertTextcolor)
+            $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize, weight: UIFont.Weight.regular)
+            $0.text = alertMessage
+        }
+    }
+    override func layout() {
+        super.layout()
+        [ alertMessageLabel ].forEach {addSubview($0)}
+        
+        alertMessageLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor, constant: -20).isActive = true
+        }
+    }
+}

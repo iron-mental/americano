@@ -14,7 +14,7 @@ enum StudyApplyMessageType {
 }
 
 
-class StudyApplyMessageView: TerminalAlertUIView {
+class StudyApplyMessageView: AlertBaseUIView {
     var type: StudyApplyMessageType = .apply
     var applyTitleLabel = UILabel()
     var applyGuideLabel = UILabel()
@@ -29,7 +29,6 @@ class StudyApplyMessageView: TerminalAlertUIView {
     }
     override func attribute() {
         super.attribute()
-        
         applyTitleLabel.do {
             $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize + 5, weight: UIFont.Weight.regular)
             $0.text = type == .apply ? "스터디 신청하기" : "신청 메세지 수정하기"

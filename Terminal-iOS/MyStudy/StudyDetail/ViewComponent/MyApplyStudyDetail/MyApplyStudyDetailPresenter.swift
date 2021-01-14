@@ -22,6 +22,10 @@ class MyApplyStudyDetailPresenter: MyApplyStudyDetailPresenterInputProtocol {
         LoadingRainbowCat.show()
         interactor?.putNewApplyMessage(newMessage: newMessage)
     }
+    
+    func cancelButtonDidTap() {
+        interactor?.deleteApply()
+    }
 }
 
 extension MyApplyStudyDetailPresenter: MyApplyStudyDetailInteractorOutputProtocol {
@@ -56,4 +60,19 @@ extension MyApplyStudyDetailPresenter: MyApplyStudyDetailInteractorOutputProtoco
             break
         }
     }
+    
+    func retriveDeleteApplyResult(result: Bool, message: String) {
+        switch result {
+        case true:
+            TerminalAlertMessage.hide()
+            self.view?.showDeleteApply(message: message)
+            break
+        case false:
+            LoadingRainbowCat.hide {
+                self.view?.showError()
+            }
+        }
+        
+    }
+    
 }

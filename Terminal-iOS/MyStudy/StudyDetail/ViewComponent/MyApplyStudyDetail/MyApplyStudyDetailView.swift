@@ -15,6 +15,7 @@ class MyApplyStudyDetailView: UIViewController {
     var applyTextField = UITextField()
     var guideLabel = UILabel()
     var admitButton = UIButton()
+    var cancelButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +52,19 @@ class MyApplyStudyDetailView: UIViewController {
             $0.backgroundColor = UIColor(named: "key")
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
-            $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(didClickButtonDidTap), for: .touchUpInside)
+        }
+        cancelButton.do {
+            $0.setTitle("신청 취소", for: .normal)
+            $0.backgroundColor = .red
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+            $0.addTarget(self, action: #selector(didCancelButtonDidTap), for: .touchUpInside)
         }
     }
     
     func layout() {
-        [inputBackgroundView, guideLabel, admitButton].forEach { view.addSubview($0) }
+        [inputBackgroundView, guideLabel, admitButton, cancelButton].forEach { view.addSubview($0) }
         [applyTextField].forEach { inputBackgroundView.addSubview($0) }
         
         inputBackgroundView.do {
@@ -86,18 +94,35 @@ class MyApplyStudyDetailView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 50)).isActive = true
         }
+        cancelButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: admitButton.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 50)).isActive = true
+        }
     }
-    @objc func didClickButton() {
+    @objc func didClickButtonDidTap() {
         if let newMessage = applyTextField.text {
             presenter?.admitButtonDidTap(newMessage: newMessage)
         }
     }
+    @objc func didCancelButtonDidTap() {
+        TerminalAlertMessage.show(type: .StudyApplyDeleteView)
+        (TerminalAlertMessage.alertView as? AlertBaseUIView)?.completeButton.addTarget(self, action: #selector(didCancelAction), for: .touchUpInside)
+    }
+    @objc func didCancelAction() {
+        presenter?.cancelButtonDidTap()
+    }
 }
 
 extension MyApplyStudyDetailView: MyApplyStudyDetailViewProtocol {
+    
+    
     func showModifyApplyMessageResult(message: String) {
         //토스트 메세지를 띄워주며 << 요놈 개발해야겠음!!
         navigationController?.popViewController(animated: true)
+        (navigationController?.viewControllers.last as? MyApplyListViewProtocol)?.presenter?.viewDidLoad()
     }
     
     func showMyApplyStudyDetail(message: String) {
@@ -107,5 +132,10 @@ extension MyApplyStudyDetailView: MyApplyStudyDetailViewProtocol {
     
     func showError() {
         print("MyApplyStudyDetailView 에서 난 오류")
+    }
+    
+    func showDeleteApply(message: String) {
+        navigationController?.popViewController(animated: true)
+        (navigationController?.viewControllers.last as? MyApplyListViewProtocol)?.presenter?.viewDidLoad()
     }
 }

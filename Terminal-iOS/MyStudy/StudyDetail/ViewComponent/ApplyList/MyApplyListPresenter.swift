@@ -30,8 +30,4 @@ extension MyApplyListPresenter: MyApplyListInteractorOutputProtocol {
     func onError() {
         
     }
-    
-//    func userIDResult(studyID: Int, userID: Int) {
-////        wireFrame
-//    }
 }

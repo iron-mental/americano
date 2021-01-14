@@ -187,6 +187,7 @@
 		CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
+		CC72CBEF25B02FCE009E9986 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */; };
 		CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */; };
 		CC8FF5FC257E80D000947FB3 /* ChatTableViewOutputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
@@ -496,6 +497,7 @@
 		CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailWireFrame.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
+		CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
 		CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertUIView.swift; sourceTree = "<group>"; };
 		CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewOutputCell.swift; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
@@ -1291,6 +1293,7 @@
 			isa = PBXGroup;
 			children = (
 				CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */,
+				CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */,
 			);
 			path = StaticViewComponent;
 			sourceTree = "<group>";
@@ -1700,6 +1703,7 @@
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
 				A5D5AE5A2573DAFB003BB277 /* IntroWireFrame.swift in Sources */,
 				CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */,
+				CC72CBEF25B02FCE009E9986 /* AlertMessageView.swift in Sources */,
 				A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
 				CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */,

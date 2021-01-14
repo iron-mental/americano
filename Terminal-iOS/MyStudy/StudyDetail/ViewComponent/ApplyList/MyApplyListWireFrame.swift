@@ -35,6 +35,4 @@ class MyApplyListWireFrame: MyApplyListWireFrameProtocol {
             sourceView.navigationController?.pushViewController(studyDetailViewController, animated: true)
         }
     }
-    
-//    func presentApplyDetailScreen(from view: MyApplyListViewProtocol, studyID: Int, )
 }
