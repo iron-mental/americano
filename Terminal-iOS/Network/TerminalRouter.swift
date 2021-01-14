@@ -36,7 +36,6 @@ enum TerminalRouter: URLRequestConvertible {
     case address
     
     // 프로젝트
-//    case projectRegister        (id: String, project: Parameters)
     case projectList            (id: String)
     case projectUpdate          (id: String, project: Parameters)
 //    case projectDelete          (id: String, projectID: String)
