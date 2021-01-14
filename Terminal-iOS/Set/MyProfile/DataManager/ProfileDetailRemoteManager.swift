@@ -11,51 +11,14 @@ import Alamofire
 import SwiftyJSON
 import SwiftKeychainWrapper
 
-class ProfileDetailRemoteManager: ProfileDetailRemoteDataManagerInputProtocol {
-    var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol?
+class ProfileDetailRemoteManager: BaseProfileRemoteDataManager, ProfileDetailRemoteDataManagerInputProtocol {
+    
     
     // MARK: 유저정보
-    
-    func getUserInfo() {
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.userInfo(id: userID))
-            .validate(statusCode: 200..<299)
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
-                    self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
-                case .failure(let err):
-                    print("실패")
-                    print(err)
-                }
-            }
+    override func getUserInfo() {
+        super.getUserInfo()
     }
-    
-    // MARK: 유저 프로젝트
-    
-    func getProjectList() {
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.projectList(id: userID))
-            .responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                let data = "\(json)".data(using: .utf8)
-                let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
-                self.remoteRequestHandler?.onProjectRetrieved(project: result)
-            case .failure(let err):
-                print("실패")
-                print(err)
-            }
-        }
+    override func getProjectList() {
+        super.getProjectList()
     }
 }

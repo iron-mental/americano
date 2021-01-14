@@ -24,6 +24,7 @@ class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
 
 extension ProfileDetailInteractor: ProfileDetailRemoteDataManagerOutputProtocol {
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
+        
         guard let result = userInfo.data else { return }
         presenter?.didRetrievedUserInfo(userInfo: result)
     }

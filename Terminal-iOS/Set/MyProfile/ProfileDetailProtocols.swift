@@ -59,14 +59,14 @@ protocol ProfileDetailInteractorOutputProtocol: class {
     func didRetrievedProject(project: [Project])
 }
 
-protocol ProfileDetailRemoteDataManagerInputProtocol: class {
-    var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol? { get set }
+protocol ProfileDetailRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {
+//    var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
     func getUserInfo()
     func getProjectList()
 }
 
-protocol ProfileDetailRemoteDataManagerOutputProtocol: class {
+protocol ProfileDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataManagerOutputProtocol {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
     func onProjectRetrieved(project: BaseResponse<[Project]>)
@@ -75,3 +75,4 @@ protocol ProfileDetailRemoteDataManagerOutputProtocol: class {
 protocol ProfileDetailLocalDataManagerInputProtocol: class {
     
 }
+

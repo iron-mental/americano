@@ -19,7 +19,7 @@ class ApplyUserPresenter: ApplyUserPresenterProtocol {
     }
     
     func showUserInfoDetail(userID: Int, state: Bool) {
-        wireFrame?.presentUserInfoDetailScreen(from: view!)
+        wireFrame?.presentUserInfoDetailScreen(from: view!, userID: userID)
     }
 }
 
@@ -36,5 +36,4 @@ extension ApplyUserPresenter: ApplyUserInteractorOutputProtocol {
             print("ApplyUserPresenter 에서 생긴 오류")
         }
     }
-    
 }

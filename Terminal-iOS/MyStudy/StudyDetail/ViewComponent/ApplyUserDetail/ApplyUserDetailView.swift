@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ApplyUserDetailView: ProfileDetailView {
+class ApplyUserDetailView: BaseProfileView {
     let refusalButton   = UIButton()
     let acceptButton    = UIButton()
+    var presenter: ApplyUserDetailPresenterInputProtocol?
     
     override func attribute() {
         super.attribute()
@@ -46,4 +47,7 @@ class ApplyUserDetailView: ProfileDetailView {
             $0.heightAnchor.constraint(equalToConstant: 45).isActive = true
         }
     }
+}
+
+extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
 }

@@ -188,6 +188,10 @@
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC72CBEF25B02FCE009E9986 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */; };
+		CC72CBF425B05A00009E9986 /* ApplyUserDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBF325B05A00009E9986 /* ApplyUserDetailProtocols.swift */; };
+		CC72CBF925B05B40009E9986 /* BaseProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBF825B05B40009E9986 /* BaseProfileView.swift */; };
+		CC72CBFF25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBFE25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift */; };
+		CC72CC0725B0632B009E9986 /* BaseProfileRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */; };
 		CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */; };
 		CC8FF5FC257E80D000947FB3 /* ChatTableViewOutputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
@@ -498,6 +502,10 @@
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
+		CC72CBF325B05A00009E9986 /* ApplyUserDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserDetailProtocols.swift; sourceTree = "<group>"; };
+		CC72CBF825B05B40009E9986 /* BaseProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileView.swift; sourceTree = "<group>"; };
+		CC72CBFE25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileRemoteDataManagerInputProtocol.swift; sourceTree = "<group>"; };
+		CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertUIView.swift; sourceTree = "<group>"; };
 		CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewOutputCell.swift; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
@@ -702,6 +710,7 @@
 			isa = PBXGroup;
 			children = (
 				A53B11AE258CB6E400498A96 /* ApplyUserDetailView.swift */,
+				CC72CBF325B05A00009E9986 /* ApplyUserDetailProtocols.swift */,
 			);
 			path = ApplyUserDetail;
 			sourceTree = "<group>";
@@ -739,6 +748,8 @@
 				A5C5B14F2545699700F4A86D /* BaseSNSView.swift */,
 				A56605E2258358A2002C4A77 /* ApplyListCell.swift */,
 				A5417FE825A7A6E3005B884F /* BaseSNSModifyView.swift */,
+				CC72CBF825B05B40009E9986 /* BaseProfileView.swift */,
+				CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -1091,6 +1102,14 @@
 			path = AddNotice;
 			sourceTree = "<group>";
 		};
+		CC72CBFD25B061CC009E9986 /* BaseProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				CC72CBFE25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift */,
+			);
+			path = BaseProtocol;
+			sourceTree = "<group>";
+		};
 		CC84850525A47FD700C792BC /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1139,6 +1158,7 @@
 		CCA1FF5524FD0C930026C3EA /* Terminal-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				CC72CBFD25B061CC009E9986 /* BaseProtocol */,
 				CCB752C825A841C0003E7CA7 /* StaticViewComponent */,
 				CCBBEEC32583631900177E25 /* CoreDataModel */,
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
@@ -1659,6 +1679,7 @@
 				A581495025912DFC00BF3C2A /* CareerModifyProtocols.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
 				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
+				CC72CC0725B0632B009E9986 /* BaseProfileRemoteDataManager.swift in Sources */,
 				A51BA0C92578132B00B9673F /* TerminalRouter.swift in Sources */,
 				CC5795042570C9E600DF96AB /* AddNoticeRemoteDataManager.swift in Sources */,
 				CC56396F259CB85800DA1479 /* SearchStudyResultView.swift in Sources */,
@@ -1715,6 +1736,7 @@
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				A5417FD325A77E3F005B884F /* ProjectSNSView.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,
+				CC72CBFF25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift in Sources */,
 				CC563941259CAD7C00DA1479 /* SearchStudyPresenter.swift in Sources */,
 				CCF632D125A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift in Sources */,
 				CCD51C83256D2A0500D41771 /* MyStudyDetailWireFrame.swift in Sources */,
@@ -1763,6 +1785,7 @@
 				A521DDF7252F107A00F83DB3 /* ProfileDetailWireFrame.swift in Sources */,
 				A5D6A78B2574309D007D6409 /* ProfileModifyPresenter.swift in Sources */,
 				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
+				CC72CBF925B05B40009E9986 /* BaseProfileView.swift in Sources */,
 				A581489C2591050F00BF3C2A /* EmailModifyInteractor.swift in Sources */,
 				CC21A7952559504600E31F77 /* IntroLocalDataManager.swift in Sources */,
 				CC26AD58251B27B3006B11E9 /* LocationUIView.swift in Sources */,
@@ -1839,6 +1862,7 @@
 				A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */,
 				CCAF0FDC253303300060A2F6 /* MyStudyMainPresenter.swift in Sources */,
 				CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */,
+				CC72CBF425B05A00009E9986 /* ApplyUserDetailProtocols.swift in Sources */,
 				CCD51C7D256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				CC5794FE2570C9C600DF96AB /* AddNoticeInteractor.swift in Sources */,

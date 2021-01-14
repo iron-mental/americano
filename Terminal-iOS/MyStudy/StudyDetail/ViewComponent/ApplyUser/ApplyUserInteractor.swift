@@ -20,7 +20,6 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
             .request(TerminalRouter.applyUserList(studyID: "\(studyID)"))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
-                print(response.response?.statusCode)
                 switch response.result {
                 case .success(let value):
                     print(JSON(value))

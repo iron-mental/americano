@@ -14,7 +14,7 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         let presenter: ProfileDetailPresenterProtocol & ProfileDetailInteractorOutputProtocol = ProfileDetailPresenter()
         let interactor: ProfileDetailInteractorInputProtocol & ProfileDetailRemoteDataManagerOutputProtocol = ProfileDetailInteractor()
         let wireFrame: ProfileDetailWireFrameProtocol = ProfileDetailWireFrame()
-        let remoteManager: ProfileDetailRemoteDataManagerInputProtocol = ProfileDetailRemoteManager()
+        var remoteManager: ProfileDetailRemoteDataManagerInputProtocol = ProfileDetailRemoteManager()
         
         view.presenter = presenter
         

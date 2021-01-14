@@ -27,6 +27,7 @@ final class ApplyUserView: UIViewController {
             $0.register(ApplyUserCell.self, forCellReuseIdentifier: ApplyUserCell.applyUserCellID)
             $0.delegate = self
             $0.dataSource = self
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }
     
@@ -70,7 +71,7 @@ extension ApplyUserView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.showUserInfoDetail(userID: 44, state: true)
+        presenter?.showUserInfoDetail(userID: userList[indexPath.row].userID, state: true)
     }
     
 }
