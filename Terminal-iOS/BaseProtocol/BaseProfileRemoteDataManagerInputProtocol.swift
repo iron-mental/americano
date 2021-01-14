@@ -1,5 +1,5 @@
 //
-//  BaseProfileInteractorInputProtocol.swift
+//  BaseProfileRemoteDataManagerInputProtocol.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2021/01/14.
@@ -8,8 +8,15 @@
 
 import Foundation
 
-protocol BaseProfileInteractorInputProtocol {
-    // PRESENTER -> INTERACTOR
+protocol BaseProfileRemoteDataManagerInputProtocol {
+    var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol? { get set }
+    
     func getUserInfo()
     func getProjectList()
+}
+
+protocol BaseProfileRemoteDataManagerOutputProtocol {
+    // REMOTEDATAMANAGER -> INTERACTOR
+    func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
+    func onProjectRetrieved(project: BaseResponse<[Project]>)
 }
