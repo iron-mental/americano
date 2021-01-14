@@ -37,6 +37,7 @@ protocol MyApplyListPresenterProtocol: class {
 protocol MyApplyListInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrieveStudies(studies: [ApplyStudy]?)
+//    func userIDResult(studyID: Int, userID: Int)
     func onError()
 }
 
@@ -45,4 +46,5 @@ protocol MyApplyListInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func getApplyList()
+//    func getUserID(studyID: Int)
 }

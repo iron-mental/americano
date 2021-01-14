@@ -38,4 +38,10 @@ class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
                 }
             }
     }
+    
+//    func getUserID(studyID: Int) {
+//        if let userInfo = CoreDataManager.shared.getUserinfo() {
+//            presenter?.userIDResult(studyID: studyID, userID: userInfo.id)
+//        }
+//    }
 }

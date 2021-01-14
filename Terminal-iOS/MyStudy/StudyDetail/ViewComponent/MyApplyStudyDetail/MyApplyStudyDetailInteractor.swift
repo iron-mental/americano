@@ -16,9 +16,11 @@ class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
     
     func getMyApplyStudyDetail(studyID: Int) {
         self.studyID = studyID
+        
         if let userInfo = CoreDataManager.shared.getUserinfo() {
             remoteDataManager?.getMyApplyStudyDetail(studyID: studyID, userID: userInfo.id)
         }
+        
     }
     
     func putNewApplyMessage(newMessage: String) {
@@ -30,6 +32,7 @@ class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
 
 extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutputProtocol {
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult) {
+        
         switch result {
         case true:
             applyID = data.id
@@ -41,6 +44,7 @@ extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutpu
     }
     
     func retriveModifyApplyMessage(result: Bool, message: String) {
+        
         switch result {
         case true:
             

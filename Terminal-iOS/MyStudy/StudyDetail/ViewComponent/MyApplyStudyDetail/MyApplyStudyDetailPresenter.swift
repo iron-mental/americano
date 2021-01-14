@@ -43,6 +43,7 @@ extension MyApplyStudyDetailPresenter: MyApplyStudyDetailInteractorOutputProtoco
     
     func retriveMyApplyStudyDetail(result: Bool, message: String) {
         switch result {
+        
         case true:
             LoadingRainbowCat.hide {
                 self.view?.showMyApplyStudyDetail(message: message)

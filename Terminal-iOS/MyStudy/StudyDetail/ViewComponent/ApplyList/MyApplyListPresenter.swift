@@ -31,4 +31,7 @@ extension MyApplyListPresenter: MyApplyListInteractorOutputProtocol {
         
     }
     
+//    func userIDResult(studyID: Int, userID: Int) {
+////        wireFrame
+//    }
 }

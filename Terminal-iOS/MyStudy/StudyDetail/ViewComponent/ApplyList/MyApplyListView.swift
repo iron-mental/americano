@@ -69,6 +69,7 @@ extension MyApplyListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let study = studyList[indexPath.row]
-        presenter?.showStudyDetail(keyValue: study.id)
+        presenter?.showStudyDetail(keyValue: study.studyID)
+        
     }
 }
