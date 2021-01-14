@@ -28,7 +28,7 @@ class CategoryCell: UICollectionViewCell {
     }
     
     private func attribute() {
-        imageView.do {
+        self.imageView.do {
             $0.layer.cornerRadius = 10
             $0.contentMode = .scaleAspectFit
             $0.clipsToBounds = true
@@ -37,7 +37,7 @@ class CategoryCell: UICollectionViewCell {
     }
     
     private func layout() {
-        self.contentView.addSubview(imageView)
+        self.contentView.addSubview(self.imageView)
         self.imageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true

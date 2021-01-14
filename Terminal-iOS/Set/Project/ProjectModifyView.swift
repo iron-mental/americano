@@ -141,6 +141,7 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
             print("메시지 : ", message)
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
             self.navigationController?.popViewController(animated: true, completion: {
+                parent?.showToast(controller: parent!, message: "프로젝트 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
             })
         } else {

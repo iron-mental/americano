@@ -11,15 +11,24 @@ import UIKit
 class LocationModifyWireFrame: LocationModifyWireFrameProtocol {
     static func createModule() -> UIViewController {
         let view: LocationModifyViewProtocol = LocationModifyView()
-        let presenter: LocationModifyPresenterProtocol & LocationModifyInteractorOutputProtocol = LocationModifyPresenter()
-        let interactor: LocationModifyInteractorInputProtocol = LocationModifyInteractor()
+        let presenter: LocationModifyPresenterProtocol
+            & LocationModifyInteractorOutputProtocol = LocationModifyPresenter()
+        let interactor: LocationModifyInteractorInputProtocol
+            & LocationModifyRemoteDataManagerOutputProtocol = LocationModifyInteractor()
         let wireFrame: LocationModifyWireFrameProtocol = LocationModifyWireFrame()
+        let remoteDataManager: LocationModifyRemoteDataManagerInputProtocol = LocationModifyRemoteDataManager()
         
         view.presenter = presenter
+        
         presenter.view = view
         presenter.wireFrame = wireFrame
+        presenter.interactor = interactor
+        
         interactor.presenter = presenter
-       
+        interactor.remoteDataManager = remoteDataManager
+        
+        remoteDataManager.remoteRequestHandler = interactor
+        
         if let view = view as? LocationModifyView {
             return view
         } else {

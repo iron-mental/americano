@@ -168,7 +168,6 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
         presenter?.didSearchButtonClicked(keyWord: text)
     }
     
-    
     class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
         override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
             let attributes = super.layoutAttributesForElements(in: rect)

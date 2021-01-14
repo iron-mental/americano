@@ -12,6 +12,8 @@ protocol LocationModifyViewProtocol: class {
     var presenter: LocationModifyPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func showAddress(address: [Address])
+    func modifyResultHandle(result: Bool, message: String)
 }
 
 protocol LocationModifyWireFrameProtocol: class {
@@ -24,16 +26,38 @@ protocol LocationModifyPresenterProtocol: class {
     var wireFrame: LocationModifyWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
+    func viewDidLoad()
+    func completeModify(sido: String, sigungu: String)
 }
 
 protocol LocationModifyInteractorInputProtocol: class {
     var presenter: LocationModifyInteractorOutputProtocol? { get set }
+    var remoteDataManager: LocationModifyRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-   
+    func retrieveAddress()
+    func retrieveCoordinates(sido: String, sigungu: String)
 }
 
 protocol LocationModifyInteractorOutputProtocol: class {
-    // INTERACTOR -> PRESENTER
     
+    // INTERACTOR -> PRESENTER
+    func retrievedAddress(result: Bool, address: [Address])
+    func didCompleteModify(result: Bool, message: String)
+}
+
+protocol LocationModifyRemoteDataManagerInputProtocol: class {
+    var remoteRequestHandler: LocationModifyRemoteDataManagerOutputProtocol? { get set }
+    
+    // INTERACTOR -> REMOTEDATAMANAGER
+    func retrieveAddress()
+    func retrieveCoordinates(location: String, completion: @escaping (_ x: Double, _ y: Double) -> Void)
+    func completeModify(params: [String: Any])
+}
+
+protocol LocationModifyRemoteDataManagerOutputProtocol: class {
+    
+    // REMOTEDATAMANAGER -> INTERACTOR
+    func onRetrieveAddress(result: BaseResponse<[Address]>)
+    func didCompleteModify(result: BaseResponse<Bool>)
 }
