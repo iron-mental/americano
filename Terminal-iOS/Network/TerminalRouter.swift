@@ -120,8 +120,6 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .projectUpdate:
             return .post
-//        case .projectDelete:
-//            return .delete
             
         // 스터디
         case .studyCreate:
