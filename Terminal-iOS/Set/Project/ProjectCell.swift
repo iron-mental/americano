@@ -33,6 +33,22 @@ class ProjectCell: UITableViewCell {
         self.delegate = nil
     }
     
+    func setTag(tag: Int) {
+        self.title.tag = tag
+        self.contents.tag = tag
+        self.sns.firstTextFeield.tag = tag
+        self.sns.secondTextField.tag = tag
+        self.sns.thirdTextField.tag = tag
+    }
+    
+    func setDelegate(with view: UIViewController) {
+        self.title.delegate = (view as! UITextFieldDelegate)
+        self.contents.delegate = (view as! UITextViewDelegate)
+        self.sns.firstTextFeield.delegate = (view as! UITextFieldDelegate)
+        self.sns.secondTextField.delegate = (view as! UITextFieldDelegate)
+        self.sns.thirdTextField.delegate = (view as! UITextFieldDelegate)
+    }
+    
     func setData(data: Project) {
         self.projectID = data.id
         self.title.text = data.title
@@ -43,6 +59,7 @@ class ProjectCell: UITableViewCell {
     }
     
     func attribute() {
+        self.selectionStyle = .none
         self.remove.do {
             $0.setTitle("ㅡ", for: .normal)
             $0.backgroundColor = .red
