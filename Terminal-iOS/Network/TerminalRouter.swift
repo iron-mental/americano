@@ -114,8 +114,6 @@ enum TerminalRouter: URLRequestConvertible {
         
             
         // 프로젝트
-//        case .projectRegister:
-//            return .post
         case .projectList:
             return .get
         case .projectUpdate:
