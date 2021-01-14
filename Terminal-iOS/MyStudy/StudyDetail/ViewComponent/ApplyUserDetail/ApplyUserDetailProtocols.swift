@@ -7,3 +7,31 @@
 //
 
 import Foundation
+
+protocol ApplyUserDetailViewProtocol {
+    var presenter: ApplyUserDetailPresenterInputProtocol? { get set }
+}
+
+protocol ApplyUserDetailPresenterInputProtocol {
+    
+}
+
+protocol ApplyUserDetailInteractorInputProtocol {
+    
+}
+
+protocol ApplyUserDetailInteractorOutputProtocol {
+    
+}
+
+protocol ApplyUserDetailRemoteDataManagerInputProtocol {
+    
+}
+
+protocol ApplyUserDetailRemoteDataManagerOutputProtocol {
+    
+}
+
+protocol ApplyUserDetailWireFrameProtocol {
+    
+}
