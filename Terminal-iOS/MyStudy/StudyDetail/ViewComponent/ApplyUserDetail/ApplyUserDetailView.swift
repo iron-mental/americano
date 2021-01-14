@@ -9,7 +9,6 @@
 import UIKit
 
 class ApplyUserDetailView: ProfileDetailView {
-    
     let refusalButton   = UIButton()
     let acceptButton    = UIButton()
     

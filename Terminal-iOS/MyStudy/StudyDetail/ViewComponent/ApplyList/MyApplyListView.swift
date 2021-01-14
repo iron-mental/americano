@@ -26,6 +26,7 @@ final class MyApplyListView: UIViewController {
             $0.register(MyApplyListCell.self, forCellReuseIdentifier: MyApplyListCell.myApplyListCellID)
             $0.delegate = self
             $0.dataSource = self
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }
     

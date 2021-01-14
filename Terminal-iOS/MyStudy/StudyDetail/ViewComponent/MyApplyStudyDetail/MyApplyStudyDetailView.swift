@@ -35,7 +35,6 @@ class MyApplyStudyDetailView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 20
             $0.layer.masksToBounds = true
-            
         }
         applyTextField.do {
             $0.addLeftPadding()

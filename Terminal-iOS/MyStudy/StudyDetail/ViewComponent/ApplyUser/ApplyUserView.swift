@@ -32,6 +32,7 @@ final class ApplyUserView: UIViewController {
     
     private func layout() {
         self.view.addSubview(applyUserList)
+        
         self.applyUserList.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
