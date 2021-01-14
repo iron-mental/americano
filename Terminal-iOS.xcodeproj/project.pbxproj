@@ -719,7 +719,6 @@
 		A55505BC255962E90089B919 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				A5753448257669DE00FD7D0C /* ProjectCell.swift */,
 				A575344C257697A000FD7D0C /* ProjectTableView.swift */,
 				A5B700B0257A9B14001F62A0 /* ProjectSNSModifyView.swift */,
 				A5417FF025A7A855005B884F /* ProfileSNSModifyView.swift */,
@@ -813,6 +812,7 @@
 				A58F901D259F450A007777B4 /* ProjectModifyInteractor.swift */,
 				A58F9022259F4514007777B4 /* ProjectModifyWireFrame.swift */,
 				A58F9027259F451D007777B4 /* ProjectModifyProtocols.swift */,
+				A5753448257669DE00FD7D0C /* ProjectCell.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";

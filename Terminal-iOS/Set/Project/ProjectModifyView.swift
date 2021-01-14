@@ -146,7 +146,7 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
             })
         } else {
             // 실패시 에러처리 부분
-            
+            self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 1)
         }
     }
 }
@@ -158,8 +158,10 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
-        cell.selectionStyle = .none
+        
         cell.delegate = self
+        cell.setDelegate(with: self)
+        cell.setTag(tag: indexPath.row)
         
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
@@ -174,10 +176,13 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         
         let index = indexPath.row
         
-        self.projectArr.remove(at: index)
-        self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-        self.projectAddButton.backgroundColor =
-            self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
+        let indexPath2 = IndexPath(row: index, section: 0)
+        self.projectView.scrollToRow(at: indexPath2, at: .top, animated: true)
+        
+//        self.projectArr.remove(at: index)
+//        self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+//        self.projectAddButton.backgroundColor =
+//            self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
     }
 }
 
@@ -186,3 +191,15 @@ extension ProjectModifyView: UIScrollViewDelegate {
         self.view.endEditing(true)
     }
 }
+
+extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let index = IndexPath(row: textField.tag, section: 0)
+        print(textField.tag)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print(textView.tag)
+    }
+}
+
