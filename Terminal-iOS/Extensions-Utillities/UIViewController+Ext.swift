@@ -20,11 +20,26 @@ extension UIViewController {
 
         alert.setValue(titleAttrString, forKey:"attributedTitle")
         
-        
         controller.present(alert, animated: true)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
             alert.dismiss(animated: true)
         }
+    }
+    
+    func keyboardAddObserver(with controller: UIViewController,
+                             showSelector: Selector,
+                             hideSelector: Selector) {
+        NotificationCenter.default.addObserver(controller, selector: showSelector, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(controller, selector: hideSelector, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardRmoveObserver(with controller: UIViewController) {
+        NotificationCenter.default.removeObserver(controller,
+                                                  name: UIResponder.keyboardWillShowNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(controller,
+                                                  name: UIResponder.keyboardWillHideNotification,
+                                                  object: nil)
     }
 }
