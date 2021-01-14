@@ -28,10 +28,15 @@ extension UIViewController {
     }
     
     func keyboardAddObserver(with controller: UIViewController,
-                             showSelector: Selector,
-                             hideSelector: Selector) {
-        NotificationCenter.default.addObserver(controller, selector: showSelector, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(controller, selector: hideSelector, name: UIResponder.keyboardWillHideNotification, object: nil)
+                             showSelector: Selector?,
+                             hideSelector: Selector?) {
+        if let showSelector = showSelector {
+            NotificationCenter.default.addObserver(controller, selector: showSelector, name: UIResponder.keyboardDidShowNotification, object: nil)
+        }
+        
+        if let hideSelector = hideSelector {
+            NotificationCenter.default.addObserver(controller, selector: hideSelector, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
     }
     
     func keyboardRmoveObserver(with controller: UIViewController) {
@@ -42,4 +47,14 @@ extension UIViewController {
                                                   name: UIResponder.keyboardWillHideNotification,
                                                   object: nil)
     }
+    
+    func hideKeyboardWhenTappedAround() {
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+            tap.cancelsTouchesInView = false
+            view.addGestureRecognizer(tap)
+        }
+
+        @objc func dismissKeyboard() {
+            view.endEditing(true)
+        }
 }

@@ -118,7 +118,7 @@ class ProjectCell: UITableViewCell {
             $0.topAnchor.constraint(equalTo: self.contents.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -50).isActive = true
         }
     }
     

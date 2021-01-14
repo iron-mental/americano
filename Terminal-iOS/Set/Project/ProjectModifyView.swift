@@ -11,7 +11,8 @@ import UIKit
 class ProjectModifyView: UIViewController, CellSubclassDelegate {
     var presenter: ProjectModifyPresenterProtocol?
     var projectArr: [Project] = []
-    
+    var index: IndexPath?
+        
     lazy var projectView = ProjectTableView()
     lazy var projectAddButton = UIButton()
     lazy var completeButton = UIButton()
@@ -20,6 +21,14 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         super.viewDidLoad()
         attribute()
         layout()
+        self.hideKeyboardWhenTappedAround()
+        keyboardAddObserver(with: self,
+                            showSelector: nil,
+                            hideSelector: #selector(keyboardWillHide))
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.keyboardRmoveObserver(with: self)
     }
     
     private func attribute() {
@@ -105,6 +114,10 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         }
     }
     
+    @objc func keyboardWillHide() {
+        self.projectView.contentInset.bottom = 0
+    }
+    
     @objc func completeModify() {
         getCellData()
         presenter?.completeModify(project: projectArr)
@@ -176,30 +189,28 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         
         let index = indexPath.row
         
-        let indexPath2 = IndexPath(row: index, section: 0)
-        self.projectView.scrollToRow(at: indexPath2, at: .top, animated: true)
-        
-//        self.projectArr.remove(at: index)
-//        self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-//        self.projectAddButton.backgroundColor =
-//            self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
-    }
-}
-
-extension ProjectModifyView: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
+        self.projectArr.remove(at: index)
+        self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        self.projectAddButton.backgroundColor =
+            self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
     }
 }
 
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let index = IndexPath(row: textField.tag, section: 0)
-        print(textField.tag)
+        self.projectView.contentInset.bottom = 180
+        self.projectView.scrollToRow(at: index, at: .top, animated: true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        print(textView.tag)
+        let index = IndexPath(row: textView.tag, section: 0)
+        self.projectView.contentInset.bottom = 180
+        self.projectView.scrollToRow(at: index, at: .top, animated: true)
     }
 }
 
