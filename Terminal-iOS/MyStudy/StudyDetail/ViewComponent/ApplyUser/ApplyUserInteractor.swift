@@ -12,6 +12,7 @@ import SwiftKeychainWrapper
 
 class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
     var presenter: ApplyUserInteractorOutputProtocol?
+    var studyID: Int?
     
     func getApplyList(studyID: Int) {
         TerminalNetworkManager
@@ -26,8 +27,12 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data!)
+                    
                     if result.result, let userList = result.data {
+                        
                         self.presenter?.didRetrieveUser(userList: userList)
+                    } else {
+                        self.presenter?.didRetrieveUser(userList: [])
                     }
                 case .failure(let err):
                     print("error:",err)

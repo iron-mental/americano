@@ -19,7 +19,6 @@ class ApplyUserPresenter: ApplyUserPresenterProtocol {
     }
     
     func showUserInfoDetail(userInfo: ApplyUser, studyID: Int) {
-//        wireFrame?.presentUserInfoDetailScreen(from: view!, userID: userID)
         wireFrame?.presentUserInfoDetailScreen(from: view!, userInfo: userInfo, studyID: studyID)
     }
 }

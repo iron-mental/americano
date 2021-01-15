@@ -23,7 +23,6 @@ class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
         
         if let view = view as? ApplyUserView {
             view.studyID = studyID
-            
             return view
         } else {
             

@@ -13,7 +13,7 @@ protocol ApplyUserDetailViewProtocol: BaseProfileViewProtocol {
     
     //PRESENTER -> View
     func showError()
-    func showApplyStatusResult(message: String)
+    func showApplyStatusResult(message: String, studyID: Int)
 }
 
 protocol ApplyUserDetailPresenterInputProtocol {
@@ -44,7 +44,7 @@ protocol ApplyUserDetailInteractorOutputProtocol {
     //INTERACTOR -> PRESENTER
     func retriveUserInfo(result: Bool, userInfo: UserInfo)
     func retriveProjectList(result: Bool, projectList: [Project])
-    func retriveApplyStatus(result: Bool, message: String)
+    func retriveApplyStatus(result: Bool, message: String, studyID: Int)
 }
 
 protocol ApplyUserDetailRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {

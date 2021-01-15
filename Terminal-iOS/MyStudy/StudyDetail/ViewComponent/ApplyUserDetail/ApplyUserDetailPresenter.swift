@@ -50,10 +50,10 @@ extension ApplyUserDetailPresenter: ApplyUserDetailInteractorOutputProtocol {
             print("ApplyUserDetailPresenter")
         }
     }
-    func retriveApplyStatus(result: Bool, message: String) {
+    func retriveApplyStatus(result: Bool, message: String, studyID: Int) {
         switch  result {
         case true:
-            view?.showApplyStatusResult(message: message)
+            view?.showApplyStatusResult(message: message, studyID: studyID)
             break
         case false:
             view?.showError()

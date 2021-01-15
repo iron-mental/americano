@@ -28,7 +28,6 @@ class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserD
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
                         if let message = result.message {
-                            
                             (self.remoteRequestHandler as! ApplyUserDetailRemoteDataManagerOutputProtocol).onApplyStatusRetrieved(response: result)
                         }
                     } catch {

@@ -12,8 +12,8 @@ import Kingfisher
 
 class ApplyUserDetailView: BaseProfileView {
     var presenter: ApplyUserDetailPresenterInputProtocol?
-    let refusalButton   = UIButton()
-    let acceptButton    = UIButton()
+    let refusalButton = UIButton()
+    let acceptButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,8 +72,10 @@ class ApplyUserDetailView: BaseProfileView {
 }
 
 extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
-    func showApplyStatusResult(message: String) {
-//        <#code#>
+    func showApplyStatusResult(message: String, studyID: Int) {
+        
+        navigationController?.popViewController(animated: true)
+        (navigationController?.viewControllers.last as! ApplyUserViewProtocol).presenter?.viewDidLoad(studyID: studyID)
     }
     
     func showError() {
