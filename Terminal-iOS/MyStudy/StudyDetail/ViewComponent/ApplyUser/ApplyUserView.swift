@@ -72,7 +72,8 @@ extension ApplyUserView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.showUserInfoDetail(userID: userList[indexPath.row].userID, state: true)
+        guard let id = studyID else { return }
+        presenter?.showUserInfoDetail(userInfo: userList[indexPath.row], studyID: id)
     }
     
 }

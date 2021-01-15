@@ -13,10 +13,19 @@ class ApplyUserDetailPresenter: ApplyUserDetailPresenterInputProtocol {
     var interactor: ApplyUserDetailInteractorInputProtocol?
     var wireFrame: ApplyUserDetailWireFrameProtocol?
     
-    func viewDidLoad(userID: Int) {
+    func viewDidLoad() {
         LoadingRainbowCat.show()
-        interactor?.getUserInfo(userID: userID)
+        interactor?.getUserInfo()
     }
+    
+    func rejectButtonDidTap() {
+        interactor?.postRejectStatus()
+    }
+    
+    func acceptButtonDidtap() {
+        interactor?.postAcceptStatus()
+    }
+    
 }
 
 extension ApplyUserDetailPresenter: ApplyUserDetailInteractorOutputProtocol {
@@ -39,6 +48,16 @@ extension ApplyUserDetailPresenter: ApplyUserDetailInteractorOutputProtocol {
             }
         case false:
             print("ApplyUserDetailPresenter")
+        }
+    }
+    func retriveApplyStatus(result: Bool, message: String) {
+        switch  result {
+        case true:
+            view?.showApplyStatusResult(message: message)
+            break
+        case false:
+            view?.showError()
+            break
         }
     }
 }

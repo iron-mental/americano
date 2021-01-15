@@ -18,8 +18,9 @@ class ApplyUserPresenter: ApplyUserPresenterProtocol {
         interactor?.getApplyList(studyID: studyID)
     }
     
-    func showUserInfoDetail(userID: Int, state: Bool) {
-        wireFrame?.presentUserInfoDetailScreen(from: view!, userID: userID)
+    func showUserInfoDetail(userInfo: ApplyUser, studyID: Int) {
+//        wireFrame?.presentUserInfoDetailScreen(from: view!, userID: userID)
+        wireFrame?.presentUserInfoDetailScreen(from: view!, userInfo: userInfo, studyID: studyID)
     }
 }
 

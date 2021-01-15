@@ -12,15 +12,26 @@ class ApplyUserDetailInteractor: ApplyUserDetailInteractorInputProtocol {
     var presenter: ApplyUserDetailInteractorOutputProtocol?
     var remoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol?
     
-    func getUserInfo(userID: Int) {
-        
-        remoteDataManager?.getUserInfo(userID: userID)
-        remoteDataManager?.getProjectList(userID: userID)
+    var studyID: Int?
+    var applyID: Int?
+    var userID: Int?
+    
+    func getUserInfo() {
+        guard let id = userID else { return }
+        remoteDataManager?.getUserInfo(userID: id)
+        remoteDataManager?.getProjectList(userID: id)
+    }
+    func postRejectStatus() {
+        remoteDataManager?.postApplyStatus(studyID: studyID!, applyID: applyID!, status: false)
     }
     
+    func postAcceptStatus() {
+        remoteDataManager?.postApplyStatus(studyID: studyID!, applyID: applyID!, status: true)
+    }
 }
 
 extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProtocol {
+    
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
         
         switch userInfo.result {
@@ -45,6 +56,18 @@ extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProto
             break
         case false:
             print("ApplyUserDetailInterator 에서 생긴 에러")
+            break
+        }
+    }
+    
+    func onApplyStatusRetrieved(response: BaseResponse<String>) {
+        switch response.result {
+        case true:
+            guard let message = response.data else { return }
+            presenter?.retriveApplyStatus(result: response.result, message: message)
+            break
+        case false:
+            print("ApplyUserDetailInteractor 에서 생긴 에러")
             break
         }
     }

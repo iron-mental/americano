@@ -31,8 +31,8 @@ class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
         }
     }
     
-    func presentUserInfoDetailScreen(from view: ApplyUserViewProtocol, userID: Int) {
-        let userDetailView = ApplyUserDetailWireFrame.createApplyUserDetailModule(userID: userID)
+    func presentUserInfoDetailScreen(from view: ApplyUserViewProtocol, userInfo: ApplyUser, studyID: Int) {
+        let userDetailView = ApplyUserDetailWireFrame.createApplyUserDetailModule(userInfo: userInfo, studyID: studyID)
         
         if let sourceView = view as? UIViewController {
             

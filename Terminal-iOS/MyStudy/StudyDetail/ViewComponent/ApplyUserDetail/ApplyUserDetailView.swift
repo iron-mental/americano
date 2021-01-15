@@ -12,13 +12,14 @@ import Kingfisher
 
 class ApplyUserDetailView: BaseProfileView {
     var presenter: ApplyUserDetailPresenterInputProtocol?
-    var userID: Int? { didSet { presenter?.viewDidLoad(userID: userID!) } }
     let refusalButton   = UIButton()
     let acceptButton    = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter?.viewDidLoad()
     }
+    
     override func attribute() {
         super.attribute()
         
@@ -27,12 +28,14 @@ class ApplyUserDetailView: BaseProfileView {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.red
             $0.setTitleColor(.white, for: .normal)
+            $0.addTarget(self, action: #selector(rejectButtonDidTap), for: .touchUpInside)
         }
         self.acceptButton.do {
             $0.setTitle("수락", for: .normal)
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.setTitleColor(.white, for: .normal)
+            $0.addTarget(self, action: #selector(acceptButtonDidTap), for: .touchUpInside)
         }
         [ profile.modify, career.modify, sns.modify, email.modify, location.modify].forEach { $0.isHidden = true}
     }
@@ -57,9 +60,22 @@ class ApplyUserDetailView: BaseProfileView {
             $0.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
         }
     }
+    
+    @objc func rejectButtonDidTap() {
+        presenter?.rejectButtonDidTap()
+    }
+    
+    @objc func acceptButtonDidTap() {
+
+        presenter?.acceptButtonDidtap()
+    }
 }
 
 extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
+    func showApplyStatusResult(message: String) {
+//        <#code#>
+    }
+    
     func showError() {
         print("applyUserDetailView에서 생긴 에러")
     }

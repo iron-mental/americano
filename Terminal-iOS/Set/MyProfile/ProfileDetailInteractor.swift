@@ -36,5 +36,4 @@ extension ProfileDetailInteractor: ProfileDetailRemoteDataManagerOutputProtocol 
         guard let result = project.data else { return }
         presenter?.didRetrievedProject(project: result)
     }
-    
 }

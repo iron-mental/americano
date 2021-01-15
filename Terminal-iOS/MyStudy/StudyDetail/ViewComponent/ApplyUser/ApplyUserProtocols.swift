@@ -21,7 +21,7 @@ protocol ApplyUserWireFrameProtocol: class {
     static func createUserListModule(studyID: Int) -> UIViewController
     
     // PRESENT -> WIREFRAME
-    func presentUserInfoDetailScreen(from view: ApplyUserViewProtocol, userID: Int)
+    func presentUserInfoDetailScreen(from view: ApplyUserViewProtocol, userInfo: ApplyUser, studyID: Int)
 }
 
 protocol ApplyUserPresenterProtocol: class {
@@ -31,7 +31,7 @@ protocol ApplyUserPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad(studyID: Int)
-    func showUserInfoDetail(userID: Int, state: Bool)
+    func showUserInfoDetail(userInfo: ApplyUser, studyID: Int)
 }
 
 protocol ApplyUserInteractorOutputProtocol: class {
