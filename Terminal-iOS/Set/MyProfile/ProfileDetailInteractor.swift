@@ -14,11 +14,15 @@ class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol?
     
     func getUserInfo() {
-        remoteDataManager?.getUserInfo()
+        if let userInfo = CoreDataManager.shared.getUserinfo() {
+            remoteDataManager?.getUserInfo(userID: userInfo.id)
+        }
     }
     
     func getProjectList() {
-        remoteDataManager?.getProjectList()
+        if let userInfo = CoreDataManager.shared.getUserinfo() {
+            remoteDataManager?.getProjectList(userID: userInfo.id)
+        }
     }
 }
 
@@ -32,5 +36,4 @@ extension ProfileDetailInteractor: ProfileDetailRemoteDataManagerOutputProtocol 
         guard let result = project.data else { return }
         presenter?.didRetrievedProject(project: result)
     }
-    
 }

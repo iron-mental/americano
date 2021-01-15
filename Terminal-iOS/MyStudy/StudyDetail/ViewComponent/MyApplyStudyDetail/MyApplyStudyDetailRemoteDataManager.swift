@@ -10,6 +10,40 @@ import Foundation
 import SwiftyJSON
 
 class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol {
+    var interactor: MyApplyStudyDetailRemoteDataManagerOutputProtocol?
+    
+    func getMyApplyStudyDetail(studyID: Int, userID: Int) {
+        
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.applyStudyDetail(studyID: studyID, userID: userID))
+            .validate(statusCode: 200..<500)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        
+                        let result = try JSONDecoder().decode(BaseResponse<ApplyUserResult>.self, from: data!)
+                        if let data = result.data {
+                            
+                            self.interactor?.retriveMyApplyStudyDetail(result: result.result, data: data)
+                        }
+                    } catch {
+                        
+                        print("error")
+                    }
+                    break
+                case .failure(let err):
+                    
+                    print(err)
+                    break
+                }
+            }
+    }
+    
     func putNewApplyMessage(studyID: Int, applyID: Int, newMessage: String) {
         TerminalNetworkManager
             .shared
@@ -30,6 +64,37 @@ class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerIn
                         print("error")
                     }
                     break
+                case .failure(let _):
+                    
+                    break
+                }
+            }
+    }
+    
+    func deleteApply(studyID: Int, applyID: Int) {
+        
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.applyDelete(studyID: studyID, applyID: applyID))
+            .validate(statusCode: 200..<500)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        if let message = result.message {
+                            
+                            self.interactor?.retriveDeleteApplyResult(result: result.result, message: message)
+                        }
+                    } catch {
+                        
+                        print("error")
+                    }
+                    break
                 case .failure(let err):
                     
                     break
@@ -37,33 +102,4 @@ class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerIn
             }
     }
     
-    var interactor: MyApplyStudyDetailRemoteDataManagerOutputProtocol?
-    
-    func getMyApplyStudyDetail(studyID: Int, userID: Int) {
-        
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.applyStudyDetail(studyID: studyID, userID: userID))
-            .validate(statusCode: 200..<500)
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    do {
-                        let result = try JSONDecoder().decode(BaseResponse<ApplyUserResult>.self, from: data!)
-                        if let data = result.data {
-                            self.interactor?.retriveMyApplyStudyDetail(result: result.result, data: data)
-                        }
-                    } catch {
-                        print("error")
-                    }
-                    break
-                case .failure(let err):
-                    print(err)
-                    break
-                }
-            }
-    }
 }

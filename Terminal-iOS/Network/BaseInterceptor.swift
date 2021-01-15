@@ -24,18 +24,12 @@ final class BaseInterceptor: RequestInterceptor {
             self.accessToken = token
             
         }
-        
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
-
         completion(.success(request))
-        
-        
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        
         guard let statusCode = request.response?.statusCode else {
-            
             completion(.doNotRetry)
             return
         }

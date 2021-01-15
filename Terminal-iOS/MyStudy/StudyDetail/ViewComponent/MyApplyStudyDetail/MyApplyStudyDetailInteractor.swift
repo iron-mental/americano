@@ -9,6 +9,7 @@
 import Foundation
 
 class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
+    
     var presenter: MyApplyStudyDetailInteractorOutputProtocol?
     var remoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol?
     var applyID: Int?
@@ -16,9 +17,11 @@ class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
     
     func getMyApplyStudyDetail(studyID: Int) {
         self.studyID = studyID
+        
         if let userInfo = CoreDataManager.shared.getUserinfo() {
             remoteDataManager?.getMyApplyStudyDetail(studyID: studyID, userID: userInfo.id)
         }
+        
     }
     
     func putNewApplyMessage(newMessage: String) {
@@ -26,10 +29,18 @@ class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
             remoteDataManager?.putNewApplyMessage(studyID: sID, applyID: aID, newMessage: newMessage)
         }
     }
+    
+    func deleteApply() {
+        if let sID = studyID, let aID = applyID {
+            remoteDataManager?.deleteApply(studyID: sID, applyID: aID)
+        }
+        
+    }
 }
 
 extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutputProtocol {
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult) {
+        
         switch result {
         case true:
             applyID = data.id
@@ -41,12 +52,22 @@ extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutpu
     }
     
     func retriveModifyApplyMessage(result: Bool, message: String) {
+        
         switch result {
         case true:
-            
             presenter?.retriveModifyApplyMessage(result: result, message: message)
         case false:
             print("MyApplyStudyDetailInteractor 에서 에러남")
         }
     }
+    
+    func retriveDeleteApplyResult(result: Bool, message: String) {
+        switch result {
+        case true:
+            presenter?.retriveDeleteApplyResult(result: result, message: message)
+        case false:
+            print("MyApplyStudyDetailInteractor 에서 에러남")
+        }
+    }
+    
 }

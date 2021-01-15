@@ -25,12 +25,13 @@ class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
             view.studyID = studyID
             return view
         } else {
+            
             return UIViewController()
         }
     }
     
-    func presentUserInfoDetailScreen(from view: ApplyUserViewProtocol) {
-        let userDetailView = ApplyUserDetailView()
+    func presentUserInfoDetailScreen(from view: ApplyUserViewProtocol, userInfo: ApplyUser, studyID: Int) {
+        let userDetailView = ApplyUserDetailWireFrame.createApplyUserDetailModule(userInfo: userInfo, studyID: studyID)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(userDetailView, animated: true)

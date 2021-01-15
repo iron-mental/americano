@@ -10,14 +10,14 @@ import UIKit
 
 enum AlertType {
     case StudyApplyView
-    case ModifyStudyApplyView
-
+    case StudyApplyDeleteView
+    
     var view: UIView {
         switch self {
         case .StudyApplyView:
             return StudyApplyMessageView(type: .apply)
-        case .ModifyStudyApplyView:
-            return StudyApplyMessageView(type: .modify)
+        case .StudyApplyDeleteView:
+            return AlertMessageView(message: "cancel your apply?")
         }
     }
 }
@@ -46,11 +46,12 @@ class TerminalAlertMessage: NSObject {
             sharedInstance.backgroundView = backgroundView
             TerminalAlertMessage.alertView = alertView
             
-            (alertView as! TerminalAlertUIView).dismissButton.addTarget(self, action: #selector(hide), for: .touchUpInside)
+            (alertView as! AlertBaseUIView).dismissButton.addTarget(self, action: #selector(hide), for: .touchUpInside)
         }
     }
     
     @objc class func hide() {
+        
         if let alertView = TerminalAlertMessage.alertView,
            let backgroundView = sharedInstance.backgroundView {
             backgroundView.removeFromSuperview()

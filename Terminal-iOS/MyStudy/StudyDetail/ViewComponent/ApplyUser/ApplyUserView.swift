@@ -16,6 +16,7 @@ final class ApplyUserView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         presenter?.viewDidLoad(studyID: studyID!)
         attribute()
         layout()
@@ -27,11 +28,13 @@ final class ApplyUserView: UIViewController {
             $0.register(ApplyUserCell.self, forCellReuseIdentifier: ApplyUserCell.applyUserCellID)
             $0.delegate = self
             $0.dataSource = self
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }
     
     private func layout() {
         self.view.addSubview(applyUserList)
+        
         self.applyUserList.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -69,7 +72,8 @@ extension ApplyUserView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.showUserInfoDetail(userID: 44, state: true)
+        guard let id = studyID else { return }
+        presenter?.showUserInfoDetail(userInfo: userList[indexPath.row], studyID: id)
     }
     
 }

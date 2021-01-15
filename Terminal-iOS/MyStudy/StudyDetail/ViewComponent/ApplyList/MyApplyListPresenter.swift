@@ -14,6 +14,7 @@ class MyApplyListPresenter: MyApplyListPresenterProtocol {
     var wireFrame: MyApplyListWireFrameProtocol?
     
     func viewDidLoad() {
+        LoadingRainbowCat.show()
         interactor?.getApplyList()
     }
     
@@ -24,11 +25,14 @@ class MyApplyListPresenter: MyApplyListPresenterProtocol {
 
 extension MyApplyListPresenter: MyApplyListInteractorOutputProtocol {
     func didRetrieveStudies(studies: [ApplyStudy]?) {
-        view?.showStudyList(studies: studies)
+        LoadingRainbowCat.hide {
+            self.view?.showStudyList(studies: studies)
+        }
     }
     
     func onError() {
-        
+        LoadingRainbowCat.hide {
+            print("MyApplylistPresenter 에서 생긴 에러")
+        }
     }
-    
 }
