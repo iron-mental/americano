@@ -34,7 +34,6 @@ class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
         let userDetailView = ApplyUserDetailWireFrame.createApplyUserDetailModule(userInfo: userInfo, studyID: studyID)
         
         if let sourceView = view as? UIViewController {
-            
             sourceView.navigationController?.pushViewController(userDetailView, animated: true)
         }
     }
