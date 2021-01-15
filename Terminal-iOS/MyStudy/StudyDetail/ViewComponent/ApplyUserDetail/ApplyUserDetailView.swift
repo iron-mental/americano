@@ -12,21 +12,16 @@ import Kingfisher
 
 class ApplyUserDetailView: BaseProfileView {
     var presenter: ApplyUserDetailPresenterInputProtocol?
-    var userID: Int? { didSet {
-        
-        presenter?.viewDidLoad(userID: userID!)
-        
-    } }
+    var userID: Int? { didSet { presenter?.viewDidLoad(userID: userID!) } }
     let refusalButton   = UIButton()
     let acceptButton    = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        presenter?.viewDidLoad(userID: 44)
     }
     override func attribute() {
         super.attribute()
+        
         self.refusalButton.do {
             $0.setTitle("거절", for: .normal)
             $0.layer.cornerRadius = 10
@@ -39,13 +34,13 @@ class ApplyUserDetailView: BaseProfileView {
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.setTitleColor(.white, for: .normal)
         }
-        
         [ profile.modify, career.modify, sns.modify, email.modify, location.modify].forEach { $0.isHidden = true}
     }
     
     override func layout() {
         super.layout()
         [acceptButton, refusalButton].forEach { scrollView.addSubview($0) }
+        
         self.refusalButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.location.bottomAnchor, constant: 15).isActive = true
@@ -59,6 +54,7 @@ class ApplyUserDetailView: BaseProfileView {
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -45).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 115).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 45).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
         }
     }
 }

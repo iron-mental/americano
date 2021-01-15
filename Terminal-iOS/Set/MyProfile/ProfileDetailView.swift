@@ -35,6 +35,9 @@ class ProfileDetailView: BaseProfileView {
     // MARK: Set Layout
     override func layout() {
         super.layout()
+        self.location.do {
+            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        }
     }
     
     @objc func modifyProfile() {

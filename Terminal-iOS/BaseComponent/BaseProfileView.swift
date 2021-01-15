@@ -11,7 +11,6 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class BaseProfileView: UIViewController {
-    
     // MARK: Init Property
     let scrollView      = UIScrollView()
     let profile         = ProfileView()
@@ -169,7 +168,6 @@ class BaseProfileView: UIViewController {
             $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
     }
 }
