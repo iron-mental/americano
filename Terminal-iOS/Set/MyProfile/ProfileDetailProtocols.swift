@@ -12,8 +12,6 @@ protocol ProfileDetailViewProtocol: BaseProfileViewProtocol {
     var presenter: ProfileDetailPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
-//    func showUserInfo(with userInfo: UserInfo)
-//    func addProjectToStackView(with project: [Project])
 }
 
 protocol ProfileDetailWireFrameProtocol: class {

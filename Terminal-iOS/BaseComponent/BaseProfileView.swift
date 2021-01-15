@@ -249,12 +249,5 @@ extension BaseProfileView: BaseProfileViewProtocol {
 
             self.projectStack.addArrangedSubview(projectView)
         }
-//
-//        let addProjectButton = UIButton().then {
-//            $0.setTitle("프로젝트 수정", for: .normal)
-//            $0.setTitleColor(.appColor(.mainColor), for: .normal)
-//            $0.addTarget(self, action: #selector(modifyProject), for: .touchUpInside)
-//        }
-//        self.projectStack.addArrangedSubview(addProjectButton)
     }
 }
