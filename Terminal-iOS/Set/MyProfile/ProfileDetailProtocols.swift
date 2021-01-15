@@ -60,10 +60,8 @@ protocol ProfileDetailInteractorOutputProtocol: class {
 }
 
 protocol ProfileDetailRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {
-//    var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol? { get set }
+
     // INTERACTOR -> REMOTEDATAMANAGER
-    func getUserInfo()
-    func getProjectList()
 }
 
 protocol ProfileDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataManagerOutputProtocol {

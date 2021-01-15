@@ -6,7 +6,7 @@
 //  Copyright © 2021 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ApplyUserDetailViewProtocol {
     var presenter: ApplyUserDetailPresenterInputProtocol? { get set }
@@ -18,6 +18,7 @@ protocol ApplyUserDetailPresenterInputProtocol {
     var wireFrame: ApplyUserDetailWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
+    func viewDidLoad(userID: Int)
 }
 
 protocol ApplyUserDetailInteractorInputProtocol {
@@ -25,6 +26,7 @@ protocol ApplyUserDetailInteractorInputProtocol {
     var remoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol { get set }
     
     //PRESENTER -> INTERACTOR
+    func getUserInfo(userID: Int)
 }
 
 protocol ApplyUserDetailInteractorOutputProtocol {
@@ -43,5 +45,5 @@ protocol ApplyUserDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataMa
 }
 
 protocol ApplyUserDetailWireFrameProtocol {
-    
+    static func createApplyUserDetailModule(userID: Int) -> UIViewController
 }

@@ -11,8 +11,8 @@ import Foundation
 protocol BaseProfileRemoteDataManagerInputProtocol {
     var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol? { get set }
     
-    func getUserInfo()
-    func getProjectList()
+    func getUserInfo(userID: Int)
+    func getProjectList(userID: Int)
 }
 
 protocol BaseProfileRemoteDataManagerOutputProtocol {

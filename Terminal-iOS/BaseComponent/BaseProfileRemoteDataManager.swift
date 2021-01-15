@@ -13,12 +13,11 @@ import SwiftyJSON
 class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
     var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol?
     
-    func getUserInfo() {
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+    func getUserInfo(userID: Int) {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.userInfo(id: userID))
+            .request(TerminalRouter.userInfo(id: String(userID)))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
                 switch response.result {
@@ -36,12 +35,11 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
     
     // MARK: 유저 프로젝트
     
-    func getProjectList() {
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+    func getProjectList(userID: Int) {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.projectList(id: userID))
+            .request(TerminalRouter.projectList(id: String(userID)))
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

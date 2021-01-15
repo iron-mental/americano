@@ -54,7 +54,7 @@ enum TerminalRouter: URLRequestConvertible {
     // 신청부분
     case applyStudy             (studyID: String, message: Parameters)
     case applyStudyList         (id: String)
-    case applyUserList          (studyID: String)
+    case applyUserList          (studyID: Int)
     case applyStudyDetail       (studyID: Int, userID: Int)
     case applyModify            (studyID: Int, applyID: Int, message: String)
     case applyDelete            (studyID: Int, applyID: Int)

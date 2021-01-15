@@ -16,6 +16,7 @@ final class ApplyUserView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         presenter?.viewDidLoad(studyID: studyID!)
         attribute()
         layout()

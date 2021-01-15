@@ -12,13 +12,4 @@ import SwiftyJSON
 import SwiftKeychainWrapper
 
 class ProfileDetailRemoteManager: BaseProfileRemoteDataManager, ProfileDetailRemoteDataManagerInputProtocol {
-    
-    
-    // MARK: 유저정보
-    override func getUserInfo() {
-        super.getUserInfo()
-    }
-    override func getProjectList() {
-        super.getProjectList()
-    }
 }

@@ -17,8 +17,8 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.applyUserList(studyID: "\(studyID)"))
-            .validate(statusCode: 200..<299)
+            .request(TerminalRouter.applyUserList(studyID: studyID))
+            .validate(statusCode: 200..<500)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
