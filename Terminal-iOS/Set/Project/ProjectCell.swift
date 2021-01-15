@@ -14,7 +14,10 @@ protocol CellSubclassDelegate: class {
 
 class ProjectCell: UITableViewCell {
     static let projectCellID = "ProjectCellID"
+    
     lazy var remove = UIButton()
+    lazy var titleLabel = UILabel()
+    lazy var contentsLabel = UILabel()
     lazy var title = UITextField()
     lazy var contents = UITextView()
     lazy var sns = ProjectSNSModifyView()
@@ -60,6 +63,17 @@ class ProjectCell: UITableViewCell {
     
     func attribute() {
         self.selectionStyle = .none
+        
+        self.titleLabel.do {
+            $0.text = "제목"
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
+        }
+        
+        self.contentsLabel.do {
+            $0.text = "내용"
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
+        }
+        
         self.remove.do {
             $0.setTitle("ㅡ", for: .normal)
             $0.backgroundColor = .red
@@ -90,25 +104,35 @@ class ProjectCell: UITableViewCell {
     }
     
     func layout() {
-        [remove, title, contents, sns].forEach { self.contentView.addSubview($0) }
+        [titleLabel, contentsLabel ,remove, title, contents, sns].forEach { self.contentView.addSubview($0) }
         
         self.remove.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5).isActive = true
+            $0.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 5).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 30).isActive = true
         }
-        self.title.do {
+        self.titleLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
+        }
+        self.contentsLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
+        }
+        self.title.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.remove.leadingAnchor, constant: -5).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 35).isActive = true
         }
         self.contents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.title.bottomAnchor, constant: 5).isActive = true
+            $0.topAnchor.constraint(equalTo: self.contentsLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 160).isActive = true
