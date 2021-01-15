@@ -37,7 +37,7 @@ class ApplyUserDetailView: BaseProfileView {
             $0.setTitleColor(.white, for: .normal)
             $0.addTarget(self, action: #selector(acceptButtonDidTap), for: .touchUpInside)
         }
-        [ profile.modify, career.modify, sns.modify, email.modify, location.modify].forEach { $0.isHidden = true}
+        [ profile.modify, career.modify, sns.modify, email.modify, location.modify, addProjectButton].forEach { $0.isHidden = true}
     }
     
     override func layout() {
