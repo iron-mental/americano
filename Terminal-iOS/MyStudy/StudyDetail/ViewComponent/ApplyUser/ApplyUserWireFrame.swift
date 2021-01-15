@@ -30,7 +30,7 @@ class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
     }
     
     func presentUserInfoDetailScreen(from view: ApplyUserViewProtocol, userID: Int) {
-        let userDetailView = ApplyUserDetailView()
+        let userDetailView = ApplyUserDetailWireFrame.createApplyUserDetailModule(userID: userID)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(userDetailView, animated: true)

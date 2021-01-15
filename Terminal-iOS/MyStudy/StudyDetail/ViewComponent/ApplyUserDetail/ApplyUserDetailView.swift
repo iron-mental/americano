@@ -9,10 +9,16 @@
 import UIKit
 
 class ApplyUserDetailView: BaseProfileView {
+    var presenter: ApplyUserDetailPresenterInputProtocol?
+    var userID: Int?
     let refusalButton   = UIButton()
     let acceptButton    = UIButton()
-    var presenter: ApplyUserDetailPresenterInputProtocol?
     
+    override func viewDidLoad() {
+        if let id = userID {
+            presenter?.viewDidLoad(userID: id)
+        }
+    }
     override func attribute() {
         super.attribute()
         self.refusalButton.do {
@@ -50,4 +56,15 @@ class ApplyUserDetailView: BaseProfileView {
 }
 
 extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
+    func showUserInfo(userInfo: UserInfo) {
+//        <#code#>
+    }
+    
+    func showProjectList(projectList: [Project]) {
+//        <#code#>
+    }
+    
+    func showError() {
+//        <#code#>
+    }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 protocol ApplyUserDetailViewProtocol {
     var presenter: ApplyUserDetailPresenterInputProtocol? { get set }
-    
+    var userID: Int? { get set }
     //PRESENTER -> View
     func showUserInfo(userInfo: UserInfo)
     func showProjectList(projectList: [Project])
@@ -19,6 +19,7 @@ protocol ApplyUserDetailViewProtocol {
 
 protocol ApplyUserDetailPresenterInputProtocol {
     var view: ApplyUserDetailViewProtocol? { get set }
+    var interactor: ApplyUserDetailInteractorInputProtocol? { get set }
     var wireFrame: ApplyUserDetailWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
@@ -27,7 +28,7 @@ protocol ApplyUserDetailPresenterInputProtocol {
 
 protocol ApplyUserDetailInteractorInputProtocol {
     var presenter: ApplyUserDetailInteractorOutputProtocol? { get set }
-    var remoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol { get set }
+    var remoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
     func getUserInfo(userID: Int)
