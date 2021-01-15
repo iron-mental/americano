@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
+import Kingfisher
 
 class ApplyUserDetailView: BaseProfileView {
     var presenter: ApplyUserDetailPresenterInputProtocol?
@@ -37,6 +39,8 @@ class ApplyUserDetailView: BaseProfileView {
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.setTitleColor(.white, for: .normal)
         }
+        
+        [ profile.modify, career.modify, sns.modify, email.modify, location.modify].forEach { $0.isHidden = true}
     }
     
     override func layout() {
@@ -60,18 +64,8 @@ class ApplyUserDetailView: BaseProfileView {
 }
 
 extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
-    func showUserInfo(userInfo: UserInfo) {
-        
-        print(userInfo)
-    }
-    
-    func showProjectList(projectList: [Project]) {
-        
-        print(projectList)
-    }
-    
     func showError() {
-        
-        print("ApplyUserDetailView 에서 생긴 에러")
+        print("applyUserDetailView에서 생긴 에러")
     }
+    
 }

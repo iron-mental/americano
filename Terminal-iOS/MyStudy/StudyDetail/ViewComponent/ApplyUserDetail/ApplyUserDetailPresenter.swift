@@ -35,7 +35,7 @@ extension ApplyUserDetailPresenter: ApplyUserDetailInteractorOutputProtocol {
         switch result {
         case true:
             LoadingRainbowCat.hide {
-                self.view?.showProjectList(projectList: projectList)
+                self.view?.addProjectToStackView(project: projectList)
             }
         case false:
             print("ApplyUserDetailPresenter")

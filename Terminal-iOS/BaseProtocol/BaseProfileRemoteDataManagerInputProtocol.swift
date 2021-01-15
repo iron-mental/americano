@@ -8,6 +8,11 @@
 
 import Foundation
 
+protocol BaseProfileViewProtocol {
+    func showUserInfo(userInfo: UserInfo)
+    func addProjectToStackView(project: [Project])
+}
+
 protocol BaseProfileRemoteDataManagerInputProtocol {
     var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol? { get set }
     

@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol ApplyUserDetailViewProtocol {
+protocol ApplyUserDetailViewProtocol: BaseProfileViewProtocol {
     var presenter: ApplyUserDetailPresenterInputProtocol? { get set }
     var userID: Int? { get set }
     //PRESENTER -> View
-    func showUserInfo(userInfo: UserInfo)
-    func showProjectList(projectList: [Project])
+//    func showUserInfo(userInfo: UserInfo)
+//    func showProjectList(projectList: [Project])
     func showError()
 }
 
