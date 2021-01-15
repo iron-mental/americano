@@ -23,8 +23,10 @@ class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
         
         if let view = view as? ApplyUserView {
             view.studyID = studyID
+            
             return view
         } else {
+            
             return UIViewController()
         }
     }
@@ -33,6 +35,7 @@ class ApplyUserWireFrame: ApplyUserWireFrameProtocol {
         let userDetailView = ApplyUserDetailWireFrame.createApplyUserDetailModule(userID: userID)
         
         if let sourceView = view as? UIViewController {
+            
             sourceView.navigationController?.pushViewController(userDetailView, animated: true)
         }
     }

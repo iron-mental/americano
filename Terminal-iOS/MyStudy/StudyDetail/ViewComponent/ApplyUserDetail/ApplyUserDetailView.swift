@@ -10,14 +10,18 @@ import UIKit
 
 class ApplyUserDetailView: BaseProfileView {
     var presenter: ApplyUserDetailPresenterInputProtocol?
-    var userID: Int?
+    var userID: Int? { didSet {
+        
+        presenter?.viewDidLoad(userID: userID!)
+        
+    } }
     let refusalButton   = UIButton()
     let acceptButton    = UIButton()
     
     override func viewDidLoad() {
-        if let id = userID {
-            presenter?.viewDidLoad(userID: id)
-        }
+        super.viewDidLoad()
+        
+//        presenter?.viewDidLoad(userID: 44)
     }
     override func attribute() {
         super.attribute()
@@ -57,14 +61,17 @@ class ApplyUserDetailView: BaseProfileView {
 
 extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
     func showUserInfo(userInfo: UserInfo) {
-//        <#code#>
+        
+        print(userInfo)
     }
     
     func showProjectList(projectList: [Project]) {
-//        <#code#>
+        
+        print(projectList)
     }
     
     func showError() {
-//        <#code#>
+        
+        print("ApplyUserDetailView 에서 생긴 에러")
     }
 }

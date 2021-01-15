@@ -25,6 +25,9 @@ class ApplyUserDetailWireFrame: ApplyUserDetailWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         
+        remoteDataManager.remoteRequestHandler = interactor
+        
+        view.userID = userID
         return view as! UIViewController
     }
 }

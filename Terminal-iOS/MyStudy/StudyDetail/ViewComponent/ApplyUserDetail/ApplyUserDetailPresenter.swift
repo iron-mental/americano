@@ -14,17 +14,31 @@ class ApplyUserDetailPresenter: ApplyUserDetailPresenterInputProtocol {
     var wireFrame: ApplyUserDetailWireFrameProtocol?
     
     func viewDidLoad(userID: Int) {
-//        <#code#>
+        LoadingRainbowCat.show()
+        interactor?.getUserInfo(userID: userID)
     }
-
 }
 
 extension ApplyUserDetailPresenter: ApplyUserDetailInteractorOutputProtocol {
     func retriveUserInfo(result: Bool, userInfo: UserInfo) {
-//        <#code#>
+        switch result {
+        case true:
+            LoadingRainbowCat.hide {
+                self.view?.showUserInfo(userInfo: userInfo)
+            }
+        case false:
+            print("ApplyUserDetailPresenter 에서 생긴 에러")
+        }
     }
     
     func retriveProjectList(result: Bool, projectList: [Project]) {
-//        <#code#>
+        switch result {
+        case true:
+            LoadingRainbowCat.hide {
+                self.view?.showProjectList(projectList: projectList)
+            }
+        case false:
+            print("ApplyUserDetailPresenter")
+        }
     }
 }
