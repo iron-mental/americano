@@ -62,8 +62,10 @@ class ProjectCell: UITableViewCell {
     }
     
     func attribute() {
-        self.selectionStyle = .none
-        
+        self.do {
+            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.selectionStyle = .none
+        }
         self.titleLabel.do {
             $0.text = "제목"
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)

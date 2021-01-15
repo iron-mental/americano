@@ -35,7 +35,6 @@ class ProfileModifyView: UIViewController {
     // MARK: Set Attribute
     func attribute() {
         self.view.backgroundColor = .black
-
         self.picker.do {
             $0.delegate = self
         }

@@ -39,7 +39,7 @@ extension UIViewController {
         }
     }
     
-    func keyboardRmoveObserver(with controller: UIViewController) {
+    func keyboardRemoveObserver(with controller: UIViewController) {
         NotificationCenter.default.removeObserver(controller,
                                                   name: UIResponder.keyboardWillShowNotification,
                                                   object: nil)

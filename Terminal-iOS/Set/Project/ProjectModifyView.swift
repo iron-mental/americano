@@ -28,12 +28,12 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.keyboardRmoveObserver(with: self)
+        self.keyboardRemoveObserver(with: self)
     }
     
     private func attribute() {
-        self.view.backgroundColor = .black
-        
+        self.view.backgroundColor = .appColor(.terminalBackground)
+
         self.projectView.do {
             $0.delegate = self
             $0.dataSource = self
@@ -41,6 +41,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
             $0.estimatedRowHeight = 44
             $0.rowHeight = UITableView.automaticDimension
+            $0.backgroundColor = .appColor(.terminalBackground)
         }
         
         self.projectAddButton.do {
@@ -115,7 +116,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     @objc func keyboardWillHide() {
-        self.projectView.contentInset.bottom = 0
+        self.projectView.transform = .identity
     }
     
     @objc func completeModify() {
@@ -199,8 +200,9 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let index = IndexPath(row: textField.tag, section: 0)
-        self.projectView.contentInset.bottom = 180
+        self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
         self.projectView.scrollToRow(at: index, at: .top, animated: true)
+
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -209,8 +211,7 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         let index = IndexPath(row: textView.tag, section: 0)
-        self.projectView.contentInset.bottom = 180
+        self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
         self.projectView.scrollToRow(at: index, at: .top, animated: true)
     }
 }
-
