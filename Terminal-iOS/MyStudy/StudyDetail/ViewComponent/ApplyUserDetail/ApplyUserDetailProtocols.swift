@@ -11,6 +11,10 @@ import UIKit
 protocol ApplyUserDetailViewProtocol {
     var presenter: ApplyUserDetailPresenterInputProtocol? { get set }
     
+    //PRESENTER -> View
+    func showUserInfo(userInfo: UserInfo)
+    func showProjectList(projectList: [Project])
+    func showError()
 }
 
 protocol ApplyUserDetailPresenterInputProtocol {
@@ -31,17 +35,18 @@ protocol ApplyUserDetailInteractorInputProtocol {
 
 protocol ApplyUserDetailInteractorOutputProtocol {
     //INTERACTOR -> PRESENTER
+    func retriveUserInfo(result: Bool, userInfo: UserInfo)
+    func retriveProjectList(result: Bool, projectList: [Project])
 }
 
 protocol ApplyUserDetailRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {
-    var interactor: ApplyUserDetailRemoteDataManagerOutputProtocol? { get set }
-    
     //INTERACTOR -> REMOTEDATAMANAGER
 }
 
 protocol ApplyUserDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataManagerOutputProtocol {
-    
     //REMOTEDATAMANAGER -> INTERACTOR
+    func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
+    func onProjectRetrieved(project: BaseResponse<[Project]>)
 }
 
 protocol ApplyUserDetailWireFrameProtocol {
