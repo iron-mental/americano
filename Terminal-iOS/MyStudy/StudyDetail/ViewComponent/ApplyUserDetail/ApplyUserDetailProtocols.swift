@@ -10,26 +10,36 @@ import Foundation
 
 protocol ApplyUserDetailViewProtocol {
     var presenter: ApplyUserDetailPresenterInputProtocol? { get set }
+    
 }
 
 protocol ApplyUserDetailPresenterInputProtocol {
+    var view: ApplyUserDetailViewProtocol? { get set }
+    var wireFrame: ApplyUserDetailWireFrameProtocol? { get set }
     
+    //VIEW -> PRESENTER
 }
 
 protocol ApplyUserDetailInteractorInputProtocol {
+    var presenter: ApplyUserDetailInteractorOutputProtocol? { get set }
+    var remoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol { get set }
     
+    //PRESENTER -> INTERACTOR
 }
 
 protocol ApplyUserDetailInteractorOutputProtocol {
-    
+    //INTERACTOR -> PRESENTER
 }
 
-protocol ApplyUserDetailRemoteDataManagerInputProtocol {
+protocol ApplyUserDetailRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {
+    var interactor: ApplyUserDetailRemoteDataManagerOutputProtocol? { get set }
     
+    //INTERACTOR -> REMOTEDATAMANAGER
 }
 
-protocol ApplyUserDetailRemoteDataManagerOutputProtocol {
+protocol ApplyUserDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataManagerOutputProtocol {
     
+    //REMOTEDATAMANAGER -> INTERACTOR
 }
 
 protocol ApplyUserDetailWireFrameProtocol {
