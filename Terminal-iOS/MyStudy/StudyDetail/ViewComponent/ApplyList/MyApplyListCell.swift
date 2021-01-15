@@ -12,8 +12,17 @@ import Kingfisher
 
 class MyApplyListCell: ApplyListCell {
     static let myApplyListCellID = "MyApplyListCell"
-    
+    override func attribute() {
+        self.backgroundColor = UIColor.appColor(.terminalBackground)
+        self.mainImage.do {
+            $0.layer.cornerRadius = 20
+            $0.layer.masksToBounds = true
+            $0.clipsToBounds = true
+            $0.contentMode = .scaleAspectFill
+        }
+    }
     func setData(studies: ApplyStudy) {
+        
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request

@@ -8,12 +8,10 @@
 
 import UIKit
 
-protocol ProfileDetailViewProtocol: class {
+protocol ProfileDetailViewProtocol: BaseProfileViewProtocol {
     var presenter: ProfileDetailPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
-    func showUserInfo(with userInfo: UserInfo)
-    func addProjectToStackView(with project: [Project])
 }
 
 protocol ProfileDetailWireFrameProtocol: class {
@@ -63,14 +61,12 @@ protocol ProfileDetailInteractorOutputProtocol: class {
     func didRetrievedProject(project: [Project])
 }
 
-protocol ProfileDetailRemoteDataManagerInputProtocol: class {
-    var remoteRequestHandler: ProfileDetailRemoteDataManagerOutputProtocol? { get set }
+protocol ProfileDetailRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {
+
     // INTERACTOR -> REMOTEDATAMANAGER
-    func getUserInfo()
-    func getProjectList()
 }
 
-protocol ProfileDetailRemoteDataManagerOutputProtocol: class {
+protocol ProfileDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataManagerOutputProtocol {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
     func onProjectRetrieved(project: BaseResponse<[Project]>)
@@ -79,3 +75,4 @@ protocol ProfileDetailRemoteDataManagerOutputProtocol: class {
 protocol ProfileDetailLocalDataManagerInputProtocol: class {
     
 }
+

@@ -26,6 +26,7 @@ final class MyApplyListView: UIViewController {
             $0.register(MyApplyListCell.self, forCellReuseIdentifier: MyApplyListCell.myApplyListCellID)
             $0.delegate = self
             $0.dataSource = self
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }
     
@@ -69,6 +70,7 @@ extension MyApplyListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let study = studyList[indexPath.row]
-        presenter?.showStudyDetail(keyValue: study.id)
+        presenter?.showStudyDetail(keyValue: study.studyID)
+        
     }
 }
