@@ -14,6 +14,7 @@ class SetPresenter: SetPresenterProtocol {
     var wireFrame: SetWireFrameProtocol?
     
     func viewDidLoad() {
+        view?.showLoading()
         interactor?.getUserInfo()
     }
     

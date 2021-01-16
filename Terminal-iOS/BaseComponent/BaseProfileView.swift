@@ -180,7 +180,15 @@ class BaseProfileView: UIViewController {
 }
 
 extension BaseProfileView: BaseProfileViewProtocol {
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
     
+    func hideLoading() {
+        LoadingRainbowCat.hide {
+            print("Loading hide")
+        }
+    }
     func showUserInfo(userInfo: UserInfo) {
         var snsList: [String: String] = [:]
         self.userInfo = userInfo
@@ -235,6 +243,9 @@ extension BaseProfileView: BaseProfileViewProtocol {
         if let address = userInfo.address {
             self.location.location.text = address
         }
+        
+        // hide loading
+        self.hideLoading()
     }
 
     func addProjectToStackView(project: [Project]) {

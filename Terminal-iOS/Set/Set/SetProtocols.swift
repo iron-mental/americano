@@ -13,6 +13,8 @@ protocol SetViewProtocol: class {
     
     func loggedOut()
     func showUserInfo(with userInfo: UserInfo)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol SetWireFrameProtocol: class {

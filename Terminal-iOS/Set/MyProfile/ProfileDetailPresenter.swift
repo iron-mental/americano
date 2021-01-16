@@ -14,6 +14,7 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     var wireFrame: ProfileDetailWireFrameProtocol?
     
     func viewDidLoad() {
+        view?.showLoading()
         interactor?.getUserInfo()
         interactor?.getProjectList()
     }

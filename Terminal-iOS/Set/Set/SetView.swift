@@ -23,11 +23,7 @@ class SetView: UIViewController {
                                Setting(title: "개인정보 취급방침")]
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
     
-    var userInfo: UserInfo? {
-        didSet {
-            self.settingList.reloadData()
-        }
-    }
+    var userInfo: UserInfo? { didSet { self.settingList.reloadData() }}
     
     var presenter: SetPresenterProtocol?
     let settingList = UITableView(frame: .zero, style: .insetGrouped)
@@ -88,6 +84,16 @@ class SetView: UIViewController {
 }
 
 extension SetView: SetViewProtocol {
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide {
+            print("Loading hide")
+        }
+    }
+    
     func loggedOut() {
         let view = HomeView()
         view.hidesBottomBarWhenPushed = true
@@ -101,6 +107,7 @@ extension SetView: SetViewProtocol {
     
     func showUserInfo(with userInfo: UserInfo) {
         self.userInfo = userInfo
+        self.hideLoading()
     }
 }
 
