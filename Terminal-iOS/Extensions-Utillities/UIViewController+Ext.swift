@@ -20,11 +20,41 @@ extension UIViewController {
 
         alert.setValue(titleAttrString, forKey:"attributedTitle")
         
-        
         controller.present(alert, animated: true)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
             alert.dismiss(animated: true)
         }
     }
+    
+    func keyboardAddObserver(with controller: UIViewController,
+                             showSelector: Selector?,
+                             hideSelector: Selector?) {
+        if let showSelector = showSelector {
+            NotificationCenter.default.addObserver(controller, selector: showSelector, name: UIResponder.keyboardDidShowNotification, object: nil)
+        }
+        
+        if let hideSelector = hideSelector {
+            NotificationCenter.default.addObserver(controller, selector: hideSelector, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+    }
+    
+    func keyboardRemoveObserver(with controller: UIViewController) {
+        NotificationCenter.default.removeObserver(controller,
+                                                  name: UIResponder.keyboardWillShowNotification,
+                                                  object: nil)
+        NotificationCenter.default.removeObserver(controller,
+                                                  name: UIResponder.keyboardWillHideNotification,
+                                                  object: nil)
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+            tap.cancelsTouchesInView = false
+            view.addGestureRecognizer(tap)
+        }
+
+        @objc func dismissKeyboard() {
+            view.endEditing(true)
+        }
 }

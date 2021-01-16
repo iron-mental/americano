@@ -15,6 +15,8 @@ class BaseProfileView: UIViewController {
     let scrollView      = UIScrollView()
     let profile         = ProfileView()
     
+    let addProjectButton = UIButton()
+
     let careerLabel     = UILabel()
     let career          = CareerView()
     let projectLabel    = UILabel()
@@ -50,6 +52,11 @@ class BaseProfileView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
 
+        self.addProjectButton.do {
+            $0.setTitle("프로젝트 수정", for: .normal)
+            $0.setTitleColor(.appColor(.mainColor), for: .normal)
+        }
+        
         self.careerLabel.do {
             $0.text = "경력"
             $0.textColor = .white
@@ -249,5 +256,7 @@ extension BaseProfileView: BaseProfileViewProtocol {
 
             self.projectStack.addArrangedSubview(projectView)
         }
+        
+        self.projectStack.addArrangedSubview(self.addProjectButton)
     }
 }

@@ -30,6 +30,7 @@ class ProfileDetailView: BaseProfileView {
         self.sns.modify.addTarget(self, action: #selector(modifySNS), for: .touchUpInside)
         self.email.modify.addTarget(self, action: #selector(modifyEmail), for: .touchUpInside)
         self.location.modify.addTarget(self, action: #selector(modifyLocation), for: .touchUpInside)
+        self.addProjectButton.addTarget(self, action: #selector(modifyProject), for: .touchUpInside)
     }
     
     // MARK: Set Layout

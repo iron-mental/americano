@@ -11,7 +11,8 @@ import UIKit
 class ProjectModifyView: UIViewController, CellSubclassDelegate {
     var presenter: ProjectModifyPresenterProtocol?
     var projectArr: [Project] = []
-    
+    var index: IndexPath?
+        
     lazy var projectView = ProjectTableView()
     lazy var projectAddButton = UIButton()
     lazy var completeButton = UIButton()
@@ -20,11 +21,19 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         super.viewDidLoad()
         attribute()
         layout()
+        self.hideKeyboardWhenTappedAround()
+        keyboardAddObserver(with: self,
+                            showSelector: nil,
+                            hideSelector: #selector(keyboardWillHide))
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.keyboardRemoveObserver(with: self)
     }
     
     private func attribute() {
-        self.view.backgroundColor = .black
-        
+        self.view.backgroundColor = .appColor(.terminalBackground)
+
         self.projectView.do {
             $0.delegate = self
             $0.dataSource = self
@@ -32,6 +41,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.register(ProjectCell.self, forCellReuseIdentifier: ProjectCell.projectCellID)
             $0.estimatedRowHeight = 44
             $0.rowHeight = UITableView.automaticDimension
+            $0.backgroundColor = .appColor(.terminalBackground)
         }
         
         self.projectAddButton.do {
@@ -105,6 +115,10 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         }
     }
     
+    @objc func keyboardWillHide() {
+        self.projectView.transform = .identity
+    }
+    
     @objc func completeModify() {
         getCellData()
         presenter?.completeModify(project: projectArr)
@@ -146,7 +160,7 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
             })
         } else {
             // 실패시 에러처리 부분
-            
+            self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 1)
         }
     }
 }
@@ -158,8 +172,10 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
-        cell.selectionStyle = .none
+        
         cell.delegate = self
+        cell.setDelegate(with: self)
+        cell.setTag(tag: indexPath.row)
         
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
@@ -181,8 +197,21 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ProjectModifyView: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        let index = IndexPath(row: textField.tag, section: 0)
+        self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
+        self.projectView.scrollToRow(at: index, at: .top, animated: true)
+
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        let index = IndexPath(row: textView.tag, section: 0)
+        self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
+        self.projectView.scrollToRow(at: index, at: .top, animated: true)
     }
 }

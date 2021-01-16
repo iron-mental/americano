@@ -43,7 +43,7 @@ class SetView: UIViewController {
     func attribute() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        
+        appearance.backgroundColor = .appColor(.terminalBackground)
         self.do {
             $0.title = "설정"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
