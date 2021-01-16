@@ -25,7 +25,7 @@ class SNSModifyView: UIViewController {
     }
 
     func attribute() {
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .appColor(.terminalBackground)
 
         self.snsModifyView.firstTextFeield.text = self.github
         self.snsModifyView.secondTextField.text = self.linkedin

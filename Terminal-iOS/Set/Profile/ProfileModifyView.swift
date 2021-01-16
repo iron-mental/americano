@@ -18,6 +18,8 @@ class ProfileModifyView: UIViewController {
     let projectAddButton = UIButton()
     
     lazy var profileImage = UIImageView()
+    lazy var nameLabel = UILabel()
+    lazy var introductionLabel = UILabel()
     lazy var name = UITextField()
     lazy var introduction = UITextView()
     lazy var completeButton = UIButton()
@@ -34,7 +36,7 @@ class ProfileModifyView: UIViewController {
     
     // MARK: Set Attribute
     func attribute() {
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .appColor(.terminalBackground)
         self.picker.do {
             $0.delegate = self
         }
@@ -43,7 +45,7 @@ class ProfileModifyView: UIViewController {
             $0.image = self.profile?.profileImage
             let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(profileTapGesture)
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = .appColor(.terminalBackground)
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = Terminal.convertHeigt(value: 100)
             $0.frame.size.height = Terminal.convertHeigt(value: 100)
@@ -52,14 +54,22 @@ class ProfileModifyView: UIViewController {
             $0.isUserInteractionEnabled = true
             $0.backgroundColor = .blue
         }
-        
+        self.nameLabel.do {
+            $0.text = "이름"
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
+        }
         self.name.do {
             $0.text = self.profile?.nickname
-            $0.font = UIFont(name: "NotoSansKR-Medium", size: 20)
             $0.placeholder = "닉네임"
-            $0.dynamicFont(fontSize: 20, weight: .semibold)
+            $0.dynamicFont(fontSize: 16, weight: .regular)
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.addLeftPadding()
         }
-        
+        self.introductionLabel.do {
+            $0.text = "자기소개"
+            $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
+        }
         self.introduction.do {
             $0.backgroundColor = .darkGray
             $0.text = self.profile?.introduction
@@ -86,7 +96,7 @@ class ProfileModifyView: UIViewController {
     // MARK: Set Layout
     
     func layout() {
-        [self.profileImage, self.name, self.introduction, self.completeButton]
+        [self.profileImage, self.nameLabel, self.name, self.introductionLabel, self.introduction, self.completeButton]
             .forEach { self.view.addSubview($0) }
         
         self.profileImage.do {
@@ -96,16 +106,28 @@ class ProfileModifyView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
-        
-        self.name.do {
+        self.nameLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.profileImage.bottomAnchor, constant: 20).isActive = true
-            $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
+        }
+        self.name.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        }
+        
+        self.introductionLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.name.bottomAnchor, constant: 20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
         }
         
         self.introduction.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.name.bottomAnchor, constant: 7).isActive = true
+            $0.topAnchor.constraint(equalTo: self.introductionLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
