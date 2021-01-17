@@ -38,7 +38,6 @@ enum TerminalRouter: URLRequestConvertible {
     // 프로젝트
     case projectList            (id: String)
     case projectUpdate          (id: String, project: Parameters)
-//    case projectDelete          (id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
     case studyCreate            (study: Parameters)

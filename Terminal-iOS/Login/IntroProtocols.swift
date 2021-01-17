@@ -16,10 +16,12 @@ protocol IntroViewProtocol: class {
     func presentNextView()
     func presentCompleteView()
     func completeJoin()
+    
         //false
-    func showInvalidEmailAction()
+    func showInvalidEmailAction(message: String)
     func showInvalidPasswordAction()
     func showInvalidNickNameAction()
+    func showInvalidLoginAction(message: String)
 }
 
 protocol IntroWireFrameProtocol: class {
@@ -41,11 +43,11 @@ protocol IntroPresenterProtocol: class {
     func didNextButton(input: String, introState: IntroViewState, beginState: BeginState)
     
     //INTERACTOR -> PRESENTER
-    func emailValidInfo(result: Bool)
+    func emailValidInfo(result: Bool, message: String)
     func passwordValidInfo(result: Bool)
     func nicknameValidInfo(result: Bool)
     func signUpValidInfo(result: Bool)
-    func joinValidInfo(result: Bool, joinInfo: String)
+    func joinValidInfo(result: Bool, message: String)
 }
 
 protocol IntroInteractorProtocol: class {

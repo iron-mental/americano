@@ -89,15 +89,17 @@ class IntroView: UIViewController {
     // MARK: Attribute
     
     func attribute() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .black
+        
         rightBarButton = UIBarButtonItem(customView: rightbutton)
         leftBarButton = UIBarButtonItem(customView: leftButton)
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             $0.navigationItem.rightBarButtonItem = rightBarButton
             $0.navigationItem.leftBarButtonItem = leftBarButton
-            $0.navigationController?.navigationBar.shadowImage = UIImage()
-            $0.navigationController?.navigationBar.isTranslucent = false
-            $0.navigationController?.navigationBar.backgroundColor = UIColor.systemBackground
+            $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.view.backgroundColor = UIColor.systemBackground
         }
         inputTextfield.do {
@@ -285,9 +287,9 @@ extension IntroView: IntroViewProtocol {
         present(view, animated: true, completion: nil)
     }
     
-    func showInvalidEmailAction() {
+    func showInvalidEmailAction(message: String) {
         invalidView.isHidden = false
-        invalidLabel.text = "유효하지 않은 이메일 입니다."
+        invalidLabel.text = message
         invalidGuideAnimation()
     }
     
@@ -300,6 +302,12 @@ extension IntroView: IntroViewProtocol {
     func showInvalidNickNameAction() {
         invalidView.isHidden = false
         invalidLabel.text = "중복된 닉네임 입니다."
+        invalidGuideAnimation()
+    }
+    
+    func showInvalidLoginAction(message: String) {
+        invalidView.isHidden = false
+        invalidLabel.text = message
         invalidGuideAnimation()
     }
     
@@ -322,7 +330,7 @@ extension IntroView: IntroViewProtocol {
                             UIView.animate(withDuration: 0.05) {
                                 self.invalidView.transform = CGAffineTransform(translationX: 0, y: 0)
                             } completion: { _ in
-                                print("됐겠지 머 ")
+                                print("Invalid Response")
                             }
 
                         }

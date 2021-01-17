@@ -19,20 +19,20 @@ class IntroInteractor: IntroInteractorProtocol {
         if input.contains("@") && input.contains(".") {
             if beginState == .join {
                 IntroLocalDataManager.shared.email = input
-                self.presenter?.emailValidInfo(result: true)
+                self.presenter?.emailValidInfo(result: true, message: "")
             } else {
                 remoteDataManager?.getEmailValidInfo(input: input) { result in
                     switch result.result {
                     case true:
-                        self.presenter?.emailValidInfo(result: true)
+                        self.presenter?.emailValidInfo(result: true, message: result.message ?? "")
                         IntroLocalDataManager.shared.email = input
                     case false:
-                        self.presenter?.emailValidInfo(result: false)
+                        self.presenter?.emailValidInfo(result: false, message: result.message ?? "")
                     }
                 }
             }
         } else {
-            presenter?.emailValidInfo(result: false)
+            presenter?.emailValidInfo(result: false, message: "이메일 형식이 맞지 않습니다.")
         }
     }
     
@@ -77,23 +77,21 @@ class IntroInteractor: IntroInteractorProtocol {
                                             completionHandler: { result in
         switch result.result {
           case true:
-            
-            guard let refreshToken = result.data?.refreshToken else { return }
-            guard let accessToken = result.data?.accessToken else { return }
-            guard let userID = result.data?.id else { return }
-            let refreshResult = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
-            let accessResult = KeychainWrapper.standard.set(accessToken, forKey: "accessToken")
-            let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
-            print("저장 결과 :", refreshResult && accessResult && idResult)
-            
-            if refreshResult && accessResult && idResult {
-                self.presenter?.joinValidInfo(result: result.result, joinInfo: String(describing: result.data?.id))
+                 
+            if let refreshToken = result.data?.refreshToken,
+               let accessToken = result.data?.accessToken,
+               let userID = result.data?.id {
+                let refreshResult = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
+                let accessResult = KeychainWrapper.standard.set(accessToken, forKey: "accessToken")
+                let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
+                print("저장 결과 :", refreshResult && accessResult && idResult)
+                if refreshResult && accessResult && idResult {
+                    self.presenter?.joinValidInfo(result: result.result, message: String(describing: result.data?.id))
+                }
             }
-            
           case false:
-            
             self.presenter?.joinValidInfo(result: result.result,
-                                          joinInfo: "실패")
+                                          message: result.message ?? "로그인 실패")
             }
           }
         )

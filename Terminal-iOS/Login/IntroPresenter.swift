@@ -29,8 +29,8 @@ class IntroPresenter: IntroPresenterProtocol {
     
     
     /// 이메일 유효성 확인 
-    func emailValidInfo(result: Bool) {
-        result ? view?.presentNextView() : view?.showInvalidEmailAction()
+    func emailValidInfo(result: Bool, message: String) {
+        result ? view?.presentNextView() : view?.showInvalidEmailAction(message: message)
     }
     
     /// 패스워드 유효성 확인
@@ -48,8 +48,8 @@ class IntroPresenter: IntroPresenterProtocol {
     }
     
     /// 로그인 유효성 확인
-    func joinValidInfo(result: Bool, joinInfo: String) {
-        result ? view?.completeJoin() : print(joinInfo)
+    func joinValidInfo(result: Bool, message: String) {
+        result ? view?.completeJoin() : view?.showInvalidLoginAction(message: message)
     }
     
     func didNextButton(input: String, introState: IntroViewState, beginState: BeginState) {
