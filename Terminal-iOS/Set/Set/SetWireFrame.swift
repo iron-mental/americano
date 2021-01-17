@@ -42,4 +42,13 @@ class SetWireFrame: SetWireFrameProtocol {
             sourceView.navigationController?.pushViewController(profileDetailView, animated: true)
         }
     }
+    
+    func presentEmailAuth(from view: SetViewProtocol) {
+        let emailAuthView = EmailAuthWireFrame.createModule()
+        
+        if let sourceView = view as? UIViewController {
+            sourceView.present(emailAuthView, animated: true)
+        }
+    }
+    
 }

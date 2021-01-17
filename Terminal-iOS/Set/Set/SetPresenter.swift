@@ -22,6 +22,10 @@ class SetPresenter: SetPresenterProtocol {
         wireFrame?.presentProfileDetailScreen(from: view!)
     }
     
+    func showEmailAuth() {
+        wireFrame?.presentEmailAuth(from: view!)
+    }
+   
     func loggedOut() {
         view?.loggedOut()
     }

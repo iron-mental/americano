@@ -84,8 +84,7 @@ class SetView: UIViewController {
     }
     
     @objc func emailAuth() {
-        let view = EmailAuthView()
-        self.present(view, animated: true, completion: nil)
+        presenter?.showEmailAuth()
     }
 }
 
