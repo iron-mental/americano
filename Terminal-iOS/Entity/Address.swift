@@ -13,7 +13,7 @@ struct Address: Codable {
     let sigungu: [String]
 
     enum CodingKeys: String, CodingKey {
-        case sido = "si"
-        case sigungu = "gunGu"
+        case sido
+        case sigungu
     }
 }
