@@ -43,6 +43,7 @@ class EmailAuthView: UIViewController {
             $0.setTitle("취소", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(refuse), for: .touchUpInside)
         }
         
         self.acceptButton.do {
@@ -50,6 +51,7 @@ class EmailAuthView: UIViewController {
             $0.setTitle("확인", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(accept), for: .touchUpInside)
         }
     }
     
@@ -70,8 +72,23 @@ class EmailAuthView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: 220).isActive = true
         }
     }
+    
+    @objc func accept() {
+        presenter?.emailAuthRequest()
+    }
+    
+    @objc func refuse() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension EmailAuthView: EmailAuthViewProtocol {
-    
+    func emailAuthResponse(result: Bool, message: String) {
+        if result {
+            guard let view = self.presentingViewController else { return }
+            self.dismiss(animated: true) {
+                view.showToast(controller: view, message: "이메일로 인증이 전송되었습니다.", seconds: 2)
+            }
+        }
+    }
 }

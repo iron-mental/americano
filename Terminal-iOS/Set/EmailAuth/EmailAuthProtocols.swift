@@ -11,7 +11,7 @@ import UIKit
 protocol EmailAuthViewProtocol: class {
     var presenter: EmailAuthPresenterProtocol? { get set }
     
-    
+    func emailAuthResponse(result: Bool, message: String)
 }
 
 protocol EmailAuthPresenterProtocol: class {
@@ -20,15 +20,17 @@ protocol EmailAuthPresenterProtocol: class {
     var interactor : EmailAuthInteractorInputProtocol? { get set }
     
     // VIEW -> PRESENTER
-    
+    func emailAuthRequest()
 }
 
 protocol EmailAuthInteractorInputProtocol: class {
     var presenter: EmailAuthInteractorOutputProtocol? { get set }
+    
+    func emailAuthRequest()
 }
 
 protocol EmailAuthInteractorOutputProtocol: class {
-    
+    func eamilAuthResponse(result: Bool, message: String)
 }
 
 protocol EmailAuthWireFrameProtocol: class {

@@ -13,8 +13,13 @@ class EmailAuthPresenter: EmailAuthPresenterProtocol {
     var wireframe: EmailAuthWireFrameProtocol?
     var interactor: EmailAuthInteractorInputProtocol?
     
+    func emailAuthRequest() {
+        interactor?.emailAuthRequest()
+    }
 }
 
 extension EmailAuthPresenter: EmailAuthInteractorOutputProtocol {
-    
+    func eamilAuthResponse(result: Bool, message: String) {
+        view?.emailAuthResponse(result: result, message: message)
+    }
 }
