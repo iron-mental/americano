@@ -63,6 +63,7 @@ class SetView: UIViewController {
             $0.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             $0.layer.borderWidth = 1
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(emailAuth), for: .touchUpInside)
         }
     }
     
@@ -80,6 +81,11 @@ class SetView: UIViewController {
     
     @objc func pushProfileModify(_ sender: UITapGestureRecognizer) {
         presenter?.showProfileDetail()
+    }
+    
+    @objc func emailAuth() {
+        let view = EmailAuthView()
+        self.present(view, animated: true, completion: nil)
     }
 }
 

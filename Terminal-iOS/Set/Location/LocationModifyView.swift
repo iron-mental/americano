@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 import Then
 
 class LocationModifyView: UIViewController {
@@ -136,6 +137,7 @@ class LocationModifyView: UIViewController {
         } else if selectedIndex == 1 {
             self.selectedSegmentIndex = 0
             self.showToast(controller: self, message: "광역시도를 먼저 선택해주세요.", seconds: 1)
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         }
     }
 }
