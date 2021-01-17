@@ -22,7 +22,8 @@ extension CoreUserInfo {
     @NSManaged public var email: String?
     @NSManaged public var image: String?
     @NSManaged public var introduce: String?
-    @NSManaged public var address: String?
+    @NSManaged public var sido: String?
+    @NSManaged public var sigungu: String?
     @NSManaged public var careerTitle: String?
     @NSManaged public var careerContents: String?
     @NSManaged public var snsLinkedin: String?

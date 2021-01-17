@@ -14,13 +14,15 @@ struct UserInfo: Codable {
     let id: Int
     let nickname, email: String
     let image, introduce: String?
-    let address, careerTitle, careerContents: String?
+    let sido, sigungu: String?
+    let careerTitle, careerContents: String?
     let snsLinkedin, snsWeb, snsGithub: String?
     let emailVerified: Bool
     let createdAt: String
 
     enum CodingKeys: String, CodingKey {
-        case id, nickname, email, image, introduce, address
+        case id, nickname, email, image, introduce
+        case sido, sigungu
         case careerTitle = "career_title"
         case careerContents = "career_contents"
         case snsGithub = "sns_github"

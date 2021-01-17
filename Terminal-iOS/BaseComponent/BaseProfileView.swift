@@ -240,9 +240,9 @@ extension BaseProfileView: BaseProfileViewProtocol {
         self.email.email.text = userInfo.email
 
         /// 활동지역
-        if let address = userInfo.address {
-            self.location.location.text = address
-        }
+        let sido = userInfo.sido ?? ""
+        let sigungu = userInfo.sigungu ?? ""
+        self.location.location.text = sido + " " + sigungu
         
         // hide loading
         self.hideLoading()

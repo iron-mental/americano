@@ -13,7 +13,8 @@ public class LocalUserInfo: NSObject, NSCoding {
     let id: Int
     let nickname, email: String
     let image, introduce: String?
-    let address, careerTitle, careerContents: String?
+    let careerTitle, careerContents: String?
+    let sido, sigungu: String?
     let snsLinkedin, snsWeb, snsGithub: String?
     let emailVerified: Bool
     let createdAt: String
@@ -24,7 +25,8 @@ public class LocalUserInfo: NSObject, NSCoding {
              email,
              image,
              introduce,
-             address,
+             sido,
+             sigungu,
              careerTitle,
              careerContents,
              snsLinkedin,
@@ -39,7 +41,8 @@ public class LocalUserInfo: NSObject, NSCoding {
         self.email = userInfo.email
         self.image = userInfo.image
         self.introduce = userInfo.introduce
-        self.address = userInfo.address
+        self.sido = userInfo.sido
+        self.sigungu = userInfo.sigungu
         self.careerTitle = userInfo.careerTitle
         self.careerContents = userInfo.careerContents
         self.snsLinkedin = userInfo.snsLinkedin
@@ -55,7 +58,8 @@ public class LocalUserInfo: NSObject, NSCoding {
         coder.encode(email,forKey: Keys.email.rawValue)
         coder.encode(image,forKey: Keys.image.rawValue)
         coder.encode(introduce,forKey: Keys.introduce.rawValue)
-        coder.encode(address,forKey: Keys.address.rawValue)
+        coder.encode(sido, forKey: Keys.sido.rawValue)
+        coder.encode(sigungu, forKey: Keys.sigungu.rawValue)
         coder.encode(careerTitle,forKey: Keys.careerTitle.rawValue)
         coder.encode(careerContents,forKey: Keys.careerContents.rawValue)
         coder.encode(snsLinkedin,forKey: Keys.snsLinkedin.rawValue)
@@ -71,7 +75,8 @@ public class LocalUserInfo: NSObject, NSCoding {
                  email: decoder.decodeObject(forKey: Keys.email.rawValue) as? String ?? "",
                  image: decoder.decodeObject(forKey: Keys.image.rawValue) as? String ?? "",
                  introduce: decoder.decodeObject(forKey: Keys.introduce.rawValue) as? String ?? "",
-                 address: decoder.decodeObject(forKey: Keys.address.rawValue) as? String ?? "",
+                 sido: decoder.decodeObject(forKey: Keys.sido.rawValue) as? String ?? "",
+                 sigungu: decoder.decodeObject(forKey: Keys.sigungu.rawValue) as? String ?? "",
                  careerTitle: decoder.decodeObject(forKey: Keys.careerTitle.rawValue) as? String ?? "",
                  careerContents: decoder.decodeObject(forKey: Keys.careerContents.rawValue) as? String ?? "",
                  snsLinkedin: decoder.decodeObject(forKey: Keys.snsLinkedin.rawValue) as? String ?? "",
