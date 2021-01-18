@@ -25,6 +25,7 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
                 case .success(let value):
                     let json = "\(JSON(value))".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<StudyDetail>.self, from: json!)
+                    
                     completionHandler(result.data!)
                 case .failure(let err):
                     print("실패", err)
