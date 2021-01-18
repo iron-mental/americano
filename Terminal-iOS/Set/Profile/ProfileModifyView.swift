@@ -183,7 +183,7 @@ class ProfileModifyView: UIViewController {
         }
         
         let introduction    = self.introduction.text!
-        let image           = profileImage.image!
+        let image           = self.profileImage.image!
         
         let profile         = Profile(profileImage: image, nickname: nickname, introduction: introduction)
         
@@ -206,6 +206,8 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
             
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()
+        } else {
+            print("실패")
         }
     }
 }

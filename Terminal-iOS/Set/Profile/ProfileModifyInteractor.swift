@@ -46,6 +46,8 @@ extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol 
             self.presenter?.didCompleteModify(result: true, message: message)
             self.imageResult = false
             self.nicknameResult = false
+        } else {
+            print("수정 실패")
         }
     }
     
