@@ -200,9 +200,10 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let index = IndexPath(row: textField.tag, section: 0)
-        self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
-        self.projectView.scrollToRow(at: index, at: .top, animated: true)
-
+        if textField.tag != 0 {
+            self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
+            self.projectView.scrollToRow(at: index, at: .top, animated: true)
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -211,7 +212,9 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         let index = IndexPath(row: textView.tag, section: 0)
+        if textView.tag != 0 {
         self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
         self.projectView.scrollToRow(at: index, at: .top, animated: true)
+        }
     }
 }
