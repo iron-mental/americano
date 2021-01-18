@@ -74,6 +74,31 @@ class BaseProfileView: UIViewController {
             $0.text = "활동지역"
             $0.textColor = .white
         }
+        
+        self.sns.github.addTarget(self, action: #selector(goGithub), for: .touchUpInside)
+        self.sns.linkedin.addTarget(self, action: #selector(goLinkedin), for: .touchUpInside)
+        self.sns.web.addTarget(self, action: #selector(goWeb), for: .touchUpInside)
+    }
+    
+    @objc func goGithub() {
+        guard let address = self.userInfo?.snsGithub else { return }
+        let url = "https://www.github.com/\(address)"
+        let view = SNSWebView(url: url)
+        self.present(view, animated: true, completion: nil)
+    }
+    
+    @objc func goLinkedin() {
+        guard let address = self.userInfo?.snsLinkedin else { return }
+        let url = address
+        let view = SNSWebView(url: url)
+        self.present(view, animated: true, completion: nil)
+    }
+    
+    @objc func goWeb() {
+        guard let address = self.userInfo?.snsWeb else { return }
+        let url = address
+        let view = SNSWebView(url: url)
+        self.present(view, animated: true, completion: nil)
     }
     
     // MARK: Set Layout
