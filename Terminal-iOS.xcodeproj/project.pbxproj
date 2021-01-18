@@ -52,6 +52,7 @@
 		A56264D225B568DD004CD298 /* SNSWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264D125B568DD004CD298 /* SNSWebView.swift */; };
 		A56264DA25B568F4004CD298 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56264D925B568F4004CD298 /* WebKit.framework */; };
 		A56264DF25B57C04004CD298 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264DE25B57C04004CD298 /* ProjectListView.swift */; };
+		A56264F225B5AE4B004CD298 /* EmailAlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */; };
 		A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */; };
 		A56605E3258358A2002C4A77 /* ApplyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56605E2258358A2002C4A77 /* ApplyListCell.swift */; };
 		A5686A452524F048005990DC /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A442524F048005990DC /* NotiCell.swift */; };
@@ -385,6 +386,7 @@
 		A56264D125B568DD004CD298 /* SNSWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSWebView.swift; sourceTree = "<group>"; };
 		A56264D925B568F4004CD298 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A56264DE25B57C04004CD298 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
+		A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAlertMessageView.swift; sourceTree = "<group>"; };
 		A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Ext.swift"; path = "Terminal-iOS/Extensions-Utillities/UIColor+Ext.swift"; sourceTree = SOURCE_ROOT; };
 		A56605E2258358A2002C4A77 /* ApplyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyListCell.swift; sourceTree = "<group>"; };
 		A5686A442524F048005990DC /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
@@ -1389,6 +1391,7 @@
 			children = (
 				CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */,
 				CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */,
+				A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */,
 			);
 			path = StaticViewComponent;
 			sourceTree = "<group>";
@@ -1821,6 +1824,7 @@
 				CC563941259CAD7C00DA1479 /* SearchStudyPresenter.swift in Sources */,
 				CCF632D125A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift in Sources */,
 				CCD51C83256D2A0500D41771 /* MyStudyDetailWireFrame.swift in Sources */,
+				A56264F225B5AE4B004CD298 /* EmailAlertMessageView.swift in Sources */,
 				A5C5B14A25455A4100F4A86D /* CareerView.swift in Sources */,
 				A5686A452524F048005990DC /* NotiCell.swift in Sources */,
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
