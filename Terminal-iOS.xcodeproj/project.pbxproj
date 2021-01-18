@@ -49,6 +49,9 @@
 		A54AD2322588FBFF00BC6558 /* CategoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54AD2312588FBFF00BC6558 /* CategoryState.swift */; };
 		A554DDC925AEEAA300C03E41 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */; };
 		A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */; };
+		A56264D225B568DD004CD298 /* SNSWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264D125B568DD004CD298 /* SNSWebView.swift */; };
+		A56264DA25B568F4004CD298 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56264D925B568F4004CD298 /* WebKit.framework */; };
+		A56264DF25B57C04004CD298 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264DE25B57C04004CD298 /* ProjectListView.swift */; };
 		A565647A2518B7EF00AB31A9 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */; };
 		A56605E3258358A2002C4A77 /* ApplyListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56605E2258358A2002C4A77 /* ApplyListCell.swift */; };
 		A5686A452524F048005990DC /* NotiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A442524F048005990DC /* NotiCell.swift */; };
@@ -379,6 +382,9 @@
 		A54AD2312588FBFF00BC6558 /* CategoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryState.swift; sourceTree = "<group>"; };
 		A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
+		A56264D125B568DD004CD298 /* SNSWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSWebView.swift; sourceTree = "<group>"; };
+		A56264D925B568F4004CD298 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A56264DE25B57C04004CD298 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIColor+Ext.swift"; path = "Terminal-iOS/Extensions-Utillities/UIColor+Ext.swift"; sourceTree = SOURCE_ROOT; };
 		A56605E2258358A2002C4A77 /* ApplyListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyListCell.swift; sourceTree = "<group>"; };
 		A5686A442524F048005990DC /* NotiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCell.swift; sourceTree = "<group>"; };
@@ -657,6 +663,7 @@
 			files = (
 				9B4ADB0EA58C194A4FD611CA /* Pods_Terminal_iOS.framework in Frameworks */,
 				A5A0326425B459E20038073A /* AudioToolbox.framework in Frameworks */,
+				A56264DA25B568F4004CD298 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +673,7 @@
 		031FECECB36F7B6233EC27DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A56264D925B568F4004CD298 /* WebKit.framework */,
 				A5A0326325B459E20038073A /* AudioToolbox.framework */,
 				6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */,
 			);
@@ -778,6 +786,14 @@
 				CC563936259CA77400DA1479 /* SearchStudyProtocols.swift */,
 			);
 			path = SearchStudy;
+			sourceTree = "<group>";
+		};
+		A56264D025B568A6004CD298 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				A56264D125B568DD004CD298 /* SNSWebView.swift */,
+			);
+			path = Web;
 			sourceTree = "<group>";
 		};
 		A56605E025835873002C4A77 /* BaseComponent */ = {
@@ -924,6 +940,7 @@
 				A5C5B155254573CD00F4A86D /* LocationView.swift */,
 				A5417FCD25A77E33005B884F /* ProfileSNSView.swift */,
 				A5417FD225A77E3F005B884F /* ProjectSNSView.swift */,
+				A56264DE25B57C04004CD298 /* ProjectListView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1219,6 +1236,7 @@
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
 				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
 				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
+				A56264D025B568A6004CD298 /* Web */,
 				A51BA0AE2577F0CA00B9673F /* Utils */,
 				CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */,
 				CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */,
@@ -1831,6 +1849,7 @@
 				A510BA1B2583BB3E0084559C /* ApplyUserProtocols.swift in Sources */,
 				A58148FE25910EBD00BF3C2A /* SNSModifyWireFrame.swift in Sources */,
 				A58148922590C6E200BF3C2A /* EmailModifyView.swift in Sources */,
+				A56264D225B568DD004CD298 /* SNSWebView.swift in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
 				A5C7B8FA25AC6B7000016D5B /* AddressState.swift in Sources */,
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,
@@ -1949,6 +1968,7 @@
 				A5B78A96252B950600E0B440 /* ProfileDetailView.swift in Sources */,
 				A510BA112583BB230084559C /* ApplyUserPresenter.swift in Sources */,
 				A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */,
+				A56264DF25B57C04004CD298 /* ProjectListView.swift in Sources */,
 				A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */,
 				CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */,
 				A5C81C5B25836D32008F2B09 /* MyApplyListProtocols.swift in Sources */,

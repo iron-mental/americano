@@ -80,27 +80,6 @@ class BaseProfileView: UIViewController {
         self.sns.web.addTarget(self, action: #selector(goWeb), for: .touchUpInside)
     }
     
-    @objc func goGithub() {
-        guard let address = self.userInfo?.snsGithub else { return }
-        let url = "https://www.github.com/\(address)"
-        let view = SNSWebView(url: url)
-        self.present(view, animated: true, completion: nil)
-    }
-    
-    @objc func goLinkedin() {
-        guard let address = self.userInfo?.snsLinkedin else { return }
-        let url = address
-        let view = SNSWebView(url: url)
-        self.present(view, animated: true, completion: nil)
-    }
-    
-    @objc func goWeb() {
-        guard let address = self.userInfo?.snsWeb else { return }
-        let url = address
-        let view = SNSWebView(url: url)
-        self.present(view, animated: true, completion: nil)
-    }
-    
     // MARK: Set Layout
     
     func layout() {
@@ -267,7 +246,6 @@ extension BaseProfileView: BaseProfileViewProtocol {
         self.projectData = project
 
         /// 기존의 프로젝트 스택뷰에 요소들을 셋팅 전에 모두 제거
-//        self.projectStack.removeAllArrangedSubviews()
         self.project.projectStack.removeAllArrangedSubviews()
 
         for data in project {
@@ -280,8 +258,36 @@ extension BaseProfileView: BaseProfileViewProtocol {
                                           snsAppStore: data.snsAppstore ?? "",
                                           snsPlayStore: data.snsPlaystore ?? "",
                                           frame: CGRect.zero)
-
+           
             self.project.projectStack.addArrangedSubview(projectView)
         }
+    }
+}
+
+
+// MARK: @objc
+
+extension BaseProfileView {
+    
+    /// Profile SNS
+    @objc func goGithub() {
+        guard let address = self.userInfo?.snsGithub else { return }
+        let url = "https://www.github.com/\(address)"
+        let view = SNSWebView(url: url)
+        self.present(view, animated: true, completion: nil)
+    }
+    
+    @objc func goLinkedin() {
+        guard let address = self.userInfo?.snsLinkedin else { return }
+        let url = address
+        let view = SNSWebView(url: url)
+        self.present(view, animated: true, completion: nil)
+    }
+    
+    @objc func goWeb() {
+        guard let address = self.userInfo?.snsWeb else { return }
+        let url = address
+        let view = SNSWebView(url: url)
+        self.present(view, animated: true, completion: nil)
     }
 }

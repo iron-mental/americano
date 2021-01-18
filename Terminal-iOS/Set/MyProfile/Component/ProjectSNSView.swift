@@ -50,6 +50,5 @@ class ProjectSNSView: BaseSNSView {
         default:
             break
         }
-    
     }
 }

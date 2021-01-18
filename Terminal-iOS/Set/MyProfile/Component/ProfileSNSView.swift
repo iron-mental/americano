@@ -48,8 +48,8 @@ class ProfileSNSView: BaseSNSView {
         
         if let _ = snsList["github"] {
             self.snsStack.addArrangedSubview(self.github)
-                    count += 1
-                }
+            count += 1
+        }
         
         if let _ = snsList["linkedin"] {
             self.snsStack.addArrangedSubview(self.linkedin)
