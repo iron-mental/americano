@@ -60,7 +60,7 @@ class IntroInteractor: IntroInteractorProtocol {
             case true:
               self.presenter?.signUpValidInfo(result: true)
             case false:
-                print("실패이유 :", result.message!)
+                self.presenter?.nicknameValidInfo(result: false)
                 }
               }
             )

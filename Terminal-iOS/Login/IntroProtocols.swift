@@ -12,6 +12,9 @@ protocol IntroViewProtocol: class {
     var presenter: IntroPresenterProtocol? { get set }
     
     //PRESENTER -> VIEW
+    func showLoading()
+    func hideLoading()
+    
         //success
     func presentNextView()
     func presentCompleteView()

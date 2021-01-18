@@ -8,12 +8,12 @@
 
 import UIKit
 
-enum BeginState: String {
+enum BeginState {
     case signUp
     case join
 }
 
-enum IntroViewState: String {
+enum IntroViewState {
     case emailInput
     case pwdInput
     case nickname
@@ -275,6 +275,16 @@ extension IntroView: IntroViewProtocol {
         }
         
         self.navigationController?.pushViewController(view, animated: true)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide {
+            print("Loading hide")
+        }
     }
     
     func presentCompleteView() {
