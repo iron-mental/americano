@@ -345,6 +345,7 @@ extension BaseEditableStudyDetailView: UIScrollViewDelegate {
 
 extension BaseEditableStudyDetailView: selectLocationDelegate {
     func passLocation(location: StudyDetailLocationPost) {
+        
         selectedLocation = location
         locationView.address.text = "\(location.address)"
         guard let detail = location.detailAddress else { return }

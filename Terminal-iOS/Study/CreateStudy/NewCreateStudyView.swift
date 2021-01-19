@@ -16,6 +16,30 @@ class NewCreateStudyView: BaseEditableStudyDetailView {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func attribute() {
+        super.attribute()
+        self.button.do {
+            $0.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
+        }
+    }
+
+    override func didLocationViewClicked() {
+        presenter?.clickLocationView(currentView: self)
+    }
+    @objc func completeButtonDidTap() {
+        studyDetailPost = StudyDetailPost(category: selectedCategory!,
+                                          title: studyTitleTextField.text ?? "",
+                                          introduce: studyIntroduceView.textView.text ?? "",
+                                          progress: studyInfoView.textView.text ?? "",
+                                          studyTime: timeView.detailTime.text ?? "",
+                                          snsWeb: SNSInputView.web.textField.text,
+                                          snsNotion: SNSInputView.notion.textField.text,
+                                          snsEvernote: SNSInputView.evernote.textField.text,
+                                          image: mainImageView.image,
+                                          location: selectedLocation!)
+        presenter?.clickCompleteButton(study: studyDetailPost!, studyID: study?.id ?? nil)
+    }
 }
 
 extension NewCreateStudyView: CreateStudyViewProtocols {
@@ -30,7 +54,7 @@ extension NewCreateStudyView: CreateStudyViewProtocols {
                                           snsEvernote: SNSInputView.evernote.textField.text,
                                           image: mainImageView.image,
                                           location: selectedLocation!)
-        presenter?.clickCompleteButton(study: studyDetailPost!, state: state!, studyID: study?.id ?? nil)
+        presenter?.clickCompleteButton(study: studyDetailPost!, studyID: study?.id ?? nil)
     }
     
     func loading() {

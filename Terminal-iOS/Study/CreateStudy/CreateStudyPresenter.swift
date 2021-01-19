@@ -64,9 +64,9 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
             view?.webInvalid()
         }
     }
-    func clickCompleteButton(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?) {
+    func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {
 //        LoadingRainbowCat.show()
-        interactor?.studyCreateComplete(study: study, state: state, studyID: studyID ?? nil)
+        interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)
     }
     
     func studyInfoInvalid(message: String) {

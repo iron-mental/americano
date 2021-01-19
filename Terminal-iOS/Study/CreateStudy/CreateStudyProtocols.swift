@@ -53,7 +53,7 @@ protocol CreateStudyInteractorProtocols: class {
     func searchNotionID(id: String?)
     func searchEvernoteURL(url: String?)
     func searchWebURL(url: String?)
-    func studyCreateComplete(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?)
+    func studyCreateComplete(study: StudyDetailPost, studyID: Int?)
 }
 
 protocol CreateStudyPresenterProtocols: class {
@@ -67,7 +67,7 @@ protocol CreateStudyPresenterProtocols: class {
     func everNoteInputFinish(url: String?)
     func URLInputFinish(url: String?)
     func clickLocationView(currentView: UIViewController)
-    func clickCompleteButton(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?)
+    func clickCompleteButton(study: StudyDetailPost, studyID: Int?)
     
     //INTERACTOR -> PRESENTER
     func showNotionValidResult(result: Bool)
