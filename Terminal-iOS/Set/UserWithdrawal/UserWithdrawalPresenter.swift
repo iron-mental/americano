@@ -6,7 +6,7 @@
 //  Copyright © 2021 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class UserWithdrawalPresenter: UserWithdrawalPresenterProtocol {
     var view: UserWithdrawalViewProtocol?
@@ -19,5 +19,8 @@ class UserWithdrawalPresenter: UserWithdrawalPresenterProtocol {
 }
 
 extension UserWithdrawalPresenter: UserWithdrawalInteractorOutputProtocol {
-    
+    func resultUserWithdrawal(result: Bool, message: String) {
+        result ? view?.resultUserWithdrawal(message: nil):
+            view?.resultUserWithdrawal(message: message)
+    }
 }

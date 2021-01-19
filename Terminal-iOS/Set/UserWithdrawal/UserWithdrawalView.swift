@@ -56,6 +56,7 @@ class UserWithdrawalView: UIViewController {
             $0.backgroundColor = .darkGray
             $0.layer.cornerRadius = 10
             $0.setTitle("취소", for: .normal)
+            $0.addTarget(self, action: #selector(refuse), for: .touchUpInside)
         }
         
         self.removeButton.do {
@@ -118,7 +119,7 @@ class UserWithdrawalView: UIViewController {
     }
     
     @objc func refuse() {
-        
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func remove() {
@@ -130,5 +131,18 @@ class UserWithdrawalView: UIViewController {
 }
 
 extension UserWithdrawalView: UserWithdrawalViewProtocol {
-    
+    func resultUserWithdrawal(message: String?) {
+        
+        guard let message = message else {
+            self.showToast(controller: self, message: "회원이 탈퇴되었습니다.", seconds: 1)
+            let parent = self.navigationController?.rootViewController as? SetView
+            self.navigationController?.popViewController(animated: true, completion: {
+                sleep(1)
+                parent?.presenter?.loggedOut()
+            })
+            return
+        }
+        
+        self.showToast(controller: self, message: message, seconds: 1)
+    }
 }

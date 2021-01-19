@@ -20,7 +20,6 @@ class UserWithdrawalInteractor: UserWithdrawalInteractorInputProtocol {
         ]
         
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        
         TerminalNetworkManager
             .shared
             .session
@@ -32,7 +31,9 @@ class UserWithdrawalInteractor: UserWithdrawalInteractorInputProtocol {
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    
+                    let isSuccess = result.result
+                    let message = result.message ?? ""
+                    self.presenter?.resultUserWithdrawal(result: isSuccess, message: message)
                 case .failure(let error):
                     print(error)
                 }

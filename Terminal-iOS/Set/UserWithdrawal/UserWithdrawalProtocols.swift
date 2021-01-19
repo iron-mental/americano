@@ -10,6 +10,8 @@ import UIKit
 
 protocol UserWithdrawalViewProtocol: class {
     var presenter: UserWithdrawalPresenterProtocol? { get set }
+    
+    func resultUserWithdrawal(message: String?)
 }
 
 protocol UserWithdrawalPresenterProtocol: class {
@@ -27,7 +29,7 @@ protocol UserWithdrawalInteractorInputProtocol: class {
 }
 
 protocol UserWithdrawalInteractorOutputProtocol: class {
-    
+    func resultUserWithdrawal(result: Bool, message: String)
 }
 
 protocol UserWithdrawalWireFrameProtocol: class {
