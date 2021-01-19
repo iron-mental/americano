@@ -20,7 +20,7 @@ enum IntroViewState {
 }
 
 class IntroView: UIViewController {
-    var presenter : IntroPresenterProtocol?
+    var presenter: IntroPresenterProtocol?
     
     var leftButton = UIButton()
     var rightbutton = UIButton()
@@ -83,9 +83,6 @@ class IntroView: UIViewController {
         case .none:
             print("none")
             break
-        case .some(_):
-            print("some")
-            break
         }
     }
     
@@ -146,7 +143,7 @@ class IntroView: UIViewController {
         
         inputTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (40/375) * UIScreen.main.bounds.width).isActive = true
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * ( 235 / 375 )).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * ( 32 / 667 )).isActive = true
@@ -167,8 +164,8 @@ class IntroView: UIViewController {
         }
         cancelButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: inputTextfield.trailingAnchor,constant: 10).isActive = true
-            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: inputTextfield.trailingAnchor, constant: 10).isActive = true
+            $0.centerYAnchor.constraint(equalTo: inputTextfield.centerYAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
@@ -234,8 +231,6 @@ class IntroView: UIViewController {
             inputTextfield.text = ""
         case .none:
             print("none")
-        case .some(_):
-            print("some")
         }
     }
 }
