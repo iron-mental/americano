@@ -96,8 +96,23 @@ class SetView: UIViewController {
         presenter?.showProfileDetail()
     }
     
+    // MARK: Email Auth
+    
     @objc func emailAuth() {
-        presenter?.showEmailAuth()
+        
+        // 이미 인증된 경우
+        if emailVerify {
+            self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 2)
+        } else {
+            TerminalAlertMessage.show(type: .EmailAuthView)
+            if let view = TerminalAlertMessage.alertView as? AlertBaseUIView {
+                view.completeButton.addTarget(self, action: #selector(emailAuthRequest), for: .touchUpInside)
+            }
+        }
+    }
+    
+    @objc func emailAuthRequest() {
+        self.presenter?.emailAuthRequest()
     }
 }
 
@@ -109,6 +124,15 @@ extension SetView: SetViewProtocol {
     func hideLoading() {
         LoadingRainbowCat.hide {
             print("Loading hide")
+        }
+    }
+    
+    func emailAuthResponse(result: Bool, message: String) {
+        if result {
+            TerminalAlertMessage.hide()
+            self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 2)
+        } else {
+            self.showToast(controller: self, message: message, seconds: 2)
         }
     }
     
@@ -129,6 +153,7 @@ extension SetView: SetViewProtocol {
     func showUserInfo(with userInfo: UserInfo) {
         self.userInfo = userInfo
         self.attribute()
+        self.layout()
         self.hideLoading()
     }
 }

@@ -26,7 +26,7 @@ class SetWireFrame: SetWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         
-        remoteDataManager.remoteRequestHandler = interactor
+        remoteDataManager.interactor = interactor
         
         if let view = view as? SetView {
             return view

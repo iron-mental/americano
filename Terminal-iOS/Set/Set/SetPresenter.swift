@@ -22,6 +22,10 @@ class SetPresenter: SetPresenterProtocol {
         wireFrame?.presentProfileDetailScreen(from: view!)
     }
     
+    func emailAuthRequest() {
+        interactor?.emailAuthRequest()
+    }
+    
     func showEmailAuth() {
         wireFrame?.presentEmailAuth(from: view!)
     }
@@ -38,6 +42,10 @@ class SetPresenter: SetPresenterProtocol {
 extension SetPresenter: SetInteractorOutputProtocol {
     func didRetrievedUserInfo(userInfo: UserInfo) {
         view?.showUserInfo(with: userInfo)
+    }
+    
+    func eamilAuthResponse(result: Bool, message: String) {
+        view?.emailAuthResponse(result: result, message: message)
     }
     
     func onError() {

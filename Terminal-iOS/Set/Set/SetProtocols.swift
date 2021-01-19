@@ -13,6 +13,8 @@ protocol SetViewProtocol: class {
     
     func loggedOut()
     func showUserInfo(with userInfo: UserInfo)
+    func emailAuthResponse(result: Bool, message: String)
+    
     func showLoading()
     func hideLoading()
 }
@@ -34,13 +36,18 @@ protocol SetPresenterProtocol: class {
     // VIEW -> PRESENTER
     func viewDidLoad()
     func showProfileDetail()
+    func emailAuthRequest()
+    
     func showEmailAuth()
+    
     func loggedOut()
     func userWithdrawal()
+    
 }
 
 protocol SetInteractorOutputProtocol: class {
     func didRetrievedUserInfo(userInfo: UserInfo)
+    func eamilAuthResponse(result: Bool, message: String)
     func onError()
 }
 
@@ -50,6 +57,7 @@ protocol SetInteractortInputProtocol: class {
     var remoteDataManager: SetRemoteDataManagerInputProtocol? { get set }
     
     func getUserInfo()
+    func emailAuthRequest()
 }
 
 protocol SetDataManagerInputProtocol: class {
@@ -58,13 +66,15 @@ protocol SetDataManagerInputProtocol: class {
 }
 
 protocol SetRemoteDataManagerInputProtocol: class {
-    var remoteRequestHandler: SetRemoteDataManagerOutputProtocol? { get set }
+    var interactor: SetRemoteDataManagerOutputProtocol? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
     func getUserInfo()
+    func emailAuthRequest()
 }
 
 protocol SetRemoteDataManagerOutputProtocol: class {
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
+    func emailAuthResponse(result: BaseResponse<Bool>)
     func error()
 }
 
