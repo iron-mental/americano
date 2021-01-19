@@ -43,7 +43,7 @@ enum TerminalRouter: URLRequestConvertible {
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
     case studyCreate            (study: Parameters)
     case studyDetail            (studyID: String)
-    case studyUpdate            (studyID: String)
+    case studyUpdate            (studyID: String, study: Parameters)
     case studyDelete            (studyID: String)
     case studyList              (sort: Parameters)
     case studyListForKey        (value: String)
@@ -227,7 +227,7 @@ enum TerminalRouter: URLRequestConvertible {
         // 스터디
         case .studyCreate, .studyList:
             return "study"
-        case let .studyDetail(studyID), let .studyUpdate(studyID), let .studyDelete(studyID):
+        case let .studyDetail(studyID), let .studyUpdate(studyID, _), let .studyDelete(studyID):
             return "study/\(studyID)"
         case .studyListForKey:
             return "study/paging/list"
@@ -317,8 +317,8 @@ enum TerminalRouter: URLRequestConvertible {
             return sort
         case let .studyCreate(study):
             return study
-        case .studyUpdate:
-            return nil
+        case let .studyUpdate(_, study):
+            return study
         case let .studySearch(keyword):
             return ["word": keyword]
         case .studyLeave:
