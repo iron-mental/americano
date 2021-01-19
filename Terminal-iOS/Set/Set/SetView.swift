@@ -186,7 +186,6 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let profileCell = settingList.dequeueReusableCell(withIdentifier: ProfileCell.profileCellId,
                                                               for: indexPath) as! ProfileCell
-            profileCell.selectionStyle = .none
             if let userInfo = self.userInfo {
                 profileCell.setData(data: userInfo)
             }
