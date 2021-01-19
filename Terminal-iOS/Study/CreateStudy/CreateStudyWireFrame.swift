@@ -12,7 +12,8 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
     
     static func createStudyViewModul(category: String, studyDetail: StudyDetail?, state: WriteStudyViewState, parentView: UIViewController?) -> UIViewController {
         
-        let view = CreateStudyView()
+//        let view = CreateStudyView()
+        let view = NewCreateStudyView()
         let presenter = CreateStudyPresenter()
         let interactor = CreateStudyInteractor()
         let remoteDataManager = CreateStudyRemoteManager()
@@ -20,6 +21,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         
         view.presenter = presenter
         view.selectedCategory = category
+        
         view.study = studyDetail ?? nil
         view.state = state
         view.parentView = parentView ?? nil
@@ -30,6 +32,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         
         interactor.presenter = presenter
         interactor.createStudyRemoteDataManager = remoteDataManager
+        interactor.studyInfo = studyDetail ?? nil
         
         return view
     }

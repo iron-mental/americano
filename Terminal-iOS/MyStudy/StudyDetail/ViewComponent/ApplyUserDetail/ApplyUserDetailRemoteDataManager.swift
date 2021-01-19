@@ -21,6 +21,7 @@ class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserD
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    
                     let json = JSON(value)
 
                     let data = "\(json)".data(using: .utf8)
@@ -36,7 +37,7 @@ class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserD
                     }
                     break
                 case .failure(let _):
-
+                    
                     break
                 }
             }

@@ -12,16 +12,17 @@ import SwiftKeychainWrapper
 
 class CreateStudyView: UIViewController{
     var presenter: CreateStudyPresenterProtocols?
-    
     var parentView: UIViewController?
     let screenSize = UIScreen.main.bounds
     var selectedCategory: String?
+
     var selectedLocation: StudyDetailLocationPost? {
         didSet {
             self.button.alpha = 1
             self.button.isUserInteractionEnabled = true
         }
     }
+
     let picker = UIImagePickerController()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
@@ -43,16 +44,21 @@ class CreateStudyView: UIViewController{
     var locationTapGesture = UITapGestureRecognizer()
     var studyDetailPost: StudyDetailPost?
     var keyboardHeight: CGFloat = 0.0
+
     var clickedView: UIView?
+    var textViewTapFlag = false
     var currentScrollViewMinY: CGFloat = 0
     var currentScrollViewMaxY: CGFloat = 0
-    var textViewTapFlag = false
+
+
+
     var keyboardLine: UIView {
         var view = UIView()
         view.backgroundColor = .red
         view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 291 , width: UIScreen.main.bounds.width, height: 1)
         return view
     }
+
     let imageDownloadRequest = AnyModifier { request in
         var requestBody = request
         requestBody.setValue(Terminal.token, forHTTPHeaderField: "Authorization")
@@ -63,12 +69,12 @@ class CreateStudyView: UIViewController{
             setView()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter?.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     @objc func keyboardWillShow(notification:NSNotification) {
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
@@ -76,14 +82,7 @@ class CreateStudyView: UIViewController{
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
     }
-    
-    @objc func keyboardWillHide() {
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
+
     func attribute() {
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
@@ -93,6 +92,9 @@ class CreateStudyView: UIViewController{
         }
         view.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+        }
+        backgroundView.do {
+            $0.backgroundColor = .cyan
         }
         scrollView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -106,8 +108,6 @@ class CreateStudyView: UIViewController{
             $0.image = #imageLiteral(resourceName: "swift")
             mainImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(mainImageTapGesture)
-            //추후에 수정일때인지 새로작성인지 분기해서 처리 ~(철이형 얘기하는거 아님)
-            //            $0.kf.setImage(with: URL(string: (study?.image!)!), options: [.requestModifier(imageDownloadRequest)])
         }
         studyTitleTextField.do {
             $0.placeholder = "스터디 이름을 입력하세요"
@@ -118,7 +118,6 @@ class CreateStudyView: UIViewController{
             $0.layer.cornerRadius = 10
             $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
         }
-        
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.textView.text = study?.introduce ?? nil
@@ -144,7 +143,6 @@ class CreateStudyView: UIViewController{
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.detailTime.text = study?.studyTime ?? nil
         }
-        
         button.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor(named: "key")
@@ -155,13 +153,13 @@ class CreateStudyView: UIViewController{
             self.button.alpha =  state == .edit ?  1 : 0.5
         }
     }
-    
+
     func layout() {
         view.addSubview(scrollView)
         view.addSubview(keyboardLine)
-        scrollView.addSubview(backgroundView)
-        [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { backgroundView.addSubview($0)}
-        
+        //        scrollView.addSubview(backgroundView)
+        [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { scrollView.addSubview($0)}
+
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -169,13 +167,13 @@ class CreateStudyView: UIViewController{
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
-        backgroundView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        }
+        //        backgroundView.do {
+        //            $0.translatesAutoresizingMaskIntoConstraints = false
+        //            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        //            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        //            $0.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        //            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        //        }
         mainImageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
@@ -234,7 +232,7 @@ class CreateStudyView: UIViewController{
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
     }
-    
+
     func setDelegate(completion: @escaping () -> Void) {
         scrollView.delegate = self
         studyTitleTextField.delegate = self
@@ -246,7 +244,7 @@ class CreateStudyView: UIViewController{
         locationView.detailAddress.delegate = self
         timeView.detailTime.delegate = self
         picker.delegate = self
-        
+
         SNSInputView.notion.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             self!.presenter?.notionInputFinish(id: text ?? "")
@@ -275,17 +273,17 @@ class CreateStudyView: UIViewController{
             }
         }
     }
-    
+
     @objc func didImageViewClicked() {
         let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
         let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
         let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
+
         alert.addAction(library)
         alert.addAction(camera)
         alert.addAction(cancel)
-        
+
         present(alert, animated: true, completion: nil)
     }
     @objc func didLocationViewClicked() {
@@ -307,34 +305,29 @@ extension CreateStudyView: CreateStudyViewProtocols {
     func viewToTop(distance: CGFloat) {
         UIView.animate(withDuration: 0.1) {
             self.scrollView.contentOffset.y += distance
-            
         } completion: { _ in
             self.textViewTapFlag = false
             if self.textViewTapFlag == false {
                 self.clickedView?.becomeFirstResponder()
             }
-            
         }
-        
     }
-    
+
     func viewToBottom(distance: CGFloat) {
         UIView.animate(withDuration: 0.1) {
             self.scrollView.contentOffset.y += distance
-            
+
         } completion: { _ in
             self.textViewTapFlag = false
             if self.textViewTapFlag == false {
                 self.clickedView?.becomeFirstResponder()
             }
-            
         }
-        
     }
     func viewTapFlagToggle() {
         textViewTapFlag = false
     }
-    
+
     func setView() {
         attribute()
         layout()
@@ -345,7 +338,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
         })
     }
     func loading() {
-//        LoadingRainbowCat.show()
+        //        LoadingRainbowCat.show()
     }
     func getBackgroundImage() {
         print("getBackgroundImage")
@@ -354,13 +347,13 @@ extension CreateStudyView: CreateStudyViewProtocols {
         print("setVackgroundImage")
     }
     func showLoadingToNotionInput() {
-//        LoadingRainbowCat.show()
+        //        LoadingRainbowCat.show()
     }
     func showLoadingToEvernoteInput() {
-//        LoadingRainbowCat.show()
+        //        LoadingRainbowCat.show()
     }
     func showLoadingToWebInput() {
-//        LoadingRainbowCat.show()
+        //        LoadingRainbowCat.show()
     }
     func hideLoadingToNotionInput() {
         LoadingRainbowCat.hide(completion: {
@@ -412,7 +405,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
         var tempTitle = ""
         if state == .edit {
             tempTitle =  studyTitleTextField.text == study?.title ? "same" : "notSame"
-            
+
             if let currentLocation = study?.location {
                 selectedLocation = StudyDetailLocationPost(address: currentLocation.addressName,
                                                            lat: Double(currentLocation.latitude)!,
@@ -428,7 +421,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
                 if let placeName = study?.location.placeName {
                     selectedLocation?.placeName = placeName
                 }
-                
+
             }
         } else {
             tempTitle = studyTitleTextField.text ?? ""
