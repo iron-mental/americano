@@ -23,6 +23,7 @@ class EmailAuthWireFrame: EmailAuthWireFrameProtocol {
         
         
         if let view = view as? EmailAuthView {
+            view.hidesBottomBarWhenPushed = true
             return view
         } else {
             return UIViewController()

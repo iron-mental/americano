@@ -47,7 +47,18 @@ class SetWireFrame: SetWireFrameProtocol {
         let emailAuthView = EmailAuthWireFrame.createModule()
         
         if let sourceView = view as? UIViewController {
+            // 모달 overFullScreen 왜 안먹히는지 모르겠음
+            // 그냥 디폴트 present로 됨
+            sourceView.modalPresentationStyle = .overFullScreen
             sourceView.present(emailAuthView, animated: true)
+        }
+    }
+    
+    func presentUserWithdrawal(from view: SetViewProtocol) {
+        let userWithdrawalView = UserWithdrawalWireFrame.createModule()
+
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(userWithdrawalView, animated: true)
         }
     }
     

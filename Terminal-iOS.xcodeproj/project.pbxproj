@@ -39,6 +39,11 @@
 		A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */; };
 		A521DDF7252F107A00F83DB3 /* ProfileDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */; };
 		A53613B2257E6DEE0001ABCC /* SetRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */; };
+		A53A2B6E25B6BBA80002D3A0 /* UserWithdrawalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B6D25B6BBA80002D3A0 /* UserWithdrawalView.swift */; };
+		A53A2B7325B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B7225B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift */; };
+		A53A2B7D25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B7C25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift */; };
+		A53A2B8525B6BC050002D3A0 /* UserWithdrawalInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B8425B6BC050002D3A0 /* UserWithdrawalInteractor.swift */; };
+		A53A2B8A25B6BC100002D3A0 /* UserWithdrawalWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B8925B6BC100002D3A0 /* UserWithdrawalWireFrame.swift */; };
 		A53B11AF258CB6E400498A96 /* ApplyUserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53B11AE258CB6E400498A96 /* ApplyUserDetailView.swift */; };
 		A53BC19A2582604300C7EC20 /* HotKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BC1992582604300C7EC20 /* HotKeyword.swift */; };
 		A5417FCE25A77E33005B884F /* ProfileSNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5417FCD25A77E33005B884F /* ProfileSNSView.swift */; };
@@ -373,6 +378,11 @@
 		A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailPresenter.swift; sourceTree = "<group>"; };
 		A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailWireFrame.swift; sourceTree = "<group>"; };
 		A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRemoteManager.swift; sourceTree = "<group>"; };
+		A53A2B6D25B6BBA80002D3A0 /* UserWithdrawalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalView.swift; sourceTree = "<group>"; };
+		A53A2B7225B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalPresenter.swift; sourceTree = "<group>"; };
+		A53A2B7C25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalProtocols.swift; sourceTree = "<group>"; };
+		A53A2B8425B6BC050002D3A0 /* UserWithdrawalInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalInteractor.swift; sourceTree = "<group>"; };
+		A53A2B8925B6BC100002D3A0 /* UserWithdrawalWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalWireFrame.swift; sourceTree = "<group>"; };
 		A53B11AE258CB6E400498A96 /* ApplyUserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserDetailView.swift; sourceTree = "<group>"; };
 		A53BC1992582604300C7EC20 /* HotKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyword.swift; sourceTree = "<group>"; };
 		A5417FCD25A77E33005B884F /* ProfileSNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSNSView.swift; sourceTree = "<group>"; };
@@ -715,6 +725,7 @@
 		A52F00D624FD182800DE3126 /* Set */ = {
 			isa = PBXGroup;
 			children = (
+				A53A2B6C25B6BB870002D3A0 /* UserWithdrawal */,
 				A5A0325A25B458850038073A /* EmailAuth */,
 				A55505BC255962E90089B919 /* Component */,
 				A581493A25912CE100BF3C2A /* Career */,
@@ -749,6 +760,18 @@
 				CCB2AC9A250F81AC00435E5F /* CreateStudy */,
 			);
 			path = Study;
+			sourceTree = "<group>";
+		};
+		A53A2B6C25B6BB870002D3A0 /* UserWithdrawal */ = {
+			isa = PBXGroup;
+			children = (
+				A53A2B6D25B6BBA80002D3A0 /* UserWithdrawalView.swift */,
+				A53A2B7225B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift */,
+				A53A2B7C25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift */,
+				A53A2B8425B6BC050002D3A0 /* UserWithdrawalInteractor.swift */,
+				A53A2B8925B6BC100002D3A0 /* UserWithdrawalWireFrame.swift */,
+			);
+			path = UserWithdrawal;
 			sourceTree = "<group>";
 		};
 		A53B11AD258CB6CB00498A96 /* ApplyUserDetail */ = {
@@ -1710,11 +1733,13 @@
 				CCCC89B92577DBF900F93928 /* LoadingRainbowCat.swift in Sources */,
 				A5D058ED255D93910047CA9E /* StudyDetailWireFrame.swift in Sources */,
 				CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */,
+				A53A2B8A25B6BC100002D3A0 /* UserWithdrawalWireFrame.swift in Sources */,
 				A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */,
 				CCC1A2DB25B14C88004E3BE6 /* ApplyUserDetailPresenter.swift in Sources */,
 				A51BA0A82577E38900B9673F /* BaseInterceptor.swift in Sources */,
 				CCA3FF472517823E00F62627 /* StudyListProtocols.swift in Sources */,
 				CCA3FF3F2517823000F62627 /* StudyListLocalDataManager.swift in Sources */,
+				A53A2B6E25B6BBA80002D3A0 /* UserWithdrawalView.swift in Sources */,
 				CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */,
 				CCA1FF6F24FD10290026C3EA /* SetView.swift in Sources */,
 				A50583BB25A47AEE0060330E /* UIStackView+Ext.swift in Sources */,
@@ -1852,6 +1877,7 @@
 				CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */,
 				A510BA1B2583BB3E0084559C /* ApplyUserProtocols.swift in Sources */,
 				A58148FE25910EBD00BF3C2A /* SNSModifyWireFrame.swift in Sources */,
+				A53A2B7D25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift in Sources */,
 				A58148922590C6E200BF3C2A /* EmailModifyView.swift in Sources */,
 				A56264D225B568DD004CD298 /* SNSWebView.swift in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
@@ -1913,6 +1939,7 @@
 				CCAF0FE6253303770060A2F6 /* MyStudyMainWireFrame.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CCC1A2F825B14E52004E3BE6 /* ApplyUserDetailWireFrame.swift in Sources */,
+				A53A2B7325B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift in Sources */,
 				CCD51C7A256D29CC00D41771 /* MyStudyDetailPresenter.swift in Sources */,
 				A58148EF25910E9800BF3C2A /* SNSModifyView.swift in Sources */,
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,
@@ -1927,6 +1954,7 @@
 				CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */,
 				CCEEB46D25AC50F000F522C4 /* MyApplyStudyDetailInteractor.swift in Sources */,
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
+				A53A2B8525B6BC050002D3A0 /* UserWithdrawalInteractor.swift in Sources */,
 				CCC1A2E025B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift in Sources */,
 				A58F9014259F44C5007777B4 /* ProjectModifyView.swift in Sources */,
 				CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */,

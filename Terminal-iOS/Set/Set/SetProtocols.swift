@@ -23,6 +23,7 @@ protocol SetWireFrameProtocol: class {
     // PRESENT -> WIREFRAME
     func presentProfileDetailScreen(from view: SetViewProtocol)
     func presentEmailAuth(from view: SetViewProtocol)
+    func presentUserWithdrawal(from view: SetViewProtocol)
 }
 
 protocol SetPresenterProtocol: class {
@@ -35,6 +36,7 @@ protocol SetPresenterProtocol: class {
     func showProfileDetail()
     func showEmailAuth()
     func loggedOut()
+    func userWithdrawal()
 }
 
 protocol SetInteractorOutputProtocol: class {

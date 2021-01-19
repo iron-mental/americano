@@ -176,6 +176,9 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 4 && indexPath.row == 0 {
             presenter?.loggedOut()
         }
+        if indexPath.section == 4 && indexPath.row == 1 {
+            presenter?.userWithdrawal()
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -29,6 +29,10 @@ class SetPresenter: SetPresenterProtocol {
     func loggedOut() {
         view?.loggedOut()
     }
+    
+    func userWithdrawal() {
+        wireFrame?.presentUserWithdrawal(from: view!)
+    }
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {

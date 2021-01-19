@@ -20,7 +20,7 @@ class EmailAuthView: UIViewController {
     }
     
     private func attribute() {
-        emailAuth.alertMessageLabel.do {
+        self.emailAuth.alertMessageLabel.do {
             $0.textColor = UIColor.appColor(.alertTextcolor)
             $0.numberOfLines = 0
             $0.textAlignment = .center
