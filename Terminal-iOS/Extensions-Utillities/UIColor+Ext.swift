@@ -24,6 +24,8 @@ enum AssetsColor {
     case alertBackgroundColor
     case alertTopBarColor
     case alertTextcolor
+    case emailAuthRequire
+    case eamilAuthComplete
 }
 
 extension UIColor {
@@ -59,6 +61,10 @@ extension UIColor {
             return #colorLiteral(red: 0.2392156863, green: 0.2352941176, blue: 0.2352941176, alpha: 1)
         case .alertTextcolor:
             return #colorLiteral(red: 0.5098039216, green: 0.8509803922, blue: 0.4549019608, alpha: 1)
+        case .emailAuthRequire:
+            return #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        case .eamilAuthComplete:
+            return #colorLiteral(red: 0.1607843137, green: 0.462745098, blue: 0.9529411765, alpha: 0.26)
         }
     }
 }

@@ -24,10 +24,11 @@ class SetView: UIViewController {
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
     
     var userInfo: UserInfo? { didSet { self.settingList.reloadData() }}
+    var emailVerify: Bool = false
     
     var presenter: SetPresenterProtocol?
     let settingList = UITableView(frame: .zero, style: .insetGrouped)
-    let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 25))
+    let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 25))
      
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +38,14 @@ class SetView: UIViewController {
     }
     
     func attribute() {
+        if let emailVerify = userInfo?.emailVerified {
+            self.emailVerify = emailVerify
+        }
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = .appColor(.terminalBackground)
+        
         self.do {
             $0.title = "설정"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -58,11 +64,18 @@ class SetView: UIViewController {
             $0.register(UserManageCell.self, forCellReuseIdentifier: UserManageCell.userManageCellId)
         }
         accountButton.do {
-            $0.setTitle("인증", for: .normal)
-            $0.setTitleColor(.white, for: .normal)
-            $0.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            $0.layer.borderWidth = 1
+            if emailVerify {
+                $0.setTitle("인증완료", for: .normal)
+                $0.setTitleColor(.appColor(.mainColor), for: .normal)
+                $0.backgroundColor = .appColor(.eamilAuthComplete)
+            } else {
+                $0.setTitle("인증필요", for: .normal)
+                $0.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
+                $0.backgroundColor = .appColor(.emailAuthRequire)
+            }
+            
             $0.layer.cornerRadius = 10
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 14)
             $0.addTarget(self, action: #selector(emailAuth), for: .touchUpInside)
         }
     }
@@ -115,6 +128,7 @@ extension SetView: SetViewProtocol {
     
     func showUserInfo(with userInfo: UserInfo) {
         self.userInfo = userInfo
+        self.attribute()
         self.hideLoading()
     }
 }
@@ -157,28 +171,35 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
             return 1
-        } else if section == 1 {
+        case 1:
             return account.count
-        } else if section == 2 {
+        case 2:
             return noti.count
-        } else if section == 3{
+        case 3:
             return settingData.count
-        } else if section == 4 {
+        case 4:
             return userManage.count
-        } else {
+        default:
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // 프로필 상세
         if indexPath.section == 0 && indexPath.row == 0 {
             presenter?.showProfileDetail()
         }
+        
+        // 로그아웃
         if indexPath.section == 4 && indexPath.row == 0 {
             presenter?.loggedOut()
         }
+        
+        // 회원탈퇴
         if indexPath.section == 4 && indexPath.row == 1 {
             presenter?.userWithdrawal()
         }
@@ -200,13 +221,11 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 accountCell.accessoryView = accountButton
             }
-            accountCell.selectionStyle = .none
             return accountCell
         } else if indexPath.section == 2 {
             let notiCell = settingList.dequeueReusableCell(withIdentifier: NotiCell.notiCellId,
                                                            for: indexPath) as! NotiCell
             notiCell.title.text = noti[0]
-            notiCell.selectionStyle = .none
             return notiCell
         } else if indexPath.section == 3 {
             let defaultCell = settingList.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId,
@@ -216,7 +235,6 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             if settingData[indexPath.row].status == nil {
                 defaultCell.accessoryType = .disclosureIndicator
             }
-            defaultCell.selectionStyle = .none
             return defaultCell
         } else if indexPath.section == 4 {
             let userManageCell = settingList.dequeueReusableCell(withIdentifier: UserManageCell.userManageCellId,
