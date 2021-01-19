@@ -13,7 +13,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var keyboardHeight: CGFloat = 0.0
     let mainImageView = MainImageView(frame: CGRect.zero)
     let studyTitleTextField = UITextField()
-    var seletedCategory: String?
+    var selectedCategory: String?
     var studyIntroduceView = TitleWithTextView(title: "스터디 소개")
     var SNSInputView = IdInputView()
     var studyInfoView = TitleWithTextView(title: "스터디 진행")
@@ -22,6 +22,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var button = UIButton()
     var mainImageTapGesture = UITapGestureRecognizer()
     var locationTapGesture = UITapGestureRecognizer()
+    
     var studyDetailPost: StudyDetailPost?
     var backgroundView = UIView()
     let scrollView = UIScrollView()
@@ -32,6 +33,12 @@ class BaseEditableStudyDetailView: UIViewController {
     var selectedLocation: StudyDetailLocationPost?
     var textViewTapFlag = false
     
+    var testLine: UIView {
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 94, width: UIScreen.main.bounds.width, height: 2)
+        view.backgroundColor = .red
+        return view
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -40,13 +47,16 @@ class BaseEditableStudyDetailView: UIViewController {
             print("test")
         }
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        studyTitleTextField.becomeFirstResponder()
     }
     
     @objc func keyboardWillShow(notification:NSNotification) {
+        
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
+        
     }
     
     func setDelegate(completion: @escaping () -> Void) {
@@ -117,6 +127,7 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.addGestureRecognizer(mainImageTapGesture)
         }
         studyTitleTextField.do {
+            $0.tag = 1
             $0.placeholder = "스터디 이름을 입력하세요"
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.textAlignment = .center
@@ -165,6 +176,7 @@ class BaseEditableStudyDetailView: UIViewController {
     func layout() {
         view.addSubview(scrollView)
         [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { scrollView.addSubview($0)}
+        scrollView.addSubview(testLine)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -259,20 +271,25 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
+        
         var parentView = UIView()
         if type(of: textView) == SNSInputUITextField.self {
             parentView = (textView.superview?.superview)!
         } else {
-            parentView = textView.superview!
+            parentView = textView.tag == 1 ? textView : textView.superview!
         }
         
         if viewMinY >= (parentView.frame.minY) {
+            
             let distance = (parentView.frame.minY) - viewMinY
-            self.viewSetTop(distance: distance)
+            self.viewSetTop(distance: distance - 10)
         } else if viewMaxY <= (parentView.frame.maxY){
+            
             let distance = (parentView.frame.maxY) - viewMaxY
-            self.viewSetBottom(distance: distance)
-        } 
+            self.viewSetBottom(distance: distance + 10)
+        } else {
+            print("움지기잊마 ")
+        }
     }
     
     func viewSetTop(distance: CGFloat) {
@@ -304,6 +321,7 @@ extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavi
 extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         clickedView = textField
+        
         self.editableViewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
@@ -322,6 +340,7 @@ extension BaseEditableStudyDetailView: UIScrollViewDelegate {
             textViewTapFlag = false
         }
         currentScrollViewMinY = scrollView.contentOffset.y
+        print(currentScrollViewMinY)
         currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
     }
 }
