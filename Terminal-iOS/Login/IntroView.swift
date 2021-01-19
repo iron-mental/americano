@@ -65,7 +65,10 @@ class IntroView: UIViewController {
             break
         case .pwdInput:
             self.guideLabel.text = self.beginState == .join ?  "로그인을 위해 계정의 비밀번호를\n입력해 주세요." : "사용하실 비밀번호를\n설정해 주세요"
-            self.inputTextfield.placeholder = "비밀번호"
+            self.inputTextfield.do {
+                $0.placeholder = "비밀번호"
+                $0.isSecureTextEntry = true
+            }
             self.introState = .pwdInput
             self.leftButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
             self.beginState == .join ? self.rightbutton.setTitle("완료", for: .normal) : self.rightbutton.setTitle("다음", for: .normal)
@@ -104,6 +107,7 @@ class IntroView: UIViewController {
         }
         inputTextfield.do {
             $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.delegate = self
         }
         leftButton.do {
             $0.addTarget(self, action: #selector(didClickedBackButon), for: .touchUpInside)
@@ -342,17 +346,11 @@ extension IntroView: IntroViewProtocol {
                             } completion: { _ in
                                 print("Invalid Response")
                             }
-
                         }
-
                     }
-
                 }
-
             }
-
         }
-
     }
 }
 

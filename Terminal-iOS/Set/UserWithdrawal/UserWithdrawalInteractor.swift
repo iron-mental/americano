@@ -20,6 +20,7 @@ class UserWithdrawalInteractor: UserWithdrawalInteractorInputProtocol {
         ]
         
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        
         TerminalNetworkManager
             .shared
             .session
