@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NewCreateStudyView: BaseEditableStudyDetailView {
+class CreateStudyView: BaseEditableStudyDetailView {
     var presenter: CreateStudyPresenterProtocols?
     var state: WriteStudyViewState?
     var study: StudyDetail?
@@ -44,7 +44,7 @@ class NewCreateStudyView: BaseEditableStudyDetailView {
     }
 }
 
-extension NewCreateStudyView: CreateStudyViewProtocols {
+extension CreateStudyView: CreateStudyViewProtocols {
     func didClickButton() {
         studyDetailPost = StudyDetailPost(category: selectedCategory!,
                                           title: studyTitleTextField.text ?? "",

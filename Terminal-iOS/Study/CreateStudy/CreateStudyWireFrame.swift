@@ -12,8 +12,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
     
     static func createStudyViewModul(category: String, studyDetail: StudyDetail?, state: WriteStudyViewState, parentView: UIViewController?) -> UIViewController {
         
-//        let view = CreateStudyView()
-        let view = NewCreateStudyView()
+        let view = CreateStudyView()
         let presenter = CreateStudyPresenter()
         let interactor = CreateStudyInteractor()
         let remoteDataManager = CreateStudyRemoteManager()
