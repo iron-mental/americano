@@ -63,7 +63,7 @@ class BaseEditableStudyDetailView: UIViewController {
         
         SNSInputView.notion.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-//            self!.presenter?.notionInputFinish(id: text ?? "")
+            //            self!.presenter?.notionInputFinish(id: text ?? "")
             if self!.SNSInputView.notion.textField.text == "" {
                 self!.SNSInputView.notion.textField.layer.borderColor = .none
             } else {
@@ -72,7 +72,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         SNSInputView.evernote.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-//            self!.presenter?.everNoteInputFinish(url: text ?? "")
+            //            self!.presenter?.everNoteInputFinish(url: text ?? "")
             if self!.SNSInputView.evernote.textField.text == "" {
                 self!.SNSInputView.evernote.textField.layer.borderColor = .none
             } else {
@@ -81,7 +81,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         SNSInputView.web.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-//            self!.presenter?.URLInputFinish(url: text ?? "")
+            //            self!.presenter?.URLInputFinish(url: text ?? "")
             if self!.SNSInputView.web.textField.text == "" {
                 self!.SNSInputView.web.textField.layer.borderColor = .none
             } else {
@@ -91,12 +91,12 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func attribute() {
-//        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-//        let imageDownloadRequest = AnyModifier { request in
-//            var requestBody = request
-//            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-//            return requestBody
-//        }
+        //        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
+        //        let imageDownloadRequest = AnyModifier { request in
+        //            var requestBody = request
+        //            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
+        //            return requestBody
+        //        }
         view.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
         }
@@ -121,44 +121,44 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.textAlignment = .center
             $0.textColor = .white
-//            $0.text = study?.title ?? nil
+            //            $0.text = study?.title ?? nil
             $0.layer.cornerRadius = 10
             $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
         }
         
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-//            $0.textView.text = study?.introduce ?? nil
+            //            $0.textView.text = study?.introduce ?? nil
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-//            $0.notion.textField.text = study?.snsNotion ?? nil
-//            $0.web.textField.text = study?.snsNotion ?? nil
-//            $0.evernote.textField.text = study?.snsNotion ?? nil
+            //            $0.notion.textField.text = study?.snsNotion ?? nil
+            //            $0.web.textField.text = study?.snsNotion ?? nil
+            //            $0.evernote.textField.text = study?.snsNotion ?? nil
         }
         studyInfoView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-//            $0.textView.text = study?.introduce ?? nil
+            //            $0.textView.text = study?.introduce ?? nil
         }
         locationView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
-//            $0.address.text = study?.location.addressName != nil ? ". \(study?.location.addressName)" : "  주소입력"
-//            $0.detailAddress.text =  study?.location.locationDetail ?? nil
+            //            $0.address.text = study?.location.addressName != nil ? ". \(study?.location.addressName)" : "  주소입력"
+            //            $0.detailAddress.text =  study?.location.locationDetail ?? nil
         }
         timeView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-//            $0.detailTime.text = study?.studyTime ?? nil
+            //            $0.detailTime.text = study?.studyTime ?? nil
         }
         button.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor(named: "key")
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
-//            $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
-//            $0.isUserInteractionEnabled = state == .edit ? true : false
-//            self.button.alpha =  state == .edit ?  1 : 0.5
+            //            $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
+            //            $0.isUserInteractionEnabled = state == .edit ? true : false
+            //            self.button.alpha =  state == .edit ?  1 : 0.5
         }
     }
     
@@ -246,16 +246,56 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     @objc func didLocationViewClicked() {
         //SelectLocationView를 띄우는 게 맞습니다.
-//        presenter?.clickLocationView(currentView: self)
+        //        presenter?.clickLocationView(currentView: self)
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary
-//        present(picker, animated: true, completion: nil)
+        //        present(picker, animated: true, completion: nil)
     }
     func openCamera() {
         //시뮬에서 앱죽는거 에러처리 해야함
         picker.sourceType = .camera
-//        present(picker, animated: true, completion: nil)
+        //        present(picker, animated: true, completion: nil)
+    }
+    
+    func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
+        var parentView = UIView()
+        if type(of: textView) == SNSInputUITextField.self {
+            parentView = (textView.superview?.superview)!
+        } else {
+            parentView = textView.superview!
+        }
+        if viewMinY >= (parentView.frame.minY) {
+            let distance = (parentView.frame.minY) - viewMinY
+            self.viewSetTop(distance: distance)
+        } else if viewMaxY <= (parentView.frame.maxY){
+            let distance = (parentView.frame.maxY) - viewMaxY
+            self.viewSetBottom(distance: distance)
+        } else {
+            textViewTapFlag.toggle()
+        }
+    }
+    
+    func viewSetTop(distance: CGFloat) {
+        UIView.animate(withDuration: 0.1) {
+            self.scrollView.contentOffset.y += distance
+        } completion: { _ in
+            self.textViewTapFlag = false
+            if self.textViewTapFlag == false {
+                self.clickedView?.becomeFirstResponder()
+            }
+        }
+    }
+    func viewSetBottom(distance: CGFloat) {
+        UIView.animate(withDuration: 0.1) {
+            self.scrollView.contentOffset.y += distance
+            
+        } completion: { _ in
+            self.textViewTapFlag = false
+            if self.textViewTapFlag == false {
+                self.clickedView?.becomeFirstResponder()
+            }
+        }
     }
 }
 extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
@@ -271,7 +311,7 @@ extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textViewTapFlag = true
         clickedView = textField
-//        presenter?.viewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
 
@@ -279,7 +319,7 @@ extension BaseEditableStudyDetailView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textViewTapFlag = true
         clickedView = textView
-//        presenter?.viewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
 
