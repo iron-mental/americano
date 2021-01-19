@@ -62,6 +62,7 @@ class UserWithdrawalView: UIViewController {
             $0.backgroundColor = .red
             $0.layer.cornerRadius = 10
             $0.setTitle("삭제", for: .normal)
+            $0.addTarget(self, action: #selector(remove), for: .touchUpInside)
         }
         
         self.emailStack.do {
@@ -101,7 +102,8 @@ class UserWithdrawalView: UIViewController {
         
         self.stackView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 70).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
+                                    constant: 70).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 180).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
@@ -113,7 +115,17 @@ class UserWithdrawalView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
         }
+    }
+    
+    @objc func refuse() {
         
+    }
+    
+    @objc func remove() {
+        let emailText = self.email.text!
+        let passwordText = self.password.text!
+        
+        presenter?.userWithdrawal(email: emailText, password: passwordText)
     }
 }
 

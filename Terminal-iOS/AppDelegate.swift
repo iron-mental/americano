@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let home = HomeView()
         let main = ViewController()
         
-        // 리프레쉬 토큰이 없으면 -> 로그인
+        // 리프레쉬 토큰이 없으면 -> 홈화면
         if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
             KeychainWrapper.standard.set("temp", forKey: "accessToken")
             let howView = UINavigationController(rootViewController: home)

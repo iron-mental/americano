@@ -17,12 +17,13 @@ protocol UserWithdrawalPresenterProtocol: class {
     var interactor: UserWithdrawalInteractorInputProtocol? { get set }
     var wireframe: UserWithdrawalWireFrameProtocol? { get set }
     
+    func userWithdrawal(email: String, password: String)
 }
-
 
 protocol UserWithdrawalInteractorInputProtocol: class {
     var presenter: UserWithdrawalInteractorOutputProtocol? { get set }
     
+    func userWithdrawal(email: String, password: String)
 }
 
 protocol UserWithdrawalInteractorOutputProtocol: class {

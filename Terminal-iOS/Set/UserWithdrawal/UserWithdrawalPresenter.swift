@@ -13,7 +13,9 @@ class UserWithdrawalPresenter: UserWithdrawalPresenterProtocol {
     var interactor: UserWithdrawalInteractorInputProtocol?
     var wireframe: UserWithdrawalWireFrameProtocol?
     
-    
+    func userWithdrawal(email: String, password: String) {
+        interactor?.userWithdrawal(email: email, password: password)
+    }
 }
 
 extension UserWithdrawalPresenter: UserWithdrawalInteractorOutputProtocol {

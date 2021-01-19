@@ -49,7 +49,7 @@ class SetWireFrame: SetWireFrameProtocol {
         if let sourceView = view as? UIViewController {
             // 모달 overFullScreen 왜 안먹히는지 모르겠음
             // 그냥 디폴트 present로 됨
-            sourceView.modalPresentationStyle = .overFullScreen
+            sourceView.modalPresentationStyle = .fullScreen
             sourceView.present(emailAuthView, animated: true)
         }
     }
