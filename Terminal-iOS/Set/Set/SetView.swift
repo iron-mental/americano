@@ -101,11 +101,14 @@ extension SetView: SetViewProtocol {
     
     func loggedOut() {
         let view = HomeView()
-        view.hidesBottomBarWhenPushed = true
+        let home = UINavigationController(rootViewController: view)
         
         /// 로그아웃과 동시에  토큰 삭제
         KeychainWrapper.standard.remove(forKey: "refreshToken")
-        navigationController?.pushViewController(view, animated: false)
+        
+        // RootViewController replace
+        guard let window = UIApplication.shared.windows.first else { return }
+        window.replaceRootViewController(home, animated: true, completion: nil)
     }
     
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신

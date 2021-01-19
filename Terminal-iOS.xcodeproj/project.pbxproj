@@ -44,6 +44,7 @@
 		A53A2B7D25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B7C25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift */; };
 		A53A2B8525B6BC050002D3A0 /* UserWithdrawalInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B8425B6BC050002D3A0 /* UserWithdrawalInteractor.swift */; };
 		A53A2B8A25B6BC100002D3A0 /* UserWithdrawalWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B8925B6BC100002D3A0 /* UserWithdrawalWireFrame.swift */; };
+		A53A2B8F25B6FEAA0002D3A0 /* UIWindow+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B8E25B6FEAA0002D3A0 /* UIWindow+Ext.swift */; };
 		A53B11AF258CB6E400498A96 /* ApplyUserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53B11AE258CB6E400498A96 /* ApplyUserDetailView.swift */; };
 		A53BC19A2582604300C7EC20 /* HotKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53BC1992582604300C7EC20 /* HotKeyword.swift */; };
 		A5417FCE25A77E33005B884F /* ProfileSNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5417FCD25A77E33005B884F /* ProfileSNSView.swift */; };
@@ -383,6 +384,7 @@
 		A53A2B7C25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalProtocols.swift; sourceTree = "<group>"; };
 		A53A2B8425B6BC050002D3A0 /* UserWithdrawalInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalInteractor.swift; sourceTree = "<group>"; };
 		A53A2B8925B6BC100002D3A0 /* UserWithdrawalWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalWireFrame.swift; sourceTree = "<group>"; };
+		A53A2B8E25B6FEAA0002D3A0 /* UIWindow+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Ext.swift"; sourceTree = "<group>"; };
 		A53B11AE258CB6E400498A96 /* ApplyUserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserDetailView.swift; sourceTree = "<group>"; };
 		A53BC1992582604300C7EC20 /* HotKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeyword.swift; sourceTree = "<group>"; };
 		A5417FCD25A77E33005B884F /* ProfileSNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSNSView.swift; sourceTree = "<group>"; };
@@ -939,6 +941,7 @@
 				A50583BA25A47AEE0060330E /* UIStackView+Ext.swift */,
 				A5D5852625A9E55000C36452 /* Array+Ext.swift */,
 				A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */,
+				A53A2B8E25B6FEAA0002D3A0 /* UIWindow+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -1754,6 +1757,7 @@
 				CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */,
+				A53A2B8F25B6FEAA0002D3A0 /* UIWindow+Ext.swift in Sources */,
 				CCF632DB25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift in Sources */,
 				CCA3FF4A2517823E00F62627 /* StudyListWireFrame.swift in Sources */,
 				A581494B25912DF000BF3C2A /* CareerModifyWireFrame.swift in Sources */,
