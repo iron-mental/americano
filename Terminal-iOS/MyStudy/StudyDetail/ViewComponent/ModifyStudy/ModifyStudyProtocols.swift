@@ -10,29 +10,44 @@ import UIKit
 
 protocol ModifyStudyViewProtocol {
     var presenter: ModifyStudyPresenterProtocol? { get set }
+    
+    //PRESENTER -> VIEW
+    func showResult(message: String)
+    func showError()
 }
 
 protocol ModifyStudyPresenterProtocol {
     var view: ModifyStudyViewProtocol? { get set }
     var wireFrame: ModifyStudyWireFrameProtocol? { get set }
     var interactor: ModifyStudyInteractorInputProtocol? { get set }
+    
+    //VIEW -> PRESENTER
+    func completButtonDidTap(studyID: Int, study: StudyDetailPost)
 }
 
 protocol ModifyStudyInteractorInputProtocol {
     var presenter: ModifyStudyInteractorOutputProtocol? { get set }
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol? { get set }
+    
+    //PRESENTER -> INTERACTOR
+    func putStudyInfo(studyID: Int, study: StudyDetailPost)
 }
 
 protocol ModifyStudyInteractorOutputProtocol {
-    
+    //INTERACTOR -> PRESENTER
+    func putStudyInfoResult(result: Bool, message: String)
 }
 
 protocol ModifyStudyRemoteDataManagerInputProtocol {
     var interactor: ModifyStudyRemoteDataManagerOutputProtocol? { get set }
+    
+    //INTERACTOR -> REMOTEDATAMANAGER
+    func putStudyInfo(studyID: Int, study: StudyDetailPost)
 }
 
 protocol ModifyStudyRemoteDataManagerOutputProtocol {
-    
+    //REMOTEDATAMANAGER -> INTERACTOR
+    func putStudyInfoResult(result: Bool, message: String)
 }
 
 protocol ModifyStudyWireFrameProtocol {
