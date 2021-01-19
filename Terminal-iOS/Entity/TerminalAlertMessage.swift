@@ -32,7 +32,7 @@ class TerminalAlertMessage: NSObject {
         let backgroundView = UIView()
         let alertView = type.view
         
-        if let window = UIApplication.shared.keyWindow {
+        if let window = UIApplication.shared.windows.first {
             window.addSubview(backgroundView)
             window.addSubview(alertView)
             window.backgroundColor = UIColor.appColor(.terminalBackground)
