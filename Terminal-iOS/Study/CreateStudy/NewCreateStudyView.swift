@@ -13,6 +13,7 @@ class NewCreateStudyView: BaseEditableStudyDetailView {
     var state: WriteStudyViewState?
     var study: StudyDetail?
     var parentView: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -27,6 +28,7 @@ class NewCreateStudyView: BaseEditableStudyDetailView {
     override func didLocationViewClicked() {
         presenter?.clickLocationView(currentView: self)
     }
+    
     @objc func completeButtonDidTap() {
         studyDetailPost = StudyDetailPost(category: selectedCategory!,
                                           title: studyTitleTextField.text ?? "",

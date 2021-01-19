@@ -34,24 +34,6 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         ]
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
-        
-//        category: 분류 (require)
-//        title: 길이 2~10 (require)
-//        introduce: 길이 ~200 (require)
-//        progress: 길이 ~100 (require)
-//        study_time: 길이 ~100 (require)
-//        latitude: 숫자 (require)
-//        longitude: 숫자 (require)
-//        sido: 길이 ~20 (require)
-//        sigungu: 길이 ~20 (require)
-//        address_name: 길이 ~100 (require)
-//        locaion_detail: 길이 ~30
-////        place_name: 길이 ~30
-////        sns_notion: 길이 ~170
-////        sns_evernote: 길이 ~170
-////        sns_web: 길이 ~170
-//        image: jpg, jpeg, png 외 불가
-
         TerminalNetworkManager
             .shared
             .session
