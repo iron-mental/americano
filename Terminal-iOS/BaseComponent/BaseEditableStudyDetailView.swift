@@ -257,8 +257,7 @@ class BaseEditableStudyDetailView: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     @objc func didLocationViewClicked() {
-        //SelectLocationView를 띄우는 게 맞습니다.
-        //        presenter?.clickLocationView(currentView: self)
+//        
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary

@@ -10,7 +10,7 @@ import UIKit
 
 protocol ModifyStudyViewProtocol {
     var presenter: ModifyStudyPresenterProtocol? { get set }
-    
+    var study: StudyDetail? { get set }
     //PRESENTER -> VIEW
     func showResult(message: String)
     func showError()
@@ -23,11 +23,14 @@ protocol ModifyStudyPresenterProtocol {
     
     //VIEW -> PRESENTER
     func completButtonDidTap(studyID: Int, study: StudyDetailPost)
+    func locationViewDidtap()
+    func clickLocationView(currentView: UIViewController)
 }
 
 protocol ModifyStudyInteractorInputProtocol {
     var presenter: ModifyStudyInteractorOutputProtocol? { get set }
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol? { get set }
+    var currentStudy: StudyDetail? { get set }
     
     //PRESENTER -> INTERACTOR
     func putStudyInfo(studyID: Int, study: StudyDetailPost)
@@ -51,7 +54,10 @@ protocol ModifyStudyRemoteDataManagerOutputProtocol {
 }
 
 protocol ModifyStudyWireFrameProtocol {
+    static func createModifyStudyModule(study: StudyDetail, parentView: UIViewController) -> UIViewController
     
+    //PRESENTER -> WIREFRAME
+    func goToSelectLocation(view: UIViewController)
 }
 
 

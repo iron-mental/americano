@@ -70,9 +70,7 @@ class StudyCategoryView: UIViewController {
         presenter?.didClickedCreateButton()
     }
     @objc func searchStudy() {
-//        presenter?.goToSearchStudy()
-        var test = BaseEditableStudyDetailView()
-        navigationController?.pushViewController(test, animated: true)
+        presenter?.goToSearchStudy()
     }
 }
 
