@@ -18,21 +18,21 @@ class StudyCategoryInteractor: StudyCategoryInteractorInputProtocol {
     func retrieveStudyCategory() {
 
         let categoryList = [
-            Category(image: UIImage(named: "ai")!,name: "set"),
-            Category(image: UIImage(named: "android")!,name: "set"),
-            Category(image: UIImage(named: "backend")!,name: "set"),
-            Category(image: UIImage(named: "blockchain")!,name: "set"),
-            Category(image: UIImage(named: "dataengineer")!,name: "set"),
-            Category(image: UIImage(named: "desktop")!,name: "set"),
-            Category(image: UIImage(named: "devops")!,name: "set"),
-            Category(image: UIImage(named: "frontend")!,name: "set"),
-            Category(image: UIImage(named: "game")!,name: "set"),
-            Category(image: UIImage(named: "ios")!,name: "set"),
-            Category(image: UIImage(named: "iot")!,name: "set"),
-            Category(image: UIImage(named: "secure")!,name: "set"),
-            Category(image: UIImage(named: "network")!,name: "set"),
-            Category(image: UIImage(named: "language")!,name: "set"),
-            Category(image: UIImage(named: "embeded")!,name: "set")
+            Category(image: UIImage(named: "ai")!,name: "ios"),
+            Category(image: UIImage(named: "android")!,name: "ios"),
+            Category(image: UIImage(named: "backend")!,name: "ios"),
+            Category(image: UIImage(named: "blockchain")!,name: "ios"),
+            Category(image: UIImage(named: "dataengineer")!,name: "ios"),
+            Category(image: UIImage(named: "desktop")!,name: "ios"),
+            Category(image: UIImage(named: "devops")!,name: "ios"),
+            Category(image: UIImage(named: "frontend")!,name: "ios"),
+            Category(image: UIImage(named: "game")!,name: "ios"),
+            Category(image: UIImage(named: "ios")!,name: "ios"),
+            Category(image: UIImage(named: "iot")!,name: "ios"),
+            Category(image: UIImage(named: "secure")!,name: "ios"),
+            Category(image: UIImage(named: "network")!,name: "ios"),
+            Category(image: UIImage(named: "language")!,name: "ios"),
+            Category(image: UIImage(named: "embeded")!,name: "ios")
         ]
         presenter?.didRetrieveCategories(categoryList)
     }
