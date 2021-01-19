@@ -167,9 +167,6 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.backgroundColor = UIColor(named: "key")
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
-            //            $0.addTarget(self, action: #selector(didClickButton), for: .touchUpInside)
-            //            $0.isUserInteractionEnabled = state == .edit ? true : false
-            //            self.button.alpha =  state == .edit ?  1 : 0.5
         }
     }
     
@@ -257,7 +254,7 @@ class BaseEditableStudyDetailView: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     @objc func didLocationViewClicked() {
-//        
+//
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary

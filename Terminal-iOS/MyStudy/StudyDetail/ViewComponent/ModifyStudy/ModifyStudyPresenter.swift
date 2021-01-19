@@ -9,9 +9,6 @@
 import UIKit
 
 class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
-    func locationViewDidtap() {
-//        <#code#>
-    }
     
     func clickLocationView(currentView: UIViewController) {
         wireFrame?.goToSelectLocation(view: currentView)
@@ -22,7 +19,7 @@ class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
     var wireFrame: ModifyStudyWireFrameProtocol?
     
     func completButtonDidTap(studyID: Int, study: StudyDetailPost) {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
         interactor?.putStudyInfo(studyID: studyID, study: study)
     }
 }

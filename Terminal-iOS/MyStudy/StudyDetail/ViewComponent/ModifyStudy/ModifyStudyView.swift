@@ -17,12 +17,27 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     }
     override func attribute() {
         super.attribute()
-//        locationView
+        button.do {
+            $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
+        }
     }
     override func didLocationViewClicked() {
         presenter?.clickLocationView(currentView: self)
     }
     
+    @objc func buttonDidTap() {
+        var studyDetailPost = StudyDetailPost(category: study!.category,
+                                              title: studyTitleTextField.text ?? "",
+                                              introduce: studyIntroduceView.textView.text ?? "",
+                                              progress: studyInfoView.textView.text ?? "",
+                                              studyTime: timeView.detailTime.text ?? "",
+                                              snsWeb: SNSInputView.web.textField.text,
+                                              snsNotion: SNSInputView.notion.textField.text,
+                                              snsEvernote: SNSInputView.evernote.textField.text,
+                                              image: mainImageView.image,
+                                              location: selectedLocation!)
+        presenter?.completButtonDidTap(studyID: study!.id, study: studyDetailPost)
+    }
 }
 
 extension ModifyStudyView: ModifyStudyViewProtocol {

@@ -23,7 +23,6 @@ protocol ModifyStudyPresenterProtocol {
     
     //VIEW -> PRESENTER
     func completButtonDidTap(studyID: Int, study: StudyDetailPost)
-    func locationViewDidtap()
     func clickLocationView(currentView: UIViewController)
 }
 

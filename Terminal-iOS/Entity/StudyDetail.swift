@@ -6,6 +6,7 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 import Foundation
+
 // MARK: 스터디 상세
 struct StudyDetail: Codable {
     let participate: [Participate]
