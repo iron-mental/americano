@@ -10,16 +10,8 @@ import UIKit
 import Then
 
 class StudyCategoryView: UIViewController {
-    
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
-    lazy var tempButton = UIBarButtonItem(image: #imageLiteral(resourceName: "marker"), style: .plain, target: self, action: #selector(tempForStudyDetail))
-    
-    @objc func tempForStudyDetail() {
-         let view = StudyDetailView()
-        view.modalPresentationStyle = .fullScreen
-        present(view, animated: true)
-    }
     
     let categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,7 +43,7 @@ class StudyCategoryView: UIViewController {
         }
         categoryCollectionView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
+            $0.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.categoryCellID)
             $0.delegate = self
             $0.dataSource = self
             $0.showsVerticalScrollIndicator = false
@@ -62,8 +54,10 @@ class StudyCategoryView: UIViewController {
         view.addSubview(categoryCollectionView)
         categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
         categoryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        categoryCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
-        categoryCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
+        categoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                        constant: Terminal.convertWidth(value: 20)).isActive = true
+        categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                         constant: -(Terminal.convertWidth(value: 20))).isActive = true
         categoryCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     @objc func createStudy() {
@@ -93,7 +87,8 @@ extension StudyCategoryView: StudyCategoryViewProtocol {
     }
     func categoryDownAnimate() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
-            self.categoryCollectionView.transform = self.categoryCollectionView.transform.translatedBy(x: 0, y: 60)
+            self.categoryCollectionView.transform
+                = self.categoryCollectionView.transform.translatedBy(x: 0, y: 60)
         },completion: { _ in
             self.presenter?.goToCreateStudy(category: self.categoryList)
         })
@@ -107,16 +102,16 @@ extension StudyCategoryView: StudyCategoryViewProtocol {
 extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: UIScreen.main.bounds.width * 0.4,
-                      height: UIScreen.main.bounds.width * 0.27)
+        return CGSize(width: Terminal.convertWidth(value: 150),
+                      height: Terminal.convertWidth(value: 100))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.07
+        return Terminal.convertWidth(value: 26)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.height * 0.035
+        return Terminal.convertWidth(value: 13)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -124,7 +119,7 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
+        let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.categoryCellID, for: indexPath) as! CategoryCell
         let category = categoryList[indexPath.row]
         cell.imageView.image = category.image
         return cell

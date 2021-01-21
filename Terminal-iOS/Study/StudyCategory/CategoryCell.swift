@@ -10,7 +10,7 @@ import UIKit
 import Then
 
 class CategoryCell: UICollectionViewCell {
-    
+    static let categoryCellID = "categoryCellID"
     let imageView = UIImageView()
     
     override func layoutSubviews() {
