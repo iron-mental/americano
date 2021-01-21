@@ -227,6 +227,7 @@
 		CCA25ACE25B6D24B00280C80 /* ModifyStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25ACD25B6D24B00280C80 /* ModifyStudyInteractor.swift */; };
 		CCA25AD325B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AD225B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift */; };
 		CCA25AD825B6D3AA00280C80 /* ModifyStudyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AD725B6D3AA00280C80 /* ModifyStudyWireFrame.swift */; };
+		CCA25ADE25B9B01800280C80 /* DelegateHostProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25ADD25B9B01800280C80 /* DelegateHostProtocols.swift */; };
 		CCA3FF37251781EB00F62627 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF35251781EB00F62627 /* Study.swift */; };
 		CCA3FF38251781EB00F62627 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF36251781EB00F62627 /* Category.swift */; };
 		CCA3FF3F2517823000F62627 /* StudyListLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF3D2517823000F62627 /* StudyListLocalDataManager.swift */; };
@@ -572,6 +573,7 @@
 		CCA25ACD25B6D24B00280C80 /* ModifyStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyInteractor.swift; sourceTree = "<group>"; };
 		CCA25AD225B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCA25AD725B6D3AA00280C80 /* ModifyStudyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyWireFrame.swift; sourceTree = "<group>"; };
+		CCA25ADD25B9B01800280C80 /* DelegateHostProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostProtocols.swift; sourceTree = "<group>"; };
 		CCA3FF35251781EB00F62627 /* Study.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		CCA3FF36251781EB00F62627 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		CCA3FF3D2517823000F62627 /* StudyListLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyListLocalDataManager.swift; sourceTree = "<group>"; };
@@ -856,6 +858,7 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				CCA25ADC25B9AFD900280C80 /* DelegateHost */,
 				CCA25AB725B6CE0900280C80 /* ModifyStudy */,
 				CCEEB45925AC4C9600F522C4 /* MyApplyStudyDetail */,
 				A53B11AD258CB6CB00498A96 /* ApplyUserDetail */,
@@ -1295,6 +1298,14 @@
 				CCA25AB825B6CE3F00280C80 /* ModifyStudyProtocols.swift */,
 			);
 			path = ModifyStudy;
+			sourceTree = "<group>";
+		};
+		CCA25ADC25B9AFD900280C80 /* DelegateHost */ = {
+			isa = PBXGroup;
+			children = (
+				CCA25ADD25B9B01800280C80 /* DelegateHostProtocols.swift */,
+			);
+			path = DelegateHost;
 			sourceTree = "<group>";
 		};
 		CCA3FF34251781E200F62627 /* Entity */ = {
@@ -1967,6 +1978,7 @@
 				CCA25AB925B6CE3F00280C80 /* ModifyStudyProtocols.swift in Sources */,
 				A5814926259129D200BF3C2A /* LocationModifyWireFrame.swift in Sources */,
 				CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */,
+				CCA25ADE25B9B01800280C80 /* DelegateHostProtocols.swift in Sources */,
 				CCEEB46D25AC50F000F522C4 /* MyApplyStudyDetailInteractor.swift in Sources */,
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
 				A53A2B8525B6BC050002D3A0 /* UserWithdrawalInteractor.swift in Sources */,
