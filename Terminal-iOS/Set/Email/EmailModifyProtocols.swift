@@ -12,6 +12,7 @@ protocol EmailModifyViewProtocol: class {
     var presenter: EmailModifyPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func modifyResultHandle(result: Bool, message: String)
 }
 
 protocol EmailModifyWireFrameProtocol: class {
@@ -26,16 +27,18 @@ protocol EmailModifyPresenterProtocol: class {
     var wireFrame: EmailModifyWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
+    func completeModify(email: String) 
 }
 
 protocol EmailModifyInteractorInputProtocol: class {
     var presenter: EmailModifyInteractorOutputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-   
+    func completeModify(email: String)
 }
 
 protocol EmailModifyInteractorOutputProtocol: class {
-    // INTERACTOR -> PRESENTER
     
+    // INTERACTOR -> PRESENTER
+    func didCompleteModify(result: Bool, message: String)
 }

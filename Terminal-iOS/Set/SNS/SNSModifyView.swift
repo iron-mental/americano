@@ -80,7 +80,7 @@ extension SNSModifyView: SNSModifyViewProtocol {
                 parent?.presenter?.viewDidLoad()
             })
         } else {
-            print("message",message)
+            self.showToast(controller: self, message: message, seconds: 1)
         }
     }
 }
