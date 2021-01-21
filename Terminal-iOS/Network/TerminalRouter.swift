@@ -51,6 +51,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studySearch            (keyword: String)
     case hotKeyword
     case studyLeave             (studyID: String)
+    case studyCategory
     
     // 신청부분
     case applyStudy             (studyID: String, message: Parameters)
@@ -141,6 +142,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .studyLeave:
             return .post
+        case .studyCategory:
+            return .get
             
         // 신청
         case .applyStudy:
@@ -171,7 +174,7 @@ enum TerminalRouter: URLRequestConvertible {
             return .put
         case .noticeDelete:
             return .delete
-    }
+        }
 }
     // MARK: URL EndPoint init
     
@@ -235,6 +238,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/ranking"
         case let .studyLeave(studyID):
             return "study/\(studyID)/leave"
+        case .studyCategory:
+            return "study/category"
             
         // 신청
         case let .applyStudy(studyID, _):
@@ -303,7 +308,9 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 스터디
-        case .studyDetail, .studyDelete, .myStudyList, .hotKeyword:
+        case .studyDetail, .studyDelete, .studyLeave, .studyCategory, .studyUpdate:
+            return nil
+        case .hotKeyword, .myStudyList:
             return nil
         case let .studyListForKey(value):
             return ["values": value]
@@ -311,12 +318,8 @@ enum TerminalRouter: URLRequestConvertible {
             return sort
         case let .studyCreate(study):
             return study
-        case .studyUpdate:
-            return nil
         case let .studySearch(keyword):
             return ["word": keyword]
-        case .studyLeave:
-            return nil
             
         // 신청
         case let .applyStudy(_, message):
