@@ -10,7 +10,7 @@ import Foundation
 
 class DelegateHostInteractor: DelegateHostInteractorInputProtocol {
     var presenter: DelegateHostInteractorOutputProtocol?
-    var remoteDataManager: DelegateHostPresenterProtocol?
+    var remoteDataManager: DelegateHostRemoteDataManagerInputProtocol?
     var studyID: Int?
     
     func putDelegateHostAPI(newLeader: Int) {

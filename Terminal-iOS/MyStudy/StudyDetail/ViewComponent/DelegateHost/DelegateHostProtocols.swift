@@ -28,7 +28,7 @@ protocol DelegateHostPresenterProtocol {
 
 protocol DelegateHostInteractorInputProtocol {
     var presenter: DelegateHostInteractorOutputProtocol? { get set }
-    var remoteDataManager: DelegateHostPresenterProtocol? { get set }
+    var remoteDataManager: DelegateHostRemoteDataManagerInputProtocol? { get set }
     var studyID: Int? { get set }
     
     //PRESENTER -> INTERACTOR
