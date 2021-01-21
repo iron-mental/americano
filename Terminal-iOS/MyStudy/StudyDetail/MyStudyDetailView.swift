@@ -21,9 +21,9 @@ class MyStudyDetailView: UIViewController {
                        ChatWireFrame.createChatModule()]
         }
     }
+    var userList: [Participate] = []
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
-    
     var VCArr: [UIViewController] = []
     var authority: StudyDetailViewState = .member
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
@@ -230,6 +230,7 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
     func setting() {
         authority = (VCArr[1] as! StudyDetailViewProtocol).state
+        userList = (VCArr[1] as! StudyDetailView).userData
         attribute()
         layout()
     }

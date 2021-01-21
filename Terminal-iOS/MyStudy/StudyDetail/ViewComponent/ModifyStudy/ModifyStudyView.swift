@@ -12,15 +12,18 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     var presenter: ModifyStudyPresenterProtocol?
     var study: StudyDetail?
     var parentView: UIViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
     override func attribute() {
         super.attribute()
         button.do {
             $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
         }
     }
+    
     override func didLocationViewClicked() {
         presenter?.clickLocationView(currentView: self)
     }
