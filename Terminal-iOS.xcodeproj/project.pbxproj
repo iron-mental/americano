@@ -228,6 +228,11 @@
 		CCA25AD325B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AD225B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift */; };
 		CCA25AD825B6D3AA00280C80 /* ModifyStudyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AD725B6D3AA00280C80 /* ModifyStudyWireFrame.swift */; };
 		CCA25ADE25B9B01800280C80 /* DelegateHostProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25ADD25B9B01800280C80 /* DelegateHostProtocols.swift */; };
+		CCA25AE325B9B34900280C80 /* DelegateHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AE225B9B34900280C80 /* DelegateHostView.swift */; };
+		CCA25AE825B9B39900280C80 /* DelegateHostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AE725B9B39900280C80 /* DelegateHostPresenter.swift */; };
+		CCA25AF025B9B3DD00280C80 /* DelegateHostInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AEF25B9B3DD00280C80 /* DelegateHostInteractor.swift */; };
+		CCA25AF525B9B41C00280C80 /* DelegateHostRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AF425B9B41C00280C80 /* DelegateHostRemoteDataManager.swift */; };
+		CCA25AFA25B9B44900280C80 /* DelegateHostWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AF925B9B44900280C80 /* DelegateHostWireFrame.swift */; };
 		CCA3FF37251781EB00F62627 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF35251781EB00F62627 /* Study.swift */; };
 		CCA3FF38251781EB00F62627 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF36251781EB00F62627 /* Category.swift */; };
 		CCA3FF3F2517823000F62627 /* StudyListLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF3D2517823000F62627 /* StudyListLocalDataManager.swift */; };
@@ -574,6 +579,11 @@
 		CCA25AD225B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCA25AD725B6D3AA00280C80 /* ModifyStudyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyWireFrame.swift; sourceTree = "<group>"; };
 		CCA25ADD25B9B01800280C80 /* DelegateHostProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostProtocols.swift; sourceTree = "<group>"; };
+		CCA25AE225B9B34900280C80 /* DelegateHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostView.swift; sourceTree = "<group>"; };
+		CCA25AE725B9B39900280C80 /* DelegateHostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostPresenter.swift; sourceTree = "<group>"; };
+		CCA25AEF25B9B3DD00280C80 /* DelegateHostInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostInteractor.swift; sourceTree = "<group>"; };
+		CCA25AF425B9B41C00280C80 /* DelegateHostRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostRemoteDataManager.swift; sourceTree = "<group>"; };
+		CCA25AF925B9B44900280C80 /* DelegateHostWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostWireFrame.swift; sourceTree = "<group>"; };
 		CCA3FF35251781EB00F62627 /* Study.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		CCA3FF36251781EB00F62627 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		CCA3FF3D2517823000F62627 /* StudyListLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyListLocalDataManager.swift; sourceTree = "<group>"; };
@@ -1303,6 +1313,11 @@
 		CCA25ADC25B9AFD900280C80 /* DelegateHost */ = {
 			isa = PBXGroup;
 			children = (
+				CCA25AE225B9B34900280C80 /* DelegateHostView.swift */,
+				CCA25AE725B9B39900280C80 /* DelegateHostPresenter.swift */,
+				CCA25AEF25B9B3DD00280C80 /* DelegateHostInteractor.swift */,
+				CCA25AF425B9B41C00280C80 /* DelegateHostRemoteDataManager.swift */,
+				CCA25AF925B9B44900280C80 /* DelegateHostWireFrame.swift */,
 				CCA25ADD25B9B01800280C80 /* DelegateHostProtocols.swift */,
 			);
 			path = DelegateHost;
@@ -1768,6 +1783,7 @@
 				A50583BB25A47AEE0060330E /* UIStackView+Ext.swift in Sources */,
 				A5D6A78E257430A8007D6409 /* ProfileModifyInteractor.swift in Sources */,
 				CCEEB47C25AC710F00F522C4 /* ApplyUserResult.swift in Sources */,
+				CCA25AE325B9B34900280C80 /* DelegateHostView.swift in Sources */,
 				CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */,
 				CC56394B259CADA500DA1479 /* SearchStudyLocalDataManager.swift in Sources */,
 				CCEEB46825AC50DF00F522C4 /* MyApplyStudyDetailPresenter.swift in Sources */,
@@ -1793,6 +1809,7 @@
 				CC56393C259CAD6F00DA1479 /* SearchStudyInteractor.swift in Sources */,
 				A53B11AF258CB6E400498A96 /* ApplyUserDetailView.swift in Sources */,
 				CCA3FF4B2517823E00F62627 /* StudyCell.swift in Sources */,
+				CCA25AFA25B9B44900280C80 /* DelegateHostWireFrame.swift in Sources */,
 				A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */,
 				A581491C259129BF00BF3C2A /* LocationModifyPresenter.swift in Sources */,
 				A510BA252583BB590084559C /* ApplyUserCell.swift in Sources */,
@@ -1879,6 +1896,7 @@
 				CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */,
 				CCD51C80256D29F200D41771 /* MyStudyDetailLocalDataManager.swift in Sources */,
 				A5C81C6125836D4C008F2B09 /* MyApplyListInteractor.swift in Sources */,
+				CCA25AF025B9B3DD00280C80 /* DelegateHostInteractor.swift in Sources */,
 				A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CC563967259CB6F700DA1479 /* SearchStudyResultProtocols.swift in Sources */,
@@ -1910,6 +1928,7 @@
 				A5A5F6C2256F843600405C71 /* SortState.swift in Sources */,
 				CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */,
 				A58148972591050600BF3C2A /* EmailModifyPresenter.swift in Sources */,
+				CCA25AE825B9B39900280C80 /* DelegateHostPresenter.swift in Sources */,
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,
 				CCF470A2256B9A710085B371 /* ChatRemoteDataManager.swift in Sources */,
 				A58F9028259F451D007777B4 /* ProjectModifyProtocols.swift in Sources */,
@@ -1949,6 +1968,7 @@
 				CCD51C9B256E247600D41771 /* NoticeInteractor.swift in Sources */,
 				CC6044712576262C000D11C7 /* NoticeDetailInteractor.swift in Sources */,
 				A5D5852725A9E55000C36452 /* Array+Ext.swift in Sources */,
+				CCA25AF525B9B41C00280C80 /* DelegateHostRemoteDataManager.swift in Sources */,
 				A5417FE925A7A6E3005B884F /* BaseSNSModifyView.swift in Sources */,
 				CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
