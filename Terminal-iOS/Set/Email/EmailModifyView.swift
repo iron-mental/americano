@@ -11,6 +11,7 @@ import UIKit
 class EmailModifyView: UIViewController {
     var presenter: EmailModifyPresenterProtocol?
     
+    var email: String?
     let emailLabel = UILabel()
     let emailTextField = UITextField()
     
@@ -27,6 +28,7 @@ class EmailModifyView: UIViewController {
             $0.textColor = .white
         }
         self.emailTextField.do {
+            $0.text = email ?? ""
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textColor = UIColor.appColor(.profileTextColor)

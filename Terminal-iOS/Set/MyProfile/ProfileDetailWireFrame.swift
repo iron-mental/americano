@@ -35,8 +35,8 @@ class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
         }
     }
     
-    func presentEmailModify(from view: ProfileDetailViewProtocol) {
-        let emailModifyView = EmailModifyWireFrame.createModule()
+    func presentEmailModify(from view: ProfileDetailViewProtocol, email: String) {
+        let emailModifyView = EmailModifyWireFrame.createModule(email: email)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(emailModifyView, animated: true)

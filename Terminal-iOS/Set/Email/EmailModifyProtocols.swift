@@ -15,7 +15,7 @@ protocol EmailModifyViewProtocol: class {
 }
 
 protocol EmailModifyWireFrameProtocol: class {
-    static func createModule() -> UIViewController
+    static func createModule(email: String) -> UIViewController
     
     func presentProfileModifyScreen(from view: EmailModifyViewProtocol, userInfo: UserInfo, project: [Project])
 }

@@ -23,8 +23,8 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
         wireFrame?.presentProfileModify(from: view!, profile: profile)
     }
     
-    func showEmailModify() {
-        wireFrame?.presentEmailModify(from: view!)
+    func showEmailModify(email: String) {
+        wireFrame?.presentEmailModify(from: view!, email: email)
     }
     
     func showSNSModify(github: String, linkedin: String, web: String) {

@@ -69,7 +69,8 @@ class ProfileDetailView: BaseProfileView {
     }
     
     @objc func modifyEmail() {
-        presenter?.showEmailModify()
+        let email = userInfo?.email ?? ""
+        presenter?.showEmailModify(email: email)
     }
     
     @objc func modifyLocation() {
