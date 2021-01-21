@@ -29,6 +29,7 @@ enum TerminalRouter: URLRequestConvertible {
     
     case userWithdrawal         (id: String, userData: Parameters)
     case emailVerify            (id: String)
+    case emailAuth              (id: String, email: String)
     case reissuanceToken        (refreshToken: String)
     case login                  (userData: Parameters)
     case signUp                 (userData: Parameters)
@@ -104,6 +105,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .delete
         case .emailVerify:
             return .get
+        case .emailAuth:
+            return .put
         case .reissuanceToken:
             return .post
         case .login, .signUp:
@@ -170,7 +173,7 @@ enum TerminalRouter: URLRequestConvertible {
             return .put
         case .noticeDelete:
             return .delete
-    }
+        }
 }
     // MARK: URL EndPoint init
     
@@ -203,6 +206,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/\(id)"
         case let .emailVerify(id):
             return "user/\(id)/emailVerify"
+        case let .emailAuth(id, _):
+            return "user/\(id)/email"
         case .reissuanceToken:
             return "user/reissuance"
         case .login:
@@ -278,6 +283,8 @@ enum TerminalRouter: URLRequestConvertible {
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
             return nil
+        case let .emailAuth(_, email):
+            return ["email": email]
         case let .userCareerUpdate(_, career):
             return career
         case let .userInfoUpdate(_, profile):
