@@ -7,11 +7,27 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class StudyCategoryRemoteManager: StudyCategoryRemoteDataManagerInputProtocol {
-    var remoteRequestHandler: StudyCategoryRemoteDataManagerOutputProtocol?
+    var interactor: StudyCategoryRemoteDataManagerOutputProtocol?
     
     func retrievePostList() {
-        
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.studyCategory)
+            .validate(statusCode: 200..<500)
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    let result = try! JSONDecoder().decode(BaseResponse<[String]>.self, from: data!)
+                    self.interactor?.onCategoriesRetrieved(categories: result)
+                case .failure(let error):
+                    print(error)
+                }
+            }
     }
 }
