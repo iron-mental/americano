@@ -15,7 +15,8 @@ class SNSModifyView: UIViewController {
     var linkedin: String = ""
     var web: String = ""
     
-    lazy var snsModifyView = ProfileSNSModifyView()
+    lazy var snsModifyView =
+        ProfileSNSModifyView()
     lazy var completeButton = UIButton()
     
     override func viewDidLoad() {
