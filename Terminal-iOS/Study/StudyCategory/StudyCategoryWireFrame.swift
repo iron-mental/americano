@@ -9,7 +9,6 @@
 import UIKit
 
 class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
-    
     static func createStudyCategory() -> UIViewController {
         let view = StudyCategoryView()
         let presenter: StudyCategoryPresenterProtocol & StudyCategoryInteractorOutputProtocol = StudyCategoryPresenter()
@@ -28,13 +27,13 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
         interactor.localDatamanager = localDataManager
         interactor.remoteDatamanager = remoteDataManager
         
-        remoteDataManager.remoteRequestHandler = interactor
+        remoteDataManager.interactor = interactor
         
         return view
     }
     
-    func presentStudyListScreen(from view: StudyCategoryViewProtocol) {
-        let studyListViewController = StudyListWireFrame.createStudyListModule()
+    func presentStudyListScreen(from view: StudyCategoryViewProtocol, category: String) {
+        let studyListViewController = StudyListWireFrame.createStudyListModule(category: category)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(studyListViewController, animated: true)

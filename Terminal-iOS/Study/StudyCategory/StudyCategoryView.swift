@@ -126,6 +126,7 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter?.showStudyListDetail()
+        let category = categoryList[indexPath.row].name
+        presenter?.showStudyListDetail(category: category)
     }
 }

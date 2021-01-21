@@ -24,7 +24,7 @@ protocol StudyCategoryWireFrameProtocol: class {
     static func createStudyCategory() -> UIViewController
     
     // PRESENTER -> WIREFRAME
-    func presentStudyListScreen(from view: StudyCategoryViewProtocol)
+    func presentStudyListScreen(from view: StudyCategoryViewProtocol, category: String)
     func goToSelectCategory(from view: StudyCategoryViewProtocol, category: [Category])
     func goToSearchStudy(from view: StudyCategoryViewProtocol)
 }
@@ -36,7 +36,7 @@ protocol StudyCategoryPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    func showStudyListDetail()
+    func showStudyListDetail(category: String)
     func goToCreateStudy(category: [Category])
     func didClickedCreateButton()
     func goToSearchStudy()
@@ -62,7 +62,7 @@ protocol StudyCategoryDataManagerInputProtocol: class {
 }
 
 protocol StudyCategoryRemoteDataManagerInputProtocol: class {
-    var remoteRequestHandler: StudyCategoryRemoteDataManagerOutputProtocol? { get set }
+    var interactor: StudyCategoryRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func retrievePostList()
@@ -70,7 +70,7 @@ protocol StudyCategoryRemoteDataManagerInputProtocol: class {
 
 protocol StudyCategoryRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-       func onCategoriesRetrieved(_ categories: [Category])
+       func onCategoriesRetrieved(categories: BaseResponse<[String]>)
        func onError()
 }
 
