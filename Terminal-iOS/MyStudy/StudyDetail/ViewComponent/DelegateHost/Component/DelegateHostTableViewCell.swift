@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SwiftKeychainWrapper
 
 class DelegateHostTableViewCell: UITableViewCell {
     static let id = "DelegateHostTableViewCell"
@@ -21,6 +22,9 @@ class DelegateHostTableViewCell: UITableViewCell {
     }
     
     func attribute() {
+        self.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         profileImage.do {
             $0.layer.cornerRadius = Terminal.convertWidth(value: 46) / 2
             $0.layer.masksToBounds = true
@@ -28,6 +32,7 @@ class DelegateHostTableViewCell: UITableViewCell {
             $0.layer.borderWidth = 0.3
             $0.layer.borderColor = UIColor.lightGray.cgColor
         }
+        
     }
     
     func layout() {
@@ -46,6 +51,22 @@ class DelegateHostTableViewCell: UITableViewCell {
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
         }
+    }
+    
+    func setData(data: Participate) {
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
+        let imageDownloadRequest = AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+        
+        if let imageURL = data.image {
+            self.profileImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
+        } else {
+            self.profileImage.image = #imageLiteral(resourceName: "ai")
+        }
+        nickname.text = data.nickname
     }
     
     required init?(coder: NSCoder) {

@@ -74,7 +74,7 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DelegateHostTableViewCell.id, for: indexPath) as! DelegateHostTableViewCell
-        cell.nickname.text = userList![indexPath.row].nickname
+        cell.setData(data: userList![indexPath.row])
         return cell
     }
     
