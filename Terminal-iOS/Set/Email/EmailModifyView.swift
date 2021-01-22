@@ -86,6 +86,9 @@ extension EmailModifyView: EmailModifyViewProtocol {
                 parent?.showToast(controller: parent!, message: "Email 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
             })
+            
+            let rootParent = self.navigationController?.viewControllers[0] as? SetView
+            rootParent?.presenter?.viewDidLoad()
         } else {
             self.showToast(controller: self, message: message, seconds: 1)
         }

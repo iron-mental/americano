@@ -155,6 +155,9 @@ extension LocationModifyView: LocationModifyViewProtocol {
                 parent?.showToast(controller: parent!, message: "활동 지역 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
             })
+            
+            let rootParent = self.navigationController?.viewControllers[0] as? SetView
+            rootParent?.presenter?.viewDidLoad()
         } else {
             // error handle
         }
