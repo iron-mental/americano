@@ -10,13 +10,13 @@ import UIKit
 import Kingfisher
 
 class DelegateHostTableViewCell: UITableViewCell {
+    static let id = "DelegateHostTableViewCell"
     var profileImage = UIImageView()
     var nickname = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         attribute()
-        
         layout()
     }
     

@@ -35,6 +35,7 @@ class DelegateHostView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.register(DelegateHostTableViewCell.self, forCellReuseIdentifier: DelegateHostTableViewCell.id)
         }
     }
     
@@ -72,7 +73,9 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: DelegateHostTableViewCell.id, for: indexPath) as! DelegateHostTableViewCell
+        cell.nickname.text = userList![indexPath.row].nickname
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
