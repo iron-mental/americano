@@ -209,6 +209,7 @@
 		CC72CBF925B05B40009E9986 /* BaseProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBF825B05B40009E9986 /* BaseProfileView.swift */; };
 		CC72CBFF25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBFE25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift */; };
 		CC72CC0725B0632B009E9986 /* BaseProfileRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */; };
+		CC7F383625BA991B00DEA541 /* DelegateHostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */; };
 		CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */; };
 		CC8FF5FC257E80D000947FB3 /* ChatTableViewOutputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
@@ -558,6 +559,7 @@
 		CC72CBF825B05B40009E9986 /* BaseProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileView.swift; sourceTree = "<group>"; };
 		CC72CBFE25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileRemoteDataManagerInputProtocol.swift; sourceTree = "<group>"; };
 		CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileRemoteDataManager.swift; sourceTree = "<group>"; };
+		CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostTableViewCell.swift; sourceTree = "<group>"; };
 		CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertUIView.swift; sourceTree = "<group>"; };
 		CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewOutputCell.swift; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
@@ -1219,6 +1221,14 @@
 			path = BaseProtocol;
 			sourceTree = "<group>";
 		};
+		CC7F383425BA990600DEA541 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		CC84850525A47FD700C792BC /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1313,6 +1323,7 @@
 		CCA25ADC25B9AFD900280C80 /* DelegateHost */ = {
 			isa = PBXGroup;
 			children = (
+				CC7F383425BA990600DEA541 /* Component */,
 				CCA25AE225B9B34900280C80 /* DelegateHostView.swift */,
 				CCA25AE725B9B39900280C80 /* DelegateHostPresenter.swift */,
 				CCA25AEF25B9B3DD00280C80 /* DelegateHostInteractor.swift */,
@@ -1858,6 +1869,7 @@
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */,
 				A5417FF125A7A855005B884F /* ProfileSNSModifyView.swift in Sources */,
+				CC7F383625BA991B00DEA541 /* DelegateHostTableViewCell.swift in Sources */,
 				A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */,
 				CCBBEF082583BAFC00177E25 /* LocalUserInfo.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
