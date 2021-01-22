@@ -330,7 +330,7 @@ enum TerminalRouter: URLRequestConvertible {
         case .studyLeave:
             return nil
         case let .delegateHost(_, newLeader):
-            return ["new_Leader": newLeader]
+            return ["new_leader": newLeader]
             
         // 신청
         case let .applyStudy(_, message):

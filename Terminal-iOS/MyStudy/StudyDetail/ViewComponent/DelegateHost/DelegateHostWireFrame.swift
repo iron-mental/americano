@@ -13,7 +13,7 @@ class DelegateHostWireFrame: DelegateHostWireFrameProtocol {
         let view = DelegateHostView()
         var presenter: DelegateHostPresenterProtocol & DelegateHostInteractorOutputProtocol = DelegateHostPresenter()
         var interactor: DelegateHostInteractorInputProtocol & DelegateHostRemoteDataManagerOutputProtocol = DelegateHostInteractor()
-        let remoteDataManager: DelegateHostRemoteDataManagerInputProtocol = DelegateHostRemoteDataManager()
+        var remoteDataManager: DelegateHostRemoteDataManagerInputProtocol = DelegateHostRemoteDataManager()
         let wireFrame = DelegateHostWireFrame()
         
         view.presenter = presenter
@@ -26,6 +26,8 @@ class DelegateHostWireFrame: DelegateHostWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         interactor.studyID = studyID
+        
+        remoteDataManager.interactor = interactor
         
         return view
     }

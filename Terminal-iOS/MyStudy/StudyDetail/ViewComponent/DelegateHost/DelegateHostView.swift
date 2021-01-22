@@ -13,6 +13,7 @@ class DelegateHostView: UIViewController {
     var userList: [Participate]?
     var userTableView = UITableView()
     var guideLabel = UILabel()
+    var selectedUserID = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,26 +45,38 @@ class DelegateHostView: UIViewController {
         
         guideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
         }
         userTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
     }
+    
+    @objc func delegateCompelteButtonDidTap() {
+        presenter?.delegateHostButtonDidTap(newLeader: selectedUserID)
+        (TerminalAlertMessage.alertView as! AlertMessageView).completeButton.removeTarget(nil, action: nil, for: .allEvents)
+    }
 }
 
 extension DelegateHostView: DelegateHostViewProtocol {
     func showDelegateHostResult(message: String) {
-        //        <#code#>
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+//            (navigationController?.viewControllers.last as! MyStudyDetailView).VCArr[0]
+//            (navigationController?.viewControllers.last as! MyStudyDetailView).VCArr[1]
+//            (navigationController?.viewControllers.last as! MyStudyDetailView).VCArr[2]
+        }
     }
     
-    func showError() {
-        //        <#code#>
+    func showError(message: String) {
+        
+        showToast(controller: self, message: message, seconds: 1, completion: nil)
+        
     }
 }
 
@@ -79,6 +92,9 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.delegateHostButtonDidTap(newLeader: userList![indexPath.row].userID)
+        selectedUserID = userList![indexPath.row].userID
+        TerminalAlertMessage.show(type: .DelegateHostConfirmView)
+        (TerminalAlertMessage.alertView as! AlertMessageView).completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
+//        navigationController?.popViewController(animated: true)
     }
 }

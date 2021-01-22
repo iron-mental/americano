@@ -14,7 +14,6 @@ class DelegateHostInteractor: DelegateHostInteractorInputProtocol {
     var studyID: Int?
     
     func putDelegateHostAPI(newLeader: Int) {
-        
         remoteDataManager?.putDelegateHostAPI(studyID: studyID!, newLeader: newLeader)
     }
     
@@ -27,7 +26,11 @@ extension DelegateHostInteractor: DelegateHostRemoteDataManagerOutputProtocol {
             presenter?.delegateHostResult(result: response.result, message: response.message!)
             break
         case false:
-            presenter?.delegateHostResult(result: response.result, message: "에러났어요")
+            if let message = response.message {
+                presenter?.delegateHostResult(result: response.result, message: message)
+            } else {
+                presenter?.delegateHostResult(result: response.result, message: "false에 메세지 없ㅇ므")
+            }
             break
         }
     }

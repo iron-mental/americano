@@ -6,7 +6,7 @@
 //  Copyright © 2021 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class DelegateHostPresenter: DelegateHostPresenterProtocol {
     var view: DelegateHostViewProtocol?
@@ -24,10 +24,12 @@ extension DelegateHostPresenter: DelegateHostInteractorOutputProtocol {
         LoadingRainbowCat.hide {
             switch result {
             case true:
-                view?.showDelegateHostResult(message: message)
+                TerminalAlertMessage.hide()
+                self.view?.showDelegateHostResult(message: message)
                 break
             case false:
-                view?.showError()
+                TerminalAlertMessage.hide()
+                self.view?.showError(message: message)
                 break
             }
         }

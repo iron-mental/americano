@@ -33,12 +33,12 @@ class BaseEditableStudyDetailView: UIViewController {
     var selectedLocation: StudyDetailLocationPost?
     var textViewTapFlag = false
     
-    var testLine: UIView {
-        let view = UIView()
-        view.frame = CGRect(x: 0, y: 94, width: UIScreen.main.bounds.width, height: 2)
-        view.backgroundColor = .red
-        return view
-    }
+//    var testLine: UIView {
+//        let view = UIView()
+//        view.frame = CGRect(x: 0, y: 94, width: UIScreen.main.bounds.width, height: 2)
+//        view.backgroundColor = .red
+//        return view
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -173,7 +173,7 @@ class BaseEditableStudyDetailView: UIViewController {
     func layout() {
         view.addSubview(scrollView)
         [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { scrollView.addSubview($0)}
-        scrollView.addSubview(testLine)
+//        scrollView.addSubview(testLine)
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

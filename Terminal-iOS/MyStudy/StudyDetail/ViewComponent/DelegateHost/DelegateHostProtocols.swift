@@ -14,7 +14,7 @@ protocol DelegateHostViewProtocol {
     
     //PRESENTER -> VIEW
     func showDelegateHostResult(message: String)
-    func showError()
+    func showError(message: String)
 }
 
 protocol DelegateHostPresenterProtocol {

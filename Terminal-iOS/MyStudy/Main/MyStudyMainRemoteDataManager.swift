@@ -21,7 +21,7 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.myStudyList(id: userID))
-            .validate(statusCode: 200..<400)
+            .validate(statusCode: 200..<503)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
