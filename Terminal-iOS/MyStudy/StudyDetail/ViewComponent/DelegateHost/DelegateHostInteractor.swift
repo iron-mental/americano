@@ -14,13 +14,13 @@ class DelegateHostInteractor: DelegateHostInteractorInputProtocol {
     var studyID: Int?
     
     func putDelegateHostAPI(newLeader: Int) {
-        <#code#>
+//        <#code#>
     }
     
 }
 
 extension DelegateHostInteractor: DelegateHostRemoteDataManagerOutputProtocol {
     func delegateHostResult(response: BaseResponse<String>) {
-        <#code#>
+//        <#code#>
     }
 }

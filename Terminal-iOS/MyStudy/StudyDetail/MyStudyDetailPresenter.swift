@@ -52,4 +52,8 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
             view?.showDeleteStudyFailed()
         }
     }
+    
+    func delegateHostButtonDidTap(studyID: Int, userList: [Participate]) {
+        wireFrame?.goToDelegateHost(from: view!, studyID: studyID, userList: userList)
+    }
 }

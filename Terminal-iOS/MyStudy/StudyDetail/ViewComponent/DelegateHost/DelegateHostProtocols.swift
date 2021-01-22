@@ -53,5 +53,5 @@ protocol DelegateHostRemoteDataManagerOutputProtocol {
 }
 
 protocol DelegateHostWireFrameProtocol {
-    static func createDelegateHostmodule(studyID: Int) -> UIViewController
+    static func createDelegateHostmodule(studyID: Int, userList: [Participate]) -> UIViewController
 }

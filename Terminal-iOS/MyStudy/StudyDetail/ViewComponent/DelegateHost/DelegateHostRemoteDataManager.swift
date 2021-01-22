@@ -12,6 +12,6 @@ class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol 
     var interactor: DelegateHostInteractorOutputProtocol?
     
     func putDelegateHostAPI(studyID: Int, newLeader: Int) {
-        <#code#>
+//        <#code#>
     }
 }

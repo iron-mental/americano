@@ -14,12 +14,12 @@ class DelegateHostPresenter: DelegateHostPresenterProtocol {
     var wireFrame: DelegateHostWireFrameProtocol?
     
     func delegateHostButtonDidTap(newLeader: Int) {
-        <#code#>
+//        <#code#>
     }
 }
 
 extension DelegateHostPresenter: DelegateHostInteractorOutputProtocol {
     func delegateHostResult(result: Bool, message: String) {
-        <#code#>
+//        <#code#>
     }
 }

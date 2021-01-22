@@ -43,7 +43,6 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
     }
     
     func goToEditStudy(study: StudyDetail, parentView: UIViewController) {
-//        let view = CreateStudyWireFrame.createStudyViewModul(category: study.category, studyDetail: study, state: .edit, parentView: parentView)
         let view = ModifyStudyWireFrame.createModifyStudyModule(study: study, parentView: parentView)
         parentView.present(view, animated: true)
     }
@@ -58,6 +57,14 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(applyUserView, animated: true)
+        }
+    }
+    
+    func goToDelegateHost(from view: MyStudyDetailViewProtocol, studyID: Int, userList: [Participate]) {
+        let delegateHostView = DelegateHostWireFrame.createDelegateHostmodule(studyID: studyID, userList: userList)
+        
+        if let parentView = view as? UIViewController {
+            parentView.navigationController?.pushViewController(delegateHostView, animated: true)
         }
     }
 }

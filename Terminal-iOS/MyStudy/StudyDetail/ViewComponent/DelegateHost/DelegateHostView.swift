@@ -11,6 +11,7 @@ import UIKit
 class DelegateHostView: UIViewController {
     var presenter: DelegateHostPresenterProtocol?
     var userList: [Participate]?
+    var userTableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +20,24 @@ class DelegateHostView: UIViewController {
 
 extension DelegateHostView: DelegateHostViewProtocol {
     func showDelegateHostResult(message: String) {
-        <#code#>
+//        <#code#>
     }
     
     func showError() {
+//        <#code#>
+    }
+}
+
+extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         <#code#>
     }
 }

@@ -190,6 +190,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     func delegateHostButtonDidTap() {
+        presenter?.delegateHostButtonDidTap(studyID: studyID!, userList: userList)
         //방장 위임하는 뷰로 가보자
     }
     
