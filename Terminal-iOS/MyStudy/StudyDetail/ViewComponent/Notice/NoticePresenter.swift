@@ -32,15 +32,6 @@ class NoticePresenter: NoticePresenterProtocol {
     func celldidTap(notice: Notice, parentView: UIViewController, state: StudyDetailViewState) {
         wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView, state: state)
     }
-    
-//    func noticeDetailResult(result: Bool, notice: Notice, parentView: UIViewController) {
-//        switch result {
-//        case true:
-////            wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView, state: state)
-//        case false:
-//            print("실패니까 대처해 얼릉")
-//        }
-//    }
     func didScrollEnded(studyID: Int) {
         
         interactor?.getNoticeListPagination(studyID: studyID)
