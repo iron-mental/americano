@@ -18,10 +18,10 @@ protocol MyStudyDetailViewProtocol: class {
     
     //PRESENTER -> VIEW
     func showLeaveStudyComplete()
-    func showLeaveStudyFailed()
+    func showLeaveStudyFailed(message: String)
     
     func showDeleteStudyComplete()
-    func showDeleteStudyFailed()
+    func showDeleteStudyFailed(message: String)
     
 }
 

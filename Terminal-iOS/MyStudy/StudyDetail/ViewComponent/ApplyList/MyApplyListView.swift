@@ -12,6 +12,7 @@ final class MyApplyListView: UIViewController {
     var presenter: MyApplyListPresenterProtocol?
     var studyList: [ApplyStudy] = []
     lazy var applyList = UITableView()
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +28,16 @@ final class MyApplyListView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.refreshControl = refreshControl
+        }
+        refreshControl.do {
+            $0.addTarget(self, action: #selector(viewDidLoad), for: .valueChanged)
         }
     }
     
     private func layout() {
         self.view.addSubview(applyList)
+        
         self.applyList.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -47,6 +53,7 @@ extension MyApplyListView: MyApplyListViewProtocol {
         if let tempStudies = studies {
             self.studyList = tempStudies
             applyList.reloadData()
+            refreshControl.endRefreshing()
         }
     }
     

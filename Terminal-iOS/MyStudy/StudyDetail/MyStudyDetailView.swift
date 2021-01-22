@@ -242,8 +242,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
     }
     
-    func showLeaveStudyFailed() {
+    func showLeaveStudyFailed(message: String) {
         print("스터디 나가기 실패")
+        showToast(controller: self, message: message, seconds: 1, completion: nil)
     }
     
     func showDeleteStudyComplete() {
@@ -251,7 +252,7 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
     }
     
-    func showDeleteStudyFailed() {
+    func showDeleteStudyFailed(message: String) {
         print("스터디 삭제 실패")
     }
 }
