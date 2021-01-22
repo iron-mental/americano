@@ -45,6 +45,7 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     @objc func keyboardWillShow(notification:NSNotification) {
+        //        button.isHidden = true
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
@@ -230,7 +231,7 @@ class BaseEditableStudyDetailView: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     @objc func didLocationViewClicked() {
-//
+        //
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary
@@ -255,7 +256,6 @@ class BaseEditableStudyDetailView: UIViewController {
             let distance = (parentView.frame.minY) - viewMinY
             self.viewSetTop(distance: distance - 10)
         } else if viewMaxY <= (parentView.frame.maxY){
-            
             let distance = (parentView.frame.maxY) - viewMaxY
             self.viewSetBottom(distance: distance + 10)
         } else {
@@ -267,15 +267,15 @@ class BaseEditableStudyDetailView: UIViewController {
         UIView.animate(withDuration: 0.1) {
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
-                self.clickedView?.becomeFirstResponder()
-                self.textViewTapFlag = true
+            self.clickedView?.becomeFirstResponder()
+            self.textViewTapFlag = true
         }
     }
     func viewSetBottom(distance: CGFloat) {
         UIView.animate(withDuration: 0.1) {
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
-                self.clickedView?.becomeFirstResponder()
+            self.clickedView?.becomeFirstResponder()
             self.textViewTapFlag = true
         }
     }
@@ -292,7 +292,6 @@ extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavi
 extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         clickedView = textField
-        
         self.editableViewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
