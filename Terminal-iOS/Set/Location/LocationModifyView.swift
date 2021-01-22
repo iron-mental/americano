@@ -119,7 +119,12 @@ class LocationModifyView: UIViewController {
     @objc func completeModify() {
         let sido = self.the1depth
         let sigungu = self.the2depth
-        presenter?.completeModify(sido: sido, sigungu: sigungu)
+        
+        if !sigungu.isEmpty {
+            presenter?.completeModify(sido: sido, sigungu: sigungu)
+        } else {
+            self.showToast(controller: self, message: "지역을 모두 선택해주세요.", seconds: 1)
+        }
     }
     
     
