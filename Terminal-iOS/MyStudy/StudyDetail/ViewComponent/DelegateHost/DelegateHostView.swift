@@ -14,12 +14,12 @@ class DelegateHostView: UIViewController {
     var userTableView = UITableView()
     var guideLabel = UILabel()
     var selectedUserID = 0
+    var studyID: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        
     }
     
     func attribute() {
@@ -65,11 +65,11 @@ class DelegateHostView: UIViewController {
 
 extension DelegateHostView: DelegateHostViewProtocol {
     func showDelegateHostResult(message: String) {
-        showToast(controller: self, message: message, seconds: 1) {
-            self.navigationController?.popViewController(animated: true)
-//            (navigationController?.viewControllers.last as! MyStudyDetailView).VCArr[0]
-//            (navigationController?.viewControllers.last as! MyStudyDetailView).VCArr[1]
-//            (navigationController?.viewControllers.last as! MyStudyDetailView).VCArr[2]
+        showToast(controller: self, message: message, seconds: 1) { [self] in
+            navigationController?.popViewController(animated: true)
+            ((navigationController?.viewControllers[1] as! MyStudyDetailView).VCArr[0] as! NoticeView).viewDidLoad()
+            ((navigationController?.viewControllers[1] as! MyStudyDetailView).VCArr[1] as! StudyDetailView).studyID = studyID!
+            ((navigationController?.viewControllers[1] as! MyStudyDetailView).VCArr[2] as! TempChatView).viewDidLoad()
         }
     }
     

@@ -18,6 +18,7 @@ class DelegateHostWireFrame: DelegateHostWireFrameProtocol {
         
         view.presenter = presenter
         view.userList = userList
+        view.studyID = studyID
         
         presenter.view = view
         presenter.interactor = interactor

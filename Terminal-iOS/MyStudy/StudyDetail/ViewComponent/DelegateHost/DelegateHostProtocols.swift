@@ -11,6 +11,7 @@ import UIKit
 protocol DelegateHostViewProtocol {
     var presenter: DelegateHostPresenterProtocol? { get set }
     var userList: [Participate]? { get set }
+    var studyID: Int? { get set }
     
     //PRESENTER -> VIEW
     func showDelegateHostResult(message: String)
