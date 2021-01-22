@@ -231,6 +231,7 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
     func setting() {
         authority = (VCArr[1] as! StudyDetailViewProtocol).state
+        (VCArr[0] as! NoticeView).state = (VCArr[1] as! StudyDetailViewProtocol).state
         userList = (VCArr[1] as! StudyDetailView).userData
         attribute()
         layout()

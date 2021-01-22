@@ -35,7 +35,7 @@ class AddNoticeWireFrame: AddNoticeWireFrameProtocol {
         return view
     }
     func goToNoticeDetailView(noticeID: Int, studyID: Int, parentView: UIViewController?) {
-        _ = NoticeDetailWireFrame.createNoticeDetailModule(notice: noticeID, studyID: studyID, parentView: nil)
+//        _ = NoticeDetailWireFrame.createNoticeDetailModule(notice: noticeID, studyID: studyID, parentView: nil)
         
     }
 }

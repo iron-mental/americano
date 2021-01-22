@@ -37,12 +37,12 @@ protocol NoticePresenterProtocol {
     
     //VIEW -> PRESENTER
     func viewDidLoad(studyID: Int)
-    func celldidTap(notice: Notice, parentView: UIViewController)
+    func celldidTap(notice: Notice, parentView: UIViewController, state: StudyDetailViewState)
     func didScrollEnded(studyID: Int)
     
     //INTERACTOR -> PRESENTER
     func showResult(result: Bool, noticeList: [Notice]?, message: String?)
-    func noticeDetailResult(result: Bool, notice: Notice, parentView: UIViewController)
+//    func noticeDetailResult(result: Bool, notice: Notice, parentView: UIViewController)
     func showNoticePaginationResult(result: Bool, notice: [Notice]?, message: String?)
 }
 
@@ -60,5 +60,5 @@ protocol NoticeWireFrameProtocol {
     var presenter: NoticePresenterProtocol? { get set }
     
     static func createNoticeModule(studyID: Int) -> UIViewController
-    func goToNoticeDetail(notice: Notice, parentView: UIViewController)
+    func goToNoticeDetail(notice: Notice, parentView: UIViewController, state: StudyDetailViewState)
 }
