@@ -14,11 +14,12 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
     var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol?
     
     func getUserInfo(userID: Int) {
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.userInfo(id: String(userID)))
-            .validate(statusCode: 200..<299)
+            .request(TerminalRouter.userInfo(id: userID))
+            .validate(statusCode: 200..<500)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -36,10 +37,13 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
     // MARK: 유저 프로젝트
     
     func getProjectList(userID: Int) {
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.projectList(id: String(userID)))
+            .request(TerminalRouter.projectList(id: userID))
+            .validate(statusCode: 200..<500)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

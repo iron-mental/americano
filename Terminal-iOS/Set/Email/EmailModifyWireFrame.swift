@@ -9,7 +9,7 @@
 import UIKit
 
 class EmailModifyWireFrame: EmailModifyWireFrameProtocol {
-    static func createModule() -> UIViewController {
+    static func createModule(email: String) -> UIViewController {
         let view: EmailModifyViewProtocol = EmailModifyView()
         let presenter: EmailModifyPresenterProtocol & EmailModifyInteractorOutputProtocol = EmailModifyPresenter()
         let interactor: EmailModifyInteractorInputProtocol = EmailModifyInteractor()
@@ -18,9 +18,11 @@ class EmailModifyWireFrame: EmailModifyWireFrameProtocol {
         view.presenter = presenter
         presenter.view = view
         presenter.wireFrame = wireFrame
+        presenter.interactor = interactor
         interactor.presenter = presenter
        
         if let view = view as? EmailModifyView {
+            view.email = email
             return view
         } else {
             return UIViewController()

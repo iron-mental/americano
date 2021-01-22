@@ -69,9 +69,6 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             "push_token": KeychainWrapper.standard.string(forKey: "pushToken") ?? "1"
         ]
         
-        print(KeychainWrapper.standard.string(forKey: "accessToken"))
-        print(KeychainWrapper.standard.string(forKey: "refreshToken"))
-        
         TerminalNetworkManager
             .shared
             .session
@@ -79,7 +76,6 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    print("토큰 : ",JSON(value))
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data!)

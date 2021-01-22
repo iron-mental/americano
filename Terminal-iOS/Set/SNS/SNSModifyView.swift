@@ -15,7 +15,8 @@ class SNSModifyView: UIViewController {
     var linkedin: String = ""
     var web: String = ""
     
-    lazy var snsModifyView = ProfileSNSModifyView()
+    lazy var snsModifyView =
+        ProfileSNSModifyView()
     lazy var completeButton = UIButton()
     
     override func viewDidLoad() {
@@ -25,7 +26,7 @@ class SNSModifyView: UIViewController {
     }
 
     func attribute() {
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .appColor(.terminalBackground)
 
         self.snsModifyView.firstTextFeield.text = self.github
         self.snsModifyView.secondTextField.text = self.linkedin
@@ -79,7 +80,7 @@ extension SNSModifyView: SNSModifyViewProtocol {
                 parent?.presenter?.viewDidLoad()
             })
         } else {
-            print("message",message)
+            self.showToast(controller: self, message: message, seconds: 1)
         }
     }
 }

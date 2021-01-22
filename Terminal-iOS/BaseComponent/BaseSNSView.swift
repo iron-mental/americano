@@ -11,7 +11,6 @@ import UIKit
 class BaseSNSView: UIView {
     
     let snsStack = UIStackView()
-    let snsImage = UIImageView()
     var firstWidth: NSLayoutConstraint!
     var secondWidth: NSLayoutConstraint!
     var thirdWidth: NSLayoutConstraint!
@@ -23,9 +22,6 @@ class BaseSNSView: UIView {
     }
     
     func attribute() {
-        self.snsImage.do {
-            $0.image = #imageLiteral(resourceName: "github")
-        }
         self.snsStack.do {
             $0.axis = .horizontal
             $0.distribution = .fillEqually

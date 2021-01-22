@@ -22,7 +22,8 @@ class CoreDataManager {
         newUserInfo.email = userInfo.email
         newUserInfo.image = userInfo.image ?? nil
         newUserInfo.introduce = userInfo.introduce ?? nil
-        newUserInfo.address = userInfo.address ?? nil
+        newUserInfo.sido = userInfo.sido ?? nil
+        newUserInfo.sigungu = userInfo.sigungu ?? nil
         newUserInfo.careerTitle = userInfo.careerTitle ?? nil
         newUserInfo.careerContents = userInfo.careerContents ?? nil
         newUserInfo.snsLinkedin = userInfo.snsLinkedin ?? nil
@@ -49,7 +50,8 @@ class CoreDataManager {
             updatingUserInfo.email = userInfo.email
             updatingUserInfo.image = userInfo.image ?? nil
             updatingUserInfo.introduce = userInfo.introduce ?? nil
-            updatingUserInfo.address = userInfo.address ?? nil
+            updatingUserInfo.sido = userInfo.sido ?? nil
+            updatingUserInfo.sigungu = userInfo.sigungu ?? nil
             updatingUserInfo.careerTitle = userInfo.careerTitle ?? nil
             updatingUserInfo.careerContents = userInfo.careerContents ?? nil
             updatingUserInfo.snsLinkedin = userInfo.snsLinkedin ?? nil
@@ -74,7 +76,8 @@ class CoreDataManager {
                                     email: record.email ?? "emailTemp",
                                     image: record.image,
                                     introduce: record.introduce,
-                                    address: record.address,
+                                    sido: record.sido,
+                                    sigungu: record.sigungu,
                                     careerTitle: record.careerTitle,
                                     careerContents: record.careerContents,
                                     snsLinkedin: record.snsLinkedin,

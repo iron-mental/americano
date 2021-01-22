@@ -26,7 +26,7 @@ class SetWireFrame: SetWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         
-        remoteDataManager.remoteRequestHandler = interactor
+        remoteDataManager.interactor = interactor
         
         if let view = view as? SetView {
             return view
@@ -42,4 +42,13 @@ class SetWireFrame: SetWireFrameProtocol {
             sourceView.navigationController?.pushViewController(profileDetailView, animated: true)
         }
     }
+    
+    func presentUserWithdrawal(from view: SetViewProtocol) {
+        let userWithdrawalView = UserWithdrawalWireFrame.createModule()
+
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(userWithdrawalView, animated: true)
+        }
+    }
+    
 }

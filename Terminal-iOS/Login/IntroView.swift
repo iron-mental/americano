@@ -8,19 +8,19 @@
 
 import UIKit
 
-enum BeginState: String {
+enum BeginState {
     case signUp
     case join
 }
 
-enum IntroViewState: String {
+enum IntroViewState {
     case emailInput
     case pwdInput
     case nickname
 }
 
 class IntroView: UIViewController {
-    var presenter : IntroPresenterProtocol?
+    var presenter: IntroPresenterProtocol?
     
     var leftButton = UIButton()
     var rightbutton = UIButton()
@@ -65,7 +65,10 @@ class IntroView: UIViewController {
             break
         case .pwdInput:
             self.guideLabel.text = self.beginState == .join ?  "로그인을 위해 계정의 비밀번호를\n입력해 주세요." : "사용하실 비밀번호를\n설정해 주세요"
-            self.inputTextfield.placeholder = "비밀번호"
+            self.inputTextfield.do {
+                $0.placeholder = "비밀번호"
+                $0.isSecureTextEntry = true
+            }
             self.introState = .pwdInput
             self.leftButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
             self.beginState == .join ? self.rightbutton.setTitle("완료", for: .normal) : self.rightbutton.setTitle("다음", for: .normal)
@@ -80,28 +83,28 @@ class IntroView: UIViewController {
         case .none:
             print("none")
             break
-        case .some(_):
-            print("some")
-            break
         }
     }
     
     // MARK: Attribute
     
     func attribute() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = .black
+        
         rightBarButton = UIBarButtonItem(customView: rightbutton)
         leftBarButton = UIBarButtonItem(customView: leftButton)
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             $0.navigationItem.rightBarButtonItem = rightBarButton
             $0.navigationItem.leftBarButtonItem = leftBarButton
-            $0.navigationController?.navigationBar.shadowImage = UIImage()
-            $0.navigationController?.navigationBar.isTranslucent = false
-            $0.navigationController?.navigationBar.backgroundColor = UIColor.systemBackground
+            $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.view.backgroundColor = UIColor.systemBackground
         }
         inputTextfield.do {
             $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.delegate = self
         }
         leftButton.do {
             $0.addTarget(self, action: #selector(didClickedBackButon), for: .touchUpInside)
@@ -140,7 +143,7 @@ class IntroView: UIViewController {
         
         inputTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (40/375) * UIScreen.main.bounds.width).isActive = true
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * ( 235 / 375 )).isActive = true
             $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * ( 32 / 667 )).isActive = true
@@ -161,8 +164,8 @@ class IntroView: UIViewController {
         }
         cancelButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: inputTextfield.trailingAnchor,constant: 10).isActive = true
-            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: inputTextfield.trailingAnchor, constant: 10).isActive = true
+            $0.centerYAnchor.constraint(equalTo: inputTextfield.centerYAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
@@ -228,8 +231,6 @@ class IntroView: UIViewController {
             inputTextfield.text = ""
         case .none:
             print("none")
-        case .some(_):
-            print("some")
         }
     }
 }
@@ -275,6 +276,16 @@ extension IntroView: IntroViewProtocol {
         self.navigationController?.pushViewController(view, animated: true)
     }
     
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide {
+            print("Loading hide")
+        }
+    }
+    
     func presentCompleteView() {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -285,9 +296,9 @@ extension IntroView: IntroViewProtocol {
         present(view, animated: true, completion: nil)
     }
     
-    func showInvalidEmailAction() {
+    func showInvalidEmailAction(message: String) {
         invalidView.isHidden = false
-        invalidLabel.text = "유효하지 않은 이메일 입니다."
+        invalidLabel.text = message
         invalidGuideAnimation()
     }
     
@@ -300,6 +311,12 @@ extension IntroView: IntroViewProtocol {
     func showInvalidNickNameAction() {
         invalidView.isHidden = false
         invalidLabel.text = "중복된 닉네임 입니다."
+        invalidGuideAnimation()
+    }
+    
+    func showInvalidLoginAction(message: String) {
+        invalidView.isHidden = false
+        invalidLabel.text = message
         invalidGuideAnimation()
     }
     
@@ -322,19 +339,13 @@ extension IntroView: IntroViewProtocol {
                             UIView.animate(withDuration: 0.05) {
                                 self.invalidView.transform = CGAffineTransform(translationX: 0, y: 0)
                             } completion: { _ in
-                                print("됐겠지 머 ")
+                                print("Invalid Response")
                             }
-
                         }
-
                     }
-
                 }
-
             }
-
         }
-
     }
 }
 

@@ -48,8 +48,8 @@ class ProfileSNSView: BaseSNSView {
         
         if let _ = snsList["github"] {
             self.snsStack.addArrangedSubview(self.github)
-                    count += 1
-                }
+            count += 1
+        }
         
         if let _ = snsList["linkedin"] {
             self.snsStack.addArrangedSubview(self.linkedin)
@@ -64,9 +64,15 @@ class ProfileSNSView: BaseSNSView {
         switch count {
         case 1:
             self.firstWidth.isActive = true
+            self.secondWidth.isActive = false
+            self.thirdWidth.isActive = false
         case 2:
+            self.firstWidth.isActive = false
             self.secondWidth.isActive = true
+            self.thirdWidth.isActive = false
         case 3:
+            self.firstWidth.isActive = false
+            self.secondWidth.isActive = false
             self.thirdWidth.isActive = true
         default:
             break

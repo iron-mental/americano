@@ -11,6 +11,7 @@ import UIKit
 enum AlertType {
     case StudyApplyView
     case StudyApplyDeleteView
+    case EmailAuthView
     
     var view: UIView {
         switch self {
@@ -18,6 +19,8 @@ enum AlertType {
             return StudyApplyMessageView(type: .apply)
         case .StudyApplyDeleteView:
             return AlertMessageView(message: "cancel your apply?")
+        case .EmailAuthView:
+            return EmailAlertMessageView(message: "이메일 인증하시겠습니까?\n\n 회원님의 이메일로 인증요청 됩니다.")
         }
     }
 }
@@ -32,7 +35,7 @@ class TerminalAlertMessage: NSObject {
         let backgroundView = UIView()
         let alertView = type.view
         
-        if let window = UIApplication.shared.keyWindow {
+        if let window = UIApplication.shared.windows.first {
             window.addSubview(backgroundView)
             window.addSubview(alertView)
             window.backgroundColor = UIColor.appColor(.terminalBackground)
