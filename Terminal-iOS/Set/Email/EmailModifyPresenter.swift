@@ -13,8 +13,13 @@ class EmailModifyPresenter: EmailModifyPresenterProtocol {
     var interactor: EmailModifyInteractorInputProtocol? 
     var wireFrame: EmailModifyWireFrameProtocol?
     
+    func completeModify(email: String) {
+        interactor?.completeModify(email: email)
+    }
 }
 
 extension EmailModifyPresenter: EmailModifyInteractorOutputProtocol {
-   
+    func didCompleteModify(result: Bool, message: String) {
+        view?.modifyResultHandle(result: result, message: message)
+    }
 }

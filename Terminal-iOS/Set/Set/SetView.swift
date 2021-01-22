@@ -23,15 +23,12 @@ class SetView: UIViewController {
                                Setting(title: "개인정보 취급방침")]
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
     
-    var userInfo: UserInfo? {
-        didSet {
-            self.settingList.reloadData()
-        }
-    }
+    var userInfo: UserInfo? { didSet { self.settingList.reloadData() }}
+    var emailVerify: Bool = false
     
     var presenter: SetPresenterProtocol?
     let settingList = UITableView(frame: .zero, style: .insetGrouped)
-    let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 25))
+    let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 25))
      
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,9 +38,14 @@ class SetView: UIViewController {
     }
     
     func attribute() {
+        if let emailVerify = userInfo?.emailVerified {
+            self.emailVerify = emailVerify
+        }
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = .appColor(.terminalBackground)
+        
         self.do {
             $0.title = "설정"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -62,11 +64,19 @@ class SetView: UIViewController {
             $0.register(UserManageCell.self, forCellReuseIdentifier: UserManageCell.userManageCellId)
         }
         accountButton.do {
-            $0.setTitle("인증", for: .normal)
-            $0.setTitleColor(.white, for: .normal)
-            $0.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-            $0.layer.borderWidth = 1
+            if emailVerify {
+                $0.setTitle("인증완료", for: .normal)
+                $0.setTitleColor(.appColor(.mainColor), for: .normal)
+                $0.backgroundColor = .appColor(.eamilAuthComplete)
+            } else {
+                $0.setTitle("인증필요", for: .normal)
+                $0.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
+                $0.backgroundColor = .appColor(.emailAuthRequire)
+            }
+            
             $0.layer.cornerRadius = 10
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 14)
+            $0.addTarget(self, action: #selector(emailAuth), for: .touchUpInside)
         }
     }
     
@@ -85,22 +95,66 @@ class SetView: UIViewController {
     @objc func pushProfileModify(_ sender: UITapGestureRecognizer) {
         presenter?.showProfileDetail()
     }
+    
+    // MARK: Email Auth
+    
+    @objc func emailAuth() {
+        
+        // 이미 인증된 경우
+        if emailVerify {
+            self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 2)
+        } else {
+            TerminalAlertMessage.show(type: .EmailAuthView)
+            if let view = TerminalAlertMessage.alertView as? AlertBaseUIView {
+                view.completeButton.addTarget(self, action: #selector(emailAuthRequest), for: .touchUpInside)
+            }
+        }
+    }
+    
+    @objc func emailAuthRequest() {
+        self.presenter?.emailAuthRequest()
+    }
 }
 
 extension SetView: SetViewProtocol {
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide {
+            print("Loading hide")
+        }
+    }
+    
+    func emailAuthResponse(result: Bool, message: String) {
+        if result {
+            TerminalAlertMessage.hide()
+            self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 2)
+        } else {
+            self.showToast(controller: self, message: message, seconds: 2)
+        }
+    }
+    
     func loggedOut() {
         let view = HomeView()
-        view.hidesBottomBarWhenPushed = true
+        let home = UINavigationController(rootViewController: view)
         
         /// 로그아웃과 동시에  토큰 삭제
         KeychainWrapper.standard.remove(forKey: "refreshToken")
-        navigationController?.pushViewController(view, animated: false)
+        
+        // RootViewController replace
+        guard let window = UIApplication.shared.windows.first else { return }
+        window.replaceRootViewController(home, animated: true, completion: nil)
     }
     
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신
     
     func showUserInfo(with userInfo: UserInfo) {
         self.userInfo = userInfo
+        self.attribute()
+        self.layout()
+        self.hideLoading()
     }
 }
 
@@ -142,27 +196,37 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        switch section {
+        case 0:
             return 1
-        } else if section == 1 {
+        case 1:
             return account.count
-        } else if section == 2 {
+        case 2:
             return noti.count
-        } else if section == 3{
+        case 3:
             return settingData.count
-        } else if section == 4 {
+        case 4:
             return userManage.count
-        } else {
+        default:
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // 프로필 상세
         if indexPath.section == 0 && indexPath.row == 0 {
             presenter?.showProfileDetail()
         }
+        
+        // 로그아웃
         if indexPath.section == 4 && indexPath.row == 0 {
             presenter?.loggedOut()
+        }
+        
+        // 회원탈퇴
+        if indexPath.section == 4 && indexPath.row == 1 {
+            presenter?.userWithdrawal()
         }
     }
     
@@ -171,7 +235,6 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let profileCell = settingList.dequeueReusableCell(withIdentifier: ProfileCell.profileCellId,
                                                               for: indexPath) as! ProfileCell
-            profileCell.selectionStyle = .none
             if let userInfo = self.userInfo {
                 profileCell.setData(data: userInfo)
             }
@@ -183,13 +246,11 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             if indexPath.row == 0 {
                 accountCell.accessoryView = accountButton
             }
-            accountCell.selectionStyle = .none
             return accountCell
         } else if indexPath.section == 2 {
             let notiCell = settingList.dequeueReusableCell(withIdentifier: NotiCell.notiCellId,
                                                            for: indexPath) as! NotiCell
             notiCell.title.text = noti[0]
-            notiCell.selectionStyle = .none
             return notiCell
         } else if indexPath.section == 3 {
             let defaultCell = settingList.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId,
@@ -199,7 +260,6 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             if settingData[indexPath.row].status == nil {
                 defaultCell.accessoryType = .disclosureIndicator
             }
-            defaultCell.selectionStyle = .none
             return defaultCell
         } else if indexPath.section == 4 {
             let userManageCell = settingList.dequeueReusableCell(withIdentifier: UserManageCell.userManageCellId,

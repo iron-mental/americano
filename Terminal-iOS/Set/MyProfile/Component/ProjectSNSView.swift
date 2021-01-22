@@ -27,8 +27,8 @@ class ProjectSNSView: BaseSNSView {
         
         if let _ = snsList["github"] {
             self.snsStack.addArrangedSubview(self.github)
-                    count += 1
-                }
+            count += 1
+        }
         
         if let _ = snsList["appStore"] {
             self.snsStack.addArrangedSubview(self.appStore)
@@ -50,6 +50,5 @@ class ProjectSNSView: BaseSNSView {
         default:
             break
         }
-    
     }
 }

@@ -118,7 +118,6 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
                 }
             }
         }
-//        localDataManager?.saveStudylist(studyList: resultArr)
         presenter?.didRetrieveLengthStudies(studies: studyArr)
     }
     

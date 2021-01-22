@@ -48,7 +48,7 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                                          fileName: "testImage.jpg",
                                          mimeType: "image/jpeg")
             }, with: TerminalRouter.userImageUpdate(id: userID))
-            .validate(statusCode: 200..<299)
+            .validate(statusCode: 200..<500)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

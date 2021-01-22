@@ -29,6 +29,7 @@ enum TerminalRouter: URLRequestConvertible {
     
     case userWithdrawal         (id: String, userData: Parameters)
     case emailVerify            (id: String)
+    case emailAuth              (id: String, email: String)
     case reissuanceToken        (refreshToken: String)
     case login                  (userData: Parameters)
     case signUp                 (userData: Parameters)
@@ -38,7 +39,6 @@ enum TerminalRouter: URLRequestConvertible {
     // 프로젝트
     case projectList            (id: String)
     case projectUpdate          (id: String, project: Parameters)
-//    case projectDelete          (id: String, projectID: String)
     
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
     case studyCreate            (study: Parameters)
@@ -106,6 +106,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .delete
         case .emailVerify:
             return .get
+        case .emailAuth:
+            return .put
         case .reissuanceToken:
             return .post
         case .login, .signUp:
@@ -207,6 +209,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/\(id)"
         case let .emailVerify(id):
             return "user/\(id)/emailVerify"
+        case let .emailAuth(id, _):
+            return "user/\(id)/email"
         case .reissuanceToken:
             return "user/reissuance"
         case .login:
@@ -284,6 +288,8 @@ enum TerminalRouter: URLRequestConvertible {
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
             return nil
+        case let .emailAuth(_, email):
+            return ["email": email]
         case let .userCareerUpdate(_, career):
             return career
         case let .userInfoUpdate(_, profile):

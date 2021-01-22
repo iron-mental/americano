@@ -14,13 +14,11 @@ class BaseProfileView: UIViewController {
     // MARK: Init Property
     let scrollView      = UIScrollView()
     let profile         = ProfileView()
-    
-    let addProjectButton = UIButton()
 
     let careerLabel     = UILabel()
     let career          = CareerView()
     let projectLabel    = UILabel()
-    let projectStack    = UIStackView()
+    let project         = ProjectListView()
     let snsLabel        = UILabel()
     let sns             = ProfileSNSView()
     let emailLabel      = UILabel()
@@ -42,7 +40,7 @@ class BaseProfileView: UIViewController {
     // MARK: Set Attribute
     
     func attribute() {
-        [profile, career, sns, projectStack, email, location].forEach {
+        [profile, career, sns, project, email, location].forEach {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
         }
@@ -50,11 +48,6 @@ class BaseProfileView: UIViewController {
         self.do {
             $0.title = "프로필"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
-        }
-
-        self.addProjectButton.do {
-            $0.setTitle("프로젝트 수정", for: .normal)
-            $0.setTitleColor(.appColor(.mainColor), for: .normal)
         }
         
         self.careerLabel.do {
@@ -82,18 +75,16 @@ class BaseProfileView: UIViewController {
             $0.textColor = .white
         }
         
-        self.projectStack.do {
-            $0.axis = .vertical
-            $0.distribution = .fill
-            $0.spacing = 5
-        }
+        self.sns.github.addTarget(self, action: #selector(goGithub), for: .touchUpInside)
+        self.sns.linkedin.addTarget(self, action: #selector(goLinkedin), for: .touchUpInside)
+        self.sns.web.addTarget(self, action: #selector(goWeb), for: .touchUpInside)
     }
     
     // MARK: Set Layout
     
     func layout() {
         self.view.addSubview(scrollView)
-        [profile, careerLabel, career, projectLabel, projectStack,
+        [profile, careerLabel, career, projectLabel, project,
          snsLabel, sns, emailLabel,email, locationLabel, location]
             .forEach { self.scrollView.addSubview($0) }
         
@@ -123,7 +114,7 @@ class BaseProfileView: UIViewController {
             $0.topAnchor.constraint(equalTo: careerLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-            $0.heightAnchor.constraint(equalTo: career.heightAnchor).isActive = true
+            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         }
         self.projectLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -131,16 +122,16 @@ class BaseProfileView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
-        self.projectStack.do {
+        self.project.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-            $0.heightAnchor.constraint(equalTo: projectStack.heightAnchor).isActive = true
+            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         }
         self.snsLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: projectStack.bottomAnchor, constant: 15).isActive = true
+            $0.topAnchor.constraint(equalTo: project.bottomAnchor, constant: 15).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
@@ -180,6 +171,15 @@ class BaseProfileView: UIViewController {
 }
 
 extension BaseProfileView: BaseProfileViewProtocol {
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide {
+            print("Loading hide")
+        }
+    }
     
     func showUserInfo(userInfo: UserInfo) {
         var snsList: [String: String] = [:]
@@ -196,9 +196,11 @@ extension BaseProfileView: BaseProfileViewProtocol {
 
         /// 프로필
         self.profile.name.text = userInfo.nickname
-
-        if let image = userInfo.image, let introduce = userInfo.introduce {
-            self.profile.descript.text = introduce
+        
+        
+        self.profile.descript.text = userInfo.introduce ?? ""
+        
+        if let image = userInfo.image {
             self.profile.profileImage.kf.setImage(with: URL(string: image),
                                              options: [.requestModifier(imageDownloadRequest)])
         }
@@ -232,16 +234,19 @@ extension BaseProfileView: BaseProfileViewProtocol {
         self.email.email.text = userInfo.email
 
         /// 활동지역
-        if let address = userInfo.address {
-            self.location.location.text = address
-        }
+        let sido = userInfo.sido ?? ""
+        let sigungu = userInfo.sigungu ?? ""
+        self.location.location.text = sido + " " + sigungu
+        
+        // hide loading
+        self.hideLoading()
     }
 
     func addProjectToStackView(project: [Project]) {
         self.projectData = project
 
         /// 기존의 프로젝트 스택뷰에 요소들을 셋팅 전에 모두 제거
-        self.projectStack.removeAllArrangedSubviews()
+        self.project.projectStack.removeAllArrangedSubviews()
 
         for data in project {
             let title = data.title
@@ -253,10 +258,36 @@ extension BaseProfileView: BaseProfileViewProtocol {
                                           snsAppStore: data.snsAppstore ?? "",
                                           snsPlayStore: data.snsPlaystore ?? "",
                                           frame: CGRect.zero)
-
-            self.projectStack.addArrangedSubview(projectView)
+           
+            self.project.projectStack.addArrangedSubview(projectView)
         }
-        
-        self.projectStack.addArrangedSubview(self.addProjectButton)
+    }
+}
+
+
+// MARK: @objc
+
+extension BaseProfileView {
+    
+    /// Profile SNS
+    @objc func goGithub() {
+        guard let address = self.userInfo?.snsGithub else { return }
+        let url = "https://www.github.com/\(address)"
+        let view = SNSWebView(url: url)
+        self.present(view, animated: true, completion: nil)
+    }
+    
+    @objc func goLinkedin() {
+        guard let address = self.userInfo?.snsLinkedin else { return }
+        let url = address
+        let view = SNSWebView(url: url)
+        self.present(view, animated: true, completion: nil)
+    }
+    
+    @objc func goWeb() {
+        guard let address = self.userInfo?.snsWeb else { return }
+        let url = address
+        let view = SNSWebView(url: url)
+        self.present(view, animated: true, completion: nil)
     }
 }

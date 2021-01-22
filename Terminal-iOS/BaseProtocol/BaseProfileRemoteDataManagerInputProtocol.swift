@@ -11,6 +11,8 @@ import Foundation
 protocol BaseProfileViewProtocol {
     func showUserInfo(userInfo: UserInfo)
     func addProjectToStackView(project: [Project])
+    func showLoading()
+    func hideLoading()
 }
 
 protocol BaseProfileRemoteDataManagerInputProtocol {

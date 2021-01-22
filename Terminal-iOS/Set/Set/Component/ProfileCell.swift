@@ -21,6 +21,7 @@ class ProfileCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         attribute()
         layout()
     }
@@ -34,14 +35,20 @@ class ProfileCell: UITableViewCell {
             return requestBody
         }
         
+        
+        /// 프로필 이미지
         let imageURL = data.image ?? ""
         self.profile.kf.setImage(with: URL(string: imageURL),
                                  options: [.requestModifier(imageDownloadRequest)])
         
-        
+        /// 자기소개
         self.name.text = data.nickname
         self.descript.text = data.introduce ?? ""
-        self.location.text = data.address ?? ""
+        
+        /// 활동지역
+        let sido = data.sido ?? ""
+        let sigungu = data.sigungu ?? ""
+        self.location.text = sido + " " + sigungu
     }
     
     func attribute() {

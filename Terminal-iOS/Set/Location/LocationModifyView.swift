@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 import Then
 
 class LocationModifyView: UIViewController {
@@ -30,11 +31,6 @@ class LocationModifyView: UIViewController {
         return collectionView
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        // 뷰 진입시 제일 초기에 시군구 탭 비활성화
-        self.locationTab.setEnabled(false, forSegmentAt: 1)
-    }
-    
     // MARK: viewDidLoad
     
     override func viewDidLoad() {
@@ -44,7 +40,7 @@ class LocationModifyView: UIViewController {
         presenter?.viewDidLoad()
     }
     
-    // MARK: attribute set
+    // MARK: Attribute set
     
     private func attribute() {
         self.do {
@@ -83,7 +79,7 @@ class LocationModifyView: UIViewController {
         }
     }
     
-    // MARK: layout set
+    // MARK: Layout set
     
     private func layout() {
         self.view.addSubview(locationTab)
@@ -134,15 +130,14 @@ class LocationModifyView: UIViewController {
         if selectedIndex == 0 {
             self.addressState = .sido
             self.address2depth.removeAll()
-            self.locationTab.setEnabled(false, forSegmentAt: 1)
             self.the1depth = ""
             self.the2depth = ""
             self.selectedSegmentIndex = 0
             self.locationCollectionView.reloadData()
-        } else if selectedIndex == 1
-                    && !self.address2depth.isEmpty{
-            self.addressState = .sigungu
-            self.locationCollectionView.reloadData()
+        } else if selectedIndex == 1 {
+            self.selectedSegmentIndex = 0
+            self.showToast(controller: self, message: "광역시도를 먼저 선택해주세요.", seconds: 1)
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         }
     }
 }

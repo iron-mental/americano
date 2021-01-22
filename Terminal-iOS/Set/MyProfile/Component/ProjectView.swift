@@ -10,6 +10,7 @@ import UIKit
 
 class ProjectView: UIView {
     var snsList: [String: String] = [:]
+    let sns = ProjectSNSView()
     
     init(title: String,
          contents: String,
@@ -33,8 +34,6 @@ class ProjectView: UIView {
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.dynamicFont(fontSize: 14, weight: .regular)
         }
-        
-        let sns = ProjectSNSView()
         
         self.addSubview(projectTitle)
         self.addSubview(projectContents)
