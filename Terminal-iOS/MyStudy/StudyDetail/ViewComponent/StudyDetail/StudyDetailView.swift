@@ -280,6 +280,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
+        memberView.totalMember.text = "\(userData.count) 명"
         parentView?.setting()
     }
     
