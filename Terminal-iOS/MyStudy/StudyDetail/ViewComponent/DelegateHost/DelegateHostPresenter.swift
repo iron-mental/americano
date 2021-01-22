@@ -14,12 +14,22 @@ class DelegateHostPresenter: DelegateHostPresenterProtocol {
     var wireFrame: DelegateHostWireFrameProtocol?
     
     func delegateHostButtonDidTap(newLeader: Int) {
-//        <#code#>
+        LoadingRainbowCat.show()
+        interactor?.putDelegateHostAPI(newLeader: newLeader)
     }
 }
 
 extension DelegateHostPresenter: DelegateHostInteractorOutputProtocol {
     func delegateHostResult(result: Bool, message: String) {
-//        <#code#>
+        LoadingRainbowCat.hide {
+            switch result {
+            case true:
+                view?.showDelegateHostResult(message: message)
+                break
+            case false:
+                view?.showError()
+                break
+            }
+        }
     }
 }

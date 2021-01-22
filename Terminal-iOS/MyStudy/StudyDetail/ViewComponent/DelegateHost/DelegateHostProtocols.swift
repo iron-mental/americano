@@ -41,7 +41,7 @@ protocol DelegateHostInteractorOutputProtocol {
 }
 
 protocol DelegateHostRemoteDataManagerInputProtocol {
-    var interactor: DelegateHostInteractorOutputProtocol? { get set }
+    var interactor: DelegateHostRemoteDataManagerOutputProtocol? { get set }
     
     //INTERACTOR -> REMOTEDATAMANAGER
     func putDelegateHostAPI(studyID: Int, newLeader: Int)

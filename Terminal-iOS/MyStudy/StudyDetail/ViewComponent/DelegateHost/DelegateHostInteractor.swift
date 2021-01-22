@@ -14,13 +14,21 @@ class DelegateHostInteractor: DelegateHostInteractorInputProtocol {
     var studyID: Int?
     
     func putDelegateHostAPI(newLeader: Int) {
-//        <#code#>
+        
+        remoteDataManager?.putDelegateHostAPI(studyID: studyID!, newLeader: newLeader)
     }
     
 }
 
 extension DelegateHostInteractor: DelegateHostRemoteDataManagerOutputProtocol {
     func delegateHostResult(response: BaseResponse<String>) {
-//        <#code#>
+        switch response.result {
+        case true:
+            presenter?.delegateHostResult(result: response.result, message: response.message!)
+            break
+        case false:
+            presenter?.delegateHostResult(result: response.result, message: "에러났어요")
+            break
+        }
     }
 }

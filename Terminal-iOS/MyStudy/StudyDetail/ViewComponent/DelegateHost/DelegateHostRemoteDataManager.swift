@@ -7,11 +7,36 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol {
-    var interactor: DelegateHostInteractorOutputProtocol?
+    var interactor: DelegateHostRemoteDataManagerOutputProtocol?
     
     func putDelegateHostAPI(studyID: Int, newLeader: Int) {
-//        <#code#>
+        
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.delegateHost(studyID: studyID, newLeader: newLeader))
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try! JSONDecoder().decode(BaseResponse<[String]>.self, from: data!)
+                        if let message = result.message {
+                            self.interactor?.delegateHostResult(response: result)
+                        }
+                    }
+                    catch {
+                        
+                    }
+                    break
+                case .failure(let err):
+                    print(err)
+                    break
+                }
+            }
     }
 }

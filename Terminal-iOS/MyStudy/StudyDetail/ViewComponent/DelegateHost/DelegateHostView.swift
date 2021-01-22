@@ -79,6 +79,6 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        <#code#>
+        presenter?.delegateHostButtonDidTap(newLeader: userList![indexPath.row].userID)
     }
 }
