@@ -38,7 +38,8 @@ class DelegateHostTableViewCell: UITableViewCell {
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 46)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 46)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 46)).isActive = true
+            $0.topAnchor.constraint(equalTo: topAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
         }
         nickname.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
