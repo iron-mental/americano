@@ -107,11 +107,11 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return Terminal.convertWidth(value: 26)
+        return Terminal.convertWidth(value: 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return Terminal.convertWidth(value: 13)
+        return Terminal.convertWidth(value: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -121,7 +121,8 @@ extension StudyCategoryView: UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.categoryCellID, for: indexPath) as! CategoryCell
         let category = categoryList[indexPath.row]
-        cell.imageView.image = category.image
+        cell.setData(category: category)
+        
         return cell
     }
     
