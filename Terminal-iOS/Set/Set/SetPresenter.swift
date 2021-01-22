@@ -25,10 +25,6 @@ class SetPresenter: SetPresenterProtocol {
     func emailAuthRequest() {
         interactor?.emailAuthRequest()
     }
-    
-    func showEmailAuth() {
-        wireFrame?.presentEmailAuth(from: view!)
-    }
    
     func loggedOut() {
         view?.loggedOut()

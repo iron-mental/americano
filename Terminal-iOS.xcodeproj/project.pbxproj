@@ -95,12 +95,7 @@
 		A58F901E259F450A007777B4 /* ProjectModifyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F901D259F450A007777B4 /* ProjectModifyInteractor.swift */; };
 		A58F9023259F4514007777B4 /* ProjectModifyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F9022259F4514007777B4 /* ProjectModifyWireFrame.swift */; };
 		A58F9028259F451D007777B4 /* ProjectModifyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58F9027259F451D007777B4 /* ProjectModifyProtocols.swift */; };
-		A5A0325C25B4589F0038073A /* EmailAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0325B25B4589F0038073A /* EmailAuthView.swift */; };
 		A5A0326425B459E20038073A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5A0326325B459E20038073A /* AudioToolbox.framework */; };
-		A5A0326925B46AAB0038073A /* EmailAuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0326825B46AAB0038073A /* EmailAuthPresenter.swift */; };
-		A5A0326E25B46AB90038073A /* EmailAuthInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0326D25B46AB90038073A /* EmailAuthInteractor.swift */; };
-		A5A0327325B46AC10038073A /* EmailAuthProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0327225B46AC10038073A /* EmailAuthProtocols.swift */; };
-		A5A0327825B46AC90038073A /* EmailAuthWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0327725B46AC90038073A /* EmailAuthWireFrame.swift */; };
 		A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A20EED25418D2A00060FFA /* ProfileView.swift */; };
 		A5A5F6C2256F843600405C71 /* SortState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6C1256F843600405C71 /* SortState.swift */; };
 		A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */; };
@@ -436,12 +431,7 @@
 		A58F901D259F450A007777B4 /* ProjectModifyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModifyInteractor.swift; sourceTree = "<group>"; };
 		A58F9022259F4514007777B4 /* ProjectModifyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModifyWireFrame.swift; sourceTree = "<group>"; };
 		A58F9027259F451D007777B4 /* ProjectModifyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModifyProtocols.swift; sourceTree = "<group>"; };
-		A5A0325B25B4589F0038073A /* EmailAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthView.swift; sourceTree = "<group>"; };
 		A5A0326325B459E20038073A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		A5A0326825B46AAB0038073A /* EmailAuthPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthPresenter.swift; sourceTree = "<group>"; };
-		A5A0326D25B46AB90038073A /* EmailAuthInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthInteractor.swift; sourceTree = "<group>"; };
-		A5A0327225B46AC10038073A /* EmailAuthProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthProtocols.swift; sourceTree = "<group>"; };
-		A5A0327725B46AC90038073A /* EmailAuthWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthWireFrame.swift; sourceTree = "<group>"; };
 		A5A20EED25418D2A00060FFA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		A5A5F6C1256F843600405C71 /* SortState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortState.swift; sourceTree = "<group>"; };
 		A5A5F6DD256FEACC00405C71 /* ProfileDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailRemoteManager.swift; sourceTree = "<group>"; };
@@ -730,7 +720,6 @@
 			isa = PBXGroup;
 			children = (
 				A53A2B6C25B6BB870002D3A0 /* UserWithdrawal */,
-				A5A0325A25B458850038073A /* EmailAuth */,
 				A55505BC255962E90089B919 /* Component */,
 				A581493A25912CE100BF3C2A /* Career */,
 				A58149122591249700BF3C2A /* Location */,
@@ -947,18 +936,6 @@
 				A5CEE7CF25B753CD00C2FF3F /* UIFont+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
-			sourceTree = "<group>";
-		};
-		A5A0325A25B458850038073A /* EmailAuth */ = {
-			isa = PBXGroup;
-			children = (
-				A5A0325B25B4589F0038073A /* EmailAuthView.swift */,
-				A5A0326825B46AAB0038073A /* EmailAuthPresenter.swift */,
-				A5A0326D25B46AB90038073A /* EmailAuthInteractor.swift */,
-				A5A0327225B46AC10038073A /* EmailAuthProtocols.swift */,
-				A5A0327725B46AC90038073A /* EmailAuthWireFrame.swift */,
-			);
-			path = EmailAuth;
 			sourceTree = "<group>";
 		};
 		A5A20EEC25418CE300060FFA /* Component */ = {
@@ -1756,7 +1733,6 @@
 				CCEEB46825AC50DF00F522C4 /* MyApplyStudyDetailPresenter.swift in Sources */,
 				CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */,
 				A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */,
-				A5A0326925B46AAB0038073A /* EmailAuthPresenter.swift in Sources */,
 				CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */,
@@ -1826,7 +1802,6 @@
 				A5417FF125A7A855005B884F /* ProfileSNSModifyView.swift in Sources */,
 				A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */,
 				CCBBEF082583BAFC00177E25 /* LocalUserInfo.swift in Sources */,
-				A5A0327825B46AC90038073A /* EmailAuthWireFrame.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
 				CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */,
 				A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */,
@@ -1847,7 +1822,6 @@
 				CC60446E2576253F000D11C7 /* NoticeDetailProtocols.swift in Sources */,
 				A5C7B8F525AC4FCD00016D5B /* Address.swift in Sources */,
 				CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */,
-				A5A0326E25B46AB90038073A /* EmailAuthInteractor.swift in Sources */,
 				A5C7B90D25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift in Sources */,
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				A5417FD325A77E3F005B884F /* ProjectSNSView.swift in Sources */,
@@ -1969,7 +1943,6 @@
 				A5814921259129C800BF3C2A /* LocationModifyInteractor.swift in Sources */,
 				A554DDC925AEEAA300C03E41 /* UIViewController+Ext.swift in Sources */,
 				CCBC88CF254BEDE200C2A6C4 /* SNSIconsView.swift in Sources */,
-				A5A0327325B46AC10038073A /* EmailAuthProtocols.swift in Sources */,
 				CCB139CF25592D8300410184 /* IntroPresenter.swift in Sources */,
 				CCF632CC25A2E841004B80B3 /* SearchStudyResultInteractor.swift in Sources */,
 				A5D6A791257430B4007D6409 /* ProfileModifyWireFrame.swift in Sources */,
@@ -1991,7 +1964,6 @@
 				A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */,
 				CCAF0FDC253303300060A2F6 /* MyStudyMainPresenter.swift in Sources */,
 				CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */,
-				A5A0325C25B4589F0038073A /* EmailAuthView.swift in Sources */,
 				CC72CBF425B05A00009E9986 /* ApplyUserDetailProtocols.swift in Sources */,
 				CCD51C7D256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
