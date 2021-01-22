@@ -69,7 +69,7 @@ class SetView: UIViewController {
                 $0.setTitleColor(.appColor(.mainColor), for: .normal)
                 $0.backgroundColor = .appColor(.eamilAuthComplete)
             } else {
-                $0.setTitle("인증필요", for: .normal)
+                $0.setTitle("미인증", for: .normal)
                 $0.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
                 $0.backgroundColor = .appColor(.emailAuthRequire)
             }
