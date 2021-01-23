@@ -23,12 +23,15 @@ class EmailModifyView: UIViewController {
     }
     
     private func attribute() {
+        self.hideKeyboardWhenTappedAround()
         self.view.backgroundColor = .appColor(.terminalBackground)
+        
         self.emailLabel.do {
             $0.text = "Email"
             $0.textColor = .white
             $0.font = UIFont.notosansMedium(size: 14)
         }
+        
         self.emailTextField.do {
             $0.text = email ?? ""
             $0.layer.cornerRadius = 10
@@ -37,6 +40,7 @@ class EmailModifyView: UIViewController {
             $0.addLeftPadding()
             $0.font = UIFont.notosansMedium(size: 18)
         }
+        
         self.completeButton.do {
             $0.backgroundColor = .appColor(.mainColor)
             $0.setTitle("수정완료", for: .normal)

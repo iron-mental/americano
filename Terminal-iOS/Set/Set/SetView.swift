@@ -99,8 +99,8 @@ class SetView: UIViewController {
     // MARK: Email Auth
     
     @objc func emailAuth() {
-        
-        // 이미 인증된 경우
+
+        /// 인증 여부에 따른 분기처리
         if emailVerify {
             self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 2)
         } else {

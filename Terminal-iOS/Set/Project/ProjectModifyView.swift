@@ -21,7 +21,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         super.viewDidLoad()
         attribute()
         layout()
-        self.hideKeyboardWhenTappedAround()
         keyboardAddObserver(with: self,
                             showSelector: nil,
                             hideSelector: #selector(keyboardWillHide))
@@ -32,6 +31,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     private func attribute() {
+        self.hideKeyboardWhenTappedAround()
         self.view.backgroundColor = .appColor(.terminalBackground)
 
         self.projectView.do {
