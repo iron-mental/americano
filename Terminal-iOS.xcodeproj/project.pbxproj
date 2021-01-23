@@ -711,6 +711,10 @@
 		A51BA0AE2577F0CA00B9673F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
+				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
+				CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */,
+				CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */,
 				A51BA0AF2577F0E300B9673F /* Contents.swift */,
 			);
 			path = Utils;
@@ -1242,12 +1246,8 @@
 				CCB752C825A841C0003E7CA7 /* StaticViewComponent */,
 				CCBBEEC32583631900177E25 /* CoreDataModel */,
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
-				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
-				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
 				A56264D025B568A6004CD298 /* Web */,
 				A51BA0AE2577F0CA00B9673F /* Utils */,
-				CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */,
-				CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */,
 				A56605E025835873002C4A77 /* BaseComponent */,
 				A5BA460C255D09C80061C511 /* Network */,
 				A587CEC7251A428A00A2AD13 /* Extensions-Utillities */,
