@@ -67,7 +67,14 @@ class SNSModifyView: UIViewController {
         let linkedIn = snsModifyView.secondTextField.text ?? ""
         let web = snsModifyView.thirdTextField.text ?? ""
 
-        self.presenter?.completeModify(github: github, linkedIn: linkedIn, web: web)
+        // 공백체크
+        if github.whitespaceCheck()
+            || linkedIn.whitespaceCheck()
+            || web.whitespaceCheck() {
+            self.showToast(controller: self, message: "공백은 포함되지 않습니다..", seconds: 1)
+        } else {
+            self.presenter?.completeModify(github: github, linkedIn: linkedIn, web: web)
+        }
     }
 }
 

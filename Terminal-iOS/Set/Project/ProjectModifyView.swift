@@ -93,7 +93,11 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         }
     }
     
-    func getCellData() {
+    func getCellData() -> Bool {
+        
+        // 공백여부 체크 변수
+        var state = true
+        
         for index in 0..<projectArr.count {
             let indexpath = IndexPath(row: index, section: 0)
             let cell = projectView.cellForRow(at: indexpath) as! ProjectCell
@@ -104,7 +108,15 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             let github = cell.sns.firstTextFeield.text ?? ""
             let appStore = cell.sns.secondTextField.text ?? ""
             let playStore = cell.sns.thirdTextField.text ?? ""
-        
+            
+            if github.whitespaceCheck()
+                || appStore.whitespaceCheck()
+                || playStore.whitespaceCheck() {
+                self.showToast(controller: self, message: "공백이 포함되어 있습니다.", seconds: 1)
+                
+                state = false
+            }
+            
             projectArr[index] = Project(id: id,
                                         title: title,
                                         contents: contents,
@@ -113,6 +125,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                         snsPlaystore: playStore,
                                         createAt: "")
         }
+        
+        return state
     }
     
     @objc func keyboardWillHide() {
@@ -120,8 +134,16 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     @objc func completeModify() {
-        getCellData()
-        presenter?.completeModify(project: projectArr)
+        let whitespaceState = getCellData()
+        
+        // 공백체크
+        if whitespaceState {
+            presenter?.completeModify(project: projectArr)
+        } else {
+            self.showToast(controller: self, message: "SNS는 공백이 포함되지 않습니다.", seconds: 1)
+        }
+        
+        
     }
     
     @objc func addProject() {

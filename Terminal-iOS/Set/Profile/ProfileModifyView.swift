@@ -227,10 +227,15 @@ class ProfileModifyView: UIViewController {
         let introduction    = self.introduction.text!
         let image           = self.profileImage.image!
         
-        let profile         = Profile(profileImage: image, nickname: nickname, introduction: introduction)
-        
-        presenter?.completeImageModify(image: image)
-        presenter?.completeModify(profile: profile)
+        // 공백체크
+        if nickname.whitespaceCheck() {
+            self.showToast(controller: self, message: "이름은 공백이 포함되지 않습니다.", seconds: 1)
+        } else {
+            let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
+            
+            presenter?.completeImageModify(image: image)
+            presenter?.completeModify(profile: profile)
+        }
     }
 
 }
