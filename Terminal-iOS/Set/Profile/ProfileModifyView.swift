@@ -11,11 +11,17 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class ProfileModifyView: UIViewController {
+    
+    // MARK: Init Property
+    
     var presenter: ProfileModifyPresenterProtocol?
     var profile: Profile?
     let picker = UIImagePickerController()
 
     let projectAddButton = UIButton()
+    
+    lazy var modifyLabel = UILabel()
+    lazy var contentView = UIView()
     
     lazy var profileImage = UIImageView()
     lazy var nameLabel = UILabel()
@@ -36,7 +42,9 @@ class ProfileModifyView: UIViewController {
     
     // MARK: Set Attribute
     func attribute() {
+        self.hideKeyboardWhenTappedAround()
         self.view.backgroundColor = .appColor(.terminalBackground)
+        
         self.picker.do {
             $0.delegate = self
         }
@@ -54,10 +62,24 @@ class ProfileModifyView: UIViewController {
             $0.isUserInteractionEnabled = true
             $0.backgroundColor = .blue
         }
+        
+        self.contentView.do {
+            $0.backgroundColor = .darkGray
+            $0.alpha = 0.5
+        }
+        
+        self.modifyLabel.do {
+            $0.text = "편집"
+            $0.textAlignment = .center
+            $0.textColor = .white
+            $0.font = UIFont.notosansMedium(size: 13)
+        }
+        
         self.nameLabel.do {
             $0.text = "이름"
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
         }
+        
         self.name.do {
             $0.text = self.profile?.nickname
             $0.placeholder = "닉네임"
@@ -66,10 +88,12 @@ class ProfileModifyView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.addLeftPadding()
         }
+        
         self.introductionLabel.do {
             $0.text = "자기소개"
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
         }
+        
         self.introduction.do {
             $0.backgroundColor = .darkGray
             $0.text = self.profile?.introduction
@@ -96,8 +120,10 @@ class ProfileModifyView: UIViewController {
     // MARK: Set Layout
     
     func layout() {
-        [self.profileImage, self.nameLabel, self.name, self.introductionLabel, self.introduction, self.completeButton]
+        [profileImage, nameLabel, name, introductionLabel, introduction, completeButton]
             .forEach { self.view.addSubview($0) }
+        self.profileImage.addSubview(self.contentView)
+        self.contentView.addSubview(self.modifyLabel)
         
         self.profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +132,21 @@ class ProfileModifyView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
+        
+        self.contentView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 35)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
+        }
+        
+        self.modifyLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+        }
+        
         self.nameLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.profileImage.bottomAnchor, constant: 20).isActive = true
