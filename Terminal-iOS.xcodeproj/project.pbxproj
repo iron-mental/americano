@@ -1465,11 +1465,8 @@
 			children = (
 				CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */,
 				CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */,
-<<<<<<< HEAD
 				A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */,
-=======
 				CC7F384B25BABEAB00DEA541 /* DelegateStudyConfirmView.swift */,
->>>>>>> feat : 방장 위임후 pop
 			);
 			path = StaticViewComponent;
 			sourceTree = "<group>";
