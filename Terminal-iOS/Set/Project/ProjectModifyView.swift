@@ -160,7 +160,7 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
             })
         } else {
             // 실패시 에러처리 부분
-            self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 1)
+            self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 1, completion: nil)
         }
     }
 }

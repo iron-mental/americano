@@ -136,7 +136,7 @@ class LocationModifyView: UIViewController {
             self.locationCollectionView.reloadData()
         } else if selectedIndex == 1 {
             self.selectedSegmentIndex = 0
-            self.showToast(controller: self, message: "광역시도를 먼저 선택해주세요.", seconds: 1)
+            self.showToast(controller: self, message: "광역시도를 먼저 선택해주세요.", seconds: 1, completion: nil)
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         }
     }
