@@ -9,17 +9,17 @@
 import UIKit
 
 enum AlertType {
-    case StudyApplyView
-    case StudyApplyDeleteView
-    case EmailAuthView
+    case studyApplyView
+    case studyApplyDeleteView
+    case emailAuthView
     
     var view: UIView {
         switch self {
-        case .StudyApplyView:
+        case .studyApplyView:
             return StudyApplyMessageView(type: .apply)
-        case .StudyApplyDeleteView:
+        case .studyApplyDeleteView:
             return AlertMessageView(message: "cancel your apply?")
-        case .EmailAuthView:
+        case .emailAuthView:
             return EmailAlertMessageView(message: "이메일 인증하시겠습니까?\n\n 회원님의 이메일로 인증요청 됩니다.")
         }
     }

@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: 닉네임 중복
 
-struct duplicateNickname: Codable {
+struct DuplicateNickname: Codable {
     let result: Bool
     let message: String
 }

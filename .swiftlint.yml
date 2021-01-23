@@ -1,9 +1,12 @@
-function_body_length: 300
+function_body_length : 500
 disabled_rules:
+- force_try
 - line_length
 - trailing_whitespace
-- opening_brace
+- vertical_whitespace
+- identifier_name
 - force_cast
+
 included:
 excluded:
 - Pods

@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
-    func getSearchResult(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> ()) {
+    func getSearchResult(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> Void) {
         var resultList: [StudyDetailLocationPost] = []
         var result = false
         let headers: HTTPHeaders = [ "Authorization": "KakaoAK 6cd40b04c090b1a033634e5051aab78c" ]
@@ -43,7 +43,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                     case .failure(let err) :
                         print(err)
                     }
-                    completionHandler(result,resultList)
+                    completionHandler(result, resultList)
                    })
     }
 }

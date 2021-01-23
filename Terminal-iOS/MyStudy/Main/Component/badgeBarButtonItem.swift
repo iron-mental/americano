@@ -8,7 +8,7 @@
 
 import UIKit
 
-class badgeBarButtonItem: UIBarButtonItem {
+class BadgeBarButtonItem: UIBarButtonItem {
     var badgeLabel = UILabel(frame: CGRect(x: -10, y: -5, width: 18, height: 18))
     var button = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
     

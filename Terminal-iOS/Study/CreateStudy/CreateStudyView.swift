@@ -48,7 +48,7 @@ class CreateStudyView: UIViewController{
     var currentScrollViewMaxY: CGFloat = 0
     var textViewTapFlag = false
     var keyboardLine: UIView {
-        var view = UIView()
+        let view = UIView()
         view.backgroundColor = .red
         view.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 291 , width: UIScreen.main.bounds.width, height: 1)
         return view

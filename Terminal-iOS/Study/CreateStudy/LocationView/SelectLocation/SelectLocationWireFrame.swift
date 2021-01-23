@@ -16,7 +16,7 @@ class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
         view.location = item
         print(view.location)
         
-        view.delegate = parentView as! selectLocationDelegate
+        view.delegate = parentView as? selectLocationDelegate
         let interactor = SelectLocationInteractor()
         let presenter = SelectLocationPresenter()
         let remoteDataManager = SelectLocationRemoteDataManager()

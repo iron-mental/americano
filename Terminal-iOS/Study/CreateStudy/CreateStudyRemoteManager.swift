@@ -63,22 +63,22 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
     func putStudy(study: StudyDetailPost, studyID: Int, completion: @escaping (Bool, String) -> Void) {
         
         let params: [String: String] = [
-            "category" : study.category != nil ? study.category : "",
-            "title" : study.title != nil ? study.title : "",
-            "introduce" : study.introduce != nil ? study.introduce : "",
-            "progress" : study.progress != nil ? study.progress : "",
-            "study_time" : study.studyTime != nil ? study.studyTime : "",
-            "latitude" : study.location.lat != nil ? String(study.location.lat) : "",
-            "longitude" : study.location.lng != nil ? String(study.location.lng) : "",
-            "sido" : study.location.sido != nil ? study.location.sido! : "",
-            "sigungu" : study.location.sigungu != nil ? study.location.sigungu! : "",
-            "address_name" : study.location.address != nil ? study.location.address : "",
-            "location_detail" : study.location.detailAddress != nil ? study.location.detailAddress! : "",
-            "place_name" : study.location.placeName != nil ? study.location.placeName! : "",
-            "sns_notion" : study.snsNotion != nil ? study.snsNotion! : "",
-            "sns_evernote" : study.snsEvernote != nil ? study.snsEvernote! : "",
-            "sns_web" : study.snsWeb != nil ? study.snsWeb! : "",
-            "image" : "\(study.image)"
+            "category": study.category != nil ? study.category : "",
+            "title": study.title != nil ? study.title : "",
+            "introduce": study.introduce != nil ? study.introduce : "",
+            "progress": study.progress != nil ? study.progress : "",
+            "study_time": study.studyTime != nil ? study.studyTime : "",
+            "latitude": study.location.lat != nil ? String(study.location.lat) : "",
+            "longitude": study.location.lng != nil ? String(study.location.lng) : "",
+            "sido": study.location.sido != nil ? study.location.sido! : "",
+            "sigungu": study.location.sigungu != nil ? study.location.sigungu! : "",
+            "address_name": study.location.address != nil ? study.location.address : "",
+            "location_detail": study.location.detailAddress != nil ? study.location.detailAddress! : "",
+            "place_name": study.location.placeName != nil ? study.location.placeName! : "",
+            "sns_notion": study.snsNotion != nil ? study.snsNotion! : "",
+            "sns_evernote": study.snsEvernote != nil ? study.snsEvernote! : "",
+            "sns_web": study.snsWeb != nil ? study.snsWeb! : "",
+            "image": "\(study.image)"
         ]
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)

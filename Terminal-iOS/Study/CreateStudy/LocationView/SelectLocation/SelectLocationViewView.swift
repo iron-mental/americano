@@ -51,8 +51,8 @@ class SelectLocationView: UIViewController {
     
     @objc func keyboardWillShow(notification:NSNotification) {
         
-        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
         if preventPlaceNameFlag == false {
@@ -84,7 +84,7 @@ class SelectLocationView: UIViewController {
         }
         bottomView.do {
             $0.completeButton.addTarget(self, action: #selector(didCompleteButtonClicked), for: .touchUpInside)
-            $0.Address.text = location?.address
+            $0.address.text = location?.address
         }
     }
     
@@ -164,7 +164,7 @@ extension SelectLocationView: UITextFieldDelegate {
 
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
-            bottomView.Address.text = item.address
+            bottomView.address.text = item.address
             location = item
     }
 }

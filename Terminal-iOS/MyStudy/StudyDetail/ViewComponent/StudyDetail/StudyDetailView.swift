@@ -254,7 +254,7 @@ class StudyDetailView: UIViewController {
         }
     }
     @objc func joinButtonDidTap() {
-        TerminalAlertMessage.show(type: .StudyApplyView)
+        TerminalAlertMessage.show(type: .studyApplyView)
         (TerminalAlertMessage.alertView as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
     }
     

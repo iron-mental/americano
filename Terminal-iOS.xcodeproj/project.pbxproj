@@ -54,6 +54,7 @@
 		A541800525A8919F005B884F /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A541800425A8919F005B884F /* LocationCell.swift */; };
 		A54AD2322588FBFF00BC6558 /* CategoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54AD2312588FBFF00BC6558 /* CategoryState.swift */; };
 		A554DDC925AEEAA300C03E41 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */; };
+		A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */; };
 		A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */; };
 		A56264D225B568DD004CD298 /* SNSWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264D125B568DD004CD298 /* SNSWebView.swift */; };
 		A56264DA25B568F4004CD298 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56264D925B568F4004CD298 /* WebKit.framework */; };
@@ -390,6 +391,7 @@
 		A541800425A8919F005B884F /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		A54AD2312588FBFF00BC6558 /* CategoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryState.swift; sourceTree = "<group>"; };
 		A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		A56264D125B568DD004CD298 /* SNSWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSWebView.swift; sourceTree = "<group>"; };
 		A56264D925B568F4004CD298 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -1223,6 +1225,7 @@
 		CCA1FF4A24FD0C930026C3EA = {
 			isa = PBXGroup;
 			children = (
+				A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */,
 				CCA1FF5524FD0C930026C3EA /* Terminal-iOS */,
 				CCA1FF5424FD0C930026C3EA /* Products */,
 				5ABD6AFD2D9CBF39ED6C88B5 /* Pods */,
@@ -1634,6 +1637,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */,

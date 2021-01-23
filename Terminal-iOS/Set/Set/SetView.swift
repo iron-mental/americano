@@ -104,7 +104,7 @@ class SetView: UIViewController {
         if emailVerify {
             self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 2)
         } else {
-            TerminalAlertMessage.show(type: .EmailAuthView)
+            TerminalAlertMessage.show(type: .emailAuthView)
             if let view = TerminalAlertMessage.alertView as? AlertBaseUIView {
                 view.completeButton.addTarget(self, action: #selector(emailAuthRequest), for: .touchUpInside)
             }

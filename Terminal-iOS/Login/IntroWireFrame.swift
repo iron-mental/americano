@@ -15,7 +15,6 @@ class IntroWireFrame: IntroWireFrameProtocol {
         let presenter: IntroPresenterProtocol = IntroPresenter()
         let interactor: IntroInteractorProtocol = IntroInteractor()
         let remoteDataManager: IntroRemoteDataManagerProtocol = IntroRemoteDataManager()
-        let localDataManager: IntroLocalDataManagerProtocol = IntroLocalDataManager()
         let wireFrame: IntroWireFrameProtocol = IntroWireFrame()
         
         view.presenter = presenter
