@@ -38,6 +38,7 @@ class ProfileModifyView: UIViewController {
         attribute()
         layout()
         textViewDidChange(introduction)
+        LoadingRainbowCat.hide()
     }
     
     // MARK: Set Attribute

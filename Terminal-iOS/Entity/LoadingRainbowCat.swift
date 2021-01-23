@@ -36,7 +36,7 @@ class LoadingRainbowCat: NSObject {
         popupView.loopMode = .loop
     }
     
-    class func hide(completion: () -> Void) {
+    class func hide(completion: (() -> Void)? = nil) {
         
         if let popupView = sharedInstance.popupView,
            let backgroundView = sharedInstance.backgroundView {
@@ -44,6 +44,6 @@ class LoadingRainbowCat: NSObject {
             backgroundView.removeFromSuperview()
             popupView.removeFromSuperview()
         }
-        completion()
+        completion?()
     }
 }
