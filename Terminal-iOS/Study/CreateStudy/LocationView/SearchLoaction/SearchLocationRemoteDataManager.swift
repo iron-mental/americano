@@ -10,17 +10,6 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-struct searchLocationResult {
-    var address: String
-    var lat: Double
-    var lng: Double
-    var detailAddress: String?
-    var placeName: String?
-    var category: String?
-    var region_1depth_name: String?
-    var region_2depth_name: String?
-}
-
 class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
     func getSearchResult(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> ()) {
         var resultList: [StudyDetailLocationPost] = []
