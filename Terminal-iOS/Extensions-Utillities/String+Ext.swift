@@ -23,4 +23,8 @@ extension String {
         
         return boundingBox.height
     }
+    
+    func whitespaceCheck() -> Bool {
+        return self.contains(" ")
+    }
 }
