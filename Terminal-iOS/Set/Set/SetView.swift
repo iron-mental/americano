@@ -185,7 +185,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             label.text = sections[1]
         } else if section == 2 {
             label.text = sections[2]
-        } else if section == 3{
+        } else if section == 3 {
             label.text = sections[3]
         }
         return headerView

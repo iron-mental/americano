@@ -63,4 +63,3 @@ protocol ProfileModifyRemoteDataManagerOutputProtocol: class {
     func nicknameModifyRetrieved(result: BaseResponse<Bool>)
     func mergeProfileModifyResult()
 }
-

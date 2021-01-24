@@ -61,10 +61,10 @@ class CoreDataManager {
             updatingUserInfo.createdAt = userInfo.createdAt
             try context.save()
             
-        }
-        catch {
+        } catch {
             print("putUserInfo 오류")
-        }    }
+        }
+    }
     
     func getUserinfo() -> UserInfo? {
         var userInfo: UserInfo?

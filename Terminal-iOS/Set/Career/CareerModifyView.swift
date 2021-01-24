@@ -11,14 +11,14 @@ import UIKit
 class CareerModifyView: UIViewController {
     var presenter: CareerModifyPresenterProtocol?
     var careerTitle: String? {
-        didSet{
+        didSet {
             if let title = self.careerTitle {
                 self.careerTitleModify.text = title
             }
         }
     }
     var careerContents: String? {
-        didSet{
+        didSet {
             if let contents = self.careerContents {
                 self.careerDescriptModify.text = contents
             }

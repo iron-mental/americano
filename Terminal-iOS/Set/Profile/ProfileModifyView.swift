@@ -190,8 +190,8 @@ class ProfileModifyView: UIViewController {
     
     @objc func didImageViewClicked() {
         let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
-        let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
+        let camera =  UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)
@@ -261,10 +261,10 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 
 // MARK: 이미지 픽커
 
-extension ProfileModifyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension ProfileModifyView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.profileImage.image = image
         }
         dismiss(animated: true, completion: nil)
@@ -282,7 +282,7 @@ extension ProfileModifyView: UITextFieldDelegate {
 
 extension ProfileModifyView: UITextViewDelegate {
     
-    //MARK: TextView Dynamic Height
+    // MARK: TextView Dynamic Height
     
     func textViewDidChange(_ textView: UITextView) {
         let size = CGSize(width: view.frame.width, height: .infinity)
@@ -296,7 +296,7 @@ extension ProfileModifyView: UITextViewDelegate {
 }
 
 extension ProfileModifyView: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
 }

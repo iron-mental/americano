@@ -76,4 +76,3 @@ protocol ProfileDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataMana
 protocol ProfileDetailLocalDataManagerInputProtocol: class {
     
 }
-
