@@ -21,9 +21,9 @@ class MyStudyDetailView: UIViewController {
                        ChatWireFrame.createChatModule()]
         }
     }
+    var userList: [Participate] = []
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
-    
     var VCArr: [UIViewController] = []
     var authority: StudyDetailViewState = .member
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
@@ -190,6 +190,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     func delegateHostButtonDidTap() {
+        presenter?.delegateHostButtonDidTap(studyID: studyID!, userList: userList)
         //방장 위임하는 뷰로 가보자
     }
     
@@ -230,6 +231,8 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
     func setting() {
         authority = (VCArr[1] as! StudyDetailViewProtocol).state
+        (VCArr[0] as! NoticeView).state = (VCArr[1] as! StudyDetailViewProtocol).state
+        userList = (VCArr[1] as! StudyDetailView).userData
         attribute()
         layout()
     }
@@ -239,8 +242,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
     }
     
-    func showLeaveStudyFailed() {
+    func showLeaveStudyFailed(message: String) {
         print("스터디 나가기 실패")
+        showToast(controller: self, message: message, seconds: 1, completion: nil)
     }
     
     func showDeleteStudyComplete() {
@@ -248,7 +252,7 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
     }
     
-    func showDeleteStudyFailed() {
+    func showDeleteStudyFailed(message: String) {
         print("스터디 삭제 실패")
     }
 }

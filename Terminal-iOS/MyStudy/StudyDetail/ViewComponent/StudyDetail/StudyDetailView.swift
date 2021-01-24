@@ -280,6 +280,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
+        memberView.totalMember.text = "\(userData.count) 명"
         parentView?.setting()
     }
     
@@ -298,13 +299,13 @@ extension StudyDetailView: StudyDetailViewProtocol {
 
 extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return userData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
-        cell.profileImage.image = #imageLiteral(resourceName: "leehi")
-        cell.nickname.text = "이하이"
+        cell.setData(userInfo: userData[indexPath.row])
+        cell.nickname.text = userData[indexPath.row].nickname
         return cell
     }
     

@@ -68,7 +68,6 @@ class ApplyUserDetailView: BaseProfileView {
     }
     
     @objc func acceptButtonDidTap() {
-
         presenter?.acceptButtonDidtap()
     }
 }

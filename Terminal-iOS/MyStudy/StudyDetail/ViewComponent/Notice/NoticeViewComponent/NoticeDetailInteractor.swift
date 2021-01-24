@@ -20,6 +20,7 @@ class NoticeDetailInteractor: NoticeDetailInteractorProtocol {
                 self.presenter?.noticeDetailResult(result: result, notice: notice)
                 break
             case false:
+//
                 break
             }
         })
@@ -32,7 +33,7 @@ class NoticeDetailInteractor: NoticeDetailInteractorProtocol {
                 self.presenter?.noticeRemoveResult(result: result, message: message)
                 break
             case false:
-                
+//                
                 break
             }
         })

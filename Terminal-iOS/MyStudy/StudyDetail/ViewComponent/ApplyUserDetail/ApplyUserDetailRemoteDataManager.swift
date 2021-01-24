@@ -17,26 +17,23 @@ class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserD
             .shared
             .session
             .request(TerminalRouter.applyDetermine(studyID: studyID, applyID: applyID, status: status))
-            .validate(statusCode: 200..<500)
+            .validate(statusCode: 200..<501)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
-
                     let data = "\(json)".data(using: .utf8)
-
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
                         if let message = result.message {
                             (self.remoteRequestHandler as! ApplyUserDetailRemoteDataManagerOutputProtocol).onApplyStatusRetrieved(response: result)
                         }
                     } catch {
-
                         print("error")
                     }
                     break
                 case .failure(let _):
-
+                    
                     break
                 }
             }

@@ -125,7 +125,7 @@ extension CareerModifyView: CareerModifyViewProtocol {
         if result {
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
             self.navigationController?.popViewController(animated: true, completion: {
-                parent?.showToast(controller: parent!, message: "경력 수정 완료", seconds: 1)
+                parent?.showToast(controller: parent!, message: "경력 수정 완료", seconds: 1, completion: nil)
                 parent?.presenter?.viewDidLoad()
             })
         } else {

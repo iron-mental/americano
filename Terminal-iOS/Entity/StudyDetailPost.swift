@@ -25,6 +25,6 @@ struct StudyDetailLocationPost {
     var detailAddress: String?
     var placeName: String?
     var category: String?
-    var sido: String?
-    var sigungu: String?
+    var sido: String
+    var sigungu: String
 }

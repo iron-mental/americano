@@ -13,7 +13,7 @@ enum TerminalRouter: URLRequestConvertible {
     typealias Parameters = [String: Any]
     
     // MARK: router case init
-
+    
     case authCheck              (id: String)
     
     // 유저 - 회원가입 로그인 비밀번호 찾기 일단 안넣음
@@ -39,11 +39,11 @@ enum TerminalRouter: URLRequestConvertible {
     // 프로젝트
     case projectList            (id: String)
     case projectUpdate          (id: String, project: Parameters)
-    
+
     // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
     case studyCreate            (study: Parameters)
     case studyDetail            (studyID: String)
-    case studyUpdate            (studyID: String)
+    case studyUpdate            (studyID: String, study: Parameters)
     case studyDelete            (studyID: String)
     case studyList              (sort: Parameters)
     case studyListForKey        (value: String)
@@ -51,6 +51,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studySearch            (keyword: String)
     case hotKeyword
     case studyLeave             (studyID: String)
+    case delegateHost           (studyID: Int, newLeader: Int)
     
     // 신청부분
     case applyStudy             (studyID: String, message: Parameters)
@@ -89,7 +90,7 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .userInfo:
             return .get
-
+            
         case .userImageUpdate:
             return .put
         case .userInfoUpdate:
@@ -111,10 +112,10 @@ enum TerminalRouter: URLRequestConvertible {
             return .post
         case .login, .signUp:
             return .post
-        
+            
         case .address:
             return .get
-        
+            
             
         // 프로젝트
         case .projectList:
@@ -143,6 +144,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .studyLeave:
             return .post
+        case .delegateHost:
+            return .put
             
         // 신청
         case .applyStudy:
@@ -174,7 +177,8 @@ enum TerminalRouter: URLRequestConvertible {
         case .noticeDelete:
             return .delete
         }
-}
+    }
+
     // MARK: URL EndPoint init
     
     var endPoint: String {
@@ -182,7 +186,7 @@ enum TerminalRouter: URLRequestConvertible {
         
         case let .authCheck(id):
             return "user/\(id)"
-        
+            
         // 유저
         case let .nicknameCheck(nickname):
             return "user/check-nickname/\(nickname)"
@@ -227,7 +231,7 @@ enum TerminalRouter: URLRequestConvertible {
         // 스터디
         case .studyCreate, .studyList:
             return "study"
-        case let .studyDetail(studyID), let .studyUpdate(studyID), let .studyDelete(studyID):
+        case let .studyDetail(studyID), let .studyUpdate(studyID, _), let .studyDelete(studyID):
             return "study/\(studyID)"
         case .studyListForKey:
             return "study/paging/list"
@@ -239,6 +243,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/ranking"
         case let .studyLeave(studyID):
             return "study/\(studyID)/leave"
+        case let .delegateHost(studyID, _):
+            return "study/\(studyID)/delegate"
             
         // 신청
         case let .applyStudy(studyID, _):
@@ -279,7 +285,7 @@ enum TerminalRouter: URLRequestConvertible {
         
         case .authCheck:
             return nil
-        
+            
         // 유저
         case .nicknameCheck, .eamilCheck, .userInfo, .emailVerify:
             return nil
@@ -295,7 +301,7 @@ enum TerminalRouter: URLRequestConvertible {
             return location
         case .userImageUpdate:
             return nil
-       
+            
         case let .userWithdrawal(_, userData):
             return userData
         case .reissuanceToken(let refreshToken):
@@ -317,12 +323,14 @@ enum TerminalRouter: URLRequestConvertible {
             return sort
         case let .studyCreate(study):
             return study
-        case .studyUpdate:
-            return nil
+        case let .studyUpdate(_, study):
+            return study
         case let .studySearch(keyword):
             return ["word": keyword]
         case .studyLeave:
             return nil
+        case let .delegateHost(_, newLeader):
+            return ["new_leader": newLeader]
             
         // 신청
         case let .applyStudy(_, message):

@@ -9,6 +9,7 @@
 import UIKit
 
 class NoticePresenter: NoticePresenterProtocol {
+    
     var view: NoticeViewProtocol?
     var wireFrame: NoticeWireFrameProtocol?
     var interactor: NoticeInteractorProtocol?
@@ -28,17 +29,8 @@ class NoticePresenter: NoticePresenterProtocol {
         }
     }
     
-    func celldidTap(notice: Notice, parentView: UIViewController) {
-        wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView)
-    }
-    
-    func noticeDetailResult(result: Bool, notice: Notice, parentView: UIViewController) {
-        switch result {
-        case true:
-            wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView)
-        case false:
-            print("실패니까 대처해 얼릉")
-        }
+    func celldidTap(notice: Notice, parentView: UIViewController, state: StudyDetailViewState) {
+        wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView, state: state)
     }
     func didScrollEnded(studyID: Int) {
         
