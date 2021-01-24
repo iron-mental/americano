@@ -93,10 +93,10 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         }
     }
     
-    func getCellData() -> Bool {
+    func getCellData() -> SNSValidate {
         
         // 공백여부 체크 변수
-        var state = true
+        var state: SNSValidate = SNSValidate(state: true, kind: "")
         
         for index in 0..<projectArr.count {
             let indexpath = IndexPath(row: index, section: 0)
@@ -109,12 +109,12 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             let appStore = cell.sns.secondTextField.text ?? ""
             let playStore = cell.sns.thirdTextField.text ?? ""
             
-            if github.whitespaceCheck()
-                || appStore.whitespaceCheck()
-                || playStore.whitespaceCheck() {
-                self.showToast(controller: self, message: "공백이 포함되어 있습니다.", seconds: 1)
-                
-                state = false
+            if github.whitespaceCheck() || appStore.whitespaceCheck() || playStore.whitespaceCheck() {
+                state = SNSValidate(state: false, kind: "whitespace")
+            } else if !appStore.appstoreCheck() {
+                state = SNSValidate(state: false, kind: "appstore")
+            } else if !playStore.playstoreCheck() {
+                state = SNSValidate(state: false, kind: "playstore")
             }
             
             projectArr[index] = Project(id: id,
@@ -134,26 +134,31 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     @objc func completeModify() {
-        let whitespaceState = getCellData()
+        let snsValidate = getCellData()
         
         // 공백체크
-        if whitespaceState {
+        if snsValidate.state {
             presenter?.completeModify(project: projectArr)
         } else {
-            self.showToast(controller: self, message: "SNS는 공백이 포함되지 않습니다.", seconds: 1)
+            if snsValidate.kind == "whitespace" {
+                self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 1)
+            } else {
+                self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 1)
+            }
         }
-        
-        
     }
     
     @objc func addProject() {
         if projectArr.count < 3 {
             let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
+            
             projectArr.append(project)
             projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .right)
+            
             if projectArr.count == 3 {
                 projectAddButton.backgroundColor = .darkGray
             }
+            
             if !projectArr.isEmpty {
                 let index = IndexPath(row: projectArr.count - 1, section: 0)
                 self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
@@ -162,7 +167,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             let alert = UIAlertController(title: "알림",
                                           message: "프로젝트는 최대 3개입니다.",
                                           preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "확인", style: .default, handler : nil )
+            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil )
 
             alert.addAction(okAction)
             present(alert, animated: true)

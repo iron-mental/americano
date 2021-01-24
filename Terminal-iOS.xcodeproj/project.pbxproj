@@ -71,6 +71,7 @@
 		A575344D257697A000FD7D0C /* ProjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575344C257697A000FD7D0C /* ProjectTableView.swift */; };
 		A57C33D3254E8B5A006CE9A2 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */; };
 		A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D6254E8C58006CE9A2 /* TempChatView.swift */; };
+		A57E829125BD8F72000F8678 /* SNSValidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E829025BD8F72000F8678 /* SNSValidate.swift */; };
 		A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */; };
 		A58148922590C6E200BF3C2A /* EmailModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58148912590C6E200BF3C2A /* EmailModifyView.swift */; };
 		A58148972591050600BF3C2A /* EmailModifyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58148962591050600BF3C2A /* EmailModifyPresenter.swift */; };
@@ -407,6 +408,7 @@
 		A575344C257697A000FD7D0C /* ProjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableView.swift; sourceTree = "<group>"; };
 		A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		A57C33D6254E8C58006CE9A2 /* TempChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempChatView.swift; sourceTree = "<group>"; };
+		A57E829025BD8F72000F8678 /* SNSValidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSValidate.swift; sourceTree = "<group>"; };
 		A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailRemoteManager.swift; sourceTree = "<group>"; };
 		A58148912590C6E200BF3C2A /* EmailModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModifyView.swift; sourceTree = "<group>"; };
 		A58148962591050600BF3C2A /* EmailModifyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModifyPresenter.swift; sourceTree = "<group>"; };
@@ -1301,6 +1303,7 @@
 				A5C7B8F425AC4FCD00016D5B /* Address.swift */,
 				A5C7B8F925AC6B7000016D5B /* AddressState.swift */,
 				CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */,
+				A57E829025BD8F72000F8678 /* SNSValidate.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1934,6 +1937,7 @@
 				CCC1A2F825B14E52004E3BE6 /* ApplyUserDetailWireFrame.swift in Sources */,
 				A53A2B7325B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift in Sources */,
 				CCD51C7A256D29CC00D41771 /* MyStudyDetailPresenter.swift in Sources */,
+				A57E829125BD8F72000F8678 /* SNSValidate.swift in Sources */,
 				A58148EF25910E9800BF3C2A /* SNSModifyView.swift in Sources */,
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,
 				CC5794F42570C29300DF96AB /* AddNoticeProtocols.swift in Sources */,
