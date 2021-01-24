@@ -41,15 +41,7 @@ extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol 
     func onCategoriesRetrieved(categories: BaseResponse<[String]>) {
         var categoryList: [Category] = []
         
-        if let nameList = categories.data {
-            for name in nameList {
-                print(name)
-//                let category = Category(image: UIImage(named: name)!, name: name)
-//                categoryList.append(category)
-            }
-        }
-        
-//        presenter?.didRetrieveCategories(categoryList)
+        // 추후 작업예정
     }
     
     func onError() {
