@@ -63,17 +63,23 @@ class SNSModifyView: UIViewController {
     
     @objc func completeModify() {
         let github = snsModifyView.firstTextFeield.text ?? ""
-        let linkedIn = snsModifyView.secondTextField.text ?? ""
+        let linkedin = snsModifyView.secondTextField.text ?? ""
         let web = snsModifyView.thirdTextField.text ?? ""
 
         // 공백체크
         if github.whitespaceCheck()
-            || linkedIn.whitespaceCheck()
+            || linkedin.whitespaceCheck()
             || web.whitespaceCheck() {
             self.showToast(controller: self, message: "공백은 포함되지 않습니다..", seconds: 1)
+        } else if !linkedin.linkedInCheck() {
+            self.showToast(controller: self, message: "Linkedin 형식이 맞지 않습니다.", seconds: 1)
+        } else if !web.webCheck(){
+            self.showToast(controller: self, message: "Web 형식이 맞지 않습니다.", seconds: 1)
         } else {
-            self.presenter?.completeModify(github: github, linkedIn: linkedIn, web: web)
+            self.presenter?.completeModify(github: github, linkedin: linkedin, web: web)
         }
+        
+        print("씨다", linkedin.linkedInCheck())
     }
 }
 
