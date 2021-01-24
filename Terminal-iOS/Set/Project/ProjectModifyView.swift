@@ -141,9 +141,9 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             presenter?.completeModify(project: projectArr)
         } else {
             if snsValidate.kind == "whitespace" {
-                self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 1)
+                self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
             } else {
-                self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 1)
+                self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
             }
         }
     }
@@ -178,16 +178,14 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
 extension ProjectModifyView: ProjectModifyViewProtocol {
     func modifyResultHandle(result: Bool, message: String) {
         if result {
-            print("수정 여부:", result)
-            print("메시지 : ", message)
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
-            self.navigationController?.popViewController(animated: true, completion: {
-                parent?.showToast(controller: parent!, message: "프로젝트 수정 완료", seconds: 1, completion: nil)
+            self.navigationController?.popViewController(animated: true) {
+                parent?.showToast(controller: parent!, message: "프로젝트 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
-            })
+            }
         } else {
             // 실패시 에러처리 부분
-            self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 1, completion: nil)
+            self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 0.5)
         }
     }
 }

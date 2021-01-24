@@ -123,10 +123,9 @@ class LocationModifyView: UIViewController {
         if !sigungu.isEmpty {
             presenter?.completeModify(sido: sido, sigungu: sigungu)
         } else {
-            self.showToast(controller: self, message: "지역을 모두 선택해주세요.", seconds: 1)
+            self.showToast(controller: self, message: "지역을 모두 선택해주세요.", seconds: 0.3)
         }
     }
-    
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
@@ -156,10 +155,10 @@ extension LocationModifyView: LocationModifyViewProtocol {
     func modifyResultHandle(result: Bool, message: String) {
         if result {
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
-            self.navigationController?.popViewController(animated: true, completion: {
-                parent?.showToast(controller: parent!, message: "활동 지역 수정 완료", seconds: 1, completion: nil)
+            self.navigationController?.popViewController(animated: true) {
+                parent?.showToast(controller: parent!, message: "활동 지역 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
-            })
+            }
             
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()

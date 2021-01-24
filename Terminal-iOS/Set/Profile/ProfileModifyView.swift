@@ -229,7 +229,7 @@ class ProfileModifyView: UIViewController {
         
         // 공백체크
         if nickname.whitespaceCheck() {
-            self.showToast(controller: self, message: "이름은 공백이 포함되지 않습니다.", seconds: 1)
+            self.showToast(controller: self, message: "이름은 공백이 포함되지 않습니다.", seconds: 0.5)
         } else {
             let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
             
@@ -246,10 +246,10 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
             print("수정 여부:", result)
             print("메시지 : ", message)
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
-            self.navigationController?.popViewController(animated: true, completion: {
-                parent?.showToast(controller: parent!, message: "프로필 수정 완료", seconds: 1, completion: nil)
+            self.navigationController?.popViewController(animated: true) {
+                parent?.showToast(controller: parent!, message: "프로필 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
-            })
+            }
             
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()

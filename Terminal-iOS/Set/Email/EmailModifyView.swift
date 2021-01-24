@@ -81,7 +81,7 @@ class EmailModifyView: UIViewController {
         
         // 공백체크
         if email.whitespaceCheck() {
-            self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 1)
+            self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
         } else {
             presenter?.completeModify(email: email)
         }

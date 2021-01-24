@@ -70,11 +70,11 @@ class SNSModifyView: UIViewController {
         if github.whitespaceCheck()
             || linkedin.whitespaceCheck()
             || web.whitespaceCheck() {
-            self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 1)
+            self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
         } else if !linkedin.linkedInCheck() {
-            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 1)
-        } else if !web.webCheck(){
-            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 1)
+            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
+        } else if !web.webCheck() {
+            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
         } else {
             self.presenter?.completeModify(github: github, linkedin: linkedin, web: web)
         }
@@ -87,10 +87,10 @@ extension SNSModifyView: SNSModifyViewProtocol {
     func modifyResultHandle(result: Bool, message: String) {
         if result {
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
-            self.navigationController?.popViewController(animated: true, completion: {
-                parent?.showToast(controller: parent!, message: "SNS 수정 완료", seconds: 1,completion: nil)
+            self.navigationController?.popViewController(animated: true) {
+                parent?.showToast(controller: parent!, message: "SNS 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
-            })
+            }
         } else {
             self.showToast(controller: self, message: message, seconds: 1, completion: nil)
         }
