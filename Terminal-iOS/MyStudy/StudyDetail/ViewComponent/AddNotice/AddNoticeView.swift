@@ -14,6 +14,11 @@ enum AddNoticeState {
 }
 
 class AddNoticeView: UIViewController {
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     var presenter: AddNoticePresenterProtocol?
     var studyID: Int?
     var notice: Notice? {
@@ -25,15 +30,36 @@ class AddNoticeView: UIViewController {
     var dismissButton = UIButton()
     var pinButton = UIButton()
     var titleTextField = UITextField()
-    var contentTextField = UITextView()
+    var contentTextView = UITextView()
     var completeButton = UIButton()
     var parentView: UIViewController?
+    var bottomAnchor: NSLayoutConstraint?
+    var keyboardHeight: CGFloat = 0.0
     
     override func viewDidLoad() {
         attribute()
         layout()
+//        titleTextField.becomeFirstResponder()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    @objc func keyboardWillShow(notification:NSNotification) {
+        
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        keyboardHeight = keyboardRectangle.height
+        bottomAnchor?.constant = -keyboardHeight
+        bottomAnchor?.isActive = true
+        view.layoutIfNeeded()
+    }
+    
+    @objc func keyboardWillHide() {
+        bottomAnchor?.constant = +keyboardHeight
+//        bottomAnchor?.isActive = true
+        view.layoutIfNeeded()
+    }
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -59,7 +85,7 @@ class AddNoticeView: UIViewController {
             $0.delegate = self
             $0.addLeftPadding()
         }
-        contentTextField.do {
+        contentTextView.do {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.textColor = .white
             $0.layer.cornerRadius = 10
@@ -76,7 +102,7 @@ class AddNoticeView: UIViewController {
     }
     
     func layout() {
-        [dismissButton, pinButton, titleTextField, contentTextField, completeButton].forEach { view.addSubview($0) }
+        [dismissButton, pinButton, titleTextField, contentTextView, completeButton].forEach { view.addSubview($0) }
         pinButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
@@ -91,16 +117,17 @@ class AddNoticeView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Terminal.convertHeigt(value: -13)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
         }
-        contentTextField.do {
+        contentTextView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertHeigt(value: -13)).isActive = true
             $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: Terminal.convertHeigt(value: -9)).isActive = true
         }
+        bottomAnchor = completeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,constant: -1).isActive = true
+            bottomAnchor?.isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 335)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
@@ -123,7 +150,7 @@ class AddNoticeView: UIViewController {
     @objc func completeButtonDidTap() {
         
         let newNoticePost = NoticePost(title: titleTextField.text ?? "",
-                                       contents: contentTextField.text ?? "",
+                                       contents: contentTextView.text ?? "",
                                        pinned: pinButton.currentTitle == "필독" ? true : false)
         
         presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
@@ -161,6 +188,10 @@ extension AddNoticeView: AddNoticeViewProtocol {
 
 extension AddNoticeView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.endEditing(true)
+        contentTextView.becomeFirstResponder()
     }
+}
+
+extension AddNoticeView: UITextViewDelegate {
+    
 }

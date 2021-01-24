@@ -17,6 +17,7 @@ protocol NoticeDetailViewProtocol {
     //PRESENTER -> VIEW
     func showNoticeDetail(notice: Notice)
     func showNoticeRemove(message: String)
+    func showError(message: String)
 }
 
 protocol NoticeDetailInteractorProtocol {
@@ -57,6 +58,6 @@ protocol NoticeDetailLocalDataManagerProtocol {
 protocol NoticeDetailWireFrameProtocol {
     var presenter: NoticeDetailPresenterProtocol? { get set }
     
-    static func createNoticeDetailModule( notice: Int, studyID: Int?, parentView: UIViewController? ) -> UIViewController
+    static func createNoticeDetailModule( notice: Int, studyID: Int?, parentView: UIViewController?, state: StudyDetailViewState) -> UIViewController
     func goToNoticeEdit(state: AddNoticeState, notice: Notice, parentView: NoticeDetailViewProtocol)
 }

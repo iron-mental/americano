@@ -20,7 +20,7 @@ class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.applyStudyList(id: userID))
-            .validate(statusCode: 200..<299)
+            .validate(statusCode: 200..<502)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

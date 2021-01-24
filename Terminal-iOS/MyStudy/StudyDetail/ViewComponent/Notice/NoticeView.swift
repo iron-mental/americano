@@ -15,6 +15,7 @@ class NoticeView: UIViewController {
     var pinnedNotiArr: [Notice] = []
     var notiArr: [Notice] = []
     lazy var notice = UITableView()
+    var state: StudyDetailViewState?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,7 +112,9 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
             selectedNotice = notiArr[indexPath.row]
         }
         selectedNotice!.studyID = studyID
-        presenter?.celldidTap(notice: selectedNotice!, parentView: self)
+        guard let currentState = state else { return }
+        presenter?.celldidTap(notice: selectedNotice!, parentView: self, state: currentState)
+        
     }
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach { indexPath in

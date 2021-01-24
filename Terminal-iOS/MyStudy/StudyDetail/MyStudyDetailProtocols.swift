@@ -18,10 +18,10 @@ protocol MyStudyDetailViewProtocol: class {
     
     //PRESENTER -> VIEW
     func showLeaveStudyComplete()
-    func showLeaveStudyFailed()
+    func showLeaveStudyFailed(message: String)
     
     func showDeleteStudyComplete()
-    func showDeleteStudyFailed()
+    func showDeleteStudyFailed(message: String)
     
 }
 
@@ -51,6 +51,7 @@ protocol MyStudyDetailPresenterProtocol: class {
     func showApplyUserList(studyID: Int)
     func leaveStudyButtonDidTap(studyID: Int)
     func deleteStudyButtonDidTap(studyID: Int)
+    func delegateHostButtonDidTap(studyID: Int, userList: [Participate])
     
     //INTERACTOR -> PRESENTER
     func leaveStudyResult(result: Bool, message: String)
@@ -77,4 +78,5 @@ protocol MyStudyDetailWireFrameProtocol: class {
     func goToEditStudy(study: StudyDetail, parentView: UIViewController)
     func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController)
     func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int)
+    func goToDelegateHost(from view: MyStudyDetailViewProtocol, studyID: Int, userList: [Participate])
 }

@@ -64,9 +64,9 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
             view?.webInvalid()
         }
     }
-    func clickCompleteButton(study: StudyDetailPost, state: WriteStudyViewState, studyID: Int?) {
-        view?.loading()
-        interactor?.studyCreateComplete(study: study, state: state, studyID: studyID ?? nil)
+    func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {
+//        LoadingRainbowCat.show()
+        interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)
     }
     
     func studyInfoInvalid(message: String) {
@@ -75,17 +75,5 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
     
     func studyInfoValid(message: String) {
         view?.studyInfoValid(message: message)
-    }
-    func viewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
-        interactor?.viewDidTap(textView: textView, viewMinY: viewMinY, viewMaxY: viewMaxY)
-    }
-    
-    func viewDidTapResult(result: Bool, topOrBottom: Bool?, distance: CGFloat?) {
-        switch result {
-        case true:
-            topOrBottom == true ? view?.viewToTop(distance: distance!) : view?.viewToBottom(distance: distance!)
-        case false:
-            view?.viewTapFlagToggle()
-        }
     }
 }

@@ -154,7 +154,6 @@
 		CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */; };
 		CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */; };
 		CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */; };
-		CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */; };
 		CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */; };
 		CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0482512286B00F88313 /* SNSCollectionView.swift */; };
 		CC21A7952559504600E31F77 /* IntroLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC21A7942559504600E31F77 /* IntroLocalDataManager.swift */; };
@@ -211,6 +210,8 @@
 		CC72CBF925B05B40009E9986 /* BaseProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBF825B05B40009E9986 /* BaseProfileView.swift */; };
 		CC72CBFF25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBFE25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift */; };
 		CC72CC0725B0632B009E9986 /* BaseProfileRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */; };
+		CC7F383625BA991B00DEA541 /* DelegateHostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */; };
+		CC7F384C25BABEAB00DEA541 /* DelegateStudyConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7F384B25BABEAB00DEA541 /* DelegateStudyConfirmView.swift */; };
 		CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */; };
 		CC8FF5FC257E80D000947FB3 /* ChatTableViewOutputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
@@ -221,6 +222,20 @@
 		CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */; };
 		CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */; };
 		CCA1FF6F24FD10290026C3EA /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF6E24FD10290026C3EA /* SetView.swift */; };
+		CCA25A8C25B6962C00280C80 /* BaseEditableStudyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25A8B25B6962C00280C80 /* BaseEditableStudyDetailView.swift */; };
+		CCA25A9125B69DD300280C80 /* CreateStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25A9025B69DD300280C80 /* CreateStudyView.swift */; };
+		CCA25AB925B6CE3F00280C80 /* ModifyStudyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AB825B6CE3F00280C80 /* ModifyStudyProtocols.swift */; };
+		CCA25AC125B6D11000280C80 /* ModifyStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AC025B6D11000280C80 /* ModifyStudyView.swift */; };
+		CCA25AC625B6D1DB00280C80 /* ModifyStudyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AC525B6D1DB00280C80 /* ModifyStudyPresenter.swift */; };
+		CCA25ACE25B6D24B00280C80 /* ModifyStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25ACD25B6D24B00280C80 /* ModifyStudyInteractor.swift */; };
+		CCA25AD325B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AD225B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift */; };
+		CCA25AD825B6D3AA00280C80 /* ModifyStudyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AD725B6D3AA00280C80 /* ModifyStudyWireFrame.swift */; };
+		CCA25ADE25B9B01800280C80 /* DelegateHostProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25ADD25B9B01800280C80 /* DelegateHostProtocols.swift */; };
+		CCA25AE325B9B34900280C80 /* DelegateHostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AE225B9B34900280C80 /* DelegateHostView.swift */; };
+		CCA25AE825B9B39900280C80 /* DelegateHostPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AE725B9B39900280C80 /* DelegateHostPresenter.swift */; };
+		CCA25AF025B9B3DD00280C80 /* DelegateHostInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AEF25B9B3DD00280C80 /* DelegateHostInteractor.swift */; };
+		CCA25AF525B9B41C00280C80 /* DelegateHostRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AF425B9B41C00280C80 /* DelegateHostRemoteDataManager.swift */; };
+		CCA25AFA25B9B44900280C80 /* DelegateHostWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA25AF925B9B44900280C80 /* DelegateHostWireFrame.swift */; };
 		CCA3FF37251781EB00F62627 /* Study.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF35251781EB00F62627 /* Study.swift */; };
 		CCA3FF38251781EB00F62627 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF36251781EB00F62627 /* Category.swift */; };
 		CCA3FF3F2517823000F62627 /* StudyListLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF3D2517823000F62627 /* StudyListLocalDataManager.swift */; };
@@ -492,7 +507,6 @@
 		CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyProtocols.swift; sourceTree = "<group>"; };
 		CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyPresenter.swift; sourceTree = "<group>"; };
 		CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyInteractor.swift; sourceTree = "<group>"; };
-		CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyView.swift; sourceTree = "<group>"; };
 		CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC1BE0482512286B00F88313 /* SNSCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionView.swift; sourceTree = "<group>"; };
 		CC21A7942559504600E31F77 /* IntroLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroLocalDataManager.swift; sourceTree = "<group>"; };
@@ -548,6 +562,8 @@
 		CC72CBF825B05B40009E9986 /* BaseProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileView.swift; sourceTree = "<group>"; };
 		CC72CBFE25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileRemoteDataManagerInputProtocol.swift; sourceTree = "<group>"; };
 		CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileRemoteDataManager.swift; sourceTree = "<group>"; };
+		CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostTableViewCell.swift; sourceTree = "<group>"; };
+		CC7F384B25BABEAB00DEA541 /* DelegateStudyConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateStudyConfirmView.swift; sourceTree = "<group>"; };
 		CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertUIView.swift; sourceTree = "<group>"; };
 		CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewOutputCell.swift; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
@@ -560,6 +576,20 @@
 		CCA1FF6224FD0C930026C3EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCA1FF6424FD0C930026C3EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CCA1FF6E24FD10290026C3EA /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
+		CCA25A8B25B6962C00280C80 /* BaseEditableStudyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEditableStudyDetailView.swift; sourceTree = "<group>"; };
+		CCA25A9025B69DD300280C80 /* CreateStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyView.swift; sourceTree = "<group>"; };
+		CCA25AB825B6CE3F00280C80 /* ModifyStudyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyProtocols.swift; sourceTree = "<group>"; };
+		CCA25AC025B6D11000280C80 /* ModifyStudyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyView.swift; sourceTree = "<group>"; };
+		CCA25AC525B6D1DB00280C80 /* ModifyStudyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyPresenter.swift; sourceTree = "<group>"; };
+		CCA25ACD25B6D24B00280C80 /* ModifyStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyInteractor.swift; sourceTree = "<group>"; };
+		CCA25AD225B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyRemoteDataManager.swift; sourceTree = "<group>"; };
+		CCA25AD725B6D3AA00280C80 /* ModifyStudyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyStudyWireFrame.swift; sourceTree = "<group>"; };
+		CCA25ADD25B9B01800280C80 /* DelegateHostProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostProtocols.swift; sourceTree = "<group>"; };
+		CCA25AE225B9B34900280C80 /* DelegateHostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostView.swift; sourceTree = "<group>"; };
+		CCA25AE725B9B39900280C80 /* DelegateHostPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostPresenter.swift; sourceTree = "<group>"; };
+		CCA25AEF25B9B3DD00280C80 /* DelegateHostInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostInteractor.swift; sourceTree = "<group>"; };
+		CCA25AF425B9B41C00280C80 /* DelegateHostRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostRemoteDataManager.swift; sourceTree = "<group>"; };
+		CCA25AF925B9B44900280C80 /* DelegateHostWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostWireFrame.swift; sourceTree = "<group>"; };
 		CCA3FF35251781EB00F62627 /* Study.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Study.swift; sourceTree = "<group>"; };
 		CCA3FF36251781EB00F62627 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		CCA3FF3D2517823000F62627 /* StudyListLocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyListLocalDataManager.swift; sourceTree = "<group>"; };
@@ -824,6 +854,7 @@
 				A5417FE825A7A6E3005B884F /* BaseSNSModifyView.swift */,
 				CC72CBF825B05B40009E9986 /* BaseProfileView.swift */,
 				CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */,
+				CCA25A8B25B6962C00280C80 /* BaseEditableStudyDetailView.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -843,6 +874,8 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				CCA25ADC25B9AFD900280C80 /* DelegateHost */,
+				CCA25AB725B6CE0900280C80 /* ModifyStudy */,
 				CCEEB45925AC4C9600F522C4 /* MyApplyStudyDetail */,
 				A53B11AD258CB6CB00498A96 /* ApplyUserDetail */,
 				CC84850525A47FD700C792BC /* AlertView */,
@@ -1200,6 +1233,14 @@
 			path = BaseProtocol;
 			sourceTree = "<group>";
 		};
+		CC7F383425BA990600DEA541 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		CC84850525A47FD700C792BC /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1276,6 +1317,33 @@
 				CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */,
 			);
 			path = "Terminal-iOS";
+			sourceTree = "<group>";
+		};
+		CCA25AB725B6CE0900280C80 /* ModifyStudy */ = {
+			isa = PBXGroup;
+			children = (
+				CCA25AC025B6D11000280C80 /* ModifyStudyView.swift */,
+				CCA25AC525B6D1DB00280C80 /* ModifyStudyPresenter.swift */,
+				CCA25ACD25B6D24B00280C80 /* ModifyStudyInteractor.swift */,
+				CCA25AD225B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift */,
+				CCA25AD725B6D3AA00280C80 /* ModifyStudyWireFrame.swift */,
+				CCA25AB825B6CE3F00280C80 /* ModifyStudyProtocols.swift */,
+			);
+			path = ModifyStudy;
+			sourceTree = "<group>";
+		};
+		CCA25ADC25B9AFD900280C80 /* DelegateHost */ = {
+			isa = PBXGroup;
+			children = (
+				CC7F383425BA990600DEA541 /* Component */,
+				CCA25AE225B9B34900280C80 /* DelegateHostView.swift */,
+				CCA25AE725B9B39900280C80 /* DelegateHostPresenter.swift */,
+				CCA25AEF25B9B3DD00280C80 /* DelegateHostInteractor.swift */,
+				CCA25AF425B9B41C00280C80 /* DelegateHostRemoteDataManager.swift */,
+				CCA25AF925B9B44900280C80 /* DelegateHostWireFrame.swift */,
+				CCA25ADD25B9B01800280C80 /* DelegateHostProtocols.swift */,
+			);
+			path = DelegateHost;
 			sourceTree = "<group>";
 		};
 		CCA3FF34251781E200F62627 /* Entity */ = {
@@ -1381,7 +1449,7 @@
 			isa = PBXGroup;
 			children = (
 				CCA00AD9252C4ED900FF7404 /* LocationView */,
-				CC1BE0412510EBEA00F88313 /* CreateStudyView.swift */,
+				CCA25A9025B69DD300280C80 /* CreateStudyView.swift */,
 				CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */,
 				CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */,
 				CC1BE0382510D8AD00F88313 /* CreateStudyWireFrame.swift */,
@@ -1409,6 +1477,7 @@
 				CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */,
 				CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */,
 				A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */,
+				CC7F384B25BABEAB00DEA541 /* DelegateStudyConfirmView.swift */,
 			);
 			path = StaticViewComponent;
 			sourceTree = "<group>";
@@ -1740,15 +1809,17 @@
 				A50583BB25A47AEE0060330E /* UIStackView+Ext.swift in Sources */,
 				A5D6A78E257430A8007D6409 /* ProfileModifyInteractor.swift in Sources */,
 				CCEEB47C25AC710F00F522C4 /* ApplyUserResult.swift in Sources */,
+				CCA25AE325B9B34900280C80 /* DelegateHostView.swift in Sources */,
 				CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */,
 				CC56394B259CADA500DA1479 /* SearchStudyLocalDataManager.swift in Sources */,
 				CCEEB46825AC50DF00F522C4 /* MyApplyStudyDetailPresenter.swift in Sources */,
-				CC1BE0422510EBEA00F88313 /* CreateStudyView.swift in Sources */,
 				A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */,
 				CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
 				CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */,
 				A53A2B8F25B6FEAA0002D3A0 /* UIWindow+Ext.swift in Sources */,
+				CCA25AD325B6D2DD00280C80 /* ModifyStudyRemoteDataManager.swift in Sources */,
+				CCA25AC125B6D11000280C80 /* ModifyStudyView.swift in Sources */,
 				CCF632DB25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift in Sources */,
 				CCA3FF4A2517823E00F62627 /* StudyListWireFrame.swift in Sources */,
 				A581494B25912DF000BF3C2A /* CareerModifyWireFrame.swift in Sources */,
@@ -1764,6 +1835,7 @@
 				CC56393C259CAD6F00DA1479 /* SearchStudyInteractor.swift in Sources */,
 				A53B11AF258CB6E400498A96 /* ApplyUserDetailView.swift in Sources */,
 				CCA3FF4B2517823E00F62627 /* StudyCell.swift in Sources */,
+				CCA25AFA25B9B44900280C80 /* DelegateHostWireFrame.swift in Sources */,
 				A5C5B156254573CD00F4A86D /* LocationView.swift in Sources */,
 				A581491C259129BF00BF3C2A /* LocationModifyPresenter.swift in Sources */,
 				A510BA252583BB590084559C /* ApplyUserCell.swift in Sources */,
@@ -1812,6 +1884,7 @@
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */,
 				A5417FF125A7A855005B884F /* ProfileSNSModifyView.swift in Sources */,
+				CC7F383625BA991B00DEA541 /* DelegateHostTableViewCell.swift in Sources */,
 				A5BA1EDA254A8FF00089D4E9 /* NotificationCell.swift in Sources */,
 				CCBBEF082583BAFC00177E25 /* LocalUserInfo.swift in Sources */,
 				CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */,
@@ -1850,6 +1923,7 @@
 				CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */,
 				CCD51C80256D29F200D41771 /* MyStudyDetailLocalDataManager.swift in Sources */,
 				A5C81C6125836D4C008F2B09 /* MyApplyListInteractor.swift in Sources */,
+				CCA25AF025B9B3DD00280C80 /* DelegateHostInteractor.swift in Sources */,
 				A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CC563967259CB6F700DA1479 /* SearchStudyResultProtocols.swift in Sources */,
@@ -1881,6 +1955,7 @@
 				A5A5F6C2256F843600405C71 /* SortState.swift in Sources */,
 				CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */,
 				A58148972591050600BF3C2A /* EmailModifyPresenter.swift in Sources */,
+				CCA25AE825B9B39900280C80 /* DelegateHostPresenter.swift in Sources */,
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,
 				CCF470A2256B9A710085B371 /* ChatRemoteDataManager.swift in Sources */,
 				A58F9028259F451D007777B4 /* ProjectModifyProtocols.swift in Sources */,
@@ -1920,11 +1995,13 @@
 				CCD51C9B256E247600D41771 /* NoticeInteractor.swift in Sources */,
 				CC6044712576262C000D11C7 /* NoticeDetailInteractor.swift in Sources */,
 				A5D5852725A9E55000C36452 /* Array+Ext.swift in Sources */,
+				CCA25AF525B9B41C00280C80 /* DelegateHostRemoteDataManager.swift in Sources */,
 				A5417FE925A7A6E3005B884F /* BaseSNSModifyView.swift in Sources */,
 				CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */,
 				CCA3FF522517826100F62627 /* StudyCategoryRemoteManager.swift in Sources */,
 				CCE279EC256E46C600DB3246 /* Notice.swift in Sources */,
 				CCD51CA8256E257D00D41771 /* NoticeProtocols.swift in Sources */,
+				CCA25A9125B69DD300280C80 /* CreateStudyView.swift in Sources */,
 				CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */,
 				A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */,
 				CC5794FB2570C9BA00DF96AB /* AddNoticeView.swift in Sources */,
@@ -1933,6 +2010,7 @@
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CCC1A2F825B14E52004E3BE6 /* ApplyUserDetailWireFrame.swift in Sources */,
 				A53A2B7325B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift in Sources */,
+				CCA25A8C25B6962C00280C80 /* BaseEditableStudyDetailView.swift in Sources */,
 				CCD51C7A256D29CC00D41771 /* MyStudyDetailPresenter.swift in Sources */,
 				A58148EF25910E9800BF3C2A /* SNSModifyView.swift in Sources */,
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,
@@ -1944,8 +2022,10 @@
 				CCEEB47225AC510400F522C4 /* MyApplyStudyDetailRemoteDataManager.swift in Sources */,
 				CC57950A2570C9FE00DF96AB /* AddNoticeWireFrame.swift in Sources */,
 				A58148AB2591053E00BF3C2A /* EmailModifyProtocols.swift in Sources */,
+				CCA25AB925B6CE3F00280C80 /* ModifyStudyProtocols.swift in Sources */,
 				A5814926259129D200BF3C2A /* LocationModifyWireFrame.swift in Sources */,
 				CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */,
+				CCA25ADE25B9B01800280C80 /* DelegateHostProtocols.swift in Sources */,
 				CCEEB46D25AC50F000F522C4 /* MyApplyStudyDetailInteractor.swift in Sources */,
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
 				A53A2B8525B6BC050002D3A0 /* UserWithdrawalInteractor.swift in Sources */,
@@ -1972,6 +2052,7 @@
 				CCBC88B6254ACF2500C2A6C4 /* BottomView.swift in Sources */,
 				A5C81C5E25836D41008F2B09 /* MyApplyListPresenter.swift in Sources */,
 				A521DDED252DEA7E00F83DB3 /* ProfileDetailProtocols.swift in Sources */,
+				CCA25AC625B6D1DB00280C80 /* ModifyStudyPresenter.swift in Sources */,
 				A541800525A8919F005B884F /* LocationCell.swift in Sources */,
 				A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */,
 				CCAF0FDC253303300060A2F6 /* MyStudyMainPresenter.swift in Sources */,
@@ -1979,6 +2060,7 @@
 				CC72CBF425B05A00009E9986 /* ApplyUserDetailProtocols.swift in Sources */,
 				CCD51C7D256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
+				CCA25AD825B6D3AA00280C80 /* ModifyStudyWireFrame.swift in Sources */,
 				CC5794FE2570C9C600DF96AB /* AddNoticeInteractor.swift in Sources */,
 				A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */,
 				CCBBEEFF2583A38E00177E25 /* TerminalCoreData.xcdatamodeld in Sources */,
@@ -2008,8 +2090,10 @@
 				CCF470AD256BA6710085B371 /* ChatTableViewCell.swift in Sources */,
 				A5D2A5F925373D180010AE1C /* HotKeywordCell.swift in Sources */,
 				A5C81C6425836D60008F2B09 /* MyApplyListWireFrame.swift in Sources */,
+				CCA25ACE25B6D24B00280C80 /* ModifyStudyInteractor.swift in Sources */,
 				CCEEB47725AC51A100F522C4 /* MyApplyStudyDetailWireFrame.swift in Sources */,
 				A517216D252CFAAA005AD11B /* SetProtocols.swift in Sources */,
+				CC7F384C25BABEAB00DEA541 /* DelegateStudyConfirmView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

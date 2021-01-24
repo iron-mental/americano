@@ -9,14 +9,14 @@
 import UIKit
 
 extension UIViewController {
-    func showToast(controller: UIViewController, message: String, seconds: Double) {
+    func showToast(controller: UIViewController, message: String, seconds: Double, completion: (() -> Void)?) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         alert.view.backgroundColor = .appColor(.terminalBackground)
         alert.view.alpha = 0.5
         alert.view.layer.cornerRadius = 20
         
         let titleFont = [NSAttributedString.Key.font: UIFont(name: "NotoSansKR-Medium", size: 15)]
-        let titleAttrString = NSMutableAttributedString(string: message, attributes: titleFont)
+        let titleAttrString = NSMutableAttributedString(string: message, attributes: titleFont as [NSAttributedString.Key : Any])
 
         alert.setValue(titleAttrString, forKey:"attributedTitle")
         
@@ -24,6 +24,7 @@ extension UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
             alert.dismiss(animated: true)
+            CATransaction.setCompletionBlock(completion)
         }
     }
     

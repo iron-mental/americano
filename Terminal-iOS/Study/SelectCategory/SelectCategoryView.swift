@@ -176,7 +176,7 @@ extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
         presenter?.go(selected: categoryList[indexPath.row])
     }
 }

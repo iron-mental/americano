@@ -69,10 +69,12 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         let params: [String: String] = [
             "email":"\(joinMaterial[0])",
             "password":"\(joinMaterial[1])",
-            "push_token": pushToken,
+            "push_token": KeychainWrapper.standard.string(forKey: "pushToken") ?? "1",
             "device": "ios"
         ]
         
+        print(KeychainWrapper.standard.string(forKey: "accessToken"))
+        print(KeychainWrapper.standard.string(forKey: "refreshToken"))
         TerminalNetworkManager
             .shared
             .session

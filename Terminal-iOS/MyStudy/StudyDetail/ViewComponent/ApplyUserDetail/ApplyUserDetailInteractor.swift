@@ -63,7 +63,6 @@ extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProto
     func onApplyStatusRetrieved(response: BaseResponse<String>) {
         switch response.result {
         case true:
-            
             guard let message = response.message else { return }
             presenter?.retriveApplyStatus(result: response.result, message: message, studyID: studyID!)
             break

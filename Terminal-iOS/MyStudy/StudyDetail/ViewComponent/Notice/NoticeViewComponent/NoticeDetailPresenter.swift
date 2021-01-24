@@ -21,7 +21,14 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
     }
     
     func noticeDetailResult(result: Bool, notice: Notice) {
-        view?.showNoticeDetail(notice: notice)
+        switch result {
+        case true:
+            view?.showNoticeDetail(notice: notice)
+            break
+        case false:
+            view?.showError(message: "권한이 없습니다.")
+            break
+        }
     }
     func removeButtonDidTap(notice: Notice) {
         interactor?.postNoticeRemove(notice: notice)

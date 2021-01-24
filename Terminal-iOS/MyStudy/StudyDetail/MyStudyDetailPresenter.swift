@@ -41,7 +41,7 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
         if result {
             view?.showLeaveStudyComplete()
         } else {
-            view?.showLeaveStudyFailed()
+            view?.showLeaveStudyFailed(message: message)
         }
     }
     
@@ -49,7 +49,11 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
         if result {
             view?.showDeleteStudyComplete()
         } else {
-            view?.showDeleteStudyFailed()
+            view?.showDeleteStudyFailed(message: message)
         }
+    }
+    
+    func delegateHostButtonDidTap(studyID: Int, userList: [Participate]) {
+        wireFrame?.goToDelegateHost(from: view!, studyID: studyID, userList: userList)
     }
 }
