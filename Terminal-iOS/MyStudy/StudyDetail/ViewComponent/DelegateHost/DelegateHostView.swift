@@ -93,7 +93,7 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedUserID = userList![indexPath.row].userID
-        TerminalAlertMessage.show(type: .DelegateHostConfirmView)
+        TerminalAlertMessage.show(type: .delegateHostConfirmView)
         (TerminalAlertMessage.alertView as! AlertMessageView).completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
 //        navigationController?.popViewController(animated: true)
     }

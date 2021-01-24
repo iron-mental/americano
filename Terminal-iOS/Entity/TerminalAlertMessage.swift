@@ -9,10 +9,10 @@
 import UIKit
 
 enum AlertType {
-    case StudyApplyView
-    case StudyApplyDeleteView
-    case EmailAuthView
-    case DelegateHostConfirmView
+    case studyApplyView
+    case studyApplyDeleteView
+    case emailAuthView
+    case delegateHostConfirmView
     
     var view: UIView {
         switch self {
@@ -22,7 +22,7 @@ enum AlertType {
             return AlertMessageView(message: "cancel your apply?")
         case .emailAuthView:
             return EmailAlertMessageView(message: "이메일 인증하시겠습니까?\n\n 회원님의 이메일로 인증요청 됩니다.")
-        case .DelegateHostConfirmView:
+        case .delegateHostConfirmView:
             return AlertMessageView(message: "방장을 위임하시겠습니까?")
         }
     }
