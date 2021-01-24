@@ -20,10 +20,6 @@ class LocationUIView: UIView {
     }
     
     func attribute() {
-        self.do {
-            $0.layer.borderWidth = 2
-            $0.layer.borderColor = UIColor.blue.cgColor
-        }
         title.do {
             $0.text = "장소"
             $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)

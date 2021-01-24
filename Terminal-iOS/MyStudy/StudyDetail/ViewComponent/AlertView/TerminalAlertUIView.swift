@@ -17,7 +17,6 @@ class AlertBaseUIView: UIView {
     var dismissButton = UIButton()
     var completeButton = UIButton()
     
-    
     init() {
         super.init(frame: CGRect.zero)
         layout()

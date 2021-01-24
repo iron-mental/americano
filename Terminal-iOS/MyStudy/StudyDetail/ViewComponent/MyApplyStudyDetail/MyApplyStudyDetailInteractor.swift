@@ -57,6 +57,7 @@ extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutpu
         case true:
             presenter?.retriveModifyApplyMessage(result: result, message: message)
         case false:
+            
             print("MyApplyStudyDetailInteractor 에서 에러남")
         }
     }
@@ -66,6 +67,7 @@ extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutpu
         case true:
             presenter?.retriveDeleteApplyResult(result: result, message: message)
         case false:
+            
             print("MyApplyStudyDetailInteractor 에서 에러남")
         }
     }

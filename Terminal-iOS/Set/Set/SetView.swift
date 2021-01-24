@@ -102,7 +102,7 @@ class SetView: UIViewController {
         
         // 이미 인증된 경우
         if emailVerify {
-            self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 2)
+            self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 2, completion: nil)
         } else {
             TerminalAlertMessage.show(type: .EmailAuthView)
             if let view = TerminalAlertMessage.alertView as? AlertBaseUIView {
@@ -130,9 +130,9 @@ extension SetView: SetViewProtocol {
     func emailAuthResponse(result: Bool, message: String) {
         if result {
             TerminalAlertMessage.hide()
-            self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 2)
+            self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 2, completion: nil)
         } else {
-            self.showToast(controller: self, message: message, seconds: 2)
+            self.showToast(controller: self, message: message, seconds: 2, completion: nil)
         }
     }
     

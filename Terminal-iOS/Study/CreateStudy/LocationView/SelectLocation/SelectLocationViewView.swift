@@ -18,6 +18,7 @@ class SelectLocationView: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
     var presenter: SelectLocationPresenterProtocol?
     let pin = UIImageView()
     var task: DispatchWorkItem?
@@ -73,6 +74,7 @@ class SelectLocationView: UIViewController {
     }
     
     func attribute() {
+        
         mapView = NMFMapView(frame: view.frame)
         mapView.do {
             $0.mapType = .basic
@@ -120,13 +122,14 @@ class SelectLocationView: UIViewController {
             location?.detailAddress = detailAddress
         }
         delegate?.passLocation(location: location!)
+        dismiss(animated: false)
         presentingViewController?.dismiss(animated: false)
-        self.presentingViewController?.presentingViewController?.dismiss(animated: false)
     }
 }
 
 extension SelectLocationView: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
+        
         task = DispatchWorkItem { [self] in
             self.pin.alpha = 1
             //추후에 여기서 mapView.cameraPosition.target.lat 으로 좌표알아내서 쏘면 됨

@@ -18,6 +18,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     var parentView: UIViewController?
     var notice: Notice?
     var noticeID: Int?
+    var state: StudyDetailViewState?
     var modifyButton = UIButton()
     var removeButton = UIButton()
     lazy var noticeBackground = UIView()
@@ -35,6 +36,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     }
     
     func attribute() {
+        
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
         }
@@ -46,12 +48,14 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.setTitle("삭제", for: .normal)
             $0.setTitleColor(.red, for: .normal)
             $0.addTarget(self, action: #selector(removeButtonDidTap), for: .touchUpInside)
+            $0.isHidden = state == .host ? false : true
         }
         modifyButton.do {
-            $0.setTitle("수정하러 가기", for: .normal)
+            $0.setTitle("수정", for: .normal)
             $0.tintColor = UIColor.appColor(.mainColor)
             $0.setTitleColor(UIColor.appColor(.mainColor), for: .normal)
             $0.addTarget(self, action: #selector(modifyButtonDidTap), for: .touchUpInside)
+            $0.isHidden = state == .host ? false : true
         }
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
@@ -176,4 +180,9 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             (self.parentView as! NoticeViewProtocol).viewLoad()
         }
     }
+    
+    func showError(message: String) {
+        print("noticedetailview에서 생긴 에러")
+    }
+    
 }

@@ -13,6 +13,7 @@ import SwiftyJSON
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
     
     func postStudy(study: StudyDetailPost, completion: @escaping (Bool, String) -> Void) {
+        
         let params: [String: String] = [
             "category" : study.category != nil ? study.category : "",
             "title" : study.title != nil ? study.title : "",
@@ -21,8 +22,8 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             "study_time" : study.studyTime != nil ? study.studyTime : "",
             "latitude" : study.location.lat != nil ? String(study.location.lat) : "",
             "longitude" : study.location.lng != nil ? String(study.location.lng) : "",
-            "sido" : study.location.sido != nil ? study.location.sido! : "",
-            "sigungu" : study.location.sigungu != nil ? study.location.sigungu! : "",
+            "sido" : study.location.sido != nil ? study.location.sido : "",
+            "sigungu" : study.location.sigungu != nil ? study.location.sigungu : "",
             "address_name" : study.location.address != nil ? study.location.address : "",
             "location_detail" : study.location.detailAddress != nil ? study.location.detailAddress! : "",
             "place_name" : study.location.placeName != nil ? study.location.placeName! : "",
@@ -33,27 +34,28 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         ]
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
-        
         TerminalNetworkManager
             .shared
             .session
             .upload(multipartFormData: { multipartFormData in
-                
                 for (key, value) in params {
                     if value != nil && value != "" && value != "nil" {
+
                         multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                     }
                 }
+                
                 multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
             }, with: TerminalRouter.studyCreate(study: params))
             .validate(statusCode: 200..<299)
             .responseJSON { response in
-                
                 switch response.result {
                 case .success(let value):
+                    
                     completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
                     break
                 case .failure(let err):
+                    
                     completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)
                     break
                 }
@@ -70,8 +72,8 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
             "study_time" : study.studyTime != nil ? study.studyTime : "",
             "latitude" : study.location.lat != nil ? String(study.location.lat) : "",
             "longitude" : study.location.lng != nil ? String(study.location.lng) : "",
-            "sido" : study.location.sido != nil ? study.location.sido! : "",
-            "sigungu" : study.location.sigungu != nil ? study.location.sigungu! : "",
+            "sido" : study.location.sido != nil ? study.location.sido : "",
+            "sigungu" : study.location.sigungu != nil ? study.location.sigungu : "",
             "address_name" : study.location.address != nil ? study.location.address : "",
             "location_detail" : study.location.detailAddress != nil ? study.location.detailAddress! : "",
             "place_name" : study.location.placeName != nil ? study.location.placeName! : "",
@@ -83,29 +85,31 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
         
-        TerminalNetworkManager
-            .shared
-            .session
-            .upload(multipartFormData: { multipartFormData in
-                for (key, value) in params {
-                    if value != nil && value != "" && value != "nil" && value != "same" {
-                        multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
-                    }
-                }
-                multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
-            }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)"))
-            .validate(statusCode: 200..<299)
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    print(JSON(value))
-                    completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
-                    break
-                case .failure(let err):
-                    completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)
-                    break
-                }
-            }
+//        TerminalNetworkManager
+//            .shared
+//            .session
+//            .upload(multipartFormData: { multipartFormData in
+//                for (key, value) in params {
+//                    if value != nil && value != "" && value != "nil" && value != "same" {
+//                        multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
+//                    }
+//                }
+//                multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
+//            }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)"))
+//            .validate(statusCode: 200..<299)
+//            .responseJSON { response in
+//                switch response.result {
+//                case .success(let value):
+//                    
+//                    print(JSON(value))
+//                    completion(JSON(value)["result"].bool!, JSON(value)["message"].string ?? "")
+//                    break
+//                case .failure(let err):
+//                    
+//                    completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)
+//                    break
+//                }
+//            }
     }
     
     func getNotionValid(id: String?) -> Bool {

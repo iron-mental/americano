@@ -20,6 +20,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         
         view.presenter = presenter
         view.selectedCategory = category
+        
         view.study = studyDetail ?? nil
         view.state = state
         view.parentView = parentView ?? nil
@@ -30,6 +31,7 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         
         interactor.presenter = presenter
         interactor.createStudyRemoteDataManager = remoteDataManager
+        interactor.studyInfo = studyDetail ?? nil
         
         return view
     }
@@ -38,7 +40,6 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         let searchLocationview =  SearchLocationWireFrame.searchLocationViewModul(parentView: view)
         //modal의 형태를 추후에 정하구요 dismiss 시켜주는 것 만으로 다시 원래 플로우인 스터디 생성 플로우로 돌아가게 하면 깔끔 할 것 같은 느낌
         searchLocationview.modalPresentationStyle = .fullScreen
-        
         view.present(searchLocationview, animated: true, completion: nil)
     }
 }

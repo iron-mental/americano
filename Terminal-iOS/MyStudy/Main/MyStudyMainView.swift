@@ -34,6 +34,7 @@ class MyStudyMainView: UIViewController {
     var tempArrayForCheck: [Int] = []
     var editDoneButton: UIBarButtonItem?
     var myStudyList: [MyStudy] = []
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +70,7 @@ class MyStudyMainView: UIViewController {
             $0.separatorColor = myStudyList.isEmpty ? .clear : .none
             $0.delegate = self
             $0.dataSource = self
+            $0.refreshControl = refreshControl
         }
         alarmButton.do {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
@@ -81,6 +83,9 @@ class MyStudyMainView: UIViewController {
                                          style: .done,
                                          target: self,
                                          action: #selector(editDoneButtonAction))
+        refreshControl.do {
+            $0.addTarget(self, action: #selector(viewDidLoad), for: .valueChanged)
+        }
     }
     
     func layout() {
@@ -223,6 +228,9 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
     }
     
     func showMyStudyList(myStudyList: [MyStudy]) {
+        myStudyList.forEach {
+            print($0.id)
+        }
         self.myStudyList = myStudyList
         attribute()
         layout()
@@ -230,6 +238,7 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         LoadingRainbowCat.hide {
             print("로딩 끝")
         }
+        self.refreshControl.endRefreshing()
     }
     
     func showErrMessage() {
