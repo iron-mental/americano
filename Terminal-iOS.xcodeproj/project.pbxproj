@@ -369,7 +369,6 @@
 		A51D8BE025264DB9003BD1B9 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		A51F2356256E195600CBFC13 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		A51F235B256E19E600CBFC13 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		A51F2381256E460D00CBFC13 /* NoticeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetail.swift; sourceTree = "<group>"; };
 		A51F238B256E5A2200CBFC13 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailProtocols.swift; sourceTree = "<group>"; };
 		A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailInteractor.swift; sourceTree = "<group>"; };
@@ -1230,7 +1229,6 @@
 				CCA1FF5424FD0C930026C3EA /* Products */,
 				5ABD6AFD2D9CBF39ED6C88B5 /* Pods */,
 				031FECECB36F7B6233EC27DC /* Frameworks */,
-				CCE279FE256F7B2E00DB3246 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1472,14 +1470,6 @@
 				A57097A5254D6B5F0001DE52 /* NoticeCell.swift */,
 			);
 			path = Notice;
-			sourceTree = "<group>";
-		};
-		CCE279FE256F7B2E00DB3246 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				A51F2381256E460D00CBFC13 /* NoticeDetail.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		CCEEB45925AC4C9600F522C4 /* MyApplyStudyDetail */ = {

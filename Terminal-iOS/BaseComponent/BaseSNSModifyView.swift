@@ -13,10 +13,6 @@ class BaseSNSModifyView: UIView {
     lazy var firstTextFeield = UITextField()
     
     lazy var secondImage = UIImageView()
-    lazy var secondLabel = UILabel().then {
-        $0.text = "www.linkedin.com/"
-        $0.textColor = .white
-    }
     lazy var secondTextField = UITextField()
     
     lazy var thirdImage = UIImageView()
@@ -43,7 +39,7 @@ class BaseSNSModifyView: UIView {
     }
     
     func layout() {
-        [firstImage, firstTextFeield, secondImage, secondLabel, secondTextField, thirdImage, thirdTextField]
+        [firstImage, firstTextFeield, secondImage, secondTextField, thirdImage, thirdTextField]
             .forEach { self.addSubview($0) }
         
         firstImage.do {
@@ -67,12 +63,6 @@ class BaseSNSModifyView: UIView {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 26)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 26)).isActive = true
         }
-//        secondLabel.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.centerYAnchor.constraint(equalTo: secondImage.centerYAnchor).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: secondImage.trailingAnchor, constant: 10).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
-//        }
         secondTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: secondImage.centerYAnchor).isActive = true
