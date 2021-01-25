@@ -22,7 +22,7 @@ class StudyListView: UIViewController {
     var sortState: SortState = .new
     
     var presenter: StudyListPresenterProtocol?
-    var studyList: [Study] = []
+    var newStudyList: [Study] = []
     var lengthStudyList: [Study] = []
     
     // MARK: ViewDidLoad
@@ -115,7 +115,8 @@ class StudyListView: UIViewController {
     
     @objc func updateList() {
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
-            self.studyList.removeAll()
+            self.newStudyList.removeAll()
+            self.lengthStudyList.removeAll()
             self.presenter?.studyList(category: self.category!)
             self.refreshControl.endRefreshing()
         }
@@ -143,7 +144,7 @@ extension StudyListView: StudyListViewProtocol {
     
     func showStudyList(with studies: [Study]) {
         for study in studies {
-            studyList.append(study)
+            newStudyList.append(study)
         }
         
         if sortState == .new {
@@ -177,7 +178,7 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
             if sortState == .new {
-                if studyList.count - 1 == indexPath.row {
+                if newStudyList.count - 1 == indexPath.row {
                     presenter?.pagingStudyList()
                 }
             } else if sortState == .length {
@@ -190,7 +191,7 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if sortState == .new {
-            return studyList.count
+            return newStudyList.count
         } else if sortState == .length {
             return lengthStudyList.count
         }
@@ -200,7 +201,7 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StudyCell.cellId, for: indexPath) as! StudyCell
         if sortState == .new {
-            cell.setData(studyList[indexPath.row])
+            cell.setData(newStudyList[indexPath.row])
         } else if sortState == .length {
             cell.setData(lengthStudyList[indexPath.row])
         }
@@ -209,12 +210,12 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if sortState == .new {
-            let keyValue = studyList[indexPath.row].id
-            guard let state = studyList[indexPath.row].isMember else { return }
+            let keyValue = newStudyList[indexPath.row].id
+            guard let state = newStudyList[indexPath.row].isMember else { return }
             presenter?.showStudyDetail(keyValue: keyValue, state: state)
         } else {
             let lengthKeyValue = lengthStudyList[indexPath.row].id
-            guard let state = studyList[indexPath.row].isMember else { return }
+            guard let state = newStudyList[indexPath.row].isMember else { return }
             presenter?.showStudyDetail(keyValue: lengthKeyValue, state: state)
         }
     }
