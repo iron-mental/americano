@@ -8,12 +8,10 @@
 
 import UIKit
 
-class CreateStudyPresenter: CreateStudyPresenterProtocols {
-    
-    
-    var view: CreateStudyViewProtocols?
-    var interactor: CreateStudyInteractorProtocols?
-    var wireFrame: CreateStudyWireFrameProtocols?
+class CreateStudyPresenter: CreateStudyPresenterProtocol {
+    var view: CreateStudyViewProtocol?
+    var interactor: CreateStudyInteractorProtocol?
+    var wireFrame: CreateStudyWireFrameProtocol?
     
     func viewDidLoad() {
         view?.setView()
@@ -65,15 +63,17 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
         }
     }
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {
-        
+        LoadingRainbowCat.show()
         interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)
     }
     
     func studyInfoInvalid(message: String) {
+        LoadingRainbowCat.hide()
         view?.studyInfoInvalid(message: message)
     }
     
     func studyInfoValid(studyID: Int) {
-        view?.studyInfoValid(message: "스터디 생성이 완료되었습니다.")
+        LoadingRainbowCat.hide()
+        view?.studyInfoValid(studyID: studyID, message: "스터디 생성이 완료되었습니다.")
     }
 }

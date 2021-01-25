@@ -10,9 +10,10 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
+class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
+    var interactor: CreateStudyReMoteDataManagerOutputProtocol?
     
-    func postStudy(study: StudyDetailPost, completion: @escaping (BaseResponse<CreateStudyResult>) -> Void) {
+    func postStudy(study: StudyDetailPost) {
         
         
         let params: [String: Any] = [
@@ -69,13 +70,14 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
                     
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<CreateStudyResult>.self, from: data!)
-                        completion(result)
+                        self.interactor?.createStudyValid(response: result)
                     } catch {
-                        print("error~~~")
+                        
                     }
                     break
                 case .failure(let err):
-                    print(err)
+                    //이 텍스트를 프레젠터에서 넣어줘야될지 음 정하면댈듯
+                    self.interactor?.createStudyInvalid(message: "서버의 연결이 불안정합니다")
                     break
                 }
             }

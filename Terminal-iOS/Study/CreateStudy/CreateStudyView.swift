@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateStudyView: BaseEditableStudyDetailView {
-    var presenter: CreateStudyPresenterProtocols?
+    var presenter: CreateStudyPresenterProtocol?
     var state: WriteStudyViewState?
     var study: StudyDetail?
     var parentView: UIViewController?
@@ -44,7 +44,7 @@ class CreateStudyView: BaseEditableStudyDetailView {
     }
 }
 
-extension CreateStudyView: CreateStudyViewProtocols {
+extension CreateStudyView: CreateStudyViewProtocol {
     func didClickButton() {
         studyDetailPost = StudyDetailPost(category: selectedCategory!,
                                           title: studyTitleTextField.text ?? "",
@@ -127,7 +127,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
         showToast(controller: self, message: message, seconds: 1)
     }
     
-    func studyInfoValid(message: String) {
+    func studyInfoValid(studyID: Int, message: String) {
         showToast(controller: self, message: message, seconds: 1)
     }
 }
