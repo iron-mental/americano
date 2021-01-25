@@ -73,7 +73,7 @@ class CreateStudyPresenter: CreateStudyPresenterProtocols {
         view?.studyInfoInvalid(message: message)
     }
     
-    func studyInfoValid(message: String) {
-        view?.studyInfoValid(message: message)
+    func studyInfoValid(studyID: Int) {
+        view?.studyInfoValid(message: "스터디 생성이 완료되었습니다.")
     }
 }

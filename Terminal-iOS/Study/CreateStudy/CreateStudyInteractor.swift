@@ -76,14 +76,14 @@ class CreateStudyInteractor: CreateStudyInteractorProtocols {
         let nullCheckResult = nullCheck(study: study)
         
         if nullCheckResult == "성공" {
-            
-            
-            createStudyRemoteDataManager?.postStudy(study: study, completion: { result, message in
-                switch result {
+            createStudyRemoteDataManager?.postStudy(study: study, completion: { response in
+                switch response.result {
                 case true:
-                    self.presenter?.studyInfoValid(message: message)
+                    guard let studyID = response.data?.studyID else { return }
+                    self.presenter?.studyInfoValid(studyID: studyID)
                     break
                 case false:
+                    guard let message = response.message else { return }
                     self.presenter?.studyInfoInvalid(message: message)
                     break
                 }

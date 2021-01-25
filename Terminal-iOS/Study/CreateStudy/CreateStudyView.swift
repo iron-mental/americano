@@ -128,8 +128,6 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     
     func studyInfoValid(message: String) {
-//        <#code#>
+        showToast(controller: self, message: message, seconds: 1)
     }
-    
-    
 }

@@ -203,6 +203,7 @@
 		CC6044812576265A000D11C7 /* NoticeDetailRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6044802576265A000D11C7 /* NoticeDetailRemoteDataManager.swift */; };
 		CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604483257626CF000D11C7 /* NoticeDetailLocalDataManager.swift */; };
 		CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */; };
+		CC60454425BF15B600A98FEC /* CreateStudyResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC60454325BF15B600A98FEC /* CreateStudyResult.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC72CBEF25B02FCE009E9986 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */; };
@@ -554,6 +555,7 @@
 		CC6044802576265A000D11C7 /* NoticeDetailRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC604483257626CF000D11C7 /* NoticeDetailLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailLocalDataManager.swift; sourceTree = "<group>"; };
 		CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailWireFrame.swift; sourceTree = "<group>"; };
+		CC60454325BF15B600A98FEC /* CreateStudyResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyResult.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
@@ -1376,6 +1378,7 @@
 				A5C7B8F925AC6B7000016D5B /* AddressState.swift */,
 				CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */,
 				A57E829025BD8F72000F8678 /* SNSValidate.swift */,
+				CC60454325BF15B600A98FEC /* CreateStudyResult.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2013,6 +2016,7 @@
 				A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */,
 				CC5794FB2570C9BA00DF96AB /* AddNoticeView.swift in Sources */,
 				A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */,
+				CC60454425BF15B600A98FEC /* CreateStudyResult.swift in Sources */,
 				CCAF0FE6253303770060A2F6 /* MyStudyMainWireFrame.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CCC1A2F825B14E52004E3BE6 /* ApplyUserDetailWireFrame.swift in Sources */,

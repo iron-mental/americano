@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
     
-    func postStudy(study: StudyDetailPost, completion: @escaping (Bool, String) -> Void) {
+    func postStudy(study: StudyDetailPost, completion: @escaping (BaseResponse<CreateStudyResult>) -> Void) {
         
         
         let params: [String: Any] = [
@@ -68,18 +68,14 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerProtocols {
                     let data = "\(json)".data(using: .utf8)
                     
                     do {
-                        //이거 result형 만들어서 받아내야함
-                        let result = try JSONDecoder().decode(BaseResponse<[Bool]>.self, from: data!)
-                        
-                        completion(result.result, result.message!)
+                        let result = try JSONDecoder().decode(BaseResponse<CreateStudyResult>.self, from: data!)
+                        completion(result)
                     } catch {
                         print("error~~~")
                     }
-                        
                     break
                 case .failure(let err):
-                    
-                    completion(JSON(err)["result"].bool!, JSON(err)["message"].string!)
+                    print(err)
                     break
                 }
             }

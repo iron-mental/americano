@@ -74,14 +74,14 @@ protocol CreateStudyPresenterProtocols: class {
     func showEvernoteValidResult(result: Bool)
     func showWebValidResult(result: Bool)
     func studyInfoInvalid(message: String)
-    func studyInfoValid(message: String)
+    func studyInfoValid(studyID: Int)
 }
 
 protocol CreateStudyRemoteDataManagerProtocols: class {
     func getNotionValid(id: String?) -> Bool
     func getEvernoteValid(url: String?) -> Bool
     func getWebValid(url: String?) -> Bool
-    func postStudy(study: StudyDetailPost, completion: @escaping (_ result: Bool, _ data: String ) -> Void)
+    func postStudy(study: StudyDetailPost, completion: @escaping (_ response: BaseResponse<CreateStudyResult>) -> Void)
     func putStudy(study: StudyDetailPost, studyID: Int, completion: @escaping (_ result: Bool, _ data: String) -> Void)
 }
 
