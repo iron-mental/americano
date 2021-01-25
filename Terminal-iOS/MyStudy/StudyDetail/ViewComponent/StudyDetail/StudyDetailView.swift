@@ -254,8 +254,9 @@ class StudyDetailView: UIViewController {
         }
     }
     @objc func joinButtonDidTap() {
-        TerminalAlertMessage.show(type: .StudyApplyView)
-        (TerminalAlertMessage.alertView as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
+        TerminalAlertMessage.alertTest(controller: self, type: .StudyApplyView)
+        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).dismissButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
+//        (TerminalAlertMessage.alertView as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
     }
     
     @objc func modifyJoinButtonDidTap() {

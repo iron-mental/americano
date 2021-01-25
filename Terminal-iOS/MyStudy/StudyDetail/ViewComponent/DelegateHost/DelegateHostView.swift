@@ -59,7 +59,8 @@ class DelegateHostView: UIViewController {
     
     @objc func delegateCompelteButtonDidTap() {
         presenter?.delegateHostButtonDidTap(newLeader: selectedUserID)
-        (TerminalAlertMessage.alertView as! AlertMessageView).completeButton.removeTarget(nil, action: nil, for: .allEvents)
+        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.removeTarget(nil, action: nil, for: .allEvents)
+        TerminalAlertMessage.alert.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -92,9 +93,6 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedUserID = userList![indexPath.row].userID
         TerminalAlertMessage.alertTest(controller: self, type: .DelegateHostConfirmView)
-        
-//        TerminalAlertMessage.show(type: .DelegateHostConfirmView)
-//        (TerminalAlertMessage.alertView as! AlertMessageView).completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
-//        navigationController?.popViewController(animated: true)
+        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
     }
 }
