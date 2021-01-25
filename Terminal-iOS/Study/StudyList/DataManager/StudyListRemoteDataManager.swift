@@ -15,7 +15,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     
     // MARK: 최신순 리스트 검색시 초기 배열값
     
-    func retrieveStudyList(category: String) {
+    func retrieveLatestStudyList(category: String) {
         let params: [String: String] = [
             "category": category,
             "sort": "new"
@@ -30,9 +30,14 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
+                    print(json)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
-                    self.remoteRequestHandler?.onStudiesRetrieved(studies: result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
+                        self.remoteRequestHandler?.onStudiesLatestRetrieved(result: result)
+                    } catch {
+                        print(error)
+                    }
                 case .failure(let err):
                     print(err)
                 }
@@ -59,7 +64,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
                     
-                    self.remoteRequestHandler?.onStudiesLengthRetrieved(studies: result)
+                    self.remoteRequestHandler?.onStudiesLengthRetrieved(result: result)
                 case .failure(let err):
                     print(err)
                 }
@@ -67,9 +72,9 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     }
     
     
-    // MARK: key 값을 통한 페이징
+    // MARK: key 값을 통한 최신순 페이징
     
-    func paginationRetrieveStudyList(keyValue: [Int], completion: @escaping (() -> Void)) {
+    func paginationRetrieveLatestStudyList(keyValue: [Int], completion: @escaping (() -> Void)) {
         if keyValue.count > 0 {
             let key = "\(keyValue)"
                 .trimmingCharacters(in: ["["])
@@ -80,14 +85,15 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .shared
                 .session
                 .request(TerminalRouter.studyListForKey(value: key))
-                .validate(statusCode: 200..<299)
+                .validate(statusCode: 200..<500)
                 .responseJSON { response in
                     switch response.result {
                     case .success(let value):
                         let json = JSON(value)
+                        print(json)
                         let data = "\(json)".data(using: .utf8)
                         let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
-                        self.remoteRequestHandler?.onStudiesRetrieved(studies: result)
+                        self.remoteRequestHandler?.onStudiesForKeyLatestRetrieved(result: result)
                         completion()
                     case .failure(let err):
                         print(err)
@@ -109,14 +115,14 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .shared
                 .session
                 .request(TerminalRouter.studyListForKey(value: key))
-                .validate(statusCode: 200..<299)
+                .validate(statusCode: 200..<500)
                 .responseJSON { response in
                     switch response.result {
                     case .success(let value):
                         let json = JSON(value)
                         let data = "\(json)".data(using: .utf8)
                         let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
-                        self.remoteRequestHandler?.onStudiesLengthRetrieved(studies: result)
+                        self.remoteRequestHandler?.onStudiesForKeyLengthRetrieved(result: result)
                         completion()
                     case .failure(let err):
                         print(err)

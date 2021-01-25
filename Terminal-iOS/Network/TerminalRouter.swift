@@ -204,7 +204,7 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/\(id)/info"
         case let .userSNSUpdate(id, _):
             return "user/\(id)/sns"
-        case let .userCareerUpdate(id,_):
+        case let .userCareerUpdate(id, _):
             return "user/\(id)/career"
         case let .userLocationUpdate(id, _):
             return "user/\(id)/location"
@@ -320,7 +320,7 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 스터디
-        case .studyDetail, .studyDelete, .studyLeave, .studyCategory, .studyUpdate:
+        case .studyDetail, .studyDelete, .studyLeave, .studyCategory:
             return nil
         case .hotKeyword, .myStudyList:
             return nil
@@ -334,10 +334,6 @@ enum TerminalRouter: URLRequestConvertible {
             return ["word": keyword]
         case let .studyUpdate(_, study):
             return study
-        case let .studySearch(keyword):
-            return ["word": keyword]
-        case .studyLeave:
-            return nil
         case let .delegateHost(_, newLeader):
             return ["new_leader": newLeader]
             

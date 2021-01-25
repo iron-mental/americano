@@ -39,7 +39,7 @@ protocol StudyListPresenterProtocol: class {
 
 protocol StudyListInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    func didRetrieveStudies(studies: [Study])
+    func didRetrieveLatestStudies(studies: [Study])
     func didRetrieveLengthStudies(studies: [Study])
     func onError()
 }
@@ -63,16 +63,18 @@ protocol StudyListRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func retrieveStudyList(category: String)
+    func retrieveLatestStudyList(category: String)
     func retrieveLengthStudyList(category: String)
-    func paginationRetrieveStudyList(keyValue: [Int], completion: @escaping (() -> Void))
+    func paginationRetrieveLatestStudyList(keyValue: [Int], completion: @escaping (() -> Void))
     func paginationRetrieveLengthStudyList(keyValue: [Int], completion: @escaping (() -> Void))
 }
 
 protocol StudyListRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    func onStudiesRetrieved(studies: BaseResponse<[Study]>)
-    func onStudiesLengthRetrieved(studies: BaseResponse<[Study]>)
+    func onStudiesLatestRetrieved(result: BaseResponse<[Study]>)
+    func onStudiesLengthRetrieved(result: BaseResponse<[Study]>)
+    func onStudiesForKeyLatestRetrieved(result: BaseResponse<[Study]>)
+    func onStudiesForKeyLengthRetrieved(result: BaseResponse<[Study]>)
     func onError()
 }
 
