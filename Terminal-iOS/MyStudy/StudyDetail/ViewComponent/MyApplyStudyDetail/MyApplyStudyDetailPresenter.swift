@@ -64,7 +64,7 @@ extension MyApplyStudyDetailPresenter: MyApplyStudyDetailInteractorOutputProtoco
     func retriveDeleteApplyResult(result: Bool, message: String) {
         switch result {
         case true:
-            TerminalAlertMessage.hide()
+            TerminalAlertMessage.hideDismissTest()
             self.view?.showDeleteApply(message: message)
             break
         case false:

@@ -34,27 +34,27 @@ class TerminalAlertMessage: NSObject {
     static var alertView: UIView?
     static var alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
     
-    class func show(type: AlertType) {
-        let backgroundView = UIView()
-        let alertView = type.view
-        
-        if let window = UIApplication.shared.windows.first {
-            window.addSubview(backgroundView)
-            window.addSubview(alertView)
-            window.backgroundColor = UIColor.appColor(.terminalBackground)
-            alertView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX * 0.8, height: 300)
-            backgroundView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX, height: window.frame.maxY)
-            backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9)
-            alertView.center = window.center
-            
-            sharedInstance.backgroundView?.removeFromSuperview()
-            TerminalAlertMessage.alertView?.removeFromSuperview()
-            sharedInstance.backgroundView = backgroundView
-            TerminalAlertMessage.alertView = alertView
-            
-            (alertView as! AlertBaseUIView).dismissButton.addTarget(self, action: #selector(hide), for: .touchUpInside)
-        }
-    }
+//    class func show(type: AlertType) {
+//        let backgroundView = UIView()
+//        let alertView = type.view
+//
+//        if let window = UIApplication.shared.windows.first {
+//            window.addSubview(backgroundView)
+//            window.addSubview(alertView)
+//            window.backgroundColor = UIColor.appColor(.terminalBackground)
+//            alertView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX * 0.8, height: 300)
+//            backgroundView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX, height: window.frame.maxY)
+//            backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.9)
+//            alertView.center = window.center
+//
+//            sharedInstance.backgroundView?.removeFromSuperview()
+//            TerminalAlertMessage.alertView?.removeFromSuperview()
+//            sharedInstance.backgroundView = backgroundView
+//            TerminalAlertMessage.alertView = alertView
+//
+//            (alertView as! AlertBaseUIView).dismissButton.addTarget(self, action: #selector(hide), for: .touchUpInside)
+//        }
+//    }
     
     class func alertTest(controller: UIViewController, type: AlertType) {
         TerminalAlertMessage.alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
@@ -88,11 +88,11 @@ class TerminalAlertMessage: NSObject {
         ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.removeTarget(nil, action: nil, for: .allEvents)
     }
     
-    @objc class func hide() {
-        if let alertView = TerminalAlertMessage.alertView,
-           let backgroundView = sharedInstance.backgroundView {
-            backgroundView.removeFromSuperview()
-            alertView.removeFromSuperview()
-        }
-    }
+//    @objc class func hide() {
+//        if let alertView = TerminalAlertMessage.alertView,
+//           let backgroundView = sharedInstance.backgroundView {
+//            backgroundView.removeFromSuperview()
+//            alertView.removeFromSuperview()
+//        }
+//    }
 }

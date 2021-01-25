@@ -107,8 +107,8 @@ class MyApplyStudyDetailView: UIViewController {
         }
     }
     @objc func didCancelButtonDidTap() {
-        TerminalAlertMessage.show(type: .StudyApplyDeleteView)
-        (TerminalAlertMessage.alertView as? AlertBaseUIView)?.completeButton.addTarget(self, action: #selector(didCancelAction), for: .touchUpInside)
+        TerminalAlertMessage.alertTest(controller: self, type: .StudyApplyDeleteView)
+        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(didCancelAction), for: .touchUpInside)
     }
     @objc func didCancelAction() {
         presenter?.cancelButtonDidTap()
@@ -119,7 +119,6 @@ extension MyApplyStudyDetailView: MyApplyStudyDetailViewProtocol {
     
     
     func showModifyApplyMessageResult(message: String) {
-        //토스트 메세지를 띄워주며 << 요놈 개발해야겠음!!
         navigationController?.popViewController(animated: true)
         (navigationController?.viewControllers.last as? MyApplyListViewProtocol)?.presenter?.viewDidLoad()
     }

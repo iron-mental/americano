@@ -24,11 +24,11 @@ extension DelegateHostPresenter: DelegateHostInteractorOutputProtocol {
         LoadingRainbowCat.hide {
             switch result {
             case true:
-                TerminalAlertMessage.hide()
+                TerminalAlertMessage.hideDismissTest()
                 self.view?.showDelegateHostResult(message: message)
                 break
             case false:
-                TerminalAlertMessage.hide()
+                TerminalAlertMessage.hideDismissTest()
                 self.view?.showError(message: message)
                 break
             }

@@ -10,6 +10,7 @@ import UIKit
 import SwiftKeychainWrapper
 import Kingfisher
 import CoreData
+
 class SetView: UIViewController {
     // 섹션
     var sections: [String] = ["","계정", "알림", "정보", ""]
@@ -104,10 +105,11 @@ class SetView: UIViewController {
         if emailVerify {
             self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 2, completion: nil)
         } else {
-            TerminalAlertMessage.show(type: .EmailAuthView)
-            if let view = TerminalAlertMessage.alertView as? AlertBaseUIView {
-                view.completeButton.addTarget(self, action: #selector(emailAuthRequest), for: .touchUpInside)
-            }
+            TerminalAlertMessage.alertTest(controller: self, type: .EmailAuthView)
+            
+            guard let alertView = (TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view else { return }
+            guard let view = alertView as? AlertBaseUIView else { return }
+            view.completeButton.addTarget(self, action: #selector(emailAuthRequest), for: .touchUpInside)
         }
     }
     
@@ -129,7 +131,7 @@ extension SetView: SetViewProtocol {
     
     func emailAuthResponse(result: Bool, message: String) {
         if result {
-            TerminalAlertMessage.hide()
+            TerminalAlertMessage.hideDismissTest()
             self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 2, completion: nil)
         } else {
             self.showToast(controller: self, message: message, seconds: 2, completion: nil)
