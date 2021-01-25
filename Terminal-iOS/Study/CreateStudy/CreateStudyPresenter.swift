@@ -16,22 +16,6 @@ class CreateStudyPresenter: CreateStudyPresenterProtocol {
     func viewDidLoad() {
         view?.setView()
     }
-    
-    func notionInputFinish(id: String?) {
-        view?.showLoadingToNotionInput()
-        interactor?.searchNotionID(id: id)
-    }
-    
-    func everNoteInputFinish(url: String?) {
-        view?.showLoadingToEvernoteInput()
-        interactor?.searchEvernoteURL(url: url)
-    }
-    
-    func URLInputFinish(url: String?) {
-        view?.showLoadingToWebInput()
-        interactor?.searchWebURL(url: url)
-    }
-    
     func clickLocationView(currentView: UIViewController) {
         wireFrame?.goToSelectLocation(view: currentView)
     }

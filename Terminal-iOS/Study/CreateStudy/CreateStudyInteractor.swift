@@ -13,31 +13,6 @@ class CreateStudyInteractor: CreateStudyInteractorProtocol {
     var remoteDataManager: CreateStudyRemoteDataManagerInputProtocol?
     var studyInfo: StudyDetail?
     
-    func searchNotionID(id: String?) {
-        if let userInput = id {
-            if let result = remoteDataManager?.getNotionValid(id: userInput) {
-                presenter?.showNotionValidResult(result: result)
-            }
-        }
-        
-    }
-    
-    func searchEvernoteURL(url: String?) {
-        if let userInput = url {
-            if let result = remoteDataManager?.getEvernoteValid(url: userInput) {
-                presenter?.showEvernoteValidResult(result: result)
-            }
-        }
-    }
-    
-    func searchWebURL(url: String?) {
-        if let userInput = url {
-            if let result = remoteDataManager?.getWebValid(url: userInput) {
-                presenter?.showWebValidResult(result: (result))
-            }
-        }
-    }
-    
     func nullCheck(study: StudyDetailPost) -> String {
         
         if study.category.isEmpty {
@@ -66,10 +41,6 @@ class CreateStudyInteractor: CreateStudyInteractorProtocol {
             }
         }
         return "성공"
-    }
-    
-    func studyInfoOptionalBinding() {
-        
     }
     
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?) {

@@ -75,54 +75,6 @@ extension CreateStudyView: CreateStudyViewProtocol {
 //        <#code#>
     }
     
-    func showLoadingToNotionInput() {
-//        <#code#>
-    }
-    
-    func showLoadingToEvernoteInput() {
-//        <#code#>
-    }
-    
-    func showLoadingToWebInput() {
-//        <#code#>
-    }
-    
-    func hideLoadingToNotionInput() {
-//        <#code#>
-    }
-    
-    func hideLoadingToEvernoteInput() {
-//        <#code#>
-    }
-    
-    func hideLoadingToWebInput() {
-//        <#code#>
-    }
-    
-    func notionValid() {
-//        <#code#>
-    }
-    
-    func evernoteValid() {
-//        <#code#>
-    }
-    
-    func webValid() {
-//        <#code#>
-    }
-    
-    func notionInvalid() {
-//        <#code#>
-    }
-    
-    func evernoteInvalid() {
-//        <#code#>
-    }
-    
-    func webInvalid() {
-//        <#code#>
-    }
-    
     func studyInfoInvalid(message: String) {
         showToast(controller: self, message: message, seconds: 1)
     }

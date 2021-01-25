@@ -28,18 +28,6 @@ protocol CreateStudyViewProtocol: class {
     func setView()
     func getBackgroundImage()
     func setBackgroundImage()
-    func showLoadingToNotionInput()
-    func showLoadingToEvernoteInput()
-    func showLoadingToWebInput()
-    func hideLoadingToNotionInput()
-    func hideLoadingToEvernoteInput()
-    func hideLoadingToWebInput()
-    func notionValid()
-    func evernoteValid()
-    func webValid()
-    func notionInvalid()
-    func evernoteInvalid()
-    func webInvalid()
     func studyInfoInvalid(message: String)
     func studyInfoValid(studyID: Int, message: String)
 }
@@ -50,11 +38,6 @@ protocol CreateStudyInteractorProtocol: class {
     var studyInfo: StudyDetail? { get set }
     
     //PRESENTER -> INTERACTOR
-    func searchNotionID(id: String?)
-    func searchEvernoteURL(url: String?)
-    func searchWebURL(url: String?)
-    
-    //REMOTEDATAMANAGER -> INTERACTOR
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?)
 }
 
@@ -65,9 +48,6 @@ protocol CreateStudyPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func viewDidLoad()
-    func notionInputFinish(id: String?)
-    func everNoteInputFinish(url: String?)
-    func URLInputFinish(url: String?)
     func clickLocationView(currentView: UIViewController)
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?)
     
@@ -82,11 +62,7 @@ protocol CreateStudyPresenterProtocol: class {
 protocol CreateStudyRemoteDataManagerInputProtocol: class {
     var interactor: CreateStudyReMoteDataManagerOutputProtocol? { get set }
     
-    func getNotionValid(id: String?) -> Bool
-    func getEvernoteValid(url: String?) -> Bool
-    func getWebValid(url: String?) -> Bool
     func postStudy(study: StudyDetailPost)
-    func putStudy(study: StudyDetailPost, studyID: Int, completion: @escaping (_ result: Bool, _ data: String) -> Void)
 }
 
 protocol CreateStudyReMoteDataManagerOutputProtocol: class {
