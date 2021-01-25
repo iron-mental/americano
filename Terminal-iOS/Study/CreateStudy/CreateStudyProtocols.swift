@@ -13,8 +13,8 @@ enum WriteStudyViewState {
     case edit
 }
 
-protocol CreateStudyViewProtocols: class {
-    var presenter: CreateStudyPresenterProtocols? { get set }
+protocol CreateStudyViewProtocol: class {
+    var presenter: CreateStudyPresenterProtocol? { get set }
     var study: StudyDetail? { get set }
     var studyDetailPost: StudyDetailPost? { get set }
     var state: WriteStudyViewState? { get set }
@@ -41,25 +41,27 @@ protocol CreateStudyViewProtocols: class {
     func evernoteInvalid()
     func webInvalid()
     func studyInfoInvalid(message: String)
-    func studyInfoValid(message: String)
+    func studyInfoValid(studyID: Int, message: String)
 }
 
-protocol CreateStudyInteractorProtocols: class {
-    var presenter: CreateStudyPresenterProtocols? { get set }
-    var createStudyRemoteDataManager: CreateStudyRemoteDataManagerProtocols? { get set }
+protocol CreateStudyInteractorProtocol: class {
+    var presenter: CreateStudyPresenterProtocol? { get set }
+    var remoteDataManager: CreateStudyRemoteDataManagerInputProtocol? { get set }
     var studyInfo: StudyDetail? { get set }
     
     //PRESENTER -> INTERACTOR
     func searchNotionID(id: String?)
     func searchEvernoteURL(url: String?)
     func searchWebURL(url: String?)
+    
+    //REMOTEDATAMANAGER -> INTERACTOR
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?)
 }
 
-protocol CreateStudyPresenterProtocols: class {
-    var view: CreateStudyViewProtocols? { get set }
-    var interactor: CreateStudyInteractorProtocols? { get set }
-    var wireFrame: CreateStudyWireFrameProtocols? { get set }
+protocol CreateStudyPresenterProtocol: class {
+    var view: CreateStudyViewProtocol? { get set }
+    var interactor: CreateStudyInteractorProtocol? { get set }
+    var wireFrame: CreateStudyWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
     func viewDidLoad()
@@ -77,19 +79,22 @@ protocol CreateStudyPresenterProtocols: class {
     func studyInfoValid(studyID: Int)
 }
 
-protocol CreateStudyRemoteDataManagerProtocols: class {
+protocol CreateStudyRemoteDataManagerInputProtocol: class {
+    var interactor: CreateStudyReMoteDataManagerOutputProtocol? { get set }
+    
     func getNotionValid(id: String?) -> Bool
     func getEvernoteValid(url: String?) -> Bool
     func getWebValid(url: String?) -> Bool
-    func postStudy(study: StudyDetailPost, completion: @escaping (_ response: BaseResponse<CreateStudyResult>) -> Void)
+    func postStudy(study: StudyDetailPost)
     func putStudy(study: StudyDetailPost, studyID: Int, completion: @escaping (_ result: Bool, _ data: String) -> Void)
 }
 
-protocol CreateStudyLocalDataManagerProtocols: class {
-    
+protocol CreateStudyReMoteDataManagerOutputProtocol: class {
+    func createStudyInvalid(message: String)
+    func createStudyValid(response: BaseResponse<CreateStudyResult>)
 }
 
-protocol CreateStudyWireFrameProtocols: class {
+protocol CreateStudyWireFrameProtocol: class {
     static func createStudyViewModul(category: String, studyDetail: StudyDetail?, state: WriteStudyViewState, parentView: UIViewController?) -> UIViewController
     //추후에 스터디 모델이 들어가야겠네용?
     func goToSelectLocation(view: UIViewController)
