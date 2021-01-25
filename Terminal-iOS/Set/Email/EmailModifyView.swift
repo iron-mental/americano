@@ -23,12 +23,15 @@ class EmailModifyView: UIViewController {
     }
     
     private func attribute() {
+        self.hideKeyboardWhenTappedAround()
         self.view.backgroundColor = .appColor(.terminalBackground)
+        
         self.emailLabel.do {
             $0.text = "Email"
             $0.textColor = .white
             $0.font = UIFont.notosansMedium(size: 14)
         }
+        
         self.emailTextField.do {
             $0.text = email ?? ""
             $0.layer.cornerRadius = 10
@@ -37,6 +40,7 @@ class EmailModifyView: UIViewController {
             $0.addLeftPadding()
             $0.font = UIFont.notosansMedium(size: 18)
         }
+        
         self.completeButton.do {
             $0.backgroundColor = .appColor(.mainColor)
             $0.setTitle("수정완료", for: .normal)
@@ -74,7 +78,14 @@ class EmailModifyView: UIViewController {
     
     @objc func completeModify() {
         let email = self.emailTextField.text ?? ""
-        presenter?.completeModify(email: email)
+        
+        // 공백체크
+        if email.whitespaceCheck() {
+            self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
+        } else {
+            presenter?.completeModify(email: email)
+        }
+        
     }
 }
 
@@ -86,6 +97,9 @@ extension EmailModifyView: EmailModifyViewProtocol {
                 parent?.showToast(controller: parent!, message: "Email 수정 완료", seconds: 1, completion: nil)
                 parent?.presenter?.viewDidLoad()
             })
+            
+            let rootParent = self.navigationController?.viewControllers[0] as? SetView
+            rootParent?.presenter?.viewDidLoad()
         } else {
             self.showToast(controller: self, message: message, seconds: 1, completion: nil)
         }

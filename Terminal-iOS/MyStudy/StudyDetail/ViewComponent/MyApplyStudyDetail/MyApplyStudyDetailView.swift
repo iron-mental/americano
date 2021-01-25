@@ -117,7 +117,6 @@ class MyApplyStudyDetailView: UIViewController {
 
 extension MyApplyStudyDetailView: MyApplyStudyDetailViewProtocol {
     
-    
     func showModifyApplyMessageResult(message: String) {
         navigationController?.popViewController(animated: true)
         (navigationController?.viewControllers.last as? MyApplyListViewProtocol)?.presenter?.viewDidLoad()

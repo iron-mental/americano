@@ -40,23 +40,23 @@ class ProfileSNSView: BaseSNSView {
         }
     }
     
-    override func addstack(snsList: [String : String]) {
+    override func addstack(snsList: [String: String]) {
         /// 추가된 SNS 갯수
         var count = 0
         
         self.snsStack.removeAllArrangedSubviews()
         
-        if let _ = snsList["github"] {
+        if snsList["github"] != nil {
             self.snsStack.addArrangedSubview(self.github)
             count += 1
         }
         
-        if let _ = snsList["linkedin"] {
+        if snsList["linkedin"] != nil {
             self.snsStack.addArrangedSubview(self.linkedin)
             count += 1
         }
         
-        if let _ = snsList["web"] {
+        if snsList["web"] != nil{
             self.snsStack.addArrangedSubview(self.web)
             count += 1
         }

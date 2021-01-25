@@ -9,7 +9,7 @@
 import UIKit
 
 class BottomView: UIView {
-    var Address = UILabel()
+    var address = UILabel()
     var detailAddress = UITextField()
     var completeButton = UIButton()
     
@@ -23,7 +23,7 @@ class BottomView: UIView {
         self.do {
             $0.backgroundColor = .systemBackground
         }
-        Address.do {
+        address.do {
             $0.text = "주소가 들어갈 공간이쥬"
         }
         detailAddress.do {
@@ -38,33 +38,19 @@ class BottomView: UIView {
     }
     
     func layout() {
-        [Address, detailAddress, completeButton].forEach { addSubview($0) }
+        [address, detailAddress, completeButton].forEach { addSubview($0) }
         
-//        textField.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: topAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 200)).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: textField.intrinsicContentSize.height)).isActive = true
-//        }
-//        searchButton.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.centerYAnchor.constraint(equalTo: textField.centerYAnchor).isActive = true
-//            $0.trailingAnchor.constraint(equalTo: trailingAnchor,constant: -Terminal.convertWidth(value: 26)).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 27)).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 27)).isActive = true
-//        }
-        Address.do {
+        address.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
             $0.topAnchor.constraint(equalTo: topAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 320)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Address.intrinsicContentSize.height).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: address.intrinsicContentSize.height).isActive = true
         }
         detailAddress.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: Address.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: Address.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: address.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: address.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 320)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: detailAddress.intrinsicContentSize.height).isActive = true
         }

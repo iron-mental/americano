@@ -20,7 +20,7 @@ class SelectCategoryView: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-    let font = UIFont(name:"Apple Color Emoji" , size: 25)
+    let font = UIFont(name:"Apple Color Emoji", size: 25)
     let titleView = UILabel()
     let textLabel = UILabel()
     var tempCategory: String?
@@ -170,7 +170,8 @@ extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CategoryCell
         let category = categoryList[indexPath.row]
-        cell.imageView.image = category.image
+        cell.setData(category: category)
+        
         return cell
     }
     

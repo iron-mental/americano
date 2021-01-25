@@ -80,11 +80,11 @@ class HomeView: UIViewController {
     
     @objc func goLogin() {
         let view = IntroWireFrame.createIntroModule(beginState: .join, introState: .emailInput)
-        self.navigationController?.pushViewController(view, animated: true, completion: nil)
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     @objc func goSignUp() {
         let view = IntroWireFrame.createIntroModule(beginState: .signUp, introState: .emailInput)
-        self.navigationController?.pushViewController(view, animated: true, completion: nil)
+        self.navigationController?.pushViewController(view, animated: true)
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class StudyListWireFrame: StudyListWireFrameProtocol {
-    static func createStudyListModule() -> UIViewController {
+    static func createStudyListModule(category: String) -> UIViewController {
         let view: StudyListViewProtocol = StudyListView()
         let presenter: StudyListPresenterProtocol & StudyListInteractorOutputProtocol = StudyListPresenter()
         let interactor: StudyListInteractorInputProtocol & StudyListRemoteDataManagerOutputProtocol = StudyListInteractor()
@@ -27,7 +27,7 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
         remoteDataManager.remoteRequestHandler = interactor
         
         if let view = view as? StudyListView {
-            view.category = "ios"
+            view.category = category
             return view
         } else {
             return UIViewController()

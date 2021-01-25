@@ -253,6 +253,7 @@ class StudyDetailView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 72)).isActive = true
         }
     }
+  
     @objc func joinButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .StudyApplyView)
         ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)

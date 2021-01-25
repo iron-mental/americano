@@ -51,6 +51,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studySearch            (keyword: String)
     case hotKeyword
     case studyLeave             (studyID: String)
+    case studyCategory
     case delegateHost           (studyID: Int, newLeader: Int)
     
     // 신청부분
@@ -144,6 +145,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .studyLeave:
             return .post
+        case .studyCategory:
+            return .get
         case .delegateHost:
             return .put
             
@@ -243,6 +246,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/ranking"
         case let .studyLeave(studyID):
             return "study/\(studyID)/leave"
+        case .studyCategory:
+            return "study/category"
         case let .delegateHost(studyID, _):
             return "study/\(studyID)/delegate"
             
@@ -315,7 +320,9 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 스터디
-        case .studyDetail, .studyDelete, .myStudyList, .hotKeyword:
+        case .studyDetail, .studyDelete, .studyLeave, .studyCategory, .studyUpdate:
+            return nil
+        case .hotKeyword, .myStudyList:
             return nil
         case let .studyListForKey(value):
             return ["values": value]
@@ -323,6 +330,8 @@ enum TerminalRouter: URLRequestConvertible {
             return sort
         case let .studyCreate(study):
             return study
+        case let .studySearch(keyword):
+            return ["word": keyword]
         case let .studyUpdate(_, study):
             return study
         case let .studySearch(keyword):

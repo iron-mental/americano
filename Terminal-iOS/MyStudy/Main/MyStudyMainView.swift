@@ -25,7 +25,7 @@ class MyStudyMainView: UIViewController {
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
     
-    var alarmButton = badgeBarButtonItem()
+    var alarmButton = BadgeBarButtonItem()
     var tempButton: UIBarButtonItem?
     var rightBarButtomItem: UIBarButtonItem?
     var dismissEditViewButtonItem: UIBarButtonItem?

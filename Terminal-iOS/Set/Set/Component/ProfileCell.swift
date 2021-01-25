@@ -73,7 +73,7 @@ class ProfileCell: UITableViewCell {
     }
     
     func layout() {
-        [profile, name, descript, location].forEach{ self.contentView.addSubview($0)}
+        [profile, name, descript, location].forEach { self.contentView.addSubview($0)}
         
         self.profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

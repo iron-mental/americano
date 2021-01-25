@@ -12,7 +12,7 @@ import UIKit
 final class ProjectTableView: UITableView {
     var maxHeight: CGFloat = 2000
     
-    override var contentSize:CGSize {
+    override var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()
         }

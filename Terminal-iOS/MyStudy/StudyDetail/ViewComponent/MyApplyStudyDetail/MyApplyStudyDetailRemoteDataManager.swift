@@ -63,9 +63,7 @@ class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerIn
                     } catch {
                         print("error")
                     }
-                    break
-                case .failure(let _):
-                    
+                case .failure:
                     break
                 }
             }
@@ -87,11 +85,9 @@ class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerIn
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
                         if let message = result.message {
-                            
                             self.interactor?.retriveDeleteApplyResult(result: result.result, message: message)
                         }
                     } catch {
-                        
                         print("error")
                     }
                     break

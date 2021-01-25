@@ -36,7 +36,7 @@ class CareerView: UIView {
     }
     
     func layout() {
-        [careerTitle, careerContents, modify].forEach{ self.addSubview($0) }
+        [careerTitle, careerContents, modify].forEach { self.addSubview($0) }
         
         self.careerTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

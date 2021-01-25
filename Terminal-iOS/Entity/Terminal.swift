@@ -16,12 +16,11 @@ class Terminal {
     
     static let githubKey = "3e5f8c2c78dffa5dd1d4fdf729060ca9bb703a65"
     
-    static func convertHeigt(value: CGFloat) -> CGFloat{
+    static func convertHeigt(value: CGFloat) -> CGFloat {
         return screenSize.height * (value / 667)
     }
     
     static func convertWidth(value: CGFloat) -> CGFloat {
         return screenSize.width * (value / 375)
     }
-    static let token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDQsImVtYWlsIjoic3dkb3Jpc0BnbWFpbC5jb20iLCJuaWNrbmFtZSI6IuycpOyDgeybkCIsImlhdCI6MTYwNzA4NzQ5NSwiZXhwIjoxMDYwNzA4NzQ5NSwiaXNzIjoidGVybWluYWwtc2VydmVyIiwic3ViIjoidXNlckluZm8tYWNjZXNzIn0.b3dYBzHr9ll524AVLeJ5sB678l1fiBQev9CCTeYl9AE"
 }

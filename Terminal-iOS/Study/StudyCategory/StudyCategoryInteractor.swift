@@ -10,37 +10,38 @@ import UIKit
 
 class StudyCategoryInteractor: StudyCategoryInteractorInputProtocol {
     var presenter: StudyCategoryInteractorOutputProtocol?
-    
     var localDatamanager: StudyCategoryLocalDataManagerInputProtocol?
-    
     var remoteDatamanager: StudyCategoryRemoteDataManagerInputProtocol?
     
     func retrieveStudyCategory() {
 
         let categoryList = [
-            Category(image: UIImage(named: "ai")!,name: "ios"),
-            Category(image: UIImage(named: "android")!,name: "ios"),
-            Category(image: UIImage(named: "backend")!,name: "ios"),
-            Category(image: UIImage(named: "blockchain")!,name: "ios"),
-            Category(image: UIImage(named: "dataengineer")!,name: "ios"),
-            Category(image: UIImage(named: "desktop")!,name: "ios"),
-            Category(image: UIImage(named: "devops")!,name: "ios"),
-            Category(image: UIImage(named: "frontend")!,name: "ios"),
-            Category(image: UIImage(named: "game")!,name: "ios"),
             Category(image: UIImage(named: "ios")!,name: "ios"),
-            Category(image: UIImage(named: "iot")!,name: "ios"),
-            Category(image: UIImage(named: "secure")!,name: "ios"),
-            Category(image: UIImage(named: "network")!,name: "ios"),
-            Category(image: UIImage(named: "language")!,name: "ios"),
-            Category(image: UIImage(named: "embeded")!,name: "ios")
+            Category(image: UIImage(named: "ai")!, name: "ai"),
+            Category(image: UIImage(named: "android")!, name: "android"),
+            Category(image: UIImage(named: "backend")!, name: "backend"),
+            Category(image: UIImage(named: "blockchain")!, name: "blockchain"),
+            Category(image: UIImage(named: "bigdata")!, name: "bigdata"),
+            Category(image: UIImage(named: "desktop")!, name: "desktop"),
+            Category(image: UIImage(named: "devops")!, name: "devops"),
+            Category(image: UIImage(named: "web")!, name: "web"),
+            Category(image: UIImage(named: "game")!, name: "game"),
+            Category(image: UIImage(named: "iot")!, name: "iot"),
+            Category(image: UIImage(named: "secure")!, name: "secure"),
+            Category(image: UIImage(named: "systemNetwork")!, name: "systemNetwork"),
+            Category(image: UIImage(named: "language")!, name: "language"),
+            Category(image: UIImage(named: "embedded")!, name: "embedded")
         ]
         presenter?.didRetrieveCategories(categoryList)
+        remoteDatamanager?.retrievePostList()
     }
 }
 
 extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol {
-    func onCategoriesRetrieved(_ categories: [Category]) {
+    func onCategoriesRetrieved(categories: BaseResponse<[String]>) {
+        var categoryList: [Category] = []
         
+        // 추후 작업예정
     }
     
     func onError() {

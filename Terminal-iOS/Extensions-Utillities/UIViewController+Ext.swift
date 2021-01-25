@@ -9,7 +9,10 @@
 import UIKit
 
 extension UIViewController {
-    func showToast(controller: UIViewController, message: String, seconds: Double, completion: (() -> Void)?) {
+    func showToast(controller: UIViewController,
+                   message: String,
+                   seconds: Double,
+                   completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         alert.view.backgroundColor = .appColor(.terminalBackground)
         alert.view.alpha = 0.5

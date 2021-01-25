@@ -17,16 +17,12 @@ class IntroPresenter: IntroPresenterProtocol {
         switch introState {
         case .emailInput:
             interactor?.checkedEmailValid(input: input, beginState: beginState)
-            break
         case .pwdInput:
             beginState == .signUp ? interactor?.checkedPasswordValid(input: input) : interactor?.checkedJoinValid(input: input)
-            break
         case .nickname:
             interactor?.signUpValid(input: input)
-            break
         }
     }
-    
     
     /// 이메일 유효성 확인 
     func emailValidInfo(result: Bool, message: String) {
@@ -56,13 +52,10 @@ class IntroPresenter: IntroPresenterProtocol {
         switch introState {
         case .emailInput:
             interactor?.checkedEmailValid(input: input, beginState: beginState)
-            break
         case .pwdInput:
             beginState == .signUp ? interactor?.checkedPasswordValid(input: input) : interactor?.checkedJoinValid(input: input)
-            break
         case .nickname:
             interactor?.signUpValid(input: input)
-            break
         }
     }
 }
