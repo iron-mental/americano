@@ -1,0 +1,17 @@
+//
+//  CreateStudyResult.swift
+//  Terminal-iOS
+//
+//  Created by 정재인 on 2021/01/26.
+//  Copyright © 2021 정재인. All rights reserved.
+//
+
+import Foundation
+
+struct CreateStudyResult: Codable {
+    let studyID: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case studyID = "study_id"
+    }
+}
