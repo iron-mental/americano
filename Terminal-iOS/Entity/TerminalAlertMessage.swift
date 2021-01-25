@@ -85,6 +85,7 @@ class TerminalAlertMessage: NSObject {
     
     @objc class func hideDismissTest() {
         TerminalAlertMessage.alert.dismiss(animated: true, completion: nil)
+        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.removeTarget(nil, action: nil, for: .allEvents)
     }
     
     @objc class func hide() {

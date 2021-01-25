@@ -59,8 +59,7 @@ class DelegateHostView: UIViewController {
     
     @objc func delegateCompelteButtonDidTap() {
         presenter?.delegateHostButtonDidTap(newLeader: selectedUserID)
-        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.removeTarget(nil, action: nil, for: .allEvents)
-        TerminalAlertMessage.alert.dismiss(animated: true, completion: nil)
+        TerminalAlertMessage.hideDismissTest()
     }
 }
 
