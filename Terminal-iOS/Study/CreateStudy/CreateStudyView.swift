@@ -30,16 +30,16 @@ class CreateStudyView: BaseEditableStudyDetailView {
     }
     
     @objc func completeButtonDidTap() {
-        studyDetailPost = StudyDetailPost(category: selectedCategory!,
-                                          title: studyTitleTextField.text ?? "",
-                                          introduce: studyIntroduceView.textView.text ?? "",
-                                          progress: studyInfoView.textView.text ?? "",
-                                          studyTime: timeView.detailTime.text ?? "",
-                                          snsWeb: SNSInputView.web.textField.text,
-                                          snsNotion: SNSInputView.notion.textField.text,
-                                          snsEvernote: SNSInputView.evernote.textField.text,
+        studyDetailPost = StudyDetailPost(category: selectedCategory ?? "",
+                                          title: studyTitleTextField.text!,
+                                          introduce: studyIntroduceView.textView.text!,
+                                          progress: studyInfoView.textView.text!,
+                                          studyTime: timeView.detailTime.text!,
+                                          snsWeb: SNSInputView.web.textField.text!,
+                                          snsNotion: SNSInputView.notion.textField.text!,
+                                          snsEvernote: SNSInputView.evernote.textField.text!,
                                           image: mainImageView.image,
-                                          location: selectedLocation!)
+                                          location: selectedLocation ?? nil)
         presenter?.clickCompleteButton(study: studyDetailPost!, studyID: study?.id ?? nil)
     }
 }
@@ -124,7 +124,7 @@ extension CreateStudyView: CreateStudyViewProtocols {
     }
     
     func studyInfoInvalid(message: String) {
-//        <#code#>
+        showToast(controller: self, message: message, seconds: 1)
     }
     
     func studyInfoValid(message: String) {

@@ -12,10 +12,10 @@ import UIKit
 
 struct StudyDetailPost {
     let category, title, introduce: String
-    let progress, studyTime: String
+    let progress, studyTime: String?
     let snsWeb, snsNotion, snsEvernote: String?
     let image: UIImage?
-    let location: StudyDetailLocationPost
+    let location: StudyDetailLocationPost?
 }
 
 struct StudyDetailLocationPost {
