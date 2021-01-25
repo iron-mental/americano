@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK: 스터디 상세
+
 struct StudyDetail: Codable {
     let participate: [Participate]
     let id: Int
@@ -27,6 +28,7 @@ struct StudyDetail: Codable {
         case authority = "Authority"
     }
 }
+
 struct Location: Codable {
     let latitude, longitude, addressName: String
     let locationDetail, placeName: String?
@@ -38,6 +40,7 @@ struct Location: Codable {
         case locationDetail = "location_detail"
     }
 }
+
 struct Participate: Codable {
     let id, userID: Int
     let nickname : String

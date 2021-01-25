@@ -124,18 +124,16 @@ class StudyListView: UIViewController {
     
     @objc func new() {
         sortState = .new
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
             self.selectedUnderline.center.x = self.lateButton.center.x
-            
         }
         self.tableView.reloadData()
     }
     
     @objc func length() {
         sortState = .length
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) {
+        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
             self.selectedUnderline.center.x = self.locationButton.center.x
-            
         }
         self.tableView.reloadData()
     }

@@ -63,6 +63,9 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     // MARK: 로그인 유효성 검사
     
     func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (BaseResponse<JoinResult>) -> Void) {
+        
+        guard let pushToken = KeychainWrapper.standard.string(forKey: "pushToken") else { return }
+        
         let params: [String: String] = [
             "email": "\(joinMaterial[0])",
             "password": "\(joinMaterial[1])",

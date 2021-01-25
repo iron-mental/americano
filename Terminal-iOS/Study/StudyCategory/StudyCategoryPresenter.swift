@@ -16,9 +16,11 @@ class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
     func viewDidLoad() {
         interactor?.retrieveStudyCategory()
     }
-    func showStudyListDetail() {
-        wireFrame?.presentStudyListScreen(from: view!)
+    
+    func showStudyListDetail(category: String) {
+        wireFrame?.presentStudyListScreen(from: view!, category: category)
     }
+    
     func goToCreateStudy(category: [Category]) {
         wireFrame?.goToSelectCategory(from: view!, category: category)
         view?.categoryUpAnimate()
