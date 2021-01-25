@@ -13,6 +13,7 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerProt
     var interactor: SearchStudyResultInteractorProtocol?
     
     func getSearchStudyResult(keyWord: String) {
+        
         TerminalNetworkManager
             .shared
             .session
@@ -21,12 +22,14 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerProt
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
                     
                     self.interactor?.showSearchStudyResult(result: result)
                 case .failure(let err):
+                    
                     print(err)
                 }
             }

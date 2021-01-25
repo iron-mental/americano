@@ -10,17 +10,18 @@ import UIKit
 import SwiftKeychainWrapper
 import Kingfisher
 import CoreData
+
 class SetView: UIViewController {
     // 섹션
     var sections: [String] = ["","계정", "알림", "정보", ""]
     var account: [String] = ["이메일", "SNS"]
     var noti: [String] = ["알림"]
     var settingData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
-                               Setting(title: "공지사항"),
-                               Setting(title: "도움말"),
-                               Setting(title: "문의하기"),
-                               Setting(title: "이용약관"),
-                               Setting(title: "개인정보 취급방침")]
+                                  Setting(title: "공지사항"),
+                                  Setting(title: "도움말"),
+                                  Setting(title: "문의하기"),
+                                  Setting(title: "이용약관"),
+                                  Setting(title: "개인정보 취급방침")]
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
     
     var userInfo: UserInfo? { didSet { self.settingList.reloadData() }}
@@ -29,7 +30,7 @@ class SetView: UIViewController {
     var presenter: SetPresenterProtocol?
     let settingList = UITableView(frame: .zero, style: .insetGrouped)
     let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 25))
-     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
@@ -104,10 +105,10 @@ class SetView: UIViewController {
         if emailVerify {
             self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 0.5)
         } else {
-            TerminalAlertMessage.show(type: .emailAuthView)
-            if let view = TerminalAlertMessage.alertView as? AlertBaseUIView {
-                view.completeButton.addTarget(self, action: #selector(emailAuthRequest), for: .touchUpInside)
-            }
+            TerminalAlertMessage.show(controller: self, type: .EmailAuthView)
+            guard let alertView = (TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view else { return }
+            guard let view = alertView as? AlertBaseUIView else { return }
+            view.completeButton.addTarget(self, action: #selector(emailAuthRequest), for: .touchUpInside)
         }
     }
     
@@ -129,7 +130,7 @@ extension SetView: SetViewProtocol {
     
     func emailAuthResponse(result: Bool, message: String) {
         if result {
-            TerminalAlertMessage.hide()
+            TerminalAlertMessage.dismiss()
             self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 2, completion: nil)
         } else {
             self.showToast(controller: self, message: message, seconds: 2, completion: nil)
