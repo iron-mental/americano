@@ -254,7 +254,7 @@ class StudyDetailView: UIViewController {
         }
     }
     @objc func joinButtonDidTap() {
-        TerminalAlertMessage.alertTest(controller: self, type: .StudyApplyView)
+        TerminalAlertMessage.show(controller: self, type: .StudyApplyView)
         ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
     }
     
@@ -266,7 +266,7 @@ class StudyDetailView: UIViewController {
     @objc func studyApplyMessageEndEditing() {
         guard let message = ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! StudyApplyMessageView).editMessageTextField.text else { return }
         presenter?.joinButtonDidTap(studyID: studyID!, message: message)
-        TerminalAlertMessage.hideDismissTest()
+        TerminalAlertMessage.dismiss()
     }
 }
 

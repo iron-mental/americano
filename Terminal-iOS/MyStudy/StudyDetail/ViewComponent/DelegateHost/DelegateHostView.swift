@@ -59,7 +59,7 @@ class DelegateHostView: UIViewController {
     
     @objc func delegateCompelteButtonDidTap() {
         presenter?.delegateHostButtonDidTap(newLeader: selectedUserID)
-        TerminalAlertMessage.hideDismissTest()
+        TerminalAlertMessage.dismiss()
     }
 }
 
@@ -91,7 +91,7 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedUserID = userList![indexPath.row].userID
-        TerminalAlertMessage.alertTest(controller: self, type: .DelegateHostConfirmView)
+        TerminalAlertMessage.show(controller: self, type: .DelegateHostConfirmView)
         ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
     }
 }

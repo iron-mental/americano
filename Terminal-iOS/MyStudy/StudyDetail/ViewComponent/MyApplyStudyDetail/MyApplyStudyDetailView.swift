@@ -107,7 +107,7 @@ class MyApplyStudyDetailView: UIViewController {
         }
     }
     @objc func didCancelButtonDidTap() {
-        TerminalAlertMessage.alertTest(controller: self, type: .StudyApplyDeleteView)
+        TerminalAlertMessage.show(controller: self, type: .StudyApplyDeleteView)
         ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(didCancelAction), for: .touchUpInside)
     }
     @objc func didCancelAction() {
