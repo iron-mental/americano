@@ -11,11 +11,17 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class ProfileModifyView: UIViewController {
+    
+    // MARK: Init Property
+    
     var presenter: ProfileModifyPresenterProtocol?
     var profile: Profile?
     let picker = UIImagePickerController()
 
     let projectAddButton = UIButton()
+    
+    lazy var modifyLabel = UILabel()
+    lazy var contentView = UIView()
     
     lazy var profileImage = UIImageView()
     lazy var nameLabel = UILabel()
@@ -32,11 +38,14 @@ class ProfileModifyView: UIViewController {
         attribute()
         layout()
         textViewDidChange(introduction)
+        LoadingRainbowCat.hide()
     }
     
     // MARK: Set Attribute
     func attribute() {
+        self.hideKeyboardWhenTappedAround()
         self.view.backgroundColor = .appColor(.terminalBackground)
+        
         self.picker.do {
             $0.delegate = self
         }
@@ -54,10 +63,24 @@ class ProfileModifyView: UIViewController {
             $0.isUserInteractionEnabled = true
             $0.backgroundColor = .blue
         }
+        
+        self.contentView.do {
+            $0.backgroundColor = .darkGray
+            $0.alpha = 0.5
+        }
+        
+        self.modifyLabel.do {
+            $0.text = "편집"
+            $0.textAlignment = .center
+            $0.textColor = .white
+            $0.font = UIFont.notosansMedium(size: 13)
+        }
+        
         self.nameLabel.do {
             $0.text = "이름"
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
         }
+        
         self.name.do {
             $0.text = self.profile?.nickname
             $0.placeholder = "닉네임"
@@ -66,10 +89,12 @@ class ProfileModifyView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.addLeftPadding()
         }
+        
         self.introductionLabel.do {
             $0.text = "자기소개"
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
         }
+        
         self.introduction.do {
             $0.backgroundColor = .darkGray
             $0.text = self.profile?.introduction
@@ -96,8 +121,10 @@ class ProfileModifyView: UIViewController {
     // MARK: Set Layout
     
     func layout() {
-        [self.profileImage, self.nameLabel, self.name, self.introductionLabel, self.introduction, self.completeButton]
+        [profileImage, nameLabel, name, introductionLabel, introduction, completeButton]
             .forEach { self.view.addSubview($0) }
+        self.profileImage.addSubview(self.contentView)
+        self.contentView.addSubview(self.modifyLabel)
         
         self.profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +133,21 @@ class ProfileModifyView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
         }
+        
+        self.contentView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 35)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
+        }
+        
+        self.modifyLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+        }
+        
         self.nameLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.profileImage.bottomAnchor, constant: 20).isActive = true
@@ -148,8 +190,8 @@ class ProfileModifyView: UIViewController {
     
     @objc func didImageViewClicked() {
         let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { (action) in self.openLibrary() }
-        let camera =  UIAlertAction(title: "카메라", style: .default) { (action) in self.openCamera() }
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
+        let camera =  UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)
@@ -185,10 +227,15 @@ class ProfileModifyView: UIViewController {
         let introduction    = self.introduction.text!
         let image           = self.profileImage.image!
         
-        let profile         = Profile(profileImage: image, nickname: nickname, introduction: introduction)
-        
-        presenter?.completeImageModify(image: image)
-        presenter?.completeModify(profile: profile)
+        // 공백체크
+        if nickname.whitespaceCheck() {
+            self.showToast(controller: self, message: "이름은 공백이 포함되지 않습니다.", seconds: 0.5)
+        } else {
+            let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
+            
+            presenter?.completeImageModify(image: image)
+            presenter?.completeModify(profile: profile)
+        }
     }
 
 }
@@ -199,10 +246,10 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
             print("수정 여부:", result)
             print("메시지 : ", message)
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
-            self.navigationController?.popViewController(animated: true, completion: {
-                parent?.showToast(controller: parent!, message: "프로필 수정 완료", seconds: 1, completion: nil)
+            self.navigationController?.popViewController(animated: true) {
+                parent?.showToast(controller: parent!, message: "프로필 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
-            })
+            }
             
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()
@@ -214,10 +261,10 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 
 // MARK: 이미지 픽커
 
-extension ProfileModifyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension ProfileModifyView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.profileImage.image = image
         }
         dismiss(animated: true, completion: nil)
@@ -235,7 +282,7 @@ extension ProfileModifyView: UITextFieldDelegate {
 
 extension ProfileModifyView: UITextViewDelegate {
     
-    //MARK: TextView Dynamic Height
+    // MARK: TextView Dynamic Height
     
     func textViewDidChange(_ textView: UITextView) {
         let size = CGSize(width: view.frame.width, height: .infinity)
@@ -249,7 +296,7 @@ extension ProfileModifyView: UITextViewDelegate {
 }
 
 extension ProfileModifyView: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
 }

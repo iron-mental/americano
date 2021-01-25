@@ -31,7 +31,7 @@ class UserWithdrawalView: UIViewController {
     }
     
     private func attribute() {
-        [self.email, self.password].forEach{
+        [self.email, self.password].forEach {
             $0.do {
                 $0.backgroundColor = .appColor(.cellBackground)
                 $0.addLeftPadding()

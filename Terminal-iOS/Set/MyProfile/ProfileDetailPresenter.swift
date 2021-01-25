@@ -20,6 +20,7 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     }
     
     func showProfileModify(profile: Profile) {
+        view?.showLoading()
         wireFrame?.presentProfileModify(from: view!, profile: profile)
     }
     

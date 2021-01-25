@@ -23,4 +23,32 @@ extension String {
         
         return boundingBox.height
     }
+    
+    func whitespaceCheck() -> Bool {
+        return self.contains(" ")
+    }
+    
+    func linkedInCheck() -> Bool {
+        return self.contains("https://www.linkedin.com/") || self == ""
+    }
+    
+    func webCheck() -> Bool {
+        return self.contains("https://") || self == ""
+    }
+    
+    func appstoreCheck() -> Bool {
+        return self.contains("https://apps.apple.com/") || self == ""
+    }
+    
+    func playstoreCheck() -> Bool {
+        return self.contains("https://play.google.com/") || self == ""
+    }
+    
+    func notionCheck() -> Bool {
+        return self.contains("https://www.notion.so/") || self == ""
+    }
+    
+    func evernoteCheck() -> Bool {
+        return self.contains("https://www.evernote.com/") || self == ""
+    }
 }

@@ -46,7 +46,7 @@ class ProfileView: UIView {
     }
     
     func layout() {
-        [profileImage, name, descript, modify].forEach{ self.addSubview($0) }
+        [profileImage, name, descript, modify].forEach { self.addSubview($0) }
         
         self.profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

@@ -52,8 +52,8 @@
 		A5417FE925A7A6E3005B884F /* BaseSNSModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5417FE825A7A6E3005B884F /* BaseSNSModifyView.swift */; };
 		A5417FF125A7A855005B884F /* ProfileSNSModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5417FF025A7A855005B884F /* ProfileSNSModifyView.swift */; };
 		A541800525A8919F005B884F /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A541800425A8919F005B884F /* LocationCell.swift */; };
-		A54AD2322588FBFF00BC6558 /* CategoryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54AD2312588FBFF00BC6558 /* CategoryState.swift */; };
 		A554DDC925AEEAA300C03E41 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */; };
+		A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */; };
 		A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */; };
 		A56264D225B568DD004CD298 /* SNSWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264D125B568DD004CD298 /* SNSWebView.swift */; };
 		A56264DA25B568F4004CD298 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56264D925B568F4004CD298 /* WebKit.framework */; };
@@ -70,6 +70,7 @@
 		A575344D257697A000FD7D0C /* ProjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575344C257697A000FD7D0C /* ProjectTableView.swift */; };
 		A57C33D3254E8B5A006CE9A2 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */; };
 		A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57C33D6254E8C58006CE9A2 /* TempChatView.swift */; };
+		A57E829125BD8F72000F8678 /* SNSValidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57E829025BD8F72000F8678 /* SNSValidate.swift */; };
 		A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */; };
 		A58148922590C6E200BF3C2A /* EmailModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58148912590C6E200BF3C2A /* EmailModifyView.swift */; };
 		A58148972591050600BF3C2A /* EmailModifyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58148962591050600BF3C2A /* EmailModifyPresenter.swift */; };
@@ -170,7 +171,6 @@
 		CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */; };
 		CC3F99202545448E00428B11 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F991F2545448E00428B11 /* HomeView.swift */; };
 		CC3F992325454B5500428B11 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F992225454B5500428B11 /* Terminal.swift */; };
-		CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F99252545765500428B11 /* UINavigationController+Ext.swift */; };
 		CC43B8232582922900A4A418 /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058F6255D95000047CA9E /* StudyDetail.swift */; };
 		CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F54D254AA3A200DC31C6 /* SearchLocationView.swift */; };
 		CC45F552254AA3BF00DC31C6 /* SearchLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F551254AA3BF00DC31C6 /* SearchLocationInteractor.swift */; };
@@ -384,7 +384,6 @@
 		A51D8BE025264DB9003BD1B9 /* AccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
 		A51F2356256E195600CBFC13 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		A51F235B256E19E600CBFC13 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		A51F2381256E460D00CBFC13 /* NoticeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetail.swift; sourceTree = "<group>"; };
 		A51F238B256E5A2200CBFC13 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
 		A521DDEC252DEA7E00F83DB3 /* ProfileDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailProtocols.swift; sourceTree = "<group>"; };
 		A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailInteractor.swift; sourceTree = "<group>"; };
@@ -404,8 +403,8 @@
 		A5417FE825A7A6E3005B884F /* BaseSNSModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSNSModifyView.swift; sourceTree = "<group>"; };
 		A5417FF025A7A855005B884F /* ProfileSNSModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSNSModifyView.swift; sourceTree = "<group>"; };
 		A541800425A8919F005B884F /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
-		A54AD2312588FBFF00BC6558 /* CategoryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryState.swift; sourceTree = "<group>"; };
 		A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		A56264D125B568DD004CD298 /* SNSWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSWebView.swift; sourceTree = "<group>"; };
 		A56264D925B568F4004CD298 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -422,6 +421,7 @@
 		A575344C257697A000FD7D0C /* ProjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableView.swift; sourceTree = "<group>"; };
 		A57C33D2254E8B5A006CE9A2 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		A57C33D6254E8C58006CE9A2 /* TempChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempChatView.swift; sourceTree = "<group>"; };
+		A57E829025BD8F72000F8678 /* SNSValidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSValidate.swift; sourceTree = "<group>"; };
 		A57ECA2E256C27FE001E9790 /* StudyDetailRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailRemoteManager.swift; sourceTree = "<group>"; };
 		A58148912590C6E200BF3C2A /* EmailModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModifyView.swift; sourceTree = "<group>"; };
 		A58148962591050600BF3C2A /* EmailModifyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailModifyPresenter.swift; sourceTree = "<group>"; };
@@ -523,7 +523,6 @@
 		CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationWireFrame.swift; sourceTree = "<group>"; };
 		CC3F991F2545448E00428B11 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CC3F992225454B5500428B11 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
-		CC3F99252545765500428B11 /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		CC45F54D254AA3A200DC31C6 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
 		CC45F551254AA3BF00DC31C6 /* SearchLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationInteractor.swift; sourceTree = "<group>"; };
 		CC45F554254AA41600DC31C6 /* SearchLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationPresenter.swift; sourceTree = "<group>"; };
@@ -743,6 +742,10 @@
 		A51BA0AE2577F0CA00B9673F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
+				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
+				CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */,
+				CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */,
 				A51BA0AF2577F0E300B9673F /* Contents.swift */,
 			);
 			path = Utils;
@@ -956,7 +959,6 @@
 			isa = PBXGroup;
 			children = (
 				A56564792518B7EF00AB31A9 /* UIColor+Ext.swift */,
-				CC3F99252545765500428B11 /* UINavigationController+Ext.swift */,
 				A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */,
 				A5BA1EF3254AE9900089D4E9 /* UISegmentControl+Ext.swift */,
 				A510EC8525594CD2009BE9A6 /* UITextField+Ext.swift */,
@@ -1270,11 +1272,11 @@
 		CCA1FF4A24FD0C930026C3EA = {
 			isa = PBXGroup;
 			children = (
+				A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */,
 				CCA1FF5524FD0C930026C3EA /* Terminal-iOS */,
 				CCA1FF5424FD0C930026C3EA /* Products */,
 				5ABD6AFD2D9CBF39ED6C88B5 /* Pods */,
 				031FECECB36F7B6233EC27DC /* Frameworks */,
-				CCE279FE256F7B2E00DB3246 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1293,12 +1295,8 @@
 				CCB752C825A841C0003E7CA7 /* StaticViewComponent */,
 				CCBBEEC32583631900177E25 /* CoreDataModel */,
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
-				CCD51C68256CC13700D41771 /* NotoSansKR-Bold.otf */,
-				CCD51C6C256CC14900D41771 /* NotoSansKR-Medium.otf */,
 				A56264D025B568A6004CD298 /* Web */,
 				A51BA0AE2577F0CA00B9673F /* Utils */,
-				CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */,
-				CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */,
 				A56605E025835873002C4A77 /* BaseComponent */,
 				A5BA460C255D09C80061C511 /* Network */,
 				A587CEC7251A428A00A2AD13 /* Extensions-Utillities */,
@@ -1373,11 +1371,11 @@
 				A53BC1992582604300C7EC20 /* HotKeyword.swift */,
 				A510B9D0258387DE0084559C /* ApplyUser.swift */,
 				A510B9D52583892B0084559C /* ApplyStudy.swift */,
-				A54AD2312588FBFF00BC6558 /* CategoryState.swift */,
 				CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */,
 				A5C7B8F425AC4FCD00016D5B /* Address.swift */,
 				A5C7B8F925AC6B7000016D5B /* AddressState.swift */,
 				CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */,
+				A57E829025BD8F72000F8678 /* SNSValidate.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1551,14 +1549,6 @@
 			path = Notice;
 			sourceTree = "<group>";
 		};
-		CCE279FE256F7B2E00DB3246 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				A51F2381256E460D00CBFC13 /* NoticeDetail.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		CCEEB45925AC4C9600F522C4 /* MyApplyStudyDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1641,6 +1631,7 @@
 				CCA1FF5124FD0C930026C3EA /* Resources */,
 				F80092817FAFE98D14C317C9 /* [CP] Embed Pods Frameworks */,
 				A56605A9258333ED002C4A77 /* Embed App Extensions */,
+				A5576DB025BC90F400AC5BEA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1713,6 +1704,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */,
@@ -1747,6 +1739,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A5576DB025BC90F400AC5BEA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 		F80092817FAFE98D14C317C9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1971,7 +1980,6 @@
 				CC21A7952559504600E31F77 /* IntroLocalDataManager.swift in Sources */,
 				CC26AD58251B27B3006B11E9 /* LocationUIView.swift in Sources */,
 				A5D6A794257430C9007D6409 /* ProfileModifyRemoteManager.swift in Sources */,
-				A54AD2322588FBFF00BC6558 /* CategoryState.swift in Sources */,
 				A5BA1EE1254A99250089D4E9 /* Noti.swift in Sources */,
 				A5A5F6E2256FEF0A00405C71 /* UserInfo.swift in Sources */,
 				A510BA162583BB340084559C /* ApplyUserInteractor.swift in Sources */,
@@ -2002,7 +2010,6 @@
 				CCE279EC256E46C600DB3246 /* Notice.swift in Sources */,
 				CCD51CA8256E257D00D41771 /* NoticeProtocols.swift in Sources */,
 				CCA25A9125B69DD300280C80 /* CreateStudyView.swift in Sources */,
-				CC3F99262545765500428B11 /* UINavigationController+Ext.swift in Sources */,
 				A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */,
 				CC5794FB2570C9BA00DF96AB /* AddNoticeView.swift in Sources */,
 				A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */,
@@ -2012,6 +2019,7 @@
 				A53A2B7325B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift in Sources */,
 				CCA25A8C25B6962C00280C80 /* BaseEditableStudyDetailView.swift in Sources */,
 				CCD51C7A256D29CC00D41771 /* MyStudyDetailPresenter.swift in Sources */,
+				A57E829125BD8F72000F8678 /* SNSValidate.swift in Sources */,
 				A58148EF25910E9800BF3C2A /* SNSModifyView.swift in Sources */,
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,
 				CC5794F42570C29300DF96AB /* AddNoticeProtocols.swift in Sources */,

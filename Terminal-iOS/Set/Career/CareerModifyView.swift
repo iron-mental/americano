@@ -11,14 +11,14 @@ import UIKit
 class CareerModifyView: UIViewController {
     var presenter: CareerModifyPresenterProtocol?
     var careerTitle: String? {
-        didSet{
+        didSet {
             if let title = self.careerTitle {
                 self.careerTitleModify.text = title
             }
         }
     }
     var careerContents: String? {
-        didSet{
+        didSet {
             if let contents = self.careerContents {
                 self.careerDescriptModify.text = contents
             }
@@ -37,7 +37,9 @@ class CareerModifyView: UIViewController {
     }
     
     func attribute() {
+        self.hideKeyboardWhenTappedAround()
         self.view.backgroundColor = .appColor(.terminalBackground)
+        
         self.careerLabel.do {
             $0.text = "경력"
             $0.textColor = .white
@@ -122,10 +124,10 @@ extension CareerModifyView: CareerModifyViewProtocol {
     func modifyResultHandle(result: Bool, message: String) {
         if result {
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
-            self.navigationController?.popViewController(animated: true, completion: {
-                parent?.showToast(controller: parent!, message: "경력 수정 완료", seconds: 1, completion: nil)
+            self.navigationController?.popViewController(animated: true) {
+                parent?.showToast(controller: parent!, message: "경력 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
-            })
+            }
         } else {
             let alert =  UIAlertController(title: "결과", message: "수정 실패", preferredStyle: .alert)
             let okAction =  UIAlertAction(title: "확인", style: .default) { _ in }

@@ -36,7 +36,7 @@ class CareerModifyInteractor: CareerModifyInteractorInputProtocol {
                     let message = result.message!
                     self.presenter?.didCompleteModify(result: isSuccess, message: message)
                 case .failure(let err):
-                    print("error:",err)
+                    print("error:", err)
                 }
             }
     }

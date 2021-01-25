@@ -16,7 +16,7 @@ class Terminal {
     
     static let githubKey = "3e5f8c2c78dffa5dd1d4fdf729060ca9bb703a65"
     
-    static func convertHeigt(value: CGFloat) -> CGFloat{
+    static func convertHeigt(value: CGFloat) -> CGFloat {
         return screenSize.height * (value / 667)
     }
     

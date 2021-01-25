@@ -85,7 +85,7 @@ class BaseProfileView: UIViewController {
     func layout() {
         self.view.addSubview(scrollView)
         [profile, careerLabel, career, projectLabel, project,
-         snsLabel, sns, emailLabel,email, locationLabel, location]
+         snsLabel, sns, emailLabel, email, locationLabel, location]
             .forEach { self.scrollView.addSubview($0) }
         
         // 스크롤뷰 오토레이아웃

@@ -27,14 +27,14 @@ protocol SNSModifyPresenterProtocol: class {
     var wireFrame: SNSModifyWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
-    func completeModify(github: String, linkedIn: String, web: String)
+    func completeModify(github: String, linkedin: String, web: String)
 }
 
 protocol SNSModifyInteractorInputProtocol: class {
     var presenter: SNSModifyInteractorOutputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
-    func completeModify(github: String, linkedIn: String, web: String)
+    func completeModify(github: String, linkedin: String, web: String)
 }
 
 protocol SNSModifyInteractorOutputProtocol: class {

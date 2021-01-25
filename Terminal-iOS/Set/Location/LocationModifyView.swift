@@ -17,9 +17,9 @@ class LocationModifyView: UIViewController {
     var address1depth: [Address] = []
     var address2depth: [String] = []
     
-    var the1depth: String = ""          { didSet { attribute() } }
-    var the2depth: String = ""          { didSet { attribute() } }
-    var selectedSegmentIndex: Int = 0   { didSet { attribute() } }
+    var the1depth: String = ""        { didSet { attribute() } }
+    var the2depth: String = ""        { didSet { attribute() } }
+    var selectedSegmentIndex: Int = 0 { didSet { attribute() } }
     
     lazy var locationLabel = UILabel()
     lazy var locationTab = UISegmentedControl(items: ["광역시도","시군구"])
@@ -119,9 +119,13 @@ class LocationModifyView: UIViewController {
     @objc func completeModify() {
         let sido = self.the1depth
         let sigungu = self.the2depth
-        presenter?.completeModify(sido: sido, sigungu: sigungu)
+        
+        if !sigungu.isEmpty {
+            presenter?.completeModify(sido: sido, sigungu: sigungu)
+        } else {
+            self.showToast(controller: self, message: "지역을 모두 선택해주세요.", seconds: 0.3)
+        }
     }
-    
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
@@ -151,10 +155,13 @@ extension LocationModifyView: LocationModifyViewProtocol {
     func modifyResultHandle(result: Bool, message: String) {
         if result {
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
-            self.navigationController?.popViewController(animated: true, completion: {
-                parent?.showToast(controller: parent!, message: "활동 지역 수정 완료", seconds: 1, completion: nil)
+            self.navigationController?.popViewController(animated: true) {
+                parent?.showToast(controller: parent!, message: "활동 지역 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
-            })
+            }
+            
+            let rootParent = self.navigationController?.viewControllers[0] as? SetView
+            rootParent?.presenter?.viewDidLoad()
         } else {
             // error handle
         }
