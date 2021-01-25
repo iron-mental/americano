@@ -46,13 +46,13 @@ class StudyListView: UIViewController {
         
         lateButton.do {
             $0.setTitle("최신", for: .normal)
-            $0.titleLabel?.font = UIFont(name: "NotoSansKR-Medium", size: 17)
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 17)
             $0.addTarget(self, action: #selector(new), for: .touchUpInside)
         }
         
         locationButton.do {
             $0.setTitle("지역", for: .normal)
-            $0.titleLabel?.font = UIFont(name: "NotoSansKR-Medium", size: 17)
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 17)
             $0.addTarget(self, action: #selector(length), for: .touchUpInside)
         }
         
