@@ -20,7 +20,7 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
     var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
     
     func retrieveStudyList(category: String) {
-        remoteDataManager?.retrieveStudyList(category: category)
+        remoteDataManager?.retrieveLatestStudyList(category: category)
         remoteDataManager?.retrieveLengthStudyList(category: category)
     }
     
@@ -39,9 +39,9 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
             }
         }
         
-        remoteDataManager?.paginationRetrieveStudyList(keyValue: newKeyValue, completion: {
+        remoteDataManager?.paginationRetrieveLatestStudyList(keyValue: newKeyValue) {
             self.newKeyValue.removeAll()
-        })
+        }
     }
     
     /// 지역순 스터디 리스트 페이징
@@ -58,67 +58,84 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
                 lengthStudyKeyArr.remove(at: 0)
             }
         }
-        remoteDataManager?.paginationRetrieveLengthStudyList(keyValue: lengthNewKeyValue, completion: {
+        remoteDataManager?.paginationRetrieveLengthStudyList(keyValue: lengthNewKeyValue) {
             self.lengthNewKeyValue.removeAll()
-        })
+        }
     }  
 }
 
 extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
-    func onStudiesRetrieved(studies: BaseResponse<[Study]>) {
+    func onStudiesLatestRetrieved(result: BaseResponse<[Study]>) {
         var resultArr: [Study] = []
         var studyArr: [Study] = []
         
-        if studies.result {
-            guard let studyList = studies.data else { return }
+        if result.result {
+            guard let studyList = result.data else { return }
             for study in studyList {
                 resultArr.append(study)
             }
             
             /// 키값만 내려오는 배열
             for data in resultArr {
-                if data.title == nil {
-                    studyKeyArr.append(data)
+                if let paing = data.isPaging {
+                    if paing {
+                        studyKeyArr.append(data)
+                    }
                 }
             }
             
             /// 모든 데이터가 내려오는 배열
             for data in resultArr {
-                if data.title != nil {
-                    studyArr.append(data)
+                if let paing = data.isPaging {
+                    if !paing {
+                        studyArr.append(data)
+                    }
                 }
             }
         }
         
-        presenter?.didRetrieveStudies(studies: studyArr)
+        presenter?.didRetrieveLatestStudies(studies: studyArr)
     }
     
-    func onStudiesLengthRetrieved(studies: BaseResponse<[Study]>) {
+    func onStudiesLengthRetrieved(result: BaseResponse<[Study]>) {
         var resultArr: [Study] = []
         var studyArr: [Study] = []
         
-        if studies.result {
-            guard let studyList = studies.data else { return }
+        if result.result {
+            guard let studyList = result.data else { return }
             for study in studyList {
                 resultArr.append(study)
             }
             
             /// 키값만 내려오는 배열
-            for data in resultArr {
-                if data.title == nil {
-                    lengthStudyKeyArr.append(data)
-                }
+            for data in resultArr where data.isPaging! {
+                lengthStudyKeyArr.append(data)
             }
             
             /// 모든 데이터가 내려오는 배열
-            for data in resultArr {
-                if data.title != nil {
-                    studyArr.append(data)
-                }
+            for data in resultArr where !data.isPaging! {
+                studyArr.append(data)
             }
         }
         presenter?.didRetrieveLengthStudies(studies: studyArr)
     }
+    
+    // MARK: 페이징을 통한 스터디 결과 
+    
+    func onStudiesForKeyLatestRetrieved(result: BaseResponse<[Study]>) {
+        if result.result {
+            guard let studyList = result.data else { return }
+            presenter?.didRetrieveLatestStudies(studies: studyList)
+        }
+    }
+    
+    func onStudiesForKeyLengthRetrieved(result: BaseResponse<[Study]>) {
+        if result.result {
+            guard let studyList = result.data else { return }
+            presenter?.didRetrieveLengthStudies(studies: studyList)
+        }
+    }
+    
     
     func onError() {
         

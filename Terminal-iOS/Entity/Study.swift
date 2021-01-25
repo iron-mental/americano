@@ -8,13 +8,13 @@
 
 import UIKit
 
-//MARK : 스터디 리스트
+// MARK: 스터디 리스트
 
 struct Study: Codable {
     let id: Int
     let title, introduce, image, sigungu: String?
     let leaderImage, createdAt: String?
-    let members: Int?
+    let memberCount: Int?
     let isMember: Bool?
     let isPaging: Bool?
     
@@ -23,7 +23,7 @@ struct Study: Codable {
         case isMember = "is_member"
         case leaderImage = "leader_image"
         case createdAt = "created_at"
-        case members = "member_count"
+        case memberCount = "member_count"
         case isPaging = "is_paging"
     }
 }
