@@ -114,8 +114,8 @@ class StudyListView: UIViewController {
     }
     
     @objc func updateList() {
-        studyList.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
+            self.studyList.removeAll()
             self.presenter?.studyList(category: self.category!)
             self.refreshControl.endRefreshing()
         }
