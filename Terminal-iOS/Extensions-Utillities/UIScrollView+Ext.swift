@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIScrollView {
-    func scrollToView(view:UIView, animated: Bool) {
+    func scrollToView(view: UIView, animated: Bool) {
         if let origin = view.superview {
 
                     // Get the Y position of your child view
