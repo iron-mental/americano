@@ -64,11 +64,9 @@ extension CreateStudyInteractor: CreateStudyReMoteDataManagerOutputProtocol {
         case true:
             guard let studyID = response.data?.studyID else { return }
             self.presenter?.studyInfoValid(studyID: studyID)
-            break
         case false:
             guard let message = response.message else { return }
             self.presenter?.studyInfoInvalid(message: message)
-            break
         }
     }
 }

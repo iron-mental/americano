@@ -58,7 +58,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     } catch {
                         
                     }
-                case .failure(let _):
+                case .failure( _):
                     //이 텍스트를 프레젠터에서 넣어줘야될지 음 정하면댈듯
                     self.interactor?.createStudyInvalid(message: "서버의 연결이 불안정합니다")
                 }
