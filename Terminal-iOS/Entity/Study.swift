@@ -16,12 +16,15 @@ struct Study: Codable {
     let leaderImage, createdAt: String?
     let members: Int?
     let isMember: Bool?
+    let isPaging: Bool?
     
     enum CodingKeys: String, CodingKey {
-        case id, title, introduce, image, sigungu, isMember
+        case id, title, introduce, image, sigungu
+        case isMember = "is_member"
         case leaderImage = "leader_image"
         case createdAt = "created_at"
-        case members
+        case members = "member_count"
+        case isPaging = "is_paging"
     }
 }
 
