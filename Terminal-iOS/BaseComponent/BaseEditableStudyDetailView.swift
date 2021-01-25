@@ -32,27 +32,35 @@ class BaseEditableStudyDetailView: UIViewController {
     var currentScrollViewMaxY: CGFloat = 0
     var selectedLocation: StudyDetailLocationPost?
     var textViewTapFlag = false
+    var scrollViewOffsetElement: CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        setDelegate() {
-            print("test")
-        }
+        setDelegate()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         studyTitleTextField.becomeFirstResponder()
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        scrollViewOffsetElement = 0
+    }
     
-    @objc func keyboardWillShow(notification:NSNotification) {
-        //        button.isHidden = true
-        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+    @objc func keyboardWillShow(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
     }
     
-    func setDelegate(completion: @escaping () -> Void) {
+    @objc func keyboardWillHide(notification: NSNotification) {
+        scrollView.contentSize.height -= scrollViewOffsetElement
+        scrollViewOffsetElement = 0
+    }
+    
+    func setDelegate(completion: (() -> Void)? = nil) {
         scrollView.delegate = self
         studyTitleTextField.delegate = self
         studyIntroduceView.textView.delegate = self
@@ -168,42 +176,42 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         studyTitleTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
             $0.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
         }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 141)).isActive = true
         }
         SNSInputView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 141)).isActive = true
         }
         studyInfoView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 141)).isActive = true
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 141)).isActive = true
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
@@ -235,12 +243,12 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     func openLibrary() {
         picker.sourceType = .photoLibrary
-        //        present(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
     func openCamera() {
         //시뮬에서 앱죽는거 에러처리 해야함
         picker.sourceType = .camera
-        //        present(picker, animated: true, completion: nil)
+        present(picker, animated: true, completion: nil)
     }
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
@@ -255,16 +263,18 @@ class BaseEditableStudyDetailView: UIViewController {
         if viewMinY >= (parentView.frame.minY) {
             let distance = (parentView.frame.minY) - viewMinY
             self.viewSetTop(distance: distance - 10)
-        } else if viewMaxY <= (parentView.frame.maxY){
+        } else if viewMaxY <= (parentView.frame.maxY) {
             let distance = (parentView.frame.maxY) - viewMaxY
+            if distance > (scrollView.contentSize.height - (scrollView.contentOffset.y + scrollView.frame.height)) {
+                scrollViewOffsetElement = distance
+            }
             self.viewSetBottom(distance: distance + 10)
         } else {
-            print("움지기잊마")
         }
     }
     
     func viewSetTop(distance: CGFloat) {
-        UIView.animate(withDuration: 0.1) {
+        UIView.animate(withDuration: 0) {
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
             self.clickedView?.becomeFirstResponder()
@@ -272,8 +282,11 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
     func viewSetBottom(distance: CGFloat) {
-        UIView.animate(withDuration: 0.1) {
+        
+        UIView.animate(withDuration: 0) {
+            self.scrollView.contentSize.height += distance
             self.scrollView.contentOffset.y += distance
+            self.scrollViewOffsetElement = distance
         } completion: { _ in
             self.clickedView?.becomeFirstResponder()
             self.textViewTapFlag = true
@@ -282,7 +295,7 @@ class BaseEditableStudyDetailView: UIViewController {
 }
 extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             mainImageView.image = image
         }
         dismiss(animated: true, completion: nil)
@@ -305,10 +318,7 @@ extension BaseEditableStudyDetailView: UITextViewDelegate {
 
 extension BaseEditableStudyDetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if textViewTapFlag == true {
-            view.endEditing(true)
-            textViewTapFlag = false
-        }
+        view.endEditing(true)
         currentScrollViewMinY = scrollView.contentOffset.y
         currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
     }
@@ -322,4 +332,3 @@ extension BaseEditableStudyDetailView: selectLocationDelegate {
         locationView.detailAddress.text = detail
     }
 }
-
