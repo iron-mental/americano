@@ -29,8 +29,8 @@ class StudyListPresenter: StudyListPresenterProtocol {
     }
 }
 
-extension StudyListPresenter: StudyListInteractorOutputProtocol {
-    func didRetrieveStudies(studies: [Study]) {
+extension StudyListPresenter: StudyListInteractorOutputProtocol { 
+    func didRetrieveLatestStudies(studies: [Study]) {
         view?.showStudyList(with: studies)
     }
     

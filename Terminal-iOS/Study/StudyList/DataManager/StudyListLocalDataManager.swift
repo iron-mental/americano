@@ -15,7 +15,7 @@ class StudyListLocalDataManager: StudyListLocalDataManagerInputProtocol {
     
     
     func retrieveStudyList() throws -> [Study] {
-        return [Study(id: 0, title: "", introduce: "", image: "", sigungu: "", leaderImage: "", createdAt: "", members: 0, isMember: true, isPaging: nil)]
+        return [Study(id: 0, title: "", introduce: "", image: "", sigungu: "", leaderImage: "", createdAt: "", memberCount: 0, isMember: true, isPaging: false)]
     }
     func saveStudylist(studyList: [Study]) {
     }
