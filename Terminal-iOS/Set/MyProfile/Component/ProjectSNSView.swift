@@ -25,17 +25,17 @@ class ProjectSNSView: BaseSNSView {
         
         self.snsStack.removeAllArrangedSubviews()
         
-        if let _ = snsList["github"] {
+        if snsList["github"] != nil {
             self.snsStack.addArrangedSubview(self.github)
             count += 1
         }
         
-        if let _ = snsList["appStore"] {
+        if snsList["appStore"] != nil {
             self.snsStack.addArrangedSubview(self.appStore)
             count += 1
         }
         
-        if let _ = snsList["playStore"] {
+        if snsList["playStore"] != nil {
             self.snsStack.addArrangedSubview(self.playStore)
             count += 1
         }

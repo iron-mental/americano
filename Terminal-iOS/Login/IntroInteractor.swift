@@ -76,8 +76,7 @@ class IntroInteractor: IntroInteractorProtocol {
         remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email, input],
                                             completionHandler: { result in
         switch result.result {
-          case true:
-                 
+        case true:
             if let refreshToken = result.data?.refreshToken,
                let accessToken = result.data?.accessToken,
                let userID = result.data?.id {
@@ -89,7 +88,7 @@ class IntroInteractor: IntroInteractorProtocol {
                     self.presenter?.joinValidInfo(result: result.result, message: String(describing: result.data?.id))
                 }
             }
-          case false:
+        case false:
             self.presenter?.joinValidInfo(result: result.result,
                                           message: result.message ?? "로그인 실패")
             }

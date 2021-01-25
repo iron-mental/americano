@@ -15,8 +15,7 @@ class SNSModifyView: UIViewController {
     var linkedin: String = ""
     var web: String = ""
     
-    lazy var snsModifyView =
-        ProfileSNSModifyView()
+    lazy var snsModifyView = ProfileSNSModifyView()
     lazy var completeButton = UIButton()
     
     override func viewDidLoad() {
@@ -64,10 +63,23 @@ class SNSModifyView: UIViewController {
     
     @objc func completeModify() {
         let github = snsModifyView.firstTextFeield.text ?? ""
-        let linkedIn = snsModifyView.secondTextField.text ?? ""
+        let linkedin = snsModifyView.secondTextField.text ?? ""
         let web = snsModifyView.thirdTextField.text ?? ""
 
-        self.presenter?.completeModify(github: github, linkedIn: linkedIn, web: web)
+        // 공백체크
+        if github.whitespaceCheck()
+            || linkedin.whitespaceCheck()
+            || web.whitespaceCheck() {
+            self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
+        } else if !linkedin.linkedInCheck() {
+            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
+        } else if !web.webCheck() {
+            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
+        } else {
+            self.presenter?.completeModify(github: github, linkedin: linkedin, web: web)
+        }
+        
+        print("씨다", linkedin.linkedInCheck())
     }
 }
 
@@ -75,10 +87,10 @@ extension SNSModifyView: SNSModifyViewProtocol {
     func modifyResultHandle(result: Bool, message: String) {
         if result {
             let parent = self.navigationController?.viewControllers[1] as? ProfileDetailView
-            self.navigationController?.popViewController(animated: true, completion: {
-                parent?.showToast(controller: parent!, message: "SNS 수정 완료", seconds: 1,completion: nil)
+            self.navigationController?.popViewController(animated: true) {
+                parent?.showToast(controller: parent!, message: "SNS 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
-            })
+            }
         } else {
             self.showToast(controller: self, message: message, seconds: 1, completion: nil)
         }

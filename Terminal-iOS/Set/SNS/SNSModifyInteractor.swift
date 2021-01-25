@@ -13,10 +13,10 @@ import SwiftyJSON
 class SNSModifyInteractor: SNSModifyInteractorInputProtocol {
     var presenter: SNSModifyInteractorOutputProtocol?
     
-    func completeModify(github: String, linkedIn: String, web: String) {
+    func completeModify(github: String, linkedin: String, web: String) {
         let params: [String: String] = [
             "sns_github": github,
-            "sns_linkedin": linkedIn,
+            "sns_linkedin": linkedin,
             "sns_web": web
         ]
         

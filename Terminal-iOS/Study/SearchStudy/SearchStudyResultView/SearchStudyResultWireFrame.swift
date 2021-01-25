@@ -11,7 +11,7 @@ import UIKit
 class SearchStudyResultWireFrame: SearchStudyResultWireFrameProtocol {
     
     static func createSearchStudyResultModule() -> UIViewController{
-        var view = SearchStudyResultView()
+        let view = SearchStudyResultView()
         let interactor = SearchStudyResultInteractor()
         let presenter = SearchStudyResultPresenter()
         let remoteDataManager = SearchStudyResultRemoteDataManager()

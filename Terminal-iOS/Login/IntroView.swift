@@ -79,10 +79,8 @@ class IntroView: UIViewController {
             self.introState = .nickname
             self.leftButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
             self.rightbutton.setTitle("완료", for: .normal)
-            break
         case .none:
             print("none")
-            break
         }
     }
     
@@ -150,8 +148,8 @@ class IntroView: UIViewController {
         }
         leftButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: (18/667) * UIScreen.main.bounds.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: (18/375) * UIScreen.main.bounds.width).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: (18/667) * UIScreen.main.bounds.height).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (18/375) * UIScreen.main.bounds.width).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (18/375) * UIScreen.main.bounds.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (18/375) * UIScreen.main.bounds.width).isActive = true
         }
@@ -186,7 +184,7 @@ class IntroView: UIViewController {
         invalidLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: invalidImage.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: invalidImage.trailingAnchor,constant: 4).isActive = true
+            $0.leadingAnchor.constraint(equalTo: invalidImage.trailingAnchor, constant: 4).isActive = true
             $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
         }
         
@@ -198,13 +196,10 @@ class IntroView: UIViewController {
         switch introState {
         case .emailInput:
             navigationController?.popViewController(animated: true)
-            break
         case .pwdInput:
             navigationController?.popViewController(animated: true)
-            break
         case .nickname:
             navigationController?.popViewController(animated: true)
-            break
         default:
             print("none")
         }
@@ -253,7 +248,6 @@ extension IntroView: IntroViewProtocol {
             view.introState = .pwdInput
             view.beginState = self.beginState == .join ? .join : .signUp
             self.inputTextfield.endEditing(true)
-            break
         case .pwdInput:
             view.beginState = self.beginState == .join ? .join : .signUp
             if self.beginState == .join {
@@ -264,11 +258,9 @@ extension IntroView: IntroViewProtocol {
                 view.introState = .nickname
                 self.inputTextfield.endEditing(true)
             }
-            break
         case .nickname:
             self.introState = .nickname
             dismiss(animated: true)
-            break
         default:
             print("none")
         }

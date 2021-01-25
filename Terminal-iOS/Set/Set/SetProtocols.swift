@@ -39,7 +39,6 @@ protocol SetPresenterProtocol: class {
     
     func loggedOut()
     func userWithdrawal()
-    
 }
 
 protocol SetInteractorOutputProtocol: class {

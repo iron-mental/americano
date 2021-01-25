@@ -11,10 +11,13 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class ProfileDetailView: BaseProfileView {
+    
     // MARK: Init Property
+    
     var presenter: ProfileDetailPresenterProtocol?
     
-    // MARK: ViewDidLoad
+    // MARK: viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -23,6 +26,7 @@ class ProfileDetailView: BaseProfileView {
     }
     
     // MARK: Set Attribute
+    
     override func attribute() {
         super.attribute()
         self.profile.modify.addTarget(self, action: #selector(modifyProfile), for: .touchUpInside)
@@ -34,6 +38,7 @@ class ProfileDetailView: BaseProfileView {
     }
     
     // MARK: Set Layout
+    
     override func layout() {
         super.layout()
         self.location.do {

@@ -1,9 +1,15 @@
-function_body_length: 300
+function_body_length : 500
 disabled_rules:
+- force_try
 - line_length
 - trailing_whitespace
-- opening_brace
+- vertical_whitespace
+- identifier_name
 - force_cast
+- orphaned_doc_comment
+- cyclomatic_complexity
+- weak_delegate
+
 included:
 excluded:
 - Pods

@@ -38,9 +38,9 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     
     func getSignUpValidInfo(signUpMaterial: [String], completionHandler: @escaping (BaseResponse<String>) -> Void) {
         let params: [String: String] = [
-            "email" : signUpMaterial[0],
-            "password" : signUpMaterial[1],
-            "nickname" : signUpMaterial[2]
+            "email": signUpMaterial[0],
+            "password": signUpMaterial[1],
+            "nickname": signUpMaterial[2]
         ]
                 
         TerminalNetworkManager
@@ -64,8 +64,8 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     
     func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (BaseResponse<JoinResult>) -> Void) {
         let params: [String: String] = [
-            "email":"\(joinMaterial[0])",
-            "password":"\(joinMaterial[1])",
+            "email": "\(joinMaterial[0])",
+            "password": "\(joinMaterial[1])",
             "push_token": KeychainWrapper.standard.string(forKey: "pushToken") ?? "1",
             "device": "ios"
         ]
@@ -84,7 +84,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                     let result = try! JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data!)
                     completionHandler(result)
                 case .failure(let error):
-                    print("에러:",error)
+                    print("에러:", error)
                     
                 }
             }        

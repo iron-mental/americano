@@ -27,7 +27,7 @@ class DefaultCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setData(_ data: Setting){
+    func setData(_ data: Setting) {
         title.do {
             $0.text = data.title
         }

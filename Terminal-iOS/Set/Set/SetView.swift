@@ -69,7 +69,7 @@ class SetView: UIViewController {
                 $0.setTitleColor(.appColor(.mainColor), for: .normal)
                 $0.backgroundColor = .appColor(.eamilAuthComplete)
             } else {
-                $0.setTitle("인증필요", for: .normal)
+                $0.setTitle("미인증", for: .normal)
                 $0.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
                 $0.backgroundColor = .appColor(.emailAuthRequire)
             }
@@ -99,12 +99,12 @@ class SetView: UIViewController {
     // MARK: Email Auth
     
     @objc func emailAuth() {
-        
-        // 이미 인증된 경우
+
+        /// 인증 여부에 따른 분기처리
         if emailVerify {
-            self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 2, completion: nil)
+            self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 0.5)
         } else {
-            TerminalAlertMessage.show(type: .EmailAuthView)
+            TerminalAlertMessage.show(type: .emailAuthView)
             if let view = TerminalAlertMessage.alertView as? AlertBaseUIView {
                 view.completeButton.addTarget(self, action: #selector(emailAuthRequest), for: .touchUpInside)
             }
@@ -185,7 +185,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             label.text = sections[1]
         } else if section == 2 {
             label.text = sections[2]
-        } else if section == 3{
+        } else if section == 3 {
             label.text = sections[3]
         }
         return headerView

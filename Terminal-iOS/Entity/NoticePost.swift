@@ -10,6 +10,6 @@ import Foundation
 
 struct NoticePost {
     var title: String
-    var contents : String
-    var pinned : Bool
+    var contents: String
+    var pinned: Bool
 }

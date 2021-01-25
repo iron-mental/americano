@@ -13,29 +13,17 @@ extension UIScrollView {
         if let origin = view.superview {
 
                     // Get the Y position of your child view
-
                     let childStartPoint = origin.convert(view.frame.origin, to: self)
-
-                    
-
                     let bottomOffset = scrollBottomOffset()
 
-                    if (childStartPoint.y > bottomOffset.y) {
-
+                    if childStartPoint.y > bottomOffset.y {
                         setContentOffset(bottomOffset, animated: true)
-
                     } else {
-
                         setContentOffset(CGPoint(x: 0, y: childStartPoint.y), animated: true)
-
                     }
-
                 }
-        
         }
     private func scrollBottomOffset() -> CGPoint {
-
             return CGPoint(x: 0, y: contentSize.height - bounds.size.height + contentInset.bottom)
-
         }
 }
