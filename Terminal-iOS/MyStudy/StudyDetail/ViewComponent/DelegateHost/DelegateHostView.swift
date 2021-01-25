@@ -74,9 +74,7 @@ extension DelegateHostView: DelegateHostViewProtocol {
     }
     
     func showError(message: String) {
-        
         showToast(controller: self, message: message, seconds: 1, completion: nil)
-        
     }
 }
 
@@ -93,8 +91,10 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedUserID = userList![indexPath.row].userID
-        TerminalAlertMessage.show(type: .DelegateHostConfirmView)
-        (TerminalAlertMessage.alertView as! AlertMessageView).completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
+        TerminalAlertMessage.alertTest(controller: self, type: .DelegateHostConfirmView)
+        
+//        TerminalAlertMessage.show(type: .DelegateHostConfirmView)
+//        (TerminalAlertMessage.alertView as! AlertMessageView).completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
 //        navigationController?.popViewController(animated: true)
     }
 }
