@@ -20,9 +20,6 @@ protocol CreateStudyViewProtocol: class {
     var state: WriteStudyViewState? { get set }
     var parentView: UIViewController? { get set }
     
-    //View -> PRESENTER
-    func didClickButton()
-    
     //PRESENTER -> VIEW
     func loading()
     func setView()
@@ -52,9 +49,6 @@ protocol CreateStudyPresenterProtocol: class {
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?)
     
     //INTERACTOR -> PRESENTER
-    func showNotionValidResult(result: Bool)
-    func showEvernoteValidResult(result: Bool)
-    func showWebValidResult(result: Bool)
     func studyInfoInvalid(message: String)
     func studyInfoValid(studyID: Int)
 }

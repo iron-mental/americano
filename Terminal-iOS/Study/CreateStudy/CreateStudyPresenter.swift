@@ -20,32 +20,6 @@ class CreateStudyPresenter: CreateStudyPresenterProtocol {
         wireFrame?.goToSelectLocation(view: currentView)
     }
     
-    func showNotionValidResult(result: Bool) {
-        view?.hideLoadingToNotionInput()
-        if result {
-            view?.notionValid()
-        } else {
-            view?.notionInvalid()
-        }
-    }
-    
-    func showEvernoteValidResult(result: Bool) {
-        view?.hideLoadingToEvernoteInput()
-        if result {
-            view?.evernoteValid()
-        } else {
-            view?.evernoteInvalid()
-        }
-    }
-    
-    func showWebValidResult(result: Bool) {
-        view?.hideLoadingToWebInput()
-        if result {
-            view?.webValid()
-        } else {
-            view?.webInvalid()
-        }
-    }
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {
         LoadingRainbowCat.show()
         interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)

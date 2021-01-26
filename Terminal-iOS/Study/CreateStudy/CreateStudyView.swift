@@ -45,20 +45,6 @@ class CreateStudyView: BaseEditableStudyDetailView {
 }
 
 extension CreateStudyView: CreateStudyViewProtocol {
-    func didClickButton() {
-        studyDetailPost = StudyDetailPost(category: selectedCategory!,
-                                          title: studyTitleTextField.text ?? "",
-                                          introduce: studyIntroduceView.textView.text ?? "",
-                                          progress: studyInfoView.textView.text ?? "",
-                                          studyTime: timeView.detailTime.text ?? "",
-                                          snsWeb: SNSInputView.web.textField.text,
-                                          snsNotion: SNSInputView.notion.textField.text,
-                                          snsEvernote: SNSInputView.evernote.textField.text,
-                                          image: mainImageView.image,
-                                          location: selectedLocation!)
-        presenter?.clickCompleteButton(study: studyDetailPost!, studyID: study?.id ?? nil)
-    }
-    
     func loading() {
 //        <#code#>
     }
