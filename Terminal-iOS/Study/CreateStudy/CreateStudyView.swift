@@ -30,6 +30,7 @@ class CreateStudyView: BaseEditableStudyDetailView {
     }
     
     @objc func completeButtonDidTap() {
+        selectedLocation?.detailAddress = locationView.detailAddress.text
         studyDetailPost = StudyDetailPost(category: selectedCategory ?? "",
                                           title: studyTitleTextField.text!,
                                           introduce: studyIntroduceView.textView.text!,

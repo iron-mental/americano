@@ -74,29 +74,39 @@ class BaseEditableStudyDetailView: UIViewController {
         
         SNSInputView.notion.textField.debounce(delay: 1) { [weak self] text in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            //            self!.presenter?.notionInputFinish(id: text ?? "")
-            if self!.SNSInputView.notion.textField.text == "" {
-                self!.SNSInputView.notion.textField.layer.borderColor = .none
+            guard let text = self?.SNSInputView.notion.textField.text else { return }
+            if text.notionCheck() {
+                if text.isEmpty {
+                    self!.SNSInputView.notion.textField.layer.borderColor = .none
+                } else {
+                    self!.SNSInputView.notion.textField.layer.borderColor = UIColor.systemBlue.cgColor
+                }
             } else {
-                self!.SNSInputView.notion.textField.layer.borderColor = UIColor.blue.cgColor
+                self!.SNSInputView.notion.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
         }
         SNSInputView.evernote.textField.debounce(delay: 1) { [weak self] text in
-            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            //            self!.presenter?.everNoteInputFinish(url: text ?? "")
-            if self!.SNSInputView.evernote.textField.text == "" {
-                self!.SNSInputView.evernote.textField.layer.borderColor = .none
+            guard let text = self?.SNSInputView.evernote.textField.text else { return }
+            if text.evernoteCheck() {
+                if text.isEmpty {
+                    self!.SNSInputView.evernote.textField.layer.borderColor = .none
+                } else {
+                    self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemBlue.cgColor
+                }
             } else {
-                self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.blue.cgColor
+                self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
         }
         SNSInputView.web.textField.debounce(delay: 1) { [weak self] text in
-            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
-            //            self!.presenter?.URLInputFinish(url: text ?? "")
-            if self!.SNSInputView.web.textField.text == "" {
-                self!.SNSInputView.web.textField.layer.borderColor = .none
+            guard let text = self?.SNSInputView.web.textField.text else { return }
+            if text.webCheck() {
+                if text.isEmpty {
+                    self!.SNSInputView.web.textField.layer.borderColor = .none
+                } else {
+                    self!.SNSInputView.web.textField.layer.borderColor = UIColor.systemBlue.cgColor
+                }
             } else {
-                self!.SNSInputView.web.textField.layer.borderColor = UIColor.blue.cgColor
+                self!.SNSInputView.web.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
         }
     }

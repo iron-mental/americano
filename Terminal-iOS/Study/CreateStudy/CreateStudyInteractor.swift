@@ -14,6 +14,9 @@ class CreateStudyInteractor: CreateStudyInteractorProtocol {
     var studyInfo: StudyDetail?
     
     func nullCheck(study: StudyDetailPost) -> String {
+        if let evernote = study.snsEvernote {
+            print(evernote)
+        }
         
         if study.category.isEmpty {
             return "카테고리가 지정되어있지 않습니다."
@@ -27,6 +30,18 @@ class CreateStudyInteractor: CreateStudyInteractorProtocol {
             return "시간을 입력해주세요"
         } else if study.location == nil {
             return "장소를 선택해주세요"
+        } else if let notion = study.snsNotion {
+            if !notion.notionCheck() {
+                return "Notion URL이 정확하지 않습니다."
+            } else if let evernote = study.snsEvernote {
+                if !evernote.evernoteCheck() {
+                    return "Evernote URL이 정확하지 않습니다."
+                } else if let web = study.snsWeb {
+                    if !web.webCheck() {
+                        return "Web URL이 정확하지 않습니다."
+                    }
+                }
+            }
         } else if let location = study.location {
             if location.lat.isZero {
                 return "장소를 선택해주세요 - latitude error"
@@ -46,6 +61,7 @@ class CreateStudyInteractor: CreateStudyInteractorProtocol {
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?) {
         let nullCheckResult = nullCheck(study: study)
         if nullCheckResult == "성공" {
+            
             remoteDataManager?.postStudy(study: study)
             
         } else {
