@@ -25,7 +25,7 @@ class SearchLocationView: UIViewController {
     
     func attribute() {
         self.do {
-            $0.view.backgroundColor = .systemBackground
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         closeButton.do {
             $0.setImage(#imageLiteral(resourceName: "back"), for: .normal)
@@ -44,6 +44,7 @@ class SearchLocationView: UIViewController {
         tableView.do {
             $0.delegate = self
             $0.dataSource = self
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(SearchLocationTableViewCell.self, forCellReuseIdentifier: SearchLocationTableViewCell.identifier)
         }
     }
@@ -76,8 +77,8 @@ class SearchLocationView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: searchTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 20.6)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,constant: Terminal.convertWidth(value: 13.5)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,constant: -Terminal.convertWidth(value: 13.5)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 13.5)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertWidth(value: 13.5)).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
@@ -87,7 +88,9 @@ class SearchLocationView: UIViewController {
     }
     
     @objc func didSearchButtonClicked() {
-        presenter?.didClickedSearchButton(text: searchTextField.text!)
+        if let keyword = searchTextField.text {
+            presenter?.didClickedSearchButton(text: keyword)
+        }
     }
 }
 
