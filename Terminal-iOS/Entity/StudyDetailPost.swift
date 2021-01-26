@@ -18,7 +18,7 @@ struct StudyDetailPost {
     let location: StudyDetailLocationPost?
 }
 
-struct StudyDetailLocationPost {
+struct StudyDetailLocationPost: Codable {
     var address: String
     var lat: Double
     var lng: Double
@@ -27,4 +27,15 @@ struct StudyDetailLocationPost {
     var category: String?
     var sido: String
     var sigungu: String
+    
+    enum CodingKeys: String, CodingKey {
+        case address
+        case lat = "y"
+        case lng = "x"
+        case detailAddress
+        case placeName
+        case category
+        case sido
+        case sigungu
+    }
 }

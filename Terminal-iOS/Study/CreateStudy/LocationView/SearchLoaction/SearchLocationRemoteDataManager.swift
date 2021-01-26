@@ -18,6 +18,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
         let parameters: [String: String] = [
             "query": text
         ]
+        
         AF.request("https://dapi.kakao.com/v2/local/search/keyword.json",
                    method: .get,
                    parameters: parameters, headers: headers).responseJSON(completionHandler: { response in
@@ -28,8 +29,9 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                         } else {
                             if let addressList = JSON(value)["documents"].array {
                                 for item in addressList {
-                                    print(item)
-                                    let item = StudyDetailLocationPost(address: item["road_address_name"].string! ,
+                                    let address = item["road_address_name"].string!.isEmpty ? item["address_name"].string! : item["road_address_name"].string!
+                                    
+                                    let newItem = StudyDetailLocationPost(address: address,
                                                                     lat: Double(item["y"].string!) ?? 0,
                                                                     lng: Double(item["x"].string!) ?? 0,
                                                                     placeName: item["place_name"].string ?? nil ,
@@ -37,7 +39,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                                                                     sido: "test",
                                                                     sigungu: "Test"
                                                                     )
-                                    resultList.append(item)
+                                    resultList.append(newItem)
                                 }
                             }
                             result = true

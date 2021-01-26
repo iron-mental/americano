@@ -262,14 +262,13 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
-        
         var parentView = UIView()
+        
         if type(of: textView) == SNSInputUITextField.self {
             parentView = (textView.superview?.superview)!
         } else {
             parentView = textView.tag == 1 ? textView : textView.superview!
         }
-        
         if viewMinY >= (parentView.frame.minY) {
             let distance = (parentView.frame.minY) - viewMinY
             self.viewSetTop(distance: distance - 10)
@@ -284,7 +283,7 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func viewSetTop(distance: CGFloat) {
-        UIView.animate(withDuration: 0) {
+        UIView.animate(withDuration: 0.2) {
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
             self.clickedView?.becomeFirstResponder()
@@ -292,8 +291,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
     func viewSetBottom(distance: CGFloat) {
-        
-        UIView.animate(withDuration: 0) {
+        UIView.animate(withDuration: 0.2) {
             self.scrollView.contentSize.height += distance
             self.scrollView.contentOffset.y += distance
             self.scrollViewOffsetElement = distance
@@ -304,7 +302,7 @@ class BaseEditableStudyDetailView: UIViewController {
     }
 }
 extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             mainImageView.image = image
         }
