@@ -11,10 +11,8 @@ import Then
 import SwiftyJSON
 
 class SearchStudyView: UIViewController {
-    
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
-    let placeSearch = UIButton()
     let hotLable = UILabel()
     let tempView = UIView()
     var searchController = UISearchController(searchResultsController: nil)
@@ -23,7 +21,6 @@ class SearchStudyView: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,17 +39,12 @@ class SearchStudyView: UIViewController {
             navigationItem.titleView = searchController.searchBar
             $0.searchBar.delegate = self
         }
+        self.hideKeyboardWhenTappedAround()
         self.view.do {
-            let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
-            event.cancelsTouchesInView = false
+//            let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
+//            event.cancelsTouchesInView = false
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.addGestureRecognizer(event)
-        }
-        self.placeSearch.do {
-            $0.setTitle("장소로 검색", for: .normal)
-            $0.setTitleColor(.white, for: .normal)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
-            $0.layer.cornerRadius = 10
+//            $0.addGestureRecognizer(event)
         }
         self.hotLable.do {
             $0.text = "핫 등록 키워드"
@@ -94,17 +86,11 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [ placeSearch, hotLable, tempView, collectionView ].forEach { self.view.addSubview($0) }
-        self.placeSearch.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 115).isActive = true
-        }
+        [hotLable, tempView, collectionView].forEach { self.view.addSubview($0) }
+       
         self.hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.placeSearch.bottomAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         }
         self.tempView.do {
@@ -123,10 +109,6 @@ class SearchStudyView: UIViewController {
         }
     }
     
-    @objc func back() {
-        navigationController?.popViewController(animated: true)
-        navigationController?.isNavigationBarHidden = false
-    }
     @objc func backgroundTap() {
         self.view.endEditing(true)
     }
