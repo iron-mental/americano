@@ -44,9 +44,9 @@ class SelectLocationView: UIViewController {
         mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)), zoomTo: 17))
         location?.lng = mapView.cameraPosition.target.lng
         location?.lat = mapView.cameraPosition.target.lat
-        presenter?.getAddress(item: location!)
     }
     override func viewWillAppear(_ animated: Bool) {
+        
         preventPlaceNameFlag = isBeingPresented
     }
     
@@ -116,7 +116,6 @@ class SelectLocationView: UIViewController {
     }
     
     @objc func didCompleteButtonClicked() {
-        
         if let detailAddress = bottomView.detailAddress.text {
             location?.detailAddress = detailAddress
         }
@@ -128,6 +127,7 @@ class SelectLocationView: UIViewController {
 
 extension SelectLocationView: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
+        
         task = DispatchWorkItem { [self] in
             self.pin.alpha = 1
             //추후에 여기서 mapView.cameraPosition.target.lat 으로 좌표알아내서 쏘면 됨
@@ -135,8 +135,9 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
                 self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
                 location?.lng = mapView.cameraPosition.target.lng
                 location?.lat = mapView.cameraPosition.target.lat
-                    location?.category = ""
-                    presenter?.getAddress(item: location!)
+                location?.category = ""
+                
+                presenter?.getAddress(item: location!)
                 
             })
         }
@@ -165,6 +166,7 @@ extension SelectLocationView: UITextFieldDelegate {
 
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
+        
             bottomView.address.text = item.address
             location = item
     }
