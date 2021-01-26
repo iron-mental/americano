@@ -21,7 +21,7 @@ class CreateStudyPresenter: CreateStudyPresenterProtocol {
     }
     
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
         interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)
     }
     

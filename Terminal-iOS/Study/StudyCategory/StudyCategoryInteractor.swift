@@ -14,7 +14,6 @@ class StudyCategoryInteractor: StudyCategoryInteractorInputProtocol {
     var remoteDatamanager: StudyCategoryRemoteDataManagerInputProtocol?
     
     func retrieveStudyCategory() {
-
         let categoryList = [
             Category(image: UIImage(named: "ios")!,name: "ios"),
             Category(image: UIImage(named: "ai")!, name: "ai"),
@@ -40,7 +39,6 @@ class StudyCategoryInteractor: StudyCategoryInteractorInputProtocol {
 extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol {
     func onCategoriesRetrieved(categories: BaseResponse<[String]>) {
         var categoryList: [Category] = []
-        
         // 추후 작업예정
     }
     

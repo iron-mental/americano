@@ -37,7 +37,7 @@ class SearchLocationView: UIViewController {
         }
         searchTextField.do {
             $0.textColor = .white
-            $0.placeholder = "장소를 검색하세요"
+            $0.placeholder = "장소 키워드 검색 ex) 강남, 신촌"
             $0.becomeFirstResponder()
             $0.delegate = self
         }

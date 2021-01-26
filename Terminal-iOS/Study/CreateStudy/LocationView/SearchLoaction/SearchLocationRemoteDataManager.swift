@@ -18,7 +18,6 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
         let parameters: [String: String] = [
             "query": text
         ]
-        
         AF.request("https://dapi.kakao.com/v2/local/search/keyword.json",
                    method: .get,
                    parameters: parameters, headers: headers).responseJSON(completionHandler: { response in
@@ -40,6 +39,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                                                                     sigungu: "Test"
                                                                     )
                                     resultList.append(newItem)
+                                    
                                 }
                             }
                             result = true

@@ -140,9 +140,9 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
         }
-        
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.categoryLabel.text = selectedCategory
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)

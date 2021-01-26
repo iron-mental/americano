@@ -33,7 +33,6 @@ class ApplyUserDetailInteractor: ApplyUserDetailInteractorInputProtocol {
 extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProtocol {
     
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
-        
         switch userInfo.result {
         case true:
             if let data = userInfo.data {
@@ -47,7 +46,6 @@ extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProto
     }
     
     func onProjectRetrieved(project: BaseResponse<[Project]>) {
-        
         switch project.result {
         case true:
             if let data = project.data {

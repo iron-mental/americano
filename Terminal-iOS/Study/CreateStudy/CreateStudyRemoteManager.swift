@@ -33,7 +33,9 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                 "address_name": location.address
             ]
             if let detailAddress = location.detailAddress {
-                params["location_detail"] = detailAddress
+                if !detailAddress.isEmpty {
+                    params["location_detail"] = detailAddress
+                }
             }
             if let placeName =  location.placeName {
                 params["place_name"] = placeName
@@ -48,12 +50,15 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                 for (key, value) in params {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
-                multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
+                
+                multipartFormData.append(imageData!, withName: "image", mimeType: "image/jpeg")
+                
             }, with: TerminalRouter.studyCreate(study: params))
             .validate(statusCode: 200..<503)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     
@@ -65,6 +70,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     }
                 case .failure(_):
                     //이 텍스트를 프레젠터에서 넣어줘야될지 음 정하면댈듯
+                    
                     self.interactor?.createStudyInvalid(message: "서버의 연결이 불안정합니다")
                 }
             }
