@@ -15,24 +15,29 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
     
     func postStudy(study: StudyDetailPost) {
         var params: [String: Any] = [:]
+        
         if let location = study.location {
             params = [
-                "category" : study.category,
-                "title" : study.title,
-                "introduce" : study.introduce,
-                "progress" : study.progress!,
-                "study_time" : study.studyTime!,
-                "sns_notion" : study.snsNotion!,
-                "sns_evernote" : study.snsEvernote!,
-                "sns_web" : study.snsWeb!,
-                "latitude" : location.lat,
-                "longitude" : location.lng,
-                "sido" : location.sido,
-                "sigungu" : location.sigungu,
-                "address_name" : location.address,
-                "location_detail" : location.detailAddress,
-                "place_name" : location.placeName
+                "category": study.category,
+                "title": study.title,
+                "introduce": study.introduce,
+                "progress": study.progress!,
+                "study_time": study.studyTime!,
+                "sns_notion": study.snsNotion!,
+                "sns_evernote": study.snsEvernote!,
+                "sns_web": study.snsWeb!,
+                "latitude": location.lat,
+                "longitude": location.lng,
+                "sido": location.sido,
+                "sigungu": location.sigungu,
+                "address_name": location.address
             ]
+            if let detailAddress = location.detailAddress {
+                params["location_detail"] = detailAddress
+            }
+            if let placeName =  location.placeName {
+                params["place_name"] = placeName
+            }
         }
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
