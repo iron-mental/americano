@@ -40,7 +40,7 @@ enum TerminalRouter: URLRequestConvertible {
     case projectList            (id: String)
     case projectUpdate          (id: String, project: Parameters)
 
-    // 스터디 - 탈퇴, 장위임, 검색, 키워드 추가해야함
+    // 스터디
     case studyCreate            (study: Parameters)
     case studyDetail            (studyID: String)
     case studyUpdate            (studyID: String, study: Parameters)

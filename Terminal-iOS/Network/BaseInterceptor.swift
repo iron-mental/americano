@@ -22,8 +22,8 @@ final class BaseInterceptor: RequestInterceptor {
 
         if let token = KeychainWrapper.standard.string(forKey: "accessToken") {
             self.accessToken = token
-            
         }
+        
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
         completion(.success(request))
     }
@@ -34,7 +34,7 @@ final class BaseInterceptor: RequestInterceptor {
             return
         }
         
-        print("status:",statusCode)
+        print("status:", statusCode)
         
         switch statusCode {
         case 200...299:
@@ -77,11 +77,10 @@ final class BaseInterceptor: RequestInterceptor {
                             }
                         }
                     } catch {
-                        
                         print("error")
                     }
                 case .failure(let error):
-                    print("에러입니다.",error)
+                    print("에러입니다.", error)
                     
                 }
             }

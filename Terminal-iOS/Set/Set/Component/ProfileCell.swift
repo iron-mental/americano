@@ -52,7 +52,7 @@ class ProfileCell: UITableViewCell {
     }
     
     func attribute() {
-        self.backgroundColor = UIColor.appColor(.terminalBackground)
+        self.backgroundColor = UIColor.appColor(.cellBackground)
         profile.do {
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = $0.frame.size.width/2
@@ -61,14 +61,15 @@ class ProfileCell: UITableViewCell {
         name.do {
             $0.textColor = .white
             $0.textAlignment = .center
-            $0.font = $0.font.withSize(20)
+            $0.font = UIFont.notosansMedium(size: 20)
         }
         descript.do {
             $0.numberOfLines = 0
-            $0.font = $0.font.withSize(16)
+            $0.font = UIFont.notosansMedium(size: 16)
         }
         location.do {
-            $0.font = $0.font.withSize(13)
+            $0.textColor = .appColor(.mainColor)
+            $0.font = UIFont.notosansMedium(size: 13)
         }
     }
     
