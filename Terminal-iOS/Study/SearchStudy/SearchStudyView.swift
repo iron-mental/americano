@@ -165,7 +165,7 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let text = keyword[indexPath.row].word
         self.searchController.searchBar.text = text
-        presenter?.didSearchButtonClicked(keyWord: text)
+        presenter?.didSearchButtonClicked(keyword: text)
     }
     
     class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
@@ -180,7 +180,7 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
                 }
                 layoutAttribute.frame.origin.x = leftMargin
                 leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
-                maxY = max(layoutAttribute.frame.maxY , maxY)
+                maxY = max(layoutAttribute.frame.maxY, maxY)
             }
             return attributes
         }
@@ -193,7 +193,7 @@ extension SearchStudyView: SearchStudyViewProtocol {
 
 extension SearchStudyView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter?.didSearchButtonClicked(keyWord: searchBar.text!)
+        presenter?.didSearchButtonClicked(keyword: searchBar.text!)
     }
 }
 

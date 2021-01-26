@@ -13,7 +13,7 @@ class SearchStudyPresenter: SearchStudyPresenterProtocol {
     var interactor: SearchStudyInteractorProtocol?
     var wireFrame: SearchStudyWireFrameProtocol?
     
-    func didSearchButtonClicked(keyWord: String) {
-        wireFrame?.goToSearchStudyRestult(from: view!, keyWord: keyWord)
+    func didSearchButtonClicked(keyword: String) {
+        wireFrame?.goToSearchStudyRestult(from: view!, keyword: keyword)
     }
 }

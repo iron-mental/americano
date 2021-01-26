@@ -9,8 +9,7 @@
 import UIKit
 
 class SearchStudyResultWireFrame: SearchStudyResultWireFrameProtocol {
-    
-    static func createSearchStudyResultModule() -> UIViewController{
+    static func createSearchStudyResultModule(keyword: String) -> UIViewController {
         let view = SearchStudyResultView()
         let interactor = SearchStudyResultInteractor()
         let presenter = SearchStudyResultPresenter()
@@ -27,8 +26,10 @@ class SearchStudyResultWireFrame: SearchStudyResultWireFrameProtocol {
         interactor.localDataManager = localDataManager
         remoteDataManager.interactor = interactor
         
+        view.keyword = keyword
         return view
     }
+    
     func presentStudyDetailScreen(from view: SearchStudyResultViewProtocol, keyValue: Int, state: Bool) {
         //state 값 이렇게 줄게 아니라 athority 받아와서 분기후에 정확하게 그에맞는걸로 해야댐
         
