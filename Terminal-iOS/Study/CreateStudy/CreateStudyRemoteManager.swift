@@ -15,7 +15,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
     
     func postStudy(study: StudyDetailPost) {
         var params: [String: Any] = [:]
-        
+        i
         if let location = study.location {
             params = [
                 "category": study.category,
@@ -41,6 +41,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                 params["place_name"] = placeName
             }
         }
+        
         
         let imageData = study.image!.jpegData(compressionQuality: 1.0)
         TerminalNetworkManager

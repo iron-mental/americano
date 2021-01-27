@@ -25,7 +25,8 @@ class SelectLocationView: UIViewController {
     var mapView = NMFMapView()
     var bottomView = BottomView()
     var location: StudyDetailLocationPost?
-    var preventPlaceNameFlag = true
+    var animationFlag = true
+    var isMoving = false
     var delegate: selectLocationDelegate?
     var keyboardHeight: CGFloat = 0.0
     var bottomAnchor: NSLayoutConstraint?
@@ -46,7 +47,7 @@ class SelectLocationView: UIViewController {
         location?.lat = mapView.cameraPosition.target.lat
     }
     override func viewWillAppear(_ animated: Bool) {
-        preventPlaceNameFlag = isBeingPresented
+        animationFlag = isBeingPresented
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -55,18 +56,18 @@ class SelectLocationView: UIViewController {
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
         
-        if preventPlaceNameFlag == false {
+        if animationFlag == false {
             bottomAnchor?.constant -= keyboardHeight
             bottomAnchor?.isActive = true
             view.layoutIfNeeded()
             view.setNeedsDisplay()
         }
         bottomView.detailAddress.becomeFirstResponder()
-        preventPlaceNameFlag = false
+        animationFlag = false
     }
     
     @objc func keyboardWillHide() {
-        if preventPlaceNameFlag == false {
+        if animationFlag == false {
             bottomAnchor?.constant = 0
             view.layoutIfNeeded()
         }
@@ -122,9 +123,14 @@ class SelectLocationView: UIViewController {
         if let detailAddress = bottomView.detailAddress.text {
             location?.detailAddress = detailAddress
         }
+        
         delegate?.passLocation(location: location!)
         dismiss(animated: false)
         presentingViewController?.dismiss(animated: false)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        isMoving = true
     }
 }
 
@@ -139,9 +145,9 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
                 location?.lng = mapView.cameraPosition.target.lng
                 location?.lat = mapView.cameraPosition.target.lat
                 location?.category = ""
-                
-                presenter?.getAddress(item: location!)
-                
+                if isMoving {
+                    presenter?.getAddress(item: location!)
+                }
             })
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task!)
