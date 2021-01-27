@@ -135,6 +135,10 @@
 		A5D058F0255D939C0047CA9E /* StudyDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058EF255D939C0047CA9E /* StudyDetailProtocols.swift */; };
 		A5D2A5F925373D180010AE1C /* HotKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */; };
 		A5D4B89125C1492C008403DC /* RequestToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4B89025C1492C008403DC /* RequestToken.swift */; };
+		A5D4B8C225C18749008403DC /* NotificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4B8C125C18749008403DC /* NotificationPresenter.swift */; };
+		A5D4B8C725C18753008403DC /* NotificationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4B8C625C18753008403DC /* NotificationInteractor.swift */; };
+		A5D4B8CC25C1875D008403DC /* NotificationWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4B8CB25C1875D008403DC /* NotificationWireFrame.swift */; };
+		A5D4B8D125C18771008403DC /* NotificationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D4B8D025C18771008403DC /* NotificationProtocols.swift */; };
 		A5D5852725A9E55000C36452 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5852625A9E55000C36452 /* Array+Ext.swift */; };
 		A5D5AE572573CE1B003BB277 /* Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5AE562573CE1B003BB277 /* Authorization.swift */; };
 		A5D5AE5A2573DAFB003BB277 /* IntroWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D5AE592573DAFB003BB277 /* IntroWireFrame.swift */; };
@@ -489,6 +493,10 @@
 		A5D058F6255D95000047CA9E /* StudyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetail.swift; sourceTree = "<group>"; };
 		A5D2A5F825373D180010AE1C /* HotKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotKeywordCell.swift; sourceTree = "<group>"; };
 		A5D4B89025C1492C008403DC /* RequestToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestToken.swift; sourceTree = "<group>"; };
+		A5D4B8C125C18749008403DC /* NotificationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPresenter.swift; sourceTree = "<group>"; };
+		A5D4B8C625C18753008403DC /* NotificationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationInteractor.swift; sourceTree = "<group>"; };
+		A5D4B8CB25C1875D008403DC /* NotificationWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationWireFrame.swift; sourceTree = "<group>"; };
+		A5D4B8D025C18771008403DC /* NotificationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationProtocols.swift; sourceTree = "<group>"; };
 		A5D5852625A9E55000C36452 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
 		A5D5AE562573CE1B003BB277 /* Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authorization.swift; sourceTree = "<group>"; };
 		A5D5AE592573DAFB003BB277 /* IntroWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroWireFrame.swift; sourceTree = "<group>"; };
@@ -1036,6 +1044,10 @@
 			children = (
 				A5BA1ED8254A8F8D0089D4E9 /* Component */,
 				A5BA1ED5254A8E9C0089D4E9 /* NotificationView.swift */,
+				A5D4B8C125C18749008403DC /* NotificationPresenter.swift */,
+				A5D4B8C625C18753008403DC /* NotificationInteractor.swift */,
+				A5D4B8CB25C1875D008403DC /* NotificationWireFrame.swift */,
+				A5D4B8D025C18771008403DC /* NotificationProtocols.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -1818,6 +1830,7 @@
 				A51BA0A82577E38900B9673F /* BaseInterceptor.swift in Sources */,
 				CCA3FF472517823E00F62627 /* StudyListProtocols.swift in Sources */,
 				CCA3FF3F2517823000F62627 /* StudyListLocalDataManager.swift in Sources */,
+				A5D4B8C225C18749008403DC /* NotificationPresenter.swift in Sources */,
 				A53A2B6E25B6BBA80002D3A0 /* UserWithdrawalView.swift in Sources */,
 				CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */,
 				CCA1FF6F24FD10290026C3EA /* SetView.swift in Sources */,
@@ -1827,6 +1840,7 @@
 				CCA25AE325B9B34900280C80 /* DelegateHostView.swift in Sources */,
 				CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */,
 				CC56394B259CADA500DA1479 /* SearchStudyLocalDataManager.swift in Sources */,
+				A5D4B8D125C18771008403DC /* NotificationProtocols.swift in Sources */,
 				CCEEB46825AC50DF00F522C4 /* MyApplyStudyDetailPresenter.swift in Sources */,
 				A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */,
 				CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */,
@@ -2047,6 +2061,7 @@
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
 				A53A2B8525B6BC050002D3A0 /* UserWithdrawalInteractor.swift in Sources */,
 				CCC1A2E025B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift in Sources */,
+				A5D4B8CC25C1875D008403DC /* NotificationWireFrame.swift in Sources */,
 				A58F9014259F44C5007777B4 /* ProjectModifyView.swift in Sources */,
 				CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */,
 				A5814921259129C800BF3C2A /* LocationModifyInteractor.swift in Sources */,
@@ -2096,6 +2111,7 @@
 				CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */,
 				A5C81C5B25836D32008F2B09 /* MyApplyListProtocols.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
+				A5D4B8C725C18753008403DC /* NotificationInteractor.swift in Sources */,
 				CCF470A8256B9AA00085B371 /* ChatWireFrame.swift in Sources */,
 				CC45F558254AA42800DC31C6 /* SearchLocationRemoteDataManager.swift in Sources */,
 				A58148A12591051A00BF3C2A /* EmailModifyWireFrame.swift in Sources */,

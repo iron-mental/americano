@@ -9,6 +9,8 @@
 import UIKit
 
 class NotificationView: UIViewController {
+    var presenter: NotificationPresenterProtocol?
+    
     let tableView = UITableView()
     
     let dummy: [Noti] = [Noti(title: "Swift 정복자", explain: "정재인님이 참여하셨습니다.", action: "프로필 보기"),
@@ -19,8 +21,6 @@ class NotificationView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationController?.navigationBar.isTranslucent = false
-//        navigationController?.navigationBar.prefersLargeTitles = false
         attribute()
         layout()
     }
@@ -58,4 +58,8 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+}
+
+extension NotificationView: NotificationViewProtocol {
+    
 }
