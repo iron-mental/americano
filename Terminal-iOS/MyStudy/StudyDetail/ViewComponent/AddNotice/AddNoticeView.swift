@@ -28,7 +28,6 @@ class AddNoticeView: UIViewController {
     }
     var state: AddNoticeState?
     var dismissButton = UIButton()
-    var pinButton = UIButton()
     var titleGuideLabel = UILabel()
     var titleTextField = UITextField()
     var contentGuideLabel = UILabel()
@@ -58,18 +57,15 @@ class AddNoticeView: UIViewController {
     
     func attribute() {
         self.do {
+            
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
+        isEssentialFlagSege.do {
+            $0.addTarget(self, action: #selector(segeIsMoving), for: .valueChanged)
         }
         dismissButton.do {
             $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
             $0.addTarget(self, action: #selector(dismissButtonTap), for: .touchUpInside)
-        }
-        pinButton.do {
-            $0.backgroundColor = UIColor.appColor(.pinnedNoticeColor)
-            $0.setTitle("필독", for: .normal)
-            $0.layer.cornerRadius = 3
-            $0.layer.masksToBounds = true
-            $0.addTarget(self, action: #selector(pinButtonDidTap(_: )), for: .touchUpInside)
         }
         titleGuideLabel.do {
             $0.text = "제목"
@@ -112,7 +108,7 @@ class AddNoticeView: UIViewController {
     }
     
     func layout() {
-        [isEssentialFlagSege, dismissButton, pinButton, titleGuideLabel, titleTextField, contentGuideLabel, contentTextView, completeButton].forEach { view.addSubview($0) }
+        [isEssentialFlagSege, dismissButton, titleGuideLabel, titleTextField, contentGuideLabel, contentTextView, completeButton].forEach { view.addSubview($0) }
         
         isEssentialFlagSege.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -124,31 +120,24 @@ class AddNoticeView: UIViewController {
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertHeigt(value: 10)).isActive = true
         }
-        pinButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: dismissButton.centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 40)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
-        }
-        titleTextField.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: pinButton.bottomAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: pinButton.trailingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
-        }
         titleGuideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: titleTextField.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: titleTextField.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
+        }
+        titleTextField.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: isEssentialFlagSege.bottomAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: titleGuideLabel.trailingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
         }
         contentGuideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: titleTextField.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: titleGuideLabel.trailingAnchor).isActive = true
         }
         contentTextView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -167,26 +156,20 @@ class AddNoticeView: UIViewController {
         }
     }
     
+    @objc func segeIsMoving(sender: UISegmentedControl) {
+        isEssentialFlagSege.selectedSegmentTintColor = sender.selectedSegmentIndex == 0 ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+    }
+    
     @objc func dismissButtonTap() {
         dismiss(animated: true) {
         }
     }
     
-    @objc func pinButtonDidTap(_ sender: UIButton) {
-        if sender.currentTitle == "필독" {
-            sender.setTitle("일반", for: .normal)
-            sender.backgroundColor = UIColor.appColor(.noticeColor)
-        } else {
-            sender.setTitle("필독", for: .normal)
-            sender.backgroundColor = UIColor.appColor(.pinnedNoticeColor)
-        }
-    }
     @objc func completeButtonDidTap() {
         
         let newNoticePost = NoticePost(title: titleTextField.text ?? "",
                                        contents: contentTextView.text ?? "",
                                        pinned: isEssentialFlagSege.selectedSegmentIndex == 0 ? true : false)
-        
         presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
     }
 }
