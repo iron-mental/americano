@@ -9,6 +9,7 @@
 import UIKit
 
 class BaseEditableStudyDetailView: UIViewController {
+    
     let screenSize = UIScreen.main.bounds
     var keyboardHeight: CGFloat = 0.0
     let mainImageView = MainImageView(frame: CGRect.zero)

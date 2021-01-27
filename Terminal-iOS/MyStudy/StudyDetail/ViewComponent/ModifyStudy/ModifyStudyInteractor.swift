@@ -16,9 +16,9 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
     func nullCheck(study: StudyDetailPost) -> String {
         if study.category.isEmpty {
             return "카테고리가 지정되어있지 않습니다."
-        } else if study.title.isEmpty {
+        } else if study.title!.isEmpty {
             return "제목을 입력해주세요"
-        } else if study.introduce.isEmpty {
+        } else if study.introduce!.isEmpty {
             return "소개를 입력해주세요"
         } else if study.progress!.isEmpty {
             return "진행을 입력해주세요"
@@ -54,24 +54,28 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
         return "성공"
     }
     
-    func duplicateCheck(targetStudy: StudyDetailPost) -> StudyDetailPost{
-        let resultStudy = StudyDetailPost(category: currentStudy?.category == targetStudy.category ? "" : targetStudy.category,
-                                          title:  currentStudy?.title == targetStudy.title ? "" : targetStudy.title,
-                                          introduce:  currentStudy?.introduce == targetStudy.introduce ? "" : targetStudy.introduce,
-                                          progress:  currentStudy?.progress == targetStudy.progress ? "" : targetStudy.progress,
-                                          studyTime:  currentStudy?.studyTime == targetStudy.studyTime ? "" : targetStudy.studyTime,
-                                          snsWeb:  currentStudy?.snsWeb == targetStudy.snsWeb ? "" : targetStudy.snsWeb,
-                                          snsNotion:  currentStudy?.snsNotion == targetStudy.snsNotion ? "" : targetStudy.snsNotion,
-                                          snsEvernote:  currentStudy?.snsEvernote == targetStudy.snsEvernote ? "" : targetStudy.snsEvernote,
-                                          image: nil,
+    
+    func duplicateCheck(targetStudy: StudyDetailPost) -> StudyDetailPost {
+        let resultStudy = StudyDetailPost(category: targetStudy.category,
+                                          title: currentStudy?.title == targetStudy.title ? nil : targetStudy.title,
+                                          introduce: targetStudy.introduce,
+                                          progress: targetStudy.progress,
+                                          studyTime: targetStudy.studyTime,
+                                          snsWeb: targetStudy.snsWeb,
+                                          snsNotion: targetStudy.snsNotion,
+                                          snsEvernote: targetStudy.snsEvernote,
+                                          image: targetStudy.image,
                                           location: targetStudy.location)
-        
         return resultStudy
     }
+
+    
     func putStudyInfo(studyID: Int, study: StudyDetailPost) {
+        
         print(nullCheck(study: study))
         if nullCheck(study: study) == "성공" {
             remoteDataManager?.putStudyInfo(studyID: studyID, study: duplicateCheck(targetStudy: study))
+//            remoteDataManager?.putStudyInfo(studyID: studyID, study: study)
         } else {
             print("ModifyStudyInteractor에서 생긴 에러")
         }

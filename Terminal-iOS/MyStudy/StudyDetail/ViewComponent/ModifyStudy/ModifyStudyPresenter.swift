@@ -19,7 +19,7 @@ class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
     var wireFrame: ModifyStudyWireFrameProtocol?
     
     func completButtonDidTap(studyID: Int, study: StudyDetailPost) {
-        LoadingRainbowCat.show()
+//        LoadingRainbowCat.show()
         interactor?.putStudyInfo(studyID: studyID, study: study)
     }
 }

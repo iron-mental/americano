@@ -52,14 +52,15 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     @objc func buttonDidTap() {
         selectedLocation?.detailAddress = locationView.detailAddress.text
         
-        studyDetailPost = StudyDetailPost(category: selectedCategory ?? "",
-                                          title: studyTitleTextField.text!,
-                                          introduce: studyIntroduceView.textView.text!,
-                                          progress: studyInfoView.textView.text!,
-                                          studyTime: timeView.detailTime.text!,
-                                          snsWeb: SNSInputView.web.textField.text!,
-                                          snsNotion: SNSInputView.notion.textField.text!,
-                                          snsEvernote: SNSInputView.evernote.textField.text!,
+        
+        studyDetailPost = StudyDetailPost(category: study!.category,
+                                          title: studyTitleTextField.text ?? "",
+                                          introduce: studyIntroduceView.textView.text ?? "",
+                                          progress: studyInfoView.textView.text ?? "",
+                                          studyTime: timeView.detailTime.text ?? "",
+                                          snsWeb: SNSInputView.web.textField.text ?? "",
+                                          snsNotion: SNSInputView.notion.textField.text ?? "",
+                                          snsEvernote: SNSInputView.evernote.textField.text ?? "",
                                           image: mainImageView.image,
                                           location: selectedLocation ?? nil)
         
