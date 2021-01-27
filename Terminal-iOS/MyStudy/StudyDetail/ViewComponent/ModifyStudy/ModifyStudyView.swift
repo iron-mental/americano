@@ -19,6 +19,27 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     
     override func attribute() {
         super.attribute()
+        studyTitleTextField.do {
+            $0.text = study?.title
+        }
+        studyIntroduceView.do {
+            $0.textView.text = study?.introduce
+        }
+        SNSInputView.do {
+            $0.notion.textField.text = study?.snsNotion ?? ""
+            $0.evernote.textField.text = study?.snsEvernote ?? ""
+            $0.web.textField.text = study?.snsWeb ?? ""
+        }
+        studyInfoView.do {
+            $0.textView.text = study?.progress
+        }
+        locationView.do {
+            $0.address.text = study?.location.addressName
+            $0.detailAddress.text = study?.location.locationDetail ?? ""
+        }
+        timeView.do {
+            $0.detailTime.text = study?.studyTime
+        }
         button.do {
             $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
         }
