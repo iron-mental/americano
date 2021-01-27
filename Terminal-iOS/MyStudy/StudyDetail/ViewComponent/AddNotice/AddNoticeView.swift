@@ -37,7 +37,8 @@ class AddNoticeView: UIViewController {
     var parentView: UIViewController?
     var bottomAnchor: NSLayoutConstraint?
     var keyboardHeight: CGFloat = 0.0
-    lazy var tapSege = UISegmentedControl(items: ["필독", "일반"])
+    lazy var isEssentialFlagSege = UISegmentedControl(items: ["필독", "일반"])
+    
     override func viewDidLoad() {
         attribute()
         layout()
@@ -111,11 +112,12 @@ class AddNoticeView: UIViewController {
     }
     
     func layout() {
-        [tapSege, dismissButton, pinButton, titleGuideLabel, titleTextField, contentGuideLabel, contentTextView, completeButton].forEach { view.addSubview($0) }
-        tapSege.do {
+        [isEssentialFlagSege, dismissButton, pinButton, titleGuideLabel, titleTextField, contentGuideLabel, contentTextView, completeButton].forEach { view.addSubview($0) }
+        
+        isEssentialFlagSege.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: dismissButton.centerYAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = truew
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         }
         dismissButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -125,7 +127,7 @@ class AddNoticeView: UIViewController {
         pinButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: dismissButton.centerYAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 40)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
         }
@@ -164,6 +166,7 @@ class AddNoticeView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
         }
     }
+    
     @objc func dismissButtonTap() {
         dismiss(animated: true) {
         }
@@ -182,7 +185,7 @@ class AddNoticeView: UIViewController {
         
         let newNoticePost = NoticePost(title: titleTextField.text ?? "",
                                        contents: contentTextView.text ?? "",
-                                       pinned: pinButton.currentTitle == "필독" ? true : false)
+                                       pinned: isEssentialFlagSege.selectedSegmentIndex == 0 ? true : false)
         
         presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
     }
