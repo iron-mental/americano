@@ -284,7 +284,6 @@ extension StudyDetailView: StudyDetailViewProtocol {
         memberView.totalMember.text = "\(userData.count) 명"
         parentView?.setting()
         attribute()
-        view.layoutIfNeeded()
     }
     
     func showError() {

@@ -43,6 +43,9 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         button.do {
             $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
         }
+        accessoryCompletButton.do {
+            $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
+        }
     }
     
     override func didLocationViewClicked() {
@@ -73,14 +76,15 @@ extension ModifyStudyView: ModifyStudyViewProtocol {
     func showResult(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
             self.navigationController?.popViewController(animated: true)
-        }
-        if let myStudyDetailView = (self.navigationController?.viewControllers[1] as? MyStudyDetailView) {
-            if let studyDetailView = myStudyDetailView.VCArr[1] as? StudyDetailViewProtocol {
-                if let id = study?.id {
-                    studyDetailView.presenter?.showStudyListDetail(studyID: "\(id)")
+            if let myStudyDetailView = (self.navigationController?.viewControllers[1] as? MyStudyDetailView) {
+                if let studyDetailView = myStudyDetailView.VCArr[1] as? StudyDetailViewProtocol {
+                    if let id = self.study?.id {
+                        studyDetailView.presenter?.showStudyListDetail(studyID: "\(id)")
+                    }
                 }
             }
         }
+        
     }
     
     func showError() {
