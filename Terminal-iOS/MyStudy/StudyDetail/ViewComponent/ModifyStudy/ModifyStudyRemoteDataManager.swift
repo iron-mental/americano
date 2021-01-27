@@ -64,12 +64,13 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
-                        let result = try! JSONDecoder().decode(BaseResponse<[String]>.self, from: data!)
-                        interactor?.putStudyInfoResult(result: <#T##Bool#>, message: <#T##String#>)
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        guard let message = result.message else { return }
+                        self.interactor?.putStudyInfoResult(result: result.result, message: message)
                     } catch {
-                        
+                        self.interactor?.putStudyInfoResult(result: false, message: "실패하였슴")
                     }
-                case .failure(let err):
+                case .failure(let err): break
                 }
             }
     }

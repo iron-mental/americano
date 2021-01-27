@@ -71,12 +71,16 @@ class ModifyStudyView: BaseEditableStudyDetailView {
 
 extension ModifyStudyView: ModifyStudyViewProtocol {
     func showResult(message: String) {
-        navigationController?.popViewController(animated: true)
-        //이부분 presenter에서 viewDidLoad하는거 구현해야함
-        (navigationController?.viewControllers.last as! StudyDetailViewProtocol).presenter?.viewDidLoad()
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+            //이부분 presenter에서 viewDidLoad하는거 구현해야함
+//            (self.navigationController?.viewControllers.last as! StudyDetailViewProtocol).presenter?.viewDidLoad()
+        }
+        
+        
     }
     
     func showError() {
-        print("ModifyStudyView 에서 생긴 에러 ")
+        showToast(controller: self, message: "수정에 실패하였습니다.", seconds: 1)
     }
 }

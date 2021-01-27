@@ -58,5 +58,3 @@ protocol ModifyStudyWireFrameProtocol {
     //PRESENTER -> WIREFRAME
     func goToSelectLocation(view: UIViewController)
 }
-
-
