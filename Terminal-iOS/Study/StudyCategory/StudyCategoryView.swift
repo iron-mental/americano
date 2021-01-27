@@ -85,11 +85,12 @@ extension StudyCategoryView: StudyCategoryViewProtocol {
     func hideLoading() {
         
     }
+    
     func categoryDownAnimate() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
             self.categoryCollectionView.transform
                 = self.categoryCollectionView.transform.translatedBy(x: 0, y: 60)
-        },completion: { _ in
+        }, completion: { _ in
             self.presenter?.goToCreateStudy(category: self.categoryList)
         })
     }
