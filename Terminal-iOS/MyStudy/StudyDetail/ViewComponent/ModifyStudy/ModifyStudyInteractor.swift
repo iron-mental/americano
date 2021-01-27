@@ -45,7 +45,6 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
     }
     
     func duplicateCheck(targetStudy: StudyDetailPost) -> StudyDetailPost{
-        
         let resultStudy = StudyDetailPost(category: currentStudy?.category == targetStudy.category ? "" : targetStudy.category,
                                           title:  currentStudy?.title == targetStudy.title ? "" : targetStudy.title,
                                           introduce:  currentStudy?.introduce == targetStudy.introduce ? "" : targetStudy.introduce,

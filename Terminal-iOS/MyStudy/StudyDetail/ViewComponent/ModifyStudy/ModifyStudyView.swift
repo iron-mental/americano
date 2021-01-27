@@ -19,9 +19,9 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     
     override func attribute() {
         super.attribute()
-//        studyTitleTextField.do {
-//            $0.text = study?.title
-//        }
+        studyTitleTextField.do {
+            $0.text = study?.title
+        }
         studyIntroduceView.do {
             $0.textView.text = study?.introduce
         }
@@ -50,17 +50,22 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     }
     
     @objc func buttonDidTap() {
-        var studyDetailPost = StudyDetailPost(category: study!.category,
-                                              title: studyTitleTextField.text ?? "",
-                                              introduce: studyIntroduceView.textView.text ?? "",
-                                              progress: studyInfoView.textView.text ?? "",
-                                              studyTime: timeView.detailTime.text ?? "",
-                                              snsWeb: SNSInputView.web.textField.text,
-                                              snsNotion: SNSInputView.notion.textField.text,
-                                              snsEvernote: SNSInputView.evernote.textField.text,
-                                              image: mainImageView.image,
-                                              location: selectedLocation!)
-        presenter?.completButtonDidTap(studyID: study!.id, study: studyDetailPost)
+        selectedLocation?.detailAddress = locationView.detailAddress.text
+        
+        studyDetailPost = StudyDetailPost(category: selectedCategory ?? "",
+                                          title: studyTitleTextField.text!,
+                                          introduce: studyIntroduceView.textView.text!,
+                                          progress: studyInfoView.textView.text!,
+                                          studyTime: timeView.detailTime.text!,
+                                          snsWeb: SNSInputView.web.textField.text!,
+                                          snsNotion: SNSInputView.notion.textField.text!,
+                                          snsEvernote: SNSInputView.evernote.textField.text!,
+                                          image: mainImageView.image,
+                                          location: selectedLocation ?? nil)
+        
+        guard let id = study?.id else { return }
+        presenter?.completButtonDidTap(studyID: id, study: studyDetailPost!)
+        
     }
 }
 

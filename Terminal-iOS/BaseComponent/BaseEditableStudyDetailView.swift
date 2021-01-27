@@ -34,7 +34,8 @@ class BaseEditableStudyDetailView: UIViewController {
     var textViewTapFlag = false
     var scrollViewOffsetElement: CGFloat = 0.0
     var accessoryCompletButton = UIButton()
-
+    var viewDidAppearFlag = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -42,10 +43,14 @@ class BaseEditableStudyDetailView: UIViewController {
         setDelegate()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        studyTitleTextField.becomeFirstResponder()
+        if viewDidAppearFlag {
+            studyTitleTextField.becomeFirstResponder()
+            viewDidAppearFlag.toggle()
+        }
         scrollViewOffsetElement = 0
     }
     
