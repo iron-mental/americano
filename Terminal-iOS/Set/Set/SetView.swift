@@ -123,17 +123,15 @@ extension SetView: SetViewProtocol {
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide {
-            print("Loading hide")
-        }
+        LoadingRainbowCat.hide()
     }
     
     func emailAuthResponse(result: Bool, message: String) {
         if result {
             TerminalAlertMessage.dismiss()
-            self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 2, completion: nil)
+            self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 1)
         } else {
-            self.showToast(controller: self, message: message, seconds: 2, completion: nil)
+            self.showToast(controller: self, message: message, seconds: 1)
         }
     }
     
@@ -179,9 +177,11 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.textAlignment = .center
         }
+        
         headerView.addSubview(label)
         label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
         label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 11).isActive = true
+        
         if section == 1 {
             label.text = sections[1]
         } else if section == 2 {
@@ -239,6 +239,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             if let userInfo = self.userInfo {
                 profileCell.setData(data: userInfo)
             }
+            profileCell.accessoryType = .disclosureIndicator
             return profileCell
         } else if indexPath.section == 1 {
             let accountCell = settingList.dequeueReusableCell(withIdentifier: AccountCell.accountCellId,
