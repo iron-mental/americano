@@ -39,27 +39,20 @@ class AddNoticeView: UIViewController {
     override func viewDidLoad() {
         attribute()
         layout()
-//        titleTextField.becomeFirstResponder()
+        titleTextField.becomeFirstResponder()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func keyboardWillShow(notification:NSNotification) {
-        
         let userInfo:NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
-        bottomAnchor?.constant = -keyboardHeight
+        bottomAnchor?.constant = -(keyboardHeight + 15)
         bottomAnchor?.isActive = true
         view.layoutIfNeeded()
     }
     
-    @objc func keyboardWillHide() {
-        bottomAnchor?.constant = +keyboardHeight
-//        bottomAnchor?.isActive = true
-        view.layoutIfNeeded()
-    }
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -154,9 +147,6 @@ class AddNoticeView: UIViewController {
                                        pinned: pinButton.currentTitle == "필독" ? true : false)
         
         presenter?.completeButtonDidTap(studyID: studyID!, notice: newNoticePost, state: state!, noticeID: notice?.id ?? nil)
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        print("너 어ㅣㅆ는데 ㅋㅋ", presentingViewController!)
     }
 }
 
