@@ -30,6 +30,7 @@ class SelectLocationView: UIViewController {
     var keyboardHeight: CGFloat = 0.0
     var bottomAnchor: NSLayoutConstraint?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -37,11 +38,10 @@ class SelectLocationView: UIViewController {
         bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         bottomView.detailAddress.becomeFirstResponder()
-        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)),zoomTo: 17))
+        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)), zoomTo: 17))
         location?.lng = mapView.cameraPosition.target.lng
         location?.lat = mapView.cameraPosition.target.lat
         presenter?.getAddress(item: location!)
@@ -50,8 +50,7 @@ class SelectLocationView: UIViewController {
         preventPlaceNameFlag = isBeingPresented
     }
     
-    @objc func keyboardWillShow(notification:NSNotification) {
-        
+    @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
@@ -74,7 +73,6 @@ class SelectLocationView: UIViewController {
     }
     
     func attribute() {
-        
         mapView = NMFMapView(frame: view.frame)
         mapView.do {
             $0.mapType = .basic
@@ -118,6 +116,7 @@ class SelectLocationView: UIViewController {
     }
     
     @objc func didCompleteButtonClicked() {
+        
         if let detailAddress = bottomView.detailAddress.text {
             location?.detailAddress = detailAddress
         }
@@ -129,7 +128,6 @@ class SelectLocationView: UIViewController {
 
 extension SelectLocationView: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        
         task = DispatchWorkItem { [self] in
             self.pin.alpha = 1
             //추후에 여기서 mapView.cameraPosition.target.lat 으로 좌표알아내서 쏘면 됨

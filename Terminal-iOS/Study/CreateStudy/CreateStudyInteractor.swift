@@ -8,81 +8,81 @@
 
 import UIKit
 
-class CreateStudyInteractor: CreateStudyInteractorProtocols {
-    var presenter: CreateStudyPresenterProtocols?
-    var createStudyRemoteDataManager: CreateStudyRemoteDataManagerProtocols?
+class CreateStudyInteractor: CreateStudyInteractorProtocol {
+    var presenter: CreateStudyPresenterProtocol?
+    var remoteDataManager: CreateStudyRemoteDataManagerInputProtocol?
     var studyInfo: StudyDetail?
     
-    func searchNotionID(id: String?) {
-        if let userInput = id {
-            if let result = createStudyRemoteDataManager?.getNotionValid(id: userInput) {
-                presenter?.showNotionValidResult(result: result)
-            }
-        }
-        
-    }
-    
-    func searchEvernoteURL(url: String?) {
-        if let userInput = url {
-            if let result = createStudyRemoteDataManager?.getEvernoteValid(url: userInput) {
-                presenter?.showEvernoteValidResult(result: result)
-            }
-        }
-    }
-    
-    func searchWebURL(url: String?) {
-        if let userInput = url {
-            if let result = createStudyRemoteDataManager?.getWebValid(url: userInput) {
-                presenter?.showWebValidResult(result: (result))
-            }
-        }
-    }
-    
     func nullCheck(study: StudyDetailPost) -> String {
-        if study.category.isEmpty {
-            return "카테고리 비어있음"
-        } else if study.title.isEmpty {
-            return "제목 비어있음"
-        } else if study.introduce.isEmpty {
-            return "소개 비어있음"
-        } else if study.progress.isEmpty {
-            return "진행 비어있음"
-        } else if study.studyTime.isEmpty {
-            return "시간 비어있음"
-        } else if study.location.lat.isZero {
-            return "latitude 비어있음"
-        } else if study.location.lng.isZero {
-            return "longitude 비어있음"
-        } else if study.location.sido.isEmpty {
-            return "sido 비어있음"
-        } else if study.location.sigungu.isEmpty {
-            return "sigungu 비어있음"
-        } else if study.location.address.isEmpty {
-            return "address 비어있음"
-        } else {
-            return "성공"
+        if let evernote = study.snsEvernote {
+            print(evernote)
         }
-    }
         
-    func studyInfoOptionalBinding() {
-        
+        if study.category.isEmpty {
+            return "카테고리가 지정되어있지 않습니다."
+        } else if study.title.isEmpty {
+            return "제목을 입력해주세요"
+        } else if study.introduce.isEmpty {
+            return "소개를 입력해주세요"
+        } else if study.progress!.isEmpty {
+            return "진행을 입력해주세요"
+        } else if study.studyTime!.isEmpty {
+            return "시간을 입력해주세요"
+        } else if study.location == nil {
+            return "장소를 선택해주세요"
+        } else if let notion = study.snsNotion {
+            if !notion.notionCheck() {
+                return "Notion URL이 정확하지 않습니다."
+            } else if let evernote = study.snsEvernote {
+                if !evernote.evernoteCheck() {
+                    return "Evernote URL이 정확하지 않습니다."
+                } else if let web = study.snsWeb {
+                    if !web.webCheck() {
+                        return "Web URL이 정확하지 않습니다."
+                    }
+                }
+            }
+        } else if let location = study.location {
+            if location.lat.isZero {
+                return "장소를 선택해주세요 - latitude error"
+            } else if location.lng.isZero {
+                return "장소를 선택해주세요 - latitude error"
+            } else if location.sido.isEmpty {
+                return "장소를 선택해주세요 - sido 비어있음"
+            } else if location.sigungu.isEmpty {
+                return "장소를 선택해주세요 - sigungu 비어있음"
+            } else if location.address.isEmpty {
+                return "장소를 선택해주세요 - address 비어있음"
+            }
+        }
+        return "성공"
     }
     
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?) {
-        print(nullCheck(study: study))
-        if nullCheck(study: study) == "성공" {
-                createStudyRemoteDataManager?.postStudy(study: study, completion: { result, message in
-                    switch result {
-                    case true:
-                        self.presenter?.studyInfoValid(message: message)
-                        break
-                    case false:
-                        self.presenter?.studyInfoInvalid(message: message)
-                        break
-                    }
-                })
+        let nullCheckResult = nullCheck(study: study)
+        if nullCheckResult == "성공" {
+            
+            remoteDataManager?.postStudy(study: study)
+            
         } else {
-            presenter?.studyInfoInvalid(message: nullCheck(study: study))
+            presenter?.studyInfoInvalid(message: nullCheckResult)
+        }
+    }
+}
+
+extension CreateStudyInteractor: CreateStudyReMoteDataManagerOutputProtocol {
+    func createStudyInvalid(message: String) {
+        
+    }
+    
+    func createStudyValid(response: BaseResponse<CreateStudyResult>) {
+        switch response.result {
+        case true:
+            guard let studyID = response.data?.studyID else { return }
+            self.presenter?.studyInfoValid(studyID: studyID)
+        case false:
+            guard let message = response.message else { return }
+            self.presenter?.studyInfoInvalid(message: message)
         }
     }
 }

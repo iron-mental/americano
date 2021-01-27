@@ -11,4 +11,3 @@ import Foundation
 class SearchStudyResultLocalDataManager: SearchStudyResultLocalDataManagerProtocol {
     
 }
-

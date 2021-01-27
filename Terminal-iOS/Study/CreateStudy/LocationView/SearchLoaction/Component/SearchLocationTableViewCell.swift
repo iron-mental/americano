@@ -24,6 +24,7 @@ class SearchLocationTableViewCell: UITableViewCell {
     func attribute() {
         self.do {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 72)).isActive = true
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         title.do {
             $0.text = "넥슨"

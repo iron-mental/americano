@@ -20,23 +20,28 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
             return "제목 비어있음"
         } else if study.introduce.isEmpty {
             return "소개 비어있음"
-        } else if study.progress.isEmpty {
+        } else if study.progress!.isEmpty {
             return "진행 비어있음"
-        } else if study.studyTime.isEmpty {
+        } else if study.studyTime!.isEmpty {
             return "시간 비어있음"
-        } else if study.location.lat.isZero {
-            return "latitude 비어있음"
-        } else if study.location.lng.isZero {
-            return "longitude 비어있음"
-        } else if study.location.sido.isEmpty {
-            return "sido 비어있음"
-        } else if study.location.sigungu.isEmpty {
-            return "sigungu 비어있음"
-        } else if study.location.address.isEmpty {
-            return "address 비어있음"
+        } else if study.location == nil {
+            return "장소를 선택해주세요"
+        } else if let location = study.location {
+            if location.lat.isZero {
+                return "장소를 선택해주세요 - latitude error"
+            } else if location.lng.isZero {
+                return "장소를 선택해주세요 - latitude error"
+            } else if location.sido.isEmpty {
+                return "장소를 선택해주세요 - sido 비어있음"
+            } else if location.sigungu.isEmpty {
+                return "장소를 선택해주세요 - sigungu 비어있음"
+            } else if location.address.isEmpty {
+                return "장소를 선택해주세요 - address 비어있음"
+            }
         } else {
             return "성공"
         }
+        return "실패요"
     }
     
     func duplicateCheck(targetStudy: StudyDetailPost) -> StudyDetailPost{

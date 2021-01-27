@@ -74,7 +74,6 @@ class ApplyUserDetailView: BaseProfileView {
 
 extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
     func showApplyStatusResult(message: String, studyID: Int) {
-        
         navigationController?.popViewController(animated: true)
         (navigationController?.viewControllers.last as! ApplyUserViewProtocol).presenter?.viewDidLoad(studyID: studyID)
     }
