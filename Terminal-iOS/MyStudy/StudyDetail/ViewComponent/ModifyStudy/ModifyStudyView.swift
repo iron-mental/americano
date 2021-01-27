@@ -52,7 +52,6 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     @objc func buttonDidTap() {
         selectedLocation?.detailAddress = locationView.detailAddress.text
         
-        
         studyDetailPost = StudyDetailPost(category: study!.category,
                                           title: studyTitleTextField.text ?? "",
                                           introduce: studyIntroduceView.textView.text ?? "",

@@ -13,7 +13,7 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol?
     var currentStudy: StudyDetail?
     
-    func nullCheck(study: StudyDetailPost) -> String {
+    func nilCheck(study: StudyDetailPost) -> String {
         if study.category.isEmpty {
             return "카테고리가 지정되어있지 않습니다."
         } else if study.title!.isEmpty {
@@ -69,13 +69,11 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
 
     
     func putStudyInfo(studyID: Int, study: StudyDetailPost) {
-        
-        print(nullCheck(study: study))
-        if nullCheck(study: study) == "성공" {
+        let nilCheckResult = nilCheck(study: study)
+        if nilCheckResult == "성공" {
             remoteDataManager?.putStudyInfo(studyID: studyID, study: duplicateCheck(targetStudy: study))
-//            remoteDataManager?.putStudyInfo(studyID: studyID, study: study)
         } else {
-            print("ModifyStudyInteractor에서 생긴 에러")
+            presenter?.putStudyInfoResult(result: false, message: nilCheckResult)
         }
     }
 }
