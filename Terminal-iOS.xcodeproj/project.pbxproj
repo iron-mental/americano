@@ -180,6 +180,7 @@
 		CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F563254AABF400DC31C6 /* SearchLocationWireFrame.swift */; };
 		CC45F568254AB16300DC31C6 /* SearchLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F567254AB16300DC31C6 /* SearchLocationTableViewCell.swift */; };
 		CC465ED42577F113008448C3 /* 14476-rainbow-cat-remix.json in Resources */ = {isa = PBXBuildFile; fileRef = CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */; };
+		CC4DCFE725C16154002493E4 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC4DCFE625C16154002493E4 /* UIImage+Ext.swift */; };
 		CC563937259CA77400DA1479 /* SearchStudyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC563936259CA77400DA1479 /* SearchStudyProtocols.swift */; };
 		CC56393C259CAD6F00DA1479 /* SearchStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC56393B259CAD6F00DA1479 /* SearchStudyInteractor.swift */; };
 		CC563941259CAD7C00DA1479 /* SearchStudyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC563940259CAD7C00DA1479 /* SearchStudyPresenter.swift */; };
@@ -532,6 +533,7 @@
 		CC45F563254AABF400DC31C6 /* SearchLocationWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationWireFrame.swift; sourceTree = "<group>"; };
 		CC45F567254AB16300DC31C6 /* SearchLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationTableViewCell.swift; sourceTree = "<group>"; };
 		CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "14476-rainbow-cat-remix.json"; sourceTree = "<group>"; };
+		CC4DCFE625C16154002493E4 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		CC563936259CA77400DA1479 /* SearchStudyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyProtocols.swift; sourceTree = "<group>"; };
 		CC56393B259CAD6F00DA1479 /* SearchStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyInteractor.swift; sourceTree = "<group>"; };
 		CC563940259CAD7C00DA1479 /* SearchStudyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyPresenter.swift; sourceTree = "<group>"; };
@@ -973,6 +975,7 @@
 				A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */,
 				A53A2B8E25B6FEAA0002D3A0 /* UIWindow+Ext.swift */,
 				A5CEE7CF25B753CD00C2FF3F /* UIFont+Ext.swift */,
+				CC4DCFE625C16154002493E4 /* UIImage+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -2026,6 +2029,7 @@
 				A57E829125BD8F72000F8678 /* SNSValidate.swift in Sources */,
 				A58148EF25910E9800BF3C2A /* SNSModifyView.swift in Sources */,
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,
+				CC4DCFE725C16154002493E4 /* UIImage+Ext.swift in Sources */,
 				CC5794F42570C29300DF96AB /* AddNoticeProtocols.swift in Sources */,
 				A5CEE7D025B753CD00C2FF3F /* UIFont+Ext.swift in Sources */,
 				A51BA0B42577F1B700B9673F /* TerminalNetworkManager.swift in Sources */,

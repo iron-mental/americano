@@ -20,7 +20,6 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     var noticeID: Int?
     var state: StudyDetailViewState?
     var moreButton = UIButton()
-//    var moreButton = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     lazy var noticeBackground = UIView()
     lazy var noticeLabel = UILabel()
     lazy var noticeTitle = UILabel()
@@ -68,7 +67,6 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
         }
-        
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             // 옵셔널로 들어와서 일단 넣어놈
@@ -146,8 +144,8 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     
     @objc func moreButtonDidTap() {
         let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let edit =  UIAlertAction(title: "수정하러 가기", style: .default) { _ in self.modifyButtonDidTap() }
-        let applyList =  UIAlertAction(title: "삭제하기", style: .default) {_ in self.removeButtonDidTap() }
+        let edit =  UIAlertAction(title: "수정하기", style: .default) { _ in self.modifyButtonDidTap() }
+        let applyList =  UIAlertAction(title: "삭제하기", style: .destructive) {_ in self.removeButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         [edit,applyList,cancel].forEach { alert.addAction($0) }
