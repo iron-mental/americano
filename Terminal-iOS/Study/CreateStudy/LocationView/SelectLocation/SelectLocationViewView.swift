@@ -46,7 +46,6 @@ class SelectLocationView: UIViewController {
         location?.lat = mapView.cameraPosition.target.lat
     }
     override func viewWillAppear(_ animated: Bool) {
-        
         preventPlaceNameFlag = isBeingPresented
     }
     
@@ -55,14 +54,15 @@ class SelectLocationView: UIViewController {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
+        
         if preventPlaceNameFlag == false {
             bottomAnchor?.constant -= keyboardHeight
             bottomAnchor?.isActive = true
             view.layoutIfNeeded()
+            view.setNeedsDisplay()
         }
         bottomView.detailAddress.becomeFirstResponder()
         preventPlaceNameFlag = false
-        
     }
     
     @objc func keyboardWillHide() {
@@ -73,7 +73,10 @@ class SelectLocationView: UIViewController {
     }
     
     func attribute() {
-        mapView = NMFMapView(frame: view.frame)
+//        mapView = NMFMapView(frame: view.frame)
+        self.do {
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         mapView.do {
             $0.mapType = .basic
             $0.symbolScale = 0.7
