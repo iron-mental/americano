@@ -13,7 +13,7 @@ enum WriteStudyViewState {
     case edit
 }
 
-protocol CreateStudyViewProtocol: class {
+protocol CreateStudyViewProtocol {
     var presenter: CreateStudyPresenterProtocol? { get set }
     var study: StudyDetail? { get set }
     var studyDetailPost: StudyDetailPost? { get set }
@@ -29,8 +29,8 @@ protocol CreateStudyViewProtocol: class {
     func studyInfoValid(studyID: Int, message: String)
 }
 
-protocol CreateStudyInteractorProtocol: class {
-    var presenter: CreateStudyPresenterProtocol? { get set }
+protocol CreateStudyInteractorInputProtocol {
+    var presenter: CreateStudyInteractorOutputProtocol? { get set }
     var remoteDataManager: CreateStudyRemoteDataManagerInputProtocol? { get set }
     var studyInfo: StudyDetail? { get set }
     
@@ -38,33 +38,36 @@ protocol CreateStudyInteractorProtocol: class {
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?)
 }
 
-protocol CreateStudyPresenterProtocol: class {
-    var view: CreateStudyViewProtocol? { get set }
-    var interactor: CreateStudyInteractorProtocol? { get set }
-    var wireFrame: CreateStudyWireFrameProtocol? { get set }
-    
-    //VIEW -> PRESENTER
-    func viewDidLoad()
-    func clickLocationView(currentView: UIViewController)
-    func clickCompleteButton(study: StudyDetailPost, studyID: Int?)
+protocol CreateStudyInteractorOutputProtocol {
     
     //INTERACTOR -> PRESENTER
     func studyInfoInvalid(message: String)
     func studyInfoValid(studyID: Int)
 }
 
-protocol CreateStudyRemoteDataManagerInputProtocol: class {
+protocol CreateStudyPresenterProtocol {
+    var view: CreateStudyViewProtocol? { get set }
+    var interactor: CreateStudyInteractorInputProtocol? { get set }
+    var wireFrame: CreateStudyWireFrameProtocol? { get set }
+    
+    //VIEW -> PRESENTER
+    func viewDidLoad()
+    func clickLocationView(currentView: UIViewController)
+    func clickCompleteButton(study: StudyDetailPost, studyID: Int?)
+}
+
+protocol CreateStudyRemoteDataManagerInputProtocol {
     var interactor: CreateStudyReMoteDataManagerOutputProtocol? { get set }
     
     func postStudy(study: StudyDetailPost)
 }
 
-protocol CreateStudyReMoteDataManagerOutputProtocol: class {
+protocol CreateStudyReMoteDataManagerOutputProtocol {
     func createStudyInvalid(message: String)
     func createStudyValid(response: BaseResponse<CreateStudyResult>)
 }
 
-protocol CreateStudyWireFrameProtocol: class {
+protocol CreateStudyWireFrameProtocol {
     static func createStudyViewModul(category: String, studyDetail: StudyDetail?, state: WriteStudyViewState, parentView: UIViewController?) -> UIViewController
     //추후에 스터디 모델이 들어가야겠네용?
     func goToSelectLocation(view: UIViewController)
