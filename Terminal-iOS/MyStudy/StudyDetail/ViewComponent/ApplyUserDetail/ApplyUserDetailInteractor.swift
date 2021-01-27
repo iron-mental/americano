@@ -18,8 +18,8 @@ class ApplyUserDetailInteractor: ApplyUserDetailInteractorInputProtocol {
     
     func getUserInfo() {
         guard let id = userID else { return }
-        remoteDataManager?.getUserInfo(userID: id)
-        remoteDataManager?.getProjectList(userID: id)
+        remoteDataManager?.getUserInfo()
+        remoteDataManager?.getProjectList()
     }
     func postRejectStatus() {
         remoteDataManager?.postApplyStatus(studyID: studyID!, applyID: applyID!, status: false)
