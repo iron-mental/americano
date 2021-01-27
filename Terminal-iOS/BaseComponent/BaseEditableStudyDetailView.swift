@@ -34,7 +34,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var textViewTapFlag = false
     var scrollViewOffsetElement: CGFloat = 0.0
     var accessoryCompletButton = UIButton()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -42,10 +42,10 @@ class BaseEditableStudyDetailView: UIViewController {
         setDelegate()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        studyTitleTextField.becomeFirstResponder()
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        studyTitleTextField.becomeFirstResponder()
         scrollViewOffsetElement = 0
     }
     
@@ -297,6 +297,7 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func viewSetTop(distance: CGFloat) {
+        
         UIView.animate(withDuration: 0.2) {
             self.button.alpha = 0
             self.scrollView.contentOffset.y += distance
@@ -306,6 +307,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
     func viewSetBottom(distance: CGFloat) {
+        
         UIView.animate(withDuration: 0.2) {
             self.button.alpha = 0
             self.scrollView.contentSize.height += distance
@@ -329,12 +331,13 @@ extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavi
 extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         clickedView = textField
-        self.editableViewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+            self.editableViewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
 
 extension BaseEditableStudyDetailView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+        
         clickedView = textView
         self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }

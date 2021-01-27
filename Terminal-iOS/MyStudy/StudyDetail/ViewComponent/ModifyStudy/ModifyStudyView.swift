@@ -19,9 +19,9 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     
     override func attribute() {
         super.attribute()
-        studyTitleTextField.do {
-            $0.text = study?.title
-        }
+//        studyTitleTextField.do {
+//            $0.text = study?.title
+//        }
         studyIntroduceView.do {
             $0.textView.text = study?.introduce
         }
