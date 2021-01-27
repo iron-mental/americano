@@ -236,6 +236,7 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         attribute()
         layout()
         LoadingRainbowCat.hide()
+        view.layoutIfNeeded()
     }
     
     func showLeaveStudyComplete() {

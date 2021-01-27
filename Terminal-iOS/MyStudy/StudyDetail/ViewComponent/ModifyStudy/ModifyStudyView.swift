@@ -73,11 +73,14 @@ extension ModifyStudyView: ModifyStudyViewProtocol {
     func showResult(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
             self.navigationController?.popViewController(animated: true)
-            //이부분 presenter에서 viewDidLoad하는거 구현해야함
-//            (self.navigationController?.viewControllers.last as! StudyDetailViewProtocol).presenter?.viewDidLoad()
         }
-        
-        
+        if let myStudyDetailView = (self.navigationController?.viewControllers[1] as? MyStudyDetailView) {
+            if let studyDetailView = myStudyDetailView.VCArr[1] as? StudyDetailViewProtocol {
+                if let id = study?.id {
+                    studyDetailView.presenter?.showStudyListDetail(studyID: "\(id)")
+                }
+            }
+        }
     }
     
     func showError() {
