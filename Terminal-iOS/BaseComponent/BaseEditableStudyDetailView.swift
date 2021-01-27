@@ -33,6 +33,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var selectedLocation: StudyDetailLocationPost?
     var textViewTapFlag = false
     var scrollViewOffsetElement: CGFloat = 0.0
+    var accessoryCompletButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,7 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
+        button.alpha = 1
         scrollView.contentSize.height -= scrollViewOffsetElement
         scrollViewOffsetElement = 0
     }
@@ -139,30 +141,43 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.textColor = .white
             $0.layer.cornerRadius = 10
             $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
+            $0.inputAccessoryView = accessoryCompletButton
         }
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.categoryLabel.text = selectedCategory
+            $0.textView.inputAccessoryView = accessoryCompletButton
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.notion.textField.inputAccessoryView = accessoryCompletButton
+            $0.evernote.textField.inputAccessoryView = accessoryCompletButton
+            $0.web.textField.inputAccessoryView = accessoryCompletButton
         }
         studyInfoView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.textView.inputAccessoryView = accessoryCompletButton
         }
         locationView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
+            $0.detailAddress.inputAccessoryView = accessoryCompletButton
         }
         timeView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.detailTime.inputAccessoryView = accessoryCompletButton
         }
         button.do {
             $0.setTitle("완료", for: .normal)
-            $0.backgroundColor = UIColor(named: "key")
+            $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
+        }
+        accessoryCompletButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
         }
     }
     
@@ -263,7 +278,6 @@ class BaseEditableStudyDetailView: UIViewController {
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
         var parentView = UIView()
-        
         if type(of: textView) == SNSInputUITextField.self {
             parentView = (textView.superview?.superview)!
         } else {
@@ -284,14 +298,16 @@ class BaseEditableStudyDetailView: UIViewController {
     
     func viewSetTop(distance: CGFloat) {
         UIView.animate(withDuration: 0.2) {
+            self.button.alpha = 0
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
-            self.clickedView?.becomeFirstResponder()
             self.textViewTapFlag = true
+            self.clickedView?.becomeFirstResponder()
         }
     }
     func viewSetBottom(distance: CGFloat) {
         UIView.animate(withDuration: 0.2) {
+            self.button.alpha = 0
             self.scrollView.contentSize.height += distance
             self.scrollView.contentOffset.y += distance
             self.scrollViewOffsetElement = distance
