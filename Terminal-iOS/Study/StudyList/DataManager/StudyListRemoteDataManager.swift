@@ -25,7 +25,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.studyList(sort: params))
-            .validate(statusCode: 200..<500)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -55,7 +55,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.studyList(sort: params))
-            .validate(statusCode: 200..<500)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -87,7 +87,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .shared
                 .session
                 .request(TerminalRouter.studyListForKey(value: key))
-                .validate(statusCode: 200..<500)
+                .validate()
                 .responseJSON { response in
                     switch response.result {
                     case .success(let value):
@@ -120,7 +120,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .shared
                 .session
                 .request(TerminalRouter.studyListForKey(value: key))
-                .validate(statusCode: 200..<500)
+                .validate()
                 .responseJSON { response in
                     switch response.result {
                     case .success(let value):

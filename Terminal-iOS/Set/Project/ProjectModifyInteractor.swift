@@ -38,7 +38,7 @@ class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.projectUpdate(id: userID, project: params))
-            .validate(statusCode: 200..<500)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

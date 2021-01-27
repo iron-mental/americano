@@ -21,12 +21,10 @@ class CategoryCell: UICollectionViewCell {
         layout()
     }
 
-    override func prepareForReuse() {
-        self.categoryView.image.image = nil
-    }
-    
     func setData(category: Category) {
+        /// 일단 API Call 할 때 마다 캐시 지워줌
         KingfisherManager.shared.cache.clearCache()
+        
         self.categoryView.title.text = category.name
         self.categoryView.image.kf.setImage(with: URL(string: category.image)!,
                                             options: [.requestModifier(RequestToken.token())])
