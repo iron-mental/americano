@@ -36,12 +36,12 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
     // MARK: 유저 프로젝트
     
     func getProjectList(userID: Int) {
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+//        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.projectList(id: userID))
+            .request(TerminalRouter.projectList(id: "\(userID)"))
             .validate(statusCode: 200..<500)
             .responseJSON { response in
                 switch response.result {
