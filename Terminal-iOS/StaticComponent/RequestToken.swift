@@ -7,3 +7,16 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
+import Kingfisher
+
+struct RequestToken {
+    static func token() -> AnyModifier {
+        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
+        return AnyModifier { request in
+            var requestBody = request
+            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
+            return requestBody
+        }
+    }
+}
