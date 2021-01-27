@@ -349,7 +349,7 @@ enum TerminalRouter: URLRequestConvertible {
         case .applyDelete:
             return nil
         case let .applyDetermine(_, _, status):
-            return ["allow": "\(status)"]
+            return ["allow": status]
             
         // 프로젝트
         case .projectList:

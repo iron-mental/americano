@@ -24,6 +24,7 @@ class StudyCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         attribute()
         layout()
     }
@@ -37,12 +38,6 @@ class StudyCell: UITableViewCell {
     }
     
     func setData(_ data: Study) {
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-            return requestBody
-        }
         
         self.mainTitle.do {
             $0.text = data.title
@@ -55,7 +50,6 @@ class StudyCell: UITableViewCell {
             $0.text = data.createdAt
         }
         self.memberCount.do {
-//            $0.text = "\(data.members!)"
             $0.text = "10명"
         }
         guard let main = data.image else {
@@ -71,32 +65,33 @@ class StudyCell: UITableViewCell {
         self.mainImage.kf.indicatorType = .activity
         self.mainImage.kf.setImage(
             with: URL(string: main),
-            options: [.requestModifier(imageDownloadRequest),
+            options: [.requestModifier(RequestToken.token()),
                       .processor(processor),
                       .scaleFactor(UIScreen.main.scale),
                       .cacheOriginalImage
             ])
         
-        self.managerImage.kf.setImage(with: URL(string: leader), options: [.requestModifier(imageDownloadRequest)])
+        self.managerImage.kf.setImage(with: URL(string: leader),
+                                      options: [.requestModifier(RequestToken.token())])
     }
     
     func attribute() {
         self.backgroundColor = UIColor.appColor(.terminalBackground)
         
         self.mainTitle.do {
-            $0.font = UIFont(name: "NotoSansKR-Medium", size: 20)
+            $0.font = UIFont.notosansMedium(size: 20)
             $0.textColor = .white
         }
         self.location.do {
             $0.textColor = UIColor.appColor(.mainColor)
-            $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
+            $0.font = UIFont.notosansMedium(size: 13)
             $0.textAlignment = .center
             $0.sizeToFit()
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 7
         }
         self.date.do {
-            $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
+            $0.font = UIFont.notosansMedium(size: 13)
             $0.textColor = UIColor.appColor(.studySubTitle)
         }
         self.managerImage.do {

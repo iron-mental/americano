@@ -70,7 +70,7 @@ protocol StudyCategoryRemoteDataManagerInputProtocol: class {
 
 protocol StudyCategoryRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-       func onCategoriesRetrieved(categories: BaseResponse<[String]>)
+       func onCategoriesRetrieved(result: BaseResponse<[String]>)
        func onError()
 }
 

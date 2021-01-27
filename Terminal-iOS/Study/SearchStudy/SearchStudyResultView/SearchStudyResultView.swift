@@ -10,14 +10,14 @@ import UIKit
 
 class SearchStudyResultView: UIViewController {
     var presenter: SearchStudyResultPresenterProtocol?
-    var keyWord: String?
+    var keyword: String?
     var studyListTableView = UITableView()
     var searchResult: [Study] = []
     var searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.returnDidTap(keyWord: keyWord!)
+        presenter?.returnDidTap(keyWord: keyword!)
         attribute()
         layout()
     }
@@ -31,7 +31,7 @@ class SearchStudyResultView: UIViewController {
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false
             $0.hidesNavigationBarDuringPresentation = false
-            $0.searchBar.text = keyWord
+            $0.searchBar.text = keyword
             navigationItem.titleView = searchController.searchBar
             $0.searchBar.delegate = self
         }
@@ -73,9 +73,7 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let keyValue = searchResult[indexPath.row].id
-        
         //후에 서버에서 member처리해주면 그때 대응
 //        guard let state = searchResult[indexPath.row].isMember else { return }
         presenter?.didTapCell(keyValue: keyValue, state: searchResult[indexPath.row].isMember!)
@@ -86,7 +84,7 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension SearchStudyResultView: SearchStudyResultViewProtocol {
+extension SearchStudyResultView: SearchStudyResultViewProtocol {    
     
     func showLoading() {
         LoadingRainbowCat.show()
@@ -99,6 +97,7 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
     }
     
     func showSearchStudyResult(result: [Study]) {
+        
         searchResult = result
         studyListTableView.reloadData()
     }

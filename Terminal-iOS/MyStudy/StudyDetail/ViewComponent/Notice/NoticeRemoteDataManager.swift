@@ -43,7 +43,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.noticeListForKey(studyID: "\(studyID)", value: valuesString))
-            .validate(statusCode: 200..<299)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

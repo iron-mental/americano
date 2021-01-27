@@ -10,7 +10,7 @@ import UIKit
 
 protocol SearchStudyResultViewProtocol {
     var presenter: SearchStudyResultPresenterProtocol? { get set }
-    var keyWord: String? { get set }
+    var keyword: String? { get set }
     //PRESENTER -> VIEW
     func showLoading()
     func hideLoading()
@@ -53,7 +53,7 @@ protocol SearchStudyResultLocalDataManagerProtocol {
 
 protocol SearchStudyResultWireFrameProtocol {
     
-    static func createSearchStudyResultModule() -> UIViewController
+    static func createSearchStudyResultModule(keyword: String) -> UIViewController
     
     //PRESENTER -> WIREFRAME
     func presentStudyDetailScreen(from view: SearchStudyResultViewProtocol, keyValue: Int, state: Bool)

@@ -11,14 +11,12 @@ import Then
 
 class StudyListView: UIViewController {
     var category: String?
-    var sort: String?
     let tableView = UITableView()
     let aligmentView = UIView()
     let lateButton = UIButton()
     let locationButton = UIButton()
     let selectedUnderline = UIView()
     let refreshControl = UIRefreshControl()
-    var enumValue: AssetsColor = .testColor
     var sortState: SortState = .new
     
     var presenter: StudyListPresenterProtocol?
@@ -46,13 +44,13 @@ class StudyListView: UIViewController {
         
         lateButton.do {
             $0.setTitle("최신", for: .normal)
-            $0.titleLabel?.font = UIFont(name: "NotoSansKR-Medium", size: 17)
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 17)
             $0.addTarget(self, action: #selector(new), for: .touchUpInside)
         }
         
         locationButton.do {
             $0.setTitle("지역", for: .normal)
-            $0.titleLabel?.font = UIFont(name: "NotoSansKR-Medium", size: 17)
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 17)
             $0.addTarget(self, action: #selector(length), for: .touchUpInside)
         }
         

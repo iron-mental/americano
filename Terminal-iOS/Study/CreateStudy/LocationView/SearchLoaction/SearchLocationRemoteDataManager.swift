@@ -28,9 +28,9 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                         } else {
                             if let addressList = JSON(value)["documents"].array {
                                 for item in addressList {
-                                    print(item["place_name"])
+                                    let address = item["road_address_name"].string!.isEmpty ? item["address_name"].string! : item["road_address_name"].string!
                                     
-                                    let item = StudyDetailLocationPost(address: item["road_address_name"].string! ,
+                                    let newItem = StudyDetailLocationPost(address: address,
                                                                     lat: Double(item["y"].string!) ?? 0,
                                                                     lng: Double(item["x"].string!) ?? 0,
                                                                     placeName: item["place_name"].string ?? nil ,
@@ -38,8 +38,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                                                                     sido: "test",
                                                                     sigungu: "Test"
                                                                     )
-                                    print("이건들어가있나?",item)
-                                    resultList.append(item)
+                                    resultList.append(newItem)
                                     
                                 }
                             }

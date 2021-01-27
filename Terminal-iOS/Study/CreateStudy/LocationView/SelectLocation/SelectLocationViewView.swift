@@ -25,10 +25,12 @@ class SelectLocationView: UIViewController {
     var mapView = NMFMapView()
     var bottomView = BottomView()
     var location: StudyDetailLocationPost?
-    var preventPlaceNameFlag = true
+    var animationFlag = true
+    var isMoving = false
     var delegate: selectLocationDelegate?
     var keyboardHeight: CGFloat = 0.0
     var bottomAnchor: NSLayoutConstraint?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,45 +39,45 @@ class SelectLocationView: UIViewController {
         bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         bottomView.detailAddress.becomeFirstResponder()
-        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)),zoomTo: 17))
+        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)), zoomTo: 17))
         location?.lng = mapView.cameraPosition.target.lng
         location?.lat = mapView.cameraPosition.target.lat
-        presenter?.getAddress(item: location!)
     }
     override func viewWillAppear(_ animated: Bool) {
-        preventPlaceNameFlag = isBeingPresented
+        animationFlag = isBeingPresented
     }
     
-    @objc func keyboardWillShow(notification:NSNotification) {
-        
+    @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
-        if preventPlaceNameFlag == false {
+        
+        if animationFlag == false {
             bottomAnchor?.constant -= keyboardHeight
             bottomAnchor?.isActive = true
             view.layoutIfNeeded()
+            view.setNeedsDisplay()
         }
         bottomView.detailAddress.becomeFirstResponder()
-        preventPlaceNameFlag = false
-        
+        animationFlag = false
     }
     
     @objc func keyboardWillHide() {
-        if preventPlaceNameFlag == false {
+        if animationFlag == false {
             bottomAnchor?.constant = 0
             view.layoutIfNeeded()
         }
     }
     
     func attribute() {
-        
-        mapView = NMFMapView(frame: view.frame)
+//        mapView = NMFMapView(frame: view.frame)
+        self.do {
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         mapView.do {
             $0.mapType = .basic
             $0.symbolScale = 0.7
@@ -121,9 +123,14 @@ class SelectLocationView: UIViewController {
         if let detailAddress = bottomView.detailAddress.text {
             location?.detailAddress = detailAddress
         }
+        
         delegate?.passLocation(location: location!)
         dismiss(animated: false)
         presentingViewController?.dismiss(animated: false)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        isMoving = true
     }
 }
 
@@ -137,9 +144,10 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
                 self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
                 location?.lng = mapView.cameraPosition.target.lng
                 location?.lat = mapView.cameraPosition.target.lat
-                    location?.category = ""
+                location?.category = ""
+                if isMoving {
                     presenter?.getAddress(item: location!)
-                
+                }
             })
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task!)

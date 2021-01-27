@@ -11,19 +11,15 @@ import Then
 import SwiftyJSON
 
 class SearchStudyView: UIViewController {
-    
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
-    let placeSearch = UIButton()
     let hotLable = UILabel()
-    let tempView = UIView()
     var searchController = UISearchController(searchResultsController: nil)
     let collectionView: UICollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +31,6 @@ class SearchStudyView: UIViewController {
     
     func attribute() {
         self.searchController.do {
-            $0.searchResultsUpdater = self
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false
             $0.hidesNavigationBarDuringPresentation = false
@@ -43,16 +38,7 @@ class SearchStudyView: UIViewController {
             $0.searchBar.delegate = self
         }
         self.view.do {
-            let event = UITapGestureRecognizer(target: self, action: #selector(backgroundTap))
-            event.cancelsTouchesInView = false
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.addGestureRecognizer(event)
-        }
-        self.placeSearch.do {
-            $0.setTitle("장소로 검색", for: .normal)
-            $0.setTitleColor(.white, for: .normal)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
-            $0.layer.cornerRadius = 10
         }
         self.hotLable.do {
             $0.text = "핫 등록 키워드"
@@ -65,9 +51,6 @@ class SearchStudyView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
         }
-        self.tempView.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
-        }
     }
     
     //나중에 옮겨야함
@@ -76,7 +59,7 @@ class SearchStudyView: UIViewController {
             .shared
             .session
             .request(TerminalRouter.hotKeyword)
-            .validate(statusCode: 200..<299)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -94,41 +77,22 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [ placeSearch, hotLable, tempView, collectionView ].forEach { self.view.addSubview($0) }
-        self.placeSearch.do {
+        [hotLable, collectionView].forEach { self.view.addSubview($0) }
+       
+        self.hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 115).isActive = true
-        }
-        self.hotLable.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.placeSearch.bottomAnchor, constant: 20).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-        }
-        self.tempView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.hotLable.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 200).isActive = true
         }
         self.collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.tempView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.tempView.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.tempView.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: self.tempView.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.hotLable.bottomAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: -10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 150).isActive = true
         }
-    }
-    
-    @objc func back() {
-        navigationController?.popViewController(animated: true)
-        navigationController?.isNavigationBarHidden = false
-    }
-    @objc func backgroundTap() {
-        self.view.endEditing(true)
     }
 }
 
@@ -165,7 +129,7 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let text = keyword[indexPath.row].word
         self.searchController.searchBar.text = text
-        presenter?.didSearchButtonClicked(keyWord: text)
+        presenter?.didSearchButtonClicked(keyword: text)
     }
     
     class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
@@ -180,7 +144,7 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
                 }
                 layoutAttribute.frame.origin.x = leftMargin
                 leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
-                maxY = max(layoutAttribute.frame.maxY , maxY)
+                maxY = max(layoutAttribute.frame.maxY, maxY)
             }
             return attributes
         }
@@ -193,12 +157,6 @@ extension SearchStudyView: SearchStudyViewProtocol {
 
 extension SearchStudyView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter?.didSearchButtonClicked(keyWord: searchBar.text!)
-    }
-}
-
-extension SearchStudyView: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-//        <#code#>
+        presenter?.didSearchButtonClicked(keyword: searchBar.text!)
     }
 }

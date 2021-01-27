@@ -8,25 +8,31 @@
 
 import UIKit
 import Then
+import SwiftKeychainWrapper
+import Kingfisher
 
 class CategoryCell: UICollectionViewCell {
     static let categoryCellID = "categoryCellID"
 
-    let category = CategoryImageView()
+    let categoryView = CategoryImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
     }
-    
+
     func setData(category: Category) {
-        self.category.image.image = category.image
-        self.category.title.text = category.name
+        /// 일단 API Call 할 때 마다 캐시 지워줌
+        KingfisherManager.shared.cache.clearCache()
+        
+        self.categoryView.title.text = category.name
+        self.categoryView.image.kf.setImage(with: URL(string: category.image)!,
+                                            options: [.requestModifier(RequestToken.token())])
     }
     
     private func layout() {
-        self.contentView.addSubview(self.category)
-        self.category.do {
+        self.contentView.addSubview(self.categoryView)
+        self.categoryView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true

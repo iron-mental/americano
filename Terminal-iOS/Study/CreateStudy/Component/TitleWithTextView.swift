@@ -12,6 +12,7 @@ class TitleWithTextView: UIView {
     var seletedCategory: String?
     var titleLabel = UILabel()
     var title: String?
+    var categoryLabel = UILabel()
     var textView = UITextView()
     
     init(title: String) {
@@ -27,16 +28,20 @@ class TitleWithTextView: UIView {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
         }
+        categoryLabel.do {
+            $0.textColor = .white
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
+        }
         textView.do {
-            $0.text = "test"
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
-            $0.dynamicFont(size: $0.font!.pointSize, weight: .regular)
+            $0.dynamicFont(size: 15, weight: .regular)
         }
     }
     
     func layout() {
-        [titleLabel, textView].forEach {
+        [titleLabel, categoryLabel, textView].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -47,6 +52,12 @@ class TitleWithTextView: UIView {
                 $0.leadingAnchor.constraint(equalTo: leadingAnchor),
                 $0.heightAnchor.constraint(equalToConstant: $0.intrinsicContentSize.height),
                 $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width)
+            ])
+        }
+        categoryLabel.do {
+            NSLayoutConstraint.activate([
+                $0.topAnchor.constraint(equalTo: titleLabel.topAnchor),
+                $0.trailingAnchor.constraint(equalTo: self.trailingAnchor)
             ])
         }
         textView.do {

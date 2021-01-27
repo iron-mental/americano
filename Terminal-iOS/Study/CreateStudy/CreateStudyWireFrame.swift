@@ -8,13 +8,13 @@
 
 import UIKit
 
-class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
+class CreateStudyWireFrame: CreateStudyWireFrameProtocol {
     
     static func createStudyViewModul(category: String, studyDetail: StudyDetail?, state: WriteStudyViewState, parentView: UIViewController?) -> UIViewController {
         
         let view = CreateStudyView()
-        let presenter = CreateStudyPresenter()
-        let interactor = CreateStudyInteractor()
+        var presenter: CreateStudyPresenterProtocol & CreateStudyInteractorOutputProtocol = CreateStudyPresenter()
+        var interactor: CreateStudyInteractorInputProtocol & CreateStudyReMoteDataManagerOutputProtocol = CreateStudyInteractor()
         let remoteDataManager = CreateStudyRemoteManager()
         let wireFrame = CreateStudyWireFrame()
         
@@ -30,8 +30,10 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocols {
         presenter.wireFrame = wireFrame
         
         interactor.presenter = presenter
-        interactor.createStudyRemoteDataManager = remoteDataManager
+        interactor.remoteDataManager = remoteDataManager
         interactor.studyInfo = studyDetail ?? nil
+        
+        remoteDataManager.interactor = interactor
         
         return view
     }

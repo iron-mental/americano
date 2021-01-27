@@ -14,15 +14,11 @@ class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol?
     
     func getUserInfo() {
-        if let userInfo = CoreDataManager.shared.getUserinfo() {
-            remoteDataManager?.getUserInfo(userID: userInfo.id)
-        }
+        remoteDataManager?.getUserInfo()
     }
     
     func getProjectList() {
-        if let userInfo = CoreDataManager.shared.getUserinfo() {
-            remoteDataManager?.getProjectList(userID: userInfo.id)
-        }
+        remoteDataManager?.getProjectList()
     }
 }
 

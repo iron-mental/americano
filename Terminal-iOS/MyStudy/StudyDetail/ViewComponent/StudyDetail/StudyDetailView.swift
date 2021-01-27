@@ -18,7 +18,7 @@ enum StudyDetailViewState: String {
     case host
     case none
     case applier
-    case rejected
+    case reject
 }
 
 class StudyDetailView: UIViewController {
@@ -85,7 +85,7 @@ class StudyDetailView: UIViewController {
         }
         joinButton.do {
             $0.tag = 0
-            if state == .none || state == .rejected {
+            if state == .none || state == .reject {
                 $0.isHidden = false
                 $0.setTitle("스터디 참여하기", for: .normal)
                 $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -112,7 +112,7 @@ class StudyDetailView: UIViewController {
             }
         }
         studyIntroduceView.do {
-            $0.contentText = ["스터디 소개",String(studyInfo?.introduce ?? "")]
+            $0.contentText = ["스터디 소개", String(studyInfo?.introduce ?? "")]
             if state == .none || state == .member {
             } else {
             }
@@ -141,12 +141,12 @@ class StudyDetailView: UIViewController {
                 detailAddress = item
             }
             $0.title.text = "장소"
-            $0.contentText = ["장소",  String(studyInfo?.location.addressName ?? "") +  detailAddress]
+            $0.contentText = ["장소", String(studyInfo?.location.addressName ?? "") +  detailAddress]
         }
         joinProgressCat.do {
             $0.addGestureRecognizer(joinProgressCatTapGesture)
             $0.isUserInteractionEnabled = false
-            if state == .none || state == .rejected {
+            if state == .none || state == .reject {
                 $0.isHidden = true
                 $0.stop()
             } else if state == .applier {
@@ -279,6 +279,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
     func showStudyDetail(with studyDetail: StudyDetail) {
         self.studyInfo = studyDetail
         userData = studyDetail.participate
+        
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
         memberView.totalMember.text = "\(userData.count) 명"
@@ -306,7 +307,7 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
         cell.setData(userInfo: userData[indexPath.row])
-        cell.nickname.text = userData[indexPath.row].nickname
+        
         return cell
     }
     
