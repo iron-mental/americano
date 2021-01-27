@@ -38,12 +38,6 @@ class StudyCell: UITableViewCell {
     }
     
     func setData(_ data: Study) {
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-            return requestBody
-        }
         
         self.mainTitle.do {
             $0.text = data.title
@@ -56,7 +50,6 @@ class StudyCell: UITableViewCell {
             $0.text = data.createdAt
         }
         self.memberCount.do {
-//            $0.text = "\(data.members!)"
             $0.text = "10명"
         }
         guard let main = data.image else {
@@ -72,13 +65,14 @@ class StudyCell: UITableViewCell {
         self.mainImage.kf.indicatorType = .activity
         self.mainImage.kf.setImage(
             with: URL(string: main),
-            options: [.requestModifier(imageDownloadRequest),
+            options: [.requestModifier(RequestToken.token()),
                       .processor(processor),
                       .scaleFactor(UIScreen.main.scale),
                       .cacheOriginalImage
             ])
         
-        self.managerImage.kf.setImage(with: URL(string: leader), options: [.requestModifier(imageDownloadRequest)])
+        self.managerImage.kf.setImage(with: URL(string: leader),
+                                      options: [.requestModifier(RequestToken.token())])
     }
     
     func attribute() {

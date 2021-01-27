@@ -23,8 +23,12 @@ class StudyCategoryRemoteManager: StudyCategoryRemoteDataManagerInputProtocol {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<[String]>.self, from: data!)
-                    self.interactor?.onCategoriesRetrieved(categories: result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[String]>.self, from: data!)
+                        self.interactor?.onCategoriesRetrieved(result: result)
+                    } catch {
+                        print(error)
+                    }
                 case .failure(let error):
                     print(error)
                 }

@@ -9,6 +9,6 @@
 import UIKit
 
 struct Category {
-    var image: UIImage
+    var image: String
     var name: String
 }

@@ -22,6 +22,7 @@ class AlertMessageView: AlertBaseUIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     override func attribute() {
         super.attribute()
         alertMessageLabel.do {
@@ -30,6 +31,7 @@ class AlertMessageView: AlertBaseUIView {
             $0.text = alertMessage
         }
     }
+    
     override func layout() {
         super.layout()
         [ alertMessageLabel ].forEach {addSubview($0)}
