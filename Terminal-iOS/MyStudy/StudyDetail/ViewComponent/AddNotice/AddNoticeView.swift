@@ -36,7 +36,7 @@ class AddNoticeView: UIViewController {
     var parentView: UIViewController?
     var bottomAnchor: NSLayoutConstraint?
     var keyboardHeight: CGFloat = 0.0
-    lazy var isEssentialFlagSege = UISegmentedControl(items: ["필독", "일반"])
+    var isEssentialFlagSege = UISegmentedControl(items: ["필독", "일반"])
     
     override func viewDidLoad() {
         attribute()
@@ -57,10 +57,11 @@ class AddNoticeView: UIViewController {
     
     func attribute() {
         self.do {
-            
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         isEssentialFlagSege.do {
+            $0.selectedSegmentIndex = 1
+            $0.selectedSegmentTintColor = UIColor.appColor(.noticeColor)
             $0.addTarget(self, action: #selector(segeIsMoving), for: .valueChanged)
         }
         dismissButton.do {
@@ -166,7 +167,6 @@ class AddNoticeView: UIViewController {
     }
     
     @objc func completeButtonDidTap() {
-        
         let newNoticePost = NoticePost(title: titleTextField.text ?? "",
                                        contents: contentTextView.text ?? "",
                                        pinned: isEssentialFlagSege.selectedSegmentIndex == 0 ? true : false)
