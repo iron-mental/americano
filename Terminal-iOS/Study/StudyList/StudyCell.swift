@@ -24,6 +24,7 @@ class StudyCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
         attribute()
         layout()
     }
@@ -84,19 +85,19 @@ class StudyCell: UITableViewCell {
         self.backgroundColor = UIColor.appColor(.terminalBackground)
         
         self.mainTitle.do {
-            $0.font = UIFont(name: "NotoSansKR-Medium", size: 20)
+            $0.font = UIFont.notosansMedium(size: 20)
             $0.textColor = .white
         }
         self.location.do {
             $0.textColor = UIColor.appColor(.mainColor)
-            $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
+            $0.font = UIFont.notosansMedium(size: 13)
             $0.textAlignment = .center
             $0.sizeToFit()
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 7
         }
         self.date.do {
-            $0.font = UIFont(name: "NotoSansKR-Medium", size: 13)
+            $0.font = UIFont.notosansMedium(size: 13)
             $0.textColor = UIColor.appColor(.studySubTitle)
         }
         self.managerImage.do {

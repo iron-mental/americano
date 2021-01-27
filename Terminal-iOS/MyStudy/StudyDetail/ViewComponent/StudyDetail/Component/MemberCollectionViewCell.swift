@@ -11,7 +11,7 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class MemberCollectionViewCell: UICollectionViewCell {
-    static  let identifier = "cell"
+    static let identifier = "cell"
     
     var profileImage = UIImageView()
     var nickname = UILabel()
@@ -41,7 +41,8 @@ class MemberCollectionViewCell: UICollectionViewCell {
             $0.layer.borderColor = UIColor.lightGray.cgColor
         }
         nickname.do {
-            $0.text = "테스트"
+            $0.font = UIFont.notosansMedium(size: 10)
+            $0.textColor = .white
         }
     }
     

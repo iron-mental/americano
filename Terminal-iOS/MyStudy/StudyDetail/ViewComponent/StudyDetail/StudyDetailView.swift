@@ -112,7 +112,7 @@ class StudyDetailView: UIViewController {
             }
         }
         studyIntroduceView.do {
-            $0.contentText = ["스터디 소개",String(studyInfo?.introduce ?? "")]
+            $0.contentText = ["스터디 소개", String(studyInfo?.introduce ?? "")]
             if state == .none || state == .member {
             } else {
             }
@@ -141,7 +141,7 @@ class StudyDetailView: UIViewController {
                 detailAddress = item
             }
             $0.title.text = "장소"
-            $0.contentText = ["장소",  String(studyInfo?.location.addressName ?? "") +  detailAddress]
+            $0.contentText = ["장소", String(studyInfo?.location.addressName ?? "") +  detailAddress]
         }
         joinProgressCat.do {
             $0.addGestureRecognizer(joinProgressCatTapGesture)
@@ -307,7 +307,7 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
         cell.setData(userInfo: userData[indexPath.row])
-        cell.nickname.text = userData[indexPath.row].nickname
+        
         return cell
     }
     

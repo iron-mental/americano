@@ -76,21 +76,13 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
             }
             
             /// 키값만 내려오는 배열
-            for data in resultArr {
-                if let paing = data.isPaging {
-                    if paing {
-                        studyKeyArr.append(data)
-                    }
-                }
+            for study in resultArr where study.isPaging! {
+                studyKeyArr.append(study)
             }
             
             /// 모든 데이터가 내려오는 배열
-            for data in resultArr {
-                if let paing = data.isPaging {
-                    if !paing {
-                        studyArr.append(data)
-                    }
-                }
+            for study in resultArr where !study.isPaging! {
+                studyArr.append(study)
             }
         }
         

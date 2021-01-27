@@ -24,7 +24,7 @@ protocol SearchStudyPresenterProtocol {
     var wireFrame: SearchStudyWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func didSearchButtonClicked(keyWord: String)
+    func didSearchButtonClicked(keyword: String)
 }
 
 protocol SearchStudyRemoteDataManagerProtocol {
@@ -39,5 +39,5 @@ protocol SearchStudyWireFrameProtocol {
     static func createSearchStudyModule() -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func goToSearchStudyRestult(from view: SearchStudyViewProtocol, keyWord: String)
+    func goToSearchStudyRestult(from view: SearchStudyViewProtocol, keyword: String)
 }
