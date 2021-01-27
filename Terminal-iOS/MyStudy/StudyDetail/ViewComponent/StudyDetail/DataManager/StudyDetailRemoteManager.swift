@@ -19,7 +19,7 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.studyDetail(studyID: studyID))
-            .validate(statusCode: 200..<299)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -43,7 +43,7 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.applyStudy(studyID: String(studyID), message: params))
-            .validate(statusCode: 200..<299)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

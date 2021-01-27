@@ -34,7 +34,7 @@ final class BaseInterceptor: RequestInterceptor {
             return
         }
         
-        print("status:",statusCode)
+        print("status:", statusCode)
         
         switch statusCode {
         case 200...299:
@@ -75,6 +75,8 @@ final class BaseInterceptor: RequestInterceptor {
                                 print("엑세스 토큰 갱신 여부 :", result)
                                 completion(result)
                             }
+                        } else {
+                            completion(false)
                         }
                     } catch {
                         

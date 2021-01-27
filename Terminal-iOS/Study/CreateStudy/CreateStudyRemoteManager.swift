@@ -54,7 +54,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                 multipartFormData.append(imageData!, withName: "image", mimeType: "image/jpeg")
                 
             }, with: TerminalRouter.studyCreate(study: params))
-            .validate(statusCode: 200..<503)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -68,7 +68,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     } catch {
                         
                     }
-                case .failure(_):
+                case .failure:
                     //이 텍스트를 프레젠터에서 넣어줘야될지 음 정하면댈듯
                     
                     self.interactor?.createStudyInvalid(message: "서버의 연결이 불안정합니다")

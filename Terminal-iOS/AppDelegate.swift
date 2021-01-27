@@ -48,19 +48,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             
             /// 유저정보 조회를 통해서 리프레쉬 토큰 유효성 검사
             let userID = KeychainWrapper.standard.string(forKey: "userID")
+            
             TerminalNetworkManager
                 .shared
                 .session
                 .request(TerminalRouter.userInfo(id: userID!))
+                .validate()
                 .responseJSON { response in
                     switch response.result {
                     case .success:
-                        if let status = response.response?.statusCode {
-                            if status == 401 {
-                                let howView = UINavigationController(rootViewController: home)
-                                self.window?.rootViewController = howView
-                            }
-                        }
+                        print("리프레쉬 유효성 검사 성공")
                     case .failure(let err):
                         print("실패:", err)
                     }
@@ -71,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { (success, error) in
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if let error = error {
                 print(error)
             }
@@ -143,7 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         let pushToken = KeychainWrapper.standard.set(deviceTokenString, forKey: "pushToken")
-        print("pushToken 성공여부:",pushToken)
+        print("pushToken 성공여부:", pushToken)
         print("pushToken:",KeychainWrapper.standard.string(forKey: "pushToken")!)
     }
     
@@ -157,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
          error conditions that could cause the creation of the store to fail.
          */
         let container = NSPersistentContainer(name: "TerminalCoreData")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { storeDescription, error in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -192,4 +189,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
 }
-
