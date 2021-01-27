@@ -29,13 +29,15 @@ class AddNoticeView: UIViewController {
     var state: AddNoticeState?
     var dismissButton = UIButton()
     var pinButton = UIButton()
+    var titleGuideLabel = UILabel()
     var titleTextField = UITextField()
+    var contentGuideLabel = UILabel()
     var contentTextView = UITextView()
     var completeButton = UIButton()
     var parentView: UIViewController?
     var bottomAnchor: NSLayoutConstraint?
     var keyboardHeight: CGFloat = 0.0
-    
+    lazy var tapSege = UISegmentedControl(items: ["필독", "일반"])
     override func viewDidLoad() {
         attribute()
         layout()
@@ -44,8 +46,8 @@ class AddNoticeView: UIViewController {
     }
     
     @objc func keyboardWillShow(notification:NSNotification) {
-        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
         bottomAnchor?.constant = -(keyboardHeight + 15)
@@ -58,7 +60,7 @@ class AddNoticeView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         dismissButton.do {
-            $0.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
             $0.addTarget(self, action: #selector(dismissButtonTap), for: .touchUpInside)
         }
         pinButton.do {
@@ -67,6 +69,13 @@ class AddNoticeView: UIViewController {
             $0.layer.cornerRadius = 3
             $0.layer.masksToBounds = true
             $0.addTarget(self, action: #selector(pinButtonDidTap(_: )), for: .touchUpInside)
+        }
+        titleGuideLabel.do {
+            $0.text = "제목"
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.textColor = .white
+            $0.dynamicFont(fontSize: 15, weight: .bold)
+            $0.textAlignment = .center
         }
         titleTextField.do {
             $0.placeholder = "제목을 입력하세요"
@@ -77,6 +86,13 @@ class AddNoticeView: UIViewController {
             $0.layer.masksToBounds = true
             $0.delegate = self
             $0.addLeftPadding()
+        }
+        contentGuideLabel.do {
+            $0.text = "내용"
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.textColor = .white
+            $0.dynamicFont(fontSize: 15, weight: .bold)
+            $0.textAlignment = .center
         }
         contentTextView.do {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
@@ -95,26 +111,48 @@ class AddNoticeView: UIViewController {
     }
     
     func layout() {
-        [dismissButton, pinButton, titleTextField, contentTextView, completeButton].forEach { view.addSubview($0) }
+        [tapSege, dismissButton, pinButton, titleGuideLabel, titleTextField, contentGuideLabel, contentTextView, completeButton].forEach { view.addSubview($0) }
+        tapSege.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: dismissButton.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = truew
+        }
+        dismissButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertHeigt(value: 10)).isActive = true
+        }
         pinButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 41)).isActive = true
+            $0.centerYAnchor.constraint(equalTo: dismissButton.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 40)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
         }
         titleTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: pinButton.centerYAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: pinButton.bottomAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
             $0.leadingAnchor.constraint(equalTo: pinButton.trailingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Terminal.convertHeigt(value: -13)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+        }
+        titleGuideLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: titleTextField.centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: titleTextField.leadingAnchor).isActive = true
+        }
+        contentGuideLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: titleTextField.leadingAnchor).isActive = true
         }
         contentTextView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertHeigt(value: -13)).isActive = true
+            $0.topAnchor.constraint(equalTo: contentGuideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
             $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: Terminal.convertHeigt(value: -9)).isActive = true
         }
         bottomAnchor = completeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
