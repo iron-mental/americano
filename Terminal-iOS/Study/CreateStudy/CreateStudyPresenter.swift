@@ -10,7 +10,7 @@ import UIKit
 
 class CreateStudyPresenter: CreateStudyPresenterProtocol {
     var view: CreateStudyViewProtocol?
-    var interactor: CreateStudyInteractorProtocol?
+    var interactor: CreateStudyInteractorInputProtocol?
     var wireFrame: CreateStudyWireFrameProtocol?
     
     func viewDidLoad() {
@@ -25,6 +25,10 @@ class CreateStudyPresenter: CreateStudyPresenterProtocol {
         interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)
     }
     
+    
+}
+
+extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {
     func studyInfoInvalid(message: String) {
         LoadingRainbowCat.hide()
         view?.studyInfoInvalid(message: message)

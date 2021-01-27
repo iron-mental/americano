@@ -15,7 +15,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
     
     func postStudy(study: StudyDetailPost) {
         var params: [String: Any] = [:]
-        
+
         if let location = study.location {
             params = [
                 "category": study.category,

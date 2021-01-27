@@ -21,7 +21,7 @@ class BottomView: UIView {
     
     func attribute() {
         self.do {
-            $0.backgroundColor = .systemBackground
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         address.do {
             $0.text = "주소가 들어갈 공간이쥬"
@@ -32,7 +32,7 @@ class BottomView: UIView {
         completeButton.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor.appColor(.mainColor)
-            $0.layer.cornerRadius = 3
+            $0.layer.cornerRadius = 5
             $0.layer.masksToBounds = true
         }
     }
@@ -57,9 +57,9 @@ class BottomView: UIView {
         completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Terminal.convertHeigt(value: 27)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Terminal.convertHeigt(value: 40)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 324)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
         }
     }
     

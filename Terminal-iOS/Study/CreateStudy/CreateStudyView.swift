@@ -23,6 +23,9 @@ class CreateStudyView: BaseEditableStudyDetailView {
         self.button.do {
             $0.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         }
+        self.accessoryCompletButton.do {
+            $0.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
+        }
     }
 
     override func didLocationViewClicked() {
