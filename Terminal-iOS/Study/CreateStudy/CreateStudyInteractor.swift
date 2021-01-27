@@ -14,10 +14,6 @@ class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
     var studyInfo: StudyDetail?
     
     func nullCheck(study: StudyDetailPost) -> String {
-        if let evernote = study.snsEvernote {
-            print(evernote)
-        }
-        
         if study.category.isEmpty {
             return "카테고리가 지정되어있지 않습니다."
         } else if study.title.isEmpty {

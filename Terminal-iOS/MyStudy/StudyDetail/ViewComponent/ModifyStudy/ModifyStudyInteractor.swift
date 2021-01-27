@@ -15,17 +15,29 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
     
     func nullCheck(study: StudyDetailPost) -> String {
         if study.category.isEmpty {
-            return "카테고리 비어있음"
+            return "카테고리가 지정되어있지 않습니다."
         } else if study.title.isEmpty {
-            return "제목 비어있음"
+            return "제목을 입력해주세요"
         } else if study.introduce.isEmpty {
-            return "소개 비어있음"
+            return "소개를 입력해주세요"
         } else if study.progress!.isEmpty {
-            return "진행 비어있음"
+            return "진행을 입력해주세요"
         } else if study.studyTime!.isEmpty {
-            return "시간 비어있음"
+            return "시간을 입력해주세요"
         } else if study.location == nil {
             return "장소를 선택해주세요"
+        } else if let notion = study.snsNotion {
+            if !notion.notionCheck() {
+                return "Notion URL이 정확하지 않습니다."
+            } else if let evernote = study.snsEvernote {
+                if !evernote.evernoteCheck() {
+                    return "Evernote URL이 정확하지 않습니다."
+                } else if let web = study.snsWeb {
+                    if !web.webCheck() {
+                        return "Web URL이 정확하지 않습니다."
+                    }
+                }
+            }
         } else if let location = study.location {
             if location.lat.isZero {
                 return "장소를 선택해주세요 - latitude error"
@@ -38,10 +50,8 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
             } else if location.address.isEmpty {
                 return "장소를 선택해주세요 - address 비어있음"
             }
-        } else {
-            return "성공"
         }
-        return "실패요"
+        return "성공"
     }
     
     func duplicateCheck(targetStudy: StudyDetailPost) -> StudyDetailPost{
@@ -59,12 +69,9 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
         return resultStudy
     }
     func putStudyInfo(studyID: Int, study: StudyDetailPost) {
-        
         print(nullCheck(study: study))
         if nullCheck(study: study) == "성공" {
-            
             remoteDataManager?.putStudyInfo(studyID: studyID, study: duplicateCheck(targetStudy: study))
-            
         } else {
             print("ModifyStudyInteractor에서 생긴 에러")
         }
