@@ -8,9 +8,16 @@
 
 import Foundation
 
-// 알림에 대한 구조체
-struct Noti {
-    let title: String
-    let explain: String
-    let action: String
+// 알림에 대한 모델
+
+struct Noti: Codable {
+    let id, studyID: Int
+    let pushEvent, message, createdAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case studyID
+        case pushEvent, message
+        case createdAt
+    }
 }
