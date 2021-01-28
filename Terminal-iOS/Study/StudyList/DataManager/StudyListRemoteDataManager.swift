@@ -84,10 +84,15 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .trimmingCharacters(in: ["]"])
                 .removeWhitespace()
             
+            let params: [String: Any] = [
+                "sort": "new",
+                "values": key
+            ]
+            
             TerminalNetworkManager
                 .shared
                 .session
-                .request(TerminalRouter.studyListForKey(value: key))
+                .request(TerminalRouter.studyListForKey(key: params))
                 .validate()
                 .responseJSON { response in
                     switch response.result {
@@ -117,10 +122,15 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .trimmingCharacters(in: ["]"])
                 .removeWhitespace()
             
+            let params: [String: Any] = [
+                "sort": "length",
+                "values": key
+            ]
+            
             TerminalNetworkManager
                 .shared
                 .session
-                .request(TerminalRouter.studyListForKey(value: key))
+                .request(TerminalRouter.studyListForKey(key: params))
                 .validate()
                 .responseJSON { response in
                     switch response.result {
