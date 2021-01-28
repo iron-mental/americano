@@ -42,7 +42,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
             }
         }
         
-        let imageData = study.image!.jpegData(compressionQuality: 1.0)
+        
         TerminalNetworkManager
             .shared
             .session
@@ -50,9 +50,11 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                 for (key, value) in params {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
-                
-                multipartFormData.append(imageData!, withName: "image", mimeType: "image/jpeg")
-                
+                if let image = study.image {
+                    if let imageData = image.jpegData(compressionQuality: 1.0) {
+                        multipartFormData.append(imageData, withName: "image", fileName: "\(image)" , mimeType: "image/jpeg")
+                    }
+                }
             }, with: TerminalRouter.studyCreate(study: params))
             .validate()
             .responseJSON { response in

@@ -70,6 +70,9 @@ extension CreateStudyView: CreateStudyViewProtocol {
     }
     
     func studyInfoValid(studyID: Int, message: String) {
-        showToast(controller: self, message: message, seconds: 1)
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+        }
+        
     }
 }

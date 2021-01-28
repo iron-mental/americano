@@ -235,6 +235,8 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         userList = (VCArr[1] as! StudyDetailView).userData
         attribute()
         layout()
+        LoadingRainbowCat.hide()
+        view.layoutIfNeeded()
     }
     
     func showLeaveStudyComplete() {

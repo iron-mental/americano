@@ -163,6 +163,7 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
     }
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
         print(location?.placeName)
+        
     }
 }
 

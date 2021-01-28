@@ -14,52 +14,63 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
     var interactor: ModifyStudyRemoteDataManagerOutputProtocol?
     
     func putStudyInfo(studyID: Int, study: StudyDetailPost) {
-        
-        let params: [String: String] = [
-            "category" : study.category,
-            "title" : study.title,
-            "introduce" : study.introduce,
-            "progress" : study.progress!,
-            "study_time" : study.studyTime!,
-            "latitude" : "\(study.location?.lat)",
-            "longitude" : "\(study.location?.lng)",
-            "sido" : "\(study.location?.sido)",
-            "sigungu" : "\(study.location?.sigungu)",
-            "address_name" : study.location?.address ?? "",
-            "location_detail" : (study.location?.detailAddress)!,
-            "place_name" : (study.location?.placeName)!,
-            "sns_notion" : study.snsNotion!,
-            "sns_evernote" : study.snsEvernote!,
-            "sns_web" : study.snsWeb!,
+        var params: [String: Any] = [:]
+        params = [
+            "category": study.category,
+            "introduce": study.introduce!,
+            "progress": study.progress!,
+            "study_time": study.studyTime!,
+            "sns_notion": study.snsNotion!,
+            "sns_evernote": study.snsEvernote!,
+            "sns_web": study.snsWeb!
         ]
+        
+        if let title = study.title {
+            params["title"] = title
+        }
+        if let location = study.location {
+            params["address"] = location.address
+            params["latitude"] = location.lat
+            params["longitude"] = location.lng
+            params["sido"] = location.sido
+            params["sigungu"] = location.sigungu
+            if let detailAddress = location.detailAddress {
+                if !detailAddress.isEmpty {
+                    params["location_detail"] = detailAddress
+                }
+            }
+            if let placeName =  location.placeName {
+                params["place_name"] = placeName
+            }
+        }
         
         TerminalNetworkManager
             .shared
             .session
             .upload(multipartFormData: { multipartFormData in
                 for (key, value) in params {
-                    if value != nil && value != "" && value != "nil" && value != "same" {
-                        
-                        multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
-                    }
+                    multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
                 if let image = study.image {
-                    var imageData = image.jpegData(compressionQuality: 1.0)
-                    multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
+                    if let imageData = image.jpegData(compressionQuality: 1.0) {
+                        multipartFormData.append(imageData, withName: "image", fileName: "\(image)" , mimeType: "image/jpeg")
+                    }
                 }
-                
             }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)", study: params))
             .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    print(JSON(value))
-                    
-                    
-                    break
-                case .failure(let err):
-                    
-                    break
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        guard let message = result.message else { return }
+                        self.interactor?.putStudyInfoResult(result: result.result, message: message)
+                    } catch {
+                        self.interactor?.putStudyInfoResult(result: false, message: "실패하였슴")
+                    }
+                case .failure(let err): break
                 }
             }
     }

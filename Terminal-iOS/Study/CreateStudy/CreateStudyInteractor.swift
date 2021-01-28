@@ -14,15 +14,11 @@ class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
     var studyInfo: StudyDetail?
     
     func nullCheck(study: StudyDetailPost) -> String {
-        if let evernote = study.snsEvernote {
-            print(evernote)
-        }
-        
         if study.category.isEmpty {
             return "카테고리가 지정되어있지 않습니다."
-        } else if study.title.isEmpty {
+        } else if study.title!.isEmpty {
             return "제목을 입력해주세요"
-        } else if study.introduce.isEmpty {
+        } else if study.introduce!.isEmpty {
             return "소개를 입력해주세요"
         } else if study.progress!.isEmpty {
             return "진행을 입력해주세요"
@@ -61,9 +57,7 @@ class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?) {
         let nullCheckResult = nullCheck(study: study)
         if nullCheckResult == "성공" {
-            
             remoteDataManager?.postStudy(study: study)
-            
         } else {
             presenter?.studyInfoInvalid(message: nullCheckResult)
         }
