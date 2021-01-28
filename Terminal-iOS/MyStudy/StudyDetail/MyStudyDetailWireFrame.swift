@@ -45,7 +45,6 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
     func goToEditStudy(study: StudyDetail, parentView: UIViewController) {
         let view = ModifyStudyWireFrame.createModifyStudyModule(study: study, parentView: parentView)
         parentView.navigationController?.pushViewController(view, animated: true)
-//        parentView.present(view, animated: true)
     }
     
     func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController) {
