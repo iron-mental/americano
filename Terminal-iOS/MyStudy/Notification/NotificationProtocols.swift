@@ -11,6 +11,7 @@ import UIKit
 protocol NotificationViewProtocol: class {
     var presenter: NotificationPresenterProtocol? { get set }
     
+    func showNotiList(notiList: [Noti])
 }
 
 protocol NotificationPresenterProtocol: class {
@@ -19,17 +20,20 @@ protocol NotificationPresenterProtocol: class {
     var wireFrame: NotificationWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
+    func viewDidLoad()
 }
 
 protocol NotificationInteractorInputProtocol: class {
-    var presenter: NotificationPresenterProtocol? { get set }
+    var presenter: NotificationInteractorOutputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
+    func retrieveAlert()
 }
 
 protocol NotificationInteractorOutputProtocol: class {
     
     // INTERACTOR -> PRESENTER
+    func didRetrievedAlert(result: [Noti]?)
 }
 
 protocol NotificationWireFrameProtocol: class {

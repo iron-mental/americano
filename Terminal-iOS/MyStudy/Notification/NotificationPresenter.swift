@@ -13,8 +13,20 @@ class NotificationPresenter: NotificationPresenterProtocol {
     var interactor: NotificationInteractorInputProtocol?
     var wireFrame: NotificationWireFrameProtocol?
     
+    func viewDidLoad() {
+        interactor?.retrieveAlert()
+    }
 }
 
 extension NotificationPresenter: NotificationInteractorOutputProtocol {
-   
+    func didRetrievedAlert(result: [Noti]?) {
+        guard let notiList = result else {
+            if let view = self.view as? NotificationView {
+                view.showToast(controller: view, message: "알림 요청 실패", seconds: 1)
+            }
+            return
+        }
+        
+        view?.showNotiList(notiList: notiList)
+    }
 }
