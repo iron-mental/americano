@@ -19,14 +19,7 @@ class NotificationPresenter: NotificationPresenterProtocol {
 }
 
 extension NotificationPresenter: NotificationInteractorOutputProtocol {
-    func didRetrievedAlert(result: [Noti]?) {
-        guard let notiList = result else {
-            if let view = self.view as? NotificationView {
-                view.showToast(controller: view, message: "알림 요청 실패", seconds: 1)
-            }
-            return
-        }
-        
-        view?.showNotiList(notiList: notiList)
+    func onRetrievedAlert(result: [Noti]) {
+        view?.showNotiList(notiList: result)
     }
 }

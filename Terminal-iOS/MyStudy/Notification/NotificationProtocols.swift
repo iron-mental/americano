@@ -25,6 +25,7 @@ protocol NotificationPresenterProtocol: class {
 
 protocol NotificationInteractorInputProtocol: class {
     var presenter: NotificationInteractorOutputProtocol? { get set }
+    var remoteDataManager: NotificationRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
     func retrieveAlert()
@@ -33,9 +34,19 @@ protocol NotificationInteractorInputProtocol: class {
 protocol NotificationInteractorOutputProtocol: class {
     
     // INTERACTOR -> PRESENTER
-    func didRetrievedAlert(result: [Noti]?)
+    func onRetrievedAlert(result: [Noti])
 }
 
 protocol NotificationWireFrameProtocol: class {
     static func createModule() -> UIViewController
+}
+
+protocol NotificationRemoteDataManagerInputProtocol: class {
+    var interactor: NotificationRemoteDataManagerOutputProtocol? { get set }
+    
+    func retrieveAlert()
+}
+
+protocol NotificationRemoteDataManagerOutputProtocol: class {
+    func onRetrievedAlert(result: BaseResponse<[Noti]>)
 }
