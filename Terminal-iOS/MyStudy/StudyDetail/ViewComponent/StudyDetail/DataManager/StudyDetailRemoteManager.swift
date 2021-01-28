@@ -13,7 +13,6 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
     
      func getStudyDetail(studyID: String, completionHandler: @escaping (StudyDetail) -> ()) {
-        
         TerminalNetworkManager
             .shared
             .session

@@ -15,12 +15,12 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
     
     func postStudy(study: StudyDetailPost) {
         var params: [String: Any] = [:]
-
+        
         if let location = study.location {
             params = [
                 "category": study.category,
-                "title": study.title,
-                "introduce": study.introduce,
+                "title": study.title!,
+                "introduce": study.introduce!,
                 "progress": study.progress!,
                 "study_time": study.studyTime!,
                 "sns_notion": study.snsNotion!,
@@ -42,7 +42,6 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
             }
         }
         
-        
         TerminalNetworkManager
             .shared
             .session
@@ -51,8 +50,11 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
                 if let image = study.image {
-                    if let imageData = image.jpegData(compressionQuality: 1.0) {
-                        multipartFormData.append(imageData, withName: "image", fileName: "\(image)" , mimeType: "image/jpeg")
+                    if let imageData = image.jpegData(compressionQuality: 0.1) {
+                        multipartFormData.append(imageData,
+                                                 withName: "image",
+                                                 fileName: "\(image).jpg" ,
+                                                 mimeType: "image/jpeg")
                     }
                 }
             }, with: TerminalRouter.studyCreate(study: params))
@@ -70,7 +72,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     } catch {
                         
                     }
-                case .failure:
+                case .failure(let err):
                     //이 텍스트를 프레젠터에서 넣어줘야될지 음 정하면댈듯
                     
                     self.interactor?.createStudyInvalid(message: "서버의 연결이 불안정합니다")

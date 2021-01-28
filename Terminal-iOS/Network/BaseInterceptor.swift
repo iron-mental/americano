@@ -37,7 +37,7 @@ final class BaseInterceptor: RequestInterceptor {
         print("status:", statusCode)
         
         switch statusCode {
-        case 200...299:
+        case 200...299, 500, 400, 413:
             completion(.doNotRetry)
         case 401, 403:
             if request.retryCount < retryLimit {

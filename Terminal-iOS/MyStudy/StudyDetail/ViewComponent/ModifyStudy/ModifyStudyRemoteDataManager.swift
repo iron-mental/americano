@@ -44,6 +44,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             }
         }
         
+        
         TerminalNetworkManager
             .shared
             .session
@@ -52,8 +53,11 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
                 if let image = study.image {
-                    if let imageData = image.jpegData(compressionQuality: 1.0) {
-                        multipartFormData.append(imageData, withName: "image", fileName: "\(image)" , mimeType: "image/jpeg")
+                    if let imageData = image.jpegData(compressionQuality: 0.1) {
+                        multipartFormData.append(imageData,
+                                                 withName: "image",
+                                                 fileName: "testImage.jpg",
+                                                 mimeType: "image/jpeg")
                     }
                 }
             }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)", study: params))
@@ -61,6 +65,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
@@ -76,4 +81,3 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             }
     }
 }
-
