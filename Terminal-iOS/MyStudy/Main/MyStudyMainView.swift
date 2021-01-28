@@ -142,9 +142,7 @@ class MyStudyMainView: UIViewController {
         alarmButton.badgeLabel.isHidden = false
         tempCountForBadge += 1
         alarmButton.badgeLabel.text = "\(tempCountForBadge)"
-        let view = NotificationView()
-        view.navigationController?.navigationBar.tintColor = UIColor.appColor(.terminalBackground)
-        self.navigationController?.pushViewController(view, animated: true)
+        presenter?.showAlert()
     }
     
     @objc func editDoneButtonAction() {
