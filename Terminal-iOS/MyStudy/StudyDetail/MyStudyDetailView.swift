@@ -49,8 +49,8 @@ class MyStudyDetailView: UIViewController {
     }
     
     func attribute() {
-        if let firstVC = VCArr.first{
-            childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+        if let firstVC = VCArr.first {
+            childPageView.setViewControllers([firstVC], direction: .forward, animated: true)
         }
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
@@ -116,7 +116,7 @@ class MyStudyDetailView: UIViewController {
     func goDetailPage() {
         tapSege.selectedSegmentIndex = 1
         UIView.animate(withDuration: 0.2) {
-            self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(1), y: 0)
+            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
         }
         self.childPageView.setViewControllers([VCArr[1]], direction: .forward, animated: false, completion: nil)
         self.getPushEvent = false
@@ -133,7 +133,7 @@ class MyStudyDetailView: UIViewController {
         let selectedIndex = sender.selectedSegmentIndex
         
         UIView.animate(withDuration: 0.2) {
-            self.selectedUnderLine.transform = CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
+            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
         }
         
         // PageView paging
@@ -145,7 +145,7 @@ class MyStudyDetailView: UIViewController {
         if pageBeforeIndex < nextPage {
             let nextVC = currentView[nextPage]
             self.childPageView.setViewControllers([nextVC], direction: .forward, animated: true)
-        } else if pageBeforeIndex > nextPage{
+        } else if pageBeforeIndex > nextPage {
             let prevVC = currentView[nextPage]
             self.childPageView.setViewControllers([prevVC], direction: .reverse, animated: true)
         }
@@ -208,7 +208,8 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = VCArr.firstIndex(of: viewController), index < (VCArr.count - 1) else { return nil }
+        guard let index = VCArr.firstIndex(of: viewController),
+              index < (VCArr.count - 1) else { return nil }
         let nextIndex = index + 1
         return VCArr[nextIndex]
     }
@@ -221,7 +222,7 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
                 self.tapSege.selectedSegmentIndex = viewControllerIndex
                 UIView.animate(withDuration: 0.2) {
                     self.selectedUnderLine.transform =
-                        CGAffineTransform(translationX:self.view.frame.width / 3 * CGFloat(viewControllerIndex), y: 0)
+                        CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(viewControllerIndex), y: 0)
                 }
             }
         }
@@ -230,16 +231,22 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
     func setting() {
-        authority = (VCArr[1] as! StudyDetailViewProtocol).state
-        (VCArr[0] as! NoticeView).state = (VCArr[1] as! StudyDetailViewProtocol).state
-        userList = (VCArr[1] as! StudyDetailView).userData
+        if let studyDetailView = VCArr[1] as? StudyDetailView,
+           let noticeView = VCArr[0] as? NoticeView {
+            self.authority = studyDetailView.state
+            noticeView.state = studyDetailView.state
+            self.userList = studyDetailView.userData
+        }
+        
         attribute()
         layout()
     }
     
     func showLeaveStudyComplete() {
         navigationController?.popViewController(animated: true)
-        (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
+        if let view = navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
+            view.presenter?.viewDidLoad()
+        }
     }
     
     func showLeaveStudyFailed(message: String) {
@@ -249,7 +256,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     
     func showDeleteStudyComplete() {
         navigationController?.popViewController(animated: true)
-        (navigationController?.viewControllers[0] as! MyStudyMainViewProtocol).presenter?.viewDidLoad()
+        if let view = navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
+            view.presenter?.viewDidLoad()
+        }
     }
     
     func showDeleteStudyFailed(message: String) {

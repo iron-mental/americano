@@ -44,7 +44,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     }
                 }
                 if let image = study.image {
-                    var imageData = image.jpegData(compressionQuality: 1.0)
+                    let imageData = image.jpegData(compressionQuality: 1.0)
                     multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
                 }
                 
@@ -54,14 +54,9 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                 switch response.result {
                 case .success(let value):
                     print(JSON(value))
-                    
-                    
-                    break
                 case .failure(let err):
-                    
                     break
                 }
             }
     }
 }
-

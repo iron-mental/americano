@@ -38,6 +38,7 @@
 		A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */; };
 		A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */; };
 		A521DDF7252F107A00F83DB3 /* ProfileDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */; };
+		A53072B625C2A94600997E96 /* NotificationRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53072B525C2A94600997E96 /* NotificationRemoteDataManager.swift */; };
 		A53613B2257E6DEE0001ABCC /* SetRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */; };
 		A53A2B6E25B6BBA80002D3A0 /* UserWithdrawalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B6D25B6BBA80002D3A0 /* UserWithdrawalView.swift */; };
 		A53A2B7325B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53A2B7225B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift */; };
@@ -268,7 +269,6 @@
 		CCAF0FDF2533034B0060A2F6 /* MyStudyMainRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FDE2533034B0060A2F6 /* MyStudyMainRemoteDataManager.swift */; };
 		CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FE2253303690060A2F6 /* MyStudyMainLocalDataManager.swift */; };
 		CCAF0FE6253303770060A2F6 /* MyStudyMainWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FE5253303770060A2F6 /* MyStudyMainWireFrame.swift */; };
-		CCB139AF2557EA0600410184 /* TempMyStudyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139AE2557EA0600410184 /* TempMyStudyList.swift */; };
 		CCB139CC2559289900410184 /* IntroProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139CB2559289900410184 /* IntroProtocols.swift */; };
 		CCB139CF25592D8300410184 /* IntroPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139CE25592D8300410184 /* IntroPresenter.swift */; };
 		CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D225592DCF00410184 /* IntroInteractor.swift */; };
@@ -395,6 +395,7 @@
 		A521DDF0252F0C9500F83DB3 /* ProfileDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailInteractor.swift; sourceTree = "<group>"; };
 		A521DDF3252F0D6300F83DB3 /* ProfileDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailPresenter.swift; sourceTree = "<group>"; };
 		A521DDF6252F107A00F83DB3 /* ProfileDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailWireFrame.swift; sourceTree = "<group>"; };
+		A53072B525C2A94600997E96 /* NotificationRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRemoteDataManager.swift; sourceTree = "<group>"; };
 		A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetRemoteManager.swift; sourceTree = "<group>"; };
 		A53A2B6D25B6BBA80002D3A0 /* UserWithdrawalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalView.swift; sourceTree = "<group>"; };
 		A53A2B7225B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserWithdrawalPresenter.swift; sourceTree = "<group>"; };
@@ -627,7 +628,6 @@
 		CCAF0FDE2533034B0060A2F6 /* MyStudyMainRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCAF0FE2253303690060A2F6 /* MyStudyMainLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainLocalDataManager.swift; sourceTree = "<group>"; };
 		CCAF0FE5253303770060A2F6 /* MyStudyMainWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainWireFrame.swift; sourceTree = "<group>"; };
-		CCB139AE2557EA0600410184 /* TempMyStudyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempMyStudyList.swift; sourceTree = "<group>"; };
 		CCB139CB2559289900410184 /* IntroProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroProtocols.swift; sourceTree = "<group>"; };
 		CCB139CE25592D8300410184 /* IntroPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPresenter.swift; sourceTree = "<group>"; };
 		CCB139D225592DCF00410184 /* IntroInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroInteractor.swift; sourceTree = "<group>"; };
@@ -1048,6 +1048,7 @@
 				A5D4B8C625C18753008403DC /* NotificationInteractor.swift */,
 				A5D4B8CB25C1875D008403DC /* NotificationWireFrame.swift */,
 				A5D4B8D025C18771008403DC /* NotificationProtocols.swift */,
+				A53072B525C2A94600997E96 /* NotificationRemoteDataManager.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -1456,7 +1457,6 @@
 				CCAF0FE5253303770060A2F6 /* MyStudyMainWireFrame.swift */,
 				CCAF0FD8253300600060A2F6 /* MyStudyMainProtocols.swift */,
 				CC99A0CA25342D400027BA24 /* Component */,
-				CCB139AE2557EA0600410184 /* TempMyStudyList.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1899,6 +1899,7 @@
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CC563950259CADBA00DA1479 /* SearchStudyWireFrame.swift in Sources */,
 				CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */,
+				A53072B625C2A94600997E96 /* NotificationRemoteDataManager.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				A5C7B90525ADB23000016D5B /* LocationModifyView.swift in Sources */,
 				A58148F925910EB400BF3C2A /* SNSModifyInteractor.swift in Sources */,
@@ -1956,7 +1957,6 @@
 				A521DDF1252F0C9600F83DB3 /* ProfileDetailInteractor.swift in Sources */,
 				A5686A532525DE13005990DC /* Setting.swift in Sources */,
 				CC563967259CB6F700DA1479 /* SearchStudyResultProtocols.swift in Sources */,
-				CCB139AF2557EA0600410184 /* TempMyStudyList.swift in Sources */,
 				A581494625912DE600BF3C2A /* CareerModifyInteractor.swift in Sources */,
 				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
 				CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */,

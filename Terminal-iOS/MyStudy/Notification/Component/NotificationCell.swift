@@ -22,10 +22,8 @@ class NotificationCell: UITableViewCell {
         layout()
     }
     
-    func setData(_ title: String, _ explain: String, _ action: String) {
-        self.title.text = title
-        self.explain.text = explain
-        self.action.setTitle(action, for: .normal)
+    func setData(noti: Noti) {
+        self.explain.text = noti.message
     }
     
     func attribute() {
