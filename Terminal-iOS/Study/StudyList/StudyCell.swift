@@ -14,9 +14,10 @@ import Kingfisher
 class StudyCell: UITableViewCell {
     static let cellId = "cellId"
     
-    var mainTitle = UILabel()
+    let mainTitle = UILabel()
     let location = UILabel()
     let date = UILabel()
+    let distance = UILabel()
     let managerImage = UIImageView()
     let mainImage = UIImageView()
     let memberImage = UIImageView()
@@ -32,6 +33,7 @@ class StudyCell: UITableViewCell {
     override func prepareForReuse() {
         self.mainTitle.text = nil
         self.location.text = nil
+        self.distance.text = nil
         self.date.text = nil
         self.managerImage.image = nil
         self.mainImage.image = nil
@@ -42,6 +44,7 @@ class StudyCell: UITableViewCell {
         self.mainTitle.do {
             $0.text = data.title
         }
+        
         self.location.do {
             $0.text = data.sigungu
         }
@@ -49,9 +52,24 @@ class StudyCell: UITableViewCell {
         self.date.do {
             $0.text = data.createdAt
         }
+        
         self.memberCount.do {
             $0.text = "10명"
         }
+        
+        self.distance.do {
+            guard let distance = data.distance else { return }
+            let point = Int((round(distance * 10) / 10) * 10) % 10
+            
+            if point == 0 {
+                let result = "\((Int(round(distance * 10) / 10)))km"
+                $0.text = result
+            } else {
+                let result = "\((round(distance * 10) / 10))km"
+                $0.text = result
+            }
+        }
+        
         guard let main = data.image else {
             mainImage.image = #imageLiteral(resourceName: "swiftmain")
             return
@@ -82,25 +100,33 @@ class StudyCell: UITableViewCell {
             $0.font = UIFont.notosansMedium(size: 20)
             $0.textColor = .white
         }
+        
         self.location.do {
             $0.textColor = UIColor.appColor(.mainColor)
             $0.font = UIFont.notosansMedium(size: 13)
             $0.textAlignment = .center
             $0.sizeToFit()
-            $0.layer.masksToBounds = true
-            $0.layer.cornerRadius = 7
         }
+        
+        self.distance.do {
+            $0.textColor = UIColor.appColor(.mainColor)
+            $0.font = UIFont.notosansMedium(size: 13)
+        }
+        
         self.date.do {
             $0.font = UIFont.notosansMedium(size: 13)
             $0.textColor = UIColor.appColor(.studySubTitle)
         }
+        
         self.managerImage.do {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 10
         }
+        
         self.memberImage.do {
             $0.image = UIImage(named: "member")
         }
+        
         self.memberCount.do {
             $0.textColor = .white
             $0.font = UIFont.notosansMedium(size: 15)
@@ -109,7 +135,7 @@ class StudyCell: UITableViewCell {
     }
     
     func layout() {
-        [mainTitle, date, managerImage, mainImage, location, memberImage, memberCount]
+        [mainTitle, date, managerImage, mainImage, location, distance, memberImage, memberCount]
             .forEach { self.contentView.addSubview($0) }
        
         self.location.do {
@@ -118,17 +144,26 @@ class StudyCell: UITableViewCell {
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 22).isActive = true
         }
+        
+        self.distance.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.location.trailingAnchor, constant: 10).isActive = true
+        }
+        
         self.mainTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.location.bottomAnchor, constant: 8).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.mainImage.leadingAnchor, constant: -10).isActive = true
         }
+        
         self.date.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.mainTitle.bottomAnchor, constant: 8).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         }
+        
         self.managerImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: self.date.centerYAnchor).isActive = true
@@ -136,6 +171,7 @@ class StudyCell: UITableViewCell {
             $0.widthAnchor.constraint(equalToConstant: 20).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
+        
         self.mainImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
@@ -143,6 +179,7 @@ class StudyCell: UITableViewCell {
             $0.widthAnchor.constraint(equalToConstant: 112).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         }
+        
         self.memberImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -7).isActive = true
@@ -150,6 +187,7 @@ class StudyCell: UITableViewCell {
             $0.widthAnchor.constraint(equalToConstant: 25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 25).isActive = true
         }
+        
         self.memberCount.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true

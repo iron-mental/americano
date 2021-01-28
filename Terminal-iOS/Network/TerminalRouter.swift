@@ -46,7 +46,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studyUpdate            (studyID: String, study: Parameters)
     case studyDelete            (studyID: String)
     case studyList              (sort: Parameters)
-    case studyListForKey        (value: String)
+    case studyListForKey        (key: Parameters)
     case myStudyList            (id: String)
     case studySearch            (keyword: String)
     case hotKeyword
@@ -325,7 +325,7 @@ enum TerminalRouter: URLRequestConvertible {
         case .hotKeyword, .myStudyList:
             return nil
         case let .studyListForKey(value):
-            return ["values": value]
+            return value
         case let .studyList(sort):
             return sort
         case let .studyCreate(study):
