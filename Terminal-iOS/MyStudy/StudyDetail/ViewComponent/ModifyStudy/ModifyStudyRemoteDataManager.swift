@@ -52,10 +52,10 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
                 if let image = study.image {
-                    let imageData = image.jpegData(compressionQuality: 1.0)
-                    multipartFormData.append(imageData!, withName: "image", fileName: "\(study.category).jpg", mimeType: "image/jpeg")
+                    if let imageData = image.jpegData(compressionQuality: 1.0) {
+                        multipartFormData.append(imageData, withName: "image", fileName: "\(image)" , mimeType: "image/jpeg")
+                    }
                 }
-                
             }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)", study: params))
             .validate()
             .responseJSON { response in
