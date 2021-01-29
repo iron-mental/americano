@@ -18,15 +18,11 @@ protocol MyApplyStudyInfoPresenterInputProtocol {
     var wireFrame: MyApplyStudyInfoWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func modifyButtonDidTap(studyID: Int) {
-    
-    }
+    func modifyButtonDidTap(studyID: Int)
 }
 
 protocol MyApplyStudyInfoWireFrameProtocol {
     static func createMyApplyStudyDetailModule(applyStudy: ApplyStudy) -> UIViewController
     
-    func goToMyApplyStudyModify(studyID: Int) {
-    
-    }
+    func goToMyApplyStudyModify(from view: UIViewController, studyID: Int)
 }

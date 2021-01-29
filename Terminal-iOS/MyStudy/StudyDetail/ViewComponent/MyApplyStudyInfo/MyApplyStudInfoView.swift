@@ -10,6 +10,7 @@ import UIKit
 
 class MyApplyStudyInfoView: UIViewController {
     var applyStudy: ApplyStudy?
+    var presenter: MyApplyStudyInfoPresenterInputProtocol?
     
     let mainImageView = UIImageView()
     let studyTitleLabel = PaddingLabel()
@@ -21,6 +22,10 @@ class MyApplyStudyInfoView: UIViewController {
         attribute()
         
         [ mainImageView, studyTitleLabel, applyMessageLabel, moreButton ].forEach { view.addSubview($0) }
+        
+        mainImageView.do {
+
+        }
     }
     
     func attribute() {
@@ -52,7 +57,8 @@ class MyApplyStudyInfoView: UIViewController {
     }
     
     func modifyButtonDidTap() {
-        
+        guard let id = applyStudy?.studyID else { return }
+        presenter?.modifyButtonDidTap(studyID: id)
     }
     
     func deleteButtonDidTap() {
@@ -61,5 +67,4 @@ class MyApplyStudyInfoView: UIViewController {
 }
 
 extension MyApplyStudyInfoView: MyApplyStudyInfoViewProtocol {
-    
 }
