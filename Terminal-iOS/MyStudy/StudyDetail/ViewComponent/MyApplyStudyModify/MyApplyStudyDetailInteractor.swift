@@ -1,5 +1,5 @@
 //
-//  MyApplyStudyDetailInteractor.swift
+//  MyApplyStudyModifyInteractor.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2021/01/11.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
+class MyApplyStudyModifyInteractor: MyApplyStudyModifyInteractorInputProtocol {
     
-    var presenter: MyApplyStudyDetailInteractorOutputProtocol?
-    var remoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol?
+    var presenter: MyApplyStudyModifyInteractorOutputProtocol?
+    var remoteDataManager: MyApplyStudyModifyRemoteDataManagerInputProtocol?
     var applyID: Int?
     var studyID: Int?
     
@@ -38,7 +38,7 @@ class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
     }
 }
 
-extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutputProtocol {
+extension MyApplyStudyModifyInteractor: MyApplyStudyModifyRemoteDataManagerOutputProtocol {
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult) {
         
         switch result {

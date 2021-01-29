@@ -1,5 +1,5 @@
 //
-//  MyApplyStudyDetailView.swift
+//  MyApplyStudyModifyView.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2021/01/11.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class MyApplyStudyDetailView: UIViewController {
-    var presenter: MyApplyStudyDetailPresenterInputProtocol?
+class MyApplyStudyModifyView: UIViewController {
+    var presenter: MyApplyStudyModifyPresenterInputProtocol?
     var studyID: Int?
     var inputBackgroundView = UIView()
     var applyTextField = UITextField()
@@ -26,7 +26,7 @@ class MyApplyStudyDetailView: UIViewController {
     
     func attribute() {
         self.do {
-            $0.navigationItem.title = "스터디 신청 상세"
+            $0.title = "신청 상세"
         }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -115,7 +115,7 @@ class MyApplyStudyDetailView: UIViewController {
     }
 }
 
-extension MyApplyStudyDetailView: MyApplyStudyDetailViewProtocol {
+extension MyApplyStudyModifyView: MyApplyStudyModifyViewProtocol {
     
     func showModifyApplyMessageResult(message: String) {
         navigationController?.popViewController(animated: true)

@@ -1,5 +1,5 @@
 //
-//  MyApplyStudyDetailPresenter.swift
+//  MyApplyStudyModifyPresenter.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2021/01/11.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-class MyApplyStudyDetailPresenter: MyApplyStudyDetailPresenterInputProtocol {
-    var view: MyApplyStudyDetailViewProtocol?
-    var interactor: MyApplyStudyDetailInteractorInputProtocol?
-    var wireFrame: MyApplyStudyDetailWireFrameProtocol?
+class MyApplyStudyModifyPresenter: MyApplyStudyModifyPresenterInputProtocol {
+    var view: MyApplyStudyModifyViewProtocol?
+    var interactor: MyApplyStudyModifyInteractorInputProtocol?
+    var wireFrame: MyApplyStudyModifyWireFrameProtocol?
     
     func viewDidLoad(studyID: Int) {
         LoadingRainbowCat.show()
@@ -28,7 +28,7 @@ class MyApplyStudyDetailPresenter: MyApplyStudyDetailPresenterInputProtocol {
     }
 }
 
-extension MyApplyStudyDetailPresenter: MyApplyStudyDetailInteractorOutputProtocol {
+extension MyApplyStudyModifyPresenter: MyApplyStudyModifyInteractorOutputProtocol {
     func retriveModifyApplyMessage(result: Bool, message: String) {
         switch result {
         

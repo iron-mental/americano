@@ -8,13 +8,13 @@
 
 import UIKit
 
-class MyApplyStudyDetailWireFrame: MyApplyStudyDetailWireFrameProtocol {
-    static func createMyApplyStudyDetailModule(studyID: Int) -> UIViewController {
-        let view = MyApplyStudyDetailView()
-        let interactor = MyApplyStudyDetailInteractor()
-        let presenter = MyApplyStudyDetailPresenter()
-        let remoteDataManager = MyApplyStudyDetailRemoteDataManager()
-        let wireFrame = MyApplyStudyDetailWireFrame()
+class MyApplyStudyModifyWireFrame: MyApplyStudyModifyWireFrameProtocol {
+    static func createMyApplyStudyModifyModule(studyID: Int) -> UIViewController {
+        let view = MyApplyStudyModifyView()
+        let interactor = MyApplyStudyModifyInteractor()
+        let presenter = MyApplyStudyModifyPresenter()
+        let remoteDataManager = MyApplyStudyModifyRemoteDataManager()
+        let wireFrame = MyApplyStudyModifyWireFrame()
         
         view.presenter = presenter
         view.studyID = studyID

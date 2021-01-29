@@ -49,7 +49,7 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
     }
     
     func goToApplyStudyDetail(from view: StudyDetailViewProtocol, studyID: Int) {
-        let applyStudyDetailView = MyApplyStudyDetailWireFrame.createMyApplyStudyDetailModule(studyID: studyID)
+        let applyStudyDetailView = MyApplyStudyModifyWireFrame.createMyApplyStudyModifyModule(studyID: studyID)
         (view as! UIViewController).navigationController?.pushViewController(applyStudyDetailView, animated: true)
     }
 }
