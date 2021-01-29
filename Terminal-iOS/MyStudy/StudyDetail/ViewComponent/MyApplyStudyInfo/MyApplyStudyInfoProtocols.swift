@@ -21,6 +21,23 @@ protocol MyApplyStudyInfoPresenterInputProtocol {
     func modifyButtonDidTap(studyID: Int)
 }
 
+protocol MyApplyStudyInfoInteractorInputProtocol {
+    var presenter: MyApplyStudyInfoInteractorOutputProtocol? { get set }
+    var remoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol? { get set }
+}
+
+protocol MyApplyStudyInfoInteractorOutputProtocol {
+    
+}
+
+protocol MyApplyStudyInfoRemoteDataManagerInputProtocol {
+    var interactor: MyApplyStudyInfoRemoteDataManagerOutputProtocol? { get set }
+}
+
+protocol MyApplyStudyInfoRemoteDataManagerOutputProtocol {
+    
+}
+
 protocol MyApplyStudyInfoWireFrameProtocol {
     static func createMyApplyStudyDetailModule(applyStudy: ApplyStudy) -> UIViewController
     

@@ -207,7 +207,7 @@
 		CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */; };
 		CC60454425BF15B600A98FEC /* CreateStudyResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC60454325BF15B600A98FEC /* CreateStudyResult.swift */; };
 		CC650D8C25C3E22000359E7D /* MyApplyStudyModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB46225AC509D00F522C4 /* MyApplyStudyModifyView.swift */; };
-		CC650DBE25C3E4A100359E7D /* MyApplyStudInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC650D9D25C3E33300359E7D /* MyApplyStudInfoView.swift */; };
+		CC650DBE25C3E4A100359E7D /* MyApplyStudyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC650D9D25C3E33300359E7D /* MyApplyStudyInfoView.swift */; };
 		CC650DBF25C3E4A100359E7D /* MyApplyStudyInfoWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC650DA225C3E34400359E7D /* MyApplyStudyInfoWireFrame.swift */; };
 		CC650DC025C3E4A100359E7D /* MyApplyStudyInfoProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC650D9525C3E2AC00359E7D /* MyApplyStudyInfoProtocols.swift */; };
 		CC650DC125C3E4A100359E7D /* MyApplyStudyDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB46725AC50DF00F522C4 /* MyApplyStudyDetailPresenter.swift */; };
@@ -565,7 +565,7 @@
 		CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailWireFrame.swift; sourceTree = "<group>"; };
 		CC60454325BF15B600A98FEC /* CreateStudyResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyResult.swift; sourceTree = "<group>"; };
 		CC650D9525C3E2AC00359E7D /* MyApplyStudyInfoProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoProtocols.swift; sourceTree = "<group>"; };
-		CC650D9D25C3E33300359E7D /* MyApplyStudInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudInfoView.swift; sourceTree = "<group>"; };
+		CC650D9D25C3E33300359E7D /* MyApplyStudyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoView.swift; sourceTree = "<group>"; };
 		CC650DA225C3E34400359E7D /* MyApplyStudyInfoWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoWireFrame.swift; sourceTree = "<group>"; };
 		CC650DF125C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoPresenter.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
@@ -1554,7 +1554,7 @@
 		CCC8760425C3D890009B90BF /* MyApplyStudyInfo */ = {
 			isa = PBXGroup;
 			children = (
-				CC650D9D25C3E33300359E7D /* MyApplyStudInfoView.swift */,
+				CC650D9D25C3E33300359E7D /* MyApplyStudyInfoView.swift */,
 				CC650DF125C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift */,
 				CC650DA225C3E34400359E7D /* MyApplyStudyInfoWireFrame.swift */,
 				CC650D9525C3E2AC00359E7D /* MyApplyStudyInfoProtocols.swift */,
@@ -1824,7 +1824,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC650DBE25C3E4A100359E7D /* MyApplyStudInfoView.swift in Sources */,
+				CC650DBE25C3E4A100359E7D /* MyApplyStudyInfoView.swift in Sources */,
 				CC650DBF25C3E4A100359E7D /* MyApplyStudyInfoWireFrame.swift in Sources */,
 				CC650DC025C3E4A100359E7D /* MyApplyStudyInfoProtocols.swift in Sources */,
 				CC650DC125C3E4A100359E7D /* MyApplyStudyDetailPresenter.swift in Sources */,
