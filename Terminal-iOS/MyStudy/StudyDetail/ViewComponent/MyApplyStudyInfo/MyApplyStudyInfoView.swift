@@ -10,7 +10,7 @@ import UIKit
 
 class MyApplyStudyInfoView: UIViewController {
     var applyStudy: ApplyStudy?
-    var presenter: MyApplyStudyInfoPresenterInputProtocol?
+    var presenter: MyApplyStudyInfoPresenterProtocol?
     
     let mainImageView = UIImageView()
     var studyTitleLabel = TitleWithContentView()
@@ -91,9 +91,27 @@ class MyApplyStudyInfoView: UIViewController {
     }
     
     func deleteButtonDidTap() {
-        
+        TerminalAlertMessage.show(controller: self, type: .StudyApplyDeleteView)
+        if let alertVC = (TerminalAlertMessage.alert.value(forKey: "contentViewController") as? UIViewController) {
+            if let alertBaseVIew = alertVC as? AlertBaseUIView {
+                alertBaseVIew.completeButton.addTarget(self, action: #selector(applyCancelButtonDidTap), for: .touchUpInside)
+            }
+        }
+//        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(didCancelAction), for: .touchUpInside)
+    }
+    
+    @objc func applyCancelButtonDidTap() {
+        presenter?.deleteButtonDidTap()
     }
 }
 
 extension MyApplyStudyInfoView: MyApplyStudyInfoViewProtocol {
+    func showDeleteApply(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
 }

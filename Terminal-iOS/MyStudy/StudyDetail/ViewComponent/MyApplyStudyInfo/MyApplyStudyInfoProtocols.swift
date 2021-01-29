@@ -9,17 +9,18 @@
 import UIKit
 
 protocol MyApplyStudyInfoViewProtocol {
-    var presenter: MyApplyStudyInfoPresenterInputProtocol? { get set }
+    var presenter: MyApplyStudyInfoPresenterProtocol? { get set }
     var applyStudy: ApplyStudy? { get set }
     
     //PRESENTER -> VIEW
     func showDeleteApply(message: String)
-    func showError()
+    func showError(message: String)
 }
 
-protocol MyApplyStudyInfoPresenterInputProtocol {
+protocol MyApplyStudyInfoPresenterProtocol {
     var view: MyApplyStudyInfoViewProtocol? { get set }
     var wireFrame: MyApplyStudyInfoWireFrameProtocol? { get set }
+    var interactor: MyApplyStudyInfoInteractorInputProtocol? { get set }
     
     //VIEW -> PRESENTER
     func modifyButtonDidTap(studyID: Int)
@@ -29,6 +30,8 @@ protocol MyApplyStudyInfoPresenterInputProtocol {
 protocol MyApplyStudyInfoInteractorInputProtocol {
     var presenter: MyApplyStudyInfoInteractorOutputProtocol? { get set }
     var remoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol? { get set }
+    var applyID: Int? { get set }
+    var studyID: Int? { get set }
     
     //PRESENTER -> INTERACTOR
     func deleteApply()

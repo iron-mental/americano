@@ -55,7 +55,7 @@ class MyApplyStudyModifyView: UIViewController {
     }
     
     func layout() {
-        [inputBackgroundView, guideLabel, admitButton, cancelButton].forEach { view.addSubview($0) }
+        [ inputBackgroundView, guideLabel, admitButton ].forEach { view.addSubview($0) }
         [applyTextField].forEach { inputBackgroundView.addSubview($0) }
         
         inputBackgroundView.do {

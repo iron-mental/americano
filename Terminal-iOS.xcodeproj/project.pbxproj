@@ -216,6 +216,8 @@
 		CC650DC425C3E4A100359E7D /* MyApplyStudyDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB47625AC51A100F522C4 /* MyApplyStudyDetailWireFrame.swift */; };
 		CC650DC525C3E4A100359E7D /* MyApplyStudyDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB45A25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift */; };
 		CC650DF225C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC650DF125C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift */; };
+		CC650DFA25C40DDD00359E7D /* MyApplyStudyInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC650DF925C40DDD00359E7D /* MyApplyStudyInfoInteractor.swift */; };
+		CC650DFF25C40E1200359E7D /* MyApplyStudyInfoRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC650DFE25C40E1200359E7D /* MyApplyStudyInfoRemoteDataManager.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC72CBEF25B02FCE009E9986 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */; };
@@ -568,6 +570,8 @@
 		CC650D9D25C3E33300359E7D /* MyApplyStudyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoView.swift; sourceTree = "<group>"; };
 		CC650DA225C3E34400359E7D /* MyApplyStudyInfoWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoWireFrame.swift; sourceTree = "<group>"; };
 		CC650DF125C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoPresenter.swift; sourceTree = "<group>"; };
+		CC650DF925C40DDD00359E7D /* MyApplyStudyInfoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoInteractor.swift; sourceTree = "<group>"; };
+		CC650DFE25C40E1200359E7D /* MyApplyStudyInfoRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoRemoteDataManager.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
@@ -1556,6 +1560,8 @@
 			children = (
 				CC650D9D25C3E33300359E7D /* MyApplyStudyInfoView.swift */,
 				CC650DF125C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift */,
+				CC650DF925C40DDD00359E7D /* MyApplyStudyInfoInteractor.swift */,
+				CC650DFE25C40E1200359E7D /* MyApplyStudyInfoRemoteDataManager.swift */,
 				CC650DA225C3E34400359E7D /* MyApplyStudyInfoWireFrame.swift */,
 				CC650D9525C3E2AC00359E7D /* MyApplyStudyInfoProtocols.swift */,
 			);
@@ -1916,6 +1922,7 @@
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CC563950259CADBA00DA1479 /* SearchStudyWireFrame.swift in Sources */,
 				CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */,
+				CC650DFF25C40E1200359E7D /* MyApplyStudyInfoRemoteDataManager.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				A5C7B90525ADB23000016D5B /* LocationModifyView.swift in Sources */,
 				A58148F925910EB400BF3C2A /* SNSModifyInteractor.swift in Sources */,
@@ -2007,6 +2014,7 @@
 				CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */,
 				CC3F99202545448E00428B11 /* HomeView.swift in Sources */,
 				CC45F555254AA41600DC31C6 /* SearchLocationPresenter.swift in Sources */,
+				CC650DFA25C40DDD00359E7D /* MyApplyStudyInfoInteractor.swift in Sources */,
 				A521DDF7252F107A00F83DB3 /* ProfileDetailWireFrame.swift in Sources */,
 				CC7B209925C3B7B6009920DC /* PaddingUILabel.swift in Sources */,
 				A5D6A78B2574309D007D6409 /* ProfileModifyPresenter.swift in Sources */,
