@@ -15,7 +15,6 @@ class MyApplyStudyModifyView: UIViewController {
     var applyTextField = UITextField()
     var guideLabel = UILabel()
     var admitButton = UIButton()
-    var cancelButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,13 +52,6 @@ class MyApplyStudyModifyView: UIViewController {
             $0.layer.masksToBounds = true
             $0.addTarget(self, action: #selector(didClickButtonDidTap), for: .touchUpInside)
         }
-        cancelButton.do {
-            $0.setTitle("신청 취소", for: .normal)
-            $0.backgroundColor = .red
-            $0.layer.cornerRadius = 10
-            $0.layer.masksToBounds = true
-            $0.addTarget(self, action: #selector(didCancelButtonDidTap), for: .touchUpInside)
-        }
     }
     
     func layout() {
@@ -93,13 +85,6 @@ class MyApplyStudyModifyView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 50)).isActive = true
         }
-        cancelButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: admitButton.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 50)).isActive = true
-        }
     }
     @objc func didClickButtonDidTap() {
         if let newMessage = applyTextField.text {
@@ -108,10 +93,6 @@ class MyApplyStudyModifyView: UIViewController {
     }
     @objc func didCancelButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .StudyApplyDeleteView)
-        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(didCancelAction), for: .touchUpInside)
-    }
-    @objc func didCancelAction() {
-        presenter?.cancelButtonDidTap()
     }
 }
 
