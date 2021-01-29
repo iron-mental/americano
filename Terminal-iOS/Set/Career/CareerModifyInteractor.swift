@@ -25,18 +25,22 @@ class CareerModifyInteractor: CareerModifyInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userCareerUpdate(id: userID, career: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    let isSuccess = result.result
-                    let message = result.message!
-                    self.presenter?.didCompleteModify(result: isSuccess, message: message)
-                case .failure(let err):
-                    print("error:", err)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let isSuccess = result.result
+                        let message = result.message!
+                        self.presenter?.didCompleteModify(result: isSuccess, message: message)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print("error:", error.localizedDescription)
                 }
             }
     }

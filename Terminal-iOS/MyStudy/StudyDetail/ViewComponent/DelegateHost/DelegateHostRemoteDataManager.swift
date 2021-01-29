@@ -18,28 +18,22 @@ class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol 
             .shared
             .session
             .request(TerminalRouter.delegateHost(studyID: studyID, newLeader: newLeader))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
-                        let result = try! JSONDecoder().decode(BaseResponse<String>.self, from: data!)
-                        
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
                         if let message = result.message {
                             self.interactor?.delegateHostResult(response: result)
                         }
+                    } catch {
+                        print(error.localizedDescription)
                     }
-                    catch {
-                        
-                    }
-                    break
                 case .failure(let err):
-                    
-                    print(err)
-                    break
+                    print(err.localizedDescription)
                 }
             }
     }

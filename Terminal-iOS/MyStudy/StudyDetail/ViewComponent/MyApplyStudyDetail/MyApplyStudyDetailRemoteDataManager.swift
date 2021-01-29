@@ -18,28 +18,22 @@ class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerIn
             .shared
             .session
             .request(TerminalRouter.applyStudyDetail(studyID: studyID, userID: userID))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
-                        
                         let result = try JSONDecoder().decode(BaseResponse<ApplyUserResult>.self, from: data!)
                         if let data = result.data {
-                            
                             self.interactor?.retriveMyApplyStudyDetail(result: result.result, data: data)
                         }
                     } catch {
-                        
-                        print("error")
+                        print(error.localizedDescription)
                     }
-                    break
-                case .failure(let err):
-                    
-                    print(err)
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
@@ -49,7 +43,7 @@ class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerIn
             .shared
             .session
             .request(TerminalRouter.applyModify(studyID: studyID, applyID: applyID, message: newMessage))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -61,10 +55,10 @@ class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerIn
                             self.interactor?.retriveModifyApplyMessage(result: result.result, message: message)
                         }
                     } catch {
-                        print("error")
+                        print(error.localizedDescription)
                     }
-                case .failure:
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
@@ -75,27 +69,23 @@ class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerIn
             .shared
             .session
             .request(TerminalRouter.applyDelete(studyID: studyID, applyID: applyID))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
                         if let message = result.message {
                             self.interactor?.retriveDeleteApplyResult(result: result.result, message: message)
                         }
                     } catch {
-                        print("error")
+                        print(error.localizedDescription)
                     }
-                    break
-                case .failure(let err):
-                    
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
-    
 }

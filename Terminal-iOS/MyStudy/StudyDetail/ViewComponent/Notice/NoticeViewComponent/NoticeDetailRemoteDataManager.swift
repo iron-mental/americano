@@ -18,7 +18,7 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.noticeDetail(studyID: "\(studyID)", noticeID: "\(noticeID)"))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -26,9 +26,8 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
                     let result: BaseResponse<Notice> = try! JSONDecoder().decode(BaseResponse<Notice>.self, from: json!)
                     guard let notice = result.data else { return }
                     completion(result.result, notice)
-                    break
-                case .failure( _):
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
@@ -39,14 +38,13 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.noticeDelete(studyID: "\(studyID)", noticeID: "\(noticeID)"))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
-                case .success(_):
+                case .success:
                     completion( true, "테스트")
-                    break
-                case .failure( _):
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }

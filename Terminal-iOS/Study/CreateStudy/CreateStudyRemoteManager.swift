@@ -56,7 +56,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     }
                 }
             }, with: TerminalRouter.studyCreate(study: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

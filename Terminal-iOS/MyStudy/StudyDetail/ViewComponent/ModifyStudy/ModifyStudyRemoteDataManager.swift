@@ -57,7 +57,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     }
                 }
             }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)", study: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -68,9 +68,10 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                         guard let message = result.message else { return }
                         self.interactor?.putStudyInfoResult(result: result.result, message: message)
                     } catch {
-                        self.interactor?.putStudyInfoResult(result: false, message: "실패하였슴")
+                        self.interactor?.putStudyInfoResult(result: false, message: "실패하였습니다.")
                     }
-                case .failure(let err): break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
