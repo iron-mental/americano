@@ -15,6 +15,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func attribute() {

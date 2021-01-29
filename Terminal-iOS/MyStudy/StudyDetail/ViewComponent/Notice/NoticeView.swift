@@ -20,6 +20,7 @@ class NoticeView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewLoad()
+        
     }
     func viewLoad() {
         noticeList.removeAll()

@@ -53,7 +53,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
                 if let image = study.image {
-                    if let imageData = image.jpegData(compressionQuality: 0.1) {
+                    if let imageData = image.jpegData(compressionQuality: 1.0) {
                         multipartFormData.append(imageData,
                                                  withName: "image",
                                                  fileName: "testImage.jpg",
@@ -65,7 +65,6 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
