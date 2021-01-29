@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B4ADB0EA58C194A4FD611CA /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */; };
 		A500482025775ADC00E37FAE /* JoinResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500481F25775ADC00E37FAE /* JoinResult.swift */; };
+		A501FC0D25C4076600150DA0 /* MyStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A501FC0C25C4076600150DA0 /* MyStudy.swift */; };
 		A5031EB32574F5DE0009AD77 /* UserInfoPut.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */; };
 		A50583BB25A47AEE0060330E /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50583BA25A47AEE0060330E /* UIStackView+Ext.swift */; };
 		A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D0258387DE0084559C /* ApplyUser.swift */; };
@@ -366,6 +367,7 @@
 		6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Terminal_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A500481F25775ADC00E37FAE /* JoinResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinResult.swift; sourceTree = "<group>"; };
+		A501FC0C25C4076600150DA0 /* MyStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudy.swift; sourceTree = "<group>"; };
 		A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPut.swift; sourceTree = "<group>"; };
 		A50583BA25A47AEE0060330E /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 		A510B9D0258387DE0084559C /* ApplyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUser.swift; sourceTree = "<group>"; };
@@ -1395,6 +1397,7 @@
 				CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */,
 				A57E829025BD8F72000F8678 /* SNSValidate.swift */,
 				CC60454325BF15B600A98FEC /* CreateStudyResult.swift */,
+				A501FC0C25C4076600150DA0 /* MyStudy.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2054,6 +2057,7 @@
 				CC57950A2570C9FE00DF96AB /* AddNoticeWireFrame.swift in Sources */,
 				A58148AB2591053E00BF3C2A /* EmailModifyProtocols.swift in Sources */,
 				CCA25AB925B6CE3F00280C80 /* ModifyStudyProtocols.swift in Sources */,
+				A501FC0D25C4076600150DA0 /* MyStudy.swift in Sources */,
 				A5814926259129D200BF3C2A /* LocationModifyWireFrame.swift in Sources */,
 				CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */,
 				CCA25ADE25B9B01800280C80 /* DelegateHostProtocols.swift in Sources */,
