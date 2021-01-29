@@ -14,15 +14,19 @@ class MyApplyStudyInfoWireFrame: MyApplyStudyInfoWireFrameProtocol {
         let view  = MyApplyStudyInfoView()
         let presenter = MyApplyStudyInfoPresenter()
         
+        
+        let wireFrame = MyApplyStudyInfoWireFrame()
         view.applyStudy = applyStudy
         view.presenter = presenter
         
         presenter.view = view
+        presenter.wireFrame = wireFrame
         return view
     }
     
     func goToMyApplyStudyModify(from view: UIViewController, studyID: Int) {
         let myApplyStudyModifyView = MyApplyStudyModifyWireFrame.createMyApplyStudyModifyModule(studyID: studyID)
         view.navigationController?.pushViewController(myApplyStudyModifyView, animated: true)
+        
     }
 }
