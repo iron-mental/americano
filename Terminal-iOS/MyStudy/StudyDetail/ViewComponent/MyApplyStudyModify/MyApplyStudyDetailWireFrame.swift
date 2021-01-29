@@ -8,6 +8,7 @@
 
 import UIKit
 class MyApplyStudyModifyWireFrame: MyApplyStudyModifyWireFrameProtocol {
+    
     static func createMyApplyStudyModifyModule(studyID: Int) -> UIViewController {
         let view = MyApplyStudyModifyView()
         let interactor = MyApplyStudyModifyInteractor()
