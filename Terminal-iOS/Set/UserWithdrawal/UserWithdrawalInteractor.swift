@@ -25,18 +25,22 @@ class UserWithdrawalInteractor: UserWithdrawalInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userWithdrawal(id: userID, userData: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { reponse in
                 switch reponse.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    let isSuccess = result.result
-                    let message = result.message ?? ""
-                    self.presenter?.resultUserWithdrawal(result: isSuccess, message: message)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let isSuccess = result.result
+                        let message = result.message ?? ""
+                        self.presenter?.resultUserWithdrawal(result: isSuccess, message: message)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
     }

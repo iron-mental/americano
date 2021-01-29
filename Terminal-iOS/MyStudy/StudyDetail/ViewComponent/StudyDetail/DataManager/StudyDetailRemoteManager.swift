@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 import SwiftyJSON
 
 class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
@@ -19,16 +18,21 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.studyDetail(studyID: studyID))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    let json = "\(JSON(value))".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<StudyDetail>.self, from: json!)
-                    
-                    completionHandler(result.data!)
-                case .failure(let err):
-                    print("실패", err)
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<StudyDetail>.self, from: data!)
+                        
+                        completionHandler(result.data!)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print("실패", error.localizedDescription)
                 }
             }
     }
@@ -43,17 +47,15 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.applyStudy(studyID: String(studyID), message: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let message = JSON(value)["message"].string!
                     let result = JSON(value)["result"].bool!
                     completion(result, message)
-                    break
-                case .failure(let err):
-                    print(err)
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }

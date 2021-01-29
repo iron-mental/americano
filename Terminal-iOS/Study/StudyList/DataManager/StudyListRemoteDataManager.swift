@@ -25,7 +25,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.studyList(sort: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -55,7 +55,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.studyList(sort: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -83,11 +83,16 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .trimmingCharacters(in: ["]"])
                 .removeWhitespace()
             
+            let params: [String: Any] = [
+                "sort": "new",
+                "values": key
+            ]
+            
             TerminalNetworkManager
                 .shared
                 .session
-                .request(TerminalRouter.studyListForKey(value: key))
-                .validate()
+                .request(TerminalRouter.studyListForKey(key: params))
+                .validate(statusCode: 200...422)
                 .responseJSON { response in
                     switch response.result {
                     case .success(let value):
@@ -116,11 +121,16 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .trimmingCharacters(in: ["]"])
                 .removeWhitespace()
             
+            let params: [String: Any] = [
+                "sort": "length",
+                "values": key
+            ]
+            
             TerminalNetworkManager
                 .shared
                 .session
-                .request(TerminalRouter.studyListForKey(value: key))
-                .validate()
+                .request(TerminalRouter.studyListForKey(key: params))
+                .validate(statusCode: 200...422)
                 .responseJSON { response in
                     switch response.result {
                     case .success(let value):

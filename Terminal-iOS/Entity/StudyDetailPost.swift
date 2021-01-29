@@ -11,7 +11,8 @@ import UIKit
 // MARK: 스터디 상세
 
 struct StudyDetailPost {
-    let category, title, introduce: String
+    let category: String
+    let title, introduce: String?
     let progress, studyTime: String?
     let snsWeb, snsNotion, snsEvernote: String?
     let image: UIImage?

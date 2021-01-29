@@ -20,17 +20,20 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userInfo(id: userID))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
-                    if result.result { completion() }
-                case .failure(let err):
-                    print("실패")
-                    print(err)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                        if result.result { completion() }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
@@ -48,16 +51,20 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                                          fileName: "testImage.jpg",
                                          mimeType: "image/jpeg")
             }, with: TerminalRouter.userImageUpdate(id: userID))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    self.remoteRequestHandler?.imageModifyRetrieved(result: result)
-                case .failure(let err):
-                    print(err)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.remoteRequestHandler?.imageModifyRetrieved(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
@@ -70,16 +77,20 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userInfoUpdate(id: userID, profile: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
+                    do {
+                        let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
     }

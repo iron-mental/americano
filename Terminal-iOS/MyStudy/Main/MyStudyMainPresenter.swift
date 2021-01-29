@@ -38,6 +38,7 @@ class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
     }
     
     func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy) {
+        LoadingRainbowCat.show()
         wireFrame?.goToStudyDetailView(view: view, selectedStudy: selectedStudy)
     }
 }

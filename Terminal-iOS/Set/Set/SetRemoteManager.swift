@@ -20,14 +20,18 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userInfo(id: userID))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
-                    self.interactor?.onUserInfoRetrieved(userInfo: result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                        self.interactor?.onUserInfoRetrieved(userInfo: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure:
                     self.interactor?.error()
                 }
@@ -41,16 +45,20 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.emailVerify(id: userID))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    self.interactor?.emailAuthResponse(result: result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.interactor?.emailAuthResponse(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
     }
