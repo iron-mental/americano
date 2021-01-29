@@ -62,7 +62,6 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     
@@ -72,9 +71,8 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     } catch {
                         
                     }
-                case .failure(let err):
+                case .failure(let value):
                     //이 텍스트를 프레젠터에서 넣어줘야될지 음 정하면댈듯
-                    
                     self.interactor?.createStudyInvalid(message: "서버의 연결이 불안정합니다")
                 }
             }

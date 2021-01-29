@@ -84,6 +84,8 @@ class AddNoticeView: UIViewController {
             $0.layer.masksToBounds = true
             $0.delegate = self
             $0.addLeftPadding()
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
         }
         contentGuideLabel.do {
             $0.text = "내용"
@@ -98,6 +100,8 @@ class AddNoticeView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
             $0.text = notice == nil ? nil : notice?.contents
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
         }
         completeButton.do {
             $0.backgroundColor = UIColor.appColor(.mainColor)
@@ -145,7 +149,7 @@ class AddNoticeView: UIViewController {
             $0.topAnchor.constraint(equalTo: contentGuideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: Terminal.convertHeigt(value: -9)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: -Terminal.convertHeigt(value: 20)).isActive = true
         }
         bottomAnchor = completeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         completeButton.do {
