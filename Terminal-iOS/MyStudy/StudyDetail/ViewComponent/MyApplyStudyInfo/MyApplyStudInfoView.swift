@@ -19,7 +19,8 @@ class MyApplyStudyInfoView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
-        [ mainImageView, studyTitleLabel, applyMessageLabel ]
+        
+        [ mainImageView, studyTitleLabel, applyMessageLabel, moreButton ].forEach { view.addSubview($0) }
     }
     
     func attribute() {

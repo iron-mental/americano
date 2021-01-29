@@ -215,6 +215,7 @@
 		CC650DC325C3E4A100359E7D /* MyApplyStudyDetailRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB47125AC510400F522C4 /* MyApplyStudyDetailRemoteDataManager.swift */; };
 		CC650DC425C3E4A100359E7D /* MyApplyStudyDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB47625AC51A100F522C4 /* MyApplyStudyDetailWireFrame.swift */; };
 		CC650DC525C3E4A100359E7D /* MyApplyStudyDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB45A25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift */; };
+		CC650DF225C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC650DF125C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC72CBEF25B02FCE009E9986 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */; };
@@ -566,6 +567,7 @@
 		CC650D9525C3E2AC00359E7D /* MyApplyStudyInfoProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoProtocols.swift; sourceTree = "<group>"; };
 		CC650D9D25C3E33300359E7D /* MyApplyStudInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudInfoView.swift; sourceTree = "<group>"; };
 		CC650DA225C3E34400359E7D /* MyApplyStudyInfoWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoWireFrame.swift; sourceTree = "<group>"; };
+		CC650DF125C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoPresenter.swift; sourceTree = "<group>"; };
 		CC6F1CBA251A148D00511016 /* SNSInputItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputItem.swift; sourceTree = "<group>"; };
 		CC6F1CBC251A155700511016 /* SNSInputUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUIView.swift; sourceTree = "<group>"; };
 		CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
@@ -1553,6 +1555,7 @@
 			isa = PBXGroup;
 			children = (
 				CC650D9D25C3E33300359E7D /* MyApplyStudInfoView.swift */,
+				CC650DF125C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift */,
 				CC650DA225C3E34400359E7D /* MyApplyStudyInfoWireFrame.swift */,
 				CC650D9525C3E2AC00359E7D /* MyApplyStudyInfoProtocols.swift */,
 			);
@@ -2068,6 +2071,7 @@
 				CCA25AB925B6CE3F00280C80 /* ModifyStudyProtocols.swift in Sources */,
 				A5814926259129D200BF3C2A /* LocationModifyWireFrame.swift in Sources */,
 				CCF4709F256B9A5D0085B371 /* ChatPresenter.swift in Sources */,
+				CC650DF225C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift in Sources */,
 				CCA25ADE25B9B01800280C80 /* DelegateHostProtocols.swift in Sources */,
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
 				A53A2B8525B6BC050002D3A0 /* UserWithdrawalInteractor.swift in Sources */,

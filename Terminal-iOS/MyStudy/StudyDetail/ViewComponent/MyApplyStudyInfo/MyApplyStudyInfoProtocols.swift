@@ -9,9 +9,24 @@
 import UIKit
 
 protocol MyApplyStudyInfoViewProtocol {
+    var presenter: MyApplyStudyInfoPresenterInputProtocol? { get set }
     var applyStudy: ApplyStudy? { get set }
+}
+
+protocol MyApplyStudyInfoPresenterInputProtocol {
+    var view: MyApplyStudyInfoViewProtocol? { get set }
+    var wireFrame: MyApplyStudyInfoWireFrameProtocol? { get set }
+    
+    //VIEW -> PRESENTER
+    func modifyButtonDidTap(studyID: Int) {
+    
+    }
 }
 
 protocol MyApplyStudyInfoWireFrameProtocol {
     static func createMyApplyStudyDetailModule(applyStudy: ApplyStudy) -> UIViewController
+    
+    func goToMyApplyStudyModify(studyID: Int) {
+    
+    }
 }
