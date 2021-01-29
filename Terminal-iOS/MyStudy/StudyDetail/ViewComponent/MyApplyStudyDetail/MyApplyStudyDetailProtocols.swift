@@ -9,8 +9,8 @@
 import UIKit
 
 
-protocol MyApplyStudyDetailViewProtocol {
-    var presenter: MyApplyStudyDetailPresenterInputProtocol? { get set }
+protocol MyApplyStudyModifyViewProtocol {
+    var presenter: MyApplyStudyModifyPresenterInputProtocol? { get set }
     var studyID: Int? { get set }
     
 //    PRESENTER -> VIEW
@@ -20,10 +20,10 @@ protocol MyApplyStudyDetailViewProtocol {
     func showError()
 }
 
-protocol MyApplyStudyDetailPresenterInputProtocol {
-    var view: MyApplyStudyDetailViewProtocol? { get set }
-    var interactor: MyApplyStudyDetailInteractorInputProtocol? { get set }
-    var wireFrame: MyApplyStudyDetailWireFrameProtocol? { get set }
+protocol MyApplyStudyModifyPresenterInputProtocol {
+    var view: MyApplyStudyModifyViewProtocol? { get set }
+    var interactor: MyApplyStudyModifyInteractorInputProtocol? { get set }
+    var wireFrame: MyApplyStudyModifyWireFrameProtocol? { get set }
     
 //    VIEW -> PRESENTER
     func viewDidLoad(studyID: Int)
@@ -31,9 +31,9 @@ protocol MyApplyStudyDetailPresenterInputProtocol {
     func cancelButtonDidTap()
 }
 
-protocol MyApplyStudyDetailInteractorInputProtocol {
-    var presenter: MyApplyStudyDetailInteractorOutputProtocol? { get set }
-    var remoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol? { get set }
+protocol MyApplyStudyModifyInteractorInputProtocol {
+    var presenter: MyApplyStudyModifyInteractorOutputProtocol? { get set }
+    var remoteDataManager: MyApplyStudyModifyRemoteDataManagerInputProtocol? { get set }
     
 //    PRESENTER -> INTERACTOR
     func getMyApplyStudyDetail(studyID: Int)
@@ -41,7 +41,7 @@ protocol MyApplyStudyDetailInteractorInputProtocol {
     func deleteApply()
 }
 
-protocol MyApplyStudyDetailInteractorOutputProtocol {
+protocol MyApplyStudyModifyInteractorOutputProtocol {
     
 //    INTERACTOR -> PRESENTER
     func retriveMyApplyStudyDetail(result: Bool, message: String)
@@ -49,8 +49,8 @@ protocol MyApplyStudyDetailInteractorOutputProtocol {
     func retriveDeleteApplyResult(result: Bool, message: String)
 }
 
-protocol MyApplyStudyDetailRemoteDataManagerInputProtocol {
-    var interactor: MyApplyStudyDetailRemoteDataManagerOutputProtocol? { get set }
+protocol MyApplyStudyModifyRemoteDataManagerInputProtocol {
+    var interactor: MyApplyStudyModifyRemoteDataManagerOutputProtocol? { get set }
     
 //    INTERACTOR -> REMOTEDATAMANAGER
     func getMyApplyStudyDetail(studyID: Int, userID: Int)
@@ -58,7 +58,7 @@ protocol MyApplyStudyDetailRemoteDataManagerInputProtocol {
     func deleteApply(studyID: Int, applyID: Int)
 }
 
-protocol MyApplyStudyDetailRemoteDataManagerOutputProtocol {
+protocol MyApplyStudyModifyRemoteDataManagerOutputProtocol {
     
 //    REMOTEDATAMANAGER -> INTERACTOR
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult)
@@ -66,6 +66,6 @@ protocol MyApplyStudyDetailRemoteDataManagerOutputProtocol {
     func retriveDeleteApplyResult(result: Bool, message: String)
 }
 
-protocol MyApplyStudyDetailWireFrameProtocol {
-    static func createMyApplyStudyDetailModule(studyID: Int) -> UIViewController
+protocol MyApplyStudyModifyWireFrameProtocol {
+    static func createMyApplyStudyModifyModule(studyID: Int) -> UIViewController
 }
