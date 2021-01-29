@@ -1,5 +1,5 @@
 //
-//  MyApplyStudyDetailWireFrame.swift
+//  MyApplyStudyModifyWireFrame.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2021/01/11.
@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 class MyApplyStudyModifyWireFrame: MyApplyStudyModifyWireFrameProtocol {
     static func createMyApplyStudyModifyModule(studyID: Int) -> UIViewController {
         let view = MyApplyStudyModifyView()

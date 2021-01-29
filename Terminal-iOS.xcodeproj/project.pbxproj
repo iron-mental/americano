@@ -206,6 +206,12 @@
 		CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604483257626CF000D11C7 /* NoticeDetailLocalDataManager.swift */; };
 		CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */; };
 		CC60454425BF15B600A98FEC /* CreateStudyResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC60454325BF15B600A98FEC /* CreateStudyResult.swift */; };
+		CC650D8C25C3E22000359E7D /* MyApplyStudyModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB46225AC509D00F522C4 /* MyApplyStudyModifyView.swift */; };
+		CC650D8D25C3E22000359E7D /* MyApplyStudyDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB46725AC50DF00F522C4 /* MyApplyStudyDetailPresenter.swift */; };
+		CC650D8E25C3E22000359E7D /* MyApplyStudyDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB46C25AC50F000F522C4 /* MyApplyStudyDetailInteractor.swift */; };
+		CC650D8F25C3E22000359E7D /* MyApplyStudyDetailRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB47125AC510400F522C4 /* MyApplyStudyDetailRemoteDataManager.swift */; };
+		CC650D9025C3E22000359E7D /* MyApplyStudyDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB47625AC51A100F522C4 /* MyApplyStudyDetailWireFrame.swift */; };
+		CC650D9125C3E22000359E7D /* MyApplyStudyDetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB45A25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift */; };
 		CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBA251A148D00511016 /* SNSInputItem.swift */; };
 		CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6F1CBC251A155700511016 /* SNSInputUIView.swift */; };
 		CC72CBEF25B02FCE009E9986 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */; };
@@ -1806,6 +1812,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC650D8C25C3E22000359E7D /* MyApplyStudyModifyView.swift in Sources */,
+				CC650D8D25C3E22000359E7D /* MyApplyStudyDetailPresenter.swift in Sources */,
+				CC650D8E25C3E22000359E7D /* MyApplyStudyDetailInteractor.swift in Sources */,
+				CC650D8F25C3E22000359E7D /* MyApplyStudyDetailRemoteDataManager.swift in Sources */,
+				CC650D9025C3E22000359E7D /* MyApplyStudyDetailWireFrame.swift in Sources */,
+				CC650D9125C3E22000359E7D /* MyApplyStudyDetailProtocols.swift in Sources */,
 				CC43B8232582922900A4A418 /* StudyDetail.swift in Sources */,
 				CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */,
 				A5BEFB0C25B9EFA900CAED80 /* CategoryImageView.swift in Sources */,
