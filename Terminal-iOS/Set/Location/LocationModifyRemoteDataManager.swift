@@ -19,23 +19,29 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
             .shared
             .session
             .request(TerminalRouter.address)
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<[Address]>.self, from: data!)
-                    self.remoteRequestHandler?.onRetrieveAddress(result: result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[Address]>.self, from: data!)
+                        self.remoteRequestHandler?.onRetrieveAddress(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
     }
     
     func retrieveCoordinates(location: String, completion: @escaping (_ x: Double, _ y: Double) -> Void) {
         let url = API.KAKAO_BASE_URL
-        let headers: HTTPHeaders = ["Authorization": "KakaoAK ec74a28d28177a706155cb8af1fb7ec8"]
+        let headers: HTTPHeaders = [
+            "Authorization": "KakaoAK ec74a28d28177a706155cb8af1fb7ec8"
+        ]
         let parameters: [String: String] = [
             "query": location
         ]
@@ -65,16 +71,20 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
             .shared
             .session
             .request(TerminalRouter.userLocationUpdate(id: userID, location: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    self.remoteRequestHandler?.didCompleteModify(result: result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.remoteRequestHandler?.didCompleteModify(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
     }

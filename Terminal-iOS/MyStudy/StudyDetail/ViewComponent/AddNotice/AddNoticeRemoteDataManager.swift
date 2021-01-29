@@ -24,7 +24,7 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.noticeCreate(studyID: "\(studyID)", notice: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -33,9 +33,8 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
                         let noticeID = JSON(value)["data"]["notice_id"].int!
                         completion(result, noticeID)
                     }
-                    break
-                case .failure( _):
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
@@ -54,7 +53,7 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             .request(TerminalRouter.noticeUpdate(studyID: String(studyID),
                                                  noticeID: String(noticeID),
                                                  notice: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -62,9 +61,8 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
                     if result {
                         completion(result, noticeID)
                     }
-                    break
-                case .failure( _):
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }

@@ -38,16 +38,20 @@ class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.projectUpdate(id: userID, project: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    self.presenter?.didCompleteModify(result: result.result, message: result.message!)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.presenter?.didCompleteModify(result: result.result, message: result.message!)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
     }
