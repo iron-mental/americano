@@ -13,46 +13,72 @@ class MyApplyStudyInfoView: UIViewController {
     var presenter: MyApplyStudyInfoPresenterInputProtocol?
     
     let mainImageView = UIImageView()
-    let studyTitleLabel = PaddingLabel()
-    let applyMessageLabel = PaddingLabel()
-    let moreButton = UIButton()
+    var studyTitleLabel = TitleWithContentView()
+    var applyMessageLabel = TitleWithContentView()
+    lazy var moreButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(moreButtonDidTap))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
-        
-        [ mainImageView, studyTitleLabel, applyMessageLabel, moreButton ].forEach { view.addSubview($0) }
-        
-        mainImageView.do {
-
-        }
+        layout()
     }
     
     func attribute() {
+        self.do {
+            $0.navigationItem.rightBarButtonItems = [moreButton]
+        }
         mainImageView.do {
             guard let image = applyStudy?.image else { return }
             $0.kf.setImage(with: URL(string: image), options: [.requestModifier(RequestToken.token())])
+            $0.contentMode = .scaleAspectFit
+            $0.layer.masksToBounds = true
         }
         studyTitleLabel.do {
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
             guard let title = applyStudy?.title else { return }
-            $0.text = title
+            $0.contentText = ["스터디 제목", title]
         }
         applyMessageLabel.do {
             guard let message = applyStudy?.message else { return }
-            $0.text = message
+            $0.contentText = ["신청 메세지", message]
         }
-        moreButton.do {
-            $0.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-            $0.addTarget(self, action: #selector(moreButtonDidTap), for: .touchUpInside)
+        
+    }
+    
+    func layout() {
+        [ mainImageView, studyTitleLabel, applyMessageLabel ].forEach { view.addSubview($0) }
+        
+        mainImageView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 170)).isActive = true
+        }
+        studyTitleLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: $0.label.bottomAnchor ).isActive = true
+        }
+        applyMessageLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: studyTitleLabel.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: $0.label.bottomAnchor ).isActive = true
         }
     }
     
     @objc func moreButtonDidTap() {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let modify = UIAlertAction(title: "수정하기", style: .default, handler: {_ in self.modifyButtonDidTap() })
-        let delete = UIAlertAction(title: "신청취소", style: .default, handler: {_ in self.deleteButtonDidTap() })
+        let delete = UIAlertAction(title: "신청취소", style: .destructive, handler: {_ in self.deleteButtonDidTap() })
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
         
-        [modify, delete].forEach { actionSheet.addAction($0) }
+        [modify, delete, cancel].forEach { actionSheet.addAction($0) }
         self.present(actionSheet, animated: true, completion: nil)
     }
     
