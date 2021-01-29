@@ -13,54 +13,52 @@ class NotificationCell: UITableViewCell {
     
     let title = UILabel()
     let explain = UILabel()
-    let action = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         attribute()
         layout()
     }
     
     func setData(noti: Noti) {
+        self.title.text = noti.studyTitle
         self.explain.text = noti.message
     }
     
     func attribute() {
-        title.do {
+        self.backgroundColor = .appColor(.terminalBackground)
+        self.selectionStyle = .none
+        self.title.do {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .semibold)
             $0.numberOfLines = 1
         }
-        explain.do {
+        self.explain.do {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 14, weight: .regular)
             $0.numberOfLines = 1
         }
-        action.do {
-            $0.setTitleColor(UIColor.appColor(.mainColor), for: .normal)
-        }
     }
+    
     func layout() {
-        addSubview(title)
-        addSubview(explain)
-        addSubview(action)
+        self.addSubview(title)
+        self.addSubview(explain)
         
-        title.do {
+        self.title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 15)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor,
+                                    constant: Terminal.convertHeigt(value: 15)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 20)).isActive = true
         }
-        explain.do {
+        self.explain.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 100)).isActive = true
-        }
-        action.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 20)).isActive = true
+            $0.topAnchor.constraint(equalTo: title.bottomAnchor,
+                                    constant: Terminal.convertHeigt(value: 20)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                         constant: -Terminal.convertWidth(value: 100)).isActive = true
         }
     }
     

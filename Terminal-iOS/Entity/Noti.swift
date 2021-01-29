@@ -12,10 +12,12 @@ import Foundation
 
 struct Noti: Codable {
     let id, studyID: Int
-    let pushEvent, message, createdAt: String
+    let studyTitle, message: String
+    let pushEvent, createdAt: String
 
     enum CodingKeys: String, CodingKey {
         case id
+        case studyTitle = "study_title"
         case studyID
         case pushEvent, message
         case createdAt

@@ -20,7 +20,7 @@ class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol 
             .shared
             .session
             .request(TerminalRouter.alert(id: userID))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -30,10 +30,10 @@ class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol 
                         let result = try JSONDecoder().decode(BaseResponse<[Noti]>.self, from: data!)
                         self.interactor?.onRetrievedAlert(result: result)
                     } catch {
-                        print(error)
+                        print(error.localizedDescription)
                     }
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             } 
     }
