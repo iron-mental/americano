@@ -29,13 +29,6 @@ class MyApplyStudyModifyInteractor: MyApplyStudyModifyInteractorInputProtocol {
             remoteDataManager?.putNewApplyMessage(studyID: sID, applyID: aID, newMessage: newMessage)
         }
     }
-    
-    func deleteApply() {
-        if let sID = studyID, let aID = applyID {
-            remoteDataManager?.deleteApply(studyID: sID, applyID: aID)
-        }
-        
-    }
 }
 
 extension MyApplyStudyModifyInteractor: MyApplyStudyModifyRemoteDataManagerOutputProtocol {
@@ -61,15 +54,4 @@ extension MyApplyStudyModifyInteractor: MyApplyStudyModifyRemoteDataManagerOutpu
             print("MyApplyStudyDetailInteractor 에서 에러남")
         }
     }
-    
-    func retriveDeleteApplyResult(result: Bool, message: String) {
-        switch result {
-        case true:
-            presenter?.retriveDeleteApplyResult(result: result, message: message)
-        case false:
-            
-            print("MyApplyStudyDetailInteractor 에서 에러남")
-        }
-    }
-    
 }
