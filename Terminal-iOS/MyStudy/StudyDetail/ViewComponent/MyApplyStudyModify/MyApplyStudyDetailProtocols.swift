@@ -16,7 +16,6 @@ protocol MyApplyStudyModifyViewProtocol {
 //    PRESENTER -> VIEW
     func showMyApplyStudyDetail(message: String)
     func showModifyApplyMessageResult(message: String)
-    func showDeleteApply(message: String)
     func showError()
 }
 
@@ -28,7 +27,6 @@ protocol MyApplyStudyModifyPresenterInputProtocol {
 //    VIEW -> PRESENTER
     func viewDidLoad(studyID: Int)
     func admitButtonDidTap(newMessage: String)
-    func cancelButtonDidTap()
 }
 
 protocol MyApplyStudyModifyInteractorInputProtocol {
@@ -38,7 +36,6 @@ protocol MyApplyStudyModifyInteractorInputProtocol {
 //    PRESENTER -> INTERACTOR
     func getMyApplyStudyDetail(studyID: Int)
     func putNewApplyMessage(newMessage: String)
-    func deleteApply()
 }
 
 protocol MyApplyStudyModifyInteractorOutputProtocol {
@@ -46,7 +43,6 @@ protocol MyApplyStudyModifyInteractorOutputProtocol {
 //    INTERACTOR -> PRESENTER
     func retriveMyApplyStudyDetail(result: Bool, message: String)
     func retriveModifyApplyMessage(result: Bool, message: String)
-    func retriveDeleteApplyResult(result: Bool, message: String)
 }
 
 protocol MyApplyStudyModifyRemoteDataManagerInputProtocol {
@@ -55,7 +51,6 @@ protocol MyApplyStudyModifyRemoteDataManagerInputProtocol {
 //    INTERACTOR -> REMOTEDATAMANAGER
     func getMyApplyStudyDetail(studyID: Int, userID: Int)
     func putNewApplyMessage(studyID: Int,applyID: Int, newMessage: String)
-    func deleteApply(studyID: Int, applyID: Int)
 }
 
 protocol MyApplyStudyModifyRemoteDataManagerOutputProtocol {
@@ -63,7 +58,6 @@ protocol MyApplyStudyModifyRemoteDataManagerOutputProtocol {
 //    REMOTEDATAMANAGER -> INTERACTOR
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult)
     func retriveModifyApplyMessage(result: Bool, message: String)
-    func retriveDeleteApplyResult(result: Bool, message: String)
 }
 
 protocol MyApplyStudyModifyWireFrameProtocol {
