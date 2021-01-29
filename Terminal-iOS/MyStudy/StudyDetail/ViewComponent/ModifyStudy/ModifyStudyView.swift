@@ -20,6 +20,9 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     
     override func attribute() {
         super.attribute()
+        self.do {
+            $0.title = "스터디 수정"
+        }
         studyTitleTextField.do {
             $0.text = study?.title
         }

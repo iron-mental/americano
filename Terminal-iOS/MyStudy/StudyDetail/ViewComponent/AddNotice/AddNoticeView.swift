@@ -57,7 +57,6 @@ class AddNoticeView: UIViewController {
     
     func attribute() {
         self.do {
-            $0.title = "스터디 수정"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         isEssentialFlagSege.do {
