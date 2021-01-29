@@ -53,7 +53,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
                 if let image = study.image {
-                    if let imageData = image.jpegData(compressionQuality: 1.0) {
+                    if let imageData = image.jpegData(compressionQuality: 0.1) {
                         multipartFormData.append(imageData,
                                                  withName: "image",
                                                  fileName: "testImage.jpg",

@@ -148,6 +148,8 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
             $0.inputAccessoryView = accessoryCompletButton
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
         }
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)

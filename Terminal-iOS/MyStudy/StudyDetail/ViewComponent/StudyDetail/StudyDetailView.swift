@@ -63,6 +63,9 @@ class StudyDetailView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.title = studyInfo?.title ?? nil
+        }
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
