@@ -14,6 +14,13 @@ class MyApplyStudyInfoView: UIViewController {
     let mainImageView = UIImageView()
     let studyTitleLabel = PaddingLabel()
     let applyMessageLabel = PaddingLabel()
+    let moreButton = UIButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        attribute()
+        [ mainImageView, studyTitleLabel, applyMessageLabel ]
+    }
     
     func attribute() {
         mainImageView.do {
@@ -21,16 +28,35 @@ class MyApplyStudyInfoView: UIViewController {
             $0.kf.setImage(with: URL(string: image), options: [.requestModifier(RequestToken.token())])
         }
         studyTitleLabel.do {
-            
+            guard let title = applyStudy?.title else { return }
+            $0.text = title
+        }
+        applyMessageLabel.do {
+            guard let message = applyStudy?.message else { return }
+            $0.text = message
+        }
+        moreButton.do {
+            $0.setImage(#imageLiteral(resourceName: "more"), for: .normal)
+            $0.addTarget(self, action: #selector(moreButtonDidTap), for: .touchUpInside)
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        attribute()
+    @objc func moreButtonDidTap() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let modify = UIAlertAction(title: "수정하기", style: .default, handler: {_ in self.modifyButtonDidTap() })
+        let delete = UIAlertAction(title: "신청취소", style: .default, handler: {_ in self.deleteButtonDidTap() })
+        
+        [modify, delete].forEach { actionSheet.addAction($0) }
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func modifyButtonDidTap() {
         
     }
     
+    func deleteButtonDidTap() {
+        
+    }
 }
 
 extension MyApplyStudyInfoView: MyApplyStudyInfoViewProtocol {

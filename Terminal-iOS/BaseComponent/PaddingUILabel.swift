@@ -11,10 +11,26 @@ import UIKit
 class PaddingLabel: UILabel {
     var padding: UIEdgeInsets = UIEdgeInsets(top: 15, left: 8, bottom: 15, right: 8)
     
+    init() {
+        super.init()
+        attribute()
+    }
+    
+    func attribute() {
+        self.do {
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
+        }
+    }
+    
     override func drawText(in rect: CGRect) {
         let paddingRect = rect.inset(by: padding)
         super.drawText(in: paddingRect)
     }
+    
     override var intrinsicContentSize: CGSize {
         var contentSize = super.intrinsicContentSize
         contentSize.height += padding.top + padding.bottom
@@ -23,4 +39,7 @@ class PaddingLabel: UILabel {
         
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
