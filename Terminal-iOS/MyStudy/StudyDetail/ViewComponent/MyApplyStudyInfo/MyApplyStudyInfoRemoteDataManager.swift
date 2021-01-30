@@ -13,6 +13,7 @@ class MyApplyStudyInfoRemoteDataManager: MyApplyStudyInfoRemoteDataManagerInputP
     var interactor: MyApplyStudyInfoRemoteDataManagerOutputProtocol?
     
     func deleteApply(studyID: Int, applyID: Int) {
+        
         TerminalNetworkManager
             .shared
             .session
@@ -32,8 +33,9 @@ class MyApplyStudyInfoRemoteDataManager: MyApplyStudyInfoRemoteDataManagerInputP
                     } catch {
                         print("error")
                     }
+                    
                     break
-                case .failure(let _):
+                case .failure(let err):
                     
                     interactor?.retriveDeleteApplyResult(result: false, message: "서버와의 연결이 불안정 합니다.")
                     break

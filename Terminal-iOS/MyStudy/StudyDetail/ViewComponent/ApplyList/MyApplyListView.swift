@@ -16,6 +16,7 @@ final class MyApplyListView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         presenter?.viewDidLoad()
         attribute()
         layout()
@@ -57,6 +58,7 @@ extension MyApplyListView: MyApplyListViewProtocol {
             self.studyList = tempStudies
             applyList.reloadData()
             refreshControl.endRefreshing()
+            
         }
     }
     
