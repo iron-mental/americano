@@ -64,9 +64,11 @@ class MyApplyStudyModifyView: UIViewController {
         
         applyTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: guideLabel.leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
             $0.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: guideLabel.trailingAnchor, constant: -Terminal.convertWidth(value: 30)).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - (Terminal.convertWidth(value: 60))).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
+            
         }
         
         admitButton.do {
@@ -101,10 +103,5 @@ extension MyApplyStudyModifyView: MyApplyStudyModifyViewProtocol {
     
     func showError() {
         print("MyApplyStudyDetailView 에서 난 오류")
-    }
-    
-    func showDeleteApply(message: String) {
-        navigationController?.popViewController(animated: true)
-        (navigationController?.viewControllers.last as? MyApplyListViewProtocol)?.presenter?.viewDidLoad()
     }
 }

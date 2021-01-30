@@ -21,7 +21,7 @@ class TimeUIView: UIView {
     func attribute() {
         title.do {
             $0.text = "시간"
-            $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
+            $0.dynamicFont(fontSize: $0.font.pointSize, weight: .medium)
         }
         detailTime.do {
             $0.sizeToFit()
