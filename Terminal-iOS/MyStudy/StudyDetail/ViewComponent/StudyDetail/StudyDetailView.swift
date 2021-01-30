@@ -270,7 +270,7 @@ class StudyDetailView: UIViewController {
   
     @objc func joinButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .StudyApplyView)
-        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
+        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
     }
     
     @objc func modifyJoinButtonDidTap() {
@@ -279,8 +279,16 @@ class StudyDetailView: UIViewController {
     }
     
     @objc func studyApplyMessageEndEditing() {
-        guard let message = ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! StudyApplyMessageView).editMessageTextField.text else { return }
-        presenter?.joinButtonDidTap(studyID: studyID!, message: message)
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view {
+                    if let messageView = alertView as? StudyApplyMessageView {
+                        guard let message =  messageView.editMessageTextField.text else { return }
+                        presenter?.joinButtonDidTap(studyID: studyID!, message: message)
+                    }
+                }
+            }
+        }
         TerminalAlertMessage.dismiss()
     }
 }
