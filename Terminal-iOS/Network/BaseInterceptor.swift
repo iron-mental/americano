@@ -17,13 +17,10 @@ final class BaseInterceptor: RequestInterceptor {
     var accessToken: String = ""
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        
         var request = urlRequest
-
         if let token = KeychainWrapper.standard.string(forKey: "accessToken") {
             self.accessToken = token
         }
-        
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
         completion(.success(request))
     }
@@ -37,7 +34,8 @@ final class BaseInterceptor: RequestInterceptor {
         print("status:", statusCode)
         
         switch statusCode {
-        case 200...299:
+        
+        case 200...299, 400...503:
             completion(.doNotRetry)
         case 401, 403:
             if request.retryCount < retryLimit {

@@ -41,8 +41,9 @@ class MemberCollectionViewCell: UICollectionViewCell {
             $0.layer.borderColor = UIColor.lightGray.cgColor
         }
         nickname.do {
-            $0.font = UIFont.notosansMedium(size: 10)
+            $0.font = UIFont.notosansMedium(size: 15)
             $0.textColor = .white
+            $0.textAlignment = .center
         }
     }
     
@@ -62,7 +63,6 @@ class MemberCollectionViewCell: UICollectionViewCell {
             $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: Terminal.convertHeigt(value: 4)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: nickname.intrinsicContentSize.height).isActive = true
         }
     }
     

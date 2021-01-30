@@ -10,7 +10,7 @@ import UIKit
 
 class TitleWithContentView: UIView {
     var title = UILabel()
-    var label = UILabel()
+    var label = PaddingLabel()
     var state: StudyDetailViewState = .none
     var contentText: [String] = ["기본 제목", "기본 텍스트"] {
         didSet {
@@ -44,10 +44,10 @@ class TitleWithContentView: UIView {
             $0.setMargins()
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.sizeToFit()
-            let insets = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
-            $0.frame.inset(by: insets)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
         }
     }
     
@@ -68,7 +68,7 @@ class TitleWithContentView: UIView {
             $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: label.intrinsicContentSize.height + 40).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: label.intrinsicContentSize.height + 40).isActive = true
         }
     }
     

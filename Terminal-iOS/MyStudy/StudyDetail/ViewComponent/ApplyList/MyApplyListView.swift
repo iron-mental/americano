@@ -22,6 +22,10 @@ final class MyApplyListView: UIViewController {
     }
     
     private func attribute() {
+        self.do {
+            $0.title = "신청한 스터디"
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         self.applyList.do {
             $0.rowHeight = 80
             $0.register(MyApplyListCell.self, forCellReuseIdentifier: MyApplyListCell.myApplyListCellID)
@@ -37,7 +41,7 @@ final class MyApplyListView: UIViewController {
     
     private func layout() {
         self.view.addSubview(applyList)
-        
+
         self.applyList.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -54,6 +58,7 @@ extension MyApplyListView: MyApplyListViewProtocol {
             self.studyList = tempStudies
             applyList.reloadData()
             refreshControl.endRefreshing()
+            
         }
     }
     
@@ -77,7 +82,6 @@ extension MyApplyListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let study = studyList[indexPath.row]
-        presenter?.showStudyDetail(keyValue: study.studyID)
-        
+        presenter?.showStudyDetail(applyStudy: study)
     }
 }

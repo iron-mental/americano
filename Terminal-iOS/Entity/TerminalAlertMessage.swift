@@ -46,7 +46,6 @@ class TerminalAlertMessage: NSObject {
         TerminalAlertMessage.alert.view.layer.cornerRadius = 5
         
         let contentViewController = UIViewController()
-        //type = .apply
         contentViewController.view = type.view
         TerminalAlertMessage.alert.setValue(contentViewController, forKey: "contentViewController")
         
@@ -70,7 +69,6 @@ class TerminalAlertMessage: NSObject {
     
     @objc class func dismiss() {
         TerminalAlertMessage.alert.dismiss(animated: true, completion: nil)
-        
         ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.removeTarget(nil, action: nil, for: .allEvents)
     }
 }

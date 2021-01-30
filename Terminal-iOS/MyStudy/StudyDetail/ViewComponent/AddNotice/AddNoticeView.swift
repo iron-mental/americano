@@ -45,7 +45,7 @@ class AddNoticeView: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
-    @objc func keyboardWillShow(notification:NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
@@ -84,6 +84,8 @@ class AddNoticeView: UIViewController {
             $0.layer.masksToBounds = true
             $0.delegate = self
             $0.addLeftPadding()
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
         }
         contentGuideLabel.do {
             $0.text = "내용"
@@ -98,6 +100,8 @@ class AddNoticeView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
             $0.text = notice == nil ? nil : notice?.contents
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
         }
         completeButton.do {
             $0.backgroundColor = UIColor.appColor(.mainColor)
@@ -145,7 +149,7 @@ class AddNoticeView: UIViewController {
             $0.topAnchor.constraint(equalTo: contentGuideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: Terminal.convertHeigt(value: -9)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: -Terminal.convertHeigt(value: 20)).isActive = true
         }
         bottomAnchor = completeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         completeButton.do {
@@ -188,12 +192,12 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                          leaderImage: nil,
                                          leaderNickname: nil,
                                          createAt: nil)
-                ((self.parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
-                (self.parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
+                ((parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
+                (parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
             } else {
                 //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
-                (self.parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
-                ((self.parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
+                (parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
+                ((parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
             }
         }
     }

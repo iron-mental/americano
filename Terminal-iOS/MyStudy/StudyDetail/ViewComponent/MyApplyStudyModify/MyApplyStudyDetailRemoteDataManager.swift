@@ -9,8 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol {
-    var interactor: MyApplyStudyDetailRemoteDataManagerOutputProtocol?
+class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerInputProtocol {
+    var interactor: MyApplyStudyModifyRemoteDataManagerOutputProtocol?
     
     func getMyApplyStudyDetail(studyID: Int, userID: Int) {
         
@@ -53,32 +53,6 @@ class MyApplyStudyDetailRemoteDataManager: MyApplyStudyDetailRemoteDataManagerIn
                         let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
                         if let message = result.message {
                             self.interactor?.retriveModifyApplyMessage(result: result.result, message: message)
-                        }
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-    }
-    
-    func deleteApply(studyID: Int, applyID: Int) {
-        
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.applyDelete(studyID: studyID, applyID: applyID))
-            .validate(statusCode: 200...422)
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
-                        if let message = result.message {
-                            self.interactor?.retriveDeleteApplyResult(result: result.result, message: message)
                         }
                     } catch {
                         print(error.localizedDescription)
