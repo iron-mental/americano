@@ -29,11 +29,13 @@ extension ModifyStudyPresenter: ModifyStudyInteractorOutputProtocol {
         switch result {
         case true:
             LoadingRainbowCat.hide {
+                
                 self.view?.showResult(message: message)
             }
             break
         case false:
             LoadingRainbowCat.hide {
+                
                 self.view?.showError()
             }
             break

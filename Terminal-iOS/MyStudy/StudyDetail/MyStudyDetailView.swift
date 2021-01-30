@@ -21,6 +21,7 @@ class MyStudyDetailView: UIViewController {
                        ChatWireFrame.createChatModule()]
         }
     }
+    var studyInfo: StudyDetail?
     var userList: [Participate] = []
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
@@ -49,8 +50,11 @@ class MyStudyDetailView: UIViewController {
     }
     
     func attribute() {
-        if let firstVC = VCArr.first {
-            childPageView.setViewControllers([firstVC], direction: .forward, animated: true)
+        self.do {
+            $0.title = studyInfo?.title ?? nil
+        }
+        if let firstVC = VCArr.first{
+            childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
@@ -190,6 +194,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     func delegateHostButtonDidTap() {
+        guard let userList = studyInfo?.participate else { return }
         presenter?.delegateHostButtonDidTap(studyID: studyID!, userList: userList)
         //방장 위임하는 뷰로 가보자
     }
@@ -231,13 +236,13 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
     func setting() {
-        if let studyDetailView = VCArr[1] as? StudyDetailView,
-           let noticeView = VCArr[0] as? NoticeView {
-            self.authority = studyDetailView.state
-            noticeView.state = studyDetailView.state
-            self.userList = studyDetailView.userData
+        if let studyDetailView = VCArr[1] as? StudyDetailViewProtocol {
+            studyInfo = studyDetailView.studyInfo
+            authority = studyDetailView.state
+            if let noticeView = VCArr[0] as? NoticeView {
+                noticeView.state = studyDetailView.state
+            }
         }
-        
         attribute()
         layout()
         LoadingRainbowCat.hide()

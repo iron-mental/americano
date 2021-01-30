@@ -46,7 +46,6 @@ class TerminalAlertMessage: NSObject {
         TerminalAlertMessage.alert.view.layer.cornerRadius = 5
         
         let contentViewController = UIViewController()
-        //type = .apply
         contentViewController.view = type.view
         TerminalAlertMessage.alert.setValue(contentViewController, forKey: "contentViewController")
         
@@ -64,13 +63,24 @@ class TerminalAlertMessage: NSObject {
         }
         
         controller.present(TerminalAlertMessage.alert, animated: true)
-        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).dismissButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view as? AlertBaseUIView {
+                    alertView.dismissButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+                }
+            }
+        }
         
     }
     
     @objc class func dismiss() {
         TerminalAlertMessage.alert.dismiss(animated: true, completion: nil)
-        
-        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.removeTarget(nil, action: nil, for: .allEvents)
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view as? AlertBaseUIView {
+                    alertView.completeButton.removeTarget(nil, action: nil, for: .allEvents)
+                }
+            }
+        }
     }
 }

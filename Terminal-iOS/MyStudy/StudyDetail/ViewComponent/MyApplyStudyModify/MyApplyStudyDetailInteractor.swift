@@ -1,5 +1,5 @@
 //
-//  MyApplyStudyDetailInteractor.swift
+//  MyApplyStudyModifyInteractor.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2021/01/11.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
+class MyApplyStudyModifyInteractor: MyApplyStudyModifyInteractorInputProtocol {
     
-    var presenter: MyApplyStudyDetailInteractorOutputProtocol?
-    var remoteDataManager: MyApplyStudyDetailRemoteDataManagerInputProtocol?
+    var presenter: MyApplyStudyModifyInteractorOutputProtocol?
+    var remoteDataManager: MyApplyStudyModifyRemoteDataManagerInputProtocol?
     var applyID: Int?
     var studyID: Int?
     
@@ -29,16 +29,9 @@ class MyApplyStudyDetailInteractor: MyApplyStudyDetailInteractorInputProtocol {
             remoteDataManager?.putNewApplyMessage(studyID: sID, applyID: aID, newMessage: newMessage)
         }
     }
-    
-    func deleteApply() {
-        if let sID = studyID, let aID = applyID {
-            remoteDataManager?.deleteApply(studyID: sID, applyID: aID)
-        }
-        
-    }
 }
 
-extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutputProtocol {
+extension MyApplyStudyModifyInteractor: MyApplyStudyModifyRemoteDataManagerOutputProtocol {
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult) {
         
         switch result {
@@ -61,15 +54,4 @@ extension MyApplyStudyDetailInteractor: MyApplyStudyDetailRemoteDataManagerOutpu
             print("MyApplyStudyDetailInteractor 에서 에러남")
         }
     }
-    
-    func retriveDeleteApplyResult(result: Bool, message: String) {
-        switch result {
-        case true:
-            presenter?.retriveDeleteApplyResult(result: result, message: message)
-        case false:
-            
-            print("MyApplyStudyDetailInteractor 에서 에러남")
-        }
-    }
-    
 }

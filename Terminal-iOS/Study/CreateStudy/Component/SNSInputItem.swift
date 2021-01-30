@@ -30,6 +30,8 @@ class SNSInputItem: UIView {
             $0.layer.cornerRadius = 10
             $0.addLeftPadding()
             $0.dynamicFont(fontSize: textField.font!.pointSize, weight: .thin)
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
         }
     }
     

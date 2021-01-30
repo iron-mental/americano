@@ -21,7 +21,7 @@ class TimeUIView: UIView {
     func attribute() {
         title.do {
             $0.text = "시간"
-            $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
+            $0.dynamicFont(fontSize: $0.font.pointSize, weight: .medium)
         }
         detailTime.do {
             $0.sizeToFit()
@@ -30,6 +30,8 @@ class TimeUIView: UIView {
             $0.placeholder = "시간정보 입력"
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.addLeftPadding()
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
         }
     }
     
