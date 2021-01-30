@@ -24,9 +24,8 @@ class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
             switch result {
             case true:
                 presenter?.studyJoinResult(result: result, message: message)
-                break
             case false:
-                break
+                presenter?.studyJoinResult(result: result, message: message)
             }
         })
     }
