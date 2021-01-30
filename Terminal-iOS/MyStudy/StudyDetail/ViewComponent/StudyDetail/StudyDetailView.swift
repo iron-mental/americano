@@ -295,6 +295,7 @@ class StudyDetailView: UIViewController {
 
 extension StudyDetailView: StudyDetailViewProtocol {
     func studyJoinResult(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
         presenter?.showStudyListDetail(studyID: "\(studyInfo!.id)")
     }
     
@@ -308,8 +309,8 @@ extension StudyDetailView: StudyDetailViewProtocol {
         attribute()
     }
     
-    func showError() {
-        
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
     
     func showLoading() {

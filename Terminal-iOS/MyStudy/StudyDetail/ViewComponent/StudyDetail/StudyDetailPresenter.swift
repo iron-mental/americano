@@ -45,6 +45,11 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
         
     }
     func studyJoinResult(result: Bool, message: String) {
-        view?.studyJoinResult(message: message)
+        switch result {
+        case true:
+            view?.studyJoinResult(message: message)
+        case false:
+            view?.showError(message: message)
+        }
     }
 }
