@@ -36,7 +36,6 @@ class PaddingLabel: UILabel {
         contentSize.height += padding.top + padding.bottom
         contentSize.width += padding.left + padding.right
         return contentSize
-        
     }
     
     required init?(coder: NSCoder) {
