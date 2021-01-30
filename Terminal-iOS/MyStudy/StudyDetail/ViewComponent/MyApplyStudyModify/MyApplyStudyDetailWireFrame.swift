@@ -9,7 +9,7 @@
 import UIKit
 class MyApplyStudyModifyWireFrame: MyApplyStudyModifyWireFrameProtocol {
     
-    static func createMyApplyStudyModifyModule(studyID: Int) -> UIViewController {
+    static func createMyApplyStudyModifyModule(parentView: UIViewController, studyID: Int) -> UIViewController {
         let view = MyApplyStudyModifyView()
         let interactor = MyApplyStudyModifyInteractor()
         let presenter = MyApplyStudyModifyPresenter()
@@ -18,6 +18,7 @@ class MyApplyStudyModifyWireFrame: MyApplyStudyModifyWireFrameProtocol {
         
         view.presenter = presenter
         view.studyID = studyID
+        view.parentView = parentView
         
         presenter.view = view
         presenter.wireFrame = wireFrame

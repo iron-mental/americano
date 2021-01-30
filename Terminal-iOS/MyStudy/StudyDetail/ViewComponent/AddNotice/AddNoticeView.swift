@@ -45,7 +45,7 @@ class AddNoticeView: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
-    @objc func keyboardWillShow(notification:NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
@@ -192,12 +192,12 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                          leaderImage: nil,
                                          leaderNickname: nil,
                                          createAt: nil)
-                ((self.parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
-                (self.parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
+                ((parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
+                (parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
             } else {
                 //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
-                (self.parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
-                ((self.parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
+                (parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
+                ((parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
             }
         }
     }

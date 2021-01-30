@@ -12,6 +12,7 @@ import UIKit
 protocol MyApplyStudyModifyViewProtocol {
     var presenter: MyApplyStudyModifyPresenterInputProtocol? { get set }
     var studyID: Int? { get set }
+    var parentView: UIViewController? { get set }
     
 //    PRESENTER -> VIEW
     func showMyApplyStudyDetail(message: String)
@@ -61,5 +62,5 @@ protocol MyApplyStudyModifyRemoteDataManagerOutputProtocol {
 }
 
 protocol MyApplyStudyModifyWireFrameProtocol {
-    static func createMyApplyStudyModifyModule(studyID: Int) -> UIViewController
+    static func createMyApplyStudyModifyModule(parentView: UIViewController, studyID: Int) -> UIViewController
 }

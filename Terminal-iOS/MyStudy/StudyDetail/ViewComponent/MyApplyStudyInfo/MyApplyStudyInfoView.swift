@@ -23,6 +23,13 @@ class MyApplyStudyInfoView: UIViewController {
         layout()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        if let parent = self.navigationController?.viewControllers.last {
+            parent.viewDidLoad()
+        }
+    }
+    
     func attribute() {
         self.do {
             $0.navigationItem.rightBarButtonItems = [moreButton]
@@ -113,8 +120,7 @@ extension MyApplyStudyInfoView: MyApplyStudyInfoViewProtocol {
             self.navigationController?.popViewController(animated: true)
             //특정 int를 넣어줄게 아니라 가장마지막에서 두번째친구에 대한 코드로 다 바꿔야할듯
             if let lastIndex = self.navigationController?.viewControllers.endIndex {
-                if let parent = self.navigationController?.viewControllers[lastIndex - 2] as? UIViewController {
-                    print(parent)
+                if let parent = self.navigationController?.viewControllers[lastIndex - 2] {
                     parent.viewDidLoad()
                 }
             }

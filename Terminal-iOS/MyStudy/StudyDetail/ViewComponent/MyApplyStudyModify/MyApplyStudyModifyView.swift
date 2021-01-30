@@ -9,17 +9,37 @@
 import UIKit
 
 class MyApplyStudyModifyView: UIViewController {
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     var presenter: MyApplyStudyModifyPresenterInputProtocol?
     var studyID: Int?
     var applyTextField = UITextField()
     var guideLabel = UILabel()
     var admitButton = UIButton()
+    var bottomAnchor: NSLayoutConstraint?
+    var keyboardHeight: CGFloat = 0.0
+    var parentView: UIViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let id = studyID else { return }
         presenter?.viewDidLoad(studyID: id)
         layout()
+        applyTextField.becomeFirstResponder()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        keyboardHeight = keyboardRectangle.height
+        bottomAnchor?.constant = -(keyboardHeight + 15)
+        bottomAnchor?.isActive = true
+        view.layoutIfNeeded()
     }
     
     func attribute() {
@@ -61,7 +81,6 @@ class MyApplyStudyModifyView: UIViewController {
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
         }
-        
         applyTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
@@ -70,13 +89,13 @@ class MyApplyStudyModifyView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
             
         }
-        
+        bottomAnchor = admitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         admitButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: applyTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 50)).isActive = true
+            bottomAnchor?.isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 335)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
         }
     }
     @objc func didClickButtonDidTap() {
@@ -90,10 +109,12 @@ class MyApplyStudyModifyView: UIViewController {
 }
 
 extension MyApplyStudyModifyView: MyApplyStudyModifyViewProtocol {
-    
     func showModifyApplyMessageResult(message: String) {
-        navigationController?.popViewController(animated: true)
-        (navigationController?.viewControllers.last as? MyApplyListViewProtocol)?.presenter?.viewDidLoad()
+        dismiss(animated: true) { [self] in
+            if let myApplyStudyInfoView = parentView as? MyApplyStudyInfoView {
+                myApplyStudyInfoView.applyMessageLabel.label.text = applyTextField.text
+            }
+        }
     }
     
     func showMyApplyStudyDetail(message: String) {
