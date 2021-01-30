@@ -11,7 +11,6 @@ import UIKit
 class MyApplyStudyModifyView: UIViewController {
     var presenter: MyApplyStudyModifyPresenterInputProtocol?
     var studyID: Int?
-    var inputBackgroundView = UIView()
     var applyTextField = UITextField()
     var guideLabel = UILabel()
     var admitButton = UIButton()
@@ -30,15 +29,15 @@ class MyApplyStudyModifyView: UIViewController {
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
-        inputBackgroundView.do {
-            $0.backgroundColor = UIColor.appColor(.InputViewColor)
-            $0.layer.cornerRadius = 20
-            $0.layer.masksToBounds = true
-        }
         applyTextField.do {
             $0.addLeftPadding()
             $0.placeholder = "안녕하세요"
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.sizeToFit()
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
         }
         guideLabel.do {
             $0.text = "가입 인사를 수정해보세요"
@@ -55,32 +54,24 @@ class MyApplyStudyModifyView: UIViewController {
     }
     
     func layout() {
-        [ inputBackgroundView, guideLabel, admitButton ].forEach { view.addSubview($0) }
-        [applyTextField].forEach { inputBackgroundView.addSubview($0) }
+        [ guideLabel, admitButton, applyTextField ].forEach { view.addSubview($0) }
         
-        inputBackgroundView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -Terminal.convertHeigt(value: 100)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 75).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        }
         guideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
         }
         
         applyTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: inputBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
-            $0.centerYAnchor.constraint(equalTo: inputBackgroundView.centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: inputBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 30)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: guideLabel.leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
+            $0.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: guideLabel.trailingAnchor, constant: -Terminal.convertWidth(value: 30)).isActive = true
         }
         
         admitButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: inputBackgroundView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: applyTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 50)).isActive = true

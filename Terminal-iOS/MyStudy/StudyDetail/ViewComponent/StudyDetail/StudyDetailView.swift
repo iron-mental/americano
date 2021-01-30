@@ -217,12 +217,11 @@ class StudyDetailView: UIViewController {
             $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 96)).isActive = true
             $0.bottomAnchor.constraint(equalTo: $0.collectionView.bottomAnchor).isActive = true
         }
         studyPlanView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: memberView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyPlanView.label.isHidden == false ? studyPlanView.label.bottomAnchor : studyPlanView.label.bottomAnchor ).isActive = true

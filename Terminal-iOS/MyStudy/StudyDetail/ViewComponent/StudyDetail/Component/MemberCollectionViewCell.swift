@@ -63,7 +63,6 @@ class MemberCollectionViewCell: UICollectionViewCell {
             $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: Terminal.convertHeigt(value: 4)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: nickname.intrinsicContentSize.height).isActive = true
         }
     }
     
