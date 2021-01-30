@@ -130,5 +130,4 @@ extension MyApplyStudyInfoView: MyApplyStudyInfoViewProtocol {
         TerminalAlertMessage.dismiss()
         showToast(controller: self, message: message, seconds: 1)
     }
-    
 }
