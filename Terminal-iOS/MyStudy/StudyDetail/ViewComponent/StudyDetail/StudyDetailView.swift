@@ -53,7 +53,6 @@ class StudyDetailView: UIViewController {
     lazy var locationView = TitleWithContentView()
     var mapView = NMFMapView()
     var joinButton = UIButton()
-    var panddingButton = UIButton()
     let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
     var joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
     
