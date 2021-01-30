@@ -84,9 +84,11 @@ class ProfileModifyView: UIViewController {
         self.name.do {
             $0.text = self.profile?.nickname
             $0.placeholder = "닉네임"
-            $0.dynamicFont(fontSize: 16, weight: .regular)
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
+            $0.dynamicFont(fontSize: 16, weight: .regular)
             $0.addLeftPadding()
         }
         
@@ -105,6 +107,8 @@ class ProfileModifyView: UIViewController {
             $0.textContainer.lineFragmentPadding = 0
             $0.textContainerInset = .zero
             $0.layer.cornerRadius = 10
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
         }
