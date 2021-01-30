@@ -27,17 +27,14 @@ class MyApplyStudyModifyPresenter: MyApplyStudyModifyPresenterInputProtocol {
 extension MyApplyStudyModifyPresenter: MyApplyStudyModifyInteractorOutputProtocol {
     func retriveModifyApplyMessage(result: Bool, message: String) {
         switch result {
-        
         case true:
             LoadingRainbowCat.hide {
                 self.view?.showModifyApplyMessageResult(message: message)
             }
-            break
         case false:
             LoadingRainbowCat.hide {
                 self.view?.showError()
             }
-            break
         }
     }
     
@@ -48,12 +45,10 @@ extension MyApplyStudyModifyPresenter: MyApplyStudyModifyInteractorOutputProtoco
             LoadingRainbowCat.hide {
                 self.view?.showMyApplyStudyDetail(message: message)
             }
-            break
         case false:
             LoadingRainbowCat.hide {
                 self.view?.showError()
             }
-            break
         }
     }   
 }

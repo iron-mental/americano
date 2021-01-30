@@ -110,13 +110,14 @@ class MyApplyStudyModifyView: UIViewController {
 
 extension MyApplyStudyModifyView: MyApplyStudyModifyViewProtocol {
     func showModifyApplyMessageResult(message: String) {
-        dismiss(animated: true) { [self] in
-            if let myApplyStudyInfoView = parentView as? MyApplyStudyInfoView {
-                myApplyStudyInfoView.applyMessageLabel.label.text = applyTextField.text
+        showToast(controller: self, message: message, seconds: 1) {
+            self.dismiss(animated: true) { [self] in
+                if let myApplyStudyInfoView = parentView as? MyApplyStudyInfoView {
+                    myApplyStudyInfoView.applyMessageLabel.label.text = applyTextField.text
+                }
             }
         }
     }
-    
     func showMyApplyStudyDetail(message: String) {
         applyTextField.text = message
         attribute()

@@ -68,7 +68,7 @@ class MyApplyStudyInfoView: UIViewController {
         }
         studyTitleLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: $0.label.bottomAnchor ).isActive = true
@@ -76,7 +76,7 @@ class MyApplyStudyInfoView: UIViewController {
         applyMessageLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyTitleLabel.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: studyTitleLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: $0.label.bottomAnchor ).isActive = true
@@ -114,7 +114,6 @@ class MyApplyStudyInfoView: UIViewController {
 
 extension MyApplyStudyInfoView: MyApplyStudyInfoViewProtocol {
     func showDeleteApply(message: String) {
-        
         TerminalAlertMessage.dismiss()
         showToast(controller: self, message: message, seconds: 1) {
             self.navigationController?.popViewController(animated: true)
