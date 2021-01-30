@@ -86,6 +86,17 @@ class StudyDetailView: UIViewController {
                 $0.image = #imageLiteral(resourceName: "ios")
             }
         }
+        snsIconsView.do {
+            if let notion = studyInfo?.snsNotion {
+                $0.notion.isHidden = notion.isEmpty ? true : false
+            }
+            if let evernote = studyInfo?.snsEvernote {
+                $0.notion.isHidden = evernote.isEmpty ? true : false
+            }
+            if let web = studyInfo?.snsWeb {
+                $0.notion.isHidden = web.isEmpty ? true : false
+            }
+        }
         joinButton.do {
             $0.tag = 0
             if state == .none || state == .reject {
