@@ -17,7 +17,7 @@ class StudyCategoryRemoteManager: StudyCategoryRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.studyCategory)
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

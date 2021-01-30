@@ -20,7 +20,7 @@ class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol 
             .shared
             .session
             .request(TerminalRouter.alert(id: userID))
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

@@ -25,7 +25,7 @@ class UserWithdrawalInteractor: UserWithdrawalInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userWithdrawal(id: userID, userData: params))
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { reponse in
                 switch reponse.result {
                 case .success(let value):

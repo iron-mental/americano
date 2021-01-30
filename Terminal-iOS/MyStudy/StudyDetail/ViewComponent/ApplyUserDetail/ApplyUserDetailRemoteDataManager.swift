@@ -17,7 +17,7 @@ class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserD
             .shared
             .session
             .request(TerminalRouter.applyDetermine(studyID: studyID, applyID: applyID, status: status))
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

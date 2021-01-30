@@ -59,7 +59,7 @@ class SearchStudyView: UIViewController {
             .shared
             .session
             .request(TerminalRouter.hotKeyword)
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

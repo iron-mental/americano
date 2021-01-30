@@ -12,13 +12,13 @@ import SwiftyJSON
 class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
     
-     func getStudyDetail(studyID: String, completionHandler: @escaping (StudyDetail) -> ()) {
+     func getStudyDetail(studyID: String, completionHandler: @escaping (StudyDetail) -> Void) {
         
         TerminalNetworkManager
             .shared
             .session
             .request(TerminalRouter.studyDetail(studyID: studyID))
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -47,7 +47,7 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.applyStudy(studyID: String(studyID), message: params))
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

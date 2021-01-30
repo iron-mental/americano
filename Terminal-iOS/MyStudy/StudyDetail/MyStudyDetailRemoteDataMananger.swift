@@ -19,7 +19,7 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.studyLeave(studyID: "\(studyID)"))
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -40,7 +40,7 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.studyDelete(studyID: "\(studyID)"))
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

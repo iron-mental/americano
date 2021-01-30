@@ -19,7 +19,7 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
             .shared
             .session
             .request(TerminalRouter.address)
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -71,7 +71,7 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
             .shared
             .session
             .request(TerminalRouter.userLocationUpdate(id: userID, location: params))
-            .validate(statusCode: 200...422)
+            .validate(statusCode: 200...400)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
