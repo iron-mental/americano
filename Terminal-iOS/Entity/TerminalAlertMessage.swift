@@ -73,6 +73,18 @@ class TerminalAlertMessage: NSObject {
         
     }
     
+    class func getAlertCompleteButton() -> UIButton {
+        var completeButton = UIButton()
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view as? AlertBaseUIView {
+                    completeButton = alertView.completeButton
+                }
+            }
+        }
+        return completeButton
+    }
+    
     @objc class func dismiss() {
         TerminalAlertMessage.alert.dismiss(animated: true, completion: nil)
         if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
