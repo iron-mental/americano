@@ -112,12 +112,14 @@ class StudyDetailView: UIViewController {
                 $0.isHidden = false
                 $0.setTitle("가입 진행중", for: .normal)
                 $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-                $0.backgroundColor = .white
-                $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-                $0.setTitleColor(.black, for: .normal)
+                $0.backgroundColor = UIColor.appColor(.terminalBackground)
+                $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 10)
+                $0.setTitleColor(UIColor.appColor(.mainColor), for: .normal)
                 $0.layer.cornerRadius = 10
                 $0.clipsToBounds = false
                 $0.contentHorizontalAlignment = .right
+                $0.layer.borderWidth = 0.1
+                $0.layer.borderColor = UIColor.gray.cgColor
                 $0.removeTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
                 $0.addTarget(self, action: #selector(modifyJoinButtonDidTap), for: .touchUpInside)
             } else {
@@ -212,7 +214,7 @@ class StudyDetailView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 113)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 150)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 36)).isActive = true
         }
         studyIntroduceView.do {
