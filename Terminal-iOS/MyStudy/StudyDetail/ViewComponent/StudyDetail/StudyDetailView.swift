@@ -80,9 +80,9 @@ class StudyDetailView: UIViewController {
         mainImageView.do {
             $0.isUserInteractionEnabled = false
             if let imageURL =  studyInfo?.image {
-                $0.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
+                $0.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(RequestToken.token())])
             } else {
-                $0.image = #imageLiteral(resourceName: "ios")
+                $0.image = #imageLiteral(resourceName: "leehi")
             }
         }
         snsIconsView.do {
@@ -255,7 +255,7 @@ class StudyDetailView: UIViewController {
         mapView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: locationView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 254)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 186)).isActive = true
             $0.bottomAnchor.constraint(equalTo: tempBackgroundView.bottomAnchor).isActive = true
