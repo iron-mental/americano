@@ -16,6 +16,7 @@ class MyApplyStudyModifyView: UIViewController {
     
     var presenter: MyApplyStudyModifyPresenterInputProtocol?
     var studyID: Int?
+    var dismissButton = UIButton()
     var applyTextField = UITextField()
     var guideLabel = UILabel()
     var admitButton = UIButton()
@@ -49,6 +50,10 @@ class MyApplyStudyModifyView: UIViewController {
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
+        dismissButton.do {
+            $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+            $0.addTarget(self, action: #selector(dismissButtonTap), for: .touchUpInside)
+        }
         applyTextField.do {
             $0.addLeftPadding()
             $0.placeholder = "안녕하세요"
@@ -74,11 +79,16 @@ class MyApplyStudyModifyView: UIViewController {
     }
     
     func layout() {
-        [ guideLabel, admitButton, applyTextField ].forEach { view.addSubview($0) }
+        [ dismissButton, guideLabel, admitButton, applyTextField ].forEach { view.addSubview($0) }
         
+        dismissButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertHeigt(value: 10)).isActive = true
+        }
         guideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: dismissButton.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
         }
         applyTextField.do {
@@ -105,6 +115,9 @@ class MyApplyStudyModifyView: UIViewController {
     }
     @objc func didCancelButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .StudyApplyDeleteView)
+    }
+    @objc func dismissButtonTap() {
+        dismiss(animated: true)
     }
 }
 
