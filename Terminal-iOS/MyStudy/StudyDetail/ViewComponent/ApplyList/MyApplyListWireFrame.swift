@@ -30,7 +30,6 @@ class MyApplyListWireFrame: MyApplyListWireFrameProtocol {
     
     func presentStudyDetailScreen(from view: MyApplyListViewProtocol, applyStudy: ApplyStudy) {
         let myApplyStudyInfoView = MyApplyStudyInfoWireFrame.createMyApplyStudyDetailModule(applyStudy: applyStudy)
-//        let studyDetailViewController = MyApplyStudyModifyWireFrame.createMyApplyStudyModifyModule(studyID: studyID)
         
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(myApplyStudyInfoView, animated: true)
