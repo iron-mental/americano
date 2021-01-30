@@ -25,6 +25,7 @@ final class MyApplyListView: UIViewController {
     private func attribute() {
         self.do {
             $0.title = "신청한 스터디"
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         self.applyList.do {
             $0.rowHeight = 80

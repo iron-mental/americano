@@ -52,7 +52,7 @@ class MemeberView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 12)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 80)).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 80)).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         }
     }

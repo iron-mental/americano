@@ -26,6 +26,7 @@ class MyApplyStudyInfoView: UIViewController {
     func attribute() {
         self.do {
             $0.navigationItem.rightBarButtonItems = [moreButton]
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         mainImageView.do {
             guard let image = applyStudy?.image else { return }
