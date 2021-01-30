@@ -37,7 +37,6 @@ class MyApplyStudyInfoRemoteDataManager: MyApplyStudyInfoRemoteDataManagerInputP
                 case .failure(let err):
                     
                     interactor?.retriveDeleteApplyResult(result: false, message: "서버와의 연결이 불안정 합니다.")
-                    break
                 }
             }
     }
