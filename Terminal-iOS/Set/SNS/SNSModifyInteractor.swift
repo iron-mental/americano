@@ -41,8 +41,14 @@ class SNSModifyInteractor: SNSModifyInteractorInputProtocol {
                     }
                 case .failure:
                     let data = response.data
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    print("result", result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let isSuccess = result.result
+                        let message = result.message!
+                        self.presenter?.didCompleteModify(result: isSuccess, message: message)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
     }

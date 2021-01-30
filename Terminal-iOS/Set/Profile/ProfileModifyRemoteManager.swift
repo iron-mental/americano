@@ -84,13 +84,19 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
-                        let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
                         self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    let data = response.data
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
     }
