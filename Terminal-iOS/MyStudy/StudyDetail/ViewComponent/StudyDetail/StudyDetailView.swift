@@ -201,16 +201,16 @@ class StudyDetailView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: joinButton.leadingAnchor).isActive = true
             $0.heightAnchor.constraint(equalTo: snsIconsView.heightAnchor).isActive = true
         }
-//        joinButton.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
-//            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 150)).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 36)).isActive = true
-//        }
+        joinButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 150)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 36)).isActive = true
+        }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: snsIconsView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
