@@ -11,7 +11,9 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class BaseProfileView: UIViewController {
+    
     // MARK: Init Property
+    
     let scrollView      = UIScrollView()
     let profile         = ProfileView()
 
@@ -184,13 +186,6 @@ extension BaseProfileView: BaseProfileViewProtocol {
     func showUserInfo(userInfo: UserInfo) {
         var snsList: [String: String] = [:]
         self.userInfo = userInfo
-        /// Kingfisher auth token
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-            return requestBody
-        }
 
         // MARK: Set User Info
 
@@ -202,7 +197,7 @@ extension BaseProfileView: BaseProfileViewProtocol {
         
         if let image = userInfo.image {
             self.profile.profileImage.kf.setImage(with: URL(string: image),
-                                             options: [.requestModifier(imageDownloadRequest)])
+                                                  options: [.requestModifier(RequestToken.token())])
         }
 
         /// 경력
