@@ -181,8 +181,7 @@ class AddNoticeView: UIViewController {
 extension AddNoticeView: AddNoticeViewProtocol {
     func showNewNotice(noticeID: Int) {
         showToast(controller: self, message: "공지사항 작성이 완료 되었습니다.", seconds: 1) { [self] in
-            dismiss(animated: false) {
-                
+            dismiss(animated: true) {
                 if state == .new {
                     notice = Notice(id: noticeID,
                                              title: nil,
