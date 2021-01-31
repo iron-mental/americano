@@ -28,10 +28,16 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    let result = JSON(value)["result"].bool!
-                    if result {
-                        let noticeID = JSON(value)["data"]["notice_id"].int!
-                        completion(result, noticeID)
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Int>.self, from: data!)
+                        if let data = result.data {
+                            completion(result.result, data)
+                        }
+                    } catch {
+                        
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
