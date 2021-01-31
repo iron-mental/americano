@@ -12,39 +12,42 @@ class NoticePresenter: NoticePresenterProtocol {
     
     var view: NoticeViewProtocol?
     var wireFrame: NoticeWireFrameProtocol?
-    var interactor: NoticeInteractorProtocol?
+    var interactor: NoticeInteractorInputProtocol?
     
     func viewDidLoad(studyID: Int) {
         view?.showLoading()
         interactor?.getNoticeList(studyID: studyID)
     }
-    func showResult(result: Bool, noticeList: [Notice]?, message: String?) {
-        switch result {
-        case true:
-            view?.showNoticeList(noticeList: noticeList!)
-            break
-        case false:
-            view?.showMessage(message: message!)
-            break
-        }
-    }
     
     func celldidTap(notice: Notice, parentView: UIViewController, state: StudyDetailViewState) {
         wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView, state: state)
     }
+    
     func didScrollEnded(studyID: Int) {
-        
         interactor?.getNoticeListPagination(studyID: studyID)
     }
-    
-    func showNoticePaginationResult(result: Bool, notice: [Notice]?, message: String?) {
+}
+
+extension NoticePresenter: NoticeInteractorOutputProtocol {
+    func showResult(result: Bool, firstNoticeList: [Notice], secondNoticeList: [Notice], message: String?) {
         switch result {
         case true:
-            view?.showNoticeList(noticeList: notice!)
-            break
+            view?.showNoticeList(firstNoticeList: firstNoticeList, secondNoticeList: secondNoticeList)
+        case false:
+            view?.showMessage(message: message!)
+        }
+    }
+    
+    func showNoticePaginationResult(result: Bool, firstNoticeList: [Notice], secondNoticeList: [Notice], message: String?) {
+        switch result {
+        case true:
+            view?.showNoticeList(firstNoticeList: firstNoticeList, secondNoticeList: secondNoticeList)
         case false:
             break
         }
+    }
+    
+    func showError(message: String) {
         
     }
 }

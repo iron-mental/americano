@@ -20,7 +20,6 @@ class NoticeView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewLoad()
-        
     }
     
     func viewLoad() {
@@ -30,32 +29,8 @@ class NoticeView: UIViewController {
         attribute()
         layout()
         presenter?.viewDidLoad(studyID: studyID!)
-        sorted()
     }
     
-    func sorted() {
-        var noticeListQueue: [[Notice]] = []
-        var pinnedNotiArr: [Notice] = []
-        var commonNotiArr: [Notice] = []
-        
-        pinnedNotiArr = noticeList.filter { $0.pinned! }
-        commonNotiArr = noticeList.filter { !$0.pinned! }
-        
-        pinnedNotiArr.isEmpty ? nil : noticeListQueue.append(pinnedNotiArr)
-        commonNotiArr.isEmpty ? nil : noticeListQueue.append(commonNotiArr)
-         
-        if !noticeList.isEmpty {
-            if !noticeListQueue[0].isEmpty {
-                firstNoticeList = noticeListQueue[0]
-            }
-            if noticeListQueue.count == 2 {
-                if !noticeListQueue[1].isEmpty {
-                    secondNoticeList = noticeListQueue[1]
-                }
-            }
-        }
-        noticeListQueue.removeAll()
-    }
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -92,9 +67,11 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
         
         return count
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         if section == 0 {
@@ -102,6 +79,7 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
         } else if section == 1 {
             headerView.backgroundColor = noticeList.isEmpty ? UIColor.appColor(.terminalBackground) : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         }
+        headerView.backgroundColor = .red
         return headerView
     }
     
@@ -139,6 +117,7 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
         presenter?.celldidTap(notice: selectedNotice!, parentView: self, state: currentState)
         
     }
+    
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach { indexPath in
             if indexPath.section == 0 {
@@ -155,13 +134,21 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 }
 
 extension NoticeView: NoticeViewProtocol {
+    func showNoticeList(firstNoticeList: [Notice], secondNoticeList: [Notice]) {
+        if !firstNoticeList.isEmpty {
+            self.firstNoticeList = firstNoticeList
+            if !secondNoticeList.isEmpty {
+                self.secondNoticeList = secondNoticeList
+            }
+        }
+        notice.reloadData()
+        LoadingRainbowCat.hide()
+    }
     func showLoading() {
         LoadingRainbowCat.show()
     }
     
     func showNoticeList(noticeList: [Notice]) {
-        self.noticeList += noticeList
-        sorted()
         notice.reloadData()
         LoadingRainbowCat.hide {
             print("로딩 끝")
