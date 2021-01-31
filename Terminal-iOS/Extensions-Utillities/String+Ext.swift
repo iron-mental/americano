@@ -29,7 +29,7 @@ extension String {
     }
     
     func linkedInCheck() -> Bool {
-        return self.contains("https://www.linkedin.com/") || self == ""
+        return self.contains("https://linkedin.com/") || self == ""
     }
     
     func webCheck() -> Bool {
