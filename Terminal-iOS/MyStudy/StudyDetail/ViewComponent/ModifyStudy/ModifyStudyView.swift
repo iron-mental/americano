@@ -15,11 +15,39 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func attribute() {
         super.attribute()
+        self.do {
+            $0.title = "스터디 수정"
+        }
+        studyTitleTextField.do {
+            $0.text = study?.title
+        }
+        studyIntroduceView.do {
+            $0.textView.text = study?.introduce
+        }
+        SNSInputView.do {
+            $0.notion.textField.text = study?.snsNotion ?? ""
+            $0.evernote.textField.text = study?.snsEvernote ?? ""
+            $0.web.textField.text = study?.snsWeb ?? ""
+        }
+        studyInfoView.do {
+            $0.textView.text = study?.progress
+        }
+        locationView.do {
+            $0.address.text = study?.location.addressName
+            $0.detailAddress.text = study?.location.locationDetail ?? ""
+        }
+        timeView.do {
+            $0.detailTime.text = study?.studyTime
+        }
         button.do {
+            $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
+        }
+        accessoryCompletButton.do {
             $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
         }
     }
@@ -29,28 +57,41 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     }
     
     @objc func buttonDidTap() {
-        var studyDetailPost = StudyDetailPost(category: study!.category,
-                                              title: studyTitleTextField.text ?? "",
-                                              introduce: studyIntroduceView.textView.text ?? "",
-                                              progress: studyInfoView.textView.text ?? "",
-                                              studyTime: timeView.detailTime.text ?? "",
-                                              snsWeb: SNSInputView.web.textField.text,
-                                              snsNotion: SNSInputView.notion.textField.text,
-                                              snsEvernote: SNSInputView.evernote.textField.text,
-                                              image: mainImageView.image,
-                                              location: selectedLocation!)
-        presenter?.completButtonDidTap(studyID: study!.id, study: studyDetailPost)
+        selectedLocation?.detailAddress = locationView.detailAddress.text
+        
+        studyDetailPost = StudyDetailPost(category: study!.category,
+                                          title: studyTitleTextField.text ?? "",
+                                          introduce: studyIntroduceView.textView.text ?? "",
+                                          progress: studyInfoView.textView.text ?? "",
+                                          studyTime: timeView.detailTime.text ?? "",
+                                          snsWeb: SNSInputView.web.textField.text ?? "",
+                                          snsNotion: SNSInputView.notion.textField.text ?? "",
+                                          snsEvernote: SNSInputView.evernote.textField.text ?? "",
+                                          image: mainImageView.image,
+                                          location: selectedLocation ?? nil)
+        
+        guard let id = study?.id else { return }
+        presenter?.completButtonDidTap(studyID: id, study: studyDetailPost!)
+        
     }
 }
 
 extension ModifyStudyView: ModifyStudyViewProtocol {
     func showResult(message: String) {
-        navigationController?.popViewController(animated: true)
-        //이부분 presenter에서 viewDidLoad하는거 구현해야함
-        (navigationController?.viewControllers.last as! StudyDetailViewProtocol).presenter?.viewDidLoad()
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true, completion: {
+                if let myStudyDetailView = (self.navigationController?.viewControllers[1] as? MyStudyDetailView) {
+                    if let studyDetailView = myStudyDetailView.VCArr[1] as? StudyDetailViewProtocol {
+                        if let id = self.study?.id {
+                            studyDetailView.presenter?.showStudyListDetail(studyID: "\(id)")
+                        }
+                    }
+                }
+            })
+        }
     }
     
     func showError() {
-        print("ModifyStudyView 에서 생긴 에러 ")
+        showToast(controller: self, message: "수정에 실패하였습니다.", seconds: 1)
     }
 }

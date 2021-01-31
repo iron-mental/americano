@@ -75,11 +75,11 @@ class MyStudyMainView: UIViewController {
         alarmButton.do {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
         }
-        dismissEditViewButtonItem = UIBarButtonItem(title: "나가기",
+        dismissEditViewButtonItem = UIBarButtonItem(title: "취소",
                                                     style: .done,
                                                     target: self,
                                                     action: #selector(dismissEditViewButtonItemAction))
-        editDoneButton = UIBarButtonItem(title: "test",
+        editDoneButton = UIBarButtonItem(title: "나가기",
                                          style: .done,
                                          target: self,
                                          action: #selector(editDoneButtonAction))
@@ -93,10 +93,8 @@ class MyStudyMainView: UIViewController {
         case .edit:
             self.navigationItem.leftBarButtonItems = [dismissEditViewButtonItem!]
             self.navigationItem.rightBarButtonItems = [editDoneButton!]
-            break
         case .normal:
             self.navigationItem.rightBarButtonItems = [moreButton!, alarmButton]
-            break
         }
         
         self.view.addSubview(self.tableView)
@@ -116,7 +114,7 @@ class MyStudyMainView: UIViewController {
         let applyList =  UIAlertAction(title: "스터디 신청 목록", style: .default) {_ in self.applyList() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [edit,applyList,cancel].forEach { alert.addAction($0) }
+        [edit, applyList,cancel].forEach { alert.addAction($0) }
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -144,9 +142,7 @@ class MyStudyMainView: UIViewController {
         alarmButton.badgeLabel.isHidden = false
         tempCountForBadge += 1
         alarmButton.badgeLabel.text = "\(tempCountForBadge)"
-        let view = NotificationView()
-        view.navigationController?.navigationBar.tintColor = UIColor.appColor(.terminalBackground)
-        self.navigationController?.pushViewController(view, animated: true)
+        presenter?.showAlert()
     }
     
     @objc func editDoneButtonAction() {

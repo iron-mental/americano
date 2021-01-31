@@ -17,14 +17,12 @@ protocol MyStudyMainViewProtocol: class {
     func showLoading()
 }
 
-protocol MyStudyMainWireFrameProtocol: class {
-    var presenter: MyStudyMainPresenter? { get set }
-    
+protocol MyStudyMainWireFrameProtocol: class {   
     static func createMyStudyMainViewModul() -> UIViewController
     
-    func goToAalrmView(view: UIViewController)
     func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy)
     func goToApplyList(from view: MyStudyMainViewProtocol)
+    func goToAlert(from view: MyStudyMainViewProtocol)
 }
 
 protocol MyStudyMainInteractorProtocol: class {
@@ -44,6 +42,7 @@ protocol MyStudyMainPresenterProtocol: class {
     //VIEW -> PRESENTER
     func viewDidLoad()
     func showApplyList()
+    func showAlert()
     func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy)
     
     //INTERACTOR -> PRESENTER

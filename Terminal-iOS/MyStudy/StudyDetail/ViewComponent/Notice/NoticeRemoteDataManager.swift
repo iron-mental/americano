@@ -54,10 +54,8 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                     } else {
                         completion(false, nil, JSON(value)["message"].string!)
                     }
-                    break
-                case .failure(let err):
-                    print(err)
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }

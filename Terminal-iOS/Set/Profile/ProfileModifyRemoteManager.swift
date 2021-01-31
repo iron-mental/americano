@@ -26,11 +26,14 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
-                    if result.result { completion() }
-                case .failure(let err):
-                    print("실패")
-                    print(err)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                        if result.result { completion() }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
@@ -52,12 +55,17 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    self.remoteRequestHandler?.imageModifyRetrieved(result: result)
-                case .failure(let err):
-                    print(err)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.remoteRequestHandler?.imageModifyRetrieved(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
@@ -76,10 +84,20 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
-                case .failure(let error):
-                    print(error)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure:
+                    let data = response.data
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
     }

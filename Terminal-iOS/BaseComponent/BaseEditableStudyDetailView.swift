@@ -9,6 +9,7 @@
 import UIKit
 
 class BaseEditableStudyDetailView: UIViewController {
+    
     let screenSize = UIScreen.main.bounds
     var keyboardHeight: CGFloat = 0.0
     let mainImageView = MainImageView(frame: CGRect.zero)
@@ -34,6 +35,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var textViewTapFlag = false
     var scrollViewOffsetElement: CGFloat = 0.0
     var accessoryCompletButton = UIButton()
+    var viewDidAppearFlag = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +44,14 @@ class BaseEditableStudyDetailView: UIViewController {
         setDelegate()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        studyTitleTextField.becomeFirstResponder()
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        if viewDidAppearFlag {
+            studyTitleTextField.becomeFirstResponder()
+            viewDidAppearFlag.toggle()
+        }
         scrollViewOffsetElement = 0
     }
     
@@ -142,6 +148,8 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
             $0.inputAccessoryView = accessoryCompletButton
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
         }
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -297,6 +305,7 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func viewSetTop(distance: CGFloat) {
+        
         UIView.animate(withDuration: 0.2) {
             self.button.alpha = 0
             self.scrollView.contentOffset.y += distance
@@ -306,6 +315,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
     func viewSetBottom(distance: CGFloat) {
+        
         UIView.animate(withDuration: 0.2) {
             self.button.alpha = 0
             self.scrollView.contentSize.height += distance
@@ -329,12 +339,13 @@ extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavi
 extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         clickedView = textField
-        self.editableViewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+            self.editableViewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
 
 extension BaseEditableStudyDetailView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
+        
         clickedView = textView
         self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
@@ -342,7 +353,9 @@ extension BaseEditableStudyDetailView: UITextViewDelegate {
 
 extension BaseEditableStudyDetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        view.endEditing(true)
+        if type(of: scrollView) == UIScrollView.self {
+            view.endEditing(true)
+        }
         currentScrollViewMinY = scrollView.contentOffset.y
         currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
     }

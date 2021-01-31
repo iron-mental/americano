@@ -63,6 +63,9 @@ class StudyDetailView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.title = studyInfo?.title ?? nil
+        }
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
@@ -81,6 +84,17 @@ class StudyDetailView: UIViewController {
                 $0.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
             } else {
                 $0.image = #imageLiteral(resourceName: "ios")
+            }
+        }
+        snsIconsView.do {
+            if let notion = studyInfo?.snsNotion {
+                $0.notion.isHidden = notion.isEmpty ? true : false
+            }
+            if let evernote = studyInfo?.snsEvernote {
+                $0.notion.isHidden = evernote.isEmpty ? true : false
+            }
+            if let web = studyInfo?.snsWeb {
+                $0.notion.isHidden = web.isEmpty ? true : false
             }
         }
         joinButton.do {
@@ -214,11 +228,11 @@ class StudyDetailView: UIViewController {
             $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 96)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: $0.collectionView.bottomAnchor).isActive = true
         }
         studyPlanView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: memberView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyPlanView.label.isHidden == false ? studyPlanView.label.bottomAnchor : studyPlanView.label.bottomAnchor ).isActive = true
@@ -279,11 +293,11 @@ extension StudyDetailView: StudyDetailViewProtocol {
     func showStudyDetail(with studyDetail: StudyDetail) {
         self.studyInfo = studyDetail
         userData = studyDetail.participate
-        
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
         memberView.totalMember.text = "\(userData.count) 명"
         parentView?.setting()
+        attribute()
     }
     
     func showError() {

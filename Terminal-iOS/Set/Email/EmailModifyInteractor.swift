@@ -26,12 +26,24 @@ class EmailModifyInteractor: EmailModifyInteractorInputProtocol {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    let isSuccess = result.result
-                    let message = result.message!
-                    self.presenter?.didCompleteModify(result: isSuccess, message: message)
-                case .failure(let error):
-                    print(error)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let isSuccess = result.result
+                        let message = result.message!
+                        self.presenter?.didCompleteModify(result: isSuccess, message: message)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure:
+                    let data = response.data
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let isSuccess = result.result
+                        let message = result.message!
+                        self.presenter?.didCompleteModify(result: isSuccess, message: message)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
     }

@@ -35,6 +35,7 @@ enum TerminalRouter: URLRequestConvertible {
     case signUp                 (userData: Parameters)
     
     case address
+    case alert                  (id: String)
     
     // 프로젝트
     case projectList            (id: String)
@@ -46,7 +47,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studyUpdate            (studyID: String, study: Parameters)
     case studyDelete            (studyID: String)
     case studyList              (sort: Parameters)
-    case studyListForKey        (value: String)
+    case studyListForKey        (key: Parameters)
     case myStudyList            (id: String)
     case studySearch            (keyword: String)
     case hotKeyword
@@ -115,6 +116,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .post
             
         case .address:
+            return .get
+        case .alert:
             return .get
             
             
@@ -224,6 +227,8 @@ enum TerminalRouter: URLRequestConvertible {
             
         case .address:
             return "user/address"
+        case let .alert(id):
+            return "user/\(id)/alert"
             
         // 프로젝트
         case let .projectList(id):
@@ -316,7 +321,7 @@ enum TerminalRouter: URLRequestConvertible {
         case let .signUp(userData):
             return userData
             
-        case .address:
+        case .address, .alert:
             return nil
             
         // 스터디
@@ -325,7 +330,7 @@ enum TerminalRouter: URLRequestConvertible {
         case .hotKeyword, .myStudyList:
             return nil
         case let .studyListForKey(value):
-            return ["values": value]
+            return value
         case let .studyList(sort):
             return sort
         case let .studyCreate(study):

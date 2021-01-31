@@ -9,10 +9,15 @@
 import UIKit
 
 enum AlertType {
+    //신청
     case StudyApplyView
+    //신청취소
     case StudyApplyDeleteView
+    //이메일auth
     case EmailAuthView
+    //방장위임
     case DelegateHostConfirmView
+    
     
     var view: UIView {
         switch self {
@@ -27,6 +32,7 @@ enum AlertType {
         }
     }
 }
+
 
 class TerminalAlertMessage: NSObject {
     private static let sharedInstance = TerminalAlertMessage()
@@ -57,12 +63,24 @@ class TerminalAlertMessage: NSObject {
         }
         
         controller.present(TerminalAlertMessage.alert, animated: true)
-        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).dismissButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view as? AlertBaseUIView {
+                    alertView.dismissButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+                }
+            }
+        }
         
     }
     
     @objc class func dismiss() {
         TerminalAlertMessage.alert.dismiss(animated: true, completion: nil)
-        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.removeTarget(nil, action: nil, for: .allEvents)
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view as? AlertBaseUIView {
+                    alertView.completeButton.removeTarget(nil, action: nil, for: .allEvents)
+                }
+            }
+        }
     }
 }

@@ -33,9 +33,8 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
                         let noticeID = JSON(value)["data"]["notice_id"].int!
                         completion(result, noticeID)
                     }
-                    break
-                case .failure( _):
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }
@@ -62,9 +61,8 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
                     if result {
                         completion(result, noticeID)
                     }
-                    break
-                case .failure( _):
-                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }

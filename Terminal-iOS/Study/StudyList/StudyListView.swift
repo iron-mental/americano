@@ -127,6 +127,10 @@ class StudyListView: UIViewController {
             self.selectedUnderline.center.x = self.lateButton.center.x
         }
         self.tableView.reloadData()
+        
+        if !newStudyList.isEmpty {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
     }
     
     @objc func length() {
@@ -135,6 +139,10 @@ class StudyListView: UIViewController {
             self.selectedUnderline.center.x = self.locationButton.center.x
         }
         self.tableView.reloadData()
+        
+        if !lengthStudyList.isEmpty {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        }
     }
 }
 

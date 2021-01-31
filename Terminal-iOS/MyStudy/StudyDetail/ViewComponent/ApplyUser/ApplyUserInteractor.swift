@@ -23,19 +23,21 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    print(JSON(value))
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data!)
-                    
-                    if result.result, let userList = result.data {
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data!)
                         
-                        self.presenter?.didRetrieveUser(userList: userList)
-                    } else {
-                        self.presenter?.didRetrieveUser(userList: [])
+                        if result.result, let userList = result.data {
+                            self.presenter?.didRetrieveUser(userList: userList)
+                        } else {
+                            self.presenter?.didRetrieveUser(userList: [])
+                        }
+                    } catch {
+                        print(error.localizedDescription)
                     }
-                case .failure(let err):
-                    print("error:",err)
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
     }

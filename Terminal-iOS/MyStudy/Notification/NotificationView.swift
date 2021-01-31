@@ -9,20 +9,16 @@
 import UIKit
 
 class NotificationView: UIViewController {
-    let tableView = UITableView()
+    var presenter: NotificationPresenterProtocol?
     
-    let dummy: [Noti] = [Noti(title: "Swift 정복자", explain: "정재인님이 참여하셨습니다.", action: "프로필 보기"),
-                         Noti(title: "안드로이드 정복자", explain: "고영찬님이 참여하셨습니다.", action: "인사하러 가기"),
-                         Noti(title: "갓서버 양육소", explain: "갓철님이 참여하셨습니다.", action: "살펴보러가기"),
-                         Noti(title: "드루와 드루와", explain: "최용권님이 공지사항 등록했어요.", action: "공지사항 보러가기")
-    ]
+    let tableView = UITableView()
+    var notiList: [Noti] = [Noti(id: 2, studyID: 2, studyTitle: "사당역 모임", message: "스터디에 참여하고 싶다고 왔슴!", pushEvent: "ㄹㅇ", createdAt: "ㄹㅇ")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationController?.navigationBar.isTranslucent = false
-//        navigationController?.navigationBar.prefersLargeTitles = false
         attribute()
         layout()
+        presenter?.viewDidLoad()
     }
     
     func attribute() {
@@ -31,8 +27,11 @@ class NotificationView: UIViewController {
             $0.dataSource = self
             $0.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.cellID)
             $0.rowHeight = Terminal.convertHeigt(value: 80)
+            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.separatorColor = .darkGray
         }
     }
+    
     func layout() {
         view.addSubview(tableView)
         tableView.do {
@@ -47,15 +46,22 @@ class NotificationView: UIViewController {
 
 extension NotificationView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummy.count
+        return notiList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NotificationCell.cellID, for: indexPath) as! NotificationCell
-        let data = dummy[indexPath.row]
         
-        cell.setData(data.title, data.explain, data.action)
+        let data = notiList[indexPath.row]
+        cell.setData(noti: data)
         
         return cell
+    }
+}
+
+extension NotificationView: NotificationViewProtocol {
+    func showNotiList(notiList: [Noti]) {
+//        self.notiList = notiList
+//        self.tableView.reloadData()
     }
 }

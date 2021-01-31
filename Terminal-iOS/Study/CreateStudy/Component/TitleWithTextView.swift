@@ -37,6 +37,8 @@ class TitleWithTextView: UIView {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
             $0.dynamicFont(size: 15, weight: .regular)
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
         }
     }
     

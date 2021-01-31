@@ -8,9 +8,7 @@
 
 import UIKit
 
-class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
-    var presenter: MyStudyMainPresenter?
-
+class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {    
     static func createMyStudyMainViewModul() -> UIViewController {
         let view: MyStudyMainViewProtocol = MyStudyMainView()
         let presenter: MyStudyMainPresenterProtocol = MyStudyMainPresenter()
@@ -45,12 +43,16 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
         }
     }
     
-    func goToAalrmView(view: UIViewController) {
+    func goToAlert(from view: MyStudyMainViewProtocol) {
+        let notificationView = NotificationWireFrame.createModule()
         
+        if let sourceView = view as? UIViewController {
+            sourceView.navigationController?.pushViewController(notificationView, animated: true)
+        }
     }
     
     func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy) {
         let myStudyDetailView =  MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: selectedStudy.id)
-        view.navigationController?.pushViewController(myStudyDetailView, animated: false)
+        view.navigationController?.pushViewController(myStudyDetailView, animated: true)
     }
 }

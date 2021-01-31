@@ -26,8 +26,12 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
-                    self.interactor?.onUserInfoRetrieved(userInfo: result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                        self.interactor?.onUserInfoRetrieved(userInfo: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure:
                     self.interactor?.error()
                 }
@@ -47,10 +51,14 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                    self.interactor?.emailAuthResponse(result: result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        self.interactor?.emailAuthResponse(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
     }

@@ -19,7 +19,7 @@ class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
     var wireFrame: ModifyStudyWireFrameProtocol?
     
     func completButtonDidTap(studyID: Int, study: StudyDetailPost) {
-//        LoadingRainbowCat.show()
+        LoadingRainbowCat.show()
         interactor?.putStudyInfo(studyID: studyID, study: study)
     }
 }
@@ -29,11 +29,13 @@ extension ModifyStudyPresenter: ModifyStudyInteractorOutputProtocol {
         switch result {
         case true:
             LoadingRainbowCat.hide {
+                
                 self.view?.showResult(message: message)
             }
             break
         case false:
             LoadingRainbowCat.hide {
+                
                 self.view?.showError()
             }
             break

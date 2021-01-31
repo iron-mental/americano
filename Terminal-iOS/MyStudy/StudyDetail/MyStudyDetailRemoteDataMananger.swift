@@ -44,14 +44,11 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = "\(JSON(value))".data(using: .utf8)
                     let result: BaseResponse = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: json!)
                     self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
-                    break
                 case .failure(let err):
-                    
-                    break
+                    print(err.localizedDescription)
                 }
             }
     }

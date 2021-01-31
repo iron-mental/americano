@@ -31,6 +31,8 @@ class LocationUIView: UIView {
             $0.layer.masksToBounds = true
             $0.text = "📍 장소 키워드 검색하러 가기"
             $0.setMargins()
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
         }
         detailAddress.do {
             $0.sizeToFit()
@@ -38,6 +40,8 @@ class LocationUIView: UIView {
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
             $0.addLeftPadding()
+            $0.layer.borderWidth = 0.1
+            $0.layer.borderColor = UIColor.gray.cgColor
         }
     }
     
