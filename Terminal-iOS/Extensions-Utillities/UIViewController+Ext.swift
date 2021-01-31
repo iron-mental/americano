@@ -21,13 +21,14 @@ extension UIViewController {
         let titleFont = [NSAttributedString.Key.font: UIFont(name: "NotoSansKR-Medium", size: 15)]
         let titleAttrString = NSMutableAttributedString(string: message, attributes: titleFont as [NSAttributedString.Key : Any])
 
-        alert.setValue(titleAttrString, forKey:"attributedTitle")
+        alert.setValue(titleAttrString, forKey: "attributedTitle")
         
         controller.present(alert, animated: true)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {
-            alert.dismiss(animated: true)
-            CATransaction.setCompletionBlock(completion)
+            alert.dismiss(animated: true) {
+                CATransaction.setCompletionBlock(completion)
+            }
         }
     }
     
