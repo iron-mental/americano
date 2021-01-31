@@ -19,7 +19,7 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userInfo(id: userID))
-            .validate(statusCode: 200...400)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -43,7 +43,7 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.projectList(id: userID))
-            .validate(statusCode: 200...400)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

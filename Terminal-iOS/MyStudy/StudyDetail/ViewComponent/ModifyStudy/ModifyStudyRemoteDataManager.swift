@@ -61,7 +61,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     }
                 }
             }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)", study: params))
-            .validate(statusCode: 200...400)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

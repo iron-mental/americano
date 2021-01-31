@@ -19,7 +19,7 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
             .shared
             .session
             .request(TerminalRouter.address)
-            .validate(statusCode: 200...400)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -71,7 +71,7 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
             .shared
             .session
             .request(TerminalRouter.userLocationUpdate(id: userID, location: params))
-            .validate(statusCode: 200...400)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -83,7 +83,7 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
+                case .failure:
                     let data = response.data
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)

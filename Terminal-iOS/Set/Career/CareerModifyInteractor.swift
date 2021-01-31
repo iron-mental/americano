@@ -25,7 +25,7 @@ class CareerModifyInteractor: CareerModifyInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.userCareerUpdate(id: userID, career: params))
-            .validate(statusCode: 200...400)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
