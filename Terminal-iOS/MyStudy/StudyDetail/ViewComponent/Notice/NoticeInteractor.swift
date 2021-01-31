@@ -28,6 +28,7 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
                     //이 부분 페이지네이션 관련 컬럼이 추가됐는지 안됐는지 확인하고 그걸로 분기
                     $0.title != nil ? self.totalNoticeList.append($0) : self.nextNoticeID.append($0.id)
                 }
+                
                 self.sorted {
                 self.presenter?.showResult(result: result,
                                            firstNoticeList: self.firstNoticeList.isEmpty ? nil : self.firstNoticeList,
@@ -42,6 +43,7 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
     }
     
     func getNoticeListPagination(studyID: Int) {
+        
         var nextNoticeListIDs: [Int] = []
         
         if nextNoticeID.count > 9 {
@@ -51,7 +53,6 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
             nextNoticeListIDs = nextNoticeID
             nextNoticeID.removeAll()
         }
-        
         if nextNoticeListIDs.count > 0 {
             remoteDataManager?.getNoticeListPagination(studyID: studyID, noticeListIDs: nextNoticeListIDs, completion: { result, noticeList, message in
                 switch result {

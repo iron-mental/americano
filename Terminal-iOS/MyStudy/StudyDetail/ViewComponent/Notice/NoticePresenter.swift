@@ -39,15 +39,6 @@ extension NoticePresenter: NoticeInteractorOutputProtocol {
         }
     }
     
-    func showNoticePaginationResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?) {
-        switch result {
-        case true:
-            view?.showNoticeList(firstNoticeList: firstNoticeList, secondNoticeList: secondNoticeList)
-        case false:
-            break
-        }
-    }
-    
     func showError(message: String) {
         view?.showMessage(message: message)
     }

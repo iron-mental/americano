@@ -33,7 +33,6 @@ protocol NoticeInteractorOutputProtocol {
     
     //INTERACTOR -> PRESENTER
     func showResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?)
-    func showNoticePaginationResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?)
     func showError(message: String)
 }
 
