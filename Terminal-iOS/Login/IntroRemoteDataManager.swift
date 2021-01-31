@@ -37,6 +37,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     // MARK: 회원가입 유효성 검사
     
     func getSignUpValidInfo(signUpMaterial: [String], completionHandler: @escaping (BaseResponse<String>) -> Void) {
+        
         let params: [String: String] = [
             "email": signUpMaterial[0],
             "password": signUpMaterial[1],
@@ -52,10 +53,14 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<String>.self, from: data!)
-                    completionHandler(result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        completionHandler(result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
-                    print("에러:",error)
+                    print("에러:", error)
                 }
             }
     }
@@ -69,12 +74,13 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         let params: [String: String] = [
             "email": "\(joinMaterial[0])",
             "password": "\(joinMaterial[1])",
-            "push_token": KeychainWrapper.standard.string(forKey: "pushToken") ?? "1",
+            "push_token": pushToken,
             "device": "ios"
         ]
         
         print(KeychainWrapper.standard.string(forKey: "accessToken"))
         print(KeychainWrapper.standard.string(forKey: "refreshToken"))
+        
         TerminalNetworkManager
             .shared
             .session
@@ -84,11 +90,14 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data!)
-                    completionHandler(result)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data!)
+                        completionHandler(result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
                     print("에러:", error)
-                    
                 }
             }        
     }

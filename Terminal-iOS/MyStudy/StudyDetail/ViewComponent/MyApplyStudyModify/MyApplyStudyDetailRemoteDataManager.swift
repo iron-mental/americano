@@ -18,7 +18,7 @@ class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerIn
             .shared
             .session
             .request(TerminalRouter.applyStudyDetail(studyID: studyID, userID: userID))
-            .validate(statusCode: 200...422)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -43,7 +43,7 @@ class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerIn
             .shared
             .session
             .request(TerminalRouter.applyModify(studyID: studyID, applyID: applyID, message: newMessage))
-            .validate(statusCode: 200...422)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

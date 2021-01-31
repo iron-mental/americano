@@ -18,7 +18,7 @@ class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol 
             .shared
             .session
             .request(TerminalRouter.delegateHost(studyID: studyID, newLeader: newLeader))
-            .validate(statusCode: 200...422)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

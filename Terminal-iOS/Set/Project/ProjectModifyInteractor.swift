@@ -38,7 +38,7 @@ class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
             .shared
             .session
             .request(TerminalRouter.projectUpdate(id: userID, project: params))
-            .validate(statusCode: 200...422)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -46,12 +46,22 @@ class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                        self.presenter?.didCompleteModify(result: result.result, message: result.message!)
+                        let isSuccess = result.result
+                        let message = result.message!
+                        self.presenter?.didCompleteModify(result: isSuccess, message: message)
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    let data = response.data
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let isSuccess = result.result
+                        let message = result.message!
+                        self.presenter?.didCompleteModify(result: isSuccess, message: message)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
     }

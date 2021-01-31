@@ -24,7 +24,7 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.noticeCreate(studyID: "\(studyID)", notice: params))
-            .validate(statusCode: 200...422)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -53,7 +53,7 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             .request(TerminalRouter.noticeUpdate(studyID: String(studyID),
                                                  noticeID: String(noticeID),
                                                  notice: params))
-            .validate(statusCode: 200...422)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

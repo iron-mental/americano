@@ -1,25 +1,25 @@
 //
-//  MyApplyListInteractor.swift
+//  NotificationRemoteDataManager.swift
 //  Terminal-iOS
 //
-//  Created by once on 2020/12/11.
-//  Copyright © 2020 정재인. All rights reserved.
+//  Created by once on 2021/01/28.
+//  Copyright © 2021 정재인. All rights reserved.
 //
 
 import Foundation
 import SwiftyJSON
 import SwiftKeychainWrapper
 
-class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
-    var presenter: MyApplyListInteractorOutputProtocol?
+class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol {
+    var interactor: NotificationRemoteDataManagerOutputProtocol?
     
-    func getApplyList() {
+    func retrieveAlert() {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.applyStudyList(id: userID))
+            .request(TerminalRouter.alert(id: userID))
             .validate()
             .responseJSON { response in
                 switch response.result {
@@ -27,19 +27,14 @@ class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<[ApplyStudy]>.self, from: data!)
-                        
-                        if result.result, let studies = result.data {
-                            self.presenter?.didRetrieveStudies(studies: studies)
-                        } else {
-                            self.presenter?.didRetrieveStudies(studies: nil)
-                        }
+                        let result = try JSONDecoder().decode(BaseResponse<[Noti]>.self, from: data!)
+                        self.interactor?.onRetrievedAlert(result: result)
                     } catch {
                         print(error.localizedDescription)
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
-            }
+            } 
     }
 }

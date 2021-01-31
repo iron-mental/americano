@@ -31,16 +31,15 @@ final class BaseInterceptor: RequestInterceptor {
             return
         }
         
-        print("status:", statusCode)
+        print("statusCode:", statusCode)
         
         switch statusCode {
-        
-        case 200...299, 400...503:
+        case 400, 422...503:
             completion(.doNotRetry)
         case 401, 403:
             if request.retryCount < retryLimit {
                 refreshToken { success in
-                    print("성공여부 :", success)
+                    print("토큰 갱신 성공여부 :", success)
                     return completion(.retryWithDelay(self.retryDelay))
                 }
             }
@@ -77,10 +76,10 @@ final class BaseInterceptor: RequestInterceptor {
                             completion(false)
                         }
                     } catch {
-                        print("error")
+                        print(error.localizedDescription)
                     }
                 case .failure(let error):
-                    print("에러입니다.", error)
+                    print("에러입니다.", error.localizedDescription)
                     
                 }
             }
