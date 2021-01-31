@@ -46,7 +46,6 @@ class StudyDetailView: UIViewController {
     var mainImageViewTapGesture = UITapGestureRecognizer()
     var mainImageView = MainImageView(frame: CGRect.zero)
     var snsIconsView = StudyDetailSNSView()
-    var snsList: [String: String] = [:]
     lazy var studyIntroduceView = TitleWithContentView()
     var memberView = MemeberView()
     lazy var studyPlanView = TitleWithContentView()
@@ -85,10 +84,10 @@ class StudyDetailView: UIViewController {
                 $0.notion.isHidden = notion.isEmpty ? true : false
             }
             if let evernote = studyInfo?.snsEvernote {
-                $0.notion.isHidden = evernote.isEmpty ? true : false
+                $0.evernote.isHidden = evernote.isEmpty ? true : false
             }
             if let web = studyInfo?.snsWeb {
-                $0.notion.isHidden = web.isEmpty ? true : false
+                $0.web.isHidden = web.isEmpty ? true : false
             }
         }
         joinButton.do {
@@ -200,18 +199,18 @@ class StudyDetailView: UIViewController {
         }
         snsIconsView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
-            $0.trailingAnchor.constraint(equalTo: joinButton.trailingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: snsIconsView.heightAnchor).isActive = true
         }
-        joinButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 150)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 36)).isActive = true
-        }
+//        joinButton.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 150)).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 36)).isActive = true
+//        }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: snsIconsView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
@@ -296,12 +295,15 @@ extension StudyDetailView: StudyDetailViewProtocol {
     }
     
     func showStudyDetail(with studyDetail: StudyDetail) {
+        var snsList: [String: String] = [:]
+        
         self.studyInfo = studyDetail
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
         memberView.totalMember.text = "\(userData.count) 명"
         parentView?.setting()
+        
         
         if let notion = studyDetail.snsNotion,
            let evernote = studyDetail.snsEvernote,

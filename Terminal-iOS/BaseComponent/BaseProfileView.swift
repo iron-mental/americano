@@ -30,7 +30,6 @@ class BaseProfileView: UIViewController {
     var userInfo: UserInfo?
     
     // MARK: ViewDidLoad
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -38,7 +37,6 @@ class BaseProfileView: UIViewController {
     }
     
     // MARK: Set Attribute
-    
     func attribute() {
         [profile, career, sns, project, email, location].forEach {
             $0.layer.cornerRadius = 10
