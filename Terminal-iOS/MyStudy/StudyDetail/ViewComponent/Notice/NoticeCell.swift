@@ -28,7 +28,10 @@ class NoticeCell: UITableViewCell {
         noticeLabel.text = "공지"
     }
     
-    func setData(_ data: Notice){
+    func setData(_ data: Notice) {
+        guard let isPinned = data.pinned else { return }
+        self.noticeLabel.text = isPinned ? "필독" : "일반"
+        self.noticeBackground.backgroundColor = isPinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
         noticeTitle.do {
             $0.text = data.title
         }
