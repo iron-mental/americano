@@ -45,7 +45,8 @@ class StudyDetailView: UIViewController {
     let picker = UIImagePickerController()
     var mainImageViewTapGesture = UITapGestureRecognizer()
     var mainImageView = MainImageView(frame: CGRect.zero)
-    var snsIconsView = SNSIconsView(frame: CGRect.zero)
+    var snsIconsView = StudyDetailSNSView()
+    var snsList: [String: String] = [:]
     lazy var studyIntroduceView = TitleWithContentView()
     var memberView = MemeberView()
     lazy var studyPlanView = TitleWithContentView()
@@ -64,12 +65,6 @@ class StudyDetailView: UIViewController {
     func attribute() {
         self.do {
             $0.title = studyInfo?.title ?? nil
-        }
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-            return requestBody
         }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -206,9 +201,9 @@ class StudyDetailView: UIViewController {
         snsIconsView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: snsIconsView.intrinsicContentSize.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: joinButton.trailingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: snsIconsView.heightAnchor).isActive = true
         }
         joinButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -307,6 +302,21 @@ extension StudyDetailView: StudyDetailViewProtocol {
         memberView.collectionView.reloadData()
         memberView.totalMember.text = "\(userData.count) 명"
         parentView?.setting()
+        
+        if let notion = studyDetail.snsNotion,
+           let evernote = studyDetail.snsEvernote,
+           let web = studyDetail.snsWeb {
+            if !notion.isEmpty {
+                snsList.updateValue(notion, forKey: "notion")
+            }
+            if !evernote.isEmpty {
+                snsList.updateValue(evernote, forKey: "evernote")
+            }
+            if !web.isEmpty {
+                snsList.updateValue(web, forKey: "web")
+            }
+        }
+        self.snsIconsView.addstack(snsList: snsList)
         attribute()
     }
     
@@ -331,7 +341,6 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
         cell.setData(userInfo: userData[indexPath.row])
-        
         return cell
     }
     
