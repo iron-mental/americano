@@ -180,24 +180,27 @@ class AddNoticeView: UIViewController {
 
 extension AddNoticeView: AddNoticeViewProtocol {
     func showNewNotice(noticeID: Int) {
-        dismiss(animated: false) { [self] in
-            if state == .new {
-                notice = Notice(id: noticeID,
-                                         title: nil,
-                                         contents: nil,
-                                         leaderID: nil,
-                                         studyID: studyID,
-                                         pinned: nil,
-                                         updatedAt: nil,
-                                         leaderImage: nil,
-                                         leaderNickname: nil,
-                                         createAt: nil)
-                ((parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
-                (parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
-            } else {
-                //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
-                (parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
-                ((parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
+        showToast(controller: self, message: "공지사항 작성이 완료 되었습니다.", seconds: 1) { [self] in
+            dismiss(animated: false) {
+                
+                if state == .new {
+                    notice = Notice(id: noticeID,
+                                             title: nil,
+                                             contents: nil,
+                                             leaderID: nil,
+                                             studyID: studyID,
+                                             pinned: nil,
+                                             updatedAt: nil,
+                                             leaderImage: nil,
+                                             leaderNickname: nil,
+                                             createAt: nil)
+                    ((parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
+                    (parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
+                } else {
+                    //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
+                    (parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
+                    ((parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
+                }
             }
         }
     }
