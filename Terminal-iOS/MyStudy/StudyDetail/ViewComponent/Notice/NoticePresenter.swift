@@ -29,7 +29,8 @@ class NoticePresenter: NoticePresenterProtocol {
 }
 
 extension NoticePresenter: NoticeInteractorOutputProtocol {
-    func showResult(result: Bool, firstNoticeList: [Notice], secondNoticeList: [Notice], message: String?) {
+    
+    func showResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?) {
         switch result {
         case true:
             view?.showNoticeList(firstNoticeList: firstNoticeList, secondNoticeList: secondNoticeList)
@@ -38,7 +39,7 @@ extension NoticePresenter: NoticeInteractorOutputProtocol {
         }
     }
     
-    func showNoticePaginationResult(result: Bool, firstNoticeList: [Notice], secondNoticeList: [Notice], message: String?) {
+    func showNoticePaginationResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?) {
         switch result {
         case true:
             view?.showNoticeList(firstNoticeList: firstNoticeList, secondNoticeList: secondNoticeList)
@@ -48,6 +49,6 @@ extension NoticePresenter: NoticeInteractorOutputProtocol {
     }
     
     func showError(message: String) {
-        
+        view?.showMessage(message: message)
     }
 }

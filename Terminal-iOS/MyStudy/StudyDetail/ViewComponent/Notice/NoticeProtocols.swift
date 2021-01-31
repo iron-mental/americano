@@ -11,10 +11,10 @@ import UIKit
 protocol NoticeViewProtocol {
     var studyID: Int? { get set }
     var presenter: NoticePresenterProtocol? { get set }
-    var noticeList: [Notice] { get set }
+//    var noticeList: [Notice] { get set }
     
     //PRESENTER -> VIEW
-    func showNoticeList(firstNoticeList: [Notice], secondNoticeList: [Notice])
+    func showNoticeList(firstNoticeList: [Notice]?, secondNoticeList: [Notice]?)
     func showMessage(message: String)
     func viewLoad()
     func showLoading()
@@ -32,8 +32,8 @@ protocol NoticeInteractorInputProtocol {
 protocol NoticeInteractorOutputProtocol {
     
     //INTERACTOR -> PRESENTER
-    func showResult(result: Bool, firstNoticeList: [Notice], secondNoticeList: [Notice], message: String?)
-    func showNoticePaginationResult(result: Bool, firstNoticeList: [Notice], secondNoticeList: [Notice], message: String?)
+    func showResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?)
+    func showNoticePaginationResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?)
     func showError(message: String)
 }
 

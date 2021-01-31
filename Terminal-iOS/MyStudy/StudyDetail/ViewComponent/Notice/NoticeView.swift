@@ -11,7 +11,6 @@ import UIKit
 class NoticeView: UIViewController {
     var presenter: NoticePresenterProtocol?
     var studyID: Int?
-    var noticeList: [Notice] = []
     var firstNoticeList: [Notice] = []
     var secondNoticeList: [Notice] = []
     lazy var notice = UITableView(frame: CGRect.zero, style: .grouped)
@@ -23,7 +22,6 @@ class NoticeView: UIViewController {
     }
     
     func viewLoad() {
-        noticeList.removeAll()
         firstNoticeList.removeAll()
         secondNoticeList.removeAll()
         attribute()
@@ -77,9 +75,8 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
         if section == 0 {
             headerView.backgroundColor = UIColor.appColor(.terminalBackground)
         } else if section == 1 {
-            headerView.backgroundColor = noticeList.isEmpty ? UIColor.appColor(.terminalBackground) : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            headerView.backgroundColor = secondNoticeList.isEmpty ? UIColor.appColor(.terminalBackground) : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         }
-        headerView.backgroundColor = .red
         return headerView
     }
     
@@ -134,12 +131,13 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 }
 
 extension NoticeView: NoticeViewProtocol {
-    func showNoticeList(firstNoticeList: [Notice], secondNoticeList: [Notice]) {
-        if !firstNoticeList.isEmpty {
-            self.firstNoticeList = firstNoticeList
-            if !secondNoticeList.isEmpty {
-                self.secondNoticeList = secondNoticeList
-            }
+    func showNoticeList(firstNoticeList: [Notice]?, secondNoticeList: [Notice]?) {
+        
+        if let first = firstNoticeList {
+            self.firstNoticeList = first
+        }
+        if let second = secondNoticeList {
+            self.secondNoticeList = second
         }
         notice.reloadData()
         LoadingRainbowCat.hide()

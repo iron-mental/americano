@@ -22,21 +22,17 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
         nextNoticeID.removeAll()
         
         remoteDataManager?.getNoticeList(studyID: studyID, completion: { result, noticeList, message in
-            
-            
             switch result {
             case true:
                 noticeList?.forEach {
                     //이 부분 페이지네이션 관련 컬럼이 추가됐는지 안됐는지 확인하고 그걸로 분기
                     $0.title != nil ? self.totalNoticeList.append($0) : self.nextNoticeID.append($0.id)
                 }
-                let sortedNoticeList = self.sorted()
-                if sortedNoticeList.count == 0 {
-                    self.presenter?.showResult(result: result, firstNoticeList: [], secondNoticeList: [], message: "조회된 공지사항이 없습니다.")
-                } else if sortedNoticeList.count == 2 {
-                    self.presenter?.showResult(result: result, firstNoticeList: sortedNoticeList[0], secondNoticeList: sortedNoticeList[1], message: message)
-                } else if sortedNoticeList.count == 1 {
-                    self.presenter?.showResult(result: result, firstNoticeList: sortedNoticeList[0], secondNoticeList: [], message: message)
+                self.sorted {
+                self.presenter?.showResult(result: result,
+                                           firstNoticeList: self.firstNoticeList.isEmpty ? nil : self.firstNoticeList,
+                                           secondNoticeList: self.secondNoticeList.isEmpty ? nil : self.secondNoticeList,
+                                           message: message)
                 }
             case false:
                 guard let msg = message else { return }
@@ -63,13 +59,11 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
                     noticeList?.forEach({
                         self.totalNoticeList.append($0)
                     })
-                    let sortedNoticeList = self.sorted()
-                    if sortedNoticeList.count == 0 {
-                        self.presenter?.showResult(result: result, firstNoticeList: [], secondNoticeList: [], message: "조회된 공지사항이 없습니다.")
-                    } else if sortedNoticeList.count == 2 {
-                        self.presenter?.showResult(result: result, firstNoticeList: sortedNoticeList[0], secondNoticeList: sortedNoticeList[1], message: message)
-                    } else if sortedNoticeList.count == 1 {
-                        self.presenter?.showResult(result: result, firstNoticeList: sortedNoticeList[0], secondNoticeList: [], message: message)
+                    self.sorted {
+                        self.presenter?.showResult(result: result,
+                                                   firstNoticeList: self.firstNoticeList.isEmpty ? nil : self.firstNoticeList,
+                                                   secondNoticeList: self.secondNoticeList.isEmpty ? nil : self.secondNoticeList,
+                                                   message: message)
                     }
                 case false:
                     guard let msg = message else { return }
@@ -79,7 +73,7 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
         }
     }
     
-    func sorted() -> [[Notice]] {
+    func sorted(completion: @escaping () -> Void) {
         var noticeListQueue: [[Notice]] = []
         var pinnedNotiArr: [Notice] = []
         var commonNotiArr: [Notice] = []
@@ -98,7 +92,6 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
                 }
             }
         }
-        
-        return noticeListQueue
+        completion()
     }
 }
