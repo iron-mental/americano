@@ -35,8 +35,10 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
     }
     
     func getPagingStudyList(keys: [Int]) {
-        
-        var params: [String: String] = ["values": ""]
+        var params: [String: String] = [
+            "values": "",
+            "sort": "length"
+        ]
         keys.forEach { params["values"]?.append("\($0),") }
         params["values"]?.removeLast()
         
