@@ -105,8 +105,7 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
     }
     
     func showSearchStudyListResult(result: [Study]) {
-        
-        searchResult = result
+        searchResult += result
         studyListTableView.reloadData()
     }
 }

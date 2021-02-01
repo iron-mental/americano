@@ -52,7 +52,7 @@ extension SearchStudyResultInteractor: SearchStudyResultRemoteDataManagerOutputP
         switch result.result {
         case true:
             if let itemList = result.data {
-                self.presenter?.showSearchStudyListResult(result: itemList)
+                self.presenter?.showPagingStudyListResult(result: itemList)
             }
         case false:
             print("err")

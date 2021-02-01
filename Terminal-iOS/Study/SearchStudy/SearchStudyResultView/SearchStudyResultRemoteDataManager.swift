@@ -35,7 +35,31 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
     }
     
     func getPagingStudyList(keys: [Int]) {
-        print(keys)
+        
+        var params: [String: String] = ["values": ""]
+        keys.forEach { params["values"]?.append("\($0),") }
+        params["values"]?.removeLast()
+        
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.studyListForKey(key: params))
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
+                        self.interactor?.showPagingStudyListResult(result: result)
+                    } catch {
+                        print(error)
+                    }
+                case .failure(let err):
+                    print(err)
+                }
+            }
     }
     
 }
