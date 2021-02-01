@@ -22,7 +22,6 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerProt
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)

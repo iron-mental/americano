@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchStudyResultViewProtocol {
+protocol SearchStudyResultViewProtocol: class {
     var presenter: SearchStudyResultPresenterProtocol? { get set }
     var keyword: String? { get set }
     //PRESENTER -> VIEW
@@ -17,45 +17,44 @@ protocol SearchStudyResultViewProtocol {
     func showSearchStudyResult(result: [Study])
 }
 
-protocol SearchStudyResultInteractorProtocol {
-    var presenter: SearchStudyResultPresenterProtocol? { get set }
-    var remoteDataManager: SearchStudyResultRemoteDataManagerProtocol? { get set }
-    var localDataManager: SearchStudyResultLocalDataManagerProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
-    func getSearchStudyResult(keyWord: String)
-    
-    //DATAMANAGER -> INTERACTOR
-    func showSearchStudyResult(result: BaseResponse<[Study]>)
-}
-
-protocol SearchStudyResultPresenterProtocol {
+protocol SearchStudyResultPresenterProtocol: class {
     var view: SearchStudyResultViewProtocol? { get set }
-    var interactor: SearchStudyResultInteractorProtocol? { get set }
+    var interactor: SearchStudyResultInteractorInputProtocol? { get set }
     var wireFrame: SearchStudyResultWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
     func returnDidTap(keyWord: String)
     func didTapCell(keyValue: Int, state: Bool)
+}
+
+protocol SearchStudyResultInteractorInputProtocol: class {
+    var presenter: SearchStudyResultInteractorOutputProtocol? { get set }
+    var remoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol? { get set }
     
+    //PRESENTER -> INTERACTOR
+    func getSearchStudyResult(keyWord: String)
+}
+
+protocol SearchStudyResultInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func showSearchStudyResult(result: [Study])
 }
 
-protocol SearchStudyResultRemoteDataManagerProtocol {
-    var interactor: SearchStudyResultInteractorProtocol? { get set }
+protocol SearchStudyResultRemoteDataManagerInputProtocol: class {
+    var interactor: SearchStudyResultRemoteDataManagerOutputProtocol? { get set }
+    //INTERACTOR -> REMOTEDATAMANAGER
     func getSearchStudyResult(keyWord: String)
 }
 
-protocol SearchStudyResultLocalDataManagerProtocol {
-    
+protocol SearchStudyResultRemoteDataManagerOutputProtocol: class {
+    //DATAMANAGER -> INTERACTOR
+    func showSearchStudyResult(result: BaseResponse<[Study]>)
 }
 
-protocol SearchStudyResultWireFrameProtocol {
+protocol SearchStudyResultWireFrameProtocol: class {
     
     static func createSearchStudyResultModule(keyword: String) -> UIViewController
     
     //PRESENTER -> WIREFRAME
     func presentStudyDetailScreen(from view: SearchStudyResultViewProtocol, keyValue: Int, state: Bool)
 }
-

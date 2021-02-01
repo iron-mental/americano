@@ -24,6 +24,6 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     }
     
     func didTapCell(keyValue: Int, state: Bool) {
-            wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
+        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
     }
 }
