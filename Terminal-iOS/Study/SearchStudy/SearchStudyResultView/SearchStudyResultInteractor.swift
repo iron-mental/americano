@@ -8,10 +8,12 @@
 
 import Foundation
 
-class SearchStudyResultInteractor: SearchStudyResultInteractorProtocol {
-    var presenter: SearchStudyResultPresenterProtocol?
-    var remoteDataManager: SearchStudyResultRemoteDataManagerProtocol?
-    var localDataManager: SearchStudyResultLocalDataManagerProtocol?
+class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
+    var presenter: SearchStudyResultInteractorOutputProtocol?
+    var remoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol?
+    
+    var studyList: [Study] = []
+    var isPagingStudyList: [Int] = []
     
     func getSearchStudyResult(keyWord: String) {
         remoteDataManager?.getSearchStudyResult(keyWord: keyWord)
@@ -20,9 +22,15 @@ class SearchStudyResultInteractor: SearchStudyResultInteractorProtocol {
     func showSearchStudyResult(result: BaseResponse<[Study]>) {
         switch result.result {
         case true:
-            presenter?.showSearchStudyResult(result: result.data!)
+            if let itemList = result.data {
+                self.studyList = itemList.filter { !$0.isPaging! }
+                self.isPagingStudyList = (itemList.filter { $0.isPaging! }).map { $0.id }
+            }
+            presenter?.showSearchStudyResult(result: studyList)
         case false:
             print("err")
         }
     }
 }
+
+
