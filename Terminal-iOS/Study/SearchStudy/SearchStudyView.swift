@@ -29,6 +29,11 @@ class SearchStudyView: UIViewController {
         layout()
     }
     
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        searchController.isActive = true
+//    }
+    
     func attribute() {
         self.searchController.do {
             $0.obscuresBackgroundDuringPresentation = false
@@ -36,6 +41,7 @@ class SearchStudyView: UIViewController {
             $0.hidesNavigationBarDuringPresentation = false
             navigationItem.titleView = searchController.searchBar
             $0.searchBar.delegate = self
+//            $0.delegate = self
         }
         self.view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -55,7 +61,7 @@ class SearchStudyView: UIViewController {
     
     func layout() {
         [hotLable, collectionView].forEach { self.view.addSubview($0) }
-       
+        
         self.hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
@@ -152,3 +158,11 @@ extension SearchStudyView: UISearchBarDelegate {
         presenter?.didSearchButtonClicked(keyword: searchBar.text!)
     }
 }
+
+//extension SearchStudyView: UISearchControllerDelegate {
+//    func didPresentSearchController(_ searchController: UISearchController) {
+//        DispatchQueue.main.async {
+//            searchController.searchBar.becomeFirstResponder()
+//        }
+//    }
+//}
