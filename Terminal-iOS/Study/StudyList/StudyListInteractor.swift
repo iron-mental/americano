@@ -16,8 +16,8 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
     var lengthNewKeyValue: [Int] = []
     
     weak var presenter: StudyListInteractorOutputProtocol?
-    weak var localDataManager: StudyListLocalDataManagerInputProtocol?
-    weak var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
+    var localDataManager: StudyListLocalDataManagerInputProtocol?
+    var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
     
     func retrieveStudyList(category: String) {
         remoteDataManager?.retrieveLatestStudyList(category: category)

@@ -132,6 +132,11 @@ class StudyCell: UITableViewCell {
             $0.font = UIFont.notosansMedium(size: 15)
             $0.textAlignment = .center
         }
+        
+        self.mainImage.do {
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = 10
+        }
     }
     
     func layout() {
