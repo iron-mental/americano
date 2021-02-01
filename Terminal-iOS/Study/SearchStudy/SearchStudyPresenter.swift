@@ -9,11 +9,28 @@
 import Foundation
 
 class SearchStudyPresenter: SearchStudyPresenterProtocol {
-    var view: SearchStudyViewProtocol?
-    var interactor: SearchStudyInteractorProtocol?
+    weak var view: SearchStudyViewProtocol?
+    var interactor: SearchStudyInteractorInputProtocol?
     var wireFrame: SearchStudyWireFrameProtocol?
     
     func didSearchButtonClicked(keyword: String) {
         wireFrame?.goToSearchStudyRestult(from: view!, keyword: keyword)
+    }
+    
+    func viewDidLoad() {
+        view?.showLoading()
+        interactor?.getHotKeyword()
+    }
+}
+
+extension SearchStudyPresenter: SearchStudyInteractorOutputProtocol {
+    func getHotKeywordSuccess(keyword: [HotKeyword]) {
+        view?.hideLoading()
+        view?.showHotkeyword(keyword: keyword)
+    }
+    
+    func getHotKeywordFailure(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

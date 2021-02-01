@@ -24,7 +24,7 @@ class SearchStudyView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.searchBar.becomeFirstResponder()
-        didload()
+        presenter?.viewDidLoad()
         attribute()
         layout()
     }
@@ -51,29 +51,6 @@ class SearchStudyView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
         }
-    }
-    
-    //나중에 옮겨야함
-    func didload() {
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.hotKeyword)
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<[HotKeyword]>.self, from: data!)
-                    if let keyword = result.data {
-                        self.keyword = keyword
-                        self.collectionView.reloadData()
-                    }
-                case .failure(let err):
-                    print(err)
-                }
-            }
     }
     
     func layout() {
@@ -152,7 +129,22 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
 }
 
 extension SearchStudyView: SearchStudyViewProtocol {
+    func showHotkeyword(keyword: [HotKeyword]) {
+        self.keyword = keyword
+        collectionView.reloadData()
+    }
     
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
+    }
 }
 
 extension SearchStudyView: UISearchBarDelegate {
