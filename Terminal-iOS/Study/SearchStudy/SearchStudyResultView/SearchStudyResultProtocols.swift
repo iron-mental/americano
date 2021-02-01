@@ -14,7 +14,7 @@ protocol SearchStudyResultViewProtocol: class {
     //PRESENTER -> VIEW
     func showLoading()
     func hideLoading()
-    func showSearchStudyResult(result: [Study])
+    func showSearchStudyListResult(result: [Study])
 }
 
 protocol SearchStudyResultPresenterProtocol: class {
@@ -25,6 +25,7 @@ protocol SearchStudyResultPresenterProtocol: class {
     //VIEW -> PRESENTER
     func returnDidTap(keyWord: String)
     func didTapCell(keyValue: Int, state: Bool)
+    func scrollGettingBottom()
 }
 
 protocol SearchStudyResultInteractorInputProtocol: class {
@@ -32,23 +33,27 @@ protocol SearchStudyResultInteractorInputProtocol: class {
     var remoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
-    func getSearchStudyResult(keyWord: String)
+    func getSearchStudyList(keyWord: String)
+    func getPagingStudyList()
 }
 
 protocol SearchStudyResultInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
-    func showSearchStudyResult(result: [Study])
+    func showSearchStudyListResult(result: [Study])
+    func showPagingStudyListResult(result: [Study])
 }
 
 protocol SearchStudyResultRemoteDataManagerInputProtocol: class {
     var interactor: SearchStudyResultRemoteDataManagerOutputProtocol? { get set }
     //INTERACTOR -> REMOTEDATAMANAGER
-    func getSearchStudyResult(keyWord: String)
+    func getSearchStudyList(keyWord: String)
+    func getPagingStudyList(keys: [Int])
 }
 
 protocol SearchStudyResultRemoteDataManagerOutputProtocol: class {
     //DATAMANAGER -> INTERACTOR
-    func showSearchStudyResult(result: BaseResponse<[Study]>)
+    func showSearchStudyListResult(result: BaseResponse<[Study]>)
+    func showPagingStudyListResult(result: BaseResponse<[Study]>)
 }
 
 protocol SearchStudyResultWireFrameProtocol: class {
