@@ -11,6 +11,10 @@ import Then
 import SwiftyJSON
 
 class SearchStudyView: UIViewController {
+    deinit {
+        searchController.isActive = false
+    }
+    
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
     let hotLable = UILabel()
@@ -29,10 +33,10 @@ class SearchStudyView: UIViewController {
         layout()
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        searchController.isActive = true
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchController.isActive = true
+    }
     
     func attribute() {
         self.searchController.do {
@@ -41,7 +45,7 @@ class SearchStudyView: UIViewController {
             $0.hidesNavigationBarDuringPresentation = false
             navigationItem.titleView = searchController.searchBar
             $0.searchBar.delegate = self
-//            $0.delegate = self
+            $0.delegate = self
         }
         self.view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -159,10 +163,11 @@ extension SearchStudyView: UISearchBarDelegate {
     }
 }
 
-//extension SearchStudyView: UISearchControllerDelegate {
-//    func didPresentSearchController(_ searchController: UISearchController) {
-//        DispatchQueue.main.async {
-//            searchController.searchBar.becomeFirstResponder()
-//        }
-//    }
-//}
+extension SearchStudyView: UISearchControllerDelegate {
+    func didPresentSearchController(_ searchController: UISearchController) {
+        DispatchQueue.main.async {
+            searchController.searchBar.becomeFirstResponder()
+            self.hideLoading()
+        }
+    }
+}
