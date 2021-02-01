@@ -10,29 +10,49 @@ import UIKit
 
 protocol SearchStudyViewProtocol: class {
     var presenter: SearchStudyPresenterProtocol? { get set }
-}
-
-protocol SearchStudyInteractorProtocol: class {
-    var presenter: SearchStudyPresenterProtocol? { get set }
-    var remoteDataManager: SearchStudyRemoteDataManagerProtocol? { get set }
-    var localDataManager: SearchStudyLocalDataManagerProtocol? { get set }
+    
+    func showHotkeyword(keyword: [HotKeyword])
+    func showError(message: String)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol SearchStudyPresenterProtocol: class {
     var view: SearchStudyViewProtocol? { get set }
-    var interactor: SearchStudyInteractorProtocol? { get set }
+    var interactor: SearchStudyInteractorInputProtocol? { get set }
     var wireFrame: SearchStudyWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
     func didSearchButtonClicked(keyword: String)
+    func viewDidLoad()
 }
 
-protocol SearchStudyRemoteDataManagerProtocol: class {
+protocol SearchStudyInteractorInputProtocol: class {
+    var presenter: SearchStudyInteractorOutputProtocol? { get set }
+    var remoteDataManager: SearchStudyRemoteDataManagerInputProtocol? { get set }
     
+    //PRESENTER -> INTERACTOR
+    func getHotKeyword()
 }
 
-protocol SearchStudyLocalDataManagerProtocol: class {
+protocol SearchStudyInteractorOutputProtocol: class {
     
+    //INTERACTOR -> PRESENTER
+    func getHotKeywordSuccess(keyword: [HotKeyword])
+    func getHotKeywordFailure(message: String)
+}
+
+protocol SearchStudyRemoteDataManagerInputProtocol: class {
+    var interactor: SearchStudyRemoteDataManagerOutputProtocol? { get set }
+    
+    //INTERACTOR -> REMOTEDATAMANAGER
+    func getHotKeyword()
+}
+
+protocol SearchStudyRemoteDataManagerOutputProtocol: class {
+    
+    //REMOTEDATAMANAGER -> INTERACTOR
+    func getHotKeywordResult(response: BaseResponse<[HotKeyword]>)
 }
 
 protocol SearchStudyWireFrameProtocol: class {
