@@ -9,8 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerProtocol {
-    var interactor: SearchStudyResultInteractorProtocol?
+class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol {
+    var interactor: SearchStudyResultRemoteDataManagerOutputProtocol?
     
     func getSearchStudyResult(keyWord: String) {
         

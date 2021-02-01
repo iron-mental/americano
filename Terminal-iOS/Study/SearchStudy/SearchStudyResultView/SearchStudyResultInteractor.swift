@@ -18,7 +18,9 @@ class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
     func getSearchStudyResult(keyWord: String) {
         remoteDataManager?.getSearchStudyResult(keyWord: keyWord)
     }
-    
+}
+
+extension SearchStudyResultInteractor: SearchStudyResultRemoteDataManagerOutputProtocol {
     func showSearchStudyResult(result: BaseResponse<[Study]>) {
         switch result.result {
         case true:
@@ -26,11 +28,10 @@ class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
                 self.studyList = itemList.filter { !$0.isPaging! }
                 self.isPagingStudyList = (itemList.filter { $0.isPaging! }).map { $0.id }
             }
-            presenter?.showSearchStudyResult(result: studyList)
+            self.presenter?.showSearchStudyResult(result: studyList)
         case false:
             print("err")
         }
     }
 }
-
 

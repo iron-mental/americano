@@ -10,7 +10,7 @@ import Foundation
 
 class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     var view: SearchStudyResultViewProtocol?
-    var interactor: SearchStudyResultInteractorProtocol?
+    var interactor: SearchStudyResultInteractorInputProtocol?
     var wireFrame: SearchStudyResultWireFrameProtocol?
     
     func returnDidTap(keyWord: String) {
@@ -18,12 +18,14 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
         interactor?.getSearchStudyResult(keyWord: keyWord)
     }
     
+    func didTapCell(keyValue: Int, state: Bool) {
+        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
+    }
+}
+
+extension SearchStudyResultPresenter: SearchStudyResultInteractorOutputProtocol {
     func showSearchStudyResult(result: [Study]) {
         view?.hideLoading()
         view?.showSearchStudyResult(result: result)
-    }
-    
-    func didTapCell(keyValue: Int, state: Bool) {
-        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
     }
 }
