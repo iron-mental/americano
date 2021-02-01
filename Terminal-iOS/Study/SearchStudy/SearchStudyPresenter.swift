@@ -25,12 +25,10 @@ class SearchStudyPresenter: SearchStudyPresenterProtocol {
 
 extension SearchStudyPresenter: SearchStudyInteractorOutputProtocol {
     func getHotKeywordSuccess(keyword: [HotKeyword]) {
-        view?.hideLoading()
         view?.showHotkeyword(keyword: keyword)
     }
     
     func getHotKeywordFailure(message: String) {
-        view?.hideLoading()
         view?.showError(message: message)
     }
 }
