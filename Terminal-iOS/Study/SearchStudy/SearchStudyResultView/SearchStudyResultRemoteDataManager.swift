@@ -12,7 +12,7 @@ import SwiftyJSON
 class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol {
     var interactor: SearchStudyResultRemoteDataManagerOutputProtocol?
     
-    func getSearchStudyResult(keyWord: String) {
+    func getSearchStudyList(keyWord: String) {
         
         TerminalNetworkManager
             .shared
@@ -26,11 +26,16 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
                     
-                    self.interactor?.showSearchStudyResult(result: result)
+                    self.interactor?.showSearchStudyListResult(result: result)
                 case .failure(let err):
                     
                     print(err)
                 }
             }
     }
+    
+    func getPagingStudyList(keys: [Int]) {
+        print(keys)
+    }
+    
 }

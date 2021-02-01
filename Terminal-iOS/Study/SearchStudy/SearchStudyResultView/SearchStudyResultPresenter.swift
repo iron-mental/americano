@@ -15,17 +15,26 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     
     func returnDidTap(keyWord: String) {
         view?.showLoading()
-        interactor?.getSearchStudyResult(keyWord: keyWord)
+        interactor?.getSearchStudyList(keyWord: keyWord)
     }
     
     func didTapCell(keyValue: Int, state: Bool) {
         wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
     }
+    
+    func scrollToBottom() {
+        interactor?.getPagingStudyList()
+    }
+    
 }
 
 extension SearchStudyResultPresenter: SearchStudyResultInteractorOutputProtocol {
-    func showSearchStudyResult(result: [Study]) {
+    func showSearchStudyListResult(result: [Study]) {
         view?.hideLoading()
-        view?.showSearchStudyResult(result: result)
+        view?.showSearchStudyListResult(result: result)
+    }
+    
+    func showPagingStudyListResult(result: [Study]) {
+        view?.showSearchStudyListResult(result: result)
     }
 }

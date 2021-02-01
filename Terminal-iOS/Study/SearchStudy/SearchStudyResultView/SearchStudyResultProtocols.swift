@@ -25,7 +25,7 @@ protocol SearchStudyResultPresenterProtocol: class {
     //VIEW -> PRESENTER
     func returnDidTap(keyWord: String)
     func didTapCell(keyValue: Int, state: Bool)
-    func scrollGettingBottom()
+    func scrollToBottom()
 }
 
 protocol SearchStudyResultInteractorInputProtocol: class {

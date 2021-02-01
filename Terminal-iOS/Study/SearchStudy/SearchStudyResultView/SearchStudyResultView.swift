@@ -38,6 +38,7 @@ class SearchStudyResultView: UIViewController {
         self.studyListTableView.do {
             $0.delegate = self
             $0.dataSource = self
+            $0.prefetchDataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
             $0.rowHeight = 105
@@ -61,7 +62,14 @@ class SearchStudyResultView: UIViewController {
     }
 }
 
-extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
+extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths {
+            if searchResult.count - 1 == indexPath.row {
+                presenter?.scrollToBottom()
+            }
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResult.count
     }
@@ -96,7 +104,7 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
         }
     }
     
-    func showSearchStudyResult(result: [Study]) {
+    func showSearchStudyListResult(result: [Study]) {
         
         searchResult = result
         studyListTableView.reloadData()
