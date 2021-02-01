@@ -8,17 +8,17 @@
 
 import UIKit
 
-protocol SearchStudyViewProtocol {
+protocol SearchStudyViewProtocol: class {
     var presenter: SearchStudyPresenterProtocol? { get set }
 }
 
-protocol SearchStudyInteractorProtocol {
+protocol SearchStudyInteractorProtocol: class {
     var presenter: SearchStudyPresenterProtocol? { get set }
     var remoteDataManager: SearchStudyRemoteDataManagerProtocol? { get set }
     var localDataManager: SearchStudyLocalDataManagerProtocol? { get set }
 }
 
-protocol SearchStudyPresenterProtocol {
+protocol SearchStudyPresenterProtocol: class {
     var view: SearchStudyViewProtocol? { get set }
     var interactor: SearchStudyInteractorProtocol? { get set }
     var wireFrame: SearchStudyWireFrameProtocol? { get set }
@@ -27,15 +27,15 @@ protocol SearchStudyPresenterProtocol {
     func didSearchButtonClicked(keyword: String)
 }
 
-protocol SearchStudyRemoteDataManagerProtocol {
+protocol SearchStudyRemoteDataManagerProtocol: class {
     
 }
 
-protocol SearchStudyLocalDataManagerProtocol {
+protocol SearchStudyLocalDataManagerProtocol: class {
     
 }
 
-protocol SearchStudyWireFrameProtocol {
+protocol SearchStudyWireFrameProtocol: class {
     static func createSearchStudyModule() -> UIViewController
     
     //PRESENTER -> WIREFRAME
