@@ -15,6 +15,7 @@ protocol SearchStudyResultViewProtocol: class {
     func showLoading()
     func hideLoading()
     func showSearchStudyListResult(result: [Study])
+    func showPagingStudyListResult(result: [Study])
 }
 
 protocol SearchStudyResultPresenterProtocol: class {

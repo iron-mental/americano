@@ -35,6 +35,6 @@ extension SearchStudyResultPresenter: SearchStudyResultInteractorOutputProtocol 
     }
     
     func showPagingStudyListResult(result: [Study]) {
-        view?.showSearchStudyListResult(result: result)
+        view?.showPagingStudyListResult(result: result)
     }
 }
