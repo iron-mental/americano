@@ -11,7 +11,7 @@ import SwiftyJSON
 import SwiftKeychainWrapper
 
 class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
-    var presenter: MyApplyListInteractorOutputProtocol?
+    weak var presenter: MyApplyListInteractorOutputProtocol?
     
     func getApplyList() {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }

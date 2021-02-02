@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ModifyStudyViewProtocol {
+protocol ModifyStudyViewProtocol: class {
     var presenter: ModifyStudyPresenterProtocol? { get set }
     var study: StudyDetail? { get set }
     //PRESENTER -> VIEW
@@ -16,7 +16,7 @@ protocol ModifyStudyViewProtocol {
     func showError()
 }
 
-protocol ModifyStudyPresenterProtocol {
+protocol ModifyStudyPresenterProtocol: class {
     var view: ModifyStudyViewProtocol? { get set }
     var wireFrame: ModifyStudyWireFrameProtocol? { get set }
     var interactor: ModifyStudyInteractorInputProtocol? { get set }
@@ -26,7 +26,7 @@ protocol ModifyStudyPresenterProtocol {
     func clickLocationView(currentView: UIViewController)
 }
 
-protocol ModifyStudyInteractorInputProtocol {
+protocol ModifyStudyInteractorInputProtocol: class {
     var presenter: ModifyStudyInteractorOutputProtocol? { get set }
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol? { get set }
     var currentStudy: StudyDetail? { get set }
@@ -35,24 +35,24 @@ protocol ModifyStudyInteractorInputProtocol {
     func putStudyInfo(studyID: Int, study: StudyDetailPost)
 }
 
-protocol ModifyStudyInteractorOutputProtocol {
+protocol ModifyStudyInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func putStudyInfoResult(result: Bool, message: String)
 }
 
-protocol ModifyStudyRemoteDataManagerInputProtocol {
+protocol ModifyStudyRemoteDataManagerInputProtocol: class {
     var interactor: ModifyStudyRemoteDataManagerOutputProtocol? { get set }
     
     //INTERACTOR -> REMOTEDATAMANAGER
     func putStudyInfo(studyID: Int, study: StudyDetailPost)
 }
 
-protocol ModifyStudyRemoteDataManagerOutputProtocol {
+protocol ModifyStudyRemoteDataManagerOutputProtocol: class {
     //REMOTEDATAMANAGER -> INTERACTOR
     func putStudyInfoResult(result: Bool, message: String)
 }
 
-protocol ModifyStudyWireFrameProtocol {
+protocol ModifyStudyWireFrameProtocol: class {
     static func createModifyStudyModule(study: StudyDetail, parentView: UIViewController) -> UIViewController
     
     //PRESENTER -> WIREFRAME

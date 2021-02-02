@@ -15,7 +15,7 @@ protocol ChatViewProtocol: UIViewController {
     func showMessage(message: String)
 }
 
-protocol ChatInteractorProtocol {
+protocol ChatInteractorProtocol: class {
     var presenter: ChatPresenterProtocol? { get set }
     var remoteDataManager: ChatRemoteDataManagerProtocol? { get set }
     var localDataManager: ChatLocalDataManagerProtocol? { get set }
@@ -29,7 +29,7 @@ protocol ChatInteractorProtocol {
     func receiveMessage(message: String)
 }
 
-protocol ChatPresenterProtocol {
+protocol ChatPresenterProtocol: class {
     var view: ChatViewProtocol? { get set }
     var wireFrame: ChatWireFrameProtocol? { get set }
     var interactor: ChatInteractorProtocol? { get set }
@@ -43,18 +43,18 @@ protocol ChatPresenterProtocol {
     func showReceiveMessage(message: String)
 }
 
-protocol ChatRemoteDataManagerProtocol {
+protocol ChatRemoteDataManagerProtocol: class {
     var interactor: ChatInteractorProtocol? { get set }
     func connectSocket()
     func emit(message: String)
     func disconnectSocket()
 }
 
-protocol ChatLocalDataManagerProtocol {
+protocol ChatLocalDataManagerProtocol: class {
     
 }
 
-protocol ChatWireFrameProtocol {
+protocol ChatWireFrameProtocol: class{
     var presenter: ChatPresenterProtocol? { get set }
     static func createChatModule() -> UIViewController
 }

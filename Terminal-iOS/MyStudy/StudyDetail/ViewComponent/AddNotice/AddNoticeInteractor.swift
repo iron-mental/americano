@@ -9,7 +9,7 @@
 import Foundation
 
 class AddNoticeInteractor: AddNoticeInteractorProtocol {
-    var presenter: AddNoticePresenterProtocol?
+    weak var presenter: AddNoticePresenterProtocol?
     var remoteDataManager: AddNoticeRemoteDataManagerProtocol?
     var localDataManager: AddNoticeLocalDataManagerProtocol?
     

@@ -11,7 +11,7 @@ import SwiftyJSON
 import SwiftKeychainWrapper
 
 class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
-    var presenter: ApplyUserInteractorOutputProtocol?
+    weak var presenter: ApplyUserInteractorOutputProtocol?
     var studyID: Int?
     
     func getApplyList(studyID: Int) {

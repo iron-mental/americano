@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol {
-    var interactor: DelegateHostRemoteDataManagerOutputProtocol?
+    weak var interactor: DelegateHostRemoteDataManagerOutputProtocol?
     
     func putDelegateHostAPI(studyID: Int, newLeader: Int) {
         

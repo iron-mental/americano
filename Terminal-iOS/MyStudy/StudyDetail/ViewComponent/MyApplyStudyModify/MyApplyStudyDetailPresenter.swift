@@ -9,7 +9,7 @@
 import Foundation
 
 class MyApplyStudyModifyPresenter: MyApplyStudyModifyPresenterInputProtocol {
-    var view: MyApplyStudyModifyViewProtocol?
+    weak var view: MyApplyStudyModifyViewProtocol?
     var interactor: MyApplyStudyModifyInteractorInputProtocol?
     var wireFrame: MyApplyStudyModifyWireFrameProtocol?
     

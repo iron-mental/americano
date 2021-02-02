@@ -30,18 +30,25 @@ class MyStudyMainTableViewCell: UITableViewCell {
         }
         studyMainimage.do {
             $0.image = #imageLiteral(resourceName: "swiftmain")
-            $0.contentMode = .scaleAspectFit
+            $0.contentMode = .scaleAspectFill
             $0.layer.masksToBounds = true
-            $0.layer.cornerRadius = 5
+            $0.layer.cornerRadius = 8
+            $0.alpha = 0.8
         }
         locationLabel.do {
             $0.text = "사당역 스타벅스"
             $0.textColor = UIColor.appColor(.mainColor)
-            $0.font = $0.font.withSize(14 * (parentFrame.height / 667))
+            $0.font = UIFont.notosansMedium(size: 15)
+            $0.layer.borderWidth = 0.5
+            $0.layer.borderColor = UIColor.appColor(.mainColor).cgColor
+            $0.layer.cornerRadius = 8
+            $0.layer.masksToBounds = true
+            $0.textAlignment = .center
         }
         titleLabel.do {
             $0.text = "Swift 정복하기"
-            $0.font = $0.font.withSize(16 * (parentFrame.height / 667))
+            $0.font = UIFont.notosansBold(size: 30)
+            $0.textColor = UIColor.appColor(.profileTextColor)
         }
         notiGuideView.do {
             $0.layer.cornerRadius = Terminal.convertWidth(value: 10) / 2
@@ -71,15 +78,12 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor, constant: (15/667) * parentFrame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: studyMainimage.trailingAnchor, constant: (23/375) * parentFrame.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (20/667) * parentFrame.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (200/375) * parentFrame.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: $0.intrinsicContentSize.height + 5).isActive = true
         }
         titleLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -(15/667) * parentFrame.height).isActive = true
+            $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: (3/667) * parentFrame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: studyMainimage.trailingAnchor, constant: (23/375) * parentFrame.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (20/667) * parentFrame.height).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (200/375) * parentFrame.width).isActive = true
         }
         checkBox.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -88,13 +92,13 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
         }
-        notiGuideView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: checkBox.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 10)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 10)).isActive = true
-        }
+//        notiGuideView.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: checkBox.centerXAnchor).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 10)).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 10)).isActive = true
+//        }
     }
     
     required init?(coder: NSCoder) {

@@ -39,7 +39,7 @@ class StudyDetailView: UIViewController {
             attribute()
         }
     }
-    var parentView: MyStudyDetailViewProtocol?
+    weak var parentView: MyStudyDetailViewProtocol?
     var scrollView = UIScrollView()
     var tempBackgroundView = UIView()
     let picker = UIImagePickerController()

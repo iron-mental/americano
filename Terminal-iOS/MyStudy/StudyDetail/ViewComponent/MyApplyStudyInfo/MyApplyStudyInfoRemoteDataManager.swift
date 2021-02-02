@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class MyApplyStudyInfoRemoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol {
-    var interactor: MyApplyStudyInfoRemoteDataManagerOutputProtocol?
+    weak var interactor: MyApplyStudyInfoRemoteDataManagerOutputProtocol?
     
     func deleteApply(studyID: Int, applyID: Int) {
         

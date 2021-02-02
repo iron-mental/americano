@@ -8,21 +8,21 @@
 
 import Foundation
 
-protocol BaseProfileViewProtocol {
+protocol BaseProfileViewProtocol: class {
     func showUserInfo(userInfo: UserInfo)
     func addProjectToStackView(project: [Project])
     func showLoading()
     func hideLoading()
 }
 
-protocol BaseProfileRemoteDataManagerInputProtocol {
+protocol BaseProfileRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol? { get set }
     
     func getUserInfo()
     func getProjectList()
 }
 
-protocol BaseProfileRemoteDataManagerOutputProtocol {
+protocol BaseProfileRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
     func onProjectRetrieved(project: BaseResponse<[Project]>)

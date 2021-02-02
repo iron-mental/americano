@@ -9,7 +9,7 @@
 import UIKit
 
 class DelegateHostPresenter: DelegateHostPresenterProtocol {
-    var view: DelegateHostViewProtocol?
+    weak var view: DelegateHostViewProtocol?
     var interactor: DelegateHostInteractorInputProtocol?
     var wireFrame: DelegateHostWireFrameProtocol?
     

@@ -10,6 +10,10 @@ import UIKit
 import SwiftKeychainWrapper
 
 class MyStudyDetailView: UIViewController {
+    deinit {
+        print("detail")
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
     var presenter: MyStudyDetailPresenterProtocol?
     var noticePushEvent: Bool = false
     var getPushEvent: Bool = false
@@ -53,7 +57,10 @@ class MyStudyDetailView: UIViewController {
         self.do {
             $0.title = studyInfo?.title ?? nil
         }
-        if let firstVC = VCArr.first{
+        navigationController?.do {
+            $0.navigationBar.prefersLargeTitles = true
+        }
+        if let firstVC = VCArr.first {
             childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
         let appearance = UINavigationBarAppearance()

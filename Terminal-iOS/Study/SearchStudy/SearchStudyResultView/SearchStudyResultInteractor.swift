@@ -13,7 +13,7 @@ class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
     var remoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol?
     var studyList: [Study] = []
     var isPagingStudyList: [Int] = []
-    
+    var test: [Any] = []
     func getSearchStudyList(keyWord: String) {
         remoteDataManager?.getSearchStudyList(keyWord: keyWord)
     }
@@ -41,6 +41,9 @@ extension SearchStudyResultInteractor: SearchStudyResultRemoteDataManagerOutputP
             if let itemList = result.data {
                 self.studyList = itemList.filter { !$0.isPaging! }
                 self.isPagingStudyList = (itemList.filter { $0.isPaging! }).map { $0.id }
+                for item in itemList where item.isPaging! {
+                    self.isPagingStudyList.append(item.id)
+                }
             }
             self.presenter?.showSearchStudyListResult(result: studyList)
         case false:

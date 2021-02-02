@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
-    var interactor: MyStudyDetailInteractorProtocol?
+    weak var interactor: MyStudyDetailInteractorProtocol?
     
     func postLeaveStudyAPI(studyID: Int) {
         //데이터 로직 인터렉터로 옮겨야됨
@@ -25,12 +25,9 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
                 case .success(let value):
                     let json = "\(JSON(value))".data(using: .utf8)
                     let result: BaseResponse = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: json!)
-                    self.interactor?.leaveStudyResult(result: result.result, message: result.message!)
-                    
-                    break
+                    self.interactor?.leaveStudyResult(result: result.result, message: result.message!)       
                 case .failure(let err):
-                    
-                    break
+                    print(err.localizedDescription)
                 }
             }
     }

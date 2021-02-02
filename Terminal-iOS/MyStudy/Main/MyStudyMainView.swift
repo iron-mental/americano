@@ -21,10 +21,8 @@ class MyStudyMainView: UIViewController {
     
     var presenter: MyStudyMainPresenterProtocol?
     var state: MyStudyMainViewState = .normal
-    
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
-    
     var alarmButton = BadgeBarButtonItem()
     var tempButton: UIBarButtonItem?
     var rightBarButtomItem: UIBarButtonItem?
@@ -114,7 +112,7 @@ class MyStudyMainView: UIViewController {
         let applyList =  UIAlertAction(title: "스터디 신청 목록", style: .default) {_ in self.applyList() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [edit, applyList,cancel].forEach { alert.addAction($0) }
+        [edit, applyList, cancel].forEach { alert.addAction($0) }
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -161,11 +159,11 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyStudyMainTableViewCell.identifier) as! MyStudyMainTableViewCell
+        
         switch state {
         case .normal:
             cell.checkBox.isHidden = true
             cell.notiGuideView.isHidden = false
-            break
         case .edit:
             cell.checkBox.isHidden = false
             cell.notiGuideView.isHidden = true
@@ -174,12 +172,11 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
             } else {
                 cell.checkBox.backgroundColor = .appColor(.testColor)
             }
-            break
         }
         
         cell.locationLabel.text = myStudyList[indexPath.row].sigungu
         cell.titleLabel.text = myStudyList[indexPath.row].title
-        
+        cell.locationLabel.widthAnchor.constraint(equalToConstant: cell.locationLabel.intrinsicContentSize.width + 10).isActive = true
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
@@ -205,14 +202,12 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
         switch state {
         case .normal:
             presenter?.didClickedCellForDetail(view: self, selectedStudy: myStudyList[indexPath.row])
-            break
         case .edit:
             if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
                 tempArrayForCheck.remove(at: tempArrayForCheck.firstIndex(of: myStudyList[indexPath.row].id)!)
             } else {
                 tempArrayForCheck.append(myStudyList[indexPath.row].id)
             }
-            break
         }
         tableView.reloadData()
     }

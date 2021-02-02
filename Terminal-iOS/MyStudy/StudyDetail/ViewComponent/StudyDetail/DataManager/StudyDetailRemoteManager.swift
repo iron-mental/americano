@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
-    var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
+    weak var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
     
      func getStudyDetail(studyID: String, completionHandler: @escaping (StudyDetail) -> Void) {
         TerminalNetworkManager

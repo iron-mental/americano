@@ -9,10 +9,7 @@
 import UIKit
 
 class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
-    
-    
-    
-    var view: NoticeDetailViewProtocol?
+    weak var view: NoticeDetailViewProtocol?
     var interactor: NoticeDetailInteractorProtocol?
     var wireFrame: NoticeDetailWireFrameProtocol?
     
@@ -24,10 +21,8 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
         switch result {
         case true:
             view?.showNoticeDetail(notice: notice)
-            break
         case false:
             view?.showError(message: "권한이 없습니다.")
-            break
         }
     }
     func removeButtonDidTap(notice: Notice) {

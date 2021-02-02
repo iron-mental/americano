@@ -9,7 +9,7 @@
 import Foundation
 
 class ApplyUserDetailInteractor: ApplyUserDetailInteractorInputProtocol {
-    var presenter: ApplyUserDetailInteractorOutputProtocol?
+    weak var presenter: ApplyUserDetailInteractorOutputProtocol?
     var remoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol?
     
     var studyID: Int?

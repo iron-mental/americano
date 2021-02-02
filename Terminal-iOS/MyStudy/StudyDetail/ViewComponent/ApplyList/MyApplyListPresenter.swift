@@ -9,7 +9,7 @@
 import Foundation
  
 class MyApplyListPresenter: MyApplyListPresenterProtocol {
-    var view: MyApplyListViewProtocol?
+    weak var view: MyApplyListViewProtocol?
     var interactor: MyApplyListInteractorInputProtocol?
     var wireFrame: MyApplyListWireFrameProtocol?
     
