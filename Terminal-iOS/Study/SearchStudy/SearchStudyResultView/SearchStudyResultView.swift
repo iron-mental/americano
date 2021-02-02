@@ -27,7 +27,7 @@ class SearchStudyResultView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         self.searchController.do {
-            $0.searchResultsUpdater = self
+//            $0.searchResultsUpdater = self
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false
             $0.hidesNavigationBarDuringPresentation = false
@@ -117,8 +117,8 @@ extension SearchStudyResultView: UISearchBarDelegate {
     }
 }
 
-extension SearchStudyResultView: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-//        <#code#>
-    }
-}
+//extension SearchStudyResultView: UISearchResultsUpdating {
+//    func updateSearchResults(for searchController: UISearchController) {
+////        <#code#>
+//    }
+//}
