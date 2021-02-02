@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol {
-    var interactor: SearchStudyResultRemoteDataManagerOutputProtocol?
+    weak var interactor: SearchStudyResultRemoteDataManagerOutputProtocol?
     
     func getSearchStudyList(keyWord: String) {
         

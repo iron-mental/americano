@@ -9,7 +9,7 @@
 import Foundation
 
 class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
-    var presenter: SearchStudyResultInteractorOutputProtocol?
+    weak var presenter: SearchStudyResultInteractorOutputProtocol?
     var remoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol?
     var studyList: [Study] = []
     var isPagingStudyList: [Int] = []
