@@ -43,7 +43,6 @@ class MyStudyMainView: UIViewController {
     func attribute() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        
         moreButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
         moreButton?.do {
             $0.image = #imageLiteral(resourceName: "more")
@@ -54,7 +53,9 @@ class MyStudyMainView: UIViewController {
             $0.title = "내 스터디"
             $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.navigationController?.navigationBar.barTintColor = UIColor.appColor(.terminalBackground)
+            $0.navigationItem.largeTitleDisplayMode = .automatic
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.navigationController?.navigationBar.prefersLargeTitles = true
         }
         tableView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)

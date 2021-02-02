@@ -11,8 +11,7 @@ import SwiftKeychainWrapper
 
 class MyStudyDetailView: UIViewController {
     deinit {
-        print("detail")
-        navigationController?.navigationBar.prefersLargeTitles = false
+        
     }
     var presenter: MyStudyDetailPresenterProtocol?
     var noticePushEvent: Bool = false
