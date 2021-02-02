@@ -8,19 +8,52 @@
 
 import Foundation
 
-class SearchStudyResultInteractor: SearchStudyResultInteractorProtocol {
-    var presenter: SearchStudyResultPresenterProtocol?
-    var remoteDataManager: SearchStudyResultRemoteDataManagerProtocol?
-    var localDataManager: SearchStudyResultLocalDataManagerProtocol?
+class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
+    var presenter: SearchStudyResultInteractorOutputProtocol?
+    var remoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol?
+    var studyList: [Study] = []
+    var isPagingStudyList: [Int] = []
     
-    func getSearchStudyResult(keyWord: String) {
-        remoteDataManager?.getSearchStudyResult(keyWord: keyWord)
+    func getSearchStudyList(keyWord: String) {
+        remoteDataManager?.getSearchStudyList(keyWord: keyWord)
     }
     
-    func showSearchStudyResult(result: BaseResponse<[Study]>) {
+    func getPagingStudyList() {
+        var nextStudyList: [Int] = []
+        for item in isPagingStudyList {
+            nextStudyList.append(item)
+            if nextStudyList.count > 9 {
+                break
+            }
+        }
+        if !isPagingStudyList.isEmpty {
+            isPagingStudyList.removeSubrange(0..<nextStudyList.count)
+            remoteDataManager?.getPagingStudyList(keys: nextStudyList)
+        }
+    }
+}
+
+extension SearchStudyResultInteractor: SearchStudyResultRemoteDataManagerOutputProtocol {
+    
+    func showSearchStudyListResult(result: BaseResponse<[Study]>) {
         switch result.result {
         case true:
-            presenter?.showSearchStudyResult(result: result.data!)
+            if let itemList = result.data {
+                self.studyList = itemList.filter { !$0.isPaging! }
+                self.isPagingStudyList = (itemList.filter { $0.isPaging! }).map { $0.id }
+            }
+            self.presenter?.showSearchStudyListResult(result: studyList)
+        case false:
+            print("err")
+        }
+    }
+    
+    func showPagingStudyListResult(result: BaseResponse<[Study]>) {
+        switch result.result {
+        case true:
+            if let itemList = result.data {
+                self.presenter?.showPagingStudyListResult(result: itemList)
+            }
         case false:
             print("err")
         }

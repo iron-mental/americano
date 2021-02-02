@@ -84,7 +84,6 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .removeWhitespace()
             
             let params: [String: Any] = [
-                "sort": "new",
                 "values": key
             ]
             
@@ -122,7 +121,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .removeWhitespace()
             
             let params: [String: Any] = [
-                "sort": "length",
+                "option": "distance",
                 "values": key
             ]
             

@@ -26,18 +26,22 @@ class SearchStudyResultView: UIViewController {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
+        navigationItem.do {
+            $0.titleView = searchController.searchBar
+        }
         self.searchController.do {
             $0.searchResultsUpdater = self
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false
             $0.hidesNavigationBarDuringPresentation = false
             $0.searchBar.text = keyword
-            navigationItem.titleView = searchController.searchBar
             $0.searchBar.delegate = self
         }
         self.studyListTableView.do {
             $0.delegate = self
             $0.dataSource = self
+            $0.prefetchDataSource = self
+            $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
             $0.rowHeight = 105
@@ -61,7 +65,12 @@ class SearchStudyResultView: UIViewController {
     }
 }
 
-extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
+extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths where searchResult.count - 1 == indexPath.row {
+            presenter?.scrollToBottom()
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResult.count
     }
@@ -74,8 +83,6 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let keyValue = searchResult[indexPath.row].id
-        //후에 서버에서 member처리해주면 그때 대응
-//        guard let state = searchResult[indexPath.row].isMember else { return }
         presenter?.didTapCell(keyValue: keyValue, state: searchResult[indexPath.row].isMember!)
     }
     
@@ -96,9 +103,15 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
         }
     }
     
-    func showSearchStudyResult(result: [Study]) {
-        
+    func showSearchStudyListResult(result: [Study], completion: @escaping () -> Void) {
         searchResult = result
+        studyListTableView.reloadData()
+        if !result.isEmpty { studyListTableView.scrollToRow(at: [0, 0], at: .none, animated: false) }
+        completion()
+    }
+    
+    func showPagingStudyListResult(result: [Study]) {
+        searchResult += result
         studyListTableView.reloadData()
     }
 }
@@ -112,6 +125,6 @@ extension SearchStudyResultView: UISearchBarDelegate {
 
 extension SearchStudyResultView: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-//        <#code#>
+//        
     }
 }

@@ -10,20 +10,32 @@ import Foundation
 
 class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     var view: SearchStudyResultViewProtocol?
-    var interactor: SearchStudyResultInteractorProtocol?
+    var interactor: SearchStudyResultInteractorInputProtocol?
     var wireFrame: SearchStudyResultWireFrameProtocol?
     
     func returnDidTap(keyWord: String) {
         view?.showLoading()
-        interactor?.getSearchStudyResult(keyWord: keyWord)
-    }
-    
-    func showSearchStudyResult(result: [Study]) {
-        view?.hideLoading()
-        view?.showSearchStudyResult(result: result)
+        interactor?.getSearchStudyList(keyWord: keyWord)
     }
     
     func didTapCell(keyValue: Int, state: Bool) {
-            wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
+        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
+    }
+    
+    func scrollToBottom() {
+        interactor?.getPagingStudyList()
+    }
+    
+}
+
+extension SearchStudyResultPresenter: SearchStudyResultInteractorOutputProtocol {
+    func showSearchStudyListResult(result: [Study]) {
+        view?.showSearchStudyListResult(result: result) {
+            self.view?.hideLoading()
+        }
+    }
+    
+    func showPagingStudyListResult(result: [Study]) {
+        view?.showPagingStudyListResult(result: result)
     }
 }
