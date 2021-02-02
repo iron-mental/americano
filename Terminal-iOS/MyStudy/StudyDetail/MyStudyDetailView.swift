@@ -282,7 +282,6 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     }
     
     func showDeleteStudyFailed(message: String) {
-        print("스터디 삭제 실패")
         showToast(controller: self, message: message, seconds: 1)
     }
 }
