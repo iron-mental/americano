@@ -22,6 +22,9 @@ final class ApplyUserView: UIViewController {
     }
     
     private func attribute() {
+        self.do {
+            $0.title = "신청자 목록"
+        }
         self.applyUserList.do {
             $0.rowHeight = 80
             $0.register(ApplyUserCell.self, forCellReuseIdentifier: ApplyUserCell.applyUserCellID)

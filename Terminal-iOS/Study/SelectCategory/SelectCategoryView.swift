@@ -9,10 +9,8 @@
 import UIKit
 
 class SelectCategoryView: UIViewController {
-    
     var presenter: SelectCategoryPresenterProtocol?
     var categoryList: [Category] = []
-    
     let scrollView = UIScrollView()
     let backgroundView = UIView()
     let collectionView: UICollectionView = {
@@ -20,7 +18,7 @@ class SelectCategoryView: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-    let font = UIFont(name:"Apple Color Emoji", size: 25)
+    let font = UIFont(name: "Apple Color Emoji", size: 25)
     let titleView = UILabel()
     let textLabel = UILabel()
     var tempCategory: String?
@@ -42,7 +40,6 @@ class SelectCategoryView: UIViewController {
         navigationItem.do {
             $0.titleView = titleView
         }
-        //추후에 스크롤뷰 위 백그라운드 뷰는 컴포넌트화 시켜서 코드를 줄여봅시다.
         scrollView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -54,7 +51,7 @@ class SelectCategoryView: UIViewController {
             $0.textColor = .white
             $0.frame = CGRect(x: 0, y: 0, width: 90, height: 35)
             let attributedStr = NSMutableAttributedString(string: textLabel.text ?? "empty")
-            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font, range: NSMakeRange(0, 7))
+            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font as Any, range: NSMakeRange(0, 7))
             textLabel.attributedText = attributedStr
         }
         collectionView.do {
@@ -73,6 +70,7 @@ class SelectCategoryView: UIViewController {
         scrollView.addSubview(backgroundView)
         backgroundView.addSubview(textLabel)
         backgroundView.addSubview(collectionView)
+        
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -86,7 +84,7 @@ class SelectCategoryView: UIViewController {
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 50).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 50).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
         textLabel.do {
@@ -112,12 +110,10 @@ class SelectCategoryView: UIViewController {
         //애니메이션은 task 단위로 묶어서 하나 하는 중일 때 하나 들어오면 그전 꺼 취소하거나 그런식으로..
         UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
             self.textLabel.transform = self.textLabel.transform.translatedBy(x: -490, y: 0)
-        })
-        { _ in
+        }) { _ in
             UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
                 self.textLabel.transform = self.textLabel.transform.translatedBy(x: 10, y: 0)
-            })
-            { _ in
+            }) { _ in
                 UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
                     self.textLabel.transform = self.textLabel.transform.translatedBy(x: -5, y: 0)
                 })
@@ -131,7 +127,7 @@ class SelectCategoryView: UIViewController {
         }) { _ in
             UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
                 self.collectionView.transform = self.collectionView.transform.translatedBy(x: 0, y: -60)
-            },completion: { _ in
+            }, completion: { _ in
                 self.navigationController?.popViewController(animated: false)
             })
         }
