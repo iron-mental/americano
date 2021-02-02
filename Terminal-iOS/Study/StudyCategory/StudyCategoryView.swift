@@ -12,7 +12,6 @@ import Then
 class StudyCategoryView: UIViewController {
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
-    
     let categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -75,15 +74,15 @@ extension StudyCategoryView: StudyCategoryViewProtocol {
     }
     
     func showError() {
-        
+        showToast(controller: self, message: "서버와의 연결이 불안정합니다.", seconds: 1)
     }
     
     func showLoading() {
-        
+        LoadingRainbowCat.show()
     }
     
     func hideLoading() {
-        
+        LoadingRainbowCat.hide()
     }
     
     func categoryDownAnimate() {

@@ -11,21 +11,21 @@ import UIKit
 class SearchStudyWireFrame: SearchStudyWireFrameProtocol {
     static func createSearchStudyModule() -> UIViewController {
         let view = SearchStudyView()
-        let interactor = SearchStudyInteractor()
-        let presenter = SearchStudyPresenter()
+        let interactor: SearchStudyInteractorInputProtocol & SearchStudyRemoteDataManagerOutputProtocol = SearchStudyInteractor()
+        let presenter: SearchStudyPresenterProtocol & SearchStudyInteractorOutputProtocol = SearchStudyPresenter()
         let remoteDataManager = SearchStudyRemoteDataManager()
-        let localDataManager = SearchStudyLocalDataManager()
         let wireFrame = SearchStudyWireFrame()
         
         view.presenter = presenter
         
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
-        interactor.localDataManager = localDataManager
         
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame
+        
+        remoteDataManager.interactor = interactor
         
         return view
     }
