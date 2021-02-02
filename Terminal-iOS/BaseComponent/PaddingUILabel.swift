@@ -9,10 +9,12 @@
 import UIKit
 
 class PaddingLabel: UILabel {
-    var padding: UIEdgeInsets = UIEdgeInsets(top: 15, left: 8, bottom: 15, right: 8)
+    var padding: UIEdgeInsets?
     
-    init() {
+    init(insets: UIEdgeInsets? = UIEdgeInsets(top: 15, left: 8, bottom: 15, right: 8)) {
         super.init(frame: CGRect.zero)
+
+        padding = insets
         attribute()
     }
     
@@ -27,14 +29,14 @@ class PaddingLabel: UILabel {
     }
     
     override func drawText(in rect: CGRect) {
-        let paddingRect = rect.inset(by: padding)
+        let paddingRect = rect.inset(by: padding!)
         super.drawText(in: paddingRect)
     }
     
     override var intrinsicContentSize: CGSize {
         var contentSize = super.intrinsicContentSize
-        contentSize.height += padding.top + padding.bottom
-        contentSize.width += padding.left + padding.right
+        contentSize.height += padding!.top + padding!.bottom
+        contentSize.width += padding!.left + padding!.right
         return contentSize
     }
     
