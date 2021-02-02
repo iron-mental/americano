@@ -10,17 +10,11 @@ import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
 
-enum MyStudyMainViewState {
-    case normal
-    case edit
-}
-
 // MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
 class MyStudyMainView: UIViewController {
     var applyState: Bool = false
     
     var presenter: MyStudyMainPresenterProtocol?
-    var state: MyStudyMainViewState = .normal
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
     var alarmButton = BadgeBarButtonItem()
@@ -73,28 +67,13 @@ class MyStudyMainView: UIViewController {
         alarmButton.do {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
         }
-        dismissEditViewButtonItem = UIBarButtonItem(title: "취소",
-                                                    style: .done,
-                                                    target: self,
-                                                    action: #selector(dismissEditViewButtonItemAction))
-        editDoneButton = UIBarButtonItem(title: "나가기",
-                                         style: .done,
-                                         target: self,
-                                         action: #selector(editDoneButtonAction))
         refreshControl.do {
             $0.addTarget(self, action: #selector(viewDidLoad), for: .valueChanged)
         }
     }
     
     func layout() {
-        switch state {
-        case .edit:
-            self.navigationItem.leftBarButtonItems = [dismissEditViewButtonItem!]
-            self.navigationItem.rightBarButtonItems = [editDoneButton!]
-        case .normal:
-            self.navigationItem.rightBarButtonItems = [moreButton!, alarmButton]
-        }
-        
+        self.navigationItem.rightBarButtonItems = [moreButton!, alarmButton]
         self.view.addSubview(self.tableView)
         
         self.tableView.do {
@@ -108,28 +87,11 @@ class MyStudyMainView: UIViewController {
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
         let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let edit =  UIAlertAction(title: "스터디 편집", style: .default) { _ in self.editButtonAction() }
         let applyList =  UIAlertAction(title: "스터디 신청 목록", style: .default) {_ in self.applyList() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [edit, applyList, cancel].forEach { alert.addAction($0) }
+        [ applyList, cancel].forEach { alert.addAction($0) }
         self.present(alert, animated: true, completion: nil)
-    }
-    
-    @objc func dismissEditViewButtonItemAction() {
-        self.navigationItem.leftBarButtonItems?.removeAll()
-        self.navigationItem.rightBarButtonItems?.removeAll()
-        state = .normal
-        layout()
-        tempArrayForCheck.removeAll()
-        tableView.reloadData()
-    }
-    
-    @objc func editButtonAction() {
-        self.navigationItem.rightBarButtonItems?.removeAll()
-        state = .edit
-        layout()
-        tableView.reloadData()
     }
     
     @objc func applyList() {
@@ -142,13 +104,6 @@ class MyStudyMainView: UIViewController {
         alarmButton.badgeLabel.text = "\(tempCountForBadge)"
         presenter?.showAlert()
     }
-    
-    @objc func editDoneButtonAction() {
-        tempArrayForCheck.forEach { checkedID in
-            myStudyList.remove(at: myStudyList.firstIndex(where: { $0.id == checkedID })!)
-        }
-        dismissEditViewButtonItemAction()
-    }
 }
 
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
@@ -159,24 +114,14 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyStudyMainTableViewCell.identifier) as! MyStudyMainTableViewCell
-        
-        switch state {
-        case .normal:
+
             cell.checkBox.isHidden = true
             cell.notiGuideView.isHidden = false
-        case .edit:
-            cell.checkBox.isHidden = false
-            cell.notiGuideView.isHidden = true
-            if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
-                cell.checkBox.backgroundColor = .appColor(.mainColor)
-            } else {
-                cell.checkBox.backgroundColor = .appColor(.testColor)
-            }
-        }
+
         
         cell.locationLabel.text = myStudyList[indexPath.row].sigungu
         cell.titleLabel.text = myStudyList[indexPath.row].title
-        cell.locationLabel.widthAnchor.constraint(equalToConstant: cell.locationLabel.intrinsicContentSize.width + 10).isActive = true
+        cell.locationLabel.widthAnchor.constraint(equalToConstant: cell.locationLabel.intrinsicContentSize.width + 30).isActive = true
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
             var requestBody = request
@@ -199,16 +144,7 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch state {
-        case .normal:
-            presenter?.didClickedCellForDetail(view: self, selectedStudy: myStudyList[indexPath.row])
-        case .edit:
-            if tempArrayForCheck.contains(myStudyList[indexPath.row].id) {
-                tempArrayForCheck.remove(at: tempArrayForCheck.firstIndex(of: myStudyList[indexPath.row].id)!)
-            } else {
-                tempArrayForCheck.append(myStudyList[indexPath.row].id)
-            }
-        }
+        presenter?.didClickedCellForDetail(view: self, selectedStudy: myStudyList[indexPath.row])
         tableView.reloadData()
     }
 }
