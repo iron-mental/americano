@@ -29,6 +29,7 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     func connectSocket() {
         chatSocket = manager.socket(forNamespace: "/terminal")
         chatSocket.connect()
+        
         chatSocket.on("message") { array, ack in
             self.interactor?.receiveMessage(message: "\(array)")
         }

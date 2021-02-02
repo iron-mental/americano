@@ -39,7 +39,7 @@ class LocationUIView: UIView {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
-            $0.addLeftPadding()
+            $0.addLeftPadding(padding: 10)
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
         }

@@ -47,7 +47,7 @@ class CareerModifyView: UIViewController {
         
         self.careerTitleModify.do {
             $0.placeholder = "타이틀"
-            $0.addLeftPadding()
+            $0.addLeftPadding(padding: 10)
             $0.backgroundColor = .red
             $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .bold)

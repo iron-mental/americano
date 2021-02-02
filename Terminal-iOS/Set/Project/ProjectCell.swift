@@ -89,7 +89,7 @@ class ProjectCell: UITableViewCell {
             $0.placeholder = "프로젝트 타이틀"
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
-            $0.addLeftPadding()
+            $0.addLeftPadding(padding: 10)
         }
         
         self.contents.do {

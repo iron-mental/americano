@@ -28,7 +28,7 @@ class SNSInputItem: UIView {
             $0.sizeToFit()
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
-            $0.addLeftPadding()
+            $0.addLeftPadding(padding: 10)
             $0.dynamicFont(fontSize: textField.font!.pointSize, weight: .thin)
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor

@@ -37,7 +37,7 @@ class EmailModifyView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textColor = UIColor.appColor(.profileTextColor)
-            $0.addLeftPadding()
+            $0.addLeftPadding(padding: 10)
             $0.font = UIFont.notosansMedium(size: 18)
         }
         

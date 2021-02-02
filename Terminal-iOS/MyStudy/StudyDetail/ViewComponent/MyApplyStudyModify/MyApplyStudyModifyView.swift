@@ -55,7 +55,7 @@ class MyApplyStudyModifyView: UIViewController {
             $0.addTarget(self, action: #selector(dismissButtonTap), for: .touchUpInside)
         }
         applyTextField.do {
-            $0.addLeftPadding()
+            $0.addLeftPadding(padding: 10)
             $0.placeholder = "안녕하세요"
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.sizeToFit()
