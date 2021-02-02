@@ -33,7 +33,7 @@ class MyStudyDetailView: UIViewController {
                                              options: nil)
     lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
-    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(didClickecmoreButton))
+    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(moreButtonDidTap))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,6 +133,39 @@ class MyStudyDetailView: UIViewController {
         self.noticePushEvent = false
     }
     
+    func addNoticeButtonDidTap() {
+        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
+    }
+    
+    func editStudyButtonDidTap() {
+        if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
+            presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
+        }
+    }
+    
+    func applyListButtonDidTap() {
+        presenter?.showApplyUserList(studyID: studyID!)
+    }
+    
+    func delegateHostButtonDidTap() {
+        guard let userList = studyInfo?.participate else { return }
+        presenter?.delegateHostButtonDidTap(studyID: studyID!, userList: userList)
+        //방장 위임하는 뷰로 가보자
+    }
+    
+    func deleteStudyButtonDidTap() {
+        //스터디 삭제하기
+        TerminalAlertMessage.show(controller: self, type: .DeleteStudyView)
+        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(deleteStudyCompleteButtonDidTap), for: .touchUpInside)
+    }
+    
+    func leaveStudyButtonDidTap() {
+        //스터디 나가기
+        TerminalAlertMessage.show(controller: self, type: .LeaveStudyView)
+        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(leaveStudyCompleteButtonDidTap), for: .touchUpInside)
+    }
+    
+    // MARK: - @objc
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
         
@@ -156,7 +189,7 @@ class MyStudyDetailView: UIViewController {
         pageBeforeIndex = nextPage
     }
     
-    @objc func didClickecmoreButton() {
+    @objc func moreButtonDidTap() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let noticeAdd = UIAlertAction(title: "공지사항 추가", style: .default) { _ in self.addNoticeButtonDidTap() }
         let studyEdit = UIAlertAction(title: "스터디 정보 수정", style: .default) { _ in self.editStudyButtonDidTap() }
@@ -174,33 +207,11 @@ class MyStudyDetailView: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func addNoticeButtonDidTap() {
-        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
-    }
-    
-    func editStudyButtonDidTap() {
-        if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
-            presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
-        }
-    }
-    
-    func applyListButtonDidTap() {
-        presenter?.showApplyUserList(studyID: studyID!)
-    }
-    
-    func leaveStudyButtonDidTap() {
-        //스터디 나가기
+    @objc func leaveStudyCompleteButtonDidTap() {
         presenter?.leaveStudyButtonDidTap(studyID: studyID!)
     }
     
-    func delegateHostButtonDidTap() {
-        guard let userList = studyInfo?.participate else { return }
-        presenter?.delegateHostButtonDidTap(studyID: studyID!, userList: userList)
-        //방장 위임하는 뷰로 가보자
-    }
-    
-    func deleteStudyButtonDidTap() {
-        //스터디 삭제하기
+    @objc func deleteStudyCompleteButtonDidTap() {
         presenter?.deleteStudyButtonDidTap(studyID: studyID!)
     }
 }
