@@ -25,7 +25,6 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
-                    
                     self.interactor?.showSearchStudyListResult(result: result)
                 case .failure(let err):
                     
@@ -35,9 +34,7 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
     }
     
     func getPagingStudyList(keys: [Int]) {
-        var params: [String: String] = [
-            "values": ""
-        ]
+        var params: [String: String] = [ "values": "" ]
         keys.forEach { params["values"]?.append("\($0),") }
         params["values"]?.removeLast()
         

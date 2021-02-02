@@ -106,11 +106,10 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
     func showSearchStudyListResult(result: [Study], completion: @escaping () -> Void) {
         searchResult = result
         studyListTableView.reloadData()
-        if !result.isEmpty {
-            studyListTableView.scrollToRow(at: [0, 0], at: .none, animated: false)
-        }
+        if !result.isEmpty { studyListTableView.scrollToRow(at: [0, 0], at: .none, animated: false) }
         completion()
     }
+    
     func showPagingStudyListResult(result: [Study]) {
         searchResult += result
         studyListTableView.reloadData()
@@ -126,6 +125,6 @@ extension SearchStudyResultView: UISearchBarDelegate {
 
 extension SearchStudyResultView: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print(searchController)
+//        
     }
 }
