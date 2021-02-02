@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
-    var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
+    weak var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
     
     // MARK: 최신순 리스트 검색시 초기 배열값
     
@@ -30,6 +30,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
+                    print(json)
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
@@ -84,7 +85,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .removeWhitespace()
             
             let params: [String: Any] = [
-                "sort": "new",
+                "option": "default",
                 "values": key
             ]
             
@@ -103,10 +104,17 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                             self.remoteRequestHandler?.onStudiesForKeyLatestRetrieved(result: result)
                             completion()
                         } catch {
-                            print(error)
+                            print(error.localizedDescription)
                         }
-                    case .failure(let err):
-                        print(err)
+                    case .failure:
+                        if let data = response.data {
+                            do {
+                                let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
+                                self.remoteRequestHandler?.onStudiesForKeyLengthRetrieved(result: result)
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
                     }
                 }
         }
@@ -122,7 +130,7 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .removeWhitespace()
             
             let params: [String: Any] = [
-                "sort": "length",
+                "option": "distance",
                 "values": key
             ]
             
@@ -141,10 +149,17 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                             self.remoteRequestHandler?.onStudiesForKeyLengthRetrieved(result: result)
                             completion()
                         } catch {
-                            print(error)
+                            print(error.localizedDescription)
                         }
-                    case .failure(let err):
-                        print(err)
+                    case .failure:
+                        if let data = response.data {
+                            do {
+                                let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
+                                self.remoteRequestHandler?.onStudiesForKeyLengthRetrieved(result: result)
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
                     }
                 }
         }

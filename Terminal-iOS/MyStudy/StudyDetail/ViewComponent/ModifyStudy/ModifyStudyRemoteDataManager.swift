@@ -29,7 +29,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             params["title"] = title
         }
         if let location = study.location {
-            params["address"] = location.address
+            params["address_name"] = location.address
             params["latitude"] = location.lat
             params["longitude"] = location.lng
             params["sido"] = location.sido
@@ -65,6 +65,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
@@ -75,6 +76,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                         self.interactor?.putStudyInfoResult(result: false, message: "실패하였습니다.")
                     }
                 case .failure(let error):
+                    
                     print(error.localizedDescription)
                 }
             }

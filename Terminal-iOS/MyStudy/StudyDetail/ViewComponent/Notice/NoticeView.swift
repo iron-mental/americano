@@ -11,31 +11,24 @@ import UIKit
 class NoticeView: UIViewController {
     var presenter: NoticePresenterProtocol?
     var studyID: Int?
-    var noticeList: [Notice] = []
-    var pinnedNotiArr: [Notice] = []
-    var notiArr: [Notice] = []
-    lazy var notice = UITableView()
+    var firstNoticeList: [Notice] = []
+    var secondNoticeList: [Notice] = []
+    lazy var notice = UITableView(frame: CGRect.zero, style: .grouped)
     var state: StudyDetailViewState?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewLoad()
-        
     }
+    
     func viewLoad() {
-        noticeList.removeAll()
-        pinnedNotiArr.removeAll()
-        notiArr.removeAll()
+        firstNoticeList.removeAll()
+        secondNoticeList.removeAll()
         attribute()
         layout()
         presenter?.viewDidLoad(studyID: studyID!)
-        sorted()
     }
     
-    func sorted() {
-        pinnedNotiArr = noticeList.filter { $0.pinned! }
-        notiArr = noticeList.filter { !$0.pinned! }
-    }
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -66,26 +59,32 @@ class NoticeView: UIViewController {
 extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        var count = 0
+        count += firstNoticeList.isEmpty ? 0 : 1
+        count += secondNoticeList.isEmpty ? 0 : 1
+        
+        return count
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 5
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         if section == 0 {
             headerView.backgroundColor = UIColor.appColor(.terminalBackground)
         } else if section == 1 {
-            headerView.backgroundColor = noticeList.isEmpty ? UIColor.appColor(.terminalBackground) : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1) 
+            headerView.backgroundColor = secondNoticeList.isEmpty ? UIColor.appColor(.terminalBackground) : #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         }
         return headerView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return pinnedNotiArr.count
+            return firstNoticeList.count
         } else if section == 1 {
-            return notiArr.count
+            return secondNoticeList.count
         } else {
             return 0
         }
@@ -95,11 +94,9 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
         let noticeCell = notice.dequeueReusableCell(withIdentifier: NoticeCell.noticeCellID, for: indexPath) as! NoticeCell
         
         if indexPath.section == 0 {
-            noticeCell.noticeLabel.text = "필독"
-            noticeCell.noticeBackground.backgroundColor = UIColor.appColor(.pinnedNoticeColor)
-            noticeCell.setData(pinnedNotiArr[indexPath.row])
+            noticeCell.setData(firstNoticeList[indexPath.row])
         } else if indexPath.section == 1 {
-            noticeCell.setData(notiArr[indexPath.row])
+            noticeCell.setData(secondNoticeList[indexPath.row])
         }
         return noticeCell
     }
@@ -108,23 +105,24 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
         
         var selectedNotice: Notice?
         if indexPath.section == 0 {
-            selectedNotice = pinnedNotiArr[indexPath.row]
+            selectedNotice = firstNoticeList[indexPath.row]
         } else {
-            selectedNotice = notiArr[indexPath.row]
+            selectedNotice = secondNoticeList[indexPath.row]
         }
         selectedNotice!.studyID = studyID
         guard let currentState = state else { return }
         presenter?.celldidTap(notice: selectedNotice!, parentView: self, state: currentState)
         
     }
+    
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         indexPaths.forEach { indexPath in
             if indexPath.section == 0 {
-                if pinnedNotiArr.count - 1 == indexPath.row {
+                if firstNoticeList.count - 1 == indexPath.row {
                     presenter?.didScrollEnded(studyID: studyID!)
                 }
             } else {
-                if notiArr.count - 1 == indexPath.row {
+                if secondNoticeList.count - 1 == indexPath.row {
                     presenter?.didScrollEnded(studyID: studyID!)
                 }
             }
@@ -133,13 +131,22 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 }
 
 extension NoticeView: NoticeViewProtocol {
+    func showNoticeList(firstNoticeList: [Notice]?, secondNoticeList: [Notice]?) {
+        
+        if let first = firstNoticeList {
+            self.firstNoticeList = first
+        }
+        if let second = secondNoticeList {
+            self.secondNoticeList = second
+        }
+        notice.reloadData()
+        LoadingRainbowCat.hide()
+    }
     func showLoading() {
         LoadingRainbowCat.show()
     }
     
     func showNoticeList(noticeList: [Notice]) {
-        self.noticeList += noticeList
-        sorted()
         notice.reloadData()
         LoadingRainbowCat.hide {
             print("로딩 끝")

@@ -11,46 +11,45 @@ import UIKit
 protocol NoticeViewProtocol {
     var studyID: Int? { get set }
     var presenter: NoticePresenterProtocol? { get set }
-    var noticeList: [Notice] { get set }
+//    var noticeList: [Notice] { get set }
     
-    func showNoticeList(noticeList: [Notice])
+    //PRESENTER -> VIEW
+    func showNoticeList(firstNoticeList: [Notice]?, secondNoticeList: [Notice]?)
     func showMessage(message: String)
     func viewLoad()
     func showLoading()
 }
 
-protocol NoticeInteractorProtocol {
-    var presenter: NoticePresenterProtocol? { get set }
+protocol NoticeInteractorInputProtocol {
+    var presenter: NoticeInteractorOutputProtocol? { get set }
     var remoteDataManager: NoticeRemoteDataManagerProtocol? { get set }
-    var localDataManager: NoticeLocalDataManagerProtocol? { get set }
 
     //PRESENTER -> INTERACTOR
     func getNoticeList(studyID: Int)
     func getNoticeListPagination(studyID: Int)
 }
 
+protocol NoticeInteractorOutputProtocol {
+    
+    //INTERACTOR -> PRESENTER
+    func showResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?)
+    func showError(message: String)
+}
+
 protocol NoticePresenterProtocol {
     var view: NoticeViewProtocol? { get set }
     var wireFrame: NoticeWireFrameProtocol? { get set }
-    var interactor: NoticeInteractorProtocol? { get set }
+    var interactor: NoticeInteractorInputProtocol? { get set }
     
     //VIEW -> PRESENTER
     func viewDidLoad(studyID: Int)
     func celldidTap(notice: Notice, parentView: UIViewController, state: StudyDetailViewState)
     func didScrollEnded(studyID: Int)
-    
-    //INTERACTOR -> PRESENTER
-    func showResult(result: Bool, noticeList: [Notice]?, message: String?)
-    func showNoticePaginationResult(result: Bool, notice: [Notice]?, message: String?)
 }
 
 protocol NoticeRemoteDataManagerProtocol {
     func getNoticeList(studyID: Int, completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void)
     func getNoticeListPagination(studyID: Int, noticeListIDs: [Int], completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void)
-}
-
-protocol NoticeLocalDataManagerProtocol {
-    
 }
 
 protocol NoticeWireFrameProtocol {

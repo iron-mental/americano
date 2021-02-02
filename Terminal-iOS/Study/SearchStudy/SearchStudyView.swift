@@ -11,6 +11,10 @@ import Then
 import SwiftyJSON
 
 class SearchStudyView: UIViewController {
+    deinit {
+        searchController.isActive = false
+    }
+    
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
     let hotLable = UILabel()
@@ -24,9 +28,14 @@ class SearchStudyView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.searchBar.becomeFirstResponder()
-        didload()
+        presenter?.viewDidLoad()
         attribute()
         layout()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchController.isActive = true
     }
     
     func attribute() {
@@ -36,6 +45,7 @@ class SearchStudyView: UIViewController {
             $0.hidesNavigationBarDuringPresentation = false
             navigationItem.titleView = searchController.searchBar
             $0.searchBar.delegate = self
+            $0.delegate = self
         }
         self.view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -53,32 +63,9 @@ class SearchStudyView: UIViewController {
         }
     }
     
-    //나중에 옮겨야함
-    func didload() {
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.hotKeyword)
-            .validate()
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<[HotKeyword]>.self, from: data!)
-                    if let keyword = result.data {
-                        self.keyword = keyword
-                        self.collectionView.reloadData()
-                    }
-                case .failure(let err):
-                    print(err)
-                }
-            }
-    }
-    
     func layout() {
         [hotLable, collectionView].forEach { self.view.addSubview($0) }
-       
+        
         self.hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
@@ -152,11 +139,35 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
 }
 
 extension SearchStudyView: SearchStudyViewProtocol {
+    func showHotkeyword(keyword: [HotKeyword]) {
+        self.keyword = keyword
+        collectionView.reloadData()
+    }
     
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
+    }
 }
 
 extension SearchStudyView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         presenter?.didSearchButtonClicked(keyword: searchBar.text!)
+    }
+}
+
+extension SearchStudyView: UISearchControllerDelegate {
+    func didPresentSearchController(_ searchController: UISearchController) {
+        DispatchQueue.main.async {
+            searchController.searchBar.becomeFirstResponder()
+            self.hideLoading()
+        }
     }
 }

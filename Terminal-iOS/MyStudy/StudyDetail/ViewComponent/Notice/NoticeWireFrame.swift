@@ -13,10 +13,9 @@ class NoticeWireFrame: NoticeWireFrameProtocol {
     
     static func createNoticeModule(studyID: Int) -> UIViewController {
         let view = NoticeView()
-        let presenter = NoticePresenter()
+        var presenter: NoticePresenterProtocol & NoticeInteractorOutputProtocol = NoticePresenter()
         let interactor = NoticeInteractor()
         let remoteDataManager = NoticeRemoteDataManager()
-        let localDataManager = NoticeLocalDataManager()
         let wireFrame = NoticeWireFrame()
         
         view.presenter = presenter
@@ -26,7 +25,6 @@ class NoticeWireFrame: NoticeWireFrameProtocol {
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
-        interactor.localDataManager = localDataManager
         wireFrame.presenter = presenter
         
         return view

@@ -192,7 +192,6 @@
 		CC56393C259CAD6F00DA1479 /* SearchStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC56393B259CAD6F00DA1479 /* SearchStudyInteractor.swift */; };
 		CC563941259CAD7C00DA1479 /* SearchStudyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC563940259CAD7C00DA1479 /* SearchStudyPresenter.swift */; };
 		CC563946259CAD9200DA1479 /* SearchStudyRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC563945259CAD9200DA1479 /* SearchStudyRemoteDataManager.swift */; };
-		CC56394B259CADA500DA1479 /* SearchStudyLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC56394A259CADA500DA1479 /* SearchStudyLocalDataManager.swift */; };
 		CC563950259CADBA00DA1479 /* SearchStudyWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC56394F259CADBA00DA1479 /* SearchStudyWireFrame.swift */; };
 		CC563967259CB6F700DA1479 /* SearchStudyResultProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC563966259CB6F700DA1479 /* SearchStudyResultProtocols.swift */; };
 		CC56396F259CB85800DA1479 /* SearchStudyResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC56396E259CB85800DA1479 /* SearchStudyResultView.swift */; };
@@ -231,6 +230,8 @@
 		CC72CBF925B05B40009E9986 /* BaseProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBF825B05B40009E9986 /* BaseProfileView.swift */; };
 		CC72CBFF25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CBFE25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift */; };
 		CC72CC0725B0632B009E9986 /* BaseProfileRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */; };
+		CC74FB1E25C69CCA0087E82A /* StudyDetailSNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74FB1D25C69CCA0087E82A /* StudyDetailSNSView.swift */; };
+		CC74FB2C25C6CD6C0087E82A /* EditNoticeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC74FB2B25C6CD6C0087E82A /* EditNoticeResult.swift */; };
 		CC7B209925C3B7B6009920DC /* PaddingUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7B209825C3B7B6009920DC /* PaddingUILabel.swift */; };
 		CC7F383625BA991B00DEA541 /* DelegateHostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */; };
 		CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */; };
@@ -297,8 +298,6 @@
 		CCBC88B6254ACF2500C2A6C4 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */; };
 		CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */; };
 		CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */; };
-		CCBC88CF254BEDE200C2A6C4 /* SNSIconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88CE254BEDE200C2A6C4 /* SNSIconsView.swift */; };
-		CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC88D4254BEE2B00C2A6C4 /* SNSIconImageView.swift */; };
 		CCC1A2DB25B14C88004E3BE6 /* ApplyUserDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC1A2DA25B14C88004E3BE6 /* ApplyUserDetailPresenter.swift */; };
 		CCC1A2E025B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC1A2DF25B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift */; };
 		CCC1A2F325B14DAF004E3BE6 /* ApplyUserDetailRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC1A2F225B14DAF004E3BE6 /* ApplyUserDetailRemoteDataManager.swift */; };
@@ -317,7 +316,6 @@
 		CCD51C9B256E247600D41771 /* NoticeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C9A256E247600D41771 /* NoticeInteractor.swift */; };
 		CCD51C9F256E248200D41771 /* NoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C9E256E248200D41771 /* NoticePresenter.swift */; };
 		CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */; };
-		CCD51CA5256E254B00D41771 /* NoticeLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA4256E254B00D41771 /* NoticeLocalDataManager.swift */; };
 		CCD51CA8256E257D00D41771 /* NoticeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */; };
 		CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279DE256E46BA00DB3246 /* NoticeList.swift */; };
 		CCE279EC256E46C600DB3246 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EB256E46C600DB3246 /* Notice.swift */; };
@@ -334,7 +332,6 @@
 		CCF632C725A2E80B004B80B3 /* SearchStudyResultPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF632C625A2E80B004B80B3 /* SearchStudyResultPresenter.swift */; };
 		CCF632CC25A2E841004B80B3 /* SearchStudyResultInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF632CB25A2E841004B80B3 /* SearchStudyResultInteractor.swift */; };
 		CCF632D125A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF632D025A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift */; };
-		CCF632D625A2E880004B80B3 /* SearchStudyResultLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF632D525A2E880004B80B3 /* SearchStudyResultLocalDataManager.swift */; };
 		CCF632DB25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF632DA25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift */; };
 		CCF71AA7256F959000EC83C6 /* StudyDetailPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF71AA6256F959000EC83C6 /* StudyDetailPost.swift */; };
 /* End PBXBuildFile section */
@@ -557,7 +554,6 @@
 		CC56393B259CAD6F00DA1479 /* SearchStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyInteractor.swift; sourceTree = "<group>"; };
 		CC563940259CAD7C00DA1479 /* SearchStudyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyPresenter.swift; sourceTree = "<group>"; };
 		CC563945259CAD9200DA1479 /* SearchStudyRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyRemoteDataManager.swift; sourceTree = "<group>"; };
-		CC56394A259CADA500DA1479 /* SearchStudyLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyLocalDataManager.swift; sourceTree = "<group>"; };
 		CC56394F259CADBA00DA1479 /* SearchStudyWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyWireFrame.swift; sourceTree = "<group>"; };
 		CC563966259CB6F700DA1479 /* SearchStudyResultProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyResultProtocols.swift; sourceTree = "<group>"; };
 		CC56396E259CB85800DA1479 /* SearchStudyResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyResultView.swift; sourceTree = "<group>"; };
@@ -590,6 +586,8 @@
 		CC72CBF825B05B40009E9986 /* BaseProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileView.swift; sourceTree = "<group>"; };
 		CC72CBFE25B061E5009E9986 /* BaseProfileRemoteDataManagerInputProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileRemoteDataManagerInputProtocol.swift; sourceTree = "<group>"; };
 		CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileRemoteDataManager.swift; sourceTree = "<group>"; };
+		CC74FB1D25C69CCA0087E82A /* StudyDetailSNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailSNSView.swift; sourceTree = "<group>"; };
+		CC74FB2B25C6CD6C0087E82A /* EditNoticeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoticeResult.swift; sourceTree = "<group>"; };
 		CC7B209825C3B7B6009920DC /* PaddingUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingUILabel.swift; sourceTree = "<group>"; };
 		CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostTableViewCell.swift; sourceTree = "<group>"; };
 		CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertUIView.swift; sourceTree = "<group>"; };
@@ -658,8 +656,6 @@
 		CCBC88B5254ACF2500C2A6C4 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		CCBC88BC254B104300C2A6C4 /* StudyDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailView.swift; sourceTree = "<group>"; };
 		CCBC88C0254BC7AB00C2A6C4 /* MainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainImageView.swift; sourceTree = "<group>"; };
-		CCBC88CE254BEDE200C2A6C4 /* SNSIconsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSIconsView.swift; sourceTree = "<group>"; };
-		CCBC88D4254BEE2B00C2A6C4 /* SNSIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSIconImageView.swift; sourceTree = "<group>"; };
 		CCC1A2DA25B14C88004E3BE6 /* ApplyUserDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserDetailPresenter.swift; sourceTree = "<group>"; };
 		CCC1A2DF25B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserDetailInteractor.swift; sourceTree = "<group>"; };
 		CCC1A2F225B14DAF004E3BE6 /* ApplyUserDetailRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserDetailRemoteDataManager.swift; sourceTree = "<group>"; };
@@ -679,7 +675,6 @@
 		CCD51C9A256E247600D41771 /* NoticeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeInteractor.swift; sourceTree = "<group>"; };
 		CCD51C9E256E248200D41771 /* NoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticePresenter.swift; sourceTree = "<group>"; };
 		CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRemoteDataManager.swift; sourceTree = "<group>"; };
-		CCD51CA4256E254B00D41771 /* NoticeLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeLocalDataManager.swift; sourceTree = "<group>"; };
 		CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeProtocols.swift; sourceTree = "<group>"; };
 		CCE279DE256E46BA00DB3246 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
 		CCE279EB256E46C600DB3246 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
@@ -702,7 +697,6 @@
 		CCF632C625A2E80B004B80B3 /* SearchStudyResultPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyResultPresenter.swift; sourceTree = "<group>"; };
 		CCF632CB25A2E841004B80B3 /* SearchStudyResultInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyResultInteractor.swift; sourceTree = "<group>"; };
 		CCF632D025A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyResultRemoteDataManager.swift; sourceTree = "<group>"; };
-		CCF632D525A2E880004B80B3 /* SearchStudyResultLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyResultLocalDataManager.swift; sourceTree = "<group>"; };
 		CCF632DA25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyResultWireFrame.swift; sourceTree = "<group>"; };
 		CCF71AA6256F959000EC83C6 /* StudyDetailPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailPost.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -862,7 +856,6 @@
 				CC56393B259CAD6F00DA1479 /* SearchStudyInteractor.swift */,
 				CC563940259CAD7C00DA1479 /* SearchStudyPresenter.swift */,
 				CC563945259CAD9200DA1479 /* SearchStudyRemoteDataManager.swift */,
-				CC56394A259CADA500DA1479 /* SearchStudyLocalDataManager.swift */,
 				CC56394F259CADBA00DA1479 /* SearchStudyWireFrame.swift */,
 				CC563936259CA77400DA1479 /* SearchStudyProtocols.swift */,
 			);
@@ -1242,7 +1235,6 @@
 				CCF632CB25A2E841004B80B3 /* SearchStudyResultInteractor.swift */,
 				CCF632C625A2E80B004B80B3 /* SearchStudyResultPresenter.swift */,
 				CCF632D025A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift */,
-				CCF632D525A2E880004B80B3 /* SearchStudyResultLocalDataManager.swift */,
 				CCF632DA25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift */,
 				CC563966259CB6F700DA1479 /* SearchStudyResultProtocols.swift */,
 			);
@@ -1413,6 +1405,7 @@
 				CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */,
 				A57E829025BD8F72000F8678 /* SNSValidate.swift */,
 				CC60454325BF15B600A98FEC /* CreateStudyResult.swift */,
+				CC74FB2B25C6CD6C0087E82A /* EditNoticeResult.swift */,
 				A501FC0C25C4076600150DA0 /* MyStudy.swift */,
 			);
 			path = Entity;
@@ -1545,12 +1538,11 @@
 		CCBC88CD254BEDD000C2A6C4 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				CCBC88CE254BEDE200C2A6C4 /* SNSIconsView.swift */,
-				CCBC88D4254BEE2B00C2A6C4 /* SNSIconImageView.swift */,
 				CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */,
 				CC198E6E254C000A009D6CDF /* MemeberView.swift */,
 				CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */,
 				CC198E74254C0367009D6CDF /* MemberCollectionViewCell.swift */,
+				CC74FB1D25C69CCA0087E82A /* StudyDetailSNSView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1591,7 +1583,6 @@
 				CCD51C9A256E247600D41771 /* NoticeInteractor.swift */,
 				CCD51C9E256E248200D41771 /* NoticePresenter.swift */,
 				CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */,
-				CCD51CA4256E254B00D41771 /* NoticeLocalDataManager.swift */,
 				CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */,
 				CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */,
 				A57097A5254D6B5F0001DE52 /* NoticeCell.swift */,
@@ -1880,9 +1871,7 @@
 				CCEEB47C25AC710F00F522C4 /* ApplyUserResult.swift in Sources */,
 				CCA25AE325B9B34900280C80 /* DelegateHostView.swift in Sources */,
 				CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */,
-				CC56394B259CADA500DA1479 /* SearchStudyLocalDataManager.swift in Sources */,
 				A5D4B8D125C18771008403DC /* NotificationProtocols.swift in Sources */,
-				CCEEB46825AC50DF00F522C4 /* MyApplyStudyDetailPresenter.swift in Sources */,
 				A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */,
 				CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */,
 				CCA1FF5B24FD0C930026C3EA /* ViewController.swift in Sources */,
@@ -1934,7 +1923,6 @@
 				CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */,
 				CCF632C725A2E80B004B80B3 /* SearchStudyResultPresenter.swift in Sources */,
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,
-				CCD51CA5256E254B00D41771 /* NoticeLocalDataManager.swift in Sources */,
 				CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */,
 				CCBBEF352583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift in Sources */,
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
@@ -1968,7 +1956,6 @@
 				CCB752CA25A841E3003E7CA7 /* StudyApplyMessageView.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
 				A5D5AE5A2573DAFB003BB277 /* IntroWireFrame.swift in Sources */,
-				CCBC88D5254BEE2B00C2A6C4 /* SNSIconImageView.swift in Sources */,
 				CC72CBEF25B02FCE009E9986 /* AlertMessageView.swift in Sources */,
 				A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
@@ -1992,6 +1979,7 @@
 				A5686A452524F048005990DC /* NotiCell.swift in Sources */,
 				CCA3FF512517826100F62627 /* StudyCategoryLocalDataManager.swift in Sources */,
 				A5D058F0255D939C0047CA9E /* StudyDetailProtocols.swift in Sources */,
+				CC74FB2C25C6CD6C0087E82A /* EditNoticeResult.swift in Sources */,
 				CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */,
 				CCD51C80256D29F200D41771 /* MyStudyDetailLocalDataManager.swift in Sources */,
 				A5C81C6125836D4C008F2B09 /* MyApplyListInteractor.swift in Sources */,
@@ -2101,6 +2089,7 @@
 				CC650DF225C3EFAD00359E7D /* MyApplyStudyInfoPresenter.swift in Sources */,
 				CCA25ADE25B9B01800280C80 /* DelegateHostProtocols.swift in Sources */,
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
+				CC74FB1E25C69CCA0087E82A /* StudyDetailSNSView.swift in Sources */,
 				A53A2B8525B6BC050002D3A0 /* UserWithdrawalInteractor.swift in Sources */,
 				CCC1A2E025B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift in Sources */,
 				A5D4B8CC25C1875D008403DC /* NotificationWireFrame.swift in Sources */,
@@ -2108,7 +2097,6 @@
 				CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */,
 				A5814921259129C800BF3C2A /* LocationModifyInteractor.swift in Sources */,
 				A554DDC925AEEAA300C03E41 /* UIViewController+Ext.swift in Sources */,
-				CCBC88CF254BEDE200C2A6C4 /* SNSIconsView.swift in Sources */,
 				CCB139CF25592D8300410184 /* IntroPresenter.swift in Sources */,
 				CCF632CC25A2E841004B80B3 /* SearchStudyResultInteractor.swift in Sources */,
 				A5D6A791257430B4007D6409 /* ProfileModifyWireFrame.swift in Sources */,
@@ -2119,7 +2107,6 @@
 				CCA3FF492517823E00F62627 /* StudyListPresenter.swift in Sources */,
 				CCF470A5256B9A8A0085B371 /* ChatLocalDataManager.swift in Sources */,
 				CCF71AA7256F959000EC83C6 /* StudyDetailPost.swift in Sources */,
-				CCF632D625A2E880004B80B3 /* SearchStudyResultLocalDataManager.swift in Sources */,
 				A57097A6254D6B5F0001DE52 /* NoticeCell.swift in Sources */,
 				A510EC8625594CD2009BE9A6 /* UITextField+Ext.swift in Sources */,
 				CC198E6F254C000A009D6CDF /* MemeberView.swift in Sources */,

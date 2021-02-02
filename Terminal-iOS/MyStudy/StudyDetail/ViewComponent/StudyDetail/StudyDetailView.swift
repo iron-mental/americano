@@ -45,7 +45,7 @@ class StudyDetailView: UIViewController {
     let picker = UIImagePickerController()
     var mainImageViewTapGesture = UITapGestureRecognizer()
     var mainImageView = MainImageView(frame: CGRect.zero)
-    var snsIconsView = SNSIconsView(frame: CGRect.zero)
+    var snsIconsView = StudyDetailSNSView()
     lazy var studyIntroduceView = TitleWithContentView()
     var memberView = MemeberView()
     lazy var studyPlanView = TitleWithContentView()
@@ -53,7 +53,6 @@ class StudyDetailView: UIViewController {
     lazy var locationView = TitleWithContentView()
     var mapView = NMFMapView()
     var joinButton = UIButton()
-    var panddingButton = UIButton()
     let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
     var joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
     
@@ -66,12 +65,6 @@ class StudyDetailView: UIViewController {
         self.do {
             $0.title = studyInfo?.title ?? nil
         }
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-            return requestBody
-        }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -81,9 +74,9 @@ class StudyDetailView: UIViewController {
         mainImageView.do {
             $0.isUserInteractionEnabled = false
             if let imageURL =  studyInfo?.image {
-                $0.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
+                $0.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(RequestToken.token())])
             } else {
-                $0.image = #imageLiteral(resourceName: "ios")
+                $0.image = #imageLiteral(resourceName: "leehi")
             }
         }
         snsIconsView.do {
@@ -91,10 +84,10 @@ class StudyDetailView: UIViewController {
                 $0.notion.isHidden = notion.isEmpty ? true : false
             }
             if let evernote = studyInfo?.snsEvernote {
-                $0.notion.isHidden = evernote.isEmpty ? true : false
+                $0.evernote.isHidden = evernote.isEmpty ? true : false
             }
             if let web = studyInfo?.snsWeb {
-                $0.notion.isHidden = web.isEmpty ? true : false
+                $0.web.isHidden = web.isEmpty ? true : false
             }
         }
         joinButton.do {
@@ -113,12 +106,14 @@ class StudyDetailView: UIViewController {
                 $0.isHidden = false
                 $0.setTitle("가입 진행중", for: .normal)
                 $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-                $0.backgroundColor = .white
-                $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-                $0.setTitleColor(.black, for: .normal)
+                $0.backgroundColor = UIColor.appColor(.terminalBackground)
+                $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 10)
+                $0.setTitleColor(UIColor.appColor(.mainColor), for: .normal)
                 $0.layer.cornerRadius = 10
                 $0.clipsToBounds = false
                 $0.contentHorizontalAlignment = .right
+                $0.layer.borderWidth = 0.1
+                $0.layer.borderColor = UIColor.gray.cgColor
                 $0.removeTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
                 $0.addTarget(self, action: #selector(modifyJoinButtonDidTap), for: .touchUpInside)
             } else {
@@ -204,16 +199,16 @@ class StudyDetailView: UIViewController {
         }
         snsIconsView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: snsIconsView.intrinsicContentSize.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 22)).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: joinButton.leadingAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: snsIconsView.heightAnchor).isActive = true
         }
         joinButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 113)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 150)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 36)).isActive = true
         }
         studyIntroduceView.do {
@@ -254,7 +249,7 @@ class StudyDetailView: UIViewController {
         mapView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: locationView.bottomAnchor, constant: Terminal.convertHeigt(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 254)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 186)).isActive = true
             $0.bottomAnchor.constraint(equalTo: tempBackgroundView.bottomAnchor).isActive = true
@@ -270,7 +265,7 @@ class StudyDetailView: UIViewController {
   
     @objc func joinButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .StudyApplyView)
-        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
+        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
     }
     
     @objc func modifyJoinButtonDidTap() {
@@ -279,29 +274,56 @@ class StudyDetailView: UIViewController {
     }
     
     @objc func studyApplyMessageEndEditing() {
-        guard let message = ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! StudyApplyMessageView).editMessageTextField.text else { return }
-        presenter?.joinButtonDidTap(studyID: studyID!, message: message)
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view {
+                    if let messageView = alertView as? StudyApplyMessageView {
+                        guard let message =  messageView.editMessageTextField.text else { return }
+                        presenter?.joinButtonDidTap(studyID: studyID!, message: message)
+                    }
+                }
+            }
+        }
         TerminalAlertMessage.dismiss()
     }
 }
 
 extension StudyDetailView: StudyDetailViewProtocol {
     func studyJoinResult(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
         presenter?.showStudyListDetail(studyID: "\(studyInfo!.id)")
     }
     
     func showStudyDetail(with studyDetail: StudyDetail) {
+        var snsList: [String: String] = [:]
+        
         self.studyInfo = studyDetail
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
         memberView.totalMember.text = "\(userData.count) 명"
         parentView?.setting()
+        
+        
+        if let notion = studyDetail.snsNotion,
+           let evernote = studyDetail.snsEvernote,
+           let web = studyDetail.snsWeb {
+            if !notion.isEmpty {
+                snsList.updateValue(notion, forKey: "notion")
+            }
+            if !evernote.isEmpty {
+                snsList.updateValue(evernote, forKey: "evernote")
+            }
+            if !web.isEmpty {
+                snsList.updateValue(web, forKey: "web")
+            }
+        }
+        self.snsIconsView.addstack(snsList: snsList)
         attribute()
     }
     
-    func showError() {
-        
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
     
     func showLoading() {
@@ -321,7 +343,6 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
         cell.setData(userInfo: userData[indexPath.row])
-        
         return cell
     }
     

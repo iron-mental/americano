@@ -16,7 +16,7 @@ protocol StudyDetailViewProtocol: class {
     var parentView: MyStudyDetailViewProtocol? { get set }
     // PRESENT -> VIEW
     func showStudyDetail(with studyDetail: StudyDetail)
-    func showError()
+    func showError(message: String)
     func showLoading()
     func hideLoading()
     func studyJoinResult(message: String)
