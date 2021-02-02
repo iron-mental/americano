@@ -53,7 +53,7 @@ class MyStudyDetailView: UIViewController {
         self.do {
             $0.title = studyInfo?.title ?? nil
         }
-        if let firstVC = VCArr.first{
+        if let firstVC = VCArr.first {
             childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
         let appearance = UINavigationBarAppearance()
@@ -209,10 +209,12 @@ class MyStudyDetailView: UIViewController {
     
     @objc func leaveStudyCompleteButtonDidTap() {
         presenter?.leaveStudyButtonDidTap(studyID: studyID!)
+        TerminalAlertMessage.dismiss()
     }
     
     @objc func deleteStudyCompleteButtonDidTap() {
         presenter?.deleteStudyButtonDidTap(studyID: studyID!)
+        TerminalAlertMessage.dismiss()
     }
 }
 
@@ -281,5 +283,6 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     
     func showDeleteStudyFailed(message: String) {
         print("스터디 삭제 실패")
+        showToast(controller: self, message: message, seconds: 1)
     }
 }
