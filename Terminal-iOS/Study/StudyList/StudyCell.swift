@@ -54,7 +54,8 @@ class StudyCell: UITableViewCell {
         }
         
         self.memberCount.do {
-            $0.text = "10명"
+            guard let count = data.memberCount else { return }
+            $0.text = "\(count)"
         }
         
         self.distance.do {
@@ -195,8 +196,8 @@ class StudyCell: UITableViewCell {
         
         self.memberCount.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.mainImage.leadingAnchor, constant: -5).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -7).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.mainImage.leadingAnchor, constant: -7).isActive = true
         }
     }
     
