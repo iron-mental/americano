@@ -11,13 +11,16 @@ import UIKit
 enum AlertType {
     //신청
     case StudyApplyView
-    //신청취소
+    //신청 취소
     case StudyApplyDeleteView
-    //이메일auth
+    //이메일 auth
     case EmailAuthView
-    //방장위임
+    //방장 위임
     case DelegateHostConfirmView
-    
+    //스터디 나가기
+    case LeaveStudyView
+    //스터디 삭제
+    case DeleteStudyView
     
     var view: UIView {
         switch self {
@@ -26,9 +29,18 @@ enum AlertType {
         case .StudyApplyDeleteView:
             return AlertMessageView(message: "cancel your apply?")
         case .EmailAuthView:
+            //이부분 AlertMessageView 안쓰고 따로 만든 이유가 있는지?
             return EmailAlertMessageView(message: "이메일 인증하시겠습니까?\n\n 회원님의 이메일로 인증요청 됩니다.")
         case .DelegateHostConfirmView:
             return AlertMessageView(message: "방장을 위임하시겠습니까?")
+        case .LeaveStudyView:
+            let leaveStudyView = AlertMessageView(message: "스터디를 나가시겠습니까?")
+            leaveStudyView.alertMessageLabel.textColor = .systemRed
+            return leaveStudyView
+        case .DeleteStudyView:
+            let deleteStudyView = AlertMessageView(message: "스터디를 삭제하시겠습니까?")
+            deleteStudyView.alertMessageLabel.textColor = .systemRed
+            return deleteStudyView
         }
     }
 }
