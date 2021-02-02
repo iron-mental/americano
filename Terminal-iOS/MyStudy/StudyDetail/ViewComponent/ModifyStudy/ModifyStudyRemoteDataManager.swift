@@ -76,6 +76,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                         self.interactor?.putStudyInfoResult(result: false, message: "실패하였습니다.")
                     }
                 case .failure(let error):
+                    
                     print(error.localizedDescription)
                 }
             }

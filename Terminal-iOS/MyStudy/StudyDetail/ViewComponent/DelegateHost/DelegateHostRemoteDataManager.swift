@@ -26,7 +26,7 @@ class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol 
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
-                        if let message = result.message {
+                        if let _ = result.message {
                             self.interactor?.delegateHostResult(response: result)
                         }
                     } catch {

@@ -8,8 +8,25 @@
 
 import Foundation
 
-class SearchStudyInteractor: SearchStudyInteractorProtocol {
-    var presenter: SearchStudyPresenterProtocol?
-    var remoteDataManager: SearchStudyRemoteDataManagerProtocol?
-    var localDataManager: SearchStudyLocalDataManagerProtocol?
+class SearchStudyInteractor: SearchStudyInteractorInputProtocol {
+    var presenter: SearchStudyInteractorOutputProtocol?
+    var remoteDataManager: SearchStudyRemoteDataManagerInputProtocol?
+    
+    //PRESENTER -> INTERACTOR
+    func getHotKeyword() {
+        remoteDataManager?.getHotKeyword()
+    }
+}
+
+extension SearchStudyInteractor: SearchStudyRemoteDataManagerOutputProtocol {
+    func getHotKeywordResult(response: BaseResponse<[HotKeyword]>) {
+        switch response.result {
+        case true:
+            guard let keyword = response.data else { return }
+            self.presenter?.getHotKeywordSuccess(keyword: keyword)
+        case false:
+            guard let message = response.message else { return }
+            self.presenter?.getHotKeywordFailure(message: message)
+        }
+    }
 }

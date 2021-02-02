@@ -7,7 +7,32 @@
 //
 
 import Foundation
+import SwiftyJSON
 
-class SearchStudyRemoteDataManager: SearchStudyRemoteDataManagerProtocol {
+class SearchStudyRemoteDataManager: SearchStudyRemoteDataManagerInputProtocol {
+    var interactor: SearchStudyRemoteDataManagerOutputProtocol?
     
+    func getHotKeyword() {
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.hotKeyword)
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[HotKeyword]>.self, from: data!)
+                        self.interactor?.getHotKeywordResult(response: result)
+                    } catch {
+                        
+                    }
+                case .failure(let err):
+                    print(err)
+                }
+            }
+    }
 }
