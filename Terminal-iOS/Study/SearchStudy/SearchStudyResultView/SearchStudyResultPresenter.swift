@@ -30,8 +30,9 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
 
 extension SearchStudyResultPresenter: SearchStudyResultInteractorOutputProtocol {
     func showSearchStudyListResult(result: [Study]) {
-        view?.hideLoading()
-        view?.showSearchStudyListResult(result: result)
+        view?.showSearchStudyListResult(result: result) {
+            self.view?.hideLoading()
+        }
     }
     
     func showPagingStudyListResult(result: [Study]) {
