@@ -57,13 +57,13 @@ class AlertBaseUIView: UIView {
             $0.setTitle("", for: .normal)
         }
         dismissButton.do {
-            $0.setTitle("no", for: .normal)
+            $0.setTitle("취소", for: .normal)
             $0.setTitleColor(UIColor.appColor(.alertTextcolor), for: .normal)
             $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
             $0.titleLabel?.font = UIFont.monospacedSystemFont(ofSize: $0.titleLabel!.font.pointSize, weight: UIFont.Weight.regular)
         }
         completeButton.do {
-            $0.setTitle("yes", for: .normal)
+            $0.setTitle("확인", for: .normal)
             $0.setTitleColor(UIColor.appColor(.alertTextcolor), for: .normal)
             $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
             $0.titleLabel?.font = UIFont.monospacedSystemFont(ofSize: $0.titleLabel!.font.pointSize, weight: UIFont.Weight.regular)
