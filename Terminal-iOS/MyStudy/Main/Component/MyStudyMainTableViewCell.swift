@@ -16,7 +16,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
     var locationLabel = UILabel()
     var titleLabel = UILabel()
     lazy var notiGuideView = UIView()
-    var checkBox = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,17 +54,10 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.backgroundColor = .red
             $0.layer.masksToBounds = true
         }
-        checkBox.do {
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.appColor(.mainColor).cgColor
-            $0.backgroundColor = UIColor.systemBackground
-            $0.layer.cornerRadius = Terminal.convertWidth(value: 20) / 2
-            $0.layer.masksToBounds = true
-        }
     }
     
     func layout() {
-        [studyMainimage, locationLabel, titleLabel, checkBox, notiGuideView].forEach { addSubview($0) }
+        [studyMainimage, locationLabel, titleLabel, notiGuideView].forEach { addSubview($0) }
         
         studyMainimage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -84,13 +76,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: (3/667) * parentFrame.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: studyMainimage.trailingAnchor, constant: (23/375) * parentFrame.width).isActive = true
-        }
-        checkBox.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Terminal.convertWidth(value: 28)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
         }
 //        notiGuideView.do {
 //            $0.translatesAutoresizingMaskIntoConstraints = false

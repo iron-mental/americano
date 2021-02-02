@@ -114,26 +114,18 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MyStudyMainTableViewCell.identifier) as! MyStudyMainTableViewCell
-
-            cell.checkBox.isHidden = true
-            cell.notiGuideView.isHidden = false
+        
+        
 
         
         cell.locationLabel.text = myStudyList[indexPath.row].sigungu
         cell.titleLabel.text = myStudyList[indexPath.row].title
         cell.locationLabel.widthAnchor.constraint(equalToConstant: cell.locationLabel.intrinsicContentSize.width + 30).isActive = true
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-            return requestBody
-        }
-        
         if myStudyList[indexPath.row].image == "" || myStudyList[indexPath.row].image == "test" {
             cell.studyMainimage.image = UIImage(named: "swiftmain")
         } else {
             let url = URL(string: myStudyList[indexPath.row].image!)
-            cell.studyMainimage.kf.setImage(with: url, options: [.requestModifier(imageDownloadRequest)])
+            cell.studyMainimage.kf.setImage(with: url, options: [.requestModifier(RequestToken.token())])
         }
         
         return cell
