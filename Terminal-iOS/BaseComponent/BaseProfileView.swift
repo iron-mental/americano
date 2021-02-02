@@ -189,14 +189,12 @@ extension BaseProfileView: BaseProfileViewProtocol {
 
         /// 프로필
         self.profile.name.text = userInfo.nickname
-        
-        
         self.profile.descript.text = userInfo.introduce ?? ""
         
-        if let image = userInfo.image {
-            self.profile.profileImage.kf.setImage(with: URL(string: image),
+        let imageURL = userInfo.image ?? ""
+        self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
+                                                  placeholder: UIImage(named: "defaultProfile"),
                                                   options: [.requestModifier(RequestToken.token())])
-        }
 
         /// 경력
         if let careerTitle = userInfo.careerTitle, let careerContents = userInfo.careerContents {

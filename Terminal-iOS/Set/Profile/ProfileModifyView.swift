@@ -23,7 +23,7 @@ class ProfileModifyView: UIViewController {
     lazy var modifyLabel = UILabel()
     lazy var contentView = UIView()
     
-    lazy var profileImage = UIImageView()
+    let profileImage = UIImageView()
     lazy var nameLabel = UILabel()
     lazy var introductionLabel = UILabel()
     lazy var name = UITextField()
@@ -54,14 +54,12 @@ class ProfileModifyView: UIViewController {
             $0.image = self.profile?.profileImage
             let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(profileTapGesture)
-            $0.backgroundColor = .appColor(.terminalBackground)
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = Terminal.convertHeigt(value: 100)
             $0.frame.size.height = Terminal.convertHeigt(value: 100)
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
-            $0.backgroundColor = .blue
         }
         
         self.contentView.do {
@@ -143,7 +141,7 @@ class ProfileModifyView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 35)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 90)).isActive = true
         }
         
         self.modifyLabel.do {
@@ -157,6 +155,7 @@ class ProfileModifyView: UIViewController {
             $0.topAnchor.constraint(equalTo: self.profileImage.bottomAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
         }
+        
         self.name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 5).isActive = true
