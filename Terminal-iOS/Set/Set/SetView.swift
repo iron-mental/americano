@@ -52,6 +52,7 @@ class SetView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
         }
+        
         settingList.do {
             $0.alwaysBounceVertical = false
             $0.delegate = self
@@ -64,6 +65,7 @@ class SetView: UIViewController {
             $0.register(AccountCell.self, forCellReuseIdentifier: AccountCell.accountCellId)
             $0.register(UserManageCell.self, forCellReuseIdentifier: UserManageCell.userManageCellId)
         }
+        
         accountButton.do {
             if emailVerify {
                 $0.setTitle("인증완료", for: .normal)

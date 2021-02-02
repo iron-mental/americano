@@ -15,7 +15,7 @@ class StudyListInteractor: StudyListInteractorInputProtocol {
     var newKeyValue: [Int] = []
     var lengthNewKeyValue: [Int] = []
     
-    var presenter: StudyListInteractorOutputProtocol?
+    weak var presenter: StudyListInteractorOutputProtocol?
     var localDataManager: StudyListLocalDataManagerInputProtocol?
     var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
     
