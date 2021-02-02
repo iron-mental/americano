@@ -55,7 +55,7 @@ class TerminalAlertMessage: NSObject {
     class func show(controller: UIViewController, type: AlertType) {
         TerminalAlertMessage.alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         TerminalAlertMessage.alert.view.backgroundColor = .appColor(.terminalBackground)
-        TerminalAlertMessage.alert.view.layer.cornerRadius = 5
+        TerminalAlertMessage.alert.view.layer.cornerRadius = 15
         
         let contentViewController = UIViewController()
         contentViewController.view = type.view
