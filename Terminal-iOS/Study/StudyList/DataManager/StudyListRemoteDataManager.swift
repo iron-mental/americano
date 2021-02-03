@@ -30,7 +30,6 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
-                    print(json)
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)

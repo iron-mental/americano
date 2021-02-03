@@ -75,10 +75,6 @@ class StudyCell: UITableViewCell {
             mainImage.image = #imageLiteral(resourceName: "swiftmain")
             return
         }
-        guard let leader = data.leaderImage else {
-            managerImage.image = #imageLiteral(resourceName: "leehi")
-            return
-        }
         
         let processor = DownsamplingImageProcessor(size: mainImage.bounds.size)
         self.mainImage.kf.indicatorType = .activity
@@ -90,7 +86,9 @@ class StudyCell: UITableViewCell {
                       .cacheOriginalImage
             ])
         
-        self.managerImage.kf.setImage(with: URL(string: leader),
+        let managerImageURL = data.leaderImage ?? ""
+        self.managerImage.kf.setImage(with: URL(string: managerImageURL),
+                                      placeholder: UIImage(named: "defaultProfile"),
                                       options: [.requestModifier(RequestToken.token())])
     }
     
