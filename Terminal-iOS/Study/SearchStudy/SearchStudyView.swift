@@ -27,7 +27,7 @@ class SearchStudyView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchBar.becomeFirstResponder()
+//        searchController.searchBar.becomeFirstResponder()
         presenter?.viewDidLoad()
         attribute()
         layout()
@@ -49,7 +49,7 @@ class SearchStudyView: UIViewController {
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false
             $0.hidesNavigationBarDuringPresentation = false
-            navigationItem.titleView = searchController.searchBar
+//            navigationItem.titleView = searchController.searchBar
             $0.searchBar.delegate = self
             $0.delegate = self
         }

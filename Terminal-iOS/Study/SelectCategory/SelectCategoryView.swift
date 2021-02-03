@@ -30,6 +30,9 @@ class SelectCategoryView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.navigationController?.navigationBar.prefersLargeTitles = false
+        }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }

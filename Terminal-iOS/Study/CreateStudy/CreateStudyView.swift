@@ -20,6 +20,9 @@ class CreateStudyView: BaseEditableStudyDetailView {
     
     override func attribute() {
         super.attribute()
+        self.do {
+            $0.title = "스터디 만들기"
+        }
         self.button.do {
             $0.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         }
