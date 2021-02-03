@@ -41,6 +41,7 @@ class MyStudyMainView: UIViewController {
     }
     
     func attribute() {
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         moreButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
@@ -48,7 +49,6 @@ class MyStudyMainView: UIViewController {
             $0.image = #imageLiteral(resourceName: "more")
             $0.tintColor = .white
         }
-        
         self.do {
             $0.title = "내 스터디"
             $0.navigationController?.navigationBar.standardAppearance = appearance
@@ -70,7 +70,7 @@ class MyStudyMainView: UIViewController {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
         }
         refreshControl.do {
-            $0.addTarget(self, action: #selector(viewDidLoad), for: .valueChanged)
+            $0.addTarget(self, action: #selector(updateList), for: .valueChanged)
         }
     }
     
@@ -80,11 +80,17 @@ class MyStudyMainView: UIViewController {
         
         self.tableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
+    }
+    
+    // MARK: @objc
+    @objc func updateList() {
+        presenter?.viewDidLoad()
+        refreshControl.endRefreshing()
     }
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
@@ -136,17 +142,11 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
     }
     
     func showMyStudyList(myStudyList: [MyStudy]) {
-        myStudyList.forEach {
-            print($0.id)
-        }
         self.myStudyList = myStudyList
         attribute()
         layout()
         tableView.reloadData()
-        LoadingRainbowCat.hide {
-            print("로딩 끝")
-        }
-        self.refreshControl.endRefreshing()
+        LoadingRainbowCat.hide()
     }
     
     func showErrMessage() {
