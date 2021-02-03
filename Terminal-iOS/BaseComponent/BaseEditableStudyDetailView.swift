@@ -32,7 +32,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var currentScrollViewMaxY: CGFloat = 0
     var selectedLocation: StudyDetailLocationPost?
     var textViewTapFlag = false
-    var scrollViewOffsetElement: CGFloat = 0.0
+    var standardContentHeight: CGFloat = 0.0
     var accessoryCompletButton = UIButton()
     var viewDidAppearFlag = true
     
@@ -43,7 +43,6 @@ class BaseEditableStudyDetailView: UIViewController {
         setDelegate()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -51,7 +50,7 @@ class BaseEditableStudyDetailView: UIViewController {
             studyTitleTextField.becomeFirstResponder()
             viewDidAppearFlag.toggle()
         }
-        scrollViewOffsetElement = 0
+        standardContentHeight = scrollView.contentSize.height
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -63,8 +62,7 @@ class BaseEditableStudyDetailView: UIViewController {
     
     @objc func keyboardWillHide(notification: NSNotification) {
         button.alpha = 1
-        scrollView.contentSize.height = 1291
-        scrollViewOffsetElement = 0
+        scrollView.contentSize.height = standardContentHeight
     }
     
     func setDelegate(completion: (() -> Void)? = nil) {
@@ -295,9 +293,6 @@ class BaseEditableStudyDetailView: UIViewController {
             self.viewSetTop(distance: distance - 10)
         } else if viewMaxY <= (parentView.frame.maxY) {
             let distance = (parentView.frame.maxY) - viewMaxY
-            if distance > (scrollView.contentSize.height - (scrollView.contentOffset.y + scrollView.frame.height)) {
-                scrollViewOffsetElement = distance
-            }
             self.viewSetBottom(distance: distance + 10)
         } else {
             textViewTapFlag = false
@@ -319,7 +314,6 @@ class BaseEditableStudyDetailView: UIViewController {
             self.scrollView.contentSize.height += distance
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
-            self.scrollViewOffsetElement = distance
             self.clickedView?.becomeFirstResponder()
             self.textViewTapFlag = false
         }
