@@ -39,7 +39,13 @@ class SearchStudyView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.title = "스터디 검색"
+        }
         self.searchController.do {
+            searchController.hidesNavigationBarDuringPresentation = true
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController!.navigationBar.sizeToFit()
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false
             $0.hidesNavigationBarDuringPresentation = false
@@ -74,10 +80,8 @@ class SearchStudyView: UIViewController {
         self.collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.hotLable.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor,
-                                        constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor,
-                                         constant: -10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 150).isActive = true
         }
     }

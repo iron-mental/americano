@@ -35,6 +35,7 @@ class StudyListView: UIViewController {
     func attribute() {
         
         self.do {
+            $0.navigationController?.navigationBar.prefersLargeTitles = true
             $0.title = category ?? nil
         }
         view.do {
@@ -110,7 +111,7 @@ class StudyListView: UIViewController {
         }
         tableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: aligmentView.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: aligmentView.safeAreaLayoutGuide.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -124,7 +125,6 @@ class StudyListView: UIViewController {
             self.presenter?.studyList(category: self.category!)
             self.refreshControl.endRefreshing()
         }
-        self.tableView.reloadData()
     }
     
     @objc func new() {
