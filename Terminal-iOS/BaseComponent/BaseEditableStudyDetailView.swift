@@ -23,7 +23,6 @@ class BaseEditableStudyDetailView: UIViewController {
     var button = UIButton()
     var mainImageTapGesture = UITapGestureRecognizer()
     var locationTapGesture = UITapGestureRecognizer()
-    
     var studyDetailPost: StudyDetailPost?
     var backgroundView = UIView()
     let scrollView = UIScrollView()
@@ -64,7 +63,7 @@ class BaseEditableStudyDetailView: UIViewController {
     
     @objc func keyboardWillHide(notification: NSNotification) {
         button.alpha = 1
-        scrollView.contentSize.height -= scrollViewOffsetElement
+        scrollView.contentSize.height = 1291
         scrollViewOffsetElement = 0
     }
     
@@ -301,6 +300,7 @@ class BaseEditableStudyDetailView: UIViewController {
             }
             self.viewSetBottom(distance: distance + 10)
         } else {
+            textViewTapFlag = false
         }
     }
     
@@ -309,8 +309,8 @@ class BaseEditableStudyDetailView: UIViewController {
             self.button.alpha = 0
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
-            self.textViewTapFlag = true
             self.clickedView?.becomeFirstResponder()
+            self.textViewTapFlag = false
         }
     }
     func viewSetBottom(distance: CGFloat) {
@@ -318,10 +318,10 @@ class BaseEditableStudyDetailView: UIViewController {
             self.button.alpha = 0
             self.scrollView.contentSize.height += distance
             self.scrollView.contentOffset.y += distance
-            self.scrollViewOffsetElement = distance
         } completion: { _ in
+            self.scrollViewOffsetElement = distance
             self.clickedView?.becomeFirstResponder()
-            self.textViewTapFlag = true
+            self.textViewTapFlag = false
         }
     }
 }
@@ -336,14 +336,15 @@ extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavig
 
 extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewTapFlag = true
         clickedView = textField
-            self.editableViewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
 
 extension BaseEditableStudyDetailView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        
+        textViewTapFlag = true
         clickedView = textView
         self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
@@ -352,9 +353,11 @@ extension BaseEditableStudyDetailView: UITextViewDelegate {
 extension BaseEditableStudyDetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if type(of: scrollView) == UIScrollView.self {
-            view.endEditing(true)
             currentScrollViewMinY = scrollView.contentOffset.y
             currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
+            if !textViewTapFlag {
+                view.endEditing(true)
+            }
         }
     }
 }
