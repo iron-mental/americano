@@ -44,6 +44,7 @@ class CreateStudyView: BaseEditableStudyDetailView {
                                           snsEvernote: SNSInputView.evernote.textField.text!,
                                           image: mainImageView.image,
                                           location: selectedLocation ?? nil)
+        
         presenter?.clickCompleteButton(study: studyDetailPost!, studyID: study?.id ?? nil)
     }
 }

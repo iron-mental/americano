@@ -13,7 +13,6 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
     weak var interactor: SearchStudyResultRemoteDataManagerOutputProtocol?
     
     func getSearchStudyList(keyWord: String) {
-        
         TerminalNetworkManager
             .shared
             .session
@@ -27,7 +26,6 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
                     self.interactor?.showSearchStudyListResult(result: result)
                 case .failure(let err):
-                    
                     print(err)
                 }
             }

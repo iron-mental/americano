@@ -26,6 +26,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                         if JSON(value)["documents"].count == 0 {
                             result = false
                         } else {
+                            
                             if let addressList = JSON(value)["documents"].array {
                                 for item in addressList {
                                     let address = item["road_address_name"].string!.isEmpty ? item["address_name"].string! : item["road_address_name"].string!

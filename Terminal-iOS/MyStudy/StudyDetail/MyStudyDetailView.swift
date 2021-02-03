@@ -92,6 +92,7 @@ class MyStudyDetailView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
         }
+        
     }
     
     func layout() {
@@ -264,8 +265,10 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         }
         attribute()
         layout()
-        LoadingRainbowCat.hide()
         view.layoutIfNeeded()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            LoadingRainbowCat.hide()
+        })
     }
     
     func showLeaveStudyComplete() {

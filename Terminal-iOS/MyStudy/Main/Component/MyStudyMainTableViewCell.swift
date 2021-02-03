@@ -43,7 +43,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.textAlignment = .center
         }
         titleLabel.do {
-            $0.font = UIFont.notosansBold(size: Terminal.convertWidth(value: 20))
+            $0.font = UIFont.notosansBold(size: Terminal.convertWidth(value: 17))
             $0.textColor = UIColor.appColor(.profileTextColor)
         }
     }
@@ -65,7 +65,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
         }
         titleLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: (3/667) * parentFrame.height).isActive = true
+            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: studyMainimage.trailingAnchor, constant: (23/375) * parentFrame.width).isActive = true
         }
     }
@@ -73,7 +73,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
     func setData(study: MyStudy) {
         self.locationLabel.text = study.sigungu
         self.titleLabel.text = study.title
-        print(locationLabel.intrinsicContentSize.width)
         self.layoutIfNeeded()
         guard let image = study.image else { return }
         if image.isEmpty {

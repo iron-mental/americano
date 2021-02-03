@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {    
+class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
+    
     static func createMyStudyMainViewModul() -> UIViewController {
         let view: MyStudyMainViewProtocol = MyStudyMainView()
         let presenter: MyStudyMainPresenterProtocol = MyStudyMainPresenter()

@@ -33,7 +33,13 @@ class StudyListView: UIViewController {
     
     // MARK: Attribute
     func attribute() {
-        view.backgroundColor = UIColor.appColor(.terminalBackground)
+        
+        self.do {
+            $0.title = category ?? nil
+        }
+        view.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         aligmentView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }

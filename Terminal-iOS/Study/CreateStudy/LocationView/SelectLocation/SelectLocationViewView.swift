@@ -34,6 +34,7 @@ class SelectLocationView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         attribute()
         layout()
         bottomView.detailAddress.delegate = self
@@ -176,6 +177,7 @@ extension SelectLocationView: UITextFieldDelegate {
 
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
+        
             bottomView.address.text = item.address
             location = item
     }

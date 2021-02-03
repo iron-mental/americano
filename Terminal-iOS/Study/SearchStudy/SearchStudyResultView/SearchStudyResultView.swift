@@ -25,6 +25,9 @@ class SearchStudyResultView: UIViewController {
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            if let title = keyword {
+                $0.title = "\(title) 에 대한 검색결과"
+            }
         }
         navigationItem.do {
             $0.titleView = searchController.searchBar
@@ -118,6 +121,8 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
 
 extension SearchStudyResultView: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        keyword = searchBar.text!
+        attribute()
         presenter?.returnDidTap(keyWord: searchBar.text!)
         view.endEditing(true)
     }

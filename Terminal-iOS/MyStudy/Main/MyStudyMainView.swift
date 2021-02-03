@@ -64,6 +64,7 @@ class MyStudyMainView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.refreshControl = refreshControl
+            $0.separatorColor = .clear
         }
         alarmButton.do {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)

@@ -132,7 +132,6 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 
 extension NoticeView: NoticeViewProtocol {
     func showNoticeList(firstNoticeList: [Notice]?, secondNoticeList: [Notice]?) {
-        
         if let first = firstNoticeList {
             self.firstNoticeList = first
         }
@@ -148,13 +147,9 @@ extension NoticeView: NoticeViewProtocol {
     
     func showNoticeList(noticeList: [Notice]) {
         notice.reloadData()
-        LoadingRainbowCat.hide {
-            print("로딩 끝")
-        }
+        LoadingRainbowCat.hide()
     }
     func showMessage(message: String) {
-        LoadingRainbowCat.hide {
-            print("로딩 끝")
-        }
+        LoadingRainbowCat.hide()
     }
 }

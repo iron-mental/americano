@@ -296,15 +296,12 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func showStudyDetail(with studyDetail: StudyDetail) {
         var snsList: [String: String] = [:]
-        
         self.studyInfo = studyDetail
         userData = studyDetail.participate
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
         memberView.totalMember.text = "\(userData.count) 명"
         parentView?.setting()
-        
-        
         if let notion = studyDetail.snsNotion,
            let evernote = studyDetail.snsEvernote,
            let web = studyDetail.snsWeb {
