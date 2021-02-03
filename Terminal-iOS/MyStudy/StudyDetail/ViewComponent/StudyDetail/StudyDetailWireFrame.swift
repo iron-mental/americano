@@ -9,8 +9,6 @@
 import UIKit
 
 class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
-   
-    
     static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState) -> UIViewController {
         
         let view: StudyDetailViewProtocol = StudyDetailView()

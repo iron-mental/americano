@@ -71,9 +71,8 @@ protocol MyStudyDetailLocalDataManagerProtocol: class {
 }
 
 protocol MyStudyDetailWireFrameProtocol: class {
-    var presenter: MyStudyDetailPresenterProtocol? { get set }
-    
     static func createMyStudyDetailModule(studyID: Int) -> UIViewController
+    
     func goToAddNotice(studyID: Int, parentView: UIViewController)
     func goToEditStudy(study: StudyDetail, parentView: UIViewController)
     func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController)
