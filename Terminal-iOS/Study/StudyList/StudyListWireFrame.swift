@@ -11,8 +11,10 @@ import UIKit
 class StudyListWireFrame: StudyListWireFrameProtocol {
     static func createStudyListModule(category: String) -> UIViewController {
         let view: StudyListViewProtocol = StudyListView()
-        let presenter: StudyListPresenterProtocol & StudyListInteractorOutputProtocol = StudyListPresenter()
-        let interactor: StudyListInteractorInputProtocol & StudyListRemoteDataManagerOutputProtocol = StudyListInteractor()
+        let presenter: StudyListPresenterProtocol
+            & StudyListInteractorOutputProtocol = StudyListPresenter()
+        let interactor: StudyListInteractorInputProtocol
+            & StudyListRemoteDataManagerOutputProtocol = StudyListInteractor()
         let remoteDataManager: StudyListRemoteDataManagerInputProtocol = StudyListRemoteDataManager()
         let localDataManager: StudyListLocalDataManagerInputProtocol = StudyListLocalDataManager()
         let wireFrame: StudyListWireFrameProtocol = StudyListWireFrame()

@@ -68,17 +68,19 @@ class StudyDetailView: UIViewController {
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
+        
         tempBackgroundView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
+        
         mainImageView.do {
             $0.isUserInteractionEnabled = false
-            if let imageURL =  studyInfo?.image {
-                $0.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(RequestToken.token())])
-            } else {
-                $0.image = #imageLiteral(resourceName: "leehi")
-            }
+            let imageURL = studyInfo?.image ?? ""
+            $0.kf.setImage(with: URL(string: imageURL),
+                           placeholder: UIImage(named: "swift"),
+                           options: [.requestModifier(RequestToken.token())])
         }
+        
         snsIconsView.do {
             if let notion = studyInfo?.snsNotion {
                 $0.notion.isHidden = notion.isEmpty ? true : false
@@ -90,6 +92,7 @@ class StudyDetailView: UIViewController {
                 $0.web.isHidden = web.isEmpty ? true : false
             }
         }
+        
         joinButton.do {
             $0.tag = 0
             if state == .none || state == .reject {
@@ -120,16 +123,19 @@ class StudyDetailView: UIViewController {
                 $0.isHidden = true
             }
         }
+        
         studyIntroduceView.do {
             $0.contentText = ["스터디 소개", String(studyInfo?.introduce ?? "")]
             if state == .none || state == .member {
             } else {
             }
         }
+        
         memberView.do {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
         }
+        
         studyPlanView.do {
             $0.title.text = "스터디 진행"
             $0.contentText = ["스터디 진행", String(studyInfo?.progress ?? "")]
@@ -137,6 +143,7 @@ class StudyDetailView: UIViewController {
             } else {
             }
         }
+        
         timeView.do {
             $0.title.text = "시간"
             $0.contentText = ["시간", String(studyInfo?.studyTime ?? "")]
@@ -144,6 +151,7 @@ class StudyDetailView: UIViewController {
             } else {
             }
         }
+        
         locationView.do {
             var detailAddress = ""
             if let item = studyInfo?.location.locationDetail {
@@ -152,6 +160,7 @@ class StudyDetailView: UIViewController {
             $0.title.text = "장소"
             $0.contentText = ["장소", String(studyInfo?.location.addressName ?? "") +  detailAddress]
         }
+        
         joinProgressCat.do {
             $0.addGestureRecognizer(joinProgressCatTapGesture)
             $0.isUserInteractionEnabled = false
@@ -170,7 +179,6 @@ class StudyDetailView: UIViewController {
     }
     
     func layout() {
-        
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
@@ -274,16 +282,16 @@ class StudyDetailView: UIViewController {
     }
     
     @objc func studyApplyMessageEndEditing() {
-        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
-            if let castContentViewController = contentViewController as? UIViewController {
-                if let alertView = castContentViewController.view {
-                    if let messageView = alertView as? StudyApplyMessageView {
-                        guard let message =  messageView.editMessageTextField.text else { return }
-                        presenter?.joinButtonDidTap(studyID: studyID!, message: message)
-                    }
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController"),
+           let castContentViewController = contentViewController as? UIViewController {
+            if let alertView = castContentViewController.view {
+                if let messageView = alertView as? StudyApplyMessageView {
+                    guard let message =  messageView.editMessageTextField.text else { return }
+                    presenter?.joinButtonDidTap(studyID: studyID!, message: message)
                 }
             }
         }
+        
         TerminalAlertMessage.dismiss()
     }
 }
@@ -303,7 +311,6 @@ extension StudyDetailView: StudyDetailViewProtocol {
         memberView.collectionView.reloadData()
         memberView.totalMember.text = "\(userData.count) 명"
         parentView?.setting()
-        
         
         if let notion = studyDetail.snsNotion,
            let evernote = studyDetail.snsEvernote,

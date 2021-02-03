@@ -33,6 +33,8 @@ class BaseSNSModifyView: UIView {
         [firstTextFeield, secondTextField, thirdTextField].forEach {
             $0.textColor = .white
             $0.layer.cornerRadius = 10
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.addLeftPadding()
         }
@@ -45,7 +47,7 @@ class BaseSNSModifyView: UIView {
         firstImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 26)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 26)).isActive = true
         }
@@ -53,13 +55,13 @@ class BaseSNSModifyView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: firstImage.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: firstImage.trailingAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
         }
         secondImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: firstImage.bottomAnchor, constant: 17).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 26)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 26)).isActive = true
         }
@@ -67,13 +69,13 @@ class BaseSNSModifyView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: secondImage.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: secondImage.trailingAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
         }
         thirdImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: secondImage.bottomAnchor, constant: 17).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 26)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 26)).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
@@ -82,7 +84,7 @@ class BaseSNSModifyView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: thirdImage.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: thirdImage.trailingAnchor, constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -2).isActive = true
         }

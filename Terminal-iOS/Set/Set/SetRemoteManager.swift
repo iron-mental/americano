@@ -11,7 +11,7 @@ import SwiftyJSON
 import SwiftKeychainWrapper
 
 class SetRemoteManager: SetRemoteDataManagerInputProtocol {
-    var interactor: SetRemoteDataManagerOutputProtocol?
+    weak var interactor: SetRemoteDataManagerOutputProtocol?
     
     func getUserInfo() {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }

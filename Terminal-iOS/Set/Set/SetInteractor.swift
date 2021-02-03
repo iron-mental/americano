@@ -9,7 +9,7 @@
 import Foundation
 
 class SetInteractor: SetInteractortInputProtocol {
-    var presenter: SetInteractorOutputProtocol?
+    weak var presenter: SetInteractorOutputProtocol?
     var localDataManager: SetLocalDataManagerInputProtocol?
     var remoteDataManager: SetRemoteDataManagerInputProtocol?
     

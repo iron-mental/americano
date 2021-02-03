@@ -9,7 +9,7 @@
 import Foundation
 
 class IntroPresenter: IntroPresenterProtocol {
-    var view: IntroViewProtocol?
+    weak var view: IntroViewProtocol?
     var interactor: IntroInteractorProtocol?
     var wireFrame: IntroWireFrameProtocol?
     

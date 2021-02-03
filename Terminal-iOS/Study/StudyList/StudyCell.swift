@@ -71,26 +71,25 @@ class StudyCell: UITableViewCell {
             }
         }
         
-        guard let main = data.image else {
+        guard let mainImageURL = data.image else {
             mainImage.image = #imageLiteral(resourceName: "swiftmain")
             return
         }
-        guard let leader = data.leaderImage else {
-            managerImage.image = #imageLiteral(resourceName: "leehi")
+        
+        guard let managerImageURL = data.leaderImage else {
+            managerImage.image = #imageLiteral(resourceName: "defaultProfile")
             return
         }
         
         let processor = DownsamplingImageProcessor(size: mainImage.bounds.size)
         self.mainImage.kf.indicatorType = .activity
-        self.mainImage.kf.setImage(
-            with: URL(string: main),
-            options: [.requestModifier(RequestToken.token()),
-                      .processor(processor),
-                      .scaleFactor(UIScreen.main.scale),
-                      .cacheOriginalImage
-            ])
+        self.mainImage.kf.setImage(with: URL(string: mainImageURL),
+                                   options: [.requestModifier(RequestToken.token()),
+                                             .processor(processor),
+                                             .scaleFactor(UIScreen.main.scale),
+                                             .cacheOriginalImage])
         
-        self.managerImage.kf.setImage(with: URL(string: leader),
+        self.managerImage.kf.setImage(with: URL(string: managerImageURL),
                                       options: [.requestModifier(RequestToken.token())])
     }
     

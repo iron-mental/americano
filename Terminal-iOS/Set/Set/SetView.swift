@@ -13,7 +13,7 @@ import CoreData
 
 class SetView: UIViewController {
     // 섹션
-    var sections: [String] = ["","계정", "알림", "정보", ""]
+    var sections: [String] = ["", "계정", "알림", "정보", ""]
     var account: [String] = ["이메일", "SNS"]
     var noti: [String] = ["알림"]
     var settingData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
@@ -276,4 +276,3 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-

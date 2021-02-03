@@ -9,8 +9,6 @@
 import UIKit
 
 class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
-    var presenter: MyStudyDetailPresenterProtocol?
-    
     static func createMyStudyDetailModule(studyID: Int) -> UIViewController {
         let view: MyStudyDetailViewProtocol = MyStudyDetailView()
         let presenter: MyStudyDetailPresenterProtocol = MyStudyDetailPresenter()
@@ -20,7 +18,6 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         let wireFrame: MyStudyDetailWireFrameProtocol = MyStudyDetailWireFrame()
         
         view.presenter = presenter
-        view.studyID = studyID
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame
@@ -28,9 +25,10 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         interactor.remoteDatamanager = remoteDataManager
         interactor.localDatamanager = localDataManager
         remoteDataManager.interactor = interactor
-        wireFrame.presenter = presenter
         
         if let view = view as? MyStudyDetailView {
+            view.hidesBottomBarWhenPushed = true
+            view.studyID = studyID
             return view
         } else {
             return UIViewController()

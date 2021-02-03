@@ -34,11 +34,13 @@ class EmailModifyView: UIViewController {
         
         self.emailTextField.do {
             $0.text = email ?? ""
-            $0.layer.cornerRadius = 10
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.addLeftPadding()
             $0.font = UIFont.notosansMedium(size: 18)
+            $0.layer.cornerRadius = 10
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
         }
         
         self.completeButton.do {
@@ -58,14 +60,14 @@ class EmailModifyView: UIViewController {
         self.emailLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
         }
         self.emailTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.emailLabel.bottomAnchor, constant: 7).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
         self.completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
