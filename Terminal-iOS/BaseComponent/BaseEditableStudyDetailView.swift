@@ -305,7 +305,6 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func viewSetTop(distance: CGFloat) {
-        
         UIView.animate(withDuration: 0.2) {
             self.button.alpha = 0
             self.scrollView.contentOffset.y += distance
@@ -315,7 +314,6 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
     func viewSetBottom(distance: CGFloat) {
-        
         UIView.animate(withDuration: 0.2) {
             self.button.alpha = 0
             self.scrollView.contentSize.height += distance
@@ -327,7 +325,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
 }
-extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             mainImageView.image = image
@@ -355,9 +353,9 @@ extension BaseEditableStudyDetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if type(of: scrollView) == UIScrollView.self {
             view.endEditing(true)
+            currentScrollViewMinY = scrollView.contentOffset.y
+            currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
         }
-        currentScrollViewMinY = scrollView.contentOffset.y
-        currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
     }
 }
 
