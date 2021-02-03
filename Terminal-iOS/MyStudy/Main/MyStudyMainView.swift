@@ -90,7 +90,9 @@ class MyStudyMainView: UIViewController {
     // MARK: @objc
     @objc func updateList() {
         presenter?.viewDidLoad()
-        refreshControl.endRefreshing()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+            self.refreshControl.endRefreshing()
+        }
     }
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
