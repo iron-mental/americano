@@ -9,7 +9,7 @@
 import UIKit
 
 class StudyListPresenter: StudyListPresenterProtocol {
-    var view: StudyListViewProtocol?
+    weak var view: StudyListViewProtocol?
     var interactor: StudyListInteractorInputProtocol?
     var wireFrame: StudyListWireFrameProtocol?
     

@@ -53,6 +53,8 @@ class CareerModifyView: UIViewController {
             $0.dynamicFont(fontSize: 16, weight: .bold)
             $0.textAlignment = .left
             $0.layer.cornerRadius = 10
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
         }
         
@@ -66,6 +68,8 @@ class CareerModifyView: UIViewController {
             $0.layer.masksToBounds = true
             $0.isScrollEnabled = false
             $0.layer.cornerRadius = 10
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
         }

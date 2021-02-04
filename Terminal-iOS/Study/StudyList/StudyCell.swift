@@ -54,7 +54,8 @@ class StudyCell: UITableViewCell {
         }
         
         self.memberCount.do {
-            $0.text = "10명"
+            guard let count = data.memberCount else { return }
+            $0.text = "\(count)"
         }
         
         self.distance.do {
@@ -70,26 +71,25 @@ class StudyCell: UITableViewCell {
             }
         }
         
-        guard let main = data.image else {
+        guard let mainImageURL = data.image else {
             mainImage.image = #imageLiteral(resourceName: "swiftmain")
             return
         }
-        guard let leader = data.leaderImage else {
-            managerImage.image = #imageLiteral(resourceName: "leehi")
+        
+        guard let managerImageURL = data.leaderImage else {
+            managerImage.image = #imageLiteral(resourceName: "defaultProfile")
             return
         }
         
         let processor = DownsamplingImageProcessor(size: mainImage.bounds.size)
         self.mainImage.kf.indicatorType = .activity
-        self.mainImage.kf.setImage(
-            with: URL(string: main),
-            options: [.requestModifier(RequestToken.token()),
-                      .processor(processor),
-                      .scaleFactor(UIScreen.main.scale),
-                      .cacheOriginalImage
-            ])
+        self.mainImage.kf.setImage(with: URL(string: mainImageURL),
+                                   options: [.requestModifier(RequestToken.token()),
+                                             .processor(processor),
+                                             .scaleFactor(UIScreen.main.scale),
+                                             .cacheOriginalImage])
         
-        self.managerImage.kf.setImage(with: URL(string: leader),
+        self.managerImage.kf.setImage(with: URL(string: managerImageURL),
                                       options: [.requestModifier(RequestToken.token())])
     }
     
@@ -131,6 +131,11 @@ class StudyCell: UITableViewCell {
             $0.textColor = .white
             $0.font = UIFont.notosansMedium(size: 15)
             $0.textAlignment = .center
+        }
+        
+        self.mainImage.do {
+            $0.clipsToBounds = true
+            $0.layer.cornerRadius = 10
         }
     }
     
@@ -190,8 +195,8 @@ class StudyCell: UITableViewCell {
         
         self.memberCount.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.mainImage.leadingAnchor, constant: -5).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -7).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.mainImage.leadingAnchor, constant: -7).isActive = true
         }
     }
     

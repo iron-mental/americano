@@ -27,19 +27,12 @@ class ProfileCell: UITableViewCell {
     }
     
     func setData(data: UserInfo) {
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        /// Kingfisher auth token
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-            return requestBody
-        }
-        
         
         /// 프로필 이미지
         let imageURL = data.image ?? ""
         self.profile.kf.setImage(with: URL(string: imageURL),
-                                 options: [.requestModifier(imageDownloadRequest)])
+                                 placeholder: UIImage(named: "defaultProfile"),
+                                 options: [.requestModifier(RequestToken.token())])
         
         /// 자기소개
         self.name.text = data.nickname

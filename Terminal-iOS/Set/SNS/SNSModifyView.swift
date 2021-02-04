@@ -48,8 +48,8 @@ class SNSModifyView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
                                     constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
         }
         
         self.completeButton.do {

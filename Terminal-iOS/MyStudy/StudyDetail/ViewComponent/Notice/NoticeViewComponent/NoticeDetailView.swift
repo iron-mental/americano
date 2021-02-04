@@ -10,10 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-
-
 class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
-    
     var presenter: NoticeDetailPresenterProtocol?
     var parentView: UIViewController?
     var notice: Notice?
@@ -66,7 +63,10 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.text = notice?.title
         }
         profileImage.do {
-            $0.image = #imageLiteral(resourceName: "leehi")
+            let imageURL = notice?.leaderImage ?? ""
+            $0.kf.setImage(with: URL(string: imageURL),
+                           placeholder: UIImage(named: "defaultProfile"),
+                           options: [.requestModifier(RequestToken.token())])
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = Terminal.convertWidth(value: 35)
             $0.frame.size.height = Terminal.convertWidth(value: 35)

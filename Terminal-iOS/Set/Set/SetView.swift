@@ -13,7 +13,7 @@ import CoreData
 
 class SetView: UIViewController {
     // 섹션
-    var sections: [String] = ["","계정", "알림", "정보", ""]
+    var sections: [String] = ["", "계정", "알림", "정보", ""]
     var account: [String] = ["이메일", "SNS"]
     var noti: [String] = ["알림"]
     var settingData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
@@ -52,6 +52,7 @@ class SetView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
         }
+        
         settingList.do {
             $0.alwaysBounceVertical = false
             $0.delegate = self
@@ -64,6 +65,7 @@ class SetView: UIViewController {
             $0.register(AccountCell.self, forCellReuseIdentifier: AccountCell.accountCellId)
             $0.register(UserManageCell.self, forCellReuseIdentifier: UserManageCell.userManageCellId)
         }
+        
         accountButton.do {
             if emailVerify {
                 $0.setTitle("인증완료", for: .normal)
@@ -274,4 +276,3 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-

@@ -9,7 +9,7 @@
 import Foundation
 
 class SetPresenter: SetPresenterProtocol {
-    var view: SetViewProtocol?
+    weak var view: SetViewProtocol?
     var interactor: SetInteractortInputProtocol?
     var wireFrame: SetWireFrameProtocol?
     

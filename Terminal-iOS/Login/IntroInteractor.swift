@@ -10,7 +10,7 @@ import Foundation
 import SwiftKeychainWrapper
 
 class IntroInteractor: IntroInteractorProtocol {
-    var presenter: IntroPresenterProtocol?
+    weak var presenter: IntroPresenterProtocol?
     var remoteDataManager: IntroRemoteDataManagerProtocol?
     
     // MARK: 이메일 유효성 검사

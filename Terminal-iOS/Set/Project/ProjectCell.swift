@@ -88,6 +88,8 @@ class ProjectCell: UITableViewCell {
             $0.textAlignment = .left
             $0.placeholder = "프로젝트 타이틀"
             $0.layer.cornerRadius = 10
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.addLeftPadding(padding: 10)
         }
@@ -99,6 +101,8 @@ class ProjectCell: UITableViewCell {
             $0.textContainerInset = .zero
             $0.dynamicFont(size: 13, weight: .regular)
             $0.layer.cornerRadius = 10
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
             $0.delegate = self
@@ -106,7 +110,7 @@ class ProjectCell: UITableViewCell {
     }
     
     func layout() {
-        [titleLabel, contentsLabel ,remove, title, contents, sns].forEach { self.contentView.addSubview($0) }
+        [titleLabel, contentsLabel, remove, title, contents, sns].forEach { self.contentView.addSubview($0) }
         
         self.remove.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

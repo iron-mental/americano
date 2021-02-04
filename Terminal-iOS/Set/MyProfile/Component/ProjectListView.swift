@@ -34,6 +34,7 @@ class ProjectListView: UIView {
     func layout() {
         self.addSubview(modify)
         self.addSubview(projectStack)
+        
         self.modify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
@@ -44,9 +45,9 @@ class ProjectListView: UIView {
         
         self.projectStack.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.modify.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.modify.bottomAnchor, constant: -20).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 5).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.modify.leadingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         }
     }
