@@ -290,18 +290,18 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         if viewMinY >= (parentView.frame.minY) {
             let distance = (parentView.frame.minY) - viewMinY
-            self.viewSetTop(distance: distance - 10)
+            self.viewSetTop(distance: distance - accessoryCompletButton.frame.height)
         } else if viewMaxY <= (parentView.frame.maxY) {
             let distance = (parentView.frame.maxY) - viewMaxY
-            self.viewSetBottom(distance: distance + 10)
+            self.viewSetBottom(distance: distance + accessoryCompletButton.frame.height)
         } else {
             textViewTapFlag = false
         }
     }
     
     func viewSetTop(distance: CGFloat) {
+        self.button.alpha = 0
         UIView.animate(withDuration: 0.2) {
-            self.button.alpha = 0
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
             self.clickedView?.becomeFirstResponder()
@@ -309,8 +309,8 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
     func viewSetBottom(distance: CGFloat) {
+        self.button.alpha = 0
         UIView.animate(withDuration: 0.2) {
-            self.button.alpha = 0
             self.scrollView.contentSize.height += distance
             self.scrollView.contentOffset.y += distance
         } completion: { _ in

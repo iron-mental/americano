@@ -26,7 +26,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     lazy var profileImage = UIImageView()
     lazy var profileName = UILabel()
     lazy var noticeDate = UILabel()
-    lazy var noticeContents = UILabel()
+    lazy var noticeContents = PaddingLabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()

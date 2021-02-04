@@ -50,7 +50,7 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
     
     func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController) {
         let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice, studyID: studyID, parentView: parentView, state: .host)
-        parentView.present(view, animated: true)
+        parentView.navigationController?.pushViewController(view, animated: true)
     }
     
     func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int) {

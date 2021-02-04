@@ -22,7 +22,7 @@ class LocationUIView: UIView {
     func attribute() {
         title.do {
             $0.text = "장소"
-            $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
+            $0.dynamicFont(fontSize: $0.font.pointSize, weight: .medium)
         }
         address.do {
             $0.sizeToFit()
@@ -30,7 +30,7 @@ class LocationUIView: UIView {
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
             $0.text = "📍 장소 키워드 검색하러 가기"
-            $0.setMargins()
+            $0.setMargins(margin: 10)
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
         }
@@ -58,7 +58,7 @@ class LocationUIView: UIView {
             $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
         }
         address.do {
-            $0.topAnchor.constraint(equalTo: title.bottomAnchor,constant: Terminal.convertHeigt(value: 17)).isActive = true
+            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeigt(value: 17)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
