@@ -22,11 +22,6 @@ class SearchStudyResultView: UIViewController {
         layout()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        presenter?.returnDidTap(keyWord: keyword!)
-//        attribute()
-    }
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -34,24 +29,26 @@ class SearchStudyResultView: UIViewController {
                 $0.title = "\(title) 에 대한 검색결과"
             }
         }
+        navigationController?.do {
+            $0.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
+//            $0.navigationBar.prefersLargeTitles = true
+        }
         navigationItem.do {
             $0.hidesSearchBarWhenScrolling = true
             $0.searchController = searchController
             $0.largeTitleDisplayMode = .never
         }
         searchController.do {
-            $0.obscuresBackgroundDuringPresentation = true
+            $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.placeholder = "키워드를 검색하세요"
-            $0.searchBar.tintColor = UIColor(named: "default")
             definesPresentationContext = true
             $0.searchBar.delegate = self
-            $0.searchBar.showsCancelButton = true
+            $0.searchBar.searchTextField.text = keyword
         }
         self.studyListTableView.do {
             $0.delegate = self
             $0.dataSource = self
             $0.prefetchDataSource = self
-            $0.showsVerticalScrollIndicator = false
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
             $0.rowHeight = 105
@@ -63,7 +60,7 @@ class SearchStudyResultView: UIViewController {
 
         studyListTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

@@ -36,11 +36,11 @@ class SearchStudyView: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchController.isActive = true
+        self.title = "뭐냐"
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func attribute() {
@@ -49,11 +49,11 @@ class SearchStudyView: UIViewController {
         }
         self.navigationItem.do {
             $0.searchController = searchController
-            $0.largeTitleDisplayMode =  .always
+            $0.largeTitleDisplayMode = .always
         }
         self.searchController.do {
             $0.hidesNavigationBarDuringPresentation = true
-            navigationController?.navigationBar.prefersLargeTitles = true
+//            navigationController?.navigationBar.prefersLargeTitles = true
             navigationController!.navigationBar.sizeToFit()
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false

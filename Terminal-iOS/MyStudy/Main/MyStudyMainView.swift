@@ -56,7 +56,7 @@ class MyStudyMainView: UIViewController {
             $0.navigationItem.largeTitleDisplayMode = .automatic
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.prefersLargeTitles = true
-            $0.navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground).withAlphaComponent(0.8)
+            $0.navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
             
         }
         tableView.do {

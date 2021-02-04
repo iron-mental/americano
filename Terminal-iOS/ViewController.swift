@@ -60,8 +60,10 @@ class ViewController: UITabBarController {
         self.setViewController.tabBarItem = tabBarItems[.set]
         self.setViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
+        var test = UINavigationController(rootViewController: self.studyViewController)
+        test.navigationBar.prefersLargeTitles = true
         self.viewControllers = [
-            UINavigationController(rootViewController: self.studyViewController),
+            test,
             UINavigationController(rootViewController: self.myStudyViewController),
             UINavigationController(rootViewController: self.setViewController)
         ]
