@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     var presenter: ProfileDetailInteractorOutputProtocol?
@@ -14,11 +15,13 @@ class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol?
     
     func getUserInfo() {
-        remoteDataManager?.getUserInfo()
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        remoteDataManager?.getUserInfo(userID: userID)
     }
     
     func getProjectList() {
-        remoteDataManager?.getProjectList()
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        remoteDataManager?.getProjectList(userID: userID)
     }
 }
 

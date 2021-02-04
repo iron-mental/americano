@@ -18,8 +18,8 @@ protocol BaseProfileViewProtocol: class {
 protocol BaseProfileRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol? { get set }
     
-    func getUserInfo()
-    func getProjectList()
+    func getUserInfo(userID: String)
+    func getProjectList(userID: String)
 }
 
 protocol BaseProfileRemoteDataManagerOutputProtocol: class {
