@@ -36,7 +36,6 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
     // MARK: 유저 프로젝트
     
     func getProjectList(userID: String) {
-//        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         TerminalNetworkManager
             .shared
             .session
