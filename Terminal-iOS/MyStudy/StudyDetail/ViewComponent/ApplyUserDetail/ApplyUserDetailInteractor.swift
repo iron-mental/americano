@@ -9,7 +9,7 @@
 import Foundation
 
 class ApplyUserDetailInteractor: ApplyUserDetailInteractorInputProtocol {
-    var presenter: ApplyUserDetailInteractorOutputProtocol?
+    weak var presenter: ApplyUserDetailInteractorOutputProtocol?
     var remoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol?
     
     var studyID: Int?
@@ -18,8 +18,8 @@ class ApplyUserDetailInteractor: ApplyUserDetailInteractorInputProtocol {
     
     func getUserInfo() {
         guard let id = userID else { return }
-        remoteDataManager?.getUserInfo()
-        remoteDataManager?.getProjectList()
+        remoteDataManager?.getUserInfo(userID: "\(id)")
+        remoteDataManager?.getProjectList(userID: "\(id)")
     }
     func postRejectStatus() {
         remoteDataManager?.postApplyStatus(studyID: studyID!, applyID: applyID!, status: false)

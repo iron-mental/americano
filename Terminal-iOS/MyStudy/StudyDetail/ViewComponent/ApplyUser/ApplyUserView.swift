@@ -16,13 +16,15 @@ final class ApplyUserView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         presenter?.viewDidLoad(studyID: studyID!)
         attribute()
         layout()
     }
     
     private func attribute() {
+        self.do {
+            $0.title = "신청자 목록"
+        }
         self.applyUserList.do {
             $0.rowHeight = 80
             $0.register(ApplyUserCell.self, forCellReuseIdentifier: ApplyUserCell.applyUserCellID)

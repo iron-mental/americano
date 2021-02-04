@@ -23,11 +23,13 @@ class DelegateHostView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.title = "방장을 위임해보세요"
+        }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         guideLabel.do {
-            $0.text = "방장을 위임할 멤버를 골라주세요"
             $0.numberOfLines = 0
             $0.font = UIFont.boldSystemFont(ofSize: 28)
             

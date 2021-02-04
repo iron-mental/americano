@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerInputProtocol {
-    var interactor: MyApplyStudyModifyRemoteDataManagerOutputProtocol?
+    weak var interactor: MyApplyStudyModifyRemoteDataManagerOutputProtocol?
     
     func getMyApplyStudyDetail(studyID: Int, userID: Int) {
         

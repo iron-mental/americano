@@ -9,7 +9,7 @@
 import Foundation
 
 class ApplyUserPresenter: ApplyUserPresenterProtocol {
-    var view: ApplyUserViewProtocol?
+    weak var view: ApplyUserViewProtocol?
     var interactor: ApplyUserInteractorInputProtocol?
     var wireFrame: ApplyUserWireFrameProtocol?
     

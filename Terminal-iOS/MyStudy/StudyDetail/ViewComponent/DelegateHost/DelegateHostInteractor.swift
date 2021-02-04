@@ -9,7 +9,7 @@
 import Foundation
 
 class DelegateHostInteractor: DelegateHostInteractorInputProtocol {
-    var presenter: DelegateHostInteractorOutputProtocol?
+    weak var presenter: DelegateHostInteractorOutputProtocol?
     var remoteDataManager: DelegateHostRemoteDataManagerInputProtocol?
     var studyID: Int?
     

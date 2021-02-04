@@ -18,6 +18,7 @@ class SearchStudyView: UIViewController {
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
     let hotLable = UILabel()
+    let titleLabel = UILabel()
     var searchController = UISearchController(searchResultsController: nil)
     let collectionView: UICollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
@@ -38,12 +39,25 @@ class SearchStudyView: UIViewController {
         searchController.isActive = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     func attribute() {
+        self.do {
+            $0.title = "스터디 검색"
+        }
+        self.navigationItem.do {
+            $0.searchController = searchController
+            $0.largeTitleDisplayMode = .always
+            $0.titleView = titleLabel
+        }
         self.searchController.do {
+            $0.hidesNavigationBarDuringPresentation = true
+            navigationController!.navigationBar.sizeToFit()
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false
             $0.hidesNavigationBarDuringPresentation = false
-            navigationItem.titleView = searchController.searchBar
             $0.searchBar.delegate = self
             $0.delegate = self
         }
@@ -64,7 +78,7 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [hotLable, collectionView].forEach { self.view.addSubview($0) }
+        [ hotLable, collectionView].forEach { self.view.addSubview($0) }
         
         self.hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -74,10 +88,8 @@ class SearchStudyView: UIViewController {
         self.collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.hotLable.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor,
-                                        constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor,
-                                         constant: -10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 150).isActive = true
         }
     }

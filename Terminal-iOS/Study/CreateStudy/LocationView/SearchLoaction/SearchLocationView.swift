@@ -120,6 +120,7 @@ extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         presenter?.didSelectedItem(item: searchResultList[indexPath.row], view: self, parentView: parentView!)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -87,7 +87,7 @@ class ProfileModifyView: UIViewController {
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
             $0.dynamicFont(fontSize: 16, weight: .regular)
-            $0.addLeftPadding()
+            $0.addLeftPadding(padding: 10)
         }
         
         self.introductionLabel.do {

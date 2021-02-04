@@ -20,6 +20,9 @@ class CreateStudyView: BaseEditableStudyDetailView {
     
     override func attribute() {
         super.attribute()
+        self.do {
+            $0.title = "스터디 만들기"
+        }
         self.button.do {
             $0.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         }
@@ -44,6 +47,7 @@ class CreateStudyView: BaseEditableStudyDetailView {
                                           snsEvernote: SNSInputView.evernote.textField.text!,
                                           image: mainImageView.image,
                                           location: selectedLocation ?? nil)
+        
         presenter?.clickCompleteButton(study: studyDetailPost!, studyID: study?.id ?? nil)
     }
 }

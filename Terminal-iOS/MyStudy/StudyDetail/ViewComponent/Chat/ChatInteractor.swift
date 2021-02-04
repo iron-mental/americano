@@ -9,13 +9,7 @@
 import Foundation
 
 class ChatInteractor: ChatInteractorProtocol {
-    
-    
-    
-    
-    
-    
-    var presenter: ChatPresenterProtocol?
+    weak var presenter: ChatPresenterProtocol?
     var remoteDataManager: ChatRemoteDataManagerProtocol?
     var localDataManager: ChatLocalDataManagerProtocol?
     

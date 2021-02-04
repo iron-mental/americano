@@ -9,7 +9,7 @@
 import Foundation
 
 class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
-    var presenter: ModifyStudyInteractorOutputProtocol?
+    weak var presenter: ModifyStudyInteractorOutputProtocol?
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol?
     var currentStudy: StudyDetail?
     
@@ -83,10 +83,8 @@ extension ModifyStudyInteractor: ModifyStudyRemoteDataManagerOutputProtocol {
         switch result {
         case true:
             presenter?.putStudyInfoResult(result: result, message: message)
-            break
         case false:
             presenter?.putStudyInfoResult(result: result, message: message)
-            break
         }
     }
 }

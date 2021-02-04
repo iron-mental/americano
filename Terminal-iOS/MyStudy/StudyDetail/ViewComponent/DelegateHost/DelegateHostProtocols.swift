@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol DelegateHostViewProtocol {
+protocol DelegateHostViewProtocol: class {
     var presenter: DelegateHostPresenterProtocol? { get set }
     var userList: [Participate]? { get set }
     var studyID: Int? { get set }
@@ -18,7 +18,7 @@ protocol DelegateHostViewProtocol {
     func showError(message: String)
 }
 
-protocol DelegateHostPresenterProtocol {
+protocol DelegateHostPresenterProtocol: class {
     var view: DelegateHostViewProtocol? { get set }
     var interactor: DelegateHostInteractorInputProtocol? { get set }
     var wireFrame: DelegateHostWireFrameProtocol? { get set }
@@ -27,7 +27,7 @@ protocol DelegateHostPresenterProtocol {
     func delegateHostButtonDidTap(newLeader: Int)
 }
 
-protocol DelegateHostInteractorInputProtocol {
+protocol DelegateHostInteractorInputProtocol: class {
     var presenter: DelegateHostInteractorOutputProtocol? { get set }
     var remoteDataManager: DelegateHostRemoteDataManagerInputProtocol? { get set }
     var studyID: Int? { get set }
@@ -36,23 +36,23 @@ protocol DelegateHostInteractorInputProtocol {
     func putDelegateHostAPI(newLeader: Int)
 }
 
-protocol DelegateHostInteractorOutputProtocol {
+protocol DelegateHostInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func delegateHostResult(result: Bool, message: String)
 }
 
-protocol DelegateHostRemoteDataManagerInputProtocol {
+protocol DelegateHostRemoteDataManagerInputProtocol: class {
     var interactor: DelegateHostRemoteDataManagerOutputProtocol? { get set }
     
     //INTERACTOR -> REMOTEDATAMANAGER
     func putDelegateHostAPI(studyID: Int, newLeader: Int)
 }
 
-protocol DelegateHostRemoteDataManagerOutputProtocol {
+protocol DelegateHostRemoteDataManagerOutputProtocol: class {
     //REMOTEDATAMANAGER -> INTERACTOR
     func delegateHostResult(response: BaseResponse<String>)
 }
 
-protocol DelegateHostWireFrameProtocol {
+protocol DelegateHostWireFrameProtocol: class {
     static func createDelegateHostmodule(studyID: Int, userList: [Participate]) -> UIViewController
 }

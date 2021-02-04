@@ -83,7 +83,7 @@ class AddNoticeView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
             $0.delegate = self
-            $0.addLeftPadding()
+            $0.addLeftPadding(padding: 10)
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
         }

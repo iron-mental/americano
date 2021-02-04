@@ -9,8 +9,7 @@
 import Foundation
 
 class MyApplyStudyModifyInteractor: MyApplyStudyModifyInteractorInputProtocol {
-    
-    var presenter: MyApplyStudyModifyInteractorOutputProtocol?
+    weak var presenter: MyApplyStudyModifyInteractorOutputProtocol?
     var remoteDataManager: MyApplyStudyModifyRemoteDataManagerInputProtocol?
     var applyID: Int?
     var studyID: Int?

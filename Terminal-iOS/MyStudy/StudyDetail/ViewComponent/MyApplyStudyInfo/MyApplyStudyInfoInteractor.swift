@@ -9,7 +9,7 @@
 import Foundation
 
 class MyApplyStudyInfoInteractor: MyApplyStudyInfoInteractorInputProtocol {
-    var presenter: MyApplyStudyInfoInteractorOutputProtocol?
+    weak var presenter: MyApplyStudyInfoInteractorOutputProtocol?
     var remoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol?
     var applyID: Int?
     var studyID: Int?

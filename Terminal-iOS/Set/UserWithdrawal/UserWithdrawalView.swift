@@ -34,7 +34,7 @@ class UserWithdrawalView: UIViewController {
         [self.email, self.password].forEach {
             $0.do {
                 $0.backgroundColor = .appColor(.cellBackground)
-                $0.addLeftPadding()
+                $0.addLeftPadding(padding: 10)
                 $0.textColor = .white
                 $0.layer.cornerRadius = 10
             }

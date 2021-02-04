@@ -13,8 +13,7 @@ import SwiftyJSON
 class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
     var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol?
     
-    func getUserInfo() {
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+    func getUserInfo(userID: String) {
         TerminalNetworkManager
             .shared
             .session
@@ -36,9 +35,7 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
     
     // MARK: 유저 프로젝트
     
-    func getProjectList() {
-        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-        
+    func getProjectList(userID: String) {
         TerminalNetworkManager
             .shared
             .session

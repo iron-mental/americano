@@ -13,12 +13,11 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
     weak var interactor: SearchStudyResultRemoteDataManagerOutputProtocol?
     
     func getSearchStudyList(keyWord: String) {
-        
         TerminalNetworkManager
             .shared
             .session
             .request(TerminalRouter.studySearch(keyword: keyWord))
-            .validate()
+            .validate(statusCode: 200...299)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -27,7 +26,6 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
                     self.interactor?.showSearchStudyListResult(result: result)
                 case .failure(let err):
-                    
                     print(err)
                 }
             }
