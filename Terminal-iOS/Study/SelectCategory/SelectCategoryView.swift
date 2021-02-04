@@ -33,13 +33,14 @@ class SelectCategoryView: UIViewController {
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
-        titleView.do {
-            $0.text = "스터디 만들기"
-            $0.textColor = .white
-        }
-        navigationItem.do {
-            $0.titleView = titleView
-        }
+//        titleView.do {
+//            $0.text = "스터디 만들기"
+//            $0.textColor = .white
+//        }
+//        navigationItem.do {
+//            $0.titleView = titleView
+//        }
+        self.title = "스터디 만들기"
         scrollView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -147,16 +148,16 @@ extension SelectCategoryView: SelectCategoryViewProtocol {
 
 extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width * 0.4,
-                      height: UIScreen.main.bounds.width * 0.27)
+        return CGSize(width: Terminal.convertWidth(value: 150),
+                      height: Terminal.convertWidth(value: 100))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.07
+        return Terminal.convertWidth(value: 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.height * 0.035
+        return Terminal.convertWidth(value: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
