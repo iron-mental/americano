@@ -89,7 +89,6 @@ class MyStudyDetailView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
         }
-        
     }
     
     func layout() {
