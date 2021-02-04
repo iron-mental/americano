@@ -36,7 +36,6 @@ class SearchStudyView: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchController.isActive = true
-        self.title = "뭐냐"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +52,6 @@ class SearchStudyView: UIViewController {
         }
         self.searchController.do {
             $0.hidesNavigationBarDuringPresentation = true
-//            navigationController?.navigationBar.prefersLargeTitles = true
             navigationController!.navigationBar.sizeToFit()
             $0.obscuresBackgroundDuringPresentation = false
             $0.searchBar.showsCancelButton = false

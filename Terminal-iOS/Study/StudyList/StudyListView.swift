@@ -35,7 +35,6 @@ class StudyListView: UIViewController {
     func attribute() {
         
         self.do {
-            $0.navigationController?.navigationBar.prefersLargeTitles = true
             $0.title = category ?? nil
         }
         view.do {

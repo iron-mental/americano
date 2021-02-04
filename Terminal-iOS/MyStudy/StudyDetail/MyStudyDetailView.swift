@@ -56,9 +56,6 @@ class MyStudyDetailView: UIViewController {
         self.do {
             $0.title = studyInfo?.title ?? nil
         }
-        navigationController?.do {
-            $0.navigationBar.prefersLargeTitles = true
-        }
         if let firstVC = VCArr.first {
             childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }

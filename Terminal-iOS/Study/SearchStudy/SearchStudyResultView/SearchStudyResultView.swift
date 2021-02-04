@@ -31,7 +31,6 @@ class SearchStudyResultView: UIViewController {
         }
         navigationController?.do {
             $0.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
-//            $0.navigationBar.prefersLargeTitles = true
         }
         navigationItem.do {
             $0.hidesSearchBarWhenScrolling = true
