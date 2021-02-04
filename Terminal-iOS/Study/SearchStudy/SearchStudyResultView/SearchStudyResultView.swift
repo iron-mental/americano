@@ -13,7 +13,7 @@ class SearchStudyResultView: UIViewController {
     var keyword: String?
     var studyListTableView = UITableView()
     var searchResult: [Study] = []
-    var searchController = UISearchController(searchResultsController: nil)
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,11 @@ class SearchStudyResultView: UIViewController {
         layout()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        presenter?.returnDidTap(keyWord: keyword!)
+//        attribute()
+    }
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -30,15 +35,17 @@ class SearchStudyResultView: UIViewController {
             }
         }
         navigationItem.do {
-            $0.titleView = searchController.searchBar
+            $0.hidesSearchBarWhenScrolling = true
+            $0.searchController = searchController
+            $0.largeTitleDisplayMode = .never
         }
-        self.searchController.do {
-            $0.searchResultsUpdater = self
-            $0.obscuresBackgroundDuringPresentation = false
-            $0.searchBar.showsCancelButton = false
-            $0.hidesNavigationBarDuringPresentation = false
-            $0.searchBar.text = keyword
+        searchController.do {
+            $0.obscuresBackgroundDuringPresentation = true
+            $0.searchBar.placeholder = "키워드를 검색하세요"
+            $0.searchBar.tintColor = UIColor(named: "default")
+            definesPresentationContext = true
             $0.searchBar.delegate = self
+            $0.searchBar.showsCancelButton = true
         }
         self.studyListTableView.do {
             $0.delegate = self
@@ -52,11 +59,11 @@ class SearchStudyResultView: UIViewController {
     }
     
     func layout() {
-        [studyListTableView ].forEach { view.addSubview($0) }
+        [ studyListTableView ].forEach { view.addSubview($0) }
 
         studyListTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

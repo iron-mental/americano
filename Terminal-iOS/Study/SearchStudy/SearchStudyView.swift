@@ -24,11 +24,10 @@ class SearchStudyView: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-    let searchBar = UISearchBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchController.searchBar.becomeFirstResponder()
+        searchController.searchBar.becomeFirstResponder()
         presenter?.viewDidLoad()
         attribute()
         layout()
@@ -39,28 +38,28 @@ class SearchStudyView: UIViewController {
         searchController.isActive = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     func attribute() {
         self.do {
             $0.title = "스터디 검색"
         }
-//        self.searchController.do {
-//            searchController.hidesNavigationBarDuringPresentation = true
-//            navigationController?.navigationBar.prefersLargeTitles = true
-//            navigationController!.navigationBar.sizeToFit()
-//            $0.obscuresBackgroundDuringPresentation = false
-//            $0.searchBar.showsCancelButton = false
-//            $0.hidesNavigationBarDuringPresentation = false
-////            navigationItem.titleView = searchController.searchBar
-//            $0.searchBar.delegate = self
-////            $0.delegate = self
-//        }
-        self.searchBar.do {
-            $0.sizeToFit()
-            $0.showsCancelButton = false
+        self.navigationItem.do {
+            $0.searchController = searchController
+            $0.largeTitleDisplayMode =  .always
+        }
+        self.searchController.do {
+            $0.hidesNavigationBarDuringPresentation = true
+            navigationController?.navigationBar.prefersLargeTitles = true
+            navigationController!.navigationBar.sizeToFit()
+            $0.obscuresBackgroundDuringPresentation = false
+            $0.searchBar.showsCancelButton = false
+            $0.hidesNavigationBarDuringPresentation = false
+            $0.searchBar.delegate = self
             $0.delegate = self
-            $0.barTintColor = UIColor.appColor(.terminalBackground)
-            $0.layer.borderColor = UIColor.appColor(.terminalBackground).cgColor
-            $0.layer.borderWidth = 0.5
         }
         self.view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -79,18 +78,11 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [ searchBar, hotLable, collectionView].forEach { self.view.addSubview($0) }
+        [ hotLable, collectionView].forEach { self.view.addSubview($0) }
         
-        searchBar.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        }
         self.hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
         }
         self.collectionView.do {

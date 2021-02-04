@@ -18,7 +18,7 @@ class SearchStudyPresenter: SearchStudyPresenterProtocol {
     }
     
     func viewDidLoad() {
-//        view?.showLoading()
+        view?.showLoading()
         interactor?.getHotKeyword()
     }
 }
