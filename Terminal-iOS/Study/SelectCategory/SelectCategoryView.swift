@@ -60,9 +60,10 @@ class SelectCategoryView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.showsVerticalScrollIndicator = false
         }
         navigationItem.do {
-            $0.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backButtonTapped))
+            $0.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backButtonTapped))
         }
     }
     
@@ -109,13 +110,13 @@ class SelectCategoryView: UIViewController {
     
     func viewAppearAnimation() {
         //애니메이션은 task 단위로 묶어서 하나 하는 중일 때 하나 들어오면 그전 꺼 취소하거나 그런식으로..
-        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
+        UIView.animate(withDuration: 0.25, delay: 0, options: .transitionCurlUp, animations: {
             self.textLabel.transform = self.textLabel.transform.translatedBy(x: -490, y: 0)
         }) { _ in
-            UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+            UIView.animate(withDuration: 0.1, delay: 0, options: .transitionCurlUp, animations: {
                 self.textLabel.transform = self.textLabel.transform.translatedBy(x: 10, y: 0)
             }) { _ in
-                UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+                UIView.animate(withDuration: 0.1, delay: 0, options: .transitionCurlUp, animations: {
                     self.textLabel.transform = self.textLabel.transform.translatedBy(x: -5, y: 0)
                 })
             }

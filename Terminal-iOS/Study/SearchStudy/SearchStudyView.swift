@@ -18,6 +18,7 @@ class SearchStudyView: UIViewController {
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
     let hotLable = UILabel()
+    let titleLabel = UILabel()
     var searchController = UISearchController(searchResultsController: nil)
     let collectionView: UICollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
@@ -49,6 +50,7 @@ class SearchStudyView: UIViewController {
         self.navigationItem.do {
             $0.searchController = searchController
             $0.largeTitleDisplayMode = .always
+            $0.titleView = titleLabel
         }
         self.searchController.do {
             $0.hidesNavigationBarDuringPresentation = true
