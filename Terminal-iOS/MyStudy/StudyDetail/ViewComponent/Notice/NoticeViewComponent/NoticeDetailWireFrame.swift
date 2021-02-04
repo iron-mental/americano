@@ -9,8 +9,6 @@
 import UIKit
 
 class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
-    var presenter: NoticeDetailPresenterProtocol?
-    
     static func createNoticeDetailModule(notice: Int, studyID: Int?, parentView: UIViewController?, state: StudyDetailViewState) -> UIViewController {
         let view = NoticeDetailView()
         let presenter = NoticeDetailPresenter()
@@ -45,12 +43,17 @@ class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
         interactor.remoteDataManager = remoteDataManager
         interactor.localDataManager = localDataManager
         
-        wireFrame.presenter = presenter
-        
         return view
     }
-    func goToNoticeEdit(state: AddNoticeState, notice: Notice, parentView: NoticeDetailViewProtocol) {
-        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: notice.studyID!,notice: notice, parentView: parentView as! UIViewController, state: state)
-        (parentView as! UIViewController).present(view, animated: true)
+    
+    func goToNoticeEdit(state: AddNoticeState,
+                        notice: Notice,
+                        parentView: NoticeDetailViewProtocol) {
+        guard let parentView = parentView as? UIViewController else { return }
+        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: notice.studyID!,
+                                                            notice: notice,
+                                                            parentView: parentView,
+                                                            state: state)
+        parentView.present(view, animated: true)
     }
 }

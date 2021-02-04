@@ -37,16 +37,21 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             $0.title = "공지사항 상세"
         }
+        
         moreButton.do {
             $0.setImage(#imageLiteral(resourceName: "more"), for: .normal)
             $0.addTarget(self, action: #selector(moreButtonDidTap), for: .touchUpInside)
         }
+        
         noticeBackground.do {
             $0.layer.cornerRadius = 5
             if let isPinned = notice?.pinned {
-                $0.backgroundColor = isPinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+                $0.backgroundColor = isPinned
+                    ? UIColor.appColor(.pinnedNoticeColor)  // true
+                    : UIColor.appColor(.noticeColor)        // false
             }
         }
+        
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             $0.textAlignment = .center
@@ -57,11 +62,13 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
                 $0.text = isPinned ? "필독" : "공지"
             }
         }
+        
         noticeTitle.do {
             $0.dynamicFont(fontSize: 14, weight: .semibold)
             $0.textColor = .white
             $0.text = notice?.title
         }
+        
         profileImage.do {
             let imageURL = notice?.leaderImage ?? ""
             $0.kf.setImage(with: URL(string: imageURL),
@@ -73,6 +80,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
         }
+        
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             // 옵셔널로 들어와서 일단 넣어놈
@@ -81,18 +89,19 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.textColor = .white
             $0.textAlignment = .center
         }
+        
         noticeDate.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             $0.text = notice?.updatedAt
             $0.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             $0.textAlignment = .center
         }
+        
         noticeContents.do {
             $0.dynamicFont(fontSize: 12, weight: .regular)
             $0.numberOfLines = 0
             $0.text = notice?.contents
         }
-        
     }
     
     func layout() {
@@ -101,8 +110,10 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         
         noticeBackground.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                    constant: Terminal.convertHeigt(value: 9)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertHeigt(value: 13)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 41)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
         }
@@ -114,47 +125,58 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         moreButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: noticeLabel.centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -13)).isActive = true
         }
         noticeTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: self.noticeBackground.trailingAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
-            $0.trailingAnchor.constraint(lessThanOrEqualTo: moreButton.leadingAnchor, constant: -5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.noticeBackground.trailingAnchor,
+                                        constant: Terminal.convertWidth(value: 15)).isActive = true
+            $0.trailingAnchor.constraint(lessThanOrEqualTo: moreButton.leadingAnchor,
+                                         constant: -5).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
         }
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
+            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor,
+                                    constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertHeigt(value: 13)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
         }
         profileName.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: Terminal.convertWidth(value: 8)).isActive = true
+            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor,
+                                    constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor,
+                                        constant: Terminal.convertWidth(value: 8)).isActive = true
         }
         noticeDate.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profileName.bottomAnchor, constant: 2).isActive = true
-            $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: Terminal.convertWidth(value: 8)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor,
+                                        constant: Terminal.convertWidth(value: 8)).isActive = true
         }
         noticeContents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 13)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
+            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor,
+                                    constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 13)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -13)).isActive = true
             $0.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor).isActive = true
         }
     }
     
     @objc func moreButtonDidTap() {
-        let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let edit =  UIAlertAction(title: "수정하기", style: .default) { _ in self.modifyButtonDidTap() }
-        let applyList =  UIAlertAction(title: "삭제하기", style: .destructive) {_ in self.removeButtonDidTap() }
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let edit = UIAlertAction(title: "수정하기", style: .default) { _ in self.modifyButtonDidTap() }
+        let applyList = UIAlertAction(title: "삭제하기", style: .destructive) {_ in self.removeButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [edit,applyList,cancel].forEach { alert.addAction($0) }
+        [edit, applyList, cancel].forEach { alert.addAction($0) }
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -165,6 +187,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     @objc func removeButtonDidTap() {
         presenter?.removeButtonDidTap(notice: notice!)
     }
+    
     func showNoticeDetail(notice: Notice) {
         self.notice = notice
         attribute()

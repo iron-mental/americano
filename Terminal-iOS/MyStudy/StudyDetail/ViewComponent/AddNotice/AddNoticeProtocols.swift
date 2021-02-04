@@ -40,7 +40,7 @@ protocol AddNoticePresenterProtocol: class {
 
 protocol AddNoticeRemoteDataManagerProtocol: class {
     //INTERACTOR -> REMOTE
-    func postNotice(studyID: Int, notice:  NoticePost, completion: @escaping (_ result: Bool, _ noticeID : Int) -> Void)
+    func postNotice(studyID: Int, notice: NoticePost, completion: @escaping (_ result: Bool, _ noticeID : Int) -> Void)
     func putNotice(studyID: Int, notice: NoticePost, noticeID: Int, completion: @escaping(_ result: Bool, _ noticeID: Int) -> Void)
 }
 

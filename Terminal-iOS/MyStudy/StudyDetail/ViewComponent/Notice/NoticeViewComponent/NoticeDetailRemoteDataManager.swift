@@ -11,8 +11,9 @@ import Alamofire
 import SwiftyJSON
 
 class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
-    
-    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping ( _ result: Bool, _ data: Notice) -> Void) {
+    func getNoticeDetail(studyID: Int,
+                         noticeID: Int,
+                         completion: @escaping (_ result: Bool, _ data: Notice) -> Void) {
         
         TerminalNetworkManager
             .shared
@@ -22,17 +23,24 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    let json = "\(JSON(value))".data(using: .utf8)
-                    let result: BaseResponse<Notice> = try! JSONDecoder().decode(BaseResponse<Notice>.self, from: json!)
-                    guard let notice = result.data else { return }
-                    completion(result.result, notice)
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Notice>.self, from: data!)
+                        guard let notice = result.data else { return }
+                        completion(result.result, notice)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
     }
     
-    func postNoticeRemove(studyID: Int, noticeID: Int, completion: @escaping (Bool, String) -> Void) {
+    func postNoticeRemove(studyID: Int,
+                          noticeID: Int,
+                          completion: @escaping (_: Bool, _: String) -> Void) {
         
         TerminalNetworkManager
             .shared
@@ -42,7 +50,7 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success:
-                    completion( true, "테스트")
+                    completion(true, "테스트")
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

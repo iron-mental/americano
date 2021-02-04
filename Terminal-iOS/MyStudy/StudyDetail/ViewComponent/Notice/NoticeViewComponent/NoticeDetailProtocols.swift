@@ -38,7 +38,9 @@ protocol NoticeDetailPresenterProtocol: class {
     //VIEW -> PRESENTER
     func viewDidLoad(notice: Notice)
     func removeButtonDidTap(notice: Notice)
-    func modifyButtonDidTap(state: AddNoticeState, notice: Notice, parentView: NoticeDetailViewProtocol)
+    func modifyButtonDidTap(state: AddNoticeState,
+                            notice: Notice,
+                            parentView: NoticeDetailViewProtocol)
     
     //INTERACTOR -> PRESENTER
     func noticeDetailResult(result: Bool, notice: Notice)
@@ -46,8 +48,13 @@ protocol NoticeDetailPresenterProtocol: class {
 }
 
 protocol NoticeDetailRemoteDataManagerProtocol: class {
-    func getNoticeDetail(studyID: Int, noticeID: Int, completion: @escaping ( _ result: Bool, _ data: Notice ) -> Void)
-    func postNoticeRemove(studyID: Int, noticeID: Int, completion: @escaping ( _ result: Bool, _ message: String ) -> Void)
+    func getNoticeDetail(studyID: Int,
+                         noticeID: Int,
+                         completion: @escaping (_ result: Bool, _ data: Notice ) -> Void)
+    
+    func postNoticeRemove(studyID: Int,
+                          noticeID: Int,
+                          completion: @escaping (_ result: Bool, _ message: String ) -> Void)
 }
 
 
@@ -56,8 +63,9 @@ protocol NoticeDetailLocalDataManagerProtocol: class {
 }
 
 protocol NoticeDetailWireFrameProtocol: class {
-    var presenter: NoticeDetailPresenterProtocol? { get set }
-    
-    static func createNoticeDetailModule( notice: Int, studyID: Int?, parentView: UIViewController?, state: StudyDetailViewState) -> UIViewController
+    static func createNoticeDetailModule( notice: Int,
+                                          studyID: Int?,
+                                          parentView: UIViewController?,
+                                          state: StudyDetailViewState) -> UIViewController
     func goToNoticeEdit(state: AddNoticeState, notice: Notice, parentView: NoticeDetailViewProtocol)
 }
