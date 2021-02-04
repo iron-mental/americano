@@ -10,9 +10,6 @@ import UIKit
 import SwiftKeychainWrapper
 
 class MyStudyDetailView: UIViewController {
-    deinit {
-        
-    }
     var presenter: MyStudyDetailPresenterProtocol?
     var noticePushEvent: Bool = false
     var getPushEvent: Bool = false
