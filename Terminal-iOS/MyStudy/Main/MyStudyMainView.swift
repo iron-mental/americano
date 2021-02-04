@@ -27,6 +27,7 @@ class MyStudyMainView: UIViewController {
     var editDoneButton: UIBarButtonItem?
     var myStudyList: [MyStudy] = []
     let refreshControl = UIRefreshControl()
+    let appearance = UINavigationBarAppearance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +36,15 @@ class MyStudyMainView: UIViewController {
         presenter?.viewDidLoad()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         applyState ? presenter?.showApplyList(): nil
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor.appColor(.terminalBackground)
+        navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
     }
     
     func attribute() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
         moreButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
         moreButton?.do {
             $0.image = #imageLiteral(resourceName: "more")

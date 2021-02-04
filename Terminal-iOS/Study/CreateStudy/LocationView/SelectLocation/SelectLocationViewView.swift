@@ -31,22 +31,22 @@ class SelectLocationView: UIViewController {
     var keyboardHeight: CGFloat = 0.0
     var bottomAnchor: NSLayoutConstraint?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         attribute()
         layout()
         bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         bottomView.detailAddress.becomeFirstResponder()
         mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)), zoomTo: 17))
         location?.lng = mapView.cameraPosition.target.lng
         location?.lat = mapView.cameraPosition.target.lat
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         animationFlag = isBeingPresented
     }
@@ -61,7 +61,6 @@ class SelectLocationView: UIViewController {
             bottomAnchor?.constant -= keyboardHeight
             bottomAnchor?.isActive = true
             view.layoutIfNeeded()
-            view.setNeedsDisplay()
         }
         bottomView.detailAddress.becomeFirstResponder()
         animationFlag = false
@@ -70,12 +69,12 @@ class SelectLocationView: UIViewController {
     @objc func keyboardWillHide() {
         if animationFlag == false {
             bottomAnchor?.constant = 0
+            bottomAnchor?.isActive = true
             view.layoutIfNeeded()
         }
     }
     
     func attribute() {
-//        mapView = NMFMapView(frame: view.frame)
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -90,6 +89,8 @@ class SelectLocationView: UIViewController {
         bottomView.do {
             $0.completeButton.addTarget(self, action: #selector(didCompleteButtonClicked), for: .touchUpInside)
             $0.address.text = location?.address
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
         }
     }
     
@@ -177,8 +178,7 @@ extension SelectLocationView: UITextFieldDelegate {
 
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
-        
-            bottomView.address.text = item.address
-            location = item
+        bottomView.address.text = item.address
+        location = item
     }
 }

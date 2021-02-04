@@ -38,6 +38,7 @@ class MyStudyDetailView: UIViewController {
     lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(moreButtonDidTap))
+    let appearance = UINavigationBarAppearance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +65,6 @@ class MyStudyDetailView: UIViewController {
         if let firstVC = VCArr.first {
             childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
