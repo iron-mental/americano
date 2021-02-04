@@ -31,12 +31,14 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad(notice: notice!)
+        attribute()
         layout()
     }
     
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
+            $0.title = "공지사항 상세"
         }
         moreButton.do {
             $0.setImage(#imageLiteral(resourceName: "more"), for: .normal)
@@ -44,7 +46,9 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         }
         noticeBackground.do {
             $0.layer.cornerRadius = 5
-            $0.backgroundColor = notice!.pinned! ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+            if let isPinned = notice?.pinned {
+                $0.backgroundColor = isPinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+            }
         }
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
@@ -52,7 +56,9 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.textColor = .white
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 5
-            $0.text = notice!.pinned! ? "필독" : "공지"
+            if let isPinned = notice?.pinned {
+                $0.text = isPinned ? "필독" : "공지"
+            }
         }
         noticeTitle.do {
             $0.dynamicFont(fontSize: 14, weight: .semibold)
