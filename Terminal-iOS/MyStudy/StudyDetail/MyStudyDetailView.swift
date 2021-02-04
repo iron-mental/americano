@@ -24,6 +24,7 @@ class MyStudyDetailView: UIViewController {
                        ChatWireFrame.createChatModule()]
         }
     }
+    var studyTitle: String?
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
     var pageBeforeIndex: Int = 0
@@ -54,7 +55,11 @@ class MyStudyDetailView: UIViewController {
     
     func attribute() {
         self.do {
-            $0.title = studyInfo?.title ?? nil
+            if let title = studyInfo?.title {
+                $0.title = title
+            } else {
+                $0.title = studyTitle
+            }
         }
         if let firstVC = VCArr.first {
             childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)

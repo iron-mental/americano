@@ -36,7 +36,7 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
     
     func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int, state: Bool) {
         if state {
-            let myStudyDetailViewController = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: keyValue)
+            let myStudyDetailViewController = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: keyValue, studyTitle: "임시 타이틀")
             if let sourceView = view as? UIViewController {
                 sourceView.navigationController?.pushViewController(myStudyDetailViewController, animated: true)
             }

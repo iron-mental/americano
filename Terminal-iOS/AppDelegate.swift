@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         switch event {
         case "apply_new":
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
                 as? MyStudyDetailView {
                 view.getPushEvent = true
                 view.applyState = true
@@ -110,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
         case "study_update", "study_delegate":
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
                 as? MyStudyDetailView {
                 view.getPushEvent = true
                 goView = view
@@ -121,7 +121,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
         case "notice_new", "notice_update":
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID)
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ")
                 as? MyStudyDetailView {
                 view.noticePushEvent = true
                 goView = view
