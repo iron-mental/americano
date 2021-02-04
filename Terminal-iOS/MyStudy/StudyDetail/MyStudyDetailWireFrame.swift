@@ -20,8 +20,8 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         let wireFrame: MyStudyDetailWireFrameProtocol = MyStudyDetailWireFrame()
         
         view.presenter = presenter
-        view.studyID = studyID
         view.studyTitle = studyTitle
+        view.studyID = studyID
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame

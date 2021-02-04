@@ -22,7 +22,7 @@ protocol StudyListWireFrameProtocol: class {
     static func createStudyListModule(category: String) -> UIViewController
     
     // PRESENT -> WIREFRAME
-    func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int, state: Bool)
+    func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int, state: Bool, studyTitle: String)
 }
 
 protocol StudyListPresenterProtocol: class {
@@ -34,7 +34,7 @@ protocol StudyListPresenterProtocol: class {
     func studyList(category: String)
     func pagingStudyList()
     func pagingLengthStudyList()
-    func showStudyDetail(keyValue: Int, state: Bool)
+    func showStudyDetail(keyValue: Int, state: Bool, studyTitle: String)
 }
 
 protocol StudyListInteractorOutputProtocol: class {

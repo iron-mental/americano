@@ -25,7 +25,7 @@ protocol SearchStudyResultPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func returnDidTap(keyWord: String)
-    func didTapCell(keyValue: Int, state: Bool)
+    func didTapCell(keyValue: Int, state: Bool, studyTitle: String)
     func scrollToBottom()
 }
 
@@ -62,5 +62,5 @@ protocol SearchStudyResultWireFrameProtocol: class {
     static func createSearchStudyResultModule(keyword: String) -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func presentStudyDetailScreen(from view: SearchStudyResultViewProtocol, keyValue: Int, state: Bool)
+    func presentStudyDetailScreen(from view: SearchStudyResultViewProtocol, keyValue: Int, state: Bool, studyTitle: String)
 }

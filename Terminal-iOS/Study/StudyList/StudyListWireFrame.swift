@@ -34,15 +34,15 @@ class StudyListWireFrame: StudyListWireFrameProtocol {
         }
     }
     
-    func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int, state: Bool) {
+    func presentStudyDetailScreen(from view: StudyListViewProtocol, keyValue: Int, state: Bool, studyTitle: String) {
         if state {
-            let myStudyDetailViewController = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: keyValue, studyTitle: "임시 타이틀")
+            let myStudyDetailViewController = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: keyValue, studyTitle: studyTitle)
             if let sourceView = view as? UIViewController {
                 sourceView.navigationController?.pushViewController(myStudyDetailViewController, animated: true)
             }
         } else {
             let studyState: StudyDetailViewState = state ? .member : .none
-            let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(parent: nil, studyID: keyValue, state: studyState)
+            let studyDetailViewController = StudyDetailWireFrame.createStudyDetail(parent: nil, studyID: keyValue, state: studyState, studyTitle: studyTitle)
             if let sourceView = view as? UIViewController {
                 sourceView.navigationController?.pushViewController(studyDetailViewController, animated: true)
             }

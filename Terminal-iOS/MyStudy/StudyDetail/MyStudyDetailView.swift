@@ -20,7 +20,7 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int? {
         didSet {
             VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                       StudyDetailWireFrame.createStudyDetail(parent: self, studyID: studyID!, state: .member),
+                       StudyDetailWireFrame.createStudyDetail(parent: self, studyID: studyID!, state: .member, studyTitle: studyTitle ?? ""),
                        ChatWireFrame.createChatModule()]
         }
     }

@@ -14,6 +14,7 @@ protocol StudyDetailViewProtocol: class {
     var studyID: Int? { get set }
     var studyInfo: StudyDetail? { get set }
     var parentView: MyStudyDetailViewProtocol? { get set }
+    var studyTitle: String? { get set }
     // PRESENT -> VIEW
     func showStudyDetail(with studyDetail: StudyDetail)
     func showError(message: String)
@@ -23,7 +24,7 @@ protocol StudyDetailViewProtocol: class {
 }
 
 protocol StudyDetailWireFrameProtocol: class {
-    static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState) -> UIViewController
+    static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState, studyTitle: String) -> UIViewController
     
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyDetailViewProtocol)

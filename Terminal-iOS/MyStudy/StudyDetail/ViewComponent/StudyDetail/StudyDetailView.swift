@@ -55,15 +55,25 @@ class StudyDetailView: UIViewController {
     var joinButton = UIButton()
     let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
     var joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
+    var studyTitle: String? {
+        didSet {
+            self.title = studyTitle
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        attribute()
         layout()
     }
     
     func attribute() {
         self.do {
-            $0.title = studyInfo?.title ?? nil
+            if let title = studyInfo?.title {
+                $0.title = title
+            } else {
+                $0.title = studyTitle
+            }
         }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)

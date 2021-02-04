@@ -18,8 +18,8 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
         interactor?.getSearchStudyList(keyWord: keyWord)
     }
     
-    func didTapCell(keyValue: Int, state: Bool) {
-        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state)
+    func didTapCell(keyValue: Int, state: Bool, studyTitle: String) {
+        wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state, studyTitle: studyTitle)
     }
     
     func scrollToBottom() {
