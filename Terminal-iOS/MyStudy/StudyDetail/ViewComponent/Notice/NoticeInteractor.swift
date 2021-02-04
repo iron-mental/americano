@@ -14,7 +14,7 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
     var firstNoticeList: [Notice] = []
     var secondNoticeList: [Notice] = []
     
-    var presenter: NoticeInteractorOutputProtocol?
+    weak var presenter: NoticeInteractorOutputProtocol?
     var remoteDataManager: NoticeRemoteDataManagerProtocol?
     
     func getNoticeList(studyID: Int) {

@@ -9,11 +9,9 @@
 import UIKit
 
 class NoticeWireFrame: NoticeWireFrameProtocol {
-    var presenter: NoticePresenterProtocol?
-    
     static func createNoticeModule(studyID: Int) -> UIViewController {
         let view = NoticeView()
-        var presenter: NoticePresenterProtocol & NoticeInteractorOutputProtocol = NoticePresenter()
+        let presenter: NoticePresenterProtocol & NoticeInteractorOutputProtocol = NoticePresenter()
         let interactor = NoticeInteractor()
         let remoteDataManager = NoticeRemoteDataManager()
         let wireFrame = NoticeWireFrame()
@@ -25,12 +23,15 @@ class NoticeWireFrame: NoticeWireFrameProtocol {
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
-        wireFrame.presenter = presenter
         
         return view
     }
+    
     func goToNoticeDetail(notice: Notice, parentView: UIViewController, state: StudyDetailViewState) {
-        let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice.id, studyID: notice.studyID, parentView: parentView, state: state)
+        let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice.id,
+                                                                  studyID: notice.studyID,
+                                                                  parentView: parentView,
+                                                                  state: state)
         parentView.navigationController?.pushViewController(view, animated: true)
     }
 }

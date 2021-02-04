@@ -104,15 +104,15 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         var selectedNotice: Notice?
+        
         if indexPath.section == 0 {
             selectedNotice = firstNoticeList[indexPath.row]
         } else {
             selectedNotice = secondNoticeList[indexPath.row]
         }
-        selectedNotice!.studyID = studyID
-        guard let currentState = state else { return }
+        selectedNotice!.studyID = self.studyID
+        guard let currentState = self.state else { return }
         presenter?.celldidTap(notice: selectedNotice!, parentView: self, state: currentState)
         
     }

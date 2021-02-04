@@ -11,20 +11,27 @@ import Alamofire
 import SwiftyJSON
 
 class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
-    
-    func getNoticeList(studyID: Int, completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void) {
+    func getNoticeList(studyID: Int,
+                       completion: @escaping (_ result: Bool,
+                                              _ data: [Notice]?,
+                                              _ message: String?) -> Void) {
         TerminalNetworkManager
             .shared
             .session
             .request(TerminalRouter.noticeList(studyID: "\(studyID)"))
-            .responseJSON{ response in
+            .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     if JSON(value)["result"].bool! {
-                        let json = "\(JSON(value))".data(using: .utf8)
-                        let result = try! JSONDecoder().decode(BaseResponse<[Notice]>.self, from: json!)
-                        
-                        completion(true, result.data, nil)
+                        let json = JSON(value)
+                        let data = "\(json)".data(using: .utf8)
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self,
+                                                                  from: data!)
+                            completion(true, result.data, nil)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
                     } else {
                         completion(false, nil, JSON(value)["message"].string!)
                     }
@@ -34,7 +41,11 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
             }
     }
     
-    func getNoticeListPagination(studyID: Int, noticeListIDs: [Int], completion: @escaping (Bool, [Notice]?, String?) -> Void) {
+    func getNoticeListPagination(studyID: Int,
+                                 noticeListIDs: [Int],
+                                 completion: @escaping (_: Bool,
+                                                        _: [Notice]?,
+                                                        _: String?) -> Void) {
         var valuesString = ""
         noticeListIDs.forEach { valuesString += "\($0)," }
         valuesString.remove(at: valuesString.index(before: valuesString.endIndex))
@@ -48,9 +59,15 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                 switch response.result {
                 case .success(let value):
                     if JSON(value)["result"].bool! {
-                        let json = "\(JSON(value))".data(using: .utf8)
-                        let result: BaseResponse<[Notice]> = try! JSONDecoder().decode(BaseResponse<[Notice]>.self, from: json!)
-                        completion(true, result.data, nil)
+                        let json = JSON(value)
+                        let data = "\(json)".data(using: .utf8)
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self,
+                                                                  from: data!)
+                            completion(true, result.data, nil)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
                     } else {
                         completion(false, nil, JSON(value)["message"].string!)
                     }
