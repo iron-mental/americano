@@ -46,7 +46,7 @@ extension UILabel {
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.lineHeightMultiple = lineHeightMultiple
         
-        let attributedString:NSMutableAttributedString
+        let attributedString: NSMutableAttributedString
         if let labelattributedText = self.attributedText {
             attributedString = NSMutableAttributedString(attributedString: labelattributedText)
         } else {
@@ -54,14 +54,14 @@ extension UILabel {
         }
         
         // Line spacing attribute
-        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         
         self.attributedText = attributedString
     }
     
     func setMargins(margin: CGFloat = 20) {
             if let textString = self.text {
-                var paragraphStyle = NSMutableParagraphStyle()
+                let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.firstLineHeadIndent = margin
                 paragraphStyle.headIndent = margin
                 paragraphStyle.tailIndent = -margin

@@ -9,7 +9,7 @@
 import Foundation
 
 class MyStudyDetailInteractor: MyStudyDetailInteractorProtocol {
-    var presenter: MyStudyDetailPresenterProtocol?
+    weak var presenter: MyStudyDetailPresenterProtocol?
     var remoteDatamanager: MyStudyDetailRemoteDataManagerProtocol?
     var localDatamanager: MyStudyDetailLocalDataManagerProtocol?
     

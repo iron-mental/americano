@@ -23,7 +23,6 @@ class BaseEditableStudyDetailView: UIViewController {
     var button = UIButton()
     var mainImageTapGesture = UITapGestureRecognizer()
     var locationTapGesture = UITapGestureRecognizer()
-    
     var studyDetailPost: StudyDetailPost?
     var backgroundView = UIView()
     let scrollView = UIScrollView()
@@ -33,7 +32,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var currentScrollViewMaxY: CGFloat = 0
     var selectedLocation: StudyDetailLocationPost?
     var textViewTapFlag = false
-    var scrollViewOffsetElement: CGFloat = 0.0
+    var standardContentHeight: CGFloat = 0.0
     var accessoryCompletButton = UIButton()
     var viewDidAppearFlag = true
     
@@ -44,7 +43,6 @@ class BaseEditableStudyDetailView: UIViewController {
         setDelegate()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -52,7 +50,7 @@ class BaseEditableStudyDetailView: UIViewController {
             studyTitleTextField.becomeFirstResponder()
             viewDidAppearFlag.toggle()
         }
-        scrollViewOffsetElement = 0
+        standardContentHeight = scrollView.contentSize.height
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -64,8 +62,7 @@ class BaseEditableStudyDetailView: UIViewController {
     
     @objc func keyboardWillHide(notification: NSNotification) {
         button.alpha = 1
-        scrollView.contentSize.height -= scrollViewOffsetElement
-        scrollViewOffsetElement = 0
+        scrollView.contentSize.height = standardContentHeight
     }
     
     func setDelegate(completion: (() -> Void)? = nil) {
@@ -293,41 +290,36 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         if viewMinY >= (parentView.frame.minY) {
             let distance = (parentView.frame.minY) - viewMinY
-            self.viewSetTop(distance: distance - 10)
+            self.viewSetTop(distance: distance - accessoryCompletButton.frame.height)
         } else if viewMaxY <= (parentView.frame.maxY) {
             let distance = (parentView.frame.maxY) - viewMaxY
-            if distance > (scrollView.contentSize.height - (scrollView.contentOffset.y + scrollView.frame.height)) {
-                scrollViewOffsetElement = distance
-            }
-            self.viewSetBottom(distance: distance + 10)
+            self.viewSetBottom(distance: distance + accessoryCompletButton.frame.height)
         } else {
+            textViewTapFlag = false
         }
     }
     
     func viewSetTop(distance: CGFloat) {
-        
+        self.button.alpha = 0
         UIView.animate(withDuration: 0.2) {
-            self.button.alpha = 0
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
-            self.textViewTapFlag = true
             self.clickedView?.becomeFirstResponder()
+            self.textViewTapFlag = false
         }
     }
     func viewSetBottom(distance: CGFloat) {
-        
+        self.button.alpha = 0
         UIView.animate(withDuration: 0.2) {
-            self.button.alpha = 0
             self.scrollView.contentSize.height += distance
             self.scrollView.contentOffset.y += distance
-            self.scrollViewOffsetElement = distance
         } completion: { _ in
             self.clickedView?.becomeFirstResponder()
-            self.textViewTapFlag = true
+            self.textViewTapFlag = false
         }
     }
 }
-extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             mainImageView.image = image
@@ -338,14 +330,15 @@ extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavi
 
 extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textViewTapFlag = true
         clickedView = textField
-            self.editableViewDidTap(textView: textField, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
 
 extension BaseEditableStudyDetailView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        
+        textViewTapFlag = true
         clickedView = textView
         self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
@@ -354,10 +347,12 @@ extension BaseEditableStudyDetailView: UITextViewDelegate {
 extension BaseEditableStudyDetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if type(of: scrollView) == UIScrollView.self {
-            view.endEditing(true)
+            currentScrollViewMinY = scrollView.contentOffset.y
+            currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
+            if !textViewTapFlag {
+                view.endEditing(true)
+            }
         }
-        currentScrollViewMinY = scrollView.contentOffset.y
-        currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
     }
 }
 

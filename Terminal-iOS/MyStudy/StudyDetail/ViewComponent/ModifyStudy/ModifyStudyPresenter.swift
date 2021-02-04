@@ -9,14 +9,13 @@
 import UIKit
 
 class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
+    weak var view: ModifyStudyViewProtocol?
+    var interactor: ModifyStudyInteractorInputProtocol?
+    var wireFrame: ModifyStudyWireFrameProtocol?
     
     func clickLocationView(currentView: UIViewController) {
         wireFrame?.goToSelectLocation(view: currentView)
     }
-    
-    var view: ModifyStudyViewProtocol?
-    var interactor: ModifyStudyInteractorInputProtocol?
-    var wireFrame: ModifyStudyWireFrameProtocol?
     
     func completButtonDidTap(studyID: Int, study: StudyDetailPost) {
         LoadingRainbowCat.show()

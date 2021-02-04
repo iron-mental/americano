@@ -9,10 +9,8 @@
 import UIKit
 
 class SelectCategoryView: UIViewController {
-    
     var presenter: SelectCategoryPresenterProtocol?
     var categoryList: [Category] = []
-    
     let scrollView = UIScrollView()
     let backgroundView = UIView()
     let collectionView: UICollectionView = {
@@ -20,7 +18,7 @@ class SelectCategoryView: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-    let font = UIFont(name:"Apple Color Emoji", size: 25)
+    let font = UIFont(name: "Apple Color Emoji", size: 25)
     let titleView = UILabel()
     let textLabel = UILabel()
     var tempCategory: String?
@@ -35,14 +33,14 @@ class SelectCategoryView: UIViewController {
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
-        titleView.do {
-            $0.text = "스터디 만들기"
-            $0.textColor = .white
-        }
-        navigationItem.do {
-            $0.titleView = titleView
-        }
-        //추후에 스크롤뷰 위 백그라운드 뷰는 컴포넌트화 시켜서 코드를 줄여봅시다.
+//        titleView.do {
+//            $0.text = "스터디 만들기"
+//            $0.textColor = .white
+//        }
+//        navigationItem.do {
+//            $0.titleView = titleView
+//        }
+        self.title = "스터디 만들기"
         scrollView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -54,7 +52,7 @@ class SelectCategoryView: UIViewController {
             $0.textColor = .white
             $0.frame = CGRect(x: 0, y: 0, width: 90, height: 35)
             let attributedStr = NSMutableAttributedString(string: textLabel.text ?? "empty")
-            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font, range: NSMakeRange(0, 7))
+            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font as Any, range: NSMakeRange(0, 7))
             textLabel.attributedText = attributedStr
         }
         collectionView.do {
@@ -62,9 +60,10 @@ class SelectCategoryView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.showsVerticalScrollIndicator = false
         }
         navigationItem.do {
-            $0.leftBarButtonItem = UIBarButtonItem(title: "<<<<", style: .plain, target: self, action: #selector(backButtonTapped))
+            $0.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backButtonTapped))
         }
     }
     
@@ -73,6 +72,7 @@ class SelectCategoryView: UIViewController {
         scrollView.addSubview(backgroundView)
         backgroundView.addSubview(textLabel)
         backgroundView.addSubview(collectionView)
+        
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -86,7 +86,7 @@ class SelectCategoryView: UIViewController {
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor,constant: 50).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 50).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
         textLabel.do {
@@ -110,15 +110,13 @@ class SelectCategoryView: UIViewController {
     
     func viewAppearAnimation() {
         //애니메이션은 task 단위로 묶어서 하나 하는 중일 때 하나 들어오면 그전 꺼 취소하거나 그런식으로..
-        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: {
+        UIView.animate(withDuration: 0.25, delay: 0, options: .transitionCurlUp, animations: {
             self.textLabel.transform = self.textLabel.transform.translatedBy(x: -490, y: 0)
-        })
-        { _ in
-            UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+        }) { _ in
+            UIView.animate(withDuration: 0.1, delay: 0, options: .transitionCurlUp, animations: {
                 self.textLabel.transform = self.textLabel.transform.translatedBy(x: 10, y: 0)
-            })
-            { _ in
-                UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
+            }) { _ in
+                UIView.animate(withDuration: 0.1, delay: 0, options: .transitionCurlUp, animations: {
                     self.textLabel.transform = self.textLabel.transform.translatedBy(x: -5, y: 0)
                 })
             }
@@ -131,7 +129,7 @@ class SelectCategoryView: UIViewController {
         }) { _ in
             UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
                 self.collectionView.transform = self.collectionView.transform.translatedBy(x: 0, y: -60)
-            },completion: { _ in
+            }, completion: { _ in
                 self.navigationController?.popViewController(animated: false)
             })
         }
@@ -151,16 +149,16 @@ extension SelectCategoryView: SelectCategoryViewProtocol {
 
 extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width * 0.4,
-                      height: UIScreen.main.bounds.width * 0.27)
+        return CGSize(width: Terminal.convertWidth(value: 150),
+                      height: Terminal.convertWidth(value: 100))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.width * 0.07
+        return Terminal.convertWidth(value: 20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return UIScreen.main.bounds.height * 0.035
+        return Terminal.convertWidth(value: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

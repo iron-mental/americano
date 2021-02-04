@@ -55,6 +55,7 @@ class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
     }
     
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?) {
+        
         let nullCheckResult = nullCheck(study: study)
         if nullCheckResult == "성공" {
             remoteDataManager?.postStudy(study: study)

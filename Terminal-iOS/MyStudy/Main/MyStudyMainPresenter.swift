@@ -33,7 +33,6 @@ class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
             break
         case false:
             view?.showErrMessage()
-            break
         }
     }
     

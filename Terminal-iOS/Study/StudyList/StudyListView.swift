@@ -33,7 +33,13 @@ class StudyListView: UIViewController {
     
     // MARK: Attribute
     func attribute() {
-        view.backgroundColor = UIColor.appColor(.terminalBackground)
+        
+        self.do {
+            $0.title = category ?? nil
+        }
+        view.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         aligmentView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -104,7 +110,7 @@ class StudyListView: UIViewController {
         }
         tableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: aligmentView.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: aligmentView.safeAreaLayoutGuide.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -118,7 +124,6 @@ class StudyListView: UIViewController {
             self.presenter?.studyList(category: self.category!)
             self.refreshControl.endRefreshing()
         }
-        self.tableView.reloadData()
     }
     
     @objc func new() {
@@ -215,14 +220,15 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if sortState == .new {
             let keyValue = newStudyList[indexPath.row].id
-            guard let state = newStudyList[indexPath.row].isMember else { return }
-            presenter?.showStudyDetail(keyValue: keyValue, state: state)
+            guard let state = newStudyList[indexPath.row].isMember, let title = newStudyList[indexPath.row].title else { return }
+            presenter?.showStudyDetail(keyValue: keyValue, state: state, studyTitle: title)
         } else {
             let lengthKeyValue = lengthStudyList[indexPath.row].id
-            guard let state = newStudyList[indexPath.row].isMember else { return }
-            presenter?.showStudyDetail(keyValue: lengthKeyValue, state: state)
+            guard let state = newStudyList[indexPath.row].isMember, let title = newStudyList[indexPath.row].title else { return }
+            presenter?.showStudyDetail(keyValue: lengthKeyValue, state: state, studyTitle: title)
         }
     }
 }

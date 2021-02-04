@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol MyApplyStudyModifyViewProtocol {
+protocol MyApplyStudyModifyViewProtocol: class {
     var presenter: MyApplyStudyModifyPresenterInputProtocol? { get set }
     var studyID: Int? { get set }
     var parentView: UIViewController? { get set }
@@ -20,7 +20,7 @@ protocol MyApplyStudyModifyViewProtocol {
     func showError()
 }
 
-protocol MyApplyStudyModifyPresenterInputProtocol {
+protocol MyApplyStudyModifyPresenterInputProtocol: class {
     var view: MyApplyStudyModifyViewProtocol? { get set }
     var interactor: MyApplyStudyModifyInteractorInputProtocol? { get set }
     var wireFrame: MyApplyStudyModifyWireFrameProtocol? { get set }
@@ -30,7 +30,7 @@ protocol MyApplyStudyModifyPresenterInputProtocol {
     func admitButtonDidTap(newMessage: String)
 }
 
-protocol MyApplyStudyModifyInteractorInputProtocol {
+protocol MyApplyStudyModifyInteractorInputProtocol: class {
     var presenter: MyApplyStudyModifyInteractorOutputProtocol? { get set }
     var remoteDataManager: MyApplyStudyModifyRemoteDataManagerInputProtocol? { get set }
     
@@ -39,14 +39,14 @@ protocol MyApplyStudyModifyInteractorInputProtocol {
     func putNewApplyMessage(newMessage: String)
 }
 
-protocol MyApplyStudyModifyInteractorOutputProtocol {
+protocol MyApplyStudyModifyInteractorOutputProtocol: class {
     
 //    INTERACTOR -> PRESENTER
     func retriveMyApplyStudyDetail(result: Bool, message: String)
     func retriveModifyApplyMessage(result: Bool, message: String)
 }
 
-protocol MyApplyStudyModifyRemoteDataManagerInputProtocol {
+protocol MyApplyStudyModifyRemoteDataManagerInputProtocol: class {
     var interactor: MyApplyStudyModifyRemoteDataManagerOutputProtocol? { get set }
     
 //    INTERACTOR -> REMOTEDATAMANAGER
@@ -54,13 +54,13 @@ protocol MyApplyStudyModifyRemoteDataManagerInputProtocol {
     func putNewApplyMessage(studyID: Int,applyID: Int, newMessage: String)
 }
 
-protocol MyApplyStudyModifyRemoteDataManagerOutputProtocol {
+protocol MyApplyStudyModifyRemoteDataManagerOutputProtocol: class {
     
 //    REMOTEDATAMANAGER -> INTERACTOR
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult)
     func retriveModifyApplyMessage(result: Bool, message: String)
 }
 
-protocol MyApplyStudyModifyWireFrameProtocol {
+protocol MyApplyStudyModifyWireFrameProtocol: class {
     static func createMyApplyStudyModifyModule(parentView: UIViewController, studyID: Int) -> UIViewController
 }

@@ -9,7 +9,9 @@
 import UIKit
 
 class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
-    static func createMyStudyDetailModule(studyID: Int) -> UIViewController {
+    var presenter: MyStudyDetailPresenterProtocol?
+    
+    static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController {
         let view: MyStudyDetailViewProtocol = MyStudyDetailView()
         let presenter: MyStudyDetailPresenterProtocol = MyStudyDetailPresenter()
         let interactor: MyStudyDetailInteractorProtocol = MyStudyDetailInteractor()
@@ -18,6 +20,8 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         let wireFrame: MyStudyDetailWireFrameProtocol = MyStudyDetailWireFrame()
         
         view.presenter = presenter
+        view.studyTitle = studyTitle
+        view.studyID = studyID
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame
@@ -47,7 +51,7 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
     
     func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController) {
         let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice, studyID: studyID, parentView: parentView, state: .host)
-        parentView.present(view, animated: true)
+        parentView.navigationController?.pushViewController(view, animated: true)
     }
     
     func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int) {

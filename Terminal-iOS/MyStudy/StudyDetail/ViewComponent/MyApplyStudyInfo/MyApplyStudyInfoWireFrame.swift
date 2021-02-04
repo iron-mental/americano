@@ -12,9 +12,9 @@ class MyApplyStudyInfoWireFrame: MyApplyStudyInfoWireFrameProtocol {
     
     static func createMyApplyStudyDetailModule(applyStudy: ApplyStudy) -> UIViewController {
         let view  = MyApplyStudyInfoView()
-        var presenter: MyApplyStudyInfoPresenterProtocol & MyApplyStudyInfoInteractorOutputProtocol = MyApplyStudyInfoPresenter()
-        var interactor: MyApplyStudyInfoInteractorInputProtocol & MyApplyStudyInfoRemoteDataManagerOutputProtocol = MyApplyStudyInfoInteractor()
-        var remoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol  = MyApplyStudyInfoRemoteDataManager()
+        let presenter: MyApplyStudyInfoPresenterProtocol & MyApplyStudyInfoInteractorOutputProtocol = MyApplyStudyInfoPresenter()
+        let interactor: MyApplyStudyInfoInteractorInputProtocol & MyApplyStudyInfoRemoteDataManagerOutputProtocol = MyApplyStudyInfoInteractor()
+        let remoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol  = MyApplyStudyInfoRemoteDataManager()
         let wireFrame = MyApplyStudyInfoWireFrame()
         
         view.applyStudy = applyStudy

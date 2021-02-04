@@ -9,7 +9,7 @@
 import Foundation
 
 class NoticeDetailInteractor: NoticeDetailInteractorProtocol {
-    var presenter: NoticeDetailPresenterProtocol?
+    weak var presenter: NoticeDetailPresenterProtocol?
     var remoteDataManager: NoticeDetailRemoteDataManagerProtocol?
     var localDataManager: NoticeDetailLocalDataManagerProtocol?
     
@@ -18,9 +18,7 @@ class NoticeDetailInteractor: NoticeDetailInteractorProtocol {
             switch result {
             case true:
                 self.presenter?.noticeDetailResult(result: result, notice: notice)
-                break
             case false:
-//
                 break
             }
         })
@@ -31,9 +29,7 @@ class NoticeDetailInteractor: NoticeDetailInteractorProtocol {
             switch result {
             case true:
                 self.presenter?.noticeRemoveResult(result: result, message: message)
-                break
-            case false:
-//                
+            case false:    
                 break
             }
         })

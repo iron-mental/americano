@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {    
+class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
+    
     static func createMyStudyMainViewModul() -> UIViewController {
         let view: MyStudyMainViewProtocol = MyStudyMainView()
         let presenter: MyStudyMainPresenterProtocol = MyStudyMainPresenter()
@@ -18,7 +19,6 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
         let wireFrame: MyStudyMainWireFrameProtocol = MyStudyMainWireFrame()
         
         view.presenter = presenter
-        
         presenter.view = view
         presenter.wireFrame = wireFrame
         presenter.interactor = interactor
@@ -52,7 +52,7 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
     }
     
     func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy) {
-        let myStudyDetailView =  MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: selectedStudy.id)
+        let myStudyDetailView =  MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: selectedStudy.id, studyTitle: selectedStudy.title)
         view.navigationController?.pushViewController(myStudyDetailView, animated: true)
     }
 }

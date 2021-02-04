@@ -22,6 +22,8 @@ class BottomView: UIView {
     func attribute() {
         self.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
         }
         address.do {
             $0.text = "주소가 들어갈 공간이쥬"

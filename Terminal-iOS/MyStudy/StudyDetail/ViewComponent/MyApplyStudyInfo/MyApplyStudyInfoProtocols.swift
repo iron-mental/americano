@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MyApplyStudyInfoViewProtocol {
+protocol MyApplyStudyInfoViewProtocol: class {
     var presenter: MyApplyStudyInfoPresenterProtocol? { get set }
     var applyStudy: ApplyStudy? { get set }
     
@@ -17,7 +17,7 @@ protocol MyApplyStudyInfoViewProtocol {
     func showError(message: String)
 }
 
-protocol MyApplyStudyInfoPresenterProtocol {
+protocol MyApplyStudyInfoPresenterProtocol: class {
     var view: MyApplyStudyInfoViewProtocol? { get set }
     var wireFrame: MyApplyStudyInfoWireFrameProtocol? { get set }
     var interactor: MyApplyStudyInfoInteractorInputProtocol? { get set }
@@ -27,7 +27,7 @@ protocol MyApplyStudyInfoPresenterProtocol {
     func deleteButtonDidTap()
 }
 
-protocol MyApplyStudyInfoInteractorInputProtocol {
+protocol MyApplyStudyInfoInteractorInputProtocol: class {
     var presenter: MyApplyStudyInfoInteractorOutputProtocol? { get set }
     var remoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol? { get set }
     var applyID: Int? { get set }
@@ -37,23 +37,23 @@ protocol MyApplyStudyInfoInteractorInputProtocol {
     func deleteApply()
 }
 
-protocol MyApplyStudyInfoInteractorOutputProtocol {
+protocol MyApplyStudyInfoInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func retriveDeleteApplyResult(result: Bool, message: String)
 }
 
-protocol MyApplyStudyInfoRemoteDataManagerInputProtocol {
+protocol MyApplyStudyInfoRemoteDataManagerInputProtocol: class {
     var interactor: MyApplyStudyInfoRemoteDataManagerOutputProtocol? { get set }
     
     //INTERACTOR -> REMOTEDATAMANAGER
     func deleteApply(studyID: Int, applyID: Int)
 }
 
-protocol MyApplyStudyInfoRemoteDataManagerOutputProtocol {
+protocol MyApplyStudyInfoRemoteDataManagerOutputProtocol: class {
     func retriveDeleteApplyResult(result: Bool, message: String)
 }
 
-protocol MyApplyStudyInfoWireFrameProtocol {
+protocol MyApplyStudyInfoWireFrameProtocol: class {
     static func createMyApplyStudyDetailModule(applyStudy: ApplyStudy) -> UIViewController
     
     func goToMyApplyStudyModify(from view: UIViewController, studyID: Int)

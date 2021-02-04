@@ -36,7 +36,7 @@ class BaseSNSModifyView: UIView {
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
-            $0.addLeftPadding()
+            $0.addLeftPadding(padding: 10)
         }
     }
     

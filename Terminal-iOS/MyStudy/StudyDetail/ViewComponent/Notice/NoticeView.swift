@@ -13,7 +13,7 @@ class NoticeView: UIViewController {
     var studyID: Int?
     var firstNoticeList: [Notice] = []
     var secondNoticeList: [Notice] = []
-    lazy var notice = UITableView(frame: CGRect.zero, style: .grouped)
+    lazy var notice = UITableView(frame: CGRect.zero, style: .plain)
     var state: StudyDetailViewState?
     
     override func viewDidLoad() {
@@ -46,6 +46,7 @@ class NoticeView: UIViewController {
     
     func layout() {
         view.addSubview(notice)
+        
         notice.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -72,6 +73,7 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
+        headerView.backgroundColor = .red
         if section == 0 {
             headerView.backgroundColor = UIColor.appColor(.terminalBackground)
         } else if section == 1 {
@@ -132,7 +134,6 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 
 extension NoticeView: NoticeViewProtocol {
     func showNoticeList(firstNoticeList: [Notice]?, secondNoticeList: [Notice]?) {
-        
         if let first = firstNoticeList {
             self.firstNoticeList = first
         }
@@ -148,13 +149,9 @@ extension NoticeView: NoticeViewProtocol {
     
     func showNoticeList(noticeList: [Notice]) {
         notice.reloadData()
-        LoadingRainbowCat.hide {
-            print("로딩 끝")
-        }
+        LoadingRainbowCat.hide()
     }
     func showMessage(message: String) {
-        LoadingRainbowCat.hide {
-            print("로딩 끝")
-        }
+        LoadingRainbowCat.hide()
     }
 }

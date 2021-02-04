@@ -31,7 +31,6 @@ class NoticeWireFrame: NoticeWireFrameProtocol {
     }
     func goToNoticeDetail(notice: Notice, parentView: UIViewController, state: StudyDetailViewState) {
         let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice.id, studyID: notice.studyID, parentView: parentView, state: state)
-        parentView.present(view , animated: true) {
-        }
+        parentView.navigationController?.pushViewController(view, animated: true)
     }
 }

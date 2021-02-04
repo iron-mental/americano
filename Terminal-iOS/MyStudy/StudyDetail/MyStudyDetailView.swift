@@ -16,15 +16,12 @@ class MyStudyDetailView: UIViewController {
     var applyState: Bool = false
     var studyID: Int? {
         didSet {
-            VCArr = [
-                NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                StudyDetailWireFrame.createStudyDetail(parent: self,
-                                                       studyID: studyID!,
-                                                       state: .member),
-                ChatWireFrame.createChatModule()
-            ]
+            VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
+                       StudyDetailWireFrame.createStudyDetail(parent: self, studyID: studyID!, state: .member, studyTitle: studyTitle ?? ""),
+                       ChatWireFrame.createChatModule()]
         }
     }
+    var studyTitle: String?
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
     var pageBeforeIndex: Int = 0
@@ -37,10 +34,8 @@ class MyStudyDetailView: UIViewController {
                                              options: nil)
     lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
-    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"),
-                                          style: .done,
-                                          target: self,
-                                          action: #selector(moreButtonDidTap))
+    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(moreButtonDidTap))
+    let appearance = UINavigationBarAppearance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +53,11 @@ class MyStudyDetailView: UIViewController {
     
     func attribute() {
         self.do {
-            $0.title = studyInfo?.title ?? nil
+            if let title = studyInfo?.title {
+                $0.title = title
+            } else {
+                $0.title = studyTitle
+            }
         }
         
         if let firstVC = VCArr.first {
@@ -280,8 +279,10 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         }
         attribute()
         layout()
-        LoadingRainbowCat.hide()
         view.layoutIfNeeded()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+            LoadingRainbowCat.hide()
+        })
     }
     
     func showLeaveStudyComplete() {

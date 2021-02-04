@@ -9,7 +9,7 @@
 import UIKit
 
 class AddNoticePresenter: AddNoticePresenterProtocol {
-    var view: AddNoticeViewProtocol?
+    weak var view: AddNoticeViewProtocol?
     var wireFrame: AddNoticeWireFrameProtocol?
     var interactor: AddNoticeInteractorProtocol?
     

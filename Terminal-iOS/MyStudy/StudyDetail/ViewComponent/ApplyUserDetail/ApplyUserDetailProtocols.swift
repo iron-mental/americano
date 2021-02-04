@@ -16,7 +16,7 @@ protocol ApplyUserDetailViewProtocol: BaseProfileViewProtocol {
     func showApplyStatusResult(message: String, studyID: Int)
 }
 
-protocol ApplyUserDetailPresenterInputProtocol {
+protocol ApplyUserDetailPresenterInputProtocol: class {
     var view: ApplyUserDetailViewProtocol? { get set }
     var interactor: ApplyUserDetailInteractorInputProtocol? { get set }
     var wireFrame: ApplyUserDetailWireFrameProtocol? { get set }
@@ -27,7 +27,7 @@ protocol ApplyUserDetailPresenterInputProtocol {
     func acceptButtonDidtap()
 }
 
-protocol ApplyUserDetailInteractorInputProtocol {
+protocol ApplyUserDetailInteractorInputProtocol: class {
     var presenter: ApplyUserDetailInteractorOutputProtocol? { get set }
     var remoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol? { get set }
     var studyID: Int? { get set }
@@ -40,7 +40,7 @@ protocol ApplyUserDetailInteractorInputProtocol {
     func postAcceptStatus()
 }
 
-protocol ApplyUserDetailInteractorOutputProtocol {
+protocol ApplyUserDetailInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func retriveUserInfo(result: Bool, userInfo: UserInfo)
     func retriveProjectList(result: Bool, projectList: [Project])
@@ -59,6 +59,6 @@ protocol ApplyUserDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataMa
     func onApplyStatusRetrieved(response: BaseResponse<String>)
 }
 
-protocol ApplyUserDetailWireFrameProtocol {
+protocol ApplyUserDetailWireFrameProtocol: class {
     static func createApplyUserDetailModule(userInfo: ApplyUser, studyID: Int) -> UIViewController
 }

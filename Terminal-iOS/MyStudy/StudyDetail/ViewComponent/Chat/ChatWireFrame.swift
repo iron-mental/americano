@@ -9,7 +9,7 @@
 import UIKit
 
 class ChatWireFrame: ChatWireFrameProtocol {
-    var presenter: ChatPresenterProtocol?
+    weak var presenter: ChatPresenterProtocol?
     
     static func createChatModule() -> UIViewController {
         let view = TempChatView()
