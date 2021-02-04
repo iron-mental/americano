@@ -34,7 +34,10 @@ class MyStudyDetailView: UIViewController {
                                              options: nil)
     lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
-    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(moreButtonDidTap))
+    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"),
+                                          style: .done,
+                                          target: self,
+                                          action: #selector(moreButtonDidTap))
     let appearance = UINavigationBarAppearance()
     
     override func viewDidLoad() {
@@ -134,7 +137,8 @@ class MyStudyDetailView: UIViewController {
     func goDetailPage() {
         tapSege.selectedSegmentIndex = 1
         UIView.animate(withDuration: 0.2) {
-            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
         }
         self.childPageView.setViewControllers([VCArr[1]],
                                               direction: .forward,
@@ -186,6 +190,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     // MARK: - @objc
+    
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
         
