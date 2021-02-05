@@ -38,10 +38,8 @@ extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProto
             if let data = userInfo.data {
                 presenter?.retriveUserInfo(result: userInfo.result, userInfo: data)
             }
-            break
         case false:
             print("ApplyUserDetailInterator 에서 생긴 에러")
-            break
         }
     }
     

@@ -11,7 +11,7 @@ import Foundation
 class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     weak var view: SearchStudyResultViewProtocol?
     var interactor: SearchStudyResultInteractorInputProtocol?
-    weak var wireFrame: SearchStudyResultWireFrameProtocol?
+    var wireFrame: SearchStudyResultWireFrameProtocol?
     
     func returnDidTap(keyWord: String) {
         view?.showLoading()
