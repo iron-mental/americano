@@ -19,6 +19,7 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     }
     
     func didTapCell(keyValue: Int, state: Bool, studyTitle: String) {
+        view?.showLoading()
         wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state, studyTitle: studyTitle)
     }
     
