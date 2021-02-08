@@ -220,7 +220,6 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if sortState == .new {
             let keyValue = newStudyList[indexPath.row].id
             guard let state = newStudyList[indexPath.row].isMember, let title = newStudyList[indexPath.row].title else { return }

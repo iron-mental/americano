@@ -82,12 +82,16 @@ class StudyCell: UITableViewCell {
         }
         
         let processor = DownsamplingImageProcessor(size: mainImage.bounds.size)
-        self.mainImage.kf.indicatorType = .activity
+//        self.mainImage.kf.indicatorType = .activity
+//        self.mainImage.kf.setImage(with: URL(string: mainImageURL),
+//                                   options: [.requestModifier(RequestToken.token()),
+//                                             .processor(processor),
+//                                             .scaleFactor(UIScreen.main.scale),
+//                                             .cacheOriginalImage])
         self.mainImage.kf.setImage(with: URL(string: mainImageURL),
-                                   options: [.requestModifier(RequestToken.token()),
-                                             .processor(processor),
-                                             .scaleFactor(UIScreen.main.scale),
-                                             .cacheOriginalImage])
+                       placeholder: UIImage(named: "swift"),
+                       options: [.requestModifier(RequestToken.token()),
+                                 .processor(processor)])
         
         self.managerImage.kf.setImage(with: URL(string: managerImageURL),
                                       options: [.requestModifier(RequestToken.token())])

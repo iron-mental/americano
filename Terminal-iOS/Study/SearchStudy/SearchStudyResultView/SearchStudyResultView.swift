@@ -88,6 +88,7 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let keyValue = searchResult[indexPath.row].id
         presenter?.didTapCell(keyValue: keyValue, state: searchResult[indexPath.row].isMember!, studyTitle: searchResult[indexPath.row].title!)
     }
