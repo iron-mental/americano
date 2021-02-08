@@ -9,7 +9,7 @@
 import UIKit
 import NMapsMap
 
-protocol selectLocationDelegate {
+protocol selectLocationDelegate: class {
     func passLocation(location: StudyDetailLocationPost)
 }
 
@@ -30,6 +30,7 @@ class SelectLocationView: UIViewController {
     var delegate: selectLocationDelegate?
     var keyboardHeight: CGFloat = 0.0
     var bottomAnchor: NSLayoutConstraint?
+    var completeButtonDidTapFlag = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,7 @@ class SelectLocationView: UIViewController {
         bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -125,20 +127,27 @@ class SelectLocationView: UIViewController {
         if let detailAddress = bottomView.detailAddress.text {
             location?.detailAddress = detailAddress
         }
-        
-        delegate?.passLocation(location: location!)
-        dismiss(animated: false)
-        presentingViewController?.dismiss(animated: false)
+        if completeButtonDidTapFlag {
+            passLocationToParent()
+        } else {
+            completeButtonDidTapFlag = true
+            presenter?.getAddress(item: location!)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         isMoving = true
     }
+    
+    func passLocationToParent() {
+        delegate?.passLocation(location: location!)
+        dismiss(animated: false)
+        presentingViewController?.dismiss(animated: false)
+    }
 }
 
 extension SelectLocationView: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        
         task = DispatchWorkItem { [self] in
             self.pin.alpha = 1
             //추후에 여기서 mapView.cameraPosition.target.lat 으로 좌표알아내서 쏘면 됨
@@ -178,7 +187,16 @@ extension SelectLocationView: UITextFieldDelegate {
 
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
-        bottomView.address.text = item.address
-        location = item
+        if completeButtonDidTapFlag {
+            
+            bottomView.address.text = item.address
+            location = item
+            passLocationToParent()
+        } else {
+            
+            bottomView.address.text = item.address
+            location = item
+        }
+        
     }
 }

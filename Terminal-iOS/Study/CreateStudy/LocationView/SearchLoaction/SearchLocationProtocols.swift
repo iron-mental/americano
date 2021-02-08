@@ -38,14 +38,13 @@ protocol SearchLocationInteractorProtocol: class {
 }
 
 protocol SearchLocationRemoteDataManagerProtocol: class {
-    func getSearchResult(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> ())
+    func getSearchResult(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> Void)
 }
 
 protocol SearchLocationWireFrameProtocol: class {
-    var presenter : SearchLocationPresenterProtocol? { get set }
+    var presenter: SearchLocationPresenterProtocol? { get set }
     static func searchLocationViewModul(parentView: UIViewController) -> UIViewController
     
     //PRESENTER -> WIREFRAME
     func goToSelectLocationView(item: StudyDetailLocationPost, view: UIViewController, parentView: UIViewController)
 }
-

@@ -26,8 +26,8 @@ struct StudyDetailLocationPost: Codable {
     var detailAddress: String?
     var placeName: String?
     var category: String?
-    var sido: String
-    var sigungu: String
+    var sido: String?
+    var sigungu: String?
     
     enum CodingKeys: String, CodingKey {
         case address

@@ -43,9 +43,9 @@ class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
                 return "장소를 선택해주세요 - latitude error"
             } else if location.lng.isZero {
                 return "장소를 선택해주세요 - latitude error"
-            } else if location.sido.isEmpty {
+            } else if location.sido!.isEmpty {
                 return "장소를 선택해주세요 - sido 비어있음"
-            } else if location.sigungu.isEmpty {
+            } else if location.sigungu!.isEmpty {
                 return "장소를 선택해주세요 - sigungu 비어있음"
             } else if location.address.isEmpty {
                 return "장소를 선택해주세요 - address 비어있음"

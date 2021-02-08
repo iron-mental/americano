@@ -28,8 +28,8 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                 "sns_web": study.snsWeb!,
                 "latitude": location.lat,
                 "longitude": location.lng,
-                "sido": location.sido,
-                "sigungu": location.sigungu,
+                "sido": location.sido!,
+                "sigungu": location.sigungu!,
                 "address_name": location.address
             ]
             if let detailAddress = location.detailAddress {

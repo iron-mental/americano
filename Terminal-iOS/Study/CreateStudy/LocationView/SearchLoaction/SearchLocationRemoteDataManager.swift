@@ -31,13 +31,13 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                                 for item in addressList {
                                     let address = item["road_address_name"].string!.isEmpty ? item["address_name"].string! : item["road_address_name"].string!
                                     
+                                    
+//                                  sido, sigungu optional롸 바꾼 다음 부터 작업 재개 ㄱ ㄱ
                                     let newItem = StudyDetailLocationPost(address: address,
                                                                     lat: Double(item["y"].string!) ?? 0,
                                                                     lng: Double(item["x"].string!) ?? 0,
                                                                     placeName: item["place_name"].string ?? nil ,
-                                                                    category: item["category_group_name"].string!,
-                                                                    sido: "test",
-                                                                    sigungu: "Test"
+                                                                    category: item["category_group_name"].string!
                                                                     )
                                     resultList.append(newItem)
                                     
