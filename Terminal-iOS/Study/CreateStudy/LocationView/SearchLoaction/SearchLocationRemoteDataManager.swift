@@ -24,6 +24,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                         if JSON(value)["documents"].count == 0 {
                             //여기다가 하면 될듯?
                             self.getSearchResultByLocalName(text: text) { (result, itemList) in
+                                
                                 completionHandler(result, itemList)
                             }
                         } else {
@@ -79,7 +80,9 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                             
                             completion(true, resultList)
                         }
+                        completion(false, resultList)
                     case .failure :
+                        
                         completion(false, resultList)
                     }
                    })
