@@ -51,18 +51,22 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
         let headers: HTTPHeaders = [ "Authorization": "KakaoAK 6cd40b04c090b1a033634e5051aab78c" ]
         let parameters: [String: String] = [ "query": text ]
         var result = false
+        var address = ""
+        
         AF.request("https://dapi.kakao.com/v2/local/search/address.json",
                    method: .get,
                    parameters: parameters, headers: headers).responseJSON(completionHandler: { response in
                     switch response.result {
                     case .success(let value):
-                        if JSON(value)["documents"].count == 0 {
-                            
-                        } else {
-                            if let addressList = JSON(value)["documents"].array {
+                        let json = JSON(value)["documents"]
+                        if json.count > 0 {
+                            if let addressList = json.array {
                                 for item in addressList {
-                                    let address = item["road_address"]["address_name"].string!.isEmpty ? item["address_name"].string! : item["road_address"]["address_name"].string!
-                                    
+                                    if !item["road_address"].isEmpty {
+                                        address = item["road_address"]["address_name"].string!
+                                    } else {
+                                        address = item["address_name"].string!
+                                    }
                                     let newItem = StudyDetailLocationPost(address: address,
                                                                           lat: Double(item["y"].string!) ?? 0,
                                                                           lng: Double(item["x"].string!) ?? 0,
@@ -70,14 +74,16 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                                                                           category: ""
                                     )
                                     resultList.append(newItem)
+                                    result = true
                                 }
                             }
-                            result = true
+                            
                         }
                     case .failure(let err) :
                         print(err)
                     }
                    })
+        
         return (result, resultList)
     }
 }
