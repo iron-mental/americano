@@ -89,7 +89,6 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                 
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
