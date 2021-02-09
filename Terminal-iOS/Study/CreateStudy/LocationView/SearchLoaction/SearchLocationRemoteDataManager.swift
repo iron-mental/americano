@@ -23,8 +23,9 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                     case .success(let value):
                         if JSON(value)["documents"].count == 0 {
                             //여기다가 하면 될듯?
-                            let localSearchResult = self.getSearchResultByLocalName(text: text)
-                            completionHandler(localSearchResult.result, localSearchResult.item)
+                            self.getSearchResultByLocalName(text: text) { (result, itemList) in
+                                completionHandler(result, itemList)
+                            }
                         } else {
                             if let addressList = JSON(value)["documents"].array {
                                 for item in addressList {
@@ -46,11 +47,10 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                    })
     }
     
-    func getSearchResultByLocalName(text: String) -> (result: Bool, item: [StudyDetailLocationPost]) {
+    func getSearchResultByLocalName(text: String, completion: @escaping (_: Bool, _: [StudyDetailLocationPost]) -> Void) {
         var resultList: [StudyDetailLocationPost] = []
         let headers: HTTPHeaders = [ "Authorization": "KakaoAK 6cd40b04c090b1a033634e5051aab78c" ]
         let parameters: [String: String] = [ "query": text ]
-        var result = false
         var address = ""
         
         AF.request("https://dapi.kakao.com/v2/local/search/address.json",
@@ -70,20 +70,18 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                                     let newItem = StudyDetailLocationPost(address: address,
                                                                           lat: Double(item["y"].string!) ?? 0,
                                                                           lng: Double(item["x"].string!) ?? 0,
-                                                                          placeName: item["road_address"]["building_name"].string ?? "" ,
+                                                                          placeName: item["road_address"]["building_name"].string ?? "건물명 없음" ,
                                                                           category: ""
                                     )
                                     resultList.append(newItem)
-                                    result = true
                                 }
                             }
                             
+                            completion(true, resultList)
                         }
-                    case .failure(let err) :
-                        print(err)
+                    case .failure :
+                        completion(false, resultList)
                     }
                    })
-        
-        return (result, resultList)
     }
 }
