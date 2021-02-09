@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 
 class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
-    func getSearchResult(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> Void) {
+    func getSearchResultByKeyword(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> Void) {
         var resultList: [StudyDetailLocationPost] = []
         var result = false
         let headers: HTTPHeaders = [ "Authorization": "KakaoAK 6cd40b04c090b1a033634e5051aab78c" ]
@@ -30,9 +30,6 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                             if let addressList = JSON(value)["documents"].array {
                                 for item in addressList {
                                     let address = item["road_address_name"].string!.isEmpty ? item["address_name"].string! : item["road_address_name"].string!
-                                    
-                                    
-//                                  sido, sigungu optional롸 바꾼 다음 부터 작업 재개 ㄱ ㄱ
                                     let newItem = StudyDetailLocationPost(address: address,
                                                                     lat: Double(item["y"].string!) ?? 0,
                                                                     lng: Double(item["x"].string!) ?? 0,
@@ -51,4 +48,5 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                     completionHandler(result, resultList)
                    })
     }
+    
 }
