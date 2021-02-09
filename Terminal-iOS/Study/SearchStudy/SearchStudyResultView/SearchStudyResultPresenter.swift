@@ -11,7 +11,7 @@ import Foundation
 class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     weak var view: SearchStudyResultViewProtocol?
     var interactor: SearchStudyResultInteractorInputProtocol?
-    weak var wireFrame: SearchStudyResultWireFrameProtocol?
+    var wireFrame: SearchStudyResultWireFrameProtocol?
     
     func returnDidTap(keyWord: String) {
         view?.showLoading()
@@ -19,6 +19,7 @@ class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     }
     
     func didTapCell(keyValue: Int, state: Bool, studyTitle: String) {
+        view?.showLoading()
         wireFrame?.presentStudyDetailScreen(from: view!, keyValue: keyValue, state: state, studyTitle: studyTitle)
     }
     
@@ -37,5 +38,10 @@ extension SearchStudyResultPresenter: SearchStudyResultInteractorOutputProtocol 
     
     func showPagingStudyListResult(result: [Study]) {
         view?.showPagingStudyListResult(result: result)
+    }
+    
+    func showError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

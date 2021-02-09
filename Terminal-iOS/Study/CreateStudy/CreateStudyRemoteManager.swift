@@ -28,8 +28,8 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                 "sns_web": study.snsWeb!,
                 "latitude": location.lat,
                 "longitude": location.lng,
-                "sido": location.sido,
-                "sigungu": location.sigungu,
+                "sido": location.sido!,
+                "sigungu": location.sigungu!,
                 "address_name": location.address
             ]
             if let detailAddress = location.detailAddress {
@@ -58,7 +58,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     }
                 }
             }, with: TerminalRouter.studyCreate(study: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

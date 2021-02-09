@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 .shared
                 .session
                 .request(TerminalRouter.userInfo(id: userID!))
-                .validate()
+                .validate(statusCode: 200...422)
                 .responseJSON { response in
                     switch response.result {
                     case .success:
@@ -141,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         let pushToken = KeychainWrapper.standard.set(deviceTokenString, forKey: "pushToken")
         print("pushToken 성공여부:", pushToken)
-        print("pushToken:",KeychainWrapper.standard.string(forKey: "pushToken")!)
+        print("pushToken:", KeychainWrapper.standard.string(forKey: "pushToken")!)
     }
     
     // MARK: - Core Data stack

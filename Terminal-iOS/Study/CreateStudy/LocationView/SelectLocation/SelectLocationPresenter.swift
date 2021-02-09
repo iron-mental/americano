@@ -10,15 +10,16 @@ import UIKit
 import NMapsMap
 
 class SelectLocationPresenter: SelectLocationPresenterProtocol {
-    
-    func didClickedCompletButton(item: StudyDetailLocationPost) {
-    }
-    
     var view: SelectLocationViewProtocol?
     var interactor: SelectLocationInteractorProtocol?
     var wireFrame: SelectLocationWireFrameProtocol?
+    
     func viewDidLoad(item: StudyDetailLocationPost) {
-        interactor?.searchAddress(item: item)
+        interactor?.searchAddressOnce(item: item)
+    }
+    
+    func searchAddressOnceResult(sido: String, sigungu: String) {
+        view?.setLocaionOnce(sido: sido, sigungu: sigungu)
     }
     
     func getAddress(item: StudyDetailLocationPost) {
@@ -27,5 +28,8 @@ class SelectLocationPresenter: SelectLocationPresenterProtocol {
     
     func getAddressResult(item: StudyDetailLocationPost) {
         view?.setViewWithResult(item: item)
+    }
+    
+    func didClickedCompletButton(item: StudyDetailLocationPost) {
     }
 }

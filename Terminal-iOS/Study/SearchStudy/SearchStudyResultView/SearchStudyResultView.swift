@@ -88,6 +88,7 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let keyValue = searchResult[indexPath.row].id
         presenter?.didTapCell(keyValue: keyValue, state: searchResult[indexPath.row].isMember!, studyTitle: searchResult[indexPath.row].title!)
     }
@@ -104,9 +105,7 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide {
-            print("고양이 끝")
-        }
+        LoadingRainbowCat.hide()
     }
     
     func showSearchStudyListResult(result: [Study], completion: @escaping () -> Void) {
@@ -119,6 +118,12 @@ extension SearchStudyResultView: SearchStudyResultViewProtocol {
     func showPagingStudyListResult(result: [Study]) {
         searchResult += result
         studyListTableView.reloadData()
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }
 

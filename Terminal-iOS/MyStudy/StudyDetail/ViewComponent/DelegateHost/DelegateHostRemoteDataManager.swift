@@ -33,7 +33,12 @@ class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol 
                         print(error.localizedDescription)
                     }
                 case .failure(let err):
-                    print(err.localizedDescription)
+                    self.interactor?.delegateHostResult(response: BaseResponse(result: err.isResponseSerializationError,
+                                                                               type: nil,
+                                                                               label: nil,
+                                                                               message: "자신에게 위임할 수 없습니다",
+                                                                               code: err.responseCode,
+                                                                               data: nil))
                 }
             }
     }

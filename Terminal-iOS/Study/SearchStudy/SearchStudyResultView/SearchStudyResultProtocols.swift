@@ -16,6 +16,7 @@ protocol SearchStudyResultViewProtocol: class {
     func hideLoading()
     func showSearchStudyListResult(result: [Study], completion: @escaping () -> Void)
     func showPagingStudyListResult(result: [Study])
+    func showError(message: String)
 }
 
 protocol SearchStudyResultPresenterProtocol: class {
@@ -42,6 +43,7 @@ protocol SearchStudyResultInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func showSearchStudyListResult(result: [Study])
     func showPagingStudyListResult(result: [Study])
+    func showError(message: String)
 }
 
 protocol SearchStudyResultRemoteDataManagerInputProtocol: class {

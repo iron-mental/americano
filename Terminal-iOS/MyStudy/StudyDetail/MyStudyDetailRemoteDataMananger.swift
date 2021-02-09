@@ -19,12 +19,13 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.studyLeave(studyID: "\(studyID)"))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = "\(JSON(value))".data(using: .utf8)
                     let result: BaseResponse = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: json!)
+                    
                     self.interactor?.leaveStudyResult(result: result.result, message: result.message!)       
                 case .failure(let err):
                     print(err.localizedDescription)

@@ -347,7 +347,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
     }
     
     func hideLoading() {
-        
+        LoadingRainbowCat.hide()
     }
 }
 

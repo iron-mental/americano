@@ -72,7 +72,7 @@ class MemberCollectionViewCell: UICollectionViewCell {
             self.profileImage.kf.setImage(with: URL(string: image),
                                              options: [.requestModifier(imageDownloadRequest)])
         } else {
-            self.profileImage.image = #imageLiteral(resourceName: "ai")
+            self.profileImage.image = #imageLiteral(resourceName: "defaultProfile")
         }
     }
     

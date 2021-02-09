@@ -17,15 +17,19 @@ final class BaseInterceptor: RequestInterceptor {
     var accessToken: String = ""
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
+        
         var request = urlRequest
         if let token = KeychainWrapper.standard.string(forKey: "accessToken") {
+            
             self.accessToken = token
         }
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
+        
         completion(.success(request))
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
+        
         guard let statusCode = request.response?.statusCode else {
             completion(.doNotRetry)
             return
@@ -49,6 +53,7 @@ final class BaseInterceptor: RequestInterceptor {
     }
     
     func refreshToken(completion: @escaping (_ isSuccess: Bool) -> Void) {
+        
         guard let refreshToken = KeychainWrapper.standard.string(forKey: "refreshToken") else { return }
         
         TerminalNetworkManager
@@ -58,6 +63,7 @@ final class BaseInterceptor: RequestInterceptor {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
@@ -79,8 +85,8 @@ final class BaseInterceptor: RequestInterceptor {
                         print(error.localizedDescription)
                     }
                 case .failure(let error):
-                    print("에러입니다.", error.localizedDescription)
                     
+                    print("에러입니다.", error.localizedDescription)
                 }
             }
     }
