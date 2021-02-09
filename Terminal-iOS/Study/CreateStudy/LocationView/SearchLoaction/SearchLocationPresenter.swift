@@ -25,7 +25,6 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
     }
     
     func searchResult(list: [StudyDetailLocationPost]) {
-        
         view?.showSearchResult(list: list)
         LoadingRainbowCat.hide()
     }
