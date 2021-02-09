@@ -47,8 +47,8 @@ class BaseEditableStudyDetailView: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if viewDidAppearFlag {
-            studyTitleTextField.becomeFirstResponder()
-            viewDidAppearFlag.toggle()
+            self.studyTitleTextField.becomeFirstResponder()
+            self.viewDidAppearFlag.toggle()
         }
         standardContentHeight = scrollView.contentSize.height
     }
