@@ -21,7 +21,6 @@ class SelectLocationInteractor: SelectLocationInteractorProtocol {
                 guard let sidoName = sido, let sigunguName = sigungu else { return }
                 self.presenter?.searchAddressOnceResult(sido: sidoName, sigungu: sigunguName)
             case false:
-//                self.presenter
                 break
             break
             }
