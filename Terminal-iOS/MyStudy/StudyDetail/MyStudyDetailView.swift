@@ -267,10 +267,12 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         })
     }
     
-    func showLeaveStudyComplete() {
-        navigationController?.popViewController(animated: true)
-        if let view = navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
-            view.presenter?.viewDidLoad()
+    func showLeaveStudyComplete(message: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+            if let view = self.navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
+                view.presenter?.viewDidLoad()
+            }
         }
     }
     
@@ -279,10 +281,12 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         showToast(controller: self, message: message, seconds: 1, completion: nil)
     }
     
-    func showDeleteStudyComplete() {
-        navigationController?.popViewController(animated: true)
-        if let view = navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
-            view.presenter?.viewDidLoad()
+    func showDeleteStudyComplete(message: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+            if let view = self.navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
+                view.presenter?.viewDidLoad()
+            }
         }
     }
     
