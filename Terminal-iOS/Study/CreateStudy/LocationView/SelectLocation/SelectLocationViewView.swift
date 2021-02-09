@@ -185,7 +185,6 @@ extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
             bottomView.address.text = item.address
             location = item
-//        }
     }
     
     func setLocaionOnce(sido: String, sigungu: String) {
