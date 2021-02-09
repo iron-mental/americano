@@ -47,7 +47,9 @@ extension SearchStudyResultInteractor: SearchStudyResultRemoteDataManagerOutputP
             }
             self.presenter?.showSearchStudyListResult(result: studyList)
         case false:
-            print("err")
+            
+            guard let message = result.message else { return }
+            self.presenter?.showError(message: message)
         }
     }
     

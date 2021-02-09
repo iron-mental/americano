@@ -39,4 +39,9 @@ extension SearchStudyResultPresenter: SearchStudyResultInteractorOutputProtocol 
     func showPagingStudyListResult(result: [Study]) {
         view?.showPagingStudyListResult(result: result)
     }
+    
+    func showError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }

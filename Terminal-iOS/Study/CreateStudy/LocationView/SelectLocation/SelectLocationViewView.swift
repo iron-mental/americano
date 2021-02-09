@@ -188,12 +188,10 @@ extension SelectLocationView: UITextFieldDelegate {
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
         if completeButtonDidTapFlag {
-            
             bottomView.address.text = item.address
             location = item
             passLocationToParent()
         } else {
-            
             bottomView.address.text = item.address
             location = item
         }
