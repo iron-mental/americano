@@ -184,7 +184,6 @@ extension StudyListView: StudyListViewProtocol {
 }
 
 extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching {
-    
     /// 페이징 첫번째 방법 이게 제일 효율 높음
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
@@ -220,13 +219,14 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if sortState == .new {
             let keyValue = newStudyList[indexPath.row].id
             guard let state = newStudyList[indexPath.row].isMember, let title = newStudyList[indexPath.row].title else { return }
             presenter?.showStudyDetail(keyValue: keyValue, state: state, studyTitle: title)
         } else {
             let lengthKeyValue = lengthStudyList[indexPath.row].id
-            guard let state = newStudyList[indexPath.row].isMember, let title = newStudyList[indexPath.row].title else { return }
+            guard let state = lengthStudyList[indexPath.row].isMember, let title = lengthStudyList[indexPath.row].title else { return }
             presenter?.showStudyDetail(keyValue: lengthKeyValue, state: state, studyTitle: title)
         }
     }

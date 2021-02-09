@@ -43,8 +43,6 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                 params["place_name"] = placeName
             }
         }
-        
-        
         TerminalNetworkManager
             .shared
             .session
@@ -61,11 +59,10 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     }
                 }
             }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)", study: params))
-            .validate()
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
