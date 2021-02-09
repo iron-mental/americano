@@ -11,7 +11,7 @@ import Alamofire
 
 final class TerminalNetworkManager {
     static let shared = TerminalNetworkManager()
-    
+
     /// 인터셉터
     let interceptors = Interceptor(interceptors: [BaseInterceptor()])
 
