@@ -22,7 +22,6 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                     switch response.result {
                     case .success(let value):
                         if JSON(value)["documents"].count == 0 {
-                            //여기다가 하면 될듯?
                             self.getSearchResultByLocalName(text: text) { (result, itemList) in
                                 
                                 completionHandler(result, itemList)
