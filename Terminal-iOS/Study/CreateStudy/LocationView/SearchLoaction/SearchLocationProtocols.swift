@@ -38,7 +38,7 @@ protocol SearchLocationInteractorProtocol: class {
 }
 
 protocol SearchLocationRemoteDataManagerProtocol: class {
-    func getSearchResult(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> Void)
+    func getSearchResultByKeyword(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> Void)
 }
 
 protocol SearchLocationWireFrameProtocol: class {
