@@ -14,7 +14,7 @@ protocol SelectLocationViewProtocol: class {
     var delegate: selectLocationDelegate? { get set }
     //PRESENTER -> VIEW
     func setViewWithResult(item: StudyDetailLocationPost)
-    
+    func setLocaionOnce(sido: String, sigungu: String)
 }
 
 protocol SelectLocationInteractorProtocol: class {
@@ -23,6 +23,7 @@ protocol SelectLocationInteractorProtocol: class {
     var localDataManager: SelectLocationLocalDataManagerProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
+    func searchAddressOnce(item: StudyDetailLocationPost)
     func searchAddress(item: StudyDetailLocationPost)
     func selectLocation(item: StudyDetailLocationPost)
 }
@@ -34,6 +35,7 @@ protocol SelectLocationPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func getAddress(item: StudyDetailLocationPost)
+    func searchAddressOnceResult(sido: String, sigungu: String)
     func didClickedCompletButton(item: StudyDetailLocationPost)
     func viewDidLoad(item: StudyDetailLocationPost)
     
@@ -43,7 +45,8 @@ protocol SelectLocationPresenterProtocol: class {
 
 protocol SelectLocationRemoteDataManagerProtocol: class {
     //INTERACTOR -> REMOTEDATAMANAGER
-    func getAddressInfo(lat: Double, lng: Double, completion: @escaping (_: Bool, _ item: StudyDetailLocationPost?) -> ())
+    func getAddressInfoOnce(lat: Double, lng: Double, completion: @escaping (Bool, _ sido: String? , _ sigungu: String?) -> Void)
+    func getAddressInfo(lat: Double, lng: Double, completion: @escaping (_: Bool, _ item: StudyDetailLocationPost?) -> Void)
 }
 
 protocol SelectLocationLocalDataManagerProtocol: class {

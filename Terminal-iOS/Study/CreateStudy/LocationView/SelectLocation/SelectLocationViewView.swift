@@ -30,16 +30,15 @@ class SelectLocationView: UIViewController {
     var delegate: selectLocationDelegate?
     var keyboardHeight: CGFloat = 0.0
     var bottomAnchor: NSLayoutConstraint?
-    var completeButtonDidTapFlag = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        bottomView.detailAddress.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+        guard let item = location else { return }
+        presenter?.viewDidLoad(item: item)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +92,7 @@ class SelectLocationView: UIViewController {
             $0.address.text = location?.address
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
+            $0.detailAddress.delegate = self
         }
     }
     
@@ -127,12 +127,7 @@ class SelectLocationView: UIViewController {
         if let detailAddress = bottomView.detailAddress.text {
             location?.detailAddress = detailAddress
         }
-        if completeButtonDidTapFlag {
-            passLocationToParent()
-        } else {
-            completeButtonDidTapFlag = true
-            presenter?.getAddress(item: location!)
-        }
+        passLocationToParent()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -172,6 +167,7 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
             self.pin.transform = CGAffineTransform(translationX: 0, y: -10)
         })
     }
+    
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
         print(location?.placeName)
         
@@ -187,14 +183,18 @@ extension SelectLocationView: UITextFieldDelegate {
 
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
-        if completeButtonDidTapFlag {
+//        if completeButtonDidTapFlag {
+//            bottomView.address.text = item.address
+//            location = item
+//            passLocationToParent()
+//        } else {
             bottomView.address.text = item.address
             location = item
-            passLocationToParent()
-        } else {
-            bottomView.address.text = item.address
-            location = item
-        }
-        
+//        }
+    }
+    
+    func setLocaionOnce(sido: String, sigungu: String) {
+        location?.sido = sido
+        location?.sigungu = sigungu
     }
 }
