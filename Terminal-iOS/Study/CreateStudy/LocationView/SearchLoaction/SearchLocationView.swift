@@ -100,7 +100,6 @@ extension SearchLocationView: SearchLocationViewProtocol {
     }
     
     func showSearchResult(list: [StudyDetailLocationPost]) {
-        
         if list.isEmpty {
             showToast(controller: self, message: "검색결과가 없습니다.", seconds: 1)
         } else {
