@@ -83,11 +83,11 @@ class EmailModifyView: UIViewController {
     
     @objc func completeModify() {
         let email = self.emailTextField.text ?? ""
-        
         // 공백체크
         if email.whitespaceCheck() {
             self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
         } else {
+            LoadingRainbowCat.show()
             presenter?.completeModify(email: email)
         }
         
@@ -106,6 +106,7 @@ extension EmailModifyView: EmailModifyViewProtocol {
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()
         } else {
+            LoadingRainbowCat.hide()
             self.showToast(controller: self, message: message, seconds: 1, completion: nil)
         }
     }

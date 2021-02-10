@@ -189,9 +189,7 @@ extension BaseProfileView: BaseProfileViewProtocol {
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide {
-            print("Loading hide")
-        }
+        LoadingRainbowCat.hide()
     }
     
     func showUserInfo(userInfo: UserInfo) {
