@@ -15,8 +15,8 @@ class BaseProfileView: UIViewController {
     // MARK: Init Property
     
     let scrollView      = UIScrollView()
+    var backgroundView  = UIView()
     let profile         = ProfileView()
-
     let careerLabel     = UILabel()
     let career          = CareerView()
     let projectLabel    = UILabel()
@@ -94,78 +94,80 @@ class BaseProfileView: UIViewController {
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         }
         self.profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: profile.heightAnchor).isActive = true
         }
         self.careerLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profile.bottomAnchor, constant: 15).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: careerLabel.heightAnchor).isActive = true
         }
         self.career.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: careerLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         }
         self.projectLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: career.bottomAnchor, constant: 15).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
         self.project.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: projectLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         }
         self.snsLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: project.bottomAnchor, constant: 15).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
         self.sns.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: snsLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: sns.heightAnchor).isActive = true
         }
         self.emailLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: sns.bottomAnchor, constant: 15).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
         self.email.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalTo: email.heightAnchor).isActive = true
         }
         self.locationLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 15).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 25).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
         self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
+
         }
     }
 }

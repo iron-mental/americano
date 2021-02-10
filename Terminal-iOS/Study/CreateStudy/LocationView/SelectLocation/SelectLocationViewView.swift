@@ -145,7 +145,6 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
         task = DispatchWorkItem { [self] in
             self.pin.alpha = 1
-            //추후에 여기서 mapView.cameraPosition.target.lat 으로 좌표알아내서 쏘면 됨
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
                 self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
                 location?.lng = mapView.cameraPosition.target.lng
@@ -170,7 +169,6 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
     
     func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
         print(location?.placeName)
-        
     }
 }
 
@@ -183,8 +181,8 @@ extension SelectLocationView: UITextFieldDelegate {
 
 extension SelectLocationView: SelectLocationViewProtocol {
     func setViewWithResult(item: StudyDetailLocationPost) {
-            bottomView.address.text = item.address
-            location = item
+        bottomView.address.text = item.address
+        location = item
     }
     
     func setLocaionOnce(sido: String, sigungu: String) {
