@@ -44,8 +44,9 @@ class LocationModifyView: UIViewController {
     
     private func attribute() {
         self.do {
-            $0.title = "활동지역 설정"
+            $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "활동지역 수정"
         }
         self.locationTab.do {
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),

@@ -37,8 +37,11 @@ class CareerModifyView: UIViewController {
     }
     
     func attribute() {
-        self.hideKeyboardWhenTappedAround()
-        self.view.backgroundColor = .appColor(.terminalBackground)
+        self.do {
+            $0.hideKeyboardWhenTappedAround()
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "경력 수정"
+        }
         
         self.careerLabel.do {
             $0.text = "경력"

@@ -25,6 +25,11 @@ class SNSModifyView: UIViewController {
     }
 
     func attribute() {
+        self.do {
+            $0.hideKeyboardWhenTappedAround()
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "SNS 수정"
+        }
         self.view.backgroundColor = .appColor(.terminalBackground)
 
         self.snsModifyView.firstTextFeield.text = self.github

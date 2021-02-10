@@ -31,9 +31,11 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     private func attribute() {
-        self.hideKeyboardWhenTappedAround()
-        self.view.backgroundColor = .appColor(.terminalBackground)
-
+        self.do {
+            $0.hideKeyboardWhenTappedAround()
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "프로젝트 수정"
+        }
         self.projectView.do {
             $0.delegate = self
             $0.dataSource = self

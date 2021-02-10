@@ -96,10 +96,10 @@ class BaseProfileView: UIViewController {
         // 스크롤뷰 오토레이아웃
         self.scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
         self.backgroundView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

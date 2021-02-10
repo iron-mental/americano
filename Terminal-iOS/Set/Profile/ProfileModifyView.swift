@@ -43,8 +43,11 @@ class ProfileModifyView: UIViewController {
     
     // MARK: Set Attribute
     func attribute() {
-        self.hideKeyboardWhenTappedAround()
-        self.view.backgroundColor = .appColor(.terminalBackground)
+        self.do {
+            $0.hideKeyboardWhenTappedAround()
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "프로필 수정"
+        }
         
         self.picker.do {
             $0.delegate = self

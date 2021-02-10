@@ -23,8 +23,11 @@ class EmailModifyView: UIViewController {
     }
     
     private func attribute() {
-        self.hideKeyboardWhenTappedAround()
-        self.view.backgroundColor = .appColor(.terminalBackground)
+        self.do {
+            $0.hideKeyboardWhenTappedAround()
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "이메일 수정"
+        }
         
         self.emailLabel.do {
             $0.text = "Email"
