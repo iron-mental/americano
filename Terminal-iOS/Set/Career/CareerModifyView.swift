@@ -123,6 +123,7 @@ class CareerModifyView: UIViewController {
     @objc func completeModify() {
         let title = careerTitleModify.text!
         let contents = careerDescriptModify.text!
+        LoadingRainbowCat.show()
         presenter?.completeModify(title: title, contents: contents)
     }
 }
@@ -139,7 +140,6 @@ extension CareerModifyView: CareerModifyViewProtocol {
             let alert =  UIAlertController(title: "결과", message: "수정 실패", preferredStyle: .alert)
             let okAction =  UIAlertAction(title: "확인", style: .default) { _ in }
             alert.addAction(okAction)
-            
             self.present(alert, animated: true, completion: nil)
         }
     }

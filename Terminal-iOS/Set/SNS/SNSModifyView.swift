@@ -81,6 +81,7 @@ class SNSModifyView: UIViewController {
         } else if !web.webCheck() {
             self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
         } else {
+            LoadingRainbowCat.show()
             self.presenter?.completeModify(github: github, linkedin: linkedin, web: web)
         }
         
@@ -97,6 +98,7 @@ extension SNSModifyView: SNSModifyViewProtocol {
                 parent?.presenter?.viewDidLoad()
             }
         } else {
+            LoadingRainbowCat.hide()
             self.showToast(controller: self, message: message, seconds: 1, completion: nil)
         }
     }
