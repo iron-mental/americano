@@ -144,6 +144,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         presenter?.removeButtonDidTap(notice: notice!)
     }
     func showNoticeDetail(notice: Notice) {
+        self.title = notice.title
         self.notice = notice
         attribute()
     }
