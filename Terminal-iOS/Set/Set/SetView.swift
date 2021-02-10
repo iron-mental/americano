@@ -59,6 +59,7 @@ class SetView: UIViewController {
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.separatorColor = .clear
+            $0.showsVerticalScrollIndicator = false
             $0.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.profileCellId)
             $0.register(DefaultCell.self, forCellReuseIdentifier: DefaultCell.defalutCellId)
             $0.register(NotiCell.self, forCellReuseIdentifier: NotiCell.notiCellId)

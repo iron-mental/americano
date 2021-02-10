@@ -45,7 +45,11 @@ class ProfileCell: UITableViewCell {
     }
     
     func attribute() {
-        self.backgroundColor = UIColor.appColor(.cellBackground)
+        self.do {
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.black.cgColor
+        }
         profile.do {
             $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = $0.frame.size.width/2

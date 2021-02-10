@@ -36,7 +36,12 @@ class DefaultCell: UITableViewCell {
         }
     }
     
-    func attribute() {        
+    func attribute() {
+        self.do {
+            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.black.cgColor
+        }
         title.do {
             $0.textAlignment = .center
             $0.textColor = .white
