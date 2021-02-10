@@ -44,9 +44,8 @@ class MyStudyMainView: UIViewController {
     }
     
     func attribute() {
-        moreButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonAction(_ :)))
+        moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .plain, target: self, action: #selector(moreButtonAction(_:)))
         moreButton?.do {
-            $0.image = #imageLiteral(resourceName: "more")
             $0.tintColor = .white
         }
         self.do {
