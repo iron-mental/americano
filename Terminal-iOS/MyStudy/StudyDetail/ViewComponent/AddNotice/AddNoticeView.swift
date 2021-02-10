@@ -180,6 +180,7 @@ class AddNoticeView: UIViewController {
 
 extension AddNoticeView: AddNoticeViewProtocol {
     func showNewNotice(noticeID: Int) {
+        let noticeTitle = titleTextField.text ?? ""
         showToast(controller: self, message: "공지사항 작성이 완료 되었습니다.", seconds: 1) { [self] in
             dismiss(animated: true) {
                 if state == .new {
@@ -194,7 +195,7 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                              leaderNickname: nil,
                                              createAt: nil)
                     ((parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
-                    (parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, parentView: parentView!)
+                    (parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, title: noticeTitle, parentView: parentView!)
                 } else {
                     //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
                     (parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)

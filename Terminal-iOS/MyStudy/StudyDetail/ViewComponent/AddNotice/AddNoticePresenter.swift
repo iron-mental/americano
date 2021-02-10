@@ -24,7 +24,6 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
             case true:
                 view?.showNewNotice(noticeID: notice)
                 wireFrame?.goToNoticeDetailView(noticeID: notice, studyID: studyID, parentView: UIViewController())
-                break
             case false:
                 break
             }
