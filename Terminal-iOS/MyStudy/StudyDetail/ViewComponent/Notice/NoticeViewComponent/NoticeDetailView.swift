@@ -150,8 +150,13 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     }
     
     func showNoticeRemove(message: String) {
-        self.dismiss(animated: true) { [self] in
-            (self.parentView as! NoticeViewProtocol).viewLoad()
+        
+        showToast(controller: self, message: message, seconds: 1) {
+            if let noticeListView = self.parentView as? NoticeViewProtocol {
+                noticeListView.viewLoad()
+                self.navigationController?.popViewController(animated: true)
+            }
+            
         }
     }
     
