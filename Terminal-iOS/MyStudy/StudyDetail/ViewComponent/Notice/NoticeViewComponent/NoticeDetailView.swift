@@ -90,7 +90,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         
         noticeBackground.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
+            $0.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 41)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
@@ -109,14 +109,14 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         }
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: noticeContents.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: noticeBackground.trailingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
         }
         profileName.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: noticeContents.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.topAnchor.constraint(equalTo: profileImage.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: Terminal.convertWidth(value: 8)).isActive = true
         }
         noticeDate.do {
