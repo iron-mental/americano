@@ -18,7 +18,6 @@ class MyStudyMainView: UIViewController {
     var moreButton: UIBarButtonItem?
     var tableView = UITableView()
     var alarmButton = BadgeBarButtonItem()
-    var tempButton: UIBarButtonItem?
     var rightBarButtomItem: UIBarButtonItem?
     var dismissEditViewButtonItem: UIBarButtonItem?
     //alarmbutton 쇼잉을 위한 임시 변수!! 곧 삭제됩니다.
