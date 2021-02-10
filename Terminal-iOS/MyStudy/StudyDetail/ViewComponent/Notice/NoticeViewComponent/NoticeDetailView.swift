@@ -16,7 +16,8 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     var notice: Notice?
     var noticeID: Int?
     var state: StudyDetailViewState?
-    var moreButton = UIButton()
+//    var moreButton = UIButton()
+    var moreButton = UIBarButtonItem()
     lazy var noticeBackground = UIView()
     lazy var noticeLabel = UILabel()
     lazy var noticeTitle = UILabel()
@@ -37,10 +38,12 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             $0.title = "공지사항 상세"
         }
-        moreButton.do {
-            $0.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-            $0.addTarget(self, action: #selector(moreButtonDidTap), for: .touchUpInside)
-        }
+        navigationItem.rightBarButtonItems = [moreButton]
+        moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .plain, target: #selector(moreButtonDidTap), action: .none)
+//        moreButton.do {
+//
+//        }
+        
         noticeBackground.do {
             $0.layer.cornerRadius = 5
             if let isPinned = notice?.pinned {
@@ -96,7 +99,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     }
     
     func layout() {
-        [moreButton, noticeBackground, noticeTitle, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
+        [ noticeBackground, noticeTitle, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
         noticeBackground.addSubview(noticeLabel)
         
         noticeBackground.do {
@@ -111,15 +114,15 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.centerXAnchor.constraint(equalTo: noticeBackground.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
         }
-        moreButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: noticeLabel.centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
-        }
+//        moreButton.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.centerYAnchor.constraint(equalTo: noticeLabel.centerYAnchor).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
+//        }
         noticeTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: self.noticeBackground.trailingAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
-            $0.trailingAnchor.constraint(lessThanOrEqualTo: moreButton.leadingAnchor, constant: -5).isActive = true
+//            $0.trailingAnchor.constraint(lessThanOrEqualTo: moreButton.leadingAnchor, constant: -5).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
         }
         profileImage.do {
@@ -154,7 +157,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         let applyList =  UIAlertAction(title: "삭제하기", style: .destructive) {_ in self.removeButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [edit,applyList,cancel].forEach { alert.addAction($0) }
+        [ edit, applyList, cancel ].forEach { alert.addAction($0) }
         self.present(alert, animated: true, completion: nil)
     }
     
