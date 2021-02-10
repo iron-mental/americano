@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class DelegateHostView: UIViewController {
     var presenter: DelegateHostPresenterProtocol?
@@ -77,6 +78,7 @@ extension DelegateHostView: DelegateHostViewProtocol {
     
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1, completion: nil)
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 }
 
