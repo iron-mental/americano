@@ -47,7 +47,7 @@ protocol MyStudyDetailPresenterProtocol: class {
     //VIEW -> PRESENTER
     func addNoticeButtonDidTap(studyID: Int, parentView: UIViewController)
     func editStudyButtonDidTap(study: StudyDetail, parentView: UIViewController)
-    func addNoticeFinished(notice: Int, studyID: Int, parentView: UIViewController)
+    func addNoticeFinished(notice: Int, studyID: Int, title: String, parentView: UIViewController)
     func showApplyUserList(studyID: Int)
     func leaveStudyButtonDidTap(studyID: Int)
     func deleteStudyButtonDidTap(studyID: Int)
@@ -77,7 +77,7 @@ protocol MyStudyDetailWireFrameProtocol: class {
 
     func goToAddNotice(studyID: Int, parentView: UIViewController)
     func goToEditStudy(study: StudyDetail, parentView: UIViewController)
-    func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController)
+    func goToNoticeDetail(notice: Int, studyID: Int, title: String, parentView: UIViewController)
     func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int)
     func goToDelegateHost(from view: MyStudyDetailViewProtocol, studyID: Int, userList: [Participate])
 }

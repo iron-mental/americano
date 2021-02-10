@@ -49,8 +49,8 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         parentView.navigationController?.pushViewController(view, animated: true)
     }
     
-    func goToNoticeDetail(notice: Int, studyID: Int, parentView: UIViewController) {
-        let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice, studyID: studyID, parentView: parentView, state: .host)
+    func goToNoticeDetail(notice: Int, studyID: Int, title: String, parentView: UIViewController) {
+        let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice, studyID: studyID,title: title, parentView: parentView, state: .host)
         parentView.navigationController?.pushViewController(view, animated: true)
     }
     

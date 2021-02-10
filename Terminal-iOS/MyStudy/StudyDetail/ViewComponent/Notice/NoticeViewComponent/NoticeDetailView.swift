@@ -16,10 +16,9 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     var notice: Notice?
     var noticeID: Int?
     var state: StudyDetailViewState?
-    var moreButton = UIButton()
+    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(moreButtonDidTap))
     lazy var noticeBackground = UIView()
     lazy var noticeLabel = UILabel()
-    lazy var noticeTitle = UILabel()
     lazy var profileImage = UIImageView()
     lazy var profileName = UILabel()
     lazy var noticeDate = UILabel()
@@ -35,11 +34,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
-            $0.title = "공지사항 상세"
-        }
-        moreButton.do {
-            $0.setImage(#imageLiteral(resourceName: "more"), for: .normal)
-            $0.addTarget(self, action: #selector(moreButtonDidTap), for: .touchUpInside)
+            navigationItem.rightBarButtonItems = [moreButton]
         }
         noticeBackground.do {
             $0.layer.cornerRadius = 5
@@ -54,13 +49,8 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 5
             if let isPinned = notice?.pinned {
-                $0.text = isPinned ? "필독" : "공지"
+                $0.text = isPinned ? "필독" : "일반"
             }
-        }
-        noticeTitle.do {
-            $0.dynamicFont(fontSize: 14, weight: .semibold)
-            $0.textColor = .white
-            $0.text = notice?.title
         }
         profileImage.do {
             let imageURL = notice?.leaderImage ?? ""
@@ -75,7 +65,6 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         }
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            // 옵셔널로 들어와서 일단 넣어놈
             guard let name = notice?.leaderNickname else { return }
             $0.text = name
             $0.textColor = .white
@@ -96,12 +85,12 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     }
     
     func layout() {
-        [moreButton, noticeBackground, noticeTitle, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
+        [ noticeBackground, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
         noticeBackground.addSubview(noticeLabel)
         
         noticeBackground.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
+            $0.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 41)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
@@ -111,40 +100,29 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.centerXAnchor.constraint(equalTo: noticeBackground.centerXAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
         }
-        moreButton.do {
+        noticeContents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: noticeLabel.centerYAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 13)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
-        }
-        noticeTitle.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: self.noticeBackground.trailingAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
-            $0.trailingAnchor.constraint(lessThanOrEqualTo: moreButton.leadingAnchor, constant: -5).isActive = true
-            $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
+            $0.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor).isActive = true
         }
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: noticeBackground.trailingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
         }
         profileName.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.topAnchor.constraint(equalTo: profileImage.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: Terminal.convertWidth(value: 8)).isActive = true
         }
         noticeDate.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profileName.bottomAnchor, constant: 2).isActive = true
             $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: Terminal.convertWidth(value: 8)).isActive = true
-        }
-        noticeContents.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 13)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
-            $0.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor).isActive = true
         }
     }
     
@@ -154,7 +132,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         let applyList =  UIAlertAction(title: "삭제하기", style: .destructive) {_ in self.removeButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [edit,applyList,cancel].forEach { alert.addAction($0) }
+        [ edit, applyList, cancel ].forEach { alert.addAction($0) }
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -166,13 +144,19 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         presenter?.removeButtonDidTap(notice: notice!)
     }
     func showNoticeDetail(notice: Notice) {
+        self.title = notice.title
         self.notice = notice
         attribute()
     }
     
     func showNoticeRemove(message: String) {
-        self.dismiss(animated: true) { [self] in
-            (self.parentView as! NoticeViewProtocol).viewLoad()
+        
+        showToast(controller: self, message: message, seconds: 1) {
+            if let noticeListView = self.parentView as? NoticeViewProtocol {
+                noticeListView.viewLoad()
+                self.navigationController?.popViewController(animated: true)
+            }
+            
         }
     }
     

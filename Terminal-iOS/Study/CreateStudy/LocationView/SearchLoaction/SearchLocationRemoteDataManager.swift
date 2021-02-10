@@ -23,7 +23,6 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                     case .success(let value):
                         if JSON(value)["documents"].count == 0 {
                             self.getSearchResultByLocalName(text: text) { (result, itemList) in
-                                
                                 completionHandler(result, itemList)
                             }
                         } else {
@@ -76,12 +75,11 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                                     resultList.append(newItem)
                                 }
                             }
-                            
                             completion(true, resultList)
+                        } else {
+                            completion(false, resultList)
                         }
-                        completion(false, resultList)
                     case .failure :
-                        
                         completion(false, resultList)
                     }
                    })
