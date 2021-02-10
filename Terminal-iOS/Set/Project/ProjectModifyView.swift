@@ -96,7 +96,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     func getCellData() -> SNSValidate {
-        
         // 공백여부 체크 변수
         var state: SNSValidate = SNSValidate(state: true, kind: "")
         
@@ -137,9 +136,9 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     @objc func completeModify() {
         let snsValidate = getCellData()
-        
         // 공백체크
         if snsValidate.state {
+            LoadingRainbowCat.show()
             presenter?.completeModify(project: projectArr)
         } else {
             if snsValidate.kind == "whitespace" {
@@ -187,6 +186,7 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
             }
         } else {
             // 실패시 에러처리 부분
+            LoadingRainbowCat.hide()
             self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 0.5)
         }
     }
