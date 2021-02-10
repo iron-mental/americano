@@ -50,6 +50,10 @@ class BaseProfileView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         
+        self.backgroundView.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
+        
         self.careerLabel.do {
             $0.text = "경력"
             $0.textColor = .white
@@ -84,9 +88,10 @@ class BaseProfileView: UIViewController {
     
     func layout() {
         self.view.addSubview(scrollView)
+        self.scrollView.addSubview(backgroundView)
         [profile, careerLabel, career, projectLabel, project,
          snsLabel, sns, emailLabel, email, locationLabel, location]
-            .forEach { self.scrollView.addSubview($0) }
+            .forEach { self.backgroundView.addSubview($0) }
         
         // 스크롤뷰 오토레이아웃
         self.scrollView.do {
@@ -95,6 +100,13 @@ class BaseProfileView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        }
+        self.backgroundView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
         self.profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -166,8 +178,7 @@ class BaseProfileView: UIViewController {
             $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
-
+            $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
     }
 }
