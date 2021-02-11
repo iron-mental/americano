@@ -57,26 +57,31 @@ class BaseProfileView: UIViewController {
         self.careerLabel.do {
             $0.text = "경력"
             $0.textColor = .white
+            $0.font = UIFont.boldSystemFont(ofSize: 18)
         }
         
         self.projectLabel.do {
             $0.text = "프로젝트"
             $0.textColor = .white
+            $0.font = UIFont.boldSystemFont(ofSize: 18)
         }
         
         self.snsLabel.do {
             $0.text = "SNS"
             $0.textColor = .white
+            $0.font = UIFont.boldSystemFont(ofSize: 18)
         }
         
         self.emailLabel.do {
             $0.text = "Email"
             $0.textColor = .white
+            $0.font = UIFont.boldSystemFont(ofSize: 18)
         }
         
         self.locationLabel.do {
             $0.text = "활동지역"
             $0.textColor = .white
+            $0.font = UIFont.boldSystemFont(ofSize: 18)
         }
         
         self.sns.github.addTarget(self, action: #selector(goGithub), for: .touchUpInside)

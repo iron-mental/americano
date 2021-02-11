@@ -192,6 +192,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         } else if section == 3 {
             label.text = sections[3]
         }
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         return headerView
     }
     
