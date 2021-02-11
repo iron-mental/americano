@@ -29,7 +29,7 @@ class ProfileModifyView: UIViewController {
     lazy var name = UITextField()
     lazy var introduction = UITextView()
     lazy var completeButton = UIButton()
-    
+    var  accessoryCompletButton = UIButton()
     // MARK: viewDidLoad
     
     override func viewDidLoad() {
@@ -91,6 +91,7 @@ class ProfileModifyView: UIViewController {
             $0.layer.borderWidth = 0.1
             $0.dynamicFont(fontSize: 16, weight: .regular)
             $0.addLeftPadding(padding: 10)
+            $0.inputAccessoryView = accessoryCompletButton
         }
         
         self.introductionLabel.do {
@@ -112,6 +113,7 @@ class ProfileModifyView: UIViewController {
             $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
+            $0.inputAccessoryView = accessoryCompletButton
         }
         
         self.completeButton.do {
@@ -119,6 +121,13 @@ class ProfileModifyView: UIViewController {
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+        }
+        
+        self.accessoryCompletButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
