@@ -47,7 +47,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         button.do {
             $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
         }
-        accessoryCompletButton.do {
+        accessoryCompleteButton.do {
             $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
         }
     }

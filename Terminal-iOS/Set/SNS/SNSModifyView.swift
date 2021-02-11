@@ -30,12 +30,16 @@ class SNSModifyView: UIViewController {
             $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.title = "SNS 수정"
+            $0.view.backgroundColor = .appColor(.terminalBackground)
         }
-        self.view.backgroundColor = .appColor(.terminalBackground)
-
-        self.snsModifyView.firstTextFeield.text = self.github
-        self.snsModifyView.secondTextField.text = self.linkedin
-        self.snsModifyView.thirdTextField.text = self.web
+        self.snsModifyView.do {
+            $0.firstTextFeield.text = self.github
+            $0.firstTextFeield.inputAccessoryView = accessoryCompleteButton
+            $0.secondTextField.text = self.linkedin
+            $0.secondTextField.inputAccessoryView = accessoryCompleteButton
+            $0.thirdTextField.text = self.web
+            $0.thirdTextField.inputAccessoryView = accessoryCompleteButton
+        }
         
         self.completeButton.do {
             $0.backgroundColor = .appColor(.mainColor)
@@ -66,10 +70,10 @@ class SNSModifyView: UIViewController {
         
         self.completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.snsModifyView.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         }
     }
     

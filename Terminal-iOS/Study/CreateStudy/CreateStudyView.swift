@@ -26,7 +26,7 @@ class CreateStudyView: BaseEditableStudyDetailView {
         self.button.do {
             $0.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         }
-        self.accessoryCompletButton.do {
+        self.accessoryCompleteButton.do {
             $0.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         }
     }
