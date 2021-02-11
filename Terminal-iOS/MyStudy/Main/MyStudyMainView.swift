@@ -142,8 +142,11 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         LoadingRainbowCat.show()
     }
     
-    func showMyStudyList(myStudyList: [MyStudy]) {
-        self.myStudyList = myStudyList
+    func showMyStudyList(myStudyList: MyStudyList) {
+        
+        if let studyList = myStudyList.studyList {
+            self.myStudyList = studyList
+        }
         attribute()
         layout()
         tableView.reloadData()

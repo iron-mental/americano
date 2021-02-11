@@ -50,6 +50,9 @@ class BaseProfileView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         
+        self.scrollView.do {
+            $0.delegate = self
+        }
         self.backgroundView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -296,5 +299,11 @@ extension BaseProfileView {
         let url = address
         let view = SNSWebView(url: url)
         self.present(view, animated: true, completion: nil)
+    }
+}
+
+extension BaseProfileView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        print(scrollView)
     }
 }

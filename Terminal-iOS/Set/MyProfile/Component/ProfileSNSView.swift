@@ -15,11 +15,11 @@ class ProfileSNSView: BaseSNSView {
     }
     
     let linkedin = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
     }
     
     let web = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "blog"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
     }
     
     let modify = UIButton().then {

@@ -38,7 +38,7 @@ class ProfileDetailView: BaseProfileView {
     }
     
     // MARK: Set Layout
-    
+
     override func layout() {
         super.layout()
         self.location.do {

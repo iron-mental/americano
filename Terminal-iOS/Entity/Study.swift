@@ -31,7 +31,7 @@ struct Study: Codable {
 }
 
 public class TestStudyList: NSObject, NSCoding {
-
+    
     public var testList: [TestStudy] = []
     
     enum Key: String {

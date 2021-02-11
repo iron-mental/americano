@@ -11,11 +11,14 @@ import Foundation
 
 struct StudyDetail: Codable {
     let participate: [Participate]
+    
     let id: Int
     let category, title, introduce: String
     let progress, studyTime: String
     let snsWeb, snsNotion, snsEvernote, image: String?
+    
     let location: Location
+    
     let authority: String
     
     enum CodingKeys: String, CodingKey {
@@ -43,7 +46,7 @@ struct Location: Codable {
 
 struct Participate: Codable {
     let id, userID: Int
-    let nickname : String
+    let nickname: String
     let image: String?
     let leader: Bool
     enum CodingKeys: String, CodingKey {
@@ -52,6 +55,3 @@ struct Participate: Codable {
         case nickname, image, leader
     }
 }
-
-
-

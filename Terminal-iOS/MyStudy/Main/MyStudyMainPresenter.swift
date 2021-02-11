@@ -26,7 +26,7 @@ class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
         wireFrame?.goToAlert(from: view!)
     }
     
-    func MyStudyListResult(result: Bool, itemList: [MyStudy]?) {
+    func MyStudyListResult(result: Bool, itemList: MyStudyList?) {
         switch result {
         case true:
             view?.showMyStudyList(myStudyList: itemList!)
