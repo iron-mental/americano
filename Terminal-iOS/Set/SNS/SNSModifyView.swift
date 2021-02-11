@@ -17,6 +17,7 @@ class SNSModifyView: UIViewController {
     
     lazy var snsModifyView = ProfileSNSModifyView()
     lazy var completeButton = UIButton()
+    var accessoryCompleteButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,12 @@ class SNSModifyView: UIViewController {
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+        }
+        self.accessoryCompleteButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }

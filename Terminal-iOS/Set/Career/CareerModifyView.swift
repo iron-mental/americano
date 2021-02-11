@@ -29,7 +29,7 @@ class CareerModifyView: UIViewController {
     lazy var careerTitleModify = UITextField()
     lazy var careerDescriptModify = UITextView()
     lazy var completeButton = UIButton()
-    var accessoryCompletButton = UIButton()
+    var accessoryCompleteButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,7 @@ class CareerModifyView: UIViewController {
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
-            $0.inputAccessoryView = accessoryCompletButton
+            $0.inputAccessoryView = accessoryCompleteButton
         }
         
         self.careerDescriptModify.do {
@@ -77,7 +77,7 @@ class CareerModifyView: UIViewController {
             $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
-            $0.inputAccessoryView = accessoryCompletButton
+            $0.inputAccessoryView = accessoryCompleteButton
         }
         
         self.completeButton.do {
@@ -87,7 +87,7 @@ class CareerModifyView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
-        self.accessoryCompletButton.do {
+        self.accessoryCompleteButton.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)

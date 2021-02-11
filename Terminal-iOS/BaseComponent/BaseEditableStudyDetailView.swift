@@ -33,7 +33,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var selectedLocation: StudyDetailLocationPost?
     var textViewTapFlag = false
     var standardContentHeight: CGFloat = 0.0
-    var accessoryCompletButton = UIButton()
+    var accessoryCompleteButton = UIButton()
     var viewDidAppearFlag = true
     
     override func viewDidLoad() {
@@ -144,34 +144,34 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.textColor = .white
             $0.layer.cornerRadius = 10
             $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
-            $0.inputAccessoryView = accessoryCompletButton
+            $0.inputAccessoryView = accessoryCompleteButton
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
         }
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.categoryLabel.text = selectedCategory
-            $0.textView.inputAccessoryView = accessoryCompletButton
+            $0.textView.inputAccessoryView = accessoryCompleteButton
         }
         SNSInputView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-            $0.notion.textField.inputAccessoryView = accessoryCompletButton
-            $0.evernote.textField.inputAccessoryView = accessoryCompletButton
-            $0.web.textField.inputAccessoryView = accessoryCompletButton
+            $0.notion.textField.inputAccessoryView = accessoryCompleteButton
+            $0.evernote.textField.inputAccessoryView = accessoryCompleteButton
+            $0.web.textField.inputAccessoryView = accessoryCompleteButton
         }
         studyInfoView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-            $0.textView.inputAccessoryView = accessoryCompletButton
+            $0.textView.inputAccessoryView = accessoryCompleteButton
         }
         locationView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
-            $0.detailAddress.inputAccessoryView = accessoryCompletButton
+            $0.detailAddress.inputAccessoryView = accessoryCompleteButton
         }
         timeView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
-            $0.detailTime.inputAccessoryView = accessoryCompletButton
+            $0.detailTime.inputAccessoryView = accessoryCompleteButton
         }
         button.do {
             $0.setTitle("완료", for: .normal)
@@ -179,7 +179,7 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
         }
-        accessoryCompletButton.do {
+        accessoryCompleteButton.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
@@ -290,10 +290,10 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         if viewMinY >= (parentView.frame.minY) {
             let distance = (parentView.frame.minY) - viewMinY
-            self.viewSetTop(distance: distance - accessoryCompletButton.frame.height)
+            self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
         } else if viewMaxY <= (parentView.frame.maxY) {
             let distance = (parentView.frame.maxY) - viewMaxY
-            self.viewSetBottom(distance: distance + accessoryCompletButton.frame.height)
+            self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
         } else {
             textViewTapFlag = false
         }
