@@ -19,6 +19,10 @@ class EmailView: UIView {
     }
     
     func attribute() {
+        self.do {
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.gray.cgColor
+        }
         self.email.do {
             $0.textColor = UIColor.appColor(.profileTextColor)
         }

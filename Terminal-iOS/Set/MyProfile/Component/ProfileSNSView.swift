@@ -26,6 +26,13 @@ class ProfileSNSView: BaseSNSView {
         $0.setTitle("수정", for: .normal)
         $0.setTitleColor(.appColor(.mainColor), for: .normal)
     }
+    override func attribute() {
+        super.attribute()
+        self.do {
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.gray.cgColor
+        }
+    }
     
     override func layout() {
         super.layout()

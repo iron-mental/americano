@@ -21,6 +21,10 @@ class ProfileView: UIView {
     }
     
     func attribute() {
+        self.do {
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.gray.cgColor
+        }
         profileImage.do {
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = Terminal.convertHeigt(value: 100)

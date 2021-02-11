@@ -20,6 +20,10 @@ class CareerView: UIView {
     }
    
     func attribute() {
+        self.do {
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.gray.cgColor
+        }
         self.careerTitle.do {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 16, weight: .bold)
