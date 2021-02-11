@@ -76,10 +76,10 @@ class NoticeCell: UITableViewCell {
         addSubview(date)
         noticeBackground.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 41)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 9)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Terminal.convertHeight(value: 13)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 41)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 20)).isActive = true
         }
         noticeLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -101,7 +101,7 @@ class NoticeCell: UITableViewCell {
         }
         date.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Terminal.convertWidth(value: 12)).isActive = true
         }
     }

@@ -24,7 +24,7 @@ class StudyCategoryView: UIViewController {
         layout()
         presenter?.viewDidLoad()
     }
-    
+
     func attirbute() {
         let createStudyBtn = UIBarButtonItem(barButtonSystemItem: .add,
                                              target: self,

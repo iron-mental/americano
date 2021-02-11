@@ -45,13 +45,13 @@ class BottomView: UIView {
         address.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
-            $0.topAnchor.constraint(equalTo: topAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
+            $0.topAnchor.constraint(equalTo: topAnchor, constant: Terminal.convertHeight(value: 20)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 320)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: address.intrinsicContentSize.height).isActive = true
         }
         detailAddress.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: address.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.topAnchor.constraint(equalTo: address.bottomAnchor, constant: Terminal.convertHeight(value: 25)).isActive = true
             $0.leadingAnchor.constraint(equalTo: address.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 320)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: detailAddress.intrinsicContentSize.height).isActive = true
@@ -59,9 +59,9 @@ class BottomView: UIView {
         completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Terminal.convertHeigt(value: 40)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Terminal.convertHeight(value: 40)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 324)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 45)).isActive = true
         }
     }
     

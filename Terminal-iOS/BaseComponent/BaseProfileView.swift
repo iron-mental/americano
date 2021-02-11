@@ -13,7 +13,6 @@ import SwiftKeychainWrapper
 class BaseProfileView: UIViewController {
     
     // MARK: Init Property
-    
     let scrollView      = UIScrollView()
     var backgroundView  = UIView()
     let profile         = ProfileView()
@@ -27,7 +26,6 @@ class BaseProfileView: UIViewController {
     let email           = EmailView()
     let locationLabel   = UILabel()
     let location        = LocationView()
-    
     var projectData: [Project] = []
     var userInfo: UserInfo?
     
@@ -111,10 +109,10 @@ class BaseProfileView: UIViewController {
         }
         self.backgroundView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
         }
         self.profile.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -183,9 +181,9 @@ class BaseProfileView: UIViewController {
         }
         self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 15).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
+            $0.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: Terminal.convertHeight(value: 5)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: Terminal.convertHeight(value: 15)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertHeight(value: 15)).isActive = true
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
     }

@@ -83,8 +83,8 @@ class MyApplyStudyModifyView: UIViewController {
         
         dismissButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertHeigt(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
         }
         guideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -93,10 +93,10 @@ class MyApplyStudyModifyView: UIViewController {
         }
         applyTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.topAnchor.constraint(equalTo: guideLabel.bottomAnchor, constant: Terminal.convertHeight(value: 30)).isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - (Terminal.convertWidth(value: 60))).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 45)).isActive = true
             
         }
         bottomAnchor = admitButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -105,7 +105,7 @@ class MyApplyStudyModifyView: UIViewController {
             bottomAnchor?.isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 335)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 45)).isActive = true
         }
     }
     @objc func didClickButtonDidTap() {

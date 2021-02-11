@@ -26,7 +26,7 @@ class NotificationView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.cellID)
-            $0.rowHeight = Terminal.convertHeigt(value: 80)
+            $0.rowHeight = Terminal.convertHeight(value: 80)
             $0.backgroundColor = .appColor(.terminalBackground)
             $0.separatorColor = .darkGray
         }

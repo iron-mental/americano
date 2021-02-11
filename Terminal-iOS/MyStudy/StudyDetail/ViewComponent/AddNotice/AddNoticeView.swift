@@ -122,8 +122,8 @@ class AddNoticeView: UIViewController {
         }
         dismissButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertHeigt(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
         }
         titleGuideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -133,23 +133,23 @@ class AddNoticeView: UIViewController {
         }
         titleTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: isEssentialFlagSege.bottomAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
+            $0.topAnchor.constraint(equalTo: isEssentialFlagSege.bottomAnchor, constant: Terminal.convertHeight(value: 20)).isActive = true
             $0.leadingAnchor.constraint(equalTo: titleGuideLabel.trailingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 30)).isActive = true
         }
         contentGuideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: titleGuideLabel.trailingAnchor).isActive = true
         }
         contentTextView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: contentGuideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: contentGuideLabel.bottomAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: -Terminal.convertHeigt(value: 20)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: -Terminal.convertHeight(value: 20)).isActive = true
         }
         bottomAnchor = completeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         completeButton.do {
@@ -157,7 +157,7 @@ class AddNoticeView: UIViewController {
             bottomAnchor?.isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 335)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 45)).isActive = true
         }
     }
     

@@ -119,7 +119,7 @@ class SelectLocationView: UIViewController {
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             bottomAnchor?.isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 202)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 202)).isActive = true
         }
     }
     

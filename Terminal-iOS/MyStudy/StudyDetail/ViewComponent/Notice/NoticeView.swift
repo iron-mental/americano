@@ -39,7 +39,7 @@ class NoticeView: UIViewController {
             $0.dataSource = self
             $0.prefetchDataSource = self
             $0.bounces = false
-            $0.rowHeight = Terminal.convertHeigt(value: 123)
+            $0.rowHeight = Terminal.convertHeight(value: 123)
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }

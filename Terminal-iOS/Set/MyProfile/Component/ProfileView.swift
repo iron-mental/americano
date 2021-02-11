@@ -27,8 +27,8 @@ class ProfileView: UIView {
         }
         profileImage.do {
             $0.contentMode = .scaleAspectFill
-            $0.frame.size.width = Terminal.convertHeigt(value: 100)
-            $0.frame.size.height = Terminal.convertHeigt(value: 100)
+            $0.frame.size.width = Terminal.convertHeight(value: 100)
+            $0.frame.size.height = Terminal.convertHeight(value: 100)
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
         }
@@ -56,8 +56,8 @@ class ProfileView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
         self.name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

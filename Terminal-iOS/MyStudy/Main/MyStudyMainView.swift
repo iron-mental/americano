@@ -143,7 +143,6 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
     }
     
     func showMyStudyList(myStudyList: MyStudyList) {
-        
         if let studyList = myStudyList.studyList {
             self.myStudyList = studyList
         }

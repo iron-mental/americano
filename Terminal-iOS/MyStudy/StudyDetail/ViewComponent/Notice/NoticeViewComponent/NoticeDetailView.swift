@@ -91,9 +91,9 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         noticeBackground.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 41)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeight(value: 13)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 41)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 20)).isActive = true
         }
         noticeLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -102,15 +102,15 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         }
         noticeContents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor, constant: Terminal.convertHeight(value: 25)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 13)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
             $0.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor).isActive = true
         }
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: noticeBackground.trailingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeight(value: 9)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: noticeBackground.trailingAnchor, constant: Terminal.convertHeight(value: 13)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
         }
