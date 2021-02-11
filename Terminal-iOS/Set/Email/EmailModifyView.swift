@@ -15,6 +15,7 @@ class EmailModifyView: UIViewController {
     lazy var emailLabel = UILabel()
     lazy var emailTextField = UITextField()
     lazy var completeButton = UIButton()
+    var accessoryCompleteButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,7 @@ class EmailModifyView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
+            $0.inputAccessoryView = accessoryCompleteButton
         }
         
         self.completeButton.do {
@@ -51,6 +53,13 @@ class EmailModifyView: UIViewController {
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+        }
+        
+        self.accessoryCompleteButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
@@ -74,10 +83,10 @@ class EmailModifyView: UIViewController {
         }
         self.completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
     
