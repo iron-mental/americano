@@ -180,13 +180,13 @@ class ProfileModifyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
-        
+
         self.completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.introduction.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         }
     }
     

@@ -21,6 +21,10 @@ class ProjectView: UIView {
     ){
         super.init(frame: frame)
         
+        self.do {
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.red.cgColor
+        }
         let projectTitle = UILabel().then {
             $0.text = title
             $0.textColor = .white
@@ -56,7 +60,7 @@ class ProjectView: UIView {
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         }
-
+        
         checkSNSList(snsGithub: snsGithub, snsAppStore: snsAppStore, snsPlayStore: snsPlayStore)
         sns.addstack(snsList: snsList)
     }
@@ -74,9 +78,9 @@ class ProjectView: UIView {
             snsList.updateValue(snsPlayStore, forKey: "playStore")
         }
     }
-   
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }
