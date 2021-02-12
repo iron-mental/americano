@@ -16,6 +16,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     var currentScrollViewMinY: CGFloat = 0
     var currentScrollViewMaxY: CGFloat = 0
     var keyboardHeight: CGFloat = 0.0
+    var standardContentHeight: CGFloat = 0.0
     
     var tappedView: UIView?
     var accessoryCompleteButton = UIButton()
@@ -32,6 +33,10 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                             hideSelector: #selector(keyboardWillHide))
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        standardContentHeight = projectView.contentSize.height
+    }
     override func viewDidDisappear(_ animated: Bool) {
         self.keyboardRemoveObserver(with: self)
     }
@@ -146,21 +151,38 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
         
-        var parentView = UIView()
-        if type(of: textView) == SNSInputUITextField.self {
-            parentView = (textView.superview?.superview)!
-        } else {
-            parentView = textView.tag == 1 ? textView : textView.superview!
-        }
-        
-        if viewMinY >= (parentView.frame.minY) {
-            let distance = (parentView.frame.minY) - viewMinY
-            self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
-        } else if viewMaxY <= (parentView.frame.maxY) {
-            let distance = (parentView.frame.maxY) - viewMaxY
-            self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
-        } else {
-            isEditableViewTapping = false
+        if let parentView = textView.superview {
+            var targetMinY: CGFloat = 0
+            var targetMaxY: CGFloat = 0
+            
+            if type(of: parentView) == ProjectSNSModifyView.self {
+                //sns textField 클릭 시
+                if let superView = parentView.superview?.superview?.superview {
+                    targetMinY = textView.frame.minY + parentView.frame.minY + superView.frame.minY
+                    targetMaxY = textView.frame.maxY + parentView.frame.minY + superView.frame.minY
+                }
+            } else {
+                //제목 or 내용 textView 클릭 시
+                if let superView = parentView.superview?.superview {
+                    targetMinY = textView.frame.minY + superView.frame.minY
+                    targetMaxY = textView.frame.maxY + superView.frame.minY
+                }
+            }
+            
+            print("보이는 범위 : \(viewMinY) ~ \(viewMaxY)")
+            print("선택된 뷰의 범위: \(targetMinY) ~ \(targetMaxY)")
+            
+            if viewMinY >= (targetMinY) {
+                
+                let distance = (targetMinY) - viewMinY
+                self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
+            } else if viewMaxY <= (targetMaxY) {
+                
+                let distance = (targetMaxY) - viewMaxY
+                self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
+            } else {
+                isEditableViewTapping = false
+            }
         }
     }
     
@@ -193,6 +215,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     @objc func keyboardWillHide() {
         self.projectView.transform = .identity
+        completeButton.alpha = 1
+        projectView.contentSize.height = standardContentHeight
     }
     
     @objc func completeModify() {
@@ -280,15 +304,11 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print("스크롤중")
-        
         if type(of: scrollView) == ProjectTableView.self {
-            currentScrollViewMinY = scrollView.contentOffset.y
-            currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
-            print(currentScrollViewMinY)
-            print(currentScrollViewMaxY)
+            standardContentHeight = projectView.contentSize.height
+            currentScrollViewMinY = projectView.contentOffset.y
+            currentScrollViewMaxY = (projectView.contentOffset.y + projectView.frame.height) - keyboardHeight
             if !isEditableViewTapping {
-                print("내려간다")
                 view.endEditing(true)
             }
         }
