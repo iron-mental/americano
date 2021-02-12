@@ -35,7 +35,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-//        standardContentHeight = projectView.contentSize.height
+        standardContentHeight = projectView.contentSize.height
+        keyboardHeight = 336
     }
     override func viewDidDisappear(_ animated: Bool) {
         self.keyboardRemoveObserver(with: self)
@@ -114,13 +115,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
-        [minLine, maxLine, targetMinLine, targetMaxLine].forEach { view.addSubview($0) }
-        [minLine, maxLine].forEach {
-            $0.backgroundColor = .red
-        }
-        [targetMinLine, targetMaxLine].forEach {
-            $0.backgroundColor = .blue
-        }
     }
     
     func getCellData() -> SNSValidate {
@@ -129,7 +123,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         for index in 0..<projectArr.count {
             let indexpath = IndexPath(row: index, section: 0)
             let cell = projectView.cellForRow(at: indexpath) as! ProjectCell
-            
             let id = cell.projectID ?? nil
             let title = cell.title.text!
             let contents = cell.contents.text!
@@ -157,13 +150,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         return state
     }
     
-    var minLine = UIView()
-    
-    var maxLine = UIView()
-    
-    var targetMinLine = UIView()
-    var targetMaxLine = UIView()
-    
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
         if let parentView = textView.superview {
             var targetMinY: CGFloat = 0
@@ -185,24 +171,15 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 }
             }
             
-
-            targetMinLine.frame = CGRect(x: 0, y: Int(targetMinY), width: Int(UIScreen.main.bounds.width), height: 1)
-            targetMaxLine.frame = CGRect(x: 0, y: Int(targetMaxY), width: Int(UIScreen.main.bounds.width), height: 1)
-            
-            print("보이는 범위 : \(viewMinY) ~ \(viewMaxY)")
-            print("선택된 뷰의 범위: \(targetMinY) ~ \(targetMaxY)")
-            
-//            if viewMinY >= (targetMinY) {
-//
-//                let distance = (targetMinY) - viewMinY
-//                self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
-//            } else if viewMaxY <= (targetMaxY) {
-//
-//                let distance = (targetMaxY) - viewMaxY
-//                self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
-//            } else {
-//                isEditableViewTapping = false
-//            }
+            if viewMinY >= (targetMinY) {
+                let distance = (targetMinY) - viewMinY
+                self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
+            } else if viewMaxY <= (targetMaxY) {
+                let distance = (targetMaxY) - viewMaxY
+                self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
+            } else {
+                isEditableViewTapping = false
+            }
         }
     }
     
@@ -218,7 +195,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     func viewSetBottom(distance: CGFloat) {
         self.completeButton.alpha = 0
         UIView.animate(withDuration: 0.2) {
-//            self.projectView.contentSize.height += distance
+            self.projectView.contentSize.height += distance
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
@@ -236,7 +213,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     @objc func keyboardWillHide() {
         self.projectView.transform = .identity
         completeButton.alpha = 1
-//        projectView.contentSize.height = standardContentHeight
+        projectView.contentSize.height = standardContentHeight
     }
     
     @objc func completeModify() {
@@ -255,6 +232,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     @objc func addProject() {
         if projectArr.count < 3 {
+            standardContentHeight += 433
             let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
             projectArr.append(project)
             projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .right)
@@ -319,21 +297,16 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         
         self.projectArr.remove(at: index)
         self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-        self.projectAddButton.backgroundColor =
-            self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
+        self.projectAddButton.backgroundColor = self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
+        standardContentHeight -= 433
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if type(of: scrollView) == ProjectTableView.self {
-            
             currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
             currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
-            print(currentScrollViewMinY)
-            print(currentScrollViewMaxY)
-            minLine.frame = CGRect(x: 0, y: Int(currentScrollViewMinY), width: Int(UIScreen.main.bounds.width), height: 1)
-            maxLine.frame = CGRect(x: 0, y: Int(currentScrollViewMaxY), width: Int(UIScreen.main.bounds.width), height: 1)
             if !isEditableViewTapping {
-//                view.endEditing(true)
+                view.endEditing(true)
             }
         }
     }
