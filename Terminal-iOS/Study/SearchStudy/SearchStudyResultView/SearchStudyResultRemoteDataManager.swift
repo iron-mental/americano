@@ -17,7 +17,7 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
             .shared
             .session
             .request(TerminalRouter.studySearch(keyword: keyWord))
-            .validate(statusCode: 200...299)
+            .validate(statusCode: 200...422)
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

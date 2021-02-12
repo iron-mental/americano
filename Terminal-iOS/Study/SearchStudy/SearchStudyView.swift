@@ -154,6 +154,9 @@ extension SearchStudyView: SearchStudyViewProtocol {
     func showHotkeyword(keyword: [HotKeyword]) {
         self.keyword = keyword
         collectionView.reloadData()
+        if searchController.isActive {
+            hideLoading()
+        }
     }
     
     func showError(message: String) {
@@ -178,8 +181,10 @@ extension SearchStudyView: UISearchBarDelegate {
 extension SearchStudyView: UISearchControllerDelegate {
     func didPresentSearchController(_ searchController: UISearchController) {
         DispatchQueue.main.async {
-            searchController.searchBar.becomeFirstResponder()
-            self.hideLoading()
+            self.searchController.searchBar.becomeFirstResponder()
+            if !self.keyword.isEmpty {
+                self.hideLoading()
+            }
         }
     }
 }

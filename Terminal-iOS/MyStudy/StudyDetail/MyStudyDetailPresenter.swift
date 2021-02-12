@@ -21,8 +21,8 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
         wireFrame?.goToEditStudy(study: study, parentView: parentView)
     }
     
-    func addNoticeFinished(notice: Int, studyID: Int, parentView: UIViewController) {
-        wireFrame?.goToNoticeDetail(notice: notice, studyID: studyID, parentView: parentView)
+    func addNoticeFinished(notice: Int, studyID: Int, title: String, parentView: UIViewController) {
+        wireFrame?.goToNoticeDetail(notice: notice, studyID: studyID, title: title, parentView: parentView)
     }
     
     func showApplyUserList(studyID: Int) {
@@ -39,7 +39,7 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     
     func leaveStudyResult(result: Bool, message: String) {
         if result {
-            view?.showLeaveStudyComplete()
+            view?.showLeaveStudyComplete(message: message)
         } else {
             view?.showLeaveStudyFailed(message: message)
         }
@@ -47,7 +47,7 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     
     func deleteStudyResult(result: Bool, message: String) {
         if result {
-            view?.showDeleteStudyComplete()
+            view?.showDeleteStudyComplete(message: message)
         } else {
             view?.showDeleteStudyFailed(message: message)
         }

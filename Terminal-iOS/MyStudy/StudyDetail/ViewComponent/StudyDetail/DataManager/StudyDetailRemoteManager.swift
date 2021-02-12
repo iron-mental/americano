@@ -13,6 +13,7 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     weak var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
     
      func getStudyDetail(studyID: String, completionHandler: @escaping (StudyDetail) -> Void) {
+        
         TerminalNetworkManager
             .shared
             .session
@@ -21,11 +22,11 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
+                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<StudyDetail>.self, from: data!)
-                        
                         completionHandler(result.data!)
                     } catch {
                         print(error.localizedDescription)

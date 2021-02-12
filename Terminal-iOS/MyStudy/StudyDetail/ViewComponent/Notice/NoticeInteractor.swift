@@ -20,6 +20,8 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
     func getNoticeList(studyID: Int) {
         totalNoticeList.removeAll()
         nextNoticeID.removeAll()
+        firstNoticeList.removeAll()
+        secondNoticeList.removeAll()
         
         remoteDataManager?.getNoticeList(studyID: studyID, completion: { result, noticeList, message in
             switch result {

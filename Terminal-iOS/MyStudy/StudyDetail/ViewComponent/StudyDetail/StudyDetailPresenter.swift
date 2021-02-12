@@ -38,6 +38,7 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
 
 extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
     func didRetrieveStudyDetail(_ studyDetail: StudyDetail) {
+        view?.hideLoading()
         view?.showStudyDetail(with: studyDetail)
     }
     

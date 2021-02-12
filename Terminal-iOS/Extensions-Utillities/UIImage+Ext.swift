@@ -9,18 +9,16 @@
 import UIKit
 
 extension UIImage {
-    class func imageFrom(systemItem: UIBarButtonItem.SystemItem) -> UIImage? {
+    class func imageFromUIBarButtonItem(systemItem: UIBarButtonItem.SystemItem) -> UIImage? {
         let sysBarButtonItem = UIBarButtonItem(barButtonSystemItem: systemItem, target: nil, action: nil)
-        
-        //MARK:- Adding barButton into tool bar and rendering it.
         let toolBar = UIToolbar()
         toolBar.setItems([sysBarButtonItem], animated: false)
         toolBar.snapshotView(afterScreenUpdates: true)
         
-        if  let buttonView = sysBarButtonItem.value(forKey: "view") as? UIView{
-            for subView in buttonView.subviews {
-                if subView is UIButton {
-                    let button = subView as! UIButton
+        if let buttonView = sysBarButtonItem.value(forKey: "view") as? UIView {
+            for subView in buttonView.subviews where subView is UIButton {
+                if let button = subView as? UIButton {
+                    
                     let image = button.imageView!.image!
                     return image
                 }

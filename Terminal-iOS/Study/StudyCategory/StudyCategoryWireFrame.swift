@@ -42,7 +42,7 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
     
     func goToSelectCategory(from view: StudyCategoryViewProtocol, category: [Category]) {
         let selectCategoryView = SelectCategoryWireFrame.createSelectCategoryViewModul(category: category)
-        
+        selectCategoryView.hidesBottomBarWhenPushed = true
         if let sourceView = view as? UIViewController {
            sourceView.navigationController?.pushViewController(selectCategoryView, animated: false)
         }

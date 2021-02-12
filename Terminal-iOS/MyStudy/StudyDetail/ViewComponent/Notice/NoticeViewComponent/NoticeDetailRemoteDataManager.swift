@@ -49,8 +49,11 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
             .validate()
             .responseJSON { response in
                 switch response.result {
-                case .success:
-                    completion(true, "테스트")
+                case .success(let value):
+                    let json = "\(JSON(value))".data(using: .utf8)
+                    let result: BaseResponse<Notice> = try! JSONDecoder().decode(BaseResponse<Notice>.self, from: json!)
+                    guard let message = result.message else { return }
+                    completion(true, message)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
