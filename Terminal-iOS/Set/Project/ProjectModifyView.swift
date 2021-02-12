@@ -179,7 +179,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 let distance = (targetMaxY) - viewMaxY
                 self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
             } else {
-                isEditableViewTapping = false
+//                isEditableViewTapping = false
             }
         }
     }
@@ -190,7 +190,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
-            self.isEditableViewTapping = false
+//            self.isEditableViewTapping = false
         }
     }
     func viewSetBottom(distance: CGFloat) {
@@ -201,7 +201,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
-            self.isEditableViewTapping = false
+//            self.isEditableViewTapping = false
         }
     }
     
@@ -210,6 +210,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
+        isEditableViewTapping = false
     }
     
     @objc func keyboardWillHide() {
@@ -233,23 +234,28 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     @objc func addProject() {
+        isEditableViewTapping = true
         if projectArr.count < 3 {
-            standardContentHeight += 433
-            let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
-            projectArr.append(project)
-            projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .fade)
-            
             if projectArr.count == 3 {
                 projectAddButton.backgroundColor = .darkGray
             }
+            standardContentHeight += 433
+            let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
+            projectArr.append(project)
+            projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .right)
+            projectView.reloadData()
+//            view.layoutIfNeeded()
             
-            if !projectArr.isEmpty {
-                let index = IndexPath(row: projectArr.count - 1, section: 0)
-                self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
+//            if !projectArr.isEmpty {
+//                let index = IndexPath(row: projectArr.count - 1, section: 0)
+//                self.projectView.scrollToRow(at: index, at: .top, animated: true)
+//            }
+//            self.view.layoutSubviews()
+//            self.view.layoutIfNeeded()
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+                let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell
+                    cell?.title.becomeFirstResponder()
             }
-            let cell = projectView.cellForRow(at: [0, 0]) as? ProjectCell
-            cell?.title.becomeFirstResponder()
-            
         } else {
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
@@ -320,7 +326,6 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
 
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
         isEditableViewTapping = true
         tappedView = textField
         self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
