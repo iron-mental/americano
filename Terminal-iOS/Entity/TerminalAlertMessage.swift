@@ -46,6 +46,7 @@ enum AlertType {
         case .ProjectLimitView:
             let projectLimitView = AlertMessageView(message: "작성 가능한 프로젝트는 최대 3개입니다.")
             projectLimitView.alertMessageLabel.font = UIFont.monospacedSystemFont(ofSize: projectLimitView.alertMessageLabel.font.pointSize - 3, weight: UIFont.Weight.regular)
+            projectLimitView.onlyCompleteButton()
             return projectLimitView
         }
     }
@@ -103,7 +104,8 @@ class TerminalAlertMessage: NSObject {
         return completeButton
     }
     
-    @objc class func dismiss() {
+    @objc class func dismiss(_ sender: UIButton? = nil) {
+        
         TerminalAlertMessage.alert.dismiss(animated: true, completion: nil)
         if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
             if let castContentViewController = contentViewController as? UIViewController {

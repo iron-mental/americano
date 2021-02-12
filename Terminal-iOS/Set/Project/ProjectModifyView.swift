@@ -170,14 +170,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
             }
         } else {
-//            let alert = UIAlertController(title: "알림",
-//                                          message: "프로젝트는 최대 3개입니다.",
-//                                          preferredStyle: UIAlertController.Style.alert)
-//            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil )
-            
-//            alert.addAction(okAction)
-//            present(alert, animated: true)
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
+//            TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(TerminalAlertMessage.dismiss), for: .touchUpInside)
         }
     }
 }
