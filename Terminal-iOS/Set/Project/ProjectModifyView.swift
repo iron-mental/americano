@@ -35,7 +35,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        standardContentHeight = projectView.contentSize.height
+//        standardContentHeight = projectView.contentSize.height
     }
     override func viewDidDisappear(_ animated: Bool) {
         self.keyboardRemoveObserver(with: self)
@@ -46,6 +46,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.title = "프로젝트 수정"
+            $0.navigationItem.largeTitleDisplayMode = .never
         }
         
         self.projectView.do {
@@ -113,6 +114,13 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
+        [minLine, maxLine, targetMinLine, targetMaxLine].forEach { view.addSubview($0) }
+        [minLine, maxLine].forEach {
+            $0.backgroundColor = .red
+        }
+        [targetMinLine, targetMaxLine].forEach {
+            $0.backgroundColor = .blue
+        }
     }
     
     func getCellData() -> SNSValidate {
@@ -149,6 +157,13 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         return state
     }
     
+    var minLine = UIView()
+    
+    var maxLine = UIView()
+    
+    var targetMinLine = UIView()
+    var targetMaxLine = UIView()
+    
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
         
         if let parentView = textView.superview {
@@ -158,31 +173,35 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             if type(of: parentView) == ProjectSNSModifyView.self {
                 //sns textField 클릭 시
                 if let superView = parentView.superview?.superview?.superview {
-                    targetMinY = textView.frame.minY + parentView.frame.minY + superView.frame.minY
-                    targetMaxY = textView.frame.maxY + parentView.frame.minY + superView.frame.minY
+                    targetMinY = textView.frame.minY + parentView.frame.minY + superView.frame.origin.y
+                    targetMaxY = textView.frame.maxY + parentView.frame.minY + superView.frame.origin.y
                 }
             } else {
                 //제목 or 내용 textView 클릭 시
-                if let superView = parentView.superview?.superview {
-                    targetMinY = textView.frame.minY + superView.frame.minY
-                    targetMaxY = textView.frame.maxY + superView.frame.minY
+                if let superView = parentView.superview {
+                    targetMinY = textView.frame.minY + superView.frame.origin.y + 156
+                    targetMaxY = textView.frame.maxY + superView.frame.origin.y + 156
                 }
             }
+            
+
+            targetMinLine.frame = CGRect(x: 0, y: Int(targetMinY), width: Int(UIScreen.main.bounds.width), height: 1)
+            targetMaxLine.frame = CGRect(x: 0, y: Int(targetMaxY), width: Int(UIScreen.main.bounds.width), height: 1)
             
             print("보이는 범위 : \(viewMinY) ~ \(viewMaxY)")
             print("선택된 뷰의 범위: \(targetMinY) ~ \(targetMaxY)")
             
-            if viewMinY >= (targetMinY) {
-                
-                let distance = (targetMinY) - viewMinY
-                self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
-            } else if viewMaxY <= (targetMaxY) {
-                
-                let distance = (targetMaxY) - viewMaxY
-                self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
-            } else {
-                isEditableViewTapping = false
-            }
+//            if viewMinY >= (targetMinY) {
+//
+//                let distance = (targetMinY) - viewMinY
+//                self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
+//            } else if viewMaxY <= (targetMaxY) {
+//
+//                let distance = (targetMaxY) - viewMaxY
+//                self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
+//            } else {
+//                isEditableViewTapping = false
+//            }
         }
     }
     
@@ -198,7 +217,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     func viewSetBottom(distance: CGFloat) {
         self.completeButton.alpha = 0
         UIView.animate(withDuration: 0.2) {
-            self.projectView.contentSize.height += distance
+//            self.projectView.contentSize.height += distance
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
@@ -216,7 +235,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     @objc func keyboardWillHide() {
         self.projectView.transform = .identity
         completeButton.alpha = 1
-        projectView.contentSize.height = standardContentHeight
+//        projectView.contentSize.height = standardContentHeight
     }
     
     @objc func completeModify() {
@@ -305,9 +324,13 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if type(of: scrollView) == ProjectTableView.self {
-            standardContentHeight = projectView.contentSize.height
-            currentScrollViewMinY = projectView.contentOffset.y
-            currentScrollViewMaxY = (projectView.contentOffset.y + projectView.frame.height) - keyboardHeight
+            
+            currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
+            currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
+            print(currentScrollViewMinY)
+            print(currentScrollViewMaxY)
+            minLine.frame = CGRect(x: 0, y: Int(currentScrollViewMinY), width: Int(UIScreen.main.bounds.width), height: 1)
+            maxLine.frame = CGRect(x: 0, y: Int(currentScrollViewMaxY), width: Int(UIScreen.main.bounds.width), height: 1)
             if !isEditableViewTapping {
                 view.endEditing(true)
             }
