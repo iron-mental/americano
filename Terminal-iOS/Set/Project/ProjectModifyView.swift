@@ -12,7 +12,13 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     var presenter: ProjectModifyPresenterProtocol?
     var projectArr: [Project] = []
     var index: IndexPath?
+    var isEditableViewTapping = false
+    var currentScrollViewMinY: CGFloat = 0
+    var currentScrollViewMaxY: CGFloat = 0
+    var keyboardHeight: CGFloat = 0.0
     
+    var tappedView: UIView?
+    var accessoryCompleteButton = UIButton()
     lazy var projectView = ProjectTableView()
     lazy var projectAddButton = UIButton()
     lazy var completeButton = UIButton()
@@ -22,7 +28,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         attribute()
         layout()
         keyboardAddObserver(with: self,
-                            showSelector: nil,
+                            showSelector: #selector(keyboardWillShow),
                             hideSelector: #selector(keyboardWillHide))
     }
     
@@ -30,8 +36,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         self.keyboardRemoveObserver(with: self)
     }
     
-    
-//    이해끝
     private func attribute() {
         self.do {
             $0.hideKeyboardWhenTappedAround()
@@ -70,9 +74,14 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
+        accessoryCompleteButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+        }
     }
     
-//    이해끝
     private func layout() {
         self.view.addSubview(projectView)
         self.view.addSubview(projectAddButton)
@@ -102,7 +111,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     func getCellData() -> SNSValidate {
-        // 공백여부 체크 변수
         var state: SNSValidate = SNSValidate(state: true, kind: "")
         
         for index in 0..<projectArr.count {
@@ -136,13 +144,59 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         return state
     }
     
+    func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
+        
+        var parentView = UIView()
+        if type(of: textView) == SNSInputUITextField.self {
+            parentView = (textView.superview?.superview)!
+        } else {
+            parentView = textView.tag == 1 ? textView : textView.superview!
+        }
+        
+        if viewMinY >= (parentView.frame.minY) {
+            let distance = (parentView.frame.minY) - viewMinY
+            self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
+        } else if viewMaxY <= (parentView.frame.maxY) {
+            let distance = (parentView.frame.maxY) - viewMaxY
+            self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
+        } else {
+            isEditableViewTapping = false
+        }
+    }
+    
+    func viewSetTop(distance: CGFloat) {
+        self.completeButton.alpha = 0
+        UIView.animate(withDuration: 0.2) {
+            self.projectView.contentOffset.y += distance
+        } completion: { _ in
+            self.tappedView?.becomeFirstResponder()
+            self.isEditableViewTapping = false
+        }
+    }
+    func viewSetBottom(distance: CGFloat) {
+        self.completeButton.alpha = 0
+        UIView.animate(withDuration: 0.2) {
+            self.projectView.contentSize.height += distance
+            self.projectView.contentOffset.y += distance
+        } completion: { _ in
+            self.tappedView?.becomeFirstResponder()
+            self.isEditableViewTapping = false
+        }
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        keyboardHeight = keyboardRectangle.height
+    }
+    
     @objc func keyboardWillHide() {
         self.projectView.transform = .identity
     }
     
     @objc func completeModify() {
         let snsValidate = getCellData()
-        // 공백체크
         if snsValidate.state {
             LoadingRainbowCat.show()
             presenter?.completeModify(project: projectArr)
@@ -171,7 +225,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             }
         } else {
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
-//            TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(TerminalAlertMessage.dismiss), for: .touchUpInside)
         }
     }
 }
@@ -185,7 +238,6 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
                 parent?.presenter?.viewDidLoad()
             }
         } else {
-            // 실패시 에러처리 부분
             LoadingRainbowCat.hide()
             self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 0.5)
         }
@@ -203,6 +255,11 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         cell.setDelegate(with: self)
         cell.setTag(tag: indexPath.row)
+        cell.title.inputAccessoryView = accessoryCompleteButton
+        cell.contents.inputAccessoryView = accessoryCompleteButton
+        cell.sns.firstTextFeield.inputAccessoryView = accessoryCompleteButton
+        cell.sns.secondTextField.inputAccessoryView = accessoryCompleteButton
+        cell.sns.thirdTextField.inputAccessoryView = accessoryCompleteButton
         
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
@@ -223,17 +280,26 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        view.endEditing(true)
+        print("스크롤중")
+        
+        if type(of: scrollView) == ProjectTableView.self {
+            currentScrollViewMinY = scrollView.contentOffset.y
+            currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
+            print(currentScrollViewMinY)
+            print(currentScrollViewMaxY)
+            if !isEditableViewTapping {
+                print("내려간다")
+                view.endEditing(true)
+            }
+        }
     }
 }
 
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        let index = IndexPath(row: textField.tag, section: 0)
-        if textField.tag != 0 {
-            self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
-            self.projectView.scrollToRow(at: index, at: .top, animated: true)
-        }
+        isEditableViewTapping = true
+        tappedView = textField
+        self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -241,10 +307,8 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        let index = IndexPath(row: textView.tag, section: 0)
-        if textView.tag != 0 {
-            self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
-            self.projectView.scrollToRow(at: index, at: .top, animated: true)
-        }
+        isEditableViewTapping = true
+        tappedView = textView
+        self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
