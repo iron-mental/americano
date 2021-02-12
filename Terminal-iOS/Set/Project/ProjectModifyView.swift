@@ -30,6 +30,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         self.keyboardRemoveObserver(with: self)
     }
     
+    
+//    이해끝
     private func attribute() {
         self.do {
             $0.hideKeyboardWhenTappedAround()
@@ -55,6 +57,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 $0.backgroundColor = UIColor.appColor(.mainColor)
             }
             $0.setTitle(" + 프로젝트 추가", for: .normal)
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(addProject), for: .touchUpInside)
         }
@@ -63,11 +66,13 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.backgroundColor = .appColor(.mainColor)
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
+            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
     
+//    이해끝
     private func layout() {
         self.view.addSubview(projectView)
         self.view.addSubview(projectAddButton)
@@ -111,6 +116,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             let appStore = cell.sns.secondTextField.text ?? ""
             let playStore = cell.sns.thirdTextField.text ?? ""
             
+            //enum 으로 관리하면 더 명확할 듯
             if github.whitespaceCheck() || appStore.whitespaceCheck() || playStore.whitespaceCheck() {
                 state = SNSValidate(state: false, kind: "whitespace")
             } else if !appStore.appstoreCheck() {
@@ -127,7 +133,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                         snsPlaystore: playStore,
                                         createAt: "")
         }
-        
         return state
     }
     
@@ -153,7 +158,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     @objc func addProject() {
         if projectArr.count < 3 {
             let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
-            
             projectArr.append(project)
             projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .right)
             
@@ -166,13 +170,14 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
             }
         } else {
-            let alert = UIAlertController(title: "알림",
-                                          message: "프로젝트는 최대 3개입니다.",
-                                          preferredStyle: UIAlertController.Style.alert)
-            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil )
+//            let alert = UIAlertController(title: "알림",
+//                                          message: "프로젝트는 최대 3개입니다.",
+//                                          preferredStyle: UIAlertController.Style.alert)
+//            let okAction = UIAlertAction(title: "확인", style: .default, handler: nil )
             
-            alert.addAction(okAction)
-            present(alert, animated: true)
+//            alert.addAction(okAction)
+//            present(alert, animated: true)
+            TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
     }
 }
@@ -215,7 +220,6 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         guard let indexPath = self.projectView.indexPath(for: cell) else {
             return
         }
-        
         let index = indexPath.row
         
         self.projectArr.remove(at: index)

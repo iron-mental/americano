@@ -21,6 +21,8 @@ enum AlertType {
     case LeaveStudyView
     //스터디 삭제
     case DeleteStudyView
+    //프로젝트 3개 이하 안내
+    case ProjectLimitView
     
     var view: UIView {
         switch self {
@@ -41,6 +43,10 @@ enum AlertType {
             let deleteStudyView = AlertMessageView(message: "스터디를 삭제하시겠습니까?")
             deleteStudyView.alertMessageLabel.textColor = .systemRed
             return deleteStudyView
+        case .ProjectLimitView:
+            let projectLimitView = AlertMessageView(message: "작성 가능한 프로젝트는 최대 3개입니다.")
+            projectLimitView.alertMessageLabel.font = UIFont.monospacedSystemFont(ofSize: projectLimitView.alertMessageLabel.font.pointSize - 3, weight: UIFont.Weight.regular)
+            return projectLimitView
         }
     }
 }
