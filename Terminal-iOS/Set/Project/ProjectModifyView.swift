@@ -23,7 +23,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     lazy var projectView = ProjectTableView()
     lazy var projectAddButton = UIButton()
     lazy var completeButton = UIButton()
-    
+    var newestIndexPath: IndexPath = [0, 0]
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -36,7 +36,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         standardContentHeight = projectView.contentSize.height
-        //        keyboardHeight = 336
         currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
         view.becomeFirstResponder()
     }
@@ -235,34 +234,30 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     @objc func addProject() {
         isEditableViewTapping = true
+        let indexPath = IndexPath(row: projectArr.count, section: 0)
+        newestIndexPath = indexPath
         if projectArr.count < 3 {
-            if projectArr.isEmpty {
-                projectView.contentOffset.y = 0
-                projectView.contentSize.height = 0
-            }
-            standardContentHeight += 433
             let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
             projectArr.append(project)
             if projectArr.count == 3 {
                 projectAddButton.backgroundColor = .darkGray
             }
             projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .fade)
-//            projectView.reloadData()
-            view.layoutIfNeeded()
             
-                        if !projectArr.isEmpty {
-                            let index = IndexPath(row: projectArr.count - 1, section: 0)
-                            self.projectView.scrollToRow(at: index, at: .top, animated: true)
+            if !projectArr.isEmpty {
+                let index = IndexPath(row: projectArr.count - 1, section: 0)
+                self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
+            }
+                        if let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell {
+                            cell.title.becomeFirstResponder()
+                            standardContentHeight += cell.frame.height
+                        } else {
+                            print(projectView.cellForRow(at: [0, 2]))
                         }
-            //            self.view.layoutSubviews()
-            //            self.view.layoutIfNeeded()
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-//                let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell
-//                cell?.title.becomeFirstResponder()
-//            }
         } else {
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
+        
     }
 }
 
@@ -288,7 +283,6 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
-        
         cell.delegate = self
         cell.setDelegate(with: self)
         cell.setTag(tag: indexPath.row)
@@ -301,6 +295,10 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
         
+        if indexPath.elementsEqual(newestIndexPath) {
+            newestIndexPath = IndexPath()
+            cell.title.becomeFirstResponder()
+        }
         return cell
     }
     
