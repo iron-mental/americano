@@ -36,7 +36,9 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         standardContentHeight = projectView.contentSize.height
-        keyboardHeight = 336
+//        keyboardHeight = 336
+        currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
+        view.becomeFirstResponder()
     }
     override func viewDidDisappear(_ animated: Bool) {
         self.keyboardRemoveObserver(with: self)
@@ -170,7 +172,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                     targetMaxY = textView.frame.maxY + cellView.frame.origin.y + superView.frame.origin.y
                 }
             }
-            
             if viewMinY >= (targetMinY) {
                 let distance = (targetMinY) - viewMinY
                 self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
@@ -193,6 +194,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         }
     }
     func viewSetBottom(distance: CGFloat) {
+        
         self.completeButton.alpha = 0
         UIView.animate(withDuration: 0.2) {
             self.projectView.contentSize.height += distance
@@ -235,7 +237,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             standardContentHeight += 433
             let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
             projectArr.append(project)
-            projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .right)
+            projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .fade)
             
             if projectArr.count == 3 {
                 projectAddButton.backgroundColor = .darkGray
@@ -245,6 +247,9 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 let index = IndexPath(row: projectArr.count - 1, section: 0)
                 self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
             }
+            let cell = projectView.cellForRow(at: [0, 0]) as? ProjectCell
+            cell?.title.becomeFirstResponder()
+            
         } else {
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
@@ -302,6 +307,7 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
         if type(of: scrollView) == ProjectTableView.self {
             currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
             currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
@@ -314,6 +320,7 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
 
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
         isEditableViewTapping = true
         tappedView = textField
         self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
