@@ -171,15 +171,17 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             
             if type(of: parentView) == ProjectSNSModifyView.self {
                 //sns textField 클릭 시
-                if let superView = parentView.superview?.superview?.superview {
-                    targetMinY = textView.frame.minY + parentView.frame.minY + superView.frame.origin.y
-                    targetMaxY = textView.frame.maxY + parentView.frame.minY + superView.frame.origin.y
+                if let cellView = parentView.superview?.superview,
+                   let superView = parentView.superview?.superview?.superview {
+                    targetMinY = textView.frame.minY + parentView.frame.minY + cellView.frame.origin.y + superView.frame.origin.y
+                    targetMaxY = textView.frame.maxY + parentView.frame.minY + cellView.frame.origin.y + superView.frame.origin.y
                 }
             } else {
                 //제목 or 내용 textView 클릭 시
-                if let superView = parentView.superview?.superview {
-                    targetMinY = textView.frame.minY + superView.frame.origin.y
-                    targetMaxY = textView.frame.maxY + superView.frame.origin.y
+                if let cellView = parentView.superview,
+                   let superView = parentView.superview?.superview {
+                    targetMinY = textView.frame.minY + cellView.frame.origin.y + superView.frame.origin.y
+                    targetMaxY = textView.frame.maxY + cellView.frame.origin.y + superView.frame.origin.y
                 }
             }
             
