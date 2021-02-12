@@ -13,7 +13,9 @@ import SwiftyJSON
 
 class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
     
-    func getAddressInfoOnce(lat: Double, lng: Double, completion: @escaping (Bool, _ sido: String? , _ sigungu: String?) -> Void) {
+    func getAddressInfoOnce(lat: Double,
+                            lng: Double,
+                            completion: @escaping (Bool, _ sido: String?, _ sigungu: String?) -> Void) {
         let headers: HTTPHeaders = [ "Authorization": "KakaoAK 6cd40b04c090b1a033634e5051aab78c" ]
         let parameters: Parameters = [
             "x": lng,

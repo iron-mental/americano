@@ -43,7 +43,7 @@ struct Location: Codable {
 
 struct Participate: Codable {
     let id, userID: Int
-    let nickname : String
+    let nickname: String
     let image: String?
     let leader: Bool
     enum CodingKeys: String, CodingKey {
@@ -52,6 +52,3 @@ struct Participate: Codable {
         case nickname, image, leader
     }
 }
-
-
-

@@ -13,7 +13,7 @@ class MemberCollectionView: UICollectionView {
     let layoutValue: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     
     init(frame: CGRect) {
-        super.init(frame: frame,collectionViewLayout: layoutValue)
+        super.init(frame: frame, collectionViewLayout: layoutValue)
         attribute()
         layout()
     }

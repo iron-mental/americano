@@ -13,9 +13,15 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
     var wireFrame: AddNoticeWireFrameProtocol?
     var interactor: AddNoticeInteractorProtocol?
     
-    func completeButtonDidTap(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?) {
+    func completeButtonDidTap(studyID: Int,
+                              notice: NoticePost,
+                              state: AddNoticeState,
+                              noticeID: Int?) {
         
-        interactor?.postNotice(studyID: studyID, notice: notice, state: state, noticeID: noticeID ?? nil)
+        interactor?.postNotice(studyID: studyID,
+                               notice: notice,
+                               state: state,
+                               noticeID: noticeID ?? nil)
     }
     
     func addNoticeResult(result: Bool, notice: Int, studyID: Int) {
@@ -23,7 +29,9 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
             switch result {
             case true:
                 view?.showNewNotice(noticeID: notice)
-                wireFrame?.goToNoticeDetailView(noticeID: notice, studyID: studyID, parentView: UIViewController())
+                wireFrame?.goToNoticeDetailView(noticeID: notice,
+                                                studyID: studyID,
+                                                parentView: UIViewController())
             case false:
                 break
             }

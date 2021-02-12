@@ -34,6 +34,6 @@ extension CoreUserInfo {
 
 }
 
-extension CoreUserInfo : Identifiable {
+extension CoreUserInfo: Identifiable {
 
 }

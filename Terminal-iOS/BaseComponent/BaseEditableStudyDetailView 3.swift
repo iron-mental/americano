@@ -325,7 +325,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
 }
-extension BaseEditableStudyDetailView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             mainImageView.image = image

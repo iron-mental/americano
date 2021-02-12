@@ -51,7 +51,7 @@ class SearchLocationTableViewCell: UITableViewCell {
         
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor,constant: Terminal.convertWidth(value: 15)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 200)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 17).isActive = true

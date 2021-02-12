@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol NoticeViewProtocol {
+protocol NoticeViewProtocol: class {
     var studyID: Int? { get set }
     var presenter: NoticePresenterProtocol? { get set }
 //    var noticeList: [Notice] { get set }
@@ -20,7 +20,7 @@ protocol NoticeViewProtocol {
     func showLoading()
 }
 
-protocol NoticeInteractorInputProtocol {
+protocol NoticeInteractorInputProtocol: class {
     var presenter: NoticeInteractorOutputProtocol? { get set }
     var remoteDataManager: NoticeRemoteDataManagerProtocol? { get set }
 
@@ -29,14 +29,17 @@ protocol NoticeInteractorInputProtocol {
     func getNoticeListPagination(studyID: Int)
 }
 
-protocol NoticeInteractorOutputProtocol {
+protocol NoticeInteractorOutputProtocol: class {
     
     //INTERACTOR -> PRESENTER
-    func showResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?)
+    func showResult(result: Bool,
+                    firstNoticeList: [Notice]?,
+                    secondNoticeList: [Notice]?,
+                    message: String?)
     func showError(message: String)
 }
 
-protocol NoticePresenterProtocol {
+protocol NoticePresenterProtocol: class {
     var view: NoticeViewProtocol? { get set }
     var wireFrame: NoticeWireFrameProtocol? { get set }
     var interactor: NoticeInteractorInputProtocol? { get set }
@@ -47,14 +50,21 @@ protocol NoticePresenterProtocol {
     func didScrollEnded(studyID: Int)
 }
 
-protocol NoticeRemoteDataManagerProtocol {
-    func getNoticeList(studyID: Int, completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void)
-    func getNoticeListPagination(studyID: Int, noticeListIDs: [Int], completion: @escaping ( _ result: Bool, _ data: [Notice]?, _ message: String?) -> Void)
+protocol NoticeRemoteDataManagerProtocol: class {
+    func getNoticeList(studyID: Int,
+                       completion: @escaping (_ result: Bool,
+                                              _ data: [Notice]?,
+                                              _ message: String?) -> Void)
+    func getNoticeListPagination(studyID: Int,
+                                 noticeListIDs: [Int],
+                                 completion: @escaping (_ result: Bool,
+                                                        _ data: [Notice]?,
+                                                        _ message: String?) -> Void)
 }
 
-protocol NoticeWireFrameProtocol {
-    var presenter: NoticePresenterProtocol? { get set }
-    
+protocol NoticeWireFrameProtocol: class {    
     static func createNoticeModule(studyID: Int) -> UIViewController
-    func goToNoticeDetail(notice: Notice, parentView: UIViewController, state: StudyDetailViewState)
+    func goToNoticeDetail(notice: Notice,
+                          parentView: UIViewController,
+                          state: StudyDetailViewState)
 }

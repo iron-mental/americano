@@ -13,7 +13,10 @@ import SwiftyJSON
 
 class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
     
-    func postNotice(studyID: Int, notice: NoticePost, completion: @escaping (Bool, Int) -> Void) {
+    func postNotice(studyID: Int,
+                    notice: NoticePost,
+                    completion: @escaping (Bool, Int) -> Void) {
+        
         let params: [String: Any] = [
             "title": notice.title,
             "contents": notice.contents,
@@ -28,7 +31,6 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
@@ -37,7 +39,7 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
                             completion(result.result, data.noticeID)
                         }
                     } catch {
-                        
+                        print(error.localizedDescription)
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -46,7 +48,11 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
     }
     
     
-    func putNotice(studyID: Int, notice: NoticePost, noticeID: Int, completion: @escaping (Bool, Int) -> Void) {
+    func putNotice(studyID: Int,
+                   notice: NoticePost,
+                   noticeID: Int,
+                   completion: @escaping (Bool, Int) -> Void) {
+        
         let params: [String: Any] = [
             "title": notice.title,
             "contents": notice.contents,

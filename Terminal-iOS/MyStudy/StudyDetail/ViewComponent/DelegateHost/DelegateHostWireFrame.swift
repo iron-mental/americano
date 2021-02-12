@@ -11,9 +11,9 @@ import UIKit
 class DelegateHostWireFrame: DelegateHostWireFrameProtocol {
     static func createDelegateHostmodule(studyID: Int, userList: [Participate]) -> UIViewController {
         let view = DelegateHostView()
-        var presenter: DelegateHostPresenterProtocol & DelegateHostInteractorOutputProtocol = DelegateHostPresenter()
-        var interactor: DelegateHostInteractorInputProtocol & DelegateHostRemoteDataManagerOutputProtocol = DelegateHostInteractor()
-        var remoteDataManager: DelegateHostRemoteDataManagerInputProtocol = DelegateHostRemoteDataManager()
+        let presenter: DelegateHostPresenterProtocol & DelegateHostInteractorOutputProtocol = DelegateHostPresenter()
+        let interactor: DelegateHostInteractorInputProtocol & DelegateHostRemoteDataManagerOutputProtocol = DelegateHostInteractor()
+        let remoteDataManager: DelegateHostRemoteDataManagerInputProtocol = DelegateHostRemoteDataManager()
         let wireFrame = DelegateHostWireFrame()
         
         view.presenter = presenter

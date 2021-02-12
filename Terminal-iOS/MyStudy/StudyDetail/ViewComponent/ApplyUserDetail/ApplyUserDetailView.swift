@@ -38,7 +38,7 @@ class ApplyUserDetailView: BaseProfileView {
             $0.addTarget(self, action: #selector(acceptButtonDidTap), for: .touchUpInside)
         }
         
-        [ profile.modify, career.modify, project.modify , sns.modify, email.modify, location.modify]
+        [ profile.modify, career.modify, project.modify, sns.modify, email.modify, location.modify]
             .forEach { $0.isHidden = true}
     }
     

@@ -48,20 +48,14 @@ protocol MyStudyMainPresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func MyStudyListResult(result: Bool, itemList: [MyStudy]?)
     
-    
 }
 
 protocol MyStudyMainRemoteDataManagerProtocol: class {
     var interactor: MyStudyMainInteractorProtocol? { get set }
     //INTERACTOR -> RemoteDataManager
-    func getMyStudyList(completion: @escaping (_: Bool, _: [MyStudy]?) -> ())
-    //func getStudyDetail
+    func getMyStudyList(completion: @escaping (_: Bool, _: [MyStudy]?) -> Void)
 }
 
 protocol MyStudyMainLocalDataManagerProtocol: class {
 
 }
-
-
-
-

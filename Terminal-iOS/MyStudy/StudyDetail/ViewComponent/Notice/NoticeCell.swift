@@ -42,6 +42,7 @@ class NoticeCell: UITableViewCell {
     
     func attribute() {
         self.do {
+            $0.selectionStyle = .none
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         noticeBackground.do {

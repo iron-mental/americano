@@ -34,7 +34,10 @@ class MyStudyDetailView: UIViewController {
                                              options: nil)
     lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
-    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(moreButtonDidTap))
+    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"),
+                                          style: .done,
+                                          target: self,
+                                          action: #selector(moreButtonDidTap))
     let appearance = UINavigationBarAppearance()
     
     override func viewDidLoad() {
@@ -59,19 +62,27 @@ class MyStudyDetailView: UIViewController {
                 $0.title = studyTitle
             }
         }
+        
         if let firstVC = VCArr.first {
             childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
         }
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.navigationItem.rightBarButtonItems = [moreButton]
         }
+        
         self.tapSege.do {
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 14),
-                                       .foregroundColor: UIColor.gray], for: .normal)
+                                       .foregroundColor: UIColor.gray],
+                                      for: .normal)
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),
-                                       .foregroundColor: UIColor.white], for: .selected)
+                                       .foregroundColor: UIColor.white],
+                                      for: .selected)
             $0.selectedSegmentIndex = 0
             $0.layer.cornerRadius = 0
             $0.backgroundColor = .clear
@@ -92,7 +103,8 @@ class MyStudyDetailView: UIViewController {
     }
     
     func layout() {
-        [tapSege, selectedUnderLine, childPageView.view].forEach { view.addSubview($0) }
+        [tapSege, selectedUnderLine, childPageView.view]
+            .forEach { view.addSubview($0) }
         self.addChild(childPageView)
         self.childPageView.didMove(toParent: self)
         
@@ -103,6 +115,7 @@ class MyStudyDetailView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 38)).isActive = true
         }
+        
         self.selectedUnderLine.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: -1).isActive = true
@@ -110,6 +123,7 @@ class MyStudyDetailView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
             $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
         }
+        
         self.childPageView.view.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: 10).isActive = true
@@ -123,16 +137,23 @@ class MyStudyDetailView: UIViewController {
     func goDetailPage() {
         tapSege.selectedSegmentIndex = 1
         UIView.animate(withDuration: 0.2) {
-            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
         }
-        self.childPageView.setViewControllers([VCArr[1]], direction: .forward, animated: false, completion: nil)
+        self.childPageView.setViewControllers([VCArr[1]],
+                                              direction: .forward,
+                                              animated: false,
+                                              completion: nil)
         self.getPushEvent = false
     }
     
     /// 푸쉬 이벤트가 공지 관련일때 공지 탭으로 초기 화면 구성
     func goNoticePage() {
         tapSege.selectedSegmentIndex = 0
-        self.childPageView.setViewControllers([VCArr[0]], direction: .forward, animated: false, completion: nil)
+        self.childPageView.setViewControllers([VCArr[0]],
+                                              direction: .forward,
+                                              animated: false,
+                                              completion: nil)
         self.noticePushEvent = false
     }
     
@@ -169,6 +190,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     // MARK: - @objc
+    
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
         
@@ -207,6 +229,7 @@ class MyStudyDetailView: UIViewController {
         } else if authority == .member {
             [ leaveStudy, cancel ].forEach { alert.addAction($0) }
         }
+        
         present(alert, animated: true, completion: nil)
     }
     

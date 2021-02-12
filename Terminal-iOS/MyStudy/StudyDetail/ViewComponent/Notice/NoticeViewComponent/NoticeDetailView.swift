@@ -36,12 +36,16 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             navigationItem.rightBarButtonItems = [moreButton]
         }
+        
         noticeBackground.do {
             $0.layer.cornerRadius = 5
             if let isPinned = notice?.pinned {
-                $0.backgroundColor = isPinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+                $0.backgroundColor = isPinned
+                    ? UIColor.appColor(.pinnedNoticeColor)  // true
+                    : UIColor.appColor(.noticeColor)        // false
             }
         }
+        
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             $0.textAlignment = .center
@@ -63,6 +67,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
         }
+        
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             guard let name = notice?.leaderNickname else { return }
@@ -70,18 +75,19 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
             $0.textColor = .white
             $0.textAlignment = .center
         }
+        
         noticeDate.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             $0.text = notice?.updatedAt
             $0.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             $0.textAlignment = .center
         }
+        
         noticeContents.do {
             $0.dynamicFont(fontSize: 12, weight: .regular)
             $0.numberOfLines = 0
             $0.text = notice?.contents
         }
-        
     }
     
     func layout() {
@@ -122,17 +128,18 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         noticeDate.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: profileName.bottomAnchor, constant: 2).isActive = true
-            $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: Terminal.convertWidth(value: 8)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor,
+                                        constant: Terminal.convertWidth(value: 8)).isActive = true
         }
     }
     
     @objc func moreButtonDidTap() {
-        let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let edit =  UIAlertAction(title: "수정하기", style: .default) { _ in self.modifyButtonDidTap() }
-        let applyList =  UIAlertAction(title: "삭제하기", style: .destructive) {_ in self.removeButtonDidTap() }
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let edit = UIAlertAction(title: "수정하기", style: .default) { _ in self.modifyButtonDidTap() }
+        let applyList = UIAlertAction(title: "삭제하기", style: .destructive) {_ in self.removeButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [ edit, applyList, cancel ].forEach { alert.addAction($0) }
+        [edit, applyList, cancel].forEach { alert.addAction($0) }
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -143,6 +150,7 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     @objc func removeButtonDidTap() {
         presenter?.removeButtonDidTap(notice: notice!)
     }
+    
     func showNoticeDetail(notice: Notice) {
         self.title = notice.title
         self.notice = notice

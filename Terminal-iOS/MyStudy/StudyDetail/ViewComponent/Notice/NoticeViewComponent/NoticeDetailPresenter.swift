@@ -25,11 +25,14 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
             view?.showError(message: "권한이 없습니다.")
         }
     }
+    
     func removeButtonDidTap(notice: Notice) {
         interactor?.postNoticeRemove(notice: notice)
     }
     
-    func modifyButtonDidTap(state: AddNoticeState, notice: Notice, parentView: NoticeDetailViewProtocol) {
+    func modifyButtonDidTap(state: AddNoticeState,
+                            notice: Notice,
+                            parentView: NoticeDetailViewProtocol) {
         wireFrame?.goToNoticeEdit(state: state, notice: notice, parentView: parentView)
     }
     

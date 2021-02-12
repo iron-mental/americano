@@ -88,8 +88,7 @@ class CoreDataManager {
                 break
             }
             return userInfo
-        }
-        catch {
+        } catch {
             return nil
         }
     }

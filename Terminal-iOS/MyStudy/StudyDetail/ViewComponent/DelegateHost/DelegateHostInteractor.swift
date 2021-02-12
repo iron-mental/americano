@@ -24,14 +24,12 @@ extension DelegateHostInteractor: DelegateHostRemoteDataManagerOutputProtocol {
         switch response.result {
         case true:
             presenter?.delegateHostResult(result: response.result, message: response.message!)
-            break
         case false:
             if let message = response.message {
                 presenter?.delegateHostResult(result: response.result, message: message)
             } else {
                 presenter?.delegateHostResult(result: response.result, message: "false에 메세지 없ㅇ므")
             }
-            break
         }
     }
 }
