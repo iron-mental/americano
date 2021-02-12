@@ -36,7 +36,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         standardContentHeight = projectView.contentSize.height
-//        keyboardHeight = 336
+        //        keyboardHeight = 336
         currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
         view.becomeFirstResponder()
     }
@@ -179,7 +179,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 let distance = (targetMaxY) - viewMaxY
                 self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
             } else {
-//                isEditableViewTapping = false
+                //                isEditableViewTapping = false
             }
         }
     }
@@ -190,7 +190,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
-//            self.isEditableViewTapping = false
+            //            self.isEditableViewTapping = false
         }
     }
     func viewSetBottom(distance: CGFloat) {
@@ -201,7 +201,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
-//            self.isEditableViewTapping = false
+            //            self.isEditableViewTapping = false
         }
     }
     
@@ -236,26 +236,30 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     @objc func addProject() {
         isEditableViewTapping = true
         if projectArr.count < 3 {
-            if projectArr.count == 3 {
-                projectAddButton.backgroundColor = .darkGray
+            if projectArr.isEmpty {
+                projectView.contentOffset.y = 0
+                projectView.contentSize.height = 0
             }
             standardContentHeight += 433
             let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
             projectArr.append(project)
-            projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .right)
-            projectView.reloadData()
-//            view.layoutIfNeeded()
-            
-//            if !projectArr.isEmpty {
-//                let index = IndexPath(row: projectArr.count - 1, section: 0)
-//                self.projectView.scrollToRow(at: index, at: .top, animated: true)
-//            }
-//            self.view.layoutSubviews()
-//            self.view.layoutIfNeeded()
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-                let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell
-                    cell?.title.becomeFirstResponder()
+            if projectArr.count == 3 {
+                projectAddButton.backgroundColor = .darkGray
             }
+            projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .fade)
+//            projectView.reloadData()
+            view.layoutIfNeeded()
+            
+                        if !projectArr.isEmpty {
+                            let index = IndexPath(row: projectArr.count - 1, section: 0)
+                            self.projectView.scrollToRow(at: index, at: .top, animated: true)
+                        }
+            //            self.view.layoutSubviews()
+            //            self.view.layoutIfNeeded()
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+//                let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell
+//                cell?.title.becomeFirstResponder()
+//            }
         } else {
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
@@ -310,10 +314,12 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         self.projectAddButton.backgroundColor = self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
         standardContentHeight -= 433
+        currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
+        currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        
         if type(of: scrollView) == ProjectTableView.self {
             currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
             currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
