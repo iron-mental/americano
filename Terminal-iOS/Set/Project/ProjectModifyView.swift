@@ -165,7 +165,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     var targetMaxLine = UIView()
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
-        
         if let parentView = textView.superview {
             var targetMinY: CGFloat = 0
             var targetMaxY: CGFloat = 0
@@ -178,9 +177,9 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 }
             } else {
                 //제목 or 내용 textView 클릭 시
-                if let superView = parentView.superview {
-                    targetMinY = textView.frame.minY + superView.frame.origin.y + 156
-                    targetMaxY = textView.frame.maxY + superView.frame.origin.y + 156
+                if let superView = parentView.superview?.superview {
+                    targetMinY = textView.frame.minY + superView.frame.origin.y
+                    targetMaxY = textView.frame.maxY + superView.frame.origin.y
                 }
             }
             
@@ -332,7 +331,7 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
             minLine.frame = CGRect(x: 0, y: Int(currentScrollViewMinY), width: Int(UIScreen.main.bounds.width), height: 1)
             maxLine.frame = CGRect(x: 0, y: Int(currentScrollViewMaxY), width: Int(UIScreen.main.bounds.width), height: 1)
             if !isEditableViewTapping {
-                view.endEditing(true)
+//                view.endEditing(true)
             }
         }
     }
