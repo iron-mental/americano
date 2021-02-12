@@ -8,9 +8,7 @@
 
 import UIKit
 
-class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
-    var presenter: NoticeDetailPresenterProtocol?
-    
+class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {    
     static func createNoticeDetailModule(notice: Int, studyID: Int?, title: String, parentView: UIViewController?, state: StudyDetailViewState) -> UIViewController {
         let view = NoticeDetailView()
         let presenter = NoticeDetailPresenter()

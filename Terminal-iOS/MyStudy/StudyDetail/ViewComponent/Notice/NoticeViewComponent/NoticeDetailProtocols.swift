@@ -63,9 +63,10 @@ protocol NoticeDetailLocalDataManagerProtocol: class {
 }
 
 protocol NoticeDetailWireFrameProtocol: class {
-    static func createNoticeDetailModule( notice: Int,
-                                          studyID: Int?,
-                                          parentView: UIViewController?,
-                                          state: StudyDetailViewState) -> UIViewController
+    static func createNoticeDetailModule(notice: Int,
+                                         studyID: Int?,
+                                         title: String,
+                                         parentView: UIViewController?,
+                                         state: StudyDetailViewState) -> UIViewController
     func goToNoticeEdit(state: AddNoticeState, notice: Notice, parentView: NoticeDetailViewProtocol)
 }
