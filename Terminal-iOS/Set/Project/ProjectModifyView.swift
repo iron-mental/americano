@@ -12,7 +12,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     var presenter: ProjectModifyPresenterProtocol?
     var projectArr: [Project] = []
     var index: IndexPath?
-        
+    
     lazy var projectView = ProjectTableView()
     lazy var projectAddButton = UIButton()
     lazy var completeButton = UIButton()
@@ -36,6 +36,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.title = "프로젝트 수정"
         }
+        
         self.projectView.do {
             $0.delegate = self
             $0.dataSource = self
@@ -169,7 +170,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                           message: "프로젝트는 최대 3개입니다.",
                                           preferredStyle: UIAlertController.Style.alert)
             let okAction = UIAlertAction(title: "확인", style: .default, handler: nil )
-
+            
             alert.addAction(okAction)
             present(alert, animated: true)
         }
@@ -222,6 +223,10 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         self.projectAddButton.backgroundColor =
             self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
 }
 
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
@@ -240,8 +245,8 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         let index = IndexPath(row: textView.tag, section: 0)
         if textView.tag != 0 {
-        self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
-        self.projectView.scrollToRow(at: index, at: .top, animated: true)
+            self.projectView.transform = CGAffineTransform(translationX: 0, y: -170)
+            self.projectView.scrollToRow(at: index, at: .top, animated: true)
         }
     }
 }
