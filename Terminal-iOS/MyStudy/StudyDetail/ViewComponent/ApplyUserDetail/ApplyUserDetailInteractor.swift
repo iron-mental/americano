@@ -49,10 +49,8 @@ extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProto
             if let data = project.data {
                 presenter?.retriveProjectList(result: project.result, projectList: data)
             }
-            break
         case false:
             print("ApplyUserDetailInterator 에서 생긴 에러")
-            break
         }
     }
     
@@ -61,10 +59,8 @@ extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProto
         case true:
             guard let message = response.message else { return }
             presenter?.retriveApplyStatus(result: response.result, message: message, studyID: studyID!)
-            break
         case false:
             print("ApplyUserDetailInteractor 에서 생긴 에러")
-            break
         }
     }
 }

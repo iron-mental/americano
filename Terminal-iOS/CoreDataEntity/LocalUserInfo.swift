@@ -64,7 +64,7 @@ public class LocalUserInfo: NSObject, NSCoding {
         coder.encode(careerContents, forKey: Keys.careerContents.rawValue)
         coder.encode(snsLinkedin, forKey: Keys.snsLinkedin.rawValue)
         coder.encode(snsWeb, forKey: Keys.snsWeb.rawValue)
-        coder.encode(snsGithub,forKey: Keys.snsGithub.rawValue)
+        coder.encode(snsGithub, forKey: Keys.snsGithub.rawValue)
         coder.encode(emailVerified, forKey: Keys.emailVerified.rawValue)
         coder.encode(createdAt, forKey: Keys.createdAt.rawValue)
     }

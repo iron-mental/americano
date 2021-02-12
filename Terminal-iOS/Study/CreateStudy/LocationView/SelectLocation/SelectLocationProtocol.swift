@@ -45,8 +45,12 @@ protocol SelectLocationPresenterProtocol: class {
 
 protocol SelectLocationRemoteDataManagerProtocol: class {
     //INTERACTOR -> REMOTEDATAMANAGER
-    func getAddressInfoOnce(lat: Double, lng: Double, completion: @escaping (Bool, _ sido: String? , _ sigungu: String?) -> Void)
-    func getAddressInfo(lat: Double, lng: Double, completion: @escaping (_: Bool, _ item: StudyDetailLocationPost?) -> Void)
+    func getAddressInfoOnce(lat: Double,
+                            lng: Double,
+                            completion: @escaping (Bool, _ sido: String?, _ sigungu: String?) -> Void)
+    func getAddressInfo(lat: Double,
+                        lng: Double,
+                        completion: @escaping (_: Bool, _ item: StudyDetailLocationPost?) -> Void)
 }
 
 protocol SelectLocationLocalDataManagerProtocol: class {

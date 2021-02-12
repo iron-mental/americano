@@ -16,7 +16,7 @@ final class TerminalNetworkManager {
     let interceptors = Interceptor(interceptors: [BaseInterceptor()])
 
     /// 세션 설정
-    var session : Session
+    var session: Session
     
     private init() {
         session = Session(interceptor: interceptors)

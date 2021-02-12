@@ -31,9 +31,7 @@ class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserD
                     } catch {
                         print("error")
                     }
-                    break
-                case .failure(let _):
-                    
+                case .failure:
                     break
                 }
             }

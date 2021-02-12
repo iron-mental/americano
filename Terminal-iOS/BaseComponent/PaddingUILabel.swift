@@ -11,7 +11,7 @@ import UIKit
 class PaddingLabel: UILabel {
     var padding: UIEdgeInsets?
     
-    init(insets: UIEdgeInsets? = UIEdgeInsets(top: 15, left: 8, bottom: 15, right: 8)) {
+    init(insets: UIEdgeInsets = UIEdgeInsets(top: 15, left: 8, bottom: 15, right: 8)) {
         super.init(frame: CGRect.zero)
         padding = insets
         attribute()

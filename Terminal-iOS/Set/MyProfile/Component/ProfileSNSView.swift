@@ -56,7 +56,7 @@ class ProfileSNSView: BaseSNSView {
             count += 1
         }
         
-        if snsList["web"] != nil{
+        if snsList["web"] != nil {
             self.snsStack.addArrangedSubview(self.web)
             count += 1
         }

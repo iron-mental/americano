@@ -38,7 +38,7 @@ class ApplyListCell: UITableViewCell {
     }
     
     func layout() {
-        [mainImage, title, contents].forEach{ self.contentView.addSubview($0)}
+        [mainImage, title, contents].forEach { self.contentView.addSubview($0) }
         self.mainImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24).isActive = true
