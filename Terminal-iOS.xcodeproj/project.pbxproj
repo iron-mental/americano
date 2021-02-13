@@ -288,6 +288,7 @@
 		CCB139CF25592D8300410184 /* IntroPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139CE25592D8300410184 /* IntroPresenter.swift */; };
 		CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D225592DCF00410184 /* IntroInteractor.swift */; };
 		CCB139D625592E0300410184 /* IntroRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */; };
+		CCB1A3A925D7BDC600AADE33 /* ValidateSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */; };
 		CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */; };
 		CCB752CA25A841E3003E7CA7 /* StudyApplyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */; };
 		CCBBEEFB2583A30A00177E25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */; };
@@ -646,6 +647,7 @@
 		CCB139CE25592D8300410184 /* IntroPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPresenter.swift; sourceTree = "<group>"; };
 		CCB139D225592DCF00410184 /* IntroInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroInteractor.swift; sourceTree = "<group>"; };
 		CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroRemoteDataManager.swift; sourceTree = "<group>"; };
+		CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateSequence.swift; sourceTree = "<group>"; };
 		CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWireFrame.swift; sourceTree = "<group>"; };
 		CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyApplyMessageView.swift; sourceTree = "<group>"; };
 		CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -880,6 +882,7 @@
 				CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */,
 				CCA25A8B25B6962C00280C80 /* BaseEditableStudyDetailView.swift */,
 				CC7B209825C3B7B6009920DC /* PaddingUILabel.swift */,
+				CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -1858,6 +1861,7 @@
 				CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */,
 				A53A2B8A25B6BC100002D3A0 /* UserWithdrawalWireFrame.swift in Sources */,
 				A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */,
+				CCB1A3A925D7BDC600AADE33 /* ValidateSequence.swift in Sources */,
 				CCC1A2DB25B14C88004E3BE6 /* ApplyUserDetailPresenter.swift in Sources */,
 				A51BA0A82577E38900B9673F /* BaseInterceptor.swift in Sources */,
 				CCA3FF472517823E00F62627 /* StudyListProtocols.swift in Sources */,

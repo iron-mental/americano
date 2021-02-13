@@ -17,7 +17,7 @@ class SearchStudyRemoteDataManager: SearchStudyRemoteDataManagerInputProtocol {
             .shared
             .session
             .request(TerminalRouter.hotKeyword)
-            .validate()
+            .validate(statusCode: ValidateSequence(startValue: 200, endValue: 422))
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):

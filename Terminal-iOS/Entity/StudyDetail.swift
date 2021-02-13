@@ -9,6 +9,12 @@ import Foundation
 
 // MARK: 스터디 상세
 
+struct StudyDetailInfo: Codable {
+    let studyInfo: StudyDetail
+    let badge: Badge
+}
+
+
 struct StudyDetail: Codable {
     let participate: [Participate]
     
