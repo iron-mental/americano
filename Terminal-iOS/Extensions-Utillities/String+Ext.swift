@@ -33,7 +33,7 @@ extension String {
     }
     
     func webCheck() -> Bool {
-        return self.contains("https://") || self == ""
+        return self.contains("https://") || self == "" || self.contains("www.")
     }
     
     func appstoreCheck() -> Bool {
