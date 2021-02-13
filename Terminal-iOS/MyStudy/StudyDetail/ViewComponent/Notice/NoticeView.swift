@@ -92,7 +92,6 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let noticeCell = notice.dequeueReusableCell(withIdentifier: NoticeCell.noticeCellID, for: indexPath) as! NoticeCell
-        
         if indexPath.section == 0 {
             noticeCell.setData(firstNoticeList[indexPath.row])
         } else if indexPath.section == 1 {

@@ -27,18 +27,25 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                         let json = JSON(value)
                         let data = "\(json)".data(using: .utf8)
                         do {
-                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self,
-                                                                  from: data!)
-                            completion(true, result.data, nil)
+                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self, from: data!)
+                            completion(result.result, result.data, nil)
                         } catch {
                             print(error.localizedDescription)
                         }
                     } else {
                         completion(false, nil, JSON(value)["message"].string!)
                     }
-                case .failure(let error):
-                    print(error)
-                    //이부분에 message 실어보내느거 대응해놔야됨
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if result.message != nil {
+                                completion(result.result, nil, result.message)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }
@@ -64,8 +71,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                         let json = JSON(value)
                         let data = "\(json)".data(using: .utf8)
                         do {
-                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self,
-                                                                  from: data!)
+                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self, from: data!)
                             completion(true, result.data, nil)
                         } catch {
                             print(error.localizedDescription)
@@ -73,8 +79,17 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                     } else {
                         completion(false, nil, JSON(value)["message"].string!)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if result.message != nil {
+                                completion(result.result, nil, result.message)
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
     }

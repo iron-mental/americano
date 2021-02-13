@@ -46,7 +46,6 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
     }
     
     func postNoticeRemove(studyID: Int, noticeID: Int) {
-        
         TerminalNetworkManager
             .shared
             .session
