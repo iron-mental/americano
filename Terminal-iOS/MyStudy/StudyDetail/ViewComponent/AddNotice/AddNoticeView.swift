@@ -202,7 +202,17 @@ extension AddNoticeView: AddNoticeViewProtocol {
                     //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
                     (parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
                     //만들자 마자 수정하면 이렇게 됨
-                    ((parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
+                    if let noticeDetailView = parentView as? NoticeDetailViewProtocol {
+                        if let studyDetailView = noticeDetailView as? MyStudyDetailViewProtocol {
+                            if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
+                                noticeListView.viewLoad()
+                            }
+                        } else {
+                            if let noticeListView = noticeDetailView.parentView as? NoticeViewProtocol {
+                                noticeListView.viewLoad()
+                            }
+                        }
+                    }
                 }
             }
         }
