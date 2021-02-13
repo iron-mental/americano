@@ -10,7 +10,7 @@ import UIKit
 import SocketIO
 import SwiftyJSON
 
-struct ChatMessage  {
+struct ChatMessage {
       var roomNumber: Int
       var userID: Int
       var nickname: String

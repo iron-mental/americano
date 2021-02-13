@@ -16,7 +16,7 @@ class LoadingRainbowCat: NSObject {
     
     class func show() {
         let backgroundView = UIView()
-        let popupView = AnimationView(name:"14476-rainbow-cat-remix")
+        let popupView = AnimationView(name: "14476-rainbow-cat-remix")
         if let window = UIApplication.shared.windows.first {
             window.addSubview(backgroundView)
             window.addSubview(popupView)

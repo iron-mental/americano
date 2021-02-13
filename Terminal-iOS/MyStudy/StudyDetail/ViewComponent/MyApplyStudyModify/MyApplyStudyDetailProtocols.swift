@@ -51,7 +51,7 @@ protocol MyApplyStudyModifyRemoteDataManagerInputProtocol: class {
     
 //    INTERACTOR -> REMOTEDATAMANAGER
     func getMyApplyStudyDetail(studyID: Int, userID: Int)
-    func putNewApplyMessage(studyID: Int,applyID: Int, newMessage: String)
+    func putNewApplyMessage(studyID: Int, applyID: Int, newMessage: String)
 }
 
 protocol MyApplyStudyModifyRemoteDataManagerOutputProtocol: class {

@@ -54,7 +54,7 @@ protocol ChatLocalDataManagerProtocol: class {
     
 }
 
-protocol ChatWireFrameProtocol: class{
+protocol ChatWireFrameProtocol: class {
     var presenter: ChatPresenterProtocol? { get set }
     static func createChatModule() -> UIViewController
 }

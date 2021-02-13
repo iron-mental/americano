@@ -23,7 +23,7 @@ class IdInputView: UIView {
     func attribute() {
         titleLabel.do {
             $0.text = "SNS"
-            $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
+            $0.dynamicFont(fontSize: $0.font.pointSize, weight: .medium)
         }
         notion.do {
             $0.textField.placeholder = "예) notion.so/example1234"
@@ -51,7 +51,8 @@ class IdInputView: UIView {
             $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
         }
         notion.do {
-            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: Terminal.convertHeight(value: 17)).isActive = true
+            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
+                                    constant: Terminal.convertHeigt(value: 17)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 20)).isActive = true

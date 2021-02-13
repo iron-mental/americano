@@ -53,24 +53,24 @@ public class LocalUserInfo: NSObject, NSCoding {
     }
     
     public func encode(with coder: NSCoder) {
-        coder.encode(id,forKey: Keys.id.rawValue)
-        coder.encode(nickname,forKey: Keys.nickname.rawValue)
-        coder.encode(email,forKey: Keys.email.rawValue)
-        coder.encode(image,forKey: Keys.image.rawValue)
-        coder.encode(introduce,forKey: Keys.introduce.rawValue)
+        coder.encode(id, forKey: Keys.id.rawValue)
+        coder.encode(nickname, forKey: Keys.nickname.rawValue)
+        coder.encode(email, forKey: Keys.email.rawValue)
+        coder.encode(image, forKey: Keys.image.rawValue)
+        coder.encode(introduce, forKey: Keys.introduce.rawValue)
         coder.encode(sido, forKey: Keys.sido.rawValue)
         coder.encode(sigungu, forKey: Keys.sigungu.rawValue)
-        coder.encode(careerTitle,forKey: Keys.careerTitle.rawValue)
-        coder.encode(careerContents,forKey: Keys.careerContents.rawValue)
-        coder.encode(snsLinkedin,forKey: Keys.snsLinkedin.rawValue)
-        coder.encode(snsWeb,forKey: Keys.snsWeb.rawValue)
-        coder.encode(snsGithub,forKey: Keys.snsGithub.rawValue)
-        coder.encode(emailVerified,forKey: Keys.emailVerified.rawValue)
-        coder.encode(createdAt,forKey: Keys.createdAt.rawValue)
+        coder.encode(careerTitle, forKey: Keys.careerTitle.rawValue)
+        coder.encode(careerContents, forKey: Keys.careerContents.rawValue)
+        coder.encode(snsLinkedin, forKey: Keys.snsLinkedin.rawValue)
+        coder.encode(snsWeb, forKey: Keys.snsWeb.rawValue)
+        coder.encode(snsGithub, forKey: Keys.snsGithub.rawValue)
+        coder.encode(emailVerified, forKey: Keys.emailVerified.rawValue)
+        coder.encode(createdAt, forKey: Keys.createdAt.rawValue)
     }
     
     public required convenience init?(coder decoder: NSCoder) {
-        var decodedUserInfo = UserInfo(id: Int(decoder.decodeInt64(forKey: Keys.id.rawValue)),
+        let decodedUserInfo = UserInfo(id: Int(decoder.decodeInt64(forKey: Keys.id.rawValue)),
                  nickname: decoder.decodeObject(forKey: Keys.nickname.rawValue) as? String ?? "",
                  email: decoder.decodeObject(forKey: Keys.email.rawValue) as? String ?? "",
                  image: decoder.decodeObject(forKey: Keys.image.rawValue) as? String ?? "",

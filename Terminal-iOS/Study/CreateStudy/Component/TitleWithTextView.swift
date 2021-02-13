@@ -26,12 +26,12 @@ class TitleWithTextView: UIView {
         titleLabel.do {
             $0.text = title
             $0.backgroundColor = UIColor.appColor(.testColor)
-            $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
+            $0.dynamicFont(fontSize: $0.font.pointSize, weight: .medium)
         }
         categoryLabel.do {
             $0.textColor = .white
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.dynamicFont(fontSize: $0.font.pointSize , weight: .medium)
+            $0.dynamicFont(fontSize: $0.font.pointSize, weight: .medium)
         }
         textView.do {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
@@ -64,7 +64,8 @@ class TitleWithTextView: UIView {
         }
         textView.do {
             NSLayoutConstraint.activate([
-                $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,constant: Terminal.convertHeight(value: 17)),
+                $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
+                                        constant: Terminal.convertHeigt(value: 17)),
                 $0.leadingAnchor.constraint(equalTo: leadingAnchor),
                 $0.widthAnchor.constraint(equalTo: widthAnchor),
                 $0.bottomAnchor.constraint(equalTo: bottomAnchor)

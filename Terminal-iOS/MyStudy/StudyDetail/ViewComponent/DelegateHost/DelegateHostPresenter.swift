@@ -21,17 +21,13 @@ class DelegateHostPresenter: DelegateHostPresenterProtocol {
 
 extension DelegateHostPresenter: DelegateHostInteractorOutputProtocol {
     func delegateHostResult(result: Bool, message: String) {
-//        LoadingRainbowCat.hide {
             switch result {
             case true:
                 TerminalAlertMessage.dismiss()
                 self.view?.showDelegateHostResult(message: message)
-                break
             case false:
                 TerminalAlertMessage.dismiss()
                 self.view?.showError(message: message)
-                break
             }
-//        }
     }
 }

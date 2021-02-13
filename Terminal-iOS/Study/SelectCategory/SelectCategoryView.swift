@@ -30,8 +30,9 @@ class SelectCategoryView: UIViewController {
     }
     
     func attribute() {
-        view.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+        self.do {
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.title = "스터디 만들기"
         }
         self.do {
             $0.title = "스터디 만들기"

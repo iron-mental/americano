@@ -11,9 +11,9 @@ import UIKit
 class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
     static func createModifyStudyModule(study: StudyDetail, parentView: UIViewController) -> UIViewController {
         let view = ModifyStudyView()
-        var presenter: ModifyStudyPresenterProtocol & ModifyStudyInteractorOutputProtocol = ModifyStudyPresenter()
-        var interactor: ModifyStudyInteractorInputProtocol & ModifyStudyRemoteDataManagerOutputProtocol = ModifyStudyInteractor()
-        var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol = ModifyStudyRemoteDataManager()
+        let presenter: ModifyStudyPresenterProtocol & ModifyStudyInteractorOutputProtocol = ModifyStudyPresenter()
+        let interactor: ModifyStudyInteractorInputProtocol & ModifyStudyRemoteDataManagerOutputProtocol = ModifyStudyInteractor()
+        let remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol = ModifyStudyRemoteDataManager()
         let wireFrame = ModifyStudyWireFrame()
         
         view.presenter = presenter

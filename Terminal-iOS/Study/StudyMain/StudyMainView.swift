@@ -51,8 +51,10 @@ class StudyMainView: UIViewController {
         tempView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: -60).isActive = true
-            $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, constant: -30).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                    constant: -60).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor,
+                                      constant: -30).isActive = true
         }
     }
     
@@ -78,7 +80,7 @@ extension StudyMainView: StudyMainViewProtocol {
     func categoryDownAnimate() {
         UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {
             self.tempView.transform = self.tempView.transform.translatedBy(x: 0, y: 60)
-        },completion: { _ in
+        }, completion: { _ in
             self.presenter?.goToCreateStudy(category: self.tempCategory)
         })
     }
@@ -86,5 +88,3 @@ extension StudyMainView: StudyMainViewProtocol {
         tempView.transform = self.tempView.transform.translatedBy(x: 0, y: -60)
     }
 }
-
-

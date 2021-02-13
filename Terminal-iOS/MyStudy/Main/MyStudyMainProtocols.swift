@@ -48,7 +48,6 @@ protocol MyStudyMainPresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func MyStudyListResult(result: Bool, itemList: MyStudyList?)
     
-    
 }
 
 protocol MyStudyMainRemoteDataManagerProtocol: class {
