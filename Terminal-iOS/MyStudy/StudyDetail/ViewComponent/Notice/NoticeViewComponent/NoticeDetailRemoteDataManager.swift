@@ -14,7 +14,6 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
     weak var interactor: NoticeDetailRemoteDataManagerOutputProtocol?
     
     func getNoticeDetail(studyID: Int, noticeID: Int) {
-        
         TerminalNetworkManager
             .shared
             .session
@@ -47,6 +46,7 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
     }
     
     func postNoticeRemove(studyID: Int, noticeID: Int) {
+        
         TerminalNetworkManager
             .shared
             .session
@@ -60,8 +60,17 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
                     if result.message != nil {
                         self.interactor?.removeNoticeDetailResult(result: result)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if result.message != nil {
+                                self.interactor?.removeNoticeDetailResult(result: result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }
