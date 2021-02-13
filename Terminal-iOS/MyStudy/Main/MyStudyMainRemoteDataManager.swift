@@ -14,7 +14,7 @@ import SwiftKeychainWrapper
 class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
     var interactor: MyStudyMainInteractorProtocol?
     
-    func getMyStudyList(completion: @escaping (_: Bool, _: MyStudyList?) -> Void) {
+    func getMyStudyList(completion: @escaping (_: BaseResponse<MyStudyList>) -> Void) {
         
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         TerminalNetworkManager
@@ -29,11 +29,19 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<MyStudyList>.self, from: data!)
-                        completion(result.result, result.data)
+                        completion(result)
                     } catch {
                     }
-                case .failure(let error):
-                    print("error :", error )
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<MyStudyList>.self, from: data)
+                            completion(result)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
                 }
             }
     }
