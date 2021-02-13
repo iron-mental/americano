@@ -14,14 +14,17 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
     var wireFrame: NoticeDetailWireFrameProtocol?
     
     func viewDidLoad(notice: Notice) {
+        view?.showLoading()
         interactor?.getNoticeDetail(notice: notice)
     }
     
     func noticeDetailResult(result: Bool, notice: Notice) {
         switch result {
         case true:
+            view?.hideLoading()
             view?.showNoticeDetail(notice: notice)
         case false:
+            view?.hideLoading()
             view?.showError(message: "권한이 없습니다.")
         }
     }

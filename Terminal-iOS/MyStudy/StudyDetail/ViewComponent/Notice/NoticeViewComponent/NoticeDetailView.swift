@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
+class NoticeDetailView: UIViewController {
     var presenter: NoticeDetailPresenterProtocol?
     var parentView: UIViewController?
     var notice: Notice?
@@ -150,7 +150,8 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     @objc func removeButtonDidTap() {
         presenter?.removeButtonDidTap(notice: notice!)
     }
-    
+}
+extension NoticeDetailView: NoticeDetailViewProtocol {
     func showNoticeDetail(notice: Notice) {
         self.title = notice.title
         self.notice = notice
@@ -170,5 +171,14 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     func showError(message: String) {
         print("noticedetailview에서 생긴 에러")
     }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
+    }
+    
     
 }

@@ -14,7 +14,6 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
     func getNoticeDetail(studyID: Int,
                          noticeID: Int,
                          completion: @escaping (_ result: Bool, _ data: Notice) -> Void) {
-        
         TerminalNetworkManager
             .shared
             .session
@@ -41,7 +40,6 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
     func postNoticeRemove(studyID: Int,
                           noticeID: Int,
                           completion: @escaping (_: Bool, _: String) -> Void) {
-        
         TerminalNetworkManager
             .shared
             .session

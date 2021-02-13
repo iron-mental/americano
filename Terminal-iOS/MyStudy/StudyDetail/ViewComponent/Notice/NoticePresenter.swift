@@ -19,6 +19,7 @@ class NoticePresenter: NoticePresenterProtocol {
     }
     
     func celldidTap(notice: Notice, parentView: UIViewController, state: StudyDetailViewState) {
+        view?.showLoading()
         wireFrame?.goToNoticeDetail(notice: notice, parentView: parentView, state: state)
     }
     

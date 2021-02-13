@@ -18,6 +18,9 @@ protocol NoticeDetailViewProtocol: class {
     func showNoticeDetail(notice: Notice)
     func showNoticeRemove(message: String)
     func showError(message: String)
+    
+    func showLoading()
+    func hideLoading()
 }
 
 protocol NoticeDetailInteractorProtocol: class {
