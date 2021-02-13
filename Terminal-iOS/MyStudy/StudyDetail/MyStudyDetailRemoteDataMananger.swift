@@ -13,8 +13,6 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
     weak var interactor: MyStudyDetailInteractorProtocol?
     
     func postLeaveStudyAPI(studyID: Int) {
-        //데이터 로직 인터렉터로 옮겨야됨
-        
         TerminalNetworkManager
             .shared
             .session
@@ -26,8 +24,15 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
                     let json = "\(JSON(value))".data(using: .utf8)
                     let result: BaseResponse = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: json!)
                     self.interactor?.leaveStudyResult(result: result.result, message: result.message!)       
-                case .failure(let err):
-                    print(err.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                            self.interactor?.leaveStudyResult(result: result.result, message: result.message!)
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }

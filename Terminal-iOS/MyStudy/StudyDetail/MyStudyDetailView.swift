@@ -300,7 +300,6 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     }
     
     func showLeaveStudyFailed(message: String) {
-        print("스터디 나가기 실패")
         showToast(controller: self, message: message, seconds: 1, completion: nil)
     }
     

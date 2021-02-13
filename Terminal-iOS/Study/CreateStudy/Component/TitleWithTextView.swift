@@ -65,7 +65,7 @@ class TitleWithTextView: UIView {
         textView.do {
             NSLayoutConstraint.activate([
                 $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
-                                        constant: Terminal.convertHeigt(value: 17)),
+                                        constant: Terminal.convertHeight(value: 17)),
                 $0.leadingAnchor.constraint(equalTo: leadingAnchor),
                 $0.widthAnchor.constraint(equalTo: widthAnchor),
                 $0.bottomAnchor.constraint(equalTo: bottomAnchor)
