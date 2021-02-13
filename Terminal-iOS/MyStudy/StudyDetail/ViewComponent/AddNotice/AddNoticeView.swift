@@ -42,6 +42,7 @@ class AddNoticeView: UIViewController {
         attribute()
         layout()
         titleTextField.becomeFirstResponder()
+        hideLoading()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     

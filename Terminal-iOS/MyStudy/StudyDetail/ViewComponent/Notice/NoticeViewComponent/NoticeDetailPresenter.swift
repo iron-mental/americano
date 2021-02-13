@@ -30,16 +30,24 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
     }
     
     func removeButtonDidTap(notice: Notice) {
+        view?.showLoading()
         interactor?.postNoticeRemove(notice: notice)
     }
     
     func modifyButtonDidTap(state: AddNoticeState,
                             notice: Notice,
                             parentView: NoticeDetailViewProtocol) {
+        view?.showLoading()
         wireFrame?.goToNoticeEdit(state: state, notice: notice, parentView: parentView)
     }
     
     func noticeRemoveResult(result: Bool, message: String) {
-        view?.showNoticeRemove(message: message)
+        switch result {
+        case true:
+            view?.showNoticeRemove(message: message)
+        case false:
+            view?.hideLoading()
+            view?.showError(message: message)
+        }
     }
 }

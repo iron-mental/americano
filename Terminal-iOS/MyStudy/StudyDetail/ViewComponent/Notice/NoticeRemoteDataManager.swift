@@ -19,6 +19,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.noticeList(studyID: "\(studyID)"))
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -37,6 +38,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                     }
                 case .failure(let error):
                     print(error)
+                    //이부분에 message 실어보내느거 대응해놔야됨
                 }
             }
     }
