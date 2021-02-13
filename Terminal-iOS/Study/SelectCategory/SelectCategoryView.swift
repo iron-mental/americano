@@ -33,14 +33,10 @@ class SelectCategoryView: UIViewController {
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
-//        titleView.do {
-//            $0.text = "스터디 만들기"
-//            $0.textColor = .white
-//        }
-//        navigationItem.do {
-//            $0.titleView = titleView
-//        }
-        self.title = "스터디 만들기"
+        self.do {
+            $0.title = "스터디 만들기"
+            navigationItem.backButtonTitle = "Back"
+        }
         scrollView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }

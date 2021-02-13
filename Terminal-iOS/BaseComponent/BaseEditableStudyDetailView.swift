@@ -58,6 +58,7 @@ class BaseEditableStudyDetailView: UIViewController {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         keyboardHeight = keyboardRectangle.height
+        textViewTapFlag = false
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -117,6 +118,10 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.navigationItem.largeTitleDisplayMode = .never
+            $0.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
+        }
         view.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
         }
@@ -289,14 +294,13 @@ class BaseEditableStudyDetailView: UIViewController {
         } else {
             parentView = textView.tag == 1 ? textView : textView.superview!
         }
+        
         if viewMinY >= (parentView.frame.minY) {
             let distance = (parentView.frame.minY) - viewMinY
             self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
         } else if viewMaxY <= (parentView.frame.maxY) {
             let distance = (parentView.frame.maxY) - viewMaxY
             self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
-        } else {
-            textViewTapFlag = false
         }
     }
     
@@ -333,6 +337,7 @@ extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textViewTapFlag = true
         clickedView = textField
+        
         self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
