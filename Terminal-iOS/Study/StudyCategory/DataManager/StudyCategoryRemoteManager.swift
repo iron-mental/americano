@@ -29,8 +29,15 @@ class StudyCategoryRemoteManager: StudyCategoryRemoteDataManagerInputProtocol {
                     } catch {
                         print(error)
                     }
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<[String]>.self, from: data)
+                            self.interactor?.onError()
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
     }
