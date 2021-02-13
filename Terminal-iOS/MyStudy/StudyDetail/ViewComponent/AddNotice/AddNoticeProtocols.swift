@@ -35,6 +35,7 @@ protocol AddNoticePresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func addNoticeValid(notice: Int, studyID: Int)
     func addNoticeInvalid(message: String)
+    //    func putNoticeResult(result: BaseResponse<String>)
 }
 
 protocol AddNoticeInteractorProtocol: class {
@@ -54,7 +55,7 @@ protocol AddNoticeRemoteDataManagerProtocol: class {
     func putNotice(studyID: Int,
                    notice: NoticePost,
                    noticeID: Int,
-                   completion: @escaping(_ result: Bool, _ noticeID: Int) -> Void)
+                   completion: @escaping (BaseResponse<String>) -> Void)
 }
 
 protocol AddNoticeLocalDataManagerProtocol: class {

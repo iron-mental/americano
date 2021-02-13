@@ -19,8 +19,13 @@ class AddNoticeInteractor: AddNoticeInteractorProtocol {
             remoteDataManager?.putNotice(studyID: studyID,
                                          notice: notice,
                                          noticeID: noticeID!,
-                                         completion: { _, notice in
-                                            self.presenter?.addNoticeValid(notice: notice, studyID: studyID)
+                                         completion: { result in
+                                            switch result.result {
+                                            case true:
+                                                self.presenter?.addNoticeValid(notice: noticeID!, studyID: studyID)
+                                            case false:
+                                                self.presenter?.addNoticeInvalid(message: result.message!)
+                                            }
                                          })
         } else if state == .new {
             remoteDataManager?.postNotice(studyID: studyID,
@@ -29,7 +34,7 @@ class AddNoticeInteractor: AddNoticeInteractorProtocol {
                                             switch result.result {
                                             case true:
                                                 self.presenter?.addNoticeValid(notice: result.data!.noticeID,
-                                                                                studyID: studyID)
+                                                                               studyID: studyID)
                                             case false:
                                                 self.presenter?.addNoticeInvalid(message: result.message!)
                                             }
