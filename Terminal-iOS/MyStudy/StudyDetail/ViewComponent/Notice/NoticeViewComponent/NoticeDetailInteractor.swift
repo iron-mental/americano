@@ -11,7 +11,6 @@ import Foundation
 class NoticeDetailInteractor: NoticeDetailInteractorProtocol {
     weak var presenter: NoticeDetailPresenterProtocol?
     var remoteDataManager: NoticeDetailRemoteDataManagerProtocol?
-    var localDataManager: NoticeDetailLocalDataManagerProtocol?
     
     func getNoticeDetail(notice: Notice) {
         remoteDataManager?.getNoticeDetail(studyID: notice.studyID!, noticeID: notice.id, completion: { result, notice in

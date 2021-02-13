@@ -14,7 +14,7 @@ class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
     var wireFrame: StudyCategoryWireFrameProtocol?
     
     func viewDidLoad() {
-        view?.showLoading()
+//        view?.showLoading()
         interactor?.retrieveStudyCategory()
     }
     

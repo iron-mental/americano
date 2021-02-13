@@ -14,6 +14,7 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
     func getNoticeDetail(studyID: Int,
                          noticeID: Int,
                          completion: @escaping (_ result: Bool, _ data: Notice) -> Void) {
+        
         TerminalNetworkManager
             .shared
             .session
@@ -31,8 +32,16 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            guard let message = result.message else { return }
+                            
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }

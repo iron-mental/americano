@@ -26,7 +26,6 @@ protocol NoticeDetailViewProtocol: class {
 protocol NoticeDetailInteractorProtocol: class {
     var presenter: NoticeDetailPresenterProtocol? { get set }
     var remoteDataManager: NoticeDetailRemoteDataManagerProtocol? { get set }
-    var localDataManager: NoticeDetailLocalDataManagerProtocol? { get set }
     
     //PRESENTER -> INTERACTOR
     func getNoticeDetail(notice: Notice)
@@ -58,11 +57,6 @@ protocol NoticeDetailRemoteDataManagerProtocol: class {
     func postNoticeRemove(studyID: Int,
                           noticeID: Int,
                           completion: @escaping (_ result: Bool, _ message: String ) -> Void)
-}
-
-
-protocol NoticeDetailLocalDataManagerProtocol: class {
-    
 }
 
 protocol NoticeDetailWireFrameProtocol: class {

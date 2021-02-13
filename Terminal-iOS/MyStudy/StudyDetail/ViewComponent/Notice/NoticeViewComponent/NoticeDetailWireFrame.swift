@@ -14,7 +14,6 @@ class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
         let presenter = NoticeDetailPresenter()
         let interactor = NoticeDetailInteractor()
         let remoteDataManager = NoticeDetailRemoteDataManager()
-        let localDataManager = NoticeDetailLocalDataManager()
         let wireFrame = NoticeDetailWireFrame()
         
         let newNotice = Notice(id: notice,
@@ -42,7 +41,6 @@ class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
         
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
-        interactor.localDataManager = localDataManager
         
         return view
     }
