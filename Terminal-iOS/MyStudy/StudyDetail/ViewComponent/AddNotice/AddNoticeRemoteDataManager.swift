@@ -15,7 +15,7 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
     
     func postNotice(studyID: Int,
                     notice: NoticePost,
-                    completion: @escaping (Bool, Int) -> Void) {
+                    completion: @escaping (BaseResponse<EditNoticeResult>) -> Void) {
         
         let params: [String: Any] = [
             "title": notice.title,
@@ -35,14 +35,23 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<EditNoticeResult>.self, from: data!)
-                        if let data = result.data {
-                            completion(result.result, data.noticeID)
+                        if result.data != nil {
+                            completion(result)
                         }
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<EditNoticeResult>.self, from: data)
+                            if result.message != nil {
+                                completion(result)
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
     }

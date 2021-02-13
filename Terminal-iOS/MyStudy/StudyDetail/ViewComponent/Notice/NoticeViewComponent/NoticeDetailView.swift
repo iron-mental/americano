@@ -158,7 +158,6 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     }
     
     func showNoticeRemove(message: String) {
-        
         showToast(controller: self, message: message, seconds: 1) {
             if let noticeListView = self.parentView as? NoticeViewProtocol {
                 noticeListView.viewLoad()

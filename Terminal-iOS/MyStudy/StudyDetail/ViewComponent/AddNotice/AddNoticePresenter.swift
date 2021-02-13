@@ -17,25 +17,20 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
                               notice: NoticePost,
                               state: AddNoticeState,
                               noticeID: Int?) {
-        
+        view?.showLoading()
         interactor?.postNotice(studyID: studyID,
                                notice: notice,
                                state: state,
                                noticeID: noticeID ?? nil)
     }
     
-    func addNoticeResult(result: Bool, notice: Int, studyID: Int) {
-        if result {
-            switch result {
-            case true:
-                view?.showNewNotice(noticeID: notice)
-                wireFrame?.goToNoticeDetailView(noticeID: notice,
-                                                studyID: studyID,
-                                                parentView: UIViewController())
-            case false:
-                break
-            }
-        } else {
-        }
+    func addNoticeValid(notice: Int, studyID: Int) {
+        view?.showNewNotice(noticeID: notice)
+        wireFrame?.goToNoticeDetailView(noticeID: notice, studyID: studyID, parentView: UIViewController())
+    }
+    
+    func addNoticeInvalid(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

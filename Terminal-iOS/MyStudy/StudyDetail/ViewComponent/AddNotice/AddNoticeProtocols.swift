@@ -16,15 +16,9 @@ protocol AddNoticeViewProtocol: class {
     var parentView: UIViewController? { get set }
     
     func showNewNotice(noticeID: Int)
-}
-
-protocol AddNoticeInteractorProtocol: class {
-    var presenter: AddNoticePresenterProtocol? { get set }
-    var remoteDataManager: AddNoticeRemoteDataManagerProtocol? { get set }
-    var localDataManager: AddNoticeLocalDataManagerProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
-    func postNotice(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?)
+    func showError(message: String)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol AddNoticePresenterProtocol: class {
@@ -39,14 +33,24 @@ protocol AddNoticePresenterProtocol: class {
                               noticeID: Int?)
     
     //INTERACTOR -> PRESENTER
-    func addNoticeResult(result: Bool, notice: Int, studyID: Int)
+    func addNoticeValid(notice: Int, studyID: Int)
+    func addNoticeInvalid(message: String)
+}
+
+protocol AddNoticeInteractorProtocol: class {
+    var presenter: AddNoticePresenterProtocol? { get set }
+    var remoteDataManager: AddNoticeRemoteDataManagerProtocol? { get set }
+    var localDataManager: AddNoticeLocalDataManagerProtocol? { get set }
+    
+    //PRESENTER -> INTERACTOR
+    func postNotice(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?)
 }
 
 protocol AddNoticeRemoteDataManagerProtocol: class {
     //INTERACTOR -> REMOTE
     func postNotice(studyID: Int,
                     notice: NoticePost,
-                    completion: @escaping (_ result: Bool, _ noticeID: Int) -> Void)
+                    completion: @escaping (BaseResponse<EditNoticeResult>) -> Void)
     func putNotice(studyID: Int,
                    notice: NoticePost,
                    noticeID: Int,

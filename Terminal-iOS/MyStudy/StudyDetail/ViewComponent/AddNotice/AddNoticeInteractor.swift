@@ -19,21 +19,21 @@ class AddNoticeInteractor: AddNoticeInteractorProtocol {
             remoteDataManager?.putNotice(studyID: studyID,
                                          notice: notice,
                                          noticeID: noticeID!,
-                                         completion: { result, notice in
-                                            
-                self.presenter?.addNoticeResult(result: result,
-                                                notice: notice,
-                                                studyID: studyID)
-            })
+                                         completion: { _, notice in
+                                            self.presenter?.addNoticeValid(notice: notice, studyID: studyID)
+                                         })
         } else if state == .new {
             remoteDataManager?.postNotice(studyID: studyID,
                                           notice: notice,
-                                          completion: { result, notice in
-                                            
-                self.presenter?.addNoticeResult(result: result,
-                                                notice: notice,
-                                                studyID: studyID)
-            })
+                                          completion: { result in
+                                            switch result.result {
+                                            case true:
+                                                self.presenter?.addNoticeValid(notice: result.data!.noticeID,
+                                                                                studyID: studyID)
+                                            case false:
+                                                self.presenter?.addNoticeInvalid(message: result.message!)
+                                            }
+                                          })
         } else {
             print("addnoticestate값 지정 안됨")
         }

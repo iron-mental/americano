@@ -179,6 +179,7 @@ class AddNoticeView: UIViewController {
 }
 
 extension AddNoticeView: AddNoticeViewProtocol {
+    
     func showNewNotice(noticeID: Int) {
         let noticeTitle = titleTextField.text ?? ""
         showToast(controller: self, message: "공지사항 작성이 완료 되었습니다.", seconds: 1) { [self] in
@@ -203,6 +204,16 @@ extension AddNoticeView: AddNoticeViewProtocol {
                 }
             }
         }
+    }
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
     }
 }
 
