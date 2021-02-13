@@ -49,8 +49,15 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
                     let json = "\(JSON(value))".data(using: .utf8)
                     let result: BaseResponse = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: json!)
                     self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
-                case .failure(let err):
-                    print(err.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                            self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }
