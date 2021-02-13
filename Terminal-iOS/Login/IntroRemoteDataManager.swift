@@ -84,6 +84,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
         TerminalNetworkManager
             .shared
             .session
+            
             .request(TerminalRouter.login(userData: params))
             .responseJSON { response in
                 

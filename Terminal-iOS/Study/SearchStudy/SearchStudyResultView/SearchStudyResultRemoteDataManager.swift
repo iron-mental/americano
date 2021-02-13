@@ -17,7 +17,7 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
             .shared
             .session
             .request(TerminalRouter.studySearch(keyword: keyWord))
-            .validate(statusCode: ValidateSequence(startValue: 200, endValue: 422))
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -25,8 +25,15 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
                     self.interactor?.showSearchStudyListResult(result: result)
-                case .failure(let err):
-                    print(err)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
+                            self.interactor?.showSearchStudyListResult(result: result)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
     }
