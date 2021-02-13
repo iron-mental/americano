@@ -187,23 +187,25 @@ extension AddNoticeView: AddNoticeViewProtocol {
             dismiss(animated: true) {
                 if state == .new {
                     notice = Notice(id: noticeID,
-                                             title: nil,
-                                             contents: nil,
-                                             leaderID: nil,
-                                             studyID: studyID,
-                                             pinned: nil,
-                                             updatedAt: nil,
-                                             leaderImage: nil,
-                                             leaderNickname: nil,
-                                             createAt: nil)
-                    ((parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
-                    (parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, title: noticeTitle, parentView: parentView!)
+                                    title: nil,
+                                    contents: nil,
+                                    leaderID: nil,
+                                    studyID: studyID,
+                                    pinned: nil,
+                                    updatedAt: nil,
+                                    leaderImage: nil,
+                                    leaderNickname: nil,
+                                    createAt: nil)
+                    if let studyDetailView = parentView as? MyStudyDetailViewProtocol {
+                        if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
+                            noticeListView.viewLoad()
+                        }
+                        studyDetailView.presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, title: noticeTitle, parentView: parentView!)
+                    }
                 } else {
-                    //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
-                    (parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
-                    //만들자 마자 수정하면 이렇게 됨
                     if let noticeDetailView = parentView as? NoticeDetailViewProtocol {
-                        if let studyDetailView = noticeDetailView as? MyStudyDetailViewProtocol {
+                        noticeDetailView.presenter?.viewDidLoad(notice: notice!)
+                        if let studyDetailView = noticeDetailView.parentView as? MyStudyDetailViewProtocol {
                             if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
                                 noticeListView.viewLoad()
                             }
