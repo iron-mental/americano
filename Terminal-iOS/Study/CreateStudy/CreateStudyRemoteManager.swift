@@ -58,7 +58,7 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     }
                 }
             }, with: TerminalRouter.studyCreate(study: params))
-            .validate(statusCode: 200...422)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -79,7 +79,6 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                             print(error.localizedDescription)
                         }
                     }
-//                    self.interactor?.createStudyInvalid(message: "서버의 연결이 불안정합니다")
                 }
             }
     }
