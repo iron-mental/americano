@@ -11,8 +11,8 @@ import UIKit
 class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {    
     static func createNoticeDetailModule(notice: Int, studyID: Int?, title: String, parentView: UIViewController?, state: StudyDetailViewState) -> UIViewController {
         let view = NoticeDetailView()
-        let presenter = NoticeDetailPresenter()
-        let interactor = NoticeDetailInteractor()
+        let presenter: NoticeDetailPresenterProtocol & NoticeDetailInteractorOutputProtocol = NoticeDetailPresenter()
+        let interactor: NoticeDetailInteractorInputProtocol & NoticeDetailRemoteDataManagerOutputProtocol = NoticeDetailInteractor()
         let remoteDataManager = NoticeDetailRemoteDataManager()
         let wireFrame = NoticeDetailWireFrame()
         
@@ -42,6 +42,7 @@ class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         
+        remoteDataManager.interactor = interactor
         return view
     }
     

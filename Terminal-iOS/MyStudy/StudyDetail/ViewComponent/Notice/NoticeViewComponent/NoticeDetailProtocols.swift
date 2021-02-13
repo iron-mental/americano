@@ -46,9 +46,9 @@ protocol NoticeDetailInteractorInputProtocol: class {
 }
 
 protocol NoticeDetailInteractorOutputProtocol: class {
-    func getNoticeDetailSuccess(result: Bool, notice: Notice)
+    func getNoticeDetailSuccess(notice: Notice)
     func getNoticeDetailFailure(message: String)
-    func noticeRemoveResult(result: Bool, message: String)
+    func removeNoticeResult(result: Bool, message: String)
 }
 
 protocol NoticeDetailRemoteDataManagerInputProtocol: class {
@@ -56,10 +56,13 @@ protocol NoticeDetailRemoteDataManagerInputProtocol: class {
     func getNoticeDetail(studyID: Int, noticeID: Int)
     func postNoticeRemove(studyID: Int, noticeID: Int)
 }
+
 protocol NoticeDetailRemoteDataManagerOutputProtocol: class {
     func getNoticeDetailSuccess(notice: Notice)
     func getNoticeDetailFailure(message: String)
+    func removeNoticeDetailResult(result: BaseResponse<String>)
 }
+
 protocol NoticeDetailWireFrameProtocol: class {
     static func createNoticeDetailModule(notice: Int,
                                          studyID: Int?,

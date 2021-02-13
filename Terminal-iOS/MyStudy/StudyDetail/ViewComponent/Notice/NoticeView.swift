@@ -22,8 +22,6 @@ class NoticeView: UIViewController {
     }
     
     func viewLoad() {
-        firstNoticeList.removeAll()
-        secondNoticeList.removeAll()
         attribute()
         layout()
         presenter?.viewDidLoad(studyID: studyID!)
@@ -134,6 +132,8 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 
 extension NoticeView: NoticeViewProtocol {
     func showNoticeList(firstNoticeList: [Notice]?, secondNoticeList: [Notice]?) {
+        self.firstNoticeList.removeAll()
+        self.secondNoticeList.removeAll()
         if let first = firstNoticeList {
             self.firstNoticeList = first
         }

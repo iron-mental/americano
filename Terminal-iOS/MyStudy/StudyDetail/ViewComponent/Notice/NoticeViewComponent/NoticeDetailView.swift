@@ -159,6 +159,7 @@ extension NoticeDetailView: NoticeDetailViewProtocol {
     }
     
     func showNoticeRemove(message: String) {
+        //만들자마자 삭제해도 좀 이상하네 
         showToast(controller: self, message: message, seconds: 1) {
             if let noticeListView = self.parentView as? NoticeViewProtocol {
                 noticeListView.viewLoad()
