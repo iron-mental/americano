@@ -23,18 +23,9 @@ protocol NoticeDetailViewProtocol: class {
     func hideLoading()
 }
 
-protocol NoticeDetailInteractorProtocol: class {
-    var presenter: NoticeDetailPresenterProtocol? { get set }
-    var remoteDataManager: NoticeDetailRemoteDataManagerProtocol? { get set }
-    
-    //PRESENTER -> INTERACTOR
-    func getNoticeDetail(notice: Notice)
-    func postNoticeRemove(notice: Notice)
-}
-
 protocol NoticeDetailPresenterProtocol: class {
     var view: NoticeDetailViewProtocol? { get set  }
-    var interactor: NoticeDetailInteractorProtocol? { get set }
+    var interactor: NoticeDetailInteractorInputProtocol? { get set }
     var wireFrame: NoticeDetailWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
@@ -43,22 +34,32 @@ protocol NoticeDetailPresenterProtocol: class {
     func modifyButtonDidTap(state: AddNoticeState,
                             notice: Notice,
                             parentView: NoticeDetailViewProtocol)
+}
+
+protocol NoticeDetailInteractorInputProtocol: class {
+    var presenter: NoticeDetailInteractorOutputProtocol? { get set }
+    var remoteDataManager: NoticeDetailRemoteDataManagerInputProtocol? { get set }
     
-    //INTERACTOR -> PRESENTER
-    func noticeDetailResult(result: Bool, notice: Notice)
+    //PRESENTER -> INTERACTOR
+    func getNoticeDetail(notice: Notice)
+    func postNoticeRemove(notice: Notice)
+}
+
+protocol NoticeDetailInteractorOutputProtocol: class {
+    func getNoticeDetailSuccess(result: Bool, notice: Notice)
+    func getNoticeDetailFailure(message: String)
     func noticeRemoveResult(result: Bool, message: String)
 }
 
-protocol NoticeDetailRemoteDataManagerProtocol: class {
-    func getNoticeDetail(studyID: Int,
-                         noticeID: Int,
-                         completion: @escaping (_ result: Bool, _ data: Notice ) -> Void)
-    
-    func postNoticeRemove(studyID: Int,
-                          noticeID: Int,
-                          completion: @escaping (_ result: Bool, _ message: String ) -> Void)
+protocol NoticeDetailRemoteDataManagerInputProtocol: class {
+    var interactor: NoticeDetailRemoteDataManagerOutputProtocol? { get set }
+    func getNoticeDetail(studyID: Int, noticeID: Int)
+    func postNoticeRemove(studyID: Int, noticeID: Int)
 }
-
+protocol NoticeDetailRemoteDataManagerOutputProtocol: class {
+    func getNoticeDetailSuccess(notice: Notice)
+    func getNoticeDetailFailure(message: String)
+}
 protocol NoticeDetailWireFrameProtocol: class {
     static func createNoticeDetailModule(notice: Int,
                                          studyID: Int?,
