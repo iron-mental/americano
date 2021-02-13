@@ -41,7 +41,7 @@ final class MyApplyListView: UIViewController {
     
     private func layout() {
         self.view.addSubview(applyList)
-
+        
         self.applyList.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -58,12 +58,18 @@ extension MyApplyListView: MyApplyListViewProtocol {
             self.studyList = tempStudies
             applyList.reloadData()
             refreshControl.endRefreshing()
-            
         }
     }
     
-    func showLoading() { }
-    func hideLoading() { }
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    func hideLoading() {
+        LoadingRainbowCat.hide()
+    }
+    func showError() {
+        showToast(controller: self, message: "서버와의 연결이 불안정합니다.", seconds: 1)
+    }
 }
 
 extension MyApplyListView: UITableViewDelegate, UITableViewDataSource {

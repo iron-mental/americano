@@ -28,17 +28,31 @@ class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<[ApplyStudy]>.self, from: data!)
-                        
-                        if result.result, let studies = result.data {
-                            self.presenter?.didRetrieveStudies(studies: studies)
-                        } else {
+                        switch result.result {
+                        case true:
+                            guard let data = result.data else { return }
+                            self.presenter?.didRetrieveStudies(studies: data)
+                        case false:
                             self.presenter?.didRetrieveStudies(studies: nil)
                         }
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<[ApplyStudy]>.self, from: data)
+                            switch result.result {
+                            case true:
+                                guard let data = result.data else { return }
+                                self.presenter?.didRetrieveStudies(studies: data)
+                            case false:
+                                self.presenter?.didRetrieveStudies(studies: nil)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }

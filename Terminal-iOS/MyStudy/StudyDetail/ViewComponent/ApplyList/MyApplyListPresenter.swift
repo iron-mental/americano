@@ -7,14 +7,14 @@
 //
 
 import Foundation
- 
+
 class MyApplyListPresenter: MyApplyListPresenterProtocol {
     weak var view: MyApplyListViewProtocol?
     var interactor: MyApplyListInteractorInputProtocol?
     var wireFrame: MyApplyListWireFrameProtocol?
     
     func viewDidLoad() {
-        LoadingRainbowCat.show()
+        view?.showLoading()
         interactor?.getApplyList()
     }
     
@@ -25,14 +25,14 @@ class MyApplyListPresenter: MyApplyListPresenterProtocol {
 
 extension MyApplyListPresenter: MyApplyListInteractorOutputProtocol {
     func didRetrieveStudies(studies: [ApplyStudy]?) {
-        LoadingRainbowCat.hide {
-            self.view?.showStudyList(studies: studies)
-        }
+        view?.hideLoading()
+        self.view?.showStudyList(studies: studies)
+        
     }
     
     func onError() {
-        LoadingRainbowCat.hide {
-            print("MyApplylistPresenter 에서 생긴 에러")
-        }
+        view?.hideLoading()
+        self.view?.showError()
+        
     }
 }

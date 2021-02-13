@@ -13,6 +13,7 @@ protocol MyApplyListViewProtocol: class {
     
     // PRESENTER -> VIEW
     func showStudyList(studies: [ApplyStudy]?)
+    func showError()
     func showLoading()
     func hideLoading()
 }

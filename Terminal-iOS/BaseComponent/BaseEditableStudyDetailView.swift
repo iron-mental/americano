@@ -355,7 +355,6 @@ extension BaseEditableStudyDetailView: UITextViewDelegate {
 extension BaseEditableStudyDetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if type(of: scrollView) == UIScrollView.self {
-            
             currentScrollViewMinY = scrollView.contentOffset.y
             currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
             if !textViewTapFlag {
