@@ -9,20 +9,14 @@
 import UIKit
 
 enum AlertType {
-    //신청
-    case StudyApplyView
-    //신청 취소
-    case StudyApplyDeleteView
-    //이메일 auth
-    case EmailAuthView
-    //방장 위임
-    case DelegateHostConfirmView
-    //스터디 나가기
-    case LeaveStudyView
-    //스터디 삭제
-    case DeleteStudyView
-    //프로젝트 3개 이하 안내
-    case ProjectLimitView
+    
+    case StudyApplyView             //신청
+    case StudyApplyDeleteView       //신청 취소
+    case EmailAuthView              //이메일 auth
+    case DelegateHostConfirmView    //방장 위임
+    case LeaveStudyView             //스터디 나가기
+    case DeleteStudyView            //스터디 삭제
+    case ProjectLimitView           //프로젝트 3개 이하 안내
     
     var view: UIView {
         switch self {

@@ -22,7 +22,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     lazy var projectView = ProjectTableView()
     lazy var projectAddButton = UIButton()
     lazy var completeButton = UIButton()
-    var newestIndexPath: IndexPath = [0, 0]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -184,12 +183,12 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                         + superView.frame.origin.y
                 }
             }
-            if viewMinY >= (targetMinY) {
-                let distance = (targetMinY) - viewMinY
-                self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
-            } else if viewMaxY <= (targetMaxY) {
-                let distance = (targetMaxY) - viewMaxY
-                self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
+            if viewMinY >= targetMinY {
+                let distance = targetMinY - viewMinY
+                self.viewSetTop(distance: distance - self.accessoryCompleteButton.frame.height)
+            } else if viewMaxY <= targetMaxY {
+                let distance = targetMaxY - viewMaxY
+                self.viewSetBottom(distance: distance + self.accessoryCompleteButton.frame.height)
             } else {
                 self.isEditableViewTapping = false
             }
@@ -240,7 +239,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         let snsValidate = getCellData()
         if snsValidate.state {
             LoadingRainbowCat.show()
-            presenter?.completeModify(project: projectArr)
+            presenter?.completeModify(project: self.projectArr)
         } else {
             if snsValidate.kind == "whitespace" {
                 self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
@@ -251,10 +250,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     @objc func addProject() {
-        isEditableViewTapping = true
-        projectAddButton.isUserInteractionEnabled = false
-        let indexPath = IndexPath(row: projectArr.count, section: 0)
-        newestIndexPath = indexPath
+        self.isEditableViewTapping = true
+        self.projectAddButton.isUserInteractionEnabled = false
         
         if projectArr.count < 3 {
             let project = Project(id: nil,
@@ -264,11 +261,11 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                   snsAppstore: "",
                                   snsPlaystore: "",
                                   createAt: "")
-            projectArr.append(project)
-            if projectArr.count == 3 {
-                projectAddButton.backgroundColor = .darkGray
+            self.projectArr.append(project)
+            if self.projectArr.count == 3 {
+                self.projectAddButton.backgroundColor = .darkGray
             }
-            projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .fade)
+            self.projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .fade)
             if !projectArr.isEmpty {
                 let index = IndexPath(row: projectArr.count - 1, section: 0)
                 self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
@@ -346,7 +343,6 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    
 }
 
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
@@ -354,7 +350,9 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
         refreshEditableViewrange()
         isEditableViewTapping = true
         tappedView = textField
-        self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: tappedView!,
+                                viewMinY: CGFloat(currentScrollViewMinY),
+                                viewMaxY: CGFloat(currentScrollViewMaxY))
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -365,6 +363,8 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
         refreshEditableViewrange()
         isEditableViewTapping = true
         tappedView = textView
-        self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: tappedView!,
+                                viewMinY: CGFloat(currentScrollViewMinY),
+                                viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }
