@@ -52,8 +52,14 @@ extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol 
     }
     
     func imageModifyRetrieved(result: BaseResponse<Bool>) {
-        self.imageResult = result.result
-        mergeProfileModifyResult()
+        switch result.result {
+        case true:
+            self.imageResult = result.result
+            mergeProfileModifyResult()
+        case false:
+            self.imageResult = result.result
+            mergeProfileModifyResult()
+        }
     }
     
     func nicknameModifyRetrieved(result: BaseResponse<Bool>) {

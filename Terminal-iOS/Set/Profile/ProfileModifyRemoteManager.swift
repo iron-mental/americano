@@ -65,6 +65,16 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                         print(error.localizedDescription)
                     }
                 case .failure(let error):
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                            if result.message != nil {
+                                self.remoteRequestHandler?.imageModifyRetrieved(result: result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                     print(error.localizedDescription)
                 }
             }
