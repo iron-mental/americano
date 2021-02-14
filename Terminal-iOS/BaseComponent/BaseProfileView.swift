@@ -300,9 +300,3 @@ extension BaseProfileView {
         self.present(view, animated: true, completion: nil)
     }
 }
-
-extension BaseProfileView: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        print(scrollView)
-    }
-}
