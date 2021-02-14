@@ -11,7 +11,6 @@ import UIKit
 class ProjectModifyView: UIViewController, CellSubclassDelegate {
     var presenter: ProjectModifyPresenterProtocol?
     var projectArr: [Project] = []
-    var index: IndexPath?
     var isEditableViewTapping = false
     var currentScrollViewMinY: CGFloat = 0
     var currentScrollViewMaxY: CGFloat = 0
@@ -24,6 +23,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     lazy var projectAddButton = UIButton()
     lazy var completeButton = UIButton()
     var newestIndexPath: IndexPath = [0, 0]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -35,10 +35,11 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        refreshEditableViewrange()
-        view.becomeFirstResponder()
-        standardContentHeight = projectView.contentSize.height
+        self.refreshEditableViewrange()
+        self.view.becomeFirstResponder()
+        self.standardContentHeight = self.projectView.contentSize.height
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         self.keyboardRemoveObserver(with: self)
     }
@@ -63,13 +64,12 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         
         self.projectAddButton.do {
             $0.setTitleColor(.white, for: .normal)
-            if projectArr.count == 3 {
-                $0.backgroundColor = .darkGray
-            } else {
-                $0.backgroundColor = UIColor.appColor(.mainColor)
-            }
+            $0.backgroundColor
+                = self.projectArr.count == 3
+                ? .darkGray
+                : .appColor(.mainColor)
             $0.setTitle(" + 프로젝트 추가", for: .normal)
-            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 16)
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(addProject), for: .touchUpInside)
         }
@@ -78,13 +78,14 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.backgroundColor = .appColor(.mainColor)
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
-            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 18)
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
-        accessoryCompleteButton.do {
+        
+        self.accessoryCompleteButton.do {
             $0.setTitle("완료", for: .normal)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.backgroundColor = .appColor(.mainColor)
             $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
@@ -160,15 +161,27 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 //sns textField 클릭 시
                 if let cellView = parentView.superview?.superview,
                    let superView = parentView.superview?.superview?.superview {
-                    targetMinY = textView.frame.minY + parentView.frame.minY + cellView.frame.origin.y + superView.frame.origin.y
-                    targetMaxY = textView.frame.maxY + parentView.frame.minY + cellView.frame.origin.y + superView.frame.origin.y
+                    targetMinY = textView.frame.minY
+                        + parentView.frame.minY
+                        + cellView.frame.origin.y
+                        + superView.frame.origin.y
+                    
+                    targetMaxY = textView.frame.maxY
+                        + parentView.frame.minY
+                        + cellView.frame.origin.y
+                        + superView.frame.origin.y
                 }
             } else {
                 //제목 or 내용 textView 클릭 시
                 if let cellView = parentView.superview,
                    let superView = parentView.superview?.superview {
-                    targetMinY = textView.frame.minY + cellView.frame.origin.y + superView.frame.origin.y
-                    targetMaxY = textView.frame.maxY + cellView.frame.origin.y + superView.frame.origin.y
+                    targetMinY = textView.frame.minY
+                        + cellView.frame.origin.y
+                        + superView.frame.origin.y
+                    
+                    targetMaxY = textView.frame.maxY
+                        + cellView.frame.origin.y
+                        + superView.frame.origin.y
                 }
             }
             if viewMinY >= (targetMinY) {
@@ -178,7 +191,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 let distance = (targetMaxY) - viewMaxY
                 self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
             } else {
-                isEditableViewTapping = false
+                self.isEditableViewTapping = false
             }
         }
     }
@@ -192,8 +205,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.isEditableViewTapping = false
         }
     }
+    
     func viewSetBottom(distance: CGFloat) {
-        
         self.completeButton.alpha = 0
         UIView.animate(withDuration: 0.2) {
             self.projectView.contentSize.height += distance
@@ -205,8 +218,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     func refreshEditableViewrange() {
-        currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
-        currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
+        self.currentScrollViewMinY = self.projectView.contentOffset.y + self.projectView.frame.origin.y
+        self.currentScrollViewMaxY = self.projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -219,8 +232,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     @objc func keyboardWillHide() {
         self.projectView.transform = .identity
-        completeButton.alpha = 1
-        projectView.contentSize.height = standardContentHeight
+        self.completeButton.alpha = 1
+        self.projectView.contentSize.height = standardContentHeight
     }
     
     @objc func completeModify() {
@@ -242,8 +255,15 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         projectAddButton.isUserInteractionEnabled = false
         let indexPath = IndexPath(row: projectArr.count, section: 0)
         newestIndexPath = indexPath
+        
         if projectArr.count < 3 {
-            let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
+            let project = Project(id: nil,
+                                  title: "",
+                                  contents: "",
+                                  snsGithub: "",
+                                  snsAppstore: "",
+                                  snsPlaystore: "",
+                                  createAt: "")
             projectArr.append(project)
             if projectArr.count == 3 {
                 projectAddButton.backgroundColor = .darkGray
@@ -253,6 +273,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 let index = IndexPath(row: projectArr.count - 1, section: 0)
                 self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
             }
+            
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
                 if let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell {
                     cell.title.becomeFirstResponder()
