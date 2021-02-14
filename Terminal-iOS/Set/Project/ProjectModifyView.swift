@@ -37,6 +37,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         super.viewDidAppear(true)
         refreshEditableViewrange()
         view.becomeFirstResponder()
+        standardContentHeight = projectView.contentSize.height
     }
     override func viewDidDisappear(_ animated: Bool) {
         self.keyboardRemoveObserver(with: self)
@@ -260,7 +261,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         } else {
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
-        
     }
 }
 
@@ -314,7 +314,6 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         if type(of: scrollView) == ProjectTableView.self {
             refreshEditableViewrange()
             if !isEditableViewTapping {
