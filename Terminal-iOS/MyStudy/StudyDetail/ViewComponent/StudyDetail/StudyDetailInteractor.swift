@@ -23,24 +23,20 @@ class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
 }
 
 extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
-    func onStudyDetailRetrieved(result: Bool, studyDetail: StudyDetail?, message: String?) {
-        switch result {
+    func onStudyDetailRetrieved(result: BaseResponse<StudyDetailInfo>) {
+        switch result.result {
         case true:
-            guard let studyInfo = studyDetail else { return }
+            guard let studyInfo = result.data?.studyInfo else { return }
             presenter?.didRetrieveStudyDetail(studyInfo)
         case false:
-            guard let msg = message else { return }
+            guard let msg = result.message else { return }
             presenter?.onError(message: msg)
         }
         
     }
     
-    func postStudyJoinResult(result: Bool, message: String) {
-        switch result {
-        case true:
-            presenter?.studyJoinResult(result: result, message: message)
-        case false:
-            presenter?.studyJoinResult(result: result, message: message)
-        }
+    func postStudyJoinResult(result: BaseResponse<String>) {
+        guard let message = result.message else { return }
+        presenter?.studyJoinResult(result: result.result, message: message)
     }
 }

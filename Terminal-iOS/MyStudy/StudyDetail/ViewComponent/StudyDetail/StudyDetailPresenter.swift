@@ -12,7 +12,7 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
     weak var view: StudyDetailViewProtocol?
     var interactor: StudyDetailInteractorInputProtocol?
     var wireFrame: StudyDetailWireFrameProtocol?
-
+    
     func viewDidLoad() {
         
     }

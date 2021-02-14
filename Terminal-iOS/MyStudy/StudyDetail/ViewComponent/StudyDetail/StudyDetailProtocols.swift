@@ -76,8 +76,8 @@ protocol StudyDetailRemoteDataManagerInputProtocol: class {
 
 protocol StudyDetailRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    func onStudyDetailRetrieved(result: Bool, studyDetail: StudyDetail?, message: String?)
-    func postStudyJoinResult(result: Bool, message: String)
+    func onStudyDetailRetrieved(result: BaseResponse<StudyDetailInfo>)
+    func postStudyJoinResult(result: BaseResponse<String>)
 }
 
 protocol StudyDetailLocalDataManagerInputProtocol: class {
