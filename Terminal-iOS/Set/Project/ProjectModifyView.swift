@@ -11,7 +11,6 @@ import UIKit
 class ProjectModifyView: UIViewController, CellSubclassDelegate {
     var presenter: ProjectModifyPresenterProtocol?
     var projectArr: [Project] = []
-    var index: IndexPath?
     var isEditableViewTapping = false
     var currentScrollViewMinY: CGFloat = 0
     var currentScrollViewMaxY: CGFloat = 0
@@ -23,7 +22,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     lazy var projectView = ProjectTableView()
     lazy var projectAddButton = UIButton()
     lazy var completeButton = UIButton()
-    var newestIndexPath: IndexPath = [0, 0]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -35,10 +34,11 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        refreshEditableViewrange()
-        view.becomeFirstResponder()
-        standardContentHeight = projectView.contentSize.height
+        self.refreshEditableViewrange()
+        self.view.becomeFirstResponder()
+        self.standardContentHeight = self.projectView.contentSize.height
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         self.keyboardRemoveObserver(with: self)
     }
@@ -63,13 +63,12 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         
         self.projectAddButton.do {
             $0.setTitleColor(.white, for: .normal)
-            if projectArr.count == 3 {
-                $0.backgroundColor = .darkGray
-            } else {
-                $0.backgroundColor = UIColor.appColor(.mainColor)
-            }
+            $0.backgroundColor
+                = self.projectArr.count == 3
+                ? .darkGray
+                : .appColor(.mainColor)
             $0.setTitle(" + 프로젝트 추가", for: .normal)
-            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 16)
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(addProject), for: .touchUpInside)
         }
@@ -78,13 +77,14 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.backgroundColor = .appColor(.mainColor)
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
-            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.titleLabel?.font = UIFont.notosansMedium(size: 18)
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
-        accessoryCompleteButton.do {
+        
+        self.accessoryCompleteButton.do {
             $0.setTitle("완료", for: .normal)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.backgroundColor = .appColor(.mainColor)
             $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
@@ -160,25 +160,37 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 //sns textField 클릭 시
                 if let cellView = parentView.superview?.superview,
                    let superView = parentView.superview?.superview?.superview {
-                    targetMinY = textView.frame.minY + parentView.frame.minY + cellView.frame.origin.y + superView.frame.origin.y
-                    targetMaxY = textView.frame.maxY + parentView.frame.minY + cellView.frame.origin.y + superView.frame.origin.y
+                    targetMinY = textView.frame.minY
+                        + parentView.frame.minY
+                        + cellView.frame.origin.y
+                        + superView.frame.origin.y
+                    
+                    targetMaxY = textView.frame.maxY
+                        + parentView.frame.minY
+                        + cellView.frame.origin.y
+                        + superView.frame.origin.y
                 }
             } else {
                 //제목 or 내용 textView 클릭 시
                 if let cellView = parentView.superview,
                    let superView = parentView.superview?.superview {
-                    targetMinY = textView.frame.minY + cellView.frame.origin.y + superView.frame.origin.y
-                    targetMaxY = textView.frame.maxY + cellView.frame.origin.y + superView.frame.origin.y
+                    targetMinY = textView.frame.minY
+                        + cellView.frame.origin.y
+                        + superView.frame.origin.y
+                    
+                    targetMaxY = textView.frame.maxY
+                        + cellView.frame.origin.y
+                        + superView.frame.origin.y
                 }
             }
-            if viewMinY >= (targetMinY) {
-                let distance = (targetMinY) - viewMinY
-                self.viewSetTop(distance: distance - accessoryCompleteButton.frame.height)
-            } else if viewMaxY <= (targetMaxY) {
-                let distance = (targetMaxY) - viewMaxY
-                self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
+            if viewMinY >= targetMinY {
+                let distance = targetMinY - viewMinY
+                self.viewSetTop(distance: distance - self.accessoryCompleteButton.frame.height)
+            } else if viewMaxY <= targetMaxY {
+                let distance = targetMaxY - viewMaxY
+                self.viewSetBottom(distance: distance + self.accessoryCompleteButton.frame.height)
             } else {
-                isEditableViewTapping = false
+                self.isEditableViewTapping = false
             }
         }
     }
@@ -192,8 +204,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.isEditableViewTapping = false
         }
     }
+    
     func viewSetBottom(distance: CGFloat) {
-        
         self.completeButton.alpha = 0
         UIView.animate(withDuration: 0.2) {
             self.projectView.contentSize.height += distance
@@ -205,8 +217,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     func refreshEditableViewrange() {
-        currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
-        currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
+        self.currentScrollViewMinY = self.projectView.contentOffset.y + self.projectView.frame.origin.y
+        self.currentScrollViewMaxY = self.projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -219,15 +231,15 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     @objc func keyboardWillHide() {
         self.projectView.transform = .identity
-        completeButton.alpha = 1
-        projectView.contentSize.height = standardContentHeight
+        self.completeButton.alpha = 1
+        self.projectView.contentSize.height = standardContentHeight
     }
     
     @objc func completeModify() {
         let snsValidate = getCellData()
         if snsValidate.state {
             LoadingRainbowCat.show()
-            presenter?.completeModify(project: projectArr)
+            presenter?.completeModify(project: self.projectArr)
         } else {
             if snsValidate.kind == "whitespace" {
                 self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
@@ -238,21 +250,27 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     @objc func addProject() {
-        isEditableViewTapping = true
-        projectAddButton.isUserInteractionEnabled = false
-        let indexPath = IndexPath(row: projectArr.count, section: 0)
-        newestIndexPath = indexPath
+        self.isEditableViewTapping = true
+        self.projectAddButton.isUserInteractionEnabled = false
+        
         if projectArr.count < 3 {
-            let project = Project(id: nil, title: "", contents: "", snsGithub: "", snsAppstore: "", snsPlaystore: "", createAt: "")
-            projectArr.append(project)
-            if projectArr.count == 3 {
-                projectAddButton.backgroundColor = .darkGray
+            let project = Project(id: nil,
+                                  title: "",
+                                  contents: "",
+                                  snsGithub: "",
+                                  snsAppstore: "",
+                                  snsPlaystore: "",
+                                  createAt: "")
+            self.projectArr.append(project)
+            if self.projectArr.count == 3 {
+                self.projectAddButton.backgroundColor = .darkGray
             }
-            projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .fade)
+            self.projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .fade)
             if !projectArr.isEmpty {
                 let index = IndexPath(row: projectArr.count - 1, section: 0)
                 self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
             }
+            
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
                 if let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell {
                     cell.title.becomeFirstResponder()
@@ -261,6 +279,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 self.projectAddButton.isUserInteractionEnabled = true
             }
         } else {
+            self.projectAddButton.isUserInteractionEnabled = true
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
     }
@@ -288,14 +307,11 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
+        
         cell.delegate = self
         cell.setDelegate(with: self)
         cell.setTag(tag: indexPath.row)
-        cell.title.inputAccessoryView = accessoryCompleteButton
-        cell.contents.inputAccessoryView = accessoryCompleteButton
-        cell.sns.firstTextFeield.inputAccessoryView = accessoryCompleteButton
-        cell.sns.secondTextField.inputAccessoryView = accessoryCompleteButton
-        cell.sns.thirdTextField.inputAccessoryView = accessoryCompleteButton
+        cell.setAccessory(accessory: accessoryCompleteButton)
         
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
@@ -312,7 +328,10 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         let index = indexPath.row
         self.projectArr.remove(at: index)
         self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-        self.projectAddButton.backgroundColor = self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
+        self.projectAddButton.backgroundColor
+            = self.projectArr.count < 3
+            ? UIColor.appColor(.mainColor)
+            : UIColor.darkGray
         
         refreshEditableViewrange()
     }
@@ -325,7 +344,6 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    
 }
 
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
@@ -333,7 +351,9 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
         refreshEditableViewrange()
         isEditableViewTapping = true
         tappedView = textField
-        self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: tappedView!,
+                                viewMinY: CGFloat(currentScrollViewMinY),
+                                viewMaxY: CGFloat(currentScrollViewMaxY))
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -344,6 +364,8 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
         refreshEditableViewrange()
         isEditableViewTapping = true
         tappedView = textView
-        self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: tappedView!,
+                                viewMinY: CGFloat(currentScrollViewMinY),
+                                viewMaxY: CGFloat(currentScrollViewMaxY))
     }
 }

@@ -139,6 +139,7 @@ extension SelectCategoryView: SelectCategoryViewProtocol {
         layout()
         viewAppearAnimation()
     }
+    
     func backTapped() {
         viewDisappearAnimation()
     }

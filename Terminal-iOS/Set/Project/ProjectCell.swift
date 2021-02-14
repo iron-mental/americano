@@ -36,6 +36,14 @@ class ProjectCell: UITableViewCell {
         self.delegate = nil
     }
     
+    func setAccessory(accessory: UIButton) {
+        self.title.inputAccessoryView = accessory
+        self.contents.inputAccessoryView = accessory
+        self.sns.firstTextFeield.inputAccessoryView = accessory
+        self.sns.secondTextField.inputAccessoryView = accessory
+        self.sns.thirdTextField.inputAccessoryView = accessory
+    }
+    
     func setTag(tag: Int) {
         self.title.tag = tag
         self.contents.tag = tag
