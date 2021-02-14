@@ -233,6 +233,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     @objc func addProject() {
+        projectAddButton.isUserInteractionEnabled = false
         isEditableViewTapping = true
         let indexPath = IndexPath(row: projectArr.count, section: 0)
         newestIndexPath = indexPath
@@ -243,18 +244,17 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 projectAddButton.backgroundColor = .darkGray
             }
             projectView.insertRows(at: [IndexPath(row: projectArr.count - 1, section: 0)], with: .fade)
-            
             if !projectArr.isEmpty {
                 let index = IndexPath(row: projectArr.count - 1, section: 0)
                 self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
             }
-            if let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell {
-                cell.title.becomeFirstResponder()
-                standardContentHeight += cell.frame.height
-            } else {
-                print("세번 째 cell 못잡음@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
+                if let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell {
+                    cell.title.becomeFirstResponder()
+                    self.standardContentHeight += cell.frame.height
+                }
+                self.projectAddButton.isUserInteractionEnabled = true
             }
-            
         } else {
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
@@ -295,11 +295,6 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
-        
-//        if indexPath.elementsEqual(newestIndexPath) {
-//            newestIndexPath = IndexPath()
-//            cell.title.becomeFirstResponder()
-//        }
         return cell
     }
     
@@ -327,6 +322,7 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
 }
 
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {

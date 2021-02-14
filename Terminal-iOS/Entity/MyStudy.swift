@@ -11,6 +11,10 @@ import Foundation
 struct MyStudyList: Codable {
     var studyList: [MyStudy]?
     var badge: Badge?
+    
+    enum CodingKeys: String, CodingKey {
+        case studyList = "study_list"
+    }
 }
 struct MyStudy: Codable {
     var id: Int
