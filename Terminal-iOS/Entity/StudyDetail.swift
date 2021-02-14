@@ -15,7 +15,6 @@ struct StudyDetailInfo: Codable {
 }
 struct StudyDetail: Codable {
     let participate: [Participate]
-    
     let id: Int
     let category, title, introduce: String
     let progress, studyTime: String
