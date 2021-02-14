@@ -279,6 +279,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 self.projectAddButton.isUserInteractionEnabled = true
             }
         } else {
+            self.projectAddButton.isUserInteractionEnabled = true
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
     }
