@@ -26,7 +26,7 @@ class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerIn
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<ApplyUserResult>.self, from: data!)
                         if let data = result.data {
-                            self.interactor?.retriveMyApplyStudyDetail(result: result.result, data: data)
+                            self.interactor?.retriveMyApplyStudyDetail(result: result.result, data: data, message: nil)
                         }
                     } catch {
                         print(error.localizedDescription)
@@ -34,9 +34,9 @@ class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerIn
                 case .failure:
                     if let data = response.data {
                         do {
-                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            let result = try JSONDecoder().decode(BaseResponse<ApplyUserResult>.self, from: data)
                             if let message = result.message {
-                                //                                self.interactor?.retriveMyApplyStudyDetail(result: result.result, data: data)
+                                self.interactor?.retriveMyApplyStudyDetail(result: result.result, data: nil, message: message)
                             }
                         } catch {
                             print("error")

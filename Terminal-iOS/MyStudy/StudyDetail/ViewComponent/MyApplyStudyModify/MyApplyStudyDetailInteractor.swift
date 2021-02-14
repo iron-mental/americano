@@ -31,19 +31,18 @@ class MyApplyStudyModifyInteractor: MyApplyStudyModifyInteractorInputProtocol {
 }
 
 extension MyApplyStudyModifyInteractor: MyApplyStudyModifyRemoteDataManagerOutputProtocol {
-    func retriveMyApplyStudyDetailFailed(message: String) {
-//        <#code#>
-    }
     
-    func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult) {
+    func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult? = nil, message: String? = nil) {
         
         switch result {
         case true:
-            applyID = data.id
-            let message = data.message
+            guard let applyUserInfo = data else { return }
+            applyID = applyUserInfo.id
+            let message = applyUserInfo.message
             presenter?.retriveMyApplyStudyDetail(result: result, message: message)
         case false:
-            presenter?.retriveMyApplyStudyDetail(result: result, message: data.message)
+            guard let message = message else { return }
+            presenter?.retriveMyApplyStudyDetail(result: result, message: message)
         }
     }
     

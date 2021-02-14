@@ -43,7 +43,6 @@ protocol MyApplyStudyModifyInteractorOutputProtocol: class {
     
 //    INTERACTOR -> PRESENTER
     func retriveMyApplyStudyDetail(result: Bool, message: String)
-    func retriveMyApplyStudyDetailFailed(message: String)
     func retriveModifyApplyMessage(result: Bool, message: String)
 }
 
@@ -58,8 +57,7 @@ protocol MyApplyStudyModifyRemoteDataManagerInputProtocol: class {
 protocol MyApplyStudyModifyRemoteDataManagerOutputProtocol: class {
     
 //    REMOTEDATAMANAGER -> INTERACTOR
-    func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult)
-    func retriveMyApplyStudyDetailFailed(message: String)
+    func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult?, message: String?)
     func retriveModifyApplyMessage(result: Bool, message: String)
 }
 
