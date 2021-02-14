@@ -13,8 +13,6 @@ struct StudyDetailInfo: Codable {
     let studyInfo: StudyDetail
     let badge: Badge
 }
-
-
 struct StudyDetail: Codable {
     let participate: [Participate]
     
