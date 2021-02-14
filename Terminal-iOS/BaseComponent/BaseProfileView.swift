@@ -49,7 +49,6 @@ class BaseProfileView: UIViewController {
         }
         
         self.scrollView.do {
-            $0.delegate = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         self.backgroundView.do {

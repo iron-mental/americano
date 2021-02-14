@@ -35,9 +35,9 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        standardContentHeight = projectView.contentSize.height
-        currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
+        refreshEditableViewrange()
         view.becomeFirstResponder()
+        standardContentHeight = projectView.contentSize.height
     }
     override func viewDidDisappear(_ animated: Bool) {
         self.keyboardRemoveObserver(with: self)
@@ -189,7 +189,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
-            //            self.isEditableViewTapping = false
+            self.isEditableViewTapping = false
         }
     }
     func viewSetBottom(distance: CGFloat) {
@@ -200,8 +200,13 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
-            //            self.isEditableViewTapping = false
+            self.isEditableViewTapping = false
         }
+    }
+    
+    func refreshEditableViewrange() {
+        currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
+        currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -233,8 +238,8 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     }
     
     @objc func addProject() {
-        projectAddButton.isUserInteractionEnabled = false
         isEditableViewTapping = true
+        projectAddButton.isUserInteractionEnabled = false
         let indexPath = IndexPath(row: projectArr.count, section: 0)
         newestIndexPath = indexPath
         if projectArr.count < 3 {
@@ -258,7 +263,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         } else {
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
-        
     }
 }
 
@@ -302,21 +306,20 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         guard let indexPath = self.projectView.indexPath(for: cell) else {
             return
         }
+        if let cellHeight = projectView.cellForRow(at: [0, projectArr.count - 1])?.frame.height {
+            standardContentHeight -= cellHeight
+        }
         let index = indexPath.row
-        
         self.projectArr.remove(at: index)
         self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         self.projectAddButton.backgroundColor = self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
-        standardContentHeight -= 433
-        currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
-        currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
+        
+        refreshEditableViewrange()
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
         if type(of: scrollView) == ProjectTableView.self {
-            currentScrollViewMinY = projectView.contentOffset.y + projectView.frame.origin.y
-            currentScrollViewMaxY = projectView.contentOffset.y + (UIScreen.main.bounds.height - keyboardHeight)
+            refreshEditableViewrange()
             if !isEditableViewTapping {
                 view.endEditing(true)
             }
@@ -327,6 +330,7 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
 
 extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        refreshEditableViewrange()
         isEditableViewTapping = true
         tappedView = textField
         self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
@@ -337,6 +341,7 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
+        refreshEditableViewrange()
         isEditableViewTapping = true
         tappedView = textView
         self.editableViewDidTap(textView: tappedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))

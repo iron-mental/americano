@@ -20,11 +20,6 @@ class ProjectView: UIView {
          frame: CGRect
     ){
         super.init(frame: frame)
-        
-        self.do {
-            $0.layer.borderWidth = 0.2
-            $0.layer.borderColor = UIColor.red.cgColor
-        }
         let projectTitle = UILabel().then {
             $0.text = title
             $0.textColor = .white
