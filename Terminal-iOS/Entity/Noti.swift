@@ -14,12 +14,14 @@ struct Noti: Codable {
     let id, studyID: Int
     let studyTitle, message: String
     let pushEvent, createdAt: String
+    let confirm: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
         case studyTitle = "study_title"
-        case studyID
+        case studyID = "study_id"
         case pushEvent, message
-        case createdAt
+        case createdAt = "created_at"
+        case confirm
     }
 }

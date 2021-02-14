@@ -12,7 +12,7 @@ class NotificationView: UIViewController {
     var presenter: NotificationPresenterProtocol?
     
     let tableView = UITableView()
-    var notiList: [Noti] = [Noti(id: 2, studyID: 2, studyTitle: "사당역 모임", message: "스터디에 참여하고 싶다고 왔슴!", pushEvent: "ㄹㅇ", createdAt: "ㄹㅇ")]
+    var notiList: [Noti] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,8 +61,8 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
 
 extension NotificationView: NotificationViewProtocol {
     func showNotiList(notiList: [Noti]) {
-//        self.notiList = notiList
-//        self.tableView.reloadData()
+        self.notiList = notiList
+        self.tableView.reloadData()
     }
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)

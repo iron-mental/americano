@@ -28,6 +28,7 @@ class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol 
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<[Noti]>.self, from: data!)
+                        
                         if result.data != nil {
                             self.interactor?.onRetrievedAlert(result: result)
                         }
