@@ -20,7 +20,6 @@ struct StudyDetail: Codable {
     let progress, studyTime: String
     let snsWeb, snsNotion, snsEvernote, image: String?
     let location: Location
-    
     let authority: String
     
     enum CodingKeys: String, CodingKey {
