@@ -170,6 +170,18 @@ extension LocationModifyView: LocationModifyViewProtocol {
             // error handle
         }
     }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
+    }
 }
 
 extension LocationModifyView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

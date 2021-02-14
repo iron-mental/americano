@@ -35,9 +35,15 @@ class LocationModifyInteractor: LocationModifyInteractorInputProtocol {
 
 extension LocationModifyInteractor: LocationModifyRemoteDataManagerOutputProtocol {
     func onRetrieveAddress(result: BaseResponse<[Address]>) {
-        let isSuccess: Bool = result.result
-        let address: [Address] = result.data!  // 일단 강제 언래핑
-        self.presenter?.retrievedAddress(result: isSuccess, address: address)
+        switch result.result {
+        case true:
+            let isSuccess: Bool = result.result
+            let address: [Address] = result.data!  // 일단 강제 언래핑
+            self.presenter?.retrievedAddress(result: isSuccess, address: address)
+        case false:
+            guard let message = result.message else { return }
+            self.presenter?.retrievedAddressFailed(message: message)
+        }
     }
     
     func didCompleteModify(result: BaseResponse<Bool>) {

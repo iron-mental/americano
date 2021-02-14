@@ -14,6 +14,9 @@ protocol LocationModifyViewProtocol: class {
     // PRESENTER -> VIEW
     func showAddress(address: [Address])
     func modifyResultHandle(result: Bool, message: String)
+    func showError(message: String)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol LocationModifyWireFrameProtocol: class {
@@ -44,6 +47,7 @@ protocol LocationModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func retrievedAddress(result: Bool, address: [Address])
     func didCompleteModify(result: Bool, message: String)
+    func retrievedAddressFailed(message: String)
 }
 
 protocol LocationModifyRemoteDataManagerInputProtocol: class {
