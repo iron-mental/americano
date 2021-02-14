@@ -24,15 +24,16 @@ class MyApplyListPresenter: MyApplyListPresenterProtocol {
 }
 
 extension MyApplyListPresenter: MyApplyListInteractorOutputProtocol {
-    func didRetrieveStudies(studies: [ApplyStudy]?) {
-        view?.hideLoading()
-        self.view?.showStudyList(studies: studies)
-        
-    }
-    
-    func onError() {
-        view?.hideLoading()
-        self.view?.showError()
-        
+    func didRetrieveStudies(result: BaseResponse<[ApplyStudy]>) {
+        switch result.result {
+        case true:
+            guard let list = result.data else { return }
+            view?.hideLoading()
+            self.view?.showStudyList(studies: list)
+        case false:
+            guard let message = result.message else { return }
+            view?.hideLoading()
+            self.view?.showError(message: message)
+        }
     }
 }

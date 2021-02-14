@@ -28,12 +28,8 @@ class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<[ApplyStudy]>.self, from: data!)
-                        switch result.result {
-                        case true:
-                            guard let data = result.data else { return }
-                            self.presenter?.didRetrieveStudies(studies: data)
-                        case false:
-                            self.presenter?.didRetrieveStudies(studies: nil)
+                        if result.data != nil {
+                            self.presenter?.didRetrieveStudies(result: result)
                         }
                     } catch {
                         print(error.localizedDescription)
@@ -42,12 +38,8 @@ class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<[ApplyStudy]>.self, from: data)
-                            switch result.result {
-                            case true:
-                                guard let data = result.data else { return }
-                                self.presenter?.didRetrieveStudies(studies: data)
-                            case false:
-                                self.presenter?.didRetrieveStudies(studies: nil)
+                            if result.message != nil {
+                                self.presenter?.didRetrieveStudies(result: result)
                             }
                         } catch {
                             
