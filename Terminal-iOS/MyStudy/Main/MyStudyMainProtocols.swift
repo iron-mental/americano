@@ -54,7 +54,6 @@ protocol MyStudyMainRemoteDataManagerProtocol: class {
     var interactor: MyStudyMainInteractorProtocol? { get set }
     //INTERACTOR -> RemoteDataManager
     func getMyStudyList(completion: @escaping (_: BaseResponse<MyStudyList>) -> Void)
-    //func getStudyDetail
 }
 
 protocol MyStudyMainLocalDataManagerProtocol: class {
