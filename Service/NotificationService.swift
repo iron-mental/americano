@@ -25,7 +25,7 @@ class NotificationService: UNNotificationServiceExtension {
             let pref = UserDefaults.init(suiteName: "group.id.gits.notifiserviceextension")
             pref?.set(data, forKey: "NOTIFI_DATA")
             pref?.synchronize()
-            print("data",data)
+            print("data", data)
             contentHandler(bestAttemptContent)
         }
     }

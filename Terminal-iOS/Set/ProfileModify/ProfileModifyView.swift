@@ -333,8 +333,8 @@ class ProfileModifyView: UIViewController, CellSubclassDelegate {
     
     @objc func didImageViewClicked() {
         let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { action in self.openLibrary() }
-        let camera =  UIAlertAction(title: "카메라", style: .default) { action in self.openCamera() }
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
+        let camera =  UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)

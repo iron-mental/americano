@@ -10,11 +10,11 @@ import UIKit
 
 class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
     static func createModule() -> UIViewController {
-        var view: ProfileDetailViewProtocol = ProfileDetailView()
+        let view: ProfileDetailViewProtocol = ProfileDetailView()
         let presenter: ProfileDetailPresenterProtocol & ProfileDetailInteractorOutputProtocol = ProfileDetailPresenter()
         let interactor: ProfileDetailInteractorInputProtocol & ProfileDetailRemoteDataManagerOutputProtocol = ProfileDetailInteractor()
         let wireFrame: ProfileDetailWireFrameProtocol = ProfileDetailWireFrame()
-        var remoteManager: ProfileDetailRemoteDataManagerInputProtocol = ProfileDetailRemoteManager()
+        let remoteManager: ProfileDetailRemoteDataManagerInputProtocol = ProfileDetailRemoteManager()
         
         view.presenter = presenter
         

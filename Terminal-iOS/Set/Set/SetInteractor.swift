@@ -27,7 +27,7 @@ extension SetInteractor: SetRemoteDataManagerOutputProtocol {
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
         guard let result = userInfo.data else { return }
         //기존의 내용을 수정
-        if let _ = CoreDataManager.shared.getUserinfo() {
+        if CoreDataManager.shared.getUserinfo() != nil {
             //core에 있다는소리
             //put 하는 함수
             CoreDataManager.shared.putUserInfo(userInfo: result)

@@ -33,8 +33,9 @@ class StudyCategoryRemoteManager: StudyCategoryRemoteDataManagerInputProtocol {
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<[String]>.self, from: data)
-                            guard let message = result.message else { return }
-                            self.interactor?.onCategoriesRetrieved(result: result)
+                            if result.message != nil {
+                                self.interactor?.onCategoriesRetrieved(result: result)
+                            }
                         } catch {
                             print(error.localizedDescription)
                         }
