@@ -37,8 +37,7 @@ protocol ApplyUserPresenterProtocol: class {
 
 protocol ApplyUserInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    func didRetrieveUser(userList: [ApplyUser]?)
-    func onError(message: String)
+    func didRetrieveUser(result: BaseResponse<[ApplyUser]>)
 }
 
 protocol ApplyUserInteractorInputProtocol: class {

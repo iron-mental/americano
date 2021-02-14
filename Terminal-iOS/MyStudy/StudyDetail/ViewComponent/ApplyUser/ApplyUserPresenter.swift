@@ -25,13 +25,16 @@ class ApplyUserPresenter: ApplyUserPresenterProtocol {
 
 
 extension ApplyUserPresenter: ApplyUserInteractorOutputProtocol {
-    func didRetrieveUser(userList: [ApplyUser]?) {
-        view?.hideLoading()
-        self.view?.showUserList(userList: userList)
-    }
-    
-    func onError(message: String) {
-        view?.hideLoading()
-        print("ApplyUserPresenter 에서 생긴 오류")
+    func didRetrieveUser(result: BaseResponse<[ApplyUser]>) {
+        switch result.result {
+        case true:
+            view?.hideLoading()
+            guard let userList = result.data else { return }
+            self.view?.showUserList(userList: userList)
+        case false:
+            view?.hideLoading()
+            guard let message = result.message else { return }
+            view?.showError(message: message)
+        }
     }
 }

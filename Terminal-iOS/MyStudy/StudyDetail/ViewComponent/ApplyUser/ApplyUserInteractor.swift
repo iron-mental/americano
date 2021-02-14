@@ -27,11 +27,8 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data!)
-                        
-                        if result.result, let userList = result.data {
-                            self.presenter?.didRetrieveUser(userList: userList)
-                        } else {
-                            self.presenter?.didRetrieveUser(userList: [])
+                        if result.data != nil {
+                            self.presenter?.didRetrieveUser(result: result)
                         }
                     } catch {
                         print(error.localizedDescription)
@@ -39,9 +36,10 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
                 case .failure:
                     if let data = response.data {
                         do {
-                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
-                            guard let message = result.message else { return }
-                            self.presenter?.onError(message: message)
+                            let result = try JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data)
+                            if result.message != nil {
+                                self.presenter?.didRetrieveUser(result: result)
+                            }
                         } catch {
                             
                         }
