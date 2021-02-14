@@ -33,9 +33,9 @@ final class BaseInterceptor: RequestInterceptor {
         }
         print("statusCode:", statusCode)
         switch statusCode {
-        case 400, 422...503:
+        case 400, 422...503, 403:
             completion(.doNotRetry)
-        case 401, 403:
+        case 401:
             if request.retryCount < retryLimit {
                 refreshToken { success in
                     print("토큰 갱신 성공여부 :", success)

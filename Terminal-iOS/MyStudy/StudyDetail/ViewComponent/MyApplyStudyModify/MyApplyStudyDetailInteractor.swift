@@ -31,6 +31,10 @@ class MyApplyStudyModifyInteractor: MyApplyStudyModifyInteractorInputProtocol {
 }
 
 extension MyApplyStudyModifyInteractor: MyApplyStudyModifyRemoteDataManagerOutputProtocol {
+    func retriveMyApplyStudyDetailFailed(message: String) {
+//        <#code#>
+    }
+    
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult) {
         
         switch result {
@@ -39,18 +43,16 @@ extension MyApplyStudyModifyInteractor: MyApplyStudyModifyRemoteDataManagerOutpu
             let message = data.message
             presenter?.retriveMyApplyStudyDetail(result: result, message: message)
         case false:
-            print("MyApplyStudyDetailInteractor 에서 에러남")
+            presenter?.retriveMyApplyStudyDetail(result: result, message: data.message)
         }
     }
     
     func retriveModifyApplyMessage(result: Bool, message: String) {
-        
         switch result {
         case true:
             presenter?.retriveModifyApplyMessage(result: result, message: message)
         case false:
-            
-            print("MyApplyStudyDetailInteractor 에서 에러남")
+            presenter?.retriveModifyApplyMessage(result: result, message: message)
         }
     }
 }

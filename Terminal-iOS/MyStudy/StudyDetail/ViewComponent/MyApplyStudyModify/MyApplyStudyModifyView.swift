@@ -136,7 +136,7 @@ extension MyApplyStudyModifyView: MyApplyStudyModifyViewProtocol {
         attribute()
     }
     
-    func showError() {
-        print("MyApplyStudyDetailView 에서 난 오류")
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }

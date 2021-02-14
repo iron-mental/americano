@@ -25,6 +25,10 @@ class MyApplyStudyModifyPresenter: MyApplyStudyModifyPresenterInputProtocol {
 }
 
 extension MyApplyStudyModifyPresenter: MyApplyStudyModifyInteractorOutputProtocol {
+    func retriveMyApplyStudyDetailFailed(message: String) {
+//        <#code#>
+    }
+    
     func retriveModifyApplyMessage(result: Bool, message: String) {
         switch result {
         case true:
@@ -33,7 +37,7 @@ extension MyApplyStudyModifyPresenter: MyApplyStudyModifyInteractorOutputProtoco
             }
         case false:
             LoadingRainbowCat.hide {
-                self.view?.showError()
+                self.view?.showError(message: message)
             }
         }
     }
@@ -47,7 +51,7 @@ extension MyApplyStudyModifyPresenter: MyApplyStudyModifyInteractorOutputProtoco
             }
         case false:
             LoadingRainbowCat.hide {
-                self.view?.showError()
+                self.view?.showError(message: message)
             }
         }
     }   

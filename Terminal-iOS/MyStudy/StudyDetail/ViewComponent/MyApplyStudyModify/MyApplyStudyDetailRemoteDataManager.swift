@@ -13,7 +13,6 @@ class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerIn
     weak var interactor: MyApplyStudyModifyRemoteDataManagerOutputProtocol?
     
     func getMyApplyStudyDetail(studyID: Int, userID: Int) {
-        
         TerminalNetworkManager
             .shared
             .session
@@ -32,8 +31,17 @@ class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerIn
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if let message = result.message {
+                                //                                self.interactor?.retriveMyApplyStudyDetail(result: result.result, data: data)
+                            }
+                        } catch {
+                            print("error")
+                        }
+                    }
                 }
             }
     }
@@ -57,7 +65,7 @@ class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerIn
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
+                case .failure:
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
