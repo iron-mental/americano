@@ -13,7 +13,6 @@ class MyApplyStudyInfoRemoteDataManager: MyApplyStudyInfoRemoteDataManagerInputP
     weak var interactor: MyApplyStudyInfoRemoteDataManagerOutputProtocol?
     
     func deleteApply(studyID: Int, applyID: Int) {
-        
         TerminalNetworkManager
             .shared
             .session
@@ -34,9 +33,17 @@ class MyApplyStudyInfoRemoteDataManager: MyApplyStudyInfoRemoteDataManagerInputP
                         print("error")
                     }
                     
-                case .failure(let err):
-                    
-                    interactor?.retriveDeleteApplyResult(result: false, message: "서버와의 연결이 불안정 합니다.")
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if let message = result.message {
+                                self.interactor?.retriveDeleteApplyResult(result: result.result, message: message)
+                            }
+                        } catch {
+                            print("error")
+                        }
+                    }
                 }
             }
     }
