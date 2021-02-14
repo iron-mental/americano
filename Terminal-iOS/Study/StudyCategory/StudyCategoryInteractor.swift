@@ -21,7 +21,8 @@ class StudyCategoryInteractor: StudyCategoryInteractorInputProtocol {
 extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol {
     func onCategoriesRetrieved(result: BaseResponse<[String]>) {
         var categoryList: [Category] = []
-        if result.result {
+        switch result.result {
+        case true:
             if let categories = result.data {
                 for category in categories {
                     /// Static Image
@@ -31,10 +32,9 @@ extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol 
                 }
                 presenter?.didRetrieveCategories(categoryList)
             }
+        case false:
+            guard let message = result.message else { return }
+            presenter?.onError(message: message)
         }
-    }
-    
-    func onError(message: String) {
-        presenter?.onError(message: message)
     }
 }

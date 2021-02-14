@@ -71,7 +71,6 @@ protocol StudyCategoryRemoteDataManagerInputProtocol: class {
 protocol StudyCategoryRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
        func onCategoriesRetrieved(result: BaseResponse<[String]>)
-       func onError(message: String)
 }
 
 protocol StudyCategoryLocalDataManagerInputProtocol: class {
