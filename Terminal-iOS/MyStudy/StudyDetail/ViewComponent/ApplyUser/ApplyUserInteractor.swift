@@ -36,8 +36,16 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            guard let message = result.message else { return }
+                            self.presenter?.onError(message: message)
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }

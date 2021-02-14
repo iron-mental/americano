@@ -72,7 +72,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     } catch {
                         self.interactor?.putStudyInfoResult(result: false, message: "실패하였습니다.")
                     }
-                case .failure(let error):
+                case .failure:
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)

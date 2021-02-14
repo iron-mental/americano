@@ -55,8 +55,16 @@ extension ApplyUserView: ApplyUserViewProtocol {
         }
     }
     
-    func showLoading() { }
-    func hideLoading() { }
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    func hideLoading() {
+        LoadingRainbowCat.hide()
+    }
 }
 
 extension ApplyUserView: UITableViewDelegate, UITableViewDataSource {
