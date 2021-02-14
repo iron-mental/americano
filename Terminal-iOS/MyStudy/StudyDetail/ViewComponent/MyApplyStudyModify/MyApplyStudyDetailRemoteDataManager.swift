@@ -58,7 +58,16 @@ class MyApplyStudyModifyRemoteDataManager: MyApplyStudyModifyRemoteDataManagerIn
                         print(error.localizedDescription)
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if let message = result.message {
+                                self.interactor?.retriveModifyApplyMessage(result: result.result, message: message)
+                            }
+                        } catch {
+                            print("error")
+                        }
+                    }
                 }
             }
     }
