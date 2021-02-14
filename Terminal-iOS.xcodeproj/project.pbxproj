@@ -881,6 +881,7 @@
 				CCA25A8B25B6962C00280C80 /* BaseEditableStudyDetailView.swift */,
 				CC7B209825C3B7B6009920DC /* PaddingUILabel.swift */,
 				CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */,
+				CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -905,7 +906,6 @@
 				CCA25AB725B6CE0900280C80 /* ModifyStudy */,
 				CCEEB45925AC4C9600F522C4 /* MyApplyStudyModify */,
 				A53B11AD258CB6CB00498A96 /* ApplyUserDetail */,
-				CC84850525A47FD700C792BC /* AlertView */,
 				A510B9FC2583BB050084559C /* ApplyUser */,
 				A5C81C3F25836436008F2B09 /* ApplyList */,
 				CC5794F22570C21D00DF96AB /* AddNotice */,
@@ -1269,14 +1269,6 @@
 				CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */,
 			);
 			path = Component;
-			sourceTree = "<group>";
-		};
-		CC84850525A47FD700C792BC /* AlertView */ = {
-			isa = PBXGroup;
-			children = (
-				CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */,
-			);
-			path = AlertView;
 			sourceTree = "<group>";
 		};
 		CC99A0CA25342D400027BA24 /* Component */ = {

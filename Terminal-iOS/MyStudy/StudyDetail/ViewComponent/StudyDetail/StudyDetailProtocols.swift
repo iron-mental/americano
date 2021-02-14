@@ -63,21 +63,21 @@ protocol StudyDetailInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func didRetrieveStudyDetail(_ studyDetail: StudyDetail)
     func studyJoinResult(result: Bool, message: String)
-    func onError()
+    func onError(message: String)
 }
 
 protocol StudyDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
-    func getStudyDetail(studyID: String, completionHandler: @escaping (StudyDetail) -> Void)
-    func postStudyJoin(studyID: Int, message: String, completion: @escaping (_ result: Bool, _ data: String) -> Void)
+    func getStudyDetail(studyID: String)
+    func postStudyJoin(studyID: Int, message: String)
 }
 
 protocol StudyDetailRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-    func onStudyDetailRetrieved(_ studyDetail: StudyDetail)
-    func onError()
+    func onStudyDetailRetrieved(result: Bool, studyDetail: StudyDetail?, message: String?)
+    func postStudyJoinResult(result: Bool, message: String)
 }
 
 protocol StudyDetailLocalDataManagerInputProtocol: class {

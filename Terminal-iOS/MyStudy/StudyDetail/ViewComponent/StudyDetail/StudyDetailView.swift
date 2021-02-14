@@ -343,7 +343,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
     }
     
     func showLoading() {
-        
+        LoadingRainbowCat.show()
     }
     
     func hideLoading() {

@@ -14,29 +14,33 @@ class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
     var remoteDatamanager: StudyDetailRemoteDataManagerInputProtocol?
     
     func retrieveStudyDetail(studyID: String) {
-        remoteDatamanager?.getStudyDetail(studyID: studyID, completionHandler: {
-            self.presenter?.didRetrieveStudyDetail($0)
-        })
+        remoteDatamanager?.getStudyDetail(studyID: studyID)
     }
     
     func postStudyJoin(studyID: Int, message: String) {
-        remoteDatamanager?.postStudyJoin(studyID: studyID, message: message, completion: { [self] result, message in
-            switch result {
-            case true:
-                presenter?.studyJoinResult(result: result, message: message)
-            case false:
-                presenter?.studyJoinResult(result: result, message: message)
-            }
-        })
+        remoteDatamanager?.postStudyJoin(studyID: studyID, message: message)
     }
 }
 
 extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
-    func onStudyDetailRetrieved(_ studyDetail: StudyDetail) {
-        presenter?.didRetrieveStudyDetail(studyDetail)
+    func onStudyDetailRetrieved(result: Bool, studyDetail: StudyDetail?, message: String?) {
+        switch result {
+        case true:
+            guard let studyInfo = studyDetail else { return }
+            presenter?.didRetrieveStudyDetail(studyInfo)
+        case false:
+            guard let msg = message else { return }
+            presenter?.onError(message: msg)
+        }
+        
     }
     
-    func onError() {
-        
+    func postStudyJoinResult(result: Bool, message: String) {
+        switch result {
+        case true:
+            presenter?.studyJoinResult(result: result, message: message)
+        case false:
+            presenter?.studyJoinResult(result: result, message: message)
+        }
     }
 }
