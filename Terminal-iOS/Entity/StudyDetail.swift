@@ -19,7 +19,6 @@ struct StudyDetail: Codable {
     let category, title, introduce: String
     let progress, studyTime: String
     let snsWeb, snsNotion, snsEvernote, image: String?
-    
     let location: Location
     
     let authority: String
