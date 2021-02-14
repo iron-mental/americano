@@ -61,8 +61,13 @@ class AddNoticeView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         isEssentialFlagSege.do {
-            $0.selectedSegmentIndex = 1
-            $0.selectedSegmentTintColor = UIColor.appColor(.noticeColor)
+            if let pinned = self.notice?.pinned {
+                $0.selectedSegmentIndex = pinned ? 0 : 1
+                $0.selectedSegmentTintColor
+                    = pinned
+                    ? .appColor(.pinnedNoticeColor)
+                    : .appColor(.noticeColor)
+            }
             $0.addTarget(self, action: #selector(segeIsMoving), for: .valueChanged)
         }
         dismissButton.do {
@@ -163,7 +168,10 @@ class AddNoticeView: UIViewController {
     }
     
     @objc func segeIsMoving(sender: UISegmentedControl) {
-        isEssentialFlagSege.selectedSegmentTintColor = sender.selectedSegmentIndex == 0 ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
+        isEssentialFlagSege.selectedSegmentTintColor
+            = sender.selectedSegmentIndex == 0
+            ? UIColor.appColor(.pinnedNoticeColor)
+            : UIColor.appColor(.noticeColor)
     }
     
     @objc func dismissButtonTap() {
