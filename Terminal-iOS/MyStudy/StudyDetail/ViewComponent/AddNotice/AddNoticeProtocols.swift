@@ -35,7 +35,6 @@ protocol AddNoticePresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func addNoticeValid(notice: Int, studyID: Int)
     func addNoticeInvalid(message: String)
-    //    func putNoticeResult(result: BaseResponse<String>)
 }
 
 protocol AddNoticeInteractorProtocol: class {
