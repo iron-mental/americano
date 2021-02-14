@@ -77,7 +77,7 @@ extension DelegateHostView: DelegateHostViewProtocol {
     }
     
     func showError(message: String) {
-        showToast(controller: self, message: message, seconds: 1, completion: nil)
+        showToast(controller: self, message: message, seconds: 1)
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 }

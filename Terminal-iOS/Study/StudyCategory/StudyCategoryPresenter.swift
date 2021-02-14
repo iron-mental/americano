@@ -42,8 +42,8 @@ extension StudyCategoryPresenter: StudyCategoryInteractorOutputProtocol {
         view?.showCategoryList(with: categories)
     }
     
-    func onError() {
+    func onError(message: String) {
         view?.hideLoading()
-        view?.showError()
+        view?.showError(message: message)
     }
 }
