@@ -288,14 +288,11 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = projectView.dequeueReusableCell(withIdentifier: ProjectCell.projectCellID, for: indexPath) as! ProjectCell
+        
         cell.delegate = self
         cell.setDelegate(with: self)
         cell.setTag(tag: indexPath.row)
-        cell.title.inputAccessoryView = accessoryCompleteButton
-        cell.contents.inputAccessoryView = accessoryCompleteButton
-        cell.sns.firstTextFeield.inputAccessoryView = accessoryCompleteButton
-        cell.sns.secondTextField.inputAccessoryView = accessoryCompleteButton
-        cell.sns.thirdTextField.inputAccessoryView = accessoryCompleteButton
+        cell.setAccessory(accessory: accessoryCompleteButton)
         
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
@@ -312,7 +309,10 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         let index = indexPath.row
         self.projectArr.remove(at: index)
         self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-        self.projectAddButton.backgroundColor = self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
+        self.projectAddButton.backgroundColor
+            = self.projectArr.count < 3
+            ? UIColor.appColor(.mainColor)
+            : UIColor.darkGray
         
         refreshEditableViewrange()
     }
