@@ -29,14 +29,8 @@ class NoticePresenter: NoticePresenterProtocol {
 }
 
 extension NoticePresenter: NoticeInteractorOutputProtocol {
-    
-    func showResult(result: Bool, firstNoticeList: [Notice]?, secondNoticeList: [Notice]?, message: String?) {
-        switch result {
-        case true:
-            view?.showNoticeList(firstNoticeList: firstNoticeList, secondNoticeList: secondNoticeList)
-        case false:
-            view?.showMessage(message: message!)
-        }
+    func showResult(result: Bool, firstNoticeList: [Notice], secondNoticeList: [Notice]) {
+        view?.showNoticeList(firstNoticeList: firstNoticeList, secondNoticeList: secondNoticeList)
     }
     
     func showError(message: String) {

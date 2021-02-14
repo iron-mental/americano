@@ -33,9 +33,8 @@ protocol NoticeInteractorOutputProtocol: class {
     
     //INTERACTOR -> PRESENTER
     func showResult(result: Bool,
-                    firstNoticeList: [Notice]?,
-                    secondNoticeList: [Notice]?,
-                    message: String?)
+                    firstNoticeList: [Notice],
+                    secondNoticeList: [Notice])
     func showError(message: String)
 }
 
@@ -52,9 +51,7 @@ protocol NoticePresenterProtocol: class {
 
 protocol NoticeRemoteDataManagerProtocol: class {
     func getNoticeList(studyID: Int,
-                       completion: @escaping (_ result: Bool,
-                                              _ data: [Notice]?,
-                                              _ message: String?) -> Void)
+                       completion: @escaping (_ result: BaseResponse<[Notice]>) -> Void)
     func getNoticeListPagination(studyID: Int,
                                  noticeListIDs: [Int],
                                  completion: @escaping (_ result: Bool,
