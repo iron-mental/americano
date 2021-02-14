@@ -54,5 +54,4 @@ protocol NotificationRemoteDataManagerInputProtocol: class {
 
 protocol NotificationRemoteDataManagerOutputProtocol: class {
     func onRetrievedAlert(result: BaseResponse<[Noti]>)
-    func retrievedAlertFailed(message: String)
 }

@@ -19,14 +19,13 @@ class NotificationInteractor: NotificationInteractorInputProtocol {
 
 extension NotificationInteractor: NotificationRemoteDataManagerOutputProtocol {
     func onRetrievedAlert(result: BaseResponse<[Noti]>) {
-        if result.result {
-            if let notiList = result.data {
-                self.presenter?.onRetrievedAlert(result: notiList)
-            }
-        }   
-    }
-    
-    func retrievedAlertFailed(message: String) {
-        presenter?.retrievedAlertFailed(message: message)
+        switch result.result {
+        case true:
+            guard let notiList = result.data else { return }
+            self.presenter?.onRetrievedAlert(result: notiList)
+        case false:
+            guard let message = result.message else { return }
+            presenter?.retrievedAlertFailed(message: message)
+        }
     }
 }
