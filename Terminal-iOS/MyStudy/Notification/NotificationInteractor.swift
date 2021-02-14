@@ -25,4 +25,8 @@ extension NotificationInteractor: NotificationRemoteDataManagerOutputProtocol {
             }
         }   
     }
+    
+    func retrievedAlertFailed(message: String) {
+        presenter?.retrievedAlertFailed(message: message)
+    }
 }

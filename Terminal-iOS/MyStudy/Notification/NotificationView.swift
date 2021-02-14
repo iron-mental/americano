@@ -64,4 +64,15 @@ extension NotificationView: NotificationViewProtocol {
 //        self.notiList = notiList
 //        self.tableView.reloadData()
     }
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
+    }
 }
