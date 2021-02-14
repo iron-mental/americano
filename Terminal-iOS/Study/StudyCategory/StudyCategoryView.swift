@@ -24,7 +24,7 @@ class StudyCategoryView: UIViewController {
         layout()
         presenter?.viewDidLoad()
     }
-    
+
     func attirbute() {
         let createStudyBtn = UIBarButtonItem(barButtonSystemItem: .add,
                                              target: self,
@@ -74,8 +74,8 @@ extension StudyCategoryView: StudyCategoryViewProtocol {
         categoryCollectionView.reloadData()
     }
     
-    func showError() {
-        showToast(controller: self, message: "서버와의 연결이 불안정합니다.", seconds: 1)
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
     
     func showLoading() {

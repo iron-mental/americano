@@ -13,7 +13,6 @@ class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol 
     weak var interactor: DelegateHostRemoteDataManagerOutputProtocol?
     
     func putDelegateHostAPI(studyID: Int, newLeader: Int) {
-        
         TerminalNetworkManager
             .shared
             .session
@@ -26,19 +25,23 @@ class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol 
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
-                        if let _ = result.message {
+                        if result.message != nil {
                             self.interactor?.delegateHostResult(response: result)
                         }
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let err):
-                    self.interactor?.delegateHostResult(response: BaseResponse(result: err.isResponseSerializationError,
-                                                                               type: nil,
-                                                                               label: nil,
-                                                                               message: "자신에게 위임할 수 없습니다",
-                                                                               code: err.responseCode,
-                                                                               data: nil))
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if result.message != nil {
+                                self.interactor?.delegateHostResult(response: result)
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
     }

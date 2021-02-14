@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
+class NoticeDetailView: UIViewController {
     var presenter: NoticeDetailPresenterProtocol?
     var parentView: UIViewController?
     var notice: Notice?
@@ -97,9 +97,9 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         noticeBackground.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: profileImage.centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 41)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 20)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertHeight(value: 13)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 41)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 20)).isActive = true
         }
         noticeLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -108,15 +108,15 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
         }
         noticeContents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor, constant: Terminal.convertHeigt(value: 25)).isActive = true
+            $0.topAnchor.constraint(equalTo: noticeBackground.bottomAnchor, constant: Terminal.convertHeight(value: 25)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 13)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -13)).isActive = true
             $0.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor).isActive = true
         }
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 9)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: noticeBackground.trailingAnchor, constant: Terminal.convertHeigt(value: 13)).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeight(value: 9)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: noticeBackground.trailingAnchor, constant: Terminal.convertHeight(value: 13)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 35)).isActive = true
         }
@@ -150,7 +150,8 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     @objc func removeButtonDidTap() {
         presenter?.removeButtonDidTap(notice: notice!)
     }
-    
+}
+extension NoticeDetailView: NoticeDetailViewProtocol {
     func showNoticeDetail(notice: Notice) {
         self.title = notice.title
         self.notice = notice
@@ -158,18 +159,28 @@ class NoticeDetailView: UIViewController, NoticeDetailViewProtocol {
     }
     
     func showNoticeRemove(message: String) {
-        
         showToast(controller: self, message: message, seconds: 1) {
+            if let studyDetailView = self.parentView as? MyStudyDetailView {
+                self.parentView = studyDetailView.VCArr[0]
+            }
             if let noticeListView = self.parentView as? NoticeViewProtocol {
                 noticeListView.viewLoad()
                 self.navigationController?.popViewController(animated: true)
             }
-            
         }
     }
     
     func showError(message: String) {
         print("noticedetailview에서 생긴 에러")
     }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
+    }
+    
     
 }

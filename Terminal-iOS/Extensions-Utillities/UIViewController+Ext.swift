@@ -19,7 +19,7 @@ extension UIViewController {
         alert.view.layer.cornerRadius = 20
         
         let titleFont = [NSAttributedString.Key.font: UIFont(name: "NotoSansKR-Medium", size: 15)]
-        let titleAttrString = NSMutableAttributedString(string: message, attributes: titleFont as [NSAttributedString.Key : Any])
+        let titleAttrString = NSMutableAttributedString(string: message, attributes: titleFont as [NSAttributedString.Key: Any])
 
         alert.setValue(titleAttrString, forKey: "attributedTitle")
         

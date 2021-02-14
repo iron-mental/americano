@@ -33,21 +33,20 @@ extension MyApplyStudyModifyPresenter: MyApplyStudyModifyInteractorOutputProtoco
             }
         case false:
             LoadingRainbowCat.hide {
-                self.view?.showError()
+                self.view?.showError(message: message)
             }
         }
     }
     
     func retriveMyApplyStudyDetail(result: Bool, message: String) {
         switch result {
-        
         case true:
             LoadingRainbowCat.hide {
                 self.view?.showMyApplyStudyDetail(message: message)
             }
         case false:
             LoadingRainbowCat.hide {
-                self.view?.showError()
+                self.view?.showError(message: message)
             }
         }
     }   

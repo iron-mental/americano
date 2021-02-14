@@ -14,7 +14,7 @@ class ApplyUserPresenter: ApplyUserPresenterProtocol {
     var wireFrame: ApplyUserWireFrameProtocol?
     
     func viewDidLoad(studyID: Int) {
-        LoadingRainbowCat.show()
+        view?.showLoading()
         interactor?.getApplyList(studyID: studyID)
     }
     
@@ -25,15 +25,16 @@ class ApplyUserPresenter: ApplyUserPresenterProtocol {
 
 
 extension ApplyUserPresenter: ApplyUserInteractorOutputProtocol {
-    func didRetrieveUser(userList: [ApplyUser]?) {
-        LoadingRainbowCat.hide {
+    func didRetrieveUser(result: BaseResponse<[ApplyUser]>) {
+        switch result.result {
+        case true:
+            view?.hideLoading()
+            guard let userList = result.data else { return }
             self.view?.showUserList(userList: userList)
-        }
-    }
-    
-    func onError() {
-        LoadingRainbowCat.hide {
-            print("ApplyUserPresenter 에서 생긴 오류")
+        case false:
+            view?.hideLoading()
+            guard let message = result.message else { return }
+            view?.showError(message: message)
         }
     }
 }

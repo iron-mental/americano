@@ -142,8 +142,10 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         LoadingRainbowCat.show()
     }
     
-    func showMyStudyList(myStudyList: [MyStudy]) {
-        self.myStudyList = myStudyList
+    func showMyStudyList(myStudyList: MyStudyList) {
+        if let studyList = myStudyList.studyList {
+            self.myStudyList = studyList
+        }
         attribute()
         layout()
         tableView.reloadData()
@@ -151,8 +153,7 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
     }
     
     func showErrMessage() {
-        LoadingRainbowCat.hide {
-            print("에러 떴습니다~")
-        }
+        LoadingRainbowCat.hide()
+        showToast(controller: self, message: "서버와의 연결이 불안정 합니다.", seconds: 1)
     }
 }

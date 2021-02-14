@@ -12,12 +12,13 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
     weak var view: StudyDetailViewProtocol?
     var interactor: StudyDetailInteractorInputProtocol?
     var wireFrame: StudyDetailWireFrameProtocol?
-
+    
     func viewDidLoad() {
         
     }
     
     func showStudyListDetail(studyID: String) {
+        view?.showLoading()
         interactor?.retrieveStudyDetail(studyID: studyID)
     }
     
@@ -29,6 +30,7 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
         
     }
     func joinButtonDidTap(studyID: Int, message: String) {
+        view?.showLoading()
         interactor?.postStudyJoin(studyID: studyID, message: message)
     }
     func modifyStudyMessageButtonDidTap(studyID: Int) {
@@ -42,14 +44,17 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
         view?.showStudyDetail(with: studyDetail)
     }
     
-    func onError() {
-        
+    func onError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
     func studyJoinResult(result: Bool, message: String) {
         switch result {
         case true:
+            view?.hideLoading()
             view?.studyJoinResult(message: message)
         case false:
+            view?.hideLoading()
             view?.showError(message: message)
         }
     }

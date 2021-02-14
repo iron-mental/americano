@@ -19,6 +19,11 @@ class LocationView: UIView {
     }
     
     func attribute() {
+        self.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.gray.cgColor
+        }
         self.location.do {
             $0.numberOfLines = 0
             $0.textColor = UIColor.appColor(.profileTextColor)

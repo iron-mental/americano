@@ -15,16 +15,23 @@ class ProfileSNSView: BaseSNSView {
     }
     
     let linkedin = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
     }
     
     let web = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "blog"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
     }
     
     let modify = UIButton().then {
         $0.setTitle("수정", for: .normal)
         $0.setTitleColor(.appColor(.mainColor), for: .normal)
+    }
+    override func attribute() {
+        super.attribute()
+        self.do {
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.gray.cgColor
+        }
     }
     
     override func layout() {

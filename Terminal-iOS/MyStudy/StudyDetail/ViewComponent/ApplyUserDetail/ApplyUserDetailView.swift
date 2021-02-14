@@ -26,7 +26,7 @@ class ApplyUserDetailView: BaseProfileView {
         self.refusalButton.do {
             $0.setTitle("거절", for: .normal)
             $0.layer.cornerRadius = 10
-            $0.backgroundColor = UIColor.red
+            $0.backgroundColor = UIColor.systemRed
             $0.setTitleColor(.white, for: .normal)
             $0.addTarget(self, action: #selector(rejectButtonDidTap), for: .touchUpInside)
         }
@@ -44,7 +44,7 @@ class ApplyUserDetailView: BaseProfileView {
     
     override func layout() {
         super.layout()
-        [acceptButton, refusalButton].forEach { scrollView.addSubview($0) }
+        [acceptButton, refusalButton].forEach { backgroundView.addSubview($0) }
         
         self.refusalButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -55,10 +55,10 @@ class ApplyUserDetailView: BaseProfileView {
         }
         self.acceptButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.location.bottomAnchor, constant: 15).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -45).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 115).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 45).isActive = true
+            $0.topAnchor.constraint(equalTo: self.location.bottomAnchor, constant: Terminal.convertHeight(value: 15)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: Terminal.convertHeight(value: -45)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 115)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 45)).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
         }
     }

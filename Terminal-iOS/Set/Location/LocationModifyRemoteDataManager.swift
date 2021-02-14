@@ -31,8 +31,17 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<[Address]>.self, from: data)
+                            if result.message != nil {
+                                self.remoteRequestHandler?.onRetrieveAddress(result: result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }

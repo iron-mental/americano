@@ -8,30 +8,34 @@
 
 import Foundation
 
-class NoticeDetailInteractor: NoticeDetailInteractorProtocol {
-    weak var presenter: NoticeDetailPresenterProtocol?
-    var remoteDataManager: NoticeDetailRemoteDataManagerProtocol?
-    var localDataManager: NoticeDetailLocalDataManagerProtocol?
+class NoticeDetailInteractor: NoticeDetailInteractorInputProtocol {
+    weak var presenter: NoticeDetailInteractorOutputProtocol?
+    var remoteDataManager: NoticeDetailRemoteDataManagerInputProtocol?
     
     func getNoticeDetail(notice: Notice) {
-        remoteDataManager?.getNoticeDetail(studyID: notice.studyID!, noticeID: notice.id, completion: { result, notice in
-            switch result {
-            case true:
-                self.presenter?.noticeDetailResult(result: result, notice: notice)
-            case false:
-                break
-            }
-        })
+        remoteDataManager?.getNoticeDetail(studyID: notice.studyID!, noticeID: notice.id)
     }
     
     func postNoticeRemove(notice: Notice) {
-        remoteDataManager?.postNoticeRemove(studyID: notice.studyID!, noticeID: notice.id, completion: { result, message in
-            switch result {
-            case true:
-                self.presenter?.noticeRemoveResult(result: result, message: message)
-            case false:    
-                break
-            }
-        })
+        remoteDataManager?.postNoticeRemove(studyID: notice.studyID!, noticeID: notice.id)
+    }
+}
+
+extension NoticeDetailInteractor: NoticeDetailRemoteDataManagerOutputProtocol {
+    func getNoticeDetailResult(result: BaseResponse<Notice>) {
+        switch result.result {
+        case true:
+            guard let notice = result.data else { return }
+            presenter?.getNoticeDetailSuccess(notice: notice)
+        case false:
+            guard let message = result.message else { return }
+            presenter?.getNoticeDetailFailure(message: message)
+        }
+    }
+    
+    func removeNoticeDetailResult(result: BaseResponse<String>) {
+        if let message = result.message {
+            presenter?.removeNoticeResult(result: result.result, message: message)
+        }
     }
 }

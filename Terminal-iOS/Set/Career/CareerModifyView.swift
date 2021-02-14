@@ -29,6 +29,7 @@ class CareerModifyView: UIViewController {
     lazy var careerTitleModify = UITextField()
     lazy var careerDescriptModify = UITextView()
     lazy var completeButton = UIButton()
+    var accessoryCompleteButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +38,11 @@ class CareerModifyView: UIViewController {
     }
     
     func attribute() {
-        self.hideKeyboardWhenTappedAround()
-        self.view.backgroundColor = .appColor(.terminalBackground)
+        self.do {
+            $0.hideKeyboardWhenTappedAround()
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "경력 수정"
+        }
         
         self.careerLabel.do {
             $0.text = "경력"
@@ -56,6 +60,7 @@ class CareerModifyView: UIViewController {
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.inputAccessoryView = accessoryCompleteButton
         }
         
         self.careerDescriptModify.do {
@@ -72,6 +77,7 @@ class CareerModifyView: UIViewController {
             $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
+            $0.inputAccessoryView = accessoryCompleteButton
         }
         
         self.completeButton.do {
@@ -79,6 +85,12 @@ class CareerModifyView: UIViewController {
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+        }
+        self.accessoryCompleteButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
@@ -110,16 +122,17 @@ class CareerModifyView: UIViewController {
         
         self.completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.careerDescriptModify.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         }
     }
     
     @objc func completeModify() {
         let title = careerTitleModify.text!
         let contents = careerDescriptModify.text!
+        LoadingRainbowCat.show()
         presenter?.completeModify(title: title, contents: contents)
     }
 }
@@ -136,7 +149,6 @@ extension CareerModifyView: CareerModifyViewProtocol {
             let alert =  UIAlertController(title: "결과", message: "수정 실패", preferredStyle: .alert)
             let okAction =  UIAlertAction(title: "확인", style: .default) { _ in }
             alert.addAction(okAction)
-            
             self.present(alert, animated: true, completion: nil)
         }
     }

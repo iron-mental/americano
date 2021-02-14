@@ -12,6 +12,9 @@ protocol NotificationViewProtocol: class {
     var presenter: NotificationPresenterProtocol? { get set }
     
     func showNotiList(notiList: [Noti])
+    func showError(message: String)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol NotificationPresenterProtocol: class {
@@ -21,6 +24,7 @@ protocol NotificationPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
+    
 }
 
 protocol NotificationInteractorInputProtocol: class {
@@ -35,6 +39,7 @@ protocol NotificationInteractorOutputProtocol: class {
     
     // INTERACTOR -> PRESENTER
     func onRetrievedAlert(result: [Noti])
+    func retrievedAlertFailed(message: String)
 }
 
 protocol NotificationWireFrameProtocol: class {

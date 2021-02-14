@@ -25,11 +25,6 @@ class BaseSNSModifyView: UIView {
     }
   
     func attribute() {
-        [firstImage, secondImage, thirdImage].forEach {
-            $0.backgroundColor = .white
-            $0.layer.cornerRadius = Terminal.convertWidth(value: 13)
-        }
-        
         [firstTextFeield, secondTextField, thirdTextField].forEach {
             $0.textColor = .white
             $0.layer.cornerRadius = 10

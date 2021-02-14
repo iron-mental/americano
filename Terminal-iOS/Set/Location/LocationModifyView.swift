@@ -44,8 +44,9 @@ class LocationModifyView: UIViewController {
     
     private func attribute() {
         self.do {
-            $0.title = "활동지역 설정"
+            $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "활동지역 수정"
         }
         self.locationTab.do {
             $0.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),
@@ -121,6 +122,7 @@ class LocationModifyView: UIViewController {
         let sigungu = self.the2depth
         
         if !sigungu.isEmpty {
+            LoadingRainbowCat.show()
             presenter?.completeModify(sido: sido, sigungu: sigungu)
         } else {
             self.showToast(controller: self, message: "지역을 모두 선택해주세요.", seconds: 0.3)
@@ -163,8 +165,22 @@ extension LocationModifyView: LocationModifyViewProtocol {
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()
         } else {
+            LoadingRainbowCat.hide()
+            showToast(controller: self, message: message, seconds: 1)
             // error handle
         }
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
     }
 }
 

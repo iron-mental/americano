@@ -13,6 +13,7 @@ protocol ApplyUserViewProtocol: class {
     
     // PRESENTER -> VIEW
     func showUserList(userList: [ApplyUser]?)
+    func showError(message: String)
     func showLoading()
     func hideLoading()
 }
@@ -36,8 +37,7 @@ protocol ApplyUserPresenterProtocol: class {
 
 protocol ApplyUserInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
-    func didRetrieveUser(userList: [ApplyUser]?)
-    func onError()
+    func didRetrieveUser(result: BaseResponse<[ApplyUser]>)
 }
 
 protocol ApplyUserInteractorInputProtocol: class {

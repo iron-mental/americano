@@ -42,6 +42,7 @@ class AddNoticeView: UIViewController {
         attribute()
         layout()
         titleTextField.becomeFirstResponder()
+        hideLoading()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
@@ -122,8 +123,8 @@ class AddNoticeView: UIViewController {
         }
         dismissButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertHeigt(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
         }
         titleGuideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -133,23 +134,23 @@ class AddNoticeView: UIViewController {
         }
         titleTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: isEssentialFlagSege.bottomAnchor, constant: Terminal.convertHeigt(value: 20)).isActive = true
+            $0.topAnchor.constraint(equalTo: isEssentialFlagSege.bottomAnchor, constant: Terminal.convertHeight(value: 20)).isActive = true
             $0.leadingAnchor.constraint(equalTo: titleGuideLabel.trailingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 30)).isActive = true
         }
         contentGuideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: titleGuideLabel.trailingAnchor).isActive = true
         }
         contentTextView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: contentGuideLabel.bottomAnchor, constant: Terminal.convertHeigt(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: contentGuideLabel.bottomAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: -Terminal.convertHeigt(value: 20)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: -Terminal.convertHeight(value: 20)).isActive = true
         }
         bottomAnchor = completeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         completeButton.do {
@@ -157,7 +158,7 @@ class AddNoticeView: UIViewController {
             bottomAnchor?.isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 335)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 45)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 45)).isActive = true
         }
     }
     
@@ -179,30 +180,54 @@ class AddNoticeView: UIViewController {
 }
 
 extension AddNoticeView: AddNoticeViewProtocol {
+    
     func showNewNotice(noticeID: Int) {
         let noticeTitle = titleTextField.text ?? ""
         showToast(controller: self, message: "공지사항 작성이 완료 되었습니다.", seconds: 1) { [self] in
             dismiss(animated: true) {
                 if state == .new {
                     notice = Notice(id: noticeID,
-                                             title: nil,
-                                             contents: nil,
-                                             leaderID: nil,
-                                             studyID: studyID,
-                                             pinned: nil,
-                                             updatedAt: nil,
-                                             leaderImage: nil,
-                                             leaderNickname: nil,
-                                             createAt: nil)
-                    ((parentView as! MyStudyDetailViewProtocol).VCArr[0] as! NoticeViewProtocol).viewLoad()
-                    (parentView as! MyStudyDetailViewProtocol).presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, title: noticeTitle, parentView: parentView!)
+                                    title: nil,
+                                    contents: nil,
+                                    leaderID: nil,
+                                    studyID: studyID,
+                                    pinned: nil,
+                                    updatedAt: nil,
+                                    leaderImage: nil,
+                                    leaderNickname: nil,
+                                    createAt: nil)
+                    if let studyDetailView = parentView as? MyStudyDetailViewProtocol {
+                        if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
+                            noticeListView.viewLoad()
+                        }
+                        studyDetailView.presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, title: noticeTitle, parentView: parentView!)
+                    }
                 } else {
-                    //parentView는 당연히 NoticedetailViewProtocol을 이미 준수하는중
-                    (parentView as! NoticeDetailViewProtocol).presenter?.viewDidLoad(notice: notice!)
-                    ((parentView as! NoticeDetailViewProtocol).parentView as! NoticeViewProtocol).viewLoad()
+                    if let noticeDetailView = parentView as? NoticeDetailViewProtocol {
+                        noticeDetailView.presenter?.viewDidLoad(notice: notice!)
+                        if let studyDetailView = noticeDetailView.parentView as? MyStudyDetailViewProtocol {
+                            if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
+                                noticeListView.viewLoad()
+                            }
+                        } else {
+                            if let noticeListView = noticeDetailView.parentView as? NoticeViewProtocol {
+                                noticeListView.viewLoad()
+                            }
+                        }
+                    }
                 }
             }
         }
+    }
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
     }
 }
 

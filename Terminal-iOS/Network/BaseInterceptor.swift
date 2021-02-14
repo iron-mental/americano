@@ -20,27 +20,22 @@ final class BaseInterceptor: RequestInterceptor {
         
         var request = urlRequest
         if let token = KeychainWrapper.standard.string(forKey: "accessToken") {
-            
             self.accessToken = token
         }
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "authorization")
-        
         completion(.success(request))
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        
         guard let statusCode = request.response?.statusCode else {
             completion(.doNotRetry)
             return
         }
-        
         print("statusCode:", statusCode)
-        
         switch statusCode {
-        case 400, 422...503:
+        case 400, 422...503, 403:
             completion(.doNotRetry)
-        case 401, 403:
+        case 401:
             if request.retryCount < retryLimit {
                 refreshToken { success in
                     print("토큰 갱신 성공여부 :", success)

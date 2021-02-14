@@ -26,10 +26,15 @@ class SNSWebView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
-        if let url = self.url {
-            let url = URL(string: url)!
-            let urlRequest = URLRequest(url: url)
-            webView.load(urlRequest)
+        if let targetURL = self.url {
+            if let url = URL(string: targetURL) {
+                let urlRequest = URLRequest(url: url)
+                webView.load(urlRequest)
+            } else {
+                self.dismiss(animated: true) {
+                    self.showToast(controller: self, message: "올바르지 않은 주소입니다.", seconds: 1)
+                }
+            }
         }
     }
     

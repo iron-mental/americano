@@ -13,19 +13,19 @@ final class ProjectSNSModifyView: BaseSNSModifyView {
         super.attribute()
         
         firstImage.do {
-            $0.image = UIImage(named: "github")
+            $0.image = #imageLiteral(resourceName: "github")
         }
         firstTextFeield.do {
             $0.placeholder = "user ID만 입력"
         }
         secondImage.do {
-            $0.image = UIImage(named: "app-store")
+            $0.image = #imageLiteral(resourceName: "app-store")
         }
         secondTextField.do {
             $0.placeholder = "URL 전체 입력"
         }
         thirdImage.do {
-            $0.image = UIImage(named: "playstore")
+            $0.image = #imageLiteral(resourceName: "playstore")
         }
         thirdTextField.do {
             $0.placeholder = "URL 전체 입력"

@@ -29,7 +29,7 @@ class ProfileModifyView: UIViewController {
     lazy var name = UITextField()
     lazy var introduction = UITextView()
     lazy var completeButton = UIButton()
-    
+    var  accessoryCompleteButton = UIButton()
     // MARK: viewDidLoad
     
     override func viewDidLoad() {
@@ -43,8 +43,11 @@ class ProfileModifyView: UIViewController {
     
     // MARK: Set Attribute
     func attribute() {
-        self.hideKeyboardWhenTappedAround()
-        self.view.backgroundColor = .appColor(.terminalBackground)
+        self.do {
+            $0.hideKeyboardWhenTappedAround()
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "프로필 수정"
+        }
         
         self.picker.do {
             $0.delegate = self
@@ -55,8 +58,8 @@ class ProfileModifyView: UIViewController {
             let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(profileTapGesture)
             $0.contentMode = .scaleAspectFill
-            $0.frame.size.width = Terminal.convertHeigt(value: 100)
-            $0.frame.size.height = Terminal.convertHeigt(value: 100)
+            $0.frame.size.width = Terminal.convertHeight(value: 100)
+            $0.frame.size.height = Terminal.convertHeight(value: 100)
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
@@ -88,6 +91,7 @@ class ProfileModifyView: UIViewController {
             $0.layer.borderWidth = 0.1
             $0.dynamicFont(fontSize: 16, weight: .regular)
             $0.addLeftPadding(padding: 10)
+            $0.inputAccessoryView = accessoryCompleteButton
         }
         
         self.introductionLabel.do {
@@ -109,6 +113,7 @@ class ProfileModifyView: UIViewController {
             $0.layer.borderWidth = 0.1
             $0.backgroundColor = UIColor.appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
+            $0.inputAccessoryView = accessoryCompleteButton
         }
         
         self.completeButton.do {
@@ -116,6 +121,13 @@ class ProfileModifyView: UIViewController {
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+        }
+        
+        self.accessoryCompleteButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
@@ -132,16 +144,16 @@ class ProfileModifyView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 100)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
         
         self.contentView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 35)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 90)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 90)).isActive = true
         }
         
         self.modifyLabel.do {
@@ -177,13 +189,13 @@ class ProfileModifyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
-        
+
         self.completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.introduction.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         }
     }
     
@@ -235,7 +247,7 @@ class ProfileModifyView: UIViewController {
             self.showToast(controller: self, message: "이름은 공백이 포함되지 않습니다.", seconds: 0.5)
         } else {
             let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
-            
+            LoadingRainbowCat.show()
             presenter?.completeImageModify(image: image)
             presenter?.completeModify(profile: profile)
         }
@@ -257,7 +269,8 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()
         } else {
-            print("실패")
+            LoadingRainbowCat.hide()
+            showToast(controller: self, message: message, seconds: 1)
         }
     }
 }

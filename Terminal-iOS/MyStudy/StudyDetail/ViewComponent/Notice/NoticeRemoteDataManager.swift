@@ -12,31 +12,36 @@ import SwiftyJSON
 
 class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
     func getNoticeList(studyID: Int,
-                       completion: @escaping (_ result: Bool,
-                                              _ data: [Notice]?,
-                                              _ message: String?) -> Void) {
+                       completion: @escaping (_ result: BaseResponse<[Notice]>) -> Void) {
         TerminalNetworkManager
             .shared
             .session
             .request(TerminalRouter.noticeList(studyID: "\(studyID)"))
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    if JSON(value)["result"].bool! {
-                        let json = JSON(value)
-                        let data = "\(json)".data(using: .utf8)
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self,
-                                                                  from: data!)
-                            completion(true, result.data, nil)
-                        } catch {
-                            print(error.localizedDescription)
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self, from: data!)
+                        if result.data != nil {
+                            completion(result)
                         }
-                    } else {
-                        completion(false, nil, JSON(value)["message"].string!)
+                    } catch {
+                        print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self, from: data)
+                            if result.message != nil {
+                                completion(result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }
@@ -62,8 +67,7 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                         let json = JSON(value)
                         let data = "\(json)".data(using: .utf8)
                         do {
-                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self,
-                                                                  from: data!)
+                            let result = try JSONDecoder().decode(BaseResponse<[Notice]>.self, from: data!)
                             completion(true, result.data, nil)
                         } catch {
                             print(error.localizedDescription)
@@ -71,8 +75,17 @@ class NoticeRemoteDataManager: NoticeRemoteDataManagerProtocol {
                     } else {
                         completion(false, nil, JSON(value)["message"].string!)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if result.message != nil {
+                                completion(result.result, nil, result.message)
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
     }

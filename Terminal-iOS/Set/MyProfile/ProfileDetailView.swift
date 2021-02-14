@@ -15,7 +15,6 @@ class ProfileDetailView: BaseProfileView {
     // MARK: Init Property
     
     var presenter: ProfileDetailPresenterProtocol?
-    
     // MARK: viewDidLoad
     
     override func viewDidLoad() {
@@ -38,11 +37,12 @@ class ProfileDetailView: BaseProfileView {
     }
     
     // MARK: Set Layout
-    
+
     override func layout() {
         super.layout()
+        
         self.location.do {
-            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         }
     }
     

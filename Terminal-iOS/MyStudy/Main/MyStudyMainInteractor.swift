@@ -14,8 +14,13 @@ class MyStudyMainInteractor: MyStudyMainInteractorProtocol {
     var localManager: MyStudyMainLocalDataManagerProtocol?
     
     func getMyStudyList() {
-        remoteManager?.getMyStudyList(completion: { result, itemList in
-            self.presenter?.MyStudyListResult(result: result, itemList: itemList ?? nil)
+        remoteManager?.getMyStudyList(completion: { response in
+            switch response.result {
+            case true:
+                self.presenter?.MyStudyListResult(result: response.result, itemList: response.data)
+            case false:
+                self.presenter?.MyStudyListResult(result: response.result, itemList: response.data)
+            }
         })
     }
 }

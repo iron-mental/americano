@@ -208,7 +208,6 @@
 		CC6044712576262C000D11C7 /* NoticeDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6044702576262C000D11C7 /* NoticeDetailInteractor.swift */; };
 		CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC60447D2576263F000D11C7 /* NoticeDetailPresenter.swift */; };
 		CC6044812576265A000D11C7 /* NoticeDetailRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC6044802576265A000D11C7 /* NoticeDetailRemoteDataManager.swift */; };
-		CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604483257626CF000D11C7 /* NoticeDetailLocalDataManager.swift */; };
 		CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */; };
 		CC60454425BF15B600A98FEC /* CreateStudyResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC60454325BF15B600A98FEC /* CreateStudyResult.swift */; };
 		CC650D8C25C3E22000359E7D /* MyApplyStudyModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB46225AC509D00F522C4 /* MyApplyStudyModifyView.swift */; };
@@ -288,6 +287,7 @@
 		CCB139CF25592D8300410184 /* IntroPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139CE25592D8300410184 /* IntroPresenter.swift */; };
 		CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D225592DCF00410184 /* IntroInteractor.swift */; };
 		CCB139D625592E0300410184 /* IntroRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */; };
+		CCB1A3A925D7BDC600AADE33 /* ValidateSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */; };
 		CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */; };
 		CCB752CA25A841E3003E7CA7 /* StudyApplyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */; };
 		CCBBEEFB2583A30A00177E25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */; };
@@ -570,7 +570,6 @@
 		CC6044702576262C000D11C7 /* NoticeDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailInteractor.swift; sourceTree = "<group>"; };
 		CC60447D2576263F000D11C7 /* NoticeDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailPresenter.swift; sourceTree = "<group>"; };
 		CC6044802576265A000D11C7 /* NoticeDetailRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailRemoteDataManager.swift; sourceTree = "<group>"; };
-		CC604483257626CF000D11C7 /* NoticeDetailLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailLocalDataManager.swift; sourceTree = "<group>"; };
 		CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeDetailWireFrame.swift; sourceTree = "<group>"; };
 		CC60454325BF15B600A98FEC /* CreateStudyResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyResult.swift; sourceTree = "<group>"; };
 		CC650D9525C3E2AC00359E7D /* MyApplyStudyInfoProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyInfoProtocols.swift; sourceTree = "<group>"; };
@@ -646,6 +645,7 @@
 		CCB139CE25592D8300410184 /* IntroPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPresenter.swift; sourceTree = "<group>"; };
 		CCB139D225592DCF00410184 /* IntroInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroInteractor.swift; sourceTree = "<group>"; };
 		CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroRemoteDataManager.swift; sourceTree = "<group>"; };
+		CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateSequence.swift; sourceTree = "<group>"; };
 		CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWireFrame.swift; sourceTree = "<group>"; };
 		CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyApplyMessageView.swift; sourceTree = "<group>"; };
 		CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -880,6 +880,8 @@
 				CC72CC0625B0632B009E9986 /* BaseProfileRemoteDataManager.swift */,
 				CCA25A8B25B6962C00280C80 /* BaseEditableStudyDetailView.swift */,
 				CC7B209825C3B7B6009920DC /* PaddingUILabel.swift */,
+				CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */,
+				CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -904,7 +906,6 @@
 				CCA25AB725B6CE0900280C80 /* ModifyStudy */,
 				CCEEB45925AC4C9600F522C4 /* MyApplyStudyModify */,
 				A53B11AD258CB6CB00498A96 /* ApplyUserDetail */,
-				CC84850525A47FD700C792BC /* AlertView */,
 				A510B9FC2583BB050084559C /* ApplyUser */,
 				A5C81C3F25836436008F2B09 /* ApplyList */,
 				CC5794F22570C21D00DF96AB /* AddNotice */,
@@ -1168,7 +1169,6 @@
 				CC6044702576262C000D11C7 /* NoticeDetailInteractor.swift */,
 				CC60447D2576263F000D11C7 /* NoticeDetailPresenter.swift */,
 				CC6044802576265A000D11C7 /* NoticeDetailRemoteDataManager.swift */,
-				CC604483257626CF000D11C7 /* NoticeDetailLocalDataManager.swift */,
 				CC604486257626F4000D11C7 /* NoticeDetailWireFrame.swift */,
 				CC60446D2576253F000D11C7 /* NoticeDetailProtocols.swift */,
 			);
@@ -1269,14 +1269,6 @@
 				CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */,
 			);
 			path = Component;
-			sourceTree = "<group>";
-		};
-		CC84850525A47FD700C792BC /* AlertView */ = {
-			isa = PBXGroup;
-			children = (
-				CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */,
-			);
-			path = AlertView;
 			sourceTree = "<group>";
 		};
 		CC99A0CA25342D400027BA24 /* Component */ = {
@@ -1858,6 +1850,7 @@
 				CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */,
 				A53A2B8A25B6BC100002D3A0 /* UserWithdrawalWireFrame.swift in Sources */,
 				A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */,
+				CCB1A3A925D7BDC600AADE33 /* ValidateSequence.swift in Sources */,
 				CCC1A2DB25B14C88004E3BE6 /* ApplyUserDetailPresenter.swift in Sources */,
 				A51BA0A82577E38900B9673F /* BaseInterceptor.swift in Sources */,
 				CCA3FF472517823E00F62627 /* StudyListProtocols.swift in Sources */,
@@ -1870,7 +1863,6 @@
 				A5D6A78E257430A8007D6409 /* ProfileModifyInteractor.swift in Sources */,
 				CCEEB47C25AC710F00F522C4 /* ApplyUserResult.swift in Sources */,
 				CCA25AE325B9B34900280C80 /* DelegateHostView.swift in Sources */,
-				CC604484257626CF000D11C7 /* NoticeDetailLocalDataManager.swift in Sources */,
 				A5D4B8D125C18771008403DC /* NotificationProtocols.swift in Sources */,
 				A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */,
 				CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */,

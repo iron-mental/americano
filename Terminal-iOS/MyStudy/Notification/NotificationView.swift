@@ -26,7 +26,7 @@ class NotificationView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.cellID)
-            $0.rowHeight = Terminal.convertHeigt(value: 80)
+            $0.rowHeight = Terminal.convertHeight(value: 80)
             $0.backgroundColor = .appColor(.terminalBackground)
             $0.separatorColor = .darkGray
         }
@@ -63,5 +63,16 @@ extension NotificationView: NotificationViewProtocol {
     func showNotiList(notiList: [Noti]) {
 //        self.notiList = notiList
 //        self.tableView.reloadData()
+    }
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
     }
 }

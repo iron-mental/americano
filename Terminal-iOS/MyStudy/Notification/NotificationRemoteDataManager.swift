@@ -28,12 +28,23 @@ class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol 
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<[Noti]>.self, from: data!)
-                        self.interactor?.onRetrievedAlert(result: result)
+                        if result.data != nil {
+                            self.interactor?.onRetrievedAlert(result: result)
+                        }
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<[Noti]>.self, from: data)
+                            if result.message != nil {
+                                self.interactor?.onRetrievedAlert(result: result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             } 
     }

@@ -8,9 +8,22 @@
 
 import Foundation
 
+struct MyStudyList: Codable {
+    var studyList: [MyStudy]?
+    var badge: Badge?
+    
+    enum CodingKeys: String, CodingKey {
+        case studyList = "study_list"
+    }
+}
 struct MyStudy: Codable {
     var id: Int
     var title: String
     var sigungu: String
     var image: String?
+}
+
+struct Badge: Codable {
+    var alert: Int
+    var total: Int
 }

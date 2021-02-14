@@ -23,22 +23,21 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
         firstNoticeList.removeAll()
         secondNoticeList.removeAll()
         
-        remoteDataManager?.getNoticeList(studyID: studyID, completion: { result, noticeList, message in
-            switch result {
+        remoteDataManager?.getNoticeList(studyID: studyID, completion: { result in
+            switch result.result {
             case true:
-                noticeList?.forEach {
-                    //이 부분 페이지네이션 관련 컬럼이 추가됐는지 안됐는지 확인하고 그걸로 분기
+                guard let noticeList = result.data else { return }
+                noticeList.forEach {
                     $0.title != nil ? self.totalNoticeList.append($0) : self.nextNoticeID.append($0.id)
                 }
                 
                 self.sorted {
-                self.presenter?.showResult(result: result,
-                                           firstNoticeList: self.firstNoticeList.isEmpty ? nil : self.firstNoticeList,
-                                           secondNoticeList: self.secondNoticeList.isEmpty ? nil : self.secondNoticeList,
-                                           message: message)
+                    self.presenter?.showResult(result: result.result,
+                                           firstNoticeList: self.firstNoticeList.isEmpty ? [] : self.firstNoticeList,
+                                           secondNoticeList: self.secondNoticeList.isEmpty ? [] : self.secondNoticeList)
                 }
             case false:
-                guard let msg = message else { return }
+                guard let msg = result.message else { return }
                 self.presenter?.showError(message: msg)
             }
         })
@@ -64,9 +63,8 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
                     })
                     self.sorted {
                         self.presenter?.showResult(result: result,
-                                                   firstNoticeList: self.firstNoticeList.isEmpty ? nil : self.firstNoticeList,
-                                                   secondNoticeList: self.secondNoticeList.isEmpty ? nil : self.secondNoticeList,
-                                                   message: message)
+                                                   firstNoticeList: self.firstNoticeList.isEmpty ? [] : self.firstNoticeList,
+                                                   secondNoticeList: self.secondNoticeList.isEmpty ? [] : self.secondNoticeList)
                     }
                 case false:
                     guard let msg = message else { return }

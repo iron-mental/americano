@@ -112,14 +112,14 @@ class AlertBaseUIView: UIView {
         }
         dismissButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 30)).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -10).isActive = true
             $0.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
         }
         completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeigt(value: 30)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 30)).isActive = true
             $0.bottomAnchor.constraint(equalTo: dismissButton.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor).isActive = true

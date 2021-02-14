@@ -17,7 +17,7 @@ protocol MyApplyStudyModifyViewProtocol: class {
 //    PRESENTER -> VIEW
     func showMyApplyStudyDetail(message: String)
     func showModifyApplyMessageResult(message: String)
-    func showError()
+    func showError(message: String)
 }
 
 protocol MyApplyStudyModifyPresenterInputProtocol: class {
@@ -57,7 +57,7 @@ protocol MyApplyStudyModifyRemoteDataManagerInputProtocol: class {
 protocol MyApplyStudyModifyRemoteDataManagerOutputProtocol: class {
     
 //    REMOTEDATAMANAGER -> INTERACTOR
-    func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult)
+    func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult?, message: String?)
     func retriveModifyApplyMessage(result: Bool, message: String)
 }
 

@@ -15,6 +15,7 @@ class EmailModifyView: UIViewController {
     lazy var emailLabel = UILabel()
     lazy var emailTextField = UITextField()
     lazy var completeButton = UIButton()
+    var accessoryCompleteButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +24,11 @@ class EmailModifyView: UIViewController {
     }
     
     private func attribute() {
-        self.hideKeyboardWhenTappedAround()
-        self.view.backgroundColor = .appColor(.terminalBackground)
+        self.do {
+            $0.hideKeyboardWhenTappedAround()
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.title = "이메일 수정"
+        }
         
         self.emailLabel.do {
             $0.text = "Email"
@@ -41,6 +45,7 @@ class EmailModifyView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
+            $0.inputAccessoryView = accessoryCompleteButton
         }
         
         self.completeButton.do {
@@ -48,6 +53,13 @@ class EmailModifyView: UIViewController {
             $0.setTitle("수정완료", for: .normal)
             $0.setTitleColor(.white, for: .normal)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
+        }
+        
+        self.accessoryCompleteButton.do {
+            $0.setTitle("완료", for: .normal)
+            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
@@ -71,20 +83,20 @@ class EmailModifyView: UIViewController {
         }
         self.completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 15).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
     
     @objc func completeModify() {
         let email = self.emailTextField.text ?? ""
-        
         // 공백체크
         if email.whitespaceCheck() {
             self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
         } else {
+            LoadingRainbowCat.show()
             presenter?.completeModify(email: email)
         }
         
@@ -103,6 +115,7 @@ extension EmailModifyView: EmailModifyViewProtocol {
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()
         } else {
+            LoadingRainbowCat.hide()
             self.showToast(controller: self, message: message, seconds: 1, completion: nil)
         }
     }

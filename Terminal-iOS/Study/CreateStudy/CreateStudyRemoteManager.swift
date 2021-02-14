@@ -58,13 +58,12 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                     }
                 }
             }, with: TerminalRouter.studyCreate(study: params))
-            .validate(statusCode: 200...422)
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
-                    
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<CreateStudyResult>.self, from: data!)
                         self.interactor?.createStudyValid(response: result)
@@ -72,8 +71,14 @@ class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
                         
                     }
                 case .failure:
-                    //이 텍스트를 프레젠터에서 넣어줘야될지 음 정하면댈듯
-                    self.interactor?.createStudyInvalid(message: "서버의 연결이 불안정합니다")
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<CreateStudyResult>.self, from: data)
+                            self.interactor?.createStudyValid(response: result)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
     }

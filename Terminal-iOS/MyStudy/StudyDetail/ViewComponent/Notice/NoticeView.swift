@@ -22,8 +22,6 @@ class NoticeView: UIViewController {
     }
     
     func viewLoad() {
-        firstNoticeList.removeAll()
-        secondNoticeList.removeAll()
         attribute()
         layout()
         presenter?.viewDidLoad(studyID: studyID!)
@@ -39,7 +37,7 @@ class NoticeView: UIViewController {
             $0.dataSource = self
             $0.prefetchDataSource = self
             $0.bounces = false
-            $0.rowHeight = Terminal.convertHeigt(value: 123)
+            $0.rowHeight = Terminal.convertHeight(value: 123)
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
     }
@@ -94,7 +92,6 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let noticeCell = notice.dequeueReusableCell(withIdentifier: NoticeCell.noticeCellID, for: indexPath) as! NoticeCell
-        
         if indexPath.section == 0 {
             noticeCell.setData(firstNoticeList[indexPath.row])
         } else if indexPath.section == 1 {
@@ -134,6 +131,8 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
 
 extension NoticeView: NoticeViewProtocol {
     func showNoticeList(firstNoticeList: [Notice]?, secondNoticeList: [Notice]?) {
+        self.firstNoticeList.removeAll()
+        self.secondNoticeList.removeAll()
         if let first = firstNoticeList {
             self.firstNoticeList = first
         }

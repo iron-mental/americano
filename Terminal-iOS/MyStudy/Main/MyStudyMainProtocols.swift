@@ -12,7 +12,7 @@ protocol MyStudyMainViewProtocol: class {
     var presenter: MyStudyMainPresenterProtocol? { get set }
     
     //PRESENTER -> VIEW
-    func showMyStudyList(myStudyList: [MyStudy])
+    func showMyStudyList(myStudyList: MyStudyList)
     func showErrMessage()
     func showLoading()
 }
@@ -46,14 +46,14 @@ protocol MyStudyMainPresenterProtocol: class {
     func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy)
     
     //INTERACTOR -> PRESENTER
-    func MyStudyListResult(result: Bool, itemList: [MyStudy]?)
+    func MyStudyListResult(result: Bool, itemList: MyStudyList?)
     
 }
 
 protocol MyStudyMainRemoteDataManagerProtocol: class {
     var interactor: MyStudyMainInteractorProtocol? { get set }
     //INTERACTOR -> RemoteDataManager
-    func getMyStudyList(completion: @escaping (_: Bool, _: [MyStudy]?) -> Void)
+    func getMyStudyList(completion: @escaping (_: BaseResponse<MyStudyList>) -> Void)
 }
 
 protocol MyStudyMainLocalDataManagerProtocol: class {

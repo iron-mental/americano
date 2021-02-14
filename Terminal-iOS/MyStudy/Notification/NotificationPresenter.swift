@@ -22,4 +22,8 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
     func onRetrievedAlert(result: [Noti]) {
         view?.showNotiList(notiList: result)
     }
+    
+    func retrievedAlertFailed(message: String) {
+        view?.showError(message: message)
+    }
 }

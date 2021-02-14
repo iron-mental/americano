@@ -47,14 +47,14 @@ class NotificationCell: UITableViewCell {
         self.title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor,
-                                    constant: Terminal.convertHeigt(value: 15)).isActive = true
+                                    constant: Terminal.convertHeight(value: 15)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                         constant: Terminal.convertWidth(value: 20)).isActive = true
         }
         self.explain.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: title.bottomAnchor,
-                                    constant: Terminal.convertHeigt(value: 20)).isActive = true
+                                    constant: Terminal.convertHeight(value: 20)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                         constant: Terminal.convertWidth(value: 20)).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor,

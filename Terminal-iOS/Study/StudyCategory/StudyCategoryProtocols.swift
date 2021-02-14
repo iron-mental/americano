@@ -13,7 +13,7 @@ protocol StudyCategoryViewProtocol: class {
     
     // PRESENT -> VIEW
     func showCategoryList(with category: [Category])
-    func showError()
+    func showError(message: String)
     func showLoading()
     func hideLoading()
     func categoryDownAnimate()
@@ -45,7 +45,7 @@ protocol StudyCategoryPresenterProtocol: class {
 protocol StudyCategoryInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func didRetrieveCategories(_ categories: [Category])
-    func onError()
+    func onError(message: String)
 }
 
 protocol StudyCategoryInteractorInputProtocol: class {
@@ -71,7 +71,6 @@ protocol StudyCategoryRemoteDataManagerInputProtocol: class {
 protocol StudyCategoryRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
        func onCategoriesRetrieved(result: BaseResponse<[String]>)
-       func onError()
 }
 
 protocol StudyCategoryLocalDataManagerInputProtocol: class {

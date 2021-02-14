@@ -21,23 +21,20 @@ class StudyCategoryInteractor: StudyCategoryInteractorInputProtocol {
 extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol {
     func onCategoriesRetrieved(result: BaseResponse<[String]>) {
         var categoryList: [Category] = []
-        
-        if result.result {
+        switch result.result {
+        case true:
             if let categories = result.data {
                 for category in categories {
-                    
                     /// Static Image
                     let image = "https://www.terminal-study.tk/images/category/\(category).png"
                     let name = category
-                    
                     categoryList.append(Category(image: image, name: name))
                 }
                 presenter?.didRetrieveCategories(categoryList)
             }
+        case false:
+            guard let message = result.message else { return }
+            presenter?.onError(message: message)
         }
-    }
-    
-    func onError() {
-        
     }
 }

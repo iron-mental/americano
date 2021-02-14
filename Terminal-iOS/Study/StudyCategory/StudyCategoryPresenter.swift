@@ -14,6 +14,7 @@ class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
     var wireFrame: StudyCategoryWireFrameProtocol?
     
     func viewDidLoad() {
+//        view?.showLoading()
         interactor?.retrieveStudyCategory()
     }
     
@@ -37,10 +38,12 @@ class StudyCategoryPresenter: StudyCategoryPresenterProtocol {
 
 extension StudyCategoryPresenter: StudyCategoryInteractorOutputProtocol {
     func didRetrieveCategories(_ categories: [Category]) {
+        view?.hideLoading()
         view?.showCategoryList(with: categories)
     }
     
-    func onError() {
-        
+    func onError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

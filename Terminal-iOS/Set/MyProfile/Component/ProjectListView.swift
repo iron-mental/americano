@@ -20,6 +20,10 @@ class ProjectListView: UIView {
     }
     
     func attribute() {
+        self.do {
+            $0.layer.borderWidth = 0.2
+            $0.layer.borderColor = UIColor.gray.cgColor
+        }
         self.modify.do {
             $0.setTitle("수정", for: .normal)
             $0.setTitleColor(.appColor(.mainColor), for: .normal)

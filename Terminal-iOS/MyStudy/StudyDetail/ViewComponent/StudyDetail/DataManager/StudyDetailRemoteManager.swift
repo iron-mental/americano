@@ -12,8 +12,7 @@ import SwiftyJSON
 class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     weak var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
     
-     func getStudyDetail(studyID: String, completionHandler: @escaping (StudyDetail) -> Void) {
-        
+    func getStudyDetail(studyID: String) {
         TerminalNetworkManager
             .shared
             .session
@@ -22,22 +21,32 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<StudyDetail>.self, from: data!)
-                        completionHandler(result.data!)
+                        let result = try JSONDecoder().decode(BaseResponse<StudyDetailInfo>.self, from: data!)
+                        if result.data != nil {
+                            self.remoteRequestHandler?.onStudyDetailRetrieved(result: result)
+                        }
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print("실패", error.localizedDescription)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<StudyDetailInfo>.self, from: data)
+                            if result.message != nil {
+                                self.remoteRequestHandler?.onStudyDetailRetrieved(result: result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }
     
-    func postStudyJoin(studyID: Int, message: String, completion: @escaping (Bool, String) -> Void) {
+    func postStudyJoin(studyID: Int, message: String) {
         
         let params: [String: String] = [
             "message": message
@@ -51,11 +60,27 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    let message = JSON(value)["message"].string!
-                    let result = JSON(value)["result"].bool!
-                    completion(result, message)
-                case .failure(let error):
-                    print(error.localizedDescription)
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        if result.message != nil {
+                            self.remoteRequestHandler?.postStudyJoinResult(result: result)
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if result.message != nil {
+                                self.remoteRequestHandler?.postStudyJoinResult(result: result)
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
                 }
             }
     }

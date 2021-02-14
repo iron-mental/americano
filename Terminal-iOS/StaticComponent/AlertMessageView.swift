@@ -42,4 +42,12 @@ class AlertMessageView: AlertBaseUIView {
             $0.centerYAnchor.constraint(equalTo: bottomBar.centerYAnchor, constant: -20).isActive = true
         }
     }
+    
+    func onlyCompleteButton() {
+        completeButton.isHidden = true
+        dismissButton.setTitle("확인", for: .normal)
+        dismissButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+    }
+    
+    func dynamicLabelFontSize() {}
 }
