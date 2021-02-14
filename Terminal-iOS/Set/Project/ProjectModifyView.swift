@@ -306,12 +306,14 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         guard let indexPath = self.projectView.indexPath(for: cell) else {
             return
         }
+        if let cellHeight = projectView.cellForRow(at: [0, projectArr.count - 1])?.frame.height {
+            standardContentHeight -= cellHeight
+        }
         let index = indexPath.row
-        
         self.projectArr.remove(at: index)
         self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         self.projectAddButton.backgroundColor = self.projectArr.count < 3 ? UIColor.appColor(.mainColor) : UIColor.darkGray
-        standardContentHeight -= 433
+        
         refreshEditableViewrange()
     }
     
