@@ -178,7 +178,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 let distance = (targetMaxY) - viewMaxY
                 self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
             } else {
-                //                isEditableViewTapping = false
+                isEditableViewTapping = false
             }
         }
     }
@@ -248,12 +248,13 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 let index = IndexPath(row: projectArr.count - 1, section: 0)
                 self.projectView.scrollToRow(at: index, at: .bottom, animated: true)
             }
-                        if let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell {
-                            cell.title.becomeFirstResponder()
-                            standardContentHeight += cell.frame.height
-                        } else {
-                            print(projectView.cellForRow(at: [0, 2]))
-                        }
+            if let cell = self.projectView.cellForRow(at: [0, self.projectArr.count - 1]) as? ProjectCell {
+                cell.title.becomeFirstResponder()
+                standardContentHeight += cell.frame.height
+            } else {
+                print("세번 째 cell 못잡음@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+            }
+            
         } else {
             TerminalAlertMessage.show(controller: self, type: .ProjectLimitView)
         }
@@ -295,10 +296,10 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         let result = projectArr[indexPath.row]
         cell.setData(data: result)
         
-        if indexPath.elementsEqual(newestIndexPath) {
-            newestIndexPath = IndexPath()
-            cell.title.becomeFirstResponder()
-        }
+//        if indexPath.elementsEqual(newestIndexPath) {
+//            newestIndexPath = IndexPath()
+//            cell.title.becomeFirstResponder()
+//        }
         return cell
     }
     
