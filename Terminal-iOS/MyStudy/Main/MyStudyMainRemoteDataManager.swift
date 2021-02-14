@@ -15,7 +15,6 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
     var interactor: MyStudyMainInteractorProtocol?
     
     func getMyStudyList(completion: @escaping (_: BaseResponse<MyStudyList>) -> Void) {
-        
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         TerminalNetworkManager
             .shared
@@ -31,6 +30,7 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
                         let result = try JSONDecoder().decode(BaseResponse<MyStudyList>.self, from: data!)
                         completion(result)
                     } catch {
+                        print(error.localizedDescription)
                     }
                 case .failure:
                     if let data = response.data {
