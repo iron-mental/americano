@@ -58,8 +58,7 @@ protocol NoticeDetailRemoteDataManagerInputProtocol: class {
 }
 
 protocol NoticeDetailRemoteDataManagerOutputProtocol: class {
-    func getNoticeDetailSuccess(notice: Notice)
-    func getNoticeDetailFailure(message: String)
+    func getNoticeDetailResult(result: BaseResponse<Notice>)
     func removeNoticeDetailResult(result: BaseResponse<String>)
 }
 

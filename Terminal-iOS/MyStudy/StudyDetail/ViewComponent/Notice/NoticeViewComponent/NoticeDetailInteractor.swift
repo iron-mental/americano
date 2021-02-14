@@ -22,12 +22,15 @@ class NoticeDetailInteractor: NoticeDetailInteractorInputProtocol {
 }
 
 extension NoticeDetailInteractor: NoticeDetailRemoteDataManagerOutputProtocol {
-    func getNoticeDetailSuccess(notice: Notice) {
-        presenter?.getNoticeDetailSuccess(notice: notice)
-    }
-    
-    func getNoticeDetailFailure(message: String) {
-        presenter?.getNoticeDetailFailure(message: message)
+    func getNoticeDetailResult(result: BaseResponse<Notice>) {
+        switch result.result {
+        case true:
+            guard let notice = result.data else { return }
+            presenter?.getNoticeDetailSuccess(notice: notice)
+        case false:
+            guard let message = result.message else { return }
+            presenter?.getNoticeDetailFailure(message: message)
+        }
     }
     
     func removeNoticeDetailResult(result: BaseResponse<String>) {

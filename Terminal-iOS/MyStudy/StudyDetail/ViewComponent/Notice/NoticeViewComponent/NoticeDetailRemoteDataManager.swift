@@ -27,16 +27,16 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<Notice>.self, from: data!)
                         guard let notice = result.data else { return }
-                        self.interactor?.getNoticeDetailSuccess(notice: notice)
+                        self.interactor?.getNoticeDetailResult(result: result)
                     } catch {
                         print(error.localizedDescription)
                     }
                 case .failure:
                     if let data = response.data {
                         do {
-                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            let result = try JSONDecoder().decode(BaseResponse<Notice>.self, from: data)
                             guard let message = result.message else { return }
-                            self.interactor?.getNoticeDetailFailure(message: message)
+                            self.interactor?.getNoticeDetailResult(result: result)
                         } catch {
                             
                         }
