@@ -189,6 +189,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
+            self.isEditableViewTapping = false
         }
     }
     func viewSetBottom(distance: CGFloat) {
@@ -199,6 +200,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             self.projectView.contentOffset.y += distance
         } completion: { _ in
             self.tappedView?.becomeFirstResponder()
+            self.isEditableViewTapping = false
         }
     }
     
