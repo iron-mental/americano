@@ -74,7 +74,7 @@ extension NotificationView: NotificationViewProtocol {
     }
     
     func showAlert(message: String) {
-//        <#code#>
+        //alert 처리 해줘야겠죠
     }
     
     func showLoading() {

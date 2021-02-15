@@ -43,7 +43,8 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
                     notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 }
             }
-        case .newNotice, .updatedNotice:
+        case .newNotice,
+             .updatedNotice:
             let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
             if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
                 castedMyStudyDetailView.viewState = .Notice
@@ -51,8 +52,7 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
                     notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 }
             }
-        case .chat,
-             .studyUpdate,
+        case .studyUpdate,
              .studyHostDelegate,
              .applyAllowed:
             let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
@@ -62,6 +62,8 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
                     notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 }
             }
+        case .chat:
+            break
         case .testPush:
             break
         case .undefined,

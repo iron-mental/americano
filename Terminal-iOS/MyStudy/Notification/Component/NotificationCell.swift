@@ -23,7 +23,7 @@ class NotificationCell: UITableViewCell {
     func setData(noti: Noti) {
         self.title.text = noti.studyTitle
         self.explain.text = noti.message
-        self.backgroundColor = noti.confirm ? .clear : UIColor.appColor(.mainColor)
+        self.backgroundColor = noti.confirm ? .clear : .systemGray5
     }
     
     func attribute() {
@@ -31,11 +31,11 @@ class NotificationCell: UITableViewCell {
         self.selectionStyle = .none
         self.title.do {
             $0.textColor = .white
-            $0.dynamicFont(fontSize: 16, weight: .semibold)
+            $0.dynamicFont(fontSize: 20, weight: .bold)
             $0.numberOfLines = 1
         }
         self.explain.do {
-            $0.textColor = .white
+            $0.textColor = .systemGray
             $0.dynamicFont(fontSize: 14, weight: .regular)
             $0.numberOfLines = 1
         }
