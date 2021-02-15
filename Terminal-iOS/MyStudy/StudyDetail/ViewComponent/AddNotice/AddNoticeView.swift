@@ -21,11 +21,7 @@ class AddNoticeView: UIViewController {
     
     var presenter: AddNoticePresenterProtocol?
     var studyID: Int?
-    var notice: Notice? {
-        didSet {
-            attribute()
-        }
-    }
+    var notice: Notice? { didSet { attribute() } }
     var state: AddNoticeState?
     var dismissButton = UIButton()
     var titleGuideLabel = UILabel()

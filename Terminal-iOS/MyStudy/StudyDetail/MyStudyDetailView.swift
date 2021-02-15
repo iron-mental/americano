@@ -17,34 +17,30 @@ enum MyStudyDetialInitView {
 
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
-//    var noticePushEvent: Bool = false
-//    var getPushEvent: Bool = false
+    
+    var viewState: MyStudyDetialInitView = .StudyDetial
+    let appearance = UINavigationBarAppearance()
     var applyState: Bool = false
-    var initView: MyStudyDetialInitView = .StudyDetial
     var alertID: Int?
-    var studyID: Int? {
-        didSet {
-            setPageControllerChild()
-        }
-    }
+    var studyID: Int? { didSet { setPageControllerChild() } }
     var studyTitle: String?
-    var studyInfo: StudyDetail?
-    var userList: [Participate] = []
     var pageBeforeIndex: Int = 0
     var tabBeforeIndex: Int = 0
     var VCArr: [UIViewController] = []
-    var authority: StudyDetailViewState = .member
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
-    let childPageView = UIPageViewController(transitionStyle: .scroll,
-                                             navigationOrientation: .horizontal,
-                                             options: nil)
+    var studyInfo: StudyDetail?
+    var userList: [Participate] = []
+    var authority: StudyDetailViewState = .member
+    
     lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"),
                                           style: .done,
                                           target: self,
                                           action: #selector(moreButtonDidTap))
-    let appearance = UINavigationBarAppearance()
+    let childPageView = UIPageViewController(transitionStyle: .scroll,
+                                             navigationOrientation: .horizontal,
+                                             options: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,12 +64,10 @@ class MyStudyDetailView: UIViewController {
             }
             view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
-//        if let firstVC = VCArr.first {
-//        childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
-//        }
         
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
+        self.appearance.do {
+            $0.configureWithTransparentBackground()
+        }
         
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -105,7 +99,7 @@ class MyStudyDetailView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
         }
-        switch initView {
+        switch viewState {
         case .Notice:
             self.tapSege.selectedSegmentIndex = 0
             self.childPageView.setViewControllers([self.VCArr[0]], direction: .forward, animated: true, completion: nil)
@@ -137,7 +131,6 @@ class MyStudyDetailView: UIViewController {
         self.selectedUnderLine.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: -1).isActive = true
-//            $0.centerXAnchor.constraint(equalTo: tapSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
             $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
         }
@@ -150,30 +143,6 @@ class MyStudyDetailView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }
-    
-    /// 푸쉬 이벤트가 스터디 관련일때 스터디 탭으로 초기 화면 구성
-//    func goDetailPage() {
-//        tapSege.selectedSegmentIndex = 1
-//        UIView.animate(withDuration: 0.2) {
-//            self.selectedUnderLine.transform
-//                = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
-//        }
-//        self.childPageView.setViewControllers([VCArr[1]],
-//                                              direction: .forward,
-//                                              animated: false,
-//                                              completion: nil)
-////        self.getPushEvent = false
-//    }
-    
-    /// 푸쉬 이벤트가 공지 관련일때 공지 탭으로 초기 화면 구성
-//    func goNoticePage() {
-//        tapSege.selectedSegmentIndex = 0
-//        self.childPageView.setViewControllers([VCArr[0]],
-//                                              direction: .forward,
-//                                              animated: false,
-//                                              completion: nil)
-////        self.noticePushEvent = false
-//    }
     
     func addNoticeButtonDidTap() {
         presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)

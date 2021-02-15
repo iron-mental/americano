@@ -35,12 +35,17 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
     
     func goToStudyDetail(from view: NotificationViewProtocol, alertID: Int, alarmCase: AlarmCase, studyTitle: String, studyID: Int) {
         switch alarmCase {
-        case .newApply: break
-        //            스터디 메인 (alert넣어서) -> 신청자 목록 까지 들어가줘야 알림 처리도 하면서 목록까지 뷰잉
+        case .newApply:
+            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
+            if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
+                if let notificationListView = view as? UIViewController {
+                    notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+                }
+            }
         case .newNotice, .updatedNotice:
             let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
             if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
-                castedMyStudyDetailView.initView = .Notice
+                castedMyStudyDetailView.viewState = .Notice
                 if let notificationListView = view as? UIViewController {
                     notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 }
@@ -51,7 +56,7 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
              .applyAllowed:
             let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
             if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
-                castedMyStudyDetailView.initView = .StudyDetial
+                castedMyStudyDetailView.viewState = .StudyDetial
                 if let notificationListView = view as? UIViewController {
                     notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 }
