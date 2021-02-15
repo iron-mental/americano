@@ -43,8 +43,12 @@ class MyStudyDetailView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        getPushEvent ? goDetailPage(): nil
-        noticePushEvent ? goNoticePage(): nil
+//        getPushEvent ? goDetailPage(): nil
+//        noticePushEvent ? goNoticePage(): nil
+//        UIView.animate(withDuration: 0.2) {
+//            self.selectedUnderLine.transform
+//                = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,9 +66,9 @@ class MyStudyDetailView: UIViewController {
             }
         }
         
-        if let firstVC = VCArr.first {
-            childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
-        }
+//        if let firstVC = VCArr.first {
+//        childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+//        }
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
@@ -93,11 +97,28 @@ class MyStudyDetailView: UIViewController {
 
         self.selectedUnderLine.do {
             $0.backgroundColor = .white
+//            $0.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
         }
         
         self.childPageView.do {
             $0.delegate = self
             $0.dataSource = self
+        }
+//        self.tapSege.do {
+//            $0.selectedSegmentIndex = 1
+//        }
+        if getPushEvent {
+            tapSege.selectedSegmentIndex = 1
+            childPageView.setViewControllers([VCArr[1]], direction: .forward, animated: true, completion: nil)
+            UIView.animate(withDuration: 0.2) {
+                self.selectedUnderLine.transform
+                    = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
+            }
+        }
+        if noticePushEvent {
+            tapSege.selectedSegmentIndex = 0
+            childPageView.setViewControllers([VCArr[0]], direction: .forward, animated: true, completion: nil)
+            
         }
     }
     
@@ -118,7 +139,7 @@ class MyStudyDetailView: UIViewController {
         self.selectedUnderLine.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: -1).isActive = true
-            $0.centerXAnchor.constraint(equalTo: tapSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: tapSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
             $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
         }
@@ -143,7 +164,7 @@ class MyStudyDetailView: UIViewController {
                                               direction: .forward,
                                               animated: false,
                                               completion: nil)
-        self.getPushEvent = false
+//        self.getPushEvent = false
     }
     
     /// 푸쉬 이벤트가 공지 관련일때 공지 탭으로 초기 화면 구성
@@ -153,7 +174,7 @@ class MyStudyDetailView: UIViewController {
                                               direction: .forward,
                                               animated: false,
                                               completion: nil)
-        self.noticePushEvent = false
+//        self.noticePushEvent = false
     }
     
     func addNoticeButtonDidTap() {
@@ -177,13 +198,11 @@ class MyStudyDetailView: UIViewController {
     }
     
     func deleteStudyButtonDidTap() {
-        //스터디 삭제하기
         TerminalAlertMessage.show(controller: self, type: .DeleteStudyView)
         TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(deleteStudyCompleteButtonDidTap), for: .touchUpInside)
     }
     
     func leaveStudyButtonDidTap() {
-        //스터디 나가기
         TerminalAlertMessage.show(controller: self, type: .LeaveStudyView)
         TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(leaveStudyCompleteButtonDidTap), for: .touchUpInside)
     }
@@ -202,7 +221,6 @@ class MyStudyDetailView: UIViewController {
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
-        
         UIView.animate(withDuration: 0.2) {
             self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
         }

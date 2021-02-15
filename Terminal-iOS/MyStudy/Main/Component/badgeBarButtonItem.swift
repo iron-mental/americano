@@ -22,6 +22,7 @@ class BadgeBarButtonItem: UIBarButtonItem {
             $0.font = UIFont.systemFont(ofSize: 10)
             $0.textColor = .white
             $0.backgroundColor = .systemRed
+            $0.isHidden = true
         }
         button.do {
             $0.setBackgroundImage(#imageLiteral(resourceName: "alarm"), for: .normal)

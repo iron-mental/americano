@@ -20,8 +20,6 @@ class MyStudyMainView: UIViewController {
     var alarmButton = BadgeBarButtonItem()
     var rightBarButtomItem: UIBarButtonItem?
     var dismissEditViewButtonItem: UIBarButtonItem?
-    //alarmbutton 쇼잉을 위한 임시 변수!! 곧 삭제됩니다.
-    var editDoneButton: UIBarButtonItem?
     var myStudyList: [MyStudy] = []
     let refreshControl = UIRefreshControl()
     let appearance = UINavigationBarAppearance()
@@ -65,7 +63,8 @@ class MyStudyMainView: UIViewController {
         }
         alarmButton.do {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
-            $0.badgeLabel.isHidden = $0.badgeLabel.text == nil ? true : false
+            guard let badge = $0.badgeLabel.text else { return }
+            $0.badgeLabel.isHidden = Int(badge) == 0 ? true : false
         }
         refreshControl.do {
             $0.addTarget(self, action: #selector(updateList), for: .valueChanged)
