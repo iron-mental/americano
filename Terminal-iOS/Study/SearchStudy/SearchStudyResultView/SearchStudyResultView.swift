@@ -33,9 +33,10 @@ class SearchStudyResultView: UIViewController {
             $0.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         navigationItem.do {
-            $0.hidesSearchBarWhenScrolling = true
+            $0.hidesSearchBarWhenScrolling = false
             $0.searchController = searchController
             $0.largeTitleDisplayMode = .never
+            $0.backButtonTitle = ""
         }
         searchController.do {
             $0.obscuresBackgroundDuringPresentation = false
@@ -43,6 +44,8 @@ class SearchStudyResultView: UIViewController {
             definesPresentationContext = true
             $0.searchBar.delegate = self
             $0.searchBar.searchTextField.text = keyword
+            $0.hidesNavigationBarDuringPresentation = false
+            $0.automaticallyShowsCancelButton = false
         }
         self.studyListTableView.do {
             $0.delegate = self
@@ -94,7 +97,7 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource, UIT
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        view.endEditing(true)
+        searchController.searchBar.endEditing(true)
     }
 }
 
