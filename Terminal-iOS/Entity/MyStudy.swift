@@ -14,6 +14,7 @@ struct MyStudyList: Codable {
     
     enum CodingKeys: String, CodingKey {
         case studyList = "study_list"
+        case badge
     }
 }
 struct MyStudy: Codable {

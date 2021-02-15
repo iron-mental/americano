@@ -21,7 +21,6 @@ class MyStudyMainView: UIViewController {
     var rightBarButtomItem: UIBarButtonItem?
     var dismissEditViewButtonItem: UIBarButtonItem?
     //alarmbutton 쇼잉을 위한 임시 변수!! 곧 삭제됩니다.
-    var tempCountForBadge = 0
     var tempArrayForCheck: [Int] = []
     var editDoneButton: UIBarButtonItem?
     var myStudyList: [MyStudy] = []
@@ -108,9 +107,6 @@ class MyStudyMainView: UIViewController {
     }
     
     @objc func alarmButtonAction() {
-        alarmButton.badgeLabel.isHidden = false
-        tempCountForBadge += 1
-        alarmButton.badgeLabel.text = "\(tempCountForBadge)"
         presenter?.showAlert()
     }
 }
@@ -145,6 +141,10 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
     func showMyStudyList(myStudyList: MyStudyList) {
         if let studyList = myStudyList.studyList {
             self.myStudyList = studyList
+        }
+        
+        if let badge = myStudyList.badge {
+            self.alarmButton.badgeLabel.text = String(badge.total)
         }
         attribute()
         layout()
