@@ -10,7 +10,7 @@ import UIKit
 
 class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
   
-    static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState, studyTitle: String) -> UIViewController {
+    static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState, studyTitle: String, alertID: Int? = nil) -> UIViewController {
         let view: StudyDetailViewProtocol = StudyDetailView()
         let presenter: StudyDetailPresenterProtocol & StudyDetailInteractorOutputProtocol = StudyDetailPresenter()
         let interactor: StudyDetailInteractorInputProtocol & StudyDetailRemoteDataManagerOutputProtocol = StudyDetailInteractor()
@@ -27,7 +27,9 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDatamanager = remoteDataManager
         remoteDataManager.remoteRequestHandler = interactor
-        
+        if let id = alertID {
+            remoteDataManager.alertID = id
+        }
         if let view = view as? StudyDetailView {
             view.studyID = studyID
             view.hidesBottomBarWhenPushed = true

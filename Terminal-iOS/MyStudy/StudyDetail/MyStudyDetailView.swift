@@ -14,11 +14,10 @@ class MyStudyDetailView: UIViewController {
     var noticePushEvent: Bool = false
     var getPushEvent: Bool = false
     var applyState: Bool = false
+    var alertID: Int?
     var studyID: Int? {
         didSet {
-            VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                       StudyDetailWireFrame.createStudyDetail(parent: self, studyID: studyID!, state: .member, studyTitle: studyTitle ?? ""),
-                       ChatWireFrame.createChatModule()]
+            setPageControllerChild()
         }
     }
     var studyTitle: String?
@@ -187,6 +186,16 @@ class MyStudyDetailView: UIViewController {
         //스터디 나가기
         TerminalAlertMessage.show(controller: self, type: .LeaveStudyView)
         TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(leaveStudyCompleteButtonDidTap), for: .touchUpInside)
+    }
+    
+    func setPageControllerChild() {
+        VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
+                   StudyDetailWireFrame.createStudyDetail(parent: self,
+                                                          studyID: studyID!,
+                                                          state: .member,
+                                                          studyTitle: studyTitle ?? "",
+                                                          alertID: alertID ?? nil),
+                   ChatWireFrame.createChatModule()]
     }
     
     // MARK: - @objc

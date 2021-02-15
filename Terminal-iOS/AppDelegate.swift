@@ -17,9 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var window: UIWindow?
     var goView: MyStudyDetailView?
-    var studyID: String = ""
     var pushEvent: AlarmCase?
+    var studyID: String = ""
     var studyTitle: String = ""
+    var alertID: Int?
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow()
@@ -81,10 +84,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let userInfo = notification.request.content.userInfo
         
         if let studyID = userInfo["study_id"] as? String,
-           let pushEvent = userInfo["pushEvent"] as? String {
+           let pushEvent = userInfo["pushEvent"] as? String,
+           let alertID = userInfo["alert_id"] as? Int {
             self.studyID = studyID
             self.pushEvent = AlarmCase(rawValue: pushEvent)
-            //여기에 추가적으로 alertID,
+//            여기에 추가적으로 studyTitle도 있으면 좋을듯
+            self.alertID = alertID
         }
 
         completionHandler([.alert, .badge, .sound])
@@ -102,7 +107,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         case .studyDelete:
             break
         case .studyUpdate, .studyHostDelegate:
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
+            //alertID 넣어줘야함
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀", alertID: alertID)
                 as? MyStudyDetailView {
                 view.getPushEvent = true
                 goView = view
@@ -113,7 +119,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
         case .newApply:
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
+            //alertID 넣어줘야함
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀", alertID: alertID)
                 as? MyStudyDetailView {
                 view.getPushEvent = true
                 view.applyState = true
@@ -125,7 +132,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
         case .newNotice, .updatedNotice:
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ")
+            //alertID 넣어줘야함
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ", alertID: alertID)
                 as? MyStudyDetailView {
                 view.noticePushEvent = true
                 goView = view

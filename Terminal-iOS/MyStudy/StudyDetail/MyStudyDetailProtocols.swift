@@ -13,6 +13,8 @@ protocol MyStudyDetailViewProtocol: class {
     var studyID: Int? { get set}
     var VCArr: [UIViewController] { get set }
     var studyTitle: String? { get set }
+    var alertID: Int? { get set }
+    
     //CHILD -> PARENT
     func setting()
     
@@ -73,7 +75,7 @@ protocol MyStudyDetailLocalDataManagerProtocol: class {
 protocol MyStudyDetailWireFrameProtocol: class {
     var presenter: MyStudyDetailPresenterProtocol? { get set }
     
-    static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController
+    static func createMyStudyDetailModule(studyID: Int, studyTitle: String, alertID: Int?) -> UIViewController
 
     func goToAddNotice(studyID: Int, parentView: UIViewController)
     func goToEditStudy(study: StudyDetail, parentView: UIViewController)
