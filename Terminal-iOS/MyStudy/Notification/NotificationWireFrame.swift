@@ -49,7 +49,13 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
              .studyUpdate,
              .studyHostDelegate,
              .applyAllowed:
-            break
+            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
+            if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
+                castedMyStudyDetailView.getPushEvent = true
+                if let notificationListView = view as? UIViewController {
+                    notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+                }
+            }
         case .testPush:
             break
         case .undefined,
