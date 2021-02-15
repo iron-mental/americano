@@ -317,6 +317,7 @@
 		CCD51C9F256E248200D41771 /* NoticePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51C9E256E248200D41771 /* NoticePresenter.swift */; };
 		CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */; };
 		CCD51CA8256E257D00D41771 /* NoticeProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */; };
+		CCDAB63225DA4BD000FA5B48 /* AlarmCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDAB63125DA4BD000FA5B48 /* AlarmCase.swift */; };
 		CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279DE256E46BA00DB3246 /* NoticeList.swift */; };
 		CCE279EC256E46C600DB3246 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EB256E46C600DB3246 /* Notice.swift */; };
 		CCE4E51D25A57A6D00DEFC3C /* TerminalAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */; };
@@ -676,6 +677,7 @@
 		CCD51C9E256E248200D41771 /* NoticePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticePresenter.swift; sourceTree = "<group>"; };
 		CCD51CA1256E249100D41771 /* NoticeRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCD51CA7256E257D00D41771 /* NoticeProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeProtocols.swift; sourceTree = "<group>"; };
+		CCDAB63125DA4BD000FA5B48 /* AlarmCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmCase.swift; sourceTree = "<group>"; };
 		CCE279DE256E46BA00DB3246 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
 		CCE279EB256E46C600DB3246 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertMessage.swift; sourceTree = "<group>"; };
@@ -769,6 +771,7 @@
 				CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */,
 				CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */,
 				A51BA0AF2577F0E300B9673F /* Contents.swift */,
+				CCDAB63125DA4BD000FA5B48 /* AlarmCase.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2107,6 +2110,7 @@
 				A521DDED252DEA7E00F83DB3 /* ProfileDetailProtocols.swift in Sources */,
 				CCA25AC625B6D1DB00280C80 /* ModifyStudyPresenter.swift in Sources */,
 				A541800525A8919F005B884F /* LocationCell.swift in Sources */,
+				CCDAB63225DA4BD000FA5B48 /* AlarmCase.swift in Sources */,
 				A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */,
 				CCAF0FDC253303300060A2F6 /* MyStudyMainPresenter.swift in Sources */,
 				CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */,

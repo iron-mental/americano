@@ -10,7 +10,6 @@ import UIKit
 
 class NotificationView: UIViewController {
     var presenter: NotificationPresenterProtocol?
-    
     let tableView = UITableView()
     var notiList: [Noti] = []
     
@@ -22,13 +21,16 @@ class NotificationView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.title = "알림"
+        }
         tableView.do {
             $0.delegate = self
             $0.dataSource = self
             $0.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.cellID)
             $0.rowHeight = Terminal.convertHeight(value: 80)
             $0.backgroundColor = .appColor(.terminalBackground)
-            $0.separatorColor = .darkGray
+            $0.separatorColor = notiList.isEmpty ? .clear : .none
         }
     }
     

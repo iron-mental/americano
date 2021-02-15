@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
     var goView: MyStudyDetailView?
     var studyID: String = ""
-    var pushEvent: String = ""
+    var pushEvent: AlarmCase?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -40,9 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if let studyID = notification["study_id"] as? String,
                    let pushEvent = notification["pushEvent"] as? String {
                     self.studyID = studyID
-                    self.pushEvent = pushEvent
+                    self.pushEvent = AlarmCase(rawValue: pushEvent)
                 }
-                
                 main.selectedIndex = 1
             }
             
@@ -68,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { _, error in
             if let error = error {
                 print(error)
             }
@@ -84,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let studyID = userInfo["study_id"] as? String,
            let pushEvent = userInfo["pushEvent"] as? String {
             self.studyID = studyID
-            self.pushEvent = pushEvent
+            self.pushEvent = AlarmCase(rawValue: pushEvent)
         }
 
         completionHandler([.alert, .badge, .sound])
@@ -97,7 +96,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let studyID = Int(self.studyID)!
         
         switch event {
-        case "apply_new":
+        case .chat:
+            break
+        case .studyDelete:
+            break
+        case .studyUpdate, .studyHostDelegate:
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
+                as? MyStudyDetailView {
+                view.getPushEvent = true
+                goView = view
+                if let tabVC = self.window?.rootViewController as? UITabBarController,
+                   let navVC = tabVC.selectedViewController as? UINavigationController {
+
+                    navVC.pushViewController(goView!, animated: true)
+                }
+            }
+        case .newApply:
             if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
                 as? MyStudyDetailView {
                 view.getPushEvent = true
@@ -105,22 +119,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
-                    
+
                     navVC.pushViewController(goView!, animated: true)
                 }
             }
-        case "study_update", "study_delegate":
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
-                as? MyStudyDetailView {
-                view.getPushEvent = true
-                goView = view
-                if let tabVC = self.window?.rootViewController as? UITabBarController,
-                   let navVC = tabVC.selectedViewController as? UINavigationController {
-                    
-                    navVC.pushViewController(goView!, animated: true)
-                }
-            }
-        case "notice_new", "notice_update":
+        case .newNotice, .updatedNotice:
             if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ")
                 as? MyStudyDetailView {
                 view.noticePushEvent = true
@@ -130,8 +133,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     navVC.pushViewController(goView!, animated: true)
                 }
             }
-        default:
+        case .applyAllowed:
             break
+        case .applyRejected:
+            break
+        case .testPush:
+            break
+        case .none:
+            print("지정되어있지 않은 메세지 들어옴 ")
         }
         completionHandler()
     }
