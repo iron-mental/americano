@@ -32,7 +32,6 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
                         !paging ? self.totalNoticeList.append($0) : self.nextNoticeID.append($0.id)
                     }
                 }
-                
                 self.sorted {
                     self.presenter?.showResult(result: result.result,
                                            firstNoticeList: self.firstNoticeList.isEmpty ? [] : self.firstNoticeList,
@@ -46,7 +45,6 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
     }
     
     func getNoticeListPagination(studyID: Int) {
-        
         var nextNoticeListIDs: [Int] = []
         
         if nextNoticeID.count > 9 {

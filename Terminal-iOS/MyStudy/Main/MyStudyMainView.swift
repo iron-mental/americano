@@ -143,7 +143,7 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
             self.myStudyList = studyList
         }
         if let badge = myStudyList.badge {
-            self.alarmButton.badgeLabel.text = String(badge.total)
+            self.alarmButton.badgeLabel.text = String(badge.alert)
         }
         attribute()
         layout()

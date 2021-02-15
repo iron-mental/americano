@@ -19,10 +19,11 @@ class NotificationInteractor: NotificationInteractorInputProtocol {
     func alarmProcessing(alert: Noti) {
         let alertID = alert.id
         let studyTitle = alert.studyTitle
+        let studyID = alert.studyID
         if let alarmCase = AlarmCase(rawValue: alert.pushEvent) {
-            presenter?.alarmProcessingResult(alertID: alertID, alarmCase: alarmCase, studyTitle: studyTitle)
+            presenter?.alarmProcessingResult(alertID: alertID, alarmCase: alarmCase, studyTitle: studyTitle, studyID: studyID)
         } else {
-            presenter?.alarmProcessingResult(alertID: alertID, alarmCase: .undefined, studyTitle: studyTitle)
+            presenter?.alarmProcessingResult(alertID: alertID, alarmCase: .undefined, studyTitle: studyTitle, studyID: studyID)
         }
     }
 }

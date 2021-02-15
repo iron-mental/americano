@@ -96,8 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
-        
         let event = self.pushEvent
+//        suspend일 때 푸시 누르면 죽음 해결해야됨
         let studyID = Int(self.studyID)!
         
         switch event {

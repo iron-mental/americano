@@ -23,6 +23,7 @@ class NotificationCell: UITableViewCell {
     func setData(noti: Noti) {
         self.title.text = noti.studyTitle
         self.explain.text = noti.message
+        self.backgroundColor = noti.confirm ? .clear : UIColor.appColor(.mainColor)
     }
     
     func attribute() {

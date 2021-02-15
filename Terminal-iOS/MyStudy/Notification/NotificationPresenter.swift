@@ -31,7 +31,7 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
         view?.showError(message: message)
     }
     
-    func alarmProcessingResult(alertID: Int, alarmCase: AlarmCase, studyTitle: String) {
+    func alarmProcessingResult(alertID: Int, alarmCase: AlarmCase, studyTitle: String, studyID: Int) {
         switch alarmCase {
         case .chat,
              .studyUpdate,
@@ -40,15 +40,15 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
              .applyAllowed,
              .newNotice,
              .updatedNotice:
-            wireFrame?.goToStudyDetail(alertID: alertID, alarmCase: alarmCase, studyTitle: studyTitle)
+            wireFrame?.goToStudyDetail(from: view!, alertID: alertID, alarmCase: alarmCase, studyTitle: studyTitle, studyID: studyID)
         case .studyDelete:
             view?.showAlert(message: "\(studyTitle) 스터디가 삭제되었습니다.")
         case .applyRejected:
             view?.showAlert(message: "\(studyTitle) 스터디 입장이 거절되었습니다")
         case .undefined:
             view?.showError(message: "서버와의 연결이 불안정 합니다.")
-        case .testPush: break
-//            <#code#>
+        case .testPush:
+            break
         }
     }
 }

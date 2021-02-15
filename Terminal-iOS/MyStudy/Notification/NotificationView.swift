@@ -59,6 +59,7 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter?.cellDidTap(alert: notiList[indexPath.row])
+        presenter?.viewDidLoad()
     }
 }
 
