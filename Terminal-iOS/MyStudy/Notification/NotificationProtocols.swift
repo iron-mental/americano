@@ -24,7 +24,7 @@ protocol NotificationPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    
+//    func cellDidTap(alert: Noti)
 }
 
 protocol NotificationInteractorInputProtocol: class {
@@ -44,6 +44,9 @@ protocol NotificationInteractorOutputProtocol: class {
 
 protocol NotificationWireFrameProtocol: class {
     static func createModule() -> UIViewController
+    
+    //PRESENTER -> WIREFRAME
+//    func goToStudyDetail(alertID: Int, )
 }
 
 protocol NotificationRemoteDataManagerInputProtocol: class {

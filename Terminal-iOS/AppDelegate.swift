@@ -14,7 +14,6 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-    
     var window: UIWindow?
     var goView: MyStudyDetailView?
     var pushEvent: AlarmCase?

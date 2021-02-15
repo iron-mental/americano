@@ -13,15 +13,17 @@ import Foundation
 struct Noti: Codable {
     let id, studyID: Int
     let studyTitle, message: String
-    let pushEvent, createdAt: String
+    let pushEvent: AlarmCase.RawValue
+    let createdAt: String
     let confirm: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
         case studyTitle = "study_title"
         case studyID = "study_id"
-        case pushEvent, message
+        case pushEvent
         case createdAt = "created_at"
         case confirm
+        case message
     }
 }
