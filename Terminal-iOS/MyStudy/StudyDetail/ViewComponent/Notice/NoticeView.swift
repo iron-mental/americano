@@ -10,6 +10,8 @@ import UIKit
 
 class NoticeView: UIViewController {
     var presenter: NoticePresenterProtocol?
+    
+    weak var parentView: MyStudyDetailViewProtocol?
     var studyID: Int?
     var firstNoticeList: [Notice] = []
     var secondNoticeList: [Notice] = []
@@ -140,7 +142,7 @@ extension NoticeView: NoticeViewProtocol {
             self.secondNoticeList = second
         }
         notice.reloadData()
-//        LoadingRainbowCat.hide()
+        parentView?.setting()
     }
     func showLoading() {
         LoadingRainbowCat.show()
@@ -150,7 +152,12 @@ extension NoticeView: NoticeViewProtocol {
         notice.reloadData()
         LoadingRainbowCat.hide()
     }
+    
     func showMessage(message: String) {
+        LoadingRainbowCat.hide()
+    }
+    
+    func hideLoading() {
         LoadingRainbowCat.hide()
     }
 }

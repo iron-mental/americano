@@ -9,7 +9,7 @@
 import UIKit
 
 class NoticeWireFrame: NoticeWireFrameProtocol {
-    static func createNoticeModule(studyID: Int) -> UIViewController {
+    static func createNoticeModule(studyID: Int, parentView: MyStudyDetailViewProtocol) -> UIViewController {
         let view = NoticeView()
         let presenter: NoticePresenterProtocol & NoticeInteractorOutputProtocol = NoticePresenter()
         let interactor = NoticeInteractor()
@@ -18,6 +18,7 @@ class NoticeWireFrame: NoticeWireFrameProtocol {
         
         view.presenter = presenter
         view.studyID = studyID
+        view.parentView = parentView
         presenter.view = view
         presenter.wireFrame = wireFrame
         presenter.interactor = interactor

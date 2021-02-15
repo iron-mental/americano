@@ -27,6 +27,7 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDatamanager = remoteDataManager
         remoteDataManager.remoteRequestHandler = interactor
+        
         if let id = alertID {
             remoteDataManager.alertID = id
         }

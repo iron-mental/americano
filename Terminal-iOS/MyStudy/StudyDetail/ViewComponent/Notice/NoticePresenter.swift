@@ -30,10 +30,12 @@ class NoticePresenter: NoticePresenterProtocol {
 
 extension NoticePresenter: NoticeInteractorOutputProtocol {
     func showResult(result: Bool, firstNoticeList: [Notice], secondNoticeList: [Notice]) {
+        view?.hideLoading()
         view?.showNoticeList(firstNoticeList: firstNoticeList, secondNoticeList: secondNoticeList)
     }
     
     func showError(message: String) {
+        view?.hideLoading()
         view?.showMessage(message: message)
     }
 }

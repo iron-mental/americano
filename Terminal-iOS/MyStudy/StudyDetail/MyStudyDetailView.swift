@@ -25,7 +25,7 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int? { didSet { setPageControllerChild() } }
     var studyTitle: String?
     var pageBeforeIndex: Int = 0
-    var tabBeforeIndex: Int = 0
+//    var tabBeforeIndex: Int = 0
     var VCArr: [UIViewController] = []
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     var studyInfo: StudyDetail?
@@ -175,7 +175,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     func setPageControllerChild() {
-        VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
+        VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!, parentView: self),
                    StudyDetailWireFrame.createStudyDetail(parent: self,
                                                           studyID: studyID!,
                                                           state: .member,
@@ -188,6 +188,14 @@ class MyStudyDetailView: UIViewController {
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
+        
+        switch selectedIndex {
+        case 0: viewState = .Notice
+        case 1: viewState = .StudyDetial
+        case 2: viewState = .Chat
+        default: print("들어오지 않아요")
+        }
+        
         UIView.animate(withDuration: 0.2) {
             self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
         }

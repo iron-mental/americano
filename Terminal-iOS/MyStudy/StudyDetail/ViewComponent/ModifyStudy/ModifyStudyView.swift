@@ -79,19 +79,24 @@ class ModifyStudyView: BaseEditableStudyDetailView {
 extension ModifyStudyView: ModifyStudyViewProtocol {
     func showResult(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
-            self.navigationController?.popViewController(animated: true, completion: {
+//            self.navigationController?.popViewController(animated: true)
+//            self.navigationController?.popViewController(animated: true, completion: {
                 if let myStudyDetailView = (self.navigationController?.viewControllers[1] as? MyStudyDetailView) {
+                    print(myStudyDetailView)
                     if let studyDetailView = myStudyDetailView.VCArr[1] as? StudyDetailViewProtocol {
+                        print(studyDetailView)
                         if let id = self.study?.id {
+                            print(id)
                             studyDetailView.presenter?.showStudyListDetail(studyID: "\(id)")
                         }
                     }
                 }
-            })
+//            })
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
-    func showError() {
-        showToast(controller: self, message: "수정에 실패하였습니다.", seconds: 1)
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }
