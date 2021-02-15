@@ -13,6 +13,7 @@ protocol NotificationViewProtocol: class {
     
     func showNotiList(notiList: [Noti])
     func showError(message: String)
+    func showAlert(studyTitle: String)
     func showLoading()
     func hideLoading()
 }
@@ -24,7 +25,7 @@ protocol NotificationPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-//    func cellDidTap(alert: Noti)
+    func cellDidTap(alert: Noti)
 }
 
 protocol NotificationInteractorInputProtocol: class {
@@ -33,6 +34,7 @@ protocol NotificationInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func retrieveAlert()
+    func alarmProcessing(alert: Noti)
 }
 
 protocol NotificationInteractorOutputProtocol: class {
@@ -40,18 +42,20 @@ protocol NotificationInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func onRetrievedAlert(result: [Noti])
     func retrievedAlertFailed(message: String)
+    func alarmProcessingResult(alertID: Int, alarmCase: AlarmCase, studyTitle: String)
 }
 
 protocol NotificationWireFrameProtocol: class {
     static func createModule() -> UIViewController
     
     //PRESENTER -> WIREFRAME
-//    func goToStudyDetail(alertID: Int, )
+    func goToStudyDetail(alertID: Int, alarmCase: AlarmCase, studyTitle: String)
 }
 
 protocol NotificationRemoteDataManagerInputProtocol: class {
     var interactor: NotificationRemoteDataManagerOutputProtocol? { get set }
     
+    //INTERACTOR -> REMOTEDATAMANAGER
     func retrieveAlert()
 }
 
