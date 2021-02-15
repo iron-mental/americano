@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var goView: MyStudyDetailView?
     var studyID: String = ""
     var pushEvent: AlarmCase?
-    
+    var studyTitle: String = ""
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow()
@@ -84,6 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
            let pushEvent = userInfo["pushEvent"] as? String {
             self.studyID = studyID
             self.pushEvent = AlarmCase(rawValue: pushEvent)
+            //여기에 추가적으로 alertID,
         }
 
         completionHandler([.alert, .badge, .sound])
@@ -146,7 +147,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         let pushToken = KeychainWrapper.standard.set(deviceTokenString, forKey: "pushToken")
         print("pushToken 성공여부:", pushToken)
