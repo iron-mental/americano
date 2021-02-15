@@ -36,17 +36,20 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
     func goToStudyDetail(from view: NotificationViewProtocol, alertID: Int, alarmCase: AlarmCase, studyTitle: String, studyID: Int) {
         switch alarmCase {
         case .newApply: break
-//            스터디 메인 (alert넣어서) -> 신청자 목록 까지 들어가줘야 알림 처리도 하면서 목록까지 뷰잉
+        //            스터디 메인 (alert넣어서) -> 신청자 목록 까지 들어가줘야 알림 처리도 하면서 목록까지 뷰잉
+        case .newNotice, .updatedNotice:
+            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
+            if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
+                castedMyStudyDetailView.noticePushEvent = true
+                if let notificationListView = view as? UIViewController {
+                    notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+                }
+            }
         case .chat,
              .studyUpdate,
              .studyHostDelegate,
-             .applyAllowed,
-             .newNotice,
-             .updatedNotice:
-            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
-            if let notificationListView = view as? UIViewController {
-                notificationListView.navigationController?.pushViewController(myStudyDetailView, animated: true)
-            }
+             .applyAllowed:
+            break
         case .testPush:
             break
         case .undefined,
@@ -54,6 +57,5 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
              .applyRejected:
             print("이 곳에 오지 않습니다.")
         }
-        
     }
 }
