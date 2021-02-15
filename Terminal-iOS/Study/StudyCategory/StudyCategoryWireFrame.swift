@@ -34,7 +34,7 @@ class StudyCategoryWireFrame: StudyCategoryWireFrameProtocol {
     
     func presentStudyListScreen(from view: StudyCategoryViewProtocol, category: String) {
         let studyListViewController = StudyListWireFrame.createStudyListModule(category: category)
-        
+        studyListViewController.hidesBottomBarWhenPushed = true
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(studyListViewController, animated: true)
         }
