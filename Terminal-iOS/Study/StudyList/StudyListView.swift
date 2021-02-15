@@ -174,11 +174,11 @@ extension StudyListView: StudyListViewProtocol {
     }
     
     func showLoading() {
-        
+        LoadingRainbowCat.show()
     }
     
     func hideLoading() {
-        
+        LoadingRainbowCat.hide()
     }
     
 }

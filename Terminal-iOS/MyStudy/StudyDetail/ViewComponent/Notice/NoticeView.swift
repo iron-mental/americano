@@ -140,7 +140,7 @@ extension NoticeView: NoticeViewProtocol {
             self.secondNoticeList = second
         }
         notice.reloadData()
-        LoadingRainbowCat.hide()
+//        LoadingRainbowCat.hide()
     }
     func showLoading() {
         LoadingRainbowCat.show()

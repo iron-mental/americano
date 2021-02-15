@@ -31,10 +31,12 @@ class StudyListPresenter: StudyListPresenterProtocol {
 
 extension StudyListPresenter: StudyListInteractorOutputProtocol { 
     func didRetrieveLatestStudies(studies: [Study]) {
+        view?.hideLoading()
         view?.showStudyList(with: studies)
     }
     
     func didRetrieveLengthStudies(studies: [Study]) {
+        view?.hideLoading()
         view?.saveLengthStudyList(with: studies)
     }
       

@@ -36,6 +36,7 @@ class NotificationView: UIViewController {
     
     func layout() {
         view.addSubview(tableView)
+        
         tableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
