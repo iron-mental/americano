@@ -13,7 +13,7 @@ protocol NotificationViewProtocol: class {
     
     func showNotiList(notiList: [Noti])
     func showError(message: String)
-    func showAlert(studyTitle: String)
+    func showAlert(message: String)
     func showLoading()
     func hideLoading()
 }

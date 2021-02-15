@@ -203,7 +203,8 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                     updatedAt: nil,
                                     leaderImage: nil,
                                     leaderNickname: nil,
-                                    createAt: nil)
+                                    createAt: nil,
+                                    isPaging: nil)
                     if let studyDetailView = parentView as? MyStudyDetailViewProtocol {
                         if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
                             noticeListView.viewLoad()

@@ -28,7 +28,9 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
             case true:
                 guard let noticeList = result.data else { return }
                 noticeList.forEach {
-                    $0.title != nil ? self.totalNoticeList.append($0) : self.nextNoticeID.append($0.id)
+                    if let paging = $0.isPaging {
+                        !paging ? self.totalNoticeList.append($0) : self.nextNoticeID.append($0.id)
+                    }
                 }
                 
                 self.sorted {

@@ -58,7 +58,7 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
+        presenter?.cellDidTap(alert: notiList[indexPath.row])
     }
 }
 
@@ -67,8 +67,13 @@ extension NotificationView: NotificationViewProtocol {
         self.notiList = notiList
         self.tableView.reloadData()
     }
+    
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showAlert(message: String) {
+//        <#code#>
     }
     
     func showLoading() {

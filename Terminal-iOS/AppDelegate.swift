@@ -149,6 +149,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             break
         case .none:
             print("지정되어있지 않은 메세지 들어옴 ")
+        case .some(.undefined): break
+//            <#code#>
         }
         completionHandler()
     }

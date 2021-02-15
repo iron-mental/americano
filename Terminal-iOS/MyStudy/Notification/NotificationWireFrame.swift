@@ -9,6 +9,10 @@
 import UIKit
 
 class NotificationWireFrame: NotificationWireFrameProtocol {
+    func goToStudyDetail(alertID: Int, alarmCase: AlarmCase, studyTitle: String) {
+//        <#code#>
+    }
+    
     static func createModule() -> UIViewController {
         let view: NotificationViewProtocol = NotificationView()
         let presenter: NotificationPresenterProtocol

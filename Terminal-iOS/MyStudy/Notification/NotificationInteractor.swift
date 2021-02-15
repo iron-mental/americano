@@ -15,6 +15,16 @@ class NotificationInteractor: NotificationInteractorInputProtocol {
     func retrieveAlert() {
         self.remoteDataManager?.retrieveAlert()
     }
+    
+    func alarmProcessing(alert: Noti) {
+        let alertID = alert.id
+        let studyTitle = alert.studyTitle
+        if let alarmCase = AlarmCase(rawValue: alert.pushEvent) {
+            presenter?.alarmProcessingResult(alertID: alertID, alarmCase: alarmCase, studyTitle: studyTitle)
+        } else {
+            presenter?.alarmProcessingResult(alertID: alertID, alarmCase: .undefined, studyTitle: studyTitle)
+        }
+    }
 }
 
 extension NotificationInteractor: NotificationRemoteDataManagerOutputProtocol {

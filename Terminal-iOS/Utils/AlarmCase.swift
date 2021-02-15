@@ -19,4 +19,5 @@ enum AlarmCase: String {
     case newNotice = "notice_new"
     case updatedNotice = "notice_update"
     case testPush = "push_test"
+    case undefined
 }
