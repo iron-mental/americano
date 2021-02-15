@@ -40,7 +40,7 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
         case .newNotice, .updatedNotice:
             let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
             if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
-                castedMyStudyDetailView.noticePushEvent = true
+                castedMyStudyDetailView.initView = .Notice
                 if let notificationListView = view as? UIViewController {
                     notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 }
@@ -51,7 +51,7 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
              .applyAllowed:
             let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
             if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
-                castedMyStudyDetailView.getPushEvent = true
+                castedMyStudyDetailView.initView = .StudyDetial
                 if let notificationListView = view as? UIViewController {
                     notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 }

@@ -109,7 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             //alertID 넣어줘야함
             if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀", alertID: alertID)
                 as? MyStudyDetailView {
-                view.getPushEvent = true
+                view.initView = .StudyDetial
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
@@ -121,7 +121,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             //alertID 넣어줘야함
             if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀", alertID: alertID)
                 as? MyStudyDetailView {
-                view.getPushEvent = true
+                //이 부분 뉴 어플라이로 바꿔 줘야합니다.
+                view.initView = .Chat
                 view.applyState = true
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
@@ -134,7 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             //alertID 넣어줘야함
             if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ", alertID: alertID)
                 as? MyStudyDetailView {
-                view.noticePushEvent = true
+                view.initView = .Notice
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
