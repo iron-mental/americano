@@ -261,22 +261,22 @@ extension IntroView: IntroViewProtocol {
     }
     
     func showInvalidEmailAction(message: String) {
-        invalidLabel.text = message
+        invalidLabel.text = "❌ \(message)"
         invalidGuideAnimation()
     }
     
     func showInvalidPasswordAction() {
-        invalidLabel.text = "유효하지 않은 비밀번호 입니다."
+        invalidLabel.text = "❌ 유효하지 않은 비밀번호 입니다."
         invalidGuideAnimation()
     }
     
     func showInvalidNickNameAction() {
-        invalidLabel.text = "중복된 닉네임 입니다."
+        invalidLabel.text = "❌ 중복된 닉네임 입니다."
         invalidGuideAnimation()
     }
     
     func showInvalidLoginAction(message: String) {
-        invalidLabel.text = "❌\(message)"
+        invalidLabel.text = "❌ \(message)"
         invalidGuideAnimation()
     }
     

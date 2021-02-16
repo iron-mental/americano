@@ -103,7 +103,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
+                case .failure:
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data)
