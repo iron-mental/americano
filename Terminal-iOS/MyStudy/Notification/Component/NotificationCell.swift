@@ -45,6 +45,7 @@ class NotificationCell: UITableViewCell {
         self.titleLabel.text = noti.studyTitle
         self.explainLabel.text = noti.message
         self.backgroundColor = noti.confirm ? .clear : .systemGray5
+        self.timeLabel.text = convertToElapsedTime(notificationTime: noti.createdAt)
     }
     
     func attribute() {
@@ -59,7 +60,7 @@ class NotificationCell: UITableViewCell {
         
         self.titleLabel.do {
             $0.textColor = .systemGray
-            $0.dynamicFont(fontSize: 14, weight: .bold)
+            $0.dynamicFont(fontSize: 10, weight: .bold)
             $0.numberOfLines = 1
         }
         self.explainLabel.do {
@@ -110,6 +111,27 @@ class NotificationCell: UITableViewCell {
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor,
                                          constant: -Terminal.convertWidth(value: 100)).isActive = true
         }
+    }
+    
+    func convertToElapsedTime(notificationTime: String) -> String {
+        let splitNotificationTime = notificationTime.components(separatedBy: " ")
+        
+        let notiYearMonthDay = splitNotificationTime[0]
+        let notiSplitDay = notiYearMonthDay.components(separatedBy: "-")
+        let notiYear = notiSplitDay[0]
+        let notiMonth = notiSplitDay[1]
+        let notiDay = notiSplitDay[2]
+        
+        let notiTime = splitNotificationTime[1]
+        let notiSplitTime = notiTime.components(separatedBy: ":")
+        let notiHour = notiSplitTime[0]
+        let notiMinute = notiSplitTime[1]
+        let notiSecond = notiSplitTime[2]
+        
+        _ = "\(Date())".components(separatedBy: " ")
+        
+        
+        return notiSecond
     }
     
     required init?(coder: NSCoder) {
