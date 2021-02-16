@@ -119,25 +119,13 @@ class IntroView: UIViewController {
         }
         invalidLabel.do {
             $0.textColor = .systemRed
-//            $0.text = ""
         }
-//        invalidView.do {
-//            $0.backgroundColor = .none
-//            $0.isHidden = true
-//        }
-//        invalidImage.do {
-//            $0.image = #imageLiteral(resourceName: "invalid")
-//            $0.contentMode = .scaleAspectFill
-//        }
     }
     
     // MARK: Layout
     
     func layout() {
-//        [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton, invalidView].forEach { view.addSubview($0) }
-//        [invalidImage, invalidLabel].forEach { invalidView.addSubview($0) }
         [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton, invalidLabel ].forEach { view.addSubview($0) }
-//        [invalidImage, invalidLabel].forEach { invalidView.addSubview($0) }
         
         inputTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -157,8 +145,6 @@ class IntroView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: inputTextfield.topAnchor, constant: -(20/667) * UIScreen.main.bounds.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (33/375) * UIScreen.main.bounds.width).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: (137/375) * UIScreen.main.bounds.width).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: (93/667) * UIScreen.main.bounds.height).isActive = true
         }
         cancelButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -167,28 +153,10 @@ class IntroView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
-//        invalidView.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        }
-//        invalidImage.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.centerYAnchor.constraint(equalTo: invalidLabel.centerYAnchor).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: invalidView.leadingAnchor).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 14).isActive = true
-//        }
         invalidLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: invalidImage.topAnchor).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: invalidImage.trailingAnchor, constant: 4).isActive = true
             $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: invalidView.leadingAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
-//            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
         }
         
     }
@@ -235,6 +203,7 @@ class IntroView: UIViewController {
 
 extension IntroView: IntroViewProtocol {
     func presentNextView() {
+        self.invalidLabel.text = ""
         let view = IntroView()
         let presenter = IntroPresenter()
         let interactor = IntroInteractor()
@@ -292,26 +261,22 @@ extension IntroView: IntroViewProtocol {
     }
     
     func showInvalidEmailAction(message: String) {
-//        invalidView.isHidden = false
         invalidLabel.text = message
         invalidGuideAnimation()
     }
     
     func showInvalidPasswordAction() {
-//        invalidView.isHidden = false
         invalidLabel.text = "유효하지 않은 비밀번호 입니다."
         invalidGuideAnimation()
     }
     
     func showInvalidNickNameAction() {
-//        invalidView.isHidden = false
         invalidLabel.text = "중복된 닉네임 입니다."
         invalidGuideAnimation()
     }
     
     func showInvalidLoginAction(message: String) {
-//        invalidView.isHidden = false
-        invalidLabel.text = message
+        invalidLabel.text = "❌\(message)"
         invalidGuideAnimation()
     }
     
