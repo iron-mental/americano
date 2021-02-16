@@ -10,9 +10,8 @@ import UIKit
 
 class NotificationView: UIViewController {
     var presenter: NotificationPresenterProtocol?
-    
     let tableView = UITableView()
-    var notiList: [Noti] = [Noti(id: 2, studyID: 2, studyTitle: "사당역 모임", message: "스터디에 참여하고 싶다고 왔슴!", pushEvent: "ㄹㅇ", createdAt: "ㄹㅇ")]
+    var notiList: [Noti] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,18 +21,22 @@ class NotificationView: UIViewController {
     }
     
     func attribute() {
+        self.do {
+            $0.title = "알림"
+        }
         tableView.do {
             $0.delegate = self
             $0.dataSource = self
             $0.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.cellID)
             $0.rowHeight = Terminal.convertHeight(value: 80)
             $0.backgroundColor = .appColor(.terminalBackground)
-            $0.separatorColor = .darkGray
+            $0.separatorColor = notiList.isEmpty ? .clear : .none
         }
     }
     
     func layout() {
         view.addSubview(tableView)
+        
         tableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -51,20 +54,27 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NotificationCell.cellID, for: indexPath) as! NotificationCell
-        
         let data = notiList[indexPath.row]
         cell.setData(noti: data)
-        
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.cellDidTap(alert: notiList[indexPath.row])
     }
 }
 
 extension NotificationView: NotificationViewProtocol {
     func showNotiList(notiList: [Noti]) {
-//        self.notiList = notiList
-//        self.tableView.reloadData()
+        self.notiList = notiList
+        self.tableView.reloadData()
     }
+    
     func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showAlert(message: String) {
+        //toast가 아닌 alert으로 해아할지 고민
         showToast(controller: self, message: message, seconds: 1)
     }
     

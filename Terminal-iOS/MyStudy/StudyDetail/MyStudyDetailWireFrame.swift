@@ -11,7 +11,7 @@ import UIKit
 class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
     var presenter: MyStudyDetailPresenterProtocol?
     
-    static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController {
+    static func createMyStudyDetailModule(studyID: Int, studyTitle: String, alertID: Int? = nil) -> UIViewController {
         let view: MyStudyDetailViewProtocol = MyStudyDetailView()
         let presenter: MyStudyDetailPresenterProtocol = MyStudyDetailPresenter()
         let interactor: MyStudyDetailInteractorProtocol = MyStudyDetailInteractor()
@@ -22,6 +22,8 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         view.presenter = presenter
         view.studyTitle = studyTitle
         view.studyID = studyID
+        view.alertID = alertID
+        
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame

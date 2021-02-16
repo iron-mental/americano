@@ -166,10 +166,6 @@ extension SelectLocationView: NMFMapViewCameraDelegate {
             self.pin.transform = CGAffineTransform(translationX: 0, y: -10)
         })
     }
-    
-    func mapView(_ mapView: NMFMapView, cameraDidChangeByReason reason: Int, animated: Bool) {
-        print(location?.placeName)
-    }
 }
 
 extension SelectLocationView: UITextFieldDelegate {

@@ -21,11 +21,7 @@ class AddNoticeView: UIViewController {
     
     var presenter: AddNoticePresenterProtocol?
     var studyID: Int?
-    var notice: Notice? {
-        didSet {
-            attribute()
-        }
-    }
+    var notice: Notice? { didSet { attribute() } }
     var state: AddNoticeState?
     var dismissButton = UIButton()
     var titleGuideLabel = UILabel()
@@ -203,7 +199,8 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                     updatedAt: nil,
                                     leaderImage: nil,
                                     leaderNickname: nil,
-                                    createAt: nil)
+                                    createAt: nil,
+                                    isPaging: nil)
                     if let studyDetailView = parentView as? MyStudyDetailViewProtocol {
                         if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
                             noticeListView.viewLoad()

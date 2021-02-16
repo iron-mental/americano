@@ -18,6 +18,7 @@ protocol NoticeViewProtocol: class {
     func showMessage(message: String)
     func viewLoad()
     func showLoading()
+    func hideLoading()
 }
 
 protocol NoticeInteractorInputProtocol: class {
@@ -60,7 +61,7 @@ protocol NoticeRemoteDataManagerProtocol: class {
 }
 
 protocol NoticeWireFrameProtocol: class {    
-    static func createNoticeModule(studyID: Int) -> UIViewController
+    static func createNoticeModule(studyID: Int, parentView: MyStudyDetailViewProtocol) -> UIViewController
     func goToNoticeDetail(notice: Notice,
                           parentView: UIViewController,
                           state: StudyDetailViewState)

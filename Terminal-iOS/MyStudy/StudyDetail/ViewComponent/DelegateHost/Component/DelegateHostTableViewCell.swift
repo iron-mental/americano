@@ -64,7 +64,7 @@ class DelegateHostTableViewCell: UITableViewCell {
         if let imageURL = data.image {
             self.profileImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
         } else {
-            self.profileImage.image = #imageLiteral(resourceName: "ai")
+            self.profileImage.image = #imageLiteral(resourceName: "defaultProfile")
         }
         nickname.text = data.nickname
     }

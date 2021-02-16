@@ -20,10 +20,6 @@ class MyStudyMainView: UIViewController {
     var alarmButton = BadgeBarButtonItem()
     var rightBarButtomItem: UIBarButtonItem?
     var dismissEditViewButtonItem: UIBarButtonItem?
-    //alarmbutton 쇼잉을 위한 임시 변수!! 곧 삭제됩니다.
-    var tempCountForBadge = 0
-    var tempArrayForCheck: [Int] = []
-    var editDoneButton: UIBarButtonItem?
     var myStudyList: [MyStudy] = []
     let refreshControl = UIRefreshControl()
     let appearance = UINavigationBarAppearance()
@@ -38,6 +34,7 @@ class MyStudyMainView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         applyState ? presenter?.showApplyList(): nil
+        presenter?.viewDidLoad()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = UIColor.appColor(.terminalBackground)
         navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -67,6 +64,8 @@ class MyStudyMainView: UIViewController {
         }
         alarmButton.do {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
+            guard let badge = $0.badgeLabel.text else { return }
+            $0.badgeLabel.isHidden = Int(badge) == 0 ? true : false
         }
         refreshControl.do {
             $0.addTarget(self, action: #selector(updateList), for: .valueChanged)
@@ -108,9 +107,6 @@ class MyStudyMainView: UIViewController {
     }
     
     @objc func alarmButtonAction() {
-        alarmButton.badgeLabel.isHidden = false
-        tempCountForBadge += 1
-        alarmButton.badgeLabel.text = "\(tempCountForBadge)"
         presenter?.showAlert()
     }
 }
@@ -145,6 +141,9 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
     func showMyStudyList(myStudyList: MyStudyList) {
         if let studyList = myStudyList.studyList {
             self.myStudyList = studyList
+        }
+        if let badge = myStudyList.badge {
+            self.alarmButton.badgeLabel.text = String(badge.alert)
         }
         attribute()
         layout()

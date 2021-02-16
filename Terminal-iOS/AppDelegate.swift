@@ -14,11 +14,13 @@ import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-    
     var window: UIWindow?
     var goView: MyStudyDetailView?
+    var pushEvent: AlarmCase?
     var studyID: String = ""
-    var pushEvent: String = ""
+    var studyTitle: String = ""
+    var alertID: Int?
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -40,9 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if let studyID = notification["study_id"] as? String,
                    let pushEvent = notification["pushEvent"] as? String {
                     self.studyID = studyID
-                    self.pushEvent = pushEvent
+                    self.pushEvent = AlarmCase(rawValue: pushEvent)
                 }
-                
                 main.selectedIndex = 1
             }
             
@@ -68,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let center = UNUserNotificationCenter.current()
         center.delegate = self
-        center.requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { _, error in
             if let error = error {
                 print(error)
             }
@@ -82,9 +83,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let userInfo = notification.request.content.userInfo
         
         if let studyID = userInfo["study_id"] as? String,
-           let pushEvent = userInfo["pushEvent"] as? String {
+           let pushEvent = userInfo["pushEvent"] as? String,
+           let alertID = userInfo["alert_id"] as? Int {
             self.studyID = studyID
-            self.pushEvent = pushEvent
+            self.pushEvent = AlarmCase(rawValue: pushEvent)
+//            여기에 추가적으로 studyTitle도 있으면 좋을듯
+            self.alertID = alertID
         }
 
         completionHandler([.alert, .badge, .sound])
@@ -92,52 +96,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
-        
         let event = self.pushEvent
+//        suspend일 때 푸시 누르면 죽음 해결해야됨
         let studyID = Int(self.studyID)!
         
         switch event {
-        case "apply_new":
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
+        case .chat:
+            break
+        case .studyDelete:
+            break
+        case .studyUpdate, .studyHostDelegate:
+            //alertID 넣어줘야함
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀", alertID: alertID)
                 as? MyStudyDetailView {
-                view.getPushEvent = true
+                view.viewState = .StudyDetial
+                goView = view
+                if let tabVC = self.window?.rootViewController as? UITabBarController,
+                   let navVC = tabVC.selectedViewController as? UINavigationController {
+
+                    navVC.pushViewController(goView!, animated: true)
+                }
+            }
+        case .newApply:
+            //alertID 넣어줘야함
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀", alertID: alertID)
+                as? MyStudyDetailView {
+                //이 부분 뉴 어플라이로 바꿔 줘야합니다.
+                view.viewState = .Chat
                 view.applyState = true
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
-                    
+
                     navVC.pushViewController(goView!, animated: true)
                 }
             }
-        case "study_update", "study_delegate":
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
+        case .newNotice, .updatedNotice:
+            //alertID 넣어줘야함
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ", alertID: alertID)
                 as? MyStudyDetailView {
-                view.getPushEvent = true
-                goView = view
-                if let tabVC = self.window?.rootViewController as? UITabBarController,
-                   let navVC = tabVC.selectedViewController as? UINavigationController {
-                    
-                    navVC.pushViewController(goView!, animated: true)
-                }
-            }
-        case "notice_new", "notice_update":
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ")
-                as? MyStudyDetailView {
-                view.noticePushEvent = true
+                view.viewState = .Notice
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
                     navVC.pushViewController(goView!, animated: true)
                 }
             }
-        default:
+        case .applyAllowed:
             break
+        case .applyRejected:
+            break
+        case .testPush:
+            break
+        case .none:
+            print("지정되어있지 않은 메세지 들어옴 ")
+        case .some(.undefined): break
+//            <#code#>
         }
         completionHandler()
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         let pushToken = KeychainWrapper.standard.set(deviceTokenString, forKey: "pushToken")
         print("pushToken 성공여부:", pushToken)

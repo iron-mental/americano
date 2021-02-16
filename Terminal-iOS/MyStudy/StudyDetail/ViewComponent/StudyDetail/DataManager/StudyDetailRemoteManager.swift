@@ -11,12 +11,13 @@ import SwiftyJSON
 
 class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     weak var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
+    var alertID: Int?
     
     func getStudyDetail(studyID: String) {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.studyDetail(studyID: studyID))
+            .request(TerminalRouter.studyDetail(studyID: studyID, alertID: alertID))
             .validate()
             .responseJSON { response in
                 switch response.result {

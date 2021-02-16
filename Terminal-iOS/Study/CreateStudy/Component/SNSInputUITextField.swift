@@ -16,7 +16,7 @@ class SNSInputUITextField: UITextField {
     
     private var workItem: DispatchWorkItem?
     private var delay: Double = 0
-    private var callback: ((String?) -> Void)? = nil
+    private var callback: ((String?) -> Void)?
     
     func debounce(delay: Double, callback: @escaping ((String?) -> Void)) {
         self.delay = delay

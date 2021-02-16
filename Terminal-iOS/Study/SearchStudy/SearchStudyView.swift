@@ -46,6 +46,7 @@ class SearchStudyView: UIViewController {
     func attribute() {
         self.do {
             $0.title = "스터디 검색"
+            $0.navigationItem.backButtonTitle = ""
         }
         self.navigationItem.do {
             $0.searchController = searchController

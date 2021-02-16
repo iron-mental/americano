@@ -18,6 +18,7 @@ struct Notice: Codable {
     let leaderImage: String?
     let leaderNickname: String?
     let createAt: String?
+    let isPaging: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -28,5 +29,6 @@ struct Notice: Codable {
         case leaderID = "leader_id"
         case leaderImage = "leader_image"
         case leaderNickname = "leader_nickname"
+        case isPaging = "is_paging"
     }
 }

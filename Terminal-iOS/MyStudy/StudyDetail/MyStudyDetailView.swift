@@ -9,43 +9,43 @@
 import UIKit
 import SwiftKeychainWrapper
 
+enum MyStudyDetialInitView {
+    case Notice
+    case StudyDetial
+    case Chat
+}
+
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
-    var noticePushEvent: Bool = false
-    var getPushEvent: Bool = false
+    
+    var viewState: MyStudyDetialInitView = .StudyDetial
+    let appearance = UINavigationBarAppearance()
     var applyState: Bool = false
-    var studyID: Int? {
-        didSet {
-            VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!),
-                       StudyDetailWireFrame.createStudyDetail(parent: self, studyID: studyID!, state: .member, studyTitle: studyTitle ?? ""),
-                       ChatWireFrame.createChatModule()]
-        }
-    }
+    var alertID: Int?
+    var studyID: Int? { didSet { setPageControllerChild() } }
     var studyTitle: String?
+    var pageBeforeIndex: Int = 0
+//    var tabBeforeIndex: Int = 0
+    var VCArr: [UIViewController] = []
+    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
-    var pageBeforeIndex: Int = 0
-    var tabBeforeIndex: Int = 0
-    var VCArr: [UIViewController] = []
     var authority: StudyDetailViewState = .member
-    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
-    let childPageView = UIPageViewController(transitionStyle: .scroll,
-                                             navigationOrientation: .horizontal,
-                                             options: nil)
+    
     lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
     lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"),
                                           style: .done,
                                           target: self,
                                           action: #selector(moreButtonDidTap))
-    let appearance = UINavigationBarAppearance()
+    let childPageView = UIPageViewController(transitionStyle: .scroll,
+                                             navigationOrientation: .horizontal,
+                                             options: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
-        getPushEvent ? goDetailPage(): nil
-        noticePushEvent ? goNoticePage(): nil
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,19 +56,18 @@ class MyStudyDetailView: UIViewController {
     
     func attribute() {
         self.do {
+            //레거시임 청산해야할 부분
             if let title = studyInfo?.title {
                 $0.title = title
             } else {
                 $0.title = studyTitle
             }
+            view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         
-        if let firstVC = VCArr.first {
-            childPageView.setViewControllers([firstVC], direction: .forward, animated: true, completion: nil)
+        self.appearance.do {
+            $0.configureWithTransparentBackground()
         }
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
         
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -100,6 +99,19 @@ class MyStudyDetailView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
         }
+        switch viewState {
+        case .Notice:
+            self.tapSege.selectedSegmentIndex = 0
+            self.childPageView.setViewControllers([self.VCArr[0]], direction: .forward, animated: true, completion: nil)
+            self.pageBeforeIndex = 0
+        case .StudyDetial:
+            self.tapSege.selectedSegmentIndex = 1
+            self.childPageView.setViewControllers([self.VCArr[1]], direction: .forward, animated: true, completion: nil)
+            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
+            self.pageBeforeIndex = 1
+        case .Chat:
+            break
+        }
     }
     
     func layout() {
@@ -119,7 +131,6 @@ class MyStudyDetailView: UIViewController {
         self.selectedUnderLine.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: -1).isActive = true
-            $0.centerXAnchor.constraint(equalTo: tapSege.centerXAnchor, constant: -view.frame.width / 3).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
             $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
         }
@@ -131,30 +142,6 @@ class MyStudyDetailView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
-    }
-    
-    /// 푸쉬 이벤트가 스터디 관련일때 스터디 탭으로 초기 화면 구성
-    func goDetailPage() {
-        tapSege.selectedSegmentIndex = 1
-        UIView.animate(withDuration: 0.2) {
-            self.selectedUnderLine.transform
-                = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
-        }
-        self.childPageView.setViewControllers([VCArr[1]],
-                                              direction: .forward,
-                                              animated: false,
-                                              completion: nil)
-        self.getPushEvent = false
-    }
-    
-    /// 푸쉬 이벤트가 공지 관련일때 공지 탭으로 초기 화면 구성
-    func goNoticePage() {
-        tapSege.selectedSegmentIndex = 0
-        self.childPageView.setViewControllers([VCArr[0]],
-                                              direction: .forward,
-                                              animated: false,
-                                              completion: nil)
-        self.noticePushEvent = false
     }
     
     func addNoticeButtonDidTap() {
@@ -178,21 +165,36 @@ class MyStudyDetailView: UIViewController {
     }
     
     func deleteStudyButtonDidTap() {
-        //스터디 삭제하기
         TerminalAlertMessage.show(controller: self, type: .DeleteStudyView)
         TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(deleteStudyCompleteButtonDidTap), for: .touchUpInside)
     }
     
     func leaveStudyButtonDidTap() {
-        //스터디 나가기
         TerminalAlertMessage.show(controller: self, type: .LeaveStudyView)
         TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(leaveStudyCompleteButtonDidTap), for: .touchUpInside)
+    }
+    
+    func setPageControllerChild() {
+        VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!, parentView: self),
+                   StudyDetailWireFrame.createStudyDetail(parent: self,
+                                                          studyID: studyID!,
+                                                          state: .member,
+                                                          studyTitle: studyTitle ?? "",
+                                                          alertID: alertID ?? nil),
+                   ChatWireFrame.createChatModule()]
     }
     
     // MARK: - @objc
     
     @objc func indexChanged(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
+        
+        switch selectedIndex {
+        case 0: viewState = .Notice
+        case 1: viewState = .StudyDetial
+        case 2: viewState = .Chat
+        default: print("들어오지 않아요")
+        }
         
         UIView.animate(withDuration: 0.2) {
             self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
@@ -288,7 +290,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         layout()
         view.layoutIfNeeded()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-            LoadingRainbowCat.hide()
+            if !self.applyState {
+                LoadingRainbowCat.hide()
+            }
         })
     }
     

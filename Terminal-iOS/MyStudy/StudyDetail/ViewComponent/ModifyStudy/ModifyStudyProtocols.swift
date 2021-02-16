@@ -13,7 +13,7 @@ protocol ModifyStudyViewProtocol: class {
     var study: StudyDetail? { get set }
     //PRESENTER -> VIEW
     func showResult(message: String)
-    func showError()
+    func showError(message: String)
 }
 
 protocol ModifyStudyPresenterProtocol: class {

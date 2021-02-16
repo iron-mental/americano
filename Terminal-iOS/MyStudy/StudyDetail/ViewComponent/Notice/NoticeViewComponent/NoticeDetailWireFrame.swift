@@ -25,7 +25,8 @@ class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
                                updatedAt: nil,
                                leaderImage: nil,
                                leaderNickname: nil,
-                               createAt: nil)
+                               createAt: nil,
+                               isPaging: nil)
         view.presenter = presenter
         view.notice = newNotice
         view.parentView = parentView != nil ? parentView : nil

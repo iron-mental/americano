@@ -26,8 +26,9 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
                     let data = "\(json)".data(using: .utf8)
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<Notice>.self, from: data!)
-                        guard let notice = result.data else { return }
-                        self.interactor?.getNoticeDetailResult(result: result)
+                        if result.data != nil {
+                            self.interactor?.getNoticeDetailResult(result: result)
+                        }
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -35,8 +36,9 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<Notice>.self, from: data)
-                            guard let message = result.message else { return }
-                            self.interactor?.getNoticeDetailResult(result: result)
+                            if result.message != nil {
+                                self.interactor?.getNoticeDetailResult(result: result)
+                            }
                         } catch {
                             
                         }

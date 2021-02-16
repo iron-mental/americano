@@ -30,7 +30,6 @@ class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
         switch result {
         case true:
             view?.showMyStudyList(myStudyList: itemList!)
-            break
         case false:
             view?.showErrMessage()
         }

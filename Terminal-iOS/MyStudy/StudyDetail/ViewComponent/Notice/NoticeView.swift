@@ -10,6 +10,8 @@ import UIKit
 
 class NoticeView: UIViewController {
     var presenter: NoticePresenterProtocol?
+    
+    weak var parentView: MyStudyDetailViewProtocol?
     var studyID: Int?
     var firstNoticeList: [Notice] = []
     var secondNoticeList: [Notice] = []
@@ -47,10 +49,10 @@ class NoticeView: UIViewController {
         
         notice.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         }
     }
 }
@@ -140,7 +142,7 @@ extension NoticeView: NoticeViewProtocol {
             self.secondNoticeList = second
         }
         notice.reloadData()
-        LoadingRainbowCat.hide()
+        parentView?.setting()
     }
     func showLoading() {
         LoadingRainbowCat.show()
@@ -150,7 +152,12 @@ extension NoticeView: NoticeViewProtocol {
         notice.reloadData()
         LoadingRainbowCat.hide()
     }
+    
     func showMessage(message: String) {
+        LoadingRainbowCat.hide()
+    }
+    
+    func hideLoading() {
         LoadingRainbowCat.hide()
     }
 }

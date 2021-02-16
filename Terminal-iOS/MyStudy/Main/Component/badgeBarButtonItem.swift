@@ -19,10 +19,9 @@ class BadgeBarButtonItem: UIBarButtonItem {
             $0.layer.cornerRadius = badgeLabel.bounds.size.height / 2
             $0.textAlignment = .center
             $0.layer.masksToBounds = true
-            $0.font = $0.font.withSize(10)
+            $0.font = UIFont.systemFont(ofSize: 10)
             $0.textColor = .white
-            $0.backgroundColor = .red
-            $0.text = nil
+            $0.backgroundColor = .systemRed
             $0.isHidden = true
         }
         button.do {
