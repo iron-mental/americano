@@ -32,8 +32,8 @@ class IntroView: UIViewController {
     var rightBarButton: UIBarButtonItem?
     var leftBarButton: UIBarButtonItem?
     
-    var invalidView = UIView()
-    var invalidImage = UIImageView()
+//    var invalidView = UIView()
+//    var invalidImage = UIImageView()
     var invalidLabel = UILabel()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +63,7 @@ class IntroView: UIViewController {
             self.leftButton.setImage(#imageLiteral(resourceName: "close"), for: .normal)
             self.rightbutton.setTitle("다음", for: .normal)
         case .pwdInput:
-            self.guideLabel.text = self.beginState == .join ?  "로그인을 위해 계정의 비밀번호를\n입력해 주세요." : "사용하실 비밀번호를\n설정해 주세요"
+            self.guideLabel.text = self.beginState == .join ?  "로그인을 위해 \n계정의 비밀번호를\n입력해 주세요." : "사용하실 비밀번호를\n설정해 주세요"
             self.inputTextfield.do {
                 $0.placeholder = "비밀번호"
                 $0.isSecureTextEntry = true
@@ -118,24 +118,26 @@ class IntroView: UIViewController {
             $0.addTarget(self, action: #selector(didClickedCancelButton), for: .touchUpInside)
         }
         invalidLabel.do {
-            $0.textColor = .systemPink
-            $0.text = "아 좀 똑바로 입력하세용!!"
+            $0.textColor = .systemRed
+//            $0.text = ""
         }
-        invalidView.do {
-            $0.backgroundColor = .none
-            $0.isHidden = true
-        }
-        invalidImage.do {
-            $0.image = #imageLiteral(resourceName: "invalid")
-            $0.contentMode = .scaleAspectFill
-        }
+//        invalidView.do {
+//            $0.backgroundColor = .none
+//            $0.isHidden = true
+//        }
+//        invalidImage.do {
+//            $0.image = #imageLiteral(resourceName: "invalid")
+//            $0.contentMode = .scaleAspectFill
+//        }
     }
     
     // MARK: Layout
     
     func layout() {
-        [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton, invalidView].forEach { view.addSubview($0) }
-        [invalidImage, invalidLabel].forEach { invalidView.addSubview($0) }
+//        [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton, invalidView].forEach { view.addSubview($0) }
+//        [invalidImage, invalidLabel].forEach { invalidView.addSubview($0) }
+        [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton, invalidLabel ].forEach { view.addSubview($0) }
+//        [invalidImage, invalidLabel].forEach { invalidView.addSubview($0) }
         
         inputTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -155,8 +157,8 @@ class IntroView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: inputTextfield.topAnchor, constant: -(20/667) * UIScreen.main.bounds.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (33/375) * UIScreen.main.bounds.width).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (137/375) * UIScreen.main.bounds.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (93/667) * UIScreen.main.bounds.height).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: (137/375) * UIScreen.main.bounds.width).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: (93/667) * UIScreen.main.bounds.height).isActive = true
         }
         cancelButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -165,25 +167,28 @@ class IntroView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
-        invalidView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
-            $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        }
-        invalidImage.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: invalidLabel.centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: invalidView.leadingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 14).isActive = true
-        }
+//        invalidView.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        }
+//        invalidImage.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.centerYAnchor.constraint(equalTo: invalidLabel.centerYAnchor).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: invalidView.leadingAnchor).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: 14).isActive = true
+//        }
         invalidLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: invalidImage.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: invalidImage.trailingAnchor, constant: 4).isActive = true
-            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
+//            $0.topAnchor.constraint(equalTo: invalidImage.topAnchor).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: invalidImage.trailingAnchor, constant: 4).isActive = true
+            $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: invalidView.leadingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
+//            $0.bottomAnchor.constraint(equalTo: invalidView.bottomAnchor).isActive = true
         }
         
     }
@@ -287,47 +292,47 @@ extension IntroView: IntroViewProtocol {
     }
     
     func showInvalidEmailAction(message: String) {
-        invalidView.isHidden = false
+//        invalidView.isHidden = false
         invalidLabel.text = message
         invalidGuideAnimation()
     }
     
     func showInvalidPasswordAction() {
-        invalidView.isHidden = false
+//        invalidView.isHidden = false
         invalidLabel.text = "유효하지 않은 비밀번호 입니다."
         invalidGuideAnimation()
     }
     
     func showInvalidNickNameAction() {
-        invalidView.isHidden = false
+//        invalidView.isHidden = false
         invalidLabel.text = "중복된 닉네임 입니다."
         invalidGuideAnimation()
     }
     
     func showInvalidLoginAction(message: String) {
-        invalidView.isHidden = false
+//        invalidView.isHidden = false
         invalidLabel.text = message
         invalidGuideAnimation()
     }
     
     func invalidGuideAnimation() {
         UIView.animate(withDuration: 0.05) {
-            self.invalidView.transform = CGAffineTransform(translationX: -10, y: 0)
+            self.invalidLabel.transform = CGAffineTransform(translationX: -10, y: 0)
         } completion: { _ in
             UIView.animate(withDuration: 0.05) {
-                self.invalidView.transform = CGAffineTransform(translationX: 5, y: 0)
+                self.invalidLabel.transform = CGAffineTransform(translationX: 5, y: 0)
             } completion: { _ in
                 UIView.animate(withDuration: 0.05) {
-                    self.invalidView.transform = CGAffineTransform(translationX: -2.5, y: 0)
+                    self.invalidLabel.transform = CGAffineTransform(translationX: -2.5, y: 0)
                 } completion: { _ in
                     UIView.animate(withDuration: 0.05) {
-                        self.invalidView.transform = CGAffineTransform(translationX: 1.25, y: 0)
+                        self.invalidLabel.transform = CGAffineTransform(translationX: 1.25, y: 0)
                     } completion: { _ in
                         UIView.animate(withDuration: 0.05) {
-                            self.invalidView.transform = CGAffineTransform(translationX: -0.6125, y: 0)
+                            self.invalidLabel.transform = CGAffineTransform(translationX: -0.6125, y: 0)
                         } completion: { _ in
                             UIView.animate(withDuration: 0.05) {
-                                self.invalidView.transform = CGAffineTransform(translationX: 0, y: 0)
+                                self.invalidLabel.transform = CGAffineTransform(translationX: 0, y: 0)
                             } completion: { _ in
                                 print("Invalid Response")
                             }
