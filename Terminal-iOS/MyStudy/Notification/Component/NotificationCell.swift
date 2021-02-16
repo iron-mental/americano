@@ -11,8 +11,11 @@ import UIKit
 class NotificationCell: UITableViewCell {
     static let cellID = "NotificationCell"
     
-    let title = UILabel()
-    let explain = UILabel()
+    let iconImageview = UIImageView()
+    let titleLabel = UILabel()
+    let explainLabel = UILabel()
+    let timeLabel = UILabel()
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -21,42 +24,70 @@ class NotificationCell: UITableViewCell {
     }
     
     func setData(noti: Noti) {
-        self.title.text = noti.studyTitle
-        self.explain.text = noti.message
+        self.titleLabel.text = noti.studyTitle
+        self.explainLabel.text = noti.message
         self.backgroundColor = noti.confirm ? .clear : .systemGray5
     }
     
     func attribute() {
-        self.backgroundColor = .appColor(.terminalBackground)
-        self.selectionStyle = .none
-        self.title.do {
-            $0.textColor = .white
-            $0.dynamicFont(fontSize: 20, weight: .bold)
+        self.do {
+            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.selectionStyle = .none
+        }
+        
+        self.iconImageview.do {
+            $0.image = #imageLiteral(resourceName: "defaultProfile")
+        }
+        
+        self.titleLabel.do {
+            $0.textColor = .systemGray
+            $0.dynamicFont(fontSize: 14, weight: .bold)
             $0.numberOfLines = 1
         }
-        self.explain.do {
-            $0.textColor = .systemGray
-            $0.dynamicFont(fontSize: 14, weight: .regular)
+        self.explainLabel.do {
+            $0.textColor = .white
+            $0.dynamicFont(fontSize: 20, weight: .regular)
             $0.numberOfLines = 1
+        }
+        self.timeLabel.do {
+            $0.text = "3일 전"
+            $0.textColor = .systemGray
+            $0.dynamicFont(fontSize: 14, weight: .bold)
         }
     }
     
     func layout() {
-        self.addSubview(title)
-        self.addSubview(explain)
+        [iconImageview, titleLabel, timeLabel, explainLabel].forEach { self.addSubview($0) }
         
-        self.title.do {
+        self.iconImageview.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
+        }
+        
+        self.titleLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor,
                                     constant: Terminal.convertHeight(value: 15)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+            $0.leadingAnchor.constraint(equalTo: self.iconImageview.trailingAnchor,
                                         constant: Terminal.convertWidth(value: 20)).isActive = true
         }
-        self.explain.do {
+        
+        self.timeLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: title.bottomAnchor,
+            $0.topAnchor.constraint(equalTo: self.topAnchor,
+                                    constant: Terminal.convertHeight(value: 15)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor
+                                         , constant: -Terminal.convertWidth(value: 15)).isActive = true
+        }
+        self.explainLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
                                     constant: Terminal.convertHeight(value: 20)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor,
+            $0.leadingAnchor.constraint(equalTo: self.iconImageview.trailingAnchor,
                                         constant: Terminal.convertWidth(value: 20)).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor,
                                          constant: -Terminal.convertWidth(value: 100)).isActive = true
