@@ -44,6 +44,7 @@ class HomeView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.addTarget(self, action: #selector(goSignUp), for: .touchUpInside)
             $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
         }
         mainImage.do {
             $0.image = UIImage(named: "homeImage")
@@ -64,10 +65,11 @@ class HomeView: UIViewController {
         }
         signUpButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 50)).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 10).isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
         }
         mainImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

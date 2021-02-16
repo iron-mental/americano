@@ -19,7 +19,9 @@ class IntroPresenter: IntroPresenterProtocol {
             interactor?.checkedEmailValid(input: input, beginState: beginState)
         case .pwdInput:
             beginState == .signUp ? interactor?.checkedPasswordValid(input: input) : interactor?.checkedJoinValid(input: input)
+            beginState == .signUp ? nil : view?.showLoading()
         case .nickname:
+            view?.showLoading()
             interactor?.signUpValid(input: input)
         }
     }
@@ -35,17 +37,20 @@ class IntroPresenter: IntroPresenterProtocol {
     }
     
     func nicknameValidInfo(result: Bool) {
+        view?.hideLoading()
         result ? view?.presentNextView() : view?.showInvalidNickNameAction()
     }
     
     /// 회원가입 유효성 확인
     func signUpValidInfo(result: Bool) {
+        view?.hideLoading()
         view?.presentCompleteView()
     }
     
     /// 로그인 유효성 확인
     func joinValidInfo(result: Bool, message: String) {
         result ? view?.completeJoin() : view?.showInvalidLoginAction(message: message)
+        result ? nil : view?.hideLoading()
     }
     
     func didNextButton(input: String, introState: IntroViewState, beginState: BeginState) {
