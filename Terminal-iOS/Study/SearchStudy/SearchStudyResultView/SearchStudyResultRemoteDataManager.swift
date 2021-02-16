@@ -42,7 +42,7 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
         var params: [String: String] = [ "values": "" ]
         keys.forEach { params["values"]?.append("\($0),") }
         params["values"]?.removeLast()
-        
+
         TerminalNetworkManager
             .shared
             .session

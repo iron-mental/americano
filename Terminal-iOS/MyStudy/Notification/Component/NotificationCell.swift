@@ -85,8 +85,6 @@ class NotificationCell: UITableViewCell {
             $0.centerYAnchor.constraint(equalTo: self.titleLabel.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                         constant: Terminal.convertWidth(value: 20)).isActive = true
-            //            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
-            //            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
         }
         
         self.titleLabel.do {
