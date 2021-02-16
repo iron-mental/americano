@@ -48,6 +48,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.signUp(userData: params))
+            .validate()
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
@@ -59,8 +60,15 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print("에러:", error)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            completionHandler(result)
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }

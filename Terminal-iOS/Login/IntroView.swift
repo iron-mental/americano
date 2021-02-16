@@ -31,9 +31,6 @@ class IntroView: UIViewController {
     var introState: IntroViewState?
     var rightBarButton: UIBarButtonItem?
     var leftBarButton: UIBarButtonItem?
-    
-//    var invalidView = UIView()
-//    var invalidImage = UIImageView()
     var invalidLabel = UILabel()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,6 +115,7 @@ class IntroView: UIViewController {
             $0.addTarget(self, action: #selector(didClickedCancelButton), for: .touchUpInside)
         }
         invalidLabel.do {
+            $0.numberOfLines = 0
             $0.textColor = .systemRed
         }
     }
@@ -251,7 +249,9 @@ extension IntroView: IntroViewProtocol {
     }
     
     func presentCompleteView() {
-        self.navigationController?.popToRootViewController(animated: true)
+        showToast(controller: self, message: "회원가입이 완료되었습니다", seconds: 1) {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
     func completeJoin() {
@@ -266,7 +266,7 @@ extension IntroView: IntroViewProtocol {
     }
     
     func showInvalidPasswordAction() {
-        invalidLabel.text = "❌ 유효하지 않은 비밀번호 입니다."
+        invalidLabel.text = "❌ 비밀번호는 8 ~ 20글자 사이여야 합니다."
         invalidGuideAnimation()
     }
     
