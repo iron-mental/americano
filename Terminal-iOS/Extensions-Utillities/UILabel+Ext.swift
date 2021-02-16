@@ -13,7 +13,7 @@ extension UILabel {
         var calculatedFont: UIFont?
         let bounds = UIScreen.main.bounds
         let height = bounds.size.height
-        
+
         switch height {
         case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
             calculatedFont = UIFont.notosansMedium(size: size)
@@ -26,6 +26,9 @@ extension UILabel {
             resizeFont(calculatedFont: calculatedFont, weight: weight)
         case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
             calculatedFont = UIFont.notosansMedium(size: size * 1.2)
+            resizeFont(calculatedFont: calculatedFont, weight: weight)
+        case 926.0:
+            calculatedFont = UIFont.notosansMedium(size: size * 1.25)
             resizeFont(calculatedFont: calculatedFont, weight: weight)
         default:
             print("not an iPhone")

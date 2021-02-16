@@ -21,7 +21,6 @@ class SelectCategoryView: UIViewController {
     let font = UIFont(name: "Apple Color Emoji", size: 25)
     let titleView = UILabel()
     let textLabel = UILabel()
-    var tempCategory: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +33,7 @@ class SelectCategoryView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.title = "스터디 만들기"
             navigationItem.backButtonTitle = "카테고리 선택"
+            print($0.navigationItem.backBarButtonItem?.image)
         }
         scrollView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -57,10 +57,17 @@ class SelectCategoryView: UIViewController {
             $0.showsVerticalScrollIndicator = false
         }
         navigationItem.do {
-            $0.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backButtonTapped))
+//            let test = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action: #selector(backButtonTapped))
+            $0.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(backButtonTapped))
+//            $0.leftBarButtonItem =  UIBarButtonItem(title: "", style: .done, target: self, action: #selector(backButtonTapped))
         }
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.isMovingFromParent {
+            backButtonTapped()
+        }
+    }
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
