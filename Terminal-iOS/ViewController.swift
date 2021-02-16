@@ -61,13 +61,17 @@ class ViewController: UITabBarController {
         self.setViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
         let studyNVC = UINavigationController(rootViewController: self.studyViewController)
+        studyNVC.navigationBar.tintColor = .white
         studyNVC.navigationBar.prefersLargeTitles = true
         
         let myStudyNVC = UINavigationController(rootViewController: self.myStudyViewController)
+        myStudyNVC.navigationBar.tintColor = .white
         myStudyNVC.navigationBar.prefersLargeTitles = true
         
         let setNVC = UINavigationController(rootViewController: self.setViewController)
+        setNVC.navigationBar.tintColor = .white
         setNVC.navigationBar.prefersLargeTitles = true
+        
         self.viewControllers = [
             studyNVC,
             myStudyNVC,

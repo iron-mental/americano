@@ -41,12 +41,7 @@ class StudyCategoryView: UIViewController {
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
         }
-        searchStudyBtn.do {
-            $0.tintColor = .white
-        }
-        createStudyBtn.do {
-            $0.tintColor = .white
-        }
+        
         categoryCollectionView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.categoryCellID)
