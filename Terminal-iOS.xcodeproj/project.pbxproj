@@ -1330,6 +1330,7 @@
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
 				A56264D025B568A6004CD298 /* Web */,
 				A51BA0AE2577F0CA00B9673F /* Utils */,
+				CCED89DD25DD1FF2006DA773 /* EmptyViews */,
 				A56605E025835873002C4A77 /* BaseComponent */,
 				A5BA460C255D09C80061C511 /* Network */,
 				A587CEC7251A428A00A2AD13 /* Extensions-Utillities */,
@@ -1420,7 +1421,6 @@
 		CCA3FF3B2517821900F62627 /* StudyList */ = {
 			isa = PBXGroup;
 			children = (
-				CCA47E4625DD06F400E11D4C /* StudyListEmptyView.swift */,
 				CCA3FF452517823E00F62627 /* StudyCell.swift */,
 				CCA3FF422517823E00F62627 /* StudyListView.swift */,
 				CCA3FF462517823E00F62627 /* StudyListInteractor.swift */,
@@ -1595,6 +1595,14 @@
 				A57097A5254D6B5F0001DE52 /* NoticeCell.swift */,
 			);
 			path = Notice;
+			sourceTree = "<group>";
+		};
+		CCED89DD25DD1FF2006DA773 /* EmptyViews */ = {
+			isa = PBXGroup;
+			children = (
+				CCA47E4625DD06F400E11D4C /* StudyListEmptyView.swift */,
+			);
+			path = EmptyViews;
 			sourceTree = "<group>";
 		};
 		CCEEB45925AC4C9600F522C4 /* MyApplyStudyModify */ = {
