@@ -25,7 +25,8 @@ class BadgeBarButtonItem: UIBarButtonItem {
             $0.isHidden = true
         }
         button.do {
-            $0.setBackgroundImage(#imageLiteral(resourceName: "alarm"), for: .normal)
+//            $0.setBackgroundImage(#imageLiteral(resourceName: "alarm"), for: .normal)
+            $0.setBackgroundImage(UIImage(named: "paperplane.fill"), for: .normal)
             $0.addSubview(badgeLabel)
         }
         self.do {
