@@ -10,11 +10,14 @@ import UIKit
 
 enum EmptyViewCase {
     case StudyListEmptyView
+    case LocationListEmptyView
     
     var view: UIView {
         switch self {
         case .StudyListEmptyView:
             return SearchStudyListEmptyView()
+        case .LocationListEmptyView:
+            return SearchLocationListEmptyView()
         }
     }
 }

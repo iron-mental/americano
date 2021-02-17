@@ -1,5 +1,5 @@
 //
-//  StudyEmptyCell.swift
+//  SearchLocationEmptyView.swift
 //  Terminal-iOS
 //
 //  Created by 정재인 on 2021/02/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchStudyListEmptyView: UIView {
+class SearchLocationListEmptyView: UIView {
     let booksImageView = UIImageView()
     let guideLabel = UILabel()
     
@@ -23,14 +23,15 @@ class SearchStudyListEmptyView: UIView {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         booksImageView.do {
-            $0.image = UIImage(systemName: "books.vertical")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            $0.image = UIImage(systemName: "magnifyingglass.circle")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
             $0.tintColor = .systemGray3
             $0.contentMode = .scaleAspectFill
         }
         guideLabel.do {
-            $0.text = "스터디 검색결과가 없습니다 "
+            $0.text = "검색 결과가 없습니다.\n키워드를 입력 해주세요"
             $0.dynamicFont(fontSize: 20, weight: .bold)
             $0.textColor = .systemGray3
+            $0.numberOfLines = 0
         }
     }
     
