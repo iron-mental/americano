@@ -63,8 +63,11 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
         var count = 0
         count += firstNoticeList.isEmpty ? 0 : 1
         count += secondNoticeList.isEmpty ? 0 : 1
-        
-        return count
+        if count > 0 {
+            return count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -83,9 +86,15 @@ extension NoticeView: UITableViewDelegate, UITableViewDataSource, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if firstNoticeList.isEmpty {
+            tableView.setEmptyView(type: .NoticeListEmptyViewType)
+            return 0
+        }
         if section == 0 {
+            tableView.restore()
             return firstNoticeList.count
         } else if section == 1 {
+            tableView.restore()
             return secondNoticeList.count
         } else {
             return 0
