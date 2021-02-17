@@ -53,9 +53,9 @@ final class BaseInterceptor: RequestInterceptor {
                     }
                 }
             }
-        default:
-           break
+        default: break
         }
+        
     }
     
     func refreshToken(completion: @escaping (_ isSuccess: Bool) -> Void) {

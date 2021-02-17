@@ -8,8 +8,7 @@
 
 import UIKit
 
-class StudyListEmptyView: UIView {
-    static let cellId = "StudyEmptyCellID"
+class SearchStudyListEmptyView: UIView {
     let booksImageView = UIImageView()
     let guideLabel = UILabel()
     

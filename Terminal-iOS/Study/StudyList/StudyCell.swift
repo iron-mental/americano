@@ -12,7 +12,7 @@ import Then
 import Kingfisher
 
 class StudyCell: UITableViewCell {
-    static let cellId = "cellId"
+    static let cellId = "StudyCellID"
     
     let mainTitle = UILabel()
     let location = UILabel()
