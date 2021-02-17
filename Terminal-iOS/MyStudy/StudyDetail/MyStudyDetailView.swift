@@ -25,7 +25,6 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int? { didSet { setPageControllerChild() } }
     var studyTitle: String?
     var pageBeforeIndex: Int = 0
-//    var tabBeforeIndex: Int = 0
     var VCArr: [UIViewController] = []
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     var studyInfo: StudyDetail?
@@ -34,7 +33,7 @@ class MyStudyDetailView: UIViewController {
     
     lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
-    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"),
+    lazy var moreButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
                                           style: .done,
                                           target: self,
                                           action: #selector(moreButtonDidTap))

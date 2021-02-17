@@ -13,11 +13,10 @@ import SwiftKeychainWrapper
 // MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
 class MyStudyMainView: UIViewController {
     var applyState: Bool = false
-    
     var presenter: MyStudyMainPresenterProtocol?
+    var alarmButton = BadgeBarButtonItem()
     lazy var moreButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(moreButtonAction(_:)))
     var tableView = UITableView()
-    var alarmButton = BadgeBarButtonItem()
     var dismissEditViewButtonItem: UIBarButtonItem?
     var myStudyList: [MyStudy] = []
     let refreshControl = UIRefreshControl()
@@ -40,9 +39,6 @@ class MyStudyMainView: UIViewController {
     }
     
     func attribute() {
-//        moreButton?.do {
-//            $0.tintColor = .white
-//        }
         self.do {
             $0.title = "내 스터디"
             $0.navigationController?.navigationBar.barTintColor = UIColor.appColor(.terminalBackground)

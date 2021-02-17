@@ -12,14 +12,8 @@ import Then
 class StudyCategoryView: UIViewController {
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
-//    lazy var searchStudyBtn = UIBarButtonItem(barButtonSystemItem: .search,
-//                                         target: self,
-//                                         action: #selector(searchStudy))
     lazy var searchStudyBtn = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .done, target: self, action: #selector(searchStudy))
     lazy var createStudyBtn = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .done, target: self, action: #selector(createStudy))
-//    lazy var createStudyBtn = UIBarButtonItem(barButtonSystemItem: .add,
-//                                         target: self,
-//                                         action: #selector(createStudy))
     let categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
