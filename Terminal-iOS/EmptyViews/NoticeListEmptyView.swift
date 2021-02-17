@@ -24,5 +24,9 @@ class NoticeListEmptyView: BaseEmptyView {
             imageViewTopLayout?.isActive = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 150)).isActive = true
         }
+        self.guideLabel.do {
+            guideLabelTopLayout?.isActive = false
+            $0.topAnchor.constraint(equalTo: self.iconImageView.bottomAnchor, constant: Terminal.convertHeight(value: 100)).isActive = true
+        }
     }
 }
