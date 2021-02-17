@@ -23,6 +23,7 @@ class NotificationView: UIViewController {
     func attribute() {
         self.do {
             $0.title = "알림"
+            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         tableView.do {
             $0.delegate = self

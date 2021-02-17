@@ -15,7 +15,7 @@ class MyStudyMainView: UIViewController {
     var applyState: Bool = false
     var presenter: MyStudyMainPresenterProtocol?
     var alarmButton = BadgeBarButtonItem()
-    lazy var moreButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(moreButtonAction(_:)))
+    lazy var moreButton = UIBarButtonItem()
     var tableView = UITableView()
     var dismissEditViewButtonItem: UIBarButtonItem?
     var myStudyList: [MyStudy] = []
@@ -60,6 +60,12 @@ class MyStudyMainView: UIViewController {
             $0.button.addTarget(self, action: #selector(alarmButtonAction), for: .touchUpInside)
             guard let badge = $0.badgeLabel.text else { return }
             $0.badgeLabel.isHidden = Int(badge) == 0 ? true : false
+        }
+        moreButton.do {
+            $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.target = self
+            $0.action = #selector(moreButtonAction(_:))
+//            UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(moreButtonAction(_:)))
         }
         refreshControl.do {
             $0.addTarget(self, action: #selector(updateList), for: .valueChanged)

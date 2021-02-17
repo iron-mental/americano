@@ -30,13 +30,9 @@ class MyStudyDetailView: UIViewController {
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
     var authority: StudyDetailViewState = .member
-    
     lazy var tapSege = UISegmentedControl(items: state)
     lazy var selectedUnderLine = UIView()
-    lazy var moreButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
-                                          style: .done,
-                                          target: self,
-                                          action: #selector(moreButtonDidTap))
+    lazy var moreButton = UIBarButtonItem()
     let childPageView = UIPageViewController(transitionStyle: .scroll,
                                              navigationOrientation: .horizontal,
                                              options: nil)
@@ -89,7 +85,13 @@ class MyStudyDetailView: UIViewController {
             $0.selectedSegmentTintColor = .clear
             $0.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
         }
-
+        
+        self.moreButton.do {
+            $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.target = self
+            $0.action = #selector(moreButtonDidTap)
+        }
+        
         self.selectedUnderLine.do {
             $0.backgroundColor = .white
         }
