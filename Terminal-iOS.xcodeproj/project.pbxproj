@@ -326,6 +326,7 @@
 		CCE4E51D25A57A6D00DEFC3C /* TerminalAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */; };
 		CCED89CB25DD1D1E006DA773 /* EmptyViewCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89CA25DD1D1E006DA773 /* EmptyViewCase.swift */; };
 		CCED89E225DD2295006DA773 /* SearchLocationEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */; };
+		CCED89E725DD256C006DA773 /* NotiListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */; };
 		CCEEB43525AC2FAC00F522C4 /* nyancat_big1610346923.json in Resources */ = {isa = PBXBuildFile; fileRef = CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */; };
 		CCEEB47C25AC710F00F522C4 /* ApplyUserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB47B25AC710F00F522C4 /* ApplyUserResult.swift */; };
 		CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */; };
@@ -691,6 +692,7 @@
 		CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertMessage.swift; sourceTree = "<group>"; };
 		CCED89CA25DD1D1E006DA773 /* EmptyViewCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewCase.swift; sourceTree = "<group>"; };
 		CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationEmptyView.swift; sourceTree = "<group>"; };
+		CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiListEmptyView.swift; sourceTree = "<group>"; };
 		CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nyancat_big1610346923.json; sourceTree = "<group>"; };
 		CCEEB45A25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyDetailProtocols.swift; sourceTree = "<group>"; };
 		CCEEB46225AC509D00F522C4 /* MyApplyStudyModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyModifyView.swift; sourceTree = "<group>"; };
@@ -1604,6 +1606,7 @@
 			children = (
 				CCA47E4625DD06F400E11D4C /* StudyListEmptyView.swift */,
 				CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */,
+				CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */,
 			);
 			path = EmptyViews;
 			sourceTree = "<group>";
@@ -2097,6 +2100,7 @@
 				A58148EF25910E9800BF3C2A /* SNSModifyView.swift in Sources */,
 				CCAF0FE3253303690060A2F6 /* MyStudyMainLocalDataManager.swift in Sources */,
 				CC4DCFE725C16154002493E4 /* UIImage+Ext.swift in Sources */,
+				CCED89E725DD256C006DA773 /* NotiListEmptyView.swift in Sources */,
 				CC5794F42570C29300DF96AB /* AddNoticeProtocols.swift in Sources */,
 				A5CEE7D025B753CD00C2FF3F /* UIFont+Ext.swift in Sources */,
 				A51BA0B42577F1B700B9673F /* TerminalNetworkManager.swift in Sources */,

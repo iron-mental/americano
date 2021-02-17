@@ -82,7 +82,7 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource, UIT
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchResult.isEmpty {
-            tableView.setEmptyView(type: .StudyListEmptyView)
+            tableView.setEmptyView(type: .SearchStudyListEmptyViewType)
             return 0
         } else {
             tableView.restore()

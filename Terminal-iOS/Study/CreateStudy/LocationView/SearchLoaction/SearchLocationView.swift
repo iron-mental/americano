@@ -28,7 +28,7 @@ class SearchLocationView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         closeButton.do {
-            $0.setImage(UIImage(systemName: "chevron.left")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
+            $0.setImage(UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
             $0.addTarget(self, action: #selector(didCloseButtonClicked), for: .touchUpInside)
             $0.tintColor = .white
         }
@@ -112,7 +112,7 @@ extension SearchLocationView: SearchLocationViewProtocol {
 extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchResultList.isEmpty {
-            tableView.setEmptyView(type: .LocationListEmptyView)
+            tableView.setEmptyView(type: .SearchLocationListEmptyViewType)
             return 0
         } else {
             tableView.restore()

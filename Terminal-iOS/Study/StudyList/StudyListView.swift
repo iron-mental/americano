@@ -201,7 +201,7 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if newStudyList.isEmpty && lengthStudyList.isEmpty {
-            tableView.setEmptyView(type: .StudyListEmptyView)
+            tableView.setEmptyView(type: .SearchStudyListEmptyViewType)
         } else {
             tableView.restore()
         }

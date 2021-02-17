@@ -50,7 +50,13 @@ class NotificationView: UIViewController {
 
 extension NotificationView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notiList.count
+        if notiList.isEmpty {
+            tableView.setEmptyView(type: .NotiListEmptyViewType)
+            return 0
+        } else {
+            tableView.restore()
+            return notiList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
