@@ -15,10 +15,9 @@ class MyStudyMainView: UIViewController {
     var applyState: Bool = false
     
     var presenter: MyStudyMainPresenterProtocol?
-    var moreButton: UIBarButtonItem?
+    lazy var moreButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(moreButtonAction(_:)))
     var tableView = UITableView()
     var alarmButton = BadgeBarButtonItem()
-    var rightBarButtomItem: UIBarButtonItem?
     var dismissEditViewButtonItem: UIBarButtonItem?
     var myStudyList: [MyStudy] = []
     let refreshControl = UIRefreshControl()
@@ -41,10 +40,9 @@ class MyStudyMainView: UIViewController {
     }
     
     func attribute() {
-        moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .plain, target: self, action: #selector(moreButtonAction(_:)))
-        moreButton?.do {
-            $0.tintColor = .white
-        }
+//        moreButton?.do {
+//            $0.tintColor = .white
+//        }
         self.do {
             $0.title = "내 스터디"
             $0.navigationController?.navigationBar.barTintColor = UIColor.appColor(.terminalBackground)
@@ -73,7 +71,7 @@ class MyStudyMainView: UIViewController {
     }
     
     func layout() {
-        self.navigationItem.rightBarButtonItems = [moreButton!, alarmButton]
+        self.navigationItem.rightBarButtonItems = [moreButton, alarmButton]
         self.view.addSubview(self.tableView)
         
         self.tableView.do {
