@@ -23,12 +23,12 @@ class ViewController: UITabBarController {
     
     lazy var tabBarItems: [Tab: UITabBarItem] = [
         .study: UITabBarItem(
-            title: "",
+            title: "스터디",
             image: #imageLiteral(resourceName: "study"),
             selectedImage: #imageLiteral(resourceName: "study_clicked")
         ),
         .mystudy: UITabBarItem(
-            title: "",
+            title: "내 스터디",
             image: #imageLiteral(resourceName: "mystudy"),
             selectedImage: #imageLiteral(resourceName: "mystudy_clicked")
         ),
@@ -61,7 +61,6 @@ class ViewController: UITabBarController {
         self.studyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
         self.myStudyViewController.tabBarItem = tabBarItems[.mystudy]
-        tabBarItems[.mystudy] = UITabBarItem(tabBarSystemItem: .contacts, tag: 1)
         self.myStudyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
         
         self.setViewController.tabBarItem = tabBarItems[.set]

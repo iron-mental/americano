@@ -9,8 +9,8 @@
 import UIKit
 
 class BadgeBarButtonItem: UIBarButtonItem {
-    var badgeLabel = UILabel(frame: CGRect(x: -10, y: -5, width: 18, height: 18))
-    var button = UIButton(frame: CGRect(x: 0, y: 0, width: 18, height: 16))
+    var badgeLabel = UILabel(frame: CGRect(x: -10, y: -5, width: 14, height: 14))
+    var button = UIButton()
     
     func attribute() {
         badgeLabel.do {
@@ -26,7 +26,9 @@ class BadgeBarButtonItem: UIBarButtonItem {
         }
         button.do {
 //            $0.setBackgroundImage(#imageLiteral(resourceName: "alarm"), for: .normal)
-            $0.setBackgroundImage(UIImage(named: "paperplane.fill"), for: .normal)
+            $0.imageView?.contentMode = .scaleAspectFit
+            $0.setBackgroundImage(UIImage(systemName: "envelope"), for: .normal)
+            
             $0.addSubview(badgeLabel)
         }
         self.do {

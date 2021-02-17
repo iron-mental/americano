@@ -41,15 +41,12 @@ final class BaseInterceptor: RequestInterceptor {
                     switch result {
                     case true:
                         return completion(.retryWithDelay(self.retryDelay))
-                        break
                     case false:
                         /// refreshToken 만료시 로그아웃
                         let view = HomeView()
                         let home = UINavigationController(rootViewController: view)
-                        
                         /// 로그아웃과 동시에  토큰 삭제
                         KeychainWrapper.standard.remove(forKey: "refreshToken")
-                        
                         // RootViewController replace
                         guard let window = UIApplication.shared.windows.first else { return }
                         window.replaceRootViewController(home, animated: true, completion: nil)
