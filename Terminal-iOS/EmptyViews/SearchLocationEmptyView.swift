@@ -19,7 +19,4 @@ class SearchLocationListEmptyView: BaseEmptyView {
             $0.numberOfLines = 0
         }
     }
-    override func layout() {
-        super.layout()
-    }
 }
