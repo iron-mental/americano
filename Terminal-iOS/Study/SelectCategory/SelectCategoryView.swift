@@ -57,9 +57,8 @@ class SelectCategoryView: UIViewController {
             $0.showsVerticalScrollIndicator = false
         }
         navigationItem.do {
-//            let test = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action: #selector(backButtonTapped))
-            $0.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(backButtonTapped))
-//            $0.leftBarButtonItem =  UIBarButtonItem(title: "", style: .done, target: self, action: #selector(backButtonTapped))
+            $0.leftBarButtonItem = UIBarButtonItem()
+            $0.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(backButtonTapped))
         }
     }
     override func viewWillDisappear(_ animated: Bool) {

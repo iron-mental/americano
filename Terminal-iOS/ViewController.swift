@@ -43,12 +43,16 @@ class ViewController: UITabBarController {
     }
     
     func attribute() {
+        self.do {
+            $0.delegate = self
+        }
         self.tabBar.do {
             $0.tintColor = UIColor(named: "key")
             $0.barTintColor = UIColor.appColor(.testColor)
             $0.isTranslucent = false
             $0.unselectedItemTintColor = .white
             $0.standardAppearance.backgroundColor = .white
+            
         }
 
         self.studyViewController.tabBarItem = tabBarItems[.study]
@@ -78,4 +82,32 @@ class ViewController: UITabBarController {
             setNVC
         ]
     }
+}
+extension ViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return TabBarAnimatedTransitioning()
+    }
+
+}
+
+final class TabBarAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
+
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        guard let destination = transitionContext.view(forKey: UITransitionContextViewKey.to) else { return }
+
+        destination.alpha = 0.0
+//        destination.transform = .init(scaleX: 1.1, y: 1.1)
+        destination.transform = CGAffineTransform(translationX: 30, y: 0)
+        transitionContext.containerView.addSubview(destination)
+
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
+            destination.alpha = 1.0
+            destination.transform = .identity
+        }, completion: { transitionContext.completeTransition($0) })
+    }
+
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0.25
+    }
+
 }
