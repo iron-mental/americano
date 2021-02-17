@@ -12,6 +12,8 @@ class ViewController: UITabBarController {
     let studyViewController = StudyCategoryWireFrame.createStudyCategory()
     let myStudyViewController = MyStudyMainWireFrame.createMyStudyMainViewModul()
     let setViewController = SetWireFrame.setCreateModule()
+    static var tabBarBeforeIndex = 1
+    static var tabBarSelectedIndex = 0
     
     enum Tab: Int {
         case study
@@ -39,6 +41,7 @@ class ViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         attribute()
     }
     
@@ -81,23 +84,30 @@ class ViewController: UITabBarController {
             myStudyNVC,
             setNVC
         ]
+        self.selectedIndex = 1
+        
     }
 }
 extension ViewController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        ViewController.tabBarBeforeIndex = tabBarController.selectedIndex
         return TabBarAnimatedTransitioning()
     }
-
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        ViewController.tabBarSelectedIndex = tabBarController.selectedIndex
+    }
 }
-
 final class TabBarAnimatedTransitioning: NSObject, UIViewControllerAnimatedTransitioning {
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let destination = transitionContext.view(forKey: UITransitionContextViewKey.to) else { return }
-
         destination.alpha = 0.0
-//        destination.transform = .init(scaleX: 1.1, y: 1.1)
-        destination.transform = CGAffineTransform(translationX: 30, y: 0)
+        if ViewController.tabBarBeforeIndex < ViewController.tabBarSelectedIndex {
+            destination.transform = CGAffineTransform(translationX: 10, y: 0)
+        } else {
+            destination.transform = CGAffineTransform(translationX: -10, y: 0)
+        }
         transitionContext.containerView.addSubview(destination)
 
         UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
@@ -107,7 +117,7 @@ final class TabBarAnimatedTransitioning: NSObject, UIViewControllerAnimatedTrans
     }
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.25
+        return 0.2
     }
 
 }
