@@ -28,7 +28,7 @@ class SearchLocationView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         closeButton.do {
-            $0.setImage(UIImage(systemName: "chevron.left")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
+            $0.setImage(UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
             $0.addTarget(self, action: #selector(didCloseButtonClicked), for: .touchUpInside)
             $0.tintColor = .white
         }
@@ -99,6 +99,7 @@ extension SearchLocationView: SearchLocationViewProtocol {
     
     func showSearchResult(list: [StudyDetailLocationPost]) {
         if list.isEmpty {
+            searchResultList = list
             showToast(controller: self, message: "검색결과가 없습니다.", seconds: 1)
         } else {
             searchResultList = list
@@ -110,7 +111,13 @@ extension SearchLocationView: SearchLocationViewProtocol {
 
 extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResultList.count
+        if searchResultList.isEmpty {
+            tableView.setEmptyView(type: .SearchLocationListEmptyViewType)
+            return 0
+        } else {
+            tableView.restore()
+            return searchResultList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

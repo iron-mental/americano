@@ -94,7 +94,7 @@ class MyStudyMainView: UIViewController {
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
         let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let applyList =  UIAlertAction(title: "스터디 신청 목록", style: .default) {_ in self.applyList() }
+        let applyList =  UIAlertAction(title: "내가 신청한 스터디", style: .default) {_ in self.applyList() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         [ applyList, cancel].forEach { alert.addAction($0) }
@@ -113,7 +113,13 @@ class MyStudyMainView: UIViewController {
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myStudyList.count
+        if myStudyList.isEmpty {
+            tableView.setEmptyView(type: .MyStudyListEmptyViewType)
+            return 0
+        } else {
+            tableView.restore()
+            return myStudyList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -69,7 +69,13 @@ extension ApplyUserView: ApplyUserViewProtocol {
 
 extension ApplyUserView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userList.count
+        if userList.isEmpty {
+            tableView.setEmptyView(type: .ApplyUserListEmptyViewType)
+            return 0
+        } else {
+            tableView.restore()
+            return userList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

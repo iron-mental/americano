@@ -102,9 +102,9 @@ final class TabBarAnimatedTransitioning: NSObject, UIViewControllerAnimatedTrans
         guard let destination = transitionContext.view(forKey: UITransitionContextViewKey.to) else { return }
         destination.alpha = 0.0
         if ViewController.tabBarBeforeIndex < ViewController.tabBarSelectedIndex {
-            destination.transform = CGAffineTransform(translationX: 20, y: 0)
+            destination.transform = CGAffineTransform(translationX: 15, y: 0)
         } else {
-            destination.transform = CGAffineTransform(translationX: -20, y: 0)
+            destination.transform = CGAffineTransform(translationX: -15, y: 0)
         }
         transitionContext.containerView.addSubview(destination)
 

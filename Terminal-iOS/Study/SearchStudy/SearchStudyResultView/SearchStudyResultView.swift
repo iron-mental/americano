@@ -62,7 +62,7 @@ class SearchStudyResultView: UIViewController {
 
         studyListTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -81,6 +81,12 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource, UIT
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchResult.isEmpty {
+            tableView.setEmptyView(type: .SearchStudyListEmptyViewType)
+            return 0
+        } else {
+            tableView.restore()
+        }
         return searchResult.count
     }
     
@@ -91,7 +97,6 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource, UIT
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let keyValue = searchResult[indexPath.row].id
         presenter?.didTapCell(keyValue: keyValue, state: searchResult[indexPath.row].isMember!, studyTitle: searchResult[indexPath.row].title!)
     }
