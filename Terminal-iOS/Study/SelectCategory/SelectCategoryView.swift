@@ -56,7 +56,11 @@ class SelectCategoryView: UIViewController {
             $0.showsVerticalScrollIndicator = false
         }
         navigationItem.do {
-            $0.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(backButtonTapped))
+            $0.leftBarButtonItem = UIBarButtonItem()
+            $0.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light)),
+                                                    style: .done,
+                                                    target: self,
+                                                    action: #selector(backButtonTapped))
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
