@@ -84,6 +84,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             "push_token": pushToken,
             "device": "ios"
         ]
+        //시뮬레이터 용
 //        let params: [String: String] = [
 //            "email": "\(joinMaterial[0])",
 //            "password": "\(joinMaterial[1])",

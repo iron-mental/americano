@@ -28,12 +28,14 @@ class SearchLocationView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         closeButton.do {
-            $0.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            $0.setImage(UIImage(systemName: "chevron.left")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
             $0.addTarget(self, action: #selector(didCloseButtonClicked), for: .touchUpInside)
+            $0.tintColor = .white
         }
         searchButton.do {
-            $0.setImage(#imageLiteral(resourceName: "search"), for: .normal)
+            $0.setImage(UIImage(systemName: "magnifyingglass")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
             $0.addTarget(self, action: #selector(didSearchButtonClicked), for: .touchUpInside)
+            $0.tintColor = .white
         }
         searchTextField.do {
             $0.textColor = .white
@@ -55,16 +57,12 @@ class SearchLocationView: UIViewController {
         closeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeight(value: 18)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
+            $0.centerYAnchor.constraint(equalTo: searchTextField.centerYAnchor).isActive = true
         }
         searchButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertWidth(value: 29)).isActive = true
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeight(value: 18)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertWidth(value: 15)).isActive = true
+            $0.centerYAnchor.constraint(equalTo: searchTextField.centerYAnchor).isActive = true
         }
         searchTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

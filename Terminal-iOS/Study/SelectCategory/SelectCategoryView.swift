@@ -21,7 +21,6 @@ class SelectCategoryView: UIViewController {
     let font = UIFont(name: "Apple Color Emoji", size: 25)
     let titleView = UILabel()
     let textLabel = UILabel()
-    var tempCategory: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,10 +56,19 @@ class SelectCategoryView: UIViewController {
             $0.showsVerticalScrollIndicator = false
         }
         navigationItem.do {
-            $0.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(backButtonTapped))
+            $0.leftBarButtonItem = UIBarButtonItem()
+            $0.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light)),
+                                                    style: .done,
+                                                    target: self,
+                                                    action: #selector(backButtonTapped))
         }
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.isMovingFromParent {
+            backButtonTapped()
+        }
+    }
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)

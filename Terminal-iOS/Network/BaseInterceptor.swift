@@ -37,9 +37,20 @@ final class BaseInterceptor: RequestInterceptor {
             completion(.doNotRetry)
         case 401:
             if request.retryCount < retryLimit {
-                refreshToken { success in
-                    print("토큰 갱신 성공여부 :", success)
-                    return completion(.retryWithDelay(self.retryDelay))
+                refreshToken { result in
+                    switch result {
+                    case true:
+                        return completion(.retryWithDelay(self.retryDelay))
+                    case false:
+                        /// refreshToken 만료시 로그아웃
+                        let view = HomeView()
+                        let home = UINavigationController(rootViewController: view)
+                        /// 로그아웃과 동시에  토큰 삭제
+                        KeychainWrapper.standard.remove(forKey: "refreshToken")
+                        // RootViewController replace
+                        guard let window = UIApplication.shared.windows.first else { return }
+                        window.replaceRootViewController(home, animated: true, completion: nil)
+                    }
                 }
             }
         default:
@@ -49,7 +60,9 @@ final class BaseInterceptor: RequestInterceptor {
     
     func refreshToken(completion: @escaping (_ isSuccess: Bool) -> Void) {
         
-        guard let refreshToken = KeychainWrapper.standard.string(forKey: "refreshToken") else { return }
+        guard let refreshToken = KeychainWrapper.standard.string(forKey: "refreshToken") else {
+            return
+        }
         
         TerminalNetworkManager
             .shared
@@ -58,7 +71,6 @@ final class BaseInterceptor: RequestInterceptor {
             .responseJSON { response in
                 switch response.result {
                 case .success(let value):
-                    
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
                     do {

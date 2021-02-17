@@ -276,6 +276,7 @@
 		CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF572517826B00F62627 /* CategoryCell.swift */; };
 		CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF582517826B00F62627 /* StudyCategoryView.swift */; };
 		CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF632517829D00F62627 /* SearchStudyView.swift */; };
+		CCA47E0B25DC1F5100E11D4C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCA47E0A25DC1F5100E11D4C /* GoogleService-Info.plist */; };
 		CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */; };
 		CCAF0FD6253300410060A2F6 /* MyStudyMainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD5253300410060A2F6 /* MyStudyMainInteractor.swift */; };
 		CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD8253300600060A2F6 /* MyStudyMainProtocols.swift */; };
@@ -635,6 +636,7 @@
 		CCA3FF572517826B00F62627 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		CCA3FF582517826B00F62627 /* StudyCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyCategoryView.swift; sourceTree = "<group>"; };
 		CCA3FF632517829D00F62627 /* SearchStudyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStudyView.swift; sourceTree = "<group>"; };
+		CCA47E0A25DC1F5100E11D4C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainView.swift; sourceTree = "<group>"; };
 		CCAF0FD5253300410060A2F6 /* MyStudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainInteractor.swift; sourceTree = "<group>"; };
 		CCAF0FD8253300600060A2F6 /* MyStudyMainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainProtocols.swift; sourceTree = "<group>"; };
@@ -1336,6 +1338,7 @@
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
 				CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */,
+				CCA47E0A25DC1F5100E11D4C /* GoogleService-Info.plist */,
 			);
 			path = "Terminal-iOS";
 			sourceTree = "<group>";
@@ -1742,6 +1745,7 @@
 			files = (
 				A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
+				CCA47E0B25DC1F5100E11D4C /* GoogleService-Info.plist in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,

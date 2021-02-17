@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class MyApplyStudyModifyInteractor: MyApplyStudyModifyInteractorInputProtocol {
     weak var presenter: MyApplyStudyModifyInteractorOutputProtocol?
@@ -16,11 +17,8 @@ class MyApplyStudyModifyInteractor: MyApplyStudyModifyInteractorInputProtocol {
     
     func getMyApplyStudyDetail(studyID: Int) {
         self.studyID = studyID
-        
-        if let userInfo = CoreDataManager.shared.getUserinfo() {
-            remoteDataManager?.getMyApplyStudyDetail(studyID: studyID, userID: userInfo.id)
-        }
-        
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+        remoteDataManager?.getMyApplyStudyDetail(studyID: studyID, userID: Int(userID)!)
     }
     
     func putNewApplyMessage(newMessage: String) {
@@ -33,7 +31,6 @@ class MyApplyStudyModifyInteractor: MyApplyStudyModifyInteractorInputProtocol {
 extension MyApplyStudyModifyInteractor: MyApplyStudyModifyRemoteDataManagerOutputProtocol {
     
     func retriveMyApplyStudyDetail(result: Bool, data: ApplyUserResult? = nil, message: String? = nil) {
-        
         switch result {
         case true:
             guard let applyUserInfo = data else { return }

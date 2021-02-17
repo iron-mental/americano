@@ -13,12 +13,10 @@ import SwiftKeychainWrapper
 // MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
 class MyStudyMainView: UIViewController {
     var applyState: Bool = false
-    
     var presenter: MyStudyMainPresenterProtocol?
-    var moreButton: UIBarButtonItem?
-    var tableView = UITableView()
     var alarmButton = BadgeBarButtonItem()
-    var rightBarButtomItem: UIBarButtonItem?
+    lazy var moreButton = UIBarButtonItem()
+    var tableView = UITableView()
     var dismissEditViewButtonItem: UIBarButtonItem?
     var myStudyList: [MyStudy] = []
     let refreshControl = UIRefreshControl()
@@ -34,17 +32,13 @@ class MyStudyMainView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         applyState ? presenter?.showApplyList(): nil
-        presenter?.viewDidLoad()
+//        presenter?.viewDidLoad()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = UIColor.appColor(.terminalBackground)
         navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
     }
     
     func attribute() {
-        moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .plain, target: self, action: #selector(moreButtonAction(_:)))
-        moreButton?.do {
-            $0.tintColor = .white
-        }
         self.do {
             $0.title = "내 스터디"
             $0.navigationController?.navigationBar.barTintColor = UIColor.appColor(.terminalBackground)
@@ -67,13 +61,18 @@ class MyStudyMainView: UIViewController {
             guard let badge = $0.badgeLabel.text else { return }
             $0.badgeLabel.isHidden = Int(badge) == 0 ? true : false
         }
+        moreButton.do {
+            $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.target = self
+            $0.action = #selector(moreButtonAction(_:))
+        }
         refreshControl.do {
             $0.addTarget(self, action: #selector(updateList), for: .valueChanged)
         }
     }
     
     func layout() {
-        self.navigationItem.rightBarButtonItems = [moreButton!, alarmButton]
+        self.navigationItem.rightBarButtonItems = [moreButton, alarmButton]
         self.view.addSubview(self.tableView)
         
         self.tableView.do {

@@ -67,7 +67,8 @@ class AddNoticeView: UIViewController {
             $0.addTarget(self, action: #selector(segeIsMoving), for: .valueChanged)
         }
         dismissButton.do {
-            $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+            $0.setImage(UIImage(systemName: "xmark"), for: .normal)
+            $0.tintColor = .white
             $0.addTarget(self, action: #selector(dismissButtonTap), for: .touchUpInside)
         }
         titleGuideLabel.do {

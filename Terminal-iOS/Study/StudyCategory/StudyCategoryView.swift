@@ -12,6 +12,8 @@ import Then
 class StudyCategoryView: UIViewController {
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
+    lazy var searchStudyBtn = UIBarButtonItem()
+    lazy var createStudyBtn = UIBarButtonItem()
     let categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -26,12 +28,6 @@ class StudyCategoryView: UIViewController {
     }
 
     func attirbute() {
-        let createStudyBtn = UIBarButtonItem(barButtonSystemItem: .add,
-                                             target: self,
-                                             action: #selector(createStudy))
-        let searchStudyBtn = UIBarButtonItem(barButtonSystemItem: .search,
-                                             target: self,
-                                             action: #selector(searchStudy))
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         
@@ -40,7 +36,16 @@ class StudyCategoryView: UIViewController {
             $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.title = "스터디"
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
-//            $0.hidesBottomBarWhenPushed = true
+        }
+        self.searchStudyBtn.do {
+            $0.image = UIImage(systemName: "magnifyingglass")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.action = #selector(searchStudy)
+            $0.target = self
+        }
+        self.createStudyBtn.do {
+            $0.image = UIImage(systemName: "plus")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.action = #selector(createStudy)
+            $0.target = self
         }
         categoryCollectionView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -53,14 +58,18 @@ class StudyCategoryView: UIViewController {
     
     func layout() {
         view.addSubview(categoryCollectionView)
-        categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        categoryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        categoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                        constant: Terminal.convertWidth(value: 20)).isActive = true
-        categoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                         constant: -(Terminal.convertWidth(value: 20))).isActive = true
-        categoryCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        categoryCollectionView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                                            constant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                                             constant: -(Terminal.convertWidth(value: 20))).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        }
     }
+    
     @objc func createStudy() {
         presenter?.didClickedCreateButton()
     }
