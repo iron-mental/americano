@@ -25,7 +25,6 @@ class BadgeBarButtonItem: UIBarButtonItem {
             $0.isHidden = true
         }
         button.do {
-//            $0.setBackgroundImage(#imageLiteral(resourceName: "alarm"), for: .normal)
             $0.imageView?.contentMode = .scaleAspectFit
             $0.setBackgroundImage(UIImage(systemName: "envelope"), for: .normal)
             
