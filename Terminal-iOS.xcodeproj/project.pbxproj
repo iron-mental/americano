@@ -324,7 +324,7 @@
 		CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279DE256E46BA00DB3246 /* NoticeList.swift */; };
 		CCE279EC256E46C600DB3246 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EB256E46C600DB3246 /* Notice.swift */; };
 		CCE4E51D25A57A6D00DEFC3C /* TerminalAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */; };
-		CCED89CB25DD1D1E006DA773 /* EmptyViewCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89CA25DD1D1E006DA773 /* EmptyViewCase.swift */; };
+		CCED89CB25DD1D1E006DA773 /* EmptyViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */; };
 		CCED89E225DD2295006DA773 /* SearchLocationEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */; };
 		CCED89E725DD256C006DA773 /* NotiListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */; };
 		CCED89EC25DD284D006DA773 /* MyStudyListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89EB25DD284D006DA773 /* MyStudyListEmptyView.swift */; };
@@ -692,7 +692,7 @@
 		CCE279DE256E46BA00DB3246 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
 		CCE279EB256E46C600DB3246 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertMessage.swift; sourceTree = "<group>"; };
-		CCED89CA25DD1D1E006DA773 /* EmptyViewCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewCase.swift; sourceTree = "<group>"; };
+		CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewType.swift; sourceTree = "<group>"; };
 		CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationEmptyView.swift; sourceTree = "<group>"; };
 		CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiListEmptyView.swift; sourceTree = "<group>"; };
 		CCED89EB25DD284D006DA773 /* MyStudyListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyListEmptyView.swift; sourceTree = "<group>"; };
@@ -788,7 +788,7 @@
 				CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */,
 				A51BA0AF2577F0E300B9673F /* Contents.swift */,
 				CCDAB63125DA4BD000FA5B48 /* AlarmCase.swift */,
-				CCED89CA25DD1D1E006DA773 /* EmptyViewCase.swift */,
+				CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2109,7 +2109,7 @@
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
 				CCC1A2F825B14E52004E3BE6 /* ApplyUserDetailWireFrame.swift in Sources */,
 				A53A2B7325B6BBBF0002D3A0 /* UserWithdrawalPresenter.swift in Sources */,
-				CCED89CB25DD1D1E006DA773 /* EmptyViewCase.swift in Sources */,
+				CCED89CB25DD1D1E006DA773 /* EmptyViewType.swift in Sources */,
 				CCA25A8C25B6962C00280C80 /* BaseEditableStudyDetailView.swift in Sources */,
 				CCD51C7A256D29CC00D41771 /* MyStudyDetailPresenter.swift in Sources */,
 				A57E829125BD8F72000F8678 /* SNSValidate.swift in Sources */,

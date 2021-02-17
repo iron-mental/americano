@@ -21,5 +21,9 @@ class MyStudyListEmptyView: BaseEmptyView {
     }
     override func layout() {
         super.layout()
+        self.iconImageView.do {
+            imageViewTopLayout?.isActive = false
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 300)).isActive = true
+        }
     }
 }

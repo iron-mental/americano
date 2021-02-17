@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITableView {
-    func setEmptyView(type: EmptyViewCase) {
+    func setEmptyView(type: EmptyViewType) {
         type.view.frame = CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height)
         self.backgroundView = type.view
         self.separatorStyle = .none

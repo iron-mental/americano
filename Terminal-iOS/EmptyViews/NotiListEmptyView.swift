@@ -21,5 +21,9 @@ class NotiListEmptyView: BaseEmptyView {
     }
     override func layout() {
         super.layout()
+        self.imageViewTopLayout?.isActive = false
+        self.iconImageView.do {
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 300)).isActive = true
+        }
     }
 }

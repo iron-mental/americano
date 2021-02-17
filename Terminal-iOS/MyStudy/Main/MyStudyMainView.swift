@@ -113,7 +113,13 @@ class MyStudyMainView: UIViewController {
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myStudyList.count
+        if myStudyList.isEmpty {
+            tableView.setEmptyView(type: .MyStudyListEmptyViewType)
+            return 0
+        } else {
+            tableView.restore()
+            return myStudyList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
