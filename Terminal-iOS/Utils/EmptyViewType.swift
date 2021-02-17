@@ -13,6 +13,7 @@ enum EmptyViewType {
     case SearchLocationListEmptyViewType
     case NotiListEmptyViewType
     case MyStudyListEmptyViewType
+    case MyApplyListEmptyViewType
     
     var view: UIView {
         switch self {
@@ -24,6 +25,8 @@ enum EmptyViewType {
             return NotiListEmptyView()
         case .MyStudyListEmptyViewType:
             return MyStudyListEmptyView()
+        case .MyApplyListEmptyViewType:
+            return MyApplyListEmptyView()
         }
     }
 }

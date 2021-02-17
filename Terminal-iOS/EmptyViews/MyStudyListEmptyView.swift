@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class MyStudyListEmptyView: BaseEmptyView {
     override func attribute() {
         super.attribute()

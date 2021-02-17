@@ -12,6 +12,7 @@ class BaseEmptyView: UIView {
     let iconImageView = UIImageView()
     let guideLabel = UILabel()
     var imageViewTopLayout: NSLayoutConstraint?
+    var guideLabelTopLayout: NSLayoutConstraint?
     
     init() {
         super.init(frame: CGRect.zero)
@@ -42,13 +43,13 @@ class BaseEmptyView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
             imageViewTopLayout?.isActive = true
-//            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 100)).isActive = true
             $0.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.33).isActive = true
         }
+        guideLabelTopLayout = guideLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: Terminal.convertHeight(value: 50))
         guideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: Terminal.convertHeight(value: 50)).isActive = true
+            guideLabelTopLayout?.isActive = true
         }
     }
     required init?(coder: NSCoder) {

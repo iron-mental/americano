@@ -329,6 +329,7 @@
 		CCED89E725DD256C006DA773 /* NotiListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */; };
 		CCED89EC25DD284D006DA773 /* MyStudyListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89EB25DD284D006DA773 /* MyStudyListEmptyView.swift */; };
 		CCED89F225DD28B4006DA773 /* BaseEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89F125DD28B4006DA773 /* BaseEmptyView.swift */; };
+		CCED89FA25DD3072006DA773 /* MyApplyListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89F925DD3072006DA773 /* MyApplyListEmptyView.swift */; };
 		CCEEB43525AC2FAC00F522C4 /* nyancat_big1610346923.json in Resources */ = {isa = PBXBuildFile; fileRef = CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */; };
 		CCEEB47C25AC710F00F522C4 /* ApplyUserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEEB47B25AC710F00F522C4 /* ApplyUserResult.swift */; };
 		CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF47096256B97FE0085B371 /* ChatViewProtocols.swift */; };
@@ -697,6 +698,7 @@
 		CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiListEmptyView.swift; sourceTree = "<group>"; };
 		CCED89EB25DD284D006DA773 /* MyStudyListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyListEmptyView.swift; sourceTree = "<group>"; };
 		CCED89F125DD28B4006DA773 /* BaseEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEmptyView.swift; sourceTree = "<group>"; };
+		CCED89F925DD3072006DA773 /* MyApplyListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyListEmptyView.swift; sourceTree = "<group>"; };
 		CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nyancat_big1610346923.json; sourceTree = "<group>"; };
 		CCEEB45A25AC4CCF00F522C4 /* MyApplyStudyDetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyDetailProtocols.swift; sourceTree = "<group>"; };
 		CCEEB46225AC509D00F522C4 /* MyApplyStudyModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyApplyStudyModifyView.swift; sourceTree = "<group>"; };
@@ -1613,6 +1615,7 @@
 				CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */,
 				CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */,
 				CCED89EB25DD284D006DA773 /* MyStudyListEmptyView.swift */,
+				CCED89F925DD3072006DA773 /* MyApplyListEmptyView.swift */,
 			);
 			path = EmptyViews;
 			sourceTree = "<group>";
@@ -1979,6 +1982,7 @@
 				A510B9D62583892B0084559C /* ApplyStudy.swift in Sources */,
 				CC5795072570C9F200DF96AB /* AddNoticeLocalDataManager.swift in Sources */,
 				CC6044812576265A000D11C7 /* NoticeDetailRemoteDataManager.swift in Sources */,
+				CCED89FA25DD3072006DA773 /* MyApplyListEmptyView.swift in Sources */,
 				A51F238C256E5A2200CBFC13 /* BaseResponse.swift in Sources */,
 				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */,

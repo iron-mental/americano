@@ -94,7 +94,7 @@ class MyStudyMainView: UIViewController {
     
     @objc func moreButtonAction(_ sender: UIBarButtonItem) {
         let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let applyList =  UIAlertAction(title: "스터디 신청 목록", style: .default) {_ in self.applyList() }
+        let applyList =  UIAlertAction(title: "내가 신청한 스터디", style: .default) {_ in self.applyList() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         [ applyList, cancel].forEach { alert.addAction($0) }

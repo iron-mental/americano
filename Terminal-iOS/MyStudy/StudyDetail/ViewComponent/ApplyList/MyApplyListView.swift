@@ -44,7 +44,7 @@ final class MyApplyListView: UIViewController {
         
         self.applyList.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
@@ -74,7 +74,13 @@ extension MyApplyListView: MyApplyListViewProtocol {
 
 extension MyApplyListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return studyList.count
+        if studyList.isEmpty {
+            tableView.setEmptyView(type: .MyApplyListEmptyViewType)
+            return 0
+        } else {
+            tableView.restore()
+            return studyList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
