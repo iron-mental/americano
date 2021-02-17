@@ -65,7 +65,6 @@ class MyStudyMainView: UIViewController {
             $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
             $0.target = self
             $0.action = #selector(moreButtonAction(_:))
-//            UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(moreButtonAction(_:)))
         }
         refreshControl.do {
             $0.addTarget(self, action: #selector(updateList), for: .valueChanged)
