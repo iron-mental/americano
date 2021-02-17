@@ -122,7 +122,8 @@ class StudyCell: UITableViewCell {
         }
         
         self.memberImage.do {
-            $0.image = UIImage(named: "member")
+            $0.image = UIImage(systemName: "person")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.tintColor = .white
         }
         
         self.memberCount.do {
