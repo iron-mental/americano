@@ -9,7 +9,7 @@
 import UIKit
 
 class BadgeBarButtonItem: UIBarButtonItem {
-    var badgeLabel = UILabel(frame: CGRect(x: -10, y: -5, width: 14, height: 14))
+    var badgeLabel = UILabel(frame: CGRect(x: -10, y: -5, width: 16, height: 16))
     var button = UIButton()
     
     func attribute() {

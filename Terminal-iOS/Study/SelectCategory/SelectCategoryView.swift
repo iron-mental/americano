@@ -57,8 +57,6 @@ class SelectCategoryView: UIViewController {
             $0.showsVerticalScrollIndicator = false
         }
         navigationItem.do {
-//            $0.leftBarButtonItem = UIBarButtonItem()
-//            $0.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(backButtonTapped))
             $0.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(backButtonTapped))
         }
     }

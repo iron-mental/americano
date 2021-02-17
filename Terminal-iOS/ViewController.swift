@@ -24,18 +24,18 @@ class ViewController: UITabBarController {
     lazy var tabBarItems: [Tab: UITabBarItem] = [
         .study: UITabBarItem(
             title: "스터디",
-            image: #imageLiteral(resourceName: "study"),
-            selectedImage: #imageLiteral(resourceName: "study_clicked")
+            image: UIImage(systemName: "book"),
+            selectedImage: UIImage(systemName: "book")
         ),
         .mystudy: UITabBarItem(
             title: "내 스터디",
-            image: #imageLiteral(resourceName: "mystudy"),
-            selectedImage: #imageLiteral(resourceName: "mystudy_clicked")
+            image: UIImage(systemName: "person.3"),
+            selectedImage: UIImage(systemName: "person.3")
         ),
         .set: UITabBarItem(
             title: "설정",
-            image: #imageLiteral(resourceName: "set"),
-            selectedImage: #imageLiteral(resourceName: "set_clicked")
+            image: UIImage(systemName: "gearshape"),
+            selectedImage: UIImage(systemName: "gearshape")
         )
     ]
     
@@ -49,12 +49,11 @@ class ViewController: UITabBarController {
             $0.delegate = self
         }
         self.tabBar.do {
-            $0.tintColor = UIColor(named: "key")
+            $0.tintColor = .white
             $0.barTintColor = UIColor.appColor(.testColor)
             $0.isTranslucent = false
-            $0.unselectedItemTintColor = .white
+            $0.unselectedItemTintColor = .systemGray2
             $0.standardAppearance.backgroundColor = .white
-            
         }
 
         self.studyViewController.tabBarItem = tabBarItems[.study]
