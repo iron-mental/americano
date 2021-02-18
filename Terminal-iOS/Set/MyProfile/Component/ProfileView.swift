@@ -40,7 +40,7 @@ class ProfileView: UIView {
         descript.do {
             $0.textColor = UIColor.appColor(.profileTextColor)
             $0.numberOfLines = 0
-            $0.textAlignment = .left
+            $0.textAlignment = .center
             $0.dynamicFont(fontSize: 16, weight: .regular)
         }
         modify.do {
