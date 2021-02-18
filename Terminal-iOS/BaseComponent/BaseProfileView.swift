@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 import Kingfisher
 import SwiftKeychainWrapper
 
@@ -279,23 +280,23 @@ extension BaseProfileView {
     
     /// Profile SNS
     @objc func goGithub() {
-        guard let address = self.userInfo?.snsGithub else { return }
-        let url = "https://www.github.com/\(address)"
-        let view = SNSWebView(url: url)
-        self.present(view, animated: true, completion: nil)
+        guard let address = self.userInfo?.snsGithub,
+              let url = URL(string: "https://www.github.com/\(address)") else { return }
+        let webView = SFSafariViewController(url: url)
+        self.present(webView, animated: true, completion: nil)
     }
     
     @objc func goLinkedin() {
-        guard let address = self.userInfo?.snsLinkedin else { return }
-        let url = address
-        let view = SNSWebView(url: url)
-        self.present(view, animated: true, completion: nil)
+        guard let address = self.userInfo?.snsLinkedin,
+              let url = URL(string: address) else { return }
+        let webView = SFSafariViewController(url: url)
+        self.present(webView, animated: true, completion: nil)
     }
     
     @objc func goWeb() {
-        guard let address = self.userInfo?.snsWeb else { return }
-        let url = address
-        let view = SNSWebView(url: url)
-        self.present(view, animated: true, completion: nil)
+        guard let address = self.userInfo?.snsWeb,
+              let url = URL(string: address) else { return }
+        let webView = SFSafariViewController(url: url)
+        self.present(webView, animated: true, completion: nil)
     }
 }

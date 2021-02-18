@@ -145,7 +145,6 @@ extension SearchStudyResultView: UISearchBarDelegate {
 }
 
 extension SearchStudyResultView: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-//        
+    func updateSearchResults(for searchController: UISearchController) {   
     }
 }

@@ -145,7 +145,7 @@ extension SetView: SetViewProtocol {
         /// 로그아웃과 동시에  토큰 삭제
         KeychainWrapper.standard.remove(forKey: "refreshToken")
         
-        // RootViewController replace
+        /// RootViewController replace
         guard let window = UIApplication.shared.windows.first else { return }
         window.replaceRootViewController(home, animated: true, completion: nil)
     }
