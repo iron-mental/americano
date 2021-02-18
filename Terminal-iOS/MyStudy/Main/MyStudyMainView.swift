@@ -27,6 +27,11 @@ class MyStudyMainView: UIViewController {
         attribute()
         layout()
         presenter?.viewDidLoad()
+//        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+//
+//        if let version = version {
+//                print("version: \(version)")
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,6 +154,7 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         }
         if let badge = myStudyList.badge {
             self.alarmButton.badgeLabel.text = String(badge.alert)
+            UIApplication.shared.applicationIconBadgeNumber = badge.total
         }
         attribute()
         layout()
