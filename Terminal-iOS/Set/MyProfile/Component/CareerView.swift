@@ -30,7 +30,7 @@ class CareerView: UIView {
         }
         self.careerContents.do {
             $0.numberOfLines = 0
-            $0.textColor = UIColor.appColor(.profileTextColor)
+            $0.textColor = .appColor(.profileTextColor)
             $0.dynamicFont(fontSize: 14, weight: .regular)
         }
         self.modify.do {

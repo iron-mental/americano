@@ -448,9 +448,9 @@ extension ProfileModifyView: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: 이미지 픽커
 
-extension ProfileModifyView:  UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+extension ProfileModifyView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.profileImage.image = image
         }
