@@ -18,14 +18,13 @@ class SelectCategoryView: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-    let font = UIFont(name: "Apple Color Emoji", size: 25)
+    let font: UIFont = .notosansMedium(size: 25)
     let titleView = UILabel()
     let textLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
-        
     }
     
     func attribute() {
@@ -45,7 +44,9 @@ class SelectCategoryView: UIViewController {
             $0.textColor = .white
             $0.frame = CGRect(x: 0, y: 0, width: 90, height: 35)
             let attributedStr = NSMutableAttributedString(string: textLabel.text ?? "empty")
-            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font as Any, range: NSMakeRange(0, 7))
+            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String),
+                                       value: UIFont.notosansMedium(size: 25),
+                                       range: NSRange(location: 0, length: 7))
             textLabel.attributedText = attributedStr
         }
         collectionView.do {
@@ -63,12 +64,14 @@ class SelectCategoryView: UIViewController {
                                                     action: #selector(backButtonTapped))
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.isMovingFromParent {
             backButtonTapped()
         }
     }
+    
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
@@ -177,7 +180,6 @@ extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        LoadingRainbowCat.show()
         presenter?.go(selected: categoryList[indexPath.row])
     }
 }
