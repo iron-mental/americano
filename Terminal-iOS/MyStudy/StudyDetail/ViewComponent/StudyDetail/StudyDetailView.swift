@@ -325,13 +325,13 @@ extension StudyDetailView: StudyDetailViewProtocol {
            let evernote = studyDetail.snsEvernote,
            let web = studyDetail.snsWeb {
             if !notion.isEmpty {
-                snsList.updateValue(notion, forKey: "notion")
+                snsList.updateValue(notion, forKey: SNSState.notion.rawValue)
             }
             if !evernote.isEmpty {
-                snsList.updateValue(evernote, forKey: "evernote")
+                snsList.updateValue(evernote, forKey: SNSState.evernote.rawValue)
             }
             if !web.isEmpty {
-                snsList.updateValue(web, forKey: "web")
+                snsList.updateValue(web, forKey: SNSState.web.rawValue)
             }
         }
         self.snsIconsView.addstack(snsList: snsList)
