@@ -33,21 +33,12 @@ class TitleWithContentView: UIView {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         title.do {
-            $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.dynamicFont(fontSize: 16, weight: .bold)
             $0.text = contentText[0]
         }
         label.do {
-            $0.font.withSize(16)
-            $0.numberOfLines = 0
             $0.text = contentText[1]
-            $0.setLineSpacing(lineSpacing: 13, lineHeightMultiple: 0)
-            $0.setMargins()
-            $0.backgroundColor = UIColor.appColor(.InputViewColor)
-            $0.sizeToFit()
-            $0.layer.cornerRadius = 10
-            $0.layer.masksToBounds = true
-            $0.layer.borderWidth = 0.1
-            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.setMargins(margin: 10)
         }
     }
     

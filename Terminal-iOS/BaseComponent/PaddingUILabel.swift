@@ -24,6 +24,10 @@ class PaddingLabel: UILabel {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
+            $0.numberOfLines = 0
+            $0.sizeToFit()
+            $0.dynamicFont(fontSize: 14, weight: .regular)
+            $0.setLineSpacing(lineSpacing: 13, lineHeightMultiple: 0)
         }
     }
     
