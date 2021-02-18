@@ -11,8 +11,8 @@ import Then
 
 class ApplyListCell: UITableViewCell {
     lazy var mainImage = UIImageView()
-    lazy var title = UILabel()
-    lazy var contents = UILabel()
+    var title = UILabel()
+    var contents = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,12 +27,13 @@ class ApplyListCell: UITableViewCell {
         }
         self.title.do {
             $0.numberOfLines = 0
-            $0.textColor = .white
-            $0.dynamicFont(fontSize: 18, weight: .semibold)
+            $0.textColor = .systemGray2
+            $0.dynamicFont(fontSize: 12, weight: .semibold)
         }
         self.contents.do {
             $0.numberOfLines = 3
-            $0.textColor = UIColor.appColor(.studySubTitle)
+            $0.textColor = .white
+            $0.text = ""
             $0.dynamicFont(fontSize: 14, weight: .regular)
         }
     }
@@ -48,16 +49,13 @@ class ApplyListCell: UITableViewCell {
         }
         self.title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.mainImage.trailingAnchor, constant: 23).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 100)).isActive = true
         }
         self.contents.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.title.trailingAnchor,
-                                        constant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.mainImage.trailingAnchor, constant: 23).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 200)).isActive = true
         }

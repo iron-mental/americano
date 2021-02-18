@@ -12,8 +12,13 @@ import Kingfisher
 
 class MyApplyListCell: ApplyListCell {
     static let myApplyListCellID = "MyApplyListCell"
+    
     override func attribute() {
-        self.backgroundColor = UIColor.appColor(.terminalBackground)
+        super.attribute()
+        self.do {
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.selectionStyle = .none
+        }
         self.mainImage.do {
             $0.layer.cornerRadius = 20
             $0.layer.masksToBounds = true
