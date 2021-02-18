@@ -22,18 +22,21 @@ class BottomView: UIView {
     func attribute() {
         self.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
-            $0.layer.cornerRadius = 10
-            $0.layer.masksToBounds = true
+//            $0.layer.cornerRadius = 10
+//            $0.layer.masksToBounds = true
         }
         address.do {
             $0.text = "주소가 들어갈 공간이쥬"
+            $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         detailAddress.do {
             $0.placeholder = "상세주소를 입력하세요"
+            $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         completeButton.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.titleLabel?.dynamicFont(fontSize: 17, weight: .bold)
             $0.layer.cornerRadius = 5
             $0.layer.masksToBounds = true
         }

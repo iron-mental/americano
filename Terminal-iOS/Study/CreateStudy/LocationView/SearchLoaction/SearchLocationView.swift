@@ -16,7 +16,7 @@ class SearchLocationView: UIViewController {
     var searchButton = UIButton()
     var tableView = UITableView()
     var searchResultList: [StudyDetailLocationPost] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -42,6 +42,7 @@ class SearchLocationView: UIViewController {
             $0.placeholder = "장소 키워드 검색 ex) 강남, 신촌"
             $0.becomeFirstResponder()
             $0.delegate = self
+            $0.dynamicFont(fontSize: 14, weight: .regular)
         }
         tableView.do {
             $0.delegate = self
@@ -129,9 +130,9 @@ extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         presenter?.didSelectedItem(item: searchResultList[indexPath.row], view: self, parentView: parentView!)
     }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         searchTextField.endEditing(true)
     }

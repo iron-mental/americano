@@ -9,8 +9,6 @@
 import UIKit
 
 class SearchLocationPresenter: SearchLocationPresenterProtocol {
-   
-    
     var view: SearchLocationViewProtocol?
     var interactor: SearchLocationInteractorProtocol?
     var wireFrame: SearchLocationWireFrameProtocol?
