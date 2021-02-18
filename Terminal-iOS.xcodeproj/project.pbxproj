@@ -57,7 +57,6 @@
 		A554DDC925AEEAA300C03E41 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */; };
 		A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */; };
 		A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */; };
-		A56264D225B568DD004CD298 /* SNSWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264D125B568DD004CD298 /* SNSWebView.swift */; };
 		A56264DA25B568F4004CD298 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56264D925B568F4004CD298 /* WebKit.framework */; };
 		A56264DF25B57C04004CD298 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264DE25B57C04004CD298 /* ProjectListView.swift */; };
 		A56264F225B5AE4B004CD298 /* EmailAlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */; };
@@ -431,7 +430,6 @@
 		A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
-		A56264D125B568DD004CD298 /* SNSWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSWebView.swift; sourceTree = "<group>"; };
 		A56264D925B568F4004CD298 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A56264DE25B57C04004CD298 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAlertMessageView.swift; sourceTree = "<group>"; };
@@ -888,14 +886,6 @@
 			path = SearchStudy;
 			sourceTree = "<group>";
 		};
-		A56264D025B568A6004CD298 /* Web */ = {
-			isa = PBXGroup;
-			children = (
-				A56264D125B568DD004CD298 /* SNSWebView.swift */,
-			);
-			path = Web;
-			sourceTree = "<group>";
-		};
 		A56605E025835873002C4A77 /* BaseComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -1342,7 +1332,6 @@
 				CCB752C825A841C0003E7CA7 /* StaticComponent */,
 				CCBBEEC32583631900177E25 /* CoreDataModel */,
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
-				A56264D025B568A6004CD298 /* Web */,
 				A51BA0AE2577F0CA00B9673F /* Utils */,
 				CCED89DD25DD1FF2006DA773 /* EmptyViews */,
 				A56605E025835873002C4A77 /* BaseComponent */,
@@ -2054,7 +2043,6 @@
 				A58148FE25910EBD00BF3C2A /* SNSModifyWireFrame.swift in Sources */,
 				A53A2B7D25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift in Sources */,
 				A58148922590C6E200BF3C2A /* EmailModifyView.swift in Sources */,
-				A56264D225B568DD004CD298 /* SNSWebView.swift in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
 				A5C7B8FA25AC6B7000016D5B /* AddressState.swift in Sources */,
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,

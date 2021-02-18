@@ -22,11 +22,7 @@ class DefaultCell: UITableViewCell {
         attribute()
         layout()
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     func setData(_ data: Setting) {
         title.do {
             $0.text = data.title
@@ -68,4 +64,9 @@ class DefaultCell: UITableViewCell {
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
         }
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
