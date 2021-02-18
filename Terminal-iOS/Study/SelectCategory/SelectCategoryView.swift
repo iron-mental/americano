@@ -91,7 +91,7 @@ class SelectCategoryView: UIViewController {
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 50).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
         textLabel.do {
@@ -102,8 +102,10 @@ class SelectCategoryView: UIViewController {
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 80).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor,
+                                        constant: UIScreen.main.bounds.width * 0.053).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor,
+                                         constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: $0.contentSize.height).isActive = true
         }
