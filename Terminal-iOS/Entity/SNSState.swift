@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+enum SNSState: String {
+    case github
+    case linkedin
+    case web
+    case evernote
+    case notion
+    case appStore
+    case playStore
+}
