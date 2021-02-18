@@ -95,24 +95,24 @@ class StudyCell: UITableViewCell {
         self.backgroundColor = UIColor.appColor(.terminalBackground)
         
         self.mainTitle.do {
-            $0.font = UIFont.notosansMedium(size: 20)
+            $0.dynamicFont(fontSize: 15, weight: .regular)
             $0.textColor = .white
         }
         
         self.location.do {
             $0.textColor = UIColor.appColor(.mainColor)
-            $0.font = UIFont.notosansMedium(size: 13)
+            $0.dynamicFont(fontSize: 13, weight: .regular)
             $0.textAlignment = .center
             $0.sizeToFit()
         }
         
         self.distance.do {
             $0.textColor = UIColor.appColor(.mainColor)
-            $0.font = UIFont.notosansMedium(size: 13)
+            $0.dynamicFont(fontSize: 13, weight: .regular)
         }
         
         self.date.do {
-            $0.font = UIFont.notosansMedium(size: 13)
+            $0.dynamicFont(fontSize: 13, weight: .regular)
             $0.textColor = UIColor.appColor(.studySubTitle)
         }
         
@@ -128,7 +128,7 @@ class StudyCell: UITableViewCell {
         
         self.memberCount.do {
             $0.textColor = .white
-            $0.font = UIFont.notosansMedium(size: 15)
+            $0.dynamicFont(fontSize: 13, weight: .regular)
             $0.textAlignment = .center
         }
         
@@ -188,8 +188,8 @@ class StudyCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -7).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.memberCount.leadingAnchor, constant: -3).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 25).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
         }
         
         self.memberCount.do {
