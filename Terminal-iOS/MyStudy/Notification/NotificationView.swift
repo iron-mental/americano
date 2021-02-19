@@ -9,13 +9,6 @@
 import UIKit
 
 class NotificationView: UIViewController {
-    deinit {
-        navigationController?.viewControllers.forEach {
-            if let myStudyMainView = $0 as? MyStudyMainViewProtocol {
-                myStudyMainView.applyState = nil
-            }
-        }
-    }
     var presenter: NotificationPresenterProtocol?
     let tableView = UITableView()
     var notiList: [Noti] = []
@@ -81,7 +74,7 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         navigationController?.viewControllers.forEach {
             if let myStudyMainView = $0 as? MyStudyMainViewProtocol {
-                myStudyMainView.applyState = true
+                myStudyMainView.isVisibleState = true
             }
         }
         presenter?.cellDidTap(alert: notiList[indexPath.row])

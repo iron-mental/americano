@@ -113,7 +113,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
-
                     navVC.pushViewController(goView!, animated: true)
                 }
             }
@@ -127,7 +126,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
-
                     navVC.pushViewController(goView!, animated: true)
                 }
             }
