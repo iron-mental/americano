@@ -319,8 +319,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
         memberView.totalMember.text = "\(userData.count) 명"
-        parentView?.setting()
-
+        
         if let notion = studyDetail.snsNotion,
            let evernote = studyDetail.snsEvernote,
            let web = studyDetail.snsWeb {
@@ -336,6 +335,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
         }
         self.snsIconsView.addstack(snsList: snsList)
         attribute()
+        parentView?.setting()
     }
     
     func alertGotConfirmed() {

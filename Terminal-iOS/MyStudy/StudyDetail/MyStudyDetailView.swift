@@ -39,6 +39,7 @@ class MyStudyDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        LoadingRainbowCat.show()
         setPageControllerChild()
         attribute()
         layout()

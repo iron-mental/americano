@@ -14,7 +14,7 @@ class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
     var interactor: MyStudyMainInteractorProtocol?
     
     func viewDidLoad() {
-        view?.showLoading()
+//        view?.showLoading()
         interactor?.getMyStudyList()
     }
     

@@ -169,7 +169,7 @@
 		CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */; };
 		CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */; };
 		CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */; };
-		CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */; };
+		CC29FB2B25207C1A00C1BDCE /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2A25207C1A00C1BDCE /* SelectLocationView.swift */; };
 		CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2E25207D3F00C1BDCE /* SelectLocationInteractor.swift */; };
 		CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3125207D6000C1BDCE /* SelectLocationPresenter.swift */; };
 		CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */; };
@@ -543,7 +543,7 @@
 		CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUITextField.swift; sourceTree = "<group>"; };
 		CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyRemoteManager.swift; sourceTree = "<group>"; };
 		CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationProtocol.swift; sourceTree = "<group>"; };
-		CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewView.swift; sourceTree = "<group>"; };
+		CC29FB2A25207C1A00C1BDCE /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
 		CC29FB2E25207D3F00C1BDCE /* SelectLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationInteractor.swift; sourceTree = "<group>"; };
 		CC29FB3125207D6000C1BDCE /* SelectLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationPresenter.swift; sourceTree = "<group>"; };
 		CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationRemoteDataManager.swift; sourceTree = "<group>"; };
@@ -1212,7 +1212,7 @@
 			isa = PBXGroup;
 			children = (
 				CCBC88B4254ACF0B00C2A6C4 /* Component */,
-				CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */,
+				CC29FB2A25207C1A00C1BDCE /* SelectLocationView.swift */,
 				CC29FB2E25207D3F00C1BDCE /* SelectLocationInteractor.swift */,
 				CC29FB3125207D6000C1BDCE /* SelectLocationPresenter.swift */,
 				CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */,
@@ -1989,7 +1989,7 @@
 				CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */,
 				A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */,
 				CCAF0FD6253300410060A2F6 /* MyStudyMainInteractor.swift in Sources */,
-				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */,
+				CC29FB2B25207C1A00C1BDCE /* SelectLocationView.swift in Sources */,
 				CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */,
 				CCB752CA25A841E3003E7CA7 /* StudyApplyMessageView.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
