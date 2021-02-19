@@ -12,7 +12,6 @@ import SwiftyJSON
 class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserDetailRemoteDataManagerInputProtocol {
     
     func postApplyStatus(studyID: Int, applyID: Int, status: Bool) {
-        
         TerminalNetworkManager
             .shared
             .session
@@ -32,7 +31,16 @@ class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserD
                         print("error")
                     }
                 case .failure:
-                    break
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if result.message != nil {
+                                (self.remoteRequestHandler as! ApplyUserDetailRemoteDataManagerOutputProtocol).onApplyStatusRetrieved(response: result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }
