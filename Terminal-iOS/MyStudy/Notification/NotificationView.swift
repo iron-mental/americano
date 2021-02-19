@@ -9,6 +9,13 @@
 import UIKit
 
 class NotificationView: UIViewController {
+    deinit {
+        navigationController?.viewControllers.forEach {
+            if let myStudyMainView = $0 as? MyStudyMainViewProtocol {
+                myStudyMainView.applyState = nil
+            }
+        }
+    }
     var presenter: NotificationPresenterProtocol?
     let tableView = UITableView()
     var notiList: [Noti] = []
@@ -19,7 +26,13 @@ class NotificationView: UIViewController {
         layout()
         presenter?.viewDidLoad()
     }
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+    }
+    override func didMove(toParent parent: UIViewController?) {
+//        <#code#>
+    }
     func attribute() {
         self.do {
             $0.title = "알림"
@@ -66,6 +79,11 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.viewControllers.forEach {
+            if let myStudyMainView = $0 as? MyStudyMainViewProtocol {
+                myStudyMainView.applyState = true
+            }
+        }
         presenter?.cellDidTap(alert: notiList[indexPath.row])
     }
 }

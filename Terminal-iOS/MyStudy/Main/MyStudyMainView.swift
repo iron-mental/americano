@@ -12,7 +12,7 @@ import SwiftKeychainWrapper
 
 // MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
 class MyStudyMainView: UIViewController {
-    var applyState: Bool = false
+    var applyState: Bool?
     var presenter: MyStudyMainPresenterProtocol?
     var alarmButton = BadgeBarButtonItem()
     lazy var moreButton = UIBarButtonItem()
@@ -36,8 +36,9 @@ class MyStudyMainView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        applyState ? presenter?.showApplyList(): nil
+//        applyState ? presenter?.showApplyList(): nil
 //        presenter?.viewDidLoad()
+        applyState = false
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = UIColor.appColor(.terminalBackground)
         navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -159,7 +160,13 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         attribute()
         layout()
         tableView.reloadData()
-        LoadingRainbowCat.hide()
+        if applyState == nil {
+            LoadingRainbowCat.hide()
+        } else {
+            if !applyState! {
+                LoadingRainbowCat.hide()
+            }
+        }
     }
     
     func showErrMessage() {

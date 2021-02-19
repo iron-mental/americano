@@ -57,6 +57,9 @@ extension ApplyUserView: ApplyUserViewProtocol {
             if let myStudyDetailView  = $0 as? MyStudyDetailViewProtocol {
                 myStudyDetailView.applyState = false
             }
+            if let myStudyMainView = $0 as? MyStudyMainViewProtocol {
+                myStudyMainView.applyState = false
+            }
         }
     }
     

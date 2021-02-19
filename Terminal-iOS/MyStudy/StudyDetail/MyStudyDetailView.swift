@@ -294,6 +294,7 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         attribute()
         layout()
         view.layoutIfNeeded()
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
             if self.applyState == nil {
                 LoadingRainbowCat.hide()

@@ -10,7 +10,7 @@ import UIKit
 
 protocol MyStudyMainViewProtocol: class {
     var presenter: MyStudyMainPresenterProtocol? { get set }
-    
+    var applyState: Bool? { get set }
     //PRESENTER -> VIEW
     func showMyStudyList(myStudyList: MyStudyList)
     func showErrMessage()
