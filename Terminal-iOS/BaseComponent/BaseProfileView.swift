@@ -51,6 +51,7 @@ class BaseProfileView: UIViewController {
         
         self.scrollView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.showsVerticalScrollIndicator = false
         }
         self.backgroundView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -59,31 +60,31 @@ class BaseProfileView: UIViewController {
         self.careerLabel.do {
             $0.text = "경력"
             $0.textColor = .white
-            $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         
         self.projectLabel.do {
             $0.text = "프로젝트"
             $0.textColor = .white
-            $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         
         self.snsLabel.do {
             $0.text = "SNS"
             $0.textColor = .white
-            $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         
         self.emailLabel.do {
             $0.text = "Email"
             $0.textColor = .white
-            $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         
         self.locationLabel.do {
             $0.text = "활동지역"
             $0.textColor = .white
-            $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         
         self.sns.github.addTarget(self, action: #selector(goGithub), for: .touchUpInside)
