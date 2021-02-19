@@ -31,6 +31,7 @@ class UserWithdrawalView: UIViewController {
     }
     
     private func attribute() {
+        self.title = "회원탈퇴"
         [self.email, self.password].forEach {
             $0.do {
                 $0.backgroundColor = .appColor(.cellBackground)
@@ -103,8 +104,7 @@ class UserWithdrawalView: UIViewController {
         
         self.stackView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
-                                    constant: 70).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 180).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
