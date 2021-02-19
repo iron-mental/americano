@@ -74,6 +74,7 @@ extension NotificationView: NotificationViewProtocol {
     func showNotiList(notiList: [Noti]) {
         self.notiList = notiList
         self.tableView.reloadData()
+        view.layoutIfNeeded()
         if let myStudyMainView = navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
             myStudyMainView.presenter?.viewDidLoad()
         }

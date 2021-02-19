@@ -70,7 +70,7 @@ class ProfileCell: UITableViewCell {
         location.do {
             $0.textColor = .appColor(.mainColor)
 //            $0.font = UIFont.notosansMedium(size: 13)
-            $0.dynamicFont(fontSize: 10, weight: .regular)
+            $0.dynamicFont(fontSize: 12, weight: .regular)
         }
     }
     
@@ -91,7 +91,7 @@ class ProfileCell: UITableViewCell {
         }
         self.name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: location.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: location.bottomAnchor, constant: Terminal.convertHeight(value: 5)).isActive = true
             $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
         }
         self.descript.do {

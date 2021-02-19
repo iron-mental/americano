@@ -152,6 +152,12 @@ extension NoticeView: NoticeViewProtocol {
         }
         notice.reloadData()
         parentView?.setting()
+        navigationController?.viewControllers.forEach {
+            if let notificationListView = $0 as? NotificationViewProtocol {
+                //알림을 통해 입장 했을 시 읽음 처리
+                notificationListView.presenter?.viewDidLoad()
+            }
+        }
     }
     func showLoading() {
         LoadingRainbowCat.show()
