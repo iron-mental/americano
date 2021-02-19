@@ -33,6 +33,10 @@ class SetPresenter: SetPresenterProtocol {
     func userWithdrawal() {
         wireFrame?.presentUserWithdrawal(from: view!)
     }
+    
+    func loggedOutConfirmed() {
+        interactor?.removeRefreshToken()
+    }
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {

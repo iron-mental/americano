@@ -38,6 +38,7 @@ protocol SetPresenterProtocol: class {
     func emailAuthRequest()
     
     func loggedOut()
+    func loggedOutConfirmed()
     func userWithdrawal()
 }
 
@@ -54,6 +55,7 @@ protocol SetInteractortInputProtocol: class {
     
     func getUserInfo()
     func emailAuthRequest()
+    func removeRefreshToken()
 }
 
 protocol SetDataManagerInputProtocol: class {

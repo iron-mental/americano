@@ -157,6 +157,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        KeychainWrapper.standard.remove(forKey: "pushToken")
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         let pushToken = KeychainWrapper.standard.set(deviceTokenString, forKey: "pushToken")
         print("pushToken 성공여부:", pushToken)

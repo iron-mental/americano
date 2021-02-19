@@ -19,6 +19,7 @@ enum AlertType {
     case ProjectLimitView           //프로젝트 3개 이하 안내
     case AllowUserView              //스터디 신청 수락
     case RejectUserView             //스터디 신청 거절
+    case LogOutView                 //로그아웃
     
     var view: UIView {
         switch self {
@@ -51,6 +52,9 @@ enum AlertType {
             let rejectUserView = AlertMessageView(message: "유저의 입장을 거절하시겠습니까?")
             rejectUserView.alertMessageLabel.textColor = .systemRed
             return rejectUserView
+        case .LogOutView:
+            let logoutView = AlertMessageView(message: "로그아웃 하시겠습니까?")
+            return logoutView
         }
     }
 }

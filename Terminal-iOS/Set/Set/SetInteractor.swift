@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftKeychainWrapper
 
 class SetInteractor: SetInteractortInputProtocol {
     weak var presenter: SetInteractorOutputProtocol?
@@ -20,6 +21,10 @@ class SetInteractor: SetInteractortInputProtocol {
     
     func emailAuthRequest() {
         remoteDataManager?.emailAuthRequest()
+    }
+    
+    func removeRefreshToken() {
+        KeychainWrapper.standard.remove(forKey: "refreshToken")
     }
 }
 
