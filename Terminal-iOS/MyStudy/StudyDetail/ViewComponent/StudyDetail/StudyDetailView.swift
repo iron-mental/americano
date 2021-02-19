@@ -338,6 +338,13 @@ extension StudyDetailView: StudyDetailViewProtocol {
         attribute()
     }
     
+    func alertGotConfirmed() {
+        if let myNotificationListView =  self.navigationController?.viewControllers[1] as? NotificationViewProtocol {
+            myNotificationListView.presenter?.viewDidLoad()
+        }
+        
+    }
+    
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)
     }

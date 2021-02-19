@@ -74,6 +74,9 @@ extension NotificationView: NotificationViewProtocol {
     func showNotiList(notiList: [Noti]) {
         self.notiList = notiList
         self.tableView.reloadData()
+        if let myStudyMainView = navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
+            myStudyMainView.presenter?.viewDidLoad()
+        }
     }
     
     func showError(message: String) {
