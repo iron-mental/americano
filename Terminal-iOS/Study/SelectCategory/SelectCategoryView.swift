@@ -13,49 +13,46 @@ class SelectCategoryView: UIViewController {
     var categoryList: [Category] = []
     let scrollView = UIScrollView()
     let backgroundView = UIView()
+    let textLabel = UILabel()
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return view
     }()
-    let font = UIFont(name: "Apple Color Emoji", size: 25)
-    let titleView = UILabel()
-    let textLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
-        
     }
     
     func attribute() {
+        [backgroundView, scrollView].forEach { $0.backgroundColor = .appColor(.terminalBackground) }
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.title = "스터디 만들기"
-            navigationItem.backButtonTitle = "카테고리 선택"
         }
-        scrollView.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
-        }
-        backgroundView.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
-        }
-        textLabel.do {
+        
+        self.textLabel.do {
             $0.text = "카테고리 선택"
             $0.textColor = .white
             $0.frame = CGRect(x: 0, y: 0, width: 90, height: 35)
             let attributedStr = NSMutableAttributedString(string: textLabel.text ?? "empty")
-            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font as Any, range: NSMakeRange(0, 7))
-            textLabel.attributedText = attributedStr
+            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String),
+                                       value: UIFont.notosansMedium(size: 25),
+                                       range: NSRange(location: 0, length: 7))
+            $0.attributedText = attributedStr
         }
-        collectionView.do {
+        
+        self.collectionView.do {
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
             $0.delegate = self
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.showsVerticalScrollIndicator = false
         }
-        navigationItem.do {
+        
+        self.navigationItem.do {
+            $0.backButtonTitle = "카테고리 선택"
             $0.leftBarButtonItem = UIBarButtonItem()
             $0.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light)),
                                                     style: .done,
@@ -63,12 +60,14 @@ class SelectCategoryView: UIViewController {
                                                     action: #selector(backButtonTapped))
         }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.isMovingFromParent {
             backButtonTapped()
         }
     }
+    
     func layout() {
         view.addSubview(scrollView)
         scrollView.addSubview(backgroundView)
@@ -83,12 +82,11 @@ class SelectCategoryView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
         backgroundView.do {
-            //동적으로 추후에 변경해야함
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: 50).isActive = true
+            $0.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         }
         textLabel.do {
@@ -99,8 +97,10 @@ class SelectCategoryView: UIViewController {
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 80).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: UIScreen.main.bounds.width * 0.053).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor,
+                                        constant: UIScreen.main.bounds.width * 0.053).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor,
+                                         constant: -(UIScreen.main.bounds.width * 0.053)).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: $0.contentSize.height).isActive = true
         }
@@ -177,7 +177,6 @@ extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        LoadingRainbowCat.show()
         presenter?.go(selected: categoryList[indexPath.row])
     }
 }

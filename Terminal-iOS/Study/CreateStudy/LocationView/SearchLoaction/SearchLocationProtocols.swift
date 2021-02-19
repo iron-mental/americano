@@ -42,9 +42,10 @@ protocol SearchLocationRemoteDataManagerProtocol: class {
 }
 
 protocol SearchLocationWireFrameProtocol: class {
-    var presenter: SearchLocationPresenterProtocol? { get set }
-    static func searchLocationViewModul(parentView: UIViewController) -> UIViewController
+    static func searchLocationViewModule(parentView: UIViewController) -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func goToSelectLocationView(item: StudyDetailLocationPost, view: UIViewController, parentView: UIViewController)
+    func goToSelectLocationView(item: StudyDetailLocationPost,
+                                view: UIViewController,
+                                parentView: UIViewController)
 }
