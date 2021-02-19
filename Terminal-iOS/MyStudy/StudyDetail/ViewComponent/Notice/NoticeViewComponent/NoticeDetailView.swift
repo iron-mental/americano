@@ -34,7 +34,7 @@ class NoticeDetailView: UIViewController {
     func attribute() {
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
-            navigationItem.rightBarButtonItems = [moreButton]
+            navigationItem.rightBarButtonItems = state == .host ? [moreButton] : nil
         }
         
         noticeBackground.do {
