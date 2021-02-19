@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 .shared
                 .session
                 .request(TerminalRouter.userInfo(id: userID!))
-                .validate(statusCode: 200...422)
+                .validate()
                 .responseJSON { response in
                     switch response.result {
                     case .success:
