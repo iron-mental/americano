@@ -78,21 +78,27 @@ class ApplyUserDetailView: BaseProfileView {
     
     @objc func allowUserButtonDidTap() {
         presenter?.acceptButtonDidtap()
+        TerminalAlertMessage.dismiss()
     }
     
     @objc func rejectUserButtonDidTap() {
         presenter?.rejectButtonDidTap()
+        TerminalAlertMessage.dismiss()
     }
 }
 
 extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
     func showApplyStatusResult(message: String, studyID: Int) {
-        navigationController?.popViewController(animated: true)
-        (navigationController?.viewControllers.last as! ApplyUserViewProtocol).presenter?.viewDidLoad(studyID: studyID)
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+            if let applyUserListView = self.navigationController?.viewControllers.last as? ApplyUserViewProtocol {
+                applyUserListView.presenter?.viewDidLoad(studyID: studyID)
+            }
+        }
     }
     
-    func showError() {
-        print("applyUserDetailView에서 생긴 에러")
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
     
 }
