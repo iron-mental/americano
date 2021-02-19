@@ -16,7 +16,7 @@ class NoticeDetailView: UIViewController {
     var notice: Notice?
     var noticeID: Int?
     var state: StudyDetailViewState?
-    lazy var moreButton = UIBarButtonItem(image: #imageLiteral(resourceName: "more"), style: .done, target: self, action: #selector(moreButtonDidTap))
+    lazy var moreButton = UIBarButtonItem()
     lazy var noticeBackground = UIView()
     lazy var noticeLabel = UILabel()
     lazy var profileImage = UIImageView()
@@ -36,7 +36,11 @@ class NoticeDetailView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             navigationItem.rightBarButtonItems = state == .host ? [moreButton] : nil
         }
-        
+        self.moreButton.do {
+            $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.target = self
+            $0.action = #selector(moreButtonDidTap)
+        }
         noticeBackground.do {
             $0.layer.cornerRadius = 5
             if let isPinned = notice?.pinned {
