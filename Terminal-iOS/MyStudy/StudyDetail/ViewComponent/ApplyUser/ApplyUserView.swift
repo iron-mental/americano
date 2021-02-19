@@ -53,6 +53,11 @@ extension ApplyUserView: ApplyUserViewProtocol {
             self.userList = result
             applyUserList.reloadData()
         }
+        navigationController?.viewControllers.forEach {
+            if let myStudyDetailView  = $0 as? MyStudyDetailViewProtocol {
+                myStudyDetailView.applyState = false
+            }
+        }
     }
     
     func showError(message: String) {
