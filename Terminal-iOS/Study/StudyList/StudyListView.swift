@@ -33,15 +33,13 @@ class StudyListView: UIViewController {
     
     // MARK: Attribute
     func attribute() {
-        
         self.do {
             $0.title = category ?? nil
+            $0.view.backgroundColor = .appColor(.terminalBackground)
         }
-        view.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
-        }
+
         aligmentView.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = .appColor(.terminalBackground)
         }
         
         refreshControl.do {
@@ -50,13 +48,13 @@ class StudyListView: UIViewController {
         
         lateButton.do {
             $0.setTitle("최신", for: .normal)
-            $0.titleLabel?.font = UIFont.notosansMedium(size: 17)
+            $0.titleLabel?.font = .notosansMedium(size: 17)
             $0.addTarget(self, action: #selector(new), for: .touchUpInside)
         }
         
         locationButton.do {
             $0.setTitle("지역", for: .normal)
-            $0.titleLabel?.font = UIFont.notosansMedium(size: 17)
+            $0.titleLabel?.font = .notosansMedium(size: 17)
             $0.addTarget(self, action: #selector(length), for: .touchUpInside)
         }
         
@@ -69,7 +67,7 @@ class StudyListView: UIViewController {
             $0.dataSource = self
             $0.prefetchDataSource = self
             $0.register(StudyCell.self, forCellReuseIdentifier: StudyCell.cellId)
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = .appColor(.terminalBackground)
             $0.rowHeight = 105
             $0.refreshControl = refreshControl
         }
@@ -139,7 +137,7 @@ class StudyListView: UIViewController {
     }
     
     @objc func length() {
-        sortState = .length
+        self.sortState = .length
         UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseIn) {
             self.selectedUnderline.center.x = self.locationButton.center.x
         }

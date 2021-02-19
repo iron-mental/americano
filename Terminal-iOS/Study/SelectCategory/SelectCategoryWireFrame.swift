@@ -9,7 +9,7 @@
 import UIKit
 
 class SelectCategoryWireFrame: SelectCategoryWireFrameProtocol {
-    static func createSelectCategoryViewModul(category: [Category]) -> UIViewController {
+    static func createSelectCategoryViewModule(category: [Category]) -> UIViewController {
         let view = SelectCategoryView()
         let presenter: SelectCategoryPresenterProtocol = SelectCategoryPresenter()
         let wireFrame: SelectCategoryWireFrameProtocol = SelectCategoryWireFrame()
@@ -24,8 +24,7 @@ class SelectCategoryWireFrame: SelectCategoryWireFrameProtocol {
     }
     
     func goToCreateStudy(view: UIViewController, category: Category) {
-        
-        let createStudyView = CreateStudyWireFrame.createStudyViewModul(category: category.name, studyDetail: nil, state: .create, parentView: nil)
+        let createStudyView = CreateStudyWireFrame.createStudyViewModule(category: category.name, studyDetail: nil, state: .create, parentView: nil)
         view.navigationController?.pushViewController(createStudyView, animated: true)
     }
     
