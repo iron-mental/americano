@@ -65,12 +65,23 @@ class ApplyUserDetailView: BaseProfileView {
         }
     }
     
+    // MARK: @objc
     @objc func rejectButtonDidTap() {
-        presenter?.rejectButtonDidTap()
+        TerminalAlertMessage.show(controller: self, type: .RejectUserView)
+        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(rejectUserButtonDidTap), for: .touchUpInside)
     }
     
     @objc func acceptButtonDidTap() {
+        TerminalAlertMessage.show(controller: self, type: .AllowUserView)
+        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(allowUserButtonDidTap), for: .touchUpInside)
+    }
+    
+    @objc func allowUserButtonDidTap() {
         presenter?.acceptButtonDidtap()
+    }
+    
+    @objc func rejectUserButtonDidTap() {
+        presenter?.rejectButtonDidTap()
     }
 }
 
