@@ -44,9 +44,7 @@ class SelectCategoryView: UIViewController {
             $0.text = "카테고리 선택"
             $0.textColor = .white
             $0.frame = CGRect(x: 0, y: 0, width: 90, height: 35)
-            let attributedStr = NSMutableAttributedString(string: textLabel.text ?? "empty")
-            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String), value: font as Any, range: NSMakeRange(0, 7))
-            textLabel.attributedText = attributedStr
+            $0.dynamicFont(fontSize: 22, weight: .semibold)
         }
         collectionView.do {
             $0.register(CategoryCell.self, forCellWithReuseIdentifier: "cell")
