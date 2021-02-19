@@ -93,6 +93,13 @@ extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
             self.navigationController?.popViewController(animated: true)
             if let applyUserListView = self.navigationController?.viewControllers.last as? ApplyUserViewProtocol {
                 applyUserListView.presenter?.viewDidLoad(studyID: studyID)
+                self.navigationController?.viewControllers.forEach {
+                    if let myStudyDetailView = $0 as? MyStudyDetailViewProtocol {
+                        if let studyDetailView =  myStudyDetailView.VCArr[1] as? StudyDetailViewProtocol {
+                            studyDetailView.presenter?.showStudyListDetail(studyID: String(studyID))
+                        }
+                    }
+                }
             }
         }
     }
