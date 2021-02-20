@@ -57,6 +57,7 @@
 		A554DDC925AEEAA300C03E41 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */; };
 		A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */; };
 		A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */; };
+		A56048C025DEEB4500240E55 /* SNSState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56048BF25DEEB4500240E55 /* SNSState.swift */; };
 		A56264DA25B568F4004CD298 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56264D925B568F4004CD298 /* WebKit.framework */; };
 		A56264DF25B57C04004CD298 /* ProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264DE25B57C04004CD298 /* ProjectListView.swift */; };
 		A56264F225B5AE4B004CD298 /* EmailAlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */; };
@@ -430,6 +431,7 @@
 		A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
+		A56048BF25DEEB4500240E55 /* SNSState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSState.swift; sourceTree = "<group>"; };
 		A56264D925B568F4004CD298 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A56264DE25B57C04004CD298 /* ProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListView.swift; sourceTree = "<group>"; };
 		A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAlertMessageView.swift; sourceTree = "<group>"; };
@@ -1417,6 +1419,7 @@
 				CC60454325BF15B600A98FEC /* CreateStudyResult.swift */,
 				CC74FB2B25C6CD6C0087E82A /* EditNoticeResult.swift */,
 				A501FC0C25C4076600150DA0 /* MyStudy.swift */,
+				A56048BF25DEEB4500240E55 /* SNSState.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2002,6 +2005,7 @@
 				A5C5B1502545699700F4A86D /* BaseSNSView.swift in Sources */,
 				CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */,
 				CC60446E2576253F000D11C7 /* NoticeDetailProtocols.swift in Sources */,
+				A56048C025DEEB4500240E55 /* SNSState.swift in Sources */,
 				A5C7B8F525AC4FCD00016D5B /* Address.swift in Sources */,
 				CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */,
 				A5C7B90D25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift in Sources */,

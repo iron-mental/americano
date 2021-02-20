@@ -123,30 +123,31 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         
         for index in 0..<projectArr.count {
             let indexpath = IndexPath(row: index, section: 0)
-            let cell = projectView.cellForRow(at: indexpath) as! ProjectCell
-            let id = cell.projectID ?? nil
-            let title = cell.title.text!
-            let contents = cell.contents.text!
-            let github = cell.sns.firstTextFeield.text ?? ""
-            let appStore = cell.sns.secondTextField.text ?? ""
-            let playStore = cell.sns.thirdTextField.text ?? ""
-            
-            //enum 으로 관리하면 더 명확할 듯
-            if github.whitespaceCheck() || appStore.whitespaceCheck() || playStore.whitespaceCheck() {
-                state = SNSValidate(state: false, kind: "whitespace")
-            } else if !appStore.appstoreCheck() {
-                state = SNSValidate(state: false, kind: "appstore")
-            } else if !playStore.playstoreCheck() {
-                state = SNSValidate(state: false, kind: "playstore")
+            if let cell = projectView.cellForRow(at: indexpath) as? ProjectCell {
+                let id = cell.projectID ?? nil
+                let title = cell.title.text!
+                let contents = cell.contents.text!
+                let github = cell.sns.firstTextFeield.text ?? ""
+                let appStore = cell.sns.secondTextField.text ?? ""
+                let playStore = cell.sns.thirdTextField.text ?? ""
+                
+                //enum 으로 관리하면 더 명확할 듯
+                if github.whitespaceCheck() || appStore.whitespaceCheck() || playStore.whitespaceCheck() {
+                    state = SNSValidate(state: false, kind: "whitespace")
+                } else if !appStore.appstoreCheck() {
+                    state = SNSValidate(state: false, kind: "appstore")
+                } else if !playStore.playstoreCheck() {
+                    state = SNSValidate(state: false, kind: "playstore")
+                }
+                
+                projectArr[index] = Project(id: id,
+                                            title: title,
+                                            contents: contents,
+                                            snsGithub: github,
+                                            snsAppstore: appStore,
+                                            snsPlaystore: playStore,
+                                            createAt: "")
             }
-            
-            projectArr[index] = Project(id: id,
-                                        title: title,
-                                        contents: contents,
-                                        snsGithub: github,
-                                        snsAppstore: appStore,
-                                        snsPlaystore: playStore,
-                                        createAt: "")
         }
         return state
     }

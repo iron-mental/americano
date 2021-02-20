@@ -10,14 +10,8 @@ import UIKit
 
 class SearchLocationWireFrame: SearchLocationWireFrameProtocol {
     var presenter: SearchLocationPresenterProtocol?
-    
-    func goToSelectLocationView(item: StudyDetailLocationPost, view: UIViewController, parentView: UIViewController) {
-        let selectLocationView = SelectLocationWireFrame.selectLocationViewModul(item: item, parentView: parentView)
-        selectLocationView.modalPresentationStyle = .fullScreen
-        view.present(selectLocationView, animated: true)
-    }
-    
-    static func searchLocationViewModul(parentView: UIViewController) -> UIViewController {
+
+    static func searchLocationViewModule(parentView: UIViewController) -> UIViewController {
         let view = SearchLocationView()
         let interactor = SearchLocationInteractor()
         let presenter = SearchLocationPresenter()
@@ -34,5 +28,11 @@ class SearchLocationWireFrame: SearchLocationWireFrameProtocol {
         interactor.presenter = presenter
 
         return view
+    }
+    
+    func goToSelectLocationView(item: StudyDetailLocationPost, view: UIViewController, parentView: UIViewController) {
+        let selectLocationView = SelectLocationWireFrame.selectLocationViewModul(item: item, parentView: parentView)
+        selectLocationView.modalPresentationStyle = .fullScreen
+        view.present(selectLocationView, animated: false)
     }
 }

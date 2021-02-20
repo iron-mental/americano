@@ -92,8 +92,8 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
 //            "device": "ios"
 //        ]
         
-        print(KeychainWrapper.standard.string(forKey: "accessToken"))
-        print(KeychainWrapper.standard.string(forKey: "refreshToken"))
+        print(KeychainWrapper.standard.string(forKey: "accessToken") as Any)
+        print(KeychainWrapper.standard.string(forKey: "refreshToken") as Any)
         
         TerminalNetworkManager
             .shared
