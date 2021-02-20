@@ -11,6 +11,7 @@ import Kingfisher
 import SwiftKeychainWrapper
 import SwiftyJSON
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -28,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let home = HomeView()
         let main = ViewController()
         
+        // firebase 연동
+        FirebaseApp.configure()
         // 리프레쉬 토큰이 없으면 -> 홈화면
         if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
             KeychainWrapper.standard.set("temp", forKey: "accessToken")

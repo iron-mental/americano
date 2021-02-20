@@ -322,6 +322,7 @@
 		CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279DE256E46BA00DB3246 /* NoticeList.swift */; };
 		CCE279EC256E46C600DB3246 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EB256E46C600DB3246 /* Notice.swift */; };
 		CCE4E51D25A57A6D00DEFC3C /* TerminalAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */; };
+		CCE829BF25E0F9F800FF11C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCE829BE25E0F9F800FF11C9 /* GoogleService-Info.plist */; };
 		CCED89CB25DD1D1E006DA773 /* EmptyViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */; };
 		CCED89E225DD2295006DA773 /* SearchLocationEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */; };
 		CCED89E725DD256C006DA773 /* NotiListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */; };
@@ -691,6 +692,7 @@
 		CCE279DE256E46BA00DB3246 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
 		CCE279EB256E46C600DB3246 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertMessage.swift; sourceTree = "<group>"; };
+		CCE829BE25E0F9F800FF11C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewType.swift; sourceTree = "<group>"; };
 		CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationEmptyView.swift; sourceTree = "<group>"; };
 		CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiListEmptyView.swift; sourceTree = "<group>"; };
@@ -1348,6 +1350,7 @@
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
 				CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */,
+				CCE829BE25E0F9F800FF11C9 /* GoogleService-Info.plist */,
 			);
 			path = "Terminal-iOS";
 			sourceTree = "<group>";
@@ -1777,6 +1780,7 @@
 			files = (
 				A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
+				CCE829BF25E0F9F800FF11C9 /* GoogleService-Info.plist in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
@@ -1826,7 +1830,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		F80092817FAFE98D14C317C9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2445,6 +2449,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Terminal-iOS/Terminal-iOSDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = DH7PS64634;
 				INFOPLIST_FILE = "Terminal-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
