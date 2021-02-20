@@ -32,7 +32,9 @@ class DelegateHostTableViewCell: UITableViewCell {
             $0.layer.borderWidth = 0.3
             $0.layer.borderColor = UIColor.lightGray.cgColor
         }
-        
+        nickname.do {
+            $0.dynamicFont(fontSize: 15, weight: .bold)
+        }
     }
     
     func layout() {
@@ -49,7 +51,7 @@ class DelegateHostTableViewCell: UITableViewCell {
         nickname.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: centerXAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: Terminal.convertWidth(value: 30)).isActive = true
         }
     }
     

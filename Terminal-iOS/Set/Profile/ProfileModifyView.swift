@@ -247,7 +247,7 @@ class ProfileModifyView: UIViewController {
             self.showToast(controller: self, message: "이름은 공백이 포함되지 않습니다.", seconds: 0.5)
         } else {
             let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
-            LoadingRainbowCat.show()
+            showLoading()
             presenter?.completeImageModify(image: image)
             presenter?.completeModify(profile: profile)
         }
@@ -272,6 +272,18 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
             LoadingRainbowCat.hide()
             showToast(controller: self, message: message, seconds: 1)
         }
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show()
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide()
     }
 }
 

@@ -87,6 +87,7 @@ class AddNoticeView: UIViewController {
             $0.layer.masksToBounds = true
             $0.delegate = self
             $0.addLeftPadding(padding: 10)
+            $0.dynamicFont(fontSize: 15, weight: .regular)
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
         }
@@ -105,6 +106,7 @@ class AddNoticeView: UIViewController {
             $0.text = notice == nil ? nil : notice?.contents
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
+            $0.dynamicFont(size: 14, weight: .regular)
         }
         completeButton.do {
             $0.backgroundColor = UIColor.appColor(.mainColor)

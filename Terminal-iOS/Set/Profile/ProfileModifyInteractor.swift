@@ -63,7 +63,13 @@ extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol 
     }
     
     func nicknameModifyRetrieved(result: BaseResponse<Bool>) {
-        self.nicknameResult = result.result
-        mergeProfileModifyResult()
+        switch result.result {
+        case true:
+            self.nicknameResult = result.result
+            mergeProfileModifyResult()
+        case false:
+            guard let message = result.message else { return }
+            presenter?.modifyFailed(message: message)
+        }
     }
 }

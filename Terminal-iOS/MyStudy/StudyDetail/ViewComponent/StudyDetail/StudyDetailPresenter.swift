@@ -50,6 +50,7 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
         view?.hideLoading()
         view?.showError(message: message)
     }
+    
     func studyJoinResult(result: Bool, message: String) {
         switch result {
         case true:
@@ -59,5 +60,9 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
             view?.hideLoading()
             view?.showError(message: message)
         }
+    }
+    
+    func alertGotConfirmed() {
+        view?.alertGotConfirmed()
     }
 }

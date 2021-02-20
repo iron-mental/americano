@@ -22,12 +22,12 @@ class MemeberView: UIView {
     func attribute() {
         title.do {
             $0.text = "구성원"
-            $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.dynamicFont(fontSize: 16, weight: .bold)
         }
         totalMember.do {
             $0.text = "7 / 10"
             $0.textColor = .gray
-            $0.font.withSize(16)
+            $0.dynamicFont(fontSize: 14, weight: .regular)
         }
     }
     

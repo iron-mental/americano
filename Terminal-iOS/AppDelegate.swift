@@ -11,6 +11,7 @@ import Kingfisher
 import SwiftKeychainWrapper
 import SwiftyJSON
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -28,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let home = HomeView()
         let main = ViewController()
         
+        // firebase 연동
+        FirebaseApp.configure()
         // 리프레쉬 토큰이 없으면 -> 홈화면
         if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
             KeychainWrapper.standard.set("temp", forKey: "accessToken")
@@ -113,7 +116,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
-
                     navVC.pushViewController(goView!, animated: true)
                 }
             }
@@ -127,7 +129,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 goView = view
                 if let tabVC = self.window?.rootViewController as? UITabBarController,
                    let navVC = tabVC.selectedViewController as? UINavigationController {
-
                     navVC.pushViewController(goView!, animated: true)
                 }
             }
@@ -157,6 +158,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        KeychainWrapper.standard.remove(forKey: "pushToken")
         let deviceTokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
         let pushToken = KeychainWrapper.standard.set(deviceTokenString, forKey: "pushToken")
         print("pushToken 성공여부:", pushToken)

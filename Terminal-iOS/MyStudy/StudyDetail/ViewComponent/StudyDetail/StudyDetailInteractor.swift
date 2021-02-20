@@ -39,4 +39,8 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
         guard let message = result.message else { return }
         presenter?.studyJoinResult(result: result.result, message: message)
     }
+    
+    func alertGotConfirmed() {
+        presenter?.alertGotConfirmed()
+    }
 }

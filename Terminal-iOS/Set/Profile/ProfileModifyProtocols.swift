@@ -13,6 +13,9 @@ protocol ProfileModifyViewProtocol: class {
     
     // PRESENTER -> VIEW
     func modifyResultHandle(result: Bool, message: String)
+    func showError(message: String)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol ProfileModifyWireFrameProtocol: class {
@@ -35,6 +38,7 @@ protocol ProfileModifyPresenterProtocol: class {
 protocol ProfileModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didCompleteModify(result: Bool, message: String)
+    func modifyFailed(message: String)
 }
 
 protocol ProfileModifyInteractorInputProtocol: class {

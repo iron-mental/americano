@@ -36,11 +36,7 @@ class SelectCategoryView: UIViewController {
             $0.text = "카테고리 선택"
             $0.textColor = .white
             $0.frame = CGRect(x: 0, y: 0, width: 90, height: 35)
-            let attributedStr = NSMutableAttributedString(string: textLabel.text ?? "empty")
-            attributedStr.addAttribute(NSAttributedString.Key(rawValue: kCTFontAttributeName as String),
-                                       value: UIFont.notosansMedium(size: 25),
-                                       range: NSRange(location: 0, length: 7))
-            $0.attributedText = attributedStr
+            $0.dynamicFont(fontSize: 22, weight: .semibold)
         }
         
         self.collectionView.do {
@@ -177,6 +173,7 @@ extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        LoadingRainbowCat.show()
         presenter?.go(selected: categoryList[indexPath.row])
     }
 }

@@ -17,6 +17,9 @@ enum AlertType {
     case LeaveStudyView             //스터디 나가기
     case DeleteStudyView            //스터디 삭제
     case ProjectLimitView           //프로젝트 3개 이하 안내
+    case AllowUserView              //스터디 신청 수락
+    case RejectUserView             //스터디 신청 거절
+    case LogOutView                 //로그아웃
     
     var view: UIView {
         switch self {
@@ -42,6 +45,16 @@ enum AlertType {
             projectLimitView.alertMessageLabel.font = UIFont.monospacedSystemFont(ofSize: projectLimitView.alertMessageLabel.font.pointSize - 3, weight: UIFont.Weight.regular)
             projectLimitView.onlyCompleteButton()
             return projectLimitView
+        case .AllowUserView:
+            let allowUserView = AlertMessageView(message: "유저의 입장을 수락하시겠습니까?")
+            return allowUserView
+        case .RejectUserView:
+            let rejectUserView = AlertMessageView(message: "유저의 입장을 거절하시겠습니까?")
+            rejectUserView.alertMessageLabel.textColor = .systemRed
+            return rejectUserView
+        case .LogOutView:
+            let logoutView = AlertMessageView(message: "로그아웃 하시겠습니까?")
+            return logoutView
         }
     }
 }

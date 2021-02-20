@@ -103,7 +103,7 @@ class SetView: UIViewController {
     // MARK: Email Auth
     
     @objc func emailAuth() {
-
+        
         /// 인증 여부에 따른 분기처리
         if emailVerify {
             self.showToast(controller: self, message: "이미 인증 하셨습니다.", seconds: 0.5)
@@ -118,15 +118,25 @@ class SetView: UIViewController {
     @objc func emailAuthRequest() {
         self.presenter?.emailAuthRequest()
     }
+    
+    @objc func logOutConfirmedDidTap() {
+        TerminalAlertMessage.dismiss()
+        presenter?.loggedOutConfirmed()
+        let view = HomeView()
+        let home = UINavigationController(rootViewController: view)
+        /// RootViewController replace
+        guard let window = UIApplication.shared.windows.first else { return }
+        window.replaceRootViewController(home, animated: true, completion: nil)
+    }
 }
 
 extension SetView: SetViewProtocol {
     func showLoading() {
-//        LoadingRainbowCat.show()
+        //        LoadingRainbowCat.show()
     }
     
     func hideLoading() {
-//        LoadingRainbowCat.hide()
+        //        LoadingRainbowCat.hide()
     }
     
     func emailAuthResponse(result: Bool, message: String) {
@@ -139,15 +149,8 @@ extension SetView: SetViewProtocol {
     }
     
     func loggedOut() {
-        let view = HomeView()
-        let home = UINavigationController(rootViewController: view)
-        
-        /// 로그아웃과 동시에  토큰 삭제
-        KeychainWrapper.standard.remove(forKey: "refreshToken")
-        
-        /// RootViewController replace
-        guard let window = UIApplication.shared.windows.first else { return }
-        window.replaceRootViewController(home, animated: true, completion: nil)
+        TerminalAlertMessage.show(controller: self, type: .LogOutView)
+        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(logOutConfirmedDidTap), for: .touchUpInside)
     }
     
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신

@@ -60,7 +60,8 @@ extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProto
             guard let message = response.message else { return }
             presenter?.retriveApplyStatus(result: response.result, message: message, studyID: studyID!)
         case false:
-            print("ApplyUserDetailInteractor 에서 생긴 에러")
+            guard let message = response.message else { return }
+            presenter?.retriveApplyStatus(result: response.result, message: message, studyID: studyID!)
         }
     }
 }

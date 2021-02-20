@@ -33,6 +33,7 @@ final class MyApplyListView: UIViewController {
             $0.dataSource = self
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.refreshControl = refreshControl
+            $0.separatorColor = .clear
         }
         refreshControl.do {
             $0.addTarget(self, action: #selector(viewDidLoad), for: .valueChanged)

@@ -9,7 +9,7 @@
 import Foundation
 
 class NotificationInteractor: NotificationInteractorInputProtocol {
-    var presenter: NotificationInteractorOutputProtocol?
+    weak var presenter: NotificationInteractorOutputProtocol?
     var remoteDataManager: NotificationRemoteDataManagerInputProtocol?
     
     func retrieveAlert() {

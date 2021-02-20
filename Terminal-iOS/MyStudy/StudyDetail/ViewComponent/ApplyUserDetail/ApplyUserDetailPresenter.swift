@@ -55,7 +55,7 @@ extension ApplyUserDetailPresenter: ApplyUserDetailInteractorOutputProtocol {
         case true:
             view?.showApplyStatusResult(message: message, studyID: studyID)
         case false:
-            view?.showError()
+            view?.showError(message: message)
         }
     }
 }

@@ -27,9 +27,12 @@ class SelectLocationView: UIViewController {
     var location: StudyDetailLocationPost?
     var animationFlag = true
     var isMoving = false
-    var delegate: selectLocationDelegate?
+    weak var delegate: selectLocationDelegate?
     var keyboardHeight: CGFloat = 0.0
+    var mapViewTopAnchor: NSLayoutConstraint?
+    var mapViewBottomAnchor: NSLayoutConstraint?
     var bottomAnchor: NSLayoutConstraint?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +62,12 @@ class SelectLocationView: UIViewController {
         keyboardHeight = keyboardRectangle.height
         
         if animationFlag == false {
-            bottomAnchor?.constant -= keyboardHeight
-            bottomAnchor?.isActive = true
-            view.layoutIfNeeded()
+            bottomAnchor?.constant = -keyboardHeight
+            mapView.setNeedsUpdateConstraints()
+            bottomView.setNeedsUpdateConstraints()
+            UIView.animate(withDuration: 1) {
+                self.view.layoutIfNeeded()
+            }
         }
         bottomView.detailAddress.becomeFirstResponder()
         animationFlag = false
@@ -83,16 +89,23 @@ class SelectLocationView: UIViewController {
             $0.mapType = .basic
             $0.symbolScale = 0.7
             $0.addCameraDelegate(delegate: self)
+            $0.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - Terminal.convertHeight(value: 202))
         }
         pin.do {
             $0.image = #imageLiteral(resourceName: "marker")
+            $0.frame = CGRect(x: mapView.frame.width / 2 - (Terminal.convertWidth(value: 35) / 2),
+                              y: mapView.frame.height / 2 - (Terminal.convertWidth(value: 50) / 2),
+                              width: Terminal.convertWidth(value: 35),
+                              height: Terminal.convertWidth(value: 50))
         }
         bottomView.do {
             $0.completeButton.addTarget(self, action: #selector(didCompleteButtonClicked), for: .touchUpInside)
             $0.address.text = location?.address
-            $0.layer.cornerRadius = 10
-            $0.layer.masksToBounds = true
             $0.detailAddress.delegate = self
+            $0.frame  = CGRect(x: 0,
+                               y: UIScreen.main.bounds.height - Terminal.convertHeight(value: 202),
+                               width: UIScreen.main.bounds.width,
+                               height: Terminal.convertHeight(value: 202))
         }
     }
     
@@ -105,6 +118,7 @@ class SelectLocationView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomView.topAnchor).isActive = true
+            mapViewBottomAnchor?.isActive = true
         }
         pin.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

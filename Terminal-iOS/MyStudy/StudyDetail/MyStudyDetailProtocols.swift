@@ -14,7 +14,7 @@ protocol MyStudyDetailViewProtocol: class {
     var VCArr: [UIViewController] { get set }
     var studyTitle: String? { get set }
     var alertID: Int? { get set }
-    
+    var applyState: Bool? { get set }
     //CHILD -> PARENT
     func setting()
     

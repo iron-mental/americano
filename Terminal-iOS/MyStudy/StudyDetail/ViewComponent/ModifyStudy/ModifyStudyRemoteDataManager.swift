@@ -28,6 +28,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
         if let title = study.title {
             params["title"] = title
         }
+        
         if let location = study.location {
             params["address_name"] = location.address
             params["latitude"] = location.lat
@@ -43,6 +44,7 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                 params["place_name"] = placeName
             }
         }
+        
         TerminalNetworkManager
             .shared
             .session

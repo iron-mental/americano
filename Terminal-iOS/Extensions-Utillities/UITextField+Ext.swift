@@ -39,6 +39,9 @@ extension UITextField {
         case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
             calculatedFont = UIFont.notosansMedium(size: size * 1.20)
             resizeFont(calculatedFont: calculatedFont, weight: weight)
+        case 926.0:
+            calculatedFont = UIFont.notosansMedium(size: size * 1.25)
+            resizeFont(calculatedFont: calculatedFont, weight: weight)
         default:
             print("not an iPhone")
         }

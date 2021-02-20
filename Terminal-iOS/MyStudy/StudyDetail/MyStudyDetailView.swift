@@ -20,7 +20,7 @@ class MyStudyDetailView: UIViewController {
     
     var viewState: MyStudyDetialInitView = .StudyDetial
     let appearance = UINavigationBarAppearance()
-    var applyState: Bool = false
+    var applyState: Bool?
     var alertID: Int?
     var studyID: Int? { didSet { setPageControllerChild() } }
     var studyTitle: String?
@@ -39,14 +39,17 @@ class MyStudyDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        LoadingRainbowCat.show()
+        setPageControllerChild()
         attribute()
         layout()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        applyState ? presenter?.showApplyUserList(studyID: studyID!) : nil
-        applyState = false
+        if applyState != nil {
+            applyState! ? presenter?.showApplyUserList(studyID: studyID!) : nil
+        }
     }
     
     func attribute() {
@@ -183,6 +186,7 @@ class MyStudyDetailView: UIViewController {
                                                           studyTitle: studyTitle ?? "",
                                                           alertID: alertID ?? nil),
                    ChatWireFrame.createChatModule()]
+        (VCArr[0] as? NoticeViewProtocol)?.viewLoad()
     }
     
     // MARK: - @objc
@@ -290,11 +294,13 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         attribute()
         layout()
         view.layoutIfNeeded()
+        
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-            if !self.applyState {
+            if self.applyState == nil {
                 LoadingRainbowCat.hide()
             }
         })
+        
     }
     
     func showLeaveStudyComplete(message: String) {

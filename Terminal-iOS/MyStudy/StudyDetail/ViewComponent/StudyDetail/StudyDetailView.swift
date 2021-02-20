@@ -108,7 +108,7 @@ class StudyDetailView: UIViewController {
             if state == .none || state == .reject {
                 $0.isHidden = false
                 $0.setTitle("스터디 참여하기", for: .normal)
-                $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+                $0.titleLabel?.dynamicFont(fontSize: 13, weight: .bold)
                 $0.setTitleColor(.white, for: .normal)
                 $0.backgroundColor = UIColor.appColor(.mainColor)
                 $0.layer.cornerRadius = 10
@@ -118,7 +118,7 @@ class StudyDetailView: UIViewController {
             } else if state == .applier {
                 $0.isHidden = false
                 $0.setTitle("가입 진행중", for: .normal)
-                $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+                $0.titleLabel?.dynamicFont(fontSize: 13, weight: .bold)
                 $0.backgroundColor = UIColor.appColor(.terminalBackground)
                 $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 10)
                 $0.setTitleColor(UIColor.appColor(.mainColor), for: .normal)
@@ -319,8 +319,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
         state = StudyDetailViewState.init(rawValue: studyDetail.authority)!
         memberView.collectionView.reloadData()
         memberView.totalMember.text = "\(userData.count) 명"
-        parentView?.setting()
-
+        
         if let notion = studyDetail.snsNotion,
            let evernote = studyDetail.snsEvernote,
            let web = studyDetail.snsWeb {
@@ -336,6 +335,14 @@ extension StudyDetailView: StudyDetailViewProtocol {
         }
         self.snsIconsView.addstack(snsList: snsList)
         attribute()
+        parentView?.setting()
+    }
+    
+    func alertGotConfirmed() {
+        if let myNotificationListView =  self.navigationController?.viewControllers[1] as? NotificationViewProtocol {
+            myNotificationListView.presenter?.viewDidLoad()
+        }
+        
     }
     
     func showError(message: String) {

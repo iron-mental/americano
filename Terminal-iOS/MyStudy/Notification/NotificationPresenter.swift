@@ -9,7 +9,7 @@
 import Foundation
 
 class NotificationPresenter: NotificationPresenterProtocol {
-    var view: NotificationViewProtocol?
+    weak var view: NotificationViewProtocol?
     var interactor: NotificationInteractorInputProtocol?
     var wireFrame: NotificationWireFrameProtocol?
     
@@ -24,6 +24,7 @@ class NotificationPresenter: NotificationPresenterProtocol {
 
 extension NotificationPresenter: NotificationInteractorOutputProtocol {
     func onRetrievedAlert(result: [Noti]) {
+        view?.hideLoading()
         view?.showNotiList(notiList: result)
     }
     

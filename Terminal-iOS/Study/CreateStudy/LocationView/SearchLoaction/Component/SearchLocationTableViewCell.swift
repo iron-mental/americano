@@ -27,22 +27,17 @@ class SearchLocationTableViewCell: UITableViewCell {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         title.do {
-            $0.text = "넥슨"
             $0.textColor = UIColor.appColor(.mainColor)
-            $0.font = UIFont.boldSystemFont(ofSize: 20)
+            $0.dynamicFont(fontSize: 16, weight: .regular)
             $0.sizeToFit()
         }
         category.do {
             $0.textAlignment = .right
-            $0.text = "게임제작"
             $0.textColor = .gray
-            $0.font.withSize(14)
-            $0.sizeToFit()
+            $0.dynamicFont(fontSize: 12, weight: .regular)
         }
         detailAddress.do {
-            $0.text = "경기 성남시 분당구 판교로 394-3"
-            $0.font.withSize(18)
-            $0.sizeToFit()
+            $0.dynamicFont(fontSize: 14, weight: .regular)
         }
     }
     

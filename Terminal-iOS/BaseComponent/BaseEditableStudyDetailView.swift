@@ -181,11 +181,13 @@ class BaseEditableStudyDetailView: UIViewController {
         button.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.titleLabel?.dynamicFont(fontSize: 15, weight: .bold)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
         }
         accessoryCompleteButton.do {
             $0.setTitle("완료", for: .normal)
+            $0.titleLabel?.dynamicFont(fontSize: 15, weight: .bold)
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
         }

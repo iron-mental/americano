@@ -28,7 +28,7 @@ extension ApplyUserPresenter: ApplyUserInteractorOutputProtocol {
     func didRetrieveUser(result: BaseResponse<[ApplyUser]>) {
         switch result.result {
         case true:
-            view?.hideLoading()
+            self.view?.hideLoading()
             guard let userList = result.data else { return }
             self.view?.showUserList(userList: userList)
         case false:

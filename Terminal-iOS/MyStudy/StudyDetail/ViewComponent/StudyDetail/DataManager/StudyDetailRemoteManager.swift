@@ -28,6 +28,9 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
                         let result = try JSONDecoder().decode(BaseResponse<StudyDetailInfo>.self, from: data!)
                         if result.data != nil {
                             self.remoteRequestHandler?.onStudyDetailRetrieved(result: result)
+                            if self.alertID != nil {
+                                self.remoteRequestHandler?.alertGotConfirmed()
+                            }
                         }
                     } catch {
                         print(error.localizedDescription)

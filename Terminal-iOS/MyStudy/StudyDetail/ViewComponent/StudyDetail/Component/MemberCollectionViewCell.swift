@@ -41,7 +41,7 @@ class MemberCollectionViewCell: UICollectionViewCell {
             $0.layer.borderColor = UIColor.lightGray.cgColor
         }
         nickname.do {
-            $0.font = UIFont.notosansMedium(size: 15)
+            $0.dynamicFont(fontSize: 11, weight: .regular)
             $0.textColor = .white
             $0.textAlignment = .center
         }

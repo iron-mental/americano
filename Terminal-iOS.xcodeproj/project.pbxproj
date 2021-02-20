@@ -170,7 +170,7 @@
 		CC26AD64251B6DAC006B11E9 /* SNSInputUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */; };
 		CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */; };
 		CC29FB2625207B7100C1BDCE /* SelectLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */; };
-		CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */; };
+		CC29FB2B25207C1A00C1BDCE /* SelectLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2A25207C1A00C1BDCE /* SelectLocationView.swift */; };
 		CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB2E25207D3F00C1BDCE /* SelectLocationInteractor.swift */; };
 		CC29FB3225207D6000C1BDCE /* SelectLocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3125207D6000C1BDCE /* SelectLocationPresenter.swift */; };
 		CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */; };
@@ -276,7 +276,6 @@
 		CCA3FF5D2517826B00F62627 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF572517826B00F62627 /* CategoryCell.swift */; };
 		CCA3FF5E2517826B00F62627 /* StudyCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF582517826B00F62627 /* StudyCategoryView.swift */; };
 		CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF632517829D00F62627 /* SearchStudyView.swift */; };
-		CCA47E0B25DC1F5100E11D4C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCA47E0A25DC1F5100E11D4C /* GoogleService-Info.plist */; };
 		CCA47E4725DD06F400E11D4C /* StudyListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA47E4625DD06F400E11D4C /* StudyListEmptyView.swift */; };
 		CCA47E6025DD196900E11D4C /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA47E5F25DD196900E11D4C /* UITableView+Ext.swift */; };
 		CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */; };
@@ -324,6 +323,7 @@
 		CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279DE256E46BA00DB3246 /* NoticeList.swift */; };
 		CCE279EC256E46C600DB3246 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EB256E46C600DB3246 /* Notice.swift */; };
 		CCE4E51D25A57A6D00DEFC3C /* TerminalAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */; };
+		CCE829BF25E0F9F800FF11C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCE829BE25E0F9F800FF11C9 /* GoogleService-Info.plist */; };
 		CCED89CB25DD1D1E006DA773 /* EmptyViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */; };
 		CCED89E225DD2295006DA773 /* SearchLocationEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */; };
 		CCED89E725DD256C006DA773 /* NotiListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */; };
@@ -545,7 +545,7 @@
 		CC26AD63251B6DAC006B11E9 /* SNSInputUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSInputUITextField.swift; sourceTree = "<group>"; };
 		CC29FB20251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyRemoteManager.swift; sourceTree = "<group>"; };
 		CC29FB2525207B7100C1BDCE /* SelectLocationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationProtocol.swift; sourceTree = "<group>"; };
-		CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationViewView.swift; sourceTree = "<group>"; };
+		CC29FB2A25207C1A00C1BDCE /* SelectLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationView.swift; sourceTree = "<group>"; };
 		CC29FB2E25207D3F00C1BDCE /* SelectLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationInteractor.swift; sourceTree = "<group>"; };
 		CC29FB3125207D6000C1BDCE /* SelectLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationPresenter.swift; sourceTree = "<group>"; };
 		CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationRemoteDataManager.swift; sourceTree = "<group>"; };
@@ -646,7 +646,6 @@
 		CCA3FF572517826B00F62627 /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		CCA3FF582517826B00F62627 /* StudyCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudyCategoryView.swift; sourceTree = "<group>"; };
 		CCA3FF632517829D00F62627 /* SearchStudyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStudyView.swift; sourceTree = "<group>"; };
-		CCA47E0A25DC1F5100E11D4C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCA47E4625DD06F400E11D4C /* StudyListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListEmptyView.swift; sourceTree = "<group>"; };
 		CCA47E5F25DD196900E11D4C /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
 		CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainView.swift; sourceTree = "<group>"; };
@@ -695,6 +694,7 @@
 		CCE279DE256E46BA00DB3246 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
 		CCE279EB256E46C600DB3246 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertMessage.swift; sourceTree = "<group>"; };
+		CCE829BE25E0F9F800FF11C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewType.swift; sourceTree = "<group>"; };
 		CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationEmptyView.swift; sourceTree = "<group>"; };
 		CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiListEmptyView.swift; sourceTree = "<group>"; };
@@ -1214,7 +1214,7 @@
 			isa = PBXGroup;
 			children = (
 				CCBC88B4254ACF0B00C2A6C4 /* Component */,
-				CC29FB2A25207C1A00C1BDCE /* SelectLocationViewView.swift */,
+				CC29FB2A25207C1A00C1BDCE /* SelectLocationView.swift */,
 				CC29FB2E25207D3F00C1BDCE /* SelectLocationInteractor.swift */,
 				CC29FB3125207D6000C1BDCE /* SelectLocationPresenter.swift */,
 				CC29FB3425207E7200C1BDCE /* SelectLocationRemoteDataManager.swift */,
@@ -1352,7 +1352,7 @@
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
 				CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */,
-				CCA47E0A25DC1F5100E11D4C /* GoogleService-Info.plist */,
+				CCE829BE25E0F9F800FF11C9 /* GoogleService-Info.plist */,
 			);
 			path = "Terminal-iOS";
 			sourceTree = "<group>";
@@ -1783,7 +1783,7 @@
 			files = (
 				A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
-				CCA47E0B25DC1F5100E11D4C /* GoogleService-Info.plist in Resources */,
+				CCE829BF25E0F9F800FF11C9 /* GoogleService-Info.plist in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
@@ -1833,7 +1833,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		F80092817FAFE98D14C317C9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1992,7 +1992,7 @@
 				CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */,
 				A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */,
 				CCAF0FD6253300410060A2F6 /* MyStudyMainInteractor.swift in Sources */,
-				CC29FB2B25207C1A00C1BDCE /* SelectLocationViewView.swift in Sources */,
+				CC29FB2B25207C1A00C1BDCE /* SelectLocationView.swift in Sources */,
 				CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */,
 				CCB752CA25A841E3003E7CA7 /* StudyApplyMessageView.swift in Sources */,
 				CCA3FF592517826B00F62627 /* StudyCategoryWireFrame.swift in Sources */,
@@ -2453,6 +2453,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Terminal-iOS/Terminal-iOSDebug.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = DH7PS64634;
 				INFOPLIST_FILE = "Terminal-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

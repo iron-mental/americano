@@ -13,6 +13,7 @@ import Kingfisher
 class ApplyUserCell: ApplyListCell {
     static let applyUserCellID = "applyUserCell"
     override func attribute() {
+        super.attribute()
         self.backgroundColor = UIColor.appColor(.terminalBackground)
         self.mainImage.do {
             $0.layer.cornerRadius = 20

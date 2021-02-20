@@ -29,6 +29,7 @@ class HotKeywordCell: UICollectionViewCell {
             $0.setTitleColor(.white, for: .normal)
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.layer.cornerRadius = 10
+            $0.titleLabel?.dynamicFont(fontSize: 14, weight: .medium)
         }
     }
     

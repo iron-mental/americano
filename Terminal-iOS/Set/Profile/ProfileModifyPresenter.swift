@@ -30,4 +30,9 @@ extension ProfileModifyPresenter: ProfileModifyInteractorOutputProtocol {
     func didCompleteModify(result: Bool, message: String) {
         self.view?.modifyResultHandle(result: result, message: message)
     }
+    
+    func modifyFailed(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }

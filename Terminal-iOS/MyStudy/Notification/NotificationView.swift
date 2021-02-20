@@ -19,7 +19,13 @@ class NotificationView: UIViewController {
         layout()
         presenter?.viewDidLoad()
     }
-    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+    }
+    override func didMove(toParent parent: UIViewController?) {
+//        <#code#>
+    }
     func attribute() {
         self.do {
             $0.title = "알림"
@@ -66,6 +72,11 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.viewControllers.forEach {
+            if let myStudyMainView = $0 as? MyStudyMainViewProtocol {
+                myStudyMainView.isVisibleState = true
+            }
+        }
         presenter?.cellDidTap(alert: notiList[indexPath.row])
     }
 }
@@ -74,6 +85,10 @@ extension NotificationView: NotificationViewProtocol {
     func showNotiList(notiList: [Noti]) {
         self.notiList = notiList
         self.tableView.reloadData()
+        view.layoutIfNeeded()
+        if let myStudyMainView = navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
+            myStudyMainView.presenter?.viewDidLoad()
+        }
     }
     
     func showError(message: String) {
