@@ -19,7 +19,7 @@ class ProjectSNSView: BaseSNSView {
         $0.setImage(#imageLiteral(resourceName: "playstore"), for: .normal)
     }
     
-    override func addstack(snsList: [String : String]) {
+    override func addstack(snsList: [String: String]) {
         /// 추가된 SNS 갯수
         var count = 0
         

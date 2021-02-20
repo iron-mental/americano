@@ -11,10 +11,8 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class ProfileDetailView: BaseProfileView {
-    
-    // MARK: Init Property
-    
     var presenter: ProfileDetailPresenterProtocol?
+    
     // MARK: viewDidLoad
     
     override func viewDidLoad() {

@@ -62,15 +62,15 @@ class ProjectView: UIView {
     
     private func checkSNSList(snsGithub: String, snsAppStore: String, snsPlayStore: String) {
         if !snsGithub.isEmpty {
-            snsList.updateValue(snsGithub, forKey: "github")
+            snsList.updateValue(snsGithub, forKey: SNSState.github.rawValue)
         }
         
         if !snsAppStore.isEmpty {
-            snsList.updateValue(snsAppStore, forKey: "appStore")
+            snsList.updateValue(snsAppStore, forKey: SNSState.appStore.rawValue)
         }
         
         if !snsPlayStore.isEmpty {
-            snsList.updateValue(snsPlayStore, forKey: "playStore")
+            snsList.updateValue(snsPlayStore, forKey: SNSState.playStore.rawValue)
         }
     }
     

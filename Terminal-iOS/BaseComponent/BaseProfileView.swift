@@ -52,6 +52,7 @@ class BaseProfileView: UIViewController {
         self.scrollView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
+        
         self.backgroundView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -215,7 +216,8 @@ extension BaseProfileView: BaseProfileViewProtocol {
                                                   options: [.requestModifier(RequestToken.token())])
 
         /// 경력
-        if let careerTitle = userInfo.careerTitle, let careerContents = userInfo.careerContents {
+        if let careerTitle = userInfo.careerTitle,
+           let careerContents = userInfo.careerContents {
             self.career.careerTitle.text = careerTitle
             self.career.careerContents.text = careerContents
         }
@@ -225,15 +227,15 @@ extension BaseProfileView: BaseProfileViewProtocol {
            let linkedin = userInfo.snsLinkedin,
            let web = userInfo.snsWeb {
             if !github.isEmpty {
-                snsList.updateValue(github, forKey: "github")
+                snsList.updateValue(github, forKey: SNSState.github.rawValue)
             }
 
             if !linkedin.isEmpty {
-                snsList.updateValue(linkedin, forKey: "linkedin")
+                snsList.updateValue(linkedin, forKey: SNSState.linkedin.rawValue)
             }
 
             if !web.isEmpty {
-                snsList.updateValue(web, forKey: "web")
+                snsList.updateValue(web, forKey: SNSState.web.rawValue)
             }
         }
 
