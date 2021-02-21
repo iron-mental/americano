@@ -15,7 +15,7 @@ class MyApplyStudyInfoView: UIViewController {
     let mainImageView = UIImageView()
     var studyTitleLabel = TitleWithContentView()
     var applyMessageLabel = TitleWithContentView()
-    lazy var moreButton = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(moreButtonDidTap))
+    lazy var moreButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +50,10 @@ class MyApplyStudyInfoView: UIViewController {
             guard let message = applyStudy?.message else { return }
             $0.contentText = ["신청 메세지", message]
         }
-        moreButton.do {
-            $0.image = #imageLiteral(resourceName: "more")
-            $0.tintColor = .white
+        self.moreButton.do {
+            $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.target = self
+            $0.action = #selector(moreButtonDidTap)
         }
     }
     
