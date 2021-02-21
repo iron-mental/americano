@@ -27,16 +27,8 @@ class MyApplyListCell: ApplyListCell {
         }
     }
     func setData(studies: ApplyStudy) {
-        
-        let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-        let imageDownloadRequest = AnyModifier { request in
-            var requestBody = request
-            requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
-            return requestBody
-        }
-        
         if let imageURL = studies.image {
-            self.mainImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
+            self.mainImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(RequestToken.token())])
         }
         
         self.title.text = studies.title
