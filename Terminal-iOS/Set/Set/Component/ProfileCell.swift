@@ -58,18 +58,15 @@ class ProfileCell: UITableViewCell {
         name.do {
             $0.textColor = .white
             $0.textAlignment = .center
-//            $0.font = UIFont.notosansMedium(size: 20)
             $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         descript.do {
-            $0.numberOfLines = 0
-//            $0.font = UIFont.notosansMedium(size: 16)
+            $0.numberOfLines = 2
             $0.dynamicFont(fontSize: 13, weight: .regular)
             $0.textColor = .systemGray
         }
         location.do {
             $0.textColor = .appColor(.mainColor)
-//            $0.font = UIFont.notosansMedium(size: 13)
             $0.dynamicFont(fontSize: 12, weight: .regular)
         }
     }
@@ -87,7 +84,7 @@ class ProfileCell: UITableViewCell {
         self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 5)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20).isActive = true
+            $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
         }
         self.name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -96,9 +93,10 @@ class ProfileCell: UITableViewCell {
         }
         self.descript.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: Terminal.convertHeight(value: 5)).isActive = true
             $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         }
     }
 
