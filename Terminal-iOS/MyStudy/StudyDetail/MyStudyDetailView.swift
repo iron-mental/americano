@@ -185,7 +185,10 @@ class MyStudyDetailView: UIViewController {
                                                              state: .member,
                                                              studyTitle: studyTitle ?? ""),
                       ChatWireFrame.createChatModule()]
-        (VCArr[0] as? NoticeViewProtocol)?.viewLoad()
+        
+        if let noticeView = VCArr[0] as? NoticeViewProtocol {
+            noticeView.viewLoad()
+        }
     }
     
     // MARK: - @objc
