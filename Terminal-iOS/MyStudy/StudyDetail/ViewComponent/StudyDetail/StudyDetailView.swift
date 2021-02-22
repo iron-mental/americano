@@ -96,31 +96,6 @@ class StudyDetailView: UIViewController {
                            options: [.requestModifier(RequestToken.token())])
         }
         
-        
-        snsIconsView.do {
-            //            if let notion = studyInfo?.snsNotion {
-            //                $0.notion.isHidden = notion.isEmpty ? true : true
-            //            }
-            //            if let evernote = studyInfo?.snsEvernote {
-            //                $0.evernote.isHidden = evernote.isEmpty ? true : true
-            //            }
-            //            if let web = studyInfo?.snsWeb {
-            //                $0.web.isHidden = web.isEmpty ? true : true
-            //            }
-            $0.notion.isHidden = false
-            $0.evernote.isHidden = false
-            $0.web.isHidden = false
-            //            if let notion = studyInfo?.snsNotion {
-            //                $0.notion.isHidden = notion.isEmpty ? true : false
-            //            }
-            //            if let evernote = studyInfo?.snsEvernote {
-            //                $0.evernote.isHidden = evernote.isEmpty ? true : false
-            //            }
-            //            if let web = studyInfo?.snsWeb {
-            //                $0.web.isHidden = web.isEmpty ? true : false
-            //            }
-        }
-        
         joinButton.do {
             $0.tag = 0
             if state == .none || state == .reject {

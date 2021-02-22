@@ -300,7 +300,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
                 LoadingRainbowCat.hide()
             }
         })
-        
+        if authority != .host && authority != .member {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     func showLeaveStudyComplete(message: String) {
