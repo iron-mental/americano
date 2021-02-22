@@ -14,6 +14,7 @@ class TitleWithTextView: UIView {
     var title: String?
     var categoryLabel = UILabel()
     var textView = UITextView()
+    var staroflifeImageView = UIImageView()
     
     init(title: String) {
         super.init(frame: .zero)
@@ -40,10 +41,15 @@ class TitleWithTextView: UIView {
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
         }
+        staroflifeImageView.do {
+            $0.image = UIImage(systemName: "staroflife.fill")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            $0.tintColor = UIColor.appColor(.mainColor)
+            $0.contentMode = .scaleAspectFit
+        }
     }
     
     func layout() {
-        [titleLabel, categoryLabel, textView].forEach {
+        [titleLabel, categoryLabel, textView, staroflifeImageView].forEach {
             addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -54,6 +60,14 @@ class TitleWithTextView: UIView {
                 $0.leadingAnchor.constraint(equalTo: leadingAnchor),
                 $0.heightAnchor.constraint(equalToConstant: $0.intrinsicContentSize.height),
                 $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width)
+            ])
+        }
+        staroflifeImageView.do {
+            NSLayoutConstraint.activate([
+                $0.topAnchor.constraint(equalTo: titleLabel.topAnchor),
+                $0.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: Terminal.convertWidth(value: 5)),
+                $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 15)),
+                $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 15))
             ])
         }
         categoryLabel.do {
