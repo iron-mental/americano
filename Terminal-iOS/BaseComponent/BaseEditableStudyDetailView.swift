@@ -9,6 +9,7 @@
 import UIKit
 
 class BaseEditableStudyDetailView: UIViewController {
+    deinit { self.keyboardRemoveObserver(with: self) }
     let screenSize = UIScreen.main.bounds
     var keyboardHeight: CGFloat = 0.0
     let mainImageView = MainImageView(frame: CGRect.zero)
@@ -40,13 +41,14 @@ class BaseEditableStudyDetailView: UIViewController {
         attribute()
         layout()
         setDelegate()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        self.keyboardAddObserver(with: self,
+                                 showSelector: #selector(keyboardWillShow),
+                                 hideSelector: #selector(keyboardWillHide))
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if viewDidAppearFlag {
+        if self.viewDidAppearFlag {
             self.studyTitleTextField.becomeFirstResponder()
             self.viewDidAppearFlag.toggle()
         }
