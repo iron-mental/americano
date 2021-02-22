@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateStudyView: BaseEditableStudyDetailView {
+final class CreateStudyView: BaseEditableStudyDetailView {
     var presenter: CreateStudyPresenterProtocol?
     var state: WriteStudyViewState?
     var study: StudyDetail?

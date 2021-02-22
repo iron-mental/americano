@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateStudyPresenter: CreateStudyPresenterProtocol {
+final class CreateStudyPresenter: CreateStudyPresenterProtocol {
     var view: CreateStudyViewProtocol?
     var interactor: CreateStudyInteractorInputProtocol?
     var wireFrame: CreateStudyWireFrameProtocol?

@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
+final class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
     var interactor: CreateStudyReMoteDataManagerOutputProtocol?
     
     func postStudy(study: StudyDetailPost) {

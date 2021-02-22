@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
+final class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
     var presenter: CreateStudyInteractorOutputProtocol?
     var remoteDataManager: CreateStudyRemoteDataManagerInputProtocol?
     var studyInfo: StudyDetail?
