@@ -35,13 +35,13 @@ class StudyDetailSNSView: BaseSNSView {
         self.snsStack.removeAllArrangedSubviews()
         
         if snsList["notion"]!.isEmpty {
-            self.notion.setImage(#imageLiteral(resourceName: "terminalicon"), for: .normal)
+            self.notion.setImage(#imageLiteral(resourceName: "disablednotion"), for: .normal)
         }
         if snsList["evernote"]!.isEmpty {
-            self.evernote.setImage(#imageLiteral(resourceName: "terminalicon"), for: .normal)
+            self.evernote.setImage(#imageLiteral(resourceName: "disabledevernote"), for: .normal)
         }
         if snsList["web"]!.isEmpty {
-            self.web.setImage(#imageLiteral(resourceName: "terminalicon"), for: .normal)
+            self.web.setImage(#imageLiteral(resourceName: "disabledweb"), for: .normal)
         }
         
         self.snsStack.addArrangedSubview(self.notion)
