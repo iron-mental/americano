@@ -27,6 +27,9 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
         switch result.result {
         case true:
             guard let studyInfo = result.data?.studyInfo else { return }
+            //            studyInfo.snsWeb = convertSNS(sns: studyInfo.snsWeb)
+            convertStudyDetail(studyDetail: studyInfo)
+            
             presenter?.didRetrieveStudyDetail(studyInfo)
         case false:
             guard let msg = result.message else { return }
@@ -42,5 +45,26 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
     
     func alertGotConfirmed() {
         presenter?.alertGotConfirmed()
+    }
+    
+    func convertStudyDetail(studyDetail: StudyDetail) -> StudyDetail {
+        let convertedStudyDetail = StudyDetail(participate: studyDetail.participate,
+                                               id: studyDetail.id,
+                                               category: studyDetail.category,
+                                               title: studyDetail.title,
+                                               introduce: studyDetail.introduce,
+                                               progress: studyDetail.progress,
+                                               studyTime: studyDetail.studyTime,
+                                               snsWeb: convertSNS(sns: studyDetail.snsWeb),
+                                               snsNotion: convertSNS(sns: studyDetail.snsNotion),
+                                               snsEvernote: convertSNS(sns: studyDetail.snsEvernote),
+                                               image: studyDetail.image,
+                                               location: studyDetail.location,
+                                               authority: studyDetail.authority)
+        return convertedStudyDetail
+    }
+    
+    func convertSNS(sns: String?) -> String {
+        return ""
     }
 }
