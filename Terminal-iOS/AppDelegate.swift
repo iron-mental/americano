@@ -106,46 +106,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //        suspend일 때 푸시 누르면 죽음 해결해야됨
         let studyID = Int(self.studyID)!
         
+        guard let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
+        
         switch event {
         case .chat:
             break
         case .studyDelete:
             break
         case .studyUpdate, .studyHostDelegate:
-            //alertID 넣어줘야함
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
-                as? MyStudyDetailView {
-                view.viewState = .StudyDetial
-                goView = view
-                if let tabVC = self.window?.rootViewController as? UITabBarController,
-                   let navVC = tabVC.selectedViewController as? UINavigationController {
-                    navVC.pushViewController(goView!, animated: true)
-                }
-            }
+                view.viewState = .StudyDetail
         case .newApply:
-            //alertID 넣어줘야함
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
-                as? MyStudyDetailView {
-                //이 부분 뉴 어플라이로 바꿔 줘야합니다.
-                view.viewState = .Chat
                 view.applyState = true
                 goView = view
-                if let tabVC = self.window?.rootViewController as? UITabBarController,
-                   let navVC = tabVC.selectedViewController as? UINavigationController {
-                    navVC.pushViewController(goView!, animated: true)
-                }
-            }
         case .newNotice, .updatedNotice:
-            //alertID 넣어줘야함
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ")
-                as? MyStudyDetailView {
                 view.viewState = .Notice
                 goView = view
-                if let tabVC = self.window?.rootViewController as? UITabBarController,
-                   let navVC = tabVC.selectedViewController as? UINavigationController {
-                    navVC.pushViewController(goView!, animated: true)
-                }
-            }
         case .applyAllowed:
             break
         case .applyRejected:
@@ -155,7 +130,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         case .none:
             print("지정되어있지 않은 메세지 들어옴 ")
         case .some(.undefined): break
-        //            <#code#>
+        }
+        if let tabVC = self.window?.rootViewController as? UITabBarController,
+           let navVC = tabVC.selectedViewController as? UINavigationController {
+            navVC.pushViewController(goView!, animated: true)
         }
         completionHandler()
     }
