@@ -11,7 +11,6 @@ import UIKit
 class ModifyStudyView: BaseEditableStudyDetailView {
     var presenter: ModifyStudyPresenterProtocol?
     var study: StudyDetail?
-    var parentView: UIViewController?
     
     override func attribute() {
         super.attribute()
