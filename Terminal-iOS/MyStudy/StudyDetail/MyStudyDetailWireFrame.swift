@@ -8,9 +8,7 @@
 
 import UIKit
 
-class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
-    var presenter: MyStudyDetailPresenterProtocol?
-    
+class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {    
     static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController {
         let view: MyStudyDetailViewProtocol = MyStudyDetailView()
         let presenter: MyStudyDetailPresenterProtocol = MyStudyDetailPresenter()
