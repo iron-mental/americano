@@ -77,20 +77,20 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     
     func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (BaseResponse<JoinResult>) -> Void) {
         
-//        guard let pushToken = KeychainWrapper.standard.string(forKey: "pushToken") else { return }
-//        let params: [String: String] = [
-//            "email": "\(joinMaterial[0])",
-//            "password": "\(joinMaterial[1])",
-//            "push_token": pushToken,
-//            "device": "ios"
-//        ]
-        //시뮬레이터 용
+        guard let pushToken = KeychainWrapper.standard.string(forKey: "pushToken") else { return }
         let params: [String: String] = [
             "email": "\(joinMaterial[0])",
             "password": "\(joinMaterial[1])",
-            "push_token": "334324ㅁㄴㅇㄹ",
+            "push_token": pushToken,
             "device": "ios"
         ]
+        //시뮬레이터 용
+//        let params: [String: String] = [
+//            "email": "\(joinMaterial[0])",
+//            "password": "\(joinMaterial[1])",
+//            "push_token": "334324ㅁㄴㅇㄹ",
+//            "device": "ios"
+//        ]
         
         print(KeychainWrapper.standard.string(forKey: "accessToken") as Any)
         print(KeychainWrapper.standard.string(forKey: "refreshToken") as Any)
