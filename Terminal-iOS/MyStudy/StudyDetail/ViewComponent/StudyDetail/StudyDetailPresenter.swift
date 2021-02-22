@@ -61,8 +61,5 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
             view?.showError(message: message)
         }
     }
-    
-    func alertGotConfirmed() {
-        view?.alertGotConfirmed()
-    }
+
 }

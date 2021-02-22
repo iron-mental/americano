@@ -21,7 +21,6 @@ protocol StudyDetailViewProtocol: class {
     func showLoading()
     func hideLoading()
     func studyJoinResult(message: String)
-    func alertGotConfirmed()
 }
 
 protocol StudyDetailWireFrameProtocol: class {
@@ -65,7 +64,6 @@ protocol StudyDetailInteractorOutputProtocol: class {
     func didRetrieveStudyDetail(_ studyDetail: StudyDetail)
     func studyJoinResult(result: Bool, message: String)
     func onError(message: String)
-    func alertGotConfirmed()
 }
 
 protocol StudyDetailRemoteDataManagerInputProtocol: class {
@@ -79,7 +77,6 @@ protocol StudyDetailRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onStudyDetailRetrieved(result: BaseResponse<StudyDetailInfo>)
     func postStudyJoinResult(result: BaseResponse<String>)
-    func alertGotConfirmed()
 }
 
 protocol StudyDetailLocalDataManagerInputProtocol: class {
