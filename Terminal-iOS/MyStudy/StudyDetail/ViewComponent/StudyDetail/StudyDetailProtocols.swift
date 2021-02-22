@@ -21,11 +21,10 @@ protocol StudyDetailViewProtocol: class {
     func showLoading()
     func hideLoading()
     func studyJoinResult(message: String)
-    func alertGotConfirmed()
 }
 
 protocol StudyDetailWireFrameProtocol: class {
-    static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState, studyTitle: String, alertID: Int?) -> UIViewController
+    static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState, studyTitle: String) -> UIViewController
     
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyDetailViewProtocol)
@@ -65,12 +64,10 @@ protocol StudyDetailInteractorOutputProtocol: class {
     func didRetrieveStudyDetail(_ studyDetail: StudyDetail)
     func studyJoinResult(result: Bool, message: String)
     func onError(message: String)
-    func alertGotConfirmed()
 }
 
 protocol StudyDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol? { get set }
-    var alertID: Int? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
     func getStudyDetail(studyID: String)
     func postStudyJoin(studyID: Int, message: String)
@@ -80,7 +77,6 @@ protocol StudyDetailRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onStudyDetailRetrieved(result: BaseResponse<StudyDetailInfo>)
     func postStudyJoinResult(result: BaseResponse<String>)
-    func alertGotConfirmed()
 }
 
 protocol StudyDetailLocalDataManagerInputProtocol: class {

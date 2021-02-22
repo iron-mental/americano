@@ -325,16 +325,11 @@ extension StudyDetailView: StudyDetailViewProtocol {
         parentView?.setting()
     }
     
-    func alertGotConfirmed() {
-        if let myNotificationListView =  self.navigationController?.viewControllers[1] as? NotificationViewProtocol {
-            myNotificationListView.presenter?.viewDidLoad()
-        }
-        
-    }
-    
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
+//            여기에 공백은 허용되지않습니다고 있기 때문에 분기해줘야함 팝인지 그냥인지 ㅇ ㅇ
             self.navigationController?.popViewController(animated: true)
+            self.hideLoading()
         }
     }
     

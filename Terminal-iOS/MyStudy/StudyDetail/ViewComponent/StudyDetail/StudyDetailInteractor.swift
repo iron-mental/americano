@@ -40,10 +40,6 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
         presenter?.studyJoinResult(result: result.result, message: message)
     }
     
-    func alertGotConfirmed() {
-        presenter?.alertGotConfirmed()
-    }
-    
     func convertStudyDetail(studyDetail: StudyDetail) -> StudyDetail {
         let convertedStudyDetail = StudyDetail(participate: studyDetail.participate,
                                                id: studyDetail.id,

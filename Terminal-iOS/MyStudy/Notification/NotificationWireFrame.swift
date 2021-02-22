@@ -33,10 +33,10 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
         }
     }
     
-    func goToStudyDetail(from view: NotificationViewProtocol, alertID: Int, alarmCase: AlarmCase, studyTitle: String, studyID: Int) {
+    func goToStudyDetail(from view: NotificationViewProtocol, alarmCase: AlarmCase, studyTitle: String, studyID: Int) {
         switch alarmCase {
         case .newApply:
-            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
+            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle)
             if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
                 castedMyStudyDetailView.applyState = true
                 if let notificationListView = view as? UIViewController {
@@ -45,7 +45,7 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
             }
         case .newNotice,
              .updatedNotice:
-            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
+            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle)
             if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
                 castedMyStudyDetailView.viewState = .Notice
                 if let notificationListView = view as? UIViewController {
@@ -55,9 +55,9 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
         case .studyUpdate,
              .studyHostDelegate,
              .applyAllowed:
-            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle, alertID: alertID)
+            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle)
             if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
-                castedMyStudyDetailView.viewState = .StudyDetial
+                castedMyStudyDetailView.viewState = .StudyDetail
                 if let notificationListView = view as? UIViewController {
                     notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 }

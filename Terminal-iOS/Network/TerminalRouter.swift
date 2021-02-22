@@ -36,6 +36,7 @@ enum TerminalRouter: URLRequestConvertible {
     
     case address
     case alert                  (id: String)
+    case alertConfirm           (userID: Int, alertID: Int)
     
     // 프로젝트
     case projectList            (id: String)
@@ -43,7 +44,7 @@ enum TerminalRouter: URLRequestConvertible {
 
     // 스터디
     case studyCreate            (study: Parameters)
-    case studyDetail            (studyID: String, alertID: Int? = nil)
+    case studyDetail            (studyID: String)
     case studyUpdate            (studyID: String, study: Parameters)
     case studyDelete            (studyID: String)
     case studyList              (sort: Parameters)
@@ -92,7 +93,6 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .userInfo:
             return .get
-            
         case .userImageUpdate:
             return .put
         case .userInfoUpdate:
@@ -118,6 +118,8 @@ enum TerminalRouter: URLRequestConvertible {
         case .address:
             return .get
         case .alert:
+            return .get
+        case .alertConfirm:
             return .get
             
             
@@ -229,6 +231,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/address"
         case let .alert(id):
             return "user/\(id)/alert"
+        case let .alertConfirm(userID, alertID):
+            return "user/\(userID)/alert/\(alertID)"
             
         // 프로젝트
         case let .projectList(id):
@@ -239,7 +243,7 @@ enum TerminalRouter: URLRequestConvertible {
         // 스터디
         case .studyCreate, .studyList:
             return "study"
-        case let .studyDetail(studyID, _), let .studyUpdate(studyID, _), let .studyDelete(studyID):
+        case let .studyDetail(studyID), let .studyUpdate(studyID, _), let .studyDelete(studyID):
             return "study/\(studyID)"
         case .studyListForKey:
             return "study/paging/list"
@@ -321,16 +325,12 @@ enum TerminalRouter: URLRequestConvertible {
         case let .signUp(userData):
             return userData
             
-        case .address, .alert:
+        case .address, .alert, .alertConfirm:
             return nil
             
         // 스터디
-        case let .studyDetail(_, alertID):
-            if let id = alertID {
-                return ["alert_id": id]
-            } else {
-                return nil
-            }
+        case let .studyDetail:
+            return nil
         case .studyDelete, .studyLeave, .studyCategory:
             return nil
         case .hotKeyword, .myStudyList:

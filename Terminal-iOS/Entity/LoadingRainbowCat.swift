@@ -34,6 +34,9 @@ class LoadingRainbowCat: NSObject {
         popupView.contentMode = .scaleAspectFit
         popupView.play()
         popupView.loopMode = .loop
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+            hide()
+        }
     }
     
     class func hide(completion: (() -> Void)? = nil) {

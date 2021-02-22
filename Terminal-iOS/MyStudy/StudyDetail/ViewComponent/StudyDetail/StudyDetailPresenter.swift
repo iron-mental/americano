@@ -47,7 +47,7 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
     }
     
     func onError(message: String) {
-        view?.hideLoading()
+        
         view?.showError(message: message)
     }
     
@@ -61,8 +61,5 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
             view?.showError(message: message)
         }
     }
-    
-    func alertGotConfirmed() {
-        view?.alertGotConfirmed()
-    }
+
 }

@@ -11,14 +11,14 @@ import SwiftKeychainWrapper
 
 enum MyStudyDetialInitView {
     case Notice
-    case StudyDetial
+    case StudyDetail
     case Chat
 }
 
 class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
     
-    var viewState: MyStudyDetialInitView = .StudyDetial
+    var viewState: MyStudyDetialInitView = .StudyDetail
     let appearance = UINavigationBarAppearance()
     var applyState: Bool?
     var alertID: Int?
@@ -108,7 +108,7 @@ class MyStudyDetailView: UIViewController {
             self.tapSege.selectedSegmentIndex = 0
             self.childPageView.setViewControllers([self.VCArr[0]], direction: .forward, animated: true, completion: nil)
             self.pageBeforeIndex = 0
-        case .StudyDetial:
+        case .StudyDetail:
             self.tapSege.selectedSegmentIndex = 1
             self.childPageView.setViewControllers([self.VCArr[1]], direction: .forward, animated: true, completion: nil)
             self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
@@ -183,8 +183,7 @@ class MyStudyDetailView: UIViewController {
                    StudyDetailWireFrame.createStudyDetail(parent: self,
                                                           studyID: studyID!,
                                                           state: .member,
-                                                          studyTitle: studyTitle ?? "",
-                                                          alertID: alertID ?? nil),
+                                                          studyTitle: studyTitle ?? ""),
                    ChatWireFrame.createChatModule()]
         (VCArr[0] as? NoticeViewProtocol)?.viewLoad()
     }
@@ -196,7 +195,7 @@ class MyStudyDetailView: UIViewController {
         
         switch selectedIndex {
         case 0: viewState = .Notice
-        case 1: viewState = .StudyDetial
+        case 1: viewState = .StudyDetail
         case 2: viewState = .Chat
         default: print("들어오지 않아요")
         }
