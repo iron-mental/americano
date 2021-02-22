@@ -183,8 +183,7 @@ class MyStudyDetailView: UIViewController {
                    StudyDetailWireFrame.createStudyDetail(parent: self,
                                                           studyID: studyID!,
                                                           state: .member,
-                                                          studyTitle: studyTitle ?? "",
-                                                          alertID: alertID ?? nil),
+                                                          studyTitle: studyTitle ?? ""),
                    ChatWireFrame.createChatModule()]
         (VCArr[0] as? NoticeViewProtocol)?.viewLoad()
     }

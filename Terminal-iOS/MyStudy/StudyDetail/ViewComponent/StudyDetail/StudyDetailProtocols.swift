@@ -25,7 +25,7 @@ protocol StudyDetailViewProtocol: class {
 }
 
 protocol StudyDetailWireFrameProtocol: class {
-    static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState, studyTitle: String, alertID: Int?) -> UIViewController
+    static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState, studyTitle: String) -> UIViewController
     
     // PRESENTER -> WIREFRAME
     func presentStudyListScreen(from view: StudyDetailViewProtocol)
@@ -70,7 +70,6 @@ protocol StudyDetailInteractorOutputProtocol: class {
 
 protocol StudyDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol? { get set }
-    var alertID: Int? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
     func getStudyDetail(studyID: String)
     func postStudyJoin(studyID: Int, message: String)
