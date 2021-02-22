@@ -98,27 +98,27 @@ class StudyDetailView: UIViewController {
         
         
         snsIconsView.do {
-//            if let notion = studyInfo?.snsNotion {
-//                $0.notion.isHidden = notion.isEmpty ? true : true
-//            }
-//            if let evernote = studyInfo?.snsEvernote {
-//                $0.evernote.isHidden = evernote.isEmpty ? true : true
-//            }
-//            if let web = studyInfo?.snsWeb {
-//                $0.web.isHidden = web.isEmpty ? true : true
-//            }
+            //            if let notion = studyInfo?.snsNotion {
+            //                $0.notion.isHidden = notion.isEmpty ? true : true
+            //            }
+            //            if let evernote = studyInfo?.snsEvernote {
+            //                $0.evernote.isHidden = evernote.isEmpty ? true : true
+            //            }
+            //            if let web = studyInfo?.snsWeb {
+            //                $0.web.isHidden = web.isEmpty ? true : true
+            //            }
             $0.notion.isHidden = false
             $0.evernote.isHidden = false
             $0.web.isHidden = false
-//            if let notion = studyInfo?.snsNotion {
-//                $0.notion.isHidden = notion.isEmpty ? true : false
-//            }
-//            if let evernote = studyInfo?.snsEvernote {
-//                $0.evernote.isHidden = evernote.isEmpty ? true : false
-//            }
-//            if let web = studyInfo?.snsWeb {
-//                $0.web.isHidden = web.isEmpty ? true : false
-//            }
+            //            if let notion = studyInfo?.snsNotion {
+            //                $0.notion.isHidden = notion.isEmpty ? true : false
+            //            }
+            //            if let evernote = studyInfo?.snsEvernote {
+            //                $0.evernote.isHidden = evernote.isEmpty ? true : false
+            //            }
+            //            if let web = studyInfo?.snsWeb {
+            //                $0.web.isHidden = web.isEmpty ? true : false
+            //            }
         }
         
         joinButton.do {
@@ -298,7 +298,7 @@ class StudyDetailView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 72)).isActive = true
         }
     }
-  
+    
     @objc func joinButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .StudyApplyView)
         TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
@@ -341,15 +341,9 @@ extension StudyDetailView: StudyDetailViewProtocol {
         if let notion = studyDetail.snsNotion,
            let evernote = studyDetail.snsEvernote,
            let web = studyDetail.snsWeb {
-            if !notion.isEmpty {
-                snsList.updateValue(notion, forKey: SNSState.notion.rawValue)
-            }
-            if !evernote.isEmpty {
-                snsList.updateValue(evernote, forKey: SNSState.evernote.rawValue)
-            }
-            if !web.isEmpty {
-                snsList.updateValue(web, forKey: SNSState.web.rawValue)
-            }
+            snsList.updateValue(notion, forKey: SNSState.notion.rawValue)
+            snsList.updateValue(evernote, forKey: SNSState.evernote.rawValue)
+            snsList.updateValue(web, forKey: SNSState.web.rawValue)
         }
         self.snsIconsView.addstack(snsList: snsList)
         attribute()

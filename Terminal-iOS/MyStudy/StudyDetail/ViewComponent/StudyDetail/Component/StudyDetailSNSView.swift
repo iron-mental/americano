@@ -32,40 +32,24 @@ class StudyDetailSNSView: BaseSNSView {
     
     override func addstack(snsList: [String: String]) {
         /// 추가된 SNS 갯수
-        var count = 0
-        
         self.snsStack.removeAllArrangedSubviews()
         
-        if snsList["notion"] != nil {
-            self.snsStack.addArrangedSubview(self.notion)
-            count += 1
+        if snsList["notion"]!.isEmpty {
+            self.notion.setImage(#imageLiteral(resourceName: "terminalicon"), for: .normal)
+        }
+        if snsList["evernote"]!.isEmpty {
+            self.evernote.setImage(#imageLiteral(resourceName: "terminalicon"), for: .normal)
+        }
+        if snsList["web"]!.isEmpty {
+            self.web.setImage(#imageLiteral(resourceName: "terminalicon"), for: .normal)
         }
         
-        if snsList["evernote"] != nil {
-            self.snsStack.addArrangedSubview(self.evernote)
-            count += 1
-        }
+        self.snsStack.addArrangedSubview(self.notion)
+        self.snsStack.addArrangedSubview(self.evernote)
+        self.snsStack.addArrangedSubview(self.web)
         
-        if snsList["web"] != nil {
-            self.snsStack.addArrangedSubview(self.web)
-            count += 1
-        }
-        
-        switch count {
-        case 1:
-            self.firstWidth.isActive = true
-            self.secondWidth.isActive = false
-            self.thirdWidth.isActive = false
-        case 2:
-            self.firstWidth.isActive = false
-            self.secondWidth.isActive = true
-            self.thirdWidth.isActive = false
-        case 3:
-            self.firstWidth.isActive = false
-            self.secondWidth.isActive = false
-            self.thirdWidth.isActive = true
-        default:
-            break
-        }
+        self.firstWidth.isActive = false
+        self.secondWidth.isActive = false
+        self.thirdWidth.isActive = true
     }
 }
