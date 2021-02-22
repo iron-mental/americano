@@ -33,8 +33,8 @@ extension UIViewController {
     }
     
     func keyboardAddObserver(with controller: UIViewController,
-                             showSelector: Selector?,
-                             hideSelector: Selector?) {
+                             showSelector: Selector? = nil,
+                             hideSelector: Selector? = nil) {
         if let showSelector = showSelector {
             NotificationCenter.default.addObserver(controller, selector: showSelector, name: UIResponder.keyboardDidShowNotification, object: nil)
         }
