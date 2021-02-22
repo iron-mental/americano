@@ -16,16 +16,14 @@ class CreateStudyPresenter: CreateStudyPresenterProtocol {
     func viewDidLoad() {
         view?.setView()
     }
+    
     func clickLocationView(currentView: UIViewController) {
         wireFrame?.goToSelectLocation(view: currentView)
     }
     
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {
-//        LoadingRainbowCat.show()
         interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)
     }
-    
-    
 }
 
 extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {

@@ -25,7 +25,7 @@ class TitleWithTextView: UIView {
     
     func attribute() {
         titleLabel.do {
-            $0.text = title
+            $0.text = self.title
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.dynamicFont(fontSize: $0.font.pointSize, weight: .medium)
         }

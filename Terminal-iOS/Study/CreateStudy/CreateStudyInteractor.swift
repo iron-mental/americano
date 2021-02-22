@@ -20,21 +20,22 @@ class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
             return "제목을 입력해주세요"
         } else if study.introduce!.isEmpty {
             return "소개를 입력해주세요"
-        } else if let notion = study.snsNotion {
+        }
+        
+        if let notion = study.snsNotion,
+           let evernote = study.snsEvernote,
+           let web = study.snsWeb {
             if !notion.notionCheck() {
                 return "Notion URL이 정확하지 않습니다."
             }
-        }
-        if let evernote = study.snsEvernote {
             if !evernote.evernoteCheck() {
                 return "Evernote URL이 정확하지 않습니다."
             }
-        }
-        if let web = study.snsWeb {
             if !web.webCheck() {
                 return "Web URL이 정확하지 않습니다."
             }
         }
+        
         if study.progress!.isEmpty {
             return "진행을 입력해주세요"
         }
@@ -56,12 +57,13 @@ class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
         if study.studyTime!.isEmpty {
             return "시간을 입력해주세요"
         }
+        
         return "성공"
     }
     
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?) {
-        
         let nullCheckResult = nullCheck(study: study)
+        
         if nullCheckResult == "성공" {
             remoteDataManager?.postStudy(study: study)
         } else {

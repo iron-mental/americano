@@ -41,17 +41,17 @@ class CreateStudyView: BaseEditableStudyDetailView {
     }
     
     @objc func completeButtonDidTap() {
-        selectedLocation?.detailAddress = locationView.detailAddress.text
-        studyDetailPost = StudyDetailPost(category: selectedCategory ?? "",
-                                          title: studyTitleTextField.text!,
-                                          introduce: studyIntroduceView.textView.text!,
-                                          progress: studyInfoView.textView.text!,
-                                          studyTime: timeView.detailTime.text!,
-                                          snsWeb: SNSInputView.web.textField.text!,
-                                          snsNotion: SNSInputView.notion.textField.text!,
-                                          snsEvernote: SNSInputView.evernote.textField.text!,
-                                          image: mainImageView.image,
-                                          location: selectedLocation ?? nil)
+        self.selectedLocation?.detailAddress = self.locationView.detailAddress.text
+        self.studyDetailPost = StudyDetailPost(category: self.selectedCategory ?? "",
+                                               title: self.studyTitleTextField.text!,
+                                               introduce: self.studyIntroduceView.textView.text!,
+                                               progress: self.studyInfoView.textView.text!,
+                                               studyTime: self.timeView.detailTime.text!,
+                                               snsWeb: self.SNSInputView.web.textField.text!,
+                                               snsNotion: self.SNSInputView.notion.textField.text!,
+                                               snsEvernote: self.SNSInputView.evernote.textField.text!,
+                                               image: self.mainImageView.image,
+                                               location: self.selectedLocation ?? nil)
         
         presenter?.clickCompleteButton(study: studyDetailPost!, studyID: study?.id ?? nil)
     }
@@ -59,19 +59,15 @@ class CreateStudyView: BaseEditableStudyDetailView {
 
 extension CreateStudyView: CreateStudyViewProtocol {
     func loading() {
-//        <#code#>
     }
     
     func setView() {
-//        <#code#>
     }
     
     func getBackgroundImage() {
-//        <#code#>
     }
     
     func setBackgroundImage() {
-//        <#code#>
     }
     
     func studyInfoInvalid(message: String) {
