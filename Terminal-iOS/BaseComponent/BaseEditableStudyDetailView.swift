@@ -10,6 +10,7 @@ import UIKit
 
 class BaseEditableStudyDetailView: UIViewController {
     deinit { self.keyboardRemoveObserver(with: self) }
+    
     let screenSize = UIScreen.main.bounds
     var keyboardHeight: CGFloat = 0.0
     let mainImageView = MainImageView(frame: CGRect.zero)
@@ -36,6 +37,8 @@ class BaseEditableStudyDetailView: UIViewController {
     var accessoryCompleteButton = UIButton()
     var viewDidAppearFlag = true
     
+    // MARK: viewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -52,20 +55,20 @@ class BaseEditableStudyDetailView: UIViewController {
             self.studyTitleTextField.becomeFirstResponder()
             self.viewDidAppearFlag.toggle()
         }
-        standardContentHeight = scrollView.contentSize.height
+        self.standardContentHeight = self.scrollView.contentSize.height
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
-        keyboardHeight = keyboardRectangle.height
-        textViewTapFlag = false
+        self.keyboardHeight = keyboardRectangle.height
+        self.textViewTapFlag = false
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        button.alpha = 1
-        scrollView.contentSize.height = standardContentHeight
+        self.button.alpha = 1
+        self.scrollView.contentSize.height = self.standardContentHeight
     }
     
     func setDelegate(completion: (() -> Void)? = nil) {
@@ -122,16 +125,17 @@ class BaseEditableStudyDetailView: UIViewController {
     func attribute() {
         self.do {
             $0.navigationItem.largeTitleDisplayMode = .never
-            $0.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
-        }
-        view.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back",
+                                                                  style: UIBarButtonItem.Style.plain,
+                                                                  target: nil,
+                                                                  action: nil)
+            $0.view.backgroundColor = .appColor(.testColor)
         }
         backgroundView.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = .appColor(.terminalBackground)
         }
         scrollView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.testColor)
             $0.showsVerticalScrollIndicator = false
         }
         mainImageView.do {
@@ -180,7 +184,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         button.do {
             $0.setTitle("완료", for: .normal)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.backgroundColor = .appColor(.mainColor)
             $0.titleLabel?.dynamicFont(fontSize: 15, weight: .bold)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
@@ -188,7 +192,7 @@ class BaseEditableStudyDetailView: UIViewController {
         accessoryCompleteButton.do {
             $0.setTitle("완료", for: .normal)
             $0.titleLabel?.dynamicFont(fontSize: 15, weight: .bold)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.backgroundColor = .appColor(.mainColor)
             $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
         }
     }
@@ -229,79 +233,101 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         studyTitleTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,
+                                    constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
             $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
         }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         SNSInputView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         studyInfoView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
         button.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 50)).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         }
     }
     
     @objc func didImageViewClicked() {
-        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
-        let camera =  UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
+        let alert = UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
+        let camera = UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)
         alert.addAction(camera)
         alert.addAction(cancel)
         
-        present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
+    
+    // override point
     @objc func didLocationViewClicked() {
-        //
     }
+    
     func openLibrary() {
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
+        self.picker.sourceType = .photoLibrary
+        self.present(self.picker, animated: true, completion: nil)
     }
+    
     func openCamera() {
         //시뮬에서 앱죽는거 에러처리 해야함
-        picker.sourceType = .camera
-        present(picker, animated: true, completion: nil)
+        self.picker.sourceType = .camera
+        self.present(self.picker, animated: true, completion: nil)
     }
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
@@ -332,6 +358,7 @@ class BaseEditableStudyDetailView: UIViewController {
             self.textViewTapFlag = false
         }
     }
+    
     func viewSetBottom(distance: CGFloat) {
         self.button.alpha = 0
         UIView.animate(withDuration: 0.2) {
@@ -343,6 +370,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
 }
+
 extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {

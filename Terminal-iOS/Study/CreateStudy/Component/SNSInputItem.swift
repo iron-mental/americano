@@ -24,12 +24,11 @@ class SNSInputItem: UIView {
             $0.contentMode = .scaleAspectFit
         }
         textField.do {
-            $0.placeholder = "default placeholder"
             $0.sizeToFit()
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
             $0.addLeftPadding(padding: 10)
-            $0.dynamicFont(fontSize: textField.font!.pointSize, weight: .thin)
+            $0.dynamicFont(fontSize: textField.font!.pointSize, weight: .medium)
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
         }
@@ -50,7 +49,8 @@ class SNSInputItem: UIView {
         textField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: icon.trailingAnchor,
+                                        constant: Terminal.convertWidth(value: 15)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: $0.intrinsicContentSize.height).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         }

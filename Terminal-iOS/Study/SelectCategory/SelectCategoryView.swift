@@ -36,7 +36,7 @@ class SelectCategoryView: UIViewController {
             $0.text = "카테고리 선택"
             $0.textColor = .white
             $0.frame = CGRect(x: 0, y: 0, width: 90, height: 35)
-            $0.dynamicFont(fontSize: 22, weight: .semibold)
+            $0.dynamicFont(fontSize: 22, weight: .bold)
         }
         
         self.collectionView.do {
