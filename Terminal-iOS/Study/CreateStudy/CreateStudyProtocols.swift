@@ -69,7 +69,6 @@ protocol CreateStudyReMoteDataManagerOutputProtocol {
 protocol CreateStudyWireFrameProtocol {
     static func createStudyViewModule(category: String,
                                       studyDetail: StudyDetail?,
-                                      state: WriteStudyViewState,
                                       parentView: UIViewController?) -> UIViewController
     //추후에 스터디 모델이 들어가야겠네용?
     func goToSelectLocation(from view: CreateStudyViewProtocol)

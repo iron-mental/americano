@@ -11,7 +11,6 @@ import UIKit
 final class CreateStudyWireFrame: CreateStudyWireFrameProtocol {
     static func createStudyViewModule(category: String,
                                       studyDetail: StudyDetail?,
-                                      state: WriteStudyViewState,
                                       parentView: UIViewController?) -> UIViewController {
         
         let view = CreateStudyView()
