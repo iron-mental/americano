@@ -9,7 +9,7 @@
 import UIKit
 
 extension UILabel {
-    func dynamicFont(fontSize size: CGFloat, weight: UIFont.Weight) {
+    func dynamicFont(fontSize size: CGFloat) {
         let bounds = UIScreen.main.bounds
         let height = bounds.size.height
 
