@@ -13,11 +13,6 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     var study: StudyDetail?
     var parentView: UIViewController?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
     override func attribute() {
         super.attribute()
         self.do {
@@ -53,7 +48,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     }
     
     override func didLocationViewClicked() {
-        presenter?.clickLocationView(currentView: self)
+        presenter?.clickLocationView()
     }
     
     @objc func buttonDidTap() {
@@ -79,19 +74,12 @@ class ModifyStudyView: BaseEditableStudyDetailView {
 extension ModifyStudyView: ModifyStudyViewProtocol {
     func showResult(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
-//            self.navigationController?.popViewController(animated: true)
-//            self.navigationController?.popViewController(animated: true, completion: {
-                if let myStudyDetailView = (self.navigationController?.viewControllers[1] as? MyStudyDetailView) {
-                    print(myStudyDetailView)
-                    if let studyDetailView = myStudyDetailView.VCArr[1] as? StudyDetailViewProtocol {
-                        print(studyDetailView)
-                        if let id = self.study?.id {
-                            print(id)
-                            studyDetailView.presenter?.showStudyListDetail(studyID: "\(id)")
-                        }
-                    }
+            if let myStudyDetailView = self.navigationController?.viewControllers[1] as? MyStudyDetailView,
+               let studyDetailView = myStudyDetailView.VCArr[1] as? StudyDetailViewProtocol {
+                if let id = self.study?.id {
+                    studyDetailView.presenter?.showStudyListDetail(studyID: "\(id)")
                 }
-//            })
+            }
             self.navigationController?.popViewController(animated: true)
         }
     }

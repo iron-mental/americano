@@ -23,7 +23,7 @@ protocol ModifyStudyPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func completButtonDidTap(studyID: Int, study: StudyDetailPost)
-    func clickLocationView(currentView: UIViewController)
+    func clickLocationView()
 }
 
 protocol ModifyStudyInteractorInputProtocol: class {
@@ -56,5 +56,5 @@ protocol ModifyStudyWireFrameProtocol: class {
     static func createModifyStudyModule(study: StudyDetail, parentView: UIViewController) -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func goToSelectLocation(view: UIViewController)
+    func goToSelectLocation(from view: ModifyStudyViewProtocol)
 }

@@ -13,8 +13,8 @@ class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
     var interactor: ModifyStudyInteractorInputProtocol?
     var wireFrame: ModifyStudyWireFrameProtocol?
     
-    func clickLocationView(currentView: UIViewController) {
-        wireFrame?.goToSelectLocation(view: currentView)
+    func clickLocationView() {
+        wireFrame?.goToSelectLocation(from: view!)
     }
     
     func completButtonDidTap(studyID: Int, study: StudyDetailPost) {
