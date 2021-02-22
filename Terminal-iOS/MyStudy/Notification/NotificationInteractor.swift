@@ -22,8 +22,10 @@ class NotificationInteractor: NotificationInteractorInputProtocol {
         let studyID = alert.studyID
         if let alarmCase = AlarmCase(rawValue: alert.pushEvent) {
             presenter?.alarmProcessingResult(alertID: alertID, alarmCase: alarmCase, studyTitle: studyTitle, studyID: studyID)
-            guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-            remoteDataManager?.alertGotConfirmed(userID: Int(userID)!, alertID: alertID)
+            if !alert.confirm {
+                guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+                remoteDataManager?.alertGotConfirmed(userID: Int(userID)!, alertID: alertID)
+            }
         } else {
             presenter?.alarmProcessingResult(alertID: alertID, alarmCase: .undefined, studyTitle: studyTitle, studyID: studyID)
         }
