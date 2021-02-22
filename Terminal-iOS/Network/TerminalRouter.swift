@@ -43,7 +43,7 @@ enum TerminalRouter: URLRequestConvertible {
 
     // 스터디
     case studyCreate            (study: Parameters)
-    case studyDetail            (studyID: String, alertID: Int? = nil)
+    case studyDetail            (studyID: String)
     case studyUpdate            (studyID: String, study: Parameters)
     case studyDelete            (studyID: String)
     case studyList              (sort: Parameters)
@@ -239,7 +239,7 @@ enum TerminalRouter: URLRequestConvertible {
         // 스터디
         case .studyCreate, .studyList:
             return "study"
-        case let .studyDetail(studyID, _), let .studyUpdate(studyID, _), let .studyDelete(studyID):
+        case let .studyDetail(studyID), let .studyUpdate(studyID, _), let .studyDelete(studyID):
             return "study/\(studyID)"
         case .studyListForKey:
             return "study/paging/list"
@@ -325,12 +325,8 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 스터디
-        case let .studyDetail(_, alertID):
-            if let id = alertID {
-                return ["alert_id": id]
-            } else {
-                return nil
-            }
+        case let .studyDetail:
+            return nil
         case .studyDelete, .studyLeave, .studyCategory:
             return nil
         case .hotKeyword, .myStudyList:
