@@ -149,12 +149,12 @@ class MyStudyDetailView: UIViewController {
     }
     
     func addNoticeButtonDidTap() {
-        presenter?.addNoticeButtonDidTap(studyID: studyID!, parentView: self)
+        presenter?.addNoticeButtonDidTap(studyID: studyID!)
     }
     
     func editStudyButtonDidTap() {
         if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
-            presenter?.editStudyButtonDidTap(study: targetStudy, parentView: self)
+            presenter?.editStudyButtonDidTap(study: targetStudy)
         }
     }
     
@@ -179,12 +179,12 @@ class MyStudyDetailView: UIViewController {
     }
     
     func setPageControllerChild() {
-        VCArr =  [ NoticeWireFrame.createNoticeModule(studyID: studyID!, parentView: self),
-                   StudyDetailWireFrame.createStudyDetail(parent: self,
-                                                          studyID: studyID!,
-                                                          state: .member,
-                                                          studyTitle: studyTitle ?? ""),
-                   ChatWireFrame.createChatModule()]
+        self.VCArr = [NoticeWireFrame.createNoticeModule(studyID: studyID!, parentView: self),
+                      StudyDetailWireFrame.createStudyDetail(parent: self,
+                                                             studyID: studyID!,
+                                                             state: .member,
+                                                             studyTitle: studyTitle ?? ""),
+                      ChatWireFrame.createChatModule()]
         (VCArr[0] as? NoticeViewProtocol)?.viewLoad()
     }
     

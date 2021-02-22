@@ -47,9 +47,9 @@ protocol MyStudyDetailPresenterProtocol: class {
     var wireFrame: MyStudyDetailWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
-    func addNoticeButtonDidTap(studyID: Int, parentView: UIViewController)
-    func editStudyButtonDidTap(study: StudyDetail, parentView: UIViewController)
-    func addNoticeFinished(notice: Int, studyID: Int, title: String, parentView: UIViewController)
+    func addNoticeButtonDidTap(studyID: Int)
+    func editStudyButtonDidTap(study: StudyDetail)
+    func addNoticeFinished(notice: Int, studyID: Int, title: String)
     func showApplyUserList(studyID: Int)
     func leaveStudyButtonDidTap(studyID: Int)
     func deleteStudyButtonDidTap(studyID: Int)
@@ -75,9 +75,9 @@ protocol MyStudyDetailLocalDataManagerProtocol: class {
 protocol MyStudyDetailWireFrameProtocol: class {    
     static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController
 
-    func goToAddNotice(studyID: Int, parentView: UIViewController)
-    func goToEditStudy(study: StudyDetail, parentView: UIViewController)
-    func goToNoticeDetail(notice: Int, studyID: Int, title: String, parentView: UIViewController)
+    func goToAddNotice(studyID: Int, parentView: MyStudyDetailViewProtocol)
+    func goToEditStudy(study: StudyDetail, parentView: MyStudyDetailViewProtocol)
+    func goToNoticeDetail(notice: Int, studyID: Int, title: String, parentView: MyStudyDetailViewProtocol)
     func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int)
     func goToDelegateHost(from view: MyStudyDetailViewProtocol, studyID: Int, userList: [Participate])
 }

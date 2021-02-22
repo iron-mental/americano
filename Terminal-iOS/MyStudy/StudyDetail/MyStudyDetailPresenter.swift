@@ -13,16 +13,16 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     var interactor: MyStudyDetailInteractorProtocol?
     var wireFrame: MyStudyDetailWireFrameProtocol?
         
-    func addNoticeButtonDidTap(studyID: Int, parentView: UIViewController) {
-        wireFrame?.goToAddNotice(studyID: studyID, parentView: parentView)
+    func addNoticeButtonDidTap(studyID: Int) {
+        wireFrame?.goToAddNotice(studyID: studyID, parentView: view!)
     }
     
-    func editStudyButtonDidTap(study: StudyDetail, parentView: UIViewController) {
-        wireFrame?.goToEditStudy(study: study, parentView: parentView)
+    func editStudyButtonDidTap(study: StudyDetail) {
+        wireFrame?.goToEditStudy(study: study, parentView: view!)
     }
     
-    func addNoticeFinished(notice: Int, studyID: Int, title: String, parentView: UIViewController) {
-        wireFrame?.goToNoticeDetail(notice: notice, studyID: studyID, title: title, parentView: parentView)
+    func addNoticeFinished(notice: Int, studyID: Int, title: String) {
+        wireFrame?.goToNoticeDetail(notice: notice, studyID: studyID, title: title, parentView: view!)
     }
     
     func showApplyUserList(studyID: Int) {
