@@ -49,7 +49,7 @@ protocol NotificationWireFrameProtocol: class {
     static func createModule() -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func goToStudyDetail(from view: NotificationViewProtocol,alertID: Int, alarmCase: AlarmCase, studyTitle: String, studyID: Int)
+    func goToStudyDetail(from view: NotificationViewProtocol, alarmCase: AlarmCase, studyTitle: String, studyID: Int)
 }
 
 protocol NotificationRemoteDataManagerInputProtocol: class {

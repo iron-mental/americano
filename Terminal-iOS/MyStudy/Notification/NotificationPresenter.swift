@@ -41,7 +41,7 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
              .applyAllowed,
              .newNotice,
              .updatedNotice:
-            wireFrame?.goToStudyDetail(from: view!, alertID: alertID, alarmCase: alarmCase, studyTitle: studyTitle, studyID: studyID)
+            wireFrame?.goToStudyDetail(from: view!, alarmCase: alarmCase, studyTitle: studyTitle, studyID: studyID)
         case .studyDelete:
             view?.showAlert(message: "\(studyTitle) 스터디가 삭제되었습니다.")
         case .applyRejected:

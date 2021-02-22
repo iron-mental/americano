@@ -113,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             break
         case .studyUpdate, .studyHostDelegate:
             //alertID 넣어줘야함
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀", alertID: alertID)
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
                 as? MyStudyDetailView {
                 view.viewState = .StudyDetial
                 goView = view
@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         case .newApply:
             //alertID 넣어줘야함
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀", alertID: alertID)
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀")
                 as? MyStudyDetailView {
                 //이 부분 뉴 어플라이로 바꿔 줘야합니다.
                 view.viewState = .Chat
@@ -137,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         case .newNotice, .updatedNotice:
             //alertID 넣어줘야함
-            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ", alertID: alertID)
+            if let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "임시 타이틀 ")
                 as? MyStudyDetailView {
                 view.viewState = .Notice
                 goView = view
