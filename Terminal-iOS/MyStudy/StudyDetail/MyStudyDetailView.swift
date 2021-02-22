@@ -300,7 +300,11 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
                 LoadingRainbowCat.hide()
             }
         })
-        
+        if authority != .host && authority != .member {
+            showToast(controller: self, message: "속해있는 스터디가 아닙니다.", seconds: 1) {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     func showLeaveStudyComplete(message: String) {

@@ -31,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // firebase 연동
         FirebaseApp.configure()
+        
+        
+        
         // 리프레쉬 토큰이 없으면 -> 홈화면
         if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
             KeychainWrapper.standard.set("temp", forKey: "accessToken")
@@ -90,17 +93,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
            let alertID = userInfo["alert_id"] as? Int {
             self.studyID = studyID
             self.pushEvent = AlarmCase(rawValue: pushEvent)
-//            여기에 추가적으로 studyTitle도 있으면 좋을듯
+            //            여기에 추가적으로 studyTitle도 있으면 좋을듯
             self.alertID = alertID
         }
-
+        
         completionHandler([.alert, .badge, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
         let event = self.pushEvent
-//        suspend일 때 푸시 누르면 죽음 해결해야됨
+        //        suspend일 때 푸시 누르면 죽음 해결해야됨
         let studyID = Int(self.studyID)!
         
         switch event {
@@ -152,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         case .none:
             print("지정되어있지 않은 메세지 들어옴 ")
         case .some(.undefined): break
-//            <#code#>
+        //            <#code#>
         }
         completionHandler()
     }

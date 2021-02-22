@@ -30,16 +30,15 @@ class StudyApplyMessageView: AlertBaseUIView {
     override func attribute() {
         super.attribute()
         applyTitleLabel.do {
-            $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize + 5,
-                                                  weight: UIFont.Weight.regular)
+            $0.dynamicFont(fontSize: 15, weight: .bold)
             $0.text = type == .apply ? "스터디 신청하기" : "신청 메세지 수정하기"
         }
         applyGuideLabel.do {
-            $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize,
-                                                  weight: UIFont.Weight.regular)
+            $0.dynamicFont(fontSize: 15, weight: .bold)
             $0.text = type == .apply ? "가입 인사를 작성해보세요" : "수정할 메세지를 작성하세요"
         }
         editMessageTextField.do {
+            $0.dynamicFont(fontSize: 15, weight: .regular)
             $0.placeholder = "스터디 참여를 희망합니다."
         }
     }
@@ -63,6 +62,7 @@ class StudyApplyMessageView: AlertBaseUIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Terminal.convertWidth(value: 20)).isActive = true
         }
     }
     

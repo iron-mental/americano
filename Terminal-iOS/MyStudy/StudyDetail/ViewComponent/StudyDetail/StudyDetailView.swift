@@ -55,6 +55,7 @@ class StudyDetailView: UIViewController {
     var joinButton = UIButton()
     let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
     var joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
+    let appearance = UINavigationBarAppearance()
     var studyTitle: String? {
         didSet {
             self.title = studyTitle
@@ -75,6 +76,10 @@ class StudyDetailView: UIViewController {
                 $0.title = studyTitle
             }
         }
+        self.navigationController?.do {
+            $0.navigationBar.standardAppearance = appearance
+            $0.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -89,18 +94,6 @@ class StudyDetailView: UIViewController {
             $0.kf.setImage(with: URL(string: imageURL),
                            placeholder: UIImage(named: "swift"),
                            options: [.requestModifier(RequestToken.token())])
-        }
-        
-        snsIconsView.do {
-            if let notion = studyInfo?.snsNotion {
-                $0.notion.isHidden = notion.isEmpty ? true : false
-            }
-            if let evernote = studyInfo?.snsEvernote {
-                $0.evernote.isHidden = evernote.isEmpty ? true : false
-            }
-            if let web = studyInfo?.snsWeb {
-                $0.web.isHidden = web.isEmpty ? true : false
-            }
         }
         
         joinButton.do {
@@ -280,7 +273,7 @@ class StudyDetailView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 72)).isActive = true
         }
     }
-  
+    
     @objc func joinButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .StudyApplyView)
         TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(studyApplyMessageEndEditing), for: .touchUpInside)
@@ -323,15 +316,9 @@ extension StudyDetailView: StudyDetailViewProtocol {
         if let notion = studyDetail.snsNotion,
            let evernote = studyDetail.snsEvernote,
            let web = studyDetail.snsWeb {
-            if !notion.isEmpty {
-                snsList.updateValue(notion, forKey: SNSState.notion.rawValue)
-            }
-            if !evernote.isEmpty {
-                snsList.updateValue(evernote, forKey: SNSState.evernote.rawValue)
-            }
-            if !web.isEmpty {
-                snsList.updateValue(web, forKey: SNSState.web.rawValue)
-            }
+            snsList.updateValue(notion, forKey: SNSState.notion.rawValue)
+            snsList.updateValue(evernote, forKey: SNSState.evernote.rawValue)
+            snsList.updateValue(web, forKey: SNSState.web.rawValue)
         }
         self.snsIconsView.addstack(snsList: snsList)
         attribute()
@@ -346,7 +333,9 @@ extension StudyDetailView: StudyDetailViewProtocol {
     }
     
     func showError(message: String) {
-        showToast(controller: self, message: message, seconds: 1)
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func showLoading() {
@@ -367,10 +356,5 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
         cell.setData(userInfo: userData[indexPath.row])
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        view.setNeedsLayout()
-        view.layoutIfNeeded()
     }
 }

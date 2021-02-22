@@ -169,6 +169,9 @@ extension NoticeView: NoticeViewProtocol {
     
     func showMessage(message: String) {
         LoadingRainbowCat.hide()
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func hideLoading() {

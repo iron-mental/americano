@@ -36,8 +36,6 @@ class MyStudyMainView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        applyState ? presenter?.showApplyList(): nil
-//        presenter?.viewDidLoad()
         isVisibleState = false
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = UIColor.appColor(.terminalBackground)

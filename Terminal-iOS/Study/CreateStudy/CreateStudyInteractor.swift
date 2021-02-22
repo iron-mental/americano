@@ -20,24 +20,26 @@ class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
             return "제목을 입력해주세요"
         } else if study.introduce!.isEmpty {
             return "소개를 입력해주세요"
-        } else if study.progress!.isEmpty {
-            return "진행을 입력해주세요"
-        } else if study.studyTime!.isEmpty {
-            return "시간을 입력해주세요"
-        } else if study.location == nil {
-            return "장소를 선택해주세요"
         } else if let notion = study.snsNotion {
             if !notion.notionCheck() {
                 return "Notion URL이 정확하지 않습니다."
-            } else if let evernote = study.snsEvernote {
-                if !evernote.evernoteCheck() {
-                    return "Evernote URL이 정확하지 않습니다."
-                } else if let web = study.snsWeb {
-                    if !web.webCheck() {
-                        return "Web URL이 정확하지 않습니다."
-                    }
-                }
             }
+        }
+        if let evernote = study.snsEvernote {
+            if !evernote.evernoteCheck() {
+                return "Evernote URL이 정확하지 않습니다."
+            }
+        }
+        if let web = study.snsWeb {
+            if !web.webCheck() {
+                return "Web URL이 정확하지 않습니다."
+            }
+        }
+        if study.progress!.isEmpty {
+            return "진행을 입력해주세요"
+        }
+        if study.location == nil {
+            return "장소를 선택해주세요"
         } else if let location = study.location {
             if location.lat.isZero {
                 return "장소를 선택해주세요 - latitude error"
@@ -50,6 +52,9 @@ class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
             } else if location.address.isEmpty {
                 return "장소를 선택해주세요 - address 비어있음"
             }
+        }
+        if study.studyTime!.isEmpty {
+            return "시간을 입력해주세요"
         }
         return "성공"
     }
