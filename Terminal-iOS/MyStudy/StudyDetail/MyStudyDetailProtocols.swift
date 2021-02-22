@@ -72,9 +72,7 @@ protocol MyStudyDetailLocalDataManagerProtocol: class {
     
 }
 
-protocol MyStudyDetailWireFrameProtocol: class {
-    var presenter: MyStudyDetailPresenterProtocol? { get set }
-    
+protocol MyStudyDetailWireFrameProtocol: class {    
     static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController
 
     func goToAddNotice(studyID: Int, parentView: UIViewController)
