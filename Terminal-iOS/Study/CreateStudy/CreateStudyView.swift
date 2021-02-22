@@ -10,7 +10,6 @@ import UIKit
 
 final class CreateStudyView: BaseEditableStudyDetailView {
     var presenter: CreateStudyPresenterProtocol?
-    var state: WriteStudyViewState?
     var study: StudyDetail?
     var parentView: UIViewController?
     

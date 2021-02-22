@@ -17,7 +17,6 @@ protocol CreateStudyViewProtocol {
     var presenter: CreateStudyPresenterProtocol? { get set }
     var study: StudyDetail? { get set }
     var studyDetailPost: StudyDetailPost? { get set }
-    var state: WriteStudyViewState? { get set }
     var parentView: UIViewController? { get set }
     
     //PRESENTER -> VIEW

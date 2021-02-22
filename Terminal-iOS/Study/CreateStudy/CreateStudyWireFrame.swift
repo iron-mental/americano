@@ -21,7 +21,6 @@ final class CreateStudyWireFrame: CreateStudyWireFrameProtocol {
         view.selectedCategory = category
         
         view.study = studyDetail ?? nil
-        view.state = state
         view.parentView = parentView ?? nil
         
         presenter.view = view
