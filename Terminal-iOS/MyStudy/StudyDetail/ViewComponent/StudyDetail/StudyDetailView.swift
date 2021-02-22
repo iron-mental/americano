@@ -76,29 +76,10 @@ class StudyDetailView: UIViewController {
                 $0.title = studyTitle
             }
         }
-//        self.navigationItem.do {
-//            $0.hidesSearchBarWhenScrolling
-//        }
-        
         self.navigationController?.do {
             $0.navigationBar.standardAppearance = appearance
             $0.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
         }
-//        navigationItem.do {
-//            $0.hidesSearchBarWhenScrolling = false
-//            $0.searchController = searchController
-//            $0.largeTitleDisplayMode = .never
-//            $0.backButtonTitle = ""
-//        }
-//        searchController.do {
-//            $0.obscuresBackgroundDuringPresentation = false
-//            $0.searchBar.placeholder = "키워드를 검색하세요"
-//            definesPresentationContext = true
-//            $0.searchBar.delegate = self
-//            $0.searchBar.searchTextField.text = keyword
-//            $0.hidesNavigationBarDuringPresentation = false
-//            $0.automaticallyShowsCancelButton = false
-//        }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -115,16 +96,29 @@ class StudyDetailView: UIViewController {
                            options: [.requestModifier(RequestToken.token())])
         }
         
+        
         snsIconsView.do {
-            if let notion = studyInfo?.snsNotion {
-                $0.notion.isHidden = notion.isEmpty ? true : false
-            }
-            if let evernote = studyInfo?.snsEvernote {
-                $0.evernote.isHidden = evernote.isEmpty ? true : false
-            }
-            if let web = studyInfo?.snsWeb {
-                $0.web.isHidden = web.isEmpty ? true : false
-            }
+//            if let notion = studyInfo?.snsNotion {
+//                $0.notion.isHidden = notion.isEmpty ? true : true
+//            }
+//            if let evernote = studyInfo?.snsEvernote {
+//                $0.evernote.isHidden = evernote.isEmpty ? true : true
+//            }
+//            if let web = studyInfo?.snsWeb {
+//                $0.web.isHidden = web.isEmpty ? true : true
+//            }
+            $0.notion.isHidden = false
+            $0.evernote.isHidden = false
+            $0.web.isHidden = false
+//            if let notion = studyInfo?.snsNotion {
+//                $0.notion.isHidden = notion.isEmpty ? true : false
+//            }
+//            if let evernote = studyInfo?.snsEvernote {
+//                $0.evernote.isHidden = evernote.isEmpty ? true : false
+//            }
+//            if let web = studyInfo?.snsWeb {
+//                $0.web.isHidden = web.isEmpty ? true : false
+//            }
         }
         
         joinButton.do {
@@ -392,9 +386,4 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
         cell.setData(userInfo: userData[indexPath.row])
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        view.setNeedsLayout()
-//        view.layoutIfNeeded()
-//    }
 }

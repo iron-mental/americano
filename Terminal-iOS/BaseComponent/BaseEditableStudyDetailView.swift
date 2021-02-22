@@ -9,7 +9,6 @@
 import UIKit
 
 class BaseEditableStudyDetailView: UIViewController {
-    
     let screenSize = UIScreen.main.bounds
     var keyboardHeight: CGFloat = 0.0
     let mainImageView = MainImageView(frame: CGRect.zero)
@@ -44,6 +43,7 @@ class BaseEditableStudyDetailView: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         if viewDidAppearFlag {
@@ -126,14 +126,11 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.testColor)
         }
         backgroundView.do {
-            $0.backgroundColor = .cyan
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         scrollView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.showsVerticalScrollIndicator = false
-        }
-        backgroundView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
         }
         mainImageView.do {
             $0.alpha = 0.7
@@ -152,6 +149,7 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.inputAccessoryView = accessoryCompleteButton
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
+            
         }
         studyIntroduceView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -195,7 +193,15 @@ class BaseEditableStudyDetailView: UIViewController {
     
     func layout() {
         view.addSubview(scrollView)
-        [mainImageView, studyTitleTextField, studyIntroduceView, SNSInputView, studyInfoView, locationView, timeView, button].forEach { scrollView.addSubview($0)}
+        scrollView.addSubview(backgroundView)
+        [mainImageView,
+         studyTitleTextField,
+         studyIntroduceView,
+         SNSInputView,
+         studyInfoView,
+         locationView,
+         timeView,
+         button].forEach { backgroundView.addSubview($0)}
         
         
         scrollView.do {
@@ -205,62 +211,69 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
+        backgroundView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: scrollView.frameLayoutGuide.trailingAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor).isActive = true
+        }
         mainImageView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.widthAnchor.constraint(equalToConstant: screenSize.width).isActive = true
+            $0.widthAnchor.constraint(equalTo: backgroundView.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 170)).isActive = true
-            $0.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
         }
         studyTitleTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
-            $0.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
         }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         SNSInputView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         studyInfoView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: locationView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
         button.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 50)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         }
     }
     
