@@ -43,6 +43,7 @@ protocol NotificationInteractorOutputProtocol: class {
     func onRetrievedAlert(result: [Noti])
     func retrievedAlertFailed(message: String)
     func alarmProcessingResult(alertID: Int, alarmCase: AlarmCase, studyTitle: String, studyID: Int)
+    func alertConfirmFailed(message: String)
 }
 
 protocol NotificationWireFrameProtocol: class {
@@ -57,8 +58,10 @@ protocol NotificationRemoteDataManagerInputProtocol: class {
     
     //INTERACTOR -> REMOTEDATAMANAGER
     func retrieveAlert()
+    func alertGotConfirmed(userID:Int, alertID: Int)
 }
 
 protocol NotificationRemoteDataManagerOutputProtocol: class {
     func onRetrievedAlert(result: BaseResponse<[Noti]>)
+    func alertConfirmResult(result: BaseResponse<String>)
 }

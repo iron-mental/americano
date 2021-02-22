@@ -13,6 +13,39 @@ import SwiftKeychainWrapper
 class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol {
     var interactor: NotificationRemoteDataManagerOutputProtocol?
     
+    func alertGotConfirmed(userID:Int, alertID: Int) {
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.alertConfirm(userID: userID, alertID: alertID))
+            .validate()
+            .responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    let data = "\(json)".data(using: .utf8)
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        if result.message != nil {
+                            self.retrieveAlert()
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if result.message != nil {
+//                                self.interactor?.onRetrievedAlert(result: result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
+                }
+            }
+    }
     func retrieveAlert() {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         

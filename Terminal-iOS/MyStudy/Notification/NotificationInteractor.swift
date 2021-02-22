@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import SwiftKeychainWrapper
 class NotificationInteractor: NotificationInteractorInputProtocol {
     weak var presenter: NotificationInteractorOutputProtocol?
     var remoteDataManager: NotificationRemoteDataManagerInputProtocol?
@@ -22,6 +22,8 @@ class NotificationInteractor: NotificationInteractorInputProtocol {
         let studyID = alert.studyID
         if let alarmCase = AlarmCase(rawValue: alert.pushEvent) {
             presenter?.alarmProcessingResult(alertID: alertID, alarmCase: alarmCase, studyTitle: studyTitle, studyID: studyID)
+            guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+            remoteDataManager?.alertGotConfirmed(userID: Int(userID)!, alertID: alertID)
         } else {
             presenter?.alarmProcessingResult(alertID: alertID, alarmCase: .undefined, studyTitle: studyTitle, studyID: studyID)
         }
@@ -37,6 +39,15 @@ extension NotificationInteractor: NotificationRemoteDataManagerOutputProtocol {
         case false:
             guard let message = result.message else { return }
             presenter?.retrievedAlertFailed(message: message)
+        }
+    }
+    func alertConfirmResult(result: BaseResponse<String>) {
+        switch result.result {
+        case true:
+            break
+        case false:
+            guard let message = result.message else { return }
+            presenter?.alertConfirmFailed(message: message)
         }
     }
 }

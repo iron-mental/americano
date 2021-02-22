@@ -52,4 +52,7 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
             break
         }
     }
+    func alertConfirmFailed(message: String) {
+        view?.showError(message: message)
+    }
 }
