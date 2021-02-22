@@ -301,7 +301,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
             }
         })
         if authority != .host && authority != .member {
-            navigationController?.popViewController(animated: true)
+            showToast(controller: self, message: "속해있는 스터디가 아닙니다.", seconds: 1) {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     

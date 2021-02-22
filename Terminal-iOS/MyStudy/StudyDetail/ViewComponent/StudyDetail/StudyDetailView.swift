@@ -333,7 +333,9 @@ extension StudyDetailView: StudyDetailViewProtocol {
     }
     
     func showError(message: String) {
-        showToast(controller: self, message: message, seconds: 1)
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     func showLoading() {
