@@ -27,10 +27,7 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
         switch result.result {
         case true:
             guard let studyInfo = result.data?.studyInfo else { return }
-            //            studyInfo.snsWeb = convertSNS(sns: studyInfo.snsWeb)
-            convertStudyDetail(studyDetail: studyInfo)
-            
-            presenter?.didRetrieveStudyDetail(studyInfo)
+            presenter?.didRetrieveStudyDetail(convertStudyDetail(studyDetail: studyInfo))
         case false:
             guard let msg = result.message else { return }
             presenter?.onError(message: msg)
@@ -65,6 +62,10 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
     }
     
     func convertSNS(sns: String?) -> String {
-        return ""
+        if sns == nil {
+            return ""
+        } else {
+            return sns!
+        }
     }
 }
