@@ -9,7 +9,7 @@
 import UIKit
 
 extension UITextView {
-    func dynamicFont(size: CGFloat, weight: UIFont.Weight) {
+    func dynamicFont(size: CGFloat) {
         let bounds = UIScreen.main.bounds
         let height = bounds.size.height
         
