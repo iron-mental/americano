@@ -36,6 +36,7 @@ enum TerminalRouter: URLRequestConvertible {
     
     case address
     case alert                  (id: String)
+    case alertConfirm           (userID: Int, alertID: Int)
     
     // 프로젝트
     case projectList            (id: String)
@@ -92,7 +93,6 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .userInfo:
             return .get
-            
         case .userImageUpdate:
             return .put
         case .userInfoUpdate:
@@ -118,6 +118,8 @@ enum TerminalRouter: URLRequestConvertible {
         case .address:
             return .get
         case .alert:
+            return .get
+        case .alertConfirm:
             return .get
             
             
@@ -229,6 +231,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/address"
         case let .alert(id):
             return "user/\(id)/alert"
+        case let .alertConfirm(userID, alertID):
+            return "user/\(userID)/alert/\(alertID)"
             
         // 프로젝트
         case let .projectList(id):
@@ -321,7 +325,7 @@ enum TerminalRouter: URLRequestConvertible {
         case let .signUp(userData):
             return userData
             
-        case .address, .alert:
+        case .address, .alert, .alertConfirm:
             return nil
             
         // 스터디
