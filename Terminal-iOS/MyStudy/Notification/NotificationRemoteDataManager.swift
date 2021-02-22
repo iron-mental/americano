@@ -13,7 +13,7 @@ import SwiftKeychainWrapper
 class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol {
     var interactor: NotificationRemoteDataManagerOutputProtocol?
     
-    func alertGotConfirmed(userID:Int, alertID: Int) {
+    func alertGotConfirmed(userID: Int, alertID: Int) {
         TerminalNetworkManager
             .shared
             .session

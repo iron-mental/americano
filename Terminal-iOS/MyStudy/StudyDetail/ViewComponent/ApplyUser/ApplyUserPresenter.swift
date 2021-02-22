@@ -32,7 +32,7 @@ extension ApplyUserPresenter: ApplyUserInteractorOutputProtocol {
             guard let userList = result.data else { return }
             self.view?.showUserList(userList: userList)
         case false:
-            view?.hideLoading()
+            self.view?.hideLoading()
             guard let message = result.message else { return }
             view?.showError(message: message)
         }

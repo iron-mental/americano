@@ -57,7 +57,7 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
              .applyAllowed:
             let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle)
             if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
-                castedMyStudyDetailView.viewState = .StudyDetial
+                castedMyStudyDetailView.viewState = .StudyDetail
                 if let notificationListView = view as? UIViewController {
                     notificationListView.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 }
