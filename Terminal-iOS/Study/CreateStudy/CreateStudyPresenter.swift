@@ -17,8 +17,8 @@ final class CreateStudyPresenter: CreateStudyPresenterProtocol {
         view?.setView()
     }
     
-    func clickLocationView(currentView: UIViewController) {
-        wireFrame?.goToSelectLocation(view: currentView)
+    func clickLocationView() {
+        wireFrame?.goToSelectLocation(from: view!)
     }
     
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {

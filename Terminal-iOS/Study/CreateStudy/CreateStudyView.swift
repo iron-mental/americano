@@ -36,7 +36,7 @@ final class CreateStudyView: BaseEditableStudyDetailView {
     }
 
     override func didLocationViewClicked() {
-        presenter?.clickLocationView(currentView: self)
+        presenter?.clickLocationView()
     }
     
     @objc func completeButtonDidTap() {

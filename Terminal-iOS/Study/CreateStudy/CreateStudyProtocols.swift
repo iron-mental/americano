@@ -51,7 +51,7 @@ protocol CreateStudyPresenterProtocol {
     
     //VIEW -> PRESENTER
     func viewDidLoad()
-    func clickLocationView(currentView: UIViewController)
+    func clickLocationView()
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?)
 }
 
@@ -72,5 +72,5 @@ protocol CreateStudyWireFrameProtocol {
                                       state: WriteStudyViewState,
                                       parentView: UIViewController?) -> UIViewController
     //추후에 스터디 모델이 들어가야겠네용?
-    func goToSelectLocation(view: UIViewController)
+    func goToSelectLocation(from view: CreateStudyViewProtocol)
 }
