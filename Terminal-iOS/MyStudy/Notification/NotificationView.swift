@@ -12,6 +12,7 @@ class NotificationView: UIViewController {
     var presenter: NotificationPresenterProtocol?
     let tableView = UITableView()
     var notiList: [Noti] = []
+    var appearance = UINavigationBarAppearance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +20,17 @@ class NotificationView: UIViewController {
         layout()
         presenter?.viewDidLoad()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundColor = UIColor.appColor(.terminalBackground)
+        navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-    }
-    override func didMove(toParent parent: UIViewController?) {
-//        <#code#>
     }
     func attribute() {
         self.do {
