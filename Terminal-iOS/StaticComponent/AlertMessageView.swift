@@ -44,9 +44,8 @@ class AlertMessageView: AlertBaseUIView {
     }
     
     func onlyCompleteButton() {
-        completeButton.isHidden = true
-        dismissButton.setTitle("확인", for: .normal)
-        dismissButton.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        dismissButton.isHidden = true
+        completeButton.leadingAnchor.constraint(equalTo: bottomBar.leadingAnchor).isActive = true
     }
     
     func dynamicLabelFontSize() {}
