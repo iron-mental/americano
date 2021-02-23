@@ -32,7 +32,8 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
+                case .failure(let err):
+                    print(err)
                     self.interactor?.error()
                 }
             }

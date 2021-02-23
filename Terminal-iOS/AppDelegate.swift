@@ -17,7 +17,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
     var goView: MyStudyDetailView?
-    var pushEvent: AlarmCase?
+    var pushEvent: AlarmType?
     var studyID: String = ""
     var studyTitle: String = ""
     var alertID: Int?
@@ -25,49 +25,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow()
-        let home = HomeView()
-        let main = ViewController()
-        
+        let launchView = LaunchWireFrame.createLaunchModule()
         // firebase 연동
         FirebaseApp.configure()
         
-        // 리프레쉬 토큰이 없으면 -> 홈화면
-        if KeychainWrapper.standard.string(forKey: "refreshToken") == nil {
-            KeychainWrapper.standard.set("temp", forKey: "accessToken")
-            let howView = UINavigationController(rootViewController: home)
-            window?.rootViewController = howView
-        } else {
-            print("토큰이 유효합니다..")
-            print("로그인 완료")
-            print("accessToken : ", KeychainWrapper.standard.string(forKey: "accessToken")!)
-            window?.rootViewController = main
-            if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-                if let studyID = notification["study_id"] as? String,
-                   let pushEvent = notification["pushEvent"] as? String {
-                    self.studyID = studyID
-                    self.pushEvent = AlarmCase(rawValue: pushEvent)
-                }
-                main.selectedIndex = 1
-            }
-            
-            /// 유저정보 조회를 통해서 리프레쉬 토큰 유효성 검사
-            let userID = KeychainWrapper.standard.string(forKey: "userID")
-            
-            TerminalNetworkManager
-                .shared
-                .session
-                .request(TerminalRouter.userInfo(id: userID!))
-                .validate()
-                .responseJSON { response in
-                    switch response.result {
-                    case .success:
-                        print("리프레쉬 유효성 검사 성공")
-                    case .failure(let err):
-                        print("실패:", err)
-                    }
-                }
-        }
+        window?.rootViewController = launchView
         
+        if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
+            if let studyID = notification["study_id"] as? String,
+               let pushEvent = notification["pushEvent"] as? String {
+                self.studyID = studyID
+                self.pushEvent = AlarmType(rawValue: pushEvent)
+            }
+        }
         window?.makeKeyAndVisible()
         
         let center = UNUserNotificationCenter.current()
@@ -90,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
            let pushEvent = userInfo["pushEvent"] as? String,
            let alertID = userInfo["alert_id"] as? Int {
             self.studyID = studyID
-            self.pushEvent = AlarmCase(rawValue: pushEvent)
+            self.pushEvent = AlarmType(rawValue: pushEvent)
             //            여기에 추가적으로 studyTitle도 있으면 좋을듯
             self.alertID = alertID
         }
@@ -112,22 +82,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         case .studyDelete:
             break
         case .studyUpdate, .studyHostDelegate:
-                view.viewState = .StudyDetail
+            view.viewState = .StudyDetail
         case .newApply:
-                view.applyState = true
-                goView = view
+            view.applyState = true
+            goView = view
         case .newNotice, .updatedNotice:
-                view.viewState = .Notice
-                goView = view
+            view.viewState = .Notice
+            goView = view
         case .applyAllowed:
             break
         case .applyRejected:
             break
         case .testPush:
             break
-        case .none:
-            print("지정되어있지 않은 메세지 들어옴 ")
-        case .some(.undefined): break
+        case .none, .undefined: break
         }
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {

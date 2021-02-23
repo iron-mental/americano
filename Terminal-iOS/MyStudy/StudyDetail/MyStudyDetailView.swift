@@ -177,12 +177,12 @@ class MyStudyDetailView: UIViewController {
     
     func deleteStudyButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .DeleteStudyView)
-        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(deleteStudyCompleteButtonDidTap), for: .touchUpInside)
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(deleteStudyCompleteButtonDidTap), for: .touchUpInside)
     }
     
     func leaveStudyButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .LeaveStudyView)
-        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(leaveStudyCompleteButtonDidTap), for: .touchUpInside)
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(leaveStudyCompleteButtonDidTap), for: .touchUpInside)
     }
     
     func setPageControllerChild() {

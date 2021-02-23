@@ -150,7 +150,7 @@ extension SetView: SetViewProtocol {
     
     func loggedOut() {
         TerminalAlertMessage.show(controller: self, type: .LogOutView)
-        TerminalAlertMessage.getAlertCompleteButton().addTarget(self, action: #selector(logOutConfirmedDidTap), for: .touchUpInside)
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(logOutConfirmedDidTap), for: .touchUpInside)
     }
     
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신

@@ -304,6 +304,14 @@
 		CCC1A2E025B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC1A2DF25B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift */; };
 		CCC1A2F325B14DAF004E3BE6 /* ApplyUserDetailRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC1A2F225B14DAF004E3BE6 /* ApplyUserDetailRemoteDataManager.swift */; };
 		CCC1A2F825B14E52004E3BE6 /* ApplyUserDetailWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC1A2F725B14E52004E3BE6 /* ApplyUserDetailWireFrame.swift */; };
+		CCC223A425E4D3E000A91F37 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC223A325E4D3E000A91F37 /* LaunchView.swift */; };
+		CCC223B225E4D3FE00A91F37 /* LaunchProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC223B125E4D3FE00A91F37 /* LaunchProtocols.swift */; };
+		CCC223B725E4E05B00A91F37 /* VersionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC223B625E4E05B00A91F37 /* VersionResult.swift */; };
+		CCC223BD25E4E12A00A91F37 /* VersionResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC223BC25E4E12A00A91F37 /* VersionResultType.swift */; };
+		CCC223DE25E4E7E700A91F37 /* LaunchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC223DD25E4E7E700A91F37 /* LaunchPresenter.swift */; };
+		CCC223E325E4E7F300A91F37 /* LaunchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC223E225E4E7F300A91F37 /* LaunchInteractor.swift */; };
+		CCC223E825E4E80200A91F37 /* LaunchRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC223E725E4E80100A91F37 /* LaunchRemoteDataManager.swift */; };
+		CCC223ED25E4E80C00A91F37 /* LaunchWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC223EC25E4E80C00A91F37 /* LaunchWireFrame.swift */; };
 		CCC4DA8125407E9100D9E674 /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC4DA8025407E9100D9E674 /* IntroView.swift */; };
 		CCCC89B92577DBF900F93928 /* LoadingRainbowCat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */; };
 		CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */; };
@@ -674,6 +682,14 @@
 		CCC1A2DF25B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserDetailInteractor.swift; sourceTree = "<group>"; };
 		CCC1A2F225B14DAF004E3BE6 /* ApplyUserDetailRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserDetailRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCC1A2F725B14E52004E3BE6 /* ApplyUserDetailWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserDetailWireFrame.swift; sourceTree = "<group>"; };
+		CCC223A325E4D3E000A91F37 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		CCC223B125E4D3FE00A91F37 /* LaunchProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchProtocols.swift; sourceTree = "<group>"; };
+		CCC223B625E4E05B00A91F37 /* VersionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionResult.swift; sourceTree = "<group>"; };
+		CCC223BC25E4E12A00A91F37 /* VersionResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionResultType.swift; sourceTree = "<group>"; };
+		CCC223DD25E4E7E700A91F37 /* LaunchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPresenter.swift; sourceTree = "<group>"; };
+		CCC223E225E4E7F300A91F37 /* LaunchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInteractor.swift; sourceTree = "<group>"; };
+		CCC223E725E4E80100A91F37 /* LaunchRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRemoteDataManager.swift; sourceTree = "<group>"; };
+		CCC223EC25E4E80C00A91F37 /* LaunchWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchWireFrame.swift; sourceTree = "<group>"; };
 		CCC4DA8025407E9100D9E674 /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		CCCC89B82577DBF800F93928 /* LoadingRainbowCat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingRainbowCat.swift; sourceTree = "<group>"; };
 		CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithTextView.swift; sourceTree = "<group>"; };
@@ -793,8 +809,6 @@
 				CCEEB43425AC2FAC00F522C4 /* nyancat_big1610346923.json */,
 				CC465ED32577F113008448C3 /* 14476-rainbow-cat-remix.json */,
 				A51BA0AF2577F0E300B9673F /* Contents.swift */,
-				CCDAB63125DA4BD000FA5B48 /* AlarmCase.swift */,
-				CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1047,8 +1061,8 @@
 			children = (
 				CCA1FF6E24FD10290026C3EA /* SetView.swift */,
 				A51438AE2524952F00ACB241 /* SetPresenter.swift */,
-				A5172164252CFA47005AD11B /* SetWireFrame.swift */,
 				A5172168252CFA90005AD11B /* SetInteractor.swift */,
+				A5172164252CFA47005AD11B /* SetWireFrame.swift */,
 				A517216C252CFAAA005AD11B /* SetProtocols.swift */,
 				A53613B1257E6DEE0001ABCC /* SetRemoteManager.swift */,
 				A5686A472524F056005990DC /* Component */,
@@ -1336,6 +1350,7 @@
 				CCD51C6F256CFABE00D41771 /* Terminal-iOSDebug.entitlements */,
 				A51BA0AE2577F0CA00B9673F /* Utils */,
 				CCED89DD25DD1FF2006DA773 /* EmptyViews */,
+				CCC223BB25E4E10A00A91F37 /* Enum */,
 				A56605E025835873002C4A77 /* BaseComponent */,
 				A5BA460C255D09C80061C511 /* Network */,
 				A587CEC7251A428A00A2AD13 /* Extensions-Utillities */,
@@ -1344,6 +1359,7 @@
 				A52F00D824FD182C00DE3126 /* Study */,
 				A52F00D724FD182B00DE3126 /* MyStudy */,
 				A52F00D624FD182800DE3126 /* Set */,
+				CCC223A225E4D3A400A91F37 /* LaunchView */,
 				CCC4DA7F25407E5900D9E674 /* Login */,
 				CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */,
 				CCA1FF5A24FD0C930026C3EA /* ViewController.swift */,
@@ -1420,6 +1436,7 @@
 				CC74FB2B25C6CD6C0087E82A /* EditNoticeResult.swift */,
 				A501FC0C25C4076600150DA0 /* MyStudy.swift */,
 				A56048BF25DEEB4500240E55 /* SNSState.swift */,
+				CCC223B625E4E05B00A91F37 /* VersionResult.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1558,6 +1575,29 @@
 				CC74FB1D25C69CCA0087E82A /* StudyDetailSNSView.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		CCC223A225E4D3A400A91F37 /* LaunchView */ = {
+			isa = PBXGroup;
+			children = (
+				CCC223A325E4D3E000A91F37 /* LaunchView.swift */,
+				CCC223DD25E4E7E700A91F37 /* LaunchPresenter.swift */,
+				CCC223E225E4E7F300A91F37 /* LaunchInteractor.swift */,
+				CCC223E725E4E80100A91F37 /* LaunchRemoteDataManager.swift */,
+				CCC223EC25E4E80C00A91F37 /* LaunchWireFrame.swift */,
+				CCC223B125E4D3FE00A91F37 /* LaunchProtocols.swift */,
+			);
+			path = LaunchView;
+			sourceTree = "<group>";
+		};
+		CCC223BB25E4E10A00A91F37 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				CCDAB63125DA4BD000FA5B48 /* AlarmCase.swift */,
+				CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */,
+				CCC223BC25E4E12A00A91F37 /* VersionResultType.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 		CCC4DA7F25407E5900D9E674 /* Login */ = {
@@ -1874,14 +1914,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC650DBE25C3E4A100359E7D /* MyApplyStudyInfoView.swift in Sources */,
+				CCC223A425E4D3E000A91F37 /* LaunchView.swift in Sources */,
 				CC650DBF25C3E4A100359E7D /* MyApplyStudyInfoWireFrame.swift in Sources */,
 				CC650DC025C3E4A100359E7D /* MyApplyStudyInfoProtocols.swift in Sources */,
+				CCC223E825E4E80200A91F37 /* LaunchRemoteDataManager.swift in Sources */,
 				CC650DC125C3E4A100359E7D /* MyApplyStudyDetailPresenter.swift in Sources */,
 				CC650DC225C3E4A100359E7D /* MyApplyStudyDetailInteractor.swift in Sources */,
 				CC650DC325C3E4A100359E7D /* MyApplyStudyDetailRemoteDataManager.swift in Sources */,
 				CC650DC425C3E4A100359E7D /* MyApplyStudyDetailWireFrame.swift in Sources */,
 				CC650DC525C3E4A100359E7D /* MyApplyStudyDetailProtocols.swift in Sources */,
 				CC650D8C25C3E22000359E7D /* MyApplyStudyModifyView.swift in Sources */,
+				CCC223ED25E4E80C00A91F37 /* LaunchWireFrame.swift in Sources */,
 				CC43B8232582922900A4A418 /* StudyDetail.swift in Sources */,
 				CC29FB21251E0CAD00C1BDCE /* CreateStudyRemoteManager.swift in Sources */,
 				A5BEFB0C25B9EFA900CAED80 /* CategoryImageView.swift in Sources */,
@@ -1947,6 +1990,7 @@
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
 				A581495025912DFC00BF3C2A /* CareerModifyProtocols.swift in Sources */,
 				CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */,
+				CCC223BD25E4E12A00A91F37 /* VersionResultType.swift in Sources */,
 				A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */,
 				CC72CC0725B0632B009E9986 /* BaseProfileRemoteDataManager.swift in Sources */,
 				A51BA0C92578132B00B9673F /* TerminalRouter.swift in Sources */,
@@ -2035,6 +2079,7 @@
 				CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */,
 				A56605E3258358A2002C4A77 /* ApplyListCell.swift in Sources */,
 				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
+				CCC223B725E4E05B00A91F37 /* VersionResult.swift in Sources */,
 				A58148F425910EAC00BF3C2A /* SNSModifyPresenter.swift in Sources */,
 				A58F9023259F4514007777B4 /* ProjectModifyWireFrame.swift in Sources */,
 				A51F235C256E19E600CBFC13 /* Project.swift in Sources */,
@@ -2044,6 +2089,7 @@
 				A5C81C6725837243008F2B09 /* MyApplyListCell.swift in Sources */,
 				CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */,
 				A510BA1B2583BB3E0084559C /* ApplyUserProtocols.swift in Sources */,
+				CCC223E325E4E7F300A91F37 /* LaunchInteractor.swift in Sources */,
 				A58148FE25910EBD00BF3C2A /* SNSModifyWireFrame.swift in Sources */,
 				A53A2B7D25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift in Sources */,
 				A58148922590C6E200BF3C2A /* EmailModifyView.swift in Sources */,
@@ -2065,6 +2111,7 @@
 				CC650DFA25C40DDD00359E7D /* MyApplyStudyInfoInteractor.swift in Sources */,
 				A521DDF7252F107A00F83DB3 /* ProfileDetailWireFrame.swift in Sources */,
 				CC7B209925C3B7B6009920DC /* PaddingUILabel.swift in Sources */,
+				CCC223DE25E4E7E700A91F37 /* LaunchPresenter.swift in Sources */,
 				A5D6A78B2574309D007D6409 /* ProfileModifyPresenter.swift in Sources */,
 				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
 				CC72CBF925B05B40009E9986 /* BaseProfileView.swift in Sources */,
@@ -2121,6 +2168,7 @@
 				CCED89E725DD256C006DA773 /* NotiListEmptyView.swift in Sources */,
 				CC5794F42570C29300DF96AB /* AddNoticeProtocols.swift in Sources */,
 				A5CEE7D025B753CD00C2FF3F /* UIFont+Ext.swift in Sources */,
+				CCC223B225E4D3FE00A91F37 /* LaunchProtocols.swift in Sources */,
 				A51BA0B42577F1B700B9673F /* TerminalNetworkManager.swift in Sources */,
 				CCA47E6025DD196900E11D4C /* UITableView+Ext.swift in Sources */,
 				CCBC88C1254BC7AB00C2A6C4 /* MainImageView.swift in Sources */,
@@ -2253,6 +2301,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Terminal-iOS.Content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2274,6 +2323,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Terminal-iOS.Content";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

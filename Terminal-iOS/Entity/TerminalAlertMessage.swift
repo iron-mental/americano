@@ -9,7 +9,6 @@
 import UIKit
 
 enum AlertType {
-    
     case StudyApplyView             //신청
     case StudyApplyDeleteView       //신청 취소
     case EmailAuthView              //이메일 auth
@@ -20,6 +19,8 @@ enum AlertType {
     case AllowUserView              //스터디 신청 수락
     case RejectUserView             //스터디 신청 거절
     case LogOutView                 //로그아웃
+    case VersionUpdateRecommend     //업데이트 권장
+    case VersionUpdateRequired      //업데이트 필수
     
     var view: UIView {
         switch self {
@@ -55,6 +56,16 @@ enum AlertType {
         case .LogOutView:
             let logoutView = AlertMessageView(message: "로그아웃 하시겠습니까?")
             return logoutView
+        case .VersionUpdateRecommend:
+            let versionUpdateRecommendView = AlertMessageView(message: "앱이 새롭게 업데이트 되었습니다.\n업데이트 하시겠습니까?")
+            versionUpdateRecommendView.completeButton.setTitle("업데이트", for: .normal)
+            versionUpdateRecommendView.dismissButton.setTitle("다음에 하기", for: .normal)
+            return versionUpdateRecommendView
+        case .VersionUpdateRequired:
+            let versionUpdateRequiredView = AlertMessageView(message: "앱이 새롭게 업데이트 되었습니다.\n업데이트 후 이용해주세요.")
+            versionUpdateRequiredView.onlyCompleteButton()
+            versionUpdateRequiredView.completeButton.setTitle("업데이트 하러 가기", for: .normal)
+            return versionUpdateRequiredView
         }
     }
 }
@@ -92,27 +103,62 @@ class TerminalAlertMessage: NSObject {
         if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
             if let castContentViewController = contentViewController as? UIViewController {
                 if let alertView = castContentViewController.view as? AlertBaseUIView {
-                    alertView.dismissButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+                    if alertView.dismissButton.isHidden {
+                        alertView.completeButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+                    } else {
+                        alertView.dismissButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+                    }
                 }
             }
         }
         
     }
     
-    class func getAlertCompleteButton() -> UIButton {
-        var completeButton = UIButton()
+    class func getLeftButton() -> UIButton {
+        var button = UIButton()
         if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
             if let castContentViewController = contentViewController as? UIViewController {
                 if let alertView = castContentViewController.view as? AlertBaseUIView {
-                    completeButton = alertView.completeButton
+                    button = alertView.dismissButton
                 }
             }
         }
-        return completeButton
+        return button
+    }
+    
+    class func getRightButton() -> UIButton {
+        var button = UIButton()
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view as? AlertBaseUIView {
+                    button = alertView.completeButton
+                }
+            }
+        }
+        return button
+    }
+    
+    class func removeLeftButtonAction() {
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view as? AlertBaseUIView {
+                    alertView.dismissButton.removeTarget(nil, action: nil, for: .allEvents)
+                }
+            }
+        }
+    }
+    
+    class func removeRightButtonAction() {
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
+            if let castContentViewController = contentViewController as? UIViewController {
+                if let alertView = castContentViewController.view as? AlertBaseUIView {
+                    alertView.completeButton.removeTarget(nil, action: nil, for: .allEvents)
+                }
+            }
+        }
     }
     
     @objc class func dismiss(_ sender: UIButton? = nil) {
-        
         TerminalAlertMessage.alert.dismiss(animated: true, completion: nil)
         if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
             if let castContentViewController = contentViewController as? UIViewController {

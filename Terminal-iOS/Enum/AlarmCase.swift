@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum AlarmCase: String {
+enum AlarmType: String {
     case chat = "chat"
     case studyUpdate = "study_update"
     case studyHostDelegate = "study_delegate"

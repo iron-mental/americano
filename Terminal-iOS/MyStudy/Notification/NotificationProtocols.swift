@@ -42,7 +42,7 @@ protocol NotificationInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func onRetrievedAlert(result: [Noti])
     func retrievedAlertFailed(message: String)
-    func alarmProcessingResult(alertID: Int, alarmCase: AlarmCase, studyTitle: String, studyID: Int)
+    func alarmProcessingResult(alertID: Int, alarmCase: AlarmType, studyTitle: String, studyID: Int)
     func alertConfirmFailed(message: String)
 }
 
@@ -50,7 +50,7 @@ protocol NotificationWireFrameProtocol: class {
     static func createModule() -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func goToStudyDetail(from view: NotificationViewProtocol, alarmCase: AlarmCase, studyTitle: String, studyID: Int)
+    func goToStudyDetail(from view: NotificationViewProtocol, alarmCase: AlarmType, studyTitle: String, studyID: Int)
 }
 
 protocol NotificationRemoteDataManagerInputProtocol: class {
