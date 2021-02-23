@@ -38,7 +38,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         timeView.do {
             $0.detailTime.text = study?.studyTime
         }
-        button.do {
+        completeButton.do {
             $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
         }
         accessoryCompleteButton.do {
@@ -53,7 +53,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     @objc func buttonDidTap() {
         selectedLocation?.detailAddress = locationView.detailAddress.text
         
-        studyDetailPost = StudyDetailPost(category: study!.category,
+        self.studyDetailPost = StudyDetailPost(category: study!.category,
                                           title: studyTitleTextField.text ?? "",
                                           introduce: studyIntroduceView.textView.text ?? "",
                                           progress: studyInfoView.textView.text ?? "",
@@ -65,7 +65,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
                                           location: selectedLocation ?? nil)
         
         guard let id = study?.id else { return }
-        presenter?.completButtonDidTap(studyID: id, study: studyDetailPost!)
+        presenter?.completButtonDidTap(studyID: id, study: self.studyDetailPost!)
     }
 }
 

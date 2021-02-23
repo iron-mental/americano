@@ -27,7 +27,7 @@ final class CreateStudyView: BaseEditableStudyDetailView {
         self.do {
             $0.title = "스터디 만들기"
         }
-        self.button.do {
+        self.completeButton.do {
             $0.addTarget(self, action: #selector(completeButtonDidTap), for: .touchUpInside)
         }
         self.accessoryCompleteButton.do {

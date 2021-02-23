@@ -11,24 +11,26 @@ import UIKit
 class BaseEditableStudyDetailView: UIViewController {
     deinit { self.keyboardRemoveObserver(with: self) }
     
-    let screenSize = UIScreen.main.bounds
-    var keyboardHeight: CGFloat = 0.0
-    let mainImageView = MainImageView(frame: CGRect.zero)
+    var studyDetailPost: StudyDetailPost?
+    
+    // UI
     let studyTitleTextField = UITextField()
-    var selectedCategory: String?
+    let mainImageView = MainImageView(frame: CGRect.zero)
     var studyIntroduceView = TitleWithTextView(title: "스터디 소개")
     var SNSInputView = IdInputView()
     var studyInfoView = TitleWithTextView(title: "스터디 진행")
     var locationView = LocationUIView()
     var timeView = TimeUIView()
-    var button = UIButton()
-    var mainImageTapGesture = UITapGestureRecognizer()
-    var locationTapGesture = UITapGestureRecognizer()
-    var studyDetailPost: StudyDetailPost?
+    var completeButton = UIButton()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
     let picker = UIImagePickerController()
     var clickedView: UIView?
+    
+    // State
+    let screenSize = UIScreen.main.bounds
+    var keyboardHeight: CGFloat = 0.0
+    var selectedCategory: String?
     var currentScrollViewMinY: CGFloat = 0
     var currentScrollViewMaxY: CGFloat = 0
     var selectedLocation: StudyDetailLocationPost?
@@ -68,7 +70,7 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        self.button.alpha = 1
+        self.completeButton.alpha = 1
         self.scrollView.contentSize.height = self.standardContentHeight
     }
     
@@ -137,18 +139,18 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         scrollView.do {
             $0.backgroundColor = .appColor(.testColor)
-            $0.showsVerticalScrollIndicator = false
         }
         mainImageView.do {
             $0.alpha = 0.7
             $0.image = #imageLiteral(resourceName: "swift")
-            mainImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
+            let mainImageTapGesture = UITapGestureRecognizer(target: self,
+                                                             action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(mainImageTapGesture)
         }
         studyTitleTextField.do {
             $0.tag = 1
             $0.placeholder = "스터디 이름을 입력하세요"
-            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.backgroundColor = .appColor(.InputViewColor)
             $0.textAlignment = .center
             $0.textColor = .white
             $0.layer.cornerRadius = 10
@@ -158,31 +160,32 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.layer.borderColor = UIColor.gray.cgColor
         }
         studyIntroduceView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.testColor)
             $0.categoryLabel.text = selectedCategory
             $0.textView.inputAccessoryView = accessoryCompleteButton
         }
         SNSInputView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.testColor)
             $0.notion.textField.inputAccessoryView = accessoryCompleteButton
             $0.evernote.textField.inputAccessoryView = accessoryCompleteButton
             $0.web.textField.inputAccessoryView = accessoryCompleteButton
         }
         studyInfoView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.testColor)
             $0.textView.inputAccessoryView = accessoryCompleteButton
         }
         locationView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
-            locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
+            $0.backgroundColor = .appColor(.testColor)
+            let locationTapGesture = UITapGestureRecognizer(target: self,
+                                                            action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
             $0.detailAddress.inputAccessoryView = accessoryCompleteButton
         }
         timeView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.testColor)
             $0.detailTime.inputAccessoryView = accessoryCompleteButton
         }
-        button.do {
+        completeButton.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = .appColor(.mainColor)
             $0.titleLabel?.dynamicFont(fontSize: 15, weight: .bold)
@@ -207,7 +210,7 @@ class BaseEditableStudyDetailView: UIViewController {
          studyInfoView,
          locationView,
          timeView,
-         button].forEach { backgroundView.addSubview($0)}
+         completeButton].forEach { backgroundView.addSubview($0)}
         
         
         scrollView.do {
@@ -289,7 +292,7 @@ class BaseEditableStudyDetailView: UIViewController {
                                         constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
-        button.do {
+        completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: timeView.bottomAnchor,
                                     constant: Terminal.convertHeight(value: 23)).isActive = true
@@ -345,12 +348,12 @@ class BaseEditableStudyDetailView: UIViewController {
             let distance = (parentView.frame.maxY) - viewMaxY
             self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
         } else {
-            textViewTapFlag = false
+            self.textViewTapFlag = false
         }
     }
     
     func viewSetTop(distance: CGFloat) {
-        self.button.alpha = 0
+        self.completeButton.alpha = 0
         UIView.animate(withDuration: 0.2) {
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
@@ -360,7 +363,7 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func viewSetBottom(distance: CGFloat) {
-        self.button.alpha = 0
+        self.completeButton.alpha = 0
         UIView.animate(withDuration: 0.2) {
             self.scrollView.contentSize.height += distance
             self.scrollView.contentOffset.y += distance
@@ -374,7 +377,7 @@ class BaseEditableStudyDetailView: UIViewController {
 extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            mainImageView.image = image
+            self.mainImageView.image = image
         }
         dismiss(animated: true, completion: nil)
     }
@@ -382,26 +385,30 @@ extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavig
 
 extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textViewTapFlag = true
-        clickedView = textField
+        self.textViewTapFlag = true
+        self.clickedView = textField
         
-        self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: self.clickedView!,
+                                viewMinY: CGFloat(self.currentScrollViewMinY),
+                                viewMaxY: CGFloat(self.currentScrollViewMaxY))
     }
 }
 
 extension BaseEditableStudyDetailView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textViewTapFlag = true
-        clickedView = textView
-        self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.textViewTapFlag = true
+        self.clickedView = textView
+        self.editableViewDidTap(textView: self.clickedView!,
+                                viewMinY: CGFloat(self.currentScrollViewMinY),
+                                viewMaxY: CGFloat(self.currentScrollViewMaxY))
     }
 }
 
 extension BaseEditableStudyDetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if type(of: scrollView) == UIScrollView.self {
-            currentScrollViewMinY = scrollView.contentOffset.y
-            currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
+            self.currentScrollViewMinY = scrollView.contentOffset.y
+            self.currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
             if !textViewTapFlag {
                 view.endEditing(true)
             }
@@ -411,9 +418,9 @@ extension BaseEditableStudyDetailView: UIScrollViewDelegate {
 
 extension BaseEditableStudyDetailView: selectLocationDelegate {
     func passLocation(location: StudyDetailLocationPost) {
-        selectedLocation = location
-        locationView.address.text = "\(location.address)"
+        self.selectedLocation = location
+        self.locationView.address.text = "\(location.address)"
         guard let detail = location.detailAddress else { return }
-        locationView.detailAddress.text = detail
+        self.locationView.detailAddress.text = detail
     }
 }
