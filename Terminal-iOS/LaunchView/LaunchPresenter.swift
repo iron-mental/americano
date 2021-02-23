@@ -16,8 +16,13 @@ class LaunchPresenter: LaunchPresenterProtocol {
     func viewDidLoad() {
         interactor?.getVersionCheck()
     }
+    
     func getRefreshTokenValid() {
         interactor?.refreshTokenCheck()
+    }
+    
+    func jumpToAppStore() {
+        wireFrame?.jumpToAppStore()
     }
 }
 

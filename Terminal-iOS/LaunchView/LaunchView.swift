@@ -18,7 +18,8 @@ class LaunchView: UIViewController {
     
     // MARK: @objc
     @objc func updateButtonDidtap() {
-//        앱스토어로 가는 로직 구현부
+//        UIApplication.shared.openURL(URL(string: "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4")!)
+        presenter?.jumpToAppStore()
     }
     
     @objc func updateLaterButtonDidTap() {

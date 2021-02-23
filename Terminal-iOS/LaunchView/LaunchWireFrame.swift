@@ -41,4 +41,8 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
         guard let window = UIApplication.shared.windows.first else { return }
         window.replaceRootViewController(main, animated: true, completion: nil)
     }
+    
+    func jumpToAppStore() {
+        
+    }
 }

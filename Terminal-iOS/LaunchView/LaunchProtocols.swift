@@ -24,6 +24,7 @@ protocol LaunchPresenterProtocol: class {
     //VIEW -> PRESENTER
     func viewDidLoad()
     func getRefreshTokenValid()
+    func jumpToAppStore()
 }
 
 protocol LaunchInteractorInputProtocol: class {
@@ -62,4 +63,5 @@ protocol LaunchWireFrameProtocol: class {
     //PRESENTER -> WIREFRAME
     func replaceRootViewToIntroView()
     func replaceRootViewToMainView()
+    func jumpToAppStore()
 }
