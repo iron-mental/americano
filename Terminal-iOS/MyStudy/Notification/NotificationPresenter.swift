@@ -32,7 +32,7 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
         view?.showError(message: message)
     }
     
-    func alarmProcessingResult(alertID: Int, alarmCase: AlarmCase, studyTitle: String, studyID: Int) {
+    func alarmProcessingResult(alertID: Int, alarmCase: AlarmType, studyTitle: String, studyID: Int) {
         switch alarmCase {
         case .chat,
              .studyUpdate,

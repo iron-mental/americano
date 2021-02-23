@@ -26,6 +26,8 @@ class AlertMessageView: AlertBaseUIView {
     override func attribute() {
         super.attribute()
         alertMessageLabel.do {
+            $0.numberOfLines = 2
+            $0.textAlignment = .center
             $0.textColor = UIColor.appColor(.alertTextcolor)
             $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize, weight: UIFont.Weight.regular)
             $0.text = alertMessage

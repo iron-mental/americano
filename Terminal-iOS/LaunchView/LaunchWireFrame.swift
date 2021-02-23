@@ -31,14 +31,14 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
         return view
     }
     func replaceRootViewToIntroView() {
+        let home = HomeView()
         guard let window = UIApplication.shared.windows.first else { return }
-//        window = UIWindow()
-//        let home = HomeView()
+        window.replaceRootViewController(home, animated: true, completion: nil)
     }
     
     func replaceRootViewToMainView() {
+        let main = ViewController()
         guard let window = UIApplication.shared.windows.first else { return }
-//        window = UIWindow()
-//        let main = ViewController()
+        window.replaceRootViewController(main, animated: true, completion: nil)
     }
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2021 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol LaunchViewProtocol: class {
     var presenter: LaunchPresenterProtocol? { get set }
@@ -23,6 +23,7 @@ protocol LaunchPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func viewDidLoad()
+    func getRefreshTokenValid()
 }
 
 protocol LaunchInteractorInputProtocol: class {
@@ -38,24 +39,27 @@ protocol LaunchInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func versionNeedUpdate(force: VersionResultType)
     func refreshTokenIsEmpty()
-    func refreshTokenResult(message: String)
+    func refreshTokenResult(result: Bool)
 }
 
 protocol LaunchRemoteDataManagerInputProtocol: class {
     var interactor: LaunchRemoteDataManagerOutputProtocol? { get set }
     
     //INTERACTOR -> REMOTEDATAMANAGER
-    func getVersionCheck()
+    func getVersionCheck(version: String)
     func getRefreshTokenValid(userID: String)
 }
 
 protocol LaunchRemoteDataManagerOutputProtocol: class {
     //REMOTEDATAMANAGER -> INTERACTOR
     func getVersionResult(result: BaseResponse<VersionResult>)
-    func getRefreshTokenResult(result: BaseResponse<String>)
+    func getRefreshTokenResult(result: BaseResponse<UserInfo>)
 }
 
 protocol LaunchWireFrameProtocol: class {
+    static func createLaunchModule() -> UIViewController
+    
+    //PRESENTER -> WIREFRAME
     func replaceRootViewToIntroView()
     func replaceRootViewToMainView()
 }
