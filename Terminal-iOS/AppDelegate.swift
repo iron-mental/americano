@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
+
+import Firebase
 import Kingfisher
 import SwiftKeychainWrapper
 import SwiftyJSON
-import CoreData
-import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -19,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var goView: MyStudyDetailView?
     var pushEvent: AlarmType?
     var studyID: String = ""
-    var studyTitle: String = ""
     var alertID: Int?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
