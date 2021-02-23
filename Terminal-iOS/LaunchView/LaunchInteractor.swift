@@ -40,7 +40,7 @@ extension LaunchInteractor: LaunchRemoteDataManagerOutputProtocol {
                     presenter?.versionNeedUpdate(force: .Recommended)
                 case .Required:
                     presenter?.versionNeedUpdate(force: .Required)
-                case .none, .some: break
+                case .none: break
                 }
             }
         case false: break
