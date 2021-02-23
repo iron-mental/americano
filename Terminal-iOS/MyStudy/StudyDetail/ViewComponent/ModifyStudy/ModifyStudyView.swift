@@ -66,7 +66,6 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         
         guard let id = study?.id else { return }
         presenter?.completButtonDidTap(studyID: id, study: studyDetailPost!)
-        
     }
 }
 
@@ -85,5 +84,6 @@ extension ModifyStudyView: ModifyStudyViewProtocol {
     
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)
+        
     }
 }
