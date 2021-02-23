@@ -20,7 +20,7 @@ class NotificationInteractor: NotificationInteractorInputProtocol {
         let alertID = alert.id
         let studyTitle = alert.studyTitle
         let studyID = alert.studyID
-        if let alarmCase = AlarmCase(rawValue: alert.pushEvent) {
+        if let alarmCase = AlarmType(rawValue: alert.pushEvent) {
             presenter?.alarmProcessingResult(alertID: alertID, alarmCase: alarmCase, studyTitle: studyTitle, studyID: studyID)
             if !alert.confirm {
                 guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }

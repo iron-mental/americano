@@ -13,7 +13,7 @@ import Foundation
 struct Noti: Codable {
     let id, studyID: Int
     let studyTitle, message: String
-    let pushEvent: AlarmCase.RawValue
+    let pushEvent: AlarmType.RawValue
     let createdAt: String
     let confirm: Bool
 

@@ -33,7 +33,7 @@ class NotificationWireFrame: NotificationWireFrameProtocol {
         }
     }
     
-    func goToStudyDetail(from view: NotificationViewProtocol, alarmCase: AlarmCase, studyTitle: String, studyID: Int) {
+    func goToStudyDetail(from view: NotificationViewProtocol, alarmCase: AlarmType, studyTitle: String, studyID: Int) {
         switch alarmCase {
         case .newApply:
             let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle)

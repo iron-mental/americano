@@ -27,11 +27,6 @@ class MyStudyMainView: UIViewController {
         attribute()
         layout()
         presenter?.viewDidLoad()
-//        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-//
-//        if let version = version {
-//                print("version: \(version)")
-//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

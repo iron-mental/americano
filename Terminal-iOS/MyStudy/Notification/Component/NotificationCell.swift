@@ -26,7 +26,7 @@ class NotificationCell: UITableViewCell {
     }
     
     func setData(noti: Noti) {
-        switch AlarmCase(rawValue: noti.pushEvent) {
+        switch AlarmType(rawValue: noti.pushEvent) {
         case .applyAllowed:
             iconLabel.text = "🎉"
         case .applyRejected:
