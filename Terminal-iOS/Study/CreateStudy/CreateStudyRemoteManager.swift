@@ -64,11 +64,13 @@ final class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol 
                 case .success(let value):
                     let json = JSON(value)
                     let data = "\(json)".data(using: .utf8)
+                    
                     do {
+//                        let data2 = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
                         let result = try JSONDecoder().decode(BaseResponse<CreateStudyResult>.self, from: data!)
                         self.interactor?.createStudyValid(response: result)
                     } catch {
-                        
+                        print(error.localizedDescription)
                     }
                 case .failure:
                     if let data = response.data {

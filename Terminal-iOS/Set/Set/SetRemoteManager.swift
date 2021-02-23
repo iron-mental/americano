@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 import SwiftKeychainWrapper
 
 class SetRemoteManager: SetRemoteDataManagerInputProtocol {
@@ -21,13 +20,11 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.userInfo(id: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
                         self.interactor?.onUserInfoRetrieved(userInfo: result)
                     } catch {
                         print(error.localizedDescription)
@@ -47,13 +44,11 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.emailVerify(id: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
                         self.interactor?.emailAuthResponse(result: result)
                     } catch {
                         print(error.localizedDescription)
