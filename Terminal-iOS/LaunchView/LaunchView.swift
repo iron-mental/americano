@@ -18,7 +18,6 @@ class LaunchView: UIViewController {
     
     // MARK: @objc
     @objc func updateButtonDidtap() {
-//        UIApplication.shared.openURL(URL(string: "itms://itunes.apple.com/de/app/x-gift/id839686104?mt=8&uo=4")!)
         presenter?.jumpToAppStore()
     }
     
