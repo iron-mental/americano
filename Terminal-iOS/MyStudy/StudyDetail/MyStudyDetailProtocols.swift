@@ -11,7 +11,7 @@ import UIKit
 protocol MyStudyDetailViewProtocol: class {
     var presenter: MyStudyDetailPresenterProtocol? { get set }
     var studyID: Int? { get set}
-    var VCArr: [UIViewController] { get set }
+    var vcArr: [UIViewController] { get set }
     var studyTitle: String? { get set }
 //    var alertID: Int? { get set }
     var applyState: Bool? { get set }

@@ -25,7 +25,7 @@ class MyStudyDetailView: UIViewController {
     var studyID: Int? { didSet { setPageControllerChild() } }
     var studyTitle: String?
     var pageBeforeIndex: Int = 0
-    var VCArr: [UIViewController] = []
+    var vcArr: [UIViewController] = []
     let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
@@ -60,7 +60,6 @@ class MyStudyDetailView: UIViewController {
             } else {
                 $0.title = studyTitle
             }
-            view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         
         self.appearance.do {
@@ -68,7 +67,7 @@ class MyStudyDetailView: UIViewController {
         }
         
         self.do {
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.navigationItem.rightBarButtonItems = [moreButton]
         }
@@ -83,7 +82,7 @@ class MyStudyDetailView: UIViewController {
             $0.selectedSegmentIndex = 0
             $0.layer.cornerRadius = 0
             $0.backgroundColor = .clear
-            $0.tintColor = UIColor.appColor(.terminalBackground)
+            $0.tintColor = .appColor(.terminalBackground)
             $0.clearBG()
             $0.selectedSegmentTintColor = .clear
             $0.addTarget(self, action: #selector(indexChanged(_:)), for: .valueChanged)
@@ -106,12 +105,19 @@ class MyStudyDetailView: UIViewController {
         switch viewState {
         case .Notice:
             self.tapSege.selectedSegmentIndex = 0
-            self.childPageView.setViewControllers([self.VCArr[0]], direction: .forward, animated: true, completion: nil)
+            self.childPageView.setViewControllers([self.vcArr[0]],
+                                                  direction: .forward,
+                                                  animated: true,
+                                                  completion: nil)
             self.pageBeforeIndex = 0
         case .StudyDetail:
             self.tapSege.selectedSegmentIndex = 1
-            self.childPageView.setViewControllers([self.VCArr[1]], direction: .forward, animated: true, completion: nil)
-            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
+            self.childPageView.setViewControllers([self.vcArr[1]],
+                                                  direction: .forward,
+                                                  animated: true,
+                                                  completion: nil)
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
             self.pageBeforeIndex = 1
         case .Chat:
             break
@@ -153,7 +159,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     func editStudyButtonDidTap() {
-        if let targetStudy = (VCArr[1] as! StudyDetailView).studyInfo {
+        if let targetStudy = (vcArr[1] as! StudyDetailView).studyInfo {
             presenter?.editStudyButtonDidTap(study: targetStudy)
         }
     }
@@ -179,14 +185,14 @@ class MyStudyDetailView: UIViewController {
     }
     
     func setPageControllerChild() {
-        self.VCArr = [NoticeWireFrame.createNoticeModule(studyID: studyID!, parentView: self),
+        self.vcArr = [NoticeWireFrame.createNoticeModule(studyID: studyID!, parentView: self),
                       StudyDetailWireFrame.createStudyDetail(parent: self,
                                                              studyID: studyID!,
                                                              state: .member,
                                                              studyTitle: studyTitle ?? ""),
                       ChatWireFrame.createChatModule()]
         
-        if let noticeView = VCArr[0] as? NoticeViewProtocol {
+        if let noticeView = vcArr[0] as? NoticeViewProtocol {
             noticeView.viewLoad()
         }
     }
@@ -208,19 +214,19 @@ class MyStudyDetailView: UIViewController {
         }
         
         // PageView paging
-        let currentView = VCArr
+        let currentView = vcArr
         let nextPage = selectedIndex
         
         // if 현재페이지 < 바뀔페이지
         // else if 현재페이지 > 바뀔페이지
-        if pageBeforeIndex < nextPage {
+        if self.pageBeforeIndex < nextPage {
             let nextVC = currentView[nextPage]
             self.childPageView.setViewControllers([nextVC], direction: .forward, animated: true)
-        } else if pageBeforeIndex > nextPage {
+        } else if self.pageBeforeIndex > nextPage {
             let prevVC = currentView[nextPage]
             self.childPageView.setViewControllers([prevVC], direction: .reverse, animated: true)
         }
-        pageBeforeIndex = nextPage
+        self.pageBeforeIndex = nextPage
     }
     
     @objc func moreButtonDidTap() {
@@ -257,23 +263,23 @@ class MyStudyDetailView: UIViewController {
 
 extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = VCArr.firstIndex(of: viewController), index > 0 else { return nil }
+        guard let index = vcArr.firstIndex(of: viewController), index > 0 else { return nil }
         let previousIndex = index - 1
-        return VCArr[previousIndex]
+        return vcArr[previousIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = VCArr.firstIndex(of: viewController),
-              index < (VCArr.count - 1) else { return nil }
+        guard let index = vcArr.firstIndex(of: viewController),
+              index < (vcArr.count - 1) else { return nil }
         let nextIndex = index + 1
-        return VCArr[nextIndex]
+        return vcArr[nextIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard completed else { return }
         
         if let viewControllers = pageViewController.viewControllers {
-            if let viewControllerIndex = self.VCArr.firstIndex(of: viewControllers[0]) {
+            if let viewControllerIndex = self.vcArr.firstIndex(of: viewControllers[0]) {
                 self.tapSege.selectedSegmentIndex = viewControllerIndex
                 UIView.animate(withDuration: 0.2) {
                     self.selectedUnderLine.transform =
@@ -286,10 +292,10 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
     func setting() {
-        if let studyDetailView = VCArr[1] as? StudyDetailViewProtocol {
+        if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
             studyInfo = studyDetailView.studyInfo
             authority = studyDetailView.state
-            if let noticeView = VCArr[0] as? NoticeView {
+            if let noticeView = vcArr[0] as? NoticeView {
                 noticeView.state = studyDetailView.state
             }
         }

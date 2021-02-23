@@ -201,7 +201,7 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                     createAt: nil,
                                     isPaging: nil)
                     if let studyDetailView = self.parentView as? MyStudyDetailViewProtocol {
-                        if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
+                        if let noticeListView = studyDetailView.vcArr[0] as? NoticeViewProtocol {
                             noticeListView.viewLoad()
                         }
                         studyDetailView.presenter?.addNoticeFinished(notice: noticeID,
@@ -212,7 +212,7 @@ extension AddNoticeView: AddNoticeViewProtocol {
                     if let noticeDetailView = self.parentView as? NoticeDetailViewProtocol {
                         noticeDetailView.presenter?.viewDidLoad(notice: notice!)
                         if let studyDetailView = noticeDetailView.parentView as? MyStudyDetailViewProtocol {
-                            if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
+                            if let noticeListView = studyDetailView.vcArr[0] as? NoticeViewProtocol {
                                 noticeListView.viewLoad()
                             }
                         } else {
