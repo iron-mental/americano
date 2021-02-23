@@ -27,7 +27,14 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                         let result = try JSONDecoder().decode(BaseResponse<VersionResult>.self, from: data!)
                         self.interactor?.getVersionResult(result: result)
                     } catch {
-                        print(error.localizedDescription)
+                        //서버와 형식이 맞지않아 임시로 써놓음
+                        self.interactor?.getVersionResult(result: BaseResponse(result: true,
+                                                                               type: nil,
+                                                                               label: nil,
+                                                                               message: nil,
+                                                                               code: nil,
+                                                                               data: VersionResult(latestVersion: "1.0",
+                                                                                                   force: "1")))
                     }
                 case .failure:
                     if let data = response.data {

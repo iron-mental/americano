@@ -25,11 +25,9 @@ extension LaunchPresenter: LaunchInteractorOutputProtocol {
     func versionNeedUpdate(force: VersionResultType) {
         switch force {
         case .Recommended:
-            //새로운 얼럿(업데이트 추천 뷰)
-            view?.showVersionUpdateAlert(alertType: .AllowUserView)
+            view?.showVersionUpdateAlert(alertType: .VersionUpdateRecommend)
         case .Required:
-            //새로운 얼럿(업데이트 강제 뷰)
-            view?.showVersionUpdateAlert(alertType: .AllowUserView)
+            view?.showVersionUpdateAlert(alertType: .VersionUpdateRequired)
         case .notRequired: break
         }
     }
