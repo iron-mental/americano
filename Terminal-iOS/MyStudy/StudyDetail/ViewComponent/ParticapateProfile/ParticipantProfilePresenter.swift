@@ -20,24 +20,18 @@ class ParticipantProfilePresenter: ParticipantProfilePresenterProtocol {
 
 extension ParticipantProfilePresenter: ParticipantProfileInteractorOutputProtocol {
     func retriveUserInfo(result: Bool, userInfo: UserInfo) {
-        switch result {
-        case true:
-            LoadingRainbowCat.hide {
-                self.view?.showUserInfo(userInfo: userInfo)
-            }
-        case false:
-            print("ApplyUserDetailPresenter 에서 생긴 에러")
+        LoadingRainbowCat.hide {
+            self.view?.showUserInfo(userInfo: userInfo)
         }
     }
     
     func retriveProjectList(result: Bool, projectList: [Project]) {
-        switch result {
-        case true:
-            LoadingRainbowCat.hide {
-                self.view?.addProjectToStackView(project: projectList)
-            }
-        case false:
-            print("ApplyUserDetailPresenter")
+        LoadingRainbowCat.hide {
+            self.view?.addProjectToStackView(project: projectList)
         }
+    }
+    
+    func showError(message: String) {
+        view?.showError(message: message)
     }
 }

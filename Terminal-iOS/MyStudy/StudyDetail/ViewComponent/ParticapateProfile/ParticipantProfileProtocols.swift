@@ -8,47 +8,44 @@
 
 import UIKit
 
-protocol ParticapateProfileViewProtocol: BaseProfileViewProtocol {
-    var presenter: ParticapateProfilePresenterInputProtocol? { get set }
+protocol ParticipantProfileViewProtocol: BaseProfileViewProtocol {
+    var presenter: ParticipantProfilePresenterProtocol? { get set }
     
     //PRESENTER -> View
     func showError(message: String)
 }
 
-protocol ParticapateProfilePresenterInputProtocol: class {
-    var view: ParticapateProfileViewProtocol? { get set }
-    var interactor: ParticapateProfileInteractorInputProtocol? { get set }
-    var wireFrame: ParticapateProfileWireFrameProtocol? { get set }
+protocol ParticipantProfilePresenterProtocol: class {
+    var view: ParticipantProfileViewProtocol? { get set }
+    var interactor: ParticipantProfileInteractorInputProtocol? { get set }
+    var wireFrame: ParticipantProfileWireFrameProtocol? { get set }
     
     //VIEW -> PRESENTER
     func viewDidLoad()
 }
 
-protocol ParticapateProfileInteractorInputProtocol: class {
-    var presenter: ParticapateProfileInteractorOutputProtocol? { get set }
-    var remoteDataManager: ParticapateProfileRemoteDataManagerInputProtocol? { get set }
+protocol ParticipantProfileInteractorInputProtocol: class {
+    var presenter: ParticipantProfileInteractorOutputProtocol? { get set }
+    var remoteDataManager: ParticipantProfileRemoteDataManagerInputProtocol? { get set }
     var userID: Int? { get set }
     
     //PRESENTER -> INTERACTOR
     func getUserInfo()
 }
 
-protocol ParticapateProfileInteractorOutputProtocol: class {
+protocol ParticipantProfileInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func retriveUserInfo(result: Bool, userInfo: UserInfo)
     func retriveProjectList(result: Bool, projectList: [Project])
+    func showError(message: String)
 }
 
-protocol ParticapateProfileRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {
-    //INTERACTOR -> REMOTEDATAMANAGER
+protocol ParticipantProfileRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {
 }
 
-protocol ParticapateProfileRemoteDataManagerOutputProtocol: BaseProfileRemoteDataManagerOutputProtocol {
-    //REMOTEDATAMANAGER -> INTERACTOR
-    func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
-    func onProjectRetrieved(project: BaseResponse<[Project]>)
+protocol ParticipantProfileRemoteDataManagerOutputProtocol: BaseProfileRemoteDataManagerOutputProtocol {
 }
 
-protocol ParticapateProfileWireFrameProtocol: class {
-    static func createApplyUserDetailModule(userInfo: ApplyUser) -> UIViewController
+protocol ParticipantProfileWireFrameProtocol: class {
+    static func createParticipantProfileModule(userInfo: Int) -> UIViewController
 }

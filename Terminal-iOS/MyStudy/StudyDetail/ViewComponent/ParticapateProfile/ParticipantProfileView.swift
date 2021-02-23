@@ -13,7 +13,16 @@ class ParticipantProfileView: BaseProfileView {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        layout()
         presenter?.viewDidLoad()
+    }
+    
+    override func layout() {
+        super.layout()
+        
+        self.location.do {
+            $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
+        }
     }
 }
 

@@ -28,7 +28,9 @@ extension ParticipantProfileInteractor: ParticipantProfileRemoteDataManagerOutpu
                 presenter?.retriveUserInfo(result: userInfo.result, userInfo: data)
             }
         case false:
-            print("ApplyUserDetailInterator 에서 생긴 에러")
+            if let message = userInfo.message {
+                presenter?.showError(message: message)
+            }
         }
     }
     
@@ -39,7 +41,9 @@ extension ParticipantProfileInteractor: ParticipantProfileRemoteDataManagerOutpu
                 presenter?.retriveProjectList(result: project.result, projectList: data)
             }
         case false:
-            print("ApplyUserDetailInterator 에서 생긴 에러")
+            if let message = project.message {
+                presenter?.showError(message: message)
+            }
         }
     }
     

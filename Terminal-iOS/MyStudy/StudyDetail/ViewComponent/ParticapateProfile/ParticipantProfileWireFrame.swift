@@ -6,7 +6,7 @@
 //  Copyright © 2021 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class ParticipantProfileWireFrame: ParticipantProfileWireFrameProtocol {
     static func createParticipantProfileModule(userInfo: Int) -> UIViewController {
