@@ -16,11 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="terminal.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bPz-zm-7cx">
-                                <rect key="frame" x="40" y="240" width="334" height="166"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="terminal.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bPz-zm-7cx">
+                                <rect key="frame" x="57" y="245" width="300" height="197.5"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="S8o-EO-ubG"/>
+                                    <constraint firstAttribute="height" constant="200" id="ODl-VN-DF6"/>
                                     <constraint firstAttribute="width" constant="300" id="WLj-rk-aXL"/>
                                 </constraints>
                             </imageView>
@@ -35,7 +35,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>

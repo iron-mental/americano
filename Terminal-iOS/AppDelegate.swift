@@ -127,9 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             break
         case .testPush:
             break
-        case .none:
-            print("지정되어있지 않은 메세지 들어옴 ")
-        case .some(.undefined): break
+        case .none, .undefined: break
         }
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
