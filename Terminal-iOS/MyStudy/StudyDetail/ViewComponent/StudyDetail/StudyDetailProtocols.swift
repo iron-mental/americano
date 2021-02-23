@@ -30,6 +30,7 @@ protocol StudyDetailWireFrameProtocol: class {
     func presentStudyListScreen(from view: StudyDetailViewProtocol)
     func goToSelectCategory(from view: StudyDetailViewProtocol, category: [Category])
     func goToApplyStudyDetail(from view: StudyDetailViewProtocol, studyID: Int)
+    func goToParticipantProfile(from view: StudyDetailViewProtocol, userID: Int)
 }
 
 protocol StudyDetailPresenterProtocol: class {
@@ -44,6 +45,7 @@ protocol StudyDetailPresenterProtocol: class {
     func didClickedCreateButton()
     func joinButtonDidTap(studyID: Int, message: String)
     func modifyStudyMessageButtonDidTap(studyID: Int)
+    func memberDidTap(userID: Int)
     //INTERACTOR -> PRESENTER
     
 }

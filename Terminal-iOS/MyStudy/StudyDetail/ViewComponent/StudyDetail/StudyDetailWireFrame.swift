@@ -52,4 +52,11 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
             parentView.present(applyStudyDetailView, animated: true)
         }
     }
+    
+    func goToParticipantProfile(from view: StudyDetailViewProtocol, userID: Int) {
+        if let parentView = view as? UIViewController {
+            let participantProfileView = ParticipantProfileWireFrame.createParticipantProfileModule(userInfo: userID)
+            parentView.navigationController?.pushViewController(participantProfileView, animated: true)
+        }
+    }
 }
