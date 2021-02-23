@@ -159,7 +159,8 @@ class MyStudyDetailView: UIViewController {
     }
     
     func editStudyButtonDidTap() {
-        if let targetStudy = (vcArr[1] as! StudyDetailView).studyInfo {
+        if let studyDetail = vcArr[1] as? StudyDetailView,
+           let targetStudy = studyDetail.studyInfo {
             presenter?.editStudyButtonDidTap(study: targetStudy)
         }
     }
@@ -214,7 +215,7 @@ class MyStudyDetailView: UIViewController {
         }
         
         // PageView paging
-        let currentView = vcArr
+        let currentView = self.vcArr
         let nextPage = selectedIndex
         
         // if 현재페이지 < 바뀔페이지

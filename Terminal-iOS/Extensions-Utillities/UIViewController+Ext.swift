@@ -20,7 +20,7 @@ extension UIViewController {
         
         let titleFont = [NSAttributedString.Key.font: UIFont(name: "NotoSansKR-Medium", size: 15)]
         let titleAttrString = NSMutableAttributedString(string: message, attributes: titleFont as [NSAttributedString.Key: Any])
-
+        
         alert.setValue(titleAttrString, forKey: "attributedTitle")
         
         controller.present(alert, animated: true)
@@ -54,12 +54,12 @@ extension UIViewController {
     }
     
     func hideKeyboardWhenTappedAround() {
-            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-            tap.cancelsTouchesInView = false
-            view.addGestureRecognizer(tap)
-        }
-
-        @objc func dismissKeyboard() {
-            self.view.endEditing(true)
-        }
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
 }

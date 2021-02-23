@@ -44,6 +44,7 @@ class BaseEditableStudyDetailView: UIViewController {
         attribute()
         layout()
         setDelegate()
+        self.hideKeyboardWhenTappedAround()
         self.keyboardAddObserver(with: self,
                                  showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
