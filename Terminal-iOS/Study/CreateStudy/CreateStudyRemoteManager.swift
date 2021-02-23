@@ -6,9 +6,7 @@
 //  Copyright © 2020 정재인. All rights reserved.
 //
 
-import UIKit
-import Alamofire
-import SwiftyJSON
+import Foundation
 
 final class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol {
     var interactor: CreateStudyReMoteDataManagerOutputProtocol?
@@ -59,15 +57,11 @@ final class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol 
                 }
             }, with: TerminalRouter.studyCreate(study: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    
+                case .success(let data):
                     do {
-//                        let data2 = try JSONSerialization.data(withJSONObject: value, options: .prettyPrinted)
-                        let result = try JSONDecoder().decode(BaseResponse<CreateStudyResult>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<CreateStudyResult>.self, from: data)
                         self.interactor?.createStudyValid(response: result)
                     } catch {
                         print(error.localizedDescription)
