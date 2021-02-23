@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+struct VersionResult: Codable {
+    let latestVersion: String
+    let force: VersionResultType.RawValue
+
+    enum CodingKeys: String, CodingKey {
+        case latestVersion = "latest_version"
+        case force
+    }
+}
