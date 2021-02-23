@@ -22,6 +22,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var locationView = LocationUIView()
     var timeView = TimeUIView()
     var completeButton = UIButton()
+    var accessoryCompleteButton = UIButton()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
     let picker = UIImagePickerController()
@@ -36,7 +37,6 @@ class BaseEditableStudyDetailView: UIViewController {
     var selectedLocation: StudyDetailLocationPost?
     var textViewTapFlag = false
     var standardContentHeight: CGFloat = 0.0
-    var accessoryCompleteButton = UIButton()
     var viewDidAppearFlag = true
     
     // MARK: viewDidLoad
@@ -408,7 +408,7 @@ extension BaseEditableStudyDetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if type(of: scrollView) == UIScrollView.self {
             self.currentScrollViewMinY = scrollView.contentOffset.y
-            self.currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
+            self.currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - self.keyboardHeight
             if !textViewTapFlag {
                 view.endEditing(true)
             }
