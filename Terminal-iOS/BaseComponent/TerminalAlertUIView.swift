@@ -60,13 +60,13 @@ class AlertBaseUIView: UIView {
             $0.setTitle("취소", for: .normal)
             $0.setTitleColor(UIColor.appColor(.alertTextcolor), for: .normal)
             $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
-            $0.titleLabel?.dynamicFont(fontSize: 15, weight: .bold)
+            $0.titleLabel?.dynamicFont(fontSize: 14, weight: .bold)
         }
         completeButton.do {
             $0.setTitle("확인", for: .normal)
             $0.setTitleColor(UIColor.appColor(.alertTextcolor), for: .normal)
             $0.backgroundColor = UIColor.appColor(.alertBackgroundColor)
-            $0.titleLabel?.dynamicFont(fontSize: 15, weight: .bold)
+            $0.titleLabel?.dynamicFont(fontSize: 14, weight: .bold)
         }
     }
     
@@ -120,7 +120,7 @@ class AlertBaseUIView: UIView {
         completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 30)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: dismissButton.bottomAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: bottomBar.centerXAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: bottomBar.trailingAnchor).isActive = true
         }
