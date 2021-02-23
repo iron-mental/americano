@@ -73,8 +73,15 @@ enum TerminalRouter: URLRequestConvertible {
     case noticeUpdate           (studyID: String, noticeID: String, notice: Parameters)
     case noticeDelete           (studyID: String, noticeID: String)
     
+    // COMMON
+    case versionCheck           (version: String)
+    
     var baseURL: URL {
-        return URL(string: API.BASE_URL)!
+        if endPoint == "check-version" {
+            return URL(string: API.Common_Base_URL)!
+        } else {
+            return URL(string: API.BASE_URL)!
+        }
     }
     
     // MARK: Method init
@@ -184,6 +191,10 @@ enum TerminalRouter: URLRequestConvertible {
             return .put
         case .noticeDelete:
             return .delete
+            
+        // Common
+        case .versionCheck:
+            return .get
         }
     }
 
@@ -289,6 +300,10 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/notice/\(noticeID)"
         case let .noticeDelete(studyID, noticeID):
             return "study/\(studyID)/notice/\(noticeID)"
+            
+        // Common
+        case .versionCheck:
+            return "check-version"
         }
     }
     
@@ -329,7 +344,7 @@ enum TerminalRouter: URLRequestConvertible {
             return nil
             
         // 스터디
-        case let .studyDetail:
+        case .studyDetail:
             return nil
         case .studyDelete, .studyLeave, .studyCategory:
             return nil
@@ -375,6 +390,10 @@ enum TerminalRouter: URLRequestConvertible {
             return ["values": value]
         case .noticeDetail, .noticeList, .noticeDelete:
             return nil
+            
+        //Common
+        case let .versionCheck(version):
+            return ["version": version, "device": "ios"]
         }
     }
     
@@ -383,7 +402,7 @@ enum TerminalRouter: URLRequestConvertible {
         
         var request = URLRequest(url: url)
         request.method = method
-        
+    
         switch method {
         case .get:
             request = try URLEncoding.default.encode(request, with: parameters)
