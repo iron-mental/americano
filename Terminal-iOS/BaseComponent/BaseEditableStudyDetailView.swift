@@ -14,8 +14,8 @@ class BaseEditableStudyDetailView: UIViewController {
     var studyDetailPost: StudyDetailPost?
     
     // UI
-    let studyTitleTextField = UITextField()
     let mainImageView = MainImageView(frame: CGRect.zero)
+    let studyTitleTextField = UITextField()
     var studyIntroduceView = TitleWithTextView(title: "스터디 소개")
     var SNSInputView = IdInputView()
     var studyInfoView = TitleWithTextView(title: "스터디 진행")
