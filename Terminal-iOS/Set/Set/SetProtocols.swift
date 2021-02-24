@@ -61,12 +61,6 @@ protocol SetInteractortInputProtocol: class {
     func removeRefreshToken()
 }
 
-//이친구는 왜있는거지?
-protocol SetDataManagerInputProtocol: class {
-    // INTERACOTER -> DATAMANAGER
-    
-}
-
 protocol SetRemoteDataManagerInputProtocol: class {
     var interactor: SetRemoteDataManagerOutputProtocol? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
