@@ -24,7 +24,7 @@ class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
 }
 
 extension ModifyStudyPresenter: ModifyStudyInteractorOutputProtocol {
-    func putStudyInfoResult(result: Bool, label: String? = nil, message: String) {
+    func putStudyInfoResult(result: Bool, label: String?, message: String) {
         switch result {
         case true:
             LoadingRainbowCat.hide {
