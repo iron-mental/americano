@@ -48,6 +48,16 @@ extension SetPresenter: SetInteractorOutputProtocol {
         view?.emailAuthResponse(result: result, message: message)
     }
     
+    func logoutResult(result: BaseResponse<String>) {
+        switch result.result {
+        case true:
+            wireFrame?.replaceRootViewToIntroView(from: view!)
+        case false:
+            guard let message = result.message else { return }
+            view?.showError(message: message)
+        }
+    }
+    
     func onError() {
         
     }
