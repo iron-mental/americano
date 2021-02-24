@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class BaseEditableStudyDetailView: UIViewController {
     deinit { self.keyboardRemoveObserver(with: self) }
@@ -329,9 +330,29 @@ class BaseEditableStudyDetailView: UIViewController {
     
     func openCamera() {
         //시뮬에서 앱죽는거 에러처리 해야함
-        self.picker.sourceType = .camera
-        self.present(self.picker, animated: true, completion: nil)
+        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+            
+        switch cameraAuthorizationStatus {
+        case .authorized:
+            self.picker.sourceType = .camera
+            self.present(self.picker, animated: true, completion: nil)
+        case .notDetermined, .denied, .restricted:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                guard granted == true else {
+                    DispatchQueue.main.async {
+                        self.showToast(controller: self, message: "카메라 사용 옵션을 허용해주세요.", seconds: 1)
+                    }
+                    return
+                }
+                self.picker.sourceType = .camera
+                self.present(self.picker, animated: true, completion: nil)
+            }
+        @unknown default:
+            self.showToast(controller: self, message: "카메라 사용 옵션을 허용해주세요.", seconds: 1)
+        }
     }
+    
+    
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
         var parentView = UIView()
