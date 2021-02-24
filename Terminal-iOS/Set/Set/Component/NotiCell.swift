@@ -18,5 +18,10 @@ class NotiCell: DefaultCell {
         rightLabel.isHidden = true
         notiToggle.setOn(false, animated: true)
         self.accessoryView = notiToggle
+        notiToggle.addTarget(self, action: #selector(notiToggleDidTap(_: )), for: .touchUpInside)
+    }
+    
+    @objc func notiToggleDidTap(_ sender: UISwitch) {
+        print(sender)
     }
 }
