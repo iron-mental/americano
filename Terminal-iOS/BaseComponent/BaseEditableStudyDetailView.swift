@@ -87,7 +87,7 @@ class BaseEditableStudyDetailView: UIViewController {
         timeView.detailTime.delegate = self
         picker.delegate = self
         
-        SNSInputView.notion.textField.debounce(delay: 1) { [weak self] text in
+        SNSInputView.notion.textField.debounce(delay: 1) { [weak self] _ in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             guard let text = self?.SNSInputView.notion.textField.text else { return }
             if text.notionCheck() {
@@ -100,7 +100,8 @@ class BaseEditableStudyDetailView: UIViewController {
                 self!.SNSInputView.notion.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
         }
-        SNSInputView.evernote.textField.debounce(delay: 1) { [weak self] text in
+        
+        SNSInputView.evernote.textField.debounce(delay: 1) { [weak self] _ in
             guard let text = self?.SNSInputView.evernote.textField.text else { return }
             if text.evernoteCheck() {
                 if text.isEmpty {
@@ -112,7 +113,8 @@ class BaseEditableStudyDetailView: UIViewController {
                 self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
         }
-        SNSInputView.web.textField.debounce(delay: 1) { [weak self] text in
+        
+        SNSInputView.web.textField.debounce(delay: 1) { [weak self] _ in
             guard let text = self?.SNSInputView.web.textField.text else { return }
             if text.webCheck() {
                 if text.isEmpty {
@@ -212,7 +214,6 @@ class BaseEditableStudyDetailView: UIViewController {
          locationView,
          timeView,
          completeButton].forEach { backgroundView.addSubview($0)}
-        
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -329,7 +330,6 @@ class BaseEditableStudyDetailView: UIViewController {
     }
     
     func openCamera() {
-        //시뮬에서 앱죽는거 에러처리 해야함
         let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
             
         switch cameraAuthorizationStatus {
@@ -351,8 +351,6 @@ class BaseEditableStudyDetailView: UIViewController {
             self.showToast(controller: self, message: "카메라 사용 옵션을 허용해주세요.", seconds: 1)
         }
     }
-    
-    
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
         var parentView = UIView()
