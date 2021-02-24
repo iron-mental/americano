@@ -23,12 +23,12 @@ enum StudyDetailViewState: String {
 
 class StudyDetailView: UIViewController {
     var presenter: StudyDetailPresenterProtocol?
+    
     var state: StudyDetailViewState = .member {
         didSet {
             attribute()
         }
     }
-    var userData: [Participate] = []
     var studyID: Int? {
         didSet {
             presenter?.showStudyListDetail(studyID: "\(studyID!)")
@@ -39,28 +39,29 @@ class StudyDetailView: UIViewController {
             attribute()
         }
     }
-    weak var parentView: MyStudyDetailViewProtocol?
-    var scrollView = UIScrollView()
-    var tempBackgroundView = UIView()
-    let picker = UIImagePickerController()
-    var mainImageViewTapGesture = UITapGestureRecognizer()
-    var mainImageView = MainImageView(frame: CGRect.zero)
-    var snsIconsView = StudyDetailSNSView()
-    lazy var studyIntroduceView = TitleWithContentView()
-    var memberView = MemeberView()
-    lazy var studyPlanView = TitleWithContentView()
-    lazy var timeView = TitleWithContentView()
-    lazy var locationView = TitleWithContentView()
-    var mapView = NMFMapView()
-    var joinButton = UIButton()
-    let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
-    var joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
-    let appearance = UINavigationBarAppearance()
     var studyTitle: String? {
         didSet {
             self.title = studyTitle
         }
     }
+    var memberView = MemeberView()
+    var userData: [Participate] = []
+    var mainImageView = MainImageView(frame: CGRect.zero)
+    var snsIconsView = StudyDetailSNSView()
+    var mapView = NMFMapView()
+    var joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
+    var scrollView = UIScrollView()
+    var tempBackgroundView = UIView()
+    let picker = UIImagePickerController()
+    var mainImageViewTapGesture = UITapGestureRecognizer()
+    var joinButton = UIButton()
+    let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
+    let appearance = UINavigationBarAppearance()
+    weak var parentView: MyStudyDetailViewProtocol?
+    lazy var studyPlanView = TitleWithContentView()
+    lazy var timeView = TitleWithContentView()
+    lazy var locationView = TitleWithContentView()
+    lazy var studyIntroduceView = TitleWithContentView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,6 +138,7 @@ class StudyDetailView: UIViewController {
         memberView.do {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
+            $0.collectionView.isUserInteractionEnabled = state == .member || state == .host ? true : false
         }
         
         studyPlanView.do {
@@ -351,5 +353,9 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
         let cell = memberView.collectionView.dequeueReusableCell(withReuseIdentifier: MemberCollectionViewCell.identifier, for: indexPath) as! MemberCollectionViewCell
         cell.setData(userInfo: userData[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter?.memberDidTap(userID: userData[indexPath.row].userID)
     }
 }

@@ -26,9 +26,17 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
                     self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
-                case .failure(let err):
-                    print("실패")
-                    print(err)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
+                            if result.message != nil {
+                                self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }
@@ -48,9 +56,17 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
                     let data = "\(json)".data(using: .utf8)
                     let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
                     self.remoteRequestHandler?.onProjectRetrieved(project: result)
-                case .failure(let err):
-                    print("실패")
-                    print(err)
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<[Project]>.self, from: data)
+                            if result.message != nil {
+                                self.remoteRequestHandler?.onProjectRetrieved(project: result)
+                            }
+                        } catch {
+                            
+                        }
+                    }
                 }
             }
     }

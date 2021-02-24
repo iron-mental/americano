@@ -27,10 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Override point for customization after application launch.
         window = UIWindow()
         let launchView = LaunchWireFrame.createLaunchModule()
+        window?.rootViewController = launchView
         // firebase 연동
         FirebaseApp.configure()
-        
-        window?.rootViewController = launchView
         
         if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
             if let studyID = notification["study_id"] as? String,

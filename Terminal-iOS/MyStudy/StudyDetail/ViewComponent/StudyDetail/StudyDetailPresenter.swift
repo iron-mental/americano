@@ -33,8 +33,13 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
         view?.showLoading()
         interactor?.postStudyJoin(studyID: studyID, message: message)
     }
+    
     func modifyStudyMessageButtonDidTap(studyID: Int) {
         wireFrame?.goToApplyStudyDetail(from: view!, studyID: studyID)
+    }
+    
+    func memberDidTap(userID: Int) {
+        wireFrame?.goToParticipantProfile(from: view!, userID: userID)
     }
 }
 

@@ -278,6 +278,12 @@
 		CCA3FF652517829D00F62627 /* SearchStudyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA3FF632517829D00F62627 /* SearchStudyView.swift */; };
 		CCA47E4725DD06F400E11D4C /* StudyListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA47E4625DD06F400E11D4C /* StudyListEmptyView.swift */; };
 		CCA47E6025DD196900E11D4C /* UITableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA47E5F25DD196900E11D4C /* UITableView+Ext.swift */; };
+		CCA5D5D425E561E5001C9236 /* ParticipantProfileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5D325E561E5001C9236 /* ParticipantProfileProtocols.swift */; };
+		CCA5D5E225E5674F001C9236 /* ParticipantProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5E125E5674F001C9236 /* ParticipantProfileView.swift */; };
+		CCA5D5E725E5675E001C9236 /* ParticipantProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5E625E5675E001C9236 /* ParticipantProfilePresenter.swift */; };
+		CCA5D5EF25E5676B001C9236 /* ParticipantProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5EE25E5676B001C9236 /* ParticipantProfileInteractor.swift */; };
+		CCA5D5F425E56777001C9236 /* ParticipantProfileRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5F325E56777001C9236 /* ParticipantProfileRemoteDataManager.swift */; };
+		CCA5D5F925E56781001C9236 /* ParticipantProfileWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5F825E56781001C9236 /* ParticipantProfileWireFrame.swift */; };
 		CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */; };
 		CCAF0FD6253300410060A2F6 /* MyStudyMainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD5253300410060A2F6 /* MyStudyMainInteractor.swift */; };
 		CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD8253300600060A2F6 /* MyStudyMainProtocols.swift */; };
@@ -656,6 +662,12 @@
 		CCA3FF632517829D00F62627 /* SearchStudyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStudyView.swift; sourceTree = "<group>"; };
 		CCA47E4625DD06F400E11D4C /* StudyListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyListEmptyView.swift; sourceTree = "<group>"; };
 		CCA47E5F25DD196900E11D4C /* UITableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ext.swift"; sourceTree = "<group>"; };
+		CCA5D5D325E561E5001C9236 /* ParticipantProfileProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileProtocols.swift; sourceTree = "<group>"; };
+		CCA5D5E125E5674F001C9236 /* ParticipantProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileView.swift; sourceTree = "<group>"; };
+		CCA5D5E625E5675E001C9236 /* ParticipantProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfilePresenter.swift; sourceTree = "<group>"; };
+		CCA5D5EE25E5676B001C9236 /* ParticipantProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileInteractor.swift; sourceTree = "<group>"; };
+		CCA5D5F325E56777001C9236 /* ParticipantProfileRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileRemoteDataManager.swift; sourceTree = "<group>"; };
+		CCA5D5F825E56781001C9236 /* ParticipantProfileWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileWireFrame.swift; sourceTree = "<group>"; };
 		CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainView.swift; sourceTree = "<group>"; };
 		CCAF0FD5253300410060A2F6 /* MyStudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainInteractor.swift; sourceTree = "<group>"; };
 		CCAF0FD8253300600060A2F6 /* MyStudyMainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainProtocols.swift; sourceTree = "<group>"; };
@@ -835,7 +847,6 @@
 			children = (
 				CCAF0FD02532FFC70060A2F6 /* Main */,
 				A5BA1EE5254AA89A0089D4E9 /* StudyDetail */,
-				A5BA1ED4254A8E160089D4E9 /* Notification */,
 			);
 			path = MyStudy;
 			sourceTree = "<group>";
@@ -933,6 +944,8 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
+				CCA5D5C625E561A0001C9236 /* ParticapateProfile */,
+				A5BA1ED4254A8E160089D4E9 /* Notification */,
 				CCC8760425C3D890009B90BF /* MyApplyStudyInfo */,
 				CCA25ADC25B9AFD900280C80 /* DelegateHost */,
 				CCA25AB725B6CE0900280C80 /* ModifyStudy */,
@@ -1488,6 +1501,19 @@
 			path = DataManager;
 			sourceTree = "<group>";
 		};
+		CCA5D5C625E561A0001C9236 /* ParticapateProfile */ = {
+			isa = PBXGroup;
+			children = (
+				CCA5D5E125E5674F001C9236 /* ParticipantProfileView.swift */,
+				CCA5D5E625E5675E001C9236 /* ParticipantProfilePresenter.swift */,
+				CCA5D5EE25E5676B001C9236 /* ParticipantProfileInteractor.swift */,
+				CCA5D5F325E56777001C9236 /* ParticipantProfileRemoteDataManager.swift */,
+				CCA5D5F825E56781001C9236 /* ParticipantProfileWireFrame.swift */,
+				CCA5D5D325E561E5001C9236 /* ParticipantProfileProtocols.swift */,
+			);
+			path = ParticapateProfile;
+			sourceTree = "<group>";
+		};
 		CCAF0FD02532FFC70060A2F6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -1915,6 +1941,7 @@
 			files = (
 				CC650DBE25C3E4A100359E7D /* MyApplyStudyInfoView.swift in Sources */,
 				CCC223A425E4D3E000A91F37 /* LaunchView.swift in Sources */,
+				CCA5D5F925E56781001C9236 /* ParticipantProfileWireFrame.swift in Sources */,
 				CC650DBF25C3E4A100359E7D /* MyApplyStudyInfoWireFrame.swift in Sources */,
 				CC650DC025C3E4A100359E7D /* MyApplyStudyInfoProtocols.swift in Sources */,
 				CCC223E825E4E80200A91F37 /* LaunchRemoteDataManager.swift in Sources */,
@@ -2021,6 +2048,7 @@
 				CCED89E225DD2295006DA773 /* SearchLocationEmptyView.swift in Sources */,
 				A5D058D5255D90CE0047CA9E /* StudyDetailInteractor.swift in Sources */,
 				CCD51CA2256E249100D41771 /* NoticeRemoteDataManager.swift in Sources */,
+				CCA5D5E725E5675E001C9236 /* ParticipantProfilePresenter.swift in Sources */,
 				A510B9D62583892B0084559C /* ApplyStudy.swift in Sources */,
 				CC5795072570C9F200DF96AB /* AddNoticeLocalDataManager.swift in Sources */,
 				CC6044812576265A000D11C7 /* NoticeDetailRemoteDataManager.swift in Sources */,
@@ -2113,8 +2141,10 @@
 				CC7B209925C3B7B6009920DC /* PaddingUILabel.swift in Sources */,
 				CCC223DE25E4E7E700A91F37 /* LaunchPresenter.swift in Sources */,
 				A5D6A78B2574309D007D6409 /* ProfileModifyPresenter.swift in Sources */,
+				CCA5D5F425E56777001C9236 /* ParticipantProfileRemoteDataManager.swift in Sources */,
 				CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */,
 				CC72CBF925B05B40009E9986 /* BaseProfileView.swift in Sources */,
+				CCA5D5D425E561E5001C9236 /* ParticipantProfileProtocols.swift in Sources */,
 				A581489C2591050F00BF3C2A /* EmailModifyInteractor.swift in Sources */,
 				CC21A7952559504600E31F77 /* IntroLocalDataManager.swift in Sources */,
 				A5D4B89125C1492C008403DC /* RequestToken.swift in Sources */,
@@ -2218,6 +2248,7 @@
 				CCD51C7D256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				CCA25AD825B6D3AA00280C80 /* ModifyStudyWireFrame.swift in Sources */,
+				CCA5D5EF25E5676B001C9236 /* ParticipantProfileInteractor.swift in Sources */,
 				CC5794FE2570C9C600DF96AB /* AddNoticeInteractor.swift in Sources */,
 				A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */,
 				CCBBEEFF2583A38E00177E25 /* TerminalCoreData.xcdatamodeld in Sources */,
@@ -2245,6 +2276,7 @@
 				CC5795012570C9D400DF96AB /* AddNoticePresenter.swift in Sources */,
 				A581493C25912CFA00BF3C2A /* CareerModifyView.swift in Sources */,
 				A57C33D3254E8B5A006CE9A2 /* NoticeView.swift in Sources */,
+				CCA5D5E225E5674F001C9236 /* ParticipantProfileView.swift in Sources */,
 				CCF470AD256BA6710085B371 /* ChatTableViewCell.swift in Sources */,
 				A5D2A5F925373D180010AE1C /* HotKeywordCell.swift in Sources */,
 				A5C81C6425836D60008F2B09 /* MyApplyListWireFrame.swift in Sources */,

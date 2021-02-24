@@ -43,13 +43,15 @@ final class BaseInterceptor: RequestInterceptor {
                         return completion(.retryWithDelay(self.retryDelay))
                     case false:
                         /// refreshToken 만료시 로그아웃
-                        let view = HomeView()
-                        let home = UINavigationController(rootViewController: view)
-                        /// 로그아웃과 동시에  토큰 삭제
-                        KeychainWrapper.standard.remove(forKey: "refreshToken")
-                        // RootViewController replace
-                        guard let window = UIApplication.shared.windows.first else { return }
-                        window.replaceRootViewController(home, animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                            let view = HomeView()
+                            let home = UINavigationController(rootViewController: view)
+                            /// 로그아웃과 동시에  토큰 삭제
+                            KeychainWrapper.standard.remove(forKey: "refreshToken")
+                            // RootViewController replace
+                            guard let window = UIApplication.shared.windows.first else { return }
+                            window.replaceRootViewController(home, animated: true, completion: nil)
+                        }
                     }
                 }
             }
@@ -60,41 +62,42 @@ final class BaseInterceptor: RequestInterceptor {
     
     func refreshToken(completion: @escaping (_ isSuccess: Bool) -> Void) {
         
-        guard let refreshToken = KeychainWrapper.standard.string(forKey: "refreshToken") else {
-            return
-        }
-        
-        TerminalNetworkManager
-            .shared
-            .session
-            .request(TerminalRouter.reissuanceToken(refreshToken: refreshToken))
-            .responseJSON { response in
-                switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    do {
-                        let result = try JSONDecoder().decode(BaseResponse<Authorization>.self, from: data!)
-                        if result.result {
-                            if let refresh = result.data?.refreshToken {
-                                let result = KeychainWrapper.standard.set(refresh, forKey: "refreshToken")
-                                print("리프레쉬 토큰 갱신 여부 :", result)
+        //리프레시토큰 없을 때 로그아웃 뷰로 가야됨
+        if let refreshToken = KeychainWrapper.standard.string(forKey: "refreshToken") {
+            TerminalNetworkManager
+                .shared
+                .session
+                .request(TerminalRouter.reissuanceToken(refreshToken: refreshToken))
+                .responseJSON { response in
+                    switch response.result {
+                    case .success(let value):
+                        let json = JSON(value)
+                        let data = "\(json)".data(using: .utf8)
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<Authorization>.self, from: data!)
+                            if result.result {
+                                if let refresh = result.data?.refreshToken {
+                                    let result = KeychainWrapper.standard.set(refresh, forKey: "refreshToken")
+                                    print("리프레쉬 토큰 갱신 여부 :", result)
+                                }
+                                if let access = result.data?.accessToken {
+                                    let result = KeychainWrapper.standard.set(access, forKey: "accessToken")
+                                    print("엑세스 토큰 갱신 여부 :", result)
+                                    completion(result)
+                                }
+                            } else {
+                                completion(false)
                             }
-                            if let access = result.data?.accessToken {
-                                let result = KeychainWrapper.standard.set(access, forKey: "accessToken")
-                                print("엑세스 토큰 갱신 여부 :", result)
-                                completion(result)
-                            }
-                        } else {
-                            completion(false)
+                        } catch {
+                            print(error.localizedDescription)
                         }
-                    } catch {
-                        print(error.localizedDescription)
+                    case .failure(let error):
+                        
+                        print("에러입니다.", error.localizedDescription)
                     }
-                case .failure(let error):
-                    
-                    print("에러입니다.", error.localizedDescription)
                 }
-            }
+        } else {
+            completion(false)
+        }
     }
 }
