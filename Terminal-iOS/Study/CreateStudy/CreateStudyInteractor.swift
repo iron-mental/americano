@@ -73,10 +73,6 @@ final class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
 }
 
 extension CreateStudyInteractor: CreateStudyReMoteDataManagerOutputProtocol {
-    func createStudyInvalid(message: String) {
-        presenter?.studyInfoInvalid(message: message)
-    }
-    
     func createStudyValid(response: BaseResponse<CreateStudyResult>) {
         switch response.result {
         case true:

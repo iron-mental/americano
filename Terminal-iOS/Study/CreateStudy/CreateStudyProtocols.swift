@@ -62,7 +62,6 @@ protocol CreateStudyRemoteDataManagerInputProtocol {
 }
 
 protocol CreateStudyReMoteDataManagerOutputProtocol {
-    func createStudyInvalid(message: String)
     func createStudyValid(response: BaseResponse<CreateStudyResult>)
 }
 

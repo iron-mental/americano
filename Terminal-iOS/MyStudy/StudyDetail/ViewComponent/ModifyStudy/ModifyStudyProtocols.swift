@@ -11,6 +11,7 @@ import UIKit
 protocol ModifyStudyViewProtocol: class {
     var presenter: ModifyStudyPresenterProtocol? { get set }
     var study: StudyDetail? { get set }
+    
     //PRESENTER -> VIEW
     func showResult(message: String)
     func showError(label: String?, message: String)

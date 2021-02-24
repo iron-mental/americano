@@ -69,7 +69,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     }
 }
 
-extension ModifyStudyView: ModifyStudyViewProtocol {
+extension ModifyStudyView: ModifyStudyViewProtocol {    
     func showResult(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
             if let myStudyDetailView = self.navigationController?.viewControllers[1] as? MyStudyDetailView,
