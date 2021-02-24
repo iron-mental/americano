@@ -36,8 +36,14 @@ class SetView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(viewWillAppear(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        settingList.reloadData()
+    }
     func attribute() {
         if let emailVerify = userInfo?.emailVerified {
             self.emailVerify = emailVerify
@@ -259,6 +265,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 2 {
             let notiCell = settingList.dequeueReusableCell(withIdentifier: NotiCell.notiCellId,
                                                            for: indexPath) as! NotiCell
+            notiCell.attribute()
             notiCell.title.text = noti[0]
             return notiCell
         } else if indexPath.section == 3 {
