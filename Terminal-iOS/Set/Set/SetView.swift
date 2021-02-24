@@ -12,6 +12,7 @@ import Kingfisher
 import CoreData
 
 class SetView: UIViewController {
+    var presenter: SetPresenterProtocol?
     // 섹션
     var sections: [String] = ["", "계정", "알림", "정보", ""]
     var account: [String] = ["이메일", "SNS"]
@@ -23,21 +24,17 @@ class SetView: UIViewController {
                                   Setting(title: "이용약관"),
                                   Setting(title: "개인정보 취급방침")]
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
-    
     var userInfo: UserInfo? { didSet { self.settingList.reloadData() }}
     var emailVerify: Bool = false
-    
-    var presenter: SetPresenterProtocol?
     let settingList = UITableView(frame: .zero, style: .insetGrouped)
     let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 25))
+    let notificationCenter = NotificationCenter.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
         attribute()
         layout()
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(viewWillAppear(_:)), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +42,11 @@ class SetView: UIViewController {
         settingList.reloadData()
     }
     func attribute() {
+        notificationCenter.addObserver(self,
+                                       selector: #selector(viewWillAppear(_:)),
+                                       name: UIApplication.willEnterForegroundNotification,
+                                       object: nil)
+        
         if let emailVerify = userInfo?.emailVerified {
             self.emailVerify = emailVerify
         }

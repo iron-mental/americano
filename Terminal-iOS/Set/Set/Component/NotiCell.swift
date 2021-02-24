@@ -11,29 +11,33 @@ import SwiftKeychainWrapper
 
 class NotiCell: DefaultCell {
     static let notiCellId = "notiCell"
-    
     lazy var notiToggle = UISwitch()
+    var result = false
     
     override func attribute() {
         super.attribute()
-        rightLabel.isHidden = true
-        self.accessoryView = notiToggle
-        notiToggle.addTarget(self, action: #selector(notiToggleDidTap(_: )), for: .touchUpInside)
-        UNUserNotificationCenter.current().getNotificationSettings { (result) in
-            if result.notificationCenterSetting.rawValue == 2 {
+        accessoryView = notiToggle
+        rightLabel.do {
+            $0.isHidden = true
+        }
+        notiToggle.do { toggle in
+            toggle.addTarget(self, action: #selector(notiToggleDidTap(_: )), for: .touchUpInside)
+            getNotificationSetting { result in
                 DispatchQueue.main.async {
-                    self.notiToggle.setOn(true, animated: true)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.notiToggle.setOn(false, animated: true)
+                    toggle.setOn(result, animated: true)
                 }
             }
         }
     }
     
+    func getNotificationSetting(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { [self] in
+            self.result = $0.notificationCenterSetting.rawValue == 2
+            completion(result)
+        }
+    }
+    
     @objc func notiToggleDidTap(_ sender: UISwitch) {
-        UIApplication.openSettingsURLString
         if let bundleIdentifier = Bundle.main.bundleIdentifier,
            let appSettings = URL(string: UIApplication.openSettingsURLString + bundleIdentifier) {
             if UIApplication.shared.canOpenURL(appSettings) {
