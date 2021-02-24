@@ -9,18 +9,19 @@
 import UIKit
 
 enum AlertType {
-    case StudyApplyView             //신청
-    case StudyApplyDeleteView       //신청 취소
-    case EmailAuthView              //이메일 auth
-    case DelegateHostConfirmView    //방장 위임
-    case LeaveStudyView             //스터디 나가기
-    case DeleteStudyView            //스터디 삭제
-    case ProjectLimitView           //프로젝트 3개 이하 안내
-    case AllowUserView              //스터디 신청 수락
-    case RejectUserView             //스터디 신청 거절
-    case LogOutView                 //로그아웃
-    case VersionUpdateRecommend     //업데이트 권장
-    case VersionUpdateRequired      //업데이트 필수
+    case StudyApplyView                 //신청
+    case StudyApplyDeleteView           //신청 취소
+    case EmailAuthView                  //이메일 auth
+    case DelegateHostConfirmView        //방장 위임
+    case LeaveStudyView                 //스터디 나가기
+    case DeleteStudyView                //스터디 삭제
+    case ProjectLimitView               //프로젝트 3개 이하 안내
+    case AllowUserView                  //스터디 신청 수락
+    case RejectUserView                 //스터디 신청 거절
+    case LogOutView                     //로그아웃
+    case VersionUpdateRecommendView     //업데이트 권장
+    case VersionUpdateRequiredView      //업데이트 필수
+    case JumpToSettingAppView           //알림 설정
     
     var view: UIView {
         switch self {
@@ -56,16 +57,19 @@ enum AlertType {
         case .LogOutView:
             let logoutView = AlertMessageView(message: "로그아웃 하시겠습니까?")
             return logoutView
-        case .VersionUpdateRecommend:
+        case .VersionUpdateRecommendView:
             let versionUpdateRecommendView = AlertMessageView(message: "앱이 새롭게 업데이트 되었습니다.\n업데이트 하시겠습니까?")
             versionUpdateRecommendView.completeButton.setTitle("업데이트", for: .normal)
             versionUpdateRecommendView.dismissButton.setTitle("다음에 하기", for: .normal)
             return versionUpdateRecommendView
-        case .VersionUpdateRequired:
+        case .VersionUpdateRequiredView:
             let versionUpdateRequiredView = AlertMessageView(message: "앱이 새롭게 업데이트 되었습니다.\n업데이트 후 이용해주세요.")
             versionUpdateRequiredView.onlyCompleteButton()
             versionUpdateRequiredView.completeButton.setTitle("업데이트 하러 가기", for: .normal)
             return versionUpdateRequiredView
+        case .JumpToSettingAppView:
+            let jumpToSettingAppView = AlertMessageView(message: "터미널 앱 알림허용이 필요합니다.\niOS 알림 설정페이지로 지금\n이동하시겠습니까?")
+            return jumpToSettingAppView
         }
     }
 }
