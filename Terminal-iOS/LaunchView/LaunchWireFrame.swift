@@ -48,7 +48,6 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {
                 UIApplication.shared.openURL(url) }
-            
         }
     }
 }

@@ -19,27 +19,26 @@ class NotiCell: DefaultCell {
         rightLabel.isHidden = true
         self.accessoryView = notiToggle
         notiToggle.addTarget(self, action: #selector(notiToggleDidTap(_: )), for: .touchUpInside)
-        
-        if let isOn = KeychainWrapper.standard.bool(forKey: "notiToggle") {
-            if isOn {
-                notiToggle.setOn(true, animated: true)
-                UIApplication.shared.registerForRemoteNotifications()
+        UNUserNotificationCenter.current().getNotificationSettings { (result) in
+            if result.notificationCenterSetting.rawValue == 2 {
+                DispatchQueue.main.async {
+                    self.notiToggle.setOn(true, animated: true)
+                }
             } else {
-                UIApplication.shared.unregisterForRemoteNotifications()
-                notiToggle.setOn(false, animated: true)
+                DispatchQueue.main.async {
+                    self.notiToggle.setOn(false, animated: true)
+                }
             }
-        } else {
-            notiToggle.setOn(false, animated: true)
         }
     }
     
     @objc func notiToggleDidTap(_ sender: UISwitch) {
-        KeychainWrapper.standard.set(sender.isOn, forKey: "notiToggle")
-        guard let isOn = KeychainWrapper.standard.bool(forKey: "notiToggle") else { return }
-        if isOn {
-            UIApplication.shared.registerForRemoteNotifications()
-        } else {
-            UIApplication.shared.unregisterForRemoteNotifications()
+        UIApplication.openSettingsURLString
+        if let bundleIdentifier = Bundle.main.bundleIdentifier,
+           let appSettings = URL(string: UIApplication.openSettingsURLString + bundleIdentifier) {
+            if UIApplication.shared.canOpenURL(appSettings) {
+                UIApplication.shared.open(appSettings)
+            }
         }
     }
 }
