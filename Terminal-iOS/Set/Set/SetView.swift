@@ -130,17 +130,21 @@ class SetView: UIViewController {
     @objc func logOutConfirmedDidTap() {
         TerminalAlertMessage.dismiss()
         presenter?.loggedOutConfirmed()
-
+    }
+    
+    @objc func notiSettingConfirmedDidTap() {
+        TerminalAlertMessage.dismiss()
+        presenter?.goToSettingApp()
     }
 }
 
 extension SetView: SetViewProtocol {
     func showLoading() {
-                LoadingRainbowCat.show()
+        LoadingRainbowCat.show()
     }
     
     func hideLoading() {
-                LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide()
     }
     
     func emailAuthResponse(result: Bool, message: String) {
@@ -155,6 +159,11 @@ extension SetView: SetViewProtocol {
     func loggedOut() {
         TerminalAlertMessage.show(controller: self, type: .LogOutView)
         TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(logOutConfirmedDidTap), for: .touchUpInside)
+    }
+    
+    func showNotiSettingAlertView() {
+        TerminalAlertMessage.show(controller: self, type: .JumpToSettingAppView)
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(notiSettingConfirmedDidTap), for: .touchUpInside)
     }
     
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신
@@ -235,6 +244,11 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             presenter?.showProfileDetail()
         }
         
+        // 알림
+        if indexPath.section == 2 && indexPath.row == 0 {
+            presenter?.notiCellDidTap()
+        }
+        
         // 로그아웃
         if indexPath.section == 4 && indexPath.row == 0 {
             presenter?.loggedOut()
@@ -269,6 +283,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
                                                            for: indexPath) as! NotiCell
             notiCell.attribute()
             notiCell.title.text = noti[0]
+            notiCell.accessoryType = .disclosureIndicator
             return notiCell
         } else if indexPath.section == 3 {
             let defaultCell = settingList.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId,

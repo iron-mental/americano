@@ -57,23 +57,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        
-        if let studyID = userInfo["study_id"] as? String,
-           let pushEvent = userInfo["pushEvent"] as? String,
-           let alertID = userInfo["alert_id"] as? Int {
+        if let studyID = userInfo["study_id"] as? String {
             self.studyID = studyID
+        }
+        if let pushEvent = userInfo["pushEvent"] as? String {
             self.pushEvent = AlarmType(rawValue: pushEvent)
-            //            여기에 추가적으로 studyTitle도 있으면 좋을듯
+        }
+        if let alertID = userInfo["alert_id"] as? Int {
             self.alertID = alertID
         }
-        
         completionHandler([.alert, .badge, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
         let event = self.pushEvent
-        //        suspend일 때 푸시 누르면 죽음 해결해야됨
         let studyID = Int(self.studyID)!
         
         guard let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }

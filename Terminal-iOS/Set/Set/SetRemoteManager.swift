@@ -63,6 +63,7 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
                 }
             }
     }
+    
     func postLogout(userID: String) {
         TerminalNetworkManager
             .shared

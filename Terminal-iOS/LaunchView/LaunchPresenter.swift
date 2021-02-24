@@ -30,9 +30,9 @@ extension LaunchPresenter: LaunchInteractorOutputProtocol {
     func versionNeedUpdate(force: VersionResultType) {
         switch force {
         case .Recommended:
-            view?.showVersionUpdateAlert(alertType: .VersionUpdateRecommend)
+            view?.showVersionUpdateAlert(alertType: .VersionUpdateRecommendView)
         case .Required:
-            view?.showVersionUpdateAlert(alertType: .VersionUpdateRequired)
+            view?.showVersionUpdateAlert(alertType: .VersionUpdateRequiredView)
         case .notRequired: break
         }
     }

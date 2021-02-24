@@ -34,11 +34,11 @@ class StudyApplyMessageView: AlertBaseUIView {
             $0.text = type == .apply ? "스터디 신청하기" : "신청 메세지 수정하기"
         }
         applyGuideLabel.do {
-            $0.dynamicFont(fontSize: 15, weight: .bold)
+            $0.dynamicFont(fontSize: 13, weight: .bold)
             $0.text = type == .apply ? "가입 인사를 작성해보세요" : "수정할 메세지를 작성하세요"
         }
         editMessageTextField.do {
-            $0.dynamicFont(fontSize: 15, weight: .regular)
+            $0.dynamicFont(fontSize: 13, weight: .regular)
             $0.placeholder = "스터디 참여를 희망합니다."
         }
     }

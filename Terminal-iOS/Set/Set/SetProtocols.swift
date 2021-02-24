@@ -18,6 +18,7 @@ protocol SetViewProtocol: class {
     func showLoading()
     func hideLoading()
     func showError(message: String)
+    func showNotiSettingAlertView()
 }
 
 protocol SetWireFrameProtocol: class {
@@ -27,6 +28,7 @@ protocol SetWireFrameProtocol: class {
     func presentProfileDetailScreen(from view: SetViewProtocol)
     func presentUserWithdrawal(from view: SetViewProtocol)
     func replaceRootViewToIntroView(from view: SetViewProtocol)
+    func goToSettingApp()
 }
 
 protocol SetPresenterProtocol: class {
@@ -38,10 +40,11 @@ protocol SetPresenterProtocol: class {
     func viewDidLoad()
     func showProfileDetail()
     func emailAuthRequest()
-    
     func loggedOut()
     func loggedOutConfirmed()
     func userWithdrawal()
+    func notiCellDidTap()
+    func goToSettingApp()
 }
 
 protocol SetInteractorOutputProtocol: class {

@@ -26,7 +26,7 @@ class EmailAlertMessageView: AlertBaseUIView {
             $0.textColor = UIColor.appColor(.alertTextcolor)
             $0.numberOfLines = 0
             $0.textAlignment = .center
-            $0.font = UIFont.monospacedSystemFont(ofSize: $0.font.pointSize, weight: UIFont.Weight.regular)
+            $0.dynamicFont(fontSize: 13, weight: .regular)
             $0.text = self.message ?? ""
         }
     }

@@ -56,4 +56,13 @@ class SetWireFrame: SetWireFrameProtocol {
         let home = UINavigationController(rootViewController: view)
         window.replaceRootViewController(home, animated: true, completion: nil)
     }
+    
+    func goToSettingApp() {
+        if let bundleIdentifier = Bundle.main.bundleIdentifier,
+           let appSettings = URL(string: UIApplication.openSettingsURLString + bundleIdentifier) {
+            if UIApplication.shared.canOpenURL(appSettings) {
+                UIApplication.shared.open(appSettings)
+            }
+        }
+    }
 }
