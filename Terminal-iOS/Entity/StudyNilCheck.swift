@@ -6,10 +6,10 @@
 //  Copyright © 2021 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// 스터디 nil 체크를 위한 모델
 struct StudyNilCheck {
     let message: String
-    let label: String
+    let label: String?
 }
