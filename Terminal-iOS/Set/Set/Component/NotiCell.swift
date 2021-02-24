@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class NotiCell: DefaultCell {
     static let notiCellId = "notiCell"
@@ -16,12 +17,29 @@ class NotiCell: DefaultCell {
     override func attribute() {
         super.attribute()
         rightLabel.isHidden = true
-        notiToggle.setOn(false, animated: true)
         self.accessoryView = notiToggle
         notiToggle.addTarget(self, action: #selector(notiToggleDidTap(_: )), for: .touchUpInside)
+        
+        if let isOn = KeychainWrapper.standard.bool(forKey: "notiToggle") {
+            if isOn {
+                notiToggle.setOn(true, animated: true)
+                UIApplication.shared.registerForRemoteNotifications()
+            } else {
+                UIApplication.shared.unregisterForRemoteNotifications()
+                notiToggle.setOn(false, animated: true)
+            }
+        } else {
+            notiToggle.setOn(false, animated: true)
+        }
     }
     
     @objc func notiToggleDidTap(_ sender: UISwitch) {
-        print(sender)
+        KeychainWrapper.standard.set(sender.isOn, forKey: "notiToggle")
+        guard let isOn = KeychainWrapper.standard.bool(forKey: "notiToggle") else { return }
+        if isOn {
+            UIApplication.shared.registerForRemoteNotifications()
+        } else {
+            UIApplication.shared.unregisterForRemoteNotifications()
+        }
     }
 }
