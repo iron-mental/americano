@@ -122,11 +122,7 @@ class SetView: UIViewController {
     @objc func logOutConfirmedDidTap() {
         TerminalAlertMessage.dismiss()
         presenter?.loggedOutConfirmed()
-        let view = HomeView()
-        let home = UINavigationController(rootViewController: view)
-        /// RootViewController replace
-        guard let window = UIApplication.shared.windows.first else { return }
-        window.replaceRootViewController(home, animated: true, completion: nil)
+
     }
 }
 
@@ -160,6 +156,10 @@ extension SetView: SetViewProtocol {
         self.attribute()
         self.layout()
         self.hideLoading()
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }
 
