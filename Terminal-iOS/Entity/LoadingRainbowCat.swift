@@ -23,7 +23,7 @@ class LoadingRainbowCat: NSObject {
             window.backgroundColor = UIColor.appColor(.terminalBackground)
             popupView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
             backgroundView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX, height: window.frame.maxY)
-            backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+            backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
             popupView.center = window.center
             
             sharedInstance.backgroundView?.removeFromSuperview()

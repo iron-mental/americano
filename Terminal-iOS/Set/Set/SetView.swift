@@ -12,6 +12,7 @@ import Kingfisher
 import CoreData
 
 class SetView: UIViewController {
+    var presenter: SetPresenterProtocol?
     // 섹션
     var sections: [String] = ["", "계정", "알림", "정보", ""]
     var account: [String] = ["이메일", "SNS"]
@@ -23,13 +24,11 @@ class SetView: UIViewController {
                                   Setting(title: "이용약관"),
                                   Setting(title: "개인정보 취급방침")]
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
-    
     var userInfo: UserInfo? { didSet { self.settingList.reloadData() }}
     var emailVerify: Bool = false
-    
-    var presenter: SetPresenterProtocol?
     let settingList = UITableView(frame: .zero, style: .insetGrouped)
     let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 25))
+    let notificationCenter = NotificationCenter.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +37,16 @@ class SetView: UIViewController {
         layout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        settingList.reloadData()
+    }
     func attribute() {
+        notificationCenter.addObserver(self,
+                                       selector: #selector(viewWillAppear(_:)),
+                                       name: UIApplication.willEnterForegroundNotification,
+                                       object: nil)
+        
         if let emailVerify = userInfo?.emailVerified {
             self.emailVerify = emailVerify
         }
@@ -122,17 +130,21 @@ class SetView: UIViewController {
     @objc func logOutConfirmedDidTap() {
         TerminalAlertMessage.dismiss()
         presenter?.loggedOutConfirmed()
-
+    }
+    
+    @objc func notiSettingConfirmedDidTap() {
+        TerminalAlertMessage.dismiss()
+        presenter?.goToSettingApp()
     }
 }
 
 extension SetView: SetViewProtocol {
     func showLoading() {
-                LoadingRainbowCat.show()
+        LoadingRainbowCat.show()
     }
     
     func hideLoading() {
-                LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide()
     }
     
     func emailAuthResponse(result: Bool, message: String) {
@@ -147,6 +159,11 @@ extension SetView: SetViewProtocol {
     func loggedOut() {
         TerminalAlertMessage.show(controller: self, type: .LogOutView)
         TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(logOutConfirmedDidTap), for: .touchUpInside)
+    }
+    
+    func showNotiSettingAlertView() {
+        TerminalAlertMessage.show(controller: self, type: .JumpToSettingAppView)
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(notiSettingConfirmedDidTap), for: .touchUpInside)
     }
     
     // MARK: 환경설정 뷰가 로드시에 혹은 프로필 정보 수정시 유저 정보 갱신
@@ -227,6 +244,11 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             presenter?.showProfileDetail()
         }
         
+        // 알림
+        if indexPath.section == 2 && indexPath.row == 0 {
+            presenter?.notiCellDidTap()
+        }
+        
         // 로그아웃
         if indexPath.section == 4 && indexPath.row == 0 {
             presenter?.loggedOut()
@@ -259,7 +281,9 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 2 {
             let notiCell = settingList.dequeueReusableCell(withIdentifier: NotiCell.notiCellId,
                                                            for: indexPath) as! NotiCell
+            notiCell.attribute()
             notiCell.title.text = noti[0]
+            notiCell.accessoryType = .disclosureIndicator
             return notiCell
         } else if indexPath.section == 3 {
             let defaultCell = settingList.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId,

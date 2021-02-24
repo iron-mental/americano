@@ -34,7 +34,7 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                                                                                message: nil,
                                                                                code: nil,
                                                                                data: VersionResult(latestVersion: "1.0",
-                                                                                                   force: "1")))
+                                                                                                   force: "0")))
                     }
                 case .failure:
                     if let data = response.data {

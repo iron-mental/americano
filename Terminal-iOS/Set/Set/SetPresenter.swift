@@ -37,6 +37,14 @@ class SetPresenter: SetPresenterProtocol {
     func loggedOutConfirmed() {
         interactor?.removeRefreshToken()
     }
+    
+    func notiCellDidTap() {
+        view?.showNotiSettingAlertView()
+    }
+    
+    func goToSettingApp() {
+        wireFrame?.goToSettingApp()
+    }
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {

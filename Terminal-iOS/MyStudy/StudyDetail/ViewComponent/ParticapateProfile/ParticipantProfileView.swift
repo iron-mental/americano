@@ -17,6 +17,12 @@ class ParticipantProfileView: BaseProfileView {
         presenter?.viewDidLoad()
     }
     
+    override func attribute() {
+        super.attribute()
+        
+        [ profile.modify, career.modify, project.modify, sns.modify, email.modify, location.modify]
+            .forEach { $0.isHidden = true}
+    }
     override func layout() {
         super.layout()
         

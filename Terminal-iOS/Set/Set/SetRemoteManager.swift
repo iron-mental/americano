@@ -63,19 +63,18 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
                 }
             }
     }
+    
     func postLogout(userID: String) {
         TerminalNetworkManager
             .shared
             .session
             .request(TerminalRouter.logout(userID: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                         if result.message != nil {
                             self.interactor?.postLogoutResult(result: result)
                         }
