@@ -94,10 +94,8 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
 
 extension ModifyStudyInteractor: ModifyStudyRemoteDataManagerOutputProtocol {
     func putStudyInfoResult(result: BaseResponse<String>) {
-        if let message = result.message {
-            self.presenter?.putStudyInfoResult(result: result.result,
-                                               label: result.label,
-                                               message: message)
-        }
+        self.presenter?.putStudyInfoResult(result: result.result,
+                                           label: result.label,
+                                           message: result.message ?? "")
     }
 }
