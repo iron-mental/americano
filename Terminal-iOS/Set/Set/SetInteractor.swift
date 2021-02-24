@@ -24,11 +24,18 @@ class SetInteractor: SetInteractortInputProtocol {
     }
     
     func removeRefreshToken() {
+        guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
         KeychainWrapper.standard.remove(forKey: "refreshToken")
+        KeychainWrapper.standard.remove(forKey: "accessToken")
+        remoteDataManager?.postLogout(userID: userID)
     }
 }
 
 extension SetInteractor: SetRemoteDataManagerOutputProtocol {
+    func postLogoutResult(result: BaseResponse<String>) {
+        presenter?.logoutResult(result: result)
+    }
+    
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
         guard let result = userInfo.data else { return }
         //기존의 내용을 수정

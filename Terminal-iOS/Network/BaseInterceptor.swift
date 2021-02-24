@@ -61,7 +61,6 @@ final class BaseInterceptor: RequestInterceptor {
     }
     
     func refreshToken(completion: @escaping (_ isSuccess: Bool) -> Void) {
-        
         //리프레시토큰 없을 때 로그아웃 뷰로 가야됨
         if let refreshToken = KeychainWrapper.standard.string(forKey: "refreshToken") {
             TerminalNetworkManager
@@ -92,8 +91,8 @@ final class BaseInterceptor: RequestInterceptor {
                             print(error.localizedDescription)
                         }
                     case .failure(let error):
-                        
-                        print("에러입니다.", error.localizedDescription)
+                        //리프레시 마저 만료
+                        completion(false)
                     }
                 }
         } else {

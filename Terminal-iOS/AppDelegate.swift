@@ -50,6 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 application.registerForRemoteNotifications()
             }
         }
+        
+        print(KeychainWrapper.standard.string(forKey: "refreshToken"))
+        print(KeychainWrapper.standard.string(forKey: "accessToken"))
         return true
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

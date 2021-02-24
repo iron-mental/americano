@@ -17,6 +17,7 @@ protocol SetViewProtocol: class {
     
     func showLoading()
     func hideLoading()
+    func showError(message: String)
 }
 
 protocol SetWireFrameProtocol: class {
@@ -25,6 +26,7 @@ protocol SetWireFrameProtocol: class {
     // PRESENT -> WIREFRAME
     func presentProfileDetailScreen(from view: SetViewProtocol)
     func presentUserWithdrawal(from view: SetViewProtocol)
+    func replaceRootViewToIntroView(from view: SetViewProtocol)
 }
 
 protocol SetPresenterProtocol: class {
@@ -45,6 +47,7 @@ protocol SetPresenterProtocol: class {
 protocol SetInteractorOutputProtocol: class {
     func didRetrievedUserInfo(userInfo: UserInfo)
     func eamilAuthResponse(result: Bool, message: String)
+    func logoutResult(result: BaseResponse<String>)
     func onError()
 }
 
@@ -58,21 +61,18 @@ protocol SetInteractortInputProtocol: class {
     func removeRefreshToken()
 }
 
-protocol SetDataManagerInputProtocol: class {
-    // INTERACOTER -> DATAMANAGER
-    
-}
-
 protocol SetRemoteDataManagerInputProtocol: class {
     var interactor: SetRemoteDataManagerOutputProtocol? { get set }
     // INTERACTOR -> REMOTEDATAMANAGER
     func getUserInfo()
     func emailAuthRequest()
+    func postLogout(userID: String)
 }
 
 protocol SetRemoteDataManagerOutputProtocol: class {
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
     func emailAuthResponse(result: BaseResponse<Bool>)
+    func postLogoutResult(result: BaseResponse<String>)
     func error()
 }
 

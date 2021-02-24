@@ -50,4 +50,10 @@ class SetWireFrame: SetWireFrameProtocol {
         }
     }
     
+    func replaceRootViewToIntroView(from view: SetViewProtocol) {
+        guard let window = UIApplication.shared.windows.first else { return }
+        let view = HomeView()
+        let home = UINavigationController(rootViewController: view)
+        window.replaceRootViewController(home, animated: true, completion: nil)
+    }
 }
