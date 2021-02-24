@@ -8,48 +8,57 @@
 
 import Foundation
 
+struct StudyNullCheck {
+    let message: String
+    let label: String
+}
+
 class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
     weak var presenter: ModifyStudyInteractorOutputProtocol?
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol?
     var currentStudy: StudyDetail?
     
-    func nilCheck(study: StudyDetailPost) -> String {
+    func nilCheck(study: StudyDetailPost) -> StudyNullCheck {
+        var nullCheck: StudyNullCheck?
+        
         if study.category.isEmpty {
-            return "카테고리가 지정되어있지 않습니다."
+            nullCheck = StudyNullCheck(message: "카테고리가 지정되어있지 않습니다.", label: "category")
         } else if study.title!.isEmpty {
-            return "제목을 입력해주세요"
+            nullCheck = StudyNullCheck(message: "제목을 입력해주세요", label: "title")
         } else if study.introduce!.isEmpty {
-            return "소개를 입력해주세요"
+            nullCheck = StudyNullCheck(message: "소개를 입력해주세요", label: "introduce")
         } else if study.progress!.isEmpty {
-            return "진행을 입력해주세요"
+            nullCheck = StudyNullCheck(message: "진행을 입력해주세요", label: "progress")
         } else if study.studyTime!.isEmpty {
-            return "시간을 입력해주세요"
+            nullCheck = StudyNullCheck(message: "시간을 입력해주세요", label: "studyTime")
         } else if let notion = study.snsNotion {
             if !notion.notionCheck() {
-                return "Notion URL이 정확하지 않습니다."
+                nullCheck = StudyNullCheck(message: "Notion URL이 정확하지 않습니다.", label: "sns_notion")
             } else if let evernote = study.snsEvernote {
                 if !evernote.evernoteCheck() {
-                    return "Evernote URL이 정확하지 않습니다."
+                    nullCheck = StudyNullCheck(message: "Evernote URL이 정확하지 않습니다.", label: "sns_evernote")
                 } else if let web = study.snsWeb {
                     if !web.webCheck() {
-                        return "Web URL이 정확하지 않습니다."
+                        nullCheck = StudyNullCheck(message: "web URL이 정확하지 않습니다.", label: "sns_web")
                     }
                 }
             }
         } else if let location = study.location {
-            if location.lat.isZero {
-                return "장소를 선택해주세요 - latitude error"
-            } else if location.lng.isZero {
-                return "장소를 선택해주세요 - latitude error"
-            } else if location.sido!.isEmpty {
-                return "장소를 선택해주세요 - sido 비어있음"
-            } else if location.sigungu!.isEmpty {
-                return "장소를 선택해주세요 - sigungu 비어있음"
-            } else if location.address.isEmpty {
-                return "장소를 선택해주세요 - address 비어있음"
+            if location.lat.isZero
+                || location.lng.isZero
+                || location.sido!.isEmpty
+                || location.sigungu!.isEmpty
+                || location.address.isEmpty {
+                nullCheck = StudyNullCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
             }
         }
-        return "성공"
+        
+        if let nullCheck = nullCheck {
+            return nullCheck
+        } else {
+            return StudyNullCheck(message: "성공", label: "임시")
+        }
+        
     }
     
     
@@ -73,21 +82,22 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
     
     func putStudyInfo(studyID: Int, study: StudyDetailPost) {
         let nilCheckResult = nilCheck(study: study)
-        if nilCheckResult == "성공" {
+        if nilCheckResult.message == "성공" {
             remoteDataManager?.putStudyInfo(studyID: studyID, study: duplicateCheck(targetStudy: study))
         } else {
-            presenter?.putStudyInfoResult(result: false, message: nilCheckResult)
+            let label = nilCheckResult.label
+            let message = nilCheckResult.message
+            presenter?.putStudyInfoResult(result: false, label: label, message: message)
         }
     }
 }
 
 extension ModifyStudyInteractor: ModifyStudyRemoteDataManagerOutputProtocol {
-    func putStudyInfoResult(result: Bool, message: String) {
-        switch result {
-        case true:
-            presenter?.putStudyInfoResult(result: result, message: message)
-        case false:
-            presenter?.putStudyInfoResult(result: result, message: message)
+    func putStudyInfoResult(result: BaseResponse<String>) {
+        if let message = result.message {
+            self.presenter?.putStudyInfoResult(result: result.result,
+                                               label: result.label,
+                                               message: message)
         }
     }
 }

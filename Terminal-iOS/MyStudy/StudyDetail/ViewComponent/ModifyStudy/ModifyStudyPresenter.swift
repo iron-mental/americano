@@ -24,7 +24,7 @@ class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
 }
 
 extension ModifyStudyPresenter: ModifyStudyInteractorOutputProtocol {
-    func putStudyInfoResult(result: Bool, message: String) {
+    func putStudyInfoResult(result: Bool, label: String? = nil, message: String) {
         switch result {
         case true:
             LoadingRainbowCat.hide {
@@ -32,7 +32,11 @@ extension ModifyStudyPresenter: ModifyStudyInteractorOutputProtocol {
             }
         case false:
             LoadingRainbowCat.hide {
-                self.view?.showError(message: message)
+                guard let label = label else {
+                    self.view?.showError(label: nil, message: message)
+                    return
+                }
+                self.view?.showError(label: label, message: message)
             }
         }
     }
