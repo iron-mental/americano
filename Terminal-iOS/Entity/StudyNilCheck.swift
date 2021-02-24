@@ -6,7 +6,7 @@
 //  Copyright © 2021 정재인. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 /// 스터디 nil 체크를 위한 모델
 struct StudyNilCheck {

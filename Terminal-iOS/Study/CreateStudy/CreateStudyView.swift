@@ -69,14 +69,36 @@ extension CreateStudyView: CreateStudyViewProtocol {
     func setBackgroundImage() {
     }
     
-    func studyInfoInvalid(message: String) {
-        showToast(controller: self, message: message, seconds: 1)
+    func studyInfoInvalid(label: String? = nil, message: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            if let label = label {
+                switch label {
+                case "title":
+                    self.studyTitleTextField.becomeFirstResponder()
+                case "introduce":
+                    self.studyIntroduceView.textView.becomeFirstResponder()
+                case "progress":
+                    self.studyInfoView.textView.becomeFirstResponder()
+                case "study_time":
+                    self.timeView.detailTime.becomeFirstResponder()
+                case "locaion_detail":
+                    self.locationView.detailAddress.becomeFirstResponder()
+                case "sns_notion":
+                    self.SNSInputView.notion.textField.becomeFirstResponder()
+                case "sns_evernote":
+                    self.SNSInputView.evernote.textField.becomeFirstResponder()
+                case "sns_web":
+                    self.SNSInputView.web.textField.becomeFirstResponder()
+                default:
+                    break
+                }
+            }
+        }
     }
     
     func studyInfoValid(studyID: Int, message: String) {
         showToast(controller: self, message: message, seconds: 1) {
             self.navigationController?.popViewController(animated: true)
         }
-        
     }
 }

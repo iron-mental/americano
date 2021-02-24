@@ -24,7 +24,7 @@ protocol CreateStudyViewProtocol {
     func setView()
     func getBackgroundImage()
     func setBackgroundImage()
-    func studyInfoInvalid(message: String)
+    func studyInfoInvalid(label: String?, message: String)
     func studyInfoValid(studyID: Int, message: String)
 }
 
@@ -40,8 +40,8 @@ protocol CreateStudyInteractorInputProtocol {
 protocol CreateStudyInteractorOutputProtocol {
     
     //INTERACTOR -> PRESENTER
-    func studyInfoInvalid(message: String)
-    func studyInfoValid(studyID: Int)
+    func studyInfoInvalid(label: String?, message: String)
+    func studyInfoValid(studyID: Int, message: String)
 }
 
 protocol CreateStudyPresenterProtocol {

@@ -54,6 +54,7 @@
 		A5417FE925A7A6E3005B884F /* BaseSNSModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5417FE825A7A6E3005B884F /* BaseSNSModifyView.swift */; };
 		A5417FF125A7A855005B884F /* ProfileSNSModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5417FF025A7A855005B884F /* ProfileSNSModifyView.swift */; };
 		A541800525A8919F005B884F /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A541800425A8919F005B884F /* LocationCell.swift */; };
+		A550CC6125E6B77B003E9266 /* StudyCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A550CC6025E6B77B003E9266 /* StudyCheck.swift */; };
 		A554DDC925AEEAA300C03E41 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */; };
 		A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */; };
 		A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */; };
@@ -114,6 +115,7 @@
 		A5BA4619255D38D30061C511 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BA4618255D38D30061C511 /* String+Ext.swift */; };
 		A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */; };
 		A5BEFB0C25B9EFA900CAED80 /* CategoryImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BEFB0B25B9EFA900CAED80 /* CategoryImageView.swift */; };
+		A5C205A125E6AF6A006EBD14 /* StudyNilCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C205A025E6AF6A006EBD14 /* StudyNilCheck.swift */; };
 		A5C5B14A25455A4100F4A86D /* CareerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14925455A4100F4A86D /* CareerView.swift */; };
 		A5C5B14D2545662600F4A86D /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14C2545662600F4A86D /* ProjectView.swift */; };
 		A5C5B1502545699700F4A86D /* BaseSNSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C5B14F2545699700F4A86D /* BaseSNSView.swift */; };
@@ -436,6 +438,7 @@
 		A5417FE825A7A6E3005B884F /* BaseSNSModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSNSModifyView.swift; sourceTree = "<group>"; };
 		A5417FF025A7A855005B884F /* ProfileSNSModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSNSModifyView.swift; sourceTree = "<group>"; };
 		A541800425A8919F005B884F /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
+		A550CC6025E6B77B003E9266 /* StudyCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyCheck.swift; sourceTree = "<group>"; };
 		A554DDC825AEEAA300C03E41 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		A5576DD825BC95EE00AC5BEA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A55C29582535D7A9001E0A4D /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
@@ -496,6 +499,7 @@
 		A5BA4618255D38D30061C511 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		A5BBCEAA25592A790098BB02 /* ProfileModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModifyView.swift; sourceTree = "<group>"; };
 		A5BEFB0B25B9EFA900CAED80 /* CategoryImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryImageView.swift; sourceTree = "<group>"; };
+		A5C205A025E6AF6A006EBD14 /* StudyNilCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyNilCheck.swift; sourceTree = "<group>"; };
 		A5C5B14925455A4100F4A86D /* CareerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CareerView.swift; sourceTree = "<group>"; };
 		A5C5B14C2545662600F4A86D /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		A5C5B14F2545699700F4A86D /* BaseSNSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSNSView.swift; sourceTree = "<group>"; };
@@ -1437,6 +1441,7 @@
 				A501FC0C25C4076600150DA0 /* MyStudy.swift */,
 				A56048BF25DEEB4500240E55 /* SNSState.swift */,
 				CCC223B625E4E05B00A91F37 /* VersionResult.swift */,
+				A5C205A025E6AF6A006EBD14 /* StudyNilCheck.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1536,6 +1541,7 @@
 				CC72CBEE25B02FCE009E9986 /* AlertMessageView.swift */,
 				A56264F125B5AE4B004CD298 /* EmailAlertMessageView.swift */,
 				A5D4B89025C1492C008403DC /* RequestToken.swift */,
+				A550CC6025E6B77B003E9266 /* StudyCheck.swift */,
 			);
 			path = StaticComponent;
 			sourceTree = "<group>";
@@ -2053,6 +2059,7 @@
 				A5C7B8F525AC4FCD00016D5B /* Address.swift in Sources */,
 				CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */,
 				A5C7B90D25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift in Sources */,
+				A550CC6125E6B77B003E9266 /* StudyCheck.swift in Sources */,
 				A55C29592535D7A9001E0A4D /* UILabel+Ext.swift in Sources */,
 				A5417FD325A77E3F005B884F /* ProjectSNSView.swift in Sources */,
 				CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */,
@@ -2223,6 +2230,7 @@
 				CCBBEEFF2583A38E00177E25 /* TerminalCoreData.xcdatamodeld in Sources */,
 				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,
 				A5753449257669DE00FD7D0C /* ProjectCell.swift in Sources */,
+				A5C205A125E6AF6A006EBD14 /* StudyNilCheck.swift in Sources */,
 				CC3F992325454B5500428B11 /* Terminal.swift in Sources */,
 				CCA3FF402517823000F62627 /* StudyListRemoteDataManager.swift in Sources */,
 				A510B9FE2583BB190084559C /* ApplyUserView.swift in Sources */,
