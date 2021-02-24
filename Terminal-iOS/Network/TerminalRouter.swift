@@ -32,6 +32,7 @@ enum TerminalRouter: URLRequestConvertible {
     case emailAuth              (id: String, email: String)
     case reissuanceToken        (refreshToken: String)
     case login                  (userData: Parameters)
+    case logout                 (userID: String)
     case signUp                 (userData: Parameters)
     
     case address
@@ -119,7 +120,7 @@ enum TerminalRouter: URLRequestConvertible {
             return .put
         case .reissuanceToken:
             return .post
-        case .login, .signUp:
+        case .login, .logout, .signUp:
             return .post
             
         case .address:
@@ -235,6 +236,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "user/reissuance"
         case .login:
             return "user/login"
+        case .logout:
+            return "user/logout"
         case .signUp:
             return "user"
             
@@ -337,6 +340,8 @@ enum TerminalRouter: URLRequestConvertible {
             return ["refresh_token": refreshToken]
         case let .login(userData):
             return userData
+        case let .logout(userID):
+            return ["id": userID]
         case let .signUp(userData):
             return userData
             
