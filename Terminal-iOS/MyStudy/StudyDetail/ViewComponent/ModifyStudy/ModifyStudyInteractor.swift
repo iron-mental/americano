@@ -8,38 +8,33 @@
 
 import Foundation
 
-struct StudyNullCheck {
-    let message: String
-    let label: String
-}
-
 class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
     weak var presenter: ModifyStudyInteractorOutputProtocol?
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol?
     var currentStudy: StudyDetail?
     
-    func nilCheck(study: StudyDetailPost) -> StudyNullCheck {
-        var nullCheck: StudyNullCheck?
+    func nilCheck(study: StudyDetailPost) -> StudyNilCheck {
+        var nilCheck: StudyNilCheck?
         
         if study.category.isEmpty {
-            nullCheck = StudyNullCheck(message: "카테고리가 지정되어있지 않습니다.", label: "category")
+            nilCheck = StudyNilCheck(message: "카테고리가 지정되어있지 않습니다.", label: "category")
         } else if study.title!.isEmpty {
-            nullCheck = StudyNullCheck(message: "제목을 입력해주세요", label: "title")
+            nilCheck = StudyNilCheck(message: "제목을 입력해주세요", label: "title")
         } else if study.introduce!.isEmpty {
-            nullCheck = StudyNullCheck(message: "소개를 입력해주세요", label: "introduce")
+            nilCheck = StudyNilCheck(message: "소개를 입력해주세요", label: "introduce")
         } else if study.progress!.isEmpty {
-            nullCheck = StudyNullCheck(message: "진행을 입력해주세요", label: "progress")
+            nilCheck = StudyNilCheck(message: "진행을 입력해주세요", label: "progress")
         } else if study.studyTime!.isEmpty {
-            nullCheck = StudyNullCheck(message: "시간을 입력해주세요", label: "studyTime")
+            nilCheck = StudyNilCheck(message: "시간을 입력해주세요", label: "studyTime")
         } else if let notion = study.snsNotion {
             if !notion.notionCheck() {
-                nullCheck = StudyNullCheck(message: "Notion URL이 정확하지 않습니다.", label: "sns_notion")
+                nilCheck = StudyNilCheck(message: "Notion URL이 정확하지 않습니다.", label: "sns_notion")
             } else if let evernote = study.snsEvernote {
                 if !evernote.evernoteCheck() {
-                    nullCheck = StudyNullCheck(message: "Evernote URL이 정확하지 않습니다.", label: "sns_evernote")
+                    nilCheck = StudyNilCheck(message: "Evernote URL이 정확하지 않습니다.", label: "sns_evernote")
                 } else if let web = study.snsWeb {
                     if !web.webCheck() {
-                        nullCheck = StudyNullCheck(message: "web URL이 정확하지 않습니다.", label: "sns_web")
+                        nilCheck = StudyNilCheck(message: "web URL이 정확하지 않습니다.", label: "sns_web")
                     }
                 }
             }
@@ -49,16 +44,15 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
                 || location.sido!.isEmpty
                 || location.sigungu!.isEmpty
                 || location.address.isEmpty {
-                nullCheck = StudyNullCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
+                nilCheck = StudyNilCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
             }
         }
         
-        if let nullCheck = nullCheck {
-            return nullCheck
+        if let nilCheck = nilCheck {
+            return nilCheck
         } else {
-            return StudyNullCheck(message: "성공", label: "임시")
+            return StudyNilCheck(message: "성공", label: nil)
         }
-        
     }
     
     
