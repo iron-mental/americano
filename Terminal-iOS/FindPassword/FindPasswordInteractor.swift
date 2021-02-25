@@ -8,6 +8,8 @@
 
 import Foundation
 
-final class FindPasswordInteractor {
+final class FindPasswordInteractor: FindPasswordInteractorInputProtocol {
+    var presenter: FindPasswordInteractorOutputProtocol?
+    var remoteDataManager: FindPasswordRemoteDataManagerInputProtocol?
     
 }

@@ -6,8 +6,10 @@
 //  Copyright © 2021 정재인. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-final class FindPasswordWireFrame {
-    
+final class FindPasswordWireFrame: FindPasswordWireFrameProtocol {
+    static func createModule() -> UIViewController {
+        
+    }
 }

@@ -9,9 +9,14 @@
 import UIKit
 
 final class FindPasswordView: UIViewController {
-
+    var presenter: FindPasswordPresenterProtocol?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
+}
+
+extension FindPasswordView: FindPasswordViewProtocol {
+        
 }

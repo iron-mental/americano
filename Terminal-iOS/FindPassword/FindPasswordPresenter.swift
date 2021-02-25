@@ -8,6 +8,7 @@
 
 import Foundation
 
-final class FindPasswordPresenter {
+final class FindPasswordPresenter: FindPasswordPresenterProtocol {
     
 }
+
