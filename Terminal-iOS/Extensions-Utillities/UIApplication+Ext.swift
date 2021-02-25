@@ -9,22 +9,31 @@
 import UIKit
 
 extension UIApplication {
-    class func topViewController(base: UIViewController? = UIApplication
-                                    .shared
-                                    .windows
-                                    .first(where: { $0.isKeyWindow })?
-                                    .rootViewController) -> UIViewController? {
-        
-        if let nav = base as? UINavigationController {
-            return topViewController(base: nav.visibleViewController)
-        }
+    class func getTopViewController(base: UIViewController? = UIApplication
+                                        .shared
+                                        .windows
+                                        .first(where: { $0.isKeyWindow })?
+                                        .rootViewController, before: UIViewController? = nil) -> UIViewController? {
         if let tab = base as? UITabBarController {
             if let selected = tab.selectedViewController {
-                return topViewController(base: selected)
+                return getTopViewController(base: selected)
+            }
+        }
+        if let nav = base as? UINavigationController {
+            if let visibleViewController = nav.visibleViewController {
+                if type(of: visibleViewController) == UIAlertController.self {
+                    return getTopViewController(base: nav.viewControllers[nav.viewControllers.count - 1], before: nav.viewControllers[nav.viewControllers.count - 1])
+                }
+                return getTopViewController(base: nav.visibleViewController, before: nav.visibleViewController)
             }
         }
         if let presented = base?.presentedViewController {
-            return topViewController(base: presented)
+            if type(of: presented) == UIAlertController.self {
+                if before != nil {
+                    return before
+                }
+            }
+            return getTopViewController(base: presented)
         }
         return base
     }

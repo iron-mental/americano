@@ -15,7 +15,8 @@ class LoadingRainbowCat: NSObject {
     private var popupView: AnimationView?
     
     class func show() {
-        print("맨위가 누구냐", UIApplication.topViewController())
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        print("문연애", UIApplication.getTopViewController())
         let backgroundView = UIView()
         let popupView = AnimationView(name: "14476-rainbow-cat-remix")
         if let window = UIApplication.shared.windows.first {
@@ -41,7 +42,8 @@ class LoadingRainbowCat: NSObject {
     }
     
     class func hide(completion: (() -> Void)? = nil) {
-        
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        print("문닫은애", UIApplication.getTopViewController())
         if let popupView = sharedInstance.popupView,
            let backgroundView = sharedInstance.backgroundView {
             popupView.stop()
