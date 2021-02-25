@@ -72,7 +72,6 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         
         guard let id = study?.id else { return }
         presenter?.completButtonDidTap(studyID: id, study: studyDetailPost!)
-        
     }
 }
 

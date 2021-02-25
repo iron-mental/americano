@@ -59,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         return true
     }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         if let studyID = userInfo["study_id"] as? String {
@@ -101,22 +102,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             break
         case .none, .undefined: break
         }
-//        이부분에서 런치뷰가 이미 깔려있기에 캐스팅이 되질 않고 특정뷰로 가지않음
-//        그렇다고 버전체크와 리프레시토큰을 확인 안할 수 없으므로 그걸 런치뷰에서 다할 것이냐 아니면 앱델리게이트에서 할 것이냐 정하면 되는데
-//        뭐가 좀 더 합리적인지 체크해보자
         
-        //이건 처음 들어왔을 때 만
-        window = UIWindow()
-        //여기에 스터디 아이디랑 알림 스타일 넘겨줘야됨
-        let launchView = LaunchWireFrame.createLaunchModule(studyID: studyID, pushEvent: pushEvent)
-        window?.rootViewController = launchView
-        window?.makeKeyAndVisible()
-        
-        //이건 foreground 일 때
-//        if let tabVC = self.window?.rootViewController as? UITabBarController,
-//           let navVC = tabVC.selectedViewController as? UINavigationController {
-//            navVC.pushViewController(goView!, animated: true)
-//        }
+        if let tabVC = self.window?.rootViewController as? UITabBarController,
+           let navVC = tabVC.selectedViewController as? UINavigationController {
+            navVC.pushViewController(goView!, animated: true)
+        } else {
+            window = UIWindow()
+            let launchView = LaunchWireFrame.createLaunchModule(studyID: studyID, pushEvent: pushEvent)
+            window?.rootViewController = launchView
+            window?.makeKeyAndVisible()
+        }
         completionHandler()
     }
     
