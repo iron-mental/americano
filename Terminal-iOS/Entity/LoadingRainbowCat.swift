@@ -15,7 +15,7 @@ class LoadingRainbowCat: NSObject {
     private var popupView: AnimationView?
     
     class func show() {
-        Thread.callStackSymbols.forEach{print($0)}
+        print("맨위가 누구냐", UIApplication.topViewController())
         let backgroundView = UIView()
         let popupView = AnimationView(name: "14476-rainbow-cat-remix")
         if let window = UIApplication.shared.windows.first {
