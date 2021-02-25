@@ -328,10 +328,12 @@ extension StudyDetailView: StudyDetailViewProtocol {
     }
     
     func showError(message: String) {
+        self.hideLoading()
         showToast(controller: self, message: message, seconds: 1) {
-//            여기에 공백은 허용되지않습니다고 있기 때문에 분기해줘야함 팝인지 그냥인지 ㅇ ㅇ
-            self.navigationController?.popViewController(animated: true)
-            self.hideLoading()
+            if message != "공백은 허용되지 않습니다" {
+                self.navigationController?.popViewController(animated: true)
+                
+            }
         }
     }
     

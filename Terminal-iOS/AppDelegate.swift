@@ -46,8 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-            if let studyID = notification["study_id"] as? Int {
-                self.studyID = String(studyID)
+            if let studyID = notification["study_id"] as? String {
+                self.studyID = studyID
             }
             if let pushEvent = notification["pushEvent"] as? String {
                 self.pushEvent = AlarmType(rawValue: pushEvent)
@@ -99,19 +99,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         case .testPush: break
         case .none, .undefined: break
         }
-        
+        // 앱실행중
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
             guard let targetView = goView else { return }
+            var targetParentView: UIViewController?
             navVC.viewControllers.forEach {
                 if type(of: $0) == type(of: targetView) {
-                    navVC.popToViewController($0, animated: false)
+                    if let popPoint = targetParentView {
+                        navVC.popToViewController(popPoint, animated: false)
+                        navVC.pushViewController(targetView, animated: true)
+                    }
                     return
                 } else {
                     if navVC.viewControllers.last == $0 {
                         navVC.pushViewController(targetView, animated: true)
                     }
                 }
+                targetParentView = $0
             }
         } else {
             window = UIWindow()
