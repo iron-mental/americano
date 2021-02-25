@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
     var goView: MyStudyDetailView?
     var pushEvent: AlarmType?
-    var studyID: String = ""
+    var studyID: Int?
     var studyTitle: String = ""
     var alertID: Int?
     
@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-            if let studyID = notification["study_id"] as? String {
+            if let studyID = notification["study_id"] as? Int {
                 self.studyID = studyID
             }
             if let pushEvent = notification["pushEvent"] as? String {
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
-        if let studyID = userInfo["study_id"] as? String {
+        if let studyID = userInfo["study_id"] as? Int {
             self.studyID = studyID
         }
         if let pushEvent = userInfo["pushEvent"] as? String {
@@ -79,9 +79,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         sleep(1)
         let event = self.pushEvent
         //거절, 스터디 삭제는 스터디 아이디가 안떨어진다 분기해주자
-        let studyID = Int(self.studyID)!
+        guard let id = self.studyID else { return }
         
-        guard let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
+        guard let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "") as? MyStudyDetailView else { return }
         
         switch event {
         case .studyDelete: break
@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         } else {
             window = UIWindow()
-            let launchView = LaunchWireFrame.createLaunchModule(studyID: studyID, pushEvent: pushEvent)
+            let launchView = LaunchWireFrame.createLaunchModule(studyID: id, pushEvent: pushEvent)
             window?.rootViewController = launchView
             window?.makeKeyAndVisible()
         }
