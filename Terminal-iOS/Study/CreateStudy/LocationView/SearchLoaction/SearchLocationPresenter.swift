@@ -26,5 +26,4 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
         view?.showSearchResult(list: list)
         LoadingRainbowCat.hide()
     }
-    
 }

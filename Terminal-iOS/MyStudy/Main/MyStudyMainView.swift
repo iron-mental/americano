@@ -11,6 +11,7 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 // MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
+
 class MyStudyMainView: UIViewController {
     var isVisibleState: Bool?
     var presenter: MyStudyMainPresenterProtocol?
@@ -40,11 +41,11 @@ class MyStudyMainView: UIViewController {
     func attribute() {
         self.do {
             $0.title = "내 스터디"
-            $0.navigationController?.navigationBar.barTintColor = UIColor.appColor(.terminalBackground)
+            $0.navigationController?.navigationBar.barTintColor = .appColor(.terminalBackground)
             $0.navigationItem.largeTitleDisplayMode = .automatic
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
-            $0.navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.navigationController?.navigationBar.standardAppearance.backgroundColor = .appColor(.terminalBackground)
         }
         tableView.do {
             $0.backgroundColor = UIColor.appColor(.testColor)
@@ -83,7 +84,8 @@ class MyStudyMainView: UIViewController {
         }
     }
     
-    // MARK: @objc
+    // MARK: - @objc
+    
     @objc func updateList() {
         presenter?.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
@@ -110,7 +112,6 @@ class MyStudyMainView: UIViewController {
 }
 
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if myStudyList.isEmpty {
             tableView.setEmptyView(type: .MyStudyListEmptyViewType)

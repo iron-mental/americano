@@ -15,7 +15,7 @@ enum MyStudyDetialInitView {
     case Chat
 }
 
-class MyStudyDetailView: UIViewController {
+final class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
     
     var viewState: MyStudyDetialInitView = .StudyDetail
@@ -53,13 +53,8 @@ class MyStudyDetailView: UIViewController {
     }
     
     func attribute() {
-        self.do {
-            //레거시임 청산해야할 부분
-            if let title = studyInfo?.title {
-                $0.title = title
-            } else {
-                $0.title = studyTitle
-            }
+        if let title = studyInfo?.title {
+            self.title = title
         }
         
         self.appearance.do {
@@ -102,6 +97,7 @@ class MyStudyDetailView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
         }
+        
         switch viewState {
         case .Notice:
             self.tapSege.selectedSegmentIndex = 0
@@ -125,8 +121,7 @@ class MyStudyDetailView: UIViewController {
     }
     
     func layout() {
-        [tapSege, selectedUnderLine, childPageView.view]
-            .forEach { view.addSubview($0) }
+        [tapSege, selectedUnderLine, childPageView.view].forEach { view.addSubview($0) }
         self.addChild(childPageView)
         self.childPageView.didMove(toParent: self)
         
@@ -161,7 +156,8 @@ class MyStudyDetailView: UIViewController {
     func editStudyButtonDidTap() {
         if let studyDetail = vcArr[1] as? StudyDetailView,
            let targetStudy = studyDetail.studyInfo {
-            presenter?.editStudyButtonDidTap(study: targetStudy)
+            let location = targetStudy.location
+            presenter?.editStudyButtonDidTap(study: targetStudy, location: location)
         }
     }
     
@@ -177,12 +173,16 @@ class MyStudyDetailView: UIViewController {
     
     func deleteStudyButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .DeleteStudyView)
-        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(deleteStudyCompleteButtonDidTap), for: .touchUpInside)
+        TerminalAlertMessage.getRightButton().addTarget(self,
+                                                        action: #selector(deleteStudyCompleteButtonDidTap),
+                                                        for: .touchUpInside)
     }
     
     func leaveStudyButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .LeaveStudyView)
-        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(leaveStudyCompleteButtonDidTap), for: .touchUpInside)
+        TerminalAlertMessage.getRightButton().addTarget(self,
+                                                        action: #selector(leaveStudyCompleteButtonDidTap),
+                                                        for: .touchUpInside)
     }
     
     func setPageControllerChild() {
@@ -245,7 +245,6 @@ class MyStudyDetailView: UIViewController {
         } else if authority == .member {
             [ leaveStudy, cancel ].forEach { alert.addAction($0) }
         }
-        
         present(alert, animated: true, completion: nil)
     }
     
@@ -261,6 +260,8 @@ class MyStudyDetailView: UIViewController {
         TerminalAlertMessage.dismiss()
     }
 }
+
+// MARK: UIPageViewController extension
 
 extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {

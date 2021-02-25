@@ -33,8 +33,16 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             params["address_name"] = location.address
             params["latitude"] = location.lat
             params["longitude"] = location.lng
-            params["sido"] = location.sido
-            params["sigungu"] = location.sigungu
+            if let sido = location.sido,
+               let sigungu = location.sigungu {
+                if !sido.isEmpty {
+                    params["sido"] = sido
+                }
+                
+                if !sigungu.isEmpty {
+                    params["sido"] = sigungu
+                }
+            }
             if let detailAddress = location.detailAddress {
                 if !detailAddress.isEmpty {
                     params["location_detail"] = detailAddress

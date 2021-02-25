@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {    
+final class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {    
     static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController {
         let view: MyStudyDetailViewProtocol = MyStudyDetailView()
         let presenter: MyStudyDetailPresenterProtocol = MyStudyDetailPresenter()
@@ -18,9 +18,6 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         let wireFrame: MyStudyDetailWireFrameProtocol = MyStudyDetailWireFrame()
         
         view.presenter = presenter
-        view.studyTitle = studyTitle
-        view.studyID = studyID
-        
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame
@@ -31,6 +28,7 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         
         if let view = view as? MyStudyDetailView {
             view.hidesBottomBarWhenPushed = true
+            view.studyTitle = studyTitle
             view.studyID = studyID
             return view
         } else {
@@ -48,9 +46,9 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         }
     }
     
-    func goToEditStudy(study: StudyDetail, parentView: MyStudyDetailViewProtocol) {
+    func goToEditStudy(study: StudyDetail, location: Location, parentView: MyStudyDetailViewProtocol) {
         if let sourceView = parentView as? UIViewController {
-            let view = ModifyStudyWireFrame.createModifyStudyModule(study: study)
+            let view = ModifyStudyWireFrame.createModifyStudyModule(study: study, location: location)
             sourceView.navigationController?.pushViewController(view, animated: true)
         }
     }
