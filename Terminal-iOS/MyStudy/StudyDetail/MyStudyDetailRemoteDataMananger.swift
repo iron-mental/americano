@@ -9,7 +9,7 @@
 import Alamofire
 import SwiftyJSON
 
-class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
+final class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
     weak var interactor: MyStudyDetailInteractorProtocol?
     
     func postLeaveStudyAPI(studyID: Int) {

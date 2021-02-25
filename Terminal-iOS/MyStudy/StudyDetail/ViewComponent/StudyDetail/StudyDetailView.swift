@@ -294,7 +294,6 @@ class StudyDetailView: UIViewController {
                 }
             }
         }
-        
         TerminalAlertMessage.dismiss()
     }
 }

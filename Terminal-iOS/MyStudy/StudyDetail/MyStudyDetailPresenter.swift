@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
+final class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     weak var view: MyStudyDetailViewProtocol?
     var interactor: MyStudyDetailInteractorProtocol?
     var wireFrame: MyStudyDetailWireFrameProtocol?
@@ -17,8 +17,8 @@ class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
         wireFrame?.goToAddNotice(studyID: studyID, parentView: view!)
     }
     
-    func editStudyButtonDidTap(study: StudyDetail) {
-        wireFrame?.goToEditStudy(study: study, parentView: view!)
+    func editStudyButtonDidTap(study: StudyDetail, location: Location) {
+        wireFrame?.goToEditStudy(study: study, location: location, parentView: view!)
     }
     
     func addNoticeFinished(notice: Int, studyID: Int, title: String) {
