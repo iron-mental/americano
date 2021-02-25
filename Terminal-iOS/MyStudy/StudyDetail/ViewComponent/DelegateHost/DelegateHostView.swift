@@ -72,13 +72,13 @@ extension DelegateHostView: DelegateHostViewProtocol {
             navigationController?.popViewController(animated: true)
             navigationController?.viewControllers.forEach {
                 if let myStudyDetailView = $0 as? MyStudyDetailView {
-                    if let noticeListView = myStudyDetailView.VCArr[0] as? NoticeView {
+                    if let noticeListView = myStudyDetailView.vcArr[0] as? NoticeView {
                         noticeListView.viewDidLoad()
                     }
-                    if let studyDetailView = myStudyDetailView.VCArr[1] as? StudyDetailView {
+                    if let studyDetailView = myStudyDetailView.vcArr[1] as? StudyDetailView {
                         studyDetailView.studyID = studyID!
                     }
-                    if let chatView = myStudyDetailView.VCArr[2] as? TempChatView {
+                    if let chatView = myStudyDetailView.vcArr[2] as? TempChatView {
                         chatView.viewDidLoad()
                     }
                 }

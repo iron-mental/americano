@@ -8,9 +8,7 @@
 
 import UIKit
 
-class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
-    var presenter: MyStudyDetailPresenterProtocol?
-    
+class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {    
     static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController {
         let view: MyStudyDetailViewProtocol = MyStudyDetailView()
         let presenter: MyStudyDetailPresenterProtocol = MyStudyDetailPresenter()
@@ -40,23 +38,32 @@ class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         }
     }
     
-    func goToAddNotice(studyID: Int, parentView: UIViewController) {
-        let view = AddNoticeWireFrame.createAddNoticeModule(studyID: studyID, notice: nil, parentView: parentView, state: .new)
-        parentView.present(view, animated: true)
+    func goToAddNotice(studyID: Int, parentView: MyStudyDetailViewProtocol) {
+        if let sourceView = parentView as? UIViewController {
+            let view = AddNoticeWireFrame.createAddNoticeModule(studyID: studyID,
+                                                                notice: nil,
+                                                                parentView: sourceView,
+                                                                state: .new)
+            sourceView.present(view, animated: true)
+        }
     }
     
-    func goToEditStudy(study: StudyDetail, parentView: UIViewController) {
-        let view = ModifyStudyWireFrame.createModifyStudyModule(study: study, parentView: parentView)
-        parentView.navigationController?.pushViewController(view, animated: true)
+    func goToEditStudy(study: StudyDetail, parentView: MyStudyDetailViewProtocol) {
+        if let sourceView = parentView as? UIViewController {
+            let view = ModifyStudyWireFrame.createModifyStudyModule(study: study)
+            sourceView.navigationController?.pushViewController(view, animated: true)
+        }
     }
     
-    func goToNoticeDetail(notice: Int, studyID: Int, title: String, parentView: UIViewController) {
-        let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice,
-                                                                  studyID: studyID,
-                                                                  title: title,
-                                                                  parentView: parentView,
-                                                                  state: .host)
-        parentView.navigationController?.pushViewController(view, animated: true)
+    func goToNoticeDetail(notice: Int, studyID: Int, title: String, parentView: MyStudyDetailViewProtocol) {
+        if let sourceView = parentView as? UIViewController {
+            let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice,
+                                                                      studyID: studyID,
+                                                                      title: title,
+                                                                      parentView: sourceView,
+                                                                      state: .host)
+            sourceView.navigationController?.pushViewController(view, animated: true)
+        }
     }
     
     func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int) {

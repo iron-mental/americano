@@ -14,10 +14,7 @@ enum AddNoticeState {
 }
 
 class AddNoticeView: UIViewController {
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
+    deinit { self.keyboardRemoveObserver(with: self) }
     
     var presenter: AddNoticePresenterProtocol?
     var studyID: Int?
@@ -39,7 +36,7 @@ class AddNoticeView: UIViewController {
         layout()
         titleTextField.becomeFirstResponder()
         hideLoading()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        self.keyboardAddObserver(with: self, showSelector: #selector(keyboardWillShow))
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -187,7 +184,6 @@ class AddNoticeView: UIViewController {
 }
 
 extension AddNoticeView: AddNoticeViewProtocol {
-    
     func showNewNotice(noticeID: Int) {
         let noticeTitle = titleTextField.text ?? ""
         showToast(controller: self, message: "공지사항 작성이 완료 되었습니다.", seconds: 1) { [self] in
@@ -204,17 +200,19 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                     leaderNickname: nil,
                                     createAt: nil,
                                     isPaging: nil)
-                    if let studyDetailView = parentView as? MyStudyDetailViewProtocol {
-                        if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
+                    if let studyDetailView = self.parentView as? MyStudyDetailViewProtocol {
+                        if let noticeListView = studyDetailView.vcArr[0] as? NoticeViewProtocol {
                             noticeListView.viewLoad()
                         }
-                        studyDetailView.presenter?.addNoticeFinished(notice: noticeID, studyID: studyID!, title: noticeTitle, parentView: parentView!)
+                        studyDetailView.presenter?.addNoticeFinished(notice: noticeID,
+                                                                     studyID: studyID!,
+                                                                     title: noticeTitle)
                     }
                 } else {
-                    if let noticeDetailView = parentView as? NoticeDetailViewProtocol {
+                    if let noticeDetailView = self.parentView as? NoticeDetailViewProtocol {
                         noticeDetailView.presenter?.viewDidLoad(notice: notice!)
                         if let studyDetailView = noticeDetailView.parentView as? MyStudyDetailViewProtocol {
-                            if let noticeListView = studyDetailView.VCArr[0] as? NoticeViewProtocol {
+                            if let noticeListView = studyDetailView.vcArr[0] as? NoticeViewProtocol {
                                 noticeListView.viewLoad()
                             }
                         } else {
@@ -247,5 +245,4 @@ extension AddNoticeView: UITextFieldDelegate {
 }
 
 extension AddNoticeView: UITextViewDelegate {
-    
 }

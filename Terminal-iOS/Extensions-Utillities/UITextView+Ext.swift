@@ -15,13 +15,30 @@ extension UITextView {
         
         switch height {
         case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
-            self.font = UIFont.systemFont(ofSize: size * 1, weight: weight)
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size)
+                : .notosansMedium(size: size)
         case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
-            self.font = UIFont.systemFont(ofSize: size * 1.05, weight: weight)
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size * 1.05)
+                : .notosansMedium(size: size * 1.05)
         case 812.0: //iphone X, XS => 5.8 inch
-            self.font = UIFont.systemFont(ofSize: size * 1.15, weight: weight)
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size * 1.15)
+                : .notosansMedium(size: size * 1.15)
         case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
-            self.font = UIFont.systemFont(ofSize: size * 1.2, weight: weight)
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size * 1.2)
+                : .notosansMedium(size: size * 1.2)
+        case 926.0:
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size * 1.25)
+                : .notosansMedium(size: size * 1.25)
         default:
             print("not an iPhone", UIScreen.main.bounds.height)
         }

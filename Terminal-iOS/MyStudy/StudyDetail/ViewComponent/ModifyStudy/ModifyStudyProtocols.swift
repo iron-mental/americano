@@ -11,9 +11,10 @@ import UIKit
 protocol ModifyStudyViewProtocol: class {
     var presenter: ModifyStudyPresenterProtocol? { get set }
     var study: StudyDetail? { get set }
+    
     //PRESENTER -> VIEW
     func showResult(message: String)
-    func showError(message: String)
+    func showError(label: String?, message: String)
 }
 
 protocol ModifyStudyPresenterProtocol: class {
@@ -23,7 +24,7 @@ protocol ModifyStudyPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func completButtonDidTap(studyID: Int, study: StudyDetailPost)
-    func clickLocationView(currentView: UIViewController)
+    func clickLocationView()
 }
 
 protocol ModifyStudyInteractorInputProtocol: class {
@@ -37,7 +38,7 @@ protocol ModifyStudyInteractorInputProtocol: class {
 
 protocol ModifyStudyInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
-    func putStudyInfoResult(result: Bool, message: String)
+    func putStudyInfoResult(result: Bool, label: String?, message: String)
 }
 
 protocol ModifyStudyRemoteDataManagerInputProtocol: class {
@@ -49,12 +50,12 @@ protocol ModifyStudyRemoteDataManagerInputProtocol: class {
 
 protocol ModifyStudyRemoteDataManagerOutputProtocol: class {
     //REMOTEDATAMANAGER -> INTERACTOR
-    func putStudyInfoResult(result: Bool, message: String)
+    func putStudyInfoResult(result: BaseResponse<String>)
 }
 
 protocol ModifyStudyWireFrameProtocol: class {
-    static func createModifyStudyModule(study: StudyDetail, parentView: UIViewController) -> UIViewController
+    static func createModifyStudyModule(study: StudyDetail) -> UIViewController
     
     //PRESENTER -> WIREFRAME
-    func goToSelectLocation(view: UIViewController)
+    func goToSelectLocation(from view: ModifyStudyViewProtocol)
 }

@@ -11,12 +11,6 @@ import UIKit
 class ModifyStudyView: BaseEditableStudyDetailView {
     var presenter: ModifyStudyPresenterProtocol?
     var study: StudyDetail?
-    var parentView: UIViewController?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     
     override func attribute() {
         super.attribute()
@@ -44,7 +38,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         timeView.do {
             $0.detailTime.text = study?.studyTime
         }
-        button.do {
+        completeButton.do {
             $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
         }
         accessoryCompleteButton.do {
@@ -53,50 +47,65 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     }
     
     override func didLocationViewClicked() {
-        presenter?.clickLocationView(currentView: self)
+        presenter?.clickLocationView()
     }
     
     @objc func buttonDidTap() {
-        selectedLocation?.detailAddress = locationView.detailAddress.text
+        self.selectedLocation?.detailAddress = locationView.detailAddress.text
         
-        studyDetailPost = StudyDetailPost(category: study!.category,
-                                          title: studyTitleTextField.text ?? "",
-                                          introduce: studyIntroduceView.textView.text ?? "",
-                                          progress: studyInfoView.textView.text ?? "",
-                                          studyTime: timeView.detailTime.text ?? "",
-                                          snsWeb: SNSInputView.web.textField.text ?? "",
-                                          snsNotion: SNSInputView.notion.textField.text ?? "",
-                                          snsEvernote: SNSInputView.evernote.textField.text ?? "",
-                                          image: mainImageView.image,
-                                          location: selectedLocation ?? nil)
+        self.studyDetailPost = StudyDetailPost(category: self.study!.category,
+                                               title: self.studyTitleTextField.text ?? "",
+                                               introduce: self.studyIntroduceView.textView.text ?? "",
+                                               progress: self.studyInfoView.textView.text ?? "",
+                                               studyTime: self.timeView.detailTime.text ?? "",
+                                               snsWeb: self.SNSInputView.web.textField.text ?? "",
+                                               snsNotion: self.SNSInputView.notion.textField.text ?? "",
+                                               snsEvernote: self.SNSInputView.evernote.textField.text ?? "",
+                                               image: self.mainImageView.image,
+                                               location: self.selectedLocation ?? nil)
         
         guard let id = study?.id else { return }
-        presenter?.completButtonDidTap(studyID: id, study: studyDetailPost!)
-        
+        presenter?.completButtonDidTap(studyID: id, study: self.studyDetailPost!)
     }
 }
 
-extension ModifyStudyView: ModifyStudyViewProtocol {
+extension ModifyStudyView: ModifyStudyViewProtocol {    
     func showResult(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
-//            self.navigationController?.popViewController(animated: true)
-//            self.navigationController?.popViewController(animated: true, completion: {
-                if let myStudyDetailView = (self.navigationController?.viewControllers[1] as? MyStudyDetailView) {
-                    print(myStudyDetailView)
-                    if let studyDetailView = myStudyDetailView.VCArr[1] as? StudyDetailViewProtocol {
-                        print(studyDetailView)
-                        if let id = self.study?.id {
-                            print(id)
-                            studyDetailView.presenter?.showStudyListDetail(studyID: "\(id)")
-                        }
-                    }
+            if let myStudyDetailView = self.navigationController?.viewControllers[1] as? MyStudyDetailView,
+               let studyDetailView = myStudyDetailView.vcArr[1] as? StudyDetailViewProtocol {
+                if let id = self.study?.id {
+                    studyDetailView.presenter?.showStudyListDetail(studyID: "\(id)")
                 }
-//            })
+            }
             self.navigationController?.popViewController(animated: true)
         }
     }
     
-    func showError(message: String) {
-        showToast(controller: self, message: message, seconds: 1)
+    func showError(label: String? = nil, message: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            if let label = label {
+                switch label {
+                case "title":
+                    self.studyTitleTextField.becomeFirstResponder()
+                case "introduce":
+                    self.studyIntroduceView.textView.becomeFirstResponder()
+                case "progress":
+                    self.studyInfoView.textView.becomeFirstResponder()
+                case "study_time":
+                    self.timeView.detailTime.becomeFirstResponder()
+                case "locaion_detail":
+                    self.locationView.detailAddress.becomeFirstResponder()
+                case "sns_notion":
+                    self.SNSInputView.notion.textField.becomeFirstResponder()
+                case "sns_evernote":
+                    self.SNSInputView.evernote.textField.becomeFirstResponder()
+                case "sns_web":
+                    self.SNSInputView.web.textField.becomeFirstResponder()
+                default:
+                    break
+                }
+            }
+        }
     }
 }

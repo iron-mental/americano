@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TitleWithTextView: UIView {
+final class TitleWithTextView: UIView {
     var seletedCategory: String?
     var titleLabel = UILabel()
     var title: String?
@@ -24,24 +24,24 @@ class TitleWithTextView: UIView {
     }
     
     func attribute() {
-        titleLabel.do {
-            $0.text = title
+        self.titleLabel.do {
+            $0.text = self.title
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.dynamicFont(fontSize: $0.font.pointSize, weight: .medium)
         }
-        categoryLabel.do {
+        self.categoryLabel.do {
             $0.textColor = .white
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
             $0.dynamicFont(fontSize: $0.font.pointSize, weight: .medium)
         }
-        textView.do {
+        self.textView.do {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
             $0.dynamicFont(size: 20, weight: .regular)
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
         }
-        staroflifeImageView.do {
+        self.staroflifeImageView.do {
             $0.image = UIImage(systemName: "staroflife.fill")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
             $0.tintColor = UIColor.appColor(.mainColor)
             $0.contentMode = .scaleAspectFit
@@ -50,40 +50,35 @@ class TitleWithTextView: UIView {
     
     func layout() {
         [titleLabel, categoryLabel, textView, staroflifeImageView].forEach {
-            addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview($0)
         }
         
         titleLabel.do {
-            NSLayoutConstraint.activate([
-                $0.topAnchor.constraint(equalTo: topAnchor),
-                $0.leadingAnchor.constraint(equalTo: leadingAnchor),
-                $0.heightAnchor.constraint(equalToConstant: $0.intrinsicContentSize.height),
-                $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width)
-            ])
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         }
         staroflifeImageView.do {
-            NSLayoutConstraint.activate([
-                $0.topAnchor.constraint(equalTo: titleLabel.topAnchor),
-                $0.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: Terminal.convertWidth(value: 5)),
-                $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 15)),
-                $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 15))
-            ])
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.titleLabel.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.titleLabel.trailingAnchor,
+                                        constant: Terminal.convertWidth(value: 5)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 15)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 15)).isActive = true
         }
+        
         categoryLabel.do {
-            NSLayoutConstraint.activate([
-                $0.topAnchor.constraint(equalTo: titleLabel.topAnchor),
-                $0.trailingAnchor.constraint(equalTo: self.trailingAnchor)
-            ])
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.titleLabel.topAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         }
         textView.do {
-            NSLayoutConstraint.activate([
-                $0.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
-                                        constant: Terminal.convertHeight(value: 17)),
-                $0.leadingAnchor.constraint(equalTo: leadingAnchor),
-                $0.widthAnchor.constraint(equalTo: widthAnchor),
-                $0.bottomAnchor.constraint(equalTo: bottomAnchor)
-            ])
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 17)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         }
     }
     

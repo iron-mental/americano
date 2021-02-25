@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
+
+import Firebase
 import Kingfisher
 import SwiftKeychainWrapper
 import SwiftyJSON
-import CoreData
-import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -19,9 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var goView: MyStudyDetailView?
     var pushEvent: AlarmType?
     var studyID: String = ""
-    var studyTitle: String = ""
     var alertID: Int?
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -55,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print(KeychainWrapper.standard.string(forKey: "accessToken"))
         return true
     }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         if let studyID = userInfo["study_id"] as? String {

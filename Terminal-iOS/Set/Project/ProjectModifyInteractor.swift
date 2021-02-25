@@ -40,6 +40,7 @@ class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
             .request(TerminalRouter.projectUpdate(id: userID, project: params))
             .validate()
             .responseJSON { response in
+                print(response.response)
                 switch response.result {
                 case .success(let value):
                     let json = JSON(value)

@@ -62,24 +62,20 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                 }
             }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)", study: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
-                        guard let message = result.message else { return }
-                        self.interactor?.putStudyInfoResult(result: result.result, message: message)
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                        self.interactor?.putStudyInfoResult(result: result)
                     } catch {
-                        self.interactor?.putStudyInfoResult(result: false, message: "실패하였습니다.")
+                        print(error.localizedDescription)
                     }
                 case .failure:
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
-                            guard let message = result.message else { return }
-                            self.interactor?.putStudyInfoResult(result: result.result, message: message)
+                            self.interactor?.putStudyInfoResult(result: result)
                         } catch {
                             
                         }
