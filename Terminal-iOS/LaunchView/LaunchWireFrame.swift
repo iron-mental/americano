@@ -9,8 +9,10 @@
 import UIKit
 
 class LaunchWireFrame: LaunchWireFrameProtocol {
+    var studyID: Int?
+    var pushEvent: AlarmType?
     
-    static func createLaunchModule() -> UIViewController {
+    static func createLaunchModule(studyID: Int? = nil, pushEvent: AlarmType? = nil) -> UIViewController {
         let view = LaunchView()
         let presenter: LaunchPresenterProtocol & LaunchInteractorOutputProtocol = LaunchPresenter()
         let interactor: LaunchInteractorInputProtocol & LaunchRemoteDataManagerOutputProtocol = LaunchInteractor()
@@ -28,6 +30,9 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
         
         remoteDataManager.interactor = interactor
         
+        wireFrame.studyID = studyID
+        wireFrame.pushEvent = pushEvent
+        
         return view
     }
     func replaceRootViewToIntroView() {
@@ -37,9 +42,13 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
     }
     
     func replaceRootViewToMainView() {
-        let main = ViewController()
-        main.myStudyViewController
         guard let window = UIApplication.shared.windows.first else { return }
+        let main = ViewController()
+        if let id = studyID, let event = pushEvent {
+            main.targetStudyID = id
+            main.targetAlarmType = event
+            main.attribute()
+        }
         window.replaceRootViewController(main, animated: true, completion: nil)
     }
     
