@@ -102,10 +102,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             break
         case .none, .undefined: break
         }
-        
+        guard let targetView = goView else { return }
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
-            navVC.pushViewController(goView!, animated: true)
+            navVC.viewControllers.forEach {
+                if type(of:$0) == type(of: targetView) {
+                    navVC.popToViewController($0, animated: true)
+                    return
+                } else {
+                    if navVC.viewControllers.last == $0 {
+                        navVC.pushViewController(targetView, animated: true)
+                    }
+                }
+            }
         } else {
             window = UIWindow()
             let launchView = LaunchWireFrame.createLaunchModule(studyID: studyID, pushEvent: pushEvent)

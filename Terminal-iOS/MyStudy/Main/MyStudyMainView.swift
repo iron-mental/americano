@@ -162,6 +162,7 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         tableView.reloadData()
         if startedByPushNotification != nil && startedByPushNotification == true {
             presenter?.showStudyDetailDirectly()
+            startedByPushNotification = nil
         }
         if isVisibleState == nil {
             LoadingRainbowCat.hide()
