@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 import SwiftKeychainWrapper
 
 class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
@@ -21,13 +19,11 @@ class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
             .session
             .request(TerminalRouter.myStudyList(id: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<MyStudyList>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<MyStudyList>.self, from: data)
                         completion(result)
                     } catch {
                         print(error.localizedDescription)

@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Alamofire
-import SwiftyJSON
 
 class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
     var interactor: ModifyStudyRemoteDataManagerOutputProtocol?

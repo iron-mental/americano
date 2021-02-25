@@ -12,7 +12,6 @@ import CoreData
 import Firebase
 import Kingfisher
 import SwiftKeychainWrapper
-import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {

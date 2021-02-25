@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 import SwiftKeychainWrapper
 
 class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol {
@@ -19,13 +18,11 @@ class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol 
             .session
             .request(TerminalRouter.alertConfirm(userID: userID, alertID: alertID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                         if result.message != nil {
                             self.retrieveAlert()
                         }
@@ -54,14 +51,11 @@ class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol 
             .session
             .request(TerminalRouter.alert(id: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<[Noti]>.self, from: data!)
-                        
+                        let result = try JSONDecoder().decode(BaseResponse<[Noti]>.self, from: data)
                         if result.data != nil {
                             self.interactor?.onRetrievedAlert(result: result)
                         }

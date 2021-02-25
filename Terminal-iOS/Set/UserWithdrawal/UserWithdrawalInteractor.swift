@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 import SwiftKeychainWrapper
 
 class UserWithdrawalInteractor: UserWithdrawalInteractorInputProtocol {
@@ -26,13 +25,11 @@ class UserWithdrawalInteractor: UserWithdrawalInteractorInputProtocol {
             .session
             .request(TerminalRouter.userWithdrawal(id: userID, userData: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
                         let isSuccess = result.result
                         let message = result.message ?? ""
                         self.presenter?.resultUserWithdrawal(result: isSuccess, message: message)

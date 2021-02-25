@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
     weak var interactor: LaunchRemoteDataManagerOutputProtocol?
@@ -18,13 +17,11 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.versionCheck(version: version))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<VersionResult>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<VersionResult>.self, from: data)
                         self.interactor?.getVersionResult(result: result)
                     } catch {
                         //서버와 형식이 맞지않아 임시로 써놓음
@@ -57,13 +54,11 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.userInfo(id: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
                         self.interactor?.getRefreshTokenResult(result: result)
                     } catch {
                         print(error.localizedDescription)

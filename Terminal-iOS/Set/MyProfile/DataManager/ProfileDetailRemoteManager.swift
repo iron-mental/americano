@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Alamofire
-import SwiftyJSON
 import SwiftKeychainWrapper
 
 class ProfileDetailRemoteManager: BaseProfileRemoteDataManager, ProfileDetailRemoteDataManagerInputProtocol {

@@ -7,7 +7,6 @@
 //
 
 import Alamofire
-import SwiftyJSON
 
 final class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
     weak var interactor: MyStudyDetailInteractorProtocol?
@@ -18,12 +17,15 @@ final class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtoc
             .session
             .request(TerminalRouter.studyLeave(studyID: "\(studyID)"))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = "\(JSON(value))".data(using: .utf8)
-                    let result: BaseResponse = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: json!)
-                    self.interactor?.leaveStudyResult(result: result.result, message: result.message!)       
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                        self.interactor?.leaveStudyResult(result: result.result, message: result.message!)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure:
                     if let data = response.data {
                         do {
@@ -43,12 +45,15 @@ final class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtoc
             .session
             .request(TerminalRouter.studyDelete(studyID: "\(studyID)"))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = "\(JSON(value))".data(using: .utf8)
-                    let result: BaseResponse = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: json!)
-                    self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                        self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure:
                     if let data = response.data {
                         do {

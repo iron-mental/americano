@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 import SwiftKeychainWrapper
-import SwiftyJSON
 
 final class BaseInterceptor: RequestInterceptor {
     let retryLimit = 10
@@ -67,13 +66,11 @@ final class BaseInterceptor: RequestInterceptor {
                 .shared
                 .session
                 .request(TerminalRouter.reissuanceToken(refreshToken: refreshToken))
-                .responseJSON { response in
+                .responseData { response in
                     switch response.result {
-                    case .success(let value):
-                        let json = JSON(value)
-                        let data = "\(json)".data(using: .utf8)
+                    case .success(let data):
                         do {
-                            let result = try JSONDecoder().decode(BaseResponse<Authorization>.self, from: data!)
+                            let result = try JSONDecoder().decode(BaseResponse<Authorization>.self, from: data)
                             if result.result {
                                 if let refresh = result.data?.refreshToken {
                                     let result = KeychainWrapper.standard.set(refresh, forKey: "refreshToken")
@@ -90,7 +87,7 @@ final class BaseInterceptor: RequestInterceptor {
                         } catch {
                             print(error.localizedDescription)
                         }
-                    case .failure(let error):
+                    case .failure:
                         //리프레시 마저 만료
                         completion(false)
                     }
