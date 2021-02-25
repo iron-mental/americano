@@ -16,7 +16,7 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
-    var goView: MyStudyDetailView?
+    var goView: UIViewController?
     var pushEvent: AlarmType?
     var studyID: Int?
     var studyTitle: String = ""
@@ -65,12 +65,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let userInfo = notification.request.content.userInfo
         if let studyID = userInfo["study_id"] as? Int {
             self.studyID = studyID
+            print(self.studyID,"스터디 아이디 통과")
         }
         if let pushEvent = userInfo["pushEvent"] as? String {
             self.pushEvent = AlarmType(rawValue: pushEvent)
+            print(self.pushEvent,"푸시 이벤트 통과")
         }
         if let alertID = userInfo["alert_id"] as? Int {
             self.alertID = alertID
+            print(self.alertID, "알럿 아이디 통과")
         }
         completionHandler([.alert, .badge, .sound])
     }
@@ -80,22 +83,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let event = self.pushEvent
         //거절, 스터디 삭제는 스터디 아이디가 안떨어진다 분기해주자
         guard let id = self.studyID else { return }
-        
-        guard let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "") as? MyStudyDetailView else { return }
+        guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "") as? MyStudyDetailView else { return }
         
         switch event {
-        case .studyDelete: break
         case .studyUpdate, .studyHostDelegate, .chat:
-            view.viewState = .StudyDetail
-            goView = view
+            studyDetailView.viewState = .StudyDetail
+            goView = studyDetailView
         case .newApply:
-            view.applyState = true
-            goView = view
+            studyDetailView.applyState = true
+            goView = studyDetailView
         case .newNotice, .updatedNotice:
-            view.viewState = .Notice
-            goView = view
+            studyDetailView.viewState = .Notice
+            goView = studyDetailView
         case .applyAllowed: break
-        case .applyRejected: break
+        case .applyRejected, .studyDelete:
+            let notificationListView = NotificationWireFrame.createModule()
+            goView = notificationListView
         case .testPush: break
         case .none, .undefined: break
         }
@@ -125,6 +128,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             window?.makeKeyAndVisible()
         }
         completionHandler()
+        pushEvent = nil
+        studyID = nil
+        alertID = nil
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
