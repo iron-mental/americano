@@ -100,7 +100,8 @@ class HomeView: UIViewController {
     }
     
     @objc func goFindPassword() {
-        
+        let view = FindPasswordWireFrame.createFindPasswordModule()
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     @objc func goLogin() {
