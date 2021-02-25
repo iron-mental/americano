@@ -14,6 +14,7 @@ extension UIApplication {
                                         .windows
                                         .first(where: { $0.isKeyWindow })?
                                         .rootViewController) -> UIViewController? {
+        
         if let tab = base as? UITabBarController {
             if let selected = tab.selectedViewController {
                 return getTopViewController(base: selected)

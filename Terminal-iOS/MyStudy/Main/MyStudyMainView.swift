@@ -146,7 +146,7 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
 
 extension MyStudyMainView: MyStudyMainViewProtocol {
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func showMyStudyList(myStudyList: MyStudyList) {
@@ -164,17 +164,18 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
             presenter?.showStudyDetailDirectly()
             startedByPushNotification = nil
         }
-        if isVisibleState == nil {
-            LoadingRainbowCat.hide()
-        } else {
-            if !isVisibleState! {
-                LoadingRainbowCat.hide()
-            }
-        }
+        LoadingRainbowCat.hide(caller: self)
+//        if isVisibleState == nil {
+//            LoadingRainbowCat.hide()
+//        } else {
+//            if !isVisibleState! {
+//                LoadingRainbowCat.hide()
+//            }
+//        }
     }
     
     func showErrMessage() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
         showToast(controller: self, message: "서버와의 연결이 불안정 합니다.", seconds: 1)
     }
 }
