@@ -15,7 +15,7 @@ protocol FindPasswordViewProtocol: class {
 }
 
 protocol FindPasswordWireFrameProtocol: class {
-    static func createModule() -> UIViewController
+    static func createFindPasswordModule() -> UIViewController
 }
 
 protocol FindPasswordPresenterProtocol: class {

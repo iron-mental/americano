@@ -41,7 +41,7 @@ class HomeView: UIViewController {
         signUpButton.do {
             $0.setTitle("회원가입", for: .normal)
             $0.titleLabel?.dynamicFont(fontSize: 18, weight: .bold)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.backgroundColor = .appColor(.mainColor)
             $0.addTarget(self, action: #selector(goSignUp), for: .touchUpInside)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
@@ -50,7 +50,6 @@ class HomeView: UIViewController {
             $0.setTitle("로그인에 문제가 있으신가요?", for: .normal)
             $0.setTitleColor(.appColor(.mainColor), for: .normal)
             $0.titleLabel?.dynamicFont(fontSize: 12, weight: .medium)
-            $0.backgroundColor = .darkGray
             $0.addTarget(self, action: #selector(goFindPassword), for: .touchUpInside)
         }
         mainImage.do {

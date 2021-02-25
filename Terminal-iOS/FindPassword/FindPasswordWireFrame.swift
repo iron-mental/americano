@@ -9,7 +9,7 @@
 import UIKit
 
 final class FindPasswordWireFrame: FindPasswordWireFrameProtocol {
-    static func createModule() -> UIViewController {
+    static func createFindPasswordModule() -> UIViewController {
         let view: FindPasswordViewProtocol = FindPasswordView()
         let presenter: FindPasswordPresenterProtocol
             & FindPasswordInteractorOutputProtocol = FindPasswordPresenter()

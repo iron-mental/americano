@@ -158,6 +158,7 @@
 		A5F1031F25E80E8D0054D57F /* FindPasswordWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1031E25E80E8D0054D57F /* FindPasswordWireFrame.swift */; };
 		A5F1032425E80EB10054D57F /* FindPasswordRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1032325E80EB10054D57F /* FindPasswordRemoteDataManager.swift */; };
 		A5F1032925E80EC70054D57F /* FindPasswordProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1032825E80EC70054D57F /* FindPasswordProtocols.swift */; };
+		A5F1032E25E819130054D57F /* ResizableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1032D25E819130054D57F /* ResizableButton.swift */; };
 		CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */; };
 		CC198E6F254C000A009D6CDF /* MemeberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6E254C000A009D6CDF /* MemeberView.swift */; };
 		CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */; };
@@ -555,6 +556,7 @@
 		A5F1031E25E80E8D0054D57F /* FindPasswordWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordWireFrame.swift; sourceTree = "<group>"; };
 		A5F1032325E80EB10054D57F /* FindPasswordRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordRemoteDataManager.swift; sourceTree = "<group>"; };
 		A5F1032825E80EC70054D57F /* FindPasswordProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordProtocols.swift; sourceTree = "<group>"; };
+		A5F1032D25E819130054D57F /* ResizableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableButton.swift; sourceTree = "<group>"; };
 		CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithContentView.swift; sourceTree = "<group>"; };
 		CC198E6E254C000A009D6CDF /* MemeberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeberView.swift; sourceTree = "<group>"; };
 		CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionView.swift; sourceTree = "<group>"; };
@@ -941,6 +943,7 @@
 				CC7B209825C3B7B6009920DC /* PaddingUILabel.swift */,
 				CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */,
 				CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */,
+				A5F1032D25E819130054D57F /* ResizableButton.swift */,
 			);
 			path = BaseComponent;
 			sourceTree = "<group>";
@@ -2304,6 +2307,7 @@
 				A510EC922559613E009BE9A6 /* UITextView+Ext.swift in Sources */,
 				A56264DF25B57C04004CD298 /* ProjectListView.swift in Sources */,
 				A51F2357256E195600CBFC13 /* AccessToken.swift in Sources */,
+				A5F1032E25E819130054D57F /* ResizableButton.swift in Sources */,
 				CC45F564254AABF400DC31C6 /* SearchLocationWireFrame.swift in Sources */,
 				A5C81C5B25836D32008F2B09 /* MyApplyListProtocols.swift in Sources */,
 				CCA3FF4C2517823E00F62627 /* StudyListInteractor.swift in Sources */,
