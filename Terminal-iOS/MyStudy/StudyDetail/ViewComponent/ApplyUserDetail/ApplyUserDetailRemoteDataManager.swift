@@ -7,25 +7,23 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserDetailRemoteDataManagerInputProtocol {
-    
     func postApplyStatus(studyID: Int, applyID: Int, status: Bool) {
         TerminalNetworkManager
             .shared
             .session
             .request(TerminalRouter.applyDetermine(studyID: studyID, applyID: applyID, status: status))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                         if result.message != nil {
-                            (self.remoteRequestHandler as! ApplyUserDetailRemoteDataManagerOutputProtocol).onApplyStatusRetrieved(response: result)
+                            if let handler = self.remoteRequestHandler as?  ApplyUserDetailRemoteDataManagerOutputProtocol {
+                                handler.onApplyStatusRetrieved(response: result)
+                            }
                         }
                     } catch {
                         print("error")

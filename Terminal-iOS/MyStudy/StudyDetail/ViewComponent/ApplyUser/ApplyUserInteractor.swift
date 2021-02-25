@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 import SwiftKeychainWrapper
 
 class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
@@ -20,13 +19,11 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
             .session
             .request(TerminalRouter.applyUserList(studyID: studyID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data)
                         if result.data != nil {
                             self.presenter?.didRetrieveUser(result: result)
                         }

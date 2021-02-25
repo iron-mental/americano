@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 
 class StudyCategoryRemoteManager: StudyCategoryRemoteDataManagerInputProtocol {
     var interactor: StudyCategoryRemoteDataManagerOutputProtocol?
@@ -18,13 +17,11 @@ class StudyCategoryRemoteManager: StudyCategoryRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.studyCategory)
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<[String]>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<[String]>.self, from: data)
                         self.interactor?.onCategoriesRetrieved(result: result)
                     } catch {
                         print(error)

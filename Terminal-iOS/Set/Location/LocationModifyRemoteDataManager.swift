@@ -20,13 +20,11 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
             .session
             .request(TerminalRouter.address)
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<[Address]>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<[Address]>.self, from: data)
                         self.remoteRequestHandler?.onRetrieveAddress(result: result)
                     } catch {
                         print(error.localizedDescription)
@@ -81,13 +79,11 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
             .session
             .request(TerminalRouter.userLocationUpdate(id: userID, location: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
                         self.remoteRequestHandler?.didCompleteModify(result: result)
                     } catch {
                         print(error.localizedDescription)

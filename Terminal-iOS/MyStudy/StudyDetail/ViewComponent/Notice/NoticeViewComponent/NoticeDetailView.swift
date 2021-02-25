@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 
 class NoticeDetailView: UIViewController {
     var presenter: NoticeDetailPresenterProtocol?
@@ -185,6 +183,4 @@ extension NoticeDetailView: NoticeDetailViewProtocol {
     func hideLoading() {
         LoadingRainbowCat.hide()
     }
-    
-    
 }

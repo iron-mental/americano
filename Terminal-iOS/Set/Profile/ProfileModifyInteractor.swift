@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftKeychainWrapper
-import SwiftyJSON
 
 class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
     var presenter: ProfileModifyInteractorOutputProtocol?

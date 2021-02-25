@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol {
     weak var interactor: SearchStudyResultRemoteDataManagerOutputProtocol?
@@ -18,13 +17,15 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
             .session
             .request(TerminalRouter.studySearch(keyword: keyWord))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
-                    self.interactor?.showSearchStudyListResult(result: result)
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
+                        self.interactor?.showSearchStudyListResult(result: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure:
                     if let data = response.data {
                         do {
@@ -48,16 +49,14 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
             .session
             .request(TerminalRouter.studyListForKey(key: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
                         self.interactor?.showPagingStudyListResult(result: result)
                     } catch {
-                        print(error)
+                        print(error.localizedDescription)
                     }
                 case .failure(let err):
                     print(err)

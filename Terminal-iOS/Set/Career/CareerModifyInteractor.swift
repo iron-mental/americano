@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftKeychainWrapper
-import SwiftyJSON
 
 class CareerModifyInteractor: CareerModifyInteractorInputProtocol {
     var presenter: CareerModifyInteractorOutputProtocol?
@@ -26,13 +25,11 @@ class CareerModifyInteractor: CareerModifyInteractorInputProtocol {
             .session
             .request(TerminalRouter.userCareerUpdate(id: userID, career: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
                         let isSuccess = result.result
                         let message = result.message!
                         self.presenter?.didCompleteModify(result: isSuccess, message: message)

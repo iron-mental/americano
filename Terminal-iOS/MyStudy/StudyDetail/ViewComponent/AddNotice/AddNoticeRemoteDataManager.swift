@@ -8,9 +8,6 @@
 
 import Foundation
 
-import Alamofire
-import SwiftyJSON
-
 class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
     
     func postNotice(studyID: Int,
@@ -28,13 +25,11 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
             .session
             .request(TerminalRouter.noticeCreate(studyID: "\(studyID)", notice: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<EditNoticeResult>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<EditNoticeResult>.self, from: data)
                         if result.data != nil {
                             completion(result)
                         }
@@ -75,13 +70,11 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
                                                  noticeID: String(noticeID),
                                                  notice: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                         if result.message != nil {
                             completion(result)
                         }

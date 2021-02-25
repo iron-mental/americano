@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol {
     weak var interactor: DelegateHostRemoteDataManagerOutputProtocol?
@@ -18,13 +17,11 @@ class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol 
             .session
             .request(TerminalRouter.delegateHost(studyID: studyID, newLeader: newLeader))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                         if result.message != nil {
                             self.interactor?.delegateHostResult(response: result)
                         }
