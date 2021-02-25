@@ -11,16 +11,20 @@ import UIKit
 protocol MyStudyMainViewProtocol: class {
     var presenter: MyStudyMainPresenterProtocol? { get set }
     var isVisibleState: Bool? { get set }
+    var startedByPushNotification: Bool? { get set }
     //PRESENTER -> VIEW
     func showMyStudyList(myStudyList: MyStudyList)
     func showErrMessage()
     func showLoading()
 }
 
-protocol MyStudyMainWireFrameProtocol: class {   
-    static func createMyStudyMainViewModul() -> UIViewController
+protocol MyStudyMainWireFrameProtocol: class {
+    var studyID: Int? { get set }
+    var pushEvent: AlarmType? { get set }
     
-    func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy)
+    static func createMyStudyMainViewModul(studyID: Int?, alarmType: AlarmType?) -> UIViewController
+    func goToStudyDetailView(view: UIViewController, studyID: Int, studyTitle: String)
+    func goToStudyDetailDirectly(view: UIViewController)
     func goToApplyList(from view: MyStudyMainViewProtocol)
     func goToAlert(from view: MyStudyMainViewProtocol)
 }
@@ -44,6 +48,7 @@ protocol MyStudyMainPresenterProtocol: class {
     func showApplyList()
     func showAlert()
     func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy)
+    func showStudyDetailDirectly()
     
     //INTERACTOR -> PRESENTER
     func MyStudyListResult(result: Bool, itemList: MyStudyList?)

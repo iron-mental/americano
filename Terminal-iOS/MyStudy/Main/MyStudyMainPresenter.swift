@@ -37,6 +37,12 @@ class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
     
     func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy) {
         self.view?.showLoading()
-        wireFrame?.goToStudyDetailView(view: view, selectedStudy: selectedStudy)
+        wireFrame?.goToStudyDetailView(view: view, studyID: selectedStudy.id, studyTitle: selectedStudy.title)
+    }
+    
+    func showStudyDetailDirectly() {
+        if let myStudyMainView = view as? UIViewController {
+            wireFrame?.goToStudyDetailDirectly(view: myStudyMainView)
+        }
     }
 }

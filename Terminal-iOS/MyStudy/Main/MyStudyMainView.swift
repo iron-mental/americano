@@ -11,16 +11,19 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 // MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
-class MyStudyMainView: UIViewController {
-    var isVisibleState: Bool?
-    var presenter: MyStudyMainPresenterProtocol?
-    var alarmButton = BadgeBarButtonItem()
-    lazy var moreButton = UIBarButtonItem()
-    var tableView = UITableView()
-    var dismissEditViewButtonItem: UIBarButtonItem?
-    var myStudyList: [MyStudy] = []
-    let refreshControl = UIRefreshControl()
-    let appearance = UINavigationBarAppearance()
+final class MyStudyMainView: UIViewController {
+    var presenter:                  MyStudyMainPresenterProtocol?
+    
+    var myStudyList:                [MyStudy] = []
+    //이거 로딩캣단에서 처리 다할 수 있을 듯
+    var startedByPushNotification:  Bool?
+    var isVisibleState:             Bool?
+    var alarmButton =               BadgeBarButtonItem()
+    var dismissEditViewButtonItem:  UIBarButtonItem?
+    let refreshControl =            UIRefreshControl()
+    let appearance =                UINavigationBarAppearance()
+    var tableView =                 UITableView()
+    lazy var moreButton =           UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,21 +36,26 @@ class MyStudyMainView: UIViewController {
         super.viewDidAppear(animated)
         isVisibleState = false
         appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = UIColor.appColor(.terminalBackground)
-        navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
+        appearance.backgroundColor = .appColor(.terminalBackground)
+        navigationController?
+            .navigationBar
+            .standardAppearance
+            .backgroundColor = .appColor(.terminalBackground)
     }
     
     func attribute() {
         self.do {
             $0.title = "내 스터디"
-            $0.navigationController?.navigationBar.barTintColor = UIColor.appColor(.terminalBackground)
+            $0.navigationController?.navigationBar.barTintColor = .appColor(.terminalBackground)
             $0.navigationItem.largeTitleDisplayMode = .automatic
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
-            $0.navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
+        }
+        self.navigationItem.do {
+            $0.rightBarButtonItems = [moreButton, alarmButton]
         }
         tableView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.terminalBackground)
             $0.register(MyStudyMainTableViewCell.self, forCellReuseIdentifier: MyStudyMainTableViewCell.identifier)
             $0.separatorColor = myStudyList.isEmpty ? .clear : .none
             $0.delegate = self
@@ -71,7 +79,6 @@ class MyStudyMainView: UIViewController {
     }
     
     func layout() {
-        self.navigationItem.rightBarButtonItems = [moreButton, alarmButton]
         self.view.addSubview(self.tableView)
         
         self.tableView.do {
@@ -153,6 +160,9 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         attribute()
         layout()
         tableView.reloadData()
+        if startedByPushNotification != nil && startedByPushNotification == true {
+            presenter?.showStudyDetailDirectly()
+        }
         if isVisibleState == nil {
             LoadingRainbowCat.hide()
         } else {
