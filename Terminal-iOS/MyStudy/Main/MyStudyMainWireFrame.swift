@@ -64,23 +64,26 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
     func goToStudyDetailDirectly(view: UIViewController) {
         if let id = self.studyID, let event = self.pushEvent {
             
-            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
-            
-            if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
-                switch event {
-                case .newApply:
-                    castedMyStudyDetailView.applyState = true
-                case .newNotice,
-                     .updatedNotice:
-                    castedMyStudyDetailView.viewState = .Notice
-                case .studyUpdate,
-                     .studyHostDelegate,
-                     .applyAllowed:
-                    castedMyStudyDetailView.viewState = .StudyDetail
-                case .chat, .testPush, .undefined, .studyDelete, .applyRejected: break
-                }
-                
+            switch event {
+            case .newApply:
+                let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
+                guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
+                castedMyStudyDetailView.applyState = true
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+            case .newNotice,
+                 .updatedNotice:
+                let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
+                guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
+                castedMyStudyDetailView.viewState = .Notice
+                view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+            case .studyUpdate,
+                 .studyHostDelegate,
+                 .applyAllowed:
+                let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
+                guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
+                castedMyStudyDetailView.viewState = .StudyDetail
+                view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+            case .chat, .testPush, .undefined, .studyDelete, .applyRejected: break
             }
         }
     }

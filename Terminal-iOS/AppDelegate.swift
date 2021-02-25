@@ -83,30 +83,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         guard let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
         
         switch event {
-        case .chat:
-            break
-        case .studyDelete:
-            break
-        case .studyUpdate, .studyHostDelegate:
+        case .studyDelete: break
+        case .studyUpdate, .studyHostDelegate, .chat:
             view.viewState = .StudyDetail
+            goView = view
         case .newApply:
             view.applyState = true
             goView = view
         case .newNotice, .updatedNotice:
             view.viewState = .Notice
             goView = view
-        case .applyAllowed:
-            break
-        case .applyRejected:
-            break
-        case .testPush:
-            break
+        case .applyAllowed: break
+        case .applyRejected: break
+        case .testPush: break
         case .none, .undefined: break
         }
         
-        guard let targetView = goView else { return }
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
+            guard let targetView = goView else { return }
             navVC.viewControllers.forEach {
                 if type(of: $0) == type(of: targetView) {
                     navVC.popToViewController($0, animated: false)
