@@ -46,9 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-            if let studyID = notification["study_id"] as? String,
-               let pushEvent = notification["pushEvent"] as? String {
-                self.studyID = studyID
+            if let studyID = notification["study_id"] as? Int {
+                self.studyID = String(studyID)
+            }
+            if let pushEvent = notification["pushEvent"] as? String {
                 self.pushEvent = AlarmType(rawValue: pushEvent)
             }
         } else {

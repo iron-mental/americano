@@ -78,12 +78,14 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
             case .studyUpdate,
                  .studyHostDelegate,
+                 .chat,
                  .applyAllowed:
                 let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
                 guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
                 castedMyStudyDetailView.viewState = .StudyDetail
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
-            case .chat, .testPush, .undefined, .studyDelete, .applyRejected: break
+            case .testPush, .undefined, .studyDelete, .applyRejected: break
+            
             }
         }
     }
