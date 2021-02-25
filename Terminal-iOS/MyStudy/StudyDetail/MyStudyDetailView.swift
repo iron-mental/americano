@@ -62,7 +62,9 @@ class MyStudyDetailView: UIViewController {
             }
             view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
-        
+        self.navigationItem.do {
+            $0.largeTitleDisplayMode = .always
+        }
         self.appearance.do {
             $0.configureWithTransparentBackground()
         }
