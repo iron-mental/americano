@@ -77,6 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
         let event = self.pushEvent
+        //거절, 스터디 삭제는 스터디 아이디가 안떨어진다 분기해주자
         let studyID = Int(self.studyID)!
         
         guard let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
@@ -102,12 +103,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             break
         case .none, .undefined: break
         }
+        
         guard let targetView = goView else { return }
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
             navVC.viewControllers.forEach {
-                if type(of:$0) == type(of: targetView) {
-                    navVC.popToViewController($0, animated: true)
+                if type(of: $0) == type(of: targetView) {
+                    navVC.popToViewController($0, animated: false)
                     return
                 } else {
                     if navVC.viewControllers.last == $0 {
