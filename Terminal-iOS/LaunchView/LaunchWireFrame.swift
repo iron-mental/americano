@@ -38,6 +38,7 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
     
     func replaceRootViewToMainView() {
         let main = ViewController()
+        main.myStudyViewController
         guard let window = UIApplication.shared.windows.first else { return }
         window.replaceRootViewController(main, animated: true, completion: nil)
     }

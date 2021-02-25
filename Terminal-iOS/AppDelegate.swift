@@ -25,9 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        window = UIWindow()
-        let launchView = LaunchWireFrame.createLaunchModule()
-        window?.rootViewController = launchView
+        
         // firebase 연동
         FirebaseApp.configure()
         
@@ -38,6 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 self.pushEvent = AlarmType(rawValue: pushEvent)
             }
         }
+        
+        window = UIWindow()
+        let launchView = LaunchWireFrame.createLaunchModule()
+        window?.rootViewController = launchView
         window?.makeKeyAndVisible()
         
         let center = UNUserNotificationCenter.current()
@@ -97,6 +99,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             break
         case .none, .undefined: break
         }
+//        이부분에서 런치뷰가 이미 깔려있기에 캐스팅이 되질 않고 특정뷰로 가지않음
+//        그렇다고 버전체크와 리프레시토큰을 확인 안할 수 없으므로 그걸 런치뷰에서 다할 것이냐 아니면 앱델리게이트에서 할 것이냐 정하면 되는데
+//        뭐가 좀 더 합리적인지 체크해보자
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
             navVC.pushViewController(goView!, animated: true)
