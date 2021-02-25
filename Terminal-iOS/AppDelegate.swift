@@ -65,15 +65,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let userInfo = notification.request.content.userInfo
         if let studyID = userInfo["study_id"] as? Int {
             self.studyID = studyID
-            print(self.studyID,"스터디 아이디 통과")
         }
         if let pushEvent = userInfo["pushEvent"] as? String {
             self.pushEvent = AlarmType(rawValue: pushEvent)
-            print(self.pushEvent,"푸시 이벤트 통과")
         }
         if let alertID = userInfo["alert_id"] as? Int {
             self.alertID = alertID
-            print(self.alertID, "알럿 아이디 통과")
         }
         completionHandler([.alert, .badge, .sound])
     }

@@ -102,8 +102,7 @@ extension NotificationView: NotificationViewProtocol {
     }
     
     func showAlert(message: String) {
-        //toast가 아닌 alert으로 해아할지 고민
-        showToast(controller: self, message: message, seconds: 1)
+        showToast(controller: self, message: message, seconds: 1) 
     }
     
     func showLoading() {
