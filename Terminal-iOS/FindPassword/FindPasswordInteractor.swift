@@ -13,3 +13,7 @@ final class FindPasswordInteractor: FindPasswordInteractorInputProtocol {
     var remoteDataManager: FindPasswordRemoteDataManagerInputProtocol?
     
 }
+
+extension FindPasswordInteractor: FindPasswordRemoteDataManagerOutputProtocol {
+    
+}

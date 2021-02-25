@@ -9,6 +9,13 @@
 import Foundation
 
 final class FindPasswordPresenter: FindPasswordPresenterProtocol {
+    var view: FindPasswordViewProtocol?
+    var interactor: FindPasswordInteractorInputProtocol?
+    var wireFrame: FindPasswordWireFrameProtocol?
+    
     
 }
 
+extension FindPasswordPresenter: FindPasswordInteractorOutputProtocol {
+    
+}
