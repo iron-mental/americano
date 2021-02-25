@@ -13,7 +13,7 @@ extension UIApplication {
                                         .shared
                                         .windows
                                         .first(where: { $0.isKeyWindow })?
-                                        .rootViewController, before: UIViewController? = nil) -> UIViewController? {
+                                        .rootViewController) -> UIViewController? {
         if let tab = base as? UITabBarController {
             if let selected = tab.selectedViewController {
                 return getTopViewController(base: selected)
@@ -22,16 +22,14 @@ extension UIApplication {
         if let nav = base as? UINavigationController {
             if let visibleViewController = nav.visibleViewController {
                 if type(of: visibleViewController) == UIAlertController.self {
-                    return getTopViewController(base: nav.viewControllers[nav.viewControllers.count - 1], before: nav.viewControllers[nav.viewControllers.count - 1])
+                    return getTopViewController(base: nav.viewControllers[nav.viewControllers.count - 1])
                 }
-                return getTopViewController(base: nav.visibleViewController, before: nav.visibleViewController)
+                return getTopViewController(base: nav.visibleViewController)
             }
         }
         if let presented = base?.presentedViewController {
             if type(of: presented) == UIAlertController.self {
-                if before != nil {
-                    return before
-                }
+                return base
             }
             return getTopViewController(base: presented)
         }
