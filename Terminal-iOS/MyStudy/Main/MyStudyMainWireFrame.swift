@@ -9,8 +9,10 @@
 import UIKit
 
 class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
+    var studyID: Int?
+    var pushEvent: AlarmType?
     
-    static func createMyStudyMainViewModul() -> UIViewController {
+    static func createMyStudyMainViewModul(studyID: Int? = nil, alarmType: AlarmType? = nil) -> UIViewController {
         let view: MyStudyMainViewProtocol = MyStudyMainView()
         let presenter: MyStudyMainPresenterProtocol = MyStudyMainPresenter()
         let interactor: MyStudyMainInteractorProtocol = MyStudyMainInteractor()
@@ -27,6 +29,11 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
         interactor.remoteManager = remoteDataManager
         interactor.localManager = localDataManager
         
+        if let id = studyID, let event = alarmType {
+            view.startedByPushNotification = true
+            wireFrame.studyID = id
+            wireFrame.pushEvent = event
+        }
         if let view = view as? MyStudyMainView {
             return view
         } else {
@@ -37,7 +44,6 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
     
     func goToApplyList(from view: MyStudyMainViewProtocol) {
         let myApplyListViewController = MyApplyListWireFrame.createStudyListModule()
-        
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(myApplyListViewController, animated: true)
         }
@@ -45,14 +51,37 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
     
     func goToAlert(from view: MyStudyMainViewProtocol) {
         let notificationView = NotificationWireFrame.createModule()
-        
         if let sourceView = view as? UIViewController {
             sourceView.navigationController?.pushViewController(notificationView, animated: true)
         }
     }
     
-    func goToStudyDetailView(view: UIViewController, selectedStudy: MyStudy) {
-        let myStudyDetailView =  MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: selectedStudy.id, studyTitle: selectedStudy.title)
+    func goToStudyDetailView(view: UIViewController, studyID: Int, studyTitle: String) {
+        let myStudyDetailView =  MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: studyTitle)
         view.navigationController?.pushViewController(myStudyDetailView, animated: true)
+    }
+    
+    func goToStudyDetailDirectly(view: UIViewController) {
+        if let id = self.studyID, let event = self.pushEvent {
+            
+            let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
+            
+            if let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView {
+                switch event {
+                case .newApply:
+                    castedMyStudyDetailView.applyState = true
+                case .newNotice,
+                     .updatedNotice:
+                    castedMyStudyDetailView.viewState = .Notice
+                case .studyUpdate,
+                     .studyHostDelegate,
+                     .applyAllowed:
+                    castedMyStudyDetailView.viewState = .StudyDetail
+                case .chat, .testPush, .undefined, .studyDelete, .applyRejected: break
+                }
+                
+                view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+            }
+        }
     }
 }
