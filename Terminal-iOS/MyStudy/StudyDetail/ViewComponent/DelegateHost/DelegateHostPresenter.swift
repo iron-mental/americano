@@ -14,7 +14,6 @@ class DelegateHostPresenter: DelegateHostPresenterProtocol {
     var wireFrame: DelegateHostWireFrameProtocol?
     
     func delegateHostButtonDidTap(newLeader: Int) {
-//        LoadingRainbowCat.show()
         interactor?.putDelegateHostAPI(newLeader: newLeader)
     }
 }
