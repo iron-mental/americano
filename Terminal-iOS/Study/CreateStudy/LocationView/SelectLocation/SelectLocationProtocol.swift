@@ -57,8 +57,6 @@ protocol SelectLocationLocalDataManagerProtocol: class {
     //INTERACTOR -> LOCALDATAMANAGER
 }
 
-protocol SelectLocationWireFrameProtocol: class {
-    var presenter: SelectLocationPresenterProtocol? { get set }
-    
-    static func selectLocationViewModul(item: StudyDetailLocationPost, parentView: UIViewController) -> UIViewController
+protocol SelectLocationWireFrameProtocol: class {    
+    static func selectLocationViewModule(item: StudyDetailLocationPost, parentView: UIViewController) -> UIViewController
 }
