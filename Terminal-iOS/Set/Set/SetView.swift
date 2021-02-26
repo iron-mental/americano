@@ -140,11 +140,11 @@ class SetView: UIViewController {
 
 extension SetView: SetViewProtocol {
     func showLoading() {
-        LoadingRainbowCat.show(self)
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide(self)
+        LoadingRainbowCat.hide(caller: self)
     }
     
     func emailAuthResponse(result: Bool, message: String) {

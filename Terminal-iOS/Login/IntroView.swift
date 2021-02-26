@@ -239,13 +239,11 @@ extension IntroView: IntroViewProtocol {
     }
     
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide {
-            print("Loading hide")
-        }
+        LoadingRainbowCat.hide(caller: self)
     }
     
     func presentCompleteView() {
