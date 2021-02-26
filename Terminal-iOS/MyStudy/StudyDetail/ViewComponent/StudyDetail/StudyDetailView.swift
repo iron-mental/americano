@@ -338,11 +338,11 @@ extension StudyDetailView: StudyDetailViewProtocol {
     }
     
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
     }
 }
 

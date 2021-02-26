@@ -122,7 +122,7 @@ class LocationModifyView: UIViewController {
         let sigungu = self.the2depth
         
         if !sigungu.isEmpty {
-            LoadingRainbowCat.show()
+            showLoading()
             presenter?.completeModify(sido: sido, sigungu: sigungu)
         } else {
             self.showToast(controller: self, message: "지역을 모두 선택해주세요.", seconds: 0.3)
@@ -165,7 +165,7 @@ extension LocationModifyView: LocationModifyViewProtocol {
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()
         } else {
-            LoadingRainbowCat.hide()
+            hideLoading()
             showToast(controller: self, message: message, seconds: 1)
             // error handle
         }
@@ -176,11 +176,11 @@ extension LocationModifyView: LocationModifyViewProtocol {
     }
     
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
     }
 }
 
