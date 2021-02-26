@@ -13,6 +13,8 @@ protocol ParticipantProfileViewProtocol: BaseProfileViewProtocol {
     
     //PRESENTER -> View
     func showError(message: String)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol ParticipantProfilePresenterProtocol: class {

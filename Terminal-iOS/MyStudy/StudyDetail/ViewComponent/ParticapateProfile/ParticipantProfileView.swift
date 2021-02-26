@@ -37,4 +37,12 @@ extension ParticipantProfileView: ParticipantProfileViewProtocol {
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)
     }
+    
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
+    }
 }
