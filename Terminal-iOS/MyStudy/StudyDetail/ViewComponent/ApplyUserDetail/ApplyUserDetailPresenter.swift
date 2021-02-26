@@ -19,10 +19,12 @@ class ApplyUserDetailPresenter: ApplyUserDetailPresenterInputProtocol {
     }
     
     func rejectButtonDidTap() {
+        view?.showLoading()
         interactor?.postRejectStatus()
     }
     
     func acceptButtonDidtap() {
+        view?.showLoading()
         interactor?.postAcceptStatus()
     }
     
