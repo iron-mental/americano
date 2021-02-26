@@ -12,6 +12,7 @@ protocol FindPasswordViewProtocol: class {
     var presenter: FindPasswordPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func showResult(result: Bool, message: String?)
 }
 
 protocol FindPasswordWireFrameProtocol: class {
@@ -24,6 +25,7 @@ protocol FindPasswordPresenterProtocol: class {
     var wireFrame: FindPasswordWireFrameProtocol? { get set }
     
     // VIEW -> PRESENTER
+    func resetRequest(email: String)
 }
 
 protocol FindPasswordInteractorInputProtocol: class {
@@ -31,20 +33,24 @@ protocol FindPasswordInteractorInputProtocol: class {
     var remoteDataManager: FindPasswordRemoteDataManagerInputProtocol? { get set }
     
     // PRESENTER -> INTERACTOR
+    func resetRequest(email: String)
 }
 
 protocol FindPasswordInteractorOutputProtocol: class {
     
     // INTERACTOR -> PRESENTER
+    func resetResponse(result: Bool, message: String)
 }
 
 protocol FindPasswordRemoteDataManagerInputProtocol: class {
     var interactor: FindPasswordRemoteDataManagerOutputProtocol? { get set }
     
     // INTERACTOR -> REMOTEDATAMANAGER
+    func resetPassword(email: String)
 }
 
 protocol FindPasswordRemoteDataManagerOutputProtocol: class {
     
     // REMOTEDATAMANAGER -> INTERACTOR
+    func resetResponse(result: BaseResponse<Bool>)
 }
