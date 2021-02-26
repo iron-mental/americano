@@ -231,11 +231,11 @@ extension AddNoticeView: AddNoticeViewProtocol {
         showToast(controller: self, message: message, seconds: 1)
     }
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
     }
 }
 
