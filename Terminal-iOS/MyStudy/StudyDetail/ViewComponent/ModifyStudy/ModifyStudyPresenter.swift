@@ -18,22 +18,19 @@ class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
     }
     
     func completButtonDidTap(studyID: Int, study: StudyDetailPost) {
-        LoadingRainbowCat.show()
+        view?.showLoading()
         interactor?.putStudyInfo(studyID: studyID, study: study)
     }
 }
 
 extension ModifyStudyPresenter: ModifyStudyInteractorOutputProtocol {
     func putStudyInfoResult(result: Bool, message: String) {
+        view?.hideLoading()
         switch result {
         case true:
-            LoadingRainbowCat.hide {
-                self.view?.showResult(message: message)
-            }
+            self.view?.showResult(message: message)
         case false:
-            LoadingRainbowCat.hide {
-                self.view?.showError(message: message)
-            }
+            self.view?.showError(message: message)
         }
     }
 }
