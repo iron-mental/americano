@@ -15,9 +15,10 @@ class ApplyUserListEmptyView: BaseEmptyView {
             $0.image = UIImage(systemName: "figure.wave")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
         }
         self.guideLabel.do {
-            $0.text = "신청자가 없습니다."
+            $0.text = "유저가 존재하지 않습니다."
         }
     }
+    
     override func layout() {
         super.layout()
         self.iconImageView.do {
