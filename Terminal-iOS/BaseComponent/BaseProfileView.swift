@@ -191,11 +191,11 @@ class BaseProfileView: UIViewController {
         }
     }
     func showLoading() {
-        LoadingRainbowCat.show(self)
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide(self)
+        LoadingRainbowCat.hide(caller: self)
     }
 }
 

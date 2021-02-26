@@ -21,7 +21,7 @@ class CreateStudyPresenter: CreateStudyPresenterProtocol {
     }
     
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {
-//        LoadingRainbowCat.show()
+        view?.showLoading()
         interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)
     }
     
@@ -30,12 +30,12 @@ class CreateStudyPresenter: CreateStudyPresenterProtocol {
 
 extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {
     func studyInfoInvalid(message: String) {
-        LoadingRainbowCat.hide()
+        view?.hideLoading()
         view?.studyInfoInvalid(message: message)
     }
     
     func studyInfoValid(studyID: Int) {
-        LoadingRainbowCat.hide()
+        view?.hideLoading()
         view?.studyInfoValid(studyID: studyID, message: "스터디 생성이 완료되었습니다.")
     }
 }
