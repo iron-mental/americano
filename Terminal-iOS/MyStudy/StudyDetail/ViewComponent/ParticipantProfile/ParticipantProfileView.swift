@@ -30,19 +30,18 @@ class ParticipantProfileView: BaseProfileView {
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         }
     }
+    override func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    override func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
+    }
 }
 
 extension ParticipantProfileView: ParticipantProfileViewProtocol {
     
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)
-    }
-    
-    func showLoading() {
-        LoadingRainbowCat.show(caller: self)
-    }
-    
-    func hideLoading() {
-        LoadingRainbowCat.hide(caller: self)
     }
 }

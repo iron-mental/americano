@@ -329,6 +329,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func showError(message: String) {
         self.hideLoading()
+        parentView?.setting()
         showToast(controller: self, message: message, seconds: 1) {
             if message != "공백은 허용되지 않습니다" {
                 self.navigationController?.popViewController(animated: true)

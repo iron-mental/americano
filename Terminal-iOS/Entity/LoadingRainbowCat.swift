@@ -18,7 +18,7 @@ class LoadingRainbowCat: NSObject {
         guard let topViewController =  UIApplication.getTopViewController() else { return }
         guard let callerViewController = caller else { return }
         if type(of: topViewController) == type(of: callerViewController) {
-            print("들어오는데 성공한 애는 바로", caller)
+            print("SHOW 성공한:", caller)
             let backgroundView = UIView()
             let popupView = AnimationView(name: "14476-rainbow-cat-remix")
             if let window = UIApplication.shared.windows.first {
@@ -41,6 +41,8 @@ class LoadingRainbowCat: NSObject {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
                 hide(caller: UIApplication.getTopViewController())
             }
+        } else {
+            print("SHOW 실패한: ", caller)
         }
     }
     
@@ -48,7 +50,7 @@ class LoadingRainbowCat: NSObject {
         guard let topViewController =  UIApplication.getTopViewController() else { return }
         guard let callerViewController = caller else { return }
         if type(of: topViewController) == type(of: callerViewController) {
-            print("문 닫은애는 바로", caller)
+            print("HIDE 성공한: ", caller)
             if let popupView = sharedInstance.popupView,
                let backgroundView = sharedInstance.backgroundView {
                 popupView.stop()
@@ -56,6 +58,8 @@ class LoadingRainbowCat: NSObject {
                 popupView.removeFromSuperview()
             }
             completion?()
+        } else {
+            print("HIDE 실패한", caller)
         }
     }
 }

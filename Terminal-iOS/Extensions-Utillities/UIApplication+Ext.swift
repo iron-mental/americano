@@ -9,12 +9,7 @@
 import UIKit
 
 extension UIApplication {
-    class func getTopViewController(base: UIViewController? = UIApplication
-                                        .shared
-                                        .windows
-                                        .first(where: { $0.isKeyWindow })?
-                                        .rootViewController) -> UIViewController? {
-        
+    class func getTopViewController(base: UIViewController? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController) -> UIViewController? {
         if let tab = base as? UITabBarController {
             if let selected = tab.selectedViewController {
                 return getTopViewController(base: selected)
@@ -29,7 +24,8 @@ extension UIApplication {
             }
         }
         if let presented = base?.presentedViewController {
-            if type(of: presented) == UIAlertController.self {
+            if type(of: presented) == UIAlertController.self ||
+                type(of: presented) == UISearchController.self {
                 return base
             }
             return getTopViewController(base: presented)
