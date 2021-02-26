@@ -190,16 +190,16 @@ class BaseProfileView: UIViewController {
             $0.heightAnchor.constraint(equalTo: projectLabel.heightAnchor).isActive = true
         }
     }
-}
-
-extension BaseProfileView: BaseProfileViewProtocol {
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(self)
     }
+}
+
+extension BaseProfileView: BaseProfileViewProtocol {
     
     func showUserInfo(userInfo: UserInfo) {
         var snsList: [String: String] = [:]
