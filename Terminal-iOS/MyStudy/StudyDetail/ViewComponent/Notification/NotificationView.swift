@@ -78,11 +78,6 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.viewControllers.forEach {
-            if let myStudyMainView = $0 as? MyStudyMainViewProtocol {
-                myStudyMainView.isVisibleState = true
-            }
-        }
         presenter?.cellDidTap(alert: notiList[indexPath.row])
     }
 }

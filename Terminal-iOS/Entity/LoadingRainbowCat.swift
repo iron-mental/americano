@@ -19,27 +19,29 @@ class LoadingRainbowCat: NSObject {
         guard let callerViewController = caller else { return }
         if type(of: topViewController) == type(of: callerViewController) {
             print("SHOW 성공한:", caller)
-            let backgroundView = UIView()
-            let popupView = AnimationView(name: "14476-rainbow-cat-remix")
-            if let window = UIApplication.shared.windows.first {
-                window.addSubview(backgroundView)
-                window.addSubview(popupView)
-                window.backgroundColor = UIColor.appColor(.terminalBackground)
-                popupView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-                backgroundView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX, height: window.frame.maxY)
-                backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-                popupView.center = window.center
-                
-                sharedInstance.backgroundView?.removeFromSuperview()
-                sharedInstance.popupView?.removeFromSuperview()
-                sharedInstance.backgroundView = backgroundView
-                sharedInstance.popupView = popupView
-            }
-            popupView.contentMode = .scaleAspectFit
-            popupView.play()
-            popupView.loopMode = .loop
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-                hide(caller: UIApplication.getTopViewController())
+            if sharedInstance.backgroundView?.superview == nil {
+                let backgroundView = UIView()
+                let popupView = AnimationView(name: "14476-rainbow-cat-remix")
+                if let window = UIApplication.shared.windows.first {
+                    window.addSubview(backgroundView)
+                    window.addSubview(popupView)
+                    window.backgroundColor = UIColor.appColor(.terminalBackground)
+                    popupView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+                    backgroundView.frame = CGRect(x: 0, y: 0, width: window.frame.maxX, height: window.frame.maxY)
+                    backgroundView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+                    popupView.center = window.center
+                    
+                    sharedInstance.backgroundView?.removeFromSuperview()
+                    sharedInstance.popupView?.removeFromSuperview()
+                    sharedInstance.backgroundView = backgroundView
+                    sharedInstance.popupView = popupView
+                }
+                popupView.contentMode = .scaleAspectFit
+                popupView.play()
+                popupView.loopMode = .loop
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+                    hide(caller: UIApplication.getTopViewController())
+                }
             }
         } else {
             print("SHOW 실패한: ", caller)
@@ -51,11 +53,13 @@ class LoadingRainbowCat: NSObject {
         guard let callerViewController = caller else { return }
         if type(of: topViewController) == type(of: callerViewController) {
             print("HIDE 성공한: ", caller)
-            if let popupView = sharedInstance.popupView,
-               let backgroundView = sharedInstance.backgroundView {
-                popupView.stop()
-                backgroundView.removeFromSuperview()
-                popupView.removeFromSuperview()
+            if sharedInstance.backgroundView?.superview != nil {
+                if let popupView = sharedInstance.popupView,
+                   let backgroundView = sharedInstance.backgroundView {
+                    popupView.stop()
+                    backgroundView.removeFromSuperview()
+                    popupView.removeFromSuperview()
+                }
             }
             completion?()
         } else {

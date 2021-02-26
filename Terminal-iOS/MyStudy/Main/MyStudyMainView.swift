@@ -17,7 +17,7 @@ final class MyStudyMainView: UIViewController {
     var myStudyList:[MyStudy] = []
     //이거 로딩캣단에서 처리 다할 수 있을 듯
     var startedByPushNotification: Bool?
-    var isVisibleState: Bool?
+//    var isVisibleState: Bool?
     var dismissEditViewButtonItem: UIBarButtonItem?
     var alarmButton = BadgeBarButtonItem()
     let refreshControl = UIRefreshControl()
@@ -34,7 +34,7 @@ final class MyStudyMainView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        isVisibleState = false
+//        isVisibleState = false
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = .appColor(.terminalBackground)
         navigationController?
