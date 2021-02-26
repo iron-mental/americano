@@ -180,6 +180,7 @@
 		CC29FB3B25207EAF00C1BDCE /* SelectLocationWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */; };
 		CC3F99202545448E00428B11 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F991F2545448E00428B11 /* HomeView.swift */; };
 		CC3F992325454B5500428B11 /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3F992225454B5500428B11 /* Terminal.swift */; };
+		CC40E86725E825CE0079AF26 /* UIApplication+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC40E86625E825CE0079AF26 /* UIApplication+Ext.swift */; };
 		CC43B8232582922900A4A418 /* StudyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D058F6255D95000047CA9E /* StudyDetail.swift */; };
 		CC45F54E254AA3A200DC31C6 /* SearchLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F54D254AA3A200DC31C6 /* SearchLocationView.swift */; };
 		CC45F552254AA3BF00DC31C6 /* SearchLocationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC45F551254AA3BF00DC31C6 /* SearchLocationInteractor.swift */; };
@@ -571,6 +572,7 @@
 		CC29FB3A25207EAF00C1BDCE /* SelectLocationWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationWireFrame.swift; sourceTree = "<group>"; };
 		CC3F991F2545448E00428B11 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CC3F992225454B5500428B11 /* Terminal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
+		CC40E86625E825CE0079AF26 /* UIApplication+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Ext.swift"; sourceTree = "<group>"; };
 		CC45F54D254AA3A200DC31C6 /* SearchLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationView.swift; sourceTree = "<group>"; };
 		CC45F551254AA3BF00DC31C6 /* SearchLocationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationInteractor.swift; sourceTree = "<group>"; };
 		CC45F554254AA41600DC31C6 /* SearchLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationPresenter.swift; sourceTree = "<group>"; };
@@ -948,7 +950,7 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
-				CCA5D5C625E561A0001C9236 /* ParticapateProfile */,
+				CCA5D5C625E561A0001C9236 /* ParticipantProfile */,
 				A5BA1ED4254A8E160089D4E9 /* Notification */,
 				CCC8760425C3D890009B90BF /* MyApplyStudyInfo */,
 				CCA25ADC25B9AFD900280C80 /* DelegateHost */,
@@ -1046,6 +1048,7 @@
 				A5CEE7CF25B753CD00C2FF3F /* UIFont+Ext.swift */,
 				CC4DCFE625C16154002493E4 /* UIImage+Ext.swift */,
 				CCA47E5F25DD196900E11D4C /* UITableView+Ext.swift */,
+				CC40E86625E825CE0079AF26 /* UIApplication+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -1506,7 +1509,7 @@
 			path = DataManager;
 			sourceTree = "<group>";
 		};
-		CCA5D5C625E561A0001C9236 /* ParticapateProfile */ = {
+		CCA5D5C625E561A0001C9236 /* ParticipantProfile */ = {
 			isa = PBXGroup;
 			children = (
 				CCA5D5E125E5674F001C9236 /* ParticipantProfileView.swift */,
@@ -1516,7 +1519,7 @@
 				CCA5D5F825E56781001C9236 /* ParticipantProfileWireFrame.swift */,
 				CCA5D5D325E561E5001C9236 /* ParticipantProfileProtocols.swift */,
 			);
-			path = ParticapateProfile;
+			path = ParticipantProfile;
 			sourceTree = "<group>";
 		};
 		CCAF0FD02532FFC70060A2F6 /* Main */ = {
@@ -2041,6 +2044,7 @@
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,
 				CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */,
 				CCBBEF352583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift in Sources */,
+				CC40E86725E825CE0079AF26 /* UIApplication+Ext.swift in Sources */,
 				CC29FB3525207E7200C1BDCE /* SelectLocationRemoteDataManager.swift in Sources */,
 				CC563950259CADBA00DA1479 /* SearchStudyWireFrame.swift in Sources */,
 				CC604487257626F4000D11C7 /* NoticeDetailWireFrame.swift in Sources */,

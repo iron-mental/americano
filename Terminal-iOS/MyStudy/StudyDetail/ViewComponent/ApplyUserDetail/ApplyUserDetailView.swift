@@ -85,6 +85,14 @@ class ApplyUserDetailView: BaseProfileView {
         presenter?.rejectButtonDidTap()
         TerminalAlertMessage.dismiss()
     }
+    
+    override func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    override func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
+    }
 }
 
 extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
@@ -107,5 +115,4 @@ extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)
     }
-    
 }

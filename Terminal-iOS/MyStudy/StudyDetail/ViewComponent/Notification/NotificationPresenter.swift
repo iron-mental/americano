@@ -44,8 +44,10 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
             wireFrame?.goToStudyDetail(from: view!, alarmCase: alarmCase, studyTitle: studyTitle, studyID: studyID)
         case .studyDelete:
             view?.showAlert(message: "\(studyTitle) 스터디가 삭제되었습니다.")
+            self.viewDidLoad()
         case .applyRejected:
             view?.showAlert(message: "\(studyTitle) 스터디 입장이 거절되었습니다")
+            self.viewDidLoad()
         case .undefined:
             view?.showError(message: "서버와의 연결이 불안정 합니다.")
         case .testPush:
@@ -53,6 +55,7 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
         }
     }
     func alertConfirmFailed(message: String) {
+        view?.hideLoading()
         view?.showError(message: message)
     }
 }

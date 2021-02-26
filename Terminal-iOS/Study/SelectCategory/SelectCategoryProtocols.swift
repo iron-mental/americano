@@ -13,6 +13,8 @@ protocol SelectCategoryViewProtocol: class {
     
     //PRESENTER -> VIEW
     func showCategory()
+    func showLoading()
+    func hideLoading()
     
     //VIEW -> PRESENTER
     func backTapped()

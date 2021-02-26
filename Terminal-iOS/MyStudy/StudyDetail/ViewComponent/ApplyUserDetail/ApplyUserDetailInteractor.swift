@@ -22,6 +22,8 @@ class ApplyUserDetailInteractor: ApplyUserDetailInteractorInputProtocol {
         remoteDataManager?.getProjectList(userID: "\(id)")
     }
     func postRejectStatus() {
+        print("studyID: ", studyID)
+        print("applyID: ", applyID)
         remoteDataManager?.postApplyStatus(studyID: studyID!, applyID: applyID!, status: false)
     }
     

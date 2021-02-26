@@ -16,28 +16,18 @@ import SwiftKeychainWrapper
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
-    var goView: MyStudyDetailView?
-    var pushEvent: AlarmType?
-    var studyID: String = ""
-    var alertID: Int?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        window = UIWindow()
-        let launchView = LaunchWireFrame.createLaunchModule()
-        window?.rootViewController = launchView
+        
+        // 임시 슈가 코드
+        print(KeychainWrapper.standard.string(forKey: "refreshToken") as Any)
+        print(KeychainWrapper.standard.string(forKey: "accessToken") as Any)
+        
         // firebase 연동
         FirebaseApp.configure()
         
-        if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-            if let studyID = notification["study_id"] as? String,
-               let pushEvent = notification["pushEvent"] as? String {
-                self.studyID = studyID
-                self.pushEvent = AlarmType(rawValue: pushEvent)
-            }
-        }
-        window?.makeKeyAndVisible()
-        
+        // Noti Request
         let center = UNUserNotificationCenter.current()
         center.delegate = self
         center.requestAuthorization(options: [.alert, .badge, .sound]) { _, error in
@@ -48,57 +38,76 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 application.registerForRemoteNotifications()
             }
         }
-        
-        print(KeychainWrapper.standard.string(forKey: "refreshToken"))
-        print(KeychainWrapper.standard.string(forKey: "accessToken"))
+        if launchOptions?[.remoteNotification] == nil {
+            window = UIWindow()
+            let launchView = LaunchWireFrame.createLaunchModule()
+            window?.rootViewController = launchView
+            window?.makeKeyAndVisible()
+        }
         return true
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        if let studyID = userInfo["study_id"] as? String {
-            self.studyID = studyID
-        }
-        if let pushEvent = userInfo["pushEvent"] as? String {
-            self.pushEvent = AlarmType(rawValue: pushEvent)
-        }
-        if let alertID = userInfo["alert_id"] as? Int {
-            self.alertID = alertID
-        }
         completionHandler([.alert, .badge, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
-        let event = self.pushEvent
-        let studyID = Int(self.studyID)!
+        var goView: UIViewController?
+        let userInfo =          response.notification.request.content.userInfo
+        guard let eventValue =  userInfo["pushEvent"] as? String else { return }
+        guard let studyID =     userInfo["study_id"] as? Int else { return }
+        guard let event =       AlarmType(rawValue: eventValue) else { return }
         
-        guard let view = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
+        guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
         
         switch event {
-        case .chat:
-            break
-        case .studyDelete:
-            break
-        case .studyUpdate, .studyHostDelegate:
-            view.viewState = .StudyDetail
+        
+        case .studyUpdate,
+             .studyHostDelegate,
+             .chat:
+            studyDetailView.viewState = .StudyDetail
+            goView = studyDetailView
+            
         case .newApply:
-            view.applyState = true
-            goView = view
-        case .newNotice, .updatedNotice:
-            view.viewState = .Notice
-            goView = view
-        case .applyAllowed:
-            break
-        case .applyRejected:
-            break
-        case .testPush:
-            break
-        case .none, .undefined: break
+            studyDetailView.applyState = true
+            goView = studyDetailView
+            
+        case .newNotice,
+             .updatedNotice:
+            studyDetailView.viewState = .Notice
+            goView = studyDetailView
+            
+        case .applyRejected, .studyDelete:
+            let notificationListView = NotificationWireFrame.createModule()
+            goView = notificationListView
+            
+        case .testPush, .undefined, .applyAllowed: break
+            
         }
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
-            navVC.pushViewController(goView!, animated: true)
+            guard let targetView = goView else { return }
+            var targetParentView: UIViewController?
+            navVC.viewControllers.forEach {
+                if type(of: $0) == type(of: targetView) {
+                    if let popPoint = targetParentView {
+                        navVC.popToViewController(popPoint, animated: false)
+                        navVC.pushViewController(targetView, animated: true)
+                    }
+                    return
+                } else {
+                    if navVC.viewControllers.last == $0 {
+                        navVC.pushViewController(targetView, animated: true)
+                    }
+                }
+                targetParentView = $0
+            }
+        } else {
+            window = UIWindow()
+            let launchView = LaunchWireFrame.createLaunchModule(studyID: studyID, pushEvent: event)
+            window?.rootViewController = launchView
+            window?.makeKeyAndVisible()
         }
         completionHandler()
     }

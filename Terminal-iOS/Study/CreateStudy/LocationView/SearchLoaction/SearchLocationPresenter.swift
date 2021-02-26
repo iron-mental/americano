@@ -18,12 +18,12 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
     }
     
     func didClickedSearchButton(text: String) {
-        LoadingRainbowCat.show()
+        view?.showLoading()
         interactor?.searchKeyWord(text: text)
     }
     
     func searchResult(list: [StudyDetailLocationPost]) {
+        view?.hideLoading()
         view?.showSearchResult(list: list)
-        LoadingRainbowCat.hide()
     }
 }

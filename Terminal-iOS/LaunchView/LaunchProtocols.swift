@@ -58,7 +58,9 @@ protocol LaunchRemoteDataManagerOutputProtocol: class {
 }
 
 protocol LaunchWireFrameProtocol: class {
-    static func createLaunchModule() -> UIViewController
+    var studyID: Int? { get set }
+    var pushEvent: AlarmType? { get set }
+    static func createLaunchModule(studyID: Int?, pushEvent: AlarmType?) -> UIViewController
     
     //PRESENTER -> WIREFRAME
     func replaceRootViewToIntroView()

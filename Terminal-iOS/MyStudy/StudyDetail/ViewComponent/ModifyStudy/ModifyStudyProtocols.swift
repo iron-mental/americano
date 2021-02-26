@@ -14,6 +14,8 @@ protocol ModifyStudyViewProtocol: class {
     
     //PRESENTER -> VIEW
     func showResult(message: String)
+    func showLoading()
+    func hideLoading()
     func showError(label: String?, message: String)
 }
 

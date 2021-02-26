@@ -63,10 +63,10 @@ extension MyApplyListView: MyApplyListViewProtocol {
     }
     
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     func hideLoading() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
     }
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)

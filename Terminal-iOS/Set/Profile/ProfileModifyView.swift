@@ -19,10 +19,8 @@ class ProfileModifyView: UIViewController {
     let picker = UIImagePickerController()
 
     let projectAddButton = UIButton()
-    
     lazy var modifyLabel = UILabel()
     lazy var contentView = UIView()
-    
     let profileImage = UIImageView()
     lazy var nameLabel = UILabel()
     lazy var introductionLabel = UILabel()
@@ -38,7 +36,7 @@ class ProfileModifyView: UIViewController {
         attribute()
         layout()
         textViewDidChange(introduction)
-        LoadingRainbowCat.hide()
+        hideLoading()
     }
     
     // MARK: Set Attribute
@@ -269,7 +267,7 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()
         } else {
-            LoadingRainbowCat.hide()
+            hideLoading()
             showToast(controller: self, message: message, seconds: 1)
         }
     }
@@ -279,11 +277,11 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
     }
     
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
     }
 }
 

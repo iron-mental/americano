@@ -84,7 +84,6 @@ class SearchStudyView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: self.searchController.searchBar.leadingAnchor).isActive = true
         }
         self.collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -165,11 +164,11 @@ extension SearchStudyView: SearchStudyViewProtocol {
     }
     
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
     }
 }
 

@@ -19,7 +19,7 @@ final class CreateStudyView: BaseEditableStudyDetailView {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        LoadingRainbowCat.hide()
+        hideLoading()
     }
     
     override func attribute() {
@@ -57,9 +57,12 @@ final class CreateStudyView: BaseEditableStudyDetailView {
 }
 
 extension CreateStudyView: CreateStudyViewProtocol {
-    func loading() {
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
     }
-    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
+    }
     func setView() {
     }
     
