@@ -50,6 +50,7 @@ final class FindPasswordView: UIViewController {
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
             $0.addLeftPadding(padding: 10)
+            $0.delegate = self
         }
         self.resetButton.do {
             $0.setTitle("비밀번호 재설정", for: .normal)
@@ -124,5 +125,14 @@ extension FindPasswordView: FindPasswordViewProtocol {
             }
             self.showToast(controller: self, message: message, seconds: 1)
         }
+    }
+}
+
+extension FindPasswordView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let email = textField.text {
+            self.presenter?.resetRequest(email: email)
+        }
+        return true
     }
 }
