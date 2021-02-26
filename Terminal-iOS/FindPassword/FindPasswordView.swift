@@ -21,6 +21,7 @@ final class FindPasswordView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        self.emailTextField.becomeFirstResponder()
     }
     
     func attribute() {
@@ -40,16 +41,26 @@ final class FindPasswordView: UIViewController {
         }
         self.emailTextField.do {
             $0.placeholder = "이메일 입력"
+            $0.attributedPlaceholder = NSAttributedString(string: "이메일 입력",
+                                                          attributes: [
+                                                            .foregroundColor: UIColor.lightGray,
+                                                            .font: UIFont.notosansMedium(size: 15)])
             $0.backgroundColor = .appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
             $0.addLeftPadding(padding: 10)
         }
+        self.completeButton.do {
+            $0.setTitle("비밀번호 재설정", for: .normal)
+            $0.titleLabel?.font = .notosansMedium(size: 15)
+            $0.backgroundColor = .appColor(.mainColor)
+            $0.layer.cornerRadius = 10
+        }
     }
     
     func layout() {
-        [backButton, descript, emailTextField].forEach { self.view.addSubview($0) }
+        [backButton, descript, emailTextField, completeButton].forEach { self.view.addSubview($0) }
         
         self.backButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +82,14 @@ final class FindPasswordView: UIViewController {
             $0.topAnchor.constraint(equalTo: self.descript.bottomAnchor, constant: 10).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: self.descript.intrinsicContentSize.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        }
+        self.completeButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 10).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: self.descript.intrinsicContentSize.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
     }
     
