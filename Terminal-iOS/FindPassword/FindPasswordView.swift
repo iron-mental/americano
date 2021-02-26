@@ -24,7 +24,7 @@ final class FindPasswordView: UIViewController {
         self.emailTextField.becomeFirstResponder()
     }
     
-    func attribute() {
+    private func attribute() {
         self.do {
             $0.view.backgroundColor = .appColor(.terminalBackground)
         }
@@ -60,7 +60,7 @@ final class FindPasswordView: UIViewController {
         }
     }
     
-    func layout() {
+    private func layout() {
         [backButton, descript, emailTextField, resetButton].forEach { self.view.addSubview($0) }
         
         self.backButton.do {
@@ -106,5 +106,15 @@ final class FindPasswordView: UIViewController {
 
 extension FindPasswordView: FindPasswordViewProtocol {
     func showResult(result: Bool, message: String?) {
+        if result {
+            let view = FindPasswordResultView()
+            self.navigationController?.pushViewController(view, animated: true)
+        } else {
+            guard let message = message else {
+                self.showToast(controller: self, message: "나중에 다시 시도해 주세요.", seconds: 1)
+                return
+            }
+            self.showToast(controller: self, message: message, seconds: 1)
+        }
     }
 }

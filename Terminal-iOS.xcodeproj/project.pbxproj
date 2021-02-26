@@ -159,6 +159,7 @@
 		A5F1032425E80EB10054D57F /* FindPasswordRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1032325E80EB10054D57F /* FindPasswordRemoteDataManager.swift */; };
 		A5F1032925E80EC70054D57F /* FindPasswordProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1032825E80EC70054D57F /* FindPasswordProtocols.swift */; };
 		A5F1032E25E819130054D57F /* ResizableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1032D25E819130054D57F /* ResizableButton.swift */; };
+		A5F1034925E90CFB0054D57F /* FindPasswordResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1034825E90CFB0054D57F /* FindPasswordResultView.swift */; };
 		CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */; };
 		CC198E6F254C000A009D6CDF /* MemeberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6E254C000A009D6CDF /* MemeberView.swift */; };
 		CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */; };
@@ -557,6 +558,7 @@
 		A5F1032325E80EB10054D57F /* FindPasswordRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordRemoteDataManager.swift; sourceTree = "<group>"; };
 		A5F1032825E80EC70054D57F /* FindPasswordProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordProtocols.swift; sourceTree = "<group>"; };
 		A5F1032D25E819130054D57F /* ResizableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableButton.swift; sourceTree = "<group>"; };
+		A5F1034825E90CFB0054D57F /* FindPasswordResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordResultView.swift; sourceTree = "<group>"; };
 		CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithContentView.swift; sourceTree = "<group>"; };
 		CC198E6E254C000A009D6CDF /* MemeberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeberView.swift; sourceTree = "<group>"; };
 		CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionView.swift; sourceTree = "<group>"; };
@@ -1243,6 +1245,7 @@
 		A5F1030B25E80D960054D57F /* FindPassword */ = {
 			isa = PBXGroup;
 			children = (
+				A5F1034825E90CFB0054D57F /* FindPasswordResultView.swift */,
 				A5F1030C25E80E050054D57F /* FindPasswordView.swift */,
 				A5F1031425E80E1A0054D57F /* FindPasswordPresenter.swift */,
 				A5F1031925E80E7C0054D57F /* FindPasswordInteractor.swift */,
@@ -2254,6 +2257,7 @@
 				A5BBCEAB25592A790098BB02 /* ProfileModifyView.swift in Sources */,
 				CC74FB1E25C69CCA0087E82A /* StudyDetailSNSView.swift in Sources */,
 				A53A2B8525B6BC050002D3A0 /* UserWithdrawalInteractor.swift in Sources */,
+				A5F1034925E90CFB0054D57F /* FindPasswordResultView.swift in Sources */,
 				CCC1A2E025B14CC4004E3BE6 /* ApplyUserDetailInteractor.swift in Sources */,
 				A5D4B8CC25C1875D008403DC /* NotificationWireFrame.swift in Sources */,
 				A58F9014259F44C5007777B4 /* ProjectModifyView.swift in Sources */,
