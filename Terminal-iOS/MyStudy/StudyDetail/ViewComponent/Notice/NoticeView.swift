@@ -159,22 +159,22 @@ extension NoticeView: NoticeViewProtocol {
         }
     }
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
     }
     
     func showNoticeList(noticeList: [Notice]) {
         notice.reloadData()
-        LoadingRainbowCat.hide()
+        hideLoading()
     }
     
     func showMessage(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
-            LoadingRainbowCat.hide()
+            self.hideLoading()
             self.navigationController?.popViewController(animated: true)
         }
-    }
-    
-    func hideLoading() {
-        LoadingRainbowCat.hide()
     }
 }
