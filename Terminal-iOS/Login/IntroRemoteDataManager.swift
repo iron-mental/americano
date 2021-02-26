@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Alamofire
-import SwiftyJSON
 import SwiftKeychainWrapper
 
 class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
@@ -21,13 +19,15 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.eamilCheck(email: input))
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<String>.self, from: data!)
-                    completionHandler(result)
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                        completionHandler(result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure(let err):
                     print(err)
                 }
@@ -49,13 +49,11 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             .session
             .request(TerminalRouter.signUp(userData: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                         completionHandler(result)
                     } catch {
                         print(error.localizedDescription)
@@ -100,14 +98,11 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
             .session
             .request(TerminalRouter.login(userData: params))
             .validate()
-            .responseJSON { response in
-                
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data)
                         completionHandler(result)
                     } catch {
                         print(error.localizedDescription)

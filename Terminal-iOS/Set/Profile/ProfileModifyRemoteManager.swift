@@ -21,13 +21,11 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.userInfo(id: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
                         if result.result { completion() }
                     } catch {
                         print(error.localizedDescription)
@@ -52,14 +50,11 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                                          mimeType: "image/jpeg")
             }, with: TerminalRouter.userImageUpdate(id: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
                         self.remoteRequestHandler?.imageModifyRetrieved(result: result)
                     } catch {
                         print(error.localizedDescription)
@@ -89,13 +84,11 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.userInfoUpdate(id: userID, profile: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
                         self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
                     } catch {
                         print(error.localizedDescription)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-// MARK: 스터디 상세
+// MARK: Post 위한 스터디 상세
 
 struct StudyDetailPost {
     let category: String

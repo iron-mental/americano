@@ -7,63 +7,72 @@
 //
 
 import UIKit
+import AVFoundation
 
 class BaseEditableStudyDetailView: UIViewController {
-    let screenSize = UIScreen.main.bounds
-    var keyboardHeight: CGFloat = 0.0
+    deinit { self.keyboardRemoveObserver(with: self) }
+    
+    var studyDetailPost: StudyDetailPost?
+    
+    // UI
     let mainImageView = MainImageView(frame: CGRect.zero)
     let studyTitleTextField = UITextField()
-    var selectedCategory: String?
     var studyIntroduceView = TitleWithTextView(title: "스터디 소개")
     var SNSInputView = IdInputView()
     var studyInfoView = TitleWithTextView(title: "스터디 진행")
     var locationView = LocationUIView()
     var timeView = TimeUIView()
-    var button = UIButton()
-    var mainImageTapGesture = UITapGestureRecognizer()
-    var locationTapGesture = UITapGestureRecognizer()
-    var studyDetailPost: StudyDetailPost?
+    var completeButton = UIButton()
+    var accessoryCompleteButton = UIButton()
     var backgroundView = UIView()
     let scrollView = UIScrollView()
     let picker = UIImagePickerController()
     var clickedView: UIView?
+    
+    // State
+    let screenSize = UIScreen.main.bounds
+    var keyboardHeight: CGFloat = 0.0
+    var selectedCategory: String?
     var currentScrollViewMinY: CGFloat = 0
     var currentScrollViewMaxY: CGFloat = 0
     var selectedLocation: StudyDetailLocationPost?
     var textViewTapFlag = false
     var standardContentHeight: CGFloat = 0.0
-    var accessoryCompleteButton = UIButton()
     var viewDidAppearFlag = true
+    
+    // MARK: viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
         setDelegate()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        self.hideKeyboardWhenTappedAround()
+        self.keyboardAddObserver(with: self,
+                                 showSelector: #selector(keyboardWillShow),
+                                 hideSelector: #selector(keyboardWillHide))
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        if viewDidAppearFlag {
+        if self.viewDidAppearFlag {
             self.studyTitleTextField.becomeFirstResponder()
             self.viewDidAppearFlag.toggle()
         }
-        standardContentHeight = scrollView.contentSize.height
+        self.standardContentHeight = self.scrollView.contentSize.height
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
-        keyboardHeight = keyboardRectangle.height
-        textViewTapFlag = false
+        self.keyboardHeight = keyboardRectangle.height
+        self.textViewTapFlag = false
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        button.alpha = 1
-        scrollView.contentSize.height = standardContentHeight
+        self.completeButton.alpha = 1
+        self.scrollView.contentSize.height = self.standardContentHeight
     }
     
     func setDelegate(completion: (() -> Void)? = nil) {
@@ -78,7 +87,7 @@ class BaseEditableStudyDetailView: UIViewController {
         timeView.detailTime.delegate = self
         picker.delegate = self
         
-        SNSInputView.notion.textField.debounce(delay: 1) { [weak self] text in
+        SNSInputView.notion.textField.debounce(delay: 1) { [weak self] _ in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             guard let text = self?.SNSInputView.notion.textField.text else { return }
             if text.notionCheck() {
@@ -91,7 +100,8 @@ class BaseEditableStudyDetailView: UIViewController {
                 self!.SNSInputView.notion.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
         }
-        SNSInputView.evernote.textField.debounce(delay: 1) { [weak self] text in
+        
+        SNSInputView.evernote.textField.debounce(delay: 1) { [weak self] _ in
             guard let text = self?.SNSInputView.evernote.textField.text else { return }
             if text.evernoteCheck() {
                 if text.isEmpty {
@@ -103,7 +113,8 @@ class BaseEditableStudyDetailView: UIViewController {
                 self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
         }
-        SNSInputView.web.textField.debounce(delay: 1) { [weak self] text in
+        
+        SNSInputView.web.textField.debounce(delay: 1) { [weak self] _ in
             guard let text = self?.SNSInputView.web.textField.text else { return }
             if text.webCheck() {
                 if text.isEmpty {
@@ -120,28 +131,29 @@ class BaseEditableStudyDetailView: UIViewController {
     func attribute() {
         self.do {
             $0.navigationItem.largeTitleDisplayMode = .never
-            $0.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
-        }
-        view.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back",
+                                                                  style: UIBarButtonItem.Style.plain,
+                                                                  target: nil,
+                                                                  action: nil)
+            $0.view.backgroundColor = .appColor(.testColor)
         }
         backgroundView.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = .appColor(.terminalBackground)
         }
         scrollView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
-            $0.showsVerticalScrollIndicator = false
+            $0.backgroundColor = .appColor(.testColor)
         }
         mainImageView.do {
             $0.alpha = 0.7
             $0.image = #imageLiteral(resourceName: "swift")
-            mainImageTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
+            let mainImageTapGesture = UITapGestureRecognizer(target: self,
+                                                             action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(mainImageTapGesture)
         }
         studyTitleTextField.do {
             $0.tag = 1
             $0.placeholder = "스터디 이름을 입력하세요"
-            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.backgroundColor = .appColor(.InputViewColor)
             $0.textAlignment = .center
             $0.textColor = .white
             $0.layer.cornerRadius = 10
@@ -149,36 +161,36 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.inputAccessoryView = accessoryCompleteButton
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
-            
         }
         studyIntroduceView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.testColor)
             $0.categoryLabel.text = selectedCategory
             $0.textView.inputAccessoryView = accessoryCompleteButton
         }
         SNSInputView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.testColor)
             $0.notion.textField.inputAccessoryView = accessoryCompleteButton
             $0.evernote.textField.inputAccessoryView = accessoryCompleteButton
             $0.web.textField.inputAccessoryView = accessoryCompleteButton
         }
         studyInfoView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.testColor)
             $0.textView.inputAccessoryView = accessoryCompleteButton
         }
         locationView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
-            locationTapGesture = UITapGestureRecognizer(target: self, action: #selector(didLocationViewClicked))
+            $0.backgroundColor = .appColor(.testColor)
+            let locationTapGesture = UITapGestureRecognizer(target: self,
+                                                            action: #selector(didLocationViewClicked))
             $0.addGestureRecognizer(locationTapGesture)
             $0.detailAddress.inputAccessoryView = accessoryCompleteButton
         }
         timeView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.testColor)
             $0.detailTime.inputAccessoryView = accessoryCompleteButton
         }
-        button.do {
+        completeButton.do {
             $0.setTitle("완료", for: .normal)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.backgroundColor = .appColor(.mainColor)
             $0.titleLabel?.dynamicFont(fontSize: 15, weight: .bold)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
@@ -186,7 +198,7 @@ class BaseEditableStudyDetailView: UIViewController {
         accessoryCompleteButton.do {
             $0.setTitle("완료", for: .normal)
             $0.titleLabel?.dynamicFont(fontSize: 15, weight: .bold)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.backgroundColor = .appColor(.mainColor)
             $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
         }
     }
@@ -201,8 +213,7 @@ class BaseEditableStudyDetailView: UIViewController {
          studyInfoView,
          locationView,
          timeView,
-         button].forEach { backgroundView.addSubview($0)}
-        
+         completeButton].forEach { backgroundView.addSubview($0)}
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -227,79 +238,118 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         studyTitleTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,
+                                    constant: -((((55/667) * screenSize.height) * 16) / 55)).isActive = true
             $0.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: (300/375) * screenSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: (55/667) * screenSize.height).isActive = true
         }
         studyIntroduceView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: studyTitleTextField.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         SNSInputView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         studyInfoView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: SNSInputView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: studyInfoView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 141)).isActive = true
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: locationView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
-        button.do {
+        completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor, constant: Terminal.convertWidth(value: -15) ).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 15) ).isActive = true
+            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.trailingAnchor,
+                                         constant: Terminal.convertWidth(value: -15) ).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.safeAreaLayoutGuide.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 15) ).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 50)).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         }
     }
     
     @objc func didImageViewClicked() {
-        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
-        let camera =  UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
+        let alert = UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
+        let camera = UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)
         alert.addAction(camera)
         alert.addAction(cancel)
         
-        present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
+    
+    // override point
     @objc func didLocationViewClicked() {
-        //
     }
+    
     func openLibrary() {
-        picker.sourceType = .photoLibrary
-        present(picker, animated: true, completion: nil)
+        self.picker.sourceType = .photoLibrary
+        self.present(self.picker, animated: true, completion: nil)
     }
+    
     func openCamera() {
-        //시뮬에서 앱죽는거 에러처리 해야함
-        picker.sourceType = .camera
-        present(picker, animated: true, completion: nil)
+        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+            
+        switch cameraAuthorizationStatus {
+        case .authorized:
+            self.picker.sourceType = .camera
+            self.present(self.picker, animated: true, completion: nil)
+        case .notDetermined, .denied, .restricted:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                guard granted == true else {
+                    DispatchQueue.main.async {
+                        self.showToast(controller: self, message: "카메라 사용 옵션을 허용해주세요.", seconds: 1)
+                    }
+                    return
+                }
+                self.picker.sourceType = .camera
+                self.present(self.picker, animated: true, completion: nil)
+            }
+        @unknown default:
+            self.showToast(controller: self, message: "카메라 사용 옵션을 허용해주세요.", seconds: 1)
+        }
     }
     
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
@@ -317,12 +367,12 @@ class BaseEditableStudyDetailView: UIViewController {
             let distance = (parentView.frame.maxY) - viewMaxY
             self.viewSetBottom(distance: distance + accessoryCompleteButton.frame.height)
         } else {
-            textViewTapFlag = false
+            self.textViewTapFlag = false
         }
     }
     
     func viewSetTop(distance: CGFloat) {
-        self.button.alpha = 0
+        self.completeButton.alpha = 0
         UIView.animate(withDuration: 0.2) {
             self.scrollView.contentOffset.y += distance
         } completion: { _ in
@@ -330,8 +380,9 @@ class BaseEditableStudyDetailView: UIViewController {
             self.textViewTapFlag = false
         }
     }
+    
     func viewSetBottom(distance: CGFloat) {
-        self.button.alpha = 0
+        self.completeButton.alpha = 0
         UIView.animate(withDuration: 0.2) {
             self.scrollView.contentSize.height += distance
             self.scrollView.contentOffset.y += distance
@@ -341,10 +392,11 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
 }
+
 extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            mainImageView.image = image
+            self.mainImageView.image = image
         }
         dismiss(animated: true, completion: nil)
     }
@@ -352,26 +404,30 @@ extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavig
 
 extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textViewTapFlag = true
-        clickedView = textField
+        self.textViewTapFlag = true
+        self.clickedView = textField
         
-        self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.editableViewDidTap(textView: self.clickedView!,
+                                viewMinY: CGFloat(self.currentScrollViewMinY),
+                                viewMaxY: CGFloat(self.currentScrollViewMaxY))
     }
 }
 
 extension BaseEditableStudyDetailView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textViewTapFlag = true
-        clickedView = textView
-        self.editableViewDidTap(textView: clickedView!, viewMinY: CGFloat(currentScrollViewMinY), viewMaxY: CGFloat(currentScrollViewMaxY))
+        self.textViewTapFlag = true
+        self.clickedView = textView
+        self.editableViewDidTap(textView: self.clickedView!,
+                                viewMinY: CGFloat(self.currentScrollViewMinY),
+                                viewMaxY: CGFloat(self.currentScrollViewMaxY))
     }
 }
 
 extension BaseEditableStudyDetailView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if type(of: scrollView) == UIScrollView.self {
-            currentScrollViewMinY = scrollView.contentOffset.y
-            currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - keyboardHeight
+            self.currentScrollViewMinY = scrollView.contentOffset.y
+            self.currentScrollViewMaxY = (scrollView.contentOffset.y + scrollView.frame.height) - self.keyboardHeight
             if !textViewTapFlag {
                 view.endEditing(true)
             }
@@ -381,9 +437,9 @@ extension BaseEditableStudyDetailView: UIScrollViewDelegate {
 
 extension BaseEditableStudyDetailView: selectLocationDelegate {
     func passLocation(location: StudyDetailLocationPost) {
-        selectedLocation = location
-        locationView.address.text = "\(location.address)"
+        self.selectedLocation = location
+        self.locationView.address.text = "\(location.address)"
         guard let detail = location.detailAddress else { return }
-        locationView.detailAddress.text = detail
+        self.locationView.detailAddress.text = detail
     }
 }

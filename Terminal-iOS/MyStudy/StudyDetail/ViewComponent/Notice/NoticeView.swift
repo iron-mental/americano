@@ -150,7 +150,7 @@ extension NoticeView: NoticeViewProtocol {
             self.secondNoticeList = second
         }
         notice.reloadData()
-        parentView?.setting()
+        self.parentView?.setting()
         navigationController?.viewControllers.forEach {
             if let notificationListView = $0 as? NotificationViewProtocol {
                 //알림을 통해 입장 했을 시 읽음 처리

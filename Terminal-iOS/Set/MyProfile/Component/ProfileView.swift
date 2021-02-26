@@ -35,7 +35,7 @@ class ProfileView: UIView {
         name.do {
             $0.textColor = .white
             $0.textAlignment = .center
-            $0.dynamicFont(fontSize: 20, weight: .semibold)
+            $0.dynamicFont(fontSize: 20, weight: .bold)
         }
         descript.do {
             $0.textColor = UIColor.appColor(.profileTextColor)

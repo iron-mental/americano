@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 
 class NoticeDetailView: UIViewController {
     var presenter: NoticeDetailPresenterProtocol?
@@ -165,7 +163,7 @@ extension NoticeDetailView: NoticeDetailViewProtocol {
     func showNoticeRemove(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
             if let studyDetailView = self.parentView as? MyStudyDetailView {
-                self.parentView = studyDetailView.VCArr[0]
+                self.parentView = studyDetailView.vcArr[0]
             }
             if let noticeListView = self.parentView as? NoticeViewProtocol {
                 noticeListView.viewLoad()

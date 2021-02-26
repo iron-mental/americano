@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateStudyPresenter: CreateStudyPresenterProtocol {
+final class CreateStudyPresenter: CreateStudyPresenterProtocol {
     var view: CreateStudyViewProtocol?
     var interactor: CreateStudyInteractorInputProtocol?
     var wireFrame: CreateStudyWireFrameProtocol?
@@ -16,26 +16,29 @@ class CreateStudyPresenter: CreateStudyPresenterProtocol {
     func viewDidLoad() {
         view?.setView()
     }
-    func clickLocationView(currentView: UIViewController) {
-        wireFrame?.goToSelectLocation(view: currentView)
+    
+    func clickLocationView() {
+        wireFrame?.goToSelectLocation(from: view!)
     }
     
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {
         view?.showLoading()
         interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)
     }
-    
-    
 }
 
-extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {
-    func studyInfoInvalid(message: String) {
+extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {    
+    func studyInfoInvalid(label: String?, message: String) {
         view?.hideLoading()
-        view?.studyInfoInvalid(message: message)
+        guard let label = label else {
+            view?.studyInfoInvalid(label: nil, message: message)
+            return
+        }
+        view?.studyInfoInvalid(label: label, message: message)
     }
     
-    func studyInfoValid(studyID: Int) {
+    func studyInfoValid(studyID: Int, message: String) {
         view?.hideLoading()
-        view?.studyInfoValid(studyID: studyID, message: "스터디 생성이 완료되었습니다.")
+        view?.studyInfoValid(studyID: studyID, message: message)
     }
 }

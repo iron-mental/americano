@@ -22,33 +22,37 @@ extension UITextField {
     }
     
     func dynamicFont(fontSize size: CGFloat, weight: UIFont.Weight) {
-        var calculatedFont: UIFont?
         let bounds = UIScreen.main.bounds
         let height = bounds.size.height
         
         switch height {
         case 667.0: //iphone 6, 6s, 7, 8 => 4.7 inch
-            calculatedFont = UIFont.notosansMedium(size: size)
-            resizeFont(calculatedFont: calculatedFont, weight: weight)
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size)
+                : .notosansMedium(size: size)
         case 736.0: //iphone 6s+ 6+, 7+, 8+ => 5.5 inch
-            calculatedFont = UIFont.notosansMedium(size: size * 1.05)
-            resizeFont(calculatedFont: calculatedFont, weight: weight)
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size * 1.05)
+                : .notosansMedium(size: size * 1.05)
         case 812.0: //iphone X, XS => 5.8 inch
-            calculatedFont = UIFont.notosansMedium(size: size * 1.15)
-            resizeFont(calculatedFont: calculatedFont, weight: weight)
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size * 1.15)
+                : .notosansMedium(size: size * 1.15)
         case 896.0: //iphone XR => 6.1 inch  // iphone XS MAX => 6.5 inch
-            calculatedFont = UIFont.notosansMedium(size: size * 1.20)
-            resizeFont(calculatedFont: calculatedFont, weight: weight)
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size * 1.2)
+                : .notosansMedium(size: size * 1.2)
         case 926.0:
-            calculatedFont = UIFont.notosansMedium(size: size * 1.25)
-            resizeFont(calculatedFont: calculatedFont, weight: weight)
+            self.font =
+                weight == .bold
+                ? .notosansBold(size: size * 1.25)
+                : .notosansMedium(size: size * 1.25)
         default:
             print("not an iPhone")
         }
-    }
-    
-    private func resizeFont(calculatedFont: UIFont?, weight: UIFont.Weight) {
-        self.font = calculatedFont
-        self.font = UIFont.systemFont(ofSize: calculatedFont!.pointSize, weight: weight)
     }
 }

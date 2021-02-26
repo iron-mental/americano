@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     weak var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol?
@@ -18,13 +17,11 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.studyDetail(studyID: studyID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<StudyDetailInfo>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<StudyDetailInfo>.self, from: data)
                         if result.data != nil {
                             self.remoteRequestHandler?.onStudyDetailRetrieved(result: result)
                         }
@@ -57,13 +54,11 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.applyStudy(studyID: String(studyID), message: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                         if result.message != nil {
                             self.remoteRequestHandler?.postStudyJoinResult(result: result)
                         }

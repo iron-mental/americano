@@ -26,5 +26,4 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
         view?.hideLoading()
         view?.showSearchResult(list: list)
     }
-    
 }

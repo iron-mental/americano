@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftKeychainWrapper
-import SwiftyJSON
 
 class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
     var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol?
@@ -19,12 +18,10 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.userInfo(id: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data!)
+                case .success(let data):
+                    let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
                     self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
                 case .failure:
                     if let data = response.data {
@@ -49,13 +46,15 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.projectList(id: userID))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<[Project]>.self, from: data!)
-                    self.remoteRequestHandler?.onProjectRetrieved(project: result)
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[Project]>.self, from: data)
+                        self.remoteRequestHandler?.onProjectRetrieved(project: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure:
                     if let data = response.data {
                         do {
@@ -64,7 +63,7 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
                                 self.remoteRequestHandler?.onProjectRetrieved(project: result)
                             }
                         } catch {
-                            
+                            print(error.localizedDescription)
                         }
                     }
                 }

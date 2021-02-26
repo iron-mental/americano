@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
 
 class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     weak var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
@@ -26,16 +25,14 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.studyList(sort: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
                         self.remoteRequestHandler?.onStudiesLatestRetrieved(result: result)
                     } catch {
-                        print(error)
+                        print(error.localizedDescription)
                     }
                 case .failure(let err):
                     print(err)
@@ -56,13 +53,11 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
             .session
             .request(TerminalRouter.studyList(sort: params))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
                         self.remoteRequestHandler?.onStudiesLengthRetrieved(result: result)
                     } catch {
                         print(error)
@@ -93,13 +88,11 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .session
                 .request(TerminalRouter.studyListForKey(key: params))
                 .validate()
-                .responseJSON { response in
+                .responseData { response in
                     switch response.result {
-                    case .success(let value):
-                        let json = JSON(value)
-                        let data = "\(json)".data(using: .utf8)
+                    case .success(let data):
                         do {
-                            let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
+                            let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
                             self.remoteRequestHandler?.onStudiesForKeyLatestRetrieved(result: result)
                             completion()
                         } catch {
@@ -138,13 +131,11 @@ class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
                 .session
                 .request(TerminalRouter.studyListForKey(key: params))
                 .validate()
-                .responseJSON { response in
+                .responseData { response in
                     switch response.result {
-                    case .success(let value):
-                        let json = JSON(value)
-                        let data = "\(json)".data(using: .utf8)
+                    case .success(let data):
                         do {
-                            let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data!)
+                            let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
                             self.remoteRequestHandler?.onStudiesForKeyLengthRetrieved(result: result)
                             completion()
                         } catch {

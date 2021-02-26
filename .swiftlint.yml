@@ -1,5 +1,8 @@
 function_body_length : 500
 type_body_length : 500
+file_length:
+    warning: 1000
+    
 disabled_rules:
 - force_try
 - line_length

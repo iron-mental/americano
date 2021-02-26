@@ -13,8 +13,8 @@ class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
     var interactor: ModifyStudyInteractorInputProtocol?
     var wireFrame: ModifyStudyWireFrameProtocol?
     
-    func clickLocationView(currentView: UIViewController) {
-        wireFrame?.goToSelectLocation(view: currentView)
+    func clickLocationView() {
+        wireFrame?.goToSelectLocation(from: view!)
     }
     
     func completButtonDidTap(studyID: Int, study: StudyDetailPost) {
@@ -24,13 +24,17 @@ class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
 }
 
 extension ModifyStudyPresenter: ModifyStudyInteractorOutputProtocol {
-    func putStudyInfoResult(result: Bool, message: String) {
+    func putStudyInfoResult(result: Bool, label: String?, message: String) {
         view?.hideLoading()
         switch result {
         case true:
             self.view?.showResult(message: message)
         case false:
-            self.view?.showError(message: message)
+            guard let label = label else {
+                self.view?.showError(label: nil, message: message)
+                return
+            }
+            self.view?.showError(label: label, message: message)
         }
     }
 }

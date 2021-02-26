@@ -8,8 +8,10 @@
 
 import UIKit
 
-class CreateStudyWireFrame: CreateStudyWireFrameProtocol {
-    static func createStudyViewModule(category: String, studyDetail: StudyDetail?, state: WriteStudyViewState, parentView: UIViewController?) -> UIViewController {
+final class CreateStudyWireFrame: CreateStudyWireFrameProtocol {
+    static func createStudyViewModule(category: String,
+                                      studyDetail: StudyDetail?,
+                                      parentView: UIViewController?) -> UIViewController {
         
         let view = CreateStudyView()
         var presenter: CreateStudyPresenterProtocol & CreateStudyInteractorOutputProtocol = CreateStudyPresenter()
@@ -21,7 +23,6 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocol {
         view.selectedCategory = category
         
         view.study = studyDetail ?? nil
-        view.state = state
         view.parentView = parentView ?? nil
         
         presenter.view = view
@@ -37,10 +38,11 @@ class CreateStudyWireFrame: CreateStudyWireFrameProtocol {
         return view
     }
     
-    func goToSelectLocation(view: UIViewController) {
-        let searchLocationview =  SearchLocationWireFrame.searchLocationViewModule(parentView: view)
-        //modal의 형태를 추후에 정하구요 dismiss 시켜주는 것 만으로 다시 원래 플로우인 스터디 생성 플로우로 돌아가게 하면 깔끔 할 것 같은 느낌
-        searchLocationview.modalPresentationStyle = .fullScreen
-        view.present(searchLocationview, animated: true, completion: nil)
+    func goToSelectLocation(from view: CreateStudyViewProtocol) {
+        if let sourceView = view as? UIViewController {
+            let searchLocationview = SearchLocationWireFrame.searchLocationViewModule(parentView: sourceView)
+            searchLocationview.modalPresentationStyle = .fullScreen
+            sourceView.present(searchLocationview, animated: true, completion: nil)
+        }
     }
 }

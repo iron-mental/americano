@@ -17,7 +17,6 @@ protocol CreateStudyViewProtocol {
     var presenter: CreateStudyPresenterProtocol? { get set }
     var study: StudyDetail? { get set }
     var studyDetailPost: StudyDetailPost? { get set }
-    var state: WriteStudyViewState? { get set }
     var parentView: UIViewController? { get set }
     
     //PRESENTER -> VIEW
@@ -26,7 +25,7 @@ protocol CreateStudyViewProtocol {
     func setView()
     func getBackgroundImage()
     func setBackgroundImage()
-    func studyInfoInvalid(message: String)
+    func studyInfoInvalid(label: String?, message: String)
     func studyInfoValid(studyID: Int, message: String)
 }
 
@@ -42,8 +41,8 @@ protocol CreateStudyInteractorInputProtocol {
 protocol CreateStudyInteractorOutputProtocol {
     
     //INTERACTOR -> PRESENTER
-    func studyInfoInvalid(message: String)
-    func studyInfoValid(studyID: Int)
+    func studyInfoInvalid(label: String?, message: String)
+    func studyInfoValid(studyID: Int, message: String)
 }
 
 protocol CreateStudyPresenterProtocol {
@@ -53,7 +52,7 @@ protocol CreateStudyPresenterProtocol {
     
     //VIEW -> PRESENTER
     func viewDidLoad()
-    func clickLocationView(currentView: UIViewController)
+    func clickLocationView()
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?)
 }
 
@@ -64,15 +63,13 @@ protocol CreateStudyRemoteDataManagerInputProtocol {
 }
 
 protocol CreateStudyReMoteDataManagerOutputProtocol {
-    func createStudyInvalid(message: String)
     func createStudyValid(response: BaseResponse<CreateStudyResult>)
 }
 
 protocol CreateStudyWireFrameProtocol {
     static func createStudyViewModule(category: String,
                                       studyDetail: StudyDetail?,
-                                      state: WriteStudyViewState,
                                       parentView: UIViewController?) -> UIViewController
     //추후에 스터디 모델이 들어가야겠네용?
-    func goToSelectLocation(view: UIViewController)
+    func goToSelectLocation(from view: CreateStudyViewProtocol)
 }

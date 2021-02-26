@@ -8,7 +8,6 @@
 
 import UIKit
 import Then
-import SwiftyJSON
 
 class SearchStudyView: UIViewController {
     deinit {

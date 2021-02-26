@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Alamofire
-import SwiftyJSON
 
 class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol {
     weak var interactor: NoticeDetailRemoteDataManagerOutputProtocol?
@@ -19,13 +17,11 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
             .session
             .request(TerminalRouter.noticeDetail(studyID: "\(studyID)", noticeID: "\(noticeID)"))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = JSON(value)
-                    let data = "\(json)".data(using: .utf8)
+                case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<Notice>.self, from: data!)
+                        let result = try JSONDecoder().decode(BaseResponse<Notice>.self, from: data)
                         if result.data != nil {
                             self.interactor?.getNoticeDetailResult(result: result)
                         }
@@ -53,13 +49,16 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
             .session
             .request(TerminalRouter.noticeDelete(studyID: "\(studyID)", noticeID: "\(noticeID)"))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = "\(JSON(value))".data(using: .utf8)
-                    let result = try! JSONDecoder().decode(BaseResponse<String>.self, from: json!)
-                    if result.message != nil {
-                        self.interactor?.removeNoticeDetailResult(result: result)
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                        if result.message != nil {
+                            self.interactor?.removeNoticeDetailResult(result: result)
+                        }
+                    } catch {
+                        print(error.localizedDescription)
                     }
                 case .failure:
                     if let data = response.data {

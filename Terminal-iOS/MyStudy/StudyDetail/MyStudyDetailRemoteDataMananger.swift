@@ -7,9 +7,8 @@
 //
 
 import Alamofire
-import SwiftyJSON
 
-class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
+final class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
     weak var interactor: MyStudyDetailInteractorProtocol?
     
     func postLeaveStudyAPI(studyID: Int) {
@@ -18,12 +17,15 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
             .session
             .request(TerminalRouter.studyLeave(studyID: "\(studyID)"))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = "\(JSON(value))".data(using: .utf8)
-                    let result: BaseResponse = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: json!)
-                    self.interactor?.leaveStudyResult(result: result.result, message: result.message!)       
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                        self.interactor?.leaveStudyResult(result: result.result, message: result.message!)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure:
                     if let data = response.data {
                         do {
@@ -43,12 +45,15 @@ class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtocol {
             .session
             .request(TerminalRouter.studyDelete(studyID: "\(studyID)"))
             .validate()
-            .responseJSON { response in
+            .responseData { response in
                 switch response.result {
-                case .success(let value):
-                    let json = "\(JSON(value))".data(using: .utf8)
-                    let result: BaseResponse = try! JSONDecoder().decode(BaseResponse<Bool>.self, from: json!)
-                    self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                        self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 case .failure:
                     if let data = response.data {
                         do {

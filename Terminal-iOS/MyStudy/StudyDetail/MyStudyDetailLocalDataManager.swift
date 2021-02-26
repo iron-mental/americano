@@ -8,6 +8,6 @@
 
 import Foundation
 
-class MyStudyDetailLocalManager: MyStudyDetailLocalDataManagerProtocol {
+final class MyStudyDetailLocalManager: MyStudyDetailLocalDataManagerProtocol {
     
 }

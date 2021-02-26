@@ -88,7 +88,8 @@ final class MyStudyMainView: UIViewController {
         }
     }
     
-    // MARK: @objc
+    // MARK: - @objc
+    
     @objc func updateList() {
         presenter?.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
@@ -115,7 +116,6 @@ final class MyStudyMainView: UIViewController {
 }
 
 extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if myStudyList.isEmpty {
             tableView.setEmptyView(type: .MyStudyListEmptyViewType)

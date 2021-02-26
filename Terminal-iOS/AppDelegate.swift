@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import CoreData
+
+import Firebase
 import Kingfisher
 import SwiftKeychainWrapper
-import SwiftyJSON
-import CoreData
-import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
