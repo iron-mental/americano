@@ -13,6 +13,8 @@ protocol FindPasswordViewProtocol: class {
     
     // PRESENTER -> VIEW
     func showResult(result: Bool, message: String?)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol FindPasswordWireFrameProtocol: class {

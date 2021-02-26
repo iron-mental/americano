@@ -14,12 +14,14 @@ final class FindPasswordPresenter: FindPasswordPresenterProtocol {
     var wireFrame: FindPasswordWireFrameProtocol?
     
     func resetRequest(email: String) {
+        self.view?.showLoading()
         self.interactor?.resetRequest(email: email)
     }
 }
 
 extension FindPasswordPresenter: FindPasswordInteractorOutputProtocol {
     func resetResponse(result: Bool, message: String) {
+        self.view?.hideLoading()
         self.view?.showResult(result: result, message: message)
     }
 }

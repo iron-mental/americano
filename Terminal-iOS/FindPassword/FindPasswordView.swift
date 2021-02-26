@@ -105,6 +105,14 @@ final class FindPasswordView: UIViewController {
 }
 
 extension FindPasswordView: FindPasswordViewProtocol {
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
+    }
+    
     func showResult(result: Bool, message: String?) {
         if result {
             let view = FindPasswordResultView()
