@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NoticeListEmptyView: BaseEmptyView {
+final class NoticeListEmptyView: BaseEmptyView {
     override func attribute() {
         super.attribute()
         self.iconImageView.do {

@@ -8,8 +8,7 @@
 
 import UIKit
 
-class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
-  
+final class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
     static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState, studyTitle: String) -> UIViewController {
         let view: StudyDetailViewProtocol = StudyDetailView()
         let presenter: StudyDetailPresenterProtocol & StudyDetailInteractorOutputProtocol = StudyDetailPresenter()
@@ -35,7 +34,7 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         } else {
             return UIViewController()
         }
-
+        
     }
     
     func presentStudyListScreen(from view: StudyDetailViewProtocol) {

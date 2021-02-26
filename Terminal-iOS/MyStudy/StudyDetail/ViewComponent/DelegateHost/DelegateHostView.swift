@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-class DelegateHostView: UIViewController {
+final class DelegateHostView: UIViewController {
     var presenter: DelegateHostPresenterProtocol?
     var userList: [Participate]?
     var userTableView = UITableView()
@@ -94,7 +94,12 @@ extension DelegateHostView: DelegateHostViewProtocol {
 
 extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userList!.count
+        if userList!.isEmpty {
+            tableView.setEmptyView(type: .DelegateHostListEmptyViewType)
+            return 0
+        } else {
+            return userList!.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,7 +110,6 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedUserID = userList![indexPath.row].userID
-//        selectedUserID = userList![indexPath.row].id
         TerminalAlertMessage.show(controller: self, type: .DelegateHostConfirmView)
         ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
 

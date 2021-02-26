@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchLocationListEmptyView: BaseEmptyView {
+final class SearchLocationListEmptyView: BaseEmptyView {
     override func attribute() {
         super.attribute()
         self.iconImageView.do {
