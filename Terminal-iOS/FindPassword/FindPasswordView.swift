@@ -15,7 +15,7 @@ final class FindPasswordView: UIViewController {
     let backButton = UIButton()
     let descript = UILabel()
     let emailTextField = UITextField()
-    let completeButton = UIButton()
+    let resetButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,16 +51,17 @@ final class FindPasswordView: UIViewController {
             $0.layer.borderWidth = 0.1
             $0.addLeftPadding(padding: 10)
         }
-        self.completeButton.do {
+        self.resetButton.do {
             $0.setTitle("비밀번호 재설정", for: .normal)
             $0.titleLabel?.font = .notosansMedium(size: 15)
             $0.backgroundColor = .appColor(.mainColor)
             $0.layer.cornerRadius = 10
+            $0.addTarget(self, action: #selector(reset), for: .touchUpInside)
         }
     }
     
     func layout() {
-        [backButton, descript, emailTextField, completeButton].forEach { self.view.addSubview($0) }
+        [backButton, descript, emailTextField, resetButton].forEach { self.view.addSubview($0) }
         
         self.backButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +85,7 @@ final class FindPasswordView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: self.descript.intrinsicContentSize.width).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
-        self.completeButton.do {
+        self.resetButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 10).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
@@ -96,8 +97,14 @@ final class FindPasswordView: UIViewController {
     @objc func back() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @objc func reset() {
+        guard let email = self.emailTextField.text else { return }
+        self.presenter?.resetRequest(email: email)
+    }
 }
 
 extension FindPasswordView: FindPasswordViewProtocol {
-        
+    func showResult(result: Bool, message: String?) {
+    }
 }
