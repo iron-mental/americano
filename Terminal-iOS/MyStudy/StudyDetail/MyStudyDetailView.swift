@@ -39,7 +39,7 @@ class MyStudyDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LoadingRainbowCat.show()
+        showLoading()
         setPageControllerChild()
         attribute()
         layout()
@@ -242,13 +242,11 @@ class MyStudyDetailView: UIViewController {
     }
     
     @objc func leaveStudyCompleteButtonDidTap() {
-        LoadingRainbowCat.show()
         presenter?.leaveStudyButtonDidTap(studyID: studyID!)
         TerminalAlertMessage.dismiss()
     }
     
     @objc func deleteStudyCompleteButtonDidTap() {
-        LoadingRainbowCat.show()
         presenter?.deleteStudyButtonDidTap(studyID: studyID!)
         TerminalAlertMessage.dismiss()
     }
@@ -298,7 +296,7 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
             if self.applyState == nil {
-                LoadingRainbowCat.hide()
+                self.hideLoading()
             }
         })
         if authority != .host && authority != .member {
@@ -309,7 +307,7 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     }
     
     func showLeaveStudyComplete(message: String) {
-        LoadingRainbowCat.hide()
+        hideLoading()
         showToast(controller: self, message: message, seconds: 1) {
             self.navigationController?.popViewController(animated: true)
             if let view = self.navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
@@ -319,12 +317,12 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     }
     
     func showLeaveStudyFailed(message: String) {
-        LoadingRainbowCat.hide()
+        hideLoading()
         showToast(controller: self, message: message, seconds: 1, completion: nil)
     }
     
     func showDeleteStudyComplete(message: String) {
-        LoadingRainbowCat.hide()
+        hideLoading()
         showToast(controller: self, message: message, seconds: 1) {
             self.navigationController?.popViewController(animated: true)
             if let view = self.navigationController?.viewControllers[0] as? MyStudyMainViewProtocol {
@@ -334,7 +332,15 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     }
     
     func showDeleteStudyFailed(message: String) {
-        LoadingRainbowCat.hide()
+        hideLoading()
         showToast(controller: self, message: message, seconds: 1)
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
     }
 }

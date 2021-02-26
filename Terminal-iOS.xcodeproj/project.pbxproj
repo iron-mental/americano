@@ -946,7 +946,7 @@
 		A57C33D1254E8B28006CE9A2 /* ViewComponent */ = {
 			isa = PBXGroup;
 			children = (
-				CCA5D5C625E561A0001C9236 /* ParticapateProfile */,
+				CCA5D5C625E561A0001C9236 /* ParticipantProfile */,
 				A5BA1ED4254A8E160089D4E9 /* Notification */,
 				CCC8760425C3D890009B90BF /* MyApplyStudyInfo */,
 				CCA25ADC25B9AFD900280C80 /* DelegateHost */,
@@ -1504,7 +1504,7 @@
 			path = DataManager;
 			sourceTree = "<group>";
 		};
-		CCA5D5C625E561A0001C9236 /* ParticapateProfile */ = {
+		CCA5D5C625E561A0001C9236 /* ParticipantProfile */ = {
 			isa = PBXGroup;
 			children = (
 				CCA5D5E125E5674F001C9236 /* ParticipantProfileView.swift */,
@@ -1514,7 +1514,7 @@
 				CCA5D5F825E56781001C9236 /* ParticipantProfileWireFrame.swift */,
 				CCA5D5D325E561E5001C9236 /* ParticipantProfileProtocols.swift */,
 			);
-			path = ParticapateProfile;
+			path = ParticipantProfile;
 			sourceTree = "<group>";
 		};
 		CCAF0FD02532FFC70060A2F6 /* Main */ = {

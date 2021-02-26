@@ -13,7 +13,6 @@ protocol MyStudyDetailViewProtocol: class {
     var studyID: Int? { get set}
     var VCArr: [UIViewController] { get set }
     var studyTitle: String? { get set }
-//    var alertID: Int? { get set }
     var applyState: Bool? { get set }
     //CHILD -> PARENT
     func setting()
@@ -25,6 +24,8 @@ protocol MyStudyDetailViewProtocol: class {
     func showDeleteStudyComplete(message: String)
     func showDeleteStudyFailed(message: String)
     
+    func showLoading()
+    func hideLoading()   
 }
 
 protocol MyStudyDetailInteractorProtocol: class {
