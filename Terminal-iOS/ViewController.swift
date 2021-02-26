@@ -9,18 +9,19 @@
 import UIKit
 
 class ViewController: UITabBarController {
-    let studyViewController = StudyCategoryWireFrame.createStudyCategory()
-    let myStudyViewController = MyStudyMainWireFrame.createMyStudyMainViewModul()
-    let setViewController = SetWireFrame.setCreateModule()
-    static var tabBarBeforeIndex = 1
-    static var tabBarSelectedIndex = 0
-    
     enum Tab: Int {
         case study
         case mystudy
         case set
     }
     
+    var targetStudyID: Int? { didSet { print("Test") } }
+    var targetAlarmType: AlarmType?
+    var studyViewController = StudyCategoryWireFrame.createStudyCategory()
+    var myStudyViewController = MyStudyMainWireFrame.createMyStudyMainViewModul()
+    var setViewController = SetWireFrame.setCreateModule()
+    static var tabBarBeforeIndex = 1
+    static var tabBarSelectedIndex = 0
     lazy var tabBarItems: [Tab: UITabBarItem] = [
         .study: UITabBarItem(
             title: "스터디",
@@ -55,6 +56,7 @@ class ViewController: UITabBarController {
             $0.unselectedItemTintColor = .systemGray2
             $0.standardAppearance.backgroundColor = .white
         }
+        myStudyViewController = MyStudyMainWireFrame.createMyStudyMainViewModul(studyID: targetStudyID, alarmType: targetAlarmType)
 
         self.studyViewController.tabBarItem = tabBarItems[.study]
         self.studyViewController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)

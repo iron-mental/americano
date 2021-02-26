@@ -144,6 +144,14 @@ extension SelectCategoryView: SelectCategoryViewProtocol {
     func backTapped() {
         viewDisappearAnimation()
     }
+    
+    func showLoading() {
+        
+    }
+    
+    func hideLoading() {
+        
+    }
 }
 
 extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -173,7 +181,6 @@ extension SelectCategoryView: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        LoadingRainbowCat.show()
         presenter?.go(selected: categoryList[indexPath.row])
     }
 }

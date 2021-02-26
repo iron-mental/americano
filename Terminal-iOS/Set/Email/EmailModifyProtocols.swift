@@ -13,6 +13,8 @@ protocol EmailModifyViewProtocol: class {
     
     // PRESENTER -> VIEW
     func modifyResultHandle(result: Bool, message: String)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol EmailModifyWireFrameProtocol: class {

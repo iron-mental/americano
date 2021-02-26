@@ -22,13 +22,14 @@ final class CreateStudyPresenter: CreateStudyPresenterProtocol {
     }
     
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?) {
+        view?.showLoading()
         interactor?.studyCreateComplete(study: study, studyID: studyID ?? nil)
     }
 }
 
 extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {    
     func studyInfoInvalid(label: String?, message: String) {
-        LoadingRainbowCat.hide()
+        view?.hideLoading()
         guard let label = label else {
             view?.studyInfoInvalid(label: nil, message: message)
             return
@@ -37,7 +38,7 @@ extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {
     }
     
     func studyInfoValid(studyID: Int, message: String) {
-        LoadingRainbowCat.hide()
+        view?.hideLoading()
         view?.studyInfoValid(studyID: studyID, message: message)
     }
 }

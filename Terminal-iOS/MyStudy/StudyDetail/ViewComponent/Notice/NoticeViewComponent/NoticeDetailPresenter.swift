@@ -26,7 +26,6 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
     func modifyButtonDidTap(state: AddNoticeState,
                             notice: Notice,
                             parentView: NoticeDetailViewProtocol) {
-        view?.showLoading()
         wireFrame?.goToNoticeEdit(state: state, notice: notice, parentView: parentView)
     }
     
@@ -42,11 +41,11 @@ extension NoticeDetailPresenter: NoticeDetailInteractorOutputProtocol {
         view?.showError(message: message)
     }
     func removeNoticeResult(result: Bool, message: String) {
+        view?.hideLoading()
         switch result {
         case true:
             view?.showNoticeRemove(message: message)
         case false:
-            view?.hideLoading()
             view?.showError(message: message)
         }
     }

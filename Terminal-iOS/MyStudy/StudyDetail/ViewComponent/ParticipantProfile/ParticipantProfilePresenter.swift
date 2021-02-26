@@ -14,24 +14,24 @@ class ParticipantProfilePresenter: ParticipantProfilePresenterProtocol {
     var wireFrame: ParticipantProfileWireFrameProtocol?
     
     func viewDidLoad() {
+        view?.showLoading()
         interactor?.getUserInfo()
     }
 }
 
 extension ParticipantProfilePresenter: ParticipantProfileInteractorOutputProtocol {
     func retriveUserInfo(result: Bool, userInfo: UserInfo) {
-        LoadingRainbowCat.hide {
-            self.view?.showUserInfo(userInfo: userInfo)
-        }
+        view?.hideLoading()
+        self.view?.showUserInfo(userInfo: userInfo)
     }
     
     func retriveProjectList(result: Bool, projectList: [Project]) {
-        LoadingRainbowCat.hide {
-            self.view?.addProjectToStackView(project: projectList)
-        }
+        view?.hideLoading()
+        self.view?.addProjectToStackView(project: projectList)
     }
     
     func showError(message: String) {
+        view?.hideLoading()
         view?.showError(message: message)
     }
 }

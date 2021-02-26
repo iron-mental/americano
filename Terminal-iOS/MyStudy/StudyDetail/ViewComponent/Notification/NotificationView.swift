@@ -78,11 +78,6 @@ extension NotificationView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.viewControllers.forEach {
-            if let myStudyMainView = $0 as? MyStudyMainViewProtocol {
-                myStudyMainView.isVisibleState = true
-            }
-        }
         presenter?.cellDidTap(alert: notiList[indexPath.row])
     }
 }
@@ -102,15 +97,14 @@ extension NotificationView: NotificationViewProtocol {
     }
     
     func showAlert(message: String) {
-        //toast가 아닌 alert으로 해아할지 고민
-        showToast(controller: self, message: message, seconds: 1)
+        showToast(controller: self, message: message, seconds: 1) 
     }
     
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
     }
 }

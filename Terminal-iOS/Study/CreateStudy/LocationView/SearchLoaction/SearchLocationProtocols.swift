@@ -14,6 +14,8 @@ protocol SearchLocationViewProtocol: class {
     //PRESENTER -> VIEW
     func dismiss()
     func showSearchResult(list: [StudyDetailLocationPost])
+    func showLoading()
+    func hideLoading()
 }
 
 protocol SearchLocationPresenterProtocol: class {

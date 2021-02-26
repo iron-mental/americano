@@ -14,15 +14,17 @@ class ApplyUserDetailPresenter: ApplyUserDetailPresenterInputProtocol {
     var wireFrame: ApplyUserDetailWireFrameProtocol?
     
     func viewDidLoad() {
-        LoadingRainbowCat.show()
+        view?.showLoading()
         interactor?.getUserInfo()
     }
     
     func rejectButtonDidTap() {
+        view?.showLoading()
         interactor?.postRejectStatus()
     }
     
     func acceptButtonDidtap() {
+        view?.showLoading()
         interactor?.postAcceptStatus()
     }
     
@@ -30,27 +32,26 @@ class ApplyUserDetailPresenter: ApplyUserDetailPresenterInputProtocol {
 
 extension ApplyUserDetailPresenter: ApplyUserDetailInteractorOutputProtocol {
     func retriveUserInfo(result: Bool, userInfo: UserInfo) {
+        view?.hideLoading()
         switch result {
         case true:
-            LoadingRainbowCat.hide {
-                self.view?.showUserInfo(userInfo: userInfo)
-            }
+            self.view?.showUserInfo(userInfo: userInfo)
         case false:
             print("ApplyUserDetailPresenter 에서 생긴 에러")
         }
     }
     
     func retriveProjectList(result: Bool, projectList: [Project]) {
+        view?.hideLoading()
         switch result {
         case true:
-            LoadingRainbowCat.hide {
-                self.view?.addProjectToStackView(project: projectList)
-            }
+            self.view?.addProjectToStackView(project: projectList)
         case false:
             print("ApplyUserDetailPresenter")
         }
     }
     func retriveApplyStatus(result: Bool, message: String, studyID: Int) {
+        view?.hideLoading()
         switch result {
         case true:
             view?.showApplyStatusResult(message: message, studyID: studyID)

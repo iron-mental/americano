@@ -30,10 +30,12 @@ final class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     }
     
     func leaveStudyButtonDidTap(studyID: Int) {
+        view?.showLoading()
         interactor?.postLeaveStudyAPI(studyID: studyID)
     }
     
     func deleteStudyButtonDidTap(studyID: Int) {
+        view?.showLoading()
         interactor?.callDeleteStudyAPI(studyID: studyID)
     }
     

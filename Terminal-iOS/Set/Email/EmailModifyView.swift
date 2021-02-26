@@ -96,7 +96,7 @@ class EmailModifyView: UIViewController {
         if email.whitespaceCheck() {
             self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
         } else {
-            LoadingRainbowCat.show()
+            showLoading()
             presenter?.completeModify(email: email)
         }
         
@@ -115,8 +115,16 @@ extension EmailModifyView: EmailModifyViewProtocol {
             let rootParent = self.navigationController?.viewControllers[0] as? SetView
             rootParent?.presenter?.viewDidLoad()
         } else {
-            LoadingRainbowCat.hide()
+            hideLoading()
             self.showToast(controller: self, message: message, seconds: 1, completion: nil)
         }
+    }
+    
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
     }
 }

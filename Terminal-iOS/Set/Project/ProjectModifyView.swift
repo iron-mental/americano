@@ -239,7 +239,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     @objc func completeModify() {
         let snsValidate = getCellData()
         if snsValidate.state {
-            LoadingRainbowCat.show()
+            showLoading()
             presenter?.completeModify(project: self.projectArr)
         } else {
             if snsValidate.kind == "whitespace" {
@@ -295,9 +295,16 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
                 parent?.presenter?.viewDidLoad()
             }
         } else {
-            LoadingRainbowCat.hide()
+            hideLoading()
             self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 0.5)
         }
+    }
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
     }
 }
 

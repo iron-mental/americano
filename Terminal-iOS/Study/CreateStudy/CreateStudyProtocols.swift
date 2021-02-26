@@ -20,7 +20,8 @@ protocol CreateStudyViewProtocol {
     var parentView: UIViewController? { get set }
     
     //PRESENTER -> VIEW
-    func loading()
+    func showLoading()
+    func hideLoading()
     func setView()
     func getBackgroundImage()
     func setBackgroundImage()

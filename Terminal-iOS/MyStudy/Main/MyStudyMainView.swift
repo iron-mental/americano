@@ -11,17 +11,18 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 // MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
-
-class MyStudyMainView: UIViewController {
-    var isVisibleState: Bool?
+final class MyStudyMainView: UIViewController {
     var presenter: MyStudyMainPresenterProtocol?
-    var alarmButton = BadgeBarButtonItem()
-    lazy var moreButton = UIBarButtonItem()
-    var tableView = UITableView()
+    
+    var myStudyList:[MyStudy] = []
+    //이거 로딩캣단에서 처리 다할 수 있을 듯
+    var startedByPushNotification: Bool?
     var dismissEditViewButtonItem: UIBarButtonItem?
-    var myStudyList: [MyStudy] = []
+    var alarmButton = BadgeBarButtonItem()
     let refreshControl = UIRefreshControl()
     let appearance = UINavigationBarAppearance()
+    var tableView = UITableView()
+    lazy var moreButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +33,12 @@ class MyStudyMainView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        isVisibleState = false
         appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = UIColor.appColor(.terminalBackground)
-        navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
+        appearance.backgroundColor = .appColor(.terminalBackground)
+        navigationController?
+            .navigationBar
+            .standardAppearance
+            .backgroundColor = .appColor(.terminalBackground)
     }
     
     func attribute() {
@@ -45,10 +48,12 @@ class MyStudyMainView: UIViewController {
             $0.navigationItem.largeTitleDisplayMode = .automatic
             $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.navigationController?.navigationBar.standardAppearance = appearance
-            $0.navigationController?.navigationBar.standardAppearance.backgroundColor = .appColor(.terminalBackground)
+        }
+        self.navigationItem.do {
+            $0.rightBarButtonItems = [moreButton, alarmButton]
         }
         tableView.do {
-            $0.backgroundColor = UIColor.appColor(.testColor)
+            $0.backgroundColor = .appColor(.terminalBackground)
             $0.register(MyStudyMainTableViewCell.self, forCellReuseIdentifier: MyStudyMainTableViewCell.identifier)
             $0.separatorColor = myStudyList.isEmpty ? .clear : .none
             $0.delegate = self
@@ -72,7 +77,6 @@ class MyStudyMainView: UIViewController {
     }
     
     func layout() {
-        self.navigationItem.rightBarButtonItems = [moreButton, alarmButton]
         self.view.addSubview(self.tableView)
         
         self.tableView.do {
@@ -140,7 +144,7 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
 
 extension MyStudyMainView: MyStudyMainViewProtocol {
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func showMyStudyList(myStudyList: MyStudyList) {
@@ -154,17 +158,15 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         attribute()
         layout()
         tableView.reloadData()
-        if isVisibleState == nil {
-            LoadingRainbowCat.hide()
-        } else {
-            if !isVisibleState! {
-                LoadingRainbowCat.hide()
-            }
+        if startedByPushNotification != nil && startedByPushNotification == true {
+            presenter?.showStudyDetailDirectly()
+            startedByPushNotification = nil
         }
+        LoadingRainbowCat.hide(caller: self)
     }
     
     func showErrMessage() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
         showToast(controller: self, message: "서버와의 연결이 불안정 합니다.", seconds: 1)
     }
 }

@@ -108,6 +108,12 @@ extension SearchLocationView: SearchLocationViewProtocol {
             searchTextField.endEditing(true)
         }
     }
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
+    }
 }
 
 extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {

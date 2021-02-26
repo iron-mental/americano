@@ -60,6 +60,9 @@ class AddNoticeView: UIViewController {
                     = pinned
                     ? .appColor(.pinnedNoticeColor)
                     : .appColor(.noticeColor)
+            } else {
+                $0.selectedSegmentIndex = 1
+                $0.selectedSegmentTintColor = .appColor(.noticeColor)
             }
             $0.addTarget(self, action: #selector(segeIsMoving), for: .valueChanged)
         }
@@ -229,11 +232,11 @@ extension AddNoticeView: AddNoticeViewProtocol {
         showToast(controller: self, message: message, seconds: 1)
     }
     func showLoading() {
-        LoadingRainbowCat.show()
+        LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
-        LoadingRainbowCat.hide()
+        LoadingRainbowCat.hide(caller: self)
     }
 }
 

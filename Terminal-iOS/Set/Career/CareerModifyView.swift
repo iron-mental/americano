@@ -132,7 +132,7 @@ class CareerModifyView: UIViewController {
     @objc func completeModify() {
         let title = careerTitleModify.text!
         let contents = careerDescriptModify.text!
-        LoadingRainbowCat.show()
+        showLoading()
         presenter?.completeModify(title: title, contents: contents)
     }
 }
@@ -151,5 +151,12 @@ extension CareerModifyView: CareerModifyViewProtocol {
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
     }
 }
