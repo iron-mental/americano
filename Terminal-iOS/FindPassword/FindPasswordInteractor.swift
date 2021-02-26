@@ -12,8 +12,17 @@ final class FindPasswordInteractor: FindPasswordInteractorInputProtocol {
     var presenter: FindPasswordInteractorOutputProtocol?
     var remoteDataManager: FindPasswordRemoteDataManagerInputProtocol?
     
+    func resetRequest(email: String) {
+        if email.isEmpty {
+            self.presenter?.resetResponse(result: false, message: "이메일을 입력해주세요.")
+        } else {
+            self.remoteDataManager?.resetPassword(email: email)
+        }
+    }
 }
 
 extension FindPasswordInteractor: FindPasswordRemoteDataManagerOutputProtocol {
-    
+    func resetResponse(result: BaseResponse<Bool>) {
+        self.presenter?.resetResponse(result: result.result, message: result.message!)
+    }
 }
