@@ -14,40 +14,34 @@ class MyApplyStudyModifyPresenter: MyApplyStudyModifyPresenterInputProtocol {
     var wireFrame: MyApplyStudyModifyWireFrameProtocol?
     
     func viewDidLoad(studyID: Int) {
-        LoadingRainbowCat.show()
+        view?.showLoading()
         interactor?.getMyApplyStudyDetail(studyID: studyID)
     }
     
     func admitButtonDidTap(newMessage: String) {
-        LoadingRainbowCat.show()
+        view?.showLoading()
         interactor?.putNewApplyMessage(newMessage: newMessage)
     }
 }
 
 extension MyApplyStudyModifyPresenter: MyApplyStudyModifyInteractorOutputProtocol {
     func retriveModifyApplyMessage(result: Bool, message: String) {
+        view?.hideLoading()
         switch result {
         case true:
-            LoadingRainbowCat.hide {
-                self.view?.showModifyApplyMessageResult(message: message)
-            }
+            self.view?.showModifyApplyMessageResult(message: message)
         case false:
-            LoadingRainbowCat.hide {
-                self.view?.showError(message: message)
-            }
+            self.view?.showError(message: message)
         }
     }
     
     func retriveMyApplyStudyDetail(result: Bool, message: String) {
+        view?.hideLoading()
         switch result {
         case true:
-            LoadingRainbowCat.hide {
-                self.view?.showMyApplyStudyDetail(message: message)
-            }
+            self.view?.showMyApplyStudyDetail(message: message)
         case false:
-            LoadingRainbowCat.hide {
-                self.view?.showError(message: message)
-            }
+            self.view?.showError(message: message)
         }
     }   
 }

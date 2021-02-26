@@ -14,7 +14,7 @@ class LoadingRainbowCat: NSObject {
     private var backgroundView: UIView?
     private var popupView: AnimationView?
     
-    class func show(caller: UIViewController? = nil) {
+    class func show(caller: UIViewController?) {
         guard let topViewController =  UIApplication.getTopViewController() else { return }
         guard let callerViewController = caller else { return }
         if type(of: topViewController) == type(of: callerViewController) {
@@ -38,13 +38,13 @@ class LoadingRainbowCat: NSObject {
             popupView.contentMode = .scaleAspectFit
             popupView.play()
             popupView.loopMode = .loop
-//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
-//                hide()
-//            }
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+                hide(caller: UIApplication.getTopViewController())
+            }
         }
     }
     
-    class func hide(caller: UIViewController? = nil, completion: (() -> Void)? = nil) {
+    class func hide(caller: UIViewController?, completion: (() -> Void)? = nil) {
         guard let topViewController =  UIApplication.getTopViewController() else { return }
         guard let callerViewController = caller else { return }
         if type(of: topViewController) == type(of: callerViewController) {

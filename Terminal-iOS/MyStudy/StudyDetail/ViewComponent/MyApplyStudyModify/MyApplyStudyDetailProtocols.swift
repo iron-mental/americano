@@ -18,6 +18,8 @@ protocol MyApplyStudyModifyViewProtocol: class {
     func showMyApplyStudyDetail(message: String)
     func showModifyApplyMessageResult(message: String)
     func showError(message: String)
+    func showLoading()
+    func hideLoading()
 }
 
 protocol MyApplyStudyModifyPresenterInputProtocol: class {
