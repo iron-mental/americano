@@ -15,6 +15,8 @@ final class FindPasswordInteractor: FindPasswordInteractorInputProtocol {
     func resetRequest(email: String) {
         if email.isEmpty {
             self.presenter?.resetResponse(result: false, message: "이메일을 입력해주세요.")
+        } else if !email.contains("@") || !email.contains(".") {
+            self.presenter?.resetResponse(result: false, message: "이메일 형식이 맞지 않습니다.")
         } else {
             self.remoteDataManager?.resetPassword(email: email)
         }
