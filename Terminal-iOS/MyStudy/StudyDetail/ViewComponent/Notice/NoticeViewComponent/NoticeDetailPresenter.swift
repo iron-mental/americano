@@ -26,7 +26,6 @@ class NoticeDetailPresenter: NoticeDetailPresenterProtocol {
     func modifyButtonDidTap(state: AddNoticeState,
                             notice: Notice,
                             parentView: NoticeDetailViewProtocol) {
-        view?.showLoading()
         wireFrame?.goToNoticeEdit(state: state, notice: notice, parentView: parentView)
     }
     
