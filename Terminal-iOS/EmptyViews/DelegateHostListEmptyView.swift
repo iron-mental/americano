@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DelegateHostListEmptyView: BaseEmptyView {
+final class DelegateHostListEmptyView: BaseEmptyView {
     override func attribute() {
         super.attribute()
         self.iconImageView.do {

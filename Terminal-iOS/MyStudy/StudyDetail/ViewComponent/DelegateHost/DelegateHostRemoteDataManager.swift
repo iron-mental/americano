@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol {
+final class DelegateHostRemoteDataManager: DelegateHostRemoteDataManagerInputProtocol {
     weak var interactor: DelegateHostRemoteDataManagerOutputProtocol?
     
     func putDelegateHostAPI(studyID: Int, newLeader: Int) {

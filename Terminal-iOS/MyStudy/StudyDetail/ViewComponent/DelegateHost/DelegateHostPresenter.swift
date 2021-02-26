@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DelegateHostPresenter: DelegateHostPresenterProtocol {
+final class DelegateHostPresenter: DelegateHostPresenterProtocol {
     weak var view: DelegateHostViewProtocol?
     var interactor: DelegateHostInteractorInputProtocol?
     var wireFrame: DelegateHostWireFrameProtocol?

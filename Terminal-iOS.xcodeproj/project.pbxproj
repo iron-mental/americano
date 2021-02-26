@@ -10,6 +10,7 @@
 		9B4ADB0EA58C194A4FD611CA /* Pods_Terminal_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6670891834E54DDD4191F4FF /* Pods_Terminal_iOS.framework */; };
 		A500482025775ADC00E37FAE /* JoinResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A500481F25775ADC00E37FAE /* JoinResult.swift */; };
 		A501FC0D25C4076600150DA0 /* MyStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A501FC0C25C4076600150DA0 /* MyStudy.swift */; };
+		A5027B0725E9200000C16B73 /* DelegateHostListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5027B0625E9200000C16B73 /* DelegateHostListEmptyView.swift */; };
 		A5031EB32574F5DE0009AD77 /* UserInfoPut.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */; };
 		A50583BB25A47AEE0060330E /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50583BA25A47AEE0060330E /* UIStackView+Ext.swift */; };
 		A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D0258387DE0084559C /* ApplyUser.swift */; };
@@ -400,6 +401,7 @@
 		87475BBE7142C360612CED6A /* Pods-Terminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Terminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-Terminal-iOS/Pods-Terminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		A500481F25775ADC00E37FAE /* JoinResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinResult.swift; sourceTree = "<group>"; };
 		A501FC0C25C4076600150DA0 /* MyStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudy.swift; sourceTree = "<group>"; };
+		A5027B0625E9200000C16B73 /* DelegateHostListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostListEmptyView.swift; sourceTree = "<group>"; };
 		A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPut.swift; sourceTree = "<group>"; };
 		A50583BA25A47AEE0060330E /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 		A510B9D0258387DE0084559C /* ApplyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUser.swift; sourceTree = "<group>"; };
@@ -1686,6 +1688,7 @@
 				CCED89F925DD3072006DA773 /* MyApplyListEmptyView.swift */,
 				CCED89FE25DD3453006DA773 /* NoticeListEmptyView.swift */,
 				CCED8A0325DD379D006DA773 /* ApplyUserListEmptyView.swift */,
+				A5027B0625E9200000C16B73 /* DelegateHostListEmptyView.swift */,
 			);
 			path = EmptyViews;
 			sourceTree = "<group>";
@@ -2036,6 +2039,7 @@
 				A5B700B1257A9B14001F62A0 /* ProjectSNSModifyView.swift in Sources */,
 				A5BA4619255D38D30061C511 /* String+Ext.swift in Sources */,
 				A5D058EA255D937F0047CA9E /* StudyDetailPresenter.swift in Sources */,
+				A5027B0725E9200000C16B73 /* DelegateHostListEmptyView.swift in Sources */,
 				CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */,
 				CCF632C725A2E80B004B80B3 /* SearchStudyResultPresenter.swift in Sources */,
 				CCA3FF38251781EB00F62627 /* Category.swift in Sources */,

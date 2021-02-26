@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-class DelegateHostView: UIViewController {
+final class DelegateHostView: UIViewController {
     var presenter: DelegateHostPresenterProtocol?
     var userList: [Participate]?
     var userTableView = UITableView()
