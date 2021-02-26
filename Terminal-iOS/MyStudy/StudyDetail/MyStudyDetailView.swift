@@ -169,13 +169,7 @@ final class MyStudyDetailView: UIViewController {
         if let userList = studyInfo?.participate,
            let userID = KeychainWrapper.standard.string(forKey: "userID") {
             let filterUserList = userList.filter { $0.userID != Int(userID) }
-            
-            if filterUserList.isEmpty {
-                // 토스트로 할지 알럿으로 할지 and 문구 정하기
-                self.showToast(controller: self, message: "방장을 위임할 인원이 존재하지 않습니다.", seconds: 0.7)
-            } else {
-                presenter?.delegateHostButtonDidTap(studyID: studyID!, userList: filterUserList)
-            }
+            presenter?.delegateHostButtonDidTap(studyID: studyID!, userList: filterUserList)
         }
     }
     
