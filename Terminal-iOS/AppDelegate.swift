@@ -17,10 +17,6 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
     var goView: UIViewController?
-//    var pushEvent: AlarmType?
-//    var studyID: Int?
-//    var studyTitle: String = ""
-//    var alertID: Int?
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -44,15 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 application.registerForRemoteNotifications()
             }
         }
-        
-        if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
-//            if let studyID = notification["study_id"] as? Int {
-//                self.studyID = studyID
-//            }
-//            if let pushEvent = notification["pushEvent"] as? String {
-//                self.pushEvent = AlarmType(rawValue: pushEvent)
-//            }
-        } else {
+        if launchOptions?[.remoteNotification] == nil {
             window = UIWindow()
             let launchView = LaunchWireFrame.createLaunchModule()
             window?.rootViewController = launchView
@@ -62,44 +50,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        let userInfo = notification.request.content.userInfo
-//        if let studyID = userInfo["study_id"] as? Int {
-//            self.studyID = studyID
-//        }
-//        if let pushEvent = userInfo["pushEvent"] as? String {
-//            self.pushEvent = AlarmType(rawValue: pushEvent)
-//        }
-//        if let alertID = userInfo["alert_id"] as? Int {
-//            self.alertID = alertID
-//        }
         completionHandler([.alert, .badge, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
-//        response.notification.request.content.userInfo["study_id"]
-//        var id: Int?
-//        var event: AlarmType?
         
-//        if let fromBackgroundId = response.notification.request.content.userInfo["study_id"] as? Int,
-//           let fromBackgroundEvent = response.notification.request.content.userInfo["pushEvent"] as? String {
-//            id = fromBackgroundId
-//            event = AlarmType(rawValue: fromBackgroundEvent)
-//        }
-//
-//        if let id = studyID,
-//           let event = pushEvent {
-//
-//        }
-        
-//        let id = studyID != nil ? studyID! : response.notification.request.content.userInfo["study_id"]
-//        let
         let userInfo =          response.notification.request.content.userInfo
         guard let eventValue =  userInfo["pushEvent"] as? String else { return }
         guard let studyID =     userInfo["study_id"] as? Int else { return }
         guard let event =       AlarmType(rawValue: eventValue) else { return }
-//        let event = self.pushEvent
-//        guard let id = self.studyID else { return }
+        
         guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
         
         switch event {
@@ -151,9 +112,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             window?.makeKeyAndVisible()
         }
         completionHandler()
-//        pushEvent = nil
-//        studyID = nil
-//        alertID = nil
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
