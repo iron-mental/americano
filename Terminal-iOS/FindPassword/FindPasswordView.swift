@@ -14,6 +14,8 @@ final class FindPasswordView: UIViewController {
     
     let backButton = UIButton()
     let descript = UILabel()
+    let emailTextField = UITextField()
+    let completeButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +38,18 @@ final class FindPasswordView: UIViewController {
             $0.textAlignment = .center
             $0.numberOfLines = 2
         }
+        self.emailTextField.do {
+            $0.placeholder = "이메일 입력"
+            $0.backgroundColor = .appColor(.InputViewColor)
+            $0.layer.cornerRadius = 10
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
+            $0.addLeftPadding(padding: 10)
+        }
     }
     
     func layout() {
-        [backButton, descript].forEach { self.view.addSubview($0) }
+        [backButton, descript, emailTextField].forEach { self.view.addSubview($0) }
         
         self.backButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -55,6 +65,13 @@ final class FindPasswordView: UIViewController {
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
                                     constant: Terminal.convertHeight(value: 100)).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        }
+        self.emailTextField.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.descript.bottomAnchor, constant: 10).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: self.descript.intrinsicContentSize.width).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
     }
     
