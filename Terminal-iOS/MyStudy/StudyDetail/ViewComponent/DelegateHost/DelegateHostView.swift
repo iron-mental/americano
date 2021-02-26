@@ -94,7 +94,12 @@ extension DelegateHostView: DelegateHostViewProtocol {
 
 extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userList!.count
+        if userList!.isEmpty {
+            tableView.setEmptyView(type: .DelegateHostListEmptyViewType)
+            return 0
+        } else {
+            return userList!.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
