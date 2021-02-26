@@ -16,15 +16,13 @@ import Firebase
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
-    var goView: UIViewController?
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         // 임시 슈가 코드
-        print(KeychainWrapper.standard.string(forKey: "refreshToken"))
-        print(KeychainWrapper.standard.string(forKey: "accessToken"))
+        print(KeychainWrapper.standard.string(forKey: "refreshToken") as Any)
+        print(KeychainWrapper.standard.string(forKey: "accessToken") as Any)
         
         // firebase 연동
         FirebaseApp.configure()
@@ -55,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
-        
+        var goView: UIViewController?
         let userInfo =          response.notification.request.content.userInfo
         guard let eventValue =  userInfo["pushEvent"] as? String else { return }
         guard let studyID =     userInfo["study_id"] as? Int else { return }
