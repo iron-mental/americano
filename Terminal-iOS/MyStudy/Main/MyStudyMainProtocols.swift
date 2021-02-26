@@ -10,7 +10,6 @@ import UIKit
 
 protocol MyStudyMainViewProtocol: class {
     var presenter: MyStudyMainPresenterProtocol? { get set }
-//    var isVisibleState: Bool? { get set }
     var startedByPushNotification: Bool? { get set }
     //PRESENTER -> VIEW
     func showMyStudyList(myStudyList: MyStudyList)
