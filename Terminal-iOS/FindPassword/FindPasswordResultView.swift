@@ -15,6 +15,8 @@ final class FindPasswordResultView: UIViewController {
     let descript = UILabel()
     let completeButton = UIButton()
     
+    var email: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -34,7 +36,7 @@ final class FindPasswordResultView: UIViewController {
             $0.tintColor = .white
         }
         self.confirmEmail.do {
-            $0.text = "swdoriz@gmail.com"
+            $0.text = self.email ?? ""
             $0.font = .notosansMedium(size: 25)
             $0.textColor = .appColor(.mainColor)
             $0.textAlignment = .center

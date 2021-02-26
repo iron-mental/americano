@@ -117,6 +117,7 @@ extension FindPasswordView: FindPasswordViewProtocol {
     func showResult(result: Bool, message: String?) {
         if result {
             let view = FindPasswordResultView()
+            view.email = self.emailTextField.text
             self.navigationController?.pushViewController(view, animated: true)
         } else {
             guard let message = message else {
