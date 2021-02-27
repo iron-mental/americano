@@ -227,17 +227,9 @@ extension BaseProfileView: BaseProfileViewProtocol {
         if let github = userInfo.snsGithub,
            let linkedin = userInfo.snsLinkedin,
            let web = userInfo.snsWeb {
-            if !github.isEmpty {
-                snsList.updateValue(github, forKey: SNSState.github.rawValue)
-            }
-
-            if !linkedin.isEmpty {
-                snsList.updateValue(linkedin, forKey: SNSState.linkedin.rawValue)
-            }
-
-            if !web.isEmpty {
-                snsList.updateValue(web, forKey: SNSState.web.rawValue)
-            }
+            snsList.updateValue(github, forKey: SNSState.github.rawValue)
+            snsList.updateValue(linkedin, forKey: SNSState.linkedin.rawValue)
+            snsList.updateValue(web, forKey: SNSState.web.rawValue)
         }
 
         self.sns.addstack(snsList: snsList)
