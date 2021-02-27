@@ -307,7 +307,20 @@ class StudyDetailView: UIViewController {
     }
     
     @objc func snsButtonDidTap(_ sender: UIButton) {
-        
+        var url = ""
+        switch sender.tag {
+        case 0:
+            guard let notion = studyInfo?.snsNotion else { return }
+            url = notion
+        case 1:
+            guard let evernote = studyInfo?.snsEvernote else { return }
+            url = evernote
+        case 2:
+            guard let web = studyInfo?.snsWeb else { return }
+            url = web
+        default: break
+        }
+        presenter?.snsButtonDidTap(url: url)
     }
 }
 

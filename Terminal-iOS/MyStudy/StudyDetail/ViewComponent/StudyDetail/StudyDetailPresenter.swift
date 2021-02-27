@@ -41,6 +41,10 @@ class StudyDetailPresenter: StudyDetailPresenterProtocol {
     func memberDidTap(userID: Int) {
         wireFrame?.goToParticipantProfile(from: view!, userID: userID)
     }
+    
+    func snsButtonDidTap(url: String) {
+        wireFrame?.goToSNSWebView(from: view!, url: url)
+    }
 }
 
 extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {

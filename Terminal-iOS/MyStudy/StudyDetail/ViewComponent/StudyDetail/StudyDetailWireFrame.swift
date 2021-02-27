@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SafariServices
 
 class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
-  
+    
     static func createStudyDetail(parent: MyStudyDetailViewProtocol?, studyID: Int, state: StudyDetailViewState, studyTitle: String) -> UIViewController {
         let view: StudyDetailViewProtocol = StudyDetailView()
         let presenter: StudyDetailPresenterProtocol & StudyDetailInteractorOutputProtocol = StudyDetailPresenter()
@@ -35,7 +36,7 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         } else {
             return UIViewController()
         }
-
+        
     }
     
     func presentStudyListScreen(from view: StudyDetailViewProtocol) {
@@ -57,6 +58,14 @@ class StudyDetailWireFrame: StudyDetailWireFrameProtocol {
         if let parentView = view as? UIViewController {
             let participantProfileView = ParticipantProfileWireFrame.createParticipantProfileModule(userInfo: userID)
             parentView.navigationController?.pushViewController(participantProfileView, animated: true)
+        }
+    }
+    
+    func goToSNSWebView(from view: StudyDetailViewProtocol, url: String) {
+        if let destination = URL(string: url),
+           let castedView = view as? UIViewController {
+            let webView = SFSafariViewController(url: destination)
+            castedView.present(webView, animated: true, completion: nil)
         }
     }
 }
