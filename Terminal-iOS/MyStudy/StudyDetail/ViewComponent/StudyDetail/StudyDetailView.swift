@@ -97,6 +97,13 @@ class StudyDetailView: UIViewController {
                            options: [.requestModifier(RequestToken.token())])
         }
         
+        snsIconsView.do {
+            [ $0.notion, $0.evernote, $0.web ]
+                .forEach { $0.addTarget(self,
+                                        action: #selector(snsButtonDidTap(_:)),
+                                        for: .touchUpInside) }
+        }
+        
         joinButton.do {
             $0.tag = 0
             if state == .none || state == .reject {
@@ -297,6 +304,10 @@ class StudyDetailView: UIViewController {
             }
         }
         TerminalAlertMessage.dismiss()
+    }
+    
+    @objc func snsButtonDidTap(_ sender: UIButton) {
+        
     }
 }
 
