@@ -81,11 +81,9 @@ class StudyCell: UITableViewCell {
             return
         }
         
-        let processor = DownsamplingImageProcessor(size: mainImage.bounds.size)
         self.mainImage.kf.setImage(with: URL(string: mainImageURL),
-                       placeholder: UIImage(named: "swift"),
-                       options: [.requestModifier(RequestToken.token()),
-                                 .processor(processor)])
+                                   placeholder: UIImage(named: "swift"),
+                                   options: [.requestModifier(RequestToken.token())])
         
         self.managerImage.kf.setImage(with: URL(string: managerImageURL),
                                       options: [.requestModifier(RequestToken.token())])
@@ -133,6 +131,7 @@ class StudyCell: UITableViewCell {
         }
         
         self.mainImage.do {
+            $0.tintColor = .systemGray3
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 10
         }

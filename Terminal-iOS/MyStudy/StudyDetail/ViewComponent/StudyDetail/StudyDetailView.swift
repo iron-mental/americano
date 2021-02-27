@@ -145,7 +145,7 @@ class StudyDetailView: UIViewController {
         memberView.do {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
-            $0.collectionView.isUserInteractionEnabled = state == .member || state == .host ? true : false
+//            $0.collectionView.isUserInteractionEnabled = state == .member || state == .host ? true : false
         }
         
         studyPlanView.do {
@@ -381,6 +381,10 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter?.memberDidTap(userID: userData[indexPath.row].userID)
+        if state == .host || state == .member {
+            presenter?.memberDidTap(userID: userData[indexPath.row].userID)
+        } else {
+            showToast(controller: self, message: "멤버 프로필은 스터디 참여 후에 \n볼 수 있습니다.", seconds: 1)
+        }
     }
 }
