@@ -61,7 +61,7 @@ class ProfileCell: UITableViewCell {
             $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         descript.do {
-            $0.numberOfLines = 2
+            $0.numberOfLines = 1
             $0.dynamicFont(fontSize: 13, weight: .regular)
             $0.textColor = .systemGray
         }
