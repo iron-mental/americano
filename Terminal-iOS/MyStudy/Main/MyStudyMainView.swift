@@ -14,7 +14,7 @@ import SwiftKeychainWrapper
 final class MyStudyMainView: UIViewController {
     var presenter: MyStudyMainPresenterProtocol?
     
-    var myStudyList:[MyStudy] = []
+    var myStudyList: [MyStudy] = []
     //이거 로딩캣단에서 처리 다할 수 있을 듯
     var startedByPushNotification: Bool?
     var dismissEditViewButtonItem: UIBarButtonItem?
