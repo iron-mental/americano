@@ -300,6 +300,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
             if let noticeView = vcArr[0] as? NoticeView {
                 noticeView.state = studyDetailView.state
             }
+            if studyInfo == nil {
+                self.applyState = nil
+            }
         }
         attribute()
         layout()
