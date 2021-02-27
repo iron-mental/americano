@@ -46,7 +46,7 @@ extension NotificationInteractor: NotificationRemoteDataManagerOutputProtocol {
     func alertConfirmResult(result: BaseResponse<String>) {
         switch result.result {
         case true:
-            break
+            self.remoteDataManager?.retrieveAlert()
         case false:
             guard let message = result.message else { return }
             presenter?.alertConfirmFailed(message: message)

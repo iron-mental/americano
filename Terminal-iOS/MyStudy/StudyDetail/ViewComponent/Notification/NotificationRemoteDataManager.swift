@@ -24,6 +24,7 @@ class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol 
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                         if result.message != nil {
+                            self.interactor?.alertConfirmResult(result: result)
                         }
                     } catch {
                         print(error.localizedDescription)
@@ -32,7 +33,9 @@ class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol 
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
-                            //에러핸들링 추가해야댐
+                            if result.message != nil {
+                                self.interactor?.alertConfirmResult(result: result)
+                            }
                         } catch {
                             
                         }
