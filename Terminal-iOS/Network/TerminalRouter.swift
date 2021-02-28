@@ -62,6 +62,7 @@ enum TerminalRouter: URLRequestConvertible {
     case applyStudyList         (id: String)
     case applyUserList          (studyID: Int)
     case applyStudyDetail       (studyID: Int, userID: Int)
+    case applyUserDetail        (studyID: Int, applyID: Int)
     case applyModify            (studyID: Int, applyID: Int, message: String)
     case applyDelete            (studyID: Int, applyID: Int)
     case applyDetermine         (studyID: Int, applyID: Int, status: Bool)
@@ -171,6 +172,8 @@ enum TerminalRouter: URLRequestConvertible {
         case .applyUserList:
             return .get
         case .applyStudyDetail:
+            return .get
+        case .applyUserDetail:
             return .get
         case .applyModify:
             return .put
@@ -283,6 +286,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/apply"
         case let .applyStudyDetail(studyID, userID):
             return "study/\(studyID)/applyUser/\(userID)"
+        case let .applyUserDetail(studyID, applyID):
+            return "study/\(studyID)/apply/\(applyID)"
         case let .applyModify(studyID, applyID, _):
             return "study/\(studyID)/apply/\(applyID)"
         case let .applyDelete(studyID, applyID):
@@ -373,7 +378,7 @@ enum TerminalRouter: URLRequestConvertible {
             return message
         case .applyStudyList, .applyUserList:
             return nil
-        case .applyStudyDetail:
+        case .applyStudyDetail, .applyUserDetail:
             return nil
         case let .applyModify(_, _, message):
             return ["message": message]
