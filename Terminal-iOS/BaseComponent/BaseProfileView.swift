@@ -44,7 +44,7 @@ class BaseProfileView: UIViewController {
     func attribute() {
         [profile, career, sns, project, email, location].forEach {
             $0.layer.cornerRadius = 10
-            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.backgroundColor = .appColor(.cellBackground)
         }
         
         self.do {
