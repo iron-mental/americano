@@ -81,7 +81,7 @@ class ApplyUserDetailView: BaseProfileView {
                                         constant: Terminal.convertHeight(value: 15)).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor,
                                          constant: Terminal.convertHeight(value: -15)).isActive = true
-            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         }
 
         self.refusalButton.do {
@@ -168,8 +168,12 @@ extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
         let sigungu = userInfo.sigungu ?? ""
         self.location.location.text = sido + " " + sigungu
         
+        /// 가입인사
+        self.applyMessage.message.text = userInfo.message
+        
         /// 프로젝트
         self.addProjectToStackView(project: userInfo.project)
+        
     }
     
     func showApplyStatusResult(message: String, studyID: Int) {
