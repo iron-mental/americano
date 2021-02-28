@@ -12,6 +12,7 @@ import Kingfisher
 
 class ApplyUserCell: ApplyListCell {
     static let applyUserCellID = "applyUserCell"
+    
     override func attribute() {
         super.attribute()
         self.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -21,8 +22,8 @@ class ApplyUserCell: ApplyListCell {
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
-        
     }
+    
     func setData(userList: ApplyUser) {
         let token = KeychainWrapper.standard.string(forKey: "accessToken")!
         let imageDownloadRequest = AnyModifier { request in
