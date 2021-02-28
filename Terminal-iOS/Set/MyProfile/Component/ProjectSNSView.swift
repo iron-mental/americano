@@ -23,35 +23,24 @@ class ProjectSNSView: BaseSNSView {
     }
     
     override func addstack(snsList: [String: String]) {
-        /// 추가된 SNS 갯수
-        var count = 0
-        
         self.snsStack.removeAllArrangedSubviews()
         
-        if snsList["github"] != nil {
-            self.snsStack.addArrangedSubview(self.github)
-            count += 1
+        if snsList["github"]!.isEmpty {
+            self.github.alpha = 0.3
         }
         
-        if snsList["appStore"] != nil {
-            self.snsStack.addArrangedSubview(self.appStore)
-            count += 1
+        if snsList["appStore"]!.isEmpty {
+            self.appStore.alpha = 0.3
         }
         
-        if snsList["playStore"] != nil {
-            self.snsStack.addArrangedSubview(self.playStore)
-            count += 1
+        if snsList["playStore"]!.isEmpty {
+            self.playStore.alpha = 0.3
         }
         
-        switch count {
-        case 1:
-            self.firstWidth.isActive = true
-        case 2:
-            self.secondWidth.isActive = true
-        case 3:
-            self.thirdWidth.isActive = true
-        default:
-            break
-        }
+        self.snsStack.addArrangedSubview(self.github)
+        self.snsStack.addArrangedSubview(self.appStore)
+        self.snsStack.addArrangedSubview(self.playStore)
+        
+        self.thirdWidth.isActive = true
     }
 }
