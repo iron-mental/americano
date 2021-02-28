@@ -274,7 +274,8 @@ extension BaseProfileView: BaseProfileViewProtocol {
                                           snsPlayStore: data.snsPlaystore ?? "",
                                           frame: CGRect.zero)
             
-            projectView.accessibilityIdentifier = "\(data.id)"
+            guard let viewID = data.id else { return }
+            projectView.accessibilityIdentifier = String(viewID)
             projectView.isAccessibilityElement = true
             projectView.sns.github.addTarget(self, action: #selector(identifierTest(_:)), for: .touchUpInside)
             projectView.sns.appStore.addTarget(self, action: #selector(identifierTest(_:)), for: .touchUpInside)
@@ -285,7 +286,23 @@ extension BaseProfileView: BaseProfileViewProtocol {
     }
     
     @objc func identifierTest(_ sender: UIButton ) {
-        print(sender.superview?.superview?.accessibilityIdentifier)
+        if let projectID    = sender.superview?.superview?.superview?.accessibilityIdentifier,
+           let buttonID     = sender.accessibilityIdentifier {
+            if let castedProjectID = Int(projectID) {
+                let selectedProject = projectData.filter { $0.id == castedProjectID }.last
+                
+                switch buttonID {
+                case "github":
+                    print(selectedProject?.snsGithub)
+                case "appStore":
+                    print(selectedProject?.snsAppstore)
+                case "playStore":
+                    print(selectedProject?.snsPlaystore)
+                default: break
+                }
+            }
+        }
+        
     }
 }
 

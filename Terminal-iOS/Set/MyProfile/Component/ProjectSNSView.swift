@@ -11,21 +11,17 @@ import UIKit
 class ProjectSNSView: BaseSNSView {
     let github = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
-//        $0.addTarget(self, action: #selector(goToProjectWeb(_:)), for: .touchUpInside)
+        $0.accessibilityIdentifier = "github"
     }
     let appStore = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "app-store"), for: .normal)
-//        $0.addTarget(self, action: #selector(goToProjectWeb(_:)), for: .touchUpInside)
+        $0.accessibilityIdentifier = "appStore"
     }
     let playStore = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "playstore"), for: .normal)
-//        $0.addTarget(self, action: #selector(goToProjectWeb(_:)), for: .touchUpInside)
+        $0.accessibilityIdentifier = "playStore"
     }
     
-//    @objc func goToProjectWeb(_ sender: UIButton) {
-//        print(sender)
-//    }
-//
     override func addstack(snsList: [String: String]) {
         /// 추가된 SNS 갯수
         var count = 0
