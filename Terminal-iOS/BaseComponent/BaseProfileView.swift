@@ -315,6 +315,7 @@ extension BaseProfileView {
         self.present(webView, animated: true, completion: nil)
     }
     
+    /// Project SNS
     @objc func projectSNSButtonDidTap(_ sender: UIButton ) {
         if let projectID    = sender.superview?.superview?.superview?.accessibilityIdentifier,
            let buttonID     = sender.accessibilityIdentifier {
@@ -335,7 +336,6 @@ extension BaseProfileView {
                     url = selectedProject?.snsPlaystore
                 default: break
                 }
-                
                 
                 guard let unWrappedURL = url,
                       let destination = URL(string: unWrappedURL) else {
