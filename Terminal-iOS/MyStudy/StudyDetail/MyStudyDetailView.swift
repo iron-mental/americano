@@ -296,24 +296,26 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
     func setting(caller: UIViewController) {
         
-        
         if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
-            
-            if type(of: caller) == NoticeView.self {
-                //공지사항이 콜했을 경우 처리
+            if type(of: caller) == StudyDetailView.self {
+                //스터디 디테일이 콜했을 경우 처리
+                
+                //공지에 state 심어주고
                 if let noticeView = vcArr[0] as? NoticeView {
                     noticeView.state = studyDetailView.state
                 }
-            } else if type(of: caller) == StudyDetailView.self {
-                //스터디 디테일이 콜했을 경우 처리
+                //메인스터디디테일에 정보 심어주고
                 self.studyInfo = studyDetailView.studyInfo
                 self.authority = studyDetailView.state
+                
+                // 탈퇴한 스터디 핸들링 해주고
                 if authority != .host && authority != .member {
                     showToast(controller: self, message: "속해있는 스터디가 아닙니다.", seconds: 1) {
                         self.hideLoading()
                         self.navigationController?.popViewController(animated: true)
                     }
                 } else {
+                    // 알림으로 진입한거 핸들링 해주고
                     if applyState == nil {
                         self.hideLoading()
                     } else {
