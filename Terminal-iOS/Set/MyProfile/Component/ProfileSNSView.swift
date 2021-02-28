@@ -50,17 +50,17 @@ class ProfileSNSView: BaseSNSView {
     override func addstack(snsList: [String: String]) {
         self.snsStack.removeAllArrangedSubviews()
         
-        if snsList["github"]!.isEmpty {
-            github.alpha = 0.3
-        }
+        self.github.alpha = snsList["github"]!.isEmpty
+            ? 0.3
+            : 1
         
-        if snsList["linkedin"]!.isEmpty {
-            linkedin.alpha = 0.3
-        }
+        self.linkedin.alpha = snsList["linkedin"]!.isEmpty
+            ? 0.3
+            : 1
         
-        if snsList["web"]!.isEmpty {
-            web.alpha = 0.3
-        }
+        self.web.alpha = snsList["web"]!.isEmpty
+            ? 0.3
+            : 1
         
         self.snsStack.addArrangedSubview(self.github)
         self.snsStack.addArrangedSubview(self.linkedin)

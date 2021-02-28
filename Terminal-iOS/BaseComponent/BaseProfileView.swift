@@ -276,10 +276,7 @@ extension BaseProfileView: BaseProfileViewProtocol {
             self.project.projectStack.addArrangedSubview(projectView)
         }
     }
-    
-    
 }
-
 
 // MARK: @objc
 
@@ -287,26 +284,38 @@ extension BaseProfileView {
     
     /// Profile SNS
     @objc func goGithub() {
-        guard let address = self.userInfo?.snsGithub,
-              let url = URL(string: "https://www.github.com/\(address)") else { return }
-        let webView = SFSafariViewController(url: url)
-        self.present(webView, animated: true, completion: nil)
+        if let unWrappedURL = self.userInfo?.snsGithub {
+            if unWrappedURL.isEmpty {
+                self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
+            } else {
+                guard let url = URL(string: "https://www.github.com/\(unWrappedURL)") else { return }
+                let webView = SFSafariViewController(url: url)
+                self.present(webView, animated: true, completion: nil)
+            }
+        }
     }
     
     @objc func goLinkedin() {
-        guard let address = self.userInfo?.snsLinkedin,
-              let url = URL(string: address) else { return }
+        guard let unWrappedURL = self.userInfo?.snsLinkedin,
+              let url = URL(string: unWrappedURL) else {
+            self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
+            return
+        }
         let webView = SFSafariViewController(url: url)
         self.present(webView, animated: true, completion: nil)
     }
     
     @objc func goWeb() {
-        guard let address = self.userInfo?.snsWeb,
-              let url = URL(string: address) else { return }
+        guard let unWrappedURL = self.userInfo?.snsWeb,
+              let url = URL(string: unWrappedURL) else {
+            self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
+            return
+        }
         let webView = SFSafariViewController(url: url)
         self.present(webView, animated: true, completion: nil)
     }
     
+    /// Project SNS
     @objc func projectSNSButtonDidTap(_ sender: UIButton ) {
         if let projectID    = sender.superview?.superview?.superview?.accessibilityIdentifier,
            let buttonID     = sender.accessibilityIdentifier {
@@ -318,7 +327,9 @@ extension BaseProfileView {
                 switch buttonID {
                 case "github":
                     guard let github = selectedProject?.snsGithub else { return }
-                    url = "https://www.github.com/\(github)"
+                    url = github.isEmpty
+                        ? ""
+                        : "https://www.github.com/\(github)"
                 case "appStore":
                     url = selectedProject?.snsAppstore
                 case "playStore":
@@ -327,7 +338,11 @@ extension BaseProfileView {
                 }
                 
                 guard let unWrappedURL = url,
-                      let destination = URL(string: unWrappedURL) else { return }
+                      let destination = URL(string: unWrappedURL) else {
+                    self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
+                    return
+                }
+                
                 let webView = SFSafariViewController(url: destination)
                 self.present(webView, animated: true, completion: nil)
             }
