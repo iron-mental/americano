@@ -8,7 +8,37 @@
 
 import Foundation
 
-class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserDetailRemoteDataManagerInputProtocol {
+class ApplyUserDetailRemoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol {
+    var interactor: ApplyUserDetailRemoteDataManagerOutputProtocol?
+    
+    func getApplyUserInfo(studyID: Int, applyID: Int) {
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.applyUserDetail(studyID: studyID, applyID: applyID))
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<ApplyUserInfo>.self, from: data)
+                        self.interactor?.onUserInfoRetrieved(userInfo: result)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<ApplyUserInfo>.self, from: data)
+                            self.interactor?.onUserInfoRetrieved(userInfo: result)
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
+    }
+    
     func postApplyStatus(studyID: Int, applyID: Int, status: Bool) {
         TerminalNetworkManager
             .shared
@@ -21,22 +51,20 @@ class ApplyUserDetailRemoteDataManager: BaseProfileRemoteDataManager, ApplyUserD
                     do {
                         let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                         if result.message != nil {
-                            if let handler = self.remoteRequestHandler as?  ApplyUserDetailRemoteDataManagerOutputProtocol {
-                                handler.onApplyStatusRetrieved(response: result)
-                            }
+                            self.interactor?.onApplyStatusRetrieved(response: result)
                         }
                     } catch {
-                        print("error")
+                        print(error.localizedDescription)
                     }
                 case .failure:
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                             if result.message != nil {
-                                (self.remoteRequestHandler as! ApplyUserDetailRemoteDataManagerOutputProtocol).onApplyStatusRetrieved(response: result)
+                                self.interactor?.onApplyStatusRetrieved(response: result)
                             }
                         } catch {
-                            
+                            print(error.localizedDescription)
                         }
                     }
                 }
