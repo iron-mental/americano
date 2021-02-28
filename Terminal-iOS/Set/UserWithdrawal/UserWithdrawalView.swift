@@ -132,17 +132,12 @@ class UserWithdrawalView: UIViewController {
 
 extension UserWithdrawalView: UserWithdrawalViewProtocol {
     func resultUserWithdrawal(message: String?) {
-        
-        guard let message = message else {
-            self.showToast(controller: self, message: "회원이 탈퇴되었습니다.", seconds: 1, completion: nil)
-            let parent = self.navigationController?.rootViewController as? SetView
-            self.navigationController?.popViewController(animated: true, completion: {
-                sleep(1)
-                parent?.presenter?.loggedOut()
-            })
-            return
+        if let message = message {
+            self.showToast(controller: self, message: message, seconds: 1, completion: nil)
+        } else {
+            self.showToast(controller: self, message: "회원이 탈퇴되었습니다.", seconds: 1) {
+                self.presenter?.goToIntroView()
+            }
         }
-        
-        self.showToast(controller: self, message: message, seconds: 1, completion: nil)
     }
 }
