@@ -30,8 +30,6 @@ class BaseProfileView: UIViewController {
     var projectData: [Project] = []
     var userInfo: UserInfo?
     
-    var testGesture = UITapGestureRecognizer()
-    
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,7 +87,6 @@ class BaseProfileView: UIViewController {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 15, weight: .regular)
         }
-        self.testGesture = UITapGestureRecognizer(target: self, action: #selector(identifierTest))
         
         self.sns.github.addTarget(self, action: #selector(goGithub), for: .touchUpInside)
         self.sns.linkedin.addTarget(self, action: #selector(goLinkedin), for: .touchUpInside)
@@ -277,33 +274,15 @@ extension BaseProfileView: BaseProfileViewProtocol {
             guard let viewID = data.id else { return }
             projectView.accessibilityIdentifier = String(viewID)
             projectView.isAccessibilityElement = true
-            projectView.sns.github.addTarget(self, action: #selector(identifierTest(_:)), for: .touchUpInside)
-            projectView.sns.appStore.addTarget(self, action: #selector(identifierTest(_:)), for: .touchUpInside)
-            projectView.sns.playStore.addTarget(self, action: #selector(identifierTest(_:)), for: .touchUpInside)
+            projectView.sns.github.addTarget(self, action: #selector(projectSNSButtonDidTap(_: )), for: .touchUpInside)
+            projectView.sns.appStore.addTarget(self, action: #selector(projectSNSButtonDidTap(_: )), for: .touchUpInside)
+            projectView.sns.playStore.addTarget(self, action: #selector(projectSNSButtonDidTap(_: )), for: .touchUpInside)
             
             self.project.projectStack.addArrangedSubview(projectView)
         }
     }
     
-    @objc func identifierTest(_ sender: UIButton ) {
-        if let projectID    = sender.superview?.superview?.superview?.accessibilityIdentifier,
-           let buttonID     = sender.accessibilityIdentifier {
-            if let castedProjectID = Int(projectID) {
-                let selectedProject = projectData.filter { $0.id == castedProjectID }.last
-                
-                switch buttonID {
-                case "github":
-                    print(selectedProject?.snsGithub)
-                case "appStore":
-                    print(selectedProject?.snsAppstore)
-                case "playStore":
-                    print(selectedProject?.snsPlaystore)
-                default: break
-                }
-            }
-        }
-        
-    }
+    
 }
 
 
@@ -331,5 +310,31 @@ extension BaseProfileView {
               let url = URL(string: address) else { return }
         let webView = SFSafariViewController(url: url)
         self.present(webView, animated: true, completion: nil)
+    }
+    
+    @objc func projectSNSButtonDidTap(_ sender: UIButton ) {
+        if let projectID    = sender.superview?.superview?.superview?.accessibilityIdentifier,
+           let buttonID     = sender.accessibilityIdentifier {
+            if let castedProjectID = Int(projectID) {
+                var url: String?
+                
+                let selectedProject = projectData.filter { $0.id == castedProjectID }.last
+                
+                switch buttonID {
+                case "github":
+                    guard let github = selectedProject?.snsGithub else { return }
+                    url = "https://www.github.com/\(github)"
+                case "appStore":
+                    url = selectedProject?.snsAppstore
+                case "playStore":
+                    url = selectedProject?.snsPlaystore
+                default: break
+                }
+                guard let unWrappedURL = url,
+                      let destination = URL(string: unWrappedURL) else { return }
+                let webView = SFSafariViewController(url: destination)
+                self.present(webView, animated: true, completion: nil)
+            }
+        }
     }
 }
