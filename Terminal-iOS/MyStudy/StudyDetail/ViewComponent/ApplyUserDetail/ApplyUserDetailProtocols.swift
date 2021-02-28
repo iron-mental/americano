@@ -42,20 +42,21 @@ protocol ApplyUserDetailInteractorInputProtocol: class {
 
 protocol ApplyUserDetailInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
-    func retriveUserInfo(result: Bool, userInfo: UserInfo)
-    func retriveProjectList(result: Bool, projectList: [Project])
+    func retriveUserInfo(result: Bool, userInfo: ApplyUserInfo)
     func retriveApplyStatus(result: Bool, message: String, studyID: Int)
 }
 
-protocol ApplyUserDetailRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {
+protocol ApplyUserDetailRemoteDataManagerInputProtocol: class {
+    var interactor: ApplyUserDetailRemoteDataManagerOutputProtocol? { get set }
+    
     //INTERACTOR -> REMOTEDATAMANAGER
     func postApplyStatus(studyID: Int, applyID: Int, status: Bool)
+    func getApplyUserInfo(studyID: Int, applyID: Int)
 }
 
-protocol ApplyUserDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataManagerOutputProtocol {
+protocol ApplyUserDetailRemoteDataManagerOutputProtocol: class {
     //REMOTEDATAMANAGER -> INTERACTOR
-    func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
-    func onProjectRetrieved(project: BaseResponse<[Project]>)
+    func onUserInfoRetrieved(userInfo: BaseResponse<ApplyUserInfo>)
     func onApplyStatusRetrieved(response: BaseResponse<String>)
 }
 
