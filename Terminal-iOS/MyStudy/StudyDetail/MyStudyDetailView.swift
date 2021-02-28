@@ -174,9 +174,11 @@ final class MyStudyDetailView: UIViewController {
     }
     
     func delegateHostButtonDidTap() {
-        guard let userList = studyInfo?.participate else { return }
-        presenter?.delegateHostButtonDidTap(studyID: studyID!, userList: userList)
-        //방장 위임하는 뷰로 가보자
+        if let userList = studyInfo?.participate,
+           let userID = KeychainWrapper.standard.string(forKey: "userID") {
+            let filterUserList = userList.filter { $0.userID != Int(userID) }
+            presenter?.delegateHostButtonDidTap(studyID: studyID!, userList: filterUserList)
+        }
     }
     
     func deleteStudyButtonDidTap() {

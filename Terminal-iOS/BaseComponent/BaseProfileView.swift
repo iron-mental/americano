@@ -14,6 +14,7 @@ import SwiftKeychainWrapper
 class BaseProfileView: UIViewController {
     
     // MARK: Init Property
+    
     let scrollView      = UIScrollView()
     var backgroundView  = UIView()
     let profile         = ProfileView()
@@ -31,6 +32,7 @@ class BaseProfileView: UIViewController {
     var userInfo: UserInfo?
     
     // MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -38,6 +40,7 @@ class BaseProfileView: UIViewController {
     }
     
     // MARK: Set Attribute
+    
     func attribute() {
         [profile, career, sns, project, email, location].forEach {
             $0.layer.cornerRadius = 10
@@ -46,16 +49,16 @@ class BaseProfileView: UIViewController {
         
         self.do {
             $0.title = "프로필"
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = .appColor(.terminalBackground)
         }
         
         self.scrollView.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = .appColor(.terminalBackground)
             $0.showsVerticalScrollIndicator = false
         }
         
         self.backgroundView.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = .appColor(.terminalBackground)
         }
         
         self.careerLabel.do {
@@ -201,12 +204,14 @@ class BaseProfileView: UIViewController {
 
 extension BaseProfileView: BaseProfileViewProtocol {
     
+    // MARK: Set User Info
+    
     func showUserInfo(userInfo: UserInfo) {
         var snsList: [String: String] = [:]
         self.userInfo = userInfo
         
         // MARK: Set User Info
-        
+      
         /// 프로필
         self.profile.name.text = userInfo.nickname
         self.profile.descript.text = userInfo.introduce ?? ""

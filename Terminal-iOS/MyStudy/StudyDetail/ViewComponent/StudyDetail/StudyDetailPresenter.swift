@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StudyDetailPresenter: StudyDetailPresenterProtocol {
+final class StudyDetailPresenter: StudyDetailPresenterProtocol {
     weak var view: StudyDetailViewProtocol?
     var interactor: StudyDetailInteractorInputProtocol?
     var wireFrame: StudyDetailWireFrameProtocol?

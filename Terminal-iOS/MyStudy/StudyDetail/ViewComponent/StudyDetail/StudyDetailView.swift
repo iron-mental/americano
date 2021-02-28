@@ -21,7 +21,7 @@ enum StudyDetailViewState: String {
     case reject
 }
 
-class StudyDetailView: UIViewController {
+final class StudyDetailView: UIViewController {
     var presenter: StudyDetailPresenterProtocol?
     
     var state: StudyDetailViewState = .member {

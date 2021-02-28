@@ -8,10 +8,8 @@
 
 import UIKit
 
-class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
-    var presenter: SelectLocationPresenterProtocol?
-    
-    static func selectLocationViewModul(item: StudyDetailLocationPost, parentView: UIViewController) -> UIViewController {
+class SelectLocationWireFrame: SelectLocationWireFrameProtocol {    
+    static func selectLocationViewModule(item: StudyDetailLocationPost, parentView: UIViewController) -> UIViewController {
         let view = SelectLocationView()
         view.location = item
         view.delegate = parentView as? selectLocationDelegate
@@ -32,9 +30,6 @@ class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
         interactor.localDataManager = localDataManager
         interactor.remoteDataManager = remoteDataManager
         
-        wireFrame.presenter = presenter
-        
-        //여기서 view presenter 어쩌고 저쩌고 다할당 시켜서 리턴
         return view
     }
 }

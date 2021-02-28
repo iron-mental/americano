@@ -59,26 +59,17 @@ class ProjectView: UIView {
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true
         }
         
-        checkSNSList(snsGithub: snsGithub, snsAppStore: snsAppStore, snsPlayStore: snsPlayStore)
-        sns.addstack(snsList: snsList)
+        self.checkSNSList(snsGithub: snsGithub, snsAppStore: snsAppStore, snsPlayStore: snsPlayStore)
+        self.sns.addstack(snsList: self.snsList)
     }
     
     private func checkSNSList(snsGithub: String, snsAppStore: String, snsPlayStore: String) {
-        if !snsGithub.isEmpty {
-            snsList.updateValue(snsGithub, forKey: SNSState.github.rawValue)
-        }
-        
-        if !snsAppStore.isEmpty {
-            snsList.updateValue(snsAppStore, forKey: SNSState.appStore.rawValue)
-        }
-        
-        if !snsPlayStore.isEmpty {
-            snsList.updateValue(snsPlayStore, forKey: SNSState.playStore.rawValue)
-        }
+        self.snsList.updateValue(snsGithub, forKey: SNSState.github.rawValue)
+        self.snsList.updateValue(snsAppStore, forKey: SNSState.appStore.rawValue)
+        self.snsList.updateValue(snsPlayStore, forKey: SNSState.playStore.rawValue)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

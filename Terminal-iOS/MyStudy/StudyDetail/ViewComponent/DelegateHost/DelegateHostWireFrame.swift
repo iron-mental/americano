@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DelegateHostWireFrame: DelegateHostWireFrameProtocol {
+final class DelegateHostWireFrame: DelegateHostWireFrameProtocol {
     static func createDelegateHostmodule(studyID: Int, userList: [Participate]) -> UIViewController {
         let view = DelegateHostView()
         let presenter: DelegateHostPresenterProtocol & DelegateHostInteractorOutputProtocol = DelegateHostPresenter()

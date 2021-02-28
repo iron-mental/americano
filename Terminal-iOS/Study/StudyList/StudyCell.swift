@@ -87,12 +87,16 @@ class StudyCell: UITableViewCell {
             return
         }
         
-        self.mainImage.kf.setImage(with: URL(string: mainImageURL),
-                                   placeholder: UIImage(named: "swift"),
-                                   options: [.requestModifier(RequestToken.token())])
-        
-        self.managerImage.kf.setImage(with: URL(string: managerImageURL),
-                                      options: [.requestModifier(RequestToken.token())])
+        DispatchQueue.main.async {
+            let processor = DownsamplingImageProcessor(size: self.mainImage.bounds.size)
+            self.mainImage.kf.setImage(with: URL(string: mainImageURL),
+                           placeholder: UIImage(named: "swift"),
+                           options: [.requestModifier(RequestToken.token()),
+                                     .processor(processor)])
+            
+            self.managerImage.kf.setImage(with: URL(string: managerImageURL),
+                                          options: [.requestModifier(RequestToken.token())])
+        }
     }
     
     func attribute() {

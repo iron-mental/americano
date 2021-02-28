@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
+final class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
     weak var presenter: StudyDetailInteractorOutputProtocol?
     var localDatamanager: StudyDetailLocalDataManagerInputProtocol?
     var remoteDatamanager: StudyDetailRemoteDataManagerInputProtocol?
