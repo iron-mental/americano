@@ -140,4 +140,12 @@ extension UserWithdrawalView: UserWithdrawalViewProtocol {
             }
         }
     }
+    
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
+    }
 }

@@ -14,6 +14,7 @@ class UserWithdrawalPresenter: UserWithdrawalPresenterProtocol {
     var wireframe: UserWithdrawalWireFrameProtocol?
     
     func userWithdrawal(email: String, password: String) {
+        view?.showLoading()
         interactor?.userWithdrawal(email: email, password: password)
     }
     func goToIntroView() {
@@ -23,6 +24,7 @@ class UserWithdrawalPresenter: UserWithdrawalPresenterProtocol {
 
 extension UserWithdrawalPresenter: UserWithdrawalInteractorOutputProtocol {
     func resultUserWithdrawal(result: Bool, message: String) {
+        view?.hideLoading()
         switch result {
         case true:
             view?.resultUserWithdrawal(message: nil)

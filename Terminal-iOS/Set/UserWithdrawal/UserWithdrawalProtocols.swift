@@ -12,6 +12,8 @@ protocol UserWithdrawalViewProtocol: class {
     var presenter: UserWithdrawalPresenterProtocol? { get set }
     
     func resultUserWithdrawal(message: String?)
+    func hideLoading()
+    func showLoading()
 }
 
 protocol UserWithdrawalPresenterProtocol: class {
