@@ -11,14 +11,17 @@ import UIKit
 class StudyDetailSNSView: BaseSNSView {
     let notion = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "swiftmain"), for: .normal)
+        $0.tag = 0
     }
     
     let evernote = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "evernote"), for: .normal)
+        $0.tag = 1
     }
     
     let web = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
+        $0.tag = 2
     }
     
     let modify = UIButton().then {
@@ -36,12 +39,15 @@ class StudyDetailSNSView: BaseSNSView {
         
         if snsList["notion"]!.isEmpty {
             self.notion.setImage(#imageLiteral(resourceName: "disablednotion"), for: .normal)
+            self.notion.isUserInteractionEnabled = false
         }
         if snsList["evernote"]!.isEmpty {
             self.evernote.setImage(#imageLiteral(resourceName: "disabledevernote"), for: .normal)
+            self.evernote.isUserInteractionEnabled = false
         }
         if snsList["web"]!.isEmpty {
             self.web.setImage(#imageLiteral(resourceName: "disabledweb"), for: .normal)
+            self.web.isUserInteractionEnabled = false
         }
         
         self.snsStack.addArrangedSubview(self.notion)

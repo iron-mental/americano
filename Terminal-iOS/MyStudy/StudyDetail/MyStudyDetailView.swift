@@ -53,12 +53,18 @@ final class MyStudyDetailView: UIViewController {
     }
     
     func attribute() {
-        if let title = studyInfo?.title {
-            self.title = title
+        self.do {
+            if let title = studyInfo?.title {
+                $0.title = title
+            } else if let title = studyTitle {
+                $0.title = title
+            }
         }
+        
         self.navigationItem.do {
             $0.largeTitleDisplayMode = .always
         }
+        
         self.appearance.do {
             $0.configureWithTransparentBackground()
         }
@@ -301,6 +307,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
             authority = studyDetailView.state
             if let noticeView = vcArr[0] as? NoticeView {
                 noticeView.state = studyDetailView.state
+            }
+            if studyInfo == nil {
+                self.applyState = nil
             }
         }
         attribute()

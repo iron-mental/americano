@@ -61,7 +61,7 @@ class ProfileCell: UITableViewCell {
             $0.dynamicFont(fontSize: 15, weight: .regular)
         }
         descript.do {
-            $0.numberOfLines = 2
+            $0.numberOfLines = 1
             $0.dynamicFont(fontSize: 13, weight: .regular)
             $0.textColor = .systemGray
         }
@@ -88,12 +88,11 @@ class ProfileCell: UITableViewCell {
         }
         self.name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: location.bottomAnchor, constant: Terminal.convertHeight(value: 5)).isActive = true
+            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
         }
         self.descript.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: name.bottomAnchor, constant: Terminal.convertHeight(value: 5)).isActive = true
             $0.leadingAnchor.constraint(equalTo: profile.trailingAnchor, constant: 20).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -5).isActive = true

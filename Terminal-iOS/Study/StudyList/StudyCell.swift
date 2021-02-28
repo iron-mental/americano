@@ -18,6 +18,7 @@ class StudyCell: UITableViewCell {
     let location = UILabel()
     let date = UILabel()
     let distance = UILabel()
+    let calendarImage = UIImageView()
     let managerImage = UIImageView()
     let mainImage = UIImageView()
     let memberImage = UIImageView()
@@ -47,6 +48,11 @@ class StudyCell: UITableViewCell {
         
         self.location.do {
             $0.text = data.sigungu
+        }
+        
+        self.calendarImage.do {
+            $0.image = UIImage(systemName: "calendar")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.tintColor = .white
         }
         
         self.date.do {
@@ -135,13 +141,14 @@ class StudyCell: UITableViewCell {
         }
         
         self.mainImage.do {
+            $0.tintColor = .systemGray3
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 10
         }
     }
     
     func layout() {
-        [mainTitle, date, managerImage, mainImage, location, distance, memberImage, memberCount]
+        [mainTitle, date, calendarImage, managerImage, mainImage, location, distance, memberImage, memberCount]
             .forEach { self.contentView.addSubview($0) }
        
         self.location.do {
@@ -167,7 +174,15 @@ class StudyCell: UITableViewCell {
         self.date.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.mainTitle.bottomAnchor, constant: 8).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.calendarImage.trailingAnchor, constant: 10).isActive = true
+        }
+        
+        self.calendarImage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: self.date.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
         }
         
         self.managerImage.do {

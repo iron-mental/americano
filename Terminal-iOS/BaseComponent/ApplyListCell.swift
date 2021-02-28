@@ -34,6 +34,7 @@ class ApplyListCell: UITableViewCell {
             $0.numberOfLines = 3
             $0.textColor = .white
             $0.text = ""
+            $0.numberOfLines = 1
             $0.dynamicFont(fontSize: 14, weight: .regular)
         }
     }

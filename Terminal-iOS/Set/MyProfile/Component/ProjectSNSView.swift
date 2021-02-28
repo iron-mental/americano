@@ -11,12 +11,15 @@ import UIKit
 class ProjectSNSView: BaseSNSView {
     let github = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
+        $0.accessibilityIdentifier = "github"
     }
     let appStore = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "app-store"), for: .normal)
+        $0.accessibilityIdentifier = "appStore"
     }
     let playStore = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "playstore"), for: .normal)
+        $0.accessibilityIdentifier = "playStore"
     }
     
     override func addstack(snsList: [String: String]) {

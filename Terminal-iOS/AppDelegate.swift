@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Override point for customization after application launch.
         
         // 임시 슈가 코드
-        print(KeychainWrapper.standard.string(forKey: "refreshToken") as Any)
-        print(KeychainWrapper.standard.string(forKey: "accessToken") as Any)
+        print("Refresh : ", KeychainWrapper.standard.string(forKey: "refreshToken") as Any)
+        print("Access : ", KeychainWrapper.standard.string(forKey: "accessToken") as Any)
         
         // firebase 연동
         FirebaseApp.configure()

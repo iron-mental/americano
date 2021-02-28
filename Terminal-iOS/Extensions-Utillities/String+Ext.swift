@@ -49,6 +49,6 @@ extension String {
     }
     
     func evernoteCheck() -> Bool {
-        return self.contains("https://www.evernote.com/") || self == ""
+        return self.contains("https://evernote.com/") || self == ""
     }
 }

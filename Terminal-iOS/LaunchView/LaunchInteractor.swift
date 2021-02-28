@@ -23,8 +23,15 @@ class LaunchInteractor: LaunchInteractorInputProtocol {
         if let userID = KeychainWrapper.standard.string(forKey: "userID") {
             remoteDataManager?.getRefreshTokenValid(userID: userID)
         } else {
+            emptyAllToken()
             presenter?.refreshTokenIsEmpty()
         }
+    }
+    
+    func emptyAllToken() {
+        KeychainWrapper.standard.remove(forKey: "refreshToken")
+        KeychainWrapper.standard.remove(forKey: "accessToken")
+        KeychainWrapper.standard.remove(forKey: "pushToken")
     }
 }
 
@@ -53,6 +60,7 @@ extension LaunchInteractor: LaunchRemoteDataManagerOutputProtocol {
         case true:
             presenter?.refreshTokenResult(result: result.result)
         case false:
+            emptyAllToken()
             presenter?.refreshTokenResult(result: result.result)
         }
     }

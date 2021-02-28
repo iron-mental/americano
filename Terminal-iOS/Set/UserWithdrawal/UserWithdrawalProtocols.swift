@@ -12,6 +12,8 @@ protocol UserWithdrawalViewProtocol: class {
     var presenter: UserWithdrawalPresenterProtocol? { get set }
     
     func resultUserWithdrawal(message: String?)
+    func hideLoading()
+    func showLoading()
 }
 
 protocol UserWithdrawalPresenterProtocol: class {
@@ -20,6 +22,7 @@ protocol UserWithdrawalPresenterProtocol: class {
     var wireframe: UserWithdrawalWireFrameProtocol? { get set }
     
     func userWithdrawal(email: String, password: String)
+    func goToIntroView()
 }
 
 protocol UserWithdrawalInteractorInputProtocol: class {
@@ -34,4 +37,6 @@ protocol UserWithdrawalInteractorOutputProtocol: class {
 
 protocol UserWithdrawalWireFrameProtocol: class {
     static func createModule() -> UIViewController
+    
+    func goToIntroView(from view: UserWithdrawalViewProtocol)
 }

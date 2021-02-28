@@ -97,6 +97,13 @@ final class StudyDetailView: UIViewController {
                            options: [.requestModifier(RequestToken.token())])
         }
         
+        snsIconsView.do {
+            [ $0.notion, $0.evernote, $0.web ]
+                .forEach { $0.addTarget(self,
+                                        action: #selector(snsButtonDidTap(_:)),
+                                        for: .touchUpInside) }
+        }
+        
         joinButton.do {
             $0.tag = 0
             if state == .none || state == .reject {
@@ -138,7 +145,7 @@ final class StudyDetailView: UIViewController {
         memberView.do {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
-            $0.collectionView.isUserInteractionEnabled = state == .member || state == .host ? true : false
+//            $0.collectionView.isUserInteractionEnabled = state == .member || state == .host ? true : false
         }
         
         studyPlanView.do {
@@ -298,6 +305,23 @@ final class StudyDetailView: UIViewController {
         }
         TerminalAlertMessage.dismiss()
     }
+    
+    @objc func snsButtonDidTap(_ sender: UIButton) {
+        var url = ""
+        switch sender.tag {
+        case 0:
+            guard let notion = studyInfo?.snsNotion else { return }
+            url = notion
+        case 1:
+            guard let evernote = studyInfo?.snsEvernote else { return }
+            url = evernote
+        case 2:
+            guard let web = studyInfo?.snsWeb else { return }
+            url = web
+        default: break
+        }
+        presenter?.snsButtonDidTap(url: url)
+    }
 }
 
 extension StudyDetailView: StudyDetailViewProtocol {
@@ -332,7 +356,6 @@ extension StudyDetailView: StudyDetailViewProtocol {
         showToast(controller: self, message: message, seconds: 1) {
             if message != "공백은 허용되지 않습니다" {
                 self.navigationController?.popViewController(animated: true)
-                
             }
         }
     }
@@ -358,6 +381,10 @@ extension StudyDetailView: UICollectionViewDataSource, UICollectionViewDelegate 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter?.memberDidTap(userID: userData[indexPath.row].userID)
+        if state == .host || state == .member {
+            presenter?.memberDidTap(userID: userData[indexPath.row].userID)
+        } else {
+            showToast(controller: self, message: "멤버 프로필은 스터디 참여 후에 \n볼 수 있습니다.", seconds: 1)
+        }
     }
 }

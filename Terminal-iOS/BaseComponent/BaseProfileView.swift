@@ -209,23 +209,25 @@ extension BaseProfileView: BaseProfileViewProtocol {
     func showUserInfo(userInfo: UserInfo) {
         var snsList: [String: String] = [:]
         self.userInfo = userInfo
-
+        
+        // MARK: Set User Info
+      
         /// 프로필
         self.profile.name.text = userInfo.nickname
         self.profile.descript.text = userInfo.introduce ?? ""
         
         let imageURL = userInfo.image ?? ""
         self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
-                                                  placeholder: UIImage(named: "defaultProfile"),
-                                                  options: [.requestModifier(RequestToken.token())])
-
+                                              placeholder: UIImage(named: "defaultProfile"),
+                                              options: [.requestModifier(RequestToken.token())])
+        
         /// 경력
         if let careerTitle = userInfo.careerTitle,
            let careerContents = userInfo.careerContents {
             self.career.careerTitle.text = careerTitle
             self.career.careerContents.text = careerContents
         }
-
+        
         /// SNS
         let github = userInfo.snsGithub ?? ""
         let linkedin = userInfo.snsLinkedin ?? ""
@@ -234,12 +236,11 @@ extension BaseProfileView: BaseProfileViewProtocol {
         snsList.updateValue(linkedin, forKey: SNSState.linkedin.rawValue)
         snsList.updateValue(web, forKey: SNSState.web.rawValue)
         
-
         self.sns.addstack(snsList: snsList)
-
+        
         /// 이메일
         self.email.email.text = userInfo.email
-
+        
         /// 활동지역
         let sido = userInfo.sido ?? ""
         let sigungu = userInfo.sigungu ?? ""
@@ -248,27 +249,35 @@ extension BaseProfileView: BaseProfileViewProtocol {
         // hide loading
         self.hideLoading()
     }
-
+    
     func addProjectToStackView(project: [Project]) {
         self.projectData = project
-
+        
         /// 기존의 프로젝트 스택뷰에 요소들을 셋팅 전에 모두 제거
         self.project.projectStack.removeAllArrangedSubviews()
-
+        
         for data in project {
             let title = data.title
             let contents = data.contents
-
+            
             let projectView = ProjectView(title: title,
                                           contents: contents,
                                           snsGithub: data.snsGithub ?? "",
                                           snsAppStore: data.snsAppstore ?? "",
                                           snsPlayStore: data.snsPlaystore ?? "",
                                           frame: CGRect.zero)
-           
+            
+            guard let viewID = data.id else { return }
+            projectView.accessibilityIdentifier = String(viewID)
+            projectView.sns.github.addTarget(self, action: #selector(projectSNSButtonDidTap(_: )), for: .touchUpInside)
+            projectView.sns.appStore.addTarget(self, action: #selector(projectSNSButtonDidTap(_: )), for: .touchUpInside)
+            projectView.sns.playStore.addTarget(self, action: #selector(projectSNSButtonDidTap(_: )), for: .touchUpInside)
+            
             self.project.projectStack.addArrangedSubview(projectView)
         }
     }
+    
+    
 }
 
 
@@ -296,5 +305,32 @@ extension BaseProfileView {
               let url = URL(string: address) else { return }
         let webView = SFSafariViewController(url: url)
         self.present(webView, animated: true, completion: nil)
+    }
+    
+    @objc func projectSNSButtonDidTap(_ sender: UIButton ) {
+        if let projectID    = sender.superview?.superview?.superview?.accessibilityIdentifier,
+           let buttonID     = sender.accessibilityIdentifier {
+            if let castedProjectID = Int(projectID) {
+                var url: String?
+                
+                let selectedProject = projectData.filter { $0.id == castedProjectID }.last
+                
+                switch buttonID {
+                case "github":
+                    guard let github = selectedProject?.snsGithub else { return }
+                    url = "https://www.github.com/\(github)"
+                case "appStore":
+                    url = selectedProject?.snsAppstore
+                case "playStore":
+                    url = selectedProject?.snsPlaystore
+                default: break
+                }
+                
+                guard let unWrappedURL = url,
+                      let destination = URL(string: unWrappedURL) else { return }
+                let webView = SFSafariViewController(url: destination)
+                self.present(webView, animated: true, completion: nil)
+            }
+        }
     }
 }

@@ -33,6 +33,7 @@ class UserWithdrawalInteractor: UserWithdrawalInteractorInputProtocol {
                         let isSuccess = result.result
                         let message = result.message ?? ""
                         self.presenter?.resultUserWithdrawal(result: isSuccess, message: message)
+                        self.emptyAllToken()
                     } catch {
                         print(error.localizedDescription)
                     }
@@ -48,5 +49,13 @@ class UserWithdrawalInteractor: UserWithdrawalInteractorInputProtocol {
                     }
                 }
             }
+    }
+}
+
+extension UserWithdrawalInteractor {
+    func emptyAllToken() {
+        KeychainWrapper.standard.remove(forKey: "refreshToken")
+        KeychainWrapper.standard.remove(forKey: "accessToken")
+        KeychainWrapper.standard.remove(forKey: "pushToken")
     }
 }
