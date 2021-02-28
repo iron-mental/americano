@@ -273,7 +273,6 @@ extension BaseProfileView: BaseProfileViewProtocol {
             
             guard let viewID = data.id else { return }
             projectView.accessibilityIdentifier = String(viewID)
-            projectView.isAccessibilityElement = true
             projectView.sns.github.addTarget(self, action: #selector(projectSNSButtonDidTap(_: )), for: .touchUpInside)
             projectView.sns.appStore.addTarget(self, action: #selector(projectSNSButtonDidTap(_: )), for: .touchUpInside)
             projectView.sns.playStore.addTarget(self, action: #selector(projectSNSButtonDidTap(_: )), for: .touchUpInside)
@@ -330,6 +329,7 @@ extension BaseProfileView {
                     url = selectedProject?.snsPlaystore
                 default: break
                 }
+                
                 guard let unWrappedURL = url,
                       let destination = URL(string: unWrappedURL) else { return }
                 let webView = SFSafariViewController(url: destination)
