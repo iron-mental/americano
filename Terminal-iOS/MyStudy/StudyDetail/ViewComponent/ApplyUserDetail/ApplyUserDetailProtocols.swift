@@ -12,6 +12,7 @@ protocol ApplyUserDetailViewProtocol: BaseProfileViewProtocol {
     var presenter: ApplyUserDetailPresenterInputProtocol? { get set }
     
     //PRESENTER -> View
+    func showUserInfo(userInfo: ApplyUserInfo)
     func showError(message: String)
     func showApplyStatusResult(message: String, studyID: Int)
 }

@@ -161,6 +161,8 @@
 		A5F1032925E80EC70054D57F /* FindPasswordProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1032825E80EC70054D57F /* FindPasswordProtocols.swift */; };
 		A5F1032E25E819130054D57F /* ResizableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1032D25E819130054D57F /* ResizableButton.swift */; };
 		A5F1034925E90CFB0054D57F /* FindPasswordResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F1034825E90CFB0054D57F /* FindPasswordResultView.swift */; };
+		A5FCF49625EBF4A5001DEB39 /* ApplyUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FCF49525EBF4A5001DEB39 /* ApplyUserInfo.swift */; };
+		A5FCF4B425EC0BEB001DEB39 /* ApplyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FCF4B325EC0BEB001DEB39 /* ApplyMessageView.swift */; };
 		CC198E6C254BF693009D6CDF /* TitleWithContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */; };
 		CC198E6F254C000A009D6CDF /* MemeberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E6E254C000A009D6CDF /* MemeberView.swift */; };
 		CC198E72254C02CC009D6CDF /* MemberCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */; };
@@ -562,6 +564,8 @@
 		A5F1032825E80EC70054D57F /* FindPasswordProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordProtocols.swift; sourceTree = "<group>"; };
 		A5F1032D25E819130054D57F /* ResizableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableButton.swift; sourceTree = "<group>"; };
 		A5F1034825E90CFB0054D57F /* FindPasswordResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordResultView.swift; sourceTree = "<group>"; };
+		A5FCF49525EBF4A5001DEB39 /* ApplyUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserInfo.swift; sourceTree = "<group>"; };
+		A5FCF4B325EC0BEB001DEB39 /* ApplyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyMessageView.swift; sourceTree = "<group>"; };
 		CC198E6B254BF693009D6CDF /* TitleWithContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleWithContentView.swift; sourceTree = "<group>"; };
 		CC198E6E254C000A009D6CDF /* MemeberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeberView.swift; sourceTree = "<group>"; };
 		CC198E71254C02CC009D6CDF /* MemberCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCollectionView.swift; sourceTree = "<group>"; };
@@ -1083,6 +1087,7 @@
 				A5417FCD25A77E33005B884F /* ProfileSNSView.swift */,
 				A5417FD225A77E3F005B884F /* ProjectSNSView.swift */,
 				A56264DE25B57C04004CD298 /* ProjectListView.swift */,
+				A5FCF4B325EC0BEB001DEB39 /* ApplyMessageView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1492,6 +1497,7 @@
 				A56048BF25DEEB4500240E55 /* SNSState.swift */,
 				CCC223B625E4E05B00A91F37 /* VersionResult.swift */,
 				A5C205A025E6AF6A006EBD14 /* StudyNilCheck.swift */,
+				A5FCF49525EBF4A5001DEB39 /* ApplyUserInfo.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2088,6 +2094,7 @@
 				CC650DFF25C40E1200359E7D /* MyApplyStudyInfoRemoteDataManager.swift in Sources */,
 				CCA3FF5A2517826B00F62627 /* StudyCategoryInteractor.swift in Sources */,
 				A5C7B90525ADB23000016D5B /* LocationModifyView.swift in Sources */,
+				A5FCF4B425EC0BEB001DEB39 /* ApplyMessageView.swift in Sources */,
 				A58148F925910EB400BF3C2A /* SNSModifyInteractor.swift in Sources */,
 				A53613B2257E6DEE0001ABCC /* SetRemoteManager.swift in Sources */,
 				A5C81C5825836D19008F2B09 /* MyApplyListView.swift in Sources */,
@@ -2298,6 +2305,7 @@
 				A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */,
 				CCAF0FDC253303300060A2F6 /* MyStudyMainPresenter.swift in Sources */,
 				CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */,
+				A5FCF49625EBF4A5001DEB39 /* ApplyUserInfo.swift in Sources */,
 				CC72CBF425B05A00009E9986 /* ApplyUserDetailProtocols.swift in Sources */,
 				CCD51C7D256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
