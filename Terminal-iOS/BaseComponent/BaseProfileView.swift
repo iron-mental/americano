@@ -30,6 +30,8 @@ class BaseProfileView: UIViewController {
     var projectData: [Project] = []
     var userInfo: UserInfo?
     
+    var testGesture = UITapGestureRecognizer()
+    
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +89,7 @@ class BaseProfileView: UIViewController {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 15, weight: .regular)
         }
+        self.testGesture = UITapGestureRecognizer(target: self, action: #selector(identifierTest))
         
         self.sns.github.addTarget(self, action: #selector(goGithub), for: .touchUpInside)
         self.sns.linkedin.addTarget(self, action: #selector(goLinkedin), for: .touchUpInside)
@@ -204,25 +207,25 @@ extension BaseProfileView: BaseProfileViewProtocol {
     func showUserInfo(userInfo: UserInfo) {
         var snsList: [String: String] = [:]
         self.userInfo = userInfo
-
+        
         // MARK: Set User Info
-
+        
         /// 프로필
         self.profile.name.text = userInfo.nickname
         self.profile.descript.text = userInfo.introduce ?? ""
         
         let imageURL = userInfo.image ?? ""
         self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
-                                                  placeholder: UIImage(named: "defaultProfile"),
-                                                  options: [.requestModifier(RequestToken.token())])
-
+                                              placeholder: UIImage(named: "defaultProfile"),
+                                              options: [.requestModifier(RequestToken.token())])
+        
         /// 경력
         if let careerTitle = userInfo.careerTitle,
            let careerContents = userInfo.careerContents {
             self.career.careerTitle.text = careerTitle
             self.career.careerContents.text = careerContents
         }
-
+        
         /// SNS
         if let github = userInfo.snsGithub,
            let linkedin = userInfo.snsLinkedin,
@@ -230,21 +233,21 @@ extension BaseProfileView: BaseProfileViewProtocol {
             if !github.isEmpty {
                 snsList.updateValue(github, forKey: SNSState.github.rawValue)
             }
-
+            
             if !linkedin.isEmpty {
                 snsList.updateValue(linkedin, forKey: SNSState.linkedin.rawValue)
             }
-
+            
             if !web.isEmpty {
                 snsList.updateValue(web, forKey: SNSState.web.rawValue)
             }
         }
-
+        
         self.sns.addstack(snsList: snsList)
-
+        
         /// 이메일
         self.email.email.text = userInfo.email
-
+        
         /// 활동지역
         let sido = userInfo.sido ?? ""
         let sigungu = userInfo.sigungu ?? ""
@@ -253,26 +256,36 @@ extension BaseProfileView: BaseProfileViewProtocol {
         // hide loading
         self.hideLoading()
     }
-
+    
     func addProjectToStackView(project: [Project]) {
         self.projectData = project
-
+        
         /// 기존의 프로젝트 스택뷰에 요소들을 셋팅 전에 모두 제거
         self.project.projectStack.removeAllArrangedSubviews()
-
+        
         for data in project {
             let title = data.title
             let contents = data.contents
-
+            
             let projectView = ProjectView(title: title,
                                           contents: contents,
                                           snsGithub: data.snsGithub ?? "",
                                           snsAppStore: data.snsAppstore ?? "",
                                           snsPlayStore: data.snsPlaystore ?? "",
                                           frame: CGRect.zero)
-           
+            
+            projectView.accessibilityIdentifier = "\(data.id)"
+            projectView.isAccessibilityElement = true
+            projectView.sns.github.addTarget(self, action: #selector(identifierTest(_:)), for: .touchUpInside)
+            projectView.sns.appStore.addTarget(self, action: #selector(identifierTest(_:)), for: .touchUpInside)
+            projectView.sns.playStore.addTarget(self, action: #selector(identifierTest(_:)), for: .touchUpInside)
+            
             self.project.projectStack.addArrangedSubview(projectView)
         }
+    }
+    
+    @objc func identifierTest(_ sender: UIButton ) {
+        print(sender.superview?.superview?.accessibilityIdentifier)
     }
 }
 
