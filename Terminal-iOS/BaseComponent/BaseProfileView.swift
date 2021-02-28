@@ -276,10 +276,7 @@ extension BaseProfileView: BaseProfileViewProtocol {
             self.project.projectStack.addArrangedSubview(projectView)
         }
     }
-    
-    
 }
-
 
 // MARK: @objc
 
@@ -287,22 +284,33 @@ extension BaseProfileView {
     
     /// Profile SNS
     @objc func goGithub() {
-        guard let address = self.userInfo?.snsGithub,
-              let url = URL(string: "https://www.github.com/\(address)") else { return }
-        let webView = SFSafariViewController(url: url)
-        self.present(webView, animated: true, completion: nil)
+        if let unWrappedURL = self.userInfo?.snsGithub {
+            if unWrappedURL.isEmpty {
+                self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
+            } else {
+                guard let url = URL(string: "https://www.github.com/\(unWrappedURL)") else { return }
+                let webView = SFSafariViewController(url: url)
+                self.present(webView, animated: true, completion: nil)
+            }
+        }
     }
     
     @objc func goLinkedin() {
-        guard let address = self.userInfo?.snsLinkedin,
-              let url = URL(string: address) else { return }
+        guard let unWrappedURL = self.userInfo?.snsLinkedin,
+              let url = URL(string: unWrappedURL) else {
+            self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
+            return
+        }
         let webView = SFSafariViewController(url: url)
         self.present(webView, animated: true, completion: nil)
     }
     
     @objc func goWeb() {
-        guard let address = self.userInfo?.snsWeb,
-              let url = URL(string: address) else { return }
+        guard let unWrappedURL = self.userInfo?.snsWeb,
+              let url = URL(string: unWrappedURL) else {
+            self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
+            return
+        }
         let webView = SFSafariViewController(url: url)
         self.present(webView, animated: true, completion: nil)
     }
@@ -328,16 +336,15 @@ extension BaseProfileView {
                 default: break
                 }
                 
-                if let unWrappedURL = url {
-                    if unWrappedURL.isEmpty {
-                        self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
-                    } else {
-                        if let destination = URL(string: unWrappedURL) {
-                            let webView = SFSafariViewController(url: destination)
-                            self.present(webView, animated: true, completion: nil)
-                        }
-                    }
+                
+                guard let unWrappedURL = url,
+                      let destination = URL(string: unWrappedURL) else {
+                    self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
+                    return
                 }
+                
+                let webView = SFSafariViewController(url: destination)
+                self.present(webView, animated: true, completion: nil)
             }
         }
     }
