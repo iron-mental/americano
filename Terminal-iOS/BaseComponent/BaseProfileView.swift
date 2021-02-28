@@ -318,7 +318,9 @@ extension BaseProfileView {
                 switch buttonID {
                 case "github":
                     guard let github = selectedProject?.snsGithub else { return }
-                    url = "https://www.github.com/\(github)"
+                    url = github.isEmpty
+                        ? ""
+                        : "https://www.github.com/\(github)"
                 case "appStore":
                     url = selectedProject?.snsAppstore
                 case "playStore":
@@ -326,10 +328,16 @@ extension BaseProfileView {
                 default: break
                 }
                 
-                guard let unWrappedURL = url,
-                      let destination = URL(string: unWrappedURL) else { return }
-                let webView = SFSafariViewController(url: destination)
-                self.present(webView, animated: true, completion: nil)
+                if let unWrappedURL = url {
+                    if unWrappedURL.isEmpty {
+                        self.showToast(controller: self, message: "해당 SNS가 존재하지 않습니다.", seconds: 1)
+                    } else {
+                        if let destination = URL(string: unWrappedURL) {
+                            let webView = SFSafariViewController(url: destination)
+                            self.present(webView, animated: true, completion: nil)
+                        }
+                    }
+                }
             }
         }
     }
