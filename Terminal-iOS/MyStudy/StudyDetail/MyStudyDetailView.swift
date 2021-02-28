@@ -45,13 +45,6 @@ final class MyStudyDetailView: UIViewController {
         layout()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if applyState != nil {
-            applyState! ? presenter?.showApplyUserList(studyID: studyID!) : nil
-        }
-    }
-    
     func attribute() {
         self.do {
             if let title = studyInfo?.title {
@@ -301,30 +294,36 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 }
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
-    func setting() {
-        if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
-            studyInfo = studyDetailView.studyInfo
-            authority = studyDetailView.state
-            if let noticeView = vcArr[0] as? NoticeView {
-                noticeView.state = studyDetailView.state
-            }
-            if studyInfo == nil {
-                self.applyState = nil
-            }
-        }
-        attribute()
-        layout()
-        view.layoutIfNeeded()
+    func setting(caller: UIViewController) {
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-            if self.applyState == nil {
-                self.hideLoading()
+        
+        if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
+            
+            if type(of: caller) == NoticeView.self {
+                //공지사항이 콜했을 경우 처리
+                if let noticeView = vcArr[0] as? NoticeView {
+                    noticeView.state = studyDetailView.state
+                }
+            } else if type(of: caller) == StudyDetailView.self {
+                //스터디 디테일이 콜했을 경우 처리
+                self.studyInfo = studyDetailView.studyInfo
+                self.authority = studyDetailView.state
+                if authority != .host && authority != .member {
+                    showToast(controller: self, message: "속해있는 스터디가 아닙니다.", seconds: 1) {
+                        self.hideLoading()
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                } else {
+                    if applyState == nil {
+                        self.hideLoading()
+                    } else {
+                        applyState! ? presenter?.showApplyUserList(studyID: studyID!) : nil
+                    }
+                }
             }
-        })
-        if authority != .host && authority != .member {
-            showToast(controller: self, message: "속해있는 스터디가 아닙니다.", seconds: 1) {
-                self.navigationController?.popViewController(animated: true)
-            }
+            attribute()
+            layout()
+            view.layoutIfNeeded()
         }
     }
     

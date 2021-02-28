@@ -347,12 +347,12 @@ extension StudyDetailView: StudyDetailViewProtocol {
         }
         self.snsIconsView.addstack(snsList: snsList)
         attribute()
-        parentView?.setting()
+        parentView?.setting(caller: self)
     }
     
     func showError(message: String) {
         self.hideLoading()
-        parentView?.setting()
+        parentView?.setting(caller: self)
         showToast(controller: self, message: message, seconds: 1) {
             if message != "공백은 허용되지 않습니다" {
                 self.navigationController?.popViewController(animated: true)
