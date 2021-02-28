@@ -26,6 +26,8 @@ class ApplyMessageView: UIView {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 15, weight: .medium)
             $0.textColor = .appColor(.profileTextColor)
+            $0.numberOfLines = 0
+            $0.lineBreakMode = .byCharWrapping
         }
     }
     func layout() {
@@ -35,6 +37,7 @@ class ApplyMessageView: UIView {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         }
     }
