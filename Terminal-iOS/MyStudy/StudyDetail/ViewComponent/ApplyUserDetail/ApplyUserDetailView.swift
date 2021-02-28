@@ -46,7 +46,6 @@ class ApplyUserDetailView: BaseProfileView {
     
     override func layout() {
         super.layout()
-        [acceptButton, refusalButton].forEach { backgroundView.addSubview($0) }
         
         self.refusalButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -85,17 +84,52 @@ class ApplyUserDetailView: BaseProfileView {
         presenter?.rejectButtonDidTap()
         TerminalAlertMessage.dismiss()
     }
-    
-    override func showLoading() {
-        LoadingRainbowCat.show(caller: self)
-    }
-    
-    override func hideLoading() {
-        LoadingRainbowCat.hide(caller: self)
-    }
 }
 
 extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
+    
+    // MARK: Set User Info
+    
+    func showUserInfo(userInfo: ApplyUserInfo) {
+        var snsList: [String: String] = [:]
+      
+        /// 프로필
+        self.profile.name.text = userInfo.nickname
+        
+        let imageURL = userInfo.image ?? ""
+        self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
+                                              placeholder: UIImage(named: "defaultProfile"),
+                                              options: [.requestModifier(RequestToken.token())])
+        
+        /// 경력
+        if let careerTitle = userInfo.careerTitle,
+           let careerContents = userInfo.careerContents {
+            self.career.careerTitle.text = careerTitle
+            self.career.careerContents.text = careerContents
+        }
+        
+        /// SNS
+        let github = userInfo.snsGithub ?? ""
+        let linkedin = userInfo.snsLinkedin ?? ""
+        let web = userInfo.snsWeb ?? ""
+        snsList.updateValue(github, forKey: SNSState.github.rawValue)
+        snsList.updateValue(linkedin, forKey: SNSState.linkedin.rawValue)
+        snsList.updateValue(web, forKey: SNSState.web.rawValue)
+        
+        self.sns.addstack(snsList: snsList)
+        
+        /// 이메일
+        self.email.email.text = userInfo.email
+        
+        /// 활동지역
+        let sido = userInfo.sido ?? ""
+        let sigungu = userInfo.sigungu ?? ""
+        self.location.location.text = sido + " " + sigungu
+        
+        /// 프로젝트
+        self.addProjectToStackView(project: userInfo.project)
+    }
+    
     func showApplyStatusResult(message: String, studyID: Int) {
         showToast(controller: self, message: message, seconds: 1) {
             self.navigationController?.popViewController(animated: true)
