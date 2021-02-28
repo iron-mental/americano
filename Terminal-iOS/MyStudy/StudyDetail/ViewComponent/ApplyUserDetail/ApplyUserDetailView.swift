@@ -12,6 +12,9 @@ import Kingfisher
 
 class ApplyUserDetailView: BaseProfileView {
     var presenter: ApplyUserDetailPresenterInputProtocol?
+    
+    let applyMessageLabel = UILabel()
+    let applyMessage = ApplyMessageView()
     let refusalButton = UIButton()
     let acceptButton = UIButton()
     
@@ -23,6 +26,17 @@ class ApplyUserDetailView: BaseProfileView {
     override func attribute() {
         super.attribute()
         
+        self.applyMessageLabel.do {
+            $0.text = "가입인사"
+            $0.textColor = .white
+            $0.dynamicFont(fontSize: 15, weight: .regular)
+        }
+        
+        self.applyMessage.do {
+            $0.layer.cornerRadius = 10
+            $0.backgroundColor = .appColor(.cellBackground)
+        }
+        
         self.refusalButton.do {
             $0.setTitle("거절", for: .normal)
             $0.layer.cornerRadius = 10
@@ -31,6 +45,7 @@ class ApplyUserDetailView: BaseProfileView {
             $0.setTitleColor(.white, for: .normal)
             $0.addTarget(self, action: #selector(rejectButtonDidTap), for: .touchUpInside)
         }
+        
         self.acceptButton.do {
             $0.setTitle("수락", for: .normal)
             $0.layer.cornerRadius = 10
@@ -46,18 +61,45 @@ class ApplyUserDetailView: BaseProfileView {
     
     override func layout() {
         super.layout()
+
+        [applyMessageLabel, applyMessage, refusalButton, acceptButton]
+            .forEach { self.backgroundView.addSubview($0) }
         
+        self.applyMessageLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.location.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 15)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor,
+                                        constant: Terminal.convertHeight(value: 25)).isActive = true
+        }
+        
+        self.applyMessage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: self.applyMessageLabel.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 5)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.backgroundView.leadingAnchor,
+                                        constant: Terminal.convertHeight(value: 15)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor,
+                                         constant: Terminal.convertHeight(value: -15)).isActive = true
+            $0.heightAnchor.constraint(greaterThanOrEqualToConstant: 100).isActive = true
+        }
+
         self.refusalButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.location.bottomAnchor, constant: Terminal.convertHeight(value: 15)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: Terminal.convertHeight(value: 45)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.applyMessage.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 15)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,
+                                        constant: Terminal.convertHeight(value: 45)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
         }
+        
         self.acceptButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.location.bottomAnchor, constant: Terminal.convertHeight(value: 15)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: Terminal.convertHeight(value: -45)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.applyMessage.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 15)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor,
+                                         constant: Terminal.convertHeight(value: -45)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.backgroundView.bottomAnchor).isActive = true
