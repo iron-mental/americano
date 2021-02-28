@@ -9,7 +9,6 @@
 import UIKit
 
 class ProfileSNSView: BaseSNSView {
-    
     let github = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
     }
@@ -26,6 +25,7 @@ class ProfileSNSView: BaseSNSView {
         $0.setTitle("수정", for: .normal)
         $0.setTitleColor(.appColor(.mainColor), for: .normal)
     }
+    
     override func attribute() {
         super.attribute()
         self.do {
@@ -48,41 +48,24 @@ class ProfileSNSView: BaseSNSView {
     }
     
     override func addstack(snsList: [String: String]) {
-        /// 추가된 SNS 갯수
-        var count = 0
-        
         self.snsStack.removeAllArrangedSubviews()
         
-        if snsList["github"] != nil {
-            self.snsStack.addArrangedSubview(self.github)
-            count += 1
+        if snsList["github"]!.isEmpty {
+            github.alpha = 0.3
         }
         
-        if snsList["linkedin"] != nil {
-            self.snsStack.addArrangedSubview(self.linkedin)
-            count += 1
+        if snsList["linkedin"]!.isEmpty {
+            linkedin.alpha = 0.3
         }
         
-        if snsList["web"] != nil {
-            self.snsStack.addArrangedSubview(self.web)
-            count += 1
+        if snsList["web"]!.isEmpty {
+            web.alpha = 0.3
         }
         
-        switch count {
-        case 1:
-            self.firstWidth.isActive = true
-            self.secondWidth.isActive = false
-            self.thirdWidth.isActive = false
-        case 2:
-            self.firstWidth.isActive = false
-            self.secondWidth.isActive = true
-            self.thirdWidth.isActive = false
-        case 3:
-            self.firstWidth.isActive = false
-            self.secondWidth.isActive = false
-            self.thirdWidth.isActive = true
-        default:
-            break
-        }
+        self.snsStack.addArrangedSubview(self.github)
+        self.snsStack.addArrangedSubview(self.linkedin)
+        self.snsStack.addArrangedSubview(self.web)
+        
+        self.thirdWidth.isActive = true
     }
 }

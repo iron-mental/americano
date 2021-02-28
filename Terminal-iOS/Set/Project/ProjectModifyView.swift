@@ -9,6 +9,8 @@
 import UIKit
 
 class ProjectModifyView: UIViewController, CellSubclassDelegate {
+    deinit { self.keyboardRemoveObserver(with: self) }
+    
     var presenter: ProjectModifyPresenterProtocol?
     var projectArr: [Project] = []
     var isEditableViewTapping = false
@@ -37,10 +39,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         self.refreshEditableViewrange()
         self.view.becomeFirstResponder()
         self.standardContentHeight = self.projectView.contentSize.height
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        self.keyboardRemoveObserver(with: self)
     }
     
     private func attribute() {
@@ -121,7 +119,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
     func getCellData() -> SNSValidate {
         var state: SNSValidate = SNSValidate(state: true, kind: "")
         
-        for index in 0..<projectArr.count {
+        for index in 0..<self.projectArr.count {
             let indexpath = IndexPath(row: index, section: 0)
             if let cell = projectView.cellForRow(at: indexpath) as? ProjectCell {
                 let id = cell.projectID ?? nil
@@ -140,13 +138,13 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                     state = SNSValidate(state: false, kind: "playstore")
                 }
                 
-                projectArr[index] = Project(id: id,
-                                            title: title,
-                                            contents: contents,
-                                            snsGithub: github,
-                                            snsAppstore: appStore,
-                                            snsPlaystore: playStore,
-                                            createAt: "")
+                self.projectArr[index] = Project(id: id,
+                                                 title: title,
+                                                 contents: contents,
+                                                 snsGithub: github,
+                                                 snsAppstore: appStore,
+                                                 snsPlaystore: playStore,
+                                                 createAt: "")
             }
         }
         return state
@@ -338,8 +336,8 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
         self.projectView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         self.projectAddButton.backgroundColor
             = self.projectArr.count < 3
-            ? UIColor.appColor(.mainColor)
-            : UIColor.darkGray
+            ? .appColor(.mainColor)
+            : .darkGray
         
         refreshEditableViewrange()
     }

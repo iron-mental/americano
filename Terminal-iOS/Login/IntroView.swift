@@ -60,14 +60,20 @@ class IntroView: UIViewController {
             self.leftButton.setImage(#imageLiteral(resourceName: "close"), for: .normal)
             self.rightbutton.setTitle("다음", for: .normal)
         case .pwdInput:
-            self.guideLabel.text = self.beginState == .join ?  "로그인을 위해 \n계정의 비밀번호를\n입력해 주세요." : "사용하실 비밀번호를\n설정해 주세요"
+            self.guideLabel.text = self.beginState ==
+                .join
+                ? "로그인을 위해 \n계정의 비밀번호를\n입력해 주세요."
+                : "사용하실 비밀번호를\n설정해 주세요"
             self.inputTextfield.do {
                 $0.placeholder = "비밀번호"
                 $0.isSecureTextEntry = true
             }
             self.introState = .pwdInput
             self.leftButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
-            self.beginState == .join ? self.rightbutton.setTitle("완료", for: .normal) : self.rightbutton.setTitle("다음", for: .normal)
+            self.beginState ==
+                .join
+                ? self.rightbutton.setTitle("완료", for: .normal)
+                : self.rightbutton.setTitle("다음", for: .normal)
         case .nickname:
             self.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
             self.inputTextfield.placeholder = "추천 닉네임"
