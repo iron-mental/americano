@@ -9,7 +9,6 @@
 import UIKit
 
 class ProjectListView: UIView {
-    
     let modify = UIButton()
     let projectStack = UIStackView()
     

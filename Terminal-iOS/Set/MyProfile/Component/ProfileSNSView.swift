@@ -9,7 +9,6 @@
 import UIKit
 
 class ProfileSNSView: BaseSNSView {
-    
     let github = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
     }
@@ -26,6 +25,7 @@ class ProfileSNSView: BaseSNSView {
         $0.setTitle("수정", for: .normal)
         $0.setTitleColor(.appColor(.mainColor), for: .normal)
     }
+    
     override func attribute() {
         super.attribute()
         self.do {
@@ -66,8 +66,6 @@ class ProfileSNSView: BaseSNSView {
         self.snsStack.addArrangedSubview(self.linkedin)
         self.snsStack.addArrangedSubview(self.web)
         
-        self.firstWidth.isActive = false
-        self.secondWidth.isActive = false
         self.thirdWidth.isActive = true
     }
 }
