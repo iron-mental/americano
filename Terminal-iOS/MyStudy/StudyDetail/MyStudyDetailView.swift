@@ -17,7 +17,6 @@ enum MyStudyDetialInitView {
 
 final class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
-    
     var viewState: MyStudyDetialInitView = .StudyDetail
     let appearance = UINavigationBarAppearance()
     var applyState: Bool?
@@ -106,6 +105,8 @@ final class MyStudyDetailView: UIViewController {
                                                   direction: .forward,
                                                   animated: true,
                                                   completion: nil)
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: 0, y: 0)
             self.pageBeforeIndex = 0
         case .StudyDetail:
             self.tapSege.selectedSegmentIndex = 1
@@ -119,6 +120,7 @@ final class MyStudyDetailView: UIViewController {
         case .Chat:
             break
         }
+        childPageView.reloadInputViews()
     }
     
     func layout() {
@@ -202,8 +204,19 @@ final class MyStudyDetailView: UIViewController {
     
     // MARK: - @objc
     
-    @objc func indexChanged(_ sender: UISegmentedControl) {
-        let selectedIndex = sender.selectedSegmentIndex
+    @objc func indexChanged(_ sender: NSObject? = nil) {
+        var selectedIndex = 0
+        if let sege = sender as? UISegmentedControl {
+            //세그로 들어옴
+            selectedIndex = sege.selectedSegmentIndex
+        } else if let pageViewController = sender as? UIPageViewController {
+            //페이지뷰컨으로 들어옴
+            if let viewControllers = pageViewController.viewControllers {
+                if let viewControllerIndex = self.vcArr.firstIndex(of: viewControllers[0]) {
+                    selectedIndex = viewControllerIndex
+                }
+            }
+        }
         
         switch selectedIndex {
         case 0: viewState = .Notice
@@ -279,16 +292,7 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard completed else { return }
-        
-        if let viewControllers = pageViewController.viewControllers {
-            if let viewControllerIndex = self.vcArr.firstIndex(of: viewControllers[0]) {
-                self.tapSege.selectedSegmentIndex = viewControllerIndex
-                UIView.animate(withDuration: 0.2) { [self] in
-                    self.selectedUnderLine.transform =
-                        CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(viewControllerIndex), y: 0)
-                }
-            }
-        }
+        indexChanged(pageViewController)
     }
 }
 

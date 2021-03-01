@@ -205,8 +205,8 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                 isPaging: nil)
                 
                 parentView?.navigationController?.viewControllers.forEach {
-
                     if let myStudyDetail = $0 as? MyStudyDetailViewProtocol {
+                        myStudyDetail.viewState = .Notice
                         if let noticeListView = myStudyDetail.vcArr[0] as? NoticeViewProtocol {
                             noticeListView.viewLoad()
                         }
