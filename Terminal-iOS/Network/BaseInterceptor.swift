@@ -52,8 +52,7 @@ final class BaseInterceptor: RequestInterceptor {
                             KeychainWrapper.standard.remove(forKey: "userID")
                             // RootViewController replace
                             guard let window = UIApplication.shared.windows.first else { return }
-                            let nav = UINavigationController(rootViewController: home)
-                            window.replaceRootViewController(nav, animated: true, completion: nil)
+                            window.replaceRootViewController(home, animated: true, completion: nil)
                         }
                     }
                 }

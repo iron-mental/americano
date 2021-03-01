@@ -10,10 +10,24 @@ import UIKit
 
 class LaunchView: UIViewController {
     var presenter: LaunchPresenterProtocol?
+    let appearance = UINavigationBarAppearance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        attribute()
         presenter?.viewDidLoad()
+    }
+    
+    func attribute() {
+        appearance.do {
+            $0.configureWithTransparentBackground()
+        }
+        navigationController?.do {
+            $0.navigationBar.standardAppearance = appearance
+        }
+        view.do {
+            $0.backgroundColor = .appColor(.terminalBackground)
+        }
     }
     
     // MARK: @objc

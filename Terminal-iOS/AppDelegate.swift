@@ -41,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if launchOptions?[.remoteNotification] == nil {
             window = UIWindow()
             let launchView = LaunchWireFrame.createLaunchModule()
-            window?.rootViewController = launchView
+            let nav = UINavigationController(rootViewController: launchView)
+            window?.rootViewController = nav
             window?.makeKeyAndVisible()
         }
         return true
