@@ -26,7 +26,8 @@ final class MyStudyDetailView: UIViewController {
     var studyTitle: String?
     var pageBeforeIndex: Int = 0
     var vcArr: [UIViewController] = []
-    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
+//    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
+    let state: [String] = ["공지사항", "스터디 정보"]
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
     var authority: StudyDetailViewState = .member
@@ -114,7 +115,7 @@ final class MyStudyDetailView: UIViewController {
                                                   animated: true,
                                                   completion: nil)
             self.selectedUnderLine.transform
-                = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
+                = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(1), y: 0)
             self.pageBeforeIndex = 1
         case .Chat:
             break
@@ -138,7 +139,7 @@ final class MyStudyDetailView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: -1).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: view.frame.width / CGFloat(state.count)).isActive = true
         }
         
         self.childPageView.view.do {
@@ -213,8 +214,8 @@ final class MyStudyDetailView: UIViewController {
         default: print("들어오지 않아요")
         }
         
-        UIView.animate(withDuration: 0.2) {
-            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
+        UIView.animate(withDuration: 0.2) { [self] in
+            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(selectedIndex), y: 0)
         }
         
         // PageView paging
@@ -284,9 +285,9 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
         if let viewControllers = pageViewController.viewControllers {
             if let viewControllerIndex = self.vcArr.firstIndex(of: viewControllers[0]) {
                 self.tapSege.selectedSegmentIndex = viewControllerIndex
-                UIView.animate(withDuration: 0.2) {
+                UIView.animate(withDuration: 0.2) { [self] in
                     self.selectedUnderLine.transform =
-                        CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(viewControllerIndex), y: 0)
+                        CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(viewControllerIndex), y: 0)
                 }
             }
         }
