@@ -29,13 +29,12 @@ class IntroView: UIViewController {
     var cancelButton = UIButton()
     var beginState: BeginState?
     var introState: IntroViewState?
-    var rightBarButton: UIBarButtonItem?
-    var leftBarButton: UIBarButtonItem?
     var invalidLabel = UILabel()
+    lazy var rightBarButton = UIBarButtonItem(customView: rightbutton)
+    lazy var leftBarButton = UIBarButtonItem(customView: leftButton)
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
@@ -88,14 +87,10 @@ class IntroView: UIViewController {
     // MARK: Attribute
     
     func attribute() {
-        rightBarButton = UIBarButtonItem(customView: rightbutton)
-        leftBarButton = UIBarButtonItem(customView: leftButton)
-        
         self.do {
-            $0.view.backgroundColor = UIColor.appColor(.testColor)
             $0.navigationItem.rightBarButtonItem = rightBarButton
             $0.navigationItem.leftBarButtonItem = leftBarButton
-            $0.view.backgroundColor = UIColor.systemBackground
+            $0.view.backgroundColor = .appColor(.terminalBackground)
         }
         inputTextfield.do {
             $0.font = UIFont.boldSystemFont(ofSize: 18)
@@ -105,7 +100,7 @@ class IntroView: UIViewController {
             $0.addTarget(self, action: #selector(didClickedBackButon), for: .touchUpInside)
         }
         rightbutton.do {
-            $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+            $0.titleLabel?.dynamicFont(fontSize: 16, weight: .bold)
             $0.addTarget(self, action: #selector(didClickedNextButton), for: .touchUpInside)
         }
         guideLabel.do {
