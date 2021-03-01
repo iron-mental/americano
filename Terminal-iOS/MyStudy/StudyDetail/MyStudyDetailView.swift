@@ -310,8 +310,8 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
                 
                 // 탈퇴한 스터디 핸들링 해주고
                 if authority != .host && authority != .member {
+                    self.hideLoading()
                     showToast(controller: self, message: "속해있는 스터디가 아닙니다.", seconds: 1) {
-                        self.hideLoading()
                         self.navigationController?.popViewController(animated: true)
                     }
                 } else {
