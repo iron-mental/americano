@@ -56,7 +56,8 @@ class IntroView: UIViewController {
             self.guideLabel.text = "이메일을\n입력해 주세요"
             self.inputTextfield.placeholder = "abc1234@terminal.com"
             self.introState = .emailInput
-            self.leftButton.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+            self.leftButton.setImage(UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
+                                     , for: .normal)
             self.rightbutton.setTitle("다음", for: .normal)
         case .pwdInput:
             self.guideLabel.text = self.beginState ==
@@ -68,7 +69,8 @@ class IntroView: UIViewController {
                 $0.isSecureTextEntry = true
             }
             self.introState = .pwdInput
-            self.leftButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            self.leftButton.setImage(UIImage(systemName: "chevron.left")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
+                                     , for: .normal)
             self.beginState ==
                 .join
                 ? self.rightbutton.setTitle("완료", for: .normal)
@@ -97,6 +99,7 @@ class IntroView: UIViewController {
             $0.delegate = self
         }
         leftButton.do {
+            UIImage(systemName: "books.vertical")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
             $0.addTarget(self, action: #selector(didClickedBackButon), for: .touchUpInside)
         }
         rightbutton.do {
