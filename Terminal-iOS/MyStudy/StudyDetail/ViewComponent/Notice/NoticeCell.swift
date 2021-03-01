@@ -107,7 +107,8 @@ class NoticeCell: UITableViewCell {
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 13).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -13).isActive = true
             $0.topAnchor.constraint(equalTo: self.noticeTitle.bottomAnchor, constant: 10).isActive = true
-            $0.bottomAnchor.constraint(lessThanOrEqualTo: self.dateLabel.topAnchor, constant: -10).isActive = true
+//            $0.bottomAnchor.constraint(lessThanOrEqualTo: self.dateLabel.topAnchor, constant: -10).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
         }
         dateLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

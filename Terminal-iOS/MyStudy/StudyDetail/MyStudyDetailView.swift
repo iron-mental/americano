@@ -26,7 +26,6 @@ final class MyStudyDetailView: UIViewController {
     var studyTitle: String?
     var pageBeforeIndex: Int = 0
     var vcArr: [UIViewController] = []
-//    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     let state: [String] = ["공지사항", "스터디 정보"]
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
@@ -194,8 +193,7 @@ final class MyStudyDetailView: UIViewController {
                       StudyDetailWireFrame.createStudyDetail(parent: self,
                                                              studyID: studyID!,
                                                              state: .member,
-                                                             studyTitle: studyTitle ?? ""),
-                      ChatWireFrame.createChatModule()]
+                                                             studyTitle: studyTitle ?? "")]
         
         if let noticeView = vcArr[0] as? NoticeViewProtocol {
             noticeView.viewLoad()
