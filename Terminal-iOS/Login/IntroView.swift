@@ -26,7 +26,6 @@ class IntroView: UIViewController {
     var rightbutton = UIButton()
     var guideLabel = UILabel()
     var inputTextfield = UITextField()
-    var cancelButton = UIButton()
     var beginState: BeginState?
     var introState: IntroViewState?
     var invalidLabel = UILabel()
@@ -56,8 +55,9 @@ class IntroView: UIViewController {
             self.guideLabel.text = "이메일을\n입력해 주세요"
             self.inputTextfield.placeholder = "abc1234@terminal.com"
             self.introState = .emailInput
-            self.leftButton.setImage(UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
-                                     , for: .normal)
+            self.leftButton.setImage(UIImage(systemName: "xmark")?
+                                        .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)),
+                                     for: .normal)
             self.rightbutton.setTitle("다음", for: .normal)
         case .pwdInput:
             self.guideLabel.text = self.beginState ==
@@ -69,8 +69,9 @@ class IntroView: UIViewController {
                 $0.isSecureTextEntry = true
             }
             self.introState = .pwdInput
-            self.leftButton.setImage(UIImage(systemName: "chevron.left")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
-                                     , for: .normal)
+            self.leftButton.setImage(UIImage(systemName: "chevron.left")?
+                                        .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)),
+                                     for: .normal)
             self.beginState ==
                 .join
                 ? self.rightbutton.setTitle("완료", for: .normal)
@@ -95,24 +96,23 @@ class IntroView: UIViewController {
             $0.view.backgroundColor = .appColor(.terminalBackground)
         }
         inputTextfield.do {
-            $0.font = UIFont.boldSystemFont(ofSize: 18)
+            $0.dynamicFont(fontSize: 15, weight: .regular)
+            $0.clearButtonMode = .always
             $0.delegate = self
         }
         leftButton.do {
             UIImage(systemName: "books.vertical")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            $0.tintColor = .white
             $0.addTarget(self, action: #selector(didClickedBackButon), for: .touchUpInside)
         }
         rightbutton.do {
             $0.titleLabel?.dynamicFont(fontSize: 16, weight: .bold)
+            $0.tintColor = .white
             $0.addTarget(self, action: #selector(didClickedNextButton), for: .touchUpInside)
         }
         guideLabel.do {
             $0.numberOfLines = 0
             $0.font = UIFont.boldSystemFont(ofSize: 24)
-        }
-        cancelButton.do {
-            $0.setImage(#imageLiteral(resourceName: "cancel"), for: .normal)
-            $0.addTarget(self, action: #selector(didClickedCancelButton), for: .touchUpInside)
         }
         invalidLabel.do {
             $0.numberOfLines = 0
@@ -123,33 +123,18 @@ class IntroView: UIViewController {
     // MARK: Layout
     
     func layout() {
-        [inputTextfield, leftButton, rightbutton, guideLabel, cancelButton, invalidLabel ].forEach { view.addSubview($0) }
+        [inputTextfield, rightbutton, guideLabel, invalidLabel ].forEach { view.addSubview($0) }
         
         inputTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -70).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (40/375) * UIScreen.main.bounds.width).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width * ( 235 / 375 )).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height * ( 32 / 667 )).isActive = true
-        }
-        leftButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: (18/667) * UIScreen.main.bounds.height).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (18/375) * UIScreen.main.bounds.width).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: (18/375) * UIScreen.main.bounds.width).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: (18/375) * UIScreen.main.bounds.width).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Terminal.convertWidth(value: 40)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Terminal.convertWidth(value: 40)).isActive = true
         }
         guideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: inputTextfield.topAnchor, constant: -(20/667) * UIScreen.main.bounds.height).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: (33/375) * UIScreen.main.bounds.width).isActive = true
-        }
-        cancelButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: inputTextfield.trailingAnchor, constant: 10).isActive = true
-            $0.centerYAnchor.constraint(equalTo: inputTextfield.centerYAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
         invalidLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -206,13 +191,13 @@ extension IntroView: IntroViewProtocol {
         let presenter = IntroPresenter()
         let interactor = IntroInteractor()
         let remoteDataManager = IntroRemoteDataManager()
-
+        
         view.presenter = presenter
         presenter.view = view
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
-
+        
         switch introState {
         case .emailInput:
             view.introState = .pwdInput
