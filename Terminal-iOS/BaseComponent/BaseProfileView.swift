@@ -260,6 +260,9 @@ extension BaseProfileView: BaseProfileViewProtocol {
         /// 기존의 프로젝트 스택뷰에 요소들을 셋팅 전에 모두 제거
         self.project.projectStack.removeAllArrangedSubviews()
         
+        /// 프로젝트 유무에 따른 empty message 상태처리
+        self.project.emptyMessage.isHidden = project.isEmpty ? false : true
+        
         for data in project {
             let title = data.title
             let contents = data.contents
