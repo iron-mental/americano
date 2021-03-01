@@ -299,6 +299,7 @@
 		CCA5D5EF25E5676B001C9236 /* ParticipantProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5EE25E5676B001C9236 /* ParticipantProfileInteractor.swift */; };
 		CCA5D5F425E56777001C9236 /* ParticipantProfileRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5F325E56777001C9236 /* ParticipantProfileRemoteDataManager.swift */; };
 		CCA5D5F925E56781001C9236 /* ParticipantProfileWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5F825E56781001C9236 /* ParticipantProfileWireFrame.swift */; };
+		CCA959E325ECFBD0004819AE /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA959E225ECFBD0004819AE /* UIImageView+Ext.swift */; };
 		CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */; };
 		CCAF0FD6253300410060A2F6 /* MyStudyMainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD5253300410060A2F6 /* MyStudyMainInteractor.swift */; };
 		CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD8253300600060A2F6 /* MyStudyMainProtocols.swift */; };
@@ -698,6 +699,7 @@
 		CCA5D5EE25E5676B001C9236 /* ParticipantProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileInteractor.swift; sourceTree = "<group>"; };
 		CCA5D5F325E56777001C9236 /* ParticipantProfileRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCA5D5F825E56781001C9236 /* ParticipantProfileWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileWireFrame.swift; sourceTree = "<group>"; };
+		CCA959E225ECFBD0004819AE /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainView.swift; sourceTree = "<group>"; };
 		CCAF0FD5253300410060A2F6 /* MyStudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainInteractor.swift; sourceTree = "<group>"; };
 		CCAF0FD8253300600060A2F6 /* MyStudyMainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainProtocols.swift; sourceTree = "<group>"; };
@@ -1075,6 +1077,7 @@
 				CCA47E5F25DD196900E11D4C /* UITableView+Ext.swift */,
 				CC40E86625E825CE0079AF26 /* UIApplication+Ext.swift */,
 				CC90262125EBC2B300D61373 /* DispatchTimeInterval+Ext.swift */,
+				CCA959E225ECFBD0004819AE /* UIImageView+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -2138,6 +2141,7 @@
 				A56048C025DEEB4500240E55 /* SNSState.swift in Sources */,
 				A5C7B8F525AC4FCD00016D5B /* Address.swift in Sources */,
 				A5F1031525E80E1A0054D57F /* FindPasswordPresenter.swift in Sources */,
+				CCA959E325ECFBD0004819AE /* UIImageView+Ext.swift in Sources */,
 				CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */,
 				A5C7B90D25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift in Sources */,
 				A550CC6125E6B77B003E9266 /* StudyCheck.swift in Sources */,

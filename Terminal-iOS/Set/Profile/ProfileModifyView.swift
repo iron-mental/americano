@@ -61,6 +61,10 @@ class ProfileModifyView: UIViewController {
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
+            $0.tintColor = .gray
+            $0.editMode()
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 3
         }
         
         self.contentView.do {
@@ -146,13 +150,13 @@ class ProfileModifyView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
         
-        self.contentView.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 90)).isActive = true
-        }
+//        self.contentView.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
+//            $0.widthAnchor.constraint(equalToConstant: profileImage.frame.width).isActive = true
+//        }
         
         self.modifyLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -246,8 +250,10 @@ class ProfileModifyView: UIViewController {
         } else {
             let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
             showLoading()
-            presenter?.completeImageModify(image: image)
             presenter?.completeModify(profile: profile)
+//            if profile.profileImage != profile.profileImage {
+                presenter?.completeImageModify(image: image)
+//            }
         }
     }
 

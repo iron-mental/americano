@@ -31,7 +31,7 @@ class ProfileCell: UITableViewCell {
         /// 프로필 이미지
         let imageURL = data.image ?? ""
         self.profile.kf.setImage(with: URL(string: imageURL),
-                                 placeholder: UIImage(systemName: "person.crop.circle")?
+                                 placeholder: UIImage(systemName: "person.fill")?
                                     .withConfiguration(UIImage.SymbolConfiguration(weight: .ultraLight)),
                                  options: [.requestModifier(RequestToken.token())])
         
@@ -55,8 +55,10 @@ class ProfileCell: UITableViewCell {
         profile.do {
             $0.layer.cornerRadius = $0.frame.size.width/2
             $0.clipsToBounds = true
-            $0.contentMode = .scaleAspectFit
+            $0.contentMode = .scaleAspectFill
             $0.tintColor = .gray
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 1
         }
         name.do {
             $0.textColor = .white

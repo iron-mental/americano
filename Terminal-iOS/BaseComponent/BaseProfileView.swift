@@ -218,7 +218,8 @@ extension BaseProfileView: BaseProfileViewProtocol {
         
         let imageURL = userInfo.image ?? ""
         self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
-                                              placeholder: UIImage(named: "defaultProfile"),
+                                              placeholder: UIImage(systemName: "person.fill")?
+                                                .withConfiguration(UIImage.SymbolConfiguration(weight: .ultraLight)),
                                               options: [.requestModifier(RequestToken.token())])
         
         /// 경력
