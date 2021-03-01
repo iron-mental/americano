@@ -16,6 +16,7 @@ final class FindPasswordView: UIViewController {
     let descript = UILabel()
     let emailTextField = UITextField()
     let resetButton = UIButton()
+    lazy var backBarButtonItem = UIBarButtonItem(customView: backButton)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +29,13 @@ final class FindPasswordView: UIViewController {
         self.do {
             $0.view.backgroundColor = .appColor(.terminalBackground)
         }
+        self.navigationItem.do {
+            $0.leftBarButtonItem = backBarButtonItem
+        }
         self.backButton.do {
-            $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+            $0.setImage(UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold)), for: .normal)
             $0.addTarget(self, action: #selector(back), for: .touchUpInside)
+            $0.tintColor = .white
         }
         self.descript.do {
             $0.text = "터미널에서 가입했던 이메일을 입력해주세요.\n비밀번호 재설정 메일을 보내드립니다."
@@ -62,17 +67,8 @@ final class FindPasswordView: UIViewController {
     }
     
     private func layout() {
-        [backButton, descript, emailTextField, resetButton].forEach { self.view.addSubview($0) }
+        [descript, emailTextField, resetButton].forEach { self.view.addSubview($0) }
         
-        self.backButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
-                                    constant: Terminal.convertWidth(value: 18)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,
-                                        constant: Terminal.convertWidth(value: 18)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 18)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 18)).isActive = true
-        }
         self.descript.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,

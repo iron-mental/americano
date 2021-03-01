@@ -14,6 +14,7 @@ final class FindPasswordResultView: UIViewController {
     let confirmEmail = UILabel()
     let descript = UILabel()
     let completeButton = UIButton()
+    lazy var backBarButtonItem = UIBarButtonItem(customView: backButton)
     
     var email: String?
     
@@ -27,9 +28,13 @@ final class FindPasswordResultView: UIViewController {
         self.do {
             $0.view.backgroundColor = .appColor(.terminalBackground)
         }
+        self.navigationItem.do {
+            $0.leftBarButtonItem = backBarButtonItem
+        }
         self.backButton.do {
-            $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+            $0.setImage(UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold)), for: .normal)
             $0.addTarget(self, action: #selector(complete), for: .touchUpInside)
+            $0.tintColor = .white
         }
         self.mailImage.do {
             $0.image = UIImage(systemName: "envelope")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
@@ -59,17 +64,8 @@ final class FindPasswordResultView: UIViewController {
     }
     
     private func layout() {
-        [backButton, mailImage, confirmEmail, descript, completeButton].forEach { self.view.addSubview($0) }
-        
-        self.backButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
-                                    constant: Terminal.convertWidth(value: 18)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor,
-                                        constant: Terminal.convertWidth(value: 18)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 18)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 18)).isActive = true
-        }
+        [ mailImage, confirmEmail, descript, completeButton].forEach { self.view.addSubview($0) }
+    
         self.mailImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor,
