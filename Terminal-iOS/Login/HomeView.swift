@@ -14,11 +14,7 @@ class HomeView: UIViewController {
     var signUpButton = UIButton()
     var findPWButton = ResizableButton()
     var mainImage = UIImageView()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
+    lazy var loginBarButtonItem = UIBarButtonItem(customView: loginButton)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +28,9 @@ class HomeView: UIViewController {
             $0.navigationController?.navigationBar.isTranslucent = false
             $0.navigationController?.navigationBar.backgroundColor = .white
             $0.view.backgroundColor = .appColor(.terminalBackground)
+        }
+        navigationItem.do {
+            $0.rightBarButtonItem = loginBarButtonItem
         }
         loginButton.do {
             $0.setTitle("로그인", for: .normal)
@@ -60,17 +59,8 @@ class HomeView: UIViewController {
     }
     
     func layout() {
-        [loginButton, signUpButton, findPWButton, mainImage].forEach { view.addSubview($0) }
+        [ signUpButton, findPWButton, mainImage].forEach { view.addSubview($0) }
         
-        loginButton.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                    constant: 10).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                                         constant: -10).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        }
         signUpButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
