@@ -60,7 +60,6 @@ class LoadingRainbowCat: NSObject {
         if type(of: topView) == type(of: callerView) {
             if sharedInstance.backgroundView?.superview != nil {
                 guard let distance = sharedInstance.showTime?.distance(to: DispatchTime.now()).toDouble() else { return }
-                
                 if distance > 0.5 {
                     if let popupView = sharedInstance.popupView,
                        let backgroundView = sharedInstance.backgroundView {

@@ -11,7 +11,6 @@ import SwiftKeychainWrapper
 
 class NotiCell: DefaultCell {
     static let notiCellId = "notiCell"
-    lazy var state = UILabel()
     var result = false
     
     override func attribute() {

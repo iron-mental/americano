@@ -36,7 +36,7 @@ extension UIViewController {
                              showSelector: Selector? = nil,
                              hideSelector: Selector? = nil) {
         if let showSelector = showSelector {
-            NotificationCenter.default.addObserver(controller, selector: showSelector, name: UIResponder.keyboardDidShowNotification, object: nil)
+            NotificationCenter.default.addObserver(controller, selector: showSelector, name: UIResponder.keyboardWillShowNotification, object: nil)
         }
         
         if let hideSelector = hideSelector {
