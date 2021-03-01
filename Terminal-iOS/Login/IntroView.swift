@@ -35,7 +35,7 @@ class IntroView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
@@ -88,17 +88,13 @@ class IntroView: UIViewController {
     // MARK: Attribute
     
     func attribute() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .black
-        
         rightBarButton = UIBarButtonItem(customView: rightbutton)
         leftBarButton = UIBarButtonItem(customView: leftButton)
+        
         self.do {
             $0.view.backgroundColor = UIColor.appColor(.testColor)
             $0.navigationItem.rightBarButtonItem = rightBarButton
             $0.navigationItem.leftBarButtonItem = leftBarButton
-            $0.navigationController?.navigationBar.standardAppearance = appearance
             $0.view.backgroundColor = UIColor.systemBackground
         }
         inputTextfield.do {
