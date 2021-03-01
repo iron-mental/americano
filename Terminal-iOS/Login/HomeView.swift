@@ -15,7 +15,8 @@ class HomeView: UIViewController {
     var findPWButton = ResizableButton()
     var mainImage = UIImageView()
     lazy var loginBarButtonItem = UIBarButtonItem(customView: loginButton)
-
+    let appearance = UINavigationBarAppearance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -24,10 +25,13 @@ class HomeView: UIViewController {
     
     func attribute() {
         self.do {
-            $0.navigationController?.navigationBar.shadowImage = UIImage()
-            $0.navigationController?.navigationBar.isTranslucent = false
-            $0.navigationController?.navigationBar.backgroundColor = .white
             $0.view.backgroundColor = .appColor(.terminalBackground)
+        }
+        appearance.do {
+            $0.configureWithTransparentBackground()
+        }
+        navigationController?.do {
+            $0.navigationBar.standardAppearance = appearance
         }
         navigationItem.do {
             $0.rightBarButtonItem = loginBarButtonItem
