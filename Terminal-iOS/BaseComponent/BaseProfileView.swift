@@ -222,11 +222,15 @@ extension BaseProfileView: BaseProfileViewProtocol {
                                               options: [.requestModifier(RequestToken.token())])
         
         /// 경력
-        if let careerTitle = userInfo.careerTitle,
-           let careerContents = userInfo.careerContents {
-            self.career.careerTitle.text = careerTitle
-            self.career.careerContents.text = careerContents
-        }
+        let careerTitle = userInfo.careerTitle ?? ""
+        let careerContents = userInfo.careerContents ?? ""
+        self.career.careerTitle.text = careerTitle
+        self.career.careerContents.text = careerContents
+        
+        self.career.emptyMessage.isHidden =
+            careerTitle.isEmpty && careerContents.isEmpty
+            ? false
+            : true
         
         /// SNS
         let github = userInfo.snsGithub ?? ""
