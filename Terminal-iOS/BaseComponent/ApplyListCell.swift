@@ -23,8 +23,10 @@ class ApplyListCell: UITableViewCell {
     
     func attribute() {
         self.mainImage.do {
-            $0.image = #imageLiteral(resourceName: "mystudy")
+            $0.image = UIImage(systemName: "person.crop.circle")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .ultraLight))
             $0.contentMode = .scaleAspectFit
+            $0.tintColor = .gray
         }
         self.title.do {
             $0.numberOfLines = 0
