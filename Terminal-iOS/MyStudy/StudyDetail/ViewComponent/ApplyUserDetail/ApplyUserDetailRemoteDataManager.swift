@@ -9,7 +9,7 @@
 import Foundation
 
 class ApplyUserDetailRemoteDataManager: ApplyUserDetailRemoteDataManagerInputProtocol {
-    var interactor: ApplyUserDetailRemoteDataManagerOutputProtocol?
+   weak var interactor: ApplyUserDetailRemoteDataManagerOutputProtocol?
     
     func getApplyUserInfo(studyID: Int, applyID: Int) {
         TerminalNetworkManager
