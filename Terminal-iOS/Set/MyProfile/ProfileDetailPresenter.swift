@@ -48,7 +48,6 @@ class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
 extension ProfileDetailPresenter: ProfileDetailInteractorOutputProtocol {
     func didRetrievedUserInfo(userInfo: UserInfo) {
         view?.showUserInfo(userInfo: userInfo)
-        
     }
     
     func didRetrievedProject(project: [Project]) {

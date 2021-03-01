@@ -31,7 +31,7 @@ class ApplyUserDetailPresenter: ApplyUserDetailPresenterInputProtocol {
 }
 
 extension ApplyUserDetailPresenter: ApplyUserDetailInteractorOutputProtocol {
-    func retriveUserInfo(result: Bool, userInfo: UserInfo) {
+    func retriveUserInfo(result: Bool, userInfo: ApplyUserInfo) {
         view?.hideLoading()
         switch result {
         case true:
@@ -41,15 +41,6 @@ extension ApplyUserDetailPresenter: ApplyUserDetailInteractorOutputProtocol {
         }
     }
     
-    func retriveProjectList(result: Bool, projectList: [Project]) {
-        view?.hideLoading()
-        switch result {
-        case true:
-            self.view?.addProjectToStackView(project: projectList)
-        case false:
-            print("ApplyUserDetailPresenter")
-        }
-    }
     func retriveApplyStatus(result: Bool, message: String, studyID: Int) {
         view?.hideLoading()
         switch result {

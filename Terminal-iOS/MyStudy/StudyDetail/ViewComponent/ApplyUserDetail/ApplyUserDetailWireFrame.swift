@@ -11,8 +11,10 @@ import UIKit
 class ApplyUserDetailWireFrame: ApplyUserDetailWireFrameProtocol {
     static func createApplyUserDetailModule(userInfo: ApplyUser, studyID: Int) -> UIViewController {
         let view: ApplyUserDetailViewProtocol = ApplyUserDetailView()
-        let presenter: ApplyUserDetailPresenterInputProtocol & ApplyUserDetailInteractorOutputProtocol = ApplyUserDetailPresenter()
-        let interactor: ApplyUserDetailInteractorInputProtocol & ApplyUserDetailRemoteDataManagerOutputProtocol = ApplyUserDetailInteractor()
+        let presenter: ApplyUserDetailPresenterInputProtocol
+            & ApplyUserDetailInteractorOutputProtocol = ApplyUserDetailPresenter()
+        let interactor: ApplyUserDetailInteractorInputProtocol
+            & ApplyUserDetailRemoteDataManagerOutputProtocol = ApplyUserDetailInteractor()
         let remoteDataManager = ApplyUserDetailRemoteDataManager()
         let wireFrame = ApplyUserDetailWireFrame()
         
@@ -25,11 +27,15 @@ class ApplyUserDetailWireFrame: ApplyUserDetailWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         
-        remoteDataManager.remoteRequestHandler = interactor
+        remoteDataManager.interactor = interactor
         
-        interactor.applyID = userInfo.id
-        interactor.studyID = studyID
-        interactor.userID = userInfo.userID
-        return view as! UIViewController
+        if let view = view as? UIViewController {
+            interactor.applyID = userInfo.id
+            interactor.studyID = studyID
+            interactor.userID = userInfo.userID
+            return view
+        } else {
+            return UIViewController()
+        }
     }
 }
