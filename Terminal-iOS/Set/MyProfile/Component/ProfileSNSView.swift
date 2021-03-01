@@ -40,7 +40,7 @@ class ProfileSNSView: BaseSNSView {
         
         self.modify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
+            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
