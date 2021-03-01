@@ -250,6 +250,11 @@ extension BaseProfileView: BaseProfileViewProtocol {
         let sigungu = userInfo.sigungu ?? ""
         self.location.location.text = sido + " " + sigungu
         
+        self.location.emptyMessage.isHidden =
+            sido.isEmpty && sigungu.isEmpty
+            ? false
+            : true
+        
         // hide loading
         self.hideLoading()
     }
