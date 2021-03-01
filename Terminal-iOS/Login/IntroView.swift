@@ -32,10 +32,6 @@ class IntroView: UIViewController {
     lazy var rightBarButton = UIBarButtonItem(customView: rightbutton)
     lazy var leftBarButton = UIBarButtonItem(customView: leftButton)
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setting()
@@ -112,7 +108,7 @@ class IntroView: UIViewController {
         }
         guideLabel.do {
             $0.numberOfLines = 0
-            $0.font = UIFont.boldSystemFont(ofSize: 24)
+            $0.dynamicFont(fontSize: 23, weight: .bold)
         }
         invalidLabel.do {
             $0.numberOfLines = 0
@@ -123,7 +119,7 @@ class IntroView: UIViewController {
     // MARK: Layout
     
     func layout() {
-        [inputTextfield, rightbutton, guideLabel, invalidLabel ].forEach { view.addSubview($0) }
+        [inputTextfield, guideLabel, invalidLabel ].forEach { view.addSubview($0) }
         
         inputTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -141,9 +137,7 @@ class IntroView: UIViewController {
             $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
         }
-        
     }
-    
     
     @objc func didClickedBackButon() {
         self.inputTextfield.endEditing(true)
