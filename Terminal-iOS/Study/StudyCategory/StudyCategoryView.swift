@@ -38,12 +38,14 @@ class StudyCategoryView: UIViewController {
             $0.navigationItem.rightBarButtonItems = [createStudyBtn, searchStudyBtn]
         }
         self.searchStudyBtn.do {
-            $0.image = UIImage(systemName: "magnifyingglass")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.image = UIImage(systemName: "magnifyingglass")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
             $0.action = #selector(searchStudy)
             $0.target = self
         }
         self.createStudyBtn.do {
-            $0.image = UIImage(systemName: "plus")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.image = UIImage(systemName: "plus")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
             $0.action = #selector(createStudy)
             $0.target = self
         }

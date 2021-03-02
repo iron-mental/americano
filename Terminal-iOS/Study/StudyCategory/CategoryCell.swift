@@ -23,8 +23,10 @@ class CategoryCell: UICollectionViewCell {
 
     func setData(category: Category) {
         self.categoryView.title.text = category.name
-        self.categoryView.image.kf.setImage(with: URL(string: category.image)!,
-                                            options: [.requestModifier(RequestToken.token())])
+        if !category.image.isEmpty {
+            self.categoryView.image.kf.setImage(with: URL(string: category.image)!,
+                                                options: [.requestModifier(RequestToken.token())])
+        }
     }
     
     private func layout() {
