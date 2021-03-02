@@ -16,4 +16,8 @@ extension UIFont {
     static func notosansMedium(size: CGFloat) -> UIFont {
         return UIFont(name: "NotoSansKR-Medium", size: size)!
     }
+    
+    static func notosansRegular(size: CGFloat) -> UIFont {
+        return UIFont(name: "NotoSansKR-Regular", size: size)!
+    }
 }
