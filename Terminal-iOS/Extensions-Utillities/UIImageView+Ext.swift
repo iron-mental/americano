@@ -18,5 +18,6 @@ extension UIImageView {
         view.backgroundColor = .darkGray
         view.alpha = 0.7
         self.addSubview(view)
+        view.bringSubviewToFront(self)
     }
 }

@@ -45,7 +45,7 @@ class ProfileDetailView: BaseProfileView {
     }
     
     @objc func modifyProfile() {
-        let profileImage = profile.profileImage.image ?? UIImage(named: "managerImage")!
+        let profileImage = profile.profileImage.image ?? UIImage(named: "defaultProfile")!
         let name = profile.name.text ?? "none"
         let introduction = profile.descript.text ?? "none"
         let profile = Profile(profileImage: profileImage, nickname: name, introduction: introduction)

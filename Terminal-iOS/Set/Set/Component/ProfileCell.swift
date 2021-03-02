@@ -31,8 +31,7 @@ class ProfileCell: UITableViewCell {
         /// 프로필 이미지
         let imageURL = data.image ?? ""
         self.profile.kf.setImage(with: URL(string: imageURL),
-                                 placeholder: UIImage(systemName: "person.fill")?
-                                    .withConfiguration(UIImage.SymbolConfiguration(weight: .ultraLight)),
+                                 placeholder: UIImage(named: "defaultProfile"),
                                  options: [.requestModifier(RequestToken.token())])
         
         /// 자기소개
@@ -44,6 +43,7 @@ class ProfileCell: UITableViewCell {
         
         let sigungu = data.sigungu ?? ""
         self.location.text = sido + " " + sigungu
+        attribute()
     }
     
     func attribute() {
@@ -56,9 +56,13 @@ class ProfileCell: UITableViewCell {
             $0.layer.cornerRadius = $0.frame.size.width/2
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
-            $0.tintColor = .gray
-            $0.layer.borderColor = UIColor.gray.cgColor
-            $0.layer.borderWidth = 1
+            if let image = $0.image {
+                if image.isSymbolImage {
+                    $0.layer.borderWidth = 7
+                    $0.layer.borderColor = UIColor.gray.cgColor
+                    $0.tintColor = .gray
+                }
+            }
         }
         name.do {
             $0.textColor = .white
