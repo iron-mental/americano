@@ -145,7 +145,6 @@ final class StudyDetailView: UIViewController {
         memberView.do {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
-            //            $0.collectionView.isUserInteractionEnabled = state == .member || state == .host ? true : false
         }
         
         studyPlanView.do {
