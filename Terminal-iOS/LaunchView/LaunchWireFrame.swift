@@ -37,8 +37,9 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
     }
     func replaceRootViewToIntroView() {
         let home = HomeView()
+        let nav = UINavigationController(rootViewController: home)
         guard let window = UIApplication.shared.windows.first else { return }
-        window.replaceRootViewController(home, animated: true, completion: nil)
+        window.replaceRootViewController(nav, animated: true, completion: nil)
     }
     
     func replaceRootViewToMainView() {

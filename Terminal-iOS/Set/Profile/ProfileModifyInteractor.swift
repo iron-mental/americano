@@ -13,8 +13,8 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
     var presenter: ProfileModifyInteractorOutputProtocol?
     var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol?
     
-    var imageResult: Bool = false
-    var nicknameResult: Bool = false
+    var imageResult: Bool = true
+    var nicknameResult: Bool = true
     
     func viewDidLoad() {
         remoteDataManager?.authCheck {}
@@ -22,6 +22,7 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
     
     func completeImageModify(image: UIImage) {
         remoteDataManager?.retrieveImageModify(image: image)
+        imageResult = false
     }
         
     func completeModify(profile: Profile) {
@@ -33,8 +34,8 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
         if !profile.nickname.isEmpty {
             params.updateValue(profile.nickname, forKey: "nickname")
         }
-        
         remoteDataManager?.retrieveNicknameModify(profile: params)
+        nicknameResult = false
     }
 }
 

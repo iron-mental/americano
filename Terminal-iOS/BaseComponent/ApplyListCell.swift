@@ -23,8 +23,11 @@ class ApplyListCell: UITableViewCell {
     
     func attribute() {
         self.mainImage.do {
-            $0.image = #imageLiteral(resourceName: "mystudy")
+            $0.image = UIImage(named: "defaultProfile")
             $0.contentMode = .scaleAspectFit
+            $0.tintColor = .gray
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 1
         }
         self.title.do {
             $0.numberOfLines = 0

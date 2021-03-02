@@ -40,6 +40,7 @@ class ProfileCell: UITableViewCell {
         
         /// 활동지역
         let sido = data.sido ?? ""
+        
         let sigungu = data.sigungu ?? ""
         self.location.text = sido + " " + sigungu
     }
@@ -51,9 +52,9 @@ class ProfileCell: UITableViewCell {
             $0.layer.borderColor = UIColor.black.cgColor
         }
         profile.do {
-            $0.contentMode = .scaleAspectFill
             $0.layer.cornerRadius = $0.frame.size.width/2
             $0.clipsToBounds = true
+            $0.contentMode = .scaleAspectFill
         }
         name.do {
             $0.textColor = .white

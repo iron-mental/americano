@@ -40,7 +40,6 @@ class NoticeCell: UITableViewCell {
             }
             noticeContent.do {
                 $0.text = contents
-                $0.numberOfLines = 4
             }
             dateLabel.do {
                 $0.text = "작성일 : \(updateAt)"
@@ -72,11 +71,11 @@ class NoticeCell: UITableViewCell {
             $0.textColor = .white
         }
         noticeContent.do {
-            $0.dynamicFont(fontSize: 14, weight: .regular)
-            $0.numberOfLines = 0
+            $0.dynamicFont(fontSize: 12, weight: .regular)
+            $0.numberOfLines = 3
         }
         dateLabel.do {
-            $0.dynamicFont(fontSize: 12, weight: .regular)
+            $0.dynamicFont(fontSize: 11, weight: .regular)
             $0.textColor = UIColor.appColor(.studySubTitle)
         }
     }
@@ -106,7 +105,7 @@ class NoticeCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 13).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -13).isActive = true
-            $0.topAnchor.constraint(equalTo: self.noticeTitle.bottomAnchor, constant: 10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.noticeTitle.bottomAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.bottomAnchor.constraint(lessThanOrEqualTo: self.dateLabel.topAnchor, constant: -10).isActive = true
         }
         dateLabel.do {

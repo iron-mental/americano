@@ -14,8 +14,9 @@ protocol MyStudyDetailViewProtocol: class {
     var vcArr: [UIViewController] { get set }
     var studyTitle: String? { get set }
     var applyState: Bool? { get set }
+    var viewState: MyStudyDetialInitView { get set }
     //CHILD -> PARENT
-    func setting()
+    func setting(caller: UIViewController)
     
     //PRESENTER -> VIEW
     func showLeaveStudyComplete(message: String)

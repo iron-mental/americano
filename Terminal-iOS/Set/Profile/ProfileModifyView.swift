@@ -151,7 +151,7 @@ class ProfileModifyView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 90)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: profileImage.frame.width).isActive = true
         }
         
         self.modifyLabel.do {
@@ -246,8 +246,10 @@ class ProfileModifyView: UIViewController {
         } else {
             let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
             showLoading()
-            presenter?.completeImageModify(image: image)
             presenter?.completeModify(profile: profile)
+            if self.profile?.profileImage != profile.profileImage {
+                presenter?.completeImageModify(image: image)
+            }
         }
     }
 

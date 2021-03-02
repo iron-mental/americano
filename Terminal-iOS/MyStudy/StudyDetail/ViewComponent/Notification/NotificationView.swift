@@ -22,7 +22,7 @@ class NotificationView: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = UIColor.appColor(.terminalBackground)
         navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -36,6 +36,7 @@ class NotificationView: UIViewController {
         self.do {
             $0.title = "알림"
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.navigationController?.navigationBar.standardAppearance = appearance
         }
         tableView.do {
             $0.delegate = self

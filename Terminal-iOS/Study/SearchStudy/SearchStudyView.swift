@@ -120,7 +120,7 @@ extension SearchStudyView: UICollectionViewDataSource, UICollectionViewDelegateF
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HotKeywordCell.cellId, for: indexPath) as! HotKeywordCell
         
         let title = keyword[indexPath.row].word
-        cell.keyword.setTitle(title, for: .normal)
+        cell.keyword.setTitle("# "+title, for: .normal)
         
         return cell
     }

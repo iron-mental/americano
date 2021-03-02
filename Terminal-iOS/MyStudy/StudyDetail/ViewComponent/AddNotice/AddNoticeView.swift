@@ -188,49 +188,46 @@ class AddNoticeView: UIViewController {
 
 extension AddNoticeView: AddNoticeViewProtocol {
     func showNewNotice(noticeID: Int) {
+        
         let noticeTitle = titleTextField.text ?? ""
         showToast(controller: self, message: "공지사항 작성이 완료 되었습니다.", seconds: 1) { [self] in
             dismiss(animated: true) {
-                if state == .new {
-                    notice = Notice(id: noticeID,
-                                    title: nil,
-                                    contents: nil,
-                                    leaderID: nil,
-                                    studyID: studyID,
-                                    pinned: nil,
-                                    updatedAt: nil,
-                                    leaderImage: nil,
-                                    leaderNickname: nil,
-                                    createAt: nil,
-                                    isPaging: nil)
-                    if let studyDetailView = self.parentView as? MyStudyDetailViewProtocol {
-                        if let noticeListView = studyDetailView.vcArr[0] as? NoticeViewProtocol {
+                notice = Notice(id: noticeID,
+                                title: nil,
+                                contents: nil,
+                                leaderID: nil,
+                                studyID: studyID,
+                                pinned: nil,
+                                updatedAt: nil,
+                                leaderImage: nil,
+                                leaderNickname: nil,
+                                createAt: nil,
+                                isPaging: nil)
+                
+                parentView?.navigationController?.viewControllers.forEach {
+                    if let myStudyDetail = $0 as? MyStudyDetailViewProtocol {
+                        myStudyDetail.viewState = .Notice
+                        if let noticeListView = myStudyDetail.vcArr[0] as? NoticeViewProtocol {
                             noticeListView.viewLoad()
                         }
-                        studyDetailView.presenter?.addNoticeFinished(notice: noticeID,
-                                                                     studyID: studyID!,
-                                                                     title: noticeTitle)
-                    }
-                } else {
-                    if let noticeDetailView = self.parentView as? NoticeDetailViewProtocol {
-                        noticeDetailView.presenter?.viewDidLoad(notice: notice!)
-                        if let studyDetailView = noticeDetailView.parentView as? MyStudyDetailViewProtocol {
-                            if let noticeListView = studyDetailView.vcArr[0] as? NoticeViewProtocol {
-                                noticeListView.viewLoad()
-                            }
-                        } else {
-                            if let noticeListView = noticeDetailView.parentView as? NoticeViewProtocol {
-                                noticeListView.viewLoad()
-                            }
+                        if state == .new {
+                            myStudyDetail.presenter?.addNoticeFinished(notice: noticeID,
+                                                                       studyID: studyID!,
+                                                                       title: noticeTitle)
                         }
+                    }
+                    if let noticeDetail = $0 as? NoticeDetailViewProtocol {
+                        noticeDetail.presenter?.viewDidLoad(notice: notice!)
                     }
                 }
             }
         }
     }
+    
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)
     }
+    
     func showLoading() {
         LoadingRainbowCat.show(caller: self)
     }

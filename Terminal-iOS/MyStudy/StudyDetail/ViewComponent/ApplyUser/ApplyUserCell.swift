@@ -21,6 +21,8 @@ class ApplyUserCell: ApplyListCell {
             $0.layer.masksToBounds = true
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 3
         }
     }
     

@@ -249,6 +249,7 @@
 		CC7F383625BA991B00DEA541 /* DelegateHostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */; };
 		CC84850725A47FEE00C792BC /* TerminalAlertUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */; };
 		CC8FF5FC257E80D000947FB3 /* ChatTableViewOutputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */; };
+		CC90262225EBC2B300D61373 /* DispatchTimeInterval+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC90262125EBC2B300D61373 /* DispatchTimeInterval+Ext.swift */; };
 		CC99A0CC25342D620027BA24 /* MyStudyMainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */; };
 		CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */; };
 		CCA1FF5724FD0C930026C3EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */; };
@@ -298,6 +299,7 @@
 		CCA5D5EF25E5676B001C9236 /* ParticipantProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5EE25E5676B001C9236 /* ParticipantProfileInteractor.swift */; };
 		CCA5D5F425E56777001C9236 /* ParticipantProfileRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5F325E56777001C9236 /* ParticipantProfileRemoteDataManager.swift */; };
 		CCA5D5F925E56781001C9236 /* ParticipantProfileWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5D5F825E56781001C9236 /* ParticipantProfileWireFrame.swift */; };
+		CCA959E325ECFBD0004819AE /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA959E225ECFBD0004819AE /* UIImageView+Ext.swift */; };
 		CCAF0FD2253300090060A2F6 /* MyStudyMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */; };
 		CCAF0FD6253300410060A2F6 /* MyStudyMainInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD5253300410060A2F6 /* MyStudyMainInteractor.swift */; };
 		CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAF0FD8253300600060A2F6 /* MyStudyMainProtocols.swift */; };
@@ -645,6 +647,7 @@
 		CC7F383525BA991B00DEA541 /* DelegateHostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostTableViewCell.swift; sourceTree = "<group>"; };
 		CC84850625A47FEE00C792BC /* TerminalAlertUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertUIView.swift; sourceTree = "<group>"; };
 		CC8FF5FB257E80D000947FB3 /* ChatTableViewOutputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewOutputCell.swift; sourceTree = "<group>"; };
+		CC90262125EBC2B300D61373 /* DispatchTimeInterval+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchTimeInterval+Ext.swift"; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
 		CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = badgeBarButtonItem.swift; sourceTree = "<group>"; };
 		CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -696,6 +699,7 @@
 		CCA5D5EE25E5676B001C9236 /* ParticipantProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileInteractor.swift; sourceTree = "<group>"; };
 		CCA5D5F325E56777001C9236 /* ParticipantProfileRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCA5D5F825E56781001C9236 /* ParticipantProfileWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantProfileWireFrame.swift; sourceTree = "<group>"; };
+		CCA959E225ECFBD0004819AE /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		CCAF0FD1253300090060A2F6 /* MyStudyMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainView.swift; sourceTree = "<group>"; };
 		CCAF0FD5253300410060A2F6 /* MyStudyMainInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainInteractor.swift; sourceTree = "<group>"; };
 		CCAF0FD8253300600060A2F6 /* MyStudyMainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainProtocols.swift; sourceTree = "<group>"; };
@@ -1072,6 +1076,8 @@
 				CC4DCFE625C16154002493E4 /* UIImage+Ext.swift */,
 				CCA47E5F25DD196900E11D4C /* UITableView+Ext.swift */,
 				CC40E86625E825CE0079AF26 /* UIApplication+Ext.swift */,
+				CC90262125EBC2B300D61373 /* DispatchTimeInterval+Ext.swift */,
+				CCA959E225ECFBD0004819AE /* UIImageView+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -2014,6 +2020,7 @@
 				A5D058ED255D93910047CA9E /* StudyDetailWireFrame.swift in Sources */,
 				CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */,
 				A53A2B8A25B6BC100002D3A0 /* UserWithdrawalWireFrame.swift in Sources */,
+				CC90262225EBC2B300D61373 /* DispatchTimeInterval+Ext.swift in Sources */,
 				A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */,
 				CCB1A3A925D7BDC600AADE33 /* ValidateSequence.swift in Sources */,
 				CCC1A2DB25B14C88004E3BE6 /* ApplyUserDetailPresenter.swift in Sources */,
@@ -2134,6 +2141,7 @@
 				A56048C025DEEB4500240E55 /* SNSState.swift in Sources */,
 				A5C7B8F525AC4FCD00016D5B /* Address.swift in Sources */,
 				A5F1031525E80E1A0054D57F /* FindPasswordPresenter.swift in Sources */,
+				CCA959E325ECFBD0004819AE /* UIImageView+Ext.swift in Sources */,
 				CC60447E2576263F000D11C7 /* NoticeDetailPresenter.swift in Sources */,
 				A5C7B90D25ADEAFC00016D5B /* LocationModifyRemoteDataManager.swift in Sources */,
 				A550CC6125E6B77B003E9266 /* StudyCheck.swift in Sources */,

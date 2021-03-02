@@ -61,11 +61,13 @@ extension ApplyUserView: ApplyUserViewProtocol {
     }
     
     func showError(message: String) {
-        showToast(controller: self, message: message, seconds: 1)
-        navigationController?.viewControllers.forEach {
-            if let myStudyDetailView  = $0 as? MyStudyDetailViewProtocol {
-                myStudyDetailView.applyState = false
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.viewControllers.forEach {
+                if let myStudyDetailView  = $0 as? MyStudyDetailViewProtocol {
+                    myStudyDetailView.applyState = false
+                }
             }
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

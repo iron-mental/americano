@@ -13,6 +13,7 @@ class LoadingRainbowCat: NSObject {
     private static let sharedInstance = LoadingRainbowCat()
     private var backgroundView: UIView?
     private var popupView: AnimationView?
+    private var showTime: DispatchTime?
     
     class func show(caller: UIViewController?) {
         guard let topView =       UIApplication.getTopViewController() else { return }
@@ -20,6 +21,8 @@ class LoadingRainbowCat: NSObject {
         
         if type(of: topView) == type(of: callerView) {
             if sharedInstance.backgroundView?.superview == nil {
+                //                sharedInstance.showTime = DispatchTime.now()
+                sharedInstance.showTime = DispatchTime.now()
                 let backgroundView = UIView()
                 let popupView = AnimationView(name: "14476-rainbow-cat-remix")
                 
@@ -56,11 +59,24 @@ class LoadingRainbowCat: NSObject {
         
         if type(of: topView) == type(of: callerView) {
             if sharedInstance.backgroundView?.superview != nil {
-                if let popupView = sharedInstance.popupView,
-                   let backgroundView = sharedInstance.backgroundView {
-                    popupView.stop()
-                    backgroundView.removeFromSuperview()
-                    popupView.removeFromSuperview()
+                
+                guard let distance = sharedInstance.showTime?.distance(to: DispatchTime.now()).toDouble() else { return }
+                if distance > 0.5 {
+                    if let popupView = sharedInstance.popupView,
+                       let backgroundView = sharedInstance.backgroundView {
+                        popupView.stop()
+                        backgroundView.removeFromSuperview()
+                        popupView.removeFromSuperview()
+                    }
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 - distance) {
+                        if let popupView = sharedInstance.popupView,
+                           let backgroundView = sharedInstance.backgroundView {
+                            popupView.stop()
+                            backgroundView.removeFromSuperview()
+                            popupView.removeFromSuperview()
+                        }
+                    }
                 }
             }
             completion?()

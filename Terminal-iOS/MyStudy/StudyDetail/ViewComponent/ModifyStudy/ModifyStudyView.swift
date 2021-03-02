@@ -66,6 +66,9 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         
         guard let id = study?.id else { return }
         presenter?.completButtonDidTap(studyID: id, study: self.studyDetailPost!)
+        if let myStudyDetailView = self.navigationController?.viewControllers[1] as? MyStudyDetailView {
+            myStudyDetailView.viewState = .StudyDetail
+        }
     }
 }
 

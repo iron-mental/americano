@@ -26,7 +26,7 @@ final class MyStudyDetailView: UIViewController {
     var studyTitle: String?
     var pageBeforeIndex: Int = 0
     var vcArr: [UIViewController] = []
-    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
+    let state: [String] = ["공지사항", "스터디 정보"]
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
     var authority: StudyDetailViewState = .member
@@ -43,13 +43,6 @@ final class MyStudyDetailView: UIViewController {
         setPageControllerChild()
         attribute()
         layout()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if applyState != nil {
-            applyState! ? presenter?.showApplyUserList(studyID: studyID!) : nil
-        }
     }
     
     func attribute() {
@@ -114,15 +107,17 @@ final class MyStudyDetailView: UIViewController {
                                                   animated: true,
                                                   completion: nil)
             self.pageBeforeIndex = 0
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: CGFloat(pageBeforeIndex), y: 0)
         case .StudyDetail:
             self.tapSege.selectedSegmentIndex = 1
             self.childPageView.setViewControllers([self.vcArr[1]],
                                                   direction: .forward,
                                                   animated: true,
                                                   completion: nil)
-            self.selectedUnderLine.transform
-                = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(1), y: 0)
             self.pageBeforeIndex = 1
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count), y: 0)
         case .Chat:
             break
         }
@@ -145,7 +140,7 @@ final class MyStudyDetailView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: tapSege.bottomAnchor, constant: -1).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 2).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: view.frame.width / 3).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: view.frame.width / CGFloat(state.count)).isActive = true
         }
         
         self.childPageView.view.do {
@@ -200,8 +195,7 @@ final class MyStudyDetailView: UIViewController {
                       StudyDetailWireFrame.createStudyDetail(parent: self,
                                                              studyID: studyID!,
                                                              state: .member,
-                                                             studyTitle: studyTitle ?? ""),
-                      ChatWireFrame.createChatModule()]
+                                                             studyTitle: studyTitle ?? "")]
         
         if let noticeView = vcArr[0] as? NoticeViewProtocol {
             noticeView.viewLoad()
@@ -210,8 +204,18 @@ final class MyStudyDetailView: UIViewController {
     
     // MARK: - @objc
     
-    @objc func indexChanged(_ sender: UISegmentedControl) {
-        let selectedIndex = sender.selectedSegmentIndex
+    @objc func indexChanged(_ sender: NSObject) {
+        var selectedIndex = 0
+        
+        if let index = (sender as? UISegmentedControl)?.selectedSegmentIndex {
+            selectedIndex = index
+        } else if let pageViewController = sender as? UIPageViewController {
+            if let viewControllers = pageViewController.viewControllers {
+                if let index = vcArr.firstIndex(of: viewControllers[0]) {
+                    selectedIndex = index
+                }
+            }
+        }
         
         switch selectedIndex {
         case 0: viewState = .Notice
@@ -220,8 +224,8 @@ final class MyStudyDetailView: UIViewController {
         default: print("들어오지 않아요")
         }
         
-        UIView.animate(withDuration: 0.2) {
-            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(selectedIndex), y: 0)
+        UIView.animate(withDuration: 0.2) { [self] in
+            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(selectedIndex), y: 0)
         }
         
         // PageView paging
@@ -287,44 +291,43 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard completed else { return }
-        
-        if let viewControllers = pageViewController.viewControllers {
-            if let viewControllerIndex = self.vcArr.firstIndex(of: viewControllers[0]) {
-                self.tapSege.selectedSegmentIndex = viewControllerIndex
-                UIView.animate(withDuration: 0.2) {
-                    self.selectedUnderLine.transform =
-                        CGAffineTransform(translationX: self.view.frame.width / 3 * CGFloat(viewControllerIndex), y: 0)
-                }
-            }
-        }
+        indexChanged(pageViewController)
     }
 }
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
-    func setting() {
-        if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
-            studyInfo = studyDetailView.studyInfo
-            authority = studyDetailView.state
-            if let noticeView = vcArr[0] as? NoticeView {
-                noticeView.state = studyDetailView.state
-            }
-            if studyInfo == nil {
-                self.applyState = nil
-            }
-        }
-        attribute()
-        layout()
-        view.layoutIfNeeded()
+    func setting(caller: UIViewController) {
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
-            if self.applyState == nil {
-                self.hideLoading()
+        if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
+            if type(of: caller) == StudyDetailView.self {
+                //스터디 디테일이 콜했을 경우 처리
+                
+                //공지에 state 심어주고
+                if let noticeView = vcArr[0] as? NoticeView {
+                    noticeView.state = studyDetailView.state
+                }
+                //메인스터디디테일에 정보 심어주고
+                self.studyInfo = studyDetailView.studyInfo
+                self.authority = studyDetailView.state
+                
+                // 탈퇴한 스터디 핸들링 해주고
+                if authority != .host && authority != .member {
+                    self.hideLoading()
+                    showToast(controller: self, message: "속해있는 스터디가 아닙니다.", seconds: 1) {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                } else {
+                    // 알림으로 진입한거 핸들링 해주고
+                    if applyState == nil {
+                        self.hideLoading()
+                    } else {
+                        applyState! ? presenter?.showApplyUserList(studyID: studyID!) : nil
+                    }
+                }
             }
-        })
-        if authority != .host && authority != .member {
-            showToast(controller: self, message: "속해있는 스터디가 아닙니다.", seconds: 1) {
-                self.navigationController?.popViewController(animated: true)
-            }
+            attribute()
+            layout()
+            view.layoutIfNeeded()
         }
     }
     

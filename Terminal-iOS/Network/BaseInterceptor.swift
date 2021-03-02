@@ -49,6 +49,7 @@ final class BaseInterceptor: RequestInterceptor {
                             KeychainWrapper.standard.remove(forKey: "refreshToken")
                             KeychainWrapper.standard.remove(forKey: "accessToken")
                             KeychainWrapper.standard.remove(forKey: "pushToken")
+                            KeychainWrapper.standard.remove(forKey: "userID")
                             // RootViewController replace
                             guard let window = UIApplication.shared.windows.first else { return }
                             window.replaceRootViewController(home, animated: true, completion: nil)

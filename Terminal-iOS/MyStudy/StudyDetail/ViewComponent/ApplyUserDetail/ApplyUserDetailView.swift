@@ -172,11 +172,12 @@ extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
         let sigungu = userInfo.sigungu ?? ""
         self.location.location.text = sido + " " + sigungu
         
+
         self.location.emptyMessage.isHidden =
             sido.isEmpty && sigungu.isEmpty
             ? false
             : true
-        
+      
         /// 가입인사
         self.applyMessage.message.text = userInfo.message
         

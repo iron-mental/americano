@@ -220,7 +220,7 @@ extension BaseProfileView: BaseProfileViewProtocol {
         self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
                                               placeholder: UIImage(named: "defaultProfile"),
                                               options: [.requestModifier(RequestToken.token())])
-        
+        self.profile.attribute()
         /// 경력
         let careerTitle = userInfo.careerTitle ?? ""
         let careerContents = userInfo.careerContents ?? ""
