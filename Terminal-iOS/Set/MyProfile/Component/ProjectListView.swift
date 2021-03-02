@@ -9,6 +9,7 @@
 import UIKit
 
 class ProjectListView: UIView {
+    let emptyMessage = UILabel()
     let modify = UIButton()
     let projectStack = UIStackView()
     
@@ -23,6 +24,11 @@ class ProjectListView: UIView {
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
         }
+        self.emptyMessage.do {
+            $0.text = "프로젝트가 존재하지 않습니다."
+            $0.dynamicFont(fontSize: 15, weight: .medium)
+            $0.textColor = .white
+        }
         self.modify.do {
             $0.setTitle("수정", for: .normal)
             $0.setTitleColor(.appColor(.mainColor), for: .normal)
@@ -35,9 +41,13 @@ class ProjectListView: UIView {
     }
     
     func layout() {
-        self.addSubview(modify)
-        self.addSubview(projectStack)
+        [emptyMessage, modify, projectStack].forEach { self.addSubview($0) }
         
+        self.emptyMessage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        }
         self.modify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
@@ -45,7 +55,6 @@ class ProjectListView: UIView {
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
-        
         self.projectStack.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.modify.bottomAnchor, constant: -20).isActive = true

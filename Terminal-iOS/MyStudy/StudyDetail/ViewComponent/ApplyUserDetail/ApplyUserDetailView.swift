@@ -144,11 +144,15 @@ extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
                                               options: [.requestModifier(RequestToken.token())])
         
         /// 경력
-        if let careerTitle = userInfo.careerTitle,
-           let careerContents = userInfo.careerContents {
-            self.career.careerTitle.text = careerTitle
-            self.career.careerContents.text = careerContents
-        }
+        let careerTitle = userInfo.careerTitle ?? ""
+        let careerContents = userInfo.careerContents ?? ""
+        self.career.careerTitle.text = careerTitle
+        self.career.careerContents.text = careerContents
+        
+        self.career.emptyMessage.isHidden =
+            careerTitle.isEmpty && careerContents.isEmpty
+            ? false
+            : true
         
         /// SNS
         let github = userInfo.snsGithub ?? ""
@@ -168,6 +172,12 @@ extension ApplyUserDetailView: ApplyUserDetailViewProtocol {
         let sigungu = userInfo.sigungu ?? ""
         self.location.location.text = sido + " " + sigungu
         
+
+        self.location.emptyMessage.isHidden =
+            sido.isEmpty && sigungu.isEmpty
+            ? false
+            : true
+      
         /// 가입인사
         self.applyMessage.message.text = userInfo.message
         

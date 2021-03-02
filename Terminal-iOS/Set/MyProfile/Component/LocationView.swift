@@ -9,6 +9,7 @@
 import UIKit
 
 class LocationView: UIView {
+    let emptyMessage = UILabel()
     let location = UILabel()
     let modify = UIButton()
     
@@ -24,6 +25,11 @@ class LocationView: UIView {
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
         }
+        self.emptyMessage.do {
+            $0.text = "활동지역이 존재하지 않습니다."
+            $0.dynamicFont(fontSize: 15, weight: .medium)
+            $0.textColor = .white
+        }
         self.location.do {
             $0.numberOfLines = 0
             $0.textColor = .appColor(.profileTextColor)
@@ -34,9 +40,13 @@ class LocationView: UIView {
         }
     }
     func layout() {
-        self.addSubview(location)
-        self.addSubview(modify)
+        [emptyMessage, location, modify].forEach { self.addSubview($0) }
         
+        self.emptyMessage.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        }
         self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true

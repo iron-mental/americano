@@ -146,7 +146,7 @@ extension CareerModifyView: CareerModifyViewProtocol {
                 parent?.presenter?.viewDidLoad()
             }
         } else {
-            let alert =  UIAlertController(title: "결과", message: "수정 실패", preferredStyle: .alert)
+            let alert =  UIAlertController(title: "결과", message: message, preferredStyle: .alert)
             let okAction =  UIAlertAction(title: "확인", style: .default) { _ in }
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
