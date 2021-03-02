@@ -43,7 +43,6 @@ class ProfileCell: UITableViewCell {
         
         let sigungu = data.sigungu ?? ""
         self.location.text = sido + " " + sigungu
-        attribute()
     }
     
     func attribute() {
