@@ -56,13 +56,6 @@ class ProfileCell: UITableViewCell {
             $0.layer.cornerRadius = $0.frame.size.width/2
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
-            if let image = $0.image {
-                if image.isSymbolImage {
-                    $0.layer.borderWidth = 7
-                    $0.layer.borderColor = UIColor.gray.cgColor
-                    $0.tintColor = .gray
-                }
-            }
         }
         name.do {
             $0.textColor = .white
