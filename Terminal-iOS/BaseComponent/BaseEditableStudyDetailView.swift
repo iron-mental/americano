@@ -157,7 +157,7 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.textAlignment = .center
             $0.textColor = .white
             $0.layer.cornerRadius = 10
-            $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .semibold)
+            $0.dynamicFont(fontSize: $0.font!.pointSize, weight: .medium)
             $0.inputAccessoryView = accessoryCompleteButton
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor

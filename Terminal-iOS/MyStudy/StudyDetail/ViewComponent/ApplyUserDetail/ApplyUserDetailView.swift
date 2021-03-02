@@ -40,7 +40,7 @@ class ApplyUserDetailView: BaseProfileView {
         self.refusalButton.do {
             $0.setTitle("거절", for: .normal)
             $0.layer.cornerRadius = 10
-            $0.titleLabel?.dynamicFont(fontSize: 15, weight: .semibold)
+            $0.titleLabel?.dynamicFont(fontSize: 15, weight: .medium)
             $0.backgroundColor = UIColor.systemRed
             $0.setTitleColor(.white, for: .normal)
             $0.addTarget(self, action: #selector(rejectButtonDidTap), for: .touchUpInside)
@@ -49,7 +49,7 @@ class ApplyUserDetailView: BaseProfileView {
         self.acceptButton.do {
             $0.setTitle("수락", for: .normal)
             $0.layer.cornerRadius = 10
-            $0.titleLabel?.dynamicFont(fontSize: 15, weight: .semibold)
+            $0.titleLabel?.dynamicFont(fontSize: 15, weight: .medium)
             $0.backgroundColor = UIColor.appColor(.mainColor)
             $0.setTitleColor(.white, for: .normal)
             $0.addTarget(self, action: #selector(acceptButtonDidTap), for: .touchUpInside)

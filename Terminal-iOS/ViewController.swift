@@ -26,17 +26,20 @@ class ViewController: UITabBarController {
         .study: UITabBarItem(
             title: "스터디",
             image: UIImage(systemName: "book"),
-            selectedImage: UIImage(systemName: "book")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
+            selectedImage: UIImage(systemName: "book")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
         ),
         .mystudy: UITabBarItem(
             title: "내 스터디",
             image: UIImage(systemName: "person.3"),
-            selectedImage: UIImage(systemName: "person.3")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
+            selectedImage: UIImage(systemName: "person.3")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
         ),
         .set: UITabBarItem(
             title: "설정",
             image: UIImage(systemName: "gearshape"),
-            selectedImage: UIImage(systemName: "gearshape")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
+            selectedImage: UIImage(systemName: "gearshape")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
         )
     ]
     
@@ -119,5 +122,4 @@ final class TabBarAnimatedTransitioning: NSObject, UIViewControllerAnimatedTrans
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.2
     }
-
 }

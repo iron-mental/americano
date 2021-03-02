@@ -32,12 +32,14 @@ final class FindPasswordResultView: UIViewController {
             $0.leftBarButtonItem = backBarButtonItem
         }
         self.backButton.do {
-            $0.setImage(UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .bold)), for: .normal)
+            $0.setImage(UIImage(systemName: "xmark")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)), for: .normal)
             $0.addTarget(self, action: #selector(complete), for: .touchUpInside)
             $0.tintColor = .white
         }
         self.mailImage.do {
-            $0.image = UIImage(systemName: "envelope")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            $0.image = UIImage(systemName: "envelope")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
             $0.tintColor = .white
         }
         self.confirmEmail.do {
