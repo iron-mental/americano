@@ -32,7 +32,7 @@ class ApplyListCell: UITableViewCell {
         self.title.do {
             $0.numberOfLines = 0
             $0.textColor = .systemGray2
-            $0.dynamicFont(fontSize: 12, weight: .semibold)
+            $0.dynamicFont(fontSize: 12, weight: .medium)
         }
         self.contents.do {
             $0.numberOfLines = 3

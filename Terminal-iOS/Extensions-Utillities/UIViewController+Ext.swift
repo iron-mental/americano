@@ -32,23 +32,22 @@ extension UIViewController {
         }
     }
     
-    func keyboardAddObserver(with controller: UIViewController,
-                             showSelector: Selector? = nil,
+    func keyboardAddObserver(showSelector: Selector? = nil,
                              hideSelector: Selector? = nil) {
         if let showSelector = showSelector {
-            NotificationCenter.default.addObserver(controller, selector: showSelector, name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: showSelector, name: UIResponder.keyboardWillShowNotification, object: nil)
         }
         
         if let hideSelector = hideSelector {
-            NotificationCenter.default.addObserver(controller, selector: hideSelector, name: UIResponder.keyboardWillHideNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: hideSelector, name: UIResponder.keyboardWillHideNotification, object: nil)
         }
     }
     
-    func keyboardRemoveObserver(with controller: UIViewController) {
-        NotificationCenter.default.removeObserver(controller,
+    func keyboardRemoveObserver() {
+        NotificationCenter.default.removeObserver(self,
                                                   name: UIResponder.keyboardWillShowNotification,
                                                   object: nil)
-        NotificationCenter.default.removeObserver(controller,
+        NotificationCenter.default.removeObserver(self,
                                                   name: UIResponder.keyboardWillHideNotification,
                                                   object: nil)
     }

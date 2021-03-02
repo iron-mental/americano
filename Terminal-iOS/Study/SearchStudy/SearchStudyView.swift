@@ -67,7 +67,7 @@ class SearchStudyView: UIViewController {
         self.hotLable.do {
             $0.text = "핫 등록 키워드"
             $0.textColor = .white
-            $0.dynamicFont(fontSize: 14, weight: .semibold)
+            $0.dynamicFont(fontSize: 14, weight: .medium)
         }
         self.collectionView.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)

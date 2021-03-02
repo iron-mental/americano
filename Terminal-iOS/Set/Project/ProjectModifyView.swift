@@ -9,7 +9,7 @@
 import UIKit
 
 class ProjectModifyView: UIViewController, CellSubclassDelegate {
-    deinit { self.keyboardRemoveObserver(with: self) }
+    deinit { self.keyboardRemoveObserver() }
     
     var presenter: ProjectModifyPresenterProtocol?
     var projectArr: [Project] = []
@@ -29,8 +29,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
         super.viewDidLoad()
         attribute()
         layout()
-        keyboardAddObserver(with: self,
-                            showSelector: #selector(keyboardWillShow),
+        keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                             hideSelector: #selector(keyboardWillHide))
     }
     
