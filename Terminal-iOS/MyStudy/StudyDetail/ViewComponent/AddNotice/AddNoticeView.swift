@@ -14,7 +14,7 @@ enum AddNoticeState {
 }
 
 class AddNoticeView: UIViewController {
-    deinit { self.keyboardRemoveObserver(with: self) }
+    deinit { self.keyboardRemoveObserver() }
     
     var presenter: AddNoticePresenterProtocol?
     var studyID: Int?
@@ -36,7 +36,7 @@ class AddNoticeView: UIViewController {
         layout()
         titleTextField.becomeFirstResponder()
         hideLoading()
-        self.keyboardAddObserver(with: self, showSelector: #selector(keyboardWillShow))
+        self.keyboardAddObserver(showSelector: #selector(keyboardWillShow))
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {

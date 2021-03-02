@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 class BaseEditableStudyDetailView: UIViewController {
-    deinit { self.keyboardRemoveObserver(with: self) }
+    deinit { self.keyboardRemoveObserver() }
     
     var studyDetailPost: StudyDetailPost?
     
@@ -48,8 +48,7 @@ class BaseEditableStudyDetailView: UIViewController {
         layout()
         setDelegate()
         self.hideKeyboardWhenTappedAround()
-        self.keyboardAddObserver(with: self,
-                                 showSelector: #selector(keyboardWillShow),
+        self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
     }
     

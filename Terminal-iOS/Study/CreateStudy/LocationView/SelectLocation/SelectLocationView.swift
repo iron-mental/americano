@@ -14,10 +14,7 @@ protocol selectLocationDelegate: class {
 }
 
 class SelectLocationView: UIViewController {
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
+    deinit { self.keyboardRemoveObserver() }
     
     var presenter: SelectLocationPresenterProtocol?
     let pin = UIImageView()
@@ -38,8 +35,8 @@ class SelectLocationView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
+                                 hideSelector: #selector(keyboardWillHide))
         guard let item = location else { return }
         presenter?.viewDidLoad(item: item)
     }

@@ -9,10 +9,7 @@
 import UIKit
 
 class MyApplyStudyModifyView: UIViewController {
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
+    deinit { self.keyboardRemoveObserver() }
     
     var presenter: MyApplyStudyModifyPresenterInputProtocol?
     var studyID: Int?
@@ -30,7 +27,7 @@ class MyApplyStudyModifyView: UIViewController {
         presenter?.viewDidLoad(studyID: id)
         layout()
         applyTextField.becomeFirstResponder()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        self.keyboardAddObserver(showSelector: #selector(keyboardWillShow))
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
