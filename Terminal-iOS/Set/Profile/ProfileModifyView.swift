@@ -19,8 +19,6 @@ class ProfileModifyView: UIViewController {
     let picker = UIImagePickerController()
 
     let projectAddButton = UIButton()
-    lazy var modifyLabel = UILabel()
-    lazy var contentView = UIView()
     let profileImage = UIImageView()
     lazy var nameLabel = UILabel()
     lazy var introductionLabel = UILabel()
@@ -67,17 +65,17 @@ class ProfileModifyView: UIViewController {
             $0.layer.borderWidth = 3
         }
         
-        self.contentView.do {
-            $0.backgroundColor = .darkGray
-            $0.alpha = 0.5
-        }
-        
-        self.modifyLabel.do {
-            $0.text = "편집"
-            $0.textAlignment = .center
-            $0.textColor = .white
-            $0.font = UIFont.notosansMedium(size: 13)
-        }
+//        self.contentView.do {
+//            $0.backgroundColor = .darkGray
+//            $0.alpha = 0.5
+//        }
+//
+//        self.modifyLabel.do {
+//            $0.text = "편집"
+//            $0.textAlignment = .center
+//            $0.textColor = .white
+//            $0.font = UIFont.notosansMedium(size: 13)
+//        }
         
         self.nameLabel.do {
             $0.text = "이름"
@@ -139,8 +137,8 @@ class ProfileModifyView: UIViewController {
     func layout() {
         [profileImage, nameLabel, name, introductionLabel, introduction, completeButton]
             .forEach { self.view.addSubview($0) }
-        self.profileImage.addSubview(self.contentView)
-        self.contentView.addSubview(self.modifyLabel)
+//        self.profileImage.addSubview(self.contentView)
+//        self.contentView.addSubview(self.modifyLabel)
         
         self.profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -149,20 +147,12 @@ class ProfileModifyView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
-        
-//        self.contentView.do {
+
+//        self.modifyLabel.do {
 //            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
-//            $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
-//            $0.widthAnchor.constraint(equalToConstant: profileImage.frame.width).isActive = true
+//            $0.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+//            $0.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
 //        }
-        
-        self.modifyLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
-        }
         
         self.nameLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -251,9 +241,7 @@ class ProfileModifyView: UIViewController {
             let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
             showLoading()
             presenter?.completeModify(profile: profile)
-//            if profile.profileImage != profile.profileImage {
-                presenter?.completeImageModify(image: image)
-//            }
+            presenter?.completeImageModify(image: image)
         }
     }
 

@@ -16,7 +16,7 @@ extension UIImageView {
                                         height: self.frame.height / 3))
         
         view.backgroundColor = .darkGray
-        view.alpha = 0.5
+        view.alpha = 0.7
         self.addSubview(view)
     }
 }

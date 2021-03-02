@@ -17,6 +17,7 @@ enum MyStudyDetialInitView {
 
 final class MyStudyDetailView: UIViewController {
     var presenter: MyStudyDetailPresenterProtocol?
+    
     var viewState: MyStudyDetialInitView = .StudyDetail
     let appearance = UINavigationBarAppearance()
     var applyState: Bool?
@@ -105,22 +106,21 @@ final class MyStudyDetailView: UIViewController {
                                                   direction: .forward,
                                                   animated: true,
                                                   completion: nil)
-            self.selectedUnderLine.transform
-                = CGAffineTransform(translationX: 0, y: 0)
             self.pageBeforeIndex = 0
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: CGFloat(pageBeforeIndex), y: 0)
         case .StudyDetail:
             self.tapSege.selectedSegmentIndex = 1
             self.childPageView.setViewControllers([self.vcArr[1]],
                                                   direction: .forward,
                                                   animated: true,
                                                   completion: nil)
-            self.selectedUnderLine.transform
-                = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(1), y: 0)
             self.pageBeforeIndex = 1
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count), y: 0)
         case .Chat:
             break
         }
-        childPageView.reloadInputViews()
     }
     
     func layout() {
@@ -204,16 +204,15 @@ final class MyStudyDetailView: UIViewController {
     
     // MARK: - @objc
     
-    @objc func indexChanged(_ sender: NSObject? = nil) {
+    @objc func indexChanged(_ sender: NSObject) {
         var selectedIndex = 0
-        if let sege = sender as? UISegmentedControl {
-            //세그로 들어옴
-            selectedIndex = sege.selectedSegmentIndex
+        
+        if let index = (sender as? UISegmentedControl)?.selectedSegmentIndex {
+            selectedIndex = index
         } else if let pageViewController = sender as? UIPageViewController {
-            //페이지뷰컨으로 들어옴
             if let viewControllers = pageViewController.viewControllers {
-                if let viewControllerIndex = self.vcArr.firstIndex(of: viewControllers[0]) {
-                    selectedIndex = viewControllerIndex
+                if let index = vcArr.firstIndex(of: viewControllers[0]) {
+                    selectedIndex = index
                 }
             }
         }
