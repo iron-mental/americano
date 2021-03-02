@@ -241,7 +241,10 @@ class ProfileModifyView: UIViewController {
             let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
             showLoading()
             presenter?.completeModify(profile: profile)
-            presenter?.completeImageModify(image: image)
+            
+            if self.profile?.profileImage != profile.profileImage {
+                presenter?.completeImageModify(image: image)
+            }
         }
     }
 
