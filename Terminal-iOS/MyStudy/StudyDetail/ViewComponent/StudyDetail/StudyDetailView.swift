@@ -347,12 +347,14 @@ final class StudyDetailView: UIViewController {
     }
     
     @objc func reportButtonConfirmed() {
+        TerminalAlertMessage.dismiss()
         if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController"),
            let castContentViewController = contentViewController as? UIViewController {
             if let alertView = castContentViewController.view {
                 if let messageView = alertView as? AlertReportContentView {
-                    guard let message =  messageView.editMessageTextView.text else { return }
-                    print(message)
+                    guard let message =  messageView.editMessageTextView.text,
+                          let id = studyInfo?.id else { return }
+                    presenter?.reportConfirmButtonDidTap(studyID: id, reportMessage: message)
                 }
             }
         }
@@ -360,6 +362,7 @@ final class StudyDetailView: UIViewController {
 }
 
 extension StudyDetailView: StudyDetailViewProtocol {
+    
     func studyJoinResult(message: String) {
         showToast(controller: self, message: message, seconds: 1)
         presenter?.showStudyListDetail(studyID: "\(studyInfo!.id)")
@@ -403,6 +406,10 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func hideLoading() {
         LoadingRainbowCat.hide(caller: self)
+    }
+    
+    func showReportResult(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }
 

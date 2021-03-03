@@ -20,6 +20,15 @@ final class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
     func postStudyJoin(studyID: Int, message: String) {
         remoteDatamanager?.postStudyJoin(studyID: studyID, message: message)
     }
+    
+    func postReportStudy(studyID: Int, reportMessage: String) {
+        if reportMessage == "허위 신고 시 이용이 제한될 수 있습니다." ||
+            reportMessage.isEmpty {
+            presenter?.postReportStudyResult(result: false, message: "공백은 허용되지 않습니다")
+        } else {
+            remoteDatamanager?.postReportStudy(studyID: studyID, reportMessage: reportMessage)
+        }
+    }
 }
 
 extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
@@ -55,6 +64,11 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
                                                location: studyDetail.location,
                                                authority: studyDetail.authority)
         return convertedStudyDetail
+    }
+    
+    func postReportStudyResult(result: BaseResponse<String>) {
+        guard let message = result.message else { return }
+        presenter?.postReportStudyResult(result: result.result, message: message)
     }
     
     func convertSNS(sns: String?) -> String {

@@ -44,7 +44,6 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
     }
     
     func postStudyJoin(studyID: Int, message: String) {
-        
         let params: [String: String] = [
             "message": message
         ]
@@ -71,6 +70,39 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
                             let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
                             if result.message != nil {
                                 self.remoteRequestHandler?.postStudyJoinResult(result: result)
+                            }
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
+    }
+    
+    func postReportStudy(studyID: Int, reportMessage: String) {
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.reportStudy(studyID: studyID, message: reportMessage))
+            .validate()
+            .responseData { response in
+                switch response.result {
+                
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                        if result.message != nil {
+                            self.remoteRequestHandler?.postReportStudyResult(result: result)
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure:
+                    if let data = response.data {
+                        do {
+                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                            if result.message != nil {
+                                self.remoteRequestHandler?.postReportStudyResult(result: result)
                             }
                         } catch {
                             print(error.localizedDescription)
