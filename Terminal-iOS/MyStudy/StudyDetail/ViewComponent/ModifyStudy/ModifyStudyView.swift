@@ -14,6 +14,13 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     
     override func attribute() {
         super.attribute()
+        
+        mainImageView.do {
+            guard let url = study?.image else { return }
+            $0.kf.setImage(with: URL(string: url),
+                           placeholder: UIImage(named: "defaultProfile"),
+                           options: [.requestModifier(RequestToken.token())])
+        }
         self.do {
             $0.title = "스터디 수정"
         }

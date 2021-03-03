@@ -144,7 +144,6 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         mainImageView.do {
             $0.alpha = 0.7
-            $0.image = #imageLiteral(resourceName: "swift")
             let mainImageTapGesture = UITapGestureRecognizer(target: self,
                                                              action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(mainImageTapGesture)
