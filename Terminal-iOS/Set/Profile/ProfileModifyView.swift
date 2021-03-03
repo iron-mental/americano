@@ -215,6 +215,7 @@ class ProfileModifyView: UIViewController {
     }
     
     func openLibrary() {
+        picker.allowsEditing = true
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
