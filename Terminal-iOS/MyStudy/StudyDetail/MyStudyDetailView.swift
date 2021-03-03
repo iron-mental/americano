@@ -263,7 +263,7 @@ final class MyStudyDetailView: UIViewController {
         if authority == .host {
             [ noticeAdd, studyEdit, applyList, delegateHost, reportStudy, deleteStudy, leaveStudy, cancel ].forEach { alert.addAction($0) }
         } else if authority == .member {
-            [ leaveStudy, cancel ].forEach { alert.addAction($0) }
+            [ reportStudy, leaveStudy, cancel ].forEach { alert.addAction($0) }
         }
         present(alert, animated: true, completion: nil)
     }
