@@ -36,6 +36,8 @@ class AlertReportContentView: AlertBaseUIView {
             $0.backgroundColor = .systemGray5
             $0.layer.cornerRadius = 6
             $0.layer.masksToBounds = true
+            $0.text = "ex) 폭력적인 사진이 포함되어있어요"
+            $0.textColor = .gray
         }
     }
     
@@ -59,10 +61,10 @@ class AlertReportContentView: AlertBaseUIView {
         }
         editMessageTextView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: bottomBar.centerYAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: reportGuideLabel.bottomAnchor, constant: Terminal.convertHeight(value: 5)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 20)).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Terminal.convertWidth(value: 20)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: bottomBar.bottomAnchor, constant: -Terminal.convertHeight(value: 15)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: completeButton.topAnchor, constant: -Terminal.convertHeight(value: 15)).isActive = true
         }
     }
     
@@ -72,5 +74,10 @@ class AlertReportContentView: AlertBaseUIView {
 }
 
 extension AlertReportContentView: UITextViewDelegate {
-    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "ex) 폭력적인 사진이 포함되어있어요" {
+            textView.textColor = .white
+            textView.text = ""
+        }
+    }
 }
