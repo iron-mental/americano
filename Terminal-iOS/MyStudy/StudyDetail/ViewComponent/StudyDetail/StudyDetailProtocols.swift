@@ -15,7 +15,8 @@ protocol StudyDetailViewProtocol: class {
     var studyInfo: StudyDetail? { get set }
     var parentView: MyStudyDetailViewProtocol? { get set }
     var studyTitle: String? { get set }
-    // PRESENT -> VIEW
+    
+    // PRESENTER -> VIEW
     func showStudyDetail(with studyDetail: StudyDetail)
     func showError(message: String)
     func showLoading()

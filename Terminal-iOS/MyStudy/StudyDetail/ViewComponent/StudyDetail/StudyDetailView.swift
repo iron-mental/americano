@@ -343,10 +343,19 @@ final class StudyDetailView: UIViewController {
     
     @objc func reportButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .ReportContentView)
-//        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(), for: <#T##UIControl.Event#>)
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(reportButtonConfirmed), for: .touchUpInside)
     }
+    
     @objc func reportButtonConfirmed() {
-        
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController"),
+           let castContentViewController = contentViewController as? UIViewController {
+            if let alertView = castContentViewController.view {
+                if let messageView = alertView as? AlertReportContentView {
+                    guard let message =  messageView.editMessageTextView.text else { return }
+                    print(message)
+                }
+            }
+        }
     }
 }
 
