@@ -381,6 +381,7 @@
 		CCF632D125A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF632D025A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift */; };
 		CCF632DB25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF632DA25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift */; };
 		CCF71AA7256F959000EC83C6 /* StudyDetailPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF71AA6256F959000EC83C6 /* StudyDetailPost.swift */; };
+		CCFA775B25EFA61800DEE2D3 /* EmailValidteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA775A25EFA61800DEE2D3 /* EmailValidteResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -791,6 +792,7 @@
 		CCF632D025A2E865004B80B3 /* SearchStudyResultRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyResultRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCF632DA25A2E8A0004B80B3 /* SearchStudyResultWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStudyResultWireFrame.swift; sourceTree = "<group>"; };
 		CCF71AA6256F959000EC83C6 /* StudyDetailPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDetailPost.swift; sourceTree = "<group>"; };
+		CCFA775A25EFA61800DEE2D3 /* EmailValidteResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidteResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1514,6 +1516,7 @@
 				A5C205A025E6AF6A006EBD14 /* StudyNilCheck.swift */,
 				A5FCF49525EBF4A5001DEB39 /* ApplyUserInfo.swift */,
 				A5FCF4FE25EE7533001DEB39 /* FontWeight.swift */,
+				CCFA775A25EFA61800DEE2D3 /* EmailValidteResult.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2084,6 +2087,7 @@
 				CCD51C73256D274A00D41771 /* MyStudyDetailProtocols.swift in Sources */,
 				A5BA1ED6254A8E9C0089D4E9 /* NotificationView.swift in Sources */,
 				CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */,
+				CCFA775B25EFA61800DEE2D3 /* EmailValidteResult.swift in Sources */,
 				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
 				CCA3FF5B2517826B00F62627 /* StudyCategoryProtocols.swift in Sources */,
 				A581495025912DFC00BF3C2A /* CareerModifyProtocols.swift in Sources */,

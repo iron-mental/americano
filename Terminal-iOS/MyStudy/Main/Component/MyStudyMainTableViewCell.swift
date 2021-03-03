@@ -15,6 +15,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
     var studyMainimage = UIImageView()
     var locationLabel = PaddingLabel(insets: UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2))
     var titleLabel = UILabel()
+    var borderLayer = CAShapeLayer()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,12 +28,19 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.selectionStyle = .none
         }
+        borderLayer.do {
+            $0.strokeColor = UIColor.appColor(.terminalBackground).cgColor
+            $0.lineDashPattern = [3, 3]
+            $0.path = UIBezierPath(rect: studyMainimage.bounds).cgPath
+            $0.fillColor = nil
+        }
         studyMainimage.do {
             $0.image = #imageLiteral(resourceName: "swiftmain")
             $0.contentMode = .scaleAspectFill
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 8
             $0.alpha = 0.8
+            $0.layer.addSublayer(borderLayer)
         }
         locationLabel.do {
             $0.textColor = UIColor.appColor(.mainColor)
@@ -81,6 +89,10 @@ class MyStudyMainTableViewCell: UITableViewCell {
             studyMainimage.layer.borderWidth = 2
             studyMainimage.layer.borderColor = UIColor.systemGray3.cgColor
             self.studyMainimage.tintColor = .gray
+            borderLayer.frame = CGRect(x: 0,
+                                       y: 0,
+                                       width: studyMainimage.constraints[0].constant,
+                                       height: studyMainimage.constraints[1].constant)
         } else {
             studyMainimage.layer.borderWidth = 0
             studyMainimage.layer.borderColor = .none

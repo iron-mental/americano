@@ -28,12 +28,14 @@ class SearchLocationView: UIViewController {
             $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         closeButton.do {
-            $0.setImage(UIImage(systemName: "xmark")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
+            $0.setImage(UIImage(systemName: "xmark")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
             $0.addTarget(self, action: #selector(didCloseButtonClicked), for: .touchUpInside)
             $0.tintColor = .white
         }
         searchButton.do {
-            $0.setImage(UIImage(systemName: "magnifyingglass")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
+            $0.setImage(UIImage(systemName: "magnifyingglass")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
             $0.addTarget(self, action: #selector(didSearchButtonClicked), for: .touchUpInside)
             $0.tintColor = .white
         }
@@ -64,13 +66,13 @@ class SearchLocationView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Terminal.convertWidth(value: 15)).isActive = true
             $0.centerYAnchor.constraint(equalTo: searchTextField.centerYAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 30)).isActive = true
         }
         searchTextField.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Terminal.convertHeight(value: 18)).isActive = true
             $0.leadingAnchor.constraint(equalTo: closeButton.trailingAnchor, constant: Terminal.convertWidth(value: 15.7)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 250)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 30)).isActive = true
         }
         tableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

@@ -36,15 +36,21 @@ class IntroPresenter: IntroPresenterProtocol {
         result ? view?.presentNextView() : view?.showInvalidPasswordAction()
     }
     
-    func nicknameValidInfo(result: Bool) {
+    func nicknameValidInfo(result: Bool, message: String) {
         view?.hideLoading()
-        result ? view?.presentNextView() : view?.showInvalidNickNameAction()
+        result ? view?.presentNextView() : view?.showInvalidNickNameAction(message: message)
     }
     
     /// 회원가입 유효성 확인
     func signUpValidInfo(result: Bool) {
-        view?.hideLoading()
-        view?.presentCompleteView()
+        switch result {
+        case true:
+            view?.hideLoading()
+            view?.presentCompleteView()
+        case false:
+            view?.hideLoading()
+        }
+        
     }
     
     /// 로그인 유효성 확인

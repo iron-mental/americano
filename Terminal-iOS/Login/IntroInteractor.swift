@@ -24,7 +24,12 @@ class IntroInteractor: IntroInteractorProtocol {
                 remoteDataManager?.getEmailValidInfo(input: input) { result in
                     switch result.result {
                     case true:
-                        self.presenter?.emailValidInfo(result: true, message: result.message ?? "")
+                        guard let duplicate = result.data?.duplicate else { return }
+                        switch duplicate {
+                        case true: break
+                        case false:
+                            self.presenter?.emailValidInfo(result: true, message: result.message ?? "")
+                        }
                         IntroLocalDataManager.shared.email = input
                     case false:
                         self.presenter?.emailValidInfo(result: false, message: result.message ?? "")
@@ -58,14 +63,15 @@ class IntroInteractor: IntroInteractorProtocol {
                                                   completionHandler: { result in
             switch result.result {
             case true:
-              self.presenter?.signUpValidInfo(result: true)
+                self.presenter?.signUpValidInfo(result: true)
             case false:
-                self.presenter?.nicknameValidInfo(result: false)
+                guard let message = result.message else { return }
+                self.presenter?.nicknameValidInfo(result: false, message: message)
                 }
               }
             )
         } else {
-            presenter?.signUpValidInfo(result: false)
+            self.presenter?.nicknameValidInfo(result: false, message: "닉네임은 2 ~ 8 글자 여야 합니다.")
         }
     }
     

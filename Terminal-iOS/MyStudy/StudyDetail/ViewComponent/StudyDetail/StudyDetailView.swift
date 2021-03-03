@@ -102,8 +102,17 @@ final class StudyDetailView: UIViewController {
         mainImageView.do {
             $0.isUserInteractionEnabled = false
             guard let imageURL = studyInfo?.image else { return }
-            $0.kf.setImage(with: URL(string: imageURL),
-                           options: [.requestModifier(RequestToken.token())])
+            if imageURL.isEmpty {
+                $0.tintColor = .gray
+                $0.contentMode = .scaleAspectFit
+                $0.image = UIImage(systemName: "photo.fill")?
+                    .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            } else {
+                $0.kf.setImage(with: URL(string: imageURL),
+                               options: [.requestModifier(RequestToken.token())])
+                $0.tintColor = .none
+                $0.contentMode = .scaleAspectFit
+            }
         }
         
         snsIconsView.do {

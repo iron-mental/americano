@@ -13,7 +13,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     
     // MARK: 회원가입 이메일 유효성 검사
     
-    func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<String>) -> Void) {
+    func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<EmailValidteResult>) -> Void) {
         
         TerminalNetworkManager
             .shared
@@ -23,7 +23,7 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                 switch response.result {
                 case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                        let result = try JSONDecoder().decode(BaseResponse<EmailValidteResult>.self, from: data)
                         completionHandler(result)
                     } catch {
                         print(error.localizedDescription)

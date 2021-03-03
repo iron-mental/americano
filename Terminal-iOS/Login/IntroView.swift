@@ -247,8 +247,8 @@ extension IntroView: IntroViewProtocol {
         invalidGuideAnimation()
     }
     
-    func showInvalidNickNameAction() {
-        invalidLabel.text = "❌ 중복된 닉네임 입니다."
+    func showInvalidNickNameAction(message: String) {
+        invalidLabel.text = "❌ \(message)"
         invalidGuideAnimation()
     }
     

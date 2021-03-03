@@ -89,11 +89,37 @@ class StudyCell: UITableViewCell {
         
         DispatchQueue.main.async {
             let processor = DownsamplingImageProcessor(size: self.mainImage.bounds.size)
-            self.mainImage.kf.setImage(with: URL(string: mainImageURL),
-                           placeholder: UIImage(named: "swift"),
-                           options: [.requestModifier(RequestToken.token()),
-                                     .processor(processor)])
+//            self.mainImage.do {
+//                if mainImageURL.isEmpty {
+//                    $0.tintColor = .gray
+//                    $0.contentMode = .scaleAspectFit
+//                    $0.image = UIImage(systemName: "photo.fill")?
+//                        .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+//                } else {
+//                    $0.kf.setImage(with: URL(string: mainImageURL),
+//                                   options: [.requestModifier(RequestToken.token())])
+//                    $0.tintColor = .none
+//                    $0.contentMode = .scaleAspectFit
+//                }
+//            }
+            self.mainImage.do {
+                if mainImageURL.isEmpty {
+                    $0.image = nil
+                    $0.layer.borderWidth = 2
+                    $0.layer.borderColor = UIColor.systemGray3.cgColor
+                    $0.tintColor = .gray
+                } else {
+                    $0.layer.borderWidth = 0
+                    $0.layer.borderColor = .none
+                    $0.tintColor = .none
+                    $0.kf.setImage(with: URL(string: mainImageURL), options: [.requestModifier(RequestToken.token())])
+                }
+            }
             
+//            self.mainImage.kf.setImage(with: URL(string: mainImageURL),
+//                           placeholder: UIImage(named: "swift"),
+//                           options: [.requestModifier(RequestToken.token()),
+//                                     .processor(processor)])
             self.managerImage.kf.setImage(with: URL(string: managerImageURL),
                                           options: [.requestModifier(RequestToken.token())])
         }

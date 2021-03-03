@@ -18,7 +18,6 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         mainImageView.do {
             guard let url = study?.image else { return }
             $0.kf.setImage(with: URL(string: url),
-                           placeholder: UIImage(named: "defaultProfile"),
                            options: [.requestModifier(RequestToken.token())])
         }
         self.do {

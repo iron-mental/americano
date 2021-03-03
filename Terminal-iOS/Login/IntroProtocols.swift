@@ -23,7 +23,7 @@ protocol IntroViewProtocol: class {
         //false
     func showInvalidEmailAction(message: String)
     func showInvalidPasswordAction()
-    func showInvalidNickNameAction()
+    func showInvalidNickNameAction(message: String)
     func showInvalidLoginAction(message: String)
 }
 
@@ -48,7 +48,7 @@ protocol IntroPresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func emailValidInfo(result: Bool, message: String)
     func passwordValidInfo(result: Bool)
-    func nicknameValidInfo(result: Bool)
+    func nicknameValidInfo(result: Bool, message: String)
     func signUpValidInfo(result: Bool)
     func joinValidInfo(result: Bool, message: String)
 }
@@ -65,7 +65,7 @@ protocol IntroInteractorProtocol: class {
 }
 
 protocol IntroRemoteDataManagerProtocol: class {
-    func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<String>) -> Void)
+    func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<EmailValidteResult>) -> Void)
     func getSignUpValidInfo(signUpMaterial: [String], completionHandler: @escaping (BaseResponse<String>) -> Void)
     func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (BaseResponse<JoinResult>) -> Void)
 }
