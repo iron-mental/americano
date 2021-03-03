@@ -144,6 +144,8 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         mainImageView.do {
             $0.editMode()
+            $0.contentMode = .scaleAspectFill
+            $0.layer.masksToBounds = true
             $0.alpha = 0.7
             let mainImageTapGesture = UITapGestureRecognizer(target: self,
                                                              action: #selector(didImageViewClicked))

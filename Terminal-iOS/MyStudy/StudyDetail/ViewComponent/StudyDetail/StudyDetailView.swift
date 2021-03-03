@@ -101,10 +101,11 @@ final class StudyDetailView: UIViewController {
         
         mainImageView.do {
             $0.isUserInteractionEnabled = false
+            $0.contentMode = .scaleAspectFill
+            $0.layer.masksToBounds = true
             guard let imageURL = studyInfo?.image else { return }
             if imageURL.isEmpty {
                 $0.tintColor = .gray
-                $0.contentMode = .scaleAspectFit
                 $0.image = UIImage(systemName: "photo.fill")?
                     .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
             } else {
