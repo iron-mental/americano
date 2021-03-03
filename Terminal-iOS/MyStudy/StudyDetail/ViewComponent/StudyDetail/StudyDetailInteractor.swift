@@ -18,7 +18,12 @@ final class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
     }
     
     func postStudyJoin(studyID: Int, message: String) {
-        remoteDatamanager?.postStudyJoin(studyID: studyID, message: message)
+        if message == "ex) 열심히 공부할 자신 있습니다!!" ||
+            message.isEmpty {
+            presenter?.studyJoinResult(result: false, message: "공백은 허용되지 않습니다")
+        } else {
+            remoteDatamanager?.postStudyJoin(studyID: studyID, message: message)
+        }
     }
     
     func postReportStudy(studyID: Int, reportMessage: String) {
