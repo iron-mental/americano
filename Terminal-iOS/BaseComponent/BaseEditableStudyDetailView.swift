@@ -143,6 +143,7 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.backgroundColor = .appColor(.testColor)
         }
         mainImageView.do {
+            $0.editMode()
             $0.alpha = 0.7
             let mainImageTapGesture = UITapGestureRecognizer(target: self,
                                                              action: #selector(didImageViewClicked))

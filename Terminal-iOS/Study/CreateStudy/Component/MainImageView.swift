@@ -35,4 +35,32 @@ class MainImageView: UIImageView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func editMode() {
+        let backgroundView = UIView()
+        let editImageView = UIImageView()
+        
+        self.addSubview(backgroundView)
+        backgroundView.addSubview(editImageView)
+        
+        backgroundView.do {
+            $0.backgroundColor = .darkGray
+            $0.alpha = 0.5
+            $0.frame = CGRect(x: 0,
+                              y: 0,
+                              width: self.constraints[0].constant,
+                              height: self.constraints[1].constant)
+        }
+        editImageView.do {
+            $0.image = UIImage(systemName: "plus.circle")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            $0.contentMode = .scaleAspectFill
+            $0.tintColor = .lightGray
+            $0.frame = CGRect(x: self.constraints[0].constant / 2 - (Terminal.convertWidth(value: 50) / 2),
+                              y: self.constraints[1].constant / 2 - (Terminal.convertWidth(value: 50) / 2),
+                              width: Terminal.convertWidth(value: 50),
+                              height: Terminal.convertWidth(value: 50))
+        }
+        
+    }
 }
