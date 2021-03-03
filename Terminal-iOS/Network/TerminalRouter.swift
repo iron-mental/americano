@@ -56,6 +56,7 @@ enum TerminalRouter: URLRequestConvertible {
     case studyLeave             (studyID: String)
     case studyCategory
     case delegateHost           (studyID: Int, newLeader: Int)
+    case reportStudy            (studyID: Int, message: String)
     
     // 신청부분
     case applyStudy             (studyID: String, message: Parameters)
@@ -163,6 +164,8 @@ enum TerminalRouter: URLRequestConvertible {
             return .get
         case .delegateHost:
             return .put
+        case .reportStudy:
+            return .post
             
         // 신청
         case .applyStudy:
@@ -276,6 +279,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/category"
         case let .delegateHost(studyID, _):
             return "study/\(studyID)/delegate"
+        case let .reportStudy(studyID, _):
+            return "study/\(studyID)/report"
             
         // 신청
         case let .applyStudy(studyID, _):
@@ -372,6 +377,8 @@ enum TerminalRouter: URLRequestConvertible {
             return study
         case let .delegateHost(_, newLeader):
             return ["new_leader": newLeader]
+        case let .reportStudy(_, message):
+            return ["message": message]
             
         // 신청
         case let .applyStudy(_, message):
