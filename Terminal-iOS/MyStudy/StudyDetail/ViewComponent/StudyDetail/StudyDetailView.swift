@@ -303,16 +303,16 @@ final class StudyDetailView: UIViewController {
     }
     
     @objc func studyApplyMessageEndEditing() {
+        TerminalAlertMessage.dismiss()
         if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController"),
            let castContentViewController = contentViewController as? UIViewController {
             if let alertView = castContentViewController.view {
                 if let messageView = alertView as? StudyApplyMessageView {
-                    guard let message =  messageView.editMessageTextField.text else { return }
+                    guard let message =  messageView.editMessageTextView.text else { return }
                     presenter?.joinButtonDidTap(studyID: studyID!, message: message)
                 }
             }
         }
-        TerminalAlertMessage.dismiss()
     }
     
     @objc func snsButtonDidTap(_ sender: UIButton) {
