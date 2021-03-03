@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ReportContentView: AlertBaseUIView {
+class AlertReportContentView: AlertBaseUIView {
     var reportTitleLabel = UILabel()
     var editMessageTextField = UITextField()
     
-    init(type: StudyApplyMessageType) {
+    override init() {
         super.init()
         attribute()
         layout()

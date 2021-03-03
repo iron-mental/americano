@@ -62,6 +62,7 @@ final class StudyDetailView: UIViewController {
     lazy var timeView = TitleWithContentView()
     lazy var locationView = TitleWithContentView()
     lazy var studyIntroduceView = TitleWithContentView()
+    lazy var moreButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,9 +78,18 @@ final class StudyDetailView: UIViewController {
                 $0.title = studyTitle
             }
         }
-        self.navigationController?.do {
+        navigationController?.do {
             $0.navigationBar.standardAppearance = appearance
             $0.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
+            
+        }
+        navigationItem.do {
+            $0.rightBarButtonItems = [moreButton]
+        }
+        moreButton.do {
+            $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.target = self
+            $0.action = #selector(moreButtonAction)
         }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -320,6 +330,23 @@ final class StudyDetailView: UIViewController {
         default: break
         }
         presenter?.snsButtonDidTap(url: url)
+    }
+    
+    @objc func moreButtonAction() {
+        let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let applyList =  UIAlertAction(title: "신고하기", style: .default) {_ in self.reportButtonDidTap() }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        [ applyList, cancel].forEach { alert.addAction($0) }
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func reportButtonDidTap() {
+        TerminalAlertMessage.show(controller: self, type: .ReportContentView)
+//        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(), for: <#T##UIControl.Event#>)
+    }
+    @objc func reportButtonConfirmed() {
+        
     }
 }
 
