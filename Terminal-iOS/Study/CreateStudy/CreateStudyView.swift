@@ -24,9 +24,10 @@ final class CreateStudyView: BaseEditableStudyDetailView {
     
     override func attribute() {
         super.attribute()
-        self.mainImageView.do {
-            $0.image = #imageLiteral(resourceName: "swift")
-        }
+        //스터디 만들기 할 때 기본이미지 넣어주기
+//        self.mainImageView.do {
+//            $0.image = #imageLiteral(resourceName: "swift")
+//        }
         self.do {
             $0.title = "스터디 만들기"
         }

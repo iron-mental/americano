@@ -101,9 +101,8 @@ final class StudyDetailView: UIViewController {
         
         mainImageView.do {
             $0.isUserInteractionEnabled = false
-            let imageURL = studyInfo?.image ?? ""
+            guard let imageURL = studyInfo?.image else { return }
             $0.kf.setImage(with: URL(string: imageURL),
-                           placeholder: UIImage(named: "swift"),
                            options: [.requestModifier(RequestToken.token())])
         }
         

@@ -77,8 +77,14 @@ class MyStudyMainTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
         guard let image = study.image else { return }
         if image.isEmpty {
-            self.studyMainimage.image = UIImage(named: "swiftmain")
+            studyMainimage.image = nil
+            studyMainimage.layer.borderWidth = 2
+            studyMainimage.layer.borderColor = UIColor.systemGray3.cgColor
+            self.studyMainimage.tintColor = .gray
         } else {
+            studyMainimage.layer.borderWidth = 0
+            studyMainimage.layer.borderColor = .none
+            self.studyMainimage.tintColor = .none
             self.studyMainimage.kf.setImage(with: URL(string: image), options: [.requestModifier(RequestToken.token())])
         }
     }
