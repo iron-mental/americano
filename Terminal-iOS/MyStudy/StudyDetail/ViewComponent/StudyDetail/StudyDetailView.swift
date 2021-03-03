@@ -101,7 +101,7 @@ final class StudyDetailView: UIViewController {
         
         mainImageView.do {
             $0.isUserInteractionEnabled = false
-            $0.contentMode = .scaleAspectFill
+            $0.contentMode = .scaleAspectFit
             $0.layer.masksToBounds = true
             guard let imageURL = studyInfo?.image else { return }
             if imageURL.isEmpty {
@@ -112,7 +112,7 @@ final class StudyDetailView: UIViewController {
                 $0.kf.setImage(with: URL(string: imageURL),
                                options: [.requestModifier(RequestToken.token())])
                 $0.tintColor = .none
-                $0.contentMode = .scaleAspectFit
+                $0.contentMode = .scaleAspectFill
             }
         }
         

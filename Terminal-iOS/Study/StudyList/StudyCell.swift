@@ -112,6 +112,7 @@ class StudyCell: UITableViewCell {
                     $0.layer.borderWidth = 0
                     $0.layer.borderColor = .none
                     $0.tintColor = .none
+                    $0.contentMode = .scaleAspectFill
                     $0.kf.setImage(with: URL(string: mainImageURL), options: [.requestModifier(RequestToken.token())])
                 }
             }
@@ -168,7 +169,7 @@ class StudyCell: UITableViewCell {
         
         self.mainImage.do {
             $0.tintColor = .systemGray3
-            $0.clipsToBounds = true
+            $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 10
         }
     }
