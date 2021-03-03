@@ -29,6 +29,7 @@ final class StudyDetailPresenter: StudyDetailPresenterProtocol {
     func didClickedCreateButton() {
         
     }
+    
     func joinButtonDidTap(studyID: Int, message: String) {
         view?.showLoading()
         interactor?.postStudyJoin(studyID: studyID, message: message)
@@ -44,6 +45,10 @@ final class StudyDetailPresenter: StudyDetailPresenterProtocol {
     
     func snsButtonDidTap(url: String) {
         wireFrame?.goToSNSWebView(from: view!, url: url)
+    }
+    
+    func reportConfirmButtonDidTap(studyID: Int, reportMessage: String) {
+        interactor?.postReportStudy(studyID: studyID, reportMessage: reportMessage)
     }
 }
 
@@ -69,5 +74,15 @@ extension StudyDetailPresenter: StudyDetailInteractorOutputProtocol {
             view?.showError(message: message)
         }
     }
-
+    
+    func postReportStudyResult(result: Bool, message: String) {
+        switch result {
+        case true:
+            view?.hideLoading()
+            view?.showReportResult(message: message)
+        case false:
+            view?.hideLoading()
+            view?.showError(message: message)
+        }
+    }
 }

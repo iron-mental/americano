@@ -22,6 +22,7 @@ enum AlertType {
     case VersionUpdateRecommendView     //업데이트 권장
     case VersionUpdateRequiredView      //업데이트 필수
     case JumpToSettingAppView           //알림 설정
+    case ReportContentView              //컨텐츠 신고
     
     var view: UIView {
         switch self {
@@ -70,6 +71,9 @@ enum AlertType {
         case .JumpToSettingAppView:
             let jumpToSettingAppView = AlertMessageView(message: "터미널 앱 알림허용이 필요합니다.\niOS 알림 설정페이지로 지금\n이동하시겠습니까?")
             return jumpToSettingAppView
+        case .ReportContentView:
+            let reportContentView = AlertReportContentView()
+            return reportContentView
         }
     }
 }

@@ -190,6 +190,11 @@ final class MyStudyDetailView: UIViewController {
                                                         for: .touchUpInside)
     }
     
+    func reportButtonDidTap() {
+        TerminalAlertMessage.show(controller: self, type: .ReportContentView)
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(reportButtonConfirmed), for: .touchUpInside)
+    }
+    
     func setPageControllerChild() {
         self.vcArr = [NoticeWireFrame.createNoticeModule(studyID: studyID!, parentView: self),
                       StudyDetailWireFrame.createStudyDetail(parent: self,
@@ -251,13 +256,14 @@ final class MyStudyDetailView: UIViewController {
         let applyList = UIAlertAction(title: "신청자 목록", style: .default) { _ in self.applyListButtonDidTap() }
         let delegateHost = UIAlertAction(title: "방장 위임하기", style: .default) { _ in self.delegateHostButtonDidTap() }
         let deleteStudy = UIAlertAction(title: "스터디 삭제하기", style: .destructive) { _ in self.deleteStudyButtonDidTap() }
+        let reportStudy =  UIAlertAction(title: "신고하기", style: .default) {_ in self.reportButtonDidTap() }
         let leaveStudy = UIAlertAction(title: "스터디 나가기", style: .destructive) { _ in self.leaveStudyButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         if authority == .host {
-            [ noticeAdd, studyEdit, applyList, delegateHost, deleteStudy, leaveStudy, cancel ].forEach { alert.addAction($0) }
+            [ noticeAdd, studyEdit, applyList, delegateHost, reportStudy, deleteStudy, leaveStudy, cancel ].forEach { alert.addAction($0) }
         } else if authority == .member {
-            [ leaveStudy, cancel ].forEach { alert.addAction($0) }
+            [ reportStudy, leaveStudy, cancel ].forEach { alert.addAction($0) }
         }
         present(alert, animated: true, completion: nil)
     }
@@ -270,6 +276,22 @@ final class MyStudyDetailView: UIViewController {
     @objc func deleteStudyCompleteButtonDidTap() {
         presenter?.deleteStudyButtonDidTap(studyID: studyID!)
         TerminalAlertMessage.dismiss()
+    }
+    
+    @objc func reportButtonConfirmed() {
+        TerminalAlertMessage.dismiss()
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController"),
+           let castContentViewController = contentViewController as? UIViewController {
+            if let alertView = castContentViewController.view {
+                if let messageView = alertView as? AlertReportContentView {
+                    guard let message =  messageView.editMessageTextView.text,
+                          let id = studyID else { return }
+                    if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
+                        studyDetailView.presenter?.reportConfirmButtonDidTap(studyID: id, reportMessage: message)
+                    }
+                }
+            }
+        }
     }
 }
 

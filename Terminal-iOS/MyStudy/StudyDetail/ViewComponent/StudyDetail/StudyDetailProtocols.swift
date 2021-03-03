@@ -15,12 +15,14 @@ protocol StudyDetailViewProtocol: class {
     var studyInfo: StudyDetail? { get set }
     var parentView: MyStudyDetailViewProtocol? { get set }
     var studyTitle: String? { get set }
-    // PRESENT -> VIEW
+    
+    // PRESENTER -> VIEW
     func showStudyDetail(with studyDetail: StudyDetail)
     func showError(message: String)
     func showLoading()
     func hideLoading()
     func studyJoinResult(message: String)
+    func showReportResult(message: String)
 }
 
 protocol StudyDetailWireFrameProtocol: class {
@@ -48,6 +50,7 @@ protocol StudyDetailPresenterProtocol: class {
     func modifyStudyMessageButtonDidTap(studyID: Int)
     func memberDidTap(userID: Int)
     func snsButtonDidTap(url: String)
+    func reportConfirmButtonDidTap(studyID: Int, reportMessage: String)
     //INTERACTOR -> PRESENTER
     
 }
@@ -60,6 +63,7 @@ protocol StudyDetailInteractorInputProtocol: class {
     // PRESENTER -> INTERACTOR
     func retrieveStudyDetail(studyID: String)
     func postStudyJoin(studyID: Int, message: String)
+    func postReportStudy(studyID: Int, reportMessage: String)
 }
 
 protocol StudyDetailInteractorOutputProtocol: class {
@@ -68,19 +72,23 @@ protocol StudyDetailInteractorOutputProtocol: class {
     func didRetrieveStudyDetail(_ studyDetail: StudyDetail)
     func studyJoinResult(result: Bool, message: String)
     func onError(message: String)
+    func postReportStudyResult(result: Bool, message: String)
 }
 
 protocol StudyDetailRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyDetailRemoteDataManagerOutputProtocol? { get set }
+    
     // INTERACTOR -> REMOTEDATAMANAGER
     func getStudyDetail(studyID: String)
     func postStudyJoin(studyID: Int, message: String)
+    func postReportStudy(studyID: Int, reportMessage: String)
 }
 
 protocol StudyDetailRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onStudyDetailRetrieved(result: BaseResponse<StudyDetailInfo>)
     func postStudyJoinResult(result: BaseResponse<String>)
+    func postReportStudyResult(result: BaseResponse<String>)
 }
 
 protocol StudyDetailLocalDataManagerInputProtocol: class {

@@ -62,6 +62,7 @@ final class StudyDetailView: UIViewController {
     lazy var timeView = TitleWithContentView()
     lazy var locationView = TitleWithContentView()
     lazy var studyIntroduceView = TitleWithContentView()
+    lazy var moreButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,9 +78,18 @@ final class StudyDetailView: UIViewController {
                 $0.title = studyTitle
             }
         }
-        self.navigationController?.do {
+        navigationController?.do {
             $0.navigationBar.standardAppearance = appearance
             $0.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
+            
+        }
+        navigationItem.do {
+            $0.rightBarButtonItems = [moreButton]
+        }
+        moreButton.do {
+            $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.target = self
+            $0.action = #selector(moreButtonAction)
         }
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
@@ -321,9 +331,38 @@ final class StudyDetailView: UIViewController {
         }
         presenter?.snsButtonDidTap(url: url)
     }
+    
+    @objc func moreButtonAction() {
+        let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let reportStudy =  UIAlertAction(title: "신고하기", style: .default) {_ in self.reportButtonDidTap() }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        [ reportStudy, cancel].forEach { alert.addAction($0) }
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func reportButtonDidTap() {
+        TerminalAlertMessage.show(controller: self, type: .ReportContentView)
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(reportButtonConfirmed), for: .touchUpInside)
+    }
+    
+    @objc func reportButtonConfirmed() {
+        TerminalAlertMessage.dismiss()
+        if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController"),
+           let castContentViewController = contentViewController as? UIViewController {
+            if let alertView = castContentViewController.view {
+                if let messageView = alertView as? AlertReportContentView {
+                    guard let message =  messageView.editMessageTextView.text,
+                          let id = studyInfo?.id else { return }
+                    presenter?.reportConfirmButtonDidTap(studyID: id, reportMessage: message)
+                }
+            }
+        }
+    }
 }
 
 extension StudyDetailView: StudyDetailViewProtocol {
+    
     func studyJoinResult(message: String) {
         showToast(controller: self, message: message, seconds: 1)
         presenter?.showStudyListDetail(studyID: "\(studyInfo!.id)")
@@ -367,6 +406,10 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func hideLoading() {
         LoadingRainbowCat.hide(caller: self)
+    }
+    
+    func showReportResult(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }
 
