@@ -11,6 +11,7 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class ProfileModifyView: UIViewController {
+    deinit { keyboardRemoveObserver() }
     
     // MARK: Init Property
     
@@ -18,16 +19,18 @@ class ProfileModifyView: UIViewController {
     var profile: Profile?
     let picker = UIImagePickerController()
 
-    let projectAddButton = UIButton()
-    lazy var modifyLabel = UILabel()
-    lazy var contentView = UIView()
+    let modifyLabel = UILabel()
+    let contentView = UIView()
     let profileImage = UIImageView()
-    lazy var nameLabel = UILabel()
-    lazy var introductionLabel = UILabel()
-    lazy var name = UITextField()
-    lazy var introduction = UITextView()
-    lazy var completeButton = UIButton()
-    var  accessoryCompleteButton = UIButton()
+    let nameLabel = UILabel()
+    let introductionLabel = UILabel()
+    let name = UITextField()
+    let introduction = UITextView()
+    let completeButton = UIButton()
+    var accessoryCompleteButton = UIButton()
+    
+    var topAnchor: NSLayoutConstraint?
+    
     // MARK: viewDidLoad
     
     override func viewDidLoad() {
@@ -35,22 +38,22 @@ class ProfileModifyView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
-        textViewDidChange(introduction)
         hideLoading()
+        self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
+                                 hideSelector: #selector(keyboardWillHide))
     }
     
     // MARK: Set Attribute
+    
     func attribute() {
         self.do {
             $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.title = "프로필 수정"
         }
-        
         self.picker.do {
             $0.delegate = self
         }
-
         self.profileImage.do {
             $0.image = self.profile?.profileImage
             let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
@@ -62,24 +65,20 @@ class ProfileModifyView: UIViewController {
             $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
         }
-        
         self.contentView.do {
             $0.backgroundColor = .darkGray
             $0.alpha = 0.5
         }
-        
         self.modifyLabel.do {
             $0.text = "편집"
             $0.textAlignment = .center
             $0.textColor = .white
             $0.font = UIFont.notosansMedium(size: 13)
         }
-        
         self.nameLabel.do {
             $0.text = "이름"
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
         }
-        
         self.name.do {
             $0.text = self.profile?.nickname
             $0.placeholder = "닉네임"
@@ -89,14 +88,13 @@ class ProfileModifyView: UIViewController {
             $0.layer.borderWidth = 0.1
             $0.dynamicFont(fontSize: 16, weight: .regular)
             $0.addLeftPadding(padding: 10)
+            $0.delegate = self
             $0.inputAccessoryView = accessoryCompleteButton
         }
-        
         self.introductionLabel.do {
             $0.text = "자기소개"
             $0.font = UIFont(name: "NotoSansKR-Medium", size: 12)
         }
-        
         self.introduction.do {
             $0.backgroundColor = .darkGray
             $0.text = self.profile?.introduction
@@ -109,11 +107,10 @@ class ProfileModifyView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
-            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.backgroundColor = .appColor(.cellBackground)
             $0.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 6)
             $0.inputAccessoryView = accessoryCompleteButton
         }
-        
         self.completeButton.do {
             $0.backgroundColor = .appColor(.mainColor)
             $0.setTitle("수정완료", for: .normal)
@@ -121,10 +118,9 @@ class ProfileModifyView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
-        
         self.accessoryCompleteButton.do {
             $0.setTitle("완료", for: .normal)
-            $0.backgroundColor = UIColor.appColor(.mainColor)
+            $0.backgroundColor = .appColor(.mainColor)
             $0.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 45)
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
@@ -140,12 +136,10 @@ class ProfileModifyView: UIViewController {
         
         self.profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
-        
         self.contentView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
@@ -153,47 +147,72 @@ class ProfileModifyView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: profileImage.frame.width).isActive = true
         }
-        
         self.modifyLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
         }
-        
         self.nameLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.profileImage.bottomAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
         }
-        
         self.name.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
         }
-        
         self.introductionLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.name.bottomAnchor, constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
         }
-        
         self.introduction.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.introductionLabel.bottomAnchor, constant: 5).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 200).isActive = true
         }
-
         self.completeButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        }
+        
+        self.topAnchor = self.profileImage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+        self.topAnchor?.isActive = true
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        self.keyboardHandle(notification: notification, isAppear: true)
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        self.keyboardHandle(notification: notification, isAppear: false)
+    }
+    
+    private func keyboardHandle(notification: NSNotification, isAppear: Bool) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        
+        let durationKey = UIResponder.keyboardAnimationDurationUserInfoKey
+        let duration = notification.userInfo![durationKey] as! Double
+                
+        let height = self.view.frame.height - self.introduction.frame.maxY
+        let value = keyboardRectangle.height - height + 20
+        
+        self.topAnchor?.constant =
+            isAppear
+            ? -value
+            : 20
+        UIView.animate(withDuration: duration) {
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -253,7 +272,6 @@ class ProfileModifyView: UIViewController {
             }
         }
     }
-
 }
 
 extension ProfileModifyView: ProfileModifyViewProtocol {
@@ -310,9 +328,6 @@ extension ProfileModifyView: UITextFieldDelegate {
 }
 
 extension ProfileModifyView: UITextViewDelegate {
-    
-    // MARK: TextView Dynamic Height
-    
     func textViewDidChange(_ textView: UITextView) {
         let size = CGSize(width: view.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
@@ -321,11 +336,5 @@ extension ProfileModifyView: UITextViewDelegate {
                 constraint.constant = estimatedSize.height
             }
         }
-    }
-}
-
-extension ProfileModifyView: UIScrollViewDelegate {
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        self.view.endEditing(true)
     }
 }
