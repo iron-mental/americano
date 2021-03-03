@@ -18,15 +18,29 @@ class IntroInteractor: IntroInteractorProtocol {
     func checkedEmailValid(input: String, beginState: BeginState) {
         if input.contains("@") && input.contains(".") {
             if beginState == .join {
-                IntroLocalDataManager.shared.email = input
-                self.presenter?.emailValidInfo(result: true, message: "")
+                remoteDataManager?.getEmailValidInfo(input: input, completionHandler: { result in
+                    switch result.result {
+                    case true:
+                        guard let duplicate = result.data?.duplicate else { return }
+                        switch duplicate {
+                        case true:
+                            self.presenter?.emailValidInfo(result: true, message: "")
+                            IntroLocalDataManager.shared.email = input
+                        case false:
+                            self.presenter?.emailValidInfo(result: false, message: "존재하지 않는 이메일입니다.")
+                        }
+                    case false:
+                        self.presenter?.emailValidInfo(result: false, message: result.message ?? "")
+                    }
+                })
             } else {
                 remoteDataManager?.getEmailValidInfo(input: input) { result in
                     switch result.result {
                     case true:
                         guard let duplicate = result.data?.duplicate else { return }
                         switch duplicate {
-                        case true: break
+                        case true:
+                            self.presenter?.emailValidInfo(result: false, message: "중복된 이메일입니다.")
                         case false:
                             self.presenter?.emailValidInfo(result: true, message: result.message ?? "")
                         }
@@ -61,14 +75,14 @@ class IntroInteractor: IntroInteractorProtocol {
             IntroLocalDataManager.shared.nickname = input
             remoteDataManager?.getSignUpValidInfo(signUpMaterial: (IntroLocalDataManager.shared.signUp(nickname: input)),
                                                   completionHandler: { result in
-            switch result.result {
-            case true:
-                self.presenter?.signUpValidInfo(result: true)
-            case false:
-                guard let message = result.message else { return }
-                self.presenter?.nicknameValidInfo(result: false, message: message)
-                }
-              }
+                                                    switch result.result {
+                                                    case true:
+                                                        self.presenter?.signUpValidInfo(result: true)
+                                                    case false:
+                                                        guard let message = result.message else { return }
+                                                        self.presenter?.nicknameValidInfo(result: false, message: message)
+                                                    }
+                                                  }
             )
         } else {
             self.presenter?.nicknameValidInfo(result: false, message: "닉네임은 2 ~ 8 글자 여야 합니다.")
@@ -76,29 +90,29 @@ class IntroInteractor: IntroInteractorProtocol {
     }
     
     // MARK: 로그인 결과 처리
-
+    
     func checkedJoinValid(input: String) {
         
         remoteDataManager?.getJoinValidInfo(joinMaterial: [IntroLocalDataManager.shared.email, input],
                                             completionHandler: { result in
-        switch result.result {
-        case true:
-            if let refreshToken = result.data?.refreshToken,
-               let accessToken = result.data?.accessToken,
-               let userID = result.data?.id {
-                let refreshResult = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
-                let accessResult = KeychainWrapper.standard.set(accessToken, forKey: "accessToken")
-                let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
-                print("저장 결과 :", refreshResult && accessResult && idResult)
-                if refreshResult && accessResult && idResult {
-                    self.presenter?.joinValidInfo(result: result.result, message: String(describing: result.data?.id))
-                }
-            }
-        case false:
-            self.presenter?.joinValidInfo(result: result.result,
-                                          message: result.message ?? "로그인 실패")
-            }
-          }
+                                                switch result.result {
+                                                case true:
+                                                    if let refreshToken = result.data?.refreshToken,
+                                                       let accessToken = result.data?.accessToken,
+                                                       let userID = result.data?.id {
+                                                        let refreshResult = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
+                                                        let accessResult = KeychainWrapper.standard.set(accessToken, forKey: "accessToken")
+                                                        let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
+                                                        print("저장 결과 :", refreshResult && accessResult && idResult)
+                                                        if refreshResult && accessResult && idResult {
+                                                            self.presenter?.joinValidInfo(result: result.result, message: String(describing: result.data?.id))
+                                                        }
+                                                    }
+                                                case false:
+                                                    self.presenter?.joinValidInfo(result: result.result,
+                                                                                  message: result.message ?? "로그인 실패")
+                                                }
+                                            }
         )
-      }
+    }
 }
