@@ -25,9 +25,6 @@ protocol MyStudyDetailViewProtocol: class {
     func showDeleteStudyComplete(message: String)
     func showDeleteStudyFailed(message: String)
     
-    func showReportComplete(message: String)
-    func showReportFailed(message: String)
-    
     func showLoading()
     func hideLoading()   
 }
@@ -40,12 +37,10 @@ protocol MyStudyDetailInteractorProtocol: class {
     //PRESENTER -> INTERACTOR
     func postLeaveStudyAPI(studyID: Int)
     func callDeleteStudyAPI(studyID: Int)
-    func postReportStudy(studyID: Int, reportMessage: String)
     
     //DATAMANAGER -> INTERACTOR
     func leaveStudyResult(result: Bool, message: String)
     func deleteStudyResult(result: Bool, message: String)
-    func postReportStudyResult(result: BaseResponse<String>)
 }
 
 protocol MyStudyDetailPresenterProtocol: class {
@@ -65,7 +60,6 @@ protocol MyStudyDetailPresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func leaveStudyResult(result: Bool, message: String)
     func deleteStudyResult(result: Bool, message: String)
-    func postReportStudyResult(result: Bool, message: String)
 }
 
 protocol MyStudyDetailRemoteDataManagerProtocol: class {
@@ -74,7 +68,6 @@ protocol MyStudyDetailRemoteDataManagerProtocol: class {
     //INTERACTOR -> REMOTEDATAMANAGER
     func postLeaveStudyAPI(studyID: Int)
     func callDeleteStudyAPI(studyID: Int)
-    func postReportStudy(studyID: Int, reportMessage: String)
 }
 
 protocol MyStudyDetailLocalDataManagerProtocol: class {

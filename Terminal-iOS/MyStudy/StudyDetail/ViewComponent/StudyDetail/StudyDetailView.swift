@@ -334,14 +334,14 @@ final class StudyDetailView: UIViewController {
     
     @objc func moreButtonAction() {
         let alert =  UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let applyList =  UIAlertAction(title: "신고하기", style: .default) {_ in self.reportButtonDidTap() }
+        let reportStudy =  UIAlertAction(title: "신고하기", style: .default) {_ in self.reportButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [ applyList, cancel].forEach { alert.addAction($0) }
+        [ reportStudy, cancel].forEach { alert.addAction($0) }
         self.present(alert, animated: true, completion: nil)
     }
     
-    @objc func reportButtonDidTap() {
+    func reportButtonDidTap() {
         TerminalAlertMessage.show(controller: self, type: .ReportContentView)
         TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(reportButtonConfirmed), for: .touchUpInside)
     }

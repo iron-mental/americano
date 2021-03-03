@@ -285,9 +285,10 @@ final class MyStudyDetailView: UIViewController {
             if let alertView = castContentViewController.view {
                 if let messageView = alertView as? AlertReportContentView {
                     guard let message =  messageView.editMessageTextView.text,
-                          let id = studyInfo?.id else { return }
-                    presenter?.reportConfirmButtonDidTap(studyID: id, reportMessage: message)
-                    
+                          let id = studyID else { return }
+                    if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
+                        studyDetailView.presenter?.reportConfirmButtonDidTap(studyID: id, reportMessage: message)
+                    }
                 }
             }
         }

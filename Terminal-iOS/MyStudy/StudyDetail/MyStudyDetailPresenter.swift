@@ -9,6 +9,7 @@
 import UIKit
 
 final class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
+    
     weak var view: MyStudyDetailViewProtocol?
     var interactor: MyStudyDetailInteractorProtocol?
     var wireFrame: MyStudyDetailWireFrameProtocol?
