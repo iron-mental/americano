@@ -22,8 +22,8 @@ final class StudyDetailInteractor: StudyDetailInteractorInputProtocol {
     }
     
     func postReportStudy(studyID: Int, reportMessage: String) {
-        if reportMessage == "허위 신고 시 이용이 제한될 수 있습니다." ||
-            reportMessage.isEmpty {
+        if reportMessage == "허위 신고 시 이용이 제한될 수 있습니다."
+           ||  reportMessage.isEmpty {
             presenter?.postReportStudyResult(result: false, message: "공백은 허용되지 않습니다")
         } else {
             remoteDatamanager?.postReportStudy(studyID: studyID, reportMessage: reportMessage)
