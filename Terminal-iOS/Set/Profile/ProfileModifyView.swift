@@ -29,8 +29,9 @@ class ProfileModifyView: UIViewController {
     let completeButton = UIButton()
     var accessoryCompleteButton = UIButton()
     
+    var contentHeight: CGFloat = 0
+    var keyboardDuartion: Double = 0
     var topAnchor: NSLayoutConstraint?
-    var editTextViewState = false
     
     // MARK: viewDidLoad
     
@@ -195,7 +196,6 @@ class ProfileModifyView: UIViewController {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        
         self.keyboardHandle(notification: notification, isAppear: false)
     }
         
@@ -207,18 +207,16 @@ class ProfileModifyView: UIViewController {
         let durationKey = UIResponder.keyboardAnimationDurationUserInfoKey
         let duration = notification.userInfo![durationKey] as! Double
         let withDuration = duration.isZero ? 0.25 : duration
+        self.keyboardDuartion = withDuration
         
         let height = self.view.frame.height - self.introduction.frame.maxY
         let value = keyboardRectangle.height - height + 20
+        self.contentHeight = value
         
-        if self.editTextViewState {
-            self.topAnchor?.constant = isAppear ? -value : 20
-            self.editTextViewState = isAppear ? true : false
+        if !isAppear {
+            self.topAnchor?.constant = 20
             UIView.animate(withDuration: withDuration) {
                 self.view.layoutIfNeeded()
-            }
-            if self.topAnchor?.constant == 20 {
-                self.view.endEditing(true)
             }
         }
     }
@@ -330,9 +328,11 @@ extension ProfileModifyView: UITextFieldDelegate {
     }
 }
 
-extension ProfileModifyView: UITextViewDelegate {    
-    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        self.editTextViewState = true
-        return true
+extension ProfileModifyView: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.topAnchor?.constant = -self.contentHeight
+        UIView.animate(withDuration: self.keyboardDuartion) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
