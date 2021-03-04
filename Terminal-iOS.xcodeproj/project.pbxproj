@@ -69,6 +69,7 @@
 		A5686A492524F49C005990DC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A482524F49C005990DC /* Profile.swift */; };
 		A5686A502525D6FC005990DC /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A4F2525D6FC005990DC /* DefaultCell.swift */; };
 		A5686A532525DE13005990DC /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5686A522525DE13005990DC /* Setting.swift */; };
+		A56FC01625F140040021FF11 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A56FC01525F140040021FF11 /* UIView+Ext.swift */; };
 		A57097A6254D6B5F0001DE52 /* NoticeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57097A5254D6B5F0001DE52 /* NoticeCell.swift */; };
 		A5753449257669DE00FD7D0C /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5753448257669DE00FD7D0C /* ProjectCell.swift */; };
 		A575344D257697A000FD7D0C /* ProjectTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A575344C257697A000FD7D0C /* ProjectTableView.swift */; };
@@ -478,6 +479,7 @@
 		A5686A482524F49C005990DC /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		A5686A4F2525D6FC005990DC /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		A5686A522525DE13005990DC /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		A56FC01525F140040021FF11 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		A57097A5254D6B5F0001DE52 /* NoticeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeCell.swift; sourceTree = "<group>"; };
 		A5753448257669DE00FD7D0C /* ProjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
 		A575344C257697A000FD7D0C /* ProjectTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableView.swift; sourceTree = "<group>"; };
@@ -1086,6 +1088,7 @@
 				CCA47E5F25DD196900E11D4C /* UITableView+Ext.swift */,
 				CC40E86625E825CE0079AF26 /* UIApplication+Ext.swift */,
 				CC90262125EBC2B300D61373 /* DispatchTimeInterval+Ext.swift */,
+				A56FC01525F140040021FF11 /* UIView+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -2201,6 +2204,7 @@
 				A58148FE25910EBD00BF3C2A /* SNSModifyWireFrame.swift in Sources */,
 				A53A2B7D25B6BBE90002D3A0 /* UserWithdrawalProtocols.swift in Sources */,
 				A58148922590C6E200BF3C2A /* EmailModifyView.swift in Sources */,
+				A56FC01625F140040021FF11 /* UIView+Ext.swift in Sources */,
 				CCF47097256B97FE0085B371 /* ChatViewProtocols.swift in Sources */,
 				A5C7B8FA25AC6B7000016D5B /* AddressState.swift in Sources */,
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,
