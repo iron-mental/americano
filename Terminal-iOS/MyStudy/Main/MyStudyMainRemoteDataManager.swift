@@ -10,7 +10,7 @@ import UIKit
 import SwiftKeychainWrapper
 
 class MyStudyMainRemoteDataManager: MyStudyMainRemoteDataManagerProtocol {
-    var interactor: MyStudyMainInteractorProtocol?
+    weak var interactor: MyStudyMainInteractorProtocol?
     
     func getMyStudyList(completion: @escaping (_: BaseResponse<MyStudyList>) -> Void) {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }

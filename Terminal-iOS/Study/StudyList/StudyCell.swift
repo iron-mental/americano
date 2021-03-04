@@ -23,6 +23,7 @@ class StudyCell: UITableViewCell {
     let mainImage = UIImageView()
     let memberImage = UIImageView()
     let memberCount = UILabel()
+    var borderLayer = CAShapeLayer()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,7 +31,7 @@ class StudyCell: UITableViewCell {
         attribute()
         layout()
     }
-
+    
     override func prepareForReuse() {
         self.mainTitle.text = nil
         self.location.text = nil
@@ -51,7 +52,8 @@ class StudyCell: UITableViewCell {
         }
         
         self.calendarImage.do {
-            $0.image = UIImage(systemName: "calendar")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.image = UIImage(systemName: "calendar")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
             $0.tintColor = .white
         }
         
@@ -77,25 +79,34 @@ class StudyCell: UITableViewCell {
             }
         }
         
-        guard let mainImageURL = data.image else {
-            mainImage.image = #imageLiteral(resourceName: "swiftmain")
-            return
-        }
+        let mainImageURL = data.image ?? ""
+        let managerImageURL = data.leaderImage ?? ""
         
-        guard let managerImageURL = data.leaderImage else {
-            managerImage.image = #imageLiteral(resourceName: "defaultProfile")
-            return
-        }
-        
-        DispatchQueue.main.async {
-            let processor = DownsamplingImageProcessor(size: self.mainImage.bounds.size)
-            self.mainImage.kf.setImage(with: URL(string: mainImageURL),
-                           placeholder: UIImage(named: "swift"),
-                           options: [.requestModifier(RequestToken.token()),
-                                     .processor(processor)])
-            
-            self.managerImage.kf.setImage(with: URL(string: managerImageURL),
-                                          options: [.requestModifier(RequestToken.token())])
+        DispatchQueue.main.async { [self]  in
+            //메인 이미지
+            if mainImageURL.isEmpty {
+                mainImage.layer.addSublayer(borderLayer)
+                mainImage.image = nil
+                borderLayer.path = UIBezierPath(rect: CGRect(x: 0,
+                                                             y: 0,
+                                                             width: mainImage.frame.width,
+                                                             height: mainImage.frame.height)).cgPath
+                borderLayer.frame = CGRect(x: 0,
+                                           y: 0,
+                                           width: mainImage.frame.width,
+                                           height: mainImage.frame.height)
+            } else {
+                borderLayer.removeFromSuperlayer()
+                mainImage.kf.setImage(with: URL(string: mainImageURL),
+                                      options: [.requestModifier(RequestToken.token())])
+            }
+            //방장 이미지
+            if managerImageURL.isEmpty {
+                managerImage.image = #imageLiteral(resourceName: "defaultProfile")
+            } else {
+                managerImage.kf.setImage(with: URL(string: managerImageURL),
+                                         options: [.requestModifier(RequestToken.token())])
+            }
         }
     }
     
@@ -142,15 +153,23 @@ class StudyCell: UITableViewCell {
         
         self.mainImage.do {
             $0.tintColor = .systemGray3
-            $0.clipsToBounds = true
+            $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 10
+            $0.contentMode = .scaleAspectFill
+        }
+        
+        self.borderLayer.do {
+            $0.strokeColor = UIColor.systemGray3.cgColor
+            $0.lineDashPattern = [8, 3]
+            $0.fillColor = .none
+            $0.lineWidth = 8
         }
     }
     
     func layout() {
         [mainTitle, date, calendarImage, managerImage, mainImage, location, distance, memberImage, memberCount]
             .forEach { self.contentView.addSubview($0) }
-       
+        
         self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true

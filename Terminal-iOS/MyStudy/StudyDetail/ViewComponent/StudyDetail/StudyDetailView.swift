@@ -101,10 +101,18 @@ final class StudyDetailView: UIViewController {
         
         mainImageView.do {
             $0.isUserInteractionEnabled = false
-            let imageURL = studyInfo?.image ?? ""
-            $0.kf.setImage(with: URL(string: imageURL),
-                           placeholder: UIImage(named: "swift"),
-                           options: [.requestModifier(RequestToken.token())])
+            $0.contentMode = .scaleAspectFit
+            $0.layer.masksToBounds = true
+            guard let imageURL = studyInfo?.image else { return }
+            if imageURL.isEmpty {
+                $0.backgroundColor = .systemGray5
+                $0.defaultStudyImage()
+            } else {
+                $0.kf.setImage(with: URL(string: imageURL),
+                               options: [.requestModifier(RequestToken.token())])
+                $0.tintColor = .none
+                $0.contentMode = .scaleAspectFill
+            }
         }
         
         snsIconsView.do {
@@ -392,11 +400,15 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func showError(message: String) {
         self.hideLoading()
-        parentView?.setting(caller: self)
-        showToast(controller: self, message: message, seconds: 1) {
-            if message != "공백은 허용되지 않습니다" {
+        if message != "공백은 허용되지 않습니다" {
+            self.state = .none
+            parentView?.setting(caller: self)
+            self.view.isHidden = true
+            showToast(controller: self, message: message, seconds: 1) {
                 self.navigationController?.popViewController(animated: true)
             }
+        } else {
+            showToast(controller: self, message: message, seconds: 1)
         }
     }
     

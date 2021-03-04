@@ -15,6 +15,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
     var studyMainimage = UIImageView()
     var locationLabel = PaddingLabel(insets: UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2))
     var titleLabel = UILabel()
+    var borderLayer = CAShapeLayer()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,6 +34,13 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 8
             $0.alpha = 0.8
+        }
+        borderLayer.do {
+            $0.lineWidth = 2
+            $0.strokeColor = UIColor.systemGray3.cgColor
+            $0.lineDashPattern = [8, 3]
+            $0.fillColor = .none
+            $0.lineWidth = 8
         }
         locationLabel.do {
             $0.textColor = UIColor.appColor(.mainColor)
@@ -77,8 +85,12 @@ class MyStudyMainTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
         guard let image = study.image else { return }
         if image.isEmpty {
-            self.studyMainimage.image = UIImage(named: "swiftmain")
+            studyMainimage.layer.addSublayer(borderLayer)
+            studyMainimage.image = nil
+            borderLayer.path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: studyMainimage.frame.width, height: studyMainimage.frame.height)).cgPath
+            borderLayer.frame = CGRect(x: 0, y: 0, width: studyMainimage.frame.width, height: studyMainimage.frame.height)
         } else {
+            borderLayer.removeFromSuperlayer()
             self.studyMainimage.kf.setImage(with: URL(string: image), options: [.requestModifier(RequestToken.token())])
         }
     }

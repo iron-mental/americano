@@ -10,7 +10,7 @@ import Foundation
 import SwiftKeychainWrapper
 
 class SNSModifyInteractor: SNSModifyInteractorInputProtocol {
-    var presenter: SNSModifyInteractorOutputProtocol?
+    weak var presenter: SNSModifyInteractorOutputProtocol?
     
     func completeModify(github: String, linkedin: String, web: String) {
         let params: [String: String] = [

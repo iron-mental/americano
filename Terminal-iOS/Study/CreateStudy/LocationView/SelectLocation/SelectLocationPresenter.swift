@@ -10,7 +10,7 @@ import UIKit
 import NMapsMap
 
 class SelectLocationPresenter: SelectLocationPresenterProtocol {
-    var view: SelectLocationViewProtocol?
+    weak var view: SelectLocationViewProtocol?
     var interactor: SelectLocationInteractorProtocol?
     var wireFrame: SelectLocationWireFrameProtocol?
     

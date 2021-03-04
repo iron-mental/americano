@@ -9,7 +9,7 @@
 import UIKit
 
 class MyStudyMainInteractor: MyStudyMainInteractorProtocol {
-    var presenter: MyStudyMainPresenterProtocol?
+    weak var presenter: MyStudyMainPresenterProtocol?
     var remoteManager: MyStudyMainRemoteDataManagerProtocol?
     var localManager: MyStudyMainLocalDataManagerProtocol?
     

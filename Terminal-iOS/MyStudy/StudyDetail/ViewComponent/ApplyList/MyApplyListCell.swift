@@ -20,14 +20,29 @@ class MyApplyListCell: ApplyListCell {
             $0.selectionStyle = .none
         }
         self.mainImage.do {
-            $0.layer.cornerRadius = 20
+            $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
             $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
     }
     func setData(studies: ApplyStudy) {
-        if let imageURL = studies.image {
+        
+        let imageURL = studies.image ?? ""
+        
+        if imageURL.isEmpty {
+            mainImage.layer.addSublayer(borderLayer)
+            mainImage.image = nil
+            borderLayer.path = UIBezierPath(rect: CGRect(x: 0,
+                                                         y: 0,
+                                                         width: mainImage.frame.width,
+                                                         height: mainImage.frame.height)).cgPath
+            borderLayer.frame = CGRect(x: 0,
+                                       y: 0,
+                                       width: mainImage.frame.width,
+                                       height: mainImage.frame.height)
+        } else {
+            borderLayer.removeFromSuperlayer()
             self.mainImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(RequestToken.token())])
         }
         

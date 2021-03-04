@@ -9,7 +9,7 @@
 import Foundation
 
 class SearchStudyRemoteDataManager: SearchStudyRemoteDataManagerInputProtocol {
-    var interactor: SearchStudyRemoteDataManagerOutputProtocol?
+    weak var interactor: SearchStudyRemoteDataManagerOutputProtocol?
     
     func getHotKeyword() {
         TerminalNetworkManager

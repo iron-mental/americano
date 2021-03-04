@@ -13,6 +13,7 @@ class ApplyListCell: UITableViewCell {
     lazy var mainImage = UIImageView()
     var title = UILabel()
     var contents = UILabel()
+    var borderLayer = CAShapeLayer()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,10 +25,8 @@ class ApplyListCell: UITableViewCell {
     func attribute() {
         self.mainImage.do {
             $0.image = UIImage(named: "defaultProfile")
-            $0.contentMode = .scaleAspectFit
+            $0.contentMode = .scaleAspectFill
             $0.tintColor = .gray
-            $0.layer.borderColor = UIColor.gray.cgColor
-            $0.layer.borderWidth = 1
         }
         self.title.do {
             $0.numberOfLines = 0
@@ -40,6 +39,12 @@ class ApplyListCell: UITableViewCell {
             $0.text = ""
             $0.numberOfLines = 1
             $0.dynamicFont(fontSize: 14, weight: .regular)
+        }
+        self.borderLayer.do {
+            $0.strokeColor = UIColor.systemGray3.cgColor
+            $0.lineDashPattern = [8, 5]
+            $0.fillColor = .none
+            $0.lineWidth = 8
         }
     }
     

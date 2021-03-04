@@ -9,7 +9,7 @@
 import Foundation
 
 class LocationModifyInteractor: LocationModifyInteractorInputProtocol {
-    var presenter: LocationModifyInteractorOutputProtocol?
+    weak var presenter: LocationModifyInteractorOutputProtocol?
     var remoteDataManager: LocationModifyRemoteDataManagerInputProtocol?
     
     func retrieveAddress() {

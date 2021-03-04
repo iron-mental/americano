@@ -143,8 +143,10 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.backgroundColor = .appColor(.testColor)
         }
         mainImageView.do {
+            $0.editMode()
+            $0.contentMode = .scaleAspectFill
+            $0.layer.masksToBounds = true
             $0.alpha = 0.7
-            $0.image = #imageLiteral(resourceName: "swift")
             let mainImageTapGesture = UITapGestureRecognizer(target: self,
                                                              action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(mainImageTapGesture)

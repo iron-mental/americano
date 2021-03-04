@@ -9,7 +9,7 @@
 import UIKit
 
 class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
-    var view: MyStudyMainViewProtocol?
+    weak var view: MyStudyMainViewProtocol?
     var wireFrame: MyStudyMainWireFrameProtocol?
     var interactor: MyStudyMainInteractorProtocol?
     

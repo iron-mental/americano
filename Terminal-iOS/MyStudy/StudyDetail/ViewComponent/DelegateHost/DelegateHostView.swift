@@ -78,9 +78,6 @@ extension DelegateHostView: DelegateHostViewProtocol {
                     if let studyDetailView = myStudyDetailView.vcArr[1] as? StudyDetailView {
                         studyDetailView.studyID = studyID!
                     }
-                    if let chatView = myStudyDetailView.vcArr[2] as? TempChatView {
-                        chatView.viewDidLoad()
-                    }
                 }
             }
         }

@@ -9,7 +9,7 @@
 import UIKit
 
 class CareerModifyPresenter: CareerModifyPresenterProtocol {
-    var view: CareerModifyViewProtocol?
+    weak var view: CareerModifyViewProtocol?
     var interactor: CareerModifyInteractorInputProtocol?
     var wireFrame: CareerModifyWireFrameProtocol?
     

@@ -18,6 +18,7 @@ class SearchLocationWireFrame: SearchLocationWireFrameProtocol {
         
         view.presenter = presenter
         view.parentView = parentView
+        
         presenter.view = view
         presenter.interactor = interactor
         presenter.wireFrame = wireFrame

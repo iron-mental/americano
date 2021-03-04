@@ -12,7 +12,7 @@ import SwiftyJSON
 import SwiftKeychainWrapper
 
 class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProtocol {
-    var remoteRequestHandler: LocationModifyRemoteDataManagerOutputProtocol?
+    weak var remoteRequestHandler: LocationModifyRemoteDataManagerOutputProtocol?
 
     func retrieveAddress() {
         TerminalNetworkManager

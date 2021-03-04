@@ -9,7 +9,7 @@
 import Foundation
 
 class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
-    var interactor: ModifyStudyRemoteDataManagerOutputProtocol?
+    weak var interactor: ModifyStudyRemoteDataManagerOutputProtocol?
     
     func putStudyInfo(studyID: Int, study: StudyDetailPost) {
         var params: [String: Any] = [:]

@@ -10,7 +10,7 @@ import Foundation
 import SwiftKeychainWrapper
 
 class CareerModifyInteractor: CareerModifyInteractorInputProtocol {
-    var presenter: CareerModifyInteractorOutputProtocol?
+    weak var presenter: CareerModifyInteractorOutputProtocol?
     
     func completeModify(title: String, contents: String) {
         let params = [

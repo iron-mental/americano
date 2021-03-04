@@ -10,7 +10,7 @@ import Foundation
 import SwiftKeychainWrapper
 
 class NotificationRemoteDataManager: NotificationRemoteDataManagerInputProtocol {
-    var interactor: NotificationRemoteDataManagerOutputProtocol?
+    weak var interactor: NotificationRemoteDataManagerOutputProtocol?
     
     func alertGotConfirmed(userID: Int, alertID: Int) {
         TerminalNetworkManager

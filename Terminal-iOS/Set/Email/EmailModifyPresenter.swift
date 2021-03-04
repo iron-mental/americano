@@ -9,7 +9,7 @@
 import Foundation
 
 class EmailModifyPresenter: EmailModifyPresenterProtocol {
-    var view: EmailModifyViewProtocol?
+    weak var view: EmailModifyViewProtocol?
     var interactor: EmailModifyInteractorInputProtocol? 
     var wireFrame: EmailModifyWireFrameProtocol?
     

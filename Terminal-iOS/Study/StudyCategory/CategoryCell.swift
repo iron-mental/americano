@@ -26,6 +26,8 @@ class CategoryCell: UICollectionViewCell {
         if !category.image.isEmpty {
             self.categoryView.image.kf.setImage(with: URL(string: category.image)!,
                                                 options: [.requestModifier(RequestToken.token())])
+        } else {
+            self.categoryView.image.image = nil
         }
     }
     
