@@ -78,50 +78,34 @@ class StudyCell: UITableViewCell {
                 $0.text = result
             }
         }
-        DispatchQueue.main.async { [self] in
-            
-            guard let mainImageURL = data.image else {
-                //스터디 이미지가 nil
-                mainImage.image = #imageLiteral(resourceName: "swiftmain")
-                return
+        
+        let mainImageURL = data.image ?? ""
+        let managerImageURL = data.leaderImage ?? ""
+        
+        DispatchQueue.main.async { [self]  in
+            //메인 이미지
+            if mainImageURL.isEmpty {
+                mainImage.layer.addSublayer(borderLayer)
+                mainImage.image = nil
+                borderLayer.path = UIBezierPath(rect: CGRect(x: 0,
+                                                             y: 0,
+                                                             width: mainImage.frame.width,
+                                                             height: mainImage.frame.height)).cgPath
+                borderLayer.frame = CGRect(x: 0,
+                                           y: 0,
+                                           width: mainImage.frame.width,
+                                           height: mainImage.frame.height)
+            } else {
+                borderLayer.removeFromSuperlayer()
+                mainImage.kf.setImage(with: URL(string: mainImageURL),
+                                      options: [.requestModifier(RequestToken.token())])
             }
-            
-            self.mainImage.do {
-                if mainImageURL.isEmpty {
-                    //스터디 이미지가 ""
-                    $0.layer.addSublayer(borderLayer)
-                    $0.image = nil
-                    borderLayer.path = UIBezierPath(rect: CGRect(x: 0,
-                                                                 y: 0,
-                                                                 width: $0.frame.width,
-                                                                 height: $0.frame.height)).cgPath
-                    borderLayer.frame = CGRect(x: 0,
-                                               y: 0,
-                                               width: $0.frame.width,
-                                               height: $0.frame.height)
-                } else {
-                    //스터디 이미지가 유효함
-                    borderLayer.removeFromSuperlayer()
-                    $0.kf.setImage(with: URL(string: mainImageURL),
-                                   options: [.requestModifier(RequestToken.token())])
-                }
-            }
-            
-            guard let managerImageURL = data.leaderImage else {
-                //리더 이미지가 nil
+            //방장 이미지
+            if managerImageURL.isEmpty {
                 managerImage.image = #imageLiteral(resourceName: "defaultProfile")
-                return
-            }
-            
-            self.managerImage.do {
-                if managerImageURL.isEmpty {
-                    //리더 이미지가 ""
-                    $0.image = #imageLiteral(resourceName: "defaultProfile")
-                } else {
-                    //리더 이미지가 유효함
-                    $0.kf.setImage(with: URL(string: managerImageURL),
-                                   options: [.requestModifier(RequestToken.token())])
-                }
+            } else {
+                managerImage.kf.setImage(with: URL(string: managerImageURL),
+                                         options: [.requestModifier(RequestToken.token())])
             }
         }
     }

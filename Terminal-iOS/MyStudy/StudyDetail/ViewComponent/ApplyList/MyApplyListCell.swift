@@ -27,27 +27,10 @@ class MyApplyListCell: ApplyListCell {
         }
     }
     func setData(studies: ApplyStudy) {
-        if let imageURL = studies.image {
-            
-            if imageURL.isEmpty {
-                //이미지가 ""일때
-                mainImage.layer.addSublayer(borderLayer)
-                mainImage.image = nil
-                borderLayer.path = UIBezierPath(rect: CGRect(x: 0,
-                                                             y: 0,
-                                                             width: mainImage.constraints[0].constant,
-                                                             height: mainImage.constraints[1].constant)).cgPath
-                borderLayer.frame = CGRect(x: 0,
-                                           y: 0,
-                                           width: mainImage.constraints[0].constant,
-                                           height: mainImage.constraints[1].constant)
-            } else {
-                //이미지가 유효할 때
-                borderLayer.removeFromSuperlayer()
-                self.mainImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(RequestToken.token())])
-            }
-        } else {
-            //이미지가 nil일 때
+        
+        let imageURL = studies.image ?? ""
+        
+        if imageURL.isEmpty {
             mainImage.layer.addSublayer(borderLayer)
             mainImage.image = nil
             borderLayer.path = UIBezierPath(rect: CGRect(x: 0,
@@ -58,6 +41,9 @@ class MyApplyListCell: ApplyListCell {
                                        y: 0,
                                        width: mainImage.frame.width,
                                        height: mainImage.frame.height)
+        } else {
+            borderLayer.removeFromSuperlayer()
+            self.mainImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(RequestToken.token())])
         }
         
         self.title.text = studies.title
