@@ -11,7 +11,7 @@ import Kingfisher
 import SwiftKeychainWrapper
 
 class ProfileModifyView: UIViewController {
-    deinit { keyboardRemoveObserver() }
+    deinit { self.keyboardRemoveObserver() }
     
     // MARK: Init Property
     
@@ -30,6 +30,7 @@ class ProfileModifyView: UIViewController {
     var accessoryCompleteButton = UIButton()
     
     var topAnchor: NSLayoutConstraint?
+    var editTextViewState = false
     
     // MARK: viewDidLoad
     
@@ -42,7 +43,7 @@ class ProfileModifyView: UIViewController {
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
     }
-    
+
     // MARK: Set Attribute
     
     func attribute() {
@@ -193,9 +194,10 @@ class ProfileModifyView: UIViewController {
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
+        
         self.keyboardHandle(notification: notification, isAppear: false)
     }
-    
+        
     private func keyboardHandle(notification: NSNotification, isAppear: Bool) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
@@ -207,17 +209,13 @@ class ProfileModifyView: UIViewController {
         let height = self.view.frame.height - self.introduction.frame.maxY
         let value = keyboardRectangle.height - height + 20
         
-        self.topAnchor?.constant =
-            isAppear
-            ? -value
-            : 20
-        UIView.animate(withDuration: duration) {
-            self.view.layoutIfNeeded()
+        if self.editTextViewState {
+            self.editTextViewState = isAppear ? true : false
+            self.topAnchor?.constant = isAppear ? -value : 20
+            UIView.animate(withDuration: duration) {
+                self.view.layoutIfNeeded()
+            }   
         }
-    }
-    
-    @objc func backgroundTap() {
-        self.view.endEditing(true)
     }
     
     @objc func didImageViewClicked() {
@@ -327,14 +325,9 @@ extension ProfileModifyView: UITextFieldDelegate {
     }
 }
 
-extension ProfileModifyView: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        let size = CGSize(width: view.frame.width, height: .infinity)
-        let estimatedSize = textView.sizeThatFits(size)
-        textView.constraints.forEach { (constraint) in
-            if constraint.firstAttribute == .height {
-                constraint.constant = estimatedSize.height
-            }
-        }
+extension ProfileModifyView: UITextViewDelegate {    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        self.editTextViewState = true
+        return true
     }
 }
