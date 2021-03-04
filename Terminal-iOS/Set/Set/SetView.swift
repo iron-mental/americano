@@ -125,6 +125,7 @@ class SetView: UIViewController {
     
     @objc func emailAuthRequest() {
         self.presenter?.emailAuthRequest()
+        TerminalAlertMessage.dismiss()
     }
     
     @objc func logOutConfirmedDidTap() {
@@ -149,7 +150,6 @@ extension SetView: SetViewProtocol {
     
     func emailAuthResponse(result: Bool, message: String) {
         if result {
-            TerminalAlertMessage.dismiss()
             self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 1)
         } else {
             self.showToast(controller: self, message: message, seconds: 1)
