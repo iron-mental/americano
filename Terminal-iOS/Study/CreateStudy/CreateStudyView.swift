@@ -102,11 +102,18 @@ extension CreateStudyView: CreateStudyViewProtocol {
     func studyInfoValid(studyID: Int, message: String) {
         showToast(controller: self, message: message, seconds: 1) {
             if let rootViewController = self.navigationController?.parent as? ViewController {
+                rootViewController.selectedIndex = 1
                 if let myStudyMainView = rootViewController.myStudyViewController as? MyStudyMainViewProtocol {
                     myStudyMainView.presenter?.viewDidLoad()
                 }
             }
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.viewControllers.forEach {
+                if let popPoint = $0 as? StudyCategoryViewProtocol {
+                    if let popViewController = popPoint as? UIViewController {
+                        self.navigationController?.popToViewController(popViewController, animated: true)
+                    }
+                }
+            }
         }
     }
 }
