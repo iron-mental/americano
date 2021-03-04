@@ -68,8 +68,9 @@ extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol 
             self.nicknameResult = result.result
             mergeProfileModifyResult()
         case false:
-            guard let message = result.message else { return }
-            presenter?.modifyFailed(message: message)
+            guard let message = result.message,
+                  let label = result.label else { return }
+            presenter?.modifyFailed(message: message, label: label)
         }
     }
 }

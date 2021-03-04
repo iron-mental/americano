@@ -272,6 +272,11 @@ class ProfileModifyView: UIViewController {
                 presenter?.completeImageModify(image: image)
             }
         }
+        
+        self.name.layer.borderWidth = 0.1
+        self.name.layer.borderColor = UIColor.gray.cgColor
+        self.introduction.layer.borderWidth = 0.1
+        self.introduction.layer.borderColor = UIColor.gray.cgColor
     }
 }
 
@@ -294,8 +299,17 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
         }
     }
     
-    func showError(message: String) {
-        showToast(controller: self, message: message, seconds: 1)
+    func showError(message: String, label: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            switch label {
+            case "nickname":
+                self.name.warningEffect()
+            case "introduce":
+                self.introduction.warningEffect()
+            default:
+                break
+            }
+        }
     }
     
     func showLoading() {
