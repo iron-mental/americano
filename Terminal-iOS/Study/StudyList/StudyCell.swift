@@ -23,6 +23,7 @@ class StudyCell: UITableViewCell {
     let mainImage = UIImageView()
     let memberImage = UIImageView()
     let memberCount = UILabel()
+    var borderLayer = CAShapeLayer()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,7 +31,7 @@ class StudyCell: UITableViewCell {
         attribute()
         layout()
     }
-
+    
     override func prepareForReuse() {
         self.mainTitle.text = nil
         self.location.text = nil
@@ -51,7 +52,8 @@ class StudyCell: UITableViewCell {
         }
         
         self.calendarImage.do {
-            $0.image = UIImage(systemName: "calendar")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
+            $0.image = UIImage(systemName: "calendar")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
             $0.tintColor = .white
         }
         
@@ -76,53 +78,51 @@ class StudyCell: UITableViewCell {
                 $0.text = result
             }
         }
-        
-        guard let mainImageURL = data.image else {
-            mainImage.image = #imageLiteral(resourceName: "swiftmain")
-            return
-        }
-        
-        guard let managerImageURL = data.leaderImage else {
-            managerImage.image = #imageLiteral(resourceName: "defaultProfile")
-            return
-        }
-        
-        DispatchQueue.main.async {
-            let processor = DownsamplingImageProcessor(size: self.mainImage.bounds.size)
-//            self.mainImage.do {
-//                if mainImageURL.isEmpty {
-//                    $0.tintColor = .gray
-//                    $0.contentMode = .scaleAspectFit
-//                    $0.image = UIImage(systemName: "photo.fill")?
-//                        .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
-//                } else {
-//                    $0.kf.setImage(with: URL(string: mainImageURL),
-//                                   options: [.requestModifier(RequestToken.token())])
-//                    $0.tintColor = .none
-//                    $0.contentMode = .scaleAspectFit
-//                }
-//            }
+        DispatchQueue.main.async { [self] in
+            
+            guard let mainImageURL = data.image else {
+                //스터디 이미지가 nil
+                mainImage.image = #imageLiteral(resourceName: "swiftmain")
+                return
+            }
+            
             self.mainImage.do {
                 if mainImageURL.isEmpty {
+                    //스터디 이미지가 ""
+                    $0.layer.addSublayer(borderLayer)
                     $0.image = nil
-                    $0.layer.borderWidth = 2
-                    $0.layer.borderColor = UIColor.systemGray3.cgColor
-                    $0.tintColor = .gray
+                    borderLayer.path = UIBezierPath(rect: CGRect(x: 0,
+                                                                 y: 0,
+                                                                 width: $0.frame.width,
+                                                                 height: $0.frame.height)).cgPath
+                    borderLayer.frame = CGRect(x: 0,
+                                               y: 0,
+                                               width: $0.frame.width,
+                                               height: $0.frame.height)
                 } else {
-                    $0.layer.borderWidth = 0
-                    $0.layer.borderColor = .none
-                    $0.tintColor = .none
-                    $0.contentMode = .scaleAspectFill
-                    $0.kf.setImage(with: URL(string: mainImageURL), options: [.requestModifier(RequestToken.token())])
+                    //스터디 이미지가 유효함
+                    borderLayer.removeFromSuperlayer()
+                    $0.kf.setImage(with: URL(string: mainImageURL),
+                                   options: [.requestModifier(RequestToken.token())])
                 }
             }
             
-//            self.mainImage.kf.setImage(with: URL(string: mainImageURL),
-//                           placeholder: UIImage(named: "swift"),
-//                           options: [.requestModifier(RequestToken.token()),
-//                                     .processor(processor)])
-            self.managerImage.kf.setImage(with: URL(string: managerImageURL),
-                                          options: [.requestModifier(RequestToken.token())])
+            guard let managerImageURL = data.leaderImage else {
+                //리더 이미지가 nil
+                managerImage.image = #imageLiteral(resourceName: "defaultProfile")
+                return
+            }
+            
+            self.managerImage.do {
+                if managerImageURL.isEmpty {
+                    //리더 이미지가 ""
+                    $0.image = #imageLiteral(resourceName: "defaultProfile")
+                } else {
+                    //리더 이미지가 유효함
+                    $0.kf.setImage(with: URL(string: managerImageURL),
+                                   options: [.requestModifier(RequestToken.token())])
+                }
+            }
         }
     }
     
@@ -172,12 +172,20 @@ class StudyCell: UITableViewCell {
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 10
         }
+        
+        self.borderLayer.do {
+            $0.lineWidth = 2
+            $0.strokeColor = UIColor.systemGray3.cgColor
+            $0.lineDashPattern = [8, 3]
+            $0.fillColor = .none
+            $0.lineWidth = 8
+        }
     }
     
     func layout() {
         [mainTitle, date, calendarImage, managerImage, mainImage, location, distance, memberImage, memberCount]
             .forEach { self.contentView.addSubview($0) }
-       
+        
         self.location.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
