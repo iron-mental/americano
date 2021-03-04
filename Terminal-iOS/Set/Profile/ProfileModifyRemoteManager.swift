@@ -12,7 +12,7 @@ import SwiftyJSON
 import SwiftKeychainWrapper
 
 class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
-    var remoteRequestHandler: ProfileModifyRemoteDataManagerOutputProtocol?
+    weak var remoteRequestHandler: ProfileModifyRemoteDataManagerOutputProtocol?
     
     func authCheck(completion: @escaping () -> Void) {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }

@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
-    var view: ProfileModifyViewProtocol?
+    weak var view: ProfileModifyViewProtocol?
     var interactor: ProfileModifyInteractorInputProtocol?
     var wireFrame: ProfileModifyWireFrameProtocol?
     

@@ -13,7 +13,7 @@ enum WriteStudyViewState {
     case edit
 }
 
-protocol CreateStudyViewProtocol {
+protocol CreateStudyViewProtocol: class {
     var presenter: CreateStudyPresenterProtocol? { get set }
     var study: StudyDetail? { get set }
     var studyDetailPost: StudyDetailPost? { get set }
@@ -29,7 +29,7 @@ protocol CreateStudyViewProtocol {
     func studyInfoValid(studyID: Int, message: String)
 }
 
-protocol CreateStudyInteractorInputProtocol {
+protocol CreateStudyInteractorInputProtocol: class {
     var presenter: CreateStudyInteractorOutputProtocol? { get set }
     var remoteDataManager: CreateStudyRemoteDataManagerInputProtocol? { get set }
     var studyInfo: StudyDetail? { get set }
@@ -38,14 +38,14 @@ protocol CreateStudyInteractorInputProtocol {
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?)
 }
 
-protocol CreateStudyInteractorOutputProtocol {
+protocol CreateStudyInteractorOutputProtocol: class {
     
     //INTERACTOR -> PRESENTER
     func studyInfoInvalid(label: String?, message: String)
     func studyInfoValid(studyID: Int, message: String)
 }
 
-protocol CreateStudyPresenterProtocol {
+protocol CreateStudyPresenterProtocol: class {
     var view: CreateStudyViewProtocol? { get set }
     var interactor: CreateStudyInteractorInputProtocol? { get set }
     var wireFrame: CreateStudyWireFrameProtocol? { get set }
@@ -56,17 +56,17 @@ protocol CreateStudyPresenterProtocol {
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?)
 }
 
-protocol CreateStudyRemoteDataManagerInputProtocol {
+protocol CreateStudyRemoteDataManagerInputProtocol: class {
     var interactor: CreateStudyReMoteDataManagerOutputProtocol? { get set }
     
     func postStudy(study: StudyDetailPost)
 }
 
-protocol CreateStudyReMoteDataManagerOutputProtocol {
+protocol CreateStudyReMoteDataManagerOutputProtocol: class {
     func createStudyValid(response: BaseResponse<CreateStudyResult>)
 }
 
-protocol CreateStudyWireFrameProtocol {
+protocol CreateStudyWireFrameProtocol: class {
     static func createStudyViewModule(category: String,
                                       studyDetail: StudyDetail?,
                                       parentView: UIViewController?) -> UIViewController

@@ -9,7 +9,7 @@
 import UIKit
 
 final class CreateStudyPresenter: CreateStudyPresenterProtocol {
-    var view: CreateStudyViewProtocol?
+    weak var view: CreateStudyViewProtocol?
     var interactor: CreateStudyInteractorInputProtocol?
     var wireFrame: CreateStudyWireFrameProtocol?
     

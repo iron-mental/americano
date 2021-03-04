@@ -9,7 +9,7 @@
 import UIKit
 
 final class CreateStudyInteractor: CreateStudyInteractorInputProtocol {
-    var presenter: CreateStudyInteractorOutputProtocol?
+    weak var presenter: CreateStudyInteractorOutputProtocol?
     var remoteDataManager: CreateStudyRemoteDataManagerInputProtocol?
     var studyInfo: StudyDetail?
     

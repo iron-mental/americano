@@ -10,7 +10,7 @@ import UIKit
 import SwiftKeychainWrapper
 
 class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
-    var presenter: ProfileModifyInteractorOutputProtocol?
+    weak var presenter: ProfileModifyInteractorOutputProtocol?
     var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol?
     
     var imageResult: Bool = true
