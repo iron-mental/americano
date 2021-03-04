@@ -101,7 +101,11 @@ extension CreateStudyView: CreateStudyViewProtocol {
     
     func studyInfoValid(studyID: Int, message: String) {
         showToast(controller: self, message: message, seconds: 1) {
-            self.navigationController?.popViewController(animated: true)
+            if let rootViewController = self.navigationController?.parent as? ViewController {
+                if let myStudyMainView = rootViewController.myStudyViewController as? MyStudyMainViewProtocol {
+                    myStudyMainView.presenter?.viewDidLoad()
+                }
+            }
         }
     }
 }
