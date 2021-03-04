@@ -171,10 +171,10 @@ class StudyCell: UITableViewCell {
             $0.tintColor = .systemGray3
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 10
+            $0.contentMode = .scaleAspectFill
         }
         
         self.borderLayer.do {
-            $0.lineWidth = 2
             $0.strokeColor = UIColor.systemGray3.cgColor
             $0.lineDashPattern = [8, 3]
             $0.fillColor = .none

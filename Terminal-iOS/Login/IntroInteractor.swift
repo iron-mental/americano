@@ -17,39 +17,43 @@ class IntroInteractor: IntroInteractorProtocol {
     
     func checkedEmailValid(input: String, beginState: BeginState) {
         if input.contains("@") && input.contains(".") {
-            if beginState == .join {
-                remoteDataManager?.getEmailValidInfo(input: input, completionHandler: { result in
-                    switch result.result {
-                    case true:
-                        guard let duplicate = result.data?.duplicate else { return }
+            remoteDataManager?.getEmailValidInfo(input: input, completionHandler: { result in
+                switch result.result {
+                case true:
+                    guard let duplicate = result.data?.duplicate else { return }
+                    switch beginState {
+                    case .join:
+                        //로그인
                         switch duplicate {
                         case true:
+                            //등록된 이메일
                             self.presenter?.emailValidInfo(result: true, message: "")
                             IntroLocalDataManager.shared.email = input
                         case false:
+                            //등록되어있지 않은 이메일
                             self.presenter?.emailValidInfo(result: false, message: "존재하지 않는 이메일입니다.")
                         }
-                    case false:
-                        self.presenter?.emailValidInfo(result: false, message: result.message ?? "")
-                    }
-                })
-            } else {
-                remoteDataManager?.getEmailValidInfo(input: input) { result in
-                    switch result.result {
-                    case true:
-                        guard let duplicate = result.data?.duplicate else { return }
+                    case .signUp:
+                        //회원가입
                         switch duplicate {
                         case true:
+                            //등록된 이메일
                             self.presenter?.emailValidInfo(result: false, message: "중복된 이메일입니다.")
                         case false:
+                            //등록되어있지 않은 이메일
                             self.presenter?.emailValidInfo(result: true, message: result.message ?? "")
                         }
                         IntroLocalDataManager.shared.email = input
-                    case false:
+                    }
+                case false:
+                    switch beginState {
+                    case .join:
+                        self.presenter?.emailValidInfo(result: false, message: result.message ?? "")
+                    case .signUp:
                         self.presenter?.emailValidInfo(result: false, message: result.message ?? "")
                     }
                 }
-            }
+            })
         } else {
             presenter?.emailValidInfo(result: false, message: "이메일 형식이 맞지 않습니다.")
         }
