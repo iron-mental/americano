@@ -57,6 +57,7 @@ class IntroView: UIViewController {
                                         .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)),
                                      for: .normal)
             self.rightbutton.setTitle("다음", for: .normal)
+            termsOfSerViceView.isHidden = beginState == .signUp ? false : true
         case .pwdInput:
             self.guideLabel.text = self.beginState ==
                 .join
@@ -74,6 +75,7 @@ class IntroView: UIViewController {
                 .join
                 ? self.rightbutton.setTitle("완료", for: .normal)
                 : self.rightbutton.setTitle("다음", for: .normal)
+            termsOfSerViceView.isHidden = true
         case .nickname:
             self.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
             self.inputTextfield.placeholder = "추천 닉네임"
@@ -117,7 +119,6 @@ class IntroView: UIViewController {
             $0.textColor = .systemRed
         }
         termsOfSerViceView.do {
-            $0.isHidden = beginState == .signUp ? false : true
             $0.guideLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLabel(gesture:))))
         }
     }
