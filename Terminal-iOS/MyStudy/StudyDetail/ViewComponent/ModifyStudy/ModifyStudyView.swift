@@ -75,6 +75,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         if let myStudyDetailView = self.navigationController?.viewControllers[1] as? MyStudyDetailView {
             myStudyDetailView.viewState = .StudyDetail
         }
+        self.resetInputTextLayer()
     }
 }
 
