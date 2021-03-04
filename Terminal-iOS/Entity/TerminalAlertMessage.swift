@@ -23,6 +23,7 @@ enum AlertType {
     case VersionUpdateRequiredView      //업데이트 필수
     case JumpToSettingAppView           //알림 설정
     case ReportContentView              //컨텐츠 신고
+    case ServerMaintenanceView          //서버 점검중
     
     var view: UIView {
         switch self {
@@ -74,6 +75,10 @@ enum AlertType {
         case .ReportContentView:
             let reportContentView = AlertReportContentView()
             return reportContentView
+        case .ServerMaintenanceView:
+            let serverMaintenanceView = AlertMessageView(message: "터미널 앱이 점검중입니다.\n조금만 기다려주세요.\n확인버튼을 누르면 앱이 종료됩니다.")
+            serverMaintenanceView.onlyCompleteButton()
+            return serverMaintenanceView
         }
     }
 }
