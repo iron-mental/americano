@@ -22,4 +22,8 @@ extension ProjectModifyPresenter: ProjectModifyInteractorOutputProtocol {
     func didCompleteModify(result: Bool, message: String) {
         self.view?.modifyResultHandle(result: result, message: message)
     }
+    
+    func modifyFailed(message: String, label: String) {
+        self.view?.showError(message: message, label: label)
+    }
 }
