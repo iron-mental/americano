@@ -106,6 +106,7 @@ extension CreateStudyView: CreateStudyViewProtocol {
                     myStudyMainView.presenter?.viewDidLoad()
                 }
             }
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }

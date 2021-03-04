@@ -106,6 +106,7 @@ final class StudyDetailView: UIViewController {
             guard let imageURL = studyInfo?.image else { return }
             if imageURL.isEmpty {
                 $0.tintColor = .gray
+                $0.backgroundColor = .lightGray
                 $0.image = UIImage(systemName: "photo.fill")?
                     .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
             } else {
