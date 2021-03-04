@@ -30,7 +30,6 @@ class SNSModifyView: UIViewController {
             $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.title = "SNS 수정"
-            $0.view.backgroundColor = .appColor(.terminalBackground)
         }
         self.snsModifyView.do {
             $0.firstTextFeield.text = self.github
@@ -40,7 +39,6 @@ class SNSModifyView: UIViewController {
             $0.thirdTextField.text = self.web
             $0.thirdTextField.inputAccessoryView = accessoryCompleteButton
         }
-        
         self.completeButton.do {
             $0.backgroundColor = .appColor(.mainColor)
             $0.setTitle("수정완료", for: .normal)

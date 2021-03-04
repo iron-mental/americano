@@ -45,7 +45,6 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
             $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.title = "프로젝트 수정"
-            $0.navigationItem.largeTitleDisplayMode = .never
         }
         
         self.projectView.do {
