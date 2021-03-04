@@ -21,7 +21,7 @@ class StudyCheck {
         } else if study.progress!.isEmpty {
             nilCheck = StudyNilCheck(message: "진행을 입력해주세요", label: "progress")
         } else if study.studyTime!.isEmpty {
-            nilCheck = StudyNilCheck(message: "시간을 입력해주세요", label: "studyTime")
+            nilCheck = StudyNilCheck(message: "시간을 입력해주세요", label: "study_time")
         } else if let notion = study.snsNotion {
             if !notion.notionCheck() {
                 nilCheck = StudyNilCheck(message: "Notion URL이 정확하지 않습니다.", label: "sns_notion")
