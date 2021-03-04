@@ -102,20 +102,34 @@ extension ModifyStudyView: ModifyStudyViewProtocol {
                 switch label {
                 case "title":
                     self.studyTitleTextField.becomeFirstResponder()
+                    self.studyTitleTextField.layer.borderWidth = 0.4
+                    self.studyTitleTextField.layer.borderColor = UIColor.systemRed.cgColor
                 case "introduce":
                     self.studyIntroduceView.textView.becomeFirstResponder()
+                    self.studyIntroduceView.textView.layer.borderWidth = 0.4
+                    self.studyIntroduceView.textView.layer.borderColor = UIColor.systemRed.cgColor
                 case "progress":
                     self.studyInfoView.textView.becomeFirstResponder()
+                    self.studyInfoView.textView.layer.borderWidth = 0.4
+                    self.studyInfoView.textView.layer.borderColor = UIColor.systemRed.cgColor
                 case "study_time":
                     self.timeView.detailTime.becomeFirstResponder()
+                    self.timeView.detailTime.layer.borderWidth = 0.4
+                    self.timeView.detailTime.layer.borderColor = UIColor.systemRed.cgColor
                 case "locaion_detail":
-                    self.locationView.detailAddress.becomeFirstResponder()
+                    self.presenter?.clickLocationView()
                 case "sns_notion":
                     self.SNSInputView.notion.textField.becomeFirstResponder()
+                    self.SNSInputView.notion.textField.layer.borderWidth = 0.4
+                    self.SNSInputView.notion.textField.layer.borderColor = UIColor.systemRed.cgColor
                 case "sns_evernote":
                     self.SNSInputView.evernote.textField.becomeFirstResponder()
+                    self.SNSInputView.evernote.textField.layer.borderWidth = 0.4
+                    self.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemRed.cgColor
                 case "sns_web":
                     self.SNSInputView.web.textField.becomeFirstResponder()
+                    self.SNSInputView.web.textField.layer.borderWidth = 0.4
+                    self.SNSInputView.web.textField.layer.borderColor = UIColor.systemRed.cgColor
                 default:
                     break
                 }
