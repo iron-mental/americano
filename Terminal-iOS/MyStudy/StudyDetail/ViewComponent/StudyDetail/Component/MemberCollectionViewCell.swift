@@ -68,11 +68,17 @@ class MemberCollectionViewCell: UICollectionViewCell {
     
     func setData(userInfo: Participate) {
         self.nickname.text = userInfo.nickname
-        if let image = userInfo.image {
-            self.profileImage.kf.setImage(with: URL(string: image),
-                                             options: [.requestModifier(imageDownloadRequest)])
-        } else {
-            self.profileImage.image = #imageLiteral(resourceName: "defaultProfile")
+        let image = userInfo.image ?? ""
+        DispatchQueue.main.async { [self] in
+            if image.isEmpty {
+                profileImage.layer.borderColor = .none
+                profileImage.image = UIImage(named: "defaultProfile")
+            } else {
+                profileImage.layer.borderColor = UIColor.gray.cgColor
+                profileImage.contentMode = .scaleAspectFill
+                self.profileImage.kf.setImage(with: URL(string: image),
+                                                 options: [.requestModifier(imageDownloadRequest)])
+            }
         }
     }
     

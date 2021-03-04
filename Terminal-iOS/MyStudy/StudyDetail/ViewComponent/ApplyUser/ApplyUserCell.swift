@@ -31,11 +31,17 @@ class ApplyUserCell: ApplyListCell {
             requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
-        
-        if let imageURL = userList.image {
-            self.mainImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
-        }
         self.title.text = userList.nickname
         self.contents.text = userList.message
+        
+        let imageURL = userList.image ?? ""
+        DispatchQueue.main.async {
+            if imageURL.isEmpty {
+                self.mainImage.image = UIImage(named: "defaultProfile")
+            } else {
+                self.mainImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
+            }
+            
+        }
     }
 }

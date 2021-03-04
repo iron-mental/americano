@@ -62,13 +62,18 @@ class DelegateHostTableViewCell: UITableViewCell {
             requestBody.setValue("Bearer "+token, forHTTPHeaderField: "Authorization")
             return requestBody
         }
-        
-        if let imageURL = data.image {
-            self.profileImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
-        } else {
-            self.profileImage.image = #imageLiteral(resourceName: "defaultProfile")
-        }
+        let imageURL = data.image ?? ""
         nickname.text = data.nickname
+        
+        DispatchQueue.main.async {
+            if imageURL.isEmpty {
+                self.profileImage.layer.borderColor = .none
+                self.profileImage.image = #imageLiteral(resourceName: "defaultProfile")
+            } else {
+                self.profileImage.layer.borderColor = UIColor.lightGray.cgColor
+                self.profileImage.kf.setImage(with: URL(string: imageURL), options: [.requestModifier(imageDownloadRequest)])
+            }
+        }
     }
     
     required init?(coder: NSCoder) {

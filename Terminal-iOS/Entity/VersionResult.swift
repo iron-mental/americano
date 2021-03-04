@@ -11,9 +11,9 @@ import Foundation
 struct VersionResult: Codable {
     let latestVersion: String
     let force: VersionResultType.RawValue
-
+    let maintenance: Bool
     enum CodingKeys: String, CodingKey {
         case latestVersion = "latest_version"
-        case force
+        case force, maintenance
     }
 }

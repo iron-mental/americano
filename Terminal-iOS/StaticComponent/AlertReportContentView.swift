@@ -27,7 +27,7 @@ class AlertReportContentView: AlertBaseUIView {
         editMessageTextView.do {
             $0.dynamicFont(size: 10, weight: .regular)
             $0.delegate = self
-            $0.backgroundColor = .systemGray5
+            $0.backgroundColor = .systemGray6
             $0.layer.cornerRadius = 6
             $0.layer.masksToBounds = true
             $0.text = "허위 신고 시 이용이 제한될 수 있습니다."
