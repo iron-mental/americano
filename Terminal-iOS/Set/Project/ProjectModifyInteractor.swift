@@ -10,7 +10,7 @@ import Foundation
 import SwiftKeychainWrapper
 
 class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
-    var presenter: ProjectModifyInteractorOutputProtocol?
+    weak var presenter: ProjectModifyInteractorOutputProtocol?
     
     func completeModify(project: [Project]) {
         var projectArr: [[String: Any?]] = []

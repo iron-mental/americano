@@ -9,7 +9,7 @@
 import Foundation
 
 class ProjectModifyPresenter: ProjectModifyPresenterProtocol {
-    var view: ProjectModifyViewProtocol?
+    weak var view: ProjectModifyViewProtocol?
     var interactor: ProjectModifyInteractorInputProtocol?
     var wireFrame: ProjectModifyWireFrameProtocol?
     
