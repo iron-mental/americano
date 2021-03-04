@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import SafariServices
 
 class IntroWireFrame: IntroWireFrameProtocol {
+    
     static func createIntroModule(beginState: BeginState, introState: IntroViewState) -> UIViewController {
         
         let view: IntroViewProtocol = IntroView()
@@ -30,6 +32,14 @@ class IntroWireFrame: IntroWireFrameProtocol {
             return view
         } else {
             return UIViewController()
+        }
+    }
+    
+    func goToTermsOfServiceWeb(from view: IntroViewProtocol) {
+        guard let url = URL(string: "https://www.naver.com") else { return }
+        let webView = SFSafariViewController(url: url)
+        if let introview = view as? UIViewController {
+            introview.present(webView, animated: true, completion: nil)
         }
     }
 }

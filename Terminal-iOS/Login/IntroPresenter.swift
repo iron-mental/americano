@@ -69,4 +69,8 @@ class IntroPresenter: IntroPresenterProtocol {
             interactor?.signUpValid(input: input)
         }
     }
+    func termsOfServiceDidTap() {
+        wireFrame?.goToTermsOfServiceWeb(from: view!)
+    }
+    
 }
