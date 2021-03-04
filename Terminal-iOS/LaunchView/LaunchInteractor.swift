@@ -47,7 +47,12 @@ extension LaunchInteractor: LaunchRemoteDataManagerOutputProtocol {
     func getVersionResult(result: BaseResponse<VersionResult>) {
         switch result.result {
         case true:
-            if result.data != nil {
+            guard let data = result.data else { return }
+            if data.maintenance {
+                //서버 점검 중
+                presenter?.serverMaintenance()
+            } else {
+                //서버 정상
                 switch VersionResultType(rawValue: result.data!.force) {
                 case .notRequired:
                     refreshTokenCheck()

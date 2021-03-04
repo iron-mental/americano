@@ -14,6 +14,7 @@ protocol LaunchViewProtocol: class {
     //PRESENTER -> VIEW
     func showVersionUpdateAlert(alertType: AlertType)
     func showError(message: String)
+    func showMainTenanceAlert()
 }
 
 protocol LaunchPresenterProtocol: class {
@@ -41,6 +42,7 @@ protocol LaunchInteractorOutputProtocol: class {
     func versionNeedUpdate(force: VersionResultType)
     func refreshTokenIsEmpty()
     func refreshTokenResult(result: Bool)
+    func serverMaintenance()
 }
 
 protocol LaunchRemoteDataManagerInputProtocol: class {

@@ -38,6 +38,10 @@ class LaunchView: UIViewController {
     @objc func updateLaterButtonDidTap() {
         presenter?.getRefreshTokenValid()
     }
+    
+    @objc func terminatedButtonDidTap() {
+        exit(0)
+    }
 }
 
 extension LaunchView: LaunchViewProtocol {
@@ -51,5 +55,11 @@ extension LaunchView: LaunchViewProtocol {
     
     func showError(message: String) {
         //좀더 생각을 해보는 걸로 
+    }
+    
+    func showMainTenanceAlert() {
+        TerminalAlertMessage.show(controller: self, type: .ServerMaintenanceView)
+        TerminalAlertMessage.removeRightButtonAction()
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(terminatedButtonDidTap), for: .touchUpInside)
     }
 }

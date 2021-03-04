@@ -49,4 +49,9 @@ extension LaunchPresenter: LaunchInteractorOutputProtocol {
             wireFrame?.replaceRootViewToIntroView()
         }
     }
+    
+    func serverMaintenance() {
+        view?.showMainTenanceAlert()
+    }
+    
 }
