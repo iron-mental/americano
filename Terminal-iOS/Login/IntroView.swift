@@ -117,6 +117,7 @@ class IntroView: UIViewController {
             $0.textColor = .systemRed
         }
         termsOfSerViceView.do {
+            $0.isHidden = beginState == .signUp ? false : true
             $0.guideLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLabel(gesture:))))
         }
     }
@@ -149,7 +150,7 @@ class IntroView: UIViewController {
             $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor,
                                     constant: Terminal.convertHeight(value: 50)).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 80)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 40)).isActive = true
         }
     }
     
