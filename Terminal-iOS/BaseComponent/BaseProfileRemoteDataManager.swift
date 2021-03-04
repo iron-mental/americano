@@ -10,7 +10,7 @@ import Foundation
 import SwiftKeychainWrapper
 
 class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
-    var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol?
+    weak var remoteRequestHandler: BaseProfileRemoteDataManagerOutputProtocol?
     
     func getUserInfo(userID: String) {
         TerminalNetworkManager

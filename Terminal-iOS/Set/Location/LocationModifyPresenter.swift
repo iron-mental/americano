@@ -9,7 +9,7 @@
 import Foundation
 
 class LocationModifyPresenter: LocationModifyPresenterProtocol {
-    var view: LocationModifyViewProtocol?
+    weak var view: LocationModifyViewProtocol?
     var interactor: LocationModifyInteractorInputProtocol?
     var wireFrame: LocationModifyWireFrameProtocol?
     

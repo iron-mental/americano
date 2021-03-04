@@ -10,7 +10,7 @@ import Foundation
 import SwiftKeychainWrapper
 
 class EmailModifyInteractor: EmailModifyInteractorInputProtocol {
-    var presenter: EmailModifyInteractorOutputProtocol?
+    weak var presenter: EmailModifyInteractorOutputProtocol?
     
     func completeModify(email: String) {
         guard let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
