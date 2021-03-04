@@ -9,7 +9,7 @@
 import UIKit
 
 class StudyCategoryRemoteManager: StudyCategoryRemoteDataManagerInputProtocol {
-    var interactor: StudyCategoryRemoteDataManagerOutputProtocol?
+    weak var interactor: StudyCategoryRemoteDataManagerOutputProtocol?
     
     func retrievePostList() {
         TerminalNetworkManager

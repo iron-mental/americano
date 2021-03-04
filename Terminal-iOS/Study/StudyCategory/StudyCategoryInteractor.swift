@@ -9,7 +9,7 @@
 import UIKit
 
 class StudyCategoryInteractor: StudyCategoryInteractorInputProtocol {
-    var presenter: StudyCategoryInteractorOutputProtocol?
+    weak var presenter: StudyCategoryInteractorOutputProtocol?
     var localDatamanager: StudyCategoryLocalDataManagerInputProtocol?
     var remoteDatamanager: StudyCategoryRemoteDataManagerInputProtocol?
     

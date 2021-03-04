@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchLocationInteractor: SearchLocationInteractorProtocol {
-    var presenter: SearchLocationPresenterProtocol?
+    weak var presenter: SearchLocationPresenterProtocol?
     var remoteDataManager: SearchLocationRemoteDataManagerProtocol?
     
     func searchKeyWord(text: String) {
