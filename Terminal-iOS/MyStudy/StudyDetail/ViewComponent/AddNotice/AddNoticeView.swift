@@ -13,7 +13,7 @@ enum AddNoticeState {
     case new
 }
 
-class AddNoticeView: UIViewController {
+final class AddNoticeView: UIViewController {
     deinit { self.keyboardRemoveObserver() }
     
     var presenter: AddNoticePresenterProtocol?
@@ -25,6 +25,7 @@ class AddNoticeView: UIViewController {
     var titleTextField = UITextField()
     var contentGuideLabel = UILabel()
     var contentTextView = UITextView()
+    var textCountLabel = UILabel()
     var completeButton = UIButton()
     var parentView: UIViewController?
     var bottomAnchor: NSLayoutConstraint?
@@ -107,6 +108,13 @@ class AddNoticeView: UIViewController {
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
             $0.dynamicFont(size: 14, weight: .regular)
+            $0.delegate = self
+        }
+        textCountLabel.do {
+            $0.textColor = .gray
+            $0.textAlignment = .right
+            $0.dynamicFont(fontSize: 12, weight: .regular)
+            $0.text = "0/200"
         }
         completeButton.do {
             $0.backgroundColor = UIColor.appColor(.mainColor)
@@ -118,7 +126,7 @@ class AddNoticeView: UIViewController {
     }
     
     func layout() {
-        [isEssentialFlagSege, dismissButton, titleGuideLabel, titleTextField, contentGuideLabel, contentTextView, completeButton].forEach { view.addSubview($0) }
+        [isEssentialFlagSege, dismissButton, titleGuideLabel, titleTextField, contentGuideLabel, textCountLabel, contentTextView, completeButton].forEach { view.addSubview($0) }
         
         isEssentialFlagSege.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -148,6 +156,11 @@ class AddNoticeView: UIViewController {
             $0.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
             $0.trailingAnchor.constraint(equalTo: titleGuideLabel.trailingAnchor).isActive = true
+        }
+        textCountLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: contentGuideLabel.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: titleTextField.trailingAnchor).isActive = true
         }
         contentTextView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -245,4 +258,13 @@ extension AddNoticeView: UITextFieldDelegate {
 }
 
 extension AddNoticeView: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let currentText = textView.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: text)
+        if updatedText.count <= 200 {
+            textCountLabel.text = "\(updatedText.count)/200"
+        }
+        return updatedText.count <= 200
+    }
 }
