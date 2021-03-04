@@ -34,7 +34,9 @@ class StudyCheck {
                     }
                 }
             }
-        } else if let location = study.location {
+        }
+        
+        if let location = study.location {
             if location.lat.isZero
                 || location.lng.isZero
                 || location.sido!.isEmpty
@@ -42,6 +44,8 @@ class StudyCheck {
                 || location.address.isEmpty {
                 nilCheck = StudyNilCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
             }
+        } else {
+            nilCheck = StudyNilCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
         }
         
         if let nilCheck = nilCheck {
