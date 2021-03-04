@@ -308,6 +308,23 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
     
+    func resetInputTextLayer() {
+        self.studyTitleTextField.layer.borderWidth = 0.1
+        self.studyTitleTextField.layer.borderColor = UIColor.gray.cgColor
+        self.studyIntroduceView.textView.layer.borderWidth = 0.1
+        self.studyIntroduceView.textView.layer.borderColor = UIColor.gray.cgColor
+        self.studyInfoView.textView.layer.borderWidth = 0.1
+        self.studyInfoView.textView.layer.borderColor = UIColor.gray.cgColor
+        self.timeView.detailTime.layer.borderWidth = 0.1
+        self.timeView.detailTime.layer.borderColor = UIColor.gray.cgColor
+        self.SNSInputView.notion.textField.layer.borderWidth = 0.1
+        self.SNSInputView.notion.textField.layer.borderColor = UIColor.gray.cgColor
+        self.SNSInputView.evernote.textField.layer.borderWidth = 0.1
+        self.SNSInputView.evernote.textField.layer.borderColor = UIColor.gray.cgColor
+        self.SNSInputView.web.textField.layer.borderWidth = 0.1
+        self.SNSInputView.web.textField.layer.borderColor = UIColor.gray.cgColor
+    }
+    
     @objc func didImageViewClicked() {
         let alert = UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
         let library = UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
