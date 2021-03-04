@@ -28,19 +28,19 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.backgroundColor = UIColor.appColor(.testColor)
             $0.selectionStyle = .none
         }
-        borderLayer.do {
-            $0.strokeColor = UIColor.appColor(.terminalBackground).cgColor
-            $0.lineDashPattern = [3, 3]
-            $0.path = UIBezierPath(rect: studyMainimage.bounds).cgPath
-            $0.fillColor = nil
-        }
         studyMainimage.do {
             $0.image = #imageLiteral(resourceName: "swiftmain")
             $0.contentMode = .scaleAspectFill
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 8
             $0.alpha = 0.8
-            $0.layer.addSublayer(borderLayer)
+        }
+        borderLayer.do {
+            $0.lineWidth = 2
+            $0.strokeColor = UIColor.systemGray3.cgColor
+            $0.lineDashPattern = [8, 3]
+            $0.fillColor = .none
+            $0.lineWidth = 8
         }
         locationLabel.do {
             $0.textColor = UIColor.appColor(.mainColor)
@@ -85,18 +85,12 @@ class MyStudyMainTableViewCell: UITableViewCell {
         self.layoutIfNeeded()
         guard let image = study.image else { return }
         if image.isEmpty {
+            studyMainimage.layer.addSublayer(borderLayer)
             studyMainimage.image = nil
-            studyMainimage.layer.borderWidth = 2
-            studyMainimage.layer.borderColor = UIColor.systemGray3.cgColor
-            self.studyMainimage.tintColor = .gray
-            borderLayer.frame = CGRect(x: 0,
-                                       y: 0,
-                                       width: studyMainimage.constraints[0].constant,
-                                       height: studyMainimage.constraints[1].constant)
+            borderLayer.path = UIBezierPath(rect: CGRect(x: 0, y: 0, width: studyMainimage.frame.width, height: studyMainimage.frame.height)).cgPath
+            borderLayer.frame = CGRect(x: 0, y: 0, width: studyMainimage.frame.width, height: studyMainimage.frame.height)
         } else {
-            studyMainimage.layer.borderWidth = 0
-            studyMainimage.layer.borderColor = .none
-            self.studyMainimage.tintColor = .none
+            borderLayer.removeFromSuperlayer()
             self.studyMainimage.kf.setImage(with: URL(string: image), options: [.requestModifier(RequestToken.token())])
         }
     }
