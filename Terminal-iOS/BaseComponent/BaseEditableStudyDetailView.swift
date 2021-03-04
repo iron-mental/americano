@@ -89,12 +89,8 @@ class BaseEditableStudyDetailView: UIViewController {
         SNSInputView.notion.textField.debounce(delay: 1) { [weak self] _ in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             guard let text = self?.SNSInputView.notion.textField.text else { return }
-            if text.notionCheck() {
-                if text.isEmpty {
-                    self!.SNSInputView.notion.textField.layer.borderColor = .none
-                } else {
-                    self!.SNSInputView.notion.textField.layer.borderColor = UIColor.systemBlue.cgColor
-                }
+            if text.notionCheck() || text.isEmpty {
+                self!.SNSInputView.notion.textField.layer.borderColor = .none
             } else {
                 self!.SNSInputView.notion.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
@@ -102,12 +98,8 @@ class BaseEditableStudyDetailView: UIViewController {
         
         SNSInputView.evernote.textField.debounce(delay: 1) { [weak self] _ in
             guard let text = self?.SNSInputView.evernote.textField.text else { return }
-            if text.evernoteCheck() {
-                if text.isEmpty {
-                    self!.SNSInputView.evernote.textField.layer.borderColor = .none
-                } else {
-                    self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemBlue.cgColor
-                }
+            if text.evernoteCheck() || text.isEmpty {
+                self!.SNSInputView.evernote.textField.layer.borderColor = .none
             } else {
                 self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
@@ -115,12 +107,8 @@ class BaseEditableStudyDetailView: UIViewController {
         
         SNSInputView.web.textField.debounce(delay: 1) { [weak self] _ in
             guard let text = self?.SNSInputView.web.textField.text else { return }
-            if text.webCheck() {
-                if text.isEmpty {
-                    self!.SNSInputView.web.textField.layer.borderColor = .none
-                } else {
-                    self!.SNSInputView.web.textField.layer.borderColor = UIColor.systemBlue.cgColor
-                }
+            if text.webCheck() || text.isEmpty {
+                self!.SNSInputView.web.textField.layer.borderColor = .none
             } else {
                 self!.SNSInputView.web.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
