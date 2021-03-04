@@ -30,10 +30,10 @@ enum AlertType {
         case .StudyApplyView:
             return StudyApplyMessageView(type: .apply)
         case .StudyApplyDeleteView:
-            return AlertMessageView(message: "cancel your apply?")
+            return AlertMessageView(message: "가입 신청을 취소하시겠습니까?")
         case .EmailAuthView:
             //이부분 AlertMessageView 안쓰고 따로 만든 이유가 있는지?
-            return EmailAlertMessageView(message: "이메일 인증하시겠습니까?\n\n 회원님의 이메일로 인증요청 됩니다.")
+            return EmailAlertMessageView(message: "이메일 인증하시겠습니까?\n\n 회원님의 이메일로 인증 요청됩니다.")
         case .DelegateHostConfirmView:
             return AlertMessageView(message: "방장을 위임하시겠습니까?")
         case .LeaveStudyView:
@@ -57,26 +57,26 @@ enum AlertType {
             rejectUserView.alertMessageLabel.textColor = .systemRed
             return rejectUserView
         case .LogOutView:
-            let logoutView = AlertMessageView(message: "로그아웃 하시겠습니까?")
+            let logoutView = AlertMessageView(message: "로그아웃하시겠습니까?")
             return logoutView
         case .VersionUpdateRecommendView:
-            let versionUpdateRecommendView = AlertMessageView(message: "앱이 새롭게 업데이트 되었습니다.\n업데이트 하시겠습니까?")
+            let versionUpdateRecommendView = AlertMessageView(message: "앱이 새롭게 업데이트되었습니다.\n업데이트하시겠습니까?")
             versionUpdateRecommendView.completeButton.setTitle("업데이트", for: .normal)
             versionUpdateRecommendView.dismissButton.setTitle("다음에 하기", for: .normal)
             return versionUpdateRecommendView
         case .VersionUpdateRequiredView:
-            let versionUpdateRequiredView = AlertMessageView(message: "앱이 새롭게 업데이트 되었습니다.\n업데이트 후 이용해주세요.")
+            let versionUpdateRequiredView = AlertMessageView(message: "앱이 새롭게 업데이트되었습니다.\n업데이트 후 이용해 주세요.")
             versionUpdateRequiredView.onlyCompleteButton()
-            versionUpdateRequiredView.completeButton.setTitle("업데이트 하러 가기", for: .normal)
+            versionUpdateRequiredView.completeButton.setTitle("업데이트하러 가기", for: .normal)
             return versionUpdateRequiredView
         case .JumpToSettingAppView:
-            let jumpToSettingAppView = AlertMessageView(message: "터미널 앱 알림허용이 필요합니다.\niOS 알림 설정페이지로 지금\n이동하시겠습니까?")
+            let jumpToSettingAppView = AlertMessageView(message: "터미널 앱 알림 허용이 필요합니다.\niOS 알림 설정 페이지로 지금\n이동하시겠습니까?")
             return jumpToSettingAppView
         case .ReportContentView:
             let reportContentView = AlertReportContentView()
             return reportContentView
         case .ServerMaintenanceView:
-            let serverMaintenanceView = AlertMessageView(message: "터미널 앱이 점검중입니다.\n조금만 기다려주세요.\n확인버튼을 누르면 앱이 종료됩니다.")
+            let serverMaintenanceView = AlertMessageView(message: "터미널 앱이 점검 중입니다.\n조금만 기다려주세요.\n확인 버튼을 누르면 앱이 종료됩니다.")
             serverMaintenanceView.onlyCompleteButton()
             return serverMaintenanceView
         }
