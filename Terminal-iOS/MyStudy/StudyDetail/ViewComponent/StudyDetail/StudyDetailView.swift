@@ -401,11 +401,15 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func showError(message: String) {
         self.hideLoading()
-        parentView?.setting(caller: self)
-        showToast(controller: self, message: message, seconds: 1) {
-            if message != "공백은 허용되지 않습니다" {
+        if message != "공백은 허용되지 않습니다" {
+            self.state = .none
+            parentView?.setting(caller: self)
+            self.view.isHidden = true
+            showToast(controller: self, message: message, seconds: 1) {
                 self.navigationController?.popViewController(animated: true)
             }
+        } else {
+            showToast(controller: self, message: message, seconds: 1)
         }
     }
     
