@@ -89,12 +89,8 @@ class BaseEditableStudyDetailView: UIViewController {
         SNSInputView.notion.textField.debounce(delay: 1) { [weak self] _ in
             //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             guard let text = self?.SNSInputView.notion.textField.text else { return }
-            if text.notionCheck() {
-                if text.isEmpty {
-                    self!.SNSInputView.notion.textField.layer.borderColor = .none
-                } else {
-                    self!.SNSInputView.notion.textField.layer.borderColor = UIColor.systemBlue.cgColor
-                }
+            if text.notionCheck() || text.isEmpty {
+                self!.SNSInputView.notion.textField.layer.borderColor = .none
             } else {
                 self!.SNSInputView.notion.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
@@ -102,12 +98,8 @@ class BaseEditableStudyDetailView: UIViewController {
         
         SNSInputView.evernote.textField.debounce(delay: 1) { [weak self] _ in
             guard let text = self?.SNSInputView.evernote.textField.text else { return }
-            if text.evernoteCheck() {
-                if text.isEmpty {
-                    self!.SNSInputView.evernote.textField.layer.borderColor = .none
-                } else {
-                    self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemBlue.cgColor
-                }
+            if text.evernoteCheck() || text.isEmpty {
+                self!.SNSInputView.evernote.textField.layer.borderColor = .none
             } else {
                 self!.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
@@ -115,12 +107,8 @@ class BaseEditableStudyDetailView: UIViewController {
         
         SNSInputView.web.textField.debounce(delay: 1) { [weak self] _ in
             guard let text = self?.SNSInputView.web.textField.text else { return }
-            if text.webCheck() {
-                if text.isEmpty {
-                    self!.SNSInputView.web.textField.layer.borderColor = .none
-                } else {
-                    self!.SNSInputView.web.textField.layer.borderColor = UIColor.systemBlue.cgColor
-                }
+            if text.webCheck() || text.isEmpty {
+                self!.SNSInputView.web.textField.layer.borderColor = .none
             } else {
                 self!.SNSInputView.web.textField.layer.borderColor = UIColor.systemRed.cgColor
             }
@@ -306,6 +294,23 @@ class BaseEditableStudyDetailView: UIViewController {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 50)).isActive = true
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         }
+    }
+    
+    func resetInputTextLayer() {
+        self.studyTitleTextField.layer.borderWidth = 0.1
+        self.studyTitleTextField.layer.borderColor = UIColor.gray.cgColor
+        self.studyIntroduceView.textView.layer.borderWidth = 0.1
+        self.studyIntroduceView.textView.layer.borderColor = UIColor.gray.cgColor
+        self.studyInfoView.textView.layer.borderWidth = 0.1
+        self.studyInfoView.textView.layer.borderColor = UIColor.gray.cgColor
+        self.timeView.detailTime.layer.borderWidth = 0.1
+        self.timeView.detailTime.layer.borderColor = UIColor.gray.cgColor
+        self.SNSInputView.notion.textField.layer.borderWidth = 0.1
+        self.SNSInputView.notion.textField.layer.borderColor = UIColor.gray.cgColor
+        self.SNSInputView.evernote.textField.layer.borderWidth = 0.1
+        self.SNSInputView.evernote.textField.layer.borderColor = UIColor.gray.cgColor
+        self.SNSInputView.web.textField.layer.borderWidth = 0.1
+        self.SNSInputView.web.textField.layer.borderColor = UIColor.gray.cgColor
     }
     
     @objc func didImageViewClicked() {

@@ -14,8 +14,8 @@ final class CreateStudyWireFrame: CreateStudyWireFrameProtocol {
                                       parentView: UIViewController?) -> UIViewController {
         
         let view = CreateStudyView()
-        var presenter: CreateStudyPresenterProtocol & CreateStudyInteractorOutputProtocol = CreateStudyPresenter()
-        var interactor: CreateStudyInteractorInputProtocol & CreateStudyReMoteDataManagerOutputProtocol = CreateStudyInteractor()
+        let presenter: CreateStudyPresenterProtocol & CreateStudyInteractorOutputProtocol = CreateStudyPresenter()
+        let interactor: CreateStudyInteractorInputProtocol & CreateStudyReMoteDataManagerOutputProtocol = CreateStudyInteractor()
         let remoteDataManager = CreateStudyRemoteManager()
         let wireFrame = CreateStudyWireFrame()
         
