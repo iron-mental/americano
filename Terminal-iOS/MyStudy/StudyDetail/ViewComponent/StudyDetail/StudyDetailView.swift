@@ -105,10 +105,8 @@ final class StudyDetailView: UIViewController {
             $0.layer.masksToBounds = true
             guard let imageURL = studyInfo?.image else { return }
             if imageURL.isEmpty {
-                $0.tintColor = .gray
-                $0.backgroundColor = .lightGray
-                $0.image = UIImage(systemName: "photo.fill")?
-                    .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+                $0.backgroundColor = .systemGray5
+                $0.defaultStudyImage()
             } else {
                 $0.kf.setImage(with: URL(string: imageURL),
                                options: [.requestModifier(RequestToken.token())])

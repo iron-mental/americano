@@ -12,7 +12,7 @@ class MyApplyStudyInfoView: UIViewController {
     var applyStudy: ApplyStudy?
     var presenter: MyApplyStudyInfoPresenterProtocol?
     
-    let mainImageView = UIImageView()
+    let mainImageView = MainImageView(frame: CGRect.zero)
     var studyTitleLabel = TitleWithContentView()
     var applyMessageLabel = TitleWithContentView()
     lazy var moreButton = UIBarButtonItem()
@@ -41,10 +41,8 @@ class MyApplyStudyInfoView: UIViewController {
             $0.layer.masksToBounds = true
             $0.backgroundColor = .systemGray5
             if image.isEmpty {
-                $0.tintColor = .systemGray2
-                $0.contentMode = .center
-                $0.image = UIImage(systemName: "photo.fill")?
-                    .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+                $0.backgroundColor = .systemGray5
+                $0.defaultStudyImage()
             } else {
                 $0.kf.setImage(with: URL(string: image),
                                options: [.requestModifier(RequestToken.token())])

@@ -63,4 +63,21 @@ class MainImageView: UIImageView {
         }
         
     }
+    
+    func defaultStudyImage() {
+        let editImageView = UIImageView()
+    
+        self.addSubview(editImageView)
+
+        editImageView.do {
+            $0.image = UIImage(systemName: "photo")?
+                .withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            $0.contentMode = .scaleAspectFill
+            $0.tintColor = .systemGray6
+            $0.frame = CGRect(x: self.constraints[0].constant / 2 - (Terminal.convertWidth(value: 50) / 2),
+                              y: self.constraints[1].constant / 2 - (Terminal.convertWidth(value: 50) / 2),
+                              width: Terminal.convertWidth(value: 50),
+                              height: Terminal.convertWidth(value: 50))
+        }
+    }
 }
