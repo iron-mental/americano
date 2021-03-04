@@ -51,6 +51,7 @@ class ProfileModifyView: UIViewController {
             $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.title = "프로필 수정"
+            $0.navigationItem.largeTitleDisplayMode = .never
         }
         self.picker.do {
             $0.delegate = self
@@ -205,16 +206,20 @@ class ProfileModifyView: UIViewController {
         
         let durationKey = UIResponder.keyboardAnimationDurationUserInfoKey
         let duration = notification.userInfo![durationKey] as! Double
-                
+        let withDuration = duration.isZero ? 0.25 : duration
+        
         let height = self.view.frame.height - self.introduction.frame.maxY
         let value = keyboardRectangle.height - height + 20
         
         if self.editTextViewState {
-            self.editTextViewState = isAppear ? true : false
             self.topAnchor?.constant = isAppear ? -value : 20
-            UIView.animate(withDuration: duration) {
+            self.editTextViewState = isAppear ? true : false
+            UIView.animate(withDuration: withDuration) {
                 self.view.layoutIfNeeded()
-            }   
+            }
+            if self.topAnchor?.constant == 20 {
+                self.view.endEditing(true)
+            }
         }
     }
     

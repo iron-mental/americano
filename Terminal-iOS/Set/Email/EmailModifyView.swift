@@ -71,7 +71,7 @@ class EmailModifyView: UIViewController {
         
         self.emailLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
         }
         self.emailTextField.do {
@@ -99,7 +99,6 @@ class EmailModifyView: UIViewController {
             showLoading()
             presenter?.completeModify(email: email)
         }
-        
     }
 }
 
