@@ -31,6 +31,7 @@ class ProfileModifyView: UIViewController {
     var contentHeight: CGFloat = 0
     var keyboardDuartion: Double = 0
     var topAnchor: NSLayoutConstraint?
+    var profileExistence: Bool = false
     
     // MARK: viewDidLoad
     
@@ -57,8 +58,16 @@ class ProfileModifyView: UIViewController {
             $0.delegate = self
         }
         self.profileImage.do {
-            $0.image = self.profile?.profileImage
-            let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
+            if let image = self.profile?.profileImage {
+                $0.image = image
+                self.profileExistence = true
+            } else {
+                $0.image = UIImage(named: "defaultProfile")!
+                self.profileExistence = false
+            }
+            
+            let profileTapGesture = UITapGestureRecognizer(target: self,
+                                                           action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(profileTapGesture)
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = Terminal.convertHeight(value: 100)
@@ -217,14 +226,19 @@ class ProfileModifyView: UIViewController {
     }
     
     @objc func didImageViewClicked() {
-        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
-        let camera =  UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
+        let alert = UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
+        let camera = UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
+        let remove = UIAlertAction(title: "삭제", style: .destructive) { _ in }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)
         alert.addAction(camera)
+        if self.profileExistence {
+            alert.addAction(remove)
+        }
         alert.addAction(cancel)
+        
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             if let popoverController = alert.popoverPresentationController {
