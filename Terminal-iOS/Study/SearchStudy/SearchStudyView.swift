@@ -10,10 +10,6 @@ import UIKit
 import Then
 
 class SearchStudyView: UIViewController {
-    deinit {
-        searchController.isActive = false
-    }
-    
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
     let hotLable = UILabel()
@@ -33,7 +29,7 @@ class SearchStudyView: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        searchController.dismiss(animated: false, completion: nil)
+        searchController.isActive = false
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
