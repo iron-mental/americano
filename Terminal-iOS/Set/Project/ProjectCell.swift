@@ -34,6 +34,10 @@ class ProjectCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.delegate = nil
+        self.title.layer.borderWidth = 0.1
+        self.title.layer.borderColor = UIColor.gray.cgColor
+        self.contents.layer.borderWidth = 0.1
+        self.contents.layer.borderColor = UIColor.gray.cgColor
     }
     
     func setAccessory(accessory: UIButton) {
@@ -67,6 +71,17 @@ class ProjectCell: UITableViewCell {
         self.sns.firstTextFeield.text = data.snsGithub ?? ""
         self.sns.secondTextField.text = data.snsAppstore ?? ""
         self.sns.thirdTextField.text = data.snsPlaystore ?? ""
+    }
+    
+    func setWarning(label: String) {
+        switch label {
+        case "title":
+            self.title.warningEffect()
+        case "contents":
+            self.contents.warningEffect()
+        default:
+            break
+        }
     }
     
     func attribute() {
