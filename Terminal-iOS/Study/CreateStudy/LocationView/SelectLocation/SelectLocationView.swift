@@ -154,15 +154,17 @@ class SelectLocationView: UIViewController {
 
 extension SelectLocationView: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        task = DispatchWorkItem { [self] in
-            self.pin.alpha = 1
+        task = DispatchWorkItem { [weak self] in
+            self?.pin.alpha = 1
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-                self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
-                location?.lng = mapView.cameraPosition.target.lng
-                location?.lat = mapView.cameraPosition.target.lat
-                location?.category = ""
-                if isMoving {
-                    presenter?.getAddress(item: location!)
+                self?.pin.transform = CGAffineTransform(translationX: 0, y: 0)
+                self?.location?.lng = mapView.cameraPosition.target.lng
+                self?.location?.lat = mapView.cameraPosition.target.lat
+                self?.location?.category = ""
+                if self?.isMoving != nil {
+                    if (self?.isMoving)! {
+                        self?.presenter?.getAddress(item: (self?.location)!)
+                    }
                 }
             })
         }
