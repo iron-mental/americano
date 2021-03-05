@@ -244,6 +244,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
             }
         }
+        
     }
     
     @objc func addProject() {
@@ -375,6 +376,13 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
                                 viewMaxY: CGFloat(currentScrollViewMaxY))
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // 테이블뷰 재사용으로 인한 값 초기화를 방지하기 위해서
+        let index = textField.tag
+        let title = textField.text!
+        self.projectArr[index].title = title
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
     }
@@ -386,5 +394,12 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
         self.editableViewDidTap(textView: tappedView!,
                                 viewMinY: CGFloat(currentScrollViewMinY),
                                 viewMaxY: CGFloat(currentScrollViewMaxY))
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        // 테이블뷰 재사용으로 인한 값 초기화를 방지하기 위해서
+        let index = textView.tag
+        let contents = textView.text!
+        self.projectArr[index].contents = contents
     }
 }
