@@ -39,7 +39,9 @@ class SetView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        settingList.reloadData()
+        if let noticell = settingList.cellForRow(at: [2, 0]) as? NotiCell {
+            noticell.attribute()
+        }
     }
     func attribute() {
         notificationCenter.addObserver(self,
