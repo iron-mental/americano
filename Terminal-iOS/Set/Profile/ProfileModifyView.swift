@@ -232,7 +232,6 @@ class ProfileModifyView: UIViewController {
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
                 popoverController.permittedArrowDirections = []
                 self.present(alert, animated: true, completion: nil)
-                
             }
         } else {
             self.present(alert, animated: true, completion: nil)
@@ -331,7 +330,7 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 extension ProfileModifyView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             self.profileImage.image = image
         }
         dismiss(animated: true, completion: nil)
