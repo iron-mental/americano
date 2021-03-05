@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SetWireFrame: SetWireFrameProtocol {
     static func setCreateModule() -> UIViewController {
@@ -63,6 +64,33 @@ class SetWireFrame: SetWireFrameProtocol {
             if UIApplication.shared.canOpenURL(appSettings) {
                 UIApplication.shared.open(appSettings)
             }
+        }
+    }
+    
+    func goToInquiryWeb(from view: SetViewProtocol) {
+        let email = "https://mailto:team.ironmental@gmail.com"
+        if let url = URL(string: "mailto:\(email)") {
+          if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+          } else {
+            UIApplication.shared.openURL(url)
+          }
+        }
+    }
+    
+    func goToPrivacyWeb(from view: SetViewProtocol) {
+        guard let url = URL(string: "https://www.terminal-study.tk/privacy") else { return }
+        let webView = SFSafariViewController(url: url)
+        if let introview = view as? UIViewController {
+            introview.present(webView, animated: true, completion: nil)
+        }
+    }
+    
+    func goToTermsOfServiceWeb(from view: SetViewProtocol) {
+        guard let url = URL(string: "https://www.terminal-study.tk/terms") else { return }
+        let webView = SFSafariViewController(url: url)
+        if let introview = view as? UIViewController {
+            introview.present(webView, animated: true, completion: nil)
         }
     }
 }
