@@ -68,8 +68,8 @@ class SetWireFrame: SetWireFrameProtocol {
     }
     
     func goToInquiryWeb(from view: SetViewProtocol) {
-        let email = "team.ironmental@gmail.com"
-        if let url = URL(string: "mailto:\(email)") {
+        let email = "mailto:team.ironmental@gmail.com"
+        if let url = URL(string: email) {
           if #available(iOS 10.0, *) {
             UIApplication.shared.open(url)
           } else {
