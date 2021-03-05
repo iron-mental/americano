@@ -298,8 +298,19 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
     
     func showError(message: String, label: String) {
         
+        // 서버에서 내려오는 label 자르기
+        // ex) "project_list[0].title"
+        let tempResult = label.components(separatedBy: ".")
+        let index = tempResult[0].components(separatedBy: ["[", "]"])
+        
+        let row = Int(index[1])!
+        let label = tempResult[1]
+        
+        let indexPath = IndexPath(row: row, section: 0)
+        let cell = projectView.cellForRow(at: indexPath) as! ProjectCell
+        self.showToast(controller: self, message: message, seconds: 0.7)
+        cell.setWarning(label: label)
     }
-    
     
     func showLoading() {
         LoadingRainbowCat.show(caller: self)
@@ -329,9 +340,7 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func buttonTapped(cell: ProjectCell) {
-        guard let indexPath = self.projectView.indexPath(for: cell) else {
-            return
-        }
+        guard let indexPath = self.projectView.indexPath(for: cell) else { return }
         if let cellHeight = projectView.cellForRow(at: [0, projectArr.count - 1])?.frame.height {
             standardContentHeight -= cellHeight
         }
