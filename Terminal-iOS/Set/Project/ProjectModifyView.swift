@@ -306,11 +306,17 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
         
         let row = Int(index[1])!
         let label = tempResult[1]
-        
         let indexPath = IndexPath(row: row, section: 0)
-        let cell = projectView.cellForRow(at: indexPath) as! ProjectCell
-        self.showToast(controller: self, message: message, seconds: 0.7)
-        cell.setWarning(label: label)
+        
+        // cellForRow의 nil값 반환으로 인해 scroll 후 cell 반환하도록 함
+        self.projectView.scrollToRow(at: indexPath, at: .top, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
+            if let cell = self.projectView.cellForRow(at: indexPath) as? ProjectCell {
+                self.showToast(controller: self, message: message, seconds: 1) {
+                    cell.setWarning(label: label)
+                }
+            }
+        }
     }
     
     func showLoading() {
