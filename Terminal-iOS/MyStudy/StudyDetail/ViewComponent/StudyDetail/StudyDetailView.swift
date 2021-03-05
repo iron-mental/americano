@@ -108,6 +108,9 @@ final class StudyDetailView: UIViewController {
                 $0.backgroundColor = .systemGray5
                 $0.defaultStudyImage()
             } else {
+                $0.subviews.forEach {
+                    $0.removeFromSuperview()
+                }
                 $0.kf.setImage(with: URL(string: imageURL),
                                options: [.requestModifier(RequestToken.token())])
                 $0.tintColor = .none
