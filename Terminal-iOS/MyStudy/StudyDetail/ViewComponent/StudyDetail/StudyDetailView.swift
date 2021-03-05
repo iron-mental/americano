@@ -108,6 +108,9 @@ final class StudyDetailView: UIViewController {
                 $0.backgroundColor = .systemGray5
                 $0.defaultStudyImage()
             } else {
+                $0.subviews.forEach {
+                    $0.removeFromSuperview()
+                }
                 $0.kf.setImage(with: URL(string: imageURL),
                                options: [.requestModifier(RequestToken.token())])
                 $0.tintColor = .none
@@ -188,6 +191,13 @@ final class StudyDetailView: UIViewController {
             }
             $0.title.text = "장소"
             $0.contentText = ["장소", String(studyInfo?.location.addressName ?? "") +  detailAddress]
+        }
+        
+        mapView.do {
+            if let location = studyInfo?.location {
+                $0.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location.latitude)!, lng: Double(location.longitude)!), zoomTo: 17))
+            }
+            $0.isUserInteractionEnabled = false
         }
         
         joinProgressCat.do {
@@ -346,7 +356,18 @@ final class StudyDetailView: UIViewController {
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         [ reportStudy, cancel].forEach { alert.addAction($0) }
-        self.present(alert, animated: true, completion: nil)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+                self.present(alert, animated: true, completion: nil)
+                
+            }
+        } else {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func reportButtonDidTap() {
@@ -391,7 +412,7 @@ extension StudyDetailView: StudyDetailViewProtocol {
             snsList.updateValue(evernote, forKey: SNSState.evernote.rawValue)
             snsList.updateValue(web, forKey: SNSState.web.rawValue)
         }
-
+        
         memberView.collectionView.reloadData()
         self.snsIconsView.addstack(snsList: snsList)
         attribute()

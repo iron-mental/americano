@@ -23,6 +23,7 @@ class SetPresenter: SetPresenterProtocol {
     }
     
     func emailAuthRequest() {
+        view?.showLoading()
         interactor?.emailAuthRequest()
     }
     
@@ -45,6 +46,18 @@ class SetPresenter: SetPresenterProtocol {
     func goToSettingApp() {
         wireFrame?.goToSettingApp()
     }
+    
+    func goToInquiryWeb() {
+        wireFrame?.goToInquiryWeb(from: view!)
+    }
+    
+    func goToPrivacyWeb() {
+        wireFrame?.goToPrivacyWeb(from: view!)
+    }
+    
+    func goToTermsOfServiceWeb() {
+        wireFrame?.goToTermsOfServiceWeb(from: view!)
+    }
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {
@@ -53,6 +66,7 @@ extension SetPresenter: SetInteractorOutputProtocol {
     }
     
     func eamilAuthResponse(result: Bool, message: String) {
+        view?.hideLoading()
         view?.emailAuthResponse(result: result, message: message)
     }
     

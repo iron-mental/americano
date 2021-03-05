@@ -17,6 +17,7 @@ class HomeView: UIViewController {
     lazy var loginBarButtonItem = UIBarButtonItem(customView: loginButton)
     let appearance = UINavigationBarAppearance()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()

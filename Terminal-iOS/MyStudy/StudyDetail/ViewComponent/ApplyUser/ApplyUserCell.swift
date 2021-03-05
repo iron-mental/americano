@@ -16,10 +16,10 @@ class ApplyUserCell: ApplyListCell {
     override func attribute() {
         super.attribute()
         self.backgroundColor = UIColor.appColor(.terminalBackground)
+        
         self.mainImage.do {
             $0.layer.cornerRadius = 20
             $0.layer.masksToBounds = true
-            $0.clipsToBounds = true
             $0.contentMode = .scaleAspectFill
         }
     }

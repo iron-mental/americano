@@ -323,7 +323,17 @@ class BaseEditableStudyDetailView: UIViewController {
         alert.addAction(camera)
         alert.addAction(cancel)
         
-        self.present(alert, animated: true, completion: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+                self.present(alert, animated: true, completion: nil)
+                
+            }
+        } else {
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     // override point

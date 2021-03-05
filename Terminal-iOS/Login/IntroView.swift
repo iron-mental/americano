@@ -26,9 +26,11 @@ class IntroView: UIViewController {
     var rightbutton = UIButton()
     var guideLabel = UILabel()
     var inputTextfield = UITextField()
+    var termsOfSerViceView = TermsOfServiceView()
     var beginState: BeginState?
     var introState: IntroViewState?
     var invalidLabel = UILabel()
+    var gestureRange = NSRange(location: 3, length: 6)
     lazy var rightBarButton = UIBarButtonItem(customView: rightbutton)
     lazy var leftBarButton = UIBarButtonItem(customView: leftButton)
     
@@ -55,6 +57,7 @@ class IntroView: UIViewController {
                                         .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)),
                                      for: .normal)
             self.rightbutton.setTitle("다음", for: .normal)
+            termsOfSerViceView.isHidden = beginState == .signUp ? false : true
         case .pwdInput:
             self.guideLabel.text = self.beginState ==
                 .join
@@ -72,6 +75,7 @@ class IntroView: UIViewController {
                 .join
                 ? self.rightbutton.setTitle("완료", for: .normal)
                 : self.rightbutton.setTitle("다음", for: .normal)
+            termsOfSerViceView.isHidden = true
         case .nickname:
             self.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
             self.inputTextfield.placeholder = "추천 닉네임"
@@ -114,12 +118,16 @@ class IntroView: UIViewController {
             $0.numberOfLines = 0
             $0.textColor = .systemRed
         }
+        termsOfSerViceView.do {
+            $0.guideLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapLabel(gesture:))))
+        }
     }
     
     // MARK: Layout
     
     func layout() {
-        [inputTextfield, guideLabel, invalidLabel ].forEach { view.addSubview($0) }
+        [inputTextfield, guideLabel, invalidLabel, termsOfSerViceView ].forEach { view.addSubview($0) }
+        
         
         inputTextfield.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -136,6 +144,14 @@ class IntroView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
             $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
+        }
+        termsOfSerViceView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 50)).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 50)).isActive = true
         }
     }
     
@@ -160,10 +176,6 @@ class IntroView: UIViewController {
         presenter?.didClickedRightBarButton(input: inputTextfield.text!, introState: self.introState!, beginState: self.beginState!)
     }
     
-    @objc func testNextButton() {
-        presenter?.didNextButton(input: inputTextfield.text!, introState: self.introState!, beginState: self.beginState!)
-    }
-    
     @objc func didClickedCancelButton() {
         switch introState {
         case .emailInput:
@@ -174,6 +186,17 @@ class IntroView: UIViewController {
             inputTextfield.text = ""
         case .none:
             print("none")
+        }
+    }
+    
+    @IBAction func tapLabel(gesture: UITapGestureRecognizer) {
+        let result = gesture.didTapAttributedTextInLabel(label: termsOfSerViceView.guideLabel)
+        switch result {
+        case .Privacy:
+            presenter?.privacyWebDidTap()
+        case .TermsOfService:
+            presenter?.termsOfServiceDidTap()
+        case .unowned: break
         }
     }
 }

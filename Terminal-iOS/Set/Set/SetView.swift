@@ -15,11 +15,9 @@ class SetView: UIViewController {
     var presenter: SetPresenterProtocol?
     // 섹션
     var sections: [String] = ["", "계정", "알림", "정보", ""]
-    var account: [String] = ["이메일", "SNS"]
+    var account: [String] = ["이메일"]
     var noti: [String] = ["알림"]
-    var settingData: [Setting] = [Setting(title: "앱버전", status: "1.0.1"),
-                                  Setting(title: "공지사항"),
-                                  Setting(title: "도움말"),
+    var settingData: [Setting] = [Setting(title: "앱버전", status: "1.0.0"),
                                   Setting(title: "문의하기"),
                                   Setting(title: "이용약관"),
                                   Setting(title: "개인정보 취급방침")]
@@ -39,7 +37,9 @@ class SetView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        settingList.reloadData()
+        if let noticell = settingList.cellForRow(at: [2, 0]) as? NotiCell {
+            noticell.attribute()
+        }
     }
     func attribute() {
         notificationCenter.addObserver(self,
@@ -122,9 +122,10 @@ class SetView: UIViewController {
             view.completeButton.addTarget(self, action: #selector(emailAuthRequest), for: .touchUpInside)
         }
     }
-    
+
     @objc func emailAuthRequest() {
         self.presenter?.emailAuthRequest()
+        TerminalAlertMessage.dismiss()
     }
     
     @objc func logOutConfirmedDidTap() {
@@ -149,7 +150,6 @@ extension SetView: SetViewProtocol {
     
     func emailAuthResponse(result: Bool, message: String) {
         if result {
-            TerminalAlertMessage.dismiss()
             self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 1)
         } else {
             self.showToast(controller: self, message: message, seconds: 1)
@@ -247,6 +247,17 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         // 알림
         if indexPath.section == 2 && indexPath.row == 0 {
             presenter?.notiCellDidTap()
+        }
+        
+        // 정보
+        if indexPath.section == 3 {
+            if indexPath.row == 1 {
+                presenter?.goToInquiryWeb()
+            } else if indexPath.row == 2 {
+                presenter?.goToPrivacyWeb()
+            } else if indexPath.row == 3 {
+                presenter?.goToTermsOfServiceWeb()
+            }
         }
         
         // 로그아웃

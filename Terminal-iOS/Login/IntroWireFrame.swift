@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class IntroWireFrame: IntroWireFrameProtocol {
     static func createIntroModule(beginState: BeginState, introState: IntroViewState) -> UIViewController {
@@ -30,6 +31,22 @@ class IntroWireFrame: IntroWireFrameProtocol {
             return view
         } else {
             return UIViewController()
+        }
+    }
+    
+    func goToTermsOfServiceWeb(from view: IntroViewProtocol) {
+        guard let url = URL(string: "https://www.terminal-study.tk/terms") else { return }
+        let webView = SFSafariViewController(url: url)
+        if let introview = view as? UIViewController {
+            introview.present(webView, animated: true, completion: nil)
+        }
+    }
+    
+    func goToPrivacyWeb(from view: IntroViewProtocol) {
+        guard let url = URL(string: "https://www.terminal-study.tk/privacy") else { return }
+        let webView = SFSafariViewController(url: url)
+        if let introview = view as? UIViewController {
+            introview.present(webView, animated: true, completion: nil)
         }
     }
 }
