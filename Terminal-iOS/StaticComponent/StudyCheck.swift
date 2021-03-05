@@ -11,6 +11,7 @@ import Foundation
 class StudyCheck {
     static func execute(study: StudyDetailPost) -> StudyNilCheck {
         var nilCheck: StudyNilCheck?
+        let location = study.location ?? nil
         
         if study.category.isEmpty {
             nilCheck = StudyNilCheck(message: "카테고리가 지정되어있지 않습니다.", label: "category")
@@ -20,6 +21,8 @@ class StudyCheck {
             nilCheck = StudyNilCheck(message: "소개를 입력해주세요", label: "introduce")
         } else if study.progress!.isEmpty {
             nilCheck = StudyNilCheck(message: "진행을 입력해주세요", label: "progress")
+        } else if location == nil {
+            nilCheck = StudyNilCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
         } else if study.studyTime!.isEmpty {
             nilCheck = StudyNilCheck(message: "시간을 입력해주세요", label: "study_time")
         } else if let notion = study.snsNotion {
@@ -34,16 +37,6 @@ class StudyCheck {
                     }
                 }
             }
-        }
-        
-        if let location = study.location {
-            if location.lat.isZero
-                || location.lng.isZero
-                || location.address.isEmpty {
-                nilCheck = StudyNilCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
-            }
-        } else {
-            nilCheck = StudyNilCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
         }
         
         if let nilCheck = nilCheck {
