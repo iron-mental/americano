@@ -182,7 +182,7 @@ class ProfileModifyView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         }
         
-        self.topAnchor = self.profileImage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+        self.topAnchor = self.profileImage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10)
         self.topAnchor?.isActive = true
     }
     
