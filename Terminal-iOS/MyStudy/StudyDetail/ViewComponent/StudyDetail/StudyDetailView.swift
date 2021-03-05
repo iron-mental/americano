@@ -347,8 +347,8 @@ final class StudyDetailView: UIViewController {
         
         [ reportStudy, cancel].forEach { alert.addAction($0) }
         
-        if UIDevice.current.userInterfaceIdiom == .pad { //디바이스 타입이 iPad일때
-            if let popoverController = alert.popoverPresentationController { // ActionSheet가 표현되는 위치를 저장해줍니다.
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            if let popoverController = alert.popoverPresentationController {
                 popoverController.sourceView = self.view
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
                 popoverController.permittedArrowDirections = []
@@ -358,8 +358,6 @@ final class StudyDetailView: UIViewController {
         } else {
             self.present(alert, animated: true, completion: nil)
         }
-        
-        
     }
     
     func reportButtonDidTap() {

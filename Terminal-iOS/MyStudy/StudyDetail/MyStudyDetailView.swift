@@ -265,7 +265,17 @@ final class MyStudyDetailView: UIViewController {
         } else if authority == .member {
             [ reportStudy, leaveStudy, cancel ].forEach { alert.addAction($0) }
         }
-        present(alert, animated: true, completion: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+                self.present(alert, animated: true, completion: nil)
+                
+            }
+        } else {
+            present(alert, animated: true, completion: nil)
+        }
     }
     
     @objc func leaveStudyCompleteButtonDidTap() {

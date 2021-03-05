@@ -113,6 +113,8 @@ class TerminalAlertMessage: NSObject {
         }
         
         controller.present(TerminalAlertMessage.alert, animated: true)
+        
+        
         if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController") {
             if let castContentViewController = contentViewController as? UIViewController {
                 if let alertView = castContentViewController.view as? AlertBaseUIView {
