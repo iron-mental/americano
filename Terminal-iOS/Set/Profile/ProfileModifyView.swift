@@ -144,9 +144,9 @@ class ProfileModifyView: UIViewController {
         self.imageModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor,
-                                       constant: -4).isActive = true
+                                       constant: -Terminal.convertHeight(value: 4)).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.profileImage.trailingAnchor,
-                                         constant: -4).isActive = true
+                                         constant: -Terminal.convertHeight(value: 4)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 25)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 25)).isActive = true
         }
