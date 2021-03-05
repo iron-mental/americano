@@ -12,8 +12,8 @@ import Foundation
 
 struct Project: Codable {
     let id: Int?
-    let title, contents: String
-    let snsGithub, snsAppstore, snsPlaystore: String?
+    var title, contents: String
+    var snsGithub, snsAppstore, snsPlaystore: String?
     let createAt: String?
 
     enum CodingKeys: String, CodingKey {

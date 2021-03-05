@@ -20,6 +20,11 @@ class CareerModifyPresenter: CareerModifyPresenterProtocol {
 
 extension CareerModifyPresenter: CareerModifyInteractorOutputProtocol {
     func didCompleteModify(result: Bool, message: String) {
-        self.view?.modifyResultHandle(result: result, message: message)
+        view?.modifyResultHandle(result: result, message: message)
+    }
+    
+    func modifyFailed(message: String, label: String) {
+        view?.hideLoading()
+        view?.showError(message: message, label: label)
     }
 }

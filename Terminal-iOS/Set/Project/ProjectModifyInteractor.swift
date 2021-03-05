@@ -53,9 +53,9 @@ class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
-                            let isSuccess = result.result
-                            let message = result.message!
-                            self.presenter?.didCompleteModify(result: isSuccess, message: message)
+                            let message = result.message ?? ""
+                            let label = result.label ?? ""
+                            self.presenter?.modifyFailed(message: message, label: label)
                         } catch {
                             print(error.localizedDescription)
                         }

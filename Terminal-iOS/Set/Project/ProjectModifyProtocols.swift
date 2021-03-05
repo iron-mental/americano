@@ -13,6 +13,7 @@ protocol ProjectModifyViewProtocol: class {
     
     // PRESENTER -> VIEW
     func modifyResultHandle(result: Bool, message: String)
+    func showError(message: String, label: String)
     func showLoading()
     func hideLoading()
 }
@@ -40,4 +41,5 @@ protocol ProjectModifyInteractorInputProtocol: class {
 protocol ProjectModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didCompleteModify(result: Bool, message: String)
+    func modifyFailed(message: String, label: String)
 }

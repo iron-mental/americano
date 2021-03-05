@@ -134,6 +134,10 @@ class CareerModifyView: UIViewController {
         let contents = careerDescriptModify.text!
         showLoading()
         presenter?.completeModify(title: title, contents: contents)
+        self.careerTitleModify.layer.borderWidth = 0.1
+        self.careerTitleModify.layer.borderColor = UIColor.gray.cgColor
+        self.careerDescriptModify.layer.borderWidth = 0.1
+        self.careerDescriptModify.layer.borderColor = UIColor.gray.cgColor
     }
 }
 
@@ -162,6 +166,20 @@ extension CareerModifyView: CareerModifyViewProtocol {
             }
         }
     }
+    
+    func showError(message: String, label: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            switch label {
+            case "career_title":
+                self.careerTitleModify.warningEffect()
+            case "career_contents":
+                self.careerDescriptModify.warningEffect()
+            default:
+                break
+            }
+        }
+    }
+    
     func showLoading() {
         LoadingRainbowCat.show(caller: self)
     }

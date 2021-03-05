@@ -29,7 +29,6 @@ class SNSInputUITextField: UITextField {
     
     @objc private func editingChanged(_ sender: UITextField) {
         self.workItem?.cancel()
-        self.layer.borderWidth = 0.4
         
         let workItem = DispatchWorkItem(block: { [weak self] in
             self?.callback?(sender.text)

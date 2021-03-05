@@ -10,13 +10,13 @@ import UIKit
 
 class BaseSNSModifyView: UIView {
     lazy var firstImage = UIImageView()
-    lazy var firstTextFeield = UITextField()
+    lazy var firstTextFeield = SNSInputUITextField()
     
     lazy var secondImage = UIImageView()
-    lazy var secondTextField = UITextField()
+    lazy var secondTextField = SNSInputUITextField()
     
     lazy var thirdImage = UIImageView()
-    lazy var thirdTextField = UITextField()
+    lazy var thirdTextField = SNSInputUITextField()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

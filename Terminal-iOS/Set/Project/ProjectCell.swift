@@ -29,11 +29,36 @@ class ProjectCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         attribute()
         layout()
+        snsValidCheck()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         self.delegate = nil
+    }
+    
+    func snsValidCheck() {
+        self.sns.secondTextField.debounce(delay: 1) { [weak self] _ in
+            guard let text = self?.sns.secondTextField.text else { return }
+            if text.appstoreCheck() || text.isEmpty {
+                self!.sns.secondTextField.layer.borderWidth = 0.1
+                self!.sns.secondTextField.layer.borderColor = UIColor.gray.cgColor
+            } else {
+                self!.sns.secondTextField.layer.borderWidth = 0.4
+                self!.sns.secondTextField.layer.borderColor = UIColor.systemRed.cgColor
+            }
+        }
+        
+        self.sns.thirdTextField.debounce(delay: 1) { [weak self] _ in
+            guard let text = self?.sns.secondTextField.text else { return }
+            if text.playstoreCheck() || text.isEmpty {
+                self!.sns.thirdTextField.layer.borderWidth = 0.1
+                self!.sns.thirdTextField.layer.borderColor = UIColor.gray.cgColor
+            } else {
+                self!.sns.thirdTextField.layer.borderWidth = 0.4
+                self!.sns.thirdTextField.layer.borderColor = UIColor.systemRed.cgColor
+            }
+        }
     }
     
     func setAccessory(accessory: UIButton) {
@@ -69,6 +94,17 @@ class ProjectCell: UITableViewCell {
         self.sns.thirdTextField.text = data.snsPlaystore ?? ""
     }
     
+    func setWarning(label: String) {
+        switch label {
+        case "title":
+            self.title.warningEffect()
+        case "contents":
+            self.contents.warningEffect()
+        default:
+            break
+        }
+    }
+    
     func attribute() {
         self.do {
             $0.backgroundColor = .appColor(.terminalBackground)
@@ -98,7 +134,7 @@ class ProjectCell: UITableViewCell {
             $0.layer.cornerRadius = 10
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.layer.borderWidth = 0.1
-            $0.backgroundColor = UIColor.appColor(.cellBackground)
+            $0.backgroundColor = .appColor(.cellBackground)
             $0.addLeftPadding(padding: 10)
         }
         

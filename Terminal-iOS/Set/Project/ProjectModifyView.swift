@@ -244,6 +244,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
             }
         }
+        
     }
     
     @objc func addProject() {
@@ -295,6 +296,29 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
             self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 0.5)
         }
     }
+    
+    func showError(message: String, label: String) {
+        
+        // 서버에서 내려오는 label 자르기
+        // ex) "project_list[0].title"
+        let tempResult = label.components(separatedBy: ".")
+        let index = tempResult[0].components(separatedBy: ["[", "]"])
+        
+        let row = Int(index[1])!
+        let label = tempResult[1]
+        let indexPath = IndexPath(row: row, section: 0)
+        
+        // cellForRow의 nil값 반환으로 인해 scroll 후 cell 반환하도록 함
+        self.projectView.scrollToRow(at: indexPath, at: .top, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.4) {
+            if let cell = self.projectView.cellForRow(at: indexPath) as? ProjectCell {
+                self.showToast(controller: self, message: message, seconds: 1) {
+                    cell.setWarning(label: label)
+                }
+            }
+        }
+    }
+    
     func showLoading() {
         LoadingRainbowCat.show(caller: self)
     }
@@ -323,9 +347,7 @@ extension ProjectModifyView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func buttonTapped(cell: ProjectCell) {
-        guard let indexPath = self.projectView.indexPath(for: cell) else {
-            return
-        }
+        guard let indexPath = self.projectView.indexPath(for: cell) else { return }
         if let cellHeight = projectView.cellForRow(at: [0, projectArr.count - 1])?.frame.height {
             standardContentHeight -= cellHeight
         }
@@ -360,6 +382,13 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
                                 viewMaxY: CGFloat(currentScrollViewMaxY))
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // 테이블뷰 재사용으로 인한 값 초기화를 방지하기 위해서
+        let index = textField.tag
+        let title = textField.text!
+        self.projectArr[index].title = title
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
     }
@@ -371,5 +400,12 @@ extension ProjectModifyView: UITextFieldDelegate, UITextViewDelegate {
         self.editableViewDidTap(textView: tappedView!,
                                 viewMinY: CGFloat(currentScrollViewMinY),
                                 viewMaxY: CGFloat(currentScrollViewMaxY))
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        // 테이블뷰 재사용으로 인한 값 초기화를 방지하기 위해서
+        let index = textView.tag
+        let contents = textView.text!
+        self.projectArr[index].contents = contents
     }
 }
