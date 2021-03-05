@@ -26,7 +26,8 @@ final class ApplyUserView: UIViewController {
             $0.title = "신청자 목록"
         }
         self.applyUserList.do {
-            $0.rowHeight = 80
+            $0.estimatedRowHeight = 80
+            $0.rowHeight = UITableView.automaticDimension
             $0.register(ApplyUserCell.self, forCellReuseIdentifier: ApplyUserCell.applyUserCellID)
             $0.delegate = self
             $0.dataSource = self
@@ -104,4 +105,7 @@ extension ApplyUserView: UITableViewDelegate, UITableViewDataSource {
         presenter?.showUserInfoDetail(userInfo: userList[indexPath.row], studyID: id)
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }

@@ -22,7 +22,6 @@ extension UIViewController {
         let titleAttrString = NSMutableAttributedString(string: message, attributes: titleFont as [NSAttributedString.Key: Any])
         
         alert.setValue(titleAttrString, forKey: "attributedTitle")
-        
         controller.present(alert, animated: true)
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + seconds) {

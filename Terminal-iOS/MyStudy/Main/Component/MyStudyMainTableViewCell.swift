@@ -44,7 +44,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
         }
         locationLabel.do {
             $0.textColor = UIColor.appColor(.mainColor)
-            $0.font = UIFont.notosansMedium(size: Terminal.convertWidth(value: 10))
+            $0.dynamicFont(fontSize: 10, weight: .regular)
             $0.layer.borderWidth = 0.5
             $0.layer.borderColor = UIColor.appColor(.mainColor).cgColor
             $0.layer.cornerRadius = 8
@@ -52,7 +52,7 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.textAlignment = .center
         }
         titleLabel.do {
-            $0.font = UIFont.notosansBold(size: Terminal.convertWidth(value: 17))
+            $0.dynamicFont(fontSize: 17, weight: .regular)
             $0.textColor = UIColor.appColor(.profileTextColor)
         }
     }

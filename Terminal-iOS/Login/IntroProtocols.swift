@@ -32,6 +32,7 @@ protocol IntroWireFrameProtocol: class {
     
     // PRESENT -> WIREFRAME
     func goToTermsOfServiceWeb(from view: IntroViewProtocol)
+    func goToPrivacyWeb(from view: IntroViewProtocol)
 }
 
 protocol IntroPresenterProtocol: class {
@@ -42,6 +43,7 @@ protocol IntroPresenterProtocol: class {
     //VIEW -> PRESENTER
     func didClickedRightBarButton(input: String, introState: IntroViewState, beginState: BeginState)
     func termsOfServiceDidTap()
+    func privacyWebDidTap()
     
     //INTERACTOR -> PRESENTER
     func emailValidInfo(result: Bool, message: String)

@@ -40,7 +40,7 @@ extension UITextField {
         case 926.0: //iphone 12pro max
             fontSize = size * 1.25
         default:
-            print("not an iPhone")
+            fontSize = size
         }
         
         switch weight {

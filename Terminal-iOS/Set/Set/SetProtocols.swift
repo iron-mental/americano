@@ -29,6 +29,9 @@ protocol SetWireFrameProtocol: class {
     func presentUserWithdrawal(from view: SetViewProtocol)
     func replaceRootViewToIntroView(from view: SetViewProtocol)
     func goToSettingApp()
+    func goToInquiryWeb(from view: SetViewProtocol)
+    func goToPrivacyWeb(from view: SetViewProtocol)
+    func goToTermsOfServiceWeb(from view: SetViewProtocol)
 }
 
 protocol SetPresenterProtocol: class {
@@ -45,6 +48,9 @@ protocol SetPresenterProtocol: class {
     func userWithdrawal()
     func notiCellDidTap()
     func goToSettingApp()
+    func goToInquiryWeb()
+    func goToPrivacyWeb()
+    func goToTermsOfServiceWeb()
 }
 
 protocol SetInteractorOutputProtocol: class {

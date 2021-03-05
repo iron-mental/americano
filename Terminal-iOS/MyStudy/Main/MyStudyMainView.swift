@@ -103,7 +103,17 @@ final class MyStudyMainView: UIViewController {
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         [ applyList, cancel].forEach { alert.addAction($0) }
-        self.present(alert, animated: true, completion: nil)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            self.present(alert, animated: true)
+        }
     }
     
     @objc func applyList() {
