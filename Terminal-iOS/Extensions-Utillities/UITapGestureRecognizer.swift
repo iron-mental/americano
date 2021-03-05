@@ -8,9 +8,15 @@
 
 import UIKit
 
+enum SignUpGuideState {
+    case Privacy
+    case TermsOfService
+    case unowned
+}
+
 extension UITapGestureRecognizer {
 
-    func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
+    func didTapAttributedTextInLabel(label: UILabel) -> SignUpGuideState {
         let layoutManager = NSLayoutManager()
         let textContainer = NSTextContainer(size: CGSize.zero)
         let textStorage = NSTextStorage(attributedString: label.attributedText!)
@@ -32,7 +38,14 @@ extension UITapGestureRecognizer {
 
         let locationOfTouchInTextContainer = CGPoint(x: locationOfTouchInLabel.x - textContainerOffset.x, y: locationOfTouchInLabel.y - textContainerOffset.y)
         let indexOfCharacter = layoutManager.characterIndex(for: locationOfTouchInTextContainer, in: textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-        return NSLocationInRange(indexOfCharacter, targetRange)
+
+        if NSLocationInRange(indexOfCharacter, NSRange(location: 8, length: 9)) {
+            return .Privacy
+        } else if NSLocationInRange(indexOfCharacter, NSRange(location: 17, length: 3)) {
+            return .TermsOfService
+        } else {
+            return .unowned
+        }
     }
 
 }

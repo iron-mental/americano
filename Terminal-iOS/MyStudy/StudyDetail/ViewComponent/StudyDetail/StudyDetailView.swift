@@ -193,6 +193,13 @@ final class StudyDetailView: UIViewController {
             $0.contentText = ["장소", String(studyInfo?.location.addressName ?? "") +  detailAddress]
         }
         
+        mapView.do {
+            if let location = studyInfo?.location {
+                $0.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location.latitude)!, lng: Double(location.longitude)!), zoomTo: 17))
+            }
+            $0.isUserInteractionEnabled = false
+        }
+        
         joinProgressCat.do {
             $0.addGestureRecognizer(joinProgressCatTapGesture)
             $0.isUserInteractionEnabled = false

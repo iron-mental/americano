@@ -151,7 +151,7 @@ class IntroView: UIViewController {
             $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor,
                                     constant: Terminal.convertHeight(value: 50)).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 40)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 50)).isActive = true
         }
     }
     
@@ -190,8 +190,13 @@ class IntroView: UIViewController {
     }
     
     @IBAction func tapLabel(gesture: UITapGestureRecognizer) {
-        if gesture.didTapAttributedTextInLabel(label: termsOfSerViceView.guideLabel, inRange: gestureRange) {
+        let result = gesture.didTapAttributedTextInLabel(label: termsOfSerViceView.guideLabel)
+        switch result {
+        case .Privacy:
+            presenter?.privacyWebDidTap()
+        case .TermsOfService:
             presenter?.termsOfServiceDidTap()
+        case .unowned: break
         }
     }
 }

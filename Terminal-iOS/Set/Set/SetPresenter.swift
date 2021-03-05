@@ -46,6 +46,18 @@ class SetPresenter: SetPresenterProtocol {
     func goToSettingApp() {
         wireFrame?.goToSettingApp()
     }
+    
+    func goToInquiryWeb() {
+        wireFrame?.goToInquiryWeb(from: view!)
+    }
+    
+    func goToPrivacyWeb() {
+        wireFrame?.goToPrivacyWeb(from: view!)
+    }
+    
+    func goToTermsOfServiceWeb() {
+        wireFrame?.goToTermsOfServiceWeb(from: view!)
+    }
 }
 
 extension SetPresenter: SetInteractorOutputProtocol {
