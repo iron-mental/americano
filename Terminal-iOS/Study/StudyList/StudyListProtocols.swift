@@ -55,10 +55,6 @@ protocol StudyListInteractorInputProtocol: class {
     func pagingRetrieveLengthStudyList()
 }
 
-protocol StudyListDataManagerInputProtocol: class {
-    // INTERACTOR -> DATAMANAGER
-}
-
 protocol StudyListRemoteDataManagerInputProtocol: class {
     var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol? { get set }
     
@@ -82,5 +78,4 @@ protocol StudyListLocalDataManagerInputProtocol: class {
     // INTERACTOR -> LOCALDATAMANAGER
     func retrieveStudyList() throws -> [Study]
     func saveStudylist(studyList: [Study])
-//    func savePost(id: Int, title: String, imageUrl: String, thumbImageUrl: String) throws
 }
