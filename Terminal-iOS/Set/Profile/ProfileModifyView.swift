@@ -19,8 +19,7 @@ class ProfileModifyView: UIViewController {
     var profile: Profile?
     let picker = UIImagePickerController()
 
-    let modifyLabel = UILabel()
-    let contentView = UIView()
+    let imageModify = UIImageView()
     let profileImage = UIImageView()
     let nameLabel = UILabel()
     let introductionLabel = UILabel()
@@ -68,15 +67,16 @@ class ProfileModifyView: UIViewController {
             $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
         }
-        self.contentView.do {
-            $0.backgroundColor = .darkGray
-            $0.alpha = 0.5
-        }
-        self.modifyLabel.do {
-            $0.text = "편집"
-            $0.textAlignment = .center
-            $0.textColor = .white
-            $0.font = UIFont.notosansMedium(size: 13)
+        self.imageModify.do {
+            $0.image = UIImage(systemName: "plus.circle.fill")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            $0.tintColor = .lightGray
+            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.frame.size.width = Terminal.convertHeight(value: 25)
+            $0.frame.size.height = Terminal.convertHeight(value: 25)
+            $0.layer.cornerRadius = $0.frame.width / 2
+            $0.layer.borderColor = UIColor.appColor(.terminalBackground).cgColor
+            $0.layer.borderWidth = 3
+            $0.clipsToBounds = true
         }
         self.nameLabel.do {
             $0.text = "이름"
@@ -132,10 +132,8 @@ class ProfileModifyView: UIViewController {
     // MARK: Set Layout
     
     func layout() {
-        [profileImage, nameLabel, name, introductionLabel, introduction, completeButton]
+        [profileImage, imageModify, nameLabel, name, introductionLabel, introduction, completeButton]
             .forEach { self.view.addSubview($0) }
-        self.profileImage.addSubview(self.contentView)
-        self.contentView.addSubview(self.modifyLabel)
         
         self.profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -143,17 +141,14 @@ class ProfileModifyView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
-        self.contentView.do {
+        self.imageModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: profileImage.frame.width).isActive = true
-        }
-        self.modifyLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor,
+                                       constant: -4).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.profileImage.trailingAnchor,
+                                         constant: -4).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 25)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 25)).isActive = true
         }
         self.nameLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
