@@ -34,10 +34,6 @@ class ProjectCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.delegate = nil
-        self.title.layer.borderWidth = 0.1
-        self.title.layer.borderColor = UIColor.gray.cgColor
-        self.contents.layer.borderWidth = 0.1
-        self.contents.layer.borderColor = UIColor.gray.cgColor
     }
     
     func setAccessory(accessory: UIButton) {
