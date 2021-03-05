@@ -23,6 +23,7 @@ class SetPresenter: SetPresenterProtocol {
     }
     
     func emailAuthRequest() {
+        view?.showLoading()
         interactor?.emailAuthRequest()
     }
     
@@ -53,6 +54,7 @@ extension SetPresenter: SetInteractorOutputProtocol {
     }
     
     func eamilAuthResponse(result: Bool, message: String) {
+        view?.hideLoading()
         view?.emailAuthResponse(result: result, message: message)
     }
     

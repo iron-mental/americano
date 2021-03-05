@@ -39,7 +39,9 @@ class SetView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        settingList.reloadData()
+        if let noticell = settingList.cellForRow(at: [2, 0]) as? NotiCell {
+            noticell.attribute()
+        }
     }
     func attribute() {
         notificationCenter.addObserver(self,
@@ -125,6 +127,7 @@ class SetView: UIViewController {
     
     @objc func emailAuthRequest() {
         self.presenter?.emailAuthRequest()
+        TerminalAlertMessage.dismiss()
     }
     
     @objc func logOutConfirmedDidTap() {
@@ -149,7 +152,6 @@ extension SetView: SetViewProtocol {
     
     func emailAuthResponse(result: Bool, message: String) {
         if result {
-            TerminalAlertMessage.dismiss()
             self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 1)
         } else {
             self.showToast(controller: self, message: message, seconds: 1)
