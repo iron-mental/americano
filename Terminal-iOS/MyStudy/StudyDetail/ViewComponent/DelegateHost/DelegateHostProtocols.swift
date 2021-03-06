@@ -39,6 +39,7 @@ protocol DelegateHostInteractorInputProtocol: class {
 protocol DelegateHostInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func delegateHostResult(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol DelegateHostRemoteDataManagerInputProtocol: class {
@@ -51,6 +52,7 @@ protocol DelegateHostRemoteDataManagerInputProtocol: class {
 protocol DelegateHostRemoteDataManagerOutputProtocol: class {
     //REMOTEDATAMANAGER -> INTERACTOR
     func delegateHostResult(response: BaseResponse<String>)
+    func sessionTaskError(message: String)
 }
 
 protocol DelegateHostWireFrameProtocol: class {
