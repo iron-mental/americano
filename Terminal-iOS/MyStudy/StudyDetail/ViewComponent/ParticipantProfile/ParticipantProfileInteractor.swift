@@ -47,4 +47,7 @@ extension ParticipantProfileInteractor: ParticipantProfileRemoteDataManagerOutpu
         }
     }
     
+    func sessionTaskError(message: String) {
+        presenter?.showError(message: message)
+    }
 }
