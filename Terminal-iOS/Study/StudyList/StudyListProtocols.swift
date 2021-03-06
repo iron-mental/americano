@@ -16,6 +16,7 @@ protocol StudyListViewProtocol: class {
     func saveLengthStudyList(with studies: [Study])
     func showLoading()
     func hideLoading()
+    func showError(message: String)
 }
 
 protocol StudyListWireFrameProtocol: class {
@@ -41,7 +42,7 @@ protocol StudyListInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrieveLatestStudies(studies: [Study])
     func didRetrieveLengthStudies(studies: [Study])
-    func onError()
+    func sessionTaskError(message: String)
 }
 
 protocol StudyListInteractorInputProtocol: class {
@@ -71,7 +72,7 @@ protocol StudyListRemoteDataManagerOutputProtocol: class {
     func onStudiesLengthRetrieved(result: BaseResponse<[Study]>)
     func onStudiesForKeyLatestRetrieved(result: BaseResponse<[Study]>)
     func onStudiesForKeyLengthRetrieved(result: BaseResponse<[Study]>)
-    func onError()
+    func sessionTaskError(message: String)
 }
 
 protocol StudyListLocalDataManagerInputProtocol: class {

@@ -25,6 +25,8 @@ class SearchLocationWireFrame: SearchLocationWireFrameProtocol {
         
         interactor.remoteDataManager = remoteDataManager
         interactor.presenter = presenter
+        
+        remoteDataManager.interactor = interactor
 
         return view
     }

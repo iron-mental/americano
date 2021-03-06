@@ -26,13 +26,20 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
-                            self.interactor?.showSearchStudyListResult(result: result)
-                        } catch {
-                            print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
+                                    self.interactor?.showSearchStudyListResult(result: result)
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
+                            }
                         }
                     }
                 }
@@ -59,7 +66,21 @@ class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInpu
                         print(error.localizedDescription)
                     }
                 case .failure(let err):
-                    print(err)
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
+                                    self.interactor?.showSearchStudyListResult(result: result)
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
+                            }
+                        }
+                    }
                 }
             }
     }

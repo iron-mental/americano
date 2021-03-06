@@ -46,6 +46,7 @@ protocol StudyCategoryInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func didRetrieveCategories(_ categories: [Category])
     func onError(message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol StudyCategoryInteractorInputProtocol: class {
@@ -70,7 +71,8 @@ protocol StudyCategoryRemoteDataManagerInputProtocol: class {
 
 protocol StudyCategoryRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
-       func onCategoriesRetrieved(result: BaseResponse<[String]>)
+    func onCategoriesRetrieved(result: BaseResponse<[String]>)
+    func sessionTaskError(message: String)
 }
 
 protocol StudyCategoryLocalDataManagerInputProtocol: class {

@@ -40,4 +40,7 @@ extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol 
             presenter?.onError(message: message)
         }
     }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

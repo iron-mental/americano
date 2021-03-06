@@ -26,15 +26,22 @@ class StudyCategoryRemoteManager: StudyCategoryRemoteDataManagerInputProtocol {
                     } catch {
                         print(error)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<[String]>.self, from: data)
-                            if result.message != nil {
-                                self.interactor?.onCategoriesRetrieved(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[String]>.self, from: data)
+                                    if result.message != nil {
+                                        self.interactor?.onCategoriesRetrieved(result: result)
+                                    }
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
                             }
-                        } catch {
-                            print(error.localizedDescription)
                         }
                     }
                 }

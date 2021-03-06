@@ -54,4 +54,8 @@ extension ApplyUserDetailInteractor: ApplyUserDetailRemoteDataManagerOutputProto
             presenter?.retriveApplyStatus(result: response.result, message: message, studyID: studyID!)
         }
     }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

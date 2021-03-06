@@ -37,4 +37,9 @@ extension ModifyStudyPresenter: ModifyStudyInteractorOutputProtocol {
             self.view?.showError(label: label, message: message)
         }
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(label: nil, message: message)
+    }
 }

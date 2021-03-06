@@ -48,6 +48,7 @@ protocol LocationModifyInteractorOutputProtocol: class {
     func retrievedAddress(result: Bool, address: [Address])
     func didCompleteModify(result: Bool, message: String)
     func retrievedAddressFailed(message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol LocationModifyRemoteDataManagerInputProtocol: class {
@@ -64,4 +65,5 @@ protocol LocationModifyRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onRetrieveAddress(result: BaseResponse<[Address]>)
     func didCompleteModify(result: BaseResponse<Bool>)
+    func sessionTaskError(message: String)
 }

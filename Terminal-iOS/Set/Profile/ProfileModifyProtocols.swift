@@ -38,6 +38,7 @@ protocol ProfileModifyPresenterProtocol: class {
 protocol ProfileModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didCompleteModify(result: Bool, message: String)
+    func sessionTaskError(message: String)
     func modifyFailed(message: String, label: String)
 }
 
@@ -66,4 +67,5 @@ protocol ProfileModifyRemoteDataManagerOutputProtocol: class {
     func imageModifyRetrieved(result: BaseResponse<Bool>)
     func nicknameModifyRetrieved(result: BaseResponse<Bool>)
     func mergeProfileModifyResult()
+    func sessionTaskError(message: String)
 }

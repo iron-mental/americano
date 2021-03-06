@@ -30,8 +30,15 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default: break
+                        }
+                    }
                 }
             }
     }
@@ -59,18 +66,25 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
-                            if result.message != nil {
-                                self.remoteRequestHandler?.imageModifyRetrieved(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                                    if result.message != nil {
+                                        self.remoteRequestHandler?.imageModifyRetrieved(result: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
-                    print(error.localizedDescription)
                 }
             }
     }
@@ -93,13 +107,21 @@ class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    let data = response.data
-                    do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                        self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
-                    } catch {
-                        print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            let data = response.data
+                            do {
+                                let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                                self.remoteRequestHandler?.nicknameModifyRetrieved(result: result)
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
                     }
                 }
             }

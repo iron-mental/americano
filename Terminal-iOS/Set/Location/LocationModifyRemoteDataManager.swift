@@ -29,15 +29,23 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<[Address]>.self, from: data)
-                            if result.message != nil {
-                                self.remoteRequestHandler?.onRetrieveAddress(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[Address]>.self, from: data)
+                                    if result.message != nil {
+                                        self.remoteRequestHandler?.onRetrieveAddress(result: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
                 }
@@ -65,8 +73,15 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
                     let longitude = json["y"].doubleValue
 
                     completion(latitude, longitude)
-                case .failure(let error):
-                    print(error)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default: break
+                        }
+                    }
                 }
             }
     }
@@ -88,13 +103,21 @@ class LocationModifyRemoteDataManager: LocationModifyRemoteDataManagerInputProto
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    let data = response.data
-                    do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                        self.remoteRequestHandler?.didCompleteModify(result: result)
-                    } catch {
-                        print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            let data = response.data
+                            do {
+                                let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                                self.remoteRequestHandler?.didCompleteModify(result: result)
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
                     }
                 }
             }

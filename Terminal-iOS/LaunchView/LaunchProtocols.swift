@@ -43,6 +43,7 @@ protocol LaunchInteractorOutputProtocol: class {
     func refreshTokenIsEmpty()
     func refreshTokenResult(result: Bool)
     func serverMaintenance()
+    func sessionTaskError(message: String)
 }
 
 protocol LaunchRemoteDataManagerInputProtocol: class {
@@ -57,6 +58,7 @@ protocol LaunchRemoteDataManagerOutputProtocol: class {
     //REMOTEDATAMANAGER -> INTERACTOR
     func getVersionResult(result: BaseResponse<VersionResult>)
     func getRefreshTokenResult(result: BaseResponse<UserInfo>)
+    func sessionTaskError(message: String)
 }
 
 protocol LaunchWireFrameProtocol: class {

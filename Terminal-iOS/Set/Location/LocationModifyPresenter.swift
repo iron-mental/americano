@@ -38,4 +38,9 @@ extension LocationModifyPresenter: LocationModifyInteractorOutputProtocol {
         view?.hideLoading()
         self.view?.showError(message: message)
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }

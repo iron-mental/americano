@@ -25,9 +25,12 @@ class AddNoticeWireFrame: AddNoticeWireFrameProtocol {
         presenter.view = view
         presenter.wireFrame = wireFrame
         presenter.interactor = interactor
+        
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         interactor.localDataManager = localDataManager
+        
+        remoteDataManager.interactor = interactor
         
         return view
     }

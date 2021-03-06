@@ -30,7 +30,14 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
                         print(error.localizedDescription)
                     }
                 case .failure(let err):
-                    print(err)
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default: break
+                        }
+                    }
                     self.interactor?.error()
                 }
             }
@@ -53,8 +60,15 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default: break
+                        }
+                    }
                 }
             }
     }
@@ -76,15 +90,23 @@ class SetRemoteManager: SetRemoteDataManagerInputProtocol {
                     } catch {
                         
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
-                            if result.message != nil {
-                                self.interactor?.postLogoutResult(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                                    if result.message != nil {
+                                        self.interactor?.postLogoutResult(result: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
                 }

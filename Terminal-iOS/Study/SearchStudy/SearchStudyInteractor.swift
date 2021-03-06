@@ -29,4 +29,7 @@ extension SearchStudyInteractor: SearchStudyRemoteDataManagerOutputProtocol {
             self.presenter?.getHotKeywordFailure(message: message)
         }
     }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

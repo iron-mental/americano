@@ -179,6 +179,9 @@ extension StudyListView: StudyListViewProtocol {
         LoadingRainbowCat.hide(caller: self)
     }
     
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
 }
 
 extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching {

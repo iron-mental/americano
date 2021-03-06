@@ -33,4 +33,7 @@ extension MyApplyStudyInfoPresenter: MyApplyStudyInfoInteractorOutputProtocol {
             view?.showError(message: message)
         }
     }
+    func sessionTaskError(message: String) {
+        view?.showError(message: message)
+    }
 }

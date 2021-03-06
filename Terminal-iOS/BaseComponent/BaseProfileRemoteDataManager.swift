@@ -23,15 +23,22 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
                 case .success(let data):
                     let result = try! JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
                     self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
-                            if result.message != nil {
-                                self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
+                                    if result.message != nil {
+                                        self.remoteRequestHandler?.onUserInfoRetrieved(userInfo: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
                 }
@@ -55,17 +62,25 @@ class BaseProfileRemoteDataManager: BaseProfileRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<[Project]>.self, from: data)
-                            if result.message != nil {
-                                self.remoteRequestHandler?.onProjectRetrieved(project: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[Project]>.self, from: data)
+                                    if result.message != nil {
+                                        self.remoteRequestHandler?.onProjectRetrieved(project: result)
+                                    }
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
                             }
-                        } catch {
-                            print(error.localizedDescription)
                         }
                     }
+                    
                 }
             }
     }

@@ -83,4 +83,7 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
             return sns!
         }
     }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

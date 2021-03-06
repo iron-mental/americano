@@ -31,5 +31,10 @@ class SelectLocationPresenter: SelectLocationPresenterProtocol {
     }
     
     func didClickedCompletButton(item: StudyDetailLocationPost) {
+        
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.showError(message: message)
     }
 }
