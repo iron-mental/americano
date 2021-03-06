@@ -29,7 +29,7 @@ class LicensesView: UIViewController {
     
     private func attribute() {
         self.do {
-            $0.navigationItem.largeTitleDisplayMode = .never
+            $0.title = "오픈소스 라이센스"
             $0.view.backgroundColor = .appColor(.terminalBackground)
         }
         self.licenseList.do {
@@ -45,10 +45,10 @@ class LicensesView: UIViewController {
         
         self.licenseList.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
             $0.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         }
     }
 }
@@ -56,6 +56,11 @@ class LicensesView: UIViewController {
 extension LicensesView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return libraryList.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let view = LicenseDetailView()
+        self.navigationController?.pushViewController(view, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
