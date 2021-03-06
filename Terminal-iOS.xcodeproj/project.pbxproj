@@ -15,6 +15,8 @@
 		A50583BB25A47AEE0060330E /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50583BA25A47AEE0060330E /* UIStackView+Ext.swift */; };
 		A509981125F3399700F1C0C7 /* LicensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509981025F3399700F1C0C7 /* LicensesView.swift */; };
 		A509981925F367D700F1C0C7 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509981825F367D700F1C0C7 /* LicenseCell.swift */; };
+		A509981E25F3716400F1C0C7 /* LicenseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509981D25F3716400F1C0C7 /* LicenseDetailView.swift */; };
+		A509982325F375C200F1C0C7 /* LibraryLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509982225F375C200F1C0C7 /* LibraryLicense.swift */; };
 		A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D0258387DE0084559C /* ApplyUser.swift */; };
 		A510B9D62583892B0084559C /* ApplyStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D52583892B0084559C /* ApplyStudy.swift */; };
 		A510B9FE2583BB190084559C /* ApplyUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9FD2583BB190084559C /* ApplyUserView.swift */; };
@@ -429,6 +431,8 @@
 		A50583BA25A47AEE0060330E /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
 		A509981025F3399700F1C0C7 /* LicensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesView.swift; sourceTree = "<group>"; };
 		A509981825F367D700F1C0C7 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
+		A509981D25F3716400F1C0C7 /* LicenseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDetailView.swift; sourceTree = "<group>"; };
+		A509982225F375C200F1C0C7 /* LibraryLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryLicense.swift; sourceTree = "<group>"; };
 		A510B9D0258387DE0084559C /* ApplyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUser.swift; sourceTree = "<group>"; };
 		A510B9D52583892B0084559C /* ApplyStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyStudy.swift; sourceTree = "<group>"; };
 		A510B9FD2583BB190084559C /* ApplyUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserView.swift; sourceTree = "<group>"; };
@@ -855,6 +859,7 @@
 			children = (
 				A509981025F3399700F1C0C7 /* LicensesView.swift */,
 				A509981825F367D700F1C0C7 /* LicenseCell.swift */,
+				A509981D25F3716400F1C0C7 /* LicenseDetailView.swift */,
 			);
 			path = Licenses;
 			sourceTree = "<group>";
@@ -1536,6 +1541,7 @@
 				A5FCF49525EBF4A5001DEB39 /* ApplyUserInfo.swift */,
 				A5FCF4FE25EE7533001DEB39 /* FontWeight.swift */,
 				CCFA775A25EFA61800DEE2D3 /* EmailValidteResult.swift */,
+				A509982225F375C200F1C0C7 /* LibraryLicense.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2268,6 +2274,7 @@
 				A5BA1EE1254A99250089D4E9 /* Notification.swift in Sources */,
 				A5A5F6E2256FEF0A00405C71 /* UserInfo.swift in Sources */,
 				A510BA162583BB340084559C /* ApplyUserInteractor.swift in Sources */,
+				A509981E25F3716400F1C0C7 /* LicenseDetailView.swift in Sources */,
 				CCBBEEFB2583A30A00177E25 /* CoreDataManager.swift in Sources */,
 				CC563946259CAD9200DA1479 /* SearchStudyRemoteDataManager.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
@@ -2366,6 +2373,7 @@
 				CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */,
 				A5FCF49625EBF4A5001DEB39 /* ApplyUserInfo.swift in Sources */,
 				CC72CBF425B05A00009E9986 /* ApplyUserDetailProtocols.swift in Sources */,
+				A509982325F375C200F1C0C7 /* LibraryLicense.swift in Sources */,
 				CCD51C7D256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				CCA25AD825B6D3AA00280C80 /* ModifyStudyWireFrame.swift in Sources */,
