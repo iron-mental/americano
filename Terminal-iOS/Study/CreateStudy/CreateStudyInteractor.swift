@@ -41,4 +41,8 @@ extension CreateStudyInteractor: CreateStudyReMoteDataManagerOutputProtocol {
             self.presenter?.studyInfoInvalid(label: label, message: message)
         }
     }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
+    
 }

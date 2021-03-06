@@ -131,4 +131,8 @@ extension CreateStudyView: CreateStudyViewProtocol {
             }
         }
     }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
 }
