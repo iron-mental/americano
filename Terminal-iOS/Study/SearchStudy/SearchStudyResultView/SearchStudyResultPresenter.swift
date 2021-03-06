@@ -44,4 +44,7 @@ extension SearchStudyResultPresenter: SearchStudyResultInteractorOutputProtocol 
         view?.hideLoading()
         view?.showError(message: message)
     }
+    func sessionTaskError() {
+        view?.showError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+    }
 }

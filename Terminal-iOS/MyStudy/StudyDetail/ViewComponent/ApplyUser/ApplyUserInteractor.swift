@@ -30,7 +30,7 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
+                case .failure(let err):
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data)

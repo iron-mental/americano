@@ -34,7 +34,8 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                                                                                                    force: "0",
                                                                                                    maintenance: false)))
                     }
-                case .failure:
+                case .failure(let err):
+                    
                     if let data = response.data {
                         do {
                             let result = try JSONDecoder().decode(BaseResponse<VersionResult>.self, from: data)
@@ -44,6 +45,8 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                         } catch {
                             
                         }
+                    } else {
+                        
                     }
                 }
             }
