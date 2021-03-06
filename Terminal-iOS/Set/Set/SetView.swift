@@ -21,7 +21,7 @@ class SetView: UIViewController {
                                   Setting(title: "문의하기"),
                                   Setting(title: "이용약관"),
                                   Setting(title: "개인정보 취급방침"),
-                                  Setting(title: "오픈소스 라이센스 이용고지")]
+                                  Setting(title: "오픈소스 라이센스")]
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
     var userInfo: UserInfo? { didSet { self.settingList.reloadData() }}
     var emailVerify: Bool = false
@@ -258,6 +258,9 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
                 presenter?.goToPrivacyWeb()
             } else if indexPath.row == 3 {
                 presenter?.goToTermsOfServiceWeb()
+            } else if indexPath.row == 4 {
+                let view = LicensesView()
+                self.navigationController?.pushViewController(view, animated: true)
             }
         }
         
