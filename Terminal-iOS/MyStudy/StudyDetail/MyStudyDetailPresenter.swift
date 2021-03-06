@@ -59,4 +59,9 @@ final class MyStudyDetailPresenter: MyStudyDetailPresenterProtocol {
     func delegateHostButtonDidTap(studyID: Int, userList: [Participate]) {
         wireFrame?.goToDelegateHost(from: view!, studyID: studyID, userList: userList)
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }

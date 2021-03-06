@@ -26,7 +26,9 @@ protocol MyStudyDetailViewProtocol: class {
     func showDeleteStudyFailed(message: String)
     
     func showLoading()
-    func hideLoading()   
+    func hideLoading()
+    
+    func showError(message: String)
 }
 
 protocol MyStudyDetailInteractorProtocol: class {
@@ -41,6 +43,7 @@ protocol MyStudyDetailInteractorProtocol: class {
     //DATAMANAGER -> INTERACTOR
     func leaveStudyResult(result: Bool, message: String)
     func deleteStudyResult(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol MyStudyDetailPresenterProtocol: class {
@@ -60,6 +63,7 @@ protocol MyStudyDetailPresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func leaveStudyResult(result: Bool, message: String)
     func deleteStudyResult(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol MyStudyDetailRemoteDataManagerProtocol: class {
