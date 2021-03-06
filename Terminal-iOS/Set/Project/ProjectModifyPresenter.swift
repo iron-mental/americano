@@ -26,7 +26,8 @@ extension ProjectModifyPresenter: ProjectModifyInteractorOutputProtocol {
     func sessionTaskError(message: String) {
         self.view?.hideLoading()
         self.view?.showError(message: message)
-      
+    }
+    
     func modifyFailed(message: String, label: String) {
         self.view?.hideLoading()
         self.view?.showError(message: message, label: label)

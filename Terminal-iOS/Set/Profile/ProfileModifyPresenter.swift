@@ -38,6 +38,6 @@ extension ProfileModifyPresenter: ProfileModifyInteractorOutputProtocol {
     
     func sessionTaskError(message: String) {
         view?.hideLoading()
-        view?.showError(message: message)
+        view?.showError(message: message, label: nil)
     }
 }
