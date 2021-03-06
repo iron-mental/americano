@@ -78,11 +78,33 @@ class IntroInteractor: IntroInteractorProtocol {
         if input.count >= 2 && input.count <= 8 {
             IntroLocalDataManager.shared.nickname = input
             remoteDataManager?.getSignUpValidInfo(
-                signUpMaterial: (IntroLocalDataManager.shared.signUp(nickname: input)),
+                signUpMaterial: IntroLocalDataManager.shared.signUp(nickname: input),
                 completionHandler: { result in
                     switch result.result {
                     case true:
-                        self.presenter?.signUpValidInfo(result: true)
+                        self.remoteDataManager?.getJoinValidInfo(
+                            joinMaterial: [IntroLocalDataManager.shared.email,
+                                           IntroLocalDataManager.shared.password],
+                            completionHandler: { result in
+                                switch result.result {
+                                case true:
+                                    if let refreshToken = result.data?.refreshToken,
+                                       let accessToken = result.data?.accessToken,
+                                       let userID = result.data?.id {
+                                        let refreshResult = KeychainWrapper.standard.set(refreshToken, forKey: "refreshToken")
+                                        let accessResult = KeychainWrapper.standard.set(accessToken, forKey: "accessToken")
+                                        let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
+                                        print("저장 결과 :", refreshResult && accessResult && idResult)
+                                        if refreshResult && accessResult && idResult {
+                                            self.presenter?.joinValidInfo(result: result.result,
+                                                                          message: String(describing: result.data?.id))
+                                        }
+                                    }
+                                case false:
+                                    self.presenter?.joinValidInfo(result: result.result,
+                                                                  message: result.message ?? "로그인 실패")
+                                }
+                            })
                     case false:
                         guard let message = result.message else { return }
                         self.presenter?.nicknameValidInfo(result: false, message: message)
@@ -111,7 +133,8 @@ class IntroInteractor: IntroInteractorProtocol {
                         let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
                         print("저장 결과 :", refreshResult && accessResult && idResult)
                         if refreshResult && accessResult && idResult {
-                            self.presenter?.joinValidInfo(result: result.result, message: String(describing: result.data?.id))
+                            self.presenter?.joinValidInfo(result: result.result,
+                                                          message: String(describing: result.data?.id))
                         }
                     }
                 case false:
