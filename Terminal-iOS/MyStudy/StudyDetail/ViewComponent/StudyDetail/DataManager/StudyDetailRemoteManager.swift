@@ -28,15 +28,23 @@ class StudyDetailRemoteManager: StudyDetailRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<StudyDetailInfo>.self, from: data)
-                            if result.message != nil {
-                                self.remoteRequestHandler?.onStudyDetailRetrieved(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<StudyDetailInfo>.self, from: data)
+                                    if result.message != nil {
+                                        self.remoteRequestHandler?.onStudyDetailRetrieved(result: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
                 }
