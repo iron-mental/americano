@@ -24,6 +24,7 @@ enum AlertType {
     case JumpToSettingAppView           //알림 설정
     case ReportContentView              //컨텐츠 신고
     case ServerMaintenanceView          //서버 점검중
+    case LaunchDisConnectView           //런치스크린 통신에러
     
     var view: UIView {
         switch self {
@@ -79,6 +80,12 @@ enum AlertType {
             let serverMaintenanceView = AlertMessageView(message: "터미널 앱이 점검 중입니다.\n조금만 기다려주세요.\n확인 버튼을 누르면 앱이 종료됩니다.")
             serverMaintenanceView.onlyCompleteButton()
             return serverMaintenanceView
+        case .LaunchDisConnectView:
+            let launchDisConnectView = AlertMessageView(message: "통신이 원활하지 않습니다.\n잠시 후에 다시 시도해 주세요")
+            launchDisConnectView.dismissButton.setTitle("앱 종료", for: .normal)
+            launchDisConnectView.dismissButton.setTitleColor(.systemRed, for: .normal)
+            launchDisConnectView.completeButton.setTitle("재시도", for: .normal)
+            return launchDisConnectView
         }
     }
 }
