@@ -77,4 +77,9 @@ class IntroPresenter: IntroPresenterProtocol {
     func privacyWebDidTap() {
         wireFrame?.goToPrivacyWeb(from: view!)
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }

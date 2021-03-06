@@ -11,7 +11,6 @@ import SafariServices
 
 class IntroWireFrame: IntroWireFrameProtocol {
     static func createIntroModule(beginState: BeginState, introState: IntroViewState) -> UIViewController {
-        
         let view: IntroViewProtocol = IntroView()
         let presenter: IntroPresenterProtocol = IntroPresenter()
         let interactor: IntroInteractorProtocol = IntroInteractor()
@@ -24,6 +23,8 @@ class IntroWireFrame: IntroWireFrameProtocol {
         presenter.wireFrame = wireFrame
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
+        
+        remoteDataManager.interactor = interactor
         
         if let view = view as? IntroView {
             view.beginState = beginState

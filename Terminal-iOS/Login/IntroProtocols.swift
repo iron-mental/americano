@@ -25,6 +25,8 @@ protocol IntroViewProtocol: class {
     func showInvalidPasswordAction()
     func showInvalidNickNameAction(message: String)
     func showInvalidLoginAction(message: String)
+    
+    func showError(message: String)
 }
 
 protocol IntroWireFrameProtocol: class {
@@ -51,6 +53,7 @@ protocol IntroPresenterProtocol: class {
     func nicknameValidInfo(result: Bool, message: String)
     func signUpValidInfo(result: Bool)
     func joinValidInfo(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol IntroInteractorProtocol: class {
@@ -62,9 +65,12 @@ protocol IntroInteractorProtocol: class {
     func checkedPasswordValid(input: String)
     func signUpValid(input: String)
     func checkedJoinValid(input: String)
+    func sessionTaskError(message: String)
 }
 
 protocol IntroRemoteDataManagerProtocol: class {
+    var interactor: IntroInteractorProtocol? { get set }
+    
     func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<EmailValidteResult>) -> Void)
     func getSignUpValidInfo(signUpMaterial: [String], completionHandler: @escaping (BaseResponse<String>) -> Void)
     func getJoinValidInfo(joinMaterial: [String], completionHandler: @escaping (BaseResponse<JoinResult>) -> Void)

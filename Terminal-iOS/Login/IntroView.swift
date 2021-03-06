@@ -217,6 +217,7 @@ extension IntroView: IntroViewProtocol {
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
+        remoteDataManager.interactor = interactor
         
         switch introState {
         case .emailInput:
@@ -309,6 +310,9 @@ extension IntroView: IntroViewProtocol {
                 }
             }
         }
+    }
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }
 
