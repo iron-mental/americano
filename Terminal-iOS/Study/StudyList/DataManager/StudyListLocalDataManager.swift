@@ -18,5 +18,6 @@ class StudyListLocalDataManager: StudyListLocalDataManagerInputProtocol {
     }
     
     func saveStudylist(studyList: [Study]) {
+        
     }
 }
