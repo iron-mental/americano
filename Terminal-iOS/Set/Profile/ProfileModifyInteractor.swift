@@ -72,4 +72,8 @@ extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol 
             presenter?.modifyFailed(message: message)
         }
     }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }
