@@ -44,7 +44,7 @@ protocol SearchStudyResultInteractorOutputProtocol: class {
     func showSearchStudyListResult(result: [Study])
     func showPagingStudyListResult(result: [Study])
     func showError(message: String)
-    func sessionTaskError()
+    func sessionTaskError(message: String)
 }
 
 protocol SearchStudyResultRemoteDataManagerInputProtocol: class {
@@ -58,7 +58,7 @@ protocol SearchStudyResultRemoteDataManagerOutputProtocol: class {
     //DATAMANAGER -> INTERACTOR
     func showSearchStudyListResult(result: BaseResponse<[Study]>)
     func showPagingStudyListResult(result: BaseResponse<[Study]>)
-    func sessionTaskError()
+    func sessionTaskError(message: String)
 }
 
 protocol SearchStudyResultWireFrameProtocol: class {

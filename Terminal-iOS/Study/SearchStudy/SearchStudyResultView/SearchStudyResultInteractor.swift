@@ -63,7 +63,7 @@ extension SearchStudyResultInteractor: SearchStudyResultRemoteDataManagerOutputP
         }
     }
     
-    func sessionTaskError() {
-        presenter?.sessionTaskError()
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }
