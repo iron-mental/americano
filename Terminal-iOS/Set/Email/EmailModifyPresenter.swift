@@ -22,4 +22,9 @@ extension EmailModifyPresenter: EmailModifyInteractorOutputProtocol {
     func didCompleteModify(result: Bool, message: String) {
         view?.modifyResultHandle(result: result, message: message)
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }
