@@ -36,15 +36,22 @@ class CareerModifyInteractor: CareerModifyInteractorInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    let data = response.data
-                    do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                        let isSuccess = result.result
-                        let message = result.message!
-                        self.presenter?.didCompleteModify(result: isSuccess, message: message)
-                    } catch {
-                        print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.presenter?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            let data = response.data
+                            do {
+                                let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                                let isSuccess = result.result
+                                let message = result.message!
+                                self.presenter?.didCompleteModify(result: isSuccess, message: message)
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
                     }
                 }
             }

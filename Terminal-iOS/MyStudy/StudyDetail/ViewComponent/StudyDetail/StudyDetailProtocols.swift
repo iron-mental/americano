@@ -73,7 +73,7 @@ protocol StudyDetailInteractorOutputProtocol: class {
     func studyJoinResult(result: Bool, message: String)
     func onError(message: String)
     func postReportStudyResult(result: Bool, message: String)
-    Terminal-iOS/MyStudy/StudyDetail/ViewComponent/StudyDetail/StudyDetailProtocols.swift
+    func sessionTaskError(message: String)
 }
 
 protocol StudyDetailRemoteDataManagerInputProtocol: class {

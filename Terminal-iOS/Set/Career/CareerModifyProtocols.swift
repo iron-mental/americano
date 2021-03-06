@@ -15,6 +15,7 @@ protocol CareerModifyViewProtocol: class {
     func modifyResultHandle(result: Bool, message: String)
     func showLoading()
     func hideLoading()
+    func showError(message: String)
 }
 
 protocol CareerModifyWireFrameProtocol: class {
@@ -40,4 +41,5 @@ protocol CareerModifyInteractorInputProtocol: class {
 protocol CareerModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didCompleteModify(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
