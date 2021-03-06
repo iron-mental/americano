@@ -36,6 +36,6 @@ extension ProfileDetailInteractor: ProfileDetailRemoteDataManagerOutputProtocol 
         presenter?.didRetrievedProject(project: result)
     }
     func sessionTaskError(message: String) {
-//        <#code#>
+        presenter?.sessionTaskError(message: message)
     }
 }
