@@ -83,4 +83,9 @@ extension SetPresenter: SetInteractorOutputProtocol {
     func onError() {
         
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }
