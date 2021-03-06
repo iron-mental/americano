@@ -24,6 +24,7 @@ class LicenseCell: UITableViewCell {
     }
     
     private func attribute() {
+        self.backgroundColor = .appColor(.terminalBackground)
         self.library.do {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 15, weight: .medium)
