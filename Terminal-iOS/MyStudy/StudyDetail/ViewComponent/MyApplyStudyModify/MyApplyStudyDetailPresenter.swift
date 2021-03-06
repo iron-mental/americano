@@ -46,6 +46,7 @@ extension MyApplyStudyModifyPresenter: MyApplyStudyModifyInteractorOutputProtoco
     }
     
     func sessionTaskError(message: String) {
+        view?.hideLoading()
         view?.showError(message: message)
     }
 }

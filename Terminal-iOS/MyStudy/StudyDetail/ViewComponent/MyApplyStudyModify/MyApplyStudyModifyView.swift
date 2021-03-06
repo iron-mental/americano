@@ -132,7 +132,9 @@ extension MyApplyStudyModifyView: MyApplyStudyModifyViewProtocol {
     }
     
     func showError(message: String) {
-        showToast(controller: self, message: message, seconds: 1)
+        showToast(controller: self, message: message, seconds: 1) {
+            self.dismiss(animated: true)
+        }
     }
     
     func showLoading() {
