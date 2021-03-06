@@ -295,12 +295,17 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
             self.showToast(controller: self, message: "다시 시도해 주세요.", seconds: 0.5)
         }
     }
+    
     func showLoading() {
         LoadingRainbowCat.show(caller: self)
     }
     
     func hideLoading() {
         LoadingRainbowCat.hide(caller: self)
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }
 
