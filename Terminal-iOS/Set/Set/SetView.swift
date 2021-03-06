@@ -20,7 +20,8 @@ class SetView: UIViewController {
     var settingData: [Setting] = [Setting(title: "앱버전", status: "1.0.0"),
                                   Setting(title: "문의하기"),
                                   Setting(title: "이용약관"),
-                                  Setting(title: "개인정보 취급방침")]
+                                  Setting(title: "개인정보 취급방침"),
+                                  Setting(title: "오픈소스 라이센스 이용고지")]
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
     var userInfo: UserInfo? { didSet { self.settingList.reloadData() }}
     var emailVerify: Bool = false
