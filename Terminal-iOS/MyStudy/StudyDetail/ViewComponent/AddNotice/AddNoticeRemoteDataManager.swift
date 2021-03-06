@@ -9,6 +9,7 @@
 import Foundation
 
 class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
+    weak var interactor: AddNoticeInteractorProtocol?
     
     func postNotice(studyID: Int,
                     notice: NoticePost,
@@ -36,15 +37,22 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<EditNoticeResult>.self, from: data)
-                            if result.message != nil {
-                                completion(result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<EditNoticeResult>.self, from: data)
+                                    if result.message != nil {
+                                        completion(result)
+                                    }
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
                             }
-                        } catch {
-                            print(error.localizedDescription)
                         }
                     }
                 }
@@ -81,15 +89,22 @@ class AddNoticeRemoteDataManager: AddNoticeRemoteDataManagerProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
-                            if result.message != nil {
-                                completion(result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                                    if result.message != nil {
+                                        completion(result)
+                                    }
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
                             }
-                        } catch {
-                            print(error.localizedDescription)
                         }
                     }
                 }

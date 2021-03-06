@@ -35,6 +35,7 @@ protocol AddNoticePresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func addNoticeValid(notice: Int, studyID: Int)
     func addNoticeInvalid(message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol AddNoticeInteractorProtocol: class {
@@ -44,9 +45,13 @@ protocol AddNoticeInteractorProtocol: class {
     
     //PRESENTER -> INTERACTOR
     func postNotice(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?)
+    
+    //DATAMANGER -> INTERACTOR
+    func sessionTaskError(message: String)
 }
 
 protocol AddNoticeRemoteDataManagerProtocol: class {
+    var interactor: AddNoticeInteractorProtocol? { get set }
     //INTERACTOR -> REMOTE
     func postNotice(studyID: Int,
                     notice: NoticePost,
