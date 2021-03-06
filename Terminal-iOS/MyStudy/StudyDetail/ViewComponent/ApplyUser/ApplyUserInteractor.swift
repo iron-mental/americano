@@ -31,14 +31,21 @@ class ApplyUserInteractor: ApplyUserInteractorInputProtocol {
                         print(error.localizedDescription)
                     }
                 case .failure(let err):
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data)
-                            if result.message != nil {
-                                self.presenter?.didRetrieveUser(result: result)
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.presenter?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[ApplyUser]>.self, from: data)
+                                    if result.message != nil {
+                                        self.presenter?.didRetrieveUser(result: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
                 }
