@@ -40,8 +40,9 @@ extension StudyListPresenter: StudyListInteractorOutputProtocol {
         view?.hideLoading()
         view?.saveLengthStudyList(with: studies)
     }
-      
-    func onError() {
-        
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }
