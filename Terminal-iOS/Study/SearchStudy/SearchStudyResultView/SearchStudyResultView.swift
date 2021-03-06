@@ -39,13 +39,15 @@ class SearchStudyResultView: UIViewController {
             $0.backButtonTitle = ""
         }
         searchController.do {
+            $0.hidesNavigationBarDuringPresentation = false
             $0.obscuresBackgroundDuringPresentation = false
+            $0.automaticallyShowsCancelButton = false
+            $0.searchBar.delegate = self
+            
             $0.searchBar.placeholder = "키워드를 검색하세요"
             definesPresentationContext = true
-            $0.searchBar.delegate = self
             $0.searchBar.searchTextField.text = keyword
-            $0.hidesNavigationBarDuringPresentation = false
-            $0.automaticallyShowsCancelButton = false
+            
         }
         self.studyListTableView.do {
             $0.delegate = self

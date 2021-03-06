@@ -9,15 +9,15 @@
 import UIKit
 
 class StudyListInteractor: StudyListInteractorInputProtocol {
+    weak var presenter: StudyListInteractorOutputProtocol?
+    var localDataManager: StudyListLocalDataManagerInputProtocol?
+    var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
+    
     var studyKeyArr: [Study] = []
     var lengthStudyKeyArr: [Study] = []
     var keyValue: [Int] = []
     var newKeyValue: [Int] = []
     var lengthNewKeyValue: [Int] = []
-    
-    weak var presenter: StudyListInteractorOutputProtocol?
-    var localDataManager: StudyListLocalDataManagerInputProtocol?
-    var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
     
     func retrieveStudyList(category: String) {
         remoteDataManager?.retrieveLatestStudyList(category: category)
