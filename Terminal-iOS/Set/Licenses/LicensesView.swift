@@ -59,7 +59,8 @@ extension LicensesView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let view = LicenseDetailView()
+        let library = libraryList[indexPath.row]
+        let view = LicenseDetailView(library: library)
         self.navigationController?.pushViewController(view, animated: true)
     }
     
