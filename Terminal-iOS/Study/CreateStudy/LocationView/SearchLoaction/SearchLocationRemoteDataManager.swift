@@ -47,7 +47,7 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                             switch err {
                             case .sessionTaskFailed:
                                 self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
-                            default: break
+                            default: completionHandler(false, resultList)
                             }
                         }
                     }
@@ -87,8 +87,14 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                         } else {
                             completion(false, resultList)
                         }
-                    case .failure :
-                        completion(false, resultList)
+                    case .failure(let err) :
+                        if let err = err.asAFError {
+                            switch err {
+                            case .sessionTaskFailed:
+                                self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                            default: completion(false, resultList)
+                            }
+                        }
                     }
                    })
     }

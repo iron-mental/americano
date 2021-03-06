@@ -44,4 +44,8 @@ class SelectLocationInteractor: SelectLocationInteractorProtocol {
     func selectLocation(item: StudyDetailLocationPost) {
         print("test")
     }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }
