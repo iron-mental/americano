@@ -13,6 +13,10 @@
 		A5027B0725E9200000C16B73 /* DelegateHostListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5027B0625E9200000C16B73 /* DelegateHostListEmptyView.swift */; };
 		A5031EB32574F5DE0009AD77 /* UserInfoPut.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */; };
 		A50583BB25A47AEE0060330E /* UIStackView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50583BA25A47AEE0060330E /* UIStackView+Ext.swift */; };
+		A509981125F3399700F1C0C7 /* LicensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509981025F3399700F1C0C7 /* LicensesView.swift */; };
+		A509981925F367D700F1C0C7 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509981825F367D700F1C0C7 /* LicenseCell.swift */; };
+		A509981E25F3716400F1C0C7 /* LicenseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509981D25F3716400F1C0C7 /* LicenseDetailView.swift */; };
+		A509982325F375C200F1C0C7 /* LibraryLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509982225F375C200F1C0C7 /* LibraryLicense.swift */; };
 		A510B9D1258387DE0084559C /* ApplyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D0258387DE0084559C /* ApplyUser.swift */; };
 		A510B9D62583892B0084559C /* ApplyStudy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9D52583892B0084559C /* ApplyStudy.swift */; };
 		A510B9FE2583BB190084559C /* ApplyUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A510B9FD2583BB190084559C /* ApplyUserView.swift */; };
@@ -27,6 +31,7 @@
 		A5172165252CFA47005AD11B /* SetWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5172164252CFA47005AD11B /* SetWireFrame.swift */; };
 		A5172169252CFA90005AD11B /* SetInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5172168252CFA90005AD11B /* SetInteractor.swift */; };
 		A517216D252CFAAA005AD11B /* SetProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A517216C252CFAAA005AD11B /* SetProtocols.swift */; };
+		A5183BB825F2552E006A7E56 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5183BB725F2552E006A7E56 /* UIView+Ext.swift */; };
 		A51BA0A52577C93700B9673F /* UserManageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BA0A42577C93700B9673F /* UserManageCell.swift */; };
 		A51BA0A82577E38900B9673F /* BaseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BA0A72577E38900B9673F /* BaseInterceptor.swift */; };
 		A51BA0B02577F0E300B9673F /* Contents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51BA0AF2577F0E300B9673F /* Contents.swift */; };
@@ -424,6 +429,10 @@
 		A5027B0625E9200000C16B73 /* DelegateHostListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateHostListEmptyView.swift; sourceTree = "<group>"; };
 		A5031EB22574F5DE0009AD77 /* UserInfoPut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoPut.swift; sourceTree = "<group>"; };
 		A50583BA25A47AEE0060330E /* UIStackView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Ext.swift"; sourceTree = "<group>"; };
+		A509981025F3399700F1C0C7 /* LicensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicensesView.swift; sourceTree = "<group>"; };
+		A509981825F367D700F1C0C7 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
+		A509981D25F3716400F1C0C7 /* LicenseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseDetailView.swift; sourceTree = "<group>"; };
+		A509982225F375C200F1C0C7 /* LibraryLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryLicense.swift; sourceTree = "<group>"; };
 		A510B9D0258387DE0084559C /* ApplyUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUser.swift; sourceTree = "<group>"; };
 		A510B9D52583892B0084559C /* ApplyStudy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyStudy.swift; sourceTree = "<group>"; };
 		A510B9FD2583BB190084559C /* ApplyUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplyUserView.swift; sourceTree = "<group>"; };
@@ -438,6 +447,7 @@
 		A5172164252CFA47005AD11B /* SetWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetWireFrame.swift; sourceTree = "<group>"; };
 		A5172168252CFA90005AD11B /* SetInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetInteractor.swift; sourceTree = "<group>"; };
 		A517216C252CFAAA005AD11B /* SetProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProtocols.swift; sourceTree = "<group>"; };
+		A5183BB725F2552E006A7E56 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		A51BA0A42577C93700B9673F /* UserManageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManageCell.swift; sourceTree = "<group>"; };
 		A51BA0A72577E38900B9673F /* BaseInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInterceptor.swift; sourceTree = "<group>"; };
 		A51BA0AF2577F0E300B9673F /* Contents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contents.swift; sourceTree = "<group>"; };
@@ -844,6 +854,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A509980F25F3392100F1C0C7 /* Licenses */ = {
+			isa = PBXGroup;
+			children = (
+				A509981025F3399700F1C0C7 /* LicensesView.swift */,
+				A509981825F367D700F1C0C7 /* LicenseCell.swift */,
+				A509981D25F3716400F1C0C7 /* LicenseDetailView.swift */,
+			);
+			path = Licenses;
+			sourceTree = "<group>";
+		};
 		A510B9FC2583BB050084559C /* ApplyUser */ = {
 			isa = PBXGroup;
 			children = (
@@ -873,6 +893,7 @@
 		A52F00D624FD182800DE3126 /* Set */ = {
 			isa = PBXGroup;
 			children = (
+				A509980F25F3392100F1C0C7 /* Licenses */,
 				A53A2B6C25B6BB870002D3A0 /* UserWithdrawal */,
 				A55505BC255962E90089B919 /* Component */,
 				A581493A25912CE100BF3C2A /* Career */,
@@ -1091,6 +1112,7 @@
 				CC40E86625E825CE0079AF26 /* UIApplication+Ext.swift */,
 				CC90262125EBC2B300D61373 /* DispatchTimeInterval+Ext.swift */,
 				CCFA77A625F1593200DEE2D3 /* UITapGestureRecognizer.swift */,
+				A5183BB725F2552E006A7E56 /* UIView+Ext.swift */,
 			);
 			path = "Extensions-Utillities";
 			sourceTree = "<group>";
@@ -1519,6 +1541,7 @@
 				A5FCF49525EBF4A5001DEB39 /* ApplyUserInfo.swift */,
 				A5FCF4FE25EE7533001DEB39 /* FontWeight.swift */,
 				CCFA775A25EFA61800DEE2D3 /* EmailValidteResult.swift */,
+				A509982225F375C200F1C0C7 /* LibraryLicense.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -2164,6 +2187,7 @@
 				A5A5F6DE256FEACC00405C71 /* ProfileDetailRemoteManager.swift in Sources */,
 				A5F1030D25E80E050054D57F /* FindPasswordView.swift in Sources */,
 				CCA3FF37251781EB00F62627 /* Study.swift in Sources */,
+				A509981925F367D700F1C0C7 /* LicenseCell.swift in Sources */,
 				CCAF0FD9253300600060A2F6 /* MyStudyMainProtocols.swift in Sources */,
 				A5BA1EF4254AE9900089D4E9 /* UISegmentControl+Ext.swift in Sources */,
 				A5C5B1502545699700F4A86D /* BaseSNSView.swift in Sources */,
@@ -2199,6 +2223,7 @@
 				CCA47E4725DD06F400E11D4C /* StudyListEmptyView.swift in Sources */,
 				A581494625912DE600BF3C2A /* CareerModifyInteractor.swift in Sources */,
 				CCBC88BD254B104300C2A6C4 /* StudyDetailView.swift in Sources */,
+				A509981125F3399700F1C0C7 /* LicensesView.swift in Sources */,
 				CCFA779A25F1496200DEE2D3 /* TermsOfServiceView.swift in Sources */,
 				CCB139D325592DCF00410184 /* IntroInteractor.swift in Sources */,
 				A56605E3258358A2002C4A77 /* ApplyListCell.swift in Sources */,
@@ -2249,6 +2274,7 @@
 				A5BA1EE1254A99250089D4E9 /* Notification.swift in Sources */,
 				A5A5F6E2256FEF0A00405C71 /* UserInfo.swift in Sources */,
 				A510BA162583BB340084559C /* ApplyUserInteractor.swift in Sources */,
+				A509981E25F3716400F1C0C7 /* LicenseDetailView.swift in Sources */,
 				CCBBEEFB2583A30A00177E25 /* CoreDataManager.swift in Sources */,
 				CC563946259CAD9200DA1479 /* SearchStudyRemoteDataManager.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
@@ -2279,6 +2305,7 @@
 				A57ECA2F256C27FE001E9790 /* StudyDetailRemoteManager.swift in Sources */,
 				CC5794FB2570C9BA00DF96AB /* AddNoticeView.swift in Sources */,
 				A521DDF4252F0D6300F83DB3 /* ProfileDetailPresenter.swift in Sources */,
+				A5183BB825F2552E006A7E56 /* UIView+Ext.swift in Sources */,
 				CC60454425BF15B600A98FEC /* CreateStudyResult.swift in Sources */,
 				CCAF0FE6253303770060A2F6 /* MyStudyMainWireFrame.swift in Sources */,
 				CC1BE0352510D18100F88313 /* SelectCategoryPresenter.swift in Sources */,
@@ -2346,6 +2373,7 @@
 				CC9FF79E2541534D00086679 /* badgeBarButtonItem.swift in Sources */,
 				A5FCF49625EBF4A5001DEB39 /* ApplyUserInfo.swift in Sources */,
 				CC72CBF425B05A00009E9986 /* ApplyUserDetailProtocols.swift in Sources */,
+				A509982325F375C200F1C0C7 /* LibraryLicense.swift in Sources */,
 				CCD51C7D256D29E400D41771 /* MyStudyDetailRemoteDataMananger.swift in Sources */,
 				CC1BE0312510CA5400F88313 /* SelectCategoryView.swift in Sources */,
 				CCA25AD825B6D3AA00280C80 /* ModifyStudyWireFrame.swift in Sources */,

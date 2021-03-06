@@ -190,7 +190,7 @@ final class StudyDetailView: UIViewController {
                 detailAddress = item
             }
             $0.title.text = "장소"
-            $0.contentText = ["장소", String(studyInfo?.location.addressName ?? "") +  detailAddress]
+            $0.contentText = ["장소", String(studyInfo?.location.addressName ?? "") + " " + detailAddress]
         }
         
         mapView.do {

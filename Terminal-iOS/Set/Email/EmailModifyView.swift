@@ -29,13 +29,11 @@ class EmailModifyView: UIViewController {
             $0.view.backgroundColor = .appColor(.terminalBackground)
             $0.title = "이메일 수정"
         }
-        
         self.emailLabel.do {
             $0.text = "Email"
             $0.textColor = .white
             $0.font = UIFont.notosansMedium(size: 14)
         }
-        
         self.emailTextField.do {
             $0.text = email ?? ""
             $0.backgroundColor = UIColor.appColor(.cellBackground)
@@ -47,7 +45,6 @@ class EmailModifyView: UIViewController {
             $0.layer.borderWidth = 0.1
             $0.inputAccessoryView = accessoryCompleteButton
         }
-        
         self.completeButton.do {
             $0.backgroundColor = .appColor(.mainColor)
             $0.setTitle("수정완료", for: .normal)
@@ -55,7 +52,6 @@ class EmailModifyView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
-        
         self.accessoryCompleteButton.do {
             $0.setTitle("완료", for: .normal)
             $0.backgroundColor = UIColor.appColor(.mainColor)
@@ -115,6 +111,7 @@ extension EmailModifyView: EmailModifyViewProtocol {
             rootParent?.presenter?.viewDidLoad()
         } else {
             hideLoading()
+            self.emailTextField.warningEffect()
             self.showToast(controller: self, message: message, seconds: 1, completion: nil)
         }
     }

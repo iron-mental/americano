@@ -78,35 +78,21 @@ extension CreateStudyView: CreateStudyViewProtocol {
             if let label = label {
                 switch label {
                 case "title":
-                    self.studyTitleTextField.becomeFirstResponder()
-                    self.studyTitleTextField.layer.borderWidth = 0.4
-                    self.studyTitleTextField.layer.borderColor = UIColor.systemRed.cgColor
+                    self.studyTitleTextField.warningEffect()
                 case "introduce":
-                    self.studyIntroduceView.textView.becomeFirstResponder()
-                    self.studyIntroduceView.textView.layer.borderWidth = 0.4
-                    self.studyIntroduceView.textView.layer.borderColor = UIColor.systemRed.cgColor
+                    self.studyIntroduceView.textView.warningEffect()
                 case "progress":
-                    self.studyInfoView.textView.becomeFirstResponder()
-                    self.studyInfoView.textView.layer.borderWidth = 0.4
-                    self.studyInfoView.textView.layer.borderColor = UIColor.systemRed.cgColor
+                    self.studyInfoView.textView.warningEffect()
                 case "study_time":
-                    self.timeView.detailTime.becomeFirstResponder()
-                    self.timeView.detailTime.layer.borderWidth = 0.4
-                    self.timeView.detailTime.layer.borderColor = UIColor.systemRed.cgColor
+                    self.timeView.detailTime.warningEffect()
                 case "locaion_detail":
                     self.presenter?.clickLocationView()
                 case "sns_notion":
-                    self.SNSInputView.notion.textField.becomeFirstResponder()
-                    self.SNSInputView.notion.textField.layer.borderWidth = 0.4
-                    self.SNSInputView.notion.textField.layer.borderColor = UIColor.systemRed.cgColor
+                    self.SNSInputView.notion.textField.warningEffect()
                 case "sns_evernote":
-                    self.SNSInputView.evernote.textField.becomeFirstResponder()
-                    self.SNSInputView.evernote.textField.layer.borderWidth = 0.4
-                    self.SNSInputView.evernote.textField.layer.borderColor = UIColor.systemRed.cgColor
+                    self.SNSInputView.evernote.textField.warningEffect()
                 case "sns_web":
-                    self.SNSInputView.web.textField.becomeFirstResponder()
-                    self.SNSInputView.web.textField.layer.borderWidth = 0.4
-                    self.SNSInputView.web.textField.layer.borderColor = UIColor.systemRed.cgColor
+                    self.SNSInputView.web.textField.warningEffect()
                 default:
                     break
                 }
