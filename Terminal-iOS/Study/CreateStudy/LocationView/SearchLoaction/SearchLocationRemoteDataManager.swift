@@ -11,6 +11,8 @@ import Alamofire
 import SwiftyJSON
 
 class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
+    weak var interactor: SearchLocationInteractorProtocol?
+    
     func getSearchResultByKeyword(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> Void) {
         var resultList: [StudyDetailLocationPost] = []
         let headers: HTTPHeaders = [ "Authorization": "KakaoAK 6cd40b04c090b1a033634e5051aab78c" ]
@@ -41,7 +43,13 @@ class SearchLocationRemoteDataManager: SearchLocationRemoteDataManagerProtocol {
                             completionHandler(true, resultList)
                         }
                     case .failure(let err) :
-                        print(err)
+                        if let err = err.asAFError {
+                            switch err {
+                            case .sessionTaskFailed:
+                                self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                            default: break
+                            }
+                        }
                     }
                    })
     }
