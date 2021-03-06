@@ -13,7 +13,7 @@ protocol ProfileModifyViewProtocol: class {
     
     // PRESENTER -> VIEW
     func modifyResultHandle(result: Bool, message: String)
-    func showError(message: String, label: String)
+    func showError(message: String, label: String?)
     func showLoading()
     func hideLoading()
 }
