@@ -33,7 +33,8 @@ extension LaunchPresenter: LaunchInteractorOutputProtocol {
             view?.showVersionUpdateAlert(alertType: .VersionUpdateRecommendView)
         case .Required:
             view?.showVersionUpdateAlert(alertType: .VersionUpdateRequiredView)
-        case .notRequired: break
+        case .notRequired:
+            break
         }
     }
     

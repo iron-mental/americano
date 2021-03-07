@@ -35,6 +35,7 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
         
         return view
     }
+    
     func replaceRootViewToIntroView() {
         let home = HomeView()
         let nav = UINavigationController(rootViewController: home)

@@ -11,6 +11,7 @@ import SwiftKeychainWrapper
 
 class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     weak var interactor: IntroInteractorProtocol?
+    
     // MARK: 회원가입 이메일 유효성 검사
     
     func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<EmailValidteResult>) -> Void) {

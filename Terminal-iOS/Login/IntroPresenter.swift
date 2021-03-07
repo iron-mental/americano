@@ -46,11 +46,10 @@ class IntroPresenter: IntroPresenterProtocol {
         switch result {
         case true:
             view?.hideLoading()
-            view?.presentCompleteView()
+            view?.completeSignUP()
         case false:
             view?.hideLoading()
         }
-        
     }
     
     /// 로그인 유효성 확인

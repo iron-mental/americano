@@ -31,6 +31,7 @@ class LaunchView: UIViewController {
     }
     
     // MARK: @objc
+    
     @objc func updateButtonDidtap() {
         presenter?.jumpToAppStore()
     }
@@ -54,21 +55,31 @@ extension LaunchView: LaunchViewProtocol {
         TerminalAlertMessage.show(controller: self, type: alertType)
         TerminalAlertMessage.removeLeftButtonAction()
         TerminalAlertMessage.removeRightButtonAction()
-        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(updateButtonDidtap), for: .touchUpInside)
-        TerminalAlertMessage.getLeftButton().addTarget(self, action: #selector(updateLaterButtonDidTap), for: .touchUpInside)
+        TerminalAlertMessage.getRightButton().addTarget(self,
+                                                        action: #selector(updateButtonDidtap),
+                                                        for: .touchUpInside)
+        TerminalAlertMessage.getLeftButton().addTarget(self,
+                                                       action: #selector(updateLaterButtonDidTap),
+                                                       for: .touchUpInside)
     }
     
     func showError(message: String) {
         TerminalAlertMessage.show(controller: self, type: .LaunchDisConnectView)
         TerminalAlertMessage.removeLeftButtonAction()
         TerminalAlertMessage.removeRightButtonAction()
-        TerminalAlertMessage.getLeftButton().addTarget(self, action: #selector(terminatedButtonDidTap), for: .touchUpInside)
-        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(retry), for: .touchUpInside)
+        TerminalAlertMessage.getLeftButton().addTarget(self,
+                                                       action: #selector(terminatedButtonDidTap),
+                                                       for: .touchUpInside)
+        TerminalAlertMessage.getRightButton().addTarget(self,
+                                                        action: #selector(retry),
+                                                        for: .touchUpInside)
     }
     
     func showMainTenanceAlert() {
         TerminalAlertMessage.show(controller: self, type: .ServerMaintenanceView)
         TerminalAlertMessage.removeRightButtonAction()
-        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(terminatedButtonDidTap), for: .touchUpInside)
+        TerminalAlertMessage.getRightButton().addTarget(self,
+                                                        action: #selector(terminatedButtonDidTap),
+                                                        for: .touchUpInside)
     }
 }
