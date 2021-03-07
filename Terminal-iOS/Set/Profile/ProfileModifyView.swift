@@ -18,7 +18,7 @@ class ProfileModifyView: UIViewController {
     var presenter: ProfileModifyPresenterProtocol?
     var profile: Profile?
     let picker = UIImagePickerController()
-
+    
     let imageModify = UIImageView()
     let profileImage = UIImageView()
     let nameLabel = UILabel()
@@ -44,7 +44,7 @@ class ProfileModifyView: UIViewController {
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
     }
-
+    
     // MARK: Set Attribute
     
     func attribute() {
@@ -202,7 +202,7 @@ class ProfileModifyView: UIViewController {
     @objc func keyboardWillHide(notification: NSNotification) {
         self.keyboardHandle(notification: notification, isAppear: false)
     }
-        
+    
     private func keyboardHandle(notification: NSNotification, isAppear: Bool) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
@@ -229,7 +229,7 @@ class ProfileModifyView: UIViewController {
         let alert = UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
         let library = UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
         let camera = UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
-        let remove = UIAlertAction(title: "삭제", style: .destructive) { _ in }
+        let remove = UIAlertAction(title: "삭제", style: .destructive) { _ in self.removeProfileImage() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)
@@ -257,9 +257,14 @@ class ProfileModifyView: UIViewController {
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
+    
     func openCamera() {
         picker.sourceType = .camera
         present(picker, animated: true, completion: nil)
+    }
+    
+    func removeProfileImage() {
+        self.profileImage.image = UIImage(named: "defaultProfile")
     }
     
     // MARK: - 프로필 수정 완료 버튼
@@ -308,9 +313,9 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
                 parent?.showToast(controller: parent!, message: "프로필 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
             }
-            
-            let rootParent = self.navigationController?.viewControllers[0] as? SetView
-            rootParent?.presenter?.viewDidLoad()
+            if let rootParent = self.navigationController?.viewControllers[0] as? SetView {
+                rootParent.presenter?.viewDidLoad()
+            }
         } else {
             hideLoading()
             showToast(controller: self, message: message, seconds: 1)

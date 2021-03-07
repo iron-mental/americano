@@ -82,7 +82,6 @@ final class CreateStudyRemoteManager: CreateStudyRemoteDataManagerInputProtocol 
                             }
                         }
                     }
-                    
                 }
             }
     }
