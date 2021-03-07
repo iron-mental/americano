@@ -19,4 +19,12 @@ final class SearchLocationListEmptyView: BaseEmptyView {
             $0.numberOfLines = 0
         }
     }
+    
+    override func layout() {
+        super.layout()
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            guideLabelTopLayout?.isActive = false
+            guideLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: Terminal.convertHeight(value: 100)).isActive = true
+        }
+    }
 }
