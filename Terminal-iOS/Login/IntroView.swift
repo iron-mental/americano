@@ -260,14 +260,14 @@ extension IntroView: IntroViewProtocol {
     
     func completeSignUP() {
         let view = ViewController(signUpState: true)
-        view.modalPresentationStyle = .fullScreen
-        present(view, animated: true, completion: nil)
+        guard let window = UIApplication.shared.windows.first else { return }
+        window.replaceRootViewController(view, animated: true, completion: nil)
     }
     
     func completeJoin() {
         let view = ViewController()
-        view.modalPresentationStyle = .fullScreen
-        present(view, animated: true, completion: nil)
+        guard let window = UIApplication.shared.windows.first else { return }
+        window.replaceRootViewController(view, animated: true, completion: nil)
     }
     
     func showInvalidEmailAction(message: String) {
