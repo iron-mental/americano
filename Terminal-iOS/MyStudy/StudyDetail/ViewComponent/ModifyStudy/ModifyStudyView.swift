@@ -10,6 +10,7 @@ import UIKit
 
 class ModifyStudyView: BaseEditableStudyDetailView {
     var presenter: ModifyStudyPresenterProtocol?
+    var postDefaultImage = false
     var initImage: UIImage? {
         didSet {
             guard let _ = self.initImage else {
@@ -74,6 +75,15 @@ class ModifyStudyView: BaseEditableStudyDetailView {
     @objc func completeModify() {
         self.selectedLocation?.detailAddress = self.locationView.detailAddress.text
         
+        let image = self.initImage ?? nil
+        
+        // 초기와 이미지가 다를때
+        if image != self.mainImageView.image {
+            if !self.studyImageExistence {
+                self.postDefaultImage = true
+            }
+        }
+        
         self.studyDetailPost = StudyDetailPost(category: self.study!.category,
                                                title: self.studyTitleTextField.text ?? "",
                                                introduce: self.studyIntroduceView.textView.text ?? "",
@@ -83,6 +93,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
                                                snsNotion: self.SNSInputView.notion.textField.text ?? "",
                                                snsEvernote: self.SNSInputView.evernote.textField.text ?? "",
                                                image: self.mainImageView.image,
+                                               imageState: self.postDefaultImage,
                                                location: self.selectedLocation ?? nil)
         
         guard let id = study?.id else { return }
