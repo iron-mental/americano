@@ -59,7 +59,6 @@ class IntroInteractor: IntroInteractorProtocol {
         }
     }
     
-    
     // MARK: 로그인 패스워드 체크
     
     func checkedPasswordValid(input: String) {
@@ -96,8 +95,7 @@ class IntroInteractor: IntroInteractorProtocol {
                                         let idResult = KeychainWrapper.standard.set("\(userID)", forKey: "userID")
                                         print("저장 결과 :", refreshResult && accessResult && idResult)
                                         if refreshResult && accessResult && idResult {
-                                            self.presenter?.joinValidInfo(result: result.result,
-                                                                          message: String(describing: result.data?.id))
+                                            self.presenter?.signUpValidInfo(result: result.result)
                                         }
                                     }
                                 case false:
