@@ -82,7 +82,7 @@ protocol MyStudyDetailWireFrameProtocol: class {
     static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController
 
     func goToAddNotice(studyID: Int, parentView: MyStudyDetailViewProtocol)
-    func goToEditStudy(study: StudyDetail, location: Location, parentView: MyStudyDetailViewProtocol)
+    func goToEditStudy(study: StudyDetail, location: Location, parentView: MyStudyDetailViewProtocol, mainImage: UIImage?)
     func goToNoticeDetail(notice: Int, studyID: Int, title: String, parentView: MyStudyDetailViewProtocol)
     func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int)
     func goToDelegateHost(from view: MyStudyDetailViewProtocol, studyID: Int, userList: [Participate])
