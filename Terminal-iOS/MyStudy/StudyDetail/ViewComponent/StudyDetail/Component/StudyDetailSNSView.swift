@@ -10,7 +10,7 @@ import UIKit
 
 class StudyDetailSNSView: BaseSNSView {
     let notion = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "swiftmain"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "notion"), for: .normal)
         $0.tag = 0
     }
     
