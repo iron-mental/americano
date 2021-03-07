@@ -222,8 +222,7 @@ extension BaseProfileView: BaseProfileViewProtocol {
             self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
                                                   placeholder: UIImage(named: "defaultProfile"),
                                                   options: [.requestModifier(RequestToken.token())])
-            
-            self.profileState = true
+            self.profileState = imageURL.isEmpty ? false : true
         } else {
             self.profile.profileImage.image = UIImage(named: "defaultProfile")
             self.profileState = false
