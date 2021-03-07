@@ -22,12 +22,12 @@
 	<true/>
 	<key>NMFClientId</key>
 	<string>ky7k19ifw2</string>
+	<key>NSCameraUsageDescription</key>
+	<string>사진 및 동영상 촬영을 위한 카메라 사용권한</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>위치서비스를 항상 사용하시겠습니까?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>위치서비스를 앱 사용시에만 사용하시겠습니까?</string>
-	<key>NSCameraUsageDescription</key>
-	<string>사진 및 동영상 촬영을 위한 카메라 사용권한</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>사진 및 동영상 첨부를 위한 앨범 사용 권한</string>
 	<key>UIAppFonts</key>

@@ -670,7 +670,7 @@
 		CC90262125EBC2B300D61373 /* DispatchTimeInterval+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchTimeInterval+Ext.swift"; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
 		CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = badgeBarButtonItem.swift; sourceTree = "<group>"; };
-		CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCA1FF5324FD0C930026C3EA /* 터미널.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "터미널.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCA1FF5A24FD0C930026C3EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CCA1FF5D24FD0C930026C3EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1437,7 +1437,7 @@
 		CCA1FF5424FD0C930026C3EA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */,
+				CCA1FF5324FD0C930026C3EA /* 터미널.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1890,7 +1890,7 @@
 			);
 			name = "Terminal-iOS";
 			productName = "Terminal-iOS";
-			productReference = CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */;
+			productReference = CCA1FF5324FD0C930026C3EA /* 터미널.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2680,7 +2680,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Terminal-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "터미널";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2703,7 +2703,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Terminal-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "터미널";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
