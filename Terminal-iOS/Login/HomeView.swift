@@ -55,7 +55,6 @@ class HomeView: UIViewController {
             $0.addTarget(self, action: #selector(goFindPassword), for: .touchUpInside)
         }
         mainImage.do {
-//            $0.image = UIImage(systemName: "terminal.fill")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
             $0.image = #imageLiteral(resourceName: "smallertmn")
             $0.tintColor = .white
             $0.contentMode = .scaleAspectFit
