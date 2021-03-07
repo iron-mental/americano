@@ -16,8 +16,6 @@ target 'Terminal-iOS' do
   pod 'lottie-ios'
   pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
-# Recommended: Add the Firebase pod for Google Analytics
-  pod 'Firebase/Analytics'
 # Pods for Terminal-iOS
   
 post_install do |installer|
