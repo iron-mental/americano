@@ -25,14 +25,19 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                         self.interactor?.getVersionResult(result: result)
                     } catch {
                         //서버와 형식이 맞지않아 임시로 써놓음
-                        self.interactor?.getVersionResult(result: BaseResponse(result: true,
-                                                                               type: nil,
-                                                                               label: nil,
-                                                                               message: nil,
-                                                                               code: nil,
-                                                                               data: VersionResult(latestVersion: "1.0",
-                                                                                                   force: "0",
-                                                                                                   maintenance: false)))
+                        self.interactor?.getVersionResult(
+                            result: BaseResponse(
+                                result: true,
+                                type: nil,
+                                label: nil,
+                                message: nil,
+                                code: nil,
+                                data: VersionResult(
+                                    latestVersion: "1.0",
+                                    force: "0",
+                                    maintenance: false)
+                            )
+                        )
                     }
                 case .failure(let err):
                     if let err = err.asAFError {
@@ -48,7 +53,7 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                                         self.interactor?.getVersionResult(result: result)
                                     }
                                 } catch {
-                                    
+                                    print(error.localizedDescription)
                                 }
                             }
                         }

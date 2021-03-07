@@ -56,9 +56,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         sleep(1)
         var goView: UIViewController?
         let userInfo =          response.notification.request.content.userInfo
-        guard let eventValue =  userInfo["pushEvent"] as? String else { return }
-        guard let studyID =     userInfo["study_id"] as? Int else { return }
-        guard let event =       AlarmType(rawValue: eventValue) else { return }
+        guard let eventValue    = userInfo["pushEvent"] as? String else { return }
+        guard let studyID       = userInfo["study_id"] as? Int else { return }
+        guard let event         = AlarmType(rawValue: eventValue) else { return }
         
         guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
         
