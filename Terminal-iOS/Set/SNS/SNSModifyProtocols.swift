@@ -15,6 +15,7 @@ protocol SNSModifyViewProtocol: class {
     func modifyResultHandle(result: Bool, message: String)
     func showLoading()
     func hideLoading()
+    func showError(message: String)
 }
 
 protocol SNSModifyWireFrameProtocol: class {
@@ -42,4 +43,5 @@ protocol SNSModifyInteractorInputProtocol: class {
 protocol SNSModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didCompleteModify(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }

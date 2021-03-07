@@ -62,4 +62,7 @@ extension SetInteractor: SetRemoteDataManagerOutputProtocol {
             presenter?.didRetrievedUserInfo(userInfo: coreUserInfo)
         }
     }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

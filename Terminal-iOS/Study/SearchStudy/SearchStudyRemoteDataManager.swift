@@ -26,13 +26,20 @@ class SearchStudyRemoteDataManager: SearchStudyRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<[HotKeyword]>.self, from: data)
-                            self.interactor?.getHotKeywordResult(response: result)
-                        } catch {
-                            print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[HotKeyword]>.self, from: data)
+                                    self.interactor?.getHotKeywordResult(response: result)
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
+                            }
                         }
                     }
                 }

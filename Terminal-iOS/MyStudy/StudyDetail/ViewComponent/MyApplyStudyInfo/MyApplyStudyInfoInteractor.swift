@@ -30,4 +30,8 @@ extension MyApplyStudyInfoInteractor: MyApplyStudyInfoRemoteDataManagerOutputPro
             presenter?.retriveDeleteApplyResult(result: result, message: message)
         }
     }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

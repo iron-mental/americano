@@ -15,6 +15,7 @@ protocol SelectLocationViewProtocol: class {
     //PRESENTER -> VIEW
     func setViewWithResult(item: StudyDetailLocationPost)
     func setLocaionOnce(sido: String, sigungu: String)
+    func showError(message: String)
 }
 
 protocol SelectLocationInteractorProtocol: class {
@@ -26,6 +27,9 @@ protocol SelectLocationInteractorProtocol: class {
     func searchAddressOnce(item: StudyDetailLocationPost)
     func searchAddress(item: StudyDetailLocationPost)
     func selectLocation(item: StudyDetailLocationPost)
+    
+    //DATAMANAGER -> INTERACTOR
+    func sessionTaskError(message: String)
 }
 
 protocol SelectLocationPresenterProtocol: class {
@@ -41,9 +45,11 @@ protocol SelectLocationPresenterProtocol: class {
     
     //INTERACTOR -> PRESENTER
     func getAddressResult(item: StudyDetailLocationPost)
+    func sessionTaskError(message: String)
 }
 
 protocol SelectLocationRemoteDataManagerProtocol: class {
+    var interactor: SelectLocationInteractorProtocol? { get set }
     //INTERACTOR -> REMOTEDATAMANAGER
     func getAddressInfoOnce(lat: Double,
                             lng: Double,

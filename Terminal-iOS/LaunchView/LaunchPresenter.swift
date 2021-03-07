@@ -54,4 +54,7 @@ extension LaunchPresenter: LaunchInteractorOutputProtocol {
         view?.showMainTenanceAlert()
     }
     
+    func sessionTaskError(message: String) {
+        view?.showError(message: message)
+    }
 }

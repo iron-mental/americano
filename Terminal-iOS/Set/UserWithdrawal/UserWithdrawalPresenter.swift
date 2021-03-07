@@ -32,4 +32,9 @@ extension UserWithdrawalPresenter: UserWithdrawalInteractorOutputProtocol {
             view?.resultUserWithdrawal(message: message)
         }
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }

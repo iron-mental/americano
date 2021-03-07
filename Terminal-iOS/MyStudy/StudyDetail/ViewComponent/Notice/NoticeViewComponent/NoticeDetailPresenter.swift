@@ -36,10 +36,12 @@ extension NoticeDetailPresenter: NoticeDetailInteractorOutputProtocol {
         view?.hideLoading()
         view?.showNoticeDetail(notice: notice)
     }
+    
     func getNoticeDetailFailure(message: String) {
         view?.hideLoading()
         view?.showError(message: message)
     }
+    
     func removeNoticeResult(result: Bool, message: String) {
         view?.hideLoading()
         switch result {
@@ -48,5 +50,10 @@ extension NoticeDetailPresenter: NoticeDetailInteractorOutputProtocol {
         case false:
             view?.showError(message: message)
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

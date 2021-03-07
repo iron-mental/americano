@@ -92,7 +92,7 @@ final class MyStudyMainView: UIViewController {
     
     @objc func updateList() {
         presenter?.viewDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.8) {
             self.refreshControl.endRefreshing()
         }
     }
@@ -175,8 +175,8 @@ extension MyStudyMainView: MyStudyMainViewProtocol {
         LoadingRainbowCat.hide(caller: self)
     }
     
-    func showErrMessage() {
+    func showErrMessage(message: String) {
         LoadingRainbowCat.hide(caller: self)
-        showToast(controller: self, message: "서버와의 연결이 불안정 합니다.", seconds: 1)
+        showToast(controller: self, message: message, seconds: 1)
     }
 }

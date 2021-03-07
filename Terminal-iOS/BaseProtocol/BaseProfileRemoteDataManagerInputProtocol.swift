@@ -26,4 +26,5 @@ protocol BaseProfileRemoteDataManagerOutputProtocol: class {
     // REMOTEDATAMANAGER -> INTERACTOR
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
     func onProjectRetrieved(project: BaseResponse<[Project]>)
+    func sessionTaskError(message: String)
 }

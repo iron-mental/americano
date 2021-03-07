@@ -31,4 +31,8 @@ extension DelegateHostInteractor: DelegateHostRemoteDataManagerOutputProtocol {
             }
         }
     }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

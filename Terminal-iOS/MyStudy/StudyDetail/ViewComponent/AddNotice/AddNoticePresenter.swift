@@ -33,4 +33,9 @@ class AddNoticePresenter: AddNoticePresenterProtocol {
         view?.hideLoading()
         view?.showError(message: message)
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }

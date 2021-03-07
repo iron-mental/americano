@@ -181,10 +181,10 @@ extension NoticeDetailView: NoticeDetailViewProtocol {
                 self.navigationController?.popViewController(animated: true)
             }
         }
-    }
+    } 
     
     func showError(message: String) {
-        print("noticedetailview에서 생긴 에러")
+        showToast(controller: self, message: message, seconds: 1)
     }
     
     func showLoading() {

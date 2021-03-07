@@ -30,6 +30,8 @@ class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
         interactor.localDataManager = localDataManager
         interactor.remoteDataManager = remoteDataManager
         
+        remoteDataManager.interactor = interactor
+        
         return view
     }
 }

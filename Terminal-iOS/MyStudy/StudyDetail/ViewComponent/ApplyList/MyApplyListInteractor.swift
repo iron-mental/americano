@@ -31,15 +31,22 @@ class MyApplyListInteractor: MyApplyListInteractorInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<[ApplyStudy]>.self, from: data)
-                            if result.message != nil {
-                                self.presenter?.didRetrieveStudies(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.presenter?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[ApplyStudy]>.self, from: data)
+                                    if result.message != nil {
+                                        self.presenter?.didRetrieveStudies(result: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
                 }

@@ -144,4 +144,7 @@ class IntroInteractor: IntroInteractorProtocol {
             }
         )
     }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

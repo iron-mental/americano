@@ -13,7 +13,7 @@ protocol MyStudyMainViewProtocol: class {
     var startedByPushNotification: Bool? { get set }
     //PRESENTER -> VIEW
     func showMyStudyList(myStudyList: MyStudyList)
-    func showErrMessage()
+    func showErrMessage(message: String)
     func showLoading()
 }
 
@@ -35,6 +35,8 @@ protocol MyStudyMainInteractorProtocol: class {
     
     //PRESENTER -> INTERACTOR
     func getMyStudyList()
+    //DATAMANAGER -> INTERACTOR
+    func sessionTaskError(message: String)
 }
 
 protocol MyStudyMainPresenterProtocol: class {
@@ -51,7 +53,7 @@ protocol MyStudyMainPresenterProtocol: class {
     
     //INTERACTOR -> PRESENTER
     func MyStudyListResult(result: Bool, itemList: MyStudyList?)
-    
+    func sessionTaskError(message: String)
 }
 
 protocol MyStudyMainRemoteDataManagerProtocol: class {

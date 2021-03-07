@@ -27,6 +27,7 @@ protocol CreateStudyViewProtocol: class {
     func setBackgroundImage()
     func studyInfoInvalid(label: String?, message: String)
     func studyInfoValid(studyID: Int, message: String)
+    func showError(message: String)
 }
 
 protocol CreateStudyInteractorInputProtocol: class {
@@ -43,6 +44,7 @@ protocol CreateStudyInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func studyInfoInvalid(label: String?, message: String)
     func studyInfoValid(studyID: Int, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol CreateStudyPresenterProtocol: class {
@@ -64,6 +66,7 @@ protocol CreateStudyRemoteDataManagerInputProtocol: class {
 
 protocol CreateStudyReMoteDataManagerOutputProtocol: class {
     func createStudyValid(response: BaseResponse<CreateStudyResult>)
+    func sessionTaskError(message: String)
 }
 
 protocol CreateStudyWireFrameProtocol: class {

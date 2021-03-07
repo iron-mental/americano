@@ -28,16 +28,22 @@ class MyApplyStudyInfoRemoteDataManager: MyApplyStudyInfoRemoteDataManagerInputP
                     } catch {
                         print(error.localizedDescription)
                     }
-                    
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
-                            if let message = result.message {
-                                self.interactor?.retriveDeleteApplyResult(result: result.result, message: message)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                                    if let message = result.message {
+                                        self.interactor?.retriveDeleteApplyResult(result: result.result, message: message)
+                                    }
+                                } catch {
+                                    print("error")
+                                }
                             }
-                        } catch {
-                            print("error")
                         }
                     }
                 }

@@ -12,6 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
+    weak var interactor: SelectLocationInteractorProtocol?
     
     func getAddressInfoOnce(lat: Double,
                             lng: Double,
@@ -42,7 +43,13 @@ class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
                             }
                         }
                     case .failure(let err) :
-                        print(err)
+                        if let err = err.asAFError {
+                            switch err {
+                            case .sessionTaskFailed:
+                                self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                            default: break
+                            }
+                        }
                     }
                    })
     }
@@ -84,7 +91,13 @@ class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
                             }
                         }
                     case .failure(let err) :
-                        print(err)
+                        if let err = err.asAFError {
+                            switch err {
+                            case .sessionTaskFailed:
+                                self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                            default: break
+                            }
+                        }
                     }
                    })
         

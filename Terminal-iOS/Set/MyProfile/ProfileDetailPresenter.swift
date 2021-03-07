@@ -53,4 +53,9 @@ extension ProfileDetailPresenter: ProfileDetailInteractorOutputProtocol {
     func didRetrievedProject(project: [Project]) {
         view?.addProjectToStackView(project: project)
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }

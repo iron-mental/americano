@@ -12,6 +12,7 @@ protocol ProfileDetailViewProtocol: BaseProfileViewProtocol {
     var presenter: ProfileDetailPresenterProtocol? { get set }
     
     // PRESENTER -> VIEW
+    func showError(message: String)
 }
 
 protocol ProfileDetailWireFrameProtocol: class {
@@ -60,6 +61,7 @@ protocol ProfileDetailInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrievedUserInfo(userInfo: UserInfo)
     func didRetrievedProject(project: [Project])
+    func sessionTaskError(message: String)
 }
 
 protocol ProfileDetailRemoteDataManagerInputProtocol: BaseProfileRemoteDataManagerInputProtocol {
@@ -71,6 +73,7 @@ protocol ProfileDetailRemoteDataManagerOutputProtocol: BaseProfileRemoteDataMana
     // REMOTEDATAMANAGER -> INTERACTOR
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>)
     func onProjectRetrieved(project: BaseResponse<[Project]>)
+    func sessionTaskError(message: String)
 }
 
 protocol ProfileDetailLocalDataManagerInputProtocol: class {
