@@ -14,12 +14,12 @@ class NoticeDetailView: UIViewController {
     var notice: Notice?
     var state: StudyDetailViewState?
     lazy var moreButton = UIBarButtonItem()
-    lazy var noticeBackground = UIView()
-    lazy var noticeLabel = UILabel()
+    let noticeBackground = UIView()
+    let noticeLabel = UILabel()
     lazy var profileImage = UIImageView()
-    lazy var profileName = UILabel()
-    lazy var noticeDate = UILabel()
-    lazy var noticeContents = PaddingLabel()
+    let profileName = UILabel()
+    let noticeDate = UILabel()
+    let noticeContents = UITextView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
