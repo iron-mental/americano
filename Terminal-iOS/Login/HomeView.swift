@@ -25,14 +25,12 @@ class HomeView: UIViewController {
     }
     
     func attribute() {
-        self.do {
-            $0.view.backgroundColor = .appColor(.terminalBackground)
-        }
         appearance.do {
             $0.configureWithTransparentBackground()
         }
-        navigationController?.do {
-            $0.navigationBar.standardAppearance = appearance
+        self.do {
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.navigationController?.navigationBar.standardAppearance = appearance
         }
         navigationItem.do {
             $0.rightBarButtonItem = loginBarButtonItem

@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,13 +12,12 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smallertmn" translatesAutoresizingMaskIntoConstraints="NO" id="bPz-zm-7cx">
-                                <rect key="frame" x="157" y="303" width="100" height="100"/>
-                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="smallertmn" translatesAutoresizingMaskIntoConstraints="NO" id="bPz-zm-7cx">
+                                <rect key="frame" x="157" y="298" width="100" height="100"/>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="3MA-NW-qRV"/>
@@ -31,7 +29,7 @@
                         <color key="backgroundColor" red="0.090196078430000007" green="0.090196078430000007" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bPz-zm-7cx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6Du-rE-wJI"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="centerY" secondItem="bPz-zm-7cx" secondAttribute="bottom" constant="50" id="UCO-Re-qOf"/>
+                            <constraint firstAttribute="centerY" secondItem="bPz-zm-7cx" secondAttribute="bottom" constant="50" id="UCO-Re-qOf"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -42,8 +40,5 @@
     </scenes>
     <resources>
         <image name="smallertmn" width="125" height="79"/>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>
