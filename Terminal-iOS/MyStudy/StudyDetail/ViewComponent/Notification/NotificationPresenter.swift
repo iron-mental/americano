@@ -54,7 +54,13 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
             break
         }
     }
+    
     func alertConfirmFailed(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
+    
+    func sessionTaskError(message: String) {
         view?.hideLoading()
         view?.showError(message: message)
     }

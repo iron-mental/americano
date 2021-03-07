@@ -50,4 +50,7 @@ extension ModifyStudyInteractor: ModifyStudyRemoteDataManagerOutputProtocol {
                                            label: result.label,
                                            message: result.message ?? "")
     }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

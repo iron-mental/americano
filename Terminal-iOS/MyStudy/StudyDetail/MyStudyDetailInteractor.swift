@@ -28,4 +28,8 @@ final class MyStudyDetailInteractor: MyStudyDetailInteractorProtocol {
     func deleteStudyResult(result: Bool, message: String) {
         presenter?.deleteStudyResult(result: result, message: message)
     }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

@@ -10,7 +10,7 @@ import Foundation
 import SwiftKeychainWrapper
 
 class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
-    
+    weak var interactor: IntroInteractorProtocol?
     // MARK: 회원가입 이메일 유효성 검사
     
     func getEmailValidInfo(input: String, completionHandler: @escaping (BaseResponse<EmailValidteResult>) -> Void) {
@@ -29,7 +29,14 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                         print(error.localizedDescription)
                     }
                 case .failure(let err):
-                    print(err)
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default: break
+                        }
+                    }
                 }
             }
     }
@@ -58,13 +65,21 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
-                            completionHandler(result)
-                        } catch {
-                            
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                                    completionHandler(result)
+                                } catch {
+                                    
+                                }
+                            }
                         }
                     }
                 }
@@ -109,15 +124,24 @@ class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data)
-                            completionHandler(result)
-                        } catch {
-                            
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<JoinResult>.self, from: data)
+                                    completionHandler(result)
+                                } catch {
+                                    
+                                }
+                            }
                         }
                     }
+                    
                 }
             }        
     }

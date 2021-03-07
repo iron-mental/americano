@@ -51,4 +51,8 @@ extension LocationModifyInteractor: LocationModifyRemoteDataManagerOutputProtoco
                                               message: result.message!)
         }
     }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

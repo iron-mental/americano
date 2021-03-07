@@ -28,15 +28,22 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<Notice>.self, from: data)
-                            if result.message != nil {
-                                self.interactor?.getNoticeDetailResult(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<Notice>.self, from: data)
+                                    if result.message != nil {
+                                        self.interactor?.getNoticeDetailResult(result: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
                 }
@@ -60,15 +67,22 @@ class NoticeDetailRemoteDataManager: NoticeDetailRemoteDataManagerInputProtocol 
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
-                            if result.message != nil {
-                                self.interactor?.removeNoticeDetailResult(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                                    if result.message != nil {
+                                        self.interactor?.removeNoticeDetailResult(result: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
                 }

@@ -45,6 +45,7 @@ protocol ApplyUserDetailInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func retriveUserInfo(result: Bool, userInfo: ApplyUserInfo)
     func retriveApplyStatus(result: Bool, message: String, studyID: Int)
+    func sessionTaskError(message: String)
 }
 
 protocol ApplyUserDetailRemoteDataManagerInputProtocol: class {
@@ -59,6 +60,7 @@ protocol ApplyUserDetailRemoteDataManagerOutputProtocol: class {
     //REMOTEDATAMANAGER -> INTERACTOR
     func onUserInfoRetrieved(userInfo: BaseResponse<ApplyUserInfo>)
     func onApplyStatusRetrieved(response: BaseResponse<String>)
+    func sessionTaskError(message: String)
 }
 
 protocol ApplyUserDetailWireFrameProtocol: class {

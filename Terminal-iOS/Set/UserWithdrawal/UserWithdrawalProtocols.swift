@@ -14,6 +14,7 @@ protocol UserWithdrawalViewProtocol: class {
     func resultUserWithdrawal(message: String?)
     func hideLoading()
     func showLoading()
+    func showError(message: String)
 }
 
 protocol UserWithdrawalPresenterProtocol: class {
@@ -33,6 +34,7 @@ protocol UserWithdrawalInteractorInputProtocol: class {
 
 protocol UserWithdrawalInteractorOutputProtocol: class {
     func resultUserWithdrawal(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol UserWithdrawalWireFrameProtocol: class {

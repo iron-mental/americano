@@ -78,4 +78,8 @@ extension LaunchInteractor: LaunchRemoteDataManagerOutputProtocol {
             presenter?.refreshTokenResult(result: result.result)
         }
     }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

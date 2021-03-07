@@ -317,15 +317,17 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
         }
     }
     
-    func showError(message: String, label: String) {
+    func showError(message: String, label: String?) {
         showToast(controller: self, message: message, seconds: 1) {
-            switch label {
-            case "nickname":
-                self.name.warningEffect()
-            case "introduce":
-                self.introduction.warningEffect()
-            default:
-                break
+            if let target = label {
+                switch target {
+                case "nickname":
+                    self.name.warningEffect()
+                case "introduce":
+                    self.introduction.warningEffect()
+                default:
+                    break
+                }
             }
         }
     }

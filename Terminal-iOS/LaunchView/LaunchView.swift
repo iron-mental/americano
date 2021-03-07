@@ -42,6 +42,11 @@ class LaunchView: UIViewController {
     @objc func terminatedButtonDidTap() {
         exit(0)
     }
+    
+    @objc func retry() {
+        TerminalAlertMessage.dismiss()
+        viewDidLoad()
+    }
 }
 
 extension LaunchView: LaunchViewProtocol {
@@ -54,7 +59,11 @@ extension LaunchView: LaunchViewProtocol {
     }
     
     func showError(message: String) {
-        //좀더 생각을 해보는 걸로 
+        TerminalAlertMessage.show(controller: self, type: .LaunchDisConnectView)
+        TerminalAlertMessage.removeLeftButtonAction()
+        TerminalAlertMessage.removeRightButtonAction()
+        TerminalAlertMessage.getLeftButton().addTarget(self, action: #selector(terminatedButtonDidTap), for: .touchUpInside)
+        TerminalAlertMessage.getRightButton().addTarget(self, action: #selector(retry), for: .touchUpInside)
     }
     
     func showMainTenanceAlert() {

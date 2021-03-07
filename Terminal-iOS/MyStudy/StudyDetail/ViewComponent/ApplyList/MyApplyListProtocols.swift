@@ -38,6 +38,7 @@ protocol MyApplyListPresenterProtocol: class {
 protocol MyApplyListInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrieveStudies(result: BaseResponse<[ApplyStudy]>)
+    func sessionTaskError(message: String)
 }
 
 protocol MyApplyListInteractorInputProtocol: class {

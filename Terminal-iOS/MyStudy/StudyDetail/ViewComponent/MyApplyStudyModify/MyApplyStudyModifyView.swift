@@ -110,9 +110,7 @@ class MyApplyStudyModifyView: UIViewController {
             presenter?.admitButtonDidTap(newMessage: newMessage)
         }
     }
-    @objc func didCancelButtonDidTap() {
-        TerminalAlertMessage.show(controller: self, type: .StudyApplyDeleteView)
-    }
+    
     @objc func dismissButtonTap() {
         dismiss(animated: true)
     }
@@ -135,7 +133,7 @@ extension MyApplyStudyModifyView: MyApplyStudyModifyViewProtocol {
     
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
-//            팝시켜줘야할듯?
+            self.dismiss(animated: true)
         }
     }
     

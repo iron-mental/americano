@@ -128,8 +128,7 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
         }
     }
     
-    
-    func onError() {
-        
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

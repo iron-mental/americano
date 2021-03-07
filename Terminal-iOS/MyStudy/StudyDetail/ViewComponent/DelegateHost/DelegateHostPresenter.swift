@@ -29,4 +29,8 @@ extension DelegateHostPresenter: DelegateHostInteractorOutputProtocol {
                 self.view?.showError(message: message)
             }
     }
+    
+    func sessionTaskError(message: String) {
+        view?.showError(message: message)
+    }
 }

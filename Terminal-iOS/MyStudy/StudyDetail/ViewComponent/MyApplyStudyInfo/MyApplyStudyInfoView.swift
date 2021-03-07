@@ -137,7 +137,6 @@ extension MyApplyStudyInfoView: MyApplyStudyInfoViewProtocol {
         TerminalAlertMessage.dismiss()
         showToast(controller: self, message: message, seconds: 1) {
             self.navigationController?.popViewController(animated: true)
-            //특정 int를 넣어줄게 아니라 가장마지막에서 두번째친구에 대한 코드로 다 바꿔야할듯
             if let lastIndex = self.navigationController?.viewControllers.endIndex {
                 if let parent = self.navigationController?.viewControllers[lastIndex - 2] {
                     parent.viewDidLoad()

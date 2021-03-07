@@ -28,6 +28,7 @@ protocol NoticeInteractorInputProtocol: class {
     //PRESENTER -> INTERACTOR
     func getNoticeList(studyID: Int)
     func getNoticeListPagination(studyID: Int)
+    func sessionTaskError(message: String)
 }
 
 protocol NoticeInteractorOutputProtocol: class {
@@ -51,6 +52,7 @@ protocol NoticePresenterProtocol: class {
 }
 
 protocol NoticeRemoteDataManagerProtocol: class {
+    var interactor: NoticeInteractorInputProtocol? { get set }
     func getNoticeList(studyID: Int,
                        completion: @escaping (_ result: BaseResponse<[Notice]>) -> Void)
     func getNoticeListPagination(studyID: Int,

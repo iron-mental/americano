@@ -27,7 +27,7 @@ final class CreateStudyPresenter: CreateStudyPresenterProtocol {
     }
 }
 
-extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {    
+extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {
     func studyInfoInvalid(label: String?, message: String) {
         view?.hideLoading()
         guard let label = label else {
@@ -40,5 +40,10 @@ extension CreateStudyPresenter: CreateStudyInteractorOutputProtocol {
     func studyInfoValid(studyID: Int, message: String) {
         view?.hideLoading()
         view?.studyInfoValid(studyID: studyID, message: message)
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

@@ -40,6 +40,7 @@ protocol MyApplyStudyInfoInteractorInputProtocol: class {
 protocol MyApplyStudyInfoInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func retriveDeleteApplyResult(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol MyApplyStudyInfoRemoteDataManagerInputProtocol: class {
@@ -51,6 +52,7 @@ protocol MyApplyStudyInfoRemoteDataManagerInputProtocol: class {
 
 protocol MyApplyStudyInfoRemoteDataManagerOutputProtocol: class {
     func retriveDeleteApplyResult(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol MyApplyStudyInfoWireFrameProtocol: class {

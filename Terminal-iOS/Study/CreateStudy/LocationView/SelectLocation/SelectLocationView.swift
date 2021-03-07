@@ -198,4 +198,8 @@ extension SelectLocationView: SelectLocationViewProtocol {
         location?.sido = sido
         location?.sigungu = sigungu
     }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
 }

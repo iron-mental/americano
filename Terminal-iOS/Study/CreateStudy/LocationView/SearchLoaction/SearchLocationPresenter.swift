@@ -26,4 +26,8 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
         view?.hideLoading()
         view?.showSearchResult(list: list)
     }
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }

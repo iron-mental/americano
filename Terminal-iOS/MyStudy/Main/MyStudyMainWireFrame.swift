@@ -29,6 +29,8 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
         interactor.remoteManager = remoteDataManager
         interactor.localManager = localDataManager
         
+        remoteDataManager.interactor = interactor
+        
         if let id = studyID, let event = alarmType {
             view.startedByPushNotification = true
             wireFrame.studyID = id

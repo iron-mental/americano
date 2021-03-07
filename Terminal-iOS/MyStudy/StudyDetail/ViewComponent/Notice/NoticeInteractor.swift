@@ -74,6 +74,10 @@ class NoticeInteractor: NoticeInteractorInputProtocol {
         }
     }
     
+    func sessionTaskError(message: String) {
+        presenter?.showError(message: message)
+    }
+    
     func sorted(completion: @escaping () -> Void) {
         var noticeListQueue: [[Notice]] = []
         var pinnedNotiArr: [Notice] = []

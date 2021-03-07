@@ -51,4 +51,7 @@ extension MyApplyStudyModifyInteractor: MyApplyStudyModifyRemoteDataManagerOutpu
             presenter?.retriveModifyApplyMessage(result: result, message: message)
         }
     }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

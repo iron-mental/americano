@@ -119,4 +119,8 @@ extension SNSModifyView: SNSModifyViewProtocol {
     func hideLoading() {
         LoadingRainbowCat.hide(caller: self)
     }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
 }

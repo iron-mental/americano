@@ -31,7 +31,7 @@ class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
         case true:
             view?.showMyStudyList(myStudyList: itemList!)
         case false:
-            view?.showErrMessage()
+            view?.showErrMessage(message: "서버와의 연결이 불안정합니다.")
         }
     }
     
@@ -44,5 +44,9 @@ class MyStudyMainPresenter: MyStudyMainPresenterProtocol {
         if let myStudyMainView = view as? UIViewController {
             wireFrame?.goToStudyDetailDirectly(view: myStudyMainView)
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.showErrMessage(message: message)
     }
 }

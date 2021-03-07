@@ -25,6 +25,8 @@ class NoticeWireFrame: NoticeWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         
+        remoteDataManager.interactor = interactor
+        
         return view
     }
     

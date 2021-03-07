@@ -41,6 +41,7 @@ protocol ModifyStudyInteractorInputProtocol: class {
 protocol ModifyStudyInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func putStudyInfoResult(result: Bool, label: String?, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol ModifyStudyRemoteDataManagerInputProtocol: class {
@@ -53,6 +54,7 @@ protocol ModifyStudyRemoteDataManagerInputProtocol: class {
 protocol ModifyStudyRemoteDataManagerOutputProtocol: class {
     //REMOTEDATAMANAGER -> INTERACTOR
     func putStudyInfoResult(result: BaseResponse<String>)
+    func sessionTaskError(message: String)
 }
 
 protocol ModifyStudyWireFrameProtocol: class {

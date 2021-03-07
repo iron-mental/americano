@@ -22,4 +22,9 @@ extension SNSModifyPresenter: SNSModifyInteractorOutputProtocol {
     func didCompleteModify(result: Bool, message: String) {
         self.view?.modifyResultHandle(result: result, message: message)
     }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
 }
