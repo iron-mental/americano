@@ -31,7 +31,7 @@ protocol ProfileModifyPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    func completeImageModify(image: UIImage)
+    func completeImageModify(image: UIImage, profileExistence: Bool)
     func completeModify(profile: Profile)
 }
 
