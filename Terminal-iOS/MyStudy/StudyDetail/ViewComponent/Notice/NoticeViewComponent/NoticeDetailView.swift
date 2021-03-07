@@ -30,7 +30,7 @@ class NoticeDetailView: UIViewController {
     
     func attribute() {
         self.do {
-            $0.view.backgroundColor = UIColor.appColor(.testColor)
+            $0.view.backgroundColor = .appColor(.terminalBackground)
             navigationItem.rightBarButtonItems = state == .host ? [moreButton] : nil
         }
         self.moreButton.do {
@@ -46,7 +46,6 @@ class NoticeDetailView: UIViewController {
                     : .appColor(.noticeColor)        // false
             }
         }
-        
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             $0.textAlignment = .center
@@ -68,7 +67,6 @@ class NoticeDetailView: UIViewController {
             $0.layer.cornerRadius = $0.frame.width / 2
             $0.clipsToBounds = true
         }
-        
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             guard let name = notice?.leaderNickname else { return }
@@ -76,18 +74,21 @@ class NoticeDetailView: UIViewController {
             $0.textColor = .white
             $0.textAlignment = .center
         }
-        
         noticeDate.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
             $0.text = notice?.updatedAt
             $0.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             $0.textAlignment = .center
         }
-        
         noticeContents.do {
-            $0.dynamicFont(fontSize: 12, weight: .regular)
-            $0.numberOfLines = 0
+            $0.dynamicFont(size: 12, weight: .regular)
             $0.text = notice?.contents
+            $0.isEditable = false
+            $0.bounces = false
+            $0.backgroundColor = .appColor(.cellBackground)
+            $0.layer.cornerRadius = 10
+            $0.layer.borderColor = UIColor.gray.cgColor
+            $0.layer.borderWidth = 0.1
         }
     }
     
@@ -116,7 +117,8 @@ class NoticeDetailView: UIViewController {
                                         constant: Terminal.convertWidth(value: 13)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                          constant: Terminal.convertWidth(value: -13)).isActive = true
-            $0.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                       constant: Terminal.convertHeight(value: -10)).isActive = true
         }
         profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
