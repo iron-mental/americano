@@ -48,7 +48,7 @@ protocol ProfileModifyInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func viewDidLoad()
-    func completeImageModify(image: UIImage)
+    func completeImageModify(image: UIImage, profileExistence: Bool)
     func completeModify(profile: Profile)
 }
 
