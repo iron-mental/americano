@@ -31,8 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let userID = KeychainWrapper.standard.string(forKey: "userID") {
             Crashlytics.crashlytics().setCustomValue(userID, forKey: "userID")
             Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
-                AnalyticsParameterItemID: "\(userID)",
-                AnalyticsParameterContentType: "cont"
+                AnalyticsParameterItemID: "\(userID)"
                 ])
         }
         
