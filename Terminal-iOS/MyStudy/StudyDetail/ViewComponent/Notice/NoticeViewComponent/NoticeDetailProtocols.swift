@@ -12,7 +12,6 @@ protocol NoticeDetailViewProtocol: class {
     var presenter: NoticeDetailPresenterProtocol? { get set }
     var notice: Notice? { get set }
     var parentView: UIViewController? { get set }
-    var noticeID: Int? { get set }
     
     //PRESENTER -> VIEW
     func showNoticeDetail(notice: Notice)
