@@ -58,13 +58,7 @@ class ProfileModifyView: UIViewController {
             $0.delegate = self
         }
         self.profileImage.do {
-            if let image = self.profile?.profileImage {
-                $0.image = image
-                self.profileExistence = true
-            } else {
-                $0.image = UIImage(named: "defaultProfile")!
-                self.profileExistence = false
-            }
+            $0.image = self.profile?.profileImage
             
             let profileTapGesture = UITapGestureRecognizer(target: self,
                                                            action: #selector(didImageViewClicked))
@@ -234,7 +228,7 @@ class ProfileModifyView: UIViewController {
         
         alert.addAction(library)
         alert.addAction(camera)
-        if self.profileExistence {
+        if let state = self.profile?.profileState, state == true {
             alert.addAction(remove)
         }
         alert.addAction(cancel)
@@ -288,7 +282,7 @@ class ProfileModifyView: UIViewController {
         if nickname.whitespaceCheck() {
             self.showToast(controller: self, message: "이름은 공백이 포함되지 않습니다.", seconds: 0.5)
         } else {
-            let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
+            let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction, profileState: true)
             showLoading()
             presenter?.completeModify(profile: profile)
             if self.profile?.profileImage != profile.profileImage {
