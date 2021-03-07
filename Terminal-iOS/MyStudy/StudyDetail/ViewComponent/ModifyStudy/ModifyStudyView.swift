@@ -10,7 +10,13 @@ import UIKit
 
 class ModifyStudyView: BaseEditableStudyDetailView {
     var presenter: ModifyStudyPresenterProtocol?
-    var study: StudyDetail?
+    var study: StudyDetail? {
+        didSet {
+            if let url = study?.image, url.isEmpty {
+                self.studyImageExistence = false
+            }
+        }
+    }
     
     override func attribute() {
         super.attribute()
