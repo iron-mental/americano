@@ -80,7 +80,9 @@ class IntroView: UIViewController {
             self.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
             self.inputTextfield.placeholder = "닉네임"
             self.introState = .nickname
-            self.leftButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            self.leftButton.setImage(UIImage(systemName: "chevron.left")?
+                                        .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)),
+                                     for: .normal)
             self.rightbutton.setTitle("완료", for: .normal)
             self.leftButton.setImage(UIImage(systemName: "chevron.left")?
                                         .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)),

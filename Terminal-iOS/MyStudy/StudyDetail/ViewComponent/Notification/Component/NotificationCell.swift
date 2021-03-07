@@ -44,6 +44,8 @@ class NotificationCell: UITableViewCell {
         case .chat, .undefined, .testPush, .none: break
         }
         
+        
+        
         self.titleLabel.text = noti.studyTitle
         self.explainLabel.text = noti.message
         self.backgroundColor = noti.confirm ? .clear : .systemGray5

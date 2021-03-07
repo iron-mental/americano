@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CCA1FF5224FD0C930026C3EA"
-               BuildableName = "Terminal-iOS.app"
+               BuildableName = "&#x1110;&#x1165;&#x1106;&#x1175;&#x1102;&#x1165;&#x11af;.app"
                BlueprintName = "Terminal-iOS"
                ReferencedContainer = "container:Terminal-iOS.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CCA1FF5224FD0C930026C3EA"
-            BuildableName = "Terminal-iOS.app"
+            BuildableName = "&#x1110;&#x1165;&#x1106;&#x1175;&#x1102;&#x1165;&#x11af;.app"
             BlueprintName = "Terminal-iOS"
             ReferencedContainer = "container:Terminal-iOS.xcodeproj">
          </BuildableReference>
@@ -68,7 +68,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CCA1FF5224FD0C930026C3EA"
-            BuildableName = "Terminal-iOS.app"
+            BuildableName = "&#x1110;&#x1165;&#x1106;&#x1175;&#x1102;&#x1165;&#x11af;.app"
             BlueprintName = "Terminal-iOS"
             ReferencedContainer = "container:Terminal-iOS.xcodeproj">
          </BuildableReference>

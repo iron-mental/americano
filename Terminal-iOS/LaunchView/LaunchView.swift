@@ -11,10 +11,12 @@ import UIKit
 class LaunchView: UIViewController {
     var presenter: LaunchPresenterProtocol?
     let appearance = UINavigationBarAppearance()
+    var splashImageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
+        layout()
         presenter?.viewDidLoad()
     }
     
@@ -27,6 +29,22 @@ class LaunchView: UIViewController {
         }
         view.do {
             $0.backgroundColor = .appColor(.terminalBackground)
+        }
+        splashImageView.do {
+            $0.image = #imageLiteral(resourceName: "smallertmn")
+            $0.contentMode = .scaleAspectFit
+        }
+    }
+    
+    func layout() {
+        [ splashImageView ].forEach { self.view.addSubview($0) }
+        
+        splashImageView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.bottomAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -50).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
         }
     }
     

@@ -181,8 +181,6 @@
 		CC1BE03C2510D8DB00F88313 /* CreateStudyProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */; };
 		CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */; };
 		CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */; };
-		CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */; };
-		CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE0482512286B00F88313 /* SNSCollectionView.swift */; };
 		CC21A7952559504600E31F77 /* IntroLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC21A7942559504600E31F77 /* IntroLocalDataManager.swift */; };
 		CC26AD58251B27B3006B11E9 /* LocationUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD57251B27B3006B11E9 /* LocationUIView.swift */; };
 		CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */; };
@@ -600,8 +598,6 @@
 		CC1BE03B2510D8DB00F88313 /* CreateStudyProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyProtocols.swift; sourceTree = "<group>"; };
 		CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyPresenter.swift; sourceTree = "<group>"; };
 		CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyInteractor.swift; sourceTree = "<group>"; };
-		CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionViewCell.swift; sourceTree = "<group>"; };
-		CC1BE0482512286B00F88313 /* SNSCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSCollectionView.swift; sourceTree = "<group>"; };
 		CC21A7942559504600E31F77 /* IntroLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroLocalDataManager.swift; sourceTree = "<group>"; };
 		CC26AD57251B27B3006B11E9 /* LocationUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUIView.swift; sourceTree = "<group>"; };
 		CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUIView.swift; sourceTree = "<group>"; };
@@ -670,7 +666,7 @@
 		CC90262125EBC2B300D61373 /* DispatchTimeInterval+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchTimeInterval+Ext.swift"; sourceTree = "<group>"; };
 		CC99A0CB25342D620027BA24 /* MyStudyMainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyMainTableViewCell.swift; sourceTree = "<group>"; };
 		CC9FF79D2541534D00086679 /* badgeBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = badgeBarButtonItem.swift; sourceTree = "<group>"; };
-		CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Terminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CCA1FF5324FD0C930026C3EA /* 터미널.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "터미널.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA1FF5624FD0C930026C3EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCA1FF5A24FD0C930026C3EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CCA1FF5D24FD0C930026C3EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1312,8 +1308,6 @@
 		CC1BE0432511FD5400F88313 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				CC1BE0442511FD8900F88313 /* SNSCollectionViewCell.swift */,
-				CC1BE0482512286B00F88313 /* SNSCollectionView.swift */,
 				CCCF2A8F251732B50077B75C /* TitleWithTextView.swift */,
 				CC6F1CBC251A155700511016 /* SNSInputUIView.swift */,
 				CC6F1CBA251A148D00511016 /* SNSInputItem.swift */,
@@ -1437,7 +1431,7 @@
 		CCA1FF5424FD0C930026C3EA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */,
+				CCA1FF5324FD0C930026C3EA /* 터미널.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1890,7 +1884,7 @@
 			);
 			name = "Terminal-iOS";
 			productName = "Terminal-iOS";
-			productReference = CCA1FF5324FD0C930026C3EA /* Terminal-iOS.app */;
+			productReference = CCA1FF5324FD0C930026C3EA /* 터미널.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2171,7 +2165,6 @@
 				CC6044812576265A000D11C7 /* NoticeDetailRemoteDataManager.swift in Sources */,
 				CCED89FA25DD3072006DA773 /* MyApplyListEmptyView.swift in Sources */,
 				A51F238C256E5A2200CBFC13 /* BaseResponse.swift in Sources */,
-				CC1BE0452511FD8900F88313 /* SNSCollectionViewCell.swift in Sources */,
 				A57C33D7254E8C58006CE9A2 /* TempChatView.swift in Sources */,
 				A5417FF125A7A855005B884F /* ProfileSNSModifyView.swift in Sources */,
 				CC7F383625BA991B00DEA541 /* DelegateHostTableViewCell.swift in Sources */,
@@ -2251,7 +2244,6 @@
 				A5A20EEE25418D2A00060FFA /* ProfileView.swift in Sources */,
 				A5AB2705252B6F2300A39240 /* ProfileCell.swift in Sources */,
 				A5A5F6C2256F843600405C71 /* SortState.swift in Sources */,
-				CC1BE0492512286B00F88313 /* SNSCollectionView.swift in Sources */,
 				A58148972591050600BF3C2A /* EmailModifyPresenter.swift in Sources */,
 				CCA25AE825B9B39900280C80 /* DelegateHostPresenter.swift in Sources */,
 				CC6F1CBB251A148D00511016 /* SNSInputItem.swift in Sources */,
@@ -2680,7 +2672,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Terminal-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "터미널";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2703,7 +2695,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Terminal-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "터미널";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

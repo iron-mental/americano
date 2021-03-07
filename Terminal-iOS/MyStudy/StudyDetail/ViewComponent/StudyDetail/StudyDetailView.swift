@@ -85,6 +85,7 @@ final class StudyDetailView: UIViewController {
         }
         navigationItem.do {
             $0.rightBarButtonItems = [moreButton]
+            $0.largeTitleDisplayMode = .always
         }
         moreButton.do {
             $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))

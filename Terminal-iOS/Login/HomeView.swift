@@ -25,14 +25,12 @@ class HomeView: UIViewController {
     }
     
     func attribute() {
-        self.do {
-            $0.view.backgroundColor = .appColor(.terminalBackground)
-        }
         appearance.do {
             $0.configureWithTransparentBackground()
         }
-        navigationController?.do {
-            $0.navigationBar.standardAppearance = appearance
+        self.do {
+            $0.view.backgroundColor = .appColor(.terminalBackground)
+            $0.navigationController?.navigationBar.standardAppearance = appearance
         }
         navigationItem.do {
             $0.rightBarButtonItem = loginBarButtonItem
@@ -57,7 +55,7 @@ class HomeView: UIViewController {
             $0.addTarget(self, action: #selector(goFindPassword), for: .touchUpInside)
         }
         mainImage.do {
-            $0.image = UIImage(systemName: "terminal.fill")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            $0.image = #imageLiteral(resourceName: "smallertmn")
             $0.tintColor = .white
             $0.contentMode = .scaleAspectFit
         }
@@ -86,10 +84,10 @@ class HomeView: UIViewController {
         }
         mainImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 200).isActive = true
-            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: 300).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: 130).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -50).isActive = true
+            $0.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 100).isActive = true
         }
     }
     
