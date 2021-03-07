@@ -26,6 +26,7 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
                                           snsNotion: targetStudy.snsNotion,
                                           snsEvernote: targetStudy.snsEvernote,
                                           image: targetStudy.image,
+                                          imageState: targetStudy.imageState,
                                           location: targetStudy.location)
         return resultStudy
     }
