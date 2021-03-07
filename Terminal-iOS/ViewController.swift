@@ -15,6 +15,7 @@ class ViewController: UITabBarController {
         case set
     }
     
+    let signUpState: Bool?
     var targetStudyID: Int? { didSet { print("Test") } }
     var targetAlarmType: AlarmType?
     var studyViewController = StudyCategoryWireFrame.createStudyCategory()
@@ -42,6 +43,11 @@ class ViewController: UITabBarController {
                 .withConfiguration(UIImage.SymbolConfiguration(weight: .bold))
         )
     ]
+    
+    init(signUpState: Bool? = nil) {
+        self.signUpState = signUpState
+        super.init(nibName: nil, bundle: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,8 +93,16 @@ class ViewController: UITabBarController {
             myStudyNVC,
             setNVC
         ]
-        self.selectedIndex = 1
         
+        if let state = self.signUpState, state == true {
+            self.selectedIndex = 0
+        } else {
+            self.selectedIndex = 1
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 extension ViewController: UITabBarControllerDelegate {
