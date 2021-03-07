@@ -322,6 +322,9 @@
 		CCB139D625592E0300410184 /* IntroRemoteDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */; };
 		CCB1A3A925D7BDC600AADE33 /* ValidateSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */; };
 		CCB23AB0256E3C1E001736CA /* NoticeWireFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */; };
+		CCB33E5D25F48C50006B55C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */; };
+		CCB33E5E25F48C50006B55C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */; };
+		CCB33E5F25F48C50006B55C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */; };
 		CCB752CA25A841E3003E7CA7 /* StudyApplyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */; };
 		CCBBEEFB2583A30A00177E25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */; };
 		CCBBEEFF2583A38E00177E25 /* TerminalCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */; };
@@ -362,7 +365,6 @@
 		CCE279DF256E46BA00DB3246 /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279DE256E46BA00DB3246 /* NoticeList.swift */; };
 		CCE279EC256E46C600DB3246 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE279EB256E46C600DB3246 /* Notice.swift */; };
 		CCE4E51D25A57A6D00DEFC3C /* TerminalAlertMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */; };
-		CCE829BF25E0F9F800FF11C9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCE829BE25E0F9F800FF11C9 /* GoogleService-Info.plist */; };
 		CCED89CB25DD1D1E006DA773 /* EmptyViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */; };
 		CCED89E225DD2295006DA773 /* SearchLocationEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */; };
 		CCED89E725DD256C006DA773 /* NotiListEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */; };
@@ -732,6 +734,7 @@
 		CCB139D525592E0300410184 /* IntroRemoteDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroRemoteDataManager.swift; sourceTree = "<group>"; };
 		CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateSequence.swift; sourceTree = "<group>"; };
 		CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWireFrame.swift; sourceTree = "<group>"; };
+		CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyApplyMessageView.swift; sourceTree = "<group>"; };
 		CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CCBBEEFE2583A38E00177E25 /* TerminalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TerminalCoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -773,7 +776,6 @@
 		CCE279DE256E46BA00DB3246 /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
 		CCE279EB256E46C600DB3246 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		CCE4E51C25A57A6D00DEFC3C /* TerminalAlertMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalAlertMessage.swift; sourceTree = "<group>"; };
-		CCE829BE25E0F9F800FF11C9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CCED89CA25DD1D1E006DA773 /* EmptyViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewType.swift; sourceTree = "<group>"; };
 		CCED89E125DD2295006DA773 /* SearchLocationEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationEmptyView.swift; sourceTree = "<group>"; };
 		CCED89E625DD256C006DA773 /* NotiListEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiListEmptyView.swift; sourceTree = "<group>"; };
@@ -1465,10 +1467,10 @@
 				CCA1FF5A24FD0C930026C3EA /* ViewController.swift */,
 				CCA1FF5C24FD0C930026C3EA /* Main.storyboard */,
 				CCA1FF5F24FD0C930026C3EA /* Assets.xcassets */,
+				CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */,
 				CCA1FF6124FD0C930026C3EA /* LaunchScreen.storyboard */,
 				CCA1FF6424FD0C930026C3EA /* Info.plist */,
 				CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */,
-				CCE829BE25E0F9F800FF11C9 /* GoogleService-Info.plist */,
 			);
 			path = "Terminal-iOS";
 			sourceTree = "<group>";
@@ -1937,6 +1939,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB33E5E25F48C50006B55C0 /* GoogleService-Info.plist in Resources */,
 				CCA95A2025EE9ECA004819AE /* NotoSansKR-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1945,6 +1948,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB33E5F25F48C50006B55C0 /* GoogleService-Info.plist in Resources */,
 				CCA95A2125EE9ECA004819AE /* NotoSansKR-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1953,10 +1957,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB33E5D25F48C50006B55C0 /* GoogleService-Info.plist in Resources */,
 				CCA95A1F25EE9ECA004819AE /* NotoSansKR-Regular.otf in Resources */,
 				A5576DD925BC95EE00AC5BEA /* .swiftlint.yml in Resources */,
 				CCA1FF6324FD0C930026C3EA /* LaunchScreen.storyboard in Resources */,
-				CCE829BF25E0F9F800FF11C9 /* GoogleService-Info.plist in Resources */,
 				CCA1FF6024FD0C930026C3EA /* Assets.xcassets in Resources */,
 				CCD51C6D256CC14900D41771 /* NotoSansKR-Medium.otf in Resources */,
 				CCA1FF5E24FD0C930026C3EA /* Main.storyboard in Resources */,
