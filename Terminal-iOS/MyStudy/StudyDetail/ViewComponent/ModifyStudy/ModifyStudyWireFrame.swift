@@ -29,8 +29,6 @@ class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
 
         remoteDataManager.interactor = interactor
         
-        view.study = study
-        
         let postLocation = StudyDetailLocationPost(address: location.addressName,
                                                    lat: Double(location.latitude)!,
                                                    lng: Double(location.latitude)!,
@@ -39,6 +37,8 @@ class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
                                                    category: "",
                                                    sido: "",
                                                    sigungu: "")
+        view.study = study
+        view.initImage = mainImage ?? nil
         view.selectedLocation = postLocation
         interactor.currentStudy = study
         
