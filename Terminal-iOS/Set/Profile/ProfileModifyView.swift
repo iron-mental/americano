@@ -31,7 +31,7 @@ class ProfileModifyView: UIViewController {
     var contentHeight: CGFloat = 0
     var keyboardDuartion: Double = 0
     var topAnchor: NSLayoutConstraint?
-    var profileExistence: Bool = false
+    var profileExistence: Bool?
     
     // MARK: viewDidLoad
     
@@ -260,6 +260,7 @@ class ProfileModifyView: UIViewController {
     func removeProfileImage() {
         self.profileImage.image = UIImage(named: "defaultProfile")
         self.profile?.profileState = false
+        self.profileExistence = false
     }
     
     // MARK: - 프로필 수정 완료 버튼
@@ -283,11 +284,20 @@ class ProfileModifyView: UIViewController {
         if nickname.whitespaceCheck() {
             self.showToast(controller: self, message: "이름은 공백이 포함되지 않습니다.", seconds: 0.5)
         } else {
-            let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction, profileState: true)
+            let profile = Profile(profileImage: image,
+                                  nickname: nickname,
+                                  introduction: introduction,
+                                  profileState: self.profile!.profileState)
             showLoading()
             presenter?.completeModify(profile: profile)
+            
+            // 프로필 수정여부
             if self.profile?.profileImage != profile.profileImage {
-                presenter?.completeImageModify(image: image)
+                
+                // 프로필이 삭제되어 디폴트가 되었는지 혹은 변경된 것인지
+                if let profileExistence = self.profileExistence {
+                    presenter?.completeImageModify(image: image, profileExistence: profileExistence)
+                }
             }
         }
         
@@ -348,6 +358,7 @@ extension ProfileModifyView: UIImagePickerControllerDelegate & UINavigationContr
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             self.profileImage.image = image
+            self.profileExistence = true
         }
         dismiss(animated: true, completion: nil)
     }
