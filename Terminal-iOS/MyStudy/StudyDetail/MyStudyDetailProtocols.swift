@@ -53,7 +53,7 @@ protocol MyStudyDetailPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func addNoticeButtonDidTap(studyID: Int)
-    func editStudyButtonDidTap(study: StudyDetail, location: Location)
+    func editStudyButtonDidTap(study: StudyDetail, location: Location, mainImage: UIImage?)
     func addNoticeFinished(notice: Int, studyID: Int, title: String)
     func showApplyUserList(studyID: Int)
     func leaveStudyButtonDidTap(studyID: Int)
