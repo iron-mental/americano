@@ -10,39 +10,34 @@ import Foundation
 
 class StudyCheck {
     static func execute(study: StudyDetailPost) -> StudyNilCheck {
-        var nilCheck: StudyNilCheck?
         let location = study.location ?? nil
         
         if study.category.isEmpty {
-            nilCheck = StudyNilCheck(message: "카테고리가 지정되어있지 않습니다.", label: "category")
+            return StudyNilCheck(message: "카테고리가 지정되어있지 않습니다.", label: "category")
         } else if study.title!.isEmpty {
-            nilCheck = StudyNilCheck(message: "제목을 입력해주세요", label: "title")
+            return StudyNilCheck(message: "제목을 입력해주세요", label: "title")
         } else if study.introduce!.isEmpty {
-            nilCheck = StudyNilCheck(message: "소개를 입력해주세요", label: "introduce")
-        } else if study.progress!.isEmpty {
-            nilCheck = StudyNilCheck(message: "진행을 입력해주세요", label: "progress")
-        } else if location == nil {
-            nilCheck = StudyNilCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
-        } else if study.studyTime!.isEmpty {
-            nilCheck = StudyNilCheck(message: "시간을 입력해주세요", label: "study_time")
+            return StudyNilCheck(message: "소개를 입력해주세요", label: "introduce")
         } else if let notion = study.snsNotion {
             if !notion.notionCheck() {
-                nilCheck = StudyNilCheck(message: "Notion URL이 정확하지 않습니다.", label: "sns_notion")
+                return StudyNilCheck(message: "Notion URL이 정확하지 않습니다.", label: "sns_notion")
             } else if let evernote = study.snsEvernote {
                 if !evernote.evernoteCheck() {
-                    nilCheck = StudyNilCheck(message: "Evernote URL이 정확하지 않습니다.", label: "sns_evernote")
+                    return StudyNilCheck(message: "Evernote URL이 정확하지 않습니다.", label: "sns_evernote")
                 } else if let web = study.snsWeb {
                     if !web.webCheck() {
-                        nilCheck = StudyNilCheck(message: "web URL이 정확하지 않습니다.", label: "sns_web")
+                        return StudyNilCheck(message: "web URL이 정확하지 않습니다.", label: "sns_web")
                     }
                 }
             }
+        } else if study.progress!.isEmpty {
+            return StudyNilCheck(message: "진행을 입력해주세요", label: "progress")
+        } else if location == nil {
+            return StudyNilCheck(message: "장소를 선택해주세요.", label: "locaion_detail")
+        } else if study.studyTime!.isEmpty {
+            return StudyNilCheck(message: "시간을 입력해주세요", label: "study_time")
         }
         
-        if let nilCheck = nilCheck {
-            return nilCheck
-        } else {
-            return StudyNilCheck(message: "성공", label: nil)
-        }
+        return StudyNilCheck(message: "성공", label: nil)
     }
 }
