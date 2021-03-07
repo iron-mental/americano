@@ -48,7 +48,8 @@ class MyApplyStudyModifyView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         dismissButton.do {
-            $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+            $0.setImage(UIImage(systemName: "xmark")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .light)), for: .normal)
             $0.addTarget(self, action: #selector(dismissButtonTap), for: .touchUpInside)
         }
         applyTextField.do {
