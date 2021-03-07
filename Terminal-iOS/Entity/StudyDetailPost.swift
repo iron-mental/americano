@@ -16,6 +16,7 @@ struct StudyDetailPost {
     let progress, studyTime: String?
     let snsWeb, snsNotion, snsEvernote: String?
     let image: UIImage?
+    let imageState: Bool?
     let location: StudyDetailLocationPost?
 }
 
