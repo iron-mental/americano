@@ -18,7 +18,7 @@ class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
     }
     
     func completeImageModify(image: UIImage, profileExistence: Bool) {
-        interactor?.completeImageModify(image: image)
+        interactor?.completeImageModify(image: image, profileExistence: profileExistence)
     }
     
     func completeModify(profile: Profile) {
