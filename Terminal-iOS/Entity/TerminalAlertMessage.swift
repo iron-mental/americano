@@ -31,19 +31,28 @@ enum AlertType {
         case .StudyApplyView:
             return StudyApplyMessageView(type: .apply)
         case .StudyApplyDeleteView:
-            return AlertMessageView(message: "가입 신청을 취소하시겠습니까?")
+            let studyApplyDeleteView = AlertMessageView(message: "가입 신청을 취소하시겠습니까?")
+            studyApplyDeleteView.dismissButton.setTitle("닫기", for: .normal)
+            studyApplyDeleteView.completeButton.setTitle("신청 취소", for: .normal)
+            studyApplyDeleteView.completeButton.setTitleColor(.systemRed, for: .normal)
+            return studyApplyDeleteView
         case .EmailAuthView:
-            //이부분 AlertMessageView 안쓰고 따로 만든 이유가 있는지?
-            return EmailAlertMessageView(message: "이메일 인증하시겠습니까?\n\n 회원님의 이메일로 인증 요청됩니다.")
+            return EmailAlertMessageView(message: "이메일 인증하시겠습니까?\n\n회원님의 이메일로 인증 요청됩니다.")
         case .DelegateHostConfirmView:
             return AlertMessageView(message: "방장을 위임하시겠습니까?")
         case .LeaveStudyView:
             let leaveStudyView = AlertMessageView(message: "스터디를 나가시겠습니까?")
             leaveStudyView.alertMessageLabel.textColor = .systemRed
+            leaveStudyView.dismissButton.setTitle("닫기", for: .normal)
+            leaveStudyView.completeButton.setTitle("나가기", for: .normal)
+            leaveStudyView.completeButton.setTitleColor(.systemRed, for: .normal)
             return leaveStudyView
         case .DeleteStudyView:
             let deleteStudyView = AlertMessageView(message: "스터디를 삭제하시겠습니까?")
             deleteStudyView.alertMessageLabel.textColor = .systemRed
+            deleteStudyView.dismissButton.setTitle("닫기", for: .normal)
+            deleteStudyView.completeButton.setTitle("삭제하기", for: .normal)
+            deleteStudyView.completeButton.setTitleColor(.systemRed, for: .normal)
             return deleteStudyView
         case .ProjectLimitView:
             let projectLimitView = AlertMessageView(message: "작성 가능한 프로젝트는 최대 3개입니다.")
@@ -52,10 +61,13 @@ enum AlertType {
             return projectLimitView
         case .AllowUserView:
             let allowUserView = AlertMessageView(message: "유저의 입장을 수락하시겠습니까?")
+            allowUserView.completeButton.setTitle("수락하기", for: .normal)
             return allowUserView
         case .RejectUserView:
             let rejectUserView = AlertMessageView(message: "유저의 입장을 거절하시겠습니까?")
             rejectUserView.alertMessageLabel.textColor = .systemRed
+            rejectUserView.completeButton.setTitleColor(.systemRed, for: .normal)
+            rejectUserView.completeButton.setTitle("거절하기", for: .normal)
             return rejectUserView
         case .LogOutView:
             let logoutView = AlertMessageView(message: "로그아웃하시겠습니까?")

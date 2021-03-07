@@ -28,7 +28,7 @@ class AlertMessageView: AlertBaseUIView {
         alertMessageLabel.do {
             $0.numberOfLines = 3
             $0.textAlignment = .center
-            $0.textColor = UIColor.appColor(.alertTextcolor)
+            $0.textColor = .white
             $0.dynamicFont(fontSize: 13, weight: .regular)
             $0.text = alertMessage
         }
