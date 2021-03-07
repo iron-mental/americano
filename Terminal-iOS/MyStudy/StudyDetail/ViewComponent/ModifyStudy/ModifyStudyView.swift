@@ -51,10 +51,10 @@ class ModifyStudyView: BaseEditableStudyDetailView {
             $0.detailTime.text = study?.studyTime
         }
         completeButton.do {
-            $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
         accessoryCompleteButton.do {
-            $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
     
@@ -62,7 +62,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         presenter?.clickLocationView()
     }
     
-    @objc func buttonDidTap() {
+    @objc func completeModify() {
         self.selectedLocation?.detailAddress = self.locationView.detailAddress.text
         
         self.studyDetailPost = StudyDetailPost(category: self.study!.category,
