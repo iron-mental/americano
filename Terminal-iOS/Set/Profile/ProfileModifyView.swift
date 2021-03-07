@@ -18,9 +18,8 @@ class ProfileModifyView: UIViewController {
     var presenter: ProfileModifyPresenterProtocol?
     var profile: Profile?
     let picker = UIImagePickerController()
-
-    let modifyLabel = UILabel()
-    let contentView = UIView()
+    
+    let imageModify = UIImageView()
     let profileImage = UIImageView()
     let nameLabel = UILabel()
     let introductionLabel = UILabel()
@@ -32,6 +31,7 @@ class ProfileModifyView: UIViewController {
     var contentHeight: CGFloat = 0
     var keyboardDuartion: Double = 0
     var topAnchor: NSLayoutConstraint?
+    var profileExistence: Bool = false
     
     // MARK: viewDidLoad
     
@@ -44,7 +44,7 @@ class ProfileModifyView: UIViewController {
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
     }
-
+    
     // MARK: Set Attribute
     
     func attribute() {
@@ -58,8 +58,16 @@ class ProfileModifyView: UIViewController {
             $0.delegate = self
         }
         self.profileImage.do {
-            $0.image = self.profile?.profileImage
-            let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(didImageViewClicked))
+            if let image = self.profile?.profileImage {
+                $0.image = image
+                self.profileExistence = true
+            } else {
+                $0.image = UIImage(named: "defaultProfile")!
+                self.profileExistence = false
+            }
+            
+            let profileTapGesture = UITapGestureRecognizer(target: self,
+                                                           action: #selector(didImageViewClicked))
             $0.addGestureRecognizer(profileTapGesture)
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = Terminal.convertHeight(value: 100)
@@ -68,15 +76,16 @@ class ProfileModifyView: UIViewController {
             $0.clipsToBounds = true
             $0.isUserInteractionEnabled = true
         }
-        self.contentView.do {
-            $0.backgroundColor = .darkGray
-            $0.alpha = 0.5
-        }
-        self.modifyLabel.do {
-            $0.text = "편집"
-            $0.textAlignment = .center
-            $0.textColor = .white
-            $0.font = UIFont.notosansMedium(size: 13)
+        self.imageModify.do {
+            $0.image = UIImage(systemName: "plus.circle.fill")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
+            $0.tintColor = .lightGray
+            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.frame.size.width = Terminal.convertHeight(value: 25)
+            $0.frame.size.height = Terminal.convertHeight(value: 25)
+            $0.layer.cornerRadius = $0.frame.width / 2
+            $0.layer.borderColor = UIColor.appColor(.terminalBackground).cgColor
+            $0.layer.borderWidth = 3
+            $0.clipsToBounds = true
         }
         self.nameLabel.do {
             $0.text = "이름"
@@ -132,10 +141,8 @@ class ProfileModifyView: UIViewController {
     // MARK: Set Layout
     
     func layout() {
-        [profileImage, nameLabel, name, introductionLabel, introduction, completeButton]
+        [profileImage, imageModify, nameLabel, name, introductionLabel, introduction, completeButton]
             .forEach { self.view.addSubview($0) }
-        self.profileImage.addSubview(self.contentView)
-        self.contentView.addSubview(self.modifyLabel)
         
         self.profileImage.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -143,17 +150,14 @@ class ProfileModifyView: UIViewController {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 100)).isActive = true
         }
-        self.contentView.do {
+        self.imageModify.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: self.profileImage.centerXAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 35)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: profileImage.frame.width).isActive = true
-        }
-        self.modifyLabel.do {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-            $0.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.profileImage.bottomAnchor,
+                                       constant: -Terminal.convertHeight(value: 4)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.profileImage.trailingAnchor,
+                                         constant: -Terminal.convertHeight(value: 4)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 25)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 25)).isActive = true
         }
         self.nameLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -187,7 +191,7 @@ class ProfileModifyView: UIViewController {
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
         }
         
-        self.topAnchor = self.profileImage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+        self.topAnchor = self.profileImage.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10)
         self.topAnchor?.isActive = true
     }
     
@@ -198,7 +202,7 @@ class ProfileModifyView: UIViewController {
     @objc func keyboardWillHide(notification: NSNotification) {
         self.keyboardHandle(notification: notification, isAppear: false)
     }
-        
+    
     private func keyboardHandle(notification: NSNotification, isAppear: Bool) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
@@ -222,14 +226,19 @@ class ProfileModifyView: UIViewController {
     }
     
     @objc func didImageViewClicked() {
-        let alert =  UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
-        let camera =  UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
+        let alert = UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
+        let library = UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
+        let camera = UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
+        let remove = UIAlertAction(title: "삭제", style: .destructive) { _ in self.removeProfileImage() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)
         alert.addAction(camera)
+        if self.profileExistence {
+            alert.addAction(remove)
+        }
         alert.addAction(cancel)
+        
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             if let popoverController = alert.popoverPresentationController {
@@ -237,7 +246,6 @@ class ProfileModifyView: UIViewController {
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
                 popoverController.permittedArrowDirections = []
                 self.present(alert, animated: true, completion: nil)
-                
             }
         } else {
             self.present(alert, animated: true, completion: nil)
@@ -249,9 +257,14 @@ class ProfileModifyView: UIViewController {
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
     }
+    
     func openCamera() {
         picker.sourceType = .camera
         present(picker, animated: true, completion: nil)
+    }
+    
+    func removeProfileImage() {
+        self.profileImage.image = UIImage(named: "defaultProfile")
     }
     
     // MARK: - 프로필 수정 완료 버튼
@@ -300,9 +313,9 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
                 parent?.showToast(controller: parent!, message: "프로필 수정 완료", seconds: 1)
                 parent?.presenter?.viewDidLoad()
             }
-            
-            let rootParent = self.navigationController?.viewControllers[0] as? SetView
-            rootParent?.presenter?.viewDidLoad()
+            if let rootParent = self.navigationController?.viewControllers[0] as? SetView {
+                rootParent.presenter?.viewDidLoad()
+            }
         } else {
             hideLoading()
             showToast(controller: self, message: message, seconds: 1)
@@ -338,7 +351,7 @@ extension ProfileModifyView: ProfileModifyViewProtocol {
 extension ProfileModifyView: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             self.profileImage.image = image
         }
         dismiss(animated: true, completion: nil)
