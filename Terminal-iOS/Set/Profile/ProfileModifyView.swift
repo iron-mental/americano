@@ -259,6 +259,7 @@ class ProfileModifyView: UIViewController {
     
     func removeProfileImage() {
         self.profileImage.image = UIImage(named: "defaultProfile")
+        self.profile?.profileState = false
     }
     
     // MARK: - 프로필 수정 완료 버튼
