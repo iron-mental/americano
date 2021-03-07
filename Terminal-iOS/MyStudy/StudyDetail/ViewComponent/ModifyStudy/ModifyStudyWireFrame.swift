@@ -9,7 +9,9 @@
 import UIKit
 
 class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
-    static func createModifyStudyModule(study: StudyDetail, location: Location) -> UIViewController {
+    static func createModifyStudyModule(study: StudyDetail,
+                                        location: Location,
+                                        mainImage: UIImage?) -> UIViewController {
         let view = ModifyStudyView()
         let presenter: ModifyStudyPresenterProtocol & ModifyStudyInteractorOutputProtocol = ModifyStudyPresenter()
         let interactor: ModifyStudyInteractorInputProtocol & ModifyStudyRemoteDataManagerOutputProtocol = ModifyStudyInteractor()
