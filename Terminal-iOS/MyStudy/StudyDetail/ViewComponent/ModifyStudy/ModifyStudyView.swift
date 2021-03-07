@@ -10,7 +10,15 @@ import UIKit
 
 class ModifyStudyView: BaseEditableStudyDetailView {
     var presenter: ModifyStudyPresenterProtocol?
-    var initImage: UIImage?
+    var initImage: UIImage? {
+        didSet {
+            guard let _ = self.initImage else {
+                self.studyImageExistence = false
+                return
+            }
+            self.studyImageExistence = true
+        }
+    }
     var study: StudyDetail? {
         didSet {
             if let url = study?.image, url.isEmpty {
