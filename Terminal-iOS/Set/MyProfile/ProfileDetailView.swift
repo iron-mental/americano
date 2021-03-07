@@ -50,7 +50,10 @@ class ProfileDetailView: BaseProfileView {
         let profileImage = profile.profileImage.image
         let name = profile.name.text ?? "none"
         let introduction = profile.descript.text ?? "none"
-        let profile = Profile(profileImage: profileImage, nickname: name, introduction: introduction)
+        let profile = Profile(profileImage: profileImage,
+                              nickname: name,
+                              introduction: introduction,
+                              profileState: self.profileState!)
         presenter?.showProfileModify(profile: profile)
     }
     
