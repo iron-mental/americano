@@ -200,8 +200,8 @@ class StudyCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: self.date.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
         
         self.managerImage.do {

@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 import Firebase
+import FirebaseAnalytics
 import Kingfisher
 import SwiftKeychainWrapper
 
@@ -26,6 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // firebase 연동
         FirebaseApp.configure()
+        
+        if let userID = KeychainWrapper.standard.string(forKey: "userID") {
+            Crashlytics.crashlytics().setCustomValue(userID, forKey: "userID")
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterItemID: "\(userID)"
+                ])
+        }
         
         // Noti Request
         let center = UNUserNotificationCenter.current()

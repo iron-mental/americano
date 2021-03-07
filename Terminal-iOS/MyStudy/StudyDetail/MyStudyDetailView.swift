@@ -40,7 +40,6 @@ final class MyStudyDetailView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoading()
-        setPageControllerChild()
         attribute()
         layout()
     }
