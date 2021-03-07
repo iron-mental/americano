@@ -258,6 +258,12 @@ extension IntroView: IntroViewProtocol {
         }
     }
     
+    func completeSignUP() {
+        let view = ViewController(signUpState: true)
+        view.modalPresentationStyle = .fullScreen
+        present(view, animated: true, completion: nil)
+    }
+    
     func completeJoin() {
         let view = ViewController()
         view.modalPresentationStyle = .fullScreen
