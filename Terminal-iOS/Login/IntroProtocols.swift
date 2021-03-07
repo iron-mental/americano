@@ -18,6 +18,7 @@ protocol IntroViewProtocol: class {
         //success
     func presentNextView()
     func presentCompleteView()
+    func completeSignUP()
     func completeJoin()
     
         //false
