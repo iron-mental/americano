@@ -57,7 +57,7 @@ protocol ProfileModifyRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func authCheck(completion: @escaping () -> Void)
-    func retrieveImageModify(image: UIImage)
+    func retrieveImageModify(image: UIImage, profileExistence: Bool)
     func retrieveNicknameModify(profile: [String: String])
 }
 
