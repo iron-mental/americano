@@ -27,7 +27,11 @@ final class DelegateHostListEmptyView: BaseEmptyView {
         }
         self.guideLabel.do {
             guideLabelTopLayout?.isActive = false
-            $0.topAnchor.constraint(equalTo: self.iconImageView.bottomAnchor, constant: Terminal.convertHeight(value: 100)).isActive = true
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                $0.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: Terminal.convertHeight(value: 200)).isActive = true
+            } else {
+                $0.topAnchor.constraint(equalTo: self.iconImageView.bottomAnchor, constant: Terminal.convertHeight(value: 100)).isActive = true
+            }
         }
     }
 }
