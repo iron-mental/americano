@@ -58,7 +58,9 @@ protocol ModifyStudyRemoteDataManagerOutputProtocol: class {
 }
 
 protocol ModifyStudyWireFrameProtocol: class {
-    static func createModifyStudyModule(study: StudyDetail, location: Location) -> UIViewController
+    static func createModifyStudyModule(study: StudyDetail,
+                                        location: Location,
+                                        mainImage: UIImage?) -> UIViewController
     
     //PRESENTER -> WIREFRAME
     func goToSelectLocation(from view: ModifyStudyViewProtocol)

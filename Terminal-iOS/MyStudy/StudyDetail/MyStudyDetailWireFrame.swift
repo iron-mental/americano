@@ -46,14 +46,26 @@ final class MyStudyDetailWireFrame: MyStudyDetailWireFrameProtocol {
         }
     }
     
-    func goToEditStudy(study: StudyDetail, location: Location, parentView: MyStudyDetailViewProtocol) {
+    func goToEditStudy(
+        study: StudyDetail,
+        location: Location,
+        parentView: MyStudyDetailViewProtocol,
+        mainImage: UIImage?
+    ) {
         if let sourceView = parentView as? UIViewController {
-            let view = ModifyStudyWireFrame.createModifyStudyModule(study: study, location: location)
+            let view = ModifyStudyWireFrame.createModifyStudyModule(study: study,
+                                                                    location: location,
+                                                                    mainImage: mainImage)
             sourceView.navigationController?.pushViewController(view, animated: true)
         }
     }
     
-    func goToNoticeDetail(notice: Int, studyID: Int, title: String, parentView: MyStudyDetailViewProtocol) {
+    func goToNoticeDetail(
+        notice: Int,
+        studyID: Int,
+        title: String,
+        parentView: MyStudyDetailViewProtocol
+    ) {
         if let sourceView = parentView as? UIViewController {
             let view = NoticeDetailWireFrame.createNoticeDetailModule(notice: notice,
                                                                       studyID: studyID,

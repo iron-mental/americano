@@ -39,7 +39,7 @@ class BaseEditableStudyDetailView: UIViewController {
     var textViewTapFlag = false
     var standardContentHeight: CGFloat = 0.0
     var viewDidAppearFlag = true
-    
+    var studyImageExistence: Bool = false
     // MARK: viewDidLoad
     
     override func viewDidLoad() {
@@ -323,10 +323,14 @@ class BaseEditableStudyDetailView: UIViewController {
         let alert = UIAlertController(title: "대표 사진 설정", message: nil, preferredStyle: .actionSheet)
         let library = UIAlertAction(title: "사진앨범", style: .default) { _ in self.openLibrary() }
         let camera = UIAlertAction(title: "카메라", style: .default) { _ in self.openCamera() }
+        let remove = UIAlertAction(title: "삭제", style: .destructive) { _ in  self.removeImage() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)
         alert.addAction(camera)
+        if self.studyImageExistence {
+            alert.addAction(remove)
+        }
         alert.addAction(cancel)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -374,6 +378,11 @@ class BaseEditableStudyDetailView: UIViewController {
         }
     }
     
+    func removeImage() {
+        self.mainImageView.image = nil
+        self.studyImageExistence = false
+    }
+    
     func editableViewDidTap(textView: UIView, viewMinY: CGFloat, viewMaxY: CGFloat) {
         var parentView = UIView()
         if type(of: textView) == SNSInputUITextField.self {
@@ -419,6 +428,7 @@ extension BaseEditableStudyDetailView: UIImagePickerControllerDelegate & UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             self.mainImageView.image = image
+            self.studyImageExistence = true
         }
         dismiss(animated: true, completion: nil)
     }

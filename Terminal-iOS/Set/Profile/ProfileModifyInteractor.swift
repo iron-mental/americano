@@ -20,8 +20,8 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
         remoteDataManager?.authCheck {}
     }
     
-    func completeImageModify(image: UIImage) {
-        remoteDataManager?.retrieveImageModify(image: image)
+    func completeImageModify(image: UIImage, profileExistence: Bool) {
+        remoteDataManager?.retrieveImageModify(image: image, profileExistence: profileExistence)
         imageResult = false
     }
         

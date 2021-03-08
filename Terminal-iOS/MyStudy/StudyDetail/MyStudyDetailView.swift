@@ -159,7 +159,8 @@ final class MyStudyDetailView: UIViewController {
         if let studyDetail = vcArr[1] as? StudyDetailView,
            let targetStudy = studyDetail.studyInfo {
             let location = targetStudy.location
-            presenter?.editStudyButtonDidTap(study: targetStudy, location: location)
+            let mainImage = studyDetail.mainImageView.image ?? nil
+            presenter?.editStudyButtonDidTap(study: targetStudy, location: location, mainImage: mainImage)
         }
     }
     

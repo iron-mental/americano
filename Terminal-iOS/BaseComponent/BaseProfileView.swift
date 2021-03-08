@@ -28,8 +28,10 @@ class BaseProfileView: UIViewController {
     let email           = EmailView()
     let locationLabel   = UILabel()
     let location        = LocationView()
+    
     var projectData: [Project] = []
     var userInfo: UserInfo?
+    var profileState: Bool?
     
     // MARK: ViewDidLoad
     
@@ -216,10 +218,16 @@ extension BaseProfileView: BaseProfileViewProtocol {
         self.profile.name.text = userInfo.nickname
         self.profile.descript.text = userInfo.introduce ?? ""
         
-        let imageURL = userInfo.image ?? ""
-        self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
-                                              placeholder: UIImage(named: "defaultProfile"),
-                                              options: [.requestModifier(RequestToken.token())])
+        if let imageURL = userInfo.image {
+            self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
+                                                  placeholder: UIImage(named: "defaultProfile"),
+                                                  options: [.requestModifier(RequestToken.token())])
+            self.profileState = imageURL.isEmpty ? false : true
+        } else {
+            self.profile.profileImage.image = UIImage(named: "defaultProfile")
+            self.profileState = false
+        }
+        
         self.profile.attribute()
         /// 경력
         let careerTitle = userInfo.careerTitle ?? ""

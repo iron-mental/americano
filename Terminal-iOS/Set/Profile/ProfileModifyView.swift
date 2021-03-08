@@ -31,7 +31,7 @@ class ProfileModifyView: UIViewController {
     var contentHeight: CGFloat = 0
     var keyboardDuartion: Double = 0
     var topAnchor: NSLayoutConstraint?
-    var profileExistence: Bool = false
+    var profileExistence: Bool?
     
     // MARK: viewDidLoad
     
@@ -58,13 +58,7 @@ class ProfileModifyView: UIViewController {
             $0.delegate = self
         }
         self.profileImage.do {
-            if let image = self.profile?.profileImage {
-                $0.image = image
-                self.profileExistence = true
-            } else {
-                $0.image = UIImage(named: "defaultProfile")!
-                self.profileExistence = false
-            }
+            $0.image = self.profile?.profileImage
             
             let profileTapGesture = UITapGestureRecognizer(target: self,
                                                            action: #selector(didImageViewClicked))
@@ -234,7 +228,7 @@ class ProfileModifyView: UIViewController {
         
         alert.addAction(library)
         alert.addAction(camera)
-        if self.profileExistence {
+        if let state = self.profile?.profileState, state == true {
             alert.addAction(remove)
         }
         alert.addAction(cancel)
@@ -265,6 +259,8 @@ class ProfileModifyView: UIViewController {
     
     func removeProfileImage() {
         self.profileImage.image = UIImage(named: "defaultProfile")
+        self.profile?.profileState = false
+        self.profileExistence = false
     }
     
     // MARK: - 프로필 수정 완료 버튼
@@ -288,11 +284,20 @@ class ProfileModifyView: UIViewController {
         if nickname.whitespaceCheck() {
             self.showToast(controller: self, message: "이름은 공백이 포함되지 않습니다.", seconds: 0.5)
         } else {
-            let profile = Profile(profileImage: image, nickname: nickname, introduction: introduction)
+            let profile = Profile(profileImage: image,
+                                  nickname: nickname,
+                                  introduction: introduction,
+                                  profileState: self.profile!.profileState)
             showLoading()
             presenter?.completeModify(profile: profile)
+            
+            // 프로필 수정여부
             if self.profile?.profileImage != profile.profileImage {
-                presenter?.completeImageModify(image: image)
+                
+                // 프로필이 삭제되어 디폴트가 되었는지 혹은 변경된 것인지
+                if let profileExistence = self.profileExistence {
+                    presenter?.completeImageModify(image: image, profileExistence: profileExistence)
+                }
             }
         }
         
@@ -353,6 +358,7 @@ extension ProfileModifyView: UIImagePickerControllerDelegate & UINavigationContr
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             self.profileImage.image = image
+            self.profileExistence = true
         }
         dismiss(animated: true, completion: nil)
     }

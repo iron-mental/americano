@@ -47,10 +47,13 @@ class ProfileDetailView: BaseProfileView {
     // MARK: Profile modify action
     
     @objc func modifyProfile() {
-        let profileImage = profile.profileImage.image ?? nil
+        let profileImage = profile.profileImage.image
         let name = profile.name.text ?? "none"
         let introduction = profile.descript.text ?? "none"
-        let profile = Profile(profileImage: profileImage, nickname: name, introduction: introduction)
+        let profile = Profile(profileImage: profileImage,
+                              nickname: name,
+                              introduction: introduction,
+                              profileState: self.profileState!)
         presenter?.showProfileModify(profile: profile)
     }
     

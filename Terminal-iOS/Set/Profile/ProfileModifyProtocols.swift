@@ -31,7 +31,7 @@ protocol ProfileModifyPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    func completeImageModify(image: UIImage)
+    func completeImageModify(image: UIImage, profileExistence: Bool)
     func completeModify(profile: Profile)
 }
 
@@ -48,7 +48,7 @@ protocol ProfileModifyInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func viewDidLoad()
-    func completeImageModify(image: UIImage)
+    func completeImageModify(image: UIImage, profileExistence: Bool)
     func completeModify(profile: Profile)
 }
 
@@ -57,7 +57,7 @@ protocol ProfileModifyRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func authCheck(completion: @escaping () -> Void)
-    func retrieveImageModify(image: UIImage)
+    func retrieveImageModify(image: UIImage, profileExistence: Bool)
     func retrieveNicknameModify(profile: [String: String])
 }
 
