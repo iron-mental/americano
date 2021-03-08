@@ -17,7 +17,7 @@ class SetView: UIViewController {
     var sections: [String] = ["", "계정", "알림", "정보", ""]
     var account: [String] = ["이메일"]
     var noti: [String] = ["알림"]
-    var settingData: [Setting] = [Setting(title: "앱버전", status: "1.0.0"),
+    var settingData: [Setting] = [Setting(title: "앱버전"),
                                   Setting(title: "문의하기"),
                                   Setting(title: "이용약관"),
                                   Setting(title: "개인정보 취급방침"),
@@ -90,6 +90,9 @@ class SetView: UIViewController {
             $0.layer.cornerRadius = 10
             $0.titleLabel?.font = UIFont.notosansMedium(size: 14)
             $0.addTarget(self, action: #selector(emailAuth), for: .touchUpInside)
+        }
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            settingData[0].status = version
         }
     }
     
