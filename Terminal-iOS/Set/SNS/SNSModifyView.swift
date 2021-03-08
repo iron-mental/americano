@@ -120,7 +120,20 @@ extension SNSModifyView: SNSModifyViewProtocol {
         LoadingRainbowCat.hide(caller: self)
     }
     
-    func showError(message: String) {
-        showToast(controller: self, message: message, seconds: 1)
+    func showError(label: String?, message: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            if let label = label {
+                switch label {
+                case "sns_github":
+                    self.snsModifyView.firstTextFeield.warningEffect()
+                case "sns_linkedin":
+                    self.snsModifyView.secondTextField.warningEffect()
+                case "sns_web":
+                    self.snsModifyView.thirdTextField.warningEffect()
+                default:
+                    break
+                }
+            }
+        }
     }
 }
