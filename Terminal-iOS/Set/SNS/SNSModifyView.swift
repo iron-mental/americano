@@ -118,8 +118,6 @@ class SNSModifyView: UIViewController {
             showLoading()
             self.presenter?.completeModify(github: github, linkedin: linkedin, web: web)
         }
-        
-        print("씨다", linkedin.linkedInCheck())
     }
 }
 
