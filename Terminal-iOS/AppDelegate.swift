@@ -74,7 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         case .studyUpdate,
              .studyHostDelegate,
-             .chat:
+             .chat,
+             .applyAllowed:
             studyDetailView.viewState = .StudyDetail
             goView = studyDetailView
             
@@ -91,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let notificationListView = NotificationWireFrame.createModule()
             goView = notificationListView
             
-        case .testPush, .undefined, .applyAllowed: break
+        case .testPush, .undefined: break
             
         }
         if let tabVC = self.window?.rootViewController as? UITabBarController,
