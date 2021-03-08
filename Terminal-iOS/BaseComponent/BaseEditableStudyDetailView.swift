@@ -370,8 +370,10 @@ class BaseEditableStudyDetailView: UIViewController {
                     }
                     return
                 }
-                self.picker.sourceType = .camera
-                self.present(self.picker, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.picker.sourceType = .camera
+                    self.present(self.picker, animated: true, completion: nil)
+                }
             }
         @unknown default:
             self.showToast(controller: self, message: "카메라 사용 옵션을 허용해주세요.", seconds: 1)

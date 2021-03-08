@@ -53,9 +53,9 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
         }
         window.replaceRootViewController(main, animated: true, completion: nil)
     }
-    
+
     func jumpToAppStore() {
-        if let url = URL(string: "itms-apps://itunes.apple.com/app/[@id]"), UIApplication.shared.canOpenURL(url) {
+        if let url = URL(string: "https://apps.apple.com/us/app/id1557178596"), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {

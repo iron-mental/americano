@@ -8,8 +8,8 @@
 
 import Foundation
 
-enum VersionResultType: String {
-    case notRequired = "0"
-    case Recommended = "1"
-    case Required = "2"
+enum VersionResultType: Int {
+    case notRequired = 0
+    case Recommended = 1
+    case Required = 2
 }
