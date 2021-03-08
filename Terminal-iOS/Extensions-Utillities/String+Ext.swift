@@ -29,26 +29,43 @@ extension String {
     }
     
     func linkedInCheck() -> Bool {
-        return self.contains("https://linkedin.com/") || self == ""
+        return removeWWW(url: self).contains("https://linkedin.com/") || self == ""
     }
     
     func webCheck() -> Bool {
-        return self.contains("https://") || self == "" || self.contains("www.")
+        return removeWWW(url: self).contains("https://") || self == ""
     }
     
     func appstoreCheck() -> Bool {
-        return self.contains("https://apps.apple.com/") || self == ""
+        return removeWWW(url: self).contains("https://apps.apple.com/") || self == ""
     }
     
     func playstoreCheck() -> Bool {
-        return self.contains("https://play.google.com/") || self == ""
+        return removeWWW(url: self).contains("https://play.google.com/") || self == ""
     }
     
     func notionCheck() -> Bool {
-        return self.contains("https://www.notion.so/") || self == ""
+        return removeWWW(url: self).contains("https://notion.so/") || self == ""
     }
     
     func evernoteCheck() -> Bool {
-        return self.contains("https://evernote.com/") || self == ""
+        return removeWWW(url: self).contains("https://evernote.com/") || self == ""
+    }
+
+    func removeWWW(url: String) -> String {
+        var targetURL = url
+        if !url.contains("https://") {
+            targetURL = "https://" + targetURL
+        }
+        if !targetURL.isEmpty && targetURL.count > 11 {
+            let startIndex = targetURL.index(targetURL.startIndex, offsetBy: 8)
+            let endIndex = targetURL.index(targetURL.startIndex, offsetBy: 11)
+            let range = targetURL[startIndex...endIndex]
+            if range == "www." {
+                targetURL.removeSubrange(startIndex...endIndex)
+                return targetURL
+            }
+        }
+        return targetURL
     }
 }
