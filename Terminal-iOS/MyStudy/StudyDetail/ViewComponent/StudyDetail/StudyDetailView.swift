@@ -106,6 +106,7 @@ final class StudyDetailView: UIViewController {
             $0.layer.masksToBounds = true
             guard let imageURL = studyInfo?.image else { return }
             if imageURL.isEmpty {
+                $0.image = nil
                 $0.backgroundColor = .systemGray5
                 $0.defaultStudyImage()
             } else {
