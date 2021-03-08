@@ -23,9 +23,10 @@ class SNSModifyView: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        snsValidCheck()
     }
 
-    func attribute() {
+    private func attribute() {
         self.do {
             $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
@@ -54,7 +55,7 @@ class SNSModifyView: UIViewController {
         }
     }
     
-    func layout() {
+    private func layout() {
         self.view.addSubview(snsModifyView)
         self.view.addSubview(completeButton)
         
@@ -72,6 +73,30 @@ class SNSModifyView: UIViewController {
             $0.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 50).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        }
+    }
+    
+    private func snsValidCheck() {
+        self.snsModifyView.secondTextField.debounce(delay: 1) { [weak self] _ in
+            guard let text = self?.snsModifyView.secondTextField.text else { return }
+            if text.linkedInCheck() || text.isEmpty {
+                self!.snsModifyView.secondTextField.layer.borderWidth = 0.1
+                self!.snsModifyView.secondTextField.layer.borderColor = UIColor.gray.cgColor
+            } else {
+                self!.snsModifyView.secondTextField.layer.borderWidth = 0.4
+                self!.snsModifyView.secondTextField.layer.borderColor = UIColor.systemRed.cgColor
+            }
+        }
+        
+        self.snsModifyView.thirdTextField.debounce(delay: 1) { [weak self] _ in
+            guard let text = self?.snsModifyView.thirdTextField.text else { return }
+            if text.webCheck() || text.isEmpty {
+                self!.snsModifyView.thirdTextField.layer.borderWidth = 0.1
+                self!.snsModifyView.thirdTextField.layer.borderColor = UIColor.gray.cgColor
+            } else {
+                self!.snsModifyView.thirdTextField.layer.borderWidth = 0.4
+                self!.snsModifyView.thirdTextField.layer.borderColor = UIColor.systemRed.cgColor
+            }
         }
     }
     
