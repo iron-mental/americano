@@ -72,12 +72,14 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
                 guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
                 castedMyStudyDetailView.applyState = true
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+                
             case .newNotice,
                  .updatedNotice:
                 let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
                 guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
                 castedMyStudyDetailView.viewState = .Notice
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+                
             case .studyUpdate,
                  .studyHostDelegate,
                  .chat,
@@ -86,8 +88,14 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
                 guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
                 castedMyStudyDetailView.viewState = .StudyDetail
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
-            case .testPush, .undefined, .studyDelete, .applyRejected: break
-            
+                
+            case .applyRejected,
+                 .studyDelete:
+                let notificationListView = NotificationWireFrame.createModule()
+                view.navigationController?.pushViewController(notificationListView, animated: true)
+                
+            case .testPush, .undefined:
+                break
             }
         }
     }
