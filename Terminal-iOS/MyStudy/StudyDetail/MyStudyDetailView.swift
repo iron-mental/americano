@@ -353,7 +353,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
                     if applyState == nil {
                         self.hideLoading()
                     } else {
-                        applyState! ? presenter?.showApplyUserList(studyID: studyID!) : nil
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { [self] in
+                            applyState! ? presenter?.showApplyUserList(studyID: studyID!) : nil
+                        }
                     }
                 }
             }

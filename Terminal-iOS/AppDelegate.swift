@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             Crashlytics.crashlytics().setCustomValue(userID, forKey: "userID")
             Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                 AnalyticsParameterItemID: "\(userID)"
-                ])
+            ])
         }
         
         // Noti Request
@@ -65,16 +65,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         var goView: UIViewController?
         let userInfo =          response.notification.request.content.userInfo
         guard let eventValue    = userInfo["pushEvent"] as? String else { return }
-        guard let studyID       = userInfo["study_id"] as? Int else { return }
+        guard let studyID       = userInfo["study_id"] as? String else { return }
         guard let event         = AlarmType(rawValue: eventValue) else { return }
-        
-        guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
+        guard let id            = Int(studyID) else { return }
+        guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "") as? MyStudyDetailView else { return }
         
         switch event {
         
         case .studyUpdate,
              .studyHostDelegate,
-             .chat:
+             .chat,
+             .applyAllowed:
             studyDetailView.viewState = .StudyDetail
             goView = studyDetailView
             
@@ -91,11 +92,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let notificationListView = NotificationWireFrame.createModule()
             goView = notificationListView
             
-        case .testPush, .undefined, .applyAllowed: break
+        case .testPush, .undefined: break
             
         }
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
+            navVC.rootViewController?.dismiss(animated: false, completion: nil)
             guard let targetView = goView else { return }
             var targetParentView: UIViewController?
             navVC.viewControllers.forEach {
@@ -114,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         } else {
             window = UIWindow()
-            let launchView = LaunchWireFrame.createLaunchModule(studyID: studyID, pushEvent: event)
+            let launchView = LaunchWireFrame.createLaunchModule(studyID: id, pushEvent: event)
             window?.rootViewController = launchView
             window?.makeKeyAndVisible()
         }
