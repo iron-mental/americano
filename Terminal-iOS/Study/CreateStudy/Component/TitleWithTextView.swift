@@ -66,7 +66,6 @@ final class TitleWithTextView: UIView {
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 15)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 15)).isActive = true
         }
-        
         categoryLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: self.titleLabel.topAnchor).isActive = true

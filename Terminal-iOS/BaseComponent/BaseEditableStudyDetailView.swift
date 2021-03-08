@@ -159,6 +159,7 @@ class BaseEditableStudyDetailView: UIViewController {
         }
         studyIntroduceView.do {
             $0.backgroundColor = .appColor(.testColor)
+            $0.categoryLabel.textColor = .appColor(.mainColor)
             $0.categoryLabel.text = selectedCategory
             $0.textView.inputAccessoryView = accessoryCompleteButton
         }

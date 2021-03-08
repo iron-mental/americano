@@ -57,6 +57,7 @@ final class StudyDetailView: UIViewController {
     var joinButton = UIButton()
     let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
     let appearance = UINavigationBarAppearance()
+    var categoryLabel = UILabel()
     weak var parentView: MyStudyDetailViewProtocol?
     lazy var studyPlanView = TitleWithContentView()
     lazy var timeView = TitleWithContentView()
@@ -164,6 +165,13 @@ final class StudyDetailView: UIViewController {
             }
         }
         
+        categoryLabel.do {
+            $0.textColor = .appColor(.mainColor)
+            $0.text = studyInfo?.category ?? ""
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.dynamicFont(fontSize: 14, weight: .regular)
+        }
+        
         memberView.do {
             $0.collectionView.delegate = self
             $0.collectionView.dataSource = self
@@ -222,7 +230,7 @@ final class StudyDetailView: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, joinButton, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, locationView, mapView, joinProgressCat].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, joinButton, snsIconsView, studyIntroduceView, categoryLabel, memberView, studyPlanView, timeView, locationView, mapView, joinProgressCat].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -265,6 +273,11 @@ final class StudyDetailView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyIntroduceView.label.isHidden == false ? studyIntroduceView.label.bottomAnchor : studyIntroduceView.label.bottomAnchor ).isActive = true
+        }
+        categoryLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: studyIntroduceView.title.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: studyIntroduceView.trailingAnchor).isActive = true
         }
         memberView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
