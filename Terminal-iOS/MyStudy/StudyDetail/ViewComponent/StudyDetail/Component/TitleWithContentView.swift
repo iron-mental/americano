@@ -37,6 +37,7 @@ class TitleWithContentView: UIView {
             $0.text = contentText[0]
         }
         label.do {
+            $0.numberOfLines = 0
             $0.text = contentText[1]
             $0.setMargins(margin: 10)
         }
