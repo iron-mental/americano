@@ -111,9 +111,9 @@ class SNSModifyView: UIViewController {
             || web.whitespaceCheck() {
             self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
         } else if !linkedin.linkedInCheck() {
-            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
+            self.showError(label: "sns_linkedin", message: "SNS 형식이 맞지 않습니다.")
         } else if !web.webCheck() {
-            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
+            self.showError(label: "sns_web", message: "SNS 형식이 맞지 않습니다.")
         } else {
             showLoading()
             self.presenter?.completeModify(github: github, linkedin: linkedin, web: web)
