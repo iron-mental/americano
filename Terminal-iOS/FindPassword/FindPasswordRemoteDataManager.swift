@@ -27,13 +27,21 @@ final class FindPasswordRemoteDataManager: FindPasswordRemoteDataManagerInputPro
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
-                            self.interactor?.resetResponse(result: result)
-                        } catch {
-                            print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            let meesage = TerminalNetworkManager.shared.sessionTaskErrorMessage
+                            self.interactor?.sessionTaskError(message: meesage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                                    self.interactor?.resetResponse(result: result)
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
+                            }
                         }
                     }
                 }
