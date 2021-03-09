@@ -1,0 +1,20 @@
+function_body_length : 500
+type_body_length : 500
+file_length:
+    warning: 1000
+    
+disabled_rules:
+- force_try
+- line_length
+- trailing_whitespace
+- vertical_whitespace
+- identifier_name
+- force_cast
+- orphaned_doc_comment
+- cyclomatic_complexity
+- weak_delegate
+- multiple_closures_with_trailing_closure
+
+included:
+excluded:
+- Pods

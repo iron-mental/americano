@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CoreUserInfo" representedClassName="CoreUserInfo" syncable="YES">
+        <attribute name="careerContents" optional="YES" attributeType="String"/>
+        <attribute name="careerTitle" optional="YES" attributeType="String"/>
+        <attribute name="createdAt" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="emailVerified" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="introduce" optional="YES" attributeType="String"/>
+        <attribute name="nickname" optional="YES" attributeType="String"/>
+        <attribute name="sido" optional="YES" attributeType="String"/>
+        <attribute name="sigungu" optional="YES" attributeType="String"/>
+        <attribute name="snsGithub" optional="YES" attributeType="String"/>
+        <attribute name="snsLinkedin" optional="YES" attributeType="String"/>
+        <attribute name="snsWeb" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="CoreUserInfo" positionX="45" positionY="99" width="128" height="253"/>
+    </elements>
+</model>
