@@ -38,7 +38,7 @@ class SetView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if let noticell = settingList.cellForRow(at: [2, 0]) as? NotiCell {
+        if let noticell = settingList.cellForRow(at: [1, 0]) as? NotiCell {
             noticell.attribute()
         }
     }
@@ -210,12 +210,13 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 11).isActive = true
         
         if section == 1 {
-            label.text = sections[1]
-        } else if section == 2 {
             label.text = sections[2]
-        } else if section == 3 {
+        } else if section == 2 {
             label.text = sections[3]
         }
+//        else if section == 3 {
+//            label.text = sections[3]
+//        }
         label.font = UIFont.boldSystemFont(ofSize: 18)
         return headerView
     }
@@ -229,13 +230,16 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return account.count
-        case 2:
+//            return account.count
             return noti.count
-        case 3:
+        case 2:
+//            return noti.count
             return settingData.count
-        case 4:
+        case 3:
+//            return settingData.count
             return userManage.count
+//        case 4:
+//            return userManage.count
         default:
             return 0
         }
@@ -249,12 +253,12 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         }
         
         // 알림
-        if indexPath.section == 2 && indexPath.row == 0 {
+        if indexPath.section == 1 && indexPath.row == 0 {
             presenter?.notiCellDidTap()
         }
         
         // 정보
-        if indexPath.section == 3 {
+        if indexPath.section == 2 {
             if indexPath.row == 1 {
                 presenter?.goToInquiryWeb()
             } else if indexPath.row == 2 {
@@ -268,12 +272,12 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
         }
         
         // 로그아웃
-        if indexPath.section == 4 && indexPath.row == 0 {
+        if indexPath.section == 3 && indexPath.row == 0 {
             presenter?.loggedOut()
         }
         
         // 회원탈퇴
-        if indexPath.section == 4 && indexPath.row == 1 {
+        if indexPath.section == 3 && indexPath.row == 1 {
             presenter?.userWithdrawal()
         }
     }
@@ -288,22 +292,24 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
             }
             profileCell.accessoryType = .disclosureIndicator
             return profileCell
-        } else if indexPath.section == 1 {
-            let accountCell = settingList.dequeueReusableCell(withIdentifier: AccountCell.accountCellId,
-                                                              for: indexPath) as! AccountCell
-            accountCell.title.text = account[indexPath.row]
-            if indexPath.row == 0 {
-                accountCell.accessoryView = accountButton
-            }
-            return accountCell
-        } else if indexPath.section == 2 {
+        }
+//        else if indexPath.section == 1 {
+//            let accountCell = settingList.dequeueReusableCell(withIdentifier: AccountCell.accountCellId,
+//                                                              for: indexPath) as! AccountCell
+//            accountCell.title.text = account[indexPath.row]
+//            if indexPath.row == 0 {
+//                accountCell.accessoryView = accountButton
+//            }
+//            return accountCell
+//        }
+        else if indexPath.section == 1 {
             let notiCell = settingList.dequeueReusableCell(withIdentifier: NotiCell.notiCellId,
                                                            for: indexPath) as! NotiCell
             notiCell.attribute()
             notiCell.title.text = noti[0]
             notiCell.accessoryType = .disclosureIndicator
             return notiCell
-        } else if indexPath.section == 3 {
+        } else if indexPath.section == 2 {
             let defaultCell = settingList.dequeueReusableCell(withIdentifier: DefaultCell.defalutCellId,
                                                               for: indexPath) as! DefaultCell
             let data = settingData[indexPath.row]
@@ -312,7 +318,7 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
                 defaultCell.accessoryType = .disclosureIndicator
             }
             return defaultCell
-        } else if indexPath.section == 4 {
+        } else if indexPath.section == 3 {
             let userManageCell = settingList.dequeueReusableCell(withIdentifier: UserManageCell.userManageCellId,
                                                                  for: indexPath) as! UserManageCell
             let data = userManage[indexPath.row]

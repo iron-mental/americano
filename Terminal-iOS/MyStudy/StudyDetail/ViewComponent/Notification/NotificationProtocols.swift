@@ -59,7 +59,7 @@ protocol NotificationRemoteDataManagerInputProtocol: class {
     
     //INTERACTOR -> REMOTEDATAMANAGER
     func retrieveAlert()
-    func alertGotConfirmed(userID:Int, alertID: Int)
+    func alertGotConfirmed(userID: Int, alertID: Int)
 }
 
 protocol NotificationRemoteDataManagerOutputProtocol: class {

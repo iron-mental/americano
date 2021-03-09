@@ -79,10 +79,14 @@ final class StudyDetailView: UIViewController {
                 $0.title = studyTitle
             }
         }
+        appearance.do {
+            $0.configureWithTransparentBackground()
+            $0.backgroundColor = .appColor(.terminalBackground)
+        }
         navigationController?.do {
             $0.navigationBar.standardAppearance = appearance
-            $0.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
-            
+            $0.navigationBar.standardAppearance.configureWithTransparentBackground()
+            $0.navigationBar.backgroundColor = .appColor(.terminalBackground)
         }
         navigationItem.do {
             $0.rightBarButtonItems = [moreButton]
@@ -93,6 +97,7 @@ final class StudyDetailView: UIViewController {
             $0.target = self
             $0.action = #selector(moreButtonAction)
         }
+        
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -237,7 +242,7 @@ final class StudyDetailView: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
         tempBackgroundView.do {

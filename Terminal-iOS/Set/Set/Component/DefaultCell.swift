@@ -14,7 +14,7 @@ class DefaultCell: UITableViewCell {
     
     lazy var title = UILabel()
     lazy var rightLabel = UILabel()
-    
+    var rightLabelTrailingConstraint = NSLayoutConstraint()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = UIColor.appColor(.cellBackground)
@@ -57,11 +57,11 @@ class DefaultCell: UITableViewCell {
             $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
         }
-        
+        rightLabelTrailingConstraint = rightLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15)
         rightLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+            rightLabelTrailingConstraint.isActive = true
         }
     }
     
