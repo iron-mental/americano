@@ -86,6 +86,20 @@ class BaseProfileView: UIViewController {
             $0.textColor = .white
             $0.dynamicFont(fontSize: 15, weight: .regular)
         }
+        self.email.do {
+            $0.accountButton.do {
+                guard let emailVerified = userInfo?.emailVerified else { return }
+                if emailVerified {
+                    $0.setTitle("인증완료", for: .normal)
+                    $0.setTitleColor(.appColor(.mainColor), for: .normal)
+                    $0.backgroundColor = .appColor(.eamilAuthComplete)
+                } else {
+                    $0.setTitle("미인증", for: .normal)
+                    $0.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
+                    $0.backgroundColor = .appColor(.emailAuthRequire)
+                }
+            }
+        }
         
         self.locationLabel.do {
             $0.text = "활동지역"
@@ -211,7 +225,7 @@ extension BaseProfileView: BaseProfileViewProtocol {
     func showUserInfo(userInfo: UserInfo) {
         var snsList: [String: String] = [:]
         self.userInfo = userInfo
-        
+        self.attribute()
         // MARK: Set User Info
       
         /// 프로필

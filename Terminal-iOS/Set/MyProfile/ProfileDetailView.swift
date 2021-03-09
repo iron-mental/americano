@@ -26,6 +26,7 @@ class ProfileDetailView: BaseProfileView {
     
     override func attribute() {
         super.attribute()
+        self.email.accountButton.isHidden = true
         self.profile.modify.addTarget(self, action: #selector(modifyProfile), for: .touchUpInside)
         self.career.modify.addTarget(self, action: #selector(modifyCareer), for: .touchUpInside)
         self.sns.modify.addTarget(self, action: #selector(modifySNS), for: .touchUpInside)
