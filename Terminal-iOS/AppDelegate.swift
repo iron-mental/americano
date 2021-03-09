@@ -63,7 +63,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
         var goView: UIViewController?
-        let userInfo =          response.notification.request.content.userInfo
+        let userInfo = response.notification.request.content.userInfo
+        if let alertID = userInfo["alert_id"] as? Int,
+           let userID = KeychainWrapper.standard.string(forKey: "userID") {
+            guard let id = Int(userID) else { return }
+            TerminalNetworkManager
+                .shared
+                .session
+                .request(TerminalRouter.alertConfirm(userID: id, alertID: alertID))
+                .validate()
+                .responseData { response in
+                    print(response.result)
+                }
+        }
+        
+        
         guard let eventValue    = userInfo["pushEvent"] as? String else { return }
         guard let studyID       = userInfo["study_id"] as? String else { return }
         guard let event         = AlarmType(rawValue: eventValue) else { return }
