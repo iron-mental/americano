@@ -63,7 +63,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
         var goView: UIViewController?
-        let userInfo =          response.notification.request.content.userInfo
+        let userInfo = response.notification.request.content.userInfo
+        if let alertID = userInfo["alert_id"] as? Int,
+           let userID = KeychainWrapper.standard.string(forKey: "userID") {
+            guard let id = Int(userID) else { return }
+            TerminalNetworkManager
+                .shared
+                .session
+                .request(TerminalRouter.alertConfirm(userID: id, alertID: alertID))
+                .validate()
+                .responseData { response in
+                    print(response.result)
+                }
+        }
         guard let eventValue    = userInfo["pushEvent"] as? String else { return }
         guard let studyID       = userInfo["study_id"] as? String else { return }
         guard let event         = AlarmType(rawValue: eventValue) else { return }
@@ -141,7 +153,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
          error conditions that could cause the creation of the store to fail.
          */
         let container = NSPersistentContainer(name: "TerminalCoreData")
-        container.loadPersistentStores(completionHandler: { storeDescription, error in
+        container.loadPersistentStores(completionHandler: { _, error in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.

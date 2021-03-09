@@ -11,6 +11,7 @@ import UIKit
 class EmailView: UIView {
     let email = UILabel()
     let modify = UIButton()
+    let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 25))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,10 +31,16 @@ class EmailView: UIView {
             $0.setTitle("수정", for: .normal)
             $0.setTitleColor(.appColor(.mainColor), for: .normal)
         }
+        self.accountButton.do {
+            $0.layer.cornerRadius = 7
+            $0.layer.masksToBounds = true
+            $0.titleLabel?.dynamicFont(fontSize: 11, weight: .regular)
+        }
     }
     func layout() {
         self.addSubview(email)
         self.addSubview(modify)
+        self.addSubview(accountButton)
         
         self.email.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +54,13 @@ class EmailView: UIView {
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -5).isActive = true
             $0.widthAnchor.constraint(equalToConstant: 50).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        }
+        self.accountButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
     }
     

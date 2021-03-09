@@ -23,6 +23,8 @@ extension DispatchTimeInterval {
             result = Double(value)*0.000000001
         case .never:
             result = nil
+        @unknown default:
+            break
         }
 
         return result
