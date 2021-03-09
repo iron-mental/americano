@@ -44,6 +44,8 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             if let detailAddress = location.detailAddress {
                 if !detailAddress.isEmpty {
                     params["location_detail"] = detailAddress
+                } else {
+                    params["location_detail"] = ""
                 }
             }
             if let placeName =  location.placeName {

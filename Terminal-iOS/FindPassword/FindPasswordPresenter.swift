@@ -20,6 +20,11 @@ final class FindPasswordPresenter: FindPasswordPresenterProtocol {
 }
 
 extension FindPasswordPresenter: FindPasswordInteractorOutputProtocol {
+    func sessionTaskError(message: String) {
+        self.view?.hideLoading()
+        self.view?.showError(message: message)
+    }
+    
     func resetResponse(result: Bool, message: String) {
         self.view?.hideLoading()
         self.view?.showResult(result: result, message: message)
