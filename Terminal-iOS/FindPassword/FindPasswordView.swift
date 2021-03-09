@@ -123,6 +123,10 @@ extension FindPasswordView: FindPasswordViewProtocol {
             self.showToast(controller: self, message: message, seconds: 1)
         }
     }
+    
+    func showError(message: String) {
+        self.showToast(controller: self, message: message, seconds: 1)
+    }
 }
 
 extension FindPasswordView: UITextFieldDelegate {
