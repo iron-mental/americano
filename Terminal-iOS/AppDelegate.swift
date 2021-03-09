@@ -76,8 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     print(response.result)
                 }
         }
-        
-        
         guard let eventValue    = userInfo["pushEvent"] as? String else { return }
         guard let studyID       = userInfo["study_id"] as? String else { return }
         guard let event         = AlarmType(rawValue: eventValue) else { return }

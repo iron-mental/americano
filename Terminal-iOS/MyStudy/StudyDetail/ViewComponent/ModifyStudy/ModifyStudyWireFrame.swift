@@ -31,7 +31,7 @@ class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
         
         let postLocation = StudyDetailLocationPost(address: location.addressName,
                                                    lat: Double(location.latitude)!,
-                                                   lng: Double(location.latitude)!,
+                                                   lng: Double(location.longitude)!,
                                                    detailAddress: location.locationDetail ?? "",
                                                    placeName: location.placeName ?? "",
                                                    category: "",
