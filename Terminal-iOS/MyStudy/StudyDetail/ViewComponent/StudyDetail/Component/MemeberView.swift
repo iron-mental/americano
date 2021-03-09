@@ -25,7 +25,6 @@ class MemeberView: UIView {
             $0.dynamicFont(fontSize: 16, weight: .bold)
         }
         totalMember.do {
-            $0.text = "7 / 10"
             $0.textColor = .gray
             $0.dynamicFont(fontSize: 14, weight: .regular)
         }
