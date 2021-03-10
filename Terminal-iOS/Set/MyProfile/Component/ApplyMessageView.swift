@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ApplyMessageView: UIView {
+final class ApplyMessageView: UIView {
     let message = UILabel()
     
     override init(frame: CGRect) {
