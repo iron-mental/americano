@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
 
-class ProfileModifyView: UIViewController {
+final class ProfileModifyView: UIViewController {
     deinit { self.keyboardRemoveObserver() }
     
     // MARK: Init Property

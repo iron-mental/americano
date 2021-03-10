@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
+final class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
     weak var presenter: ProfileModifyInteractorOutputProtocol?
     var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol?
     

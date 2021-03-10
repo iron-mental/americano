@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import SwiftKeychainWrapper
 
-class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
+final class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProtocol {
     weak var remoteRequestHandler: ProfileModifyRemoteDataManagerOutputProtocol?
     
     func authCheck(completion: @escaping () -> Void) {
