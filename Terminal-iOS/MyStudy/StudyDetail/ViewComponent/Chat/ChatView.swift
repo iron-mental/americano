@@ -18,7 +18,7 @@ struct ChatMessage {
       var date: String
     }
 
-class TempChatView: UIViewController {
+class ChatView: UIViewController {
     var presenter: ChatPresenterProtocol?
     var chatTableView = UITableView()
     var chatArray: [ChatMessage] = [
@@ -73,13 +73,13 @@ class TempChatView: UIViewController {
     }
 }
 
-extension TempChatView: ChatViewProtocol {
+extension ChatView: ChatViewProtocol {
     func showMessage(message: String) {
     }
     
     
 }
-extension TempChatView: UITableViewDelegate, UITableViewDataSource {
+extension ChatView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatArray.count + 1
     }
@@ -100,7 +100,7 @@ extension TempChatView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension TempChatView: UITextFieldDelegate {
+extension ChatView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let inputChatMessage = textField.text else { return true }
         presenter?.emitButtonDidTap(message: inputChatMessage)
