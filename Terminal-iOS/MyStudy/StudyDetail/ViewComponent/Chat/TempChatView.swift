@@ -84,13 +84,12 @@ extension TempChatView: UITableViewDelegate, UITableViewDataSource {
         return chatArray.count + 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let inputCell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id, for: indexPath) as! ChatInputTableViewCell
-        let outputCell = tableView.dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id, for: indexPath) as! ChatOutputTableViewCell
-        
-        outputCell.textInput.delegate = self
         if indexPath.row == chatArray.count {
+            let outputCell = tableView.dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id, for: indexPath) as! ChatOutputTableViewCell
+            outputCell.textInput.delegate = self
             return outputCell
         } else {
+            let inputCell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id, for: indexPath) as! ChatInputTableViewCell
             inputCell.chatLabel.text =  "[\(chatArray[indexPath.row].date)] \(chatArray[indexPath.row].nickname) $ \(chatArray[indexPath.row].message)"
             return inputCell
         }

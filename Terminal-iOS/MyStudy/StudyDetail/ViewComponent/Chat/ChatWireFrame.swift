@@ -11,7 +11,7 @@ import UIKit
 class ChatWireFrame: ChatWireFrameProtocol {
     weak var presenter: ChatPresenterProtocol?
     
-    static func createChatModule() -> UIViewController {
+    static func createChatModule(studyID: Int) -> UIViewController {
         let view = TempChatView()
         let presenter = ChatPresenter()
         let interactor = ChatInteractor()
