@@ -1,5 +1,5 @@
 # Terminal
-> 개발자들의 스터디 모임 플랫폼 iOS앱
+> 🧑‍💻👩‍💻개발자들의 스터디 모임 플랫폼 iOS 어플리케이션
 
 ## 의존성
 
@@ -19,11 +19,16 @@
 ## 개발환경
 
 - iOS 13+
-- Swift5
-- Xcode12.4
+- Swift 5
+- Xcode 12.4
 
 ## 구조
 
 - VIPER
 - UIKit
-- 코드기반 UI
+- Code Based User Interface
+
+## 사용기술
+- Oauth 2.0
+- APNS (Apple Push Notification service)
+- CoreData
