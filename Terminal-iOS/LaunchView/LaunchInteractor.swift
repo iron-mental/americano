@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class LaunchInteractor: LaunchInteractorInputProtocol {
+final class LaunchInteractor: LaunchInteractorInputProtocol {
     weak var presenter: LaunchInteractorOutputProtocol?
     var remoteDataManager: LaunchRemoteDataManagerInputProtocol?
     

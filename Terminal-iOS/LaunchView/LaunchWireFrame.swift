@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LaunchWireFrame: LaunchWireFrameProtocol {
+final class LaunchWireFrame: LaunchWireFrameProtocol {
     var studyID: Int?
     var pushEvent: AlarmType?
     
