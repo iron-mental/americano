@@ -12,7 +12,7 @@ protocol CellSubclassDelegate: class {
     func buttonTapped(cell: ProjectCell)
 }
 
-class ProjectCell: UITableViewCell {
+final class ProjectCell: UITableViewCell {
     static let projectCellID = "ProjectCellID"
     
     lazy var remove = UIButton()
