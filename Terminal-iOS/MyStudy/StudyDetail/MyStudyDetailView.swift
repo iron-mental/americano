@@ -26,7 +26,7 @@ final class MyStudyDetailView: UIViewController {
     var studyTitle: String?
     var pageBeforeIndex: Int = 0
     var vcArr: [UIViewController] = []
-    let state: [String] = ["공지사항", "스터디 정보"]
+    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
     var authority: StudyDetailViewState = .member
@@ -116,9 +116,16 @@ final class MyStudyDetailView: UIViewController {
                                                   completion: nil)
             self.pageBeforeIndex = 1
             self.selectedUnderLine.transform
-                = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count), y: 0)
+                = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(pageBeforeIndex), y: 0)
         case .Chat:
-            break
+            self.tapSege.selectedSegmentIndex = 2
+            self.childPageView.setViewControllers([self.vcArr[2]],
+                                                  direction: .forward,
+                                                  animated: true,
+                                                  completion: nil)
+            self.pageBeforeIndex = 2
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: (self.view.frame.width / CGFloat(state.count)) * CGFloat(pageBeforeIndex), y: 0)
         }
     }
     
@@ -200,7 +207,8 @@ final class MyStudyDetailView: UIViewController {
                       StudyDetailWireFrame.createStudyDetail(parent: self,
                                                              studyID: studyID!,
                                                              state: .member,
-                                                             studyTitle: studyTitle ?? "")]
+                                                             studyTitle: studyTitle ?? ""),
+                      ChatWireFrame.createChatModule()]
         
         if let noticeView = vcArr[0] as? NoticeViewProtocol {
             noticeView.viewLoad()
