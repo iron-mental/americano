@@ -17,7 +17,7 @@ final class SNSModifyView: UIViewController {
     
     let snsModifyView = ProfileSNSModifyView()
     let completeButton = UIButton()
-    var accessoryCompleteButton = UIButton()
+    let accessoryCompleteButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
