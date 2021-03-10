@@ -8,15 +8,15 @@
 
 import UIKit
 
-class SNSModifyView: UIViewController {
+final class SNSModifyView: UIViewController {
     var presenter: SNSModifyPresenterProtocol?
     
     var github: String = ""
     var linkedin: String = ""
     var web: String = ""
     
-    lazy var snsModifyView = ProfileSNSModifyView()
-    lazy var completeButton = UIButton()
+    let snsModifyView = ProfileSNSModifyView()
+    let completeButton = UIButton()
     var accessoryCompleteButton = UIButton()
     
     override func viewDidLoad() {
