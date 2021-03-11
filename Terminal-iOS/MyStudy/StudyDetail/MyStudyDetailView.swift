@@ -208,7 +208,7 @@ final class MyStudyDetailView: UIViewController {
                                                              studyID: studyID!,
                                                              state: .member,
                                                              studyTitle: studyTitle ?? ""),
-                      ChatWireFrame.createChatModule()]
+                      ChatWireFrame.createChatModule(studyID: studyID!)]
         
         if let noticeView = vcArr[0] as? NoticeViewProtocol {
             noticeView.viewLoad()

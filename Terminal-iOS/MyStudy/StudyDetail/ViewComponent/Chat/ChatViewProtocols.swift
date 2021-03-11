@@ -19,6 +19,7 @@ protocol ChatInteractorProtocol: class {
     var presenter: ChatPresenterProtocol? { get set }
     var remoteDataManager: ChatRemoteDataManagerProtocol? { get set }
     var localDataManager: ChatLocalDataManagerProtocol? { get set }
+    var studyID: Int? { get set }
     
     //PRESENTER -> INTERACTOR
     func connectSocket()
@@ -26,7 +27,7 @@ protocol ChatInteractorProtocol: class {
     func disconnectSocket()
     
     //remoteDataManager -> Interactor
-    func receiveMessage(message: String)
+    func receiveMessage(message: Chat)
 }
 
 protocol ChatPresenterProtocol: class {
@@ -45,9 +46,10 @@ protocol ChatPresenterProtocol: class {
 
 protocol ChatRemoteDataManagerProtocol: class {
     var interactor: ChatInteractorProtocol? { get set }
-    func connectSocket()
+    func socketConnect(studyID: Int)
     func emit(message: String)
     func disconnectSocket()
+    
 }
 
 protocol ChatLocalDataManagerProtocol: class {

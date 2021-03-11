@@ -12,30 +12,32 @@ import SwiftKeychainWrapper
 
 class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     weak var interactor: ChatInteractorProtocol?
-    
-    lazy var manager = SocketManager(socketURL: URL(string: "http://3.35.154.27:3000")!, 
-                                     config: [.log(false),
-                                              .compress,
-                                              .forceWebsockets(true),
-                                              .connectParams(["token": KeychainWrapper.standard.string(forKey: "accessToken") as Any, "study_id": 231])])
     var chatSocket: SocketIOClient!
-    
-    init() {
-        
-    }
+    var manager: SocketManager?
     
     func emit(message: String) {
         chatSocket.emit("chat", message)
     }
     
-    func connectSocket() {
-        chatSocket = manager.socket(forNamespace: "/terminal")
+    func socketConnect(studyID: Int) {
+        guard let baseURL = URL(string: API.COMMON_BASE_URL + "terminal"),
+              let accessToken = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
+        manager = SocketManager(socketURL: baseURL,
+                                config: [.log(true),
+                                         .compress,
+                                         .secure(true),
+                                         .forceWebsockets(true),
+                                         .connectParams(["token": accessToken,
+                                                         "study_id": studyID])])
+        chatSocket = manager!.defaultSocket
         chatSocket.connect()
-        
         chatSocket.on("message") { array, ack in
-            self.interactor?.receiveMessage(message: "\(array)")
+            print(array)
+            let chat = Chat(studyID: 1, nickname: "S", message: "S", date: "S")
+            self.interactor?.receiveMessage(message: chat)
         }
     }
+    
     func disconnectSocket() {
         chatSocket.disconnect()
     }

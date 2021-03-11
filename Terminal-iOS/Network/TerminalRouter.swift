@@ -81,7 +81,7 @@ enum TerminalRouter: URLRequestConvertible {
     
     var baseURL: URL {
         if endPoint == "check-version" {
-            return URL(string: API.Common_Base_URL)!
+            return URL(string: API.COMMON_BASE_URL)!
         } else {
             return URL(string: API.BASE_URL)!
         }

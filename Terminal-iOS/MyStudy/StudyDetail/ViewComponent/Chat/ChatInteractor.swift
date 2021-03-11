@@ -12,13 +12,15 @@ class ChatInteractor: ChatInteractorProtocol {
     weak var presenter: ChatPresenterProtocol?
     var remoteDataManager: ChatRemoteDataManagerProtocol?
     var localDataManager: ChatLocalDataManagerProtocol?
+    var studyID: Int?
     var lastLocalChat: [String] = []
     var receiveFromSocketChat: [String] = []
     var mergeChatFlag = false
     var lastTimeStamp: Int?
     
     func connectSocket() {
-        remoteDataManager?.connectSocket()
+//        if let localChat = 코어데이터 가지고온 후 localChat에 넣어주기
+        remoteDataManager?.socketConnect(studyID: studyID!)
     }
     func emit(message: String) {
         remoteDataManager?.emit(message: message)
@@ -30,9 +32,9 @@ class ChatInteractor: ChatInteractorProtocol {
         //코어 데이터로부터 과거에 저장한 채팅을 가지고옴
         //        lastLocalChat = CoreDataManager.get
     }
-    func receiveMessage(message: String) {
+    func receiveMessage(message: Chat) {
         //소켓을 통해 들어온 메세지는 그저 이곳에 저장만
-        receiveFromSocketChat.append(message)
+//        receiveFromSocketChat.append(message)
         arrangeChat()
     }
     func receiveLastChat(lastRemoteChat: [String]) {

@@ -12,7 +12,7 @@ class ChatWireFrame: ChatWireFrameProtocol {
     weak var presenter: ChatPresenterProtocol?
     
     static func createChatModule(studyID: Int) -> UIViewController {
-        let view = TempChatView()
+        let view = ChatView()
         let presenter = ChatPresenter()
         let interactor = ChatInteractor()
         let remoteDataManager = ChatRemoteDataManager()
@@ -28,6 +28,7 @@ class ChatWireFrame: ChatWireFrameProtocol {
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
         interactor.localDataManager = localDataManager
+        interactor.studyID = studyID
         
         wireFrame.presenter = presenter
         

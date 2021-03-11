@@ -10,13 +10,38 @@ import UIKit
 import SocketIO
 import SwiftyJSON
 
+struct ChatMessage {
+      var roomNumber: Int
+      var userID: Int
+      var nickname: String
+      var message: String
+      var date: String
+    }
+
 class ChatView: UIViewController {
     var presenter: ChatPresenterProtocol?
     var chatTableView = UITableView()
-    var chatArray: [Chat] = []
+    var chatArray: [ChatMessage] = [
+        ChatMessage(roomNumber: 1,
+                    userID: 1,
+                    nickname: "강철",
+                    message: "채팅이 이루어지는 모습",
+                    date: "오후: 06: 16"),
+        ChatMessage(roomNumber: 1,
+                    userID: 1,
+                    nickname: "상원",
+                    message: "ubuntu font를 사용",
+                    date: "오후: 08: 25"),
+        ChatMessage(roomNumber: 1,
+                    userID: 1,
+                    nickname: "재인",
+                    message: "조금 더 손을 봐야함",
+                    date: "오후: 08: 26")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         presenter?.viewDidLoad()
         attribute()
         layout()
