@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
+final class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     weak var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
     
     // MARK: 최신순 리스트 검색시 초기 배열값
