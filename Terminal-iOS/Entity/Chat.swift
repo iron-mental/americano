@@ -12,9 +12,9 @@ public class Chat: NSObject, Codable, NSCoding  {
     let studyID: Int
     let nickname: String
     let message: String
-    let date: String
+    let date: Int
     
-    init(studyID: Int, nickname: String, message: String, date: String) {
+    init(studyID: Int, nickname: String, message: String, date: Int) {
         self.studyID = studyID
         self.nickname = nickname
         self.message = message
@@ -36,7 +36,7 @@ public class Chat: NSObject, Codable, NSCoding  {
         let studyID = coder.decodeObject(forKey: CodingKeys.studyID.rawValue) as? Int ?? 0
         let nickname = coder.decodeObject(forKey: CodingKeys.nickname.rawValue) as? String ?? ""
         let message = coder.decodeObject(forKey: CodingKeys.message.rawValue) as? String ?? ""
-        let date = coder.decodeObject(forKey: CodingKeys.date.rawValue) as? String ?? ""
+        let date = coder.decodeObject(forKey: CodingKeys.date.rawValue) as? Int ?? 0
         
         self.init(studyID: studyID,
                   nickname: nickname,
