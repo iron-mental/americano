@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyApplyStudyInfoView: UIViewController {
+final class MyApplyStudyInfoView: UIViewController {
     var applyStudy: ApplyStudy?
     var presenter: MyApplyStudyInfoPresenterProtocol?
     
