@@ -13,7 +13,7 @@ protocol selectLocationDelegate: class {
     func passLocation(location: StudyDetailLocationPost)
 }
 
-class SelectLocationView: UIViewController {
+final class SelectLocationView: UIViewController {
     deinit { self.keyboardRemoveObserver() }
     var presenter: SelectLocationPresenterProtocol?
     

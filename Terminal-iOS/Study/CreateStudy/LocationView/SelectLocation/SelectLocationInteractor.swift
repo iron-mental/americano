@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectLocationInteractor: SelectLocationInteractorProtocol {
+final class SelectLocationInteractor: SelectLocationInteractorProtocol {
     weak var presenter: SelectLocationPresenterProtocol?
     var remoteDataManager: SelectLocationRemoteDataManagerProtocol?
     var localDataManager: SelectLocationLocalDataManagerProtocol?
