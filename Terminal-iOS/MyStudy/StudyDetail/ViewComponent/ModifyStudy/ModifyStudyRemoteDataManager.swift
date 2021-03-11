@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
+final class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
     weak var interactor: ModifyStudyRemoteDataManagerOutputProtocol?
     
     func putStudyInfo(studyID: Int, study: StudyDetailPost) {
