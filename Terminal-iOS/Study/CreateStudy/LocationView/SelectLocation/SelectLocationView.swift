@@ -27,7 +27,6 @@ class SelectLocationView: UIViewController {
     var isMoving = false
     weak var delegate: selectLocationDelegate?
     var keyboardHeight: CGFloat = 0.0
-    var mapViewTopAnchor: NSLayoutConstraint?
     var mapViewBottomAnchor: NSLayoutConstraint?
     var bottomAnchor: NSLayoutConstraint?
     
@@ -44,7 +43,9 @@ class SelectLocationView: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         bottomView.detailAddress.becomeFirstResponder()
-        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)), zoomTo: 17))
+        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat),
+                                                               lng: Double(location!.lng)),
+                                           zoomTo: 17))
         location?.lng = mapView.cameraPosition.target.lng
         location?.lat = mapView.cameraPosition.target.lat
     }
