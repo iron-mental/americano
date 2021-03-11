@@ -35,7 +35,21 @@ final class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol 
                         print(error.localizedDescription)
                     }
                 case .failure(let err):
-                    print(err)
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.remoteRequestHandler?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
+                                    self.remoteRequestHandler?.onStudiesLatestRetrieved(result: result)
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
+                            }
+                        }
+                    }
                 }
             }
     }
