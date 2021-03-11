@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchLocationView: UIViewController {
+final class SearchLocationView: UIViewController {
     var presenter: SearchLocationPresenterProtocol?
     var parentView: UIViewController?
     var closeButton = UIButton()

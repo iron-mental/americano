@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchLocationInteractor: SearchLocationInteractorProtocol {
+final class SearchLocationInteractor: SearchLocationInteractorProtocol {
     weak var presenter: SearchLocationPresenterProtocol?
     var remoteDataManager: SearchLocationRemoteDataManagerProtocol?
     
