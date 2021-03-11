@@ -84,6 +84,8 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
             for study in resultArr where !study.isPaging! {
                 studyArr.append(study)
             }
+        } else {
+            presenter?.sessionTaskError(message: "요청하는 도중 에러가 발생했습니다.")
         }
         
         presenter?.didRetrieveLatestStudies(studies: studyArr)
@@ -108,6 +110,8 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
             for data in resultArr where !data.isPaging! {
                 studyArr.append(data)
             }
+        } else {
+            presenter?.sessionTaskError(message: "요청하는 도중 에러가 발생했습니다.")
         }
         presenter?.didRetrieveLengthStudies(studies: studyArr)
     }
