@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
+final class IntroRemoteDataManager: IntroRemoteDataManagerProtocol {
     weak var interactor: IntroInteractorProtocol?
     
     // MARK: 회원가입 이메일 유효성 검사

@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
 
-class DelegateHostTableViewCell: UITableViewCell {
+final class DelegateHostTableViewCell: UITableViewCell {
     static let id = "DelegateHostTableViewCell"
     var profileImage = UIImageView()
     var nickname = UILabel()

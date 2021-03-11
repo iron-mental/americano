@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-class HomeView: UIViewController {
+final class HomeView: UIViewController {
     var loginButton = UIButton()
     var signUpButton = UIButton()
     var findPWButton = ResizableButton()

@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class SetInteractor: SetInteractortInputProtocol {
+final class SetInteractor: SetInteractortInputProtocol {
     weak var presenter: SetInteractorOutputProtocol?
     var localDataManager: SetLocalDataManagerInputProtocol?
     var remoteDataManager: SetRemoteDataManagerInputProtocol?

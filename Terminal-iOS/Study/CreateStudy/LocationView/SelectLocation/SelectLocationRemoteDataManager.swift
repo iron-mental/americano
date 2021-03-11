@@ -11,7 +11,7 @@ import NMapsMap
 import Alamofire
 import SwiftyJSON
 
-class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
+final class SelectLocationRemoteDataManager: SelectLocationRemoteDataManagerProtocol {
     weak var interactor: SelectLocationInteractorProtocol?
     
     func getAddressInfoOnce(lat: Double,

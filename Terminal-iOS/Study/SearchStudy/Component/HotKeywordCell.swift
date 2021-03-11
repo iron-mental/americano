@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HotKeywordCell: UICollectionViewCell {
+final class HotKeywordCell: UICollectionViewCell {
     static let cellId = "HotKeywordCellId"
     let keyword = UIButton()
     

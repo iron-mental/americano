@@ -12,8 +12,8 @@ import Then
 class StudyCategoryView: UIViewController {
     var presenter: StudyCategoryPresenterProtocol?
     var categoryList: [Category] = []
-    lazy var searchStudyBtn = UIBarButtonItem()
-    lazy var createStudyBtn = UIBarButtonItem()
+    let searchStudyBtn = UIBarButtonItem()
+    let createStudyBtn = UIBarButtonItem()
     let appearance = UINavigationBarAppearance()
     let categoryCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -27,7 +27,7 @@ class StudyCategoryView: UIViewController {
         layout()
         presenter?.viewDidLoad()
     }
-
+    
     func attirbute() {
         appearance.configureWithTransparentBackground()
         
@@ -60,14 +60,14 @@ class StudyCategoryView: UIViewController {
     
     func layout() {
         view.addSubview(categoryCollectionView)
-        
         categoryCollectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                    constant: 20).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                            constant: Terminal.convertWidth(value: 20)).isActive = true
+                                        constant: Terminal.convertWidth(value: 20)).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                             constant: -(Terminal.convertWidth(value: 20))).isActive = true
+                                         constant: -(Terminal.convertWidth(value: 20))).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         }
     }

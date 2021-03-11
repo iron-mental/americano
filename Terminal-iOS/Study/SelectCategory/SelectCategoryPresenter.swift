@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectCategoryPresenter: SelectCategoryPresenterProtocol {
+final class SelectCategoryPresenter: SelectCategoryPresenterProtocol {
     weak var view: SelectCategoryViewProtocol?
     var wireFrame: SelectCategoryWireFrameProtocol?
     

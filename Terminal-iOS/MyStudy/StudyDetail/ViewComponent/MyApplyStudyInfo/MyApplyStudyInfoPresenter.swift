@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyApplyStudyInfoPresenter: MyApplyStudyInfoPresenterProtocol {
+final class MyApplyStudyInfoPresenter: MyApplyStudyInfoPresenterProtocol {
     weak var view: MyApplyStudyInfoViewProtocol?
     var wireFrame: MyApplyStudyInfoWireFrameProtocol?
     var interactor: MyApplyStudyInfoInteractorInputProtocol?

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
+final class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
     weak var interactor: LaunchRemoteDataManagerOutputProtocol?
     
     func getVersionCheck(version: String) {

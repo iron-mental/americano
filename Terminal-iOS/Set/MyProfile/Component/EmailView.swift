@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmailView: UIView {
+final class EmailView: UIView {
     let email = UILabel()
     let modify = UIButton()
     let accountButton = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 25))

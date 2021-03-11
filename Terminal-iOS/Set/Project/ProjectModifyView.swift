@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectModifyView: UIViewController, CellSubclassDelegate {
+final class ProjectModifyView: UIViewController, CellSubclassDelegate {
     deinit { self.keyboardRemoveObserver() }
     
     var presenter: ProjectModifyPresenterProtocol?

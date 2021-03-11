@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
+final class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     weak var presenter: ProfileDetailInteractorOutputProtocol?
     var localDataManager: ProfileDetailLocalDataManagerInputProtocol?
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol?

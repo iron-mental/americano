@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationCell: UITableViewCell {
+final class NotificationCell: UITableViewCell {
     static let cellID = "NotificationCell"
     
     let iconLabel = UILabel()

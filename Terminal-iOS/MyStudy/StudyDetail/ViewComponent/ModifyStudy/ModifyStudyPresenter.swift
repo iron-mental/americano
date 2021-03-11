@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
+final class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
     weak var view: ModifyStudyViewProtocol?
     var interactor: ModifyStudyInteractorInputProtocol?
     var wireFrame: ModifyStudyWireFrameProtocol?
