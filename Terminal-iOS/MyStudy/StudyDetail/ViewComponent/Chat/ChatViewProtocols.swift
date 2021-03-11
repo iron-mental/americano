@@ -12,6 +12,8 @@ protocol ChatViewProtocol: UIViewController {
     var presenter: ChatPresenterProtocol? { get set }
     
     //PRESENTER -> VIEW
+    func showLastChat(lastChat: [Chat])
+    func showSocketChat(socketChat: [Chat])
     func showMessage(message: String)
 }
 
@@ -25,9 +27,11 @@ protocol ChatInteractorProtocol: class {
     func connectSocket()
     func emit(message: String)
     func disconnectSocket()
+    func mergeChatFromSocket()
     
     //remoteDataManager -> Interactor
     func receiveMessage(message: Chat)
+    func receiveLastChat(lastRemoteChat: [Chat])
 }
 
 protocol ChatPresenterProtocol: class {
@@ -37,11 +41,14 @@ protocol ChatPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func viewDidLoad()
+    func viewRoadLastChat()
     func emitButtonDidTap(message: String)
     func viewWillDisappear()
     
     //INTERACTOR -> PRESENTER
     func showReceiveMessage(message: String)
+    func getLastChatResult(lastChat: [Chat])
+    func arrangedChatFromChat(chat: [Chat])
 }
 
 protocol ChatRemoteDataManagerProtocol: class {
@@ -49,7 +56,7 @@ protocol ChatRemoteDataManagerProtocol: class {
     func socketConnect(studyID: Int)
     func emit(message: String)
     func disconnectSocket()
-    
+    func getRemoteChat()
 }
 
 protocol ChatLocalDataManagerProtocol: class {
