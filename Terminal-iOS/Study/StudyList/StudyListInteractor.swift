@@ -122,6 +122,8 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
         if result.result {
             guard let studyList = result.data else { return }
             presenter?.didRetrieveLatestStudies(studies: studyList)
+        } else {
+            presenter?.sessionTaskError(message: "요청하는 도중 에러가 발생했습니다.")
         }
     }
     
@@ -129,6 +131,8 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
         if result.result {
             guard let studyList = result.data else { return }
             presenter?.didRetrieveLengthStudies(studies: studyList)
+        } else {
+            presenter?.sessionTaskError(message: "요청하는 도중 에러가 발생했습니다.")
         }
     }
     
