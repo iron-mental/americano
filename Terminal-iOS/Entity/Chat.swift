@@ -33,7 +33,7 @@ public class Chat: NSObject, Codable, NSCoding  {
     }
     
     public required convenience init?(coder: NSCoder) {
-        let studyID = coder.decodeObject(forKey: CodingKeys.studyID.rawValue) as! Int
+        let studyID = coder.decodeObject(forKey: CodingKeys.studyID.rawValue) as? Int ?? 0
         let nickname = coder.decodeObject(forKey: CodingKeys.nickname.rawValue) as? String ?? ""
         let message = coder.decodeObject(forKey: CodingKeys.message.rawValue) as? String ?? ""
         let date = coder.decodeObject(forKey: CodingKeys.date.rawValue) as? String ?? ""

@@ -29,6 +29,7 @@ class ChatInteractor: ChatInteractorProtocol {
                         date: "testDate")
         CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: [test])
         remoteDataManager?.emit(message: message)
+//        CoreDataManager.shared.getCurrentChatInfo(studyID: studyID!)
     }
     func disconnectSocket() {
         remoteDataManager?.disconnectSocket()

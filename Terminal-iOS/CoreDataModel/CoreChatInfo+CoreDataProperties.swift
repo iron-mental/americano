@@ -20,3 +20,7 @@ extension CoreChatInfo {
     @NSManaged public var chatList: [Chat]?
 
 }
+
+extension CoreChatInfo: Identifiable {
+
+}
