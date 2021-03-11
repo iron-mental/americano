@@ -11,7 +11,7 @@ import SwiftKeychainWrapper
 import Then
 import Kingfisher
 
-class StudyCell: UITableViewCell {
+final class StudyCell: UITableViewCell {
     static let cellId = "StudyCellID"
     
     let mainTitle = UILabel()

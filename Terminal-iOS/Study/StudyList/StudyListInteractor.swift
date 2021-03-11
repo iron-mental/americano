@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StudyListInteractor: StudyListInteractorInputProtocol {
+final class StudyListInteractor: StudyListInteractorInputProtocol {
     weak var presenter: StudyListInteractorOutputProtocol?
     var localDataManager: StudyListLocalDataManagerInputProtocol?
     var remoteDataManager: StudyListRemoteDataManagerInputProtocol?

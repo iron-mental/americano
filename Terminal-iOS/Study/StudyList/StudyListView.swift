@@ -9,7 +9,7 @@
 import UIKit
 import Then
 
-class StudyListView: UIViewController {
+final class StudyListView: UIViewController {
     var category: String?
     let tableView = UITableView()
     let aligmentView = UIView()
