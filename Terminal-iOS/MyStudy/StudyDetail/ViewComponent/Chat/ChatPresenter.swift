@@ -16,13 +16,22 @@ class ChatPresenter: ChatPresenterProtocol {
     func viewDidLoad() {
         interactor?.connectSocket()
     }
+    func viewRoadLastChat() {
+        interactor?.mergeChatFromSocket()
+    }
     func emitButtonDidTap(message: String) {
         interactor?.emit(message: message)
     }
     func viewWillDisappear() {
         interactor?.disconnectSocket()
     }
+    func getLastChatResult(lastChat: [Chat]) {
+        view?.showLastChat(lastChat: lastChat)
+    }
     func showReceiveMessage(message: String) {
         view?.showMessage(message: message)
+    }
+    func arrangedChatFromChat(chat: [Chat]) {
+        view?.showSocketChat(socketChat: chat)
     }
 }

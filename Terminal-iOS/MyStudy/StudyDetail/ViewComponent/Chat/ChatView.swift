@@ -13,7 +13,7 @@ import SwiftyJSON
 class ChatView: UIViewController {
     var presenter: ChatPresenterProtocol?
     var chatTableView = UITableView()
-    var chatArray: [Chat] = []
+    var chatList: [Chat] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,23 +49,32 @@ class ChatView: UIViewController {
 }
 
 extension ChatView: ChatViewProtocol {
-    func showMessage(message: String) {
+    func showLastChat(lastChat: [Chat]) {
+        chatList + lastChat
+        chatTableView.reloadData()
+        presenter?.viewRoadLastChat()
+    }
+    func showSocketChat(socketChat: [Chat]) {
+        chatList + socketChat
+        chatTableView.reloadData()
     }
     
-    
+    func showMessage(message: String) {
+        
+    }
 }
 extension ChatView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatArray.count + 1
+        return chatList.count + 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == chatArray.count {
+        if indexPath.row == chatList.count {
             let outputCell = tableView.dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id, for: indexPath) as! ChatOutputTableViewCell
             outputCell.textInput.delegate = self
             return outputCell
         } else {
             let inputCell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id, for: indexPath) as! ChatInputTableViewCell
-            inputCell.chatLabel.text =  "[\(chatArray[indexPath.row].date)] \(chatArray[indexPath.row].nickname) $ \(chatArray[indexPath.row].message)"
+            inputCell.chatLabel.text =  "[\(chatList[indexPath.row].date)] \(chatList[indexPath.row].nickname) $ \(chatList[indexPath.row].message)"
             return inputCell
         }
         

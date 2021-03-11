@@ -32,12 +32,18 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
         chatSocket = manager!.defaultSocket
         chatSocket.connect()
         chatSocket.on("message") { array, ack in
-            let chat = Chat(studyID: 1, nickname: "S", message: "S", date: "S")
+            let chat = Chat(studyID: 1, nickname: "S", message: "S", date: 0)
             self.interactor?.receiveMessage(message: chat)
         }
+//        connect 이벤트에서 getRemoteChat() 호출
     }
     
     func disconnectSocket() {
-        chatSocket.disconnect()
+//        chatSocket.disconnect()
+    }
+    
+    func getRemoteChat() {
+//        getChat API 콜 후
+        interactor?.receiveLastChat(lastRemoteChat: [])
     }
 }
