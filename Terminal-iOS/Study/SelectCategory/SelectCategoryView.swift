@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectCategoryView: UIViewController {
+final class SelectCategoryView: UIViewController {
     var presenter: SelectCategoryPresenterProtocol?
     var categoryList: [Category] = []
     let scrollView = UIScrollView()
