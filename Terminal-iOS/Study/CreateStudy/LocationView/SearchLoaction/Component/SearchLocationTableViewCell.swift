@@ -21,6 +21,12 @@ class SearchLocationTableViewCell: UITableViewCell {
         layout()
     }
     
+    func setData(data: StudyDetailLocationPost) {
+        self.detailAddress.text = data.address
+        self.title.text = data.placeName
+        self.category.text = data.category
+    }
+    
     func attribute() {
         self.do {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 72)).isActive = true

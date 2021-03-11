@@ -137,14 +137,15 @@ extension SearchLocationView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchLocationTableViewCell.identifier, for: indexPath) as! SearchLocationTableViewCell
-        cell.detailAddress.text = searchResultList[indexPath.row].address
-        cell.title.text = searchResultList[indexPath.row].placeName
-        cell.category.text = searchResultList[indexPath.row].category
+        let data = searchResultList[indexPath.row]
+        cell.setData(data: data)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.didSelectedItem(item: searchResultList[indexPath.row], view: self, parentView: parentView!)
+        presenter?.didSelectedItem(item: searchResultList[indexPath.row],
+                                   view: self,
+                                   parentView: parentView!)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
