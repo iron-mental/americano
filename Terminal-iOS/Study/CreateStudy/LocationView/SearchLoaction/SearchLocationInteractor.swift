@@ -13,7 +13,7 @@ final class SearchLocationInteractor: SearchLocationInteractorProtocol {
     var remoteDataManager: SearchLocationRemoteDataManagerProtocol?
     
     func searchKeyWord(text: String) {
-        remoteDataManager?.getSearchResultByKeyword(text: text, completionHandler: { [self] (result, list)in
+        remoteDataManager?.getSearchResultByKeyword(text: text, completionHandler: { [self] (result, list) in
             if result {
                 presenter?.searchResult(list: list)
             } else {
