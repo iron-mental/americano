@@ -20,9 +20,14 @@ class ChatInteractor: ChatInteractorProtocol {
     
     func connectSocket() {
 //        if let localChat = 코어데이터 가지고온 후 localChat에 넣어주기
-        remoteDataManager?.socketConnect(studyID: studyID!)
+//        remoteDataManager?.socketConnect(studyID: studyID!)
     }
     func emit(message: String) {
+        let test = Chat(studyID: studyID!,
+                        nickname: "재인",
+                        message: message,
+                        date: "testDate")
+        CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: [test])
         remoteDataManager?.emit(message: message)
     }
     func disconnectSocket() {
@@ -40,7 +45,7 @@ class ChatInteractor: ChatInteractorProtocol {
     func receiveLastChat(lastRemoteChat: [String]) {
         //리모트로부터 과거에 저장된 채팅을 가지고옴
         //합쳐주고
-        let wholeLastChat = lastLocalChat + lastRemoteChat
+        _ = lastLocalChat + lastRemoteChat
         //프레젠터로 넘겨주고
         //        presenter.getLastChatResult(lastChat: wholeLastChat)
         //기준이 될 라스트 스탬프 할당 해준뒤

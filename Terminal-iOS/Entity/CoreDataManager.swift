@@ -40,6 +40,17 @@ class CoreDataManager {
         }
     }
     
+    func saveChatInfo(studyID: Int, chatList: [Chat]) {
+        let coreChatInfo = CoreChatInfo(context: context)
+        coreChatInfo.studyID = Int64(studyID)
+        coreChatInfo.chatList = chatList
+        do {
+            try context.save()
+        } catch {
+            print("실패다 임마")
+        }
+    }
+    
     func putUserInfo(userInfo: UserInfo) {
         var updatingUserInfo: CoreUserInfo
         do {

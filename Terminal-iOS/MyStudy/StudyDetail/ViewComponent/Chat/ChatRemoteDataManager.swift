@@ -16,7 +16,7 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     var manager: SocketManager?
     
     func emit(message: String) {
-        chatSocket.emit("chat", message)
+//        chatSocket.emit("chat", message)
     }
     
     func socketConnect(studyID: Int) {
@@ -32,7 +32,6 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
         chatSocket = manager!.defaultSocket
         chatSocket.connect()
         chatSocket.on("message") { array, ack in
-            print(array)
             let chat = Chat(studyID: 1, nickname: "S", message: "S", date: "S")
             self.interactor?.receiveMessage(message: chat)
         }

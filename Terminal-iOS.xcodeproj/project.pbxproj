@@ -182,6 +182,8 @@
 		CC1BE03E2510EBBC00F88313 /* CreateStudyPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */; };
 		CC1BE0402510EBD500F88313 /* CreateStudyInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */; };
 		CC1C764325F9265C002ADA7A /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C764225F9265C002ADA7A /* Chat.swift */; };
+		CC1C76FE25FA0D56002ADA7A /* CoreChatInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C76FC25FA0D56002ADA7A /* CoreChatInfo+CoreDataClass.swift */; };
+		CC1C76FF25FA0D56002ADA7A /* CoreChatInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1C76FD25FA0D56002ADA7A /* CoreChatInfo+CoreDataProperties.swift */; };
 		CC21A7952559504600E31F77 /* IntroLocalDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC21A7942559504600E31F77 /* IntroLocalDataManager.swift */; };
 		CC26AD58251B27B3006B11E9 /* LocationUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD57251B27B3006B11E9 /* LocationUIView.swift */; };
 		CC26AD5B251B2E04006B11E9 /* TimeUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */; };
@@ -600,6 +602,8 @@
 		CC1BE03D2510EBBC00F88313 /* CreateStudyPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyPresenter.swift; sourceTree = "<group>"; };
 		CC1BE03F2510EBD500F88313 /* CreateStudyInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStudyInteractor.swift; sourceTree = "<group>"; };
 		CC1C764225F9265C002ADA7A /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		CC1C76FC25FA0D56002ADA7A /* CoreChatInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataClass.swift"; path = "/Users/jeongjaein/Desktop/Terminal-iOS/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		CC1C76FD25FA0D56002ADA7A /* CoreChatInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataProperties.swift"; path = "/Users/jeongjaein/Desktop/Terminal-iOS/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		CC21A7942559504600E31F77 /* IntroLocalDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroLocalDataManager.swift; sourceTree = "<group>"; };
 		CC26AD57251B27B3006B11E9 /* LocationUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUIView.swift; sourceTree = "<group>"; };
 		CC26AD5A251B2E04006B11E9 /* TimeUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUIView.swift; sourceTree = "<group>"; };
@@ -1664,6 +1668,8 @@
 			children = (
 				CCBBEF332583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift */,
 				CCBBEF342583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift */,
+				CC1C76FC25FA0D56002ADA7A /* CoreChatInfo+CoreDataClass.swift */,
+				CC1C76FD25FA0D56002ADA7A /* CoreChatInfo+CoreDataProperties.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -2286,6 +2292,8 @@
 				CCD51C77256D29BC00D41771 /* MyStudyDetailInteractor.swift in Sources */,
 				A5031EB32574F5DE0009AD77 /* UserInfoPut.swift in Sources */,
 				CCCF2A90251732B50077B75C /* TitleWithTextView.swift in Sources */,
+				CC1C76FF25FA0D56002ADA7A /* CoreChatInfo+CoreDataProperties.swift in Sources */,
+				CC1C76FE25FA0D56002ADA7A /* CoreChatInfo+CoreDataClass.swift in Sources */,
 				CCE4E51D25A57A6D00DEFC3C /* TerminalAlertMessage.swift in Sources */,
 				CC6F1CBD251A155700511016 /* SNSInputUIView.swift in Sources */,
 				A5D5AE572573CE1B003BB277 /* Authorization.swift in Sources */,
