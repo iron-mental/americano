@@ -15,12 +15,13 @@ protocol selectLocationDelegate: class {
 
 class SelectLocationView: UIViewController {
     deinit { self.keyboardRemoveObserver() }
-    
     var presenter: SelectLocationPresenterProtocol?
+    
+    let mapView = NMFMapView()
+    let bottomView = BottomView()
     let pin = UIImageView()
+    
     var task: DispatchWorkItem?
-    var mapView = NMFMapView()
-    var bottomView = BottomView()
     var location: StudyDetailLocationPost?
     var animationFlag = true
     var isMoving = false
