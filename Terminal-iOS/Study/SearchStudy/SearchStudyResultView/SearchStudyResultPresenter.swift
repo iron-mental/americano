@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
+final class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     weak var view: SearchStudyResultViewProtocol?
     var interactor: SearchStudyResultInteractorInputProtocol?
     var wireFrame: SearchStudyResultWireFrameProtocol?
