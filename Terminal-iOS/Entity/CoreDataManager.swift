@@ -110,12 +110,14 @@ class CoreDataManager {
                 currentChatInfo = [newCoreChatInfo]
             } else {
                 //기존 채팅에 추가
-                while !chatList.isEmpty {
+                while !remoteChatList.isEmpty {
                     if (currentChatInfo[0].chatList?.last!.date)! >= remoteChatList.first!.date {
                         remoteChatList.removeFirst()
-                    } 
+                    } else {
+                        break
+                    }
                 }
-                currentChatInfo[0].chatList! += chatList
+                currentChatInfo[0].chatList! += remoteChatList
             }
             try context.save()
         } catch {
