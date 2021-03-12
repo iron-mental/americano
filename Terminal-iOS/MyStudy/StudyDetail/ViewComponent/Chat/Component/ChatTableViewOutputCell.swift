@@ -19,6 +19,10 @@ class ChatOutputTableViewCell: UITableViewCell {
     }
     
     func attribute() {
+        self.do {
+            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.selectionStyle = .none
+        }
         textInput.do {
             $0.textColor = .white
             $0.font = UIFont.monospacedSystemFont(ofSize: textInput.font!.pointSize, weight: UIFont.Weight.regular)

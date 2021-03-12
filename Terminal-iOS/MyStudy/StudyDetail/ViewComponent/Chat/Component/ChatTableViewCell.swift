@@ -19,7 +19,12 @@ class ChatInputTableViewCell: UITableViewCell {
     }
     
     func attribute() {
+        self.do {
+            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.selectionStyle = .none
+        }
         chatLabel.do {
+            $0.numberOfLines = 0
             $0.textColor = .white
             $0.font = UIFont.monospacedSystemFont(ofSize: chatLabel.font.pointSize-4, weight: UIFont.Weight.regular)
         }
@@ -37,6 +42,16 @@ class ChatInputTableViewCell: UITableViewCell {
         }
     }
     
+    func setData(chat: Chat) {
+        
+        if chat.nickname == "__SYSTEM__" {
+            chatLabel.text = "SYSTEM $ \(chat.message)"
+            chatLabel.textColor = .appColor(.mainColor)
+            chatLabel.textAlignment = .center
+        } else {
+            chatLabel.text = "\(chat.nickname) $ \(chat.message)"
+        }
+    }
     
     
     required init?(coder: NSCoder) {

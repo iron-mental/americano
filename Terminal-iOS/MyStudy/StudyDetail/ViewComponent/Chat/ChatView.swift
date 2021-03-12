@@ -20,16 +20,22 @@ class ChatView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
+        self.hideKeyboardWhenTappedAround()
+        self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
+                                 hideSelector: #selector(keyboardWillHide))
     }
     override func viewWillDisappear(_ animated: Bool) {
         presenter?.viewWillDisappear()
     }
     
     func attribute() {
+        view.do {
+            $0.backgroundColor = .appColor(.terminalBackground)
+        }
         chatTableView.do {
+            $0.backgroundColor = .appColor(.terminalBackground)
             $0.delegate = self
             $0.dataSource = self
-            $0.backgroundColor = .black
             $0.register(ChatInputTableViewCell.self, forCellReuseIdentifier: ChatInputTableViewCell.id)
             $0.register(ChatOutputTableViewCell.self, forCellReuseIdentifier: ChatOutputTableViewCell.id)
             $0.separatorStyle = .none
@@ -80,6 +86,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count + 1
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == chatList.count {
             let outputCell = tableView.dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id, for: indexPath) as! ChatOutputTableViewCell
@@ -87,13 +94,18 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
             return outputCell
         } else {
             let inputCell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id, for: indexPath) as! ChatInputTableViewCell
-            inputCell.chatLabel.text =  "[\(chatList[indexPath.row].date)] \(chatList[indexPath.row].nickname) $ \(chatList[indexPath.row].message)"
+            inputCell.setData(chat: chatList[indexPath.row])
             return inputCell
         }
         
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
 }
 
@@ -101,7 +113,7 @@ extension ChatView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let inputChatMessage = textField.text else { return true }
         presenter?.emitButtonDidTap(message: inputChatMessage)
-        
+        textField.text = ""
         return true
     }
 }
