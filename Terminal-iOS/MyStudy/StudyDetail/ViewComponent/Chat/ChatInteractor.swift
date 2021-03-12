@@ -19,9 +19,14 @@ class ChatInteractor: ChatInteractorProtocol {
     var mergeChatFromSocketFlag = false
     
     func connectSocket() {
-//        getLastLocalChat {
-            self.remoteDataManager?.socketConnect(studyID: self.studyID!)
-//        }
+        getLastLocalChat {
+            if self.lastLocalChat.isEmpty {
+                self.remoteDataManager?.socketConnect(studyID: self.studyID!, date: nil)
+            } else {
+                self.remoteDataManager?.socketConnect(studyID: self.studyID!,
+                                                      date: self.lastLocalChat.last!.date)
+            }
+        }
     }
     func emit(message: String) {
         remoteDataManager?.emit(message: message)
@@ -38,13 +43,26 @@ class ChatInteractor: ChatInteractorProtocol {
         receiveFromSocketChat.append(message)
         arrangeChat()
     }
-    func receiveLastChat(lastRemoteChat: [Chat]) {
-        //기준이 될 라스트 타임스탬프 할당
-        lastTimeStamp = lastRemoteChat.last?.date
-        //CoreDataManager에 lastRemoteChat 저장
-        //      CoreDataManager save chat 블라블라~
-        //로컬 + 리모트 채팅을 프레젠터로 패스
-        presenter?.getLastChatResult(lastChat: lastLocalChat + lastRemoteChat)
+    func receiveLastChat(lastRemoteChat: BaseResponse<[Chat]>) {
+        switch lastRemoteChat.result {
+        case true:
+            if let remoteChat = lastRemoteChat.data {
+                if !remoteChat.isEmpty {
+                    //기준이 될 라스트 타임스탬프 할당
+                    lastTimeStamp = lastRemoteChat.data?.last?.date
+                    //CoreDataManager에 lastRemoteChat 저장
+                    //      CoreDataManager save chat 블라블라~
+                    //로컬 + 리모트 채팅을 프레젠터로 패스
+                    presenter?.getLastChatResult(lastChat: lastLocalChat + lastRemoteChat.data!)
+                } else {
+                    presenter?.getLastChatResult(lastChat: lastLocalChat)
+                }
+            }
+        case false:
+            // 에러 핸들링
+        break
+        }
+
     }
     func mergeChatFromSocket() {
         //중복되었다면 지워주고

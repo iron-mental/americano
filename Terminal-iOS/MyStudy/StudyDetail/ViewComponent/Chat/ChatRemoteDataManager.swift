@@ -11,20 +11,13 @@ import SocketIO
 import SwiftKeychainWrapper
 
 class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
+    
     weak var interactor: ChatInteractorProtocol?
     var chatSocket: SocketIOClient!
     var manager: SocketManager?
     
-    func emit(message: String) {
-        chatSocket.manager?.engine?.ws?.disableSSLCertValidation = true
-        chatSocket.manager?.engine?.sid
-//        chatSocket.manager?.engine?.ws?.
-        chatSocket.emit("chat", message)
-    }
-    
-    func socketConnect(studyID: Int) {
-//        guard let baseURL = URL(string: "https://www.terminal-study.tk/terminal"),
-              guard let baseURL = URL(string: "https://www.terminal-study.tk"),
+    func socketConnect(studyID: Int, date: Int? = nil) {
+        guard let baseURL = URL(string: "https://www.terminal-study.tk"),
               let accessToken = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
         manager = SocketManager(socketURL: baseURL,
                                 config: [.log(true),
@@ -34,29 +27,64 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                                                          "study_id": studyID])])
         
         chatSocket = manager!.socket(forNamespace: "/terminal")
-//        chatSocket = manager!.defaultSocket
         
         chatSocket.connect()
         chatSocket.on("message") { array, ack in
             print("왔다",array)
-//            self.interactoar?.receiveMessage(message: chat)
+//            self.interactor?.receiveMessage(message: C)
         }
-        //        connect 이벤트에서 getRemoteChat() 호출
+//        connect 이벤트에서 getRemoteChat() 호출
         chatSocket.on("connect") { array, ack in
-            print(array)
-            getRemoteChat()
+            self.getRemoteChat(studyID: studyID, date: date)
         }
+    }
+    
+    func emit(message: String) {
+        chatSocket.emit("chat", message)
     }
     
     func disconnectSocket() {
-        //        chatSocket.disconnect()
+//        chatSocket.disconnect()
     }
     
-    func getRemoteChat() {
+    func getRemoteChat(studyID: Int, date: Int?) {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter)
-        interactor?.receiveLastChat(lastRemoteChat: [])
+            .request(TerminalRouter.studyChat(studyID: studyID, date: studyID))
+            .validate()
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<[Chat]>.self, from: data)
+                        if result.data != nil {
+                            self.interactor?.receiveLastChat(lastRemoteChat: result)
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                    
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed: break
+//                            self.remoteRequestHandler?
+//                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<[Chat]>.self, from: data)
+                                    if result.message != nil {
+                                        self.interactor?.receiveLastChat(lastRemoteChat: result)
+                                    }
+                                } catch {
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
     }
 }
