@@ -40,30 +40,6 @@ class CoreDataManager {
         }
     }
     
-    func saveChatInfo(studyID: Int, chatList: [Chat]) {
-        let fetchRequest : NSFetchRequest<CoreChatInfo> = CoreChatInfo.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "studyID == %@", String(studyID))
-        do {
-            var currentChatInfo: [CoreChatInfo] = []
-            currentChatInfo = try CoreDataManager.shared.context.fetch(fetchRequest)
-            if currentChatInfo.isEmpty {
-                //첫번째 채팅
-                var newCoreChatInfo = CoreChatInfo(context: context)
-                newCoreChatInfo.studyID = Int64(studyID)
-                newCoreChatInfo.chatList = chatList
-                currentChatInfo[0].chatList = chatList
-            } else {
-                //채팅 하나하나 추가
-                currentChatInfo[0].chatList!.append(chatList[0])
-            }
-            try context.save()
-        } catch {
-            print("실패다")
-        }
-    }
-    
-    
-    
     func putUserInfo(userInfo: UserInfo) {
         var updatingUserInfo: CoreUserInfo
         do {
@@ -117,6 +93,28 @@ class CoreDataManager {
         }
     }
     
+    func saveChatInfo(studyID: Int, chatList: [Chat]) {
+        let fetchRequest : NSFetchRequest<CoreChatInfo> = CoreChatInfo.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "studyID == %@", String(studyID))
+        do {
+            var currentChatInfo: [CoreChatInfo] = []
+            currentChatInfo = try CoreDataManager.shared.context.fetch(fetchRequest)
+            if currentChatInfo.isEmpty {
+                //스터디 최초 채팅
+                let newCoreChatInfo = CoreChatInfo(context: context)
+                newCoreChatInfo.studyID = Int64(studyID)
+                newCoreChatInfo.chatList = chatList
+                currentChatInfo[0].chatList = chatList
+            } else {
+                //기존 채팅에 추가
+                currentChatInfo[0].chatList! += chatList
+            }
+            try context.save()
+        } catch {
+            print("실패다")
+        }
+    }
+    
     func getCurrentChatInfo(studyID: Int) -> [Chat] {
         let fetchRequest: NSFetchRequest<CoreChatInfo> = CoreChatInfo.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "studyID == %@", String(studyID))
@@ -124,7 +122,7 @@ class CoreDataManager {
             var currentChatInfo: [CoreChatInfo] = []
             currentChatInfo = try CoreDataManager.shared.context.fetch(fetchRequest)
             if currentChatInfo.isEmpty {
-                print("채팅없음")
+                return []
             } else {
                 //채팅 하나하나 추가
                 if let currentLocalChat = currentChatInfo[0].chatList {
@@ -132,7 +130,7 @@ class CoreDataManager {
                 }
             }
         } catch {
-            print("실패다")
+            return []
         }
         return []
     }

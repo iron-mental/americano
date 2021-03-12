@@ -16,34 +16,47 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     var manager: SocketManager?
     
     func emit(message: String) {
-//        chatSocket.emit("chat", message)
+        chatSocket.manager?.engine?.ws?.disableSSLCertValidation = true
+        chatSocket.manager?.engine?.sid
+//        chatSocket.manager?.engine?.ws?.
+        chatSocket.emit("chat", message)
     }
     
     func socketConnect(studyID: Int) {
-        guard let baseURL = URL(string: "http://www.terminal-study.tk/terminal"),
+//        guard let baseURL = URL(string: "https://www.terminal-study.tk/terminal"),
+              guard let baseURL = URL(string: "https://www.terminal-study.tk"),
               let accessToken = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
         manager = SocketManager(socketURL: baseURL,
                                 config: [.log(true),
                                          .compress,
-                                         .secure(true),
                                          .forceWebsockets(true),
                                          .connectParams(["token": accessToken,
                                                          "study_id": studyID])])
-        chatSocket = manager!.defaultSocket
+        
+        chatSocket = manager!.socket(forNamespace: "/terminal")
+//        chatSocket = manager!.defaultSocket
+        
         chatSocket.connect()
         chatSocket.on("message") { array, ack in
-            let chat = Chat(studyID: 1, nickname: "S", message: "S", date: 0)
-            self.interactor?.receiveMessage(message: chat)
+            print("왔다",array)
+//            self.interactoar?.receiveMessage(message: chat)
         }
-//        connect 이벤트에서 getRemoteChat() 호출
+        //        connect 이벤트에서 getRemoteChat() 호출
+        chatSocket.on("connect") { array, ack in
+            print(array)
+            getRemoteChat()
+        }
     }
     
     func disconnectSocket() {
-//        chatSocket.disconnect()
+        //        chatSocket.disconnect()
     }
     
     func getRemoteChat() {
-//        getChat API 콜 후
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter)
         interactor?.receiveLastChat(lastRemoteChat: [])
     }
 }

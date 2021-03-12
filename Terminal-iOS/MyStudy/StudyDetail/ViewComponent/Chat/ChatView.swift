@@ -50,12 +50,12 @@ class ChatView: UIViewController {
 
 extension ChatView: ChatViewProtocol {
     func showLastChat(lastChat: [Chat]) {
-        chatList + lastChat
+        chatList += lastChat
         chatTableView.reloadData()
         presenter?.viewRoadLastChat()
     }
     func showSocketChat(socketChat: [Chat]) {
-        chatList + socketChat
+        chatList += socketChat
         chatTableView.reloadData()
     }
     
