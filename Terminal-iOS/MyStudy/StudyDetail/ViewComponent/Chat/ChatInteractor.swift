@@ -19,15 +19,15 @@ class ChatInteractor: ChatInteractorProtocol {
     var mergeChatFromSocketFlag = false
     
     func connectSocket() {
-//        getLastLocalChat {
-//            if self.lastLocalChat.isEmpty {
-//                self.remoteDataManager?.socketConnect(studyID: self.studyID!, date: nil)
-//            } else {
-//                self.remoteDataManager?.socketConnect(studyID: self.studyID!,
-//                                                      date: self.lastLocalChat.last!.date)
-//            }
-//        }
-        CoreDataManager
+        getLastLocalChat {
+            if self.lastLocalChat.isEmpty {
+                self.remoteDataManager?.socketConnect(studyID: self.studyID!, date: nil)
+            } else {
+                self.remoteDataManager?.socketConnect(studyID: self.studyID!,
+                                                      date: self.lastLocalChat.last!.date)
+            }
+        }
+//        CoreDataManager.shared.tempRemoveAllChat()
     }
     
     func emit(message: String) {

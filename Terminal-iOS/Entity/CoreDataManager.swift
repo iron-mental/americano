@@ -96,6 +96,7 @@ class CoreDataManager {
     
     // MARK: Chat
     func saveChatInfo(studyID: Int, chatList: [Chat]) {
+        var remoteChatList = chatList
         let fetchRequest: NSFetchRequest<CoreChatInfo> = CoreChatInfo.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "studyID == %@", String(studyID))
         do {
@@ -105,10 +106,15 @@ class CoreDataManager {
                 //스터디 최초 채팅
                 let newCoreChatInfo = CoreChatInfo(context: context)
                 newCoreChatInfo.studyID = Int64(studyID)
-                newCoreChatInfo.chatList = chatList
-                currentChatInfo[0].chatList = chatList
+                newCoreChatInfo.chatList = remoteChatList
+                currentChatInfo = [newCoreChatInfo]
             } else {
                 //기존 채팅에 추가
+                while !chatList.isEmpty {
+                    if (currentChatInfo[0].chatList?.last!.date)! >= remoteChatList.first!.date {
+                        remoteChatList.removeFirst()
+                    } 
+                }
                 currentChatInfo[0].chatList! += chatList
             }
             try context.save()
@@ -139,5 +145,12 @@ class CoreDataManager {
         return []
     }
     
-    
+    func tempRemoveAllChat() {
+        let request: NSFetchRequest<NSFetchRequestResult> = CoreChatInfo.fetchRequest()
+        let delete = NSBatchDeleteRequest(fetchRequest: request)
+        do {
+            try self.context.execute(delete)
+        } catch {
+        }
+    }
 }
