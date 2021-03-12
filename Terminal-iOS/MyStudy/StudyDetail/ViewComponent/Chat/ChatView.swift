@@ -83,6 +83,9 @@ extension ChatView: ChatViewProtocol {
     func showSocketChat(socketChat: [Chat]) {
         chatList += socketChat
         chatTableView.reloadData()
+        DispatchQueue.main.async {
+            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom, animated: false)
+        }
     }
     
     func showMessage(message: String) {
@@ -133,7 +136,9 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
 
 extension ChatView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+    
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let inputChatMessage = textField.text else { return true }
         presenter?.emitButtonDidTap(message: inputChatMessage)

@@ -60,7 +60,12 @@ class ChatInteractor: ChatInteractorProtocol {
                     //CoreDataManager에 lastRemoteChat 저장
                     CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: remoteChat)
                     //로컬 + 리모트 채팅을 프레젠터로 패스
-                    presenter?.getLastChatResult(lastChat: lastLocalChat + remoteChat)
+                    presenter?.getLastChatResult(lastChat: lastLocalChat
+                                                    + [Chat(studyID: studyID!,
+                                                                                 nickname: "__SYSTEM__",
+                                                                                 message: "여기까지 읽으셨음",
+                                                                                 date: 0)]
+                                                    + remoteChat)
                 } else {
                     presenter?.getLastChatResult(lastChat: lastLocalChat)
                 }
