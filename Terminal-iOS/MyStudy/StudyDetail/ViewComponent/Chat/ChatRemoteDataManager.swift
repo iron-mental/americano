@@ -11,7 +11,6 @@ import SocketIO
 import SwiftKeychainWrapper
 
 class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
-    
     weak var interactor: ChatInteractorProtocol?
     var chatSocket: SocketIOClient!
     var manager: SocketManager?

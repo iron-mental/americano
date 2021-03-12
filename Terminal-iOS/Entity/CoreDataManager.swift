@@ -14,6 +14,7 @@ class CoreDataManager {
     let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
     lazy var context = appDelegate.persistentContainer.viewContext
     
+    //MARK: UserInfo
     func createUserInfo(userInfo: UserInfo) {
         let newUserInfo = CoreUserInfo(context: context)
         
@@ -93,8 +94,9 @@ class CoreDataManager {
         }
     }
     
+    //MARK: Chat
     func saveChatInfo(studyID: Int, chatList: [Chat]) {
-        let fetchRequest : NSFetchRequest<CoreChatInfo> = CoreChatInfo.fetchRequest()
+        let fetchRequest: NSFetchRequest<CoreChatInfo> = CoreChatInfo.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "studyID == %@", String(studyID))
         do {
             var currentChatInfo: [CoreChatInfo] = []
@@ -124,7 +126,6 @@ class CoreDataManager {
             if currentChatInfo.isEmpty {
                 return []
             } else {
-                //채팅 하나하나 추가
                 if let currentLocalChat = currentChatInfo[0].chatList {
                     return currentLocalChat
                 }

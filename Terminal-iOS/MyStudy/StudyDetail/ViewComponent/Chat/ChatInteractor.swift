@@ -34,9 +34,10 @@ class ChatInteractor: ChatInteractorProtocol {
     func disconnectSocket() {
         remoteDataManager?.disconnectSocket()
     }
-    func getLastLocalChat(_: @escaping () -> Void ) {
+    func getLastLocalChat(_ completion: @escaping () -> Void ) {
         //로컬 챗 세팅
         lastLocalChat = CoreDataManager.shared.getCurrentChatInfo(studyID: studyID!)
+        completion()
     }
     func receiveMessage(message: Chat) {
         //챗 from socket
@@ -49,11 +50,11 @@ class ChatInteractor: ChatInteractorProtocol {
             if let remoteChat = lastRemoteChat.data {
                 if !remoteChat.isEmpty {
                     //기준이 될 라스트 타임스탬프 할당
-                    lastTimeStamp = lastRemoteChat.data?.last?.date
+                    lastTimeStamp = remoteChat.last?.date
                     //CoreDataManager에 lastRemoteChat 저장
-                    //      CoreDataManager save chat 블라블라~
+                    CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: remoteChat)
                     //로컬 + 리모트 채팅을 프레젠터로 패스
-                    presenter?.getLastChatResult(lastChat: lastLocalChat + lastRemoteChat.data!)
+                    presenter?.getLastChatResult(lastChat: lastLocalChat + remoteChat)
                 } else {
                     presenter?.getLastChatResult(lastChat: lastLocalChat)
                 }
@@ -71,9 +72,14 @@ class ChatInteractor: ChatInteractorProtocol {
     func arrangeChat() {
         var arragedChatList: [Chat] = []
         while mergeChatFromSocketFlag
-                && !receiveFromSocketChat.isEmpty{
-            if lastTimeStamp! >= receiveFromSocketChat.first!.date {
-                receiveFromSocketChat.removeFirst()
+                && !receiveFromSocketChat.isEmpty {
+            if lastTimeStamp != nil {
+                if lastTimeStamp! >= receiveFromSocketChat.first!.date {
+                    receiveFromSocketChat.removeFirst()
+                } else {
+                    arragedChatList.append(receiveFromSocketChat.first!)
+                    receiveFromSocketChat.removeFirst()
+                }
             } else {
                 arragedChatList.append(receiveFromSocketChat.first!)
                 receiveFromSocketChat.removeFirst()
