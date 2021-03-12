@@ -21,7 +21,6 @@ class LoadingRainbowCat: NSObject {
         
         if type(of: topView) == type(of: callerView) {
             if sharedInstance.backgroundView?.superview == nil {
-                //                sharedInstance.showTime = DispatchTime.now()
                 sharedInstance.showTime = DispatchTime.now()
                 let backgroundView = UIView()
                 let popupView = AnimationView(name: "14476-rainbow-cat-remix")

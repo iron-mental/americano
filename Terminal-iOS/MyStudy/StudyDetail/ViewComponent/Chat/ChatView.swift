@@ -91,14 +91,12 @@ extension ChatView: ChatViewProtocol {
         }
         presenter?.viewRoadLastChat()
     }
-    func showSocketChat(socketChat: [Chat]) {
-        let isBottom = isTableViewSetBottom()
-        chatList += socketChat
-        self.chatTableView.insertRows(at: [IndexPath(row: chatList.count - 1, section: 0)], with: .fade)
+    func showSocketChat(socketChat: Chat) {
+        let isBottom = self.isTableViewSetBottom()
+        self.chatList.append(socketChat)
+        self.chatTableView.insertRows(at: [IndexPath(row: self.chatList.count - 1, section: 0)], with: .fade)
         if isBottom {
-            DispatchQueue.main.async {
-                self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom, animated: true)
-            }
+            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom, animated: true)
         }
     }
     
@@ -139,11 +137,15 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == chatList.count {
-            let outputCell = tableView.dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id, for: indexPath) as! ChatOutputTableViewCell
+            let outputCell = tableView
+                .dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id,
+                                     for: indexPath)as! ChatOutputTableViewCell
             outputCell.textInput.delegate = self
             return outputCell
         } else {
-            let inputCell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id, for: indexPath) as! ChatInputTableViewCell
+            let inputCell = tableView
+                .dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id,
+                                     for: indexPath) as! ChatInputTableViewCell
             inputCell.setData(chat: chatList[indexPath.row])
             return inputCell
         }

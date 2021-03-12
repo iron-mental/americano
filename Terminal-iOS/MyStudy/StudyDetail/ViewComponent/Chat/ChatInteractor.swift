@@ -17,7 +17,7 @@ class ChatInteractor: ChatInteractorProtocol {
     var receiveFromSocketChat: [Chat] = []
     var lastTimeStamp: Int?
     var mergeChatFromSocketFlag = false
-    
+    var arrangeChatTime: DispatchTime?
     func connectSocket() {
         getLastLocalChat {
             if self.lastLocalChat.isEmpty {
@@ -27,7 +27,7 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-//        CoreDataManager.shared.tempRemoveAllChat()
+        //        CoreDataManager.shared.tempRemoveAllChat()
     }
     
     func emit(message: String) {
@@ -83,32 +83,36 @@ class ChatInteractor: ChatInteractorProtocol {
     
     func mergeChatFromSocket() {
         mergeChatFromSocketFlag = true
-        arrangeChat()
+        arrangeChatTime = DispatchTime.now()
+        DispatchQueue.main.asyncAfter(deadline: arrangeChatTime! +  0.6) {
+            self.arrangeChat()
+        }
     }
     
     func arrangeChat() {
-        var arragedChatList: [Chat] = []
-        while mergeChatFromSocketFlag
+        guard let distance = arrangeChatTime?.distance(to: DispatchTime.now()).toDouble() else { return }
+        if distance >= 0.5 {
+            arrangeChatTime = DispatchTime.now()
+            var arragedChatList2: Chat?
+            if mergeChatFromSocketFlag == true
                 && !receiveFromSocketChat.isEmpty {
-            if lastTimeStamp != nil {
-                if lastTimeStamp! >= receiveFromSocketChat.first!.date {
-                    receiveFromSocketChat.removeFirst()
+                if lastTimeStamp != nil {
+                    if lastTimeStamp! >= receiveFromSocketChat.first!.date {
+                    } else {
+                        arragedChatList2 = receiveFromSocketChat.first!
+                        self.presenter?.arrangedChatFromChat(chat: arragedChatList2!)
+                    }
                 } else {
-                    arragedChatList.append(receiveFromSocketChat.first!)
-                    arragedChatList.append(receiveFromSocketChat.first!)
-                    receiveFromSocketChat.removeFirst()
+                    arragedChatList2 = receiveFromSocketChat.first!
+                    self.presenter?.arrangedChatFromChat(chat: arragedChatList2!)
                 }
-            } else {
-                arragedChatList.append(receiveFromSocketChat.first!)
-                arragedChatList.append(receiveFromSocketChat.first!)
                 receiveFromSocketChat.removeFirst()
             }
-        }
-        if !arragedChatList.isEmpty {
-            arragedChatList.forEach {
-                presenter?.arrangedChatFromChat(chat: [$0])
+            if !receiveFromSocketChat.isEmpty {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                    self.arrangeChat()
+                }
             }
-            CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: arragedChatList)
         }
     }
     
