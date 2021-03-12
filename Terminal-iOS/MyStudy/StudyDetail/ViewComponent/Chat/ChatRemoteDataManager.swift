@@ -25,7 +25,6 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                                          .forceWebsockets(true),
                                          .connectParams(["token": accessToken,
                                                          "study_id": studyID])])
-        
         chatSocket = manager!.socket(forNamespace: "/terminal")
         
         chatSocket.connect()
@@ -33,7 +32,6 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
             print("왔다",array)
 //            self.interactor?.receiveMessage(message: C)
         }
-//        connect 이벤트에서 getRemoteChat() 호출
         chatSocket.on("connect") { array, ack in
             self.getRemoteChat(studyID: studyID, date: date)
         }
@@ -51,7 +49,9 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
         TerminalNetworkManager
             .shared
             .session
-            .request(TerminalRouter.studyChat(studyID: studyID, date: studyID))
+            .request(TerminalRouter.studyChat(studyID: studyID,
+                                              date: studyID,
+                                              first: date == nil ? true : false))
             .validate()
             .responseData { response in
                 switch response.result {
@@ -69,11 +69,13 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                     if let err = err.asAFError {
                         switch err {
                         case .sessionTaskFailed: break
+                            //통신 에러
 //                            self.remoteRequestHandler?
 //                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
                         default:
                             if let data = response.data {
                                 do {
+                                    //실패 메세지
                                     let result = try JSONDecoder().decode(BaseResponse<[Chat]>.self, from: data)
                                     if result.message != nil {
                                         self.interactor?.receiveLastChat(lastRemoteChat: result)

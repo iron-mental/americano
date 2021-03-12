@@ -65,9 +65,6 @@ class ChatInteractor: ChatInteractorProtocol {
 
     }
     func mergeChatFromSocket() {
-        //중복되었다면 지워주고
-        //수정해야됨 while문을 여기서 돌려야되고
-        //소켓으로 떨어진 채팅 처리 시작
         mergeChatFromSocketFlag = true
         arrangeChat()
     }
