@@ -94,7 +94,7 @@ extension ChatView: ChatViewProtocol {
     func showSocketChat(socketChat: [Chat]) {
         let isBottom = isTableViewSetBottom()
         chatList += socketChat
-        self.chatTableView.insertRows(at: [IndexPath(row: chatList.count - socketChat.count, section: 0)], with: .fade)
+        self.chatTableView.insertRows(at: [IndexPath(row: chatList.count - 1, section: 0)], with: .fade)
         if isBottom {
             DispatchQueue.main.async {
                 self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom, animated: true)

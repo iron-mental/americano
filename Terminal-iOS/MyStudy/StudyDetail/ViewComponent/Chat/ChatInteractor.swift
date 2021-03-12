@@ -105,7 +105,9 @@ class ChatInteractor: ChatInteractorProtocol {
             }
         }
         if !arragedChatList.isEmpty {
-            presenter?.arrangedChatFromChat(chat: arragedChatList)
+            arragedChatList.forEach {
+                presenter?.arrangedChatFromChat(chat: [$0])
+            }
             CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: arragedChatList)
         }
     }
