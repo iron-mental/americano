@@ -284,8 +284,8 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/delegate"
         case let .reportStudy(studyID, _):
             return "study/\(studyID)/report"
-        case let .studyChat(studyID, date, _):
-            return "study/\(studyID)/chat?date=\(date)"
+        case let .studyChat(studyID, _, _):
+            return "study/\(studyID)/chat"
             
         // 신청
         case let .applyStudy(studyID, _):
@@ -384,8 +384,9 @@ enum TerminalRouter: URLRequestConvertible {
             return ["new_leader": newLeader]
         case let .reportStudy(_, message):
             return ["message": message]
-        case let .studyChat(_, _, first):
-            return ["first": first]
+        case let .studyChat(_, date, first):
+            return ["date": date,
+                    "first": "\(first)"]
             
         // 신청
         case let .applyStudy(_, message):

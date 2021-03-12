@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Chat: NSObject, Codable, NSCoding  {
+public class Chat: NSObject, Codable, NSCoding {
     let studyID: Int
     let nickname: String
     let message: String
@@ -44,4 +44,3 @@ public class Chat: NSObject, Codable, NSCoding  {
                   date: date)
     }
 }
-

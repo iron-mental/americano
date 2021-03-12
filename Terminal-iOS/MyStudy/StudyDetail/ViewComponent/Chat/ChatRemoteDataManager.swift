@@ -27,11 +27,11 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
         chatSocket = manager!.socket(forNamespace: "/terminal")
         
         chatSocket.connect()
-        chatSocket.on("message") { array, ack in
-            print("왔다",array)
+        chatSocket.on("message") { array, _ in
+            print("왔다", array)
 //            self.interactor?.receiveMessage(message: C)
         }
-        chatSocket.on("connect") { array, ack in
+        chatSocket.on("connect") { array, _ in
             self.getRemoteChat(studyID: studyID, date: date)
         }
     }
@@ -49,8 +49,8 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
             .shared
             .session
             .request(TerminalRouter.studyChat(studyID: studyID,
-                                              date: studyID,
-                                              first: date == nil ? true : false))
+                                              date: date ?? 0,
+                                              first: date == nil))
             .validate()
             .responseData { response in
                 switch response.result {
@@ -67,10 +67,9 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                 case .failure(let err):
                     if let err = err.asAFError {
                         switch err {
-                        case .sessionTaskFailed: break
-                            //통신 에러
-//                            self.remoteRequestHandler?
-//                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        case .sessionTaskFailed:
+                            self.interactor?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
                         default:
                             if let data = response.data {
                                 do {

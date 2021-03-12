@@ -62,6 +62,19 @@ extension ChatView: ChatViewProtocol {
     func showMessage(message: String) {
         
     }
+    
+    func showLoading() {
+        LoadingRainbowCat.show(caller: self)
+    }
+    
+    func hideLoading() {
+        LoadingRainbowCat.hide(caller: self)
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
+    
 }
 extension ChatView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -19,31 +19,37 @@ class ChatInteractor: ChatInteractorProtocol {
     var mergeChatFromSocketFlag = false
     
     func connectSocket() {
-        getLastLocalChat {
-            if self.lastLocalChat.isEmpty {
-                self.remoteDataManager?.socketConnect(studyID: self.studyID!, date: nil)
-            } else {
-                self.remoteDataManager?.socketConnect(studyID: self.studyID!,
-                                                      date: self.lastLocalChat.last!.date)
-            }
-        }
+//        getLastLocalChat {
+//            if self.lastLocalChat.isEmpty {
+//                self.remoteDataManager?.socketConnect(studyID: self.studyID!, date: nil)
+//            } else {
+//                self.remoteDataManager?.socketConnect(studyID: self.studyID!,
+//                                                      date: self.lastLocalChat.last!.date)
+//            }
+//        }
+        CoreDataManager
     }
+    
     func emit(message: String) {
         remoteDataManager?.emit(message: message)
     }
+    
     func disconnectSocket() {
         remoteDataManager?.disconnectSocket()
     }
+    
     func getLastLocalChat(_ completion: @escaping () -> Void ) {
         //로컬 챗 세팅
         lastLocalChat = CoreDataManager.shared.getCurrentChatInfo(studyID: studyID!)
         completion()
     }
+    
     func receiveMessage(message: Chat) {
-        //챗 from socket
+        //chat from socket
         receiveFromSocketChat.append(message)
         arrangeChat()
     }
+    
     func receiveLastChat(lastRemoteChat: BaseResponse<[Chat]>) {
         switch lastRemoteChat.result {
         case true:
@@ -60,15 +66,19 @@ class ChatInteractor: ChatInteractorProtocol {
                 }
             }
         case false:
-            // 에러 핸들링
-        break
+            //리모트로부터 이전 채팅을 받아오지 못했을 때
+            presenter?.getLastChatResult(lastChat: lastLocalChat)
+            guard let message = lastRemoteChat.message else { return }
+            presenter?.showError(message: message)
         }
-
+        
     }
+    
     func mergeChatFromSocket() {
         mergeChatFromSocketFlag = true
         arrangeChat()
     }
+    
     func arrangeChat() {
         var arragedChatList: [Chat] = []
         while mergeChatFromSocketFlag
@@ -88,5 +98,9 @@ class ChatInteractor: ChatInteractorProtocol {
         if !arragedChatList.isEmpty {
             presenter?.arrangedChatFromChat(chat: arragedChatList)
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        
     }
 }

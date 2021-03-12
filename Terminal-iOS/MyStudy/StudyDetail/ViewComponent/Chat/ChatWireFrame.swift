@@ -30,6 +30,8 @@ class ChatWireFrame: ChatWireFrameProtocol {
         interactor.localDataManager = localDataManager
         interactor.studyID = studyID
         
+        remoteDataManager.interactor = interactor
+        
         wireFrame.presenter = presenter
         
         return view
