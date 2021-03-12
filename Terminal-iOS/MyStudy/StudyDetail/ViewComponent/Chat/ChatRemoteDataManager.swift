@@ -9,6 +9,7 @@
 import Foundation
 import SocketIO
 import SwiftKeychainWrapper
+import SwiftyJSON
 
 class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     weak var interactor: ChatInteractorProtocol?
@@ -28,9 +29,17 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
         
         chatSocket.connect()
         chatSocket.on("message") { array, _ in
-            print("왔다", array)
-//            self.interactor?.receiveMessage(message: C)
+            do {
+                let json = JSON(array[0])
+                if let data = "\(json)".data(using: .utf8) {
+                    let newMessage = try JSONDecoder().decode(Chat.self, from: data)
+                    self.interactor?.receiveMessage(message: newMessage)
+                }
+            } catch {
+                
+            }
         }
+        
         chatSocket.on("connect") { array, _ in
             self.getRemoteChat(studyID: studyID, date: date)
         }
