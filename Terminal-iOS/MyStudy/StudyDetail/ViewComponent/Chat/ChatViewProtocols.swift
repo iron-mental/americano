@@ -31,7 +31,7 @@ protocol ChatInteractorProtocol: class {
     
     //remoteDataManager -> Interactor
     func receiveMessage(message: Chat)
-    func receiveLastChat(lastRemoteChat: [Chat])
+    func receiveLastChat(lastRemoteChat: BaseResponse<[Chat]>)
 }
 
 protocol ChatPresenterProtocol: class {
@@ -53,10 +53,10 @@ protocol ChatPresenterProtocol: class {
 
 protocol ChatRemoteDataManagerProtocol: class {
     var interactor: ChatInteractorProtocol? { get set }
-    func socketConnect(studyID: Int)
+    func socketConnect(studyID: Int, date: Int?)
     func emit(message: String)
     func disconnectSocket()
-    func getRemoteChat()
+    func getRemoteChat(studyID: Int, date: Int?)
 }
 
 protocol ChatLocalDataManagerProtocol: class {
