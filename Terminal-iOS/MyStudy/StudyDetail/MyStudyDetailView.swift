@@ -236,9 +236,9 @@ final class MyStudyDetailView: UIViewController {
         case 2: viewState = .Chat
         default: print("들어오지 않아요")
         }
-        
+        tapSege.selectedSegmentIndex = selectedIndex
         UIView.animate(withDuration: 0.2) { [self] in
-            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(selectedIndex), y: 0)
+            self.selectedUnderLine.transform = CGAffineTransform(translationX: (self.view.frame.width / CGFloat(state.count)) * CGFloat(selectedIndex), y: 0)
         }
         
         // PageView paging
