@@ -72,6 +72,7 @@ class ChatView: UIViewController {
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
         chatTableView.setBottomInset(to: keyboardHeight)
+        view.layoutIfNeeded()
     }
     
     @objc func keyboardWillHide() {
@@ -84,7 +85,7 @@ extension ChatView: ChatViewProtocol {
         chatList += lastChat
         chatTableView.reloadData()
         if let target = lastChat.firstIndex(where: {$0.message == "여기까지 읽으셨습니다."}) {
-            chatTableView.scrollToRow(at: [0, target], at: .middle, animated: true)
+            chatTableView.scrollToRow(at: [0, target], at: .top, animated: true)
         } else {
             chatTableView.scrollToRow(at: [0, lastChat.count], at: .middle, animated: true)
         }
@@ -93,9 +94,10 @@ extension ChatView: ChatViewProtocol {
     func showSocketChat(socketChat: [Chat]) {
         chatList += socketChat
         chatTableView.reloadData()
-        //이건 가장 밑을 바라보고 있을 때만 해당 하도록
+//        이건 가장 밑을 바라보고 있을 때만 해당 하도록
         DispatchQueue.main.async {
             self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom, animated: false)
+
         }
     }
     
@@ -143,13 +145,11 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
             //            view.endEditing(true)
         }
     }
+    
+    
 }
 
 extension ChatView: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-    
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let inputChatMessage = textField.text else { return true }
         presenter?.emitButtonDidTap(message: inputChatMessage)

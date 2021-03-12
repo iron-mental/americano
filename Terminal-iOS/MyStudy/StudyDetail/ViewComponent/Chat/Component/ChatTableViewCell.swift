@@ -48,10 +48,18 @@ class ChatInputTableViewCell: UITableViewCell {
             chatLabel.textColor = .appColor(.mainColor)
             chatLabel.textAlignment = .center
         } else {
-            chatLabel.text = "\(chat.nickname) $ \(chat.message)"
+            chatLabel.text = convertTime(timeStamp: chat.date) + " \(chat.nickname) $ \(chat.message)"
             chatLabel.textColor = .white
             chatLabel.textAlignment = .left
         }
+    }
+    
+    func convertTime(timeStamp: Int) -> String {
+        let calender = Calendar.current
+        let date = Date(timeIntervalSince1970: TimeInterval(timeStamp) / 1000)
+        let hour = calender.component(.hour, from: date)
+        let minute = calender.component(.minute, from: date)
+        return "[\(hour):\(minute)]"
     }
     
     required init?(coder: NSCoder) {
