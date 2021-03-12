@@ -18,6 +18,7 @@ class ChatInteractor: ChatInteractorProtocol {
     var lastTimeStamp: Int?
     var mergeChatFromSocketFlag = false
     var arrangeChatTime: DispatchTime?
+    
     func connectSocket() {
         getLastLocalChat {
             if self.lastLocalChat.isEmpty {
@@ -93,18 +94,16 @@ class ChatInteractor: ChatInteractorProtocol {
         guard let distance = arrangeChatTime?.distance(to: DispatchTime.now()).toDouble() else { return }
         if distance >= 0.5 {
             arrangeChatTime = DispatchTime.now()
-            var arragedChatList2: Chat?
             if mergeChatFromSocketFlag == true
                 && !receiveFromSocketChat.isEmpty {
-                if lastTimeStamp != nil {
-                    if lastTimeStamp! >= receiveFromSocketChat.first!.date {
-                    } else {
-                        arragedChatList2 = receiveFromSocketChat.first!
-                        self.presenter?.arrangedChatFromChat(chat: arragedChatList2!)
-                    }
-                } else {
-                    arragedChatList2 = receiveFromSocketChat.first!
-                    self.presenter?.arrangedChatFromChat(chat: arragedChatList2!)
+                let first = receiveFromSocketChat.first!
+                if (lastTimeStamp != nil
+                        && lastTimeStamp!
+                        < first.date)
+                    || lastTimeStamp == nil {
+                    self.presenter?.arrangedChatFromChat(chat: first)
+                    CoreDataManager.shared.saveChatInfo(studyID: studyID!,
+                                                        chatList: [first])
                 }
                 receiveFromSocketChat.removeFirst()
             }
