@@ -49,6 +49,8 @@ class ChatInputTableViewCell: UITableViewCell {
             chatLabel.textAlignment = .center
         } else {
             chatLabel.text = "\(chat.nickname) $ \(chat.message)"
+            chatLabel.textColor = .white
+            chatLabel.textAlignment = .left
         }
     }
     
