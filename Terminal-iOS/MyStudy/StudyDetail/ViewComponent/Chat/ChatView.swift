@@ -14,6 +14,9 @@ class ChatView: UIViewController {
     var presenter: ChatPresenterProtocol?
     var chatTableView = UITableView()
     var chatList: [Chat] = []
+    var keyboardHeight: CGFloat = 0.0
+    var chatTableViewConstraint: NSLayoutConstraint?
+    var isEdting = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,13 +47,30 @@ class ChatView: UIViewController {
     
     func layout() {
         [chatTableView].forEach { view.addSubview($0) }
+        chatTableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         chatTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            chatTableViewConstraint?.isActive = true
         }
+    }
+    
+    func tableViewAddConstant() {
+    }
+    
+    // MARK: @objc
+    @objc func keyboardWillShow(notification: NSNotification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        self.keyboardHeight = keyboardRectangle.height
+        chatTableView.setBottomInset(to: keyboardHeight)
+    }
+    
+    @objc func keyboardWillHide() {
+        chatTableView.setBottomInset(to: 0.0)
     }
 }
 
@@ -105,11 +125,15 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        view.endEditing(true)
+        if !isEdting {
+            //            view.endEditing(true)
+        }
     }
 }
 
 extension ChatView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let inputChatMessage = textField.text else { return true }
         presenter?.emitButtonDidTap(message: inputChatMessage)

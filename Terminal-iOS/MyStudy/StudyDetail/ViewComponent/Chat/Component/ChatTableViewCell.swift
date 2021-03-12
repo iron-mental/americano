@@ -43,7 +43,6 @@ class ChatInputTableViewCell: UITableViewCell {
     }
     
     func setData(chat: Chat) {
-        
         if chat.nickname == "__SYSTEM__" {
             chatLabel.text = "SYSTEM $ \(chat.message)"
             chatLabel.textColor = .appColor(.mainColor)
