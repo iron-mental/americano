@@ -92,12 +92,26 @@ extension ChatView: ChatViewProtocol {
         presenter?.viewRoadLastChat()
     }
     func showSocketChat(socketChat: [Chat]) {
+        let isBottom = isTableViewSetBottom()
         chatList += socketChat
-        chatTableView.reloadData()
-//        이건 가장 밑을 바라보고 있을 때만 해당 하도록
-        DispatchQueue.main.async {
-            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom, animated: false)
-
+        self.chatTableView.insertRows(at: [IndexPath(row: chatList.count - socketChat.count, section: 0)], with: .fade)
+        if isBottom {
+            DispatchQueue.main.async {
+                self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom, animated: true)
+            }
+        }
+    }
+    
+    func isTableViewSetBottom() -> Bool {
+        let interval = chatTableView.contentOffset.y
+            + chatTableView.visibleSize.height
+            - chatTableView.contentSize.height
+        print(interval)
+        if interval > -10
+            && interval < 10 {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -135,18 +149,6 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
         }
         
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if !isEdting {
-            //            view.endEditing(true)
-        }
-    }
-    
-    
 }
 
 extension ChatView: UITextFieldDelegate {

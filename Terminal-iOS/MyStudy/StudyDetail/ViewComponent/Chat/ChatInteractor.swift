@@ -95,9 +95,11 @@ class ChatInteractor: ChatInteractorProtocol {
                     receiveFromSocketChat.removeFirst()
                 } else {
                     arragedChatList.append(receiveFromSocketChat.first!)
+                    arragedChatList.append(receiveFromSocketChat.first!)
                     receiveFromSocketChat.removeFirst()
                 }
             } else {
+                arragedChatList.append(receiveFromSocketChat.first!)
                 arragedChatList.append(receiveFromSocketChat.first!)
                 receiveFromSocketChat.removeFirst()
             }
