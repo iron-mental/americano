@@ -213,6 +213,9 @@ final class MyStudyDetailView: UIViewController {
         if let noticeView = vcArr[0] as? NoticeViewProtocol {
             noticeView.viewLoad()
         }
+        if let chatView = vcArr[2] as? ChatViewProtocol {
+            chatView.viewLoad()
+        }
     }
     
     // MARK: - @objc
@@ -337,7 +340,6 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
     func setting(caller: UIViewController) {
-        
         if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
             if type(of: caller) == StudyDetailView.self {
                 //스터디 디테일이 콜했을 경우 처리

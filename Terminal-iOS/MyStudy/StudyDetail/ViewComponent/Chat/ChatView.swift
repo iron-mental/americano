@@ -20,15 +20,20 @@ class ChatView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewLoad()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter?.viewWillDisappear()
+    }
+    
+    func viewLoad() {
         presenter?.viewDidLoad()
         attribute()
         layout()
         self.hideKeyboardWhenTappedAround()
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        presenter?.viewWillDisappear()
     }
     
     func attribute() {
@@ -78,11 +83,17 @@ extension ChatView: ChatViewProtocol {
     func showLastChat(lastChat: [Chat]) {
         chatList += lastChat
         chatTableView.reloadData()
+        if let target = lastChat.firstIndex(where: {$0.message == "여기까지 읽으셨습니다."}) {
+            chatTableView.scrollToRow(at: [0, target], at: .middle, animated: true)
+        } else {
+            chatTableView.scrollToRow(at: [0, lastChat.count], at: .middle, animated: true)
+        }
         presenter?.viewRoadLastChat()
     }
     func showSocketChat(socketChat: [Chat]) {
         chatList += socketChat
         chatTableView.reloadData()
+        //이건 가장 밑을 바라보고 있을 때만 해당 하도록
         DispatchQueue.main.async {
             self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom, animated: false)
         }

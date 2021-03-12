@@ -8,10 +8,11 @@
 
 import UIKit
 
-protocol ChatViewProtocol: UIViewController {
+protocol ChatViewProtocol: class {
     var presenter: ChatPresenterProtocol? { get set }
     
     //PRESENTER -> VIEW
+    func viewLoad() 
     func showLastChat(lastChat: [Chat])
     func showSocketChat(socketChat: [Chat])
     func showMessage(message: String)
