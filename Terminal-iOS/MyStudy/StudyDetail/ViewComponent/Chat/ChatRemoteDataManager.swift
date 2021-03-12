@@ -26,8 +26,8 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                                          .connectParams(["token": accessToken,
                                                          "study_id": studyID])])
         chatSocket = manager!.socket(forNamespace: "/terminal")
-        
         chatSocket.connect()
+        
         chatSocket.on("message") { array, _ in
             do {
                 let json = JSON(array[0])
@@ -35,14 +35,15 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                     let newMessage = try JSONDecoder().decode(Chat.self, from: data)
                     self.interactor?.receiveMessage(message: newMessage)
                 }
-            } catch {
-                
-            }
+            } catch { }
         }
-        
-        chatSocket.on("connect") { array, _ in
+        chatSocket.on("connect") { _, _ in
             self.getRemoteChat(studyID: studyID, date: date)
         }
+    }
+    
+    func receiveSocketEvents() {
+        
     }
     
     func emit(message: String) {
@@ -50,7 +51,7 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     }
     
     func disconnectSocket() {
-//        chatSocket.disconnect()
+        chatSocket.disconnect()
     }
     
     func getRemoteChat(studyID: Int, date: Int?) {
@@ -77,8 +78,10 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                     if let err = err.asAFError {
                         switch err {
                         case .sessionTaskFailed:
-                            self.interactor?
-                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                            self.interactor?.sessionTaskError(message:
+                                                                TerminalNetworkManager
+                                                                .shared
+                                                                .sessionTaskErrorMessage)
                         default:
                             if let data = response.data {
                                 do {
