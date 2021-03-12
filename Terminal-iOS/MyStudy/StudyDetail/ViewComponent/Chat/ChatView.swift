@@ -71,8 +71,14 @@ class ChatView: UIViewController {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
-        chatTableView.setBottomInset(to: keyboardHeight)
-        view.layoutIfNeeded()
+        self.chatTableView.setBottomInset(to: self.keyboardHeight)
+        DispatchQueue.main.async {
+            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .middle,
+                                      animated: true)
+        }
+        UIView.animate(withDuration: 0.1) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     @objc func keyboardWillHide() {
@@ -84,19 +90,28 @@ extension ChatView: ChatViewProtocol {
     func showLastChat(lastChat: [Chat]) {
         chatList += lastChat
         chatTableView.reloadData()
-        if let target = lastChat.firstIndex(where: {$0.message == "여기까지 읽으셨습니다."}) {
-            chatTableView.scrollToRow(at: [0, target], at: .top, animated: true)
+        if let target = lastChat.firstIndex(where: { $0.message == "여기까지 읽으셨습니다." }) {
+            chatTableView.scrollToRow(at: [0, target], at: .top,
+                                      animated: true)
         } else {
-            chatTableView.scrollToRow(at: [0, lastChat.count], at: .middle, animated: true)
+            chatTableView.scrollToRow(at: [0, lastChat.count], at: .middle,
+                                      animated: true)
         }
         presenter?.viewRoadLastChat()
     }
+    
     func showSocketChat(socketChat: Chat) {
         let isBottom = self.isTableViewSetBottom()
         self.chatList.append(socketChat)
-        self.chatTableView.insertRows(at: [IndexPath(row: self.chatList.count - 1, section: 0)], with: .fade)
+        chatTableView.beginUpdates()
+        self.chatTableView.insertRows(at: [IndexPath(row: self.chatList.count - 1, section: 0)],
+                                      with: .fade)
+        chatTableView.endUpdates()
         if isBottom {
-            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom, animated: true)
+            self.chatTableView
+                .scrollToRow(at: [0, self.chatList.count],
+                             at: .bottom,
+                             animated: true)
         }
     }
     
@@ -104,9 +119,10 @@ extension ChatView: ChatViewProtocol {
         let interval = chatTableView.contentOffset.y
             + chatTableView.visibleSize.height
             - chatTableView.contentSize.height
+            - chatTableView.contentInset.bottom
+        
         print(interval)
-        if interval > -10
-            && interval < 10 {
+        if abs(interval) < 10 {
             return true
         } else {
             return false

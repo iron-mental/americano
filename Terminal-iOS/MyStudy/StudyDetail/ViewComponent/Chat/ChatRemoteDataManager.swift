@@ -20,7 +20,7 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
         guard let baseURL = URL(string: "https://www.terminal-study.tk"),
               let accessToken = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
         manager = SocketManager(socketURL: baseURL,
-                                config: [.log(true),
+                                config: [.log(false),
                                          .compress,
                                          .forceWebsockets(true),
                                          .connectParams(["token": accessToken,
