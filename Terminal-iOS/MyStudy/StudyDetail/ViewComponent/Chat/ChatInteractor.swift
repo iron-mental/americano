@@ -108,8 +108,8 @@ class ChatInteractor: ChatInteractorProtocol {
                 }
                 receiveFromSocketChat.removeFirst()
             }
-            if !receiveFromSocketChat.isEmpty {
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                if !self.receiveFromSocketChat.isEmpty {
                     self.arrangeChat()
                 }
             }
