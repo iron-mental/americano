@@ -14,7 +14,6 @@ class ChatView: UIViewController {
     deinit {
         self.keyboardRemoveObserver()
     }
-    
     var presenter: ChatPresenterProtocol?
     var chatTableView = UITableView()
     var chatList: [Chat] = []
@@ -46,23 +45,23 @@ class ChatView: UIViewController {
             $0.backgroundColor = .appColor(.terminalBackground)
         }
         chatTableView.do {
-            $0.backgroundColor = .appColor(.terminalBackground)
-            $0.delegate = self
-            $0.dataSource = self
             $0.register(ChatInputTableViewCell.self, forCellReuseIdentifier: ChatInputTableViewCell.id)
             $0.register(ChatOutputTableViewCell.self, forCellReuseIdentifier: ChatOutputTableViewCell.id)
+            $0.backgroundColor = .appColor(.terminalBackground)
             $0.separatorStyle = .none
+            $0.delegate = self
+            $0.dataSource = self
         }
         scrollToBottomButton.do {
-            $0.setImage(UIImage(systemName: "chevron.down")?
-                            .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
             $0.tintColor = .white
             $0.backgroundColor = .appColor(.InputViewColor)
+            $0.layer.masksToBounds  = true
+            $0.addTarget(self, action: #selector(scrollToBottom), for: .touchUpInside)
+            $0.setImage(UIImage(systemName: "chevron.down")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
             if !$0.constraints.isEmpty {
                 $0.layer.cornerRadius = $0.constraints[0].constant / 2
             }
-            $0.layer.masksToBounds  = true
-            $0.addTarget(self, action: #selector(scrollToBottom), for: .touchUpInside)
         }
     }
     
@@ -80,11 +79,12 @@ class ChatView: UIViewController {
         scrollToBottomButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.trailingAnchor.constraint(equalTo: chatTableView.trailingAnchor,
-                                         constant: -Terminal.convertWidth(value: 10)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
+                                         constant: -Terminal.convertWidth(value: 25)).isActive = true
             $0.bottomAnchor.constraint(equalTo: chatTableView.bottomAnchor,
                                        constant: -Terminal.convertWidth(value: 10)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
+            
         }
     }
     
@@ -156,7 +156,6 @@ extension ChatView: ChatViewProtocol {
             + chatTableView.visibleSize.height
             - chatTableView.contentSize.height
             - chatTableView.contentInset.bottom
-        print(interval)
         if abs(interval) < 10 {
             return true
         } else {
@@ -203,13 +202,23 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
+        let interval = chatTableView.contentSize.height
+            - (chatTableView.contentOffset.y + chatTableView.visibleSize.height)
+        if interval > 2000 {
+            UIView.animate(withDuration: 0.3) {
+                self.scrollToBottomButton.alpha = 10
+            }
+        } else {
+            UIView.animate(withDuration: 0.2) {
+                self.scrollToBottomButton.alpha = 0
+            }
+        }
     }
 }
 
 extension ChatView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-//        <#code#>
+        //        <#code#>
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
