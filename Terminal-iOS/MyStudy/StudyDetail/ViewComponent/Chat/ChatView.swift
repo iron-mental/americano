@@ -20,7 +20,7 @@ class ChatView: UIViewController {
     var chatList: [Chat] = []
     var keyboardHeight: CGFloat = 0.0
     var chatTableViewConstraint: NSLayoutConstraint?
-    var scrollToBottom
+    var scrollToBottomButton = UIButton()
     var isEdting = false
     
     override func viewDidLoad() {
@@ -53,10 +53,22 @@ class ChatView: UIViewController {
             $0.register(ChatOutputTableViewCell.self, forCellReuseIdentifier: ChatOutputTableViewCell.id)
             $0.separatorStyle = .none
         }
+        scrollToBottomButton.do {
+            $0.setImage(UIImage(systemName: "chevron.down")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
+            $0.tintColor = .white
+            $0.backgroundColor = .appColor(.InputViewColor)
+            if !$0.constraints.isEmpty {
+                $0.layer.cornerRadius = $0.constraints[0].constant / 2
+            }
+            $0.layer.masksToBounds  = true
+            $0.addTarget(self, action: #selector(scrollToBottom), for: .touchUpInside)
+        }
     }
     
     func layout() {
-        [chatTableView].forEach { view.addSubview($0) }
+        [chatTableView, scrollToBottomButton].forEach { view.addSubview($0) }
+        
         chatTableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         chatTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +76,15 @@ class ChatView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
             chatTableViewConstraint?.isActive = true
+        }
+        scrollToBottomButton.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.trailingAnchor.constraint(equalTo: chatTableView.trailingAnchor,
+                                         constant: -Terminal.convertWidth(value: 10)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: chatTableView.bottomAnchor,
+                                       constant: -Terminal.convertWidth(value: 10)).isActive = true
         }
     }
     
@@ -95,6 +116,11 @@ class ChatView: UIViewController {
             self.view.layoutIfNeeded()
         }
         chatTableView.bounces = true
+    }
+    
+    @objc func scrollToBottom() {
+        self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
+                                       animated: false)
     }
 }
 
@@ -177,7 +203,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        view.endEditing(true)
+        
     }
 }
 
