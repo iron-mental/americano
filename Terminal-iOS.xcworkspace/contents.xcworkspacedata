@@ -3,6 +3,7 @@
    version = "1.0">
    <FileRef
 <<<<<<< HEAD
+<<<<<<< HEAD
       location = "group:Terminal-iOS/CoreDataModel/CoreUserInfo+CoreDataClass.swift">
    </FileRef>
    <FileRef
@@ -15,6 +16,8 @@
 >>>>>>> feat : coredata에 chat 저장로직 구성
    </FileRef>
    <FileRef
+=======
+>>>>>>> feat : pod 에러 해결
       location = "group:Terminal-iOS.xcodeproj">
    </FileRef>
    <FileRef

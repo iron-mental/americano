@@ -14,6 +14,7 @@ class ChatView: UIViewController {
     deinit {
         self.keyboardRemoveObserver()
     }
+    
     var presenter: ChatPresenterProtocol?
     var chatTableView = UITableView()
     var chatList: [Chat] = []
@@ -50,7 +51,6 @@ class ChatView: UIViewController {
             $0.register(ChatInputTableViewCell.self, forCellReuseIdentifier: ChatInputTableViewCell.id)
             $0.register(ChatOutputTableViewCell.self, forCellReuseIdentifier: ChatOutputTableViewCell.id)
             $0.separatorStyle = .none
-            
         }
     }
     
@@ -112,12 +112,10 @@ extension ChatView: ChatViewProtocol {
     }
     
     func showSocketChat(socketChat: Chat) {
-        let isBottom = self.isTableViewSetBottom()
+        let isBottom = isTableViewSetBottom()
         self.chatList.append(socketChat)
-        chatTableView.beginUpdates()
         self.chatTableView.insertRows(at: [IndexPath(row: self.chatList.count - 1, section: 0)],
                                       with: .fade)
-        chatTableView.endUpdates()
         if isBottom {
             self.chatTableView
                 .scrollToRow(at: [0, self.chatList.count],
@@ -131,8 +129,7 @@ extension ChatView: ChatViewProtocol {
             + chatTableView.visibleSize.height
             - chatTableView.contentSize.height
             - chatTableView.contentInset.bottom
-        
-        print(interval)
+
         if abs(interval) < 10 {
             return true
         } else {
@@ -176,11 +173,17 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
             inputCell.setData(chat: chatList[indexPath.row])
             return inputCell
         }
-        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
 }
 
 extension ChatView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        <#code#>
+    }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let inputChatMessage = textField.text else { return true }
         presenter?.emitButtonDidTap(message: inputChatMessage)
