@@ -57,9 +57,9 @@ class ChatInputTableViewCell: UITableViewCell {
     func convertTime(timeStamp: Int) -> String {
         let calender = Calendar.current
         let date = Date(timeIntervalSince1970: TimeInterval(timeStamp) / 1000)
-        let hour = calender.component(.hour, from: date)
-        let minute = calender.component(.minute, from: date)
-        return "[\(hour):\(minute)]"
+        let hour = "\(calender.component(.hour, from: date))"
+        let minute = "\(calender.component(.minute, from: date))"
+        return "[\(hour.count == 2 ? hour : "0"+hour):\(minute.count == 2 ? minute : "0"+minute)]"
     }
     
     required init?(coder: NSCoder) {
