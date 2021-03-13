@@ -47,12 +47,13 @@ class ChatView: UIViewController {
             $0.register(ChatInputTableViewCell.self, forCellReuseIdentifier: ChatInputTableViewCell.id)
             $0.register(ChatOutputTableViewCell.self, forCellReuseIdentifier: ChatOutputTableViewCell.id)
             $0.separatorStyle = .none
+            
         }
     }
     
     func layout() {
         [chatTableView].forEach { view.addSubview($0) }
-        chatTableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        chatTableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         chatTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -63,6 +64,7 @@ class ChatView: UIViewController {
     }
     
     func tableViewAddConstant() {
+        
     }
     
     // MARK: @objc
@@ -71,18 +73,28 @@ class ChatView: UIViewController {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
+        
+//        chatTableView.bounces = false
+//        chatTableViewConstraint?.constant = -keyboardHeight
         self.chatTableView.setBottomInset(to: self.keyboardHeight)
-        DispatchQueue.main.async {
-            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .middle,
-                                      animated: true)
-        }
-        UIView.animate(withDuration: 0.1) {
+        UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
+        self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .middle,
+                                  animated: false)
     }
     
     @objc func keyboardWillHide() {
+        chatTableView.bounces = false
         chatTableView.setBottomInset(to: 0.0)
+//        print(chatTableView.visibleCells.endIndex)
+//        chatTableViewConstraint?.constant = 0
+        UIView.animate(withDuration: 1) {
+            self.view.layoutIfNeeded()
+        }
+//        self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .middle,
+//                                  animated: false)
+        chatTableView.bounces = true
     }
 }
 

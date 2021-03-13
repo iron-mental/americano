@@ -28,6 +28,7 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
+        //작업간 슈가 코드 지우기 ㄴㄴ
         //        CoreDataManager.shared.tempRemoveAllChat()
     }
     
@@ -46,7 +47,7 @@ class ChatInteractor: ChatInteractorProtocol {
     }
     
     func receiveMessage(message: Chat) {
-        //chat from socket
+        //소켓으로 넘어온 챗
         receiveFromSocketChat.append(message)
         arrangeChat()
     }
@@ -63,6 +64,7 @@ class ChatInteractor: ChatInteractorProtocol {
                     //로컬 + 리모트 채팅을 프레젠터로 패스
                     if !lastLocalChat.isEmpty
                         && !remoteChat.isEmpty {
+                        //필요할 때만 넣어줌 (임시 뷰잉이기에 실제로 넣지않음)
                         lastLocalChat.append(Chat(studyID: studyID!,
                                                   nickname: "__SYSTEM__",
                                                   message: "여기까지 읽으셨습니다.",
@@ -85,14 +87,14 @@ class ChatInteractor: ChatInteractorProtocol {
     func mergeChatFromSocket() {
         mergeChatFromSocketFlag = true
         arrangeChatTime = DispatchTime.now()
-        DispatchQueue.main.asyncAfter(deadline: arrangeChatTime! +  0.6) {
+        DispatchQueue.main.asyncAfter(deadline: arrangeChatTime! +  0.251) {
             self.arrangeChat()
         }
     }
     
     func arrangeChat() {
         guard let distance = arrangeChatTime?.distance(to: DispatchTime.now()).toDouble() else { return }
-        if distance >= 0.5 {
+        if distance >= 0.25 {
             arrangeChatTime = DispatchTime.now()
             if mergeChatFromSocketFlag == true
                 && !receiveFromSocketChat.isEmpty {
@@ -107,7 +109,7 @@ class ChatInteractor: ChatInteractorProtocol {
                 }
                 receiveFromSocketChat.removeFirst()
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) {
                 if !self.receiveFromSocketChat.isEmpty {
                     self.arrangeChat()
                 }
