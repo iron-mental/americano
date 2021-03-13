@@ -18,9 +18,11 @@ class ChatView: UIViewController {
     var chatTableView = UITableView()
     var chatList: [Chat] = []
     var keyboardHeight: CGFloat = 0.0
-    var chatTableViewConstraint: NSLayoutConstraint?
+    var textFieldConstraint: NSLayoutConstraint?
+    var tableViewConstraint: NSLayoutConstraint?
     var scrollToBottomButton = UIButton()
     var isEdting = false
+//    var inputTextField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,7 @@ class ChatView: UIViewController {
             $0.separatorStyle = .none
             $0.delegate = self
             $0.dataSource = self
+            $0.bounces = false
         }
         scrollToBottomButton.do {
             $0.tintColor = .white
@@ -63,18 +66,30 @@ class ChatView: UIViewController {
                 $0.layer.cornerRadius = $0.constraints[0].constant / 2
             }
         }
+//        inputTextField.do {
+//            $0.backgroundColor = .cyan
+//            $0.delegate = self
+//        }
     }
     
     func layout() {
         [chatTableView, scrollToBottomButton].forEach { view.addSubview($0) }
         
-        chatTableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+//        textFieldConstraint = inputTextField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+//        inputTextField.do {
+//            $0.translatesAutoresizingMaskIntoConstraints = false
+//            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+//            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+//            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
+//            textFieldConstraint?.isActive = true
+//        }
+        tableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         chatTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            chatTableViewConstraint?.isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            tableViewConstraint?.isActive = true
         }
         scrollToBottomButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +99,6 @@ class ChatView: UIViewController {
                                        constant: -Terminal.convertWidth(value: 10)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
-            
         }
     }
     
@@ -99,7 +113,7 @@ class ChatView: UIViewController {
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
         let isBottom = isTableViewSetBottom()
-        chatTableViewConstraint?.constant = -keyboardHeight
+        tableViewConstraint?.constant = -keyboardHeight
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
@@ -111,7 +125,7 @@ class ChatView: UIViewController {
     
     @objc func keyboardWillHide() {
         chatTableView.bounces = false
-        chatTableViewConstraint?.constant = 0
+        tableViewConstraint?.constant = 0
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
@@ -130,10 +144,10 @@ extension ChatView: ChatViewProtocol {
         chatTableView.reloadData()
         if let target = lastChat.firstIndex(where: { $0.message == "여기까지 읽으셨습니다." }) {
             chatTableView.scrollToRow(at: [0, target], at: .top,
-                                      animated: true)
+                                      animated: false)
         } else {
-            chatTableView.scrollToRow(at: [0, lastChat.count], at: .middle,
-                                      animated: true)
+            chatTableView.scrollToRow(at: [0, lastChat.count], at: .bottom,
+                                      animated: false)
         }
         presenter?.viewRoadLastChat()
     }
@@ -141,7 +155,7 @@ extension ChatView: ChatViewProtocol {
     func showSocketChat(socketChat: Chat) {
         let isBottom = isTableViewSetBottom()
         self.chatList.append(socketChat)
-        self.chatTableView.insertRows(at: [IndexPath(row: self.chatList.count - 1, section: 0)],
+        self.chatTableView.insertRows(at: [IndexPath(row: self.chatList.count, section: 0)],
                                       with: .fade)
         if isBottom {
             self.chatTableView
@@ -181,6 +195,9 @@ extension ChatView: ChatViewProtocol {
     
 }
 extension ChatView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        view.endEditing(true)
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count + 1
     }
@@ -189,7 +206,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == chatList.count {
             let outputCell = tableView
                 .dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id,
-                                     for: indexPath)as! ChatOutputTableViewCell
+                                     for: indexPath) as! ChatOutputTableViewCell
             outputCell.textInput.delegate = self
             return outputCell
         } else {
