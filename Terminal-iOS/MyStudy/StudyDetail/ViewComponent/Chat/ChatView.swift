@@ -22,16 +22,7 @@ class ChatView: UIViewController {
     var tableViewConstraint: NSLayoutConstraint?
     var scrollToBottomButton = UIButton()
     var isEdting = false
-    var panGesture = UIPanGestureRecognizer()
 //    var inputTextField = UITextField()
-    var test1: NSValue?
-    var test2: NSValue?
-    var test3: NSValue?
-    var test4: NSValue?
-    var test5: NSValue?
-    var test6: NSValue?
-    var test7: NSValue?
-    var test8: NSValue?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +37,10 @@ class ChatView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
-//        self.hideKeyboardWhenTappedAround()
+        self.hideKeyboardWhenTappedAround()
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
     func attribute() {
@@ -62,8 +54,7 @@ class ChatView: UIViewController {
             $0.separatorStyle = .none
             $0.delegate = self
             $0.dataSource = self
-            $0.bounces = false
-            $0.addGestureRecognizer(panGesture)
+//            $0.bounces = false
             $0.keyboardDismissMode = .interactive
         }
         scrollToBottomButton.do {
@@ -76,10 +67,6 @@ class ChatView: UIViewController {
             if !$0.constraints.isEmpty {
                 $0.layer.cornerRadius = $0.constraints[0].constant / 2
             }
-        }
-        panGesture.do {
-            $0.addTarget(self, action: #selector(panGestureAction(_: )))
-            $0.delegate = self
         }
 //        inputTextField.do {
 //            $0.backgroundColor = .cyan
@@ -129,7 +116,7 @@ class ChatView: UIViewController {
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
         let isBottom = isTableViewSetBottom()
-        tableViewConstraint?.constant = -keyboardHeight
+        chatTableView.setBottomInset(to: keyboardHeight)
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
@@ -142,7 +129,7 @@ class ChatView: UIViewController {
     @objc func keyboardWillHide() {
         let isBottom = isTableViewSetBottom()
         chatTableView.bounces = false
-        tableViewConstraint?.constant = 0
+        chatTableView.setBottomInset(to: 0.0)
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
@@ -153,17 +140,13 @@ class ChatView: UIViewController {
         chatTableView.bounces = true
     }
     
+    @objc func keyboardDidHide() {
+        chatTableView.setBottomInset(to: 0.0)
+    }
+    
     @objc func scrollToBottom() {
         self.chatTableView.scrollToRow(at: [0, chatList.count], at: .bottom,
                                        animated: false)
-    }
-    
-    @objc func panGestureAction(_ recognizer: UIPanGestureRecognizer) {
-        let position = recognizer.location(in: view)
-        if position.y - 50
-            > keyboardHeight {
-            print(recognizer.velocity(in: view).y)
-        }
     }
 }
 
@@ -224,10 +207,6 @@ extension ChatView: ChatViewProtocol {
     
 }
 extension ChatView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        view.endEditing(true)
-//        guard let outputCell = chatTableView.cellForRow(at: [0, chatList.count]) as? ChatOutputTableViewCell else { return }
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count + 1
     }

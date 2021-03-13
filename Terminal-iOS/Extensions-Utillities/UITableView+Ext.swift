@@ -26,4 +26,3 @@ extension UITableView {
         self.scrollIndicatorInsets = edgeInset
     }
 }
-

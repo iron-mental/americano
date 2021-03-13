@@ -11,6 +11,7 @@ import UIKit
 class ChatOutputTableViewCell: UITableViewCell {
     static var id = "ChatOutputTableViewCell"
     var textInput = UITextField()
+    var dallarLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,18 +27,27 @@ class ChatOutputTableViewCell: UITableViewCell {
         textInput.do {
             $0.textColor = .white
             $0.font = UIFont.monospacedSystemFont(ofSize: textInput.font!.pointSize, weight: UIFont.Weight.regular)
-            $0.placeholder = "_"
             $0.tintColor = .none
+        }
+        dallarLabel.do {
+            $0.textColor = .white
+            $0.text = "$"
+            $0.font = UIFont.monospacedSystemFont(ofSize: textInput.font!.pointSize, weight: UIFont.Weight.regular)
         }
     }
     
     func layout() {
-        [textInput].forEach { contentView.addSubview($0) }
+        [dallarLabel, textInput].forEach { contentView.addSubview($0) }
         
+        dallarLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
+        }
         textInput.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor, constant: 3).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         }
     }
