@@ -20,6 +20,7 @@ class ChatView: UIViewController {
     var chatList: [Chat] = []
     var keyboardHeight: CGFloat = 0.0
     var chatTableViewConstraint: NSLayoutConstraint?
+    var scrollToBottom
     var isEdting = false
     
     override func viewDidLoad() {
@@ -77,7 +78,7 @@ class ChatView: UIViewController {
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
         let isBottom = isTableViewSetBottom()
-        self.chatTableView.setBottomInset(to: self.keyboardHeight)
+        chatTableViewConstraint?.constant = -keyboardHeight
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
@@ -89,7 +90,7 @@ class ChatView: UIViewController {
     
     @objc func keyboardWillHide() {
         chatTableView.bounces = false
-        chatTableView.setBottomInset(to: 0.0)
+        chatTableViewConstraint?.constant = 0
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
@@ -129,7 +130,7 @@ extension ChatView: ChatViewProtocol {
             + chatTableView.visibleSize.height
             - chatTableView.contentSize.height
             - chatTableView.contentInset.bottom
-
+        print(interval)
         if abs(interval) < 10 {
             return true
         } else {
@@ -176,14 +177,15 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        view.endEditing(true)
+//        view.endEditing(true)
     }
 }
 
 extension ChatView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        <#code#>
+//        <#code#>
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let inputChatMessage = textField.text else { return true }
         presenter?.emitButtonDidTap(message: inputChatMessage)
