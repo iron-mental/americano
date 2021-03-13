@@ -36,11 +36,9 @@ class ChatOutputTableViewCell: UITableViewCell {
         
         textInput.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
     }
     

@@ -22,7 +22,16 @@ class ChatView: UIViewController {
     var tableViewConstraint: NSLayoutConstraint?
     var scrollToBottomButton = UIButton()
     var isEdting = false
+    var panGesture = UIPanGestureRecognizer()
 //    var inputTextField = UITextField()
+    var test1: NSValue?
+    var test2: NSValue?
+    var test3: NSValue?
+    var test4: NSValue?
+    var test5: NSValue?
+    var test6: NSValue?
+    var test7: NSValue?
+    var test8: NSValue?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +46,7 @@ class ChatView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
     }
@@ -54,6 +63,8 @@ class ChatView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.bounces = false
+            $0.addGestureRecognizer(panGesture)
+            $0.keyboardDismissMode = .interactive
         }
         scrollToBottomButton.do {
             $0.tintColor = .white
@@ -65,6 +76,10 @@ class ChatView: UIViewController {
             if !$0.constraints.isEmpty {
                 $0.layer.cornerRadius = $0.constraints[0].constant / 2
             }
+        }
+        panGesture.do {
+            $0.addTarget(self, action: #selector(panGestureAction(_: )))
+            $0.delegate = self
         }
 //        inputTextField.do {
 //            $0.backgroundColor = .cyan
@@ -83,7 +98,7 @@ class ChatView: UIViewController {
 //            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
 //            textFieldConstraint?.isActive = true
 //        }
-        tableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        tableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         chatTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -109,6 +124,7 @@ class ChatView: UIViewController {
     // MARK: @objc
     @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
@@ -124,17 +140,30 @@ class ChatView: UIViewController {
     }
     
     @objc func keyboardWillHide() {
+        let isBottom = isTableViewSetBottom()
         chatTableView.bounces = false
         tableViewConstraint?.constant = 0
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
+        if isBottom {
+            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
+                                           animated: false)
+        }
         chatTableView.bounces = true
     }
     
     @objc func scrollToBottom() {
-        self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
+        self.chatTableView.scrollToRow(at: [0, chatList.count], at: .bottom,
                                        animated: false)
+    }
+    
+    @objc func panGestureAction(_ recognizer: UIPanGestureRecognizer) {
+        let position = recognizer.location(in: view)
+        if position.y - 50
+            > keyboardHeight {
+            print(recognizer.velocity(in: view).y)
+        }
     }
 }
 
@@ -144,10 +173,10 @@ extension ChatView: ChatViewProtocol {
         chatTableView.reloadData()
         if let target = lastChat.firstIndex(where: { $0.message == "여기까지 읽으셨습니다." }) {
             chatTableView.scrollToRow(at: [0, target], at: .top,
-                                      animated: false)
+                                      animated: true)
         } else {
-            chatTableView.scrollToRow(at: [0, lastChat.count], at: .bottom,
-                                      animated: false)
+            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .middle,
+                                      animated: true)
         }
         presenter?.viewRoadLastChat()
     }
@@ -155,11 +184,11 @@ extension ChatView: ChatViewProtocol {
     func showSocketChat(socketChat: Chat) {
         let isBottom = isTableViewSetBottom()
         self.chatList.append(socketChat)
-        self.chatTableView.insertRows(at: [IndexPath(row: self.chatList.count, section: 0)],
-                                      with: .fade)
+        self.chatTableView.insertRows(at: [IndexPath(row: chatList.count - 1, section: 0)],
+                                      with: .middle)
         if isBottom {
             self.chatTableView
-                .scrollToRow(at: [0, self.chatList.count],
+                .scrollToRow(at: [0, chatList.count],
                              at: .bottom,
                              animated: true)
         }
@@ -197,6 +226,7 @@ extension ChatView: ChatViewProtocol {
 extension ChatView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         view.endEditing(true)
+//        guard let outputCell = chatTableView.cellForRow(at: [0, chatList.count]) as? ChatOutputTableViewCell else { return }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count + 1
@@ -206,7 +236,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
         if indexPath.row == chatList.count {
             let outputCell = tableView
                 .dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id,
-                                     for: indexPath) as! ChatOutputTableViewCell
+                                     for: indexPath)as! ChatOutputTableViewCell
             outputCell.textInput.delegate = self
             return outputCell
         } else {
@@ -242,6 +272,13 @@ extension ChatView: UITextFieldDelegate {
         guard let inputChatMessage = textField.text else { return true }
         presenter?.emitButtonDidTap(message: inputChatMessage)
         textField.text = ""
+        return true
+    }
+}
+
+extension ChatView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
 }
