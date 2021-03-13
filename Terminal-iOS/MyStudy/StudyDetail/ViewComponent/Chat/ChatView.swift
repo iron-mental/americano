@@ -11,6 +11,9 @@ import SocketIO
 import SwiftyJSON
 
 class ChatView: UIViewController {
+    deinit {
+        self.keyboardRemoveObserver()
+    }
     var presenter: ChatPresenterProtocol?
     var chatTableView = UITableView()
     var chatList: [Chat] = []
@@ -73,27 +76,23 @@ class ChatView: UIViewController {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
-        
-//        chatTableView.bounces = false
-//        chatTableViewConstraint?.constant = -keyboardHeight
+        let isBottom = isTableViewSetBottom()
         self.chatTableView.setBottomInset(to: self.keyboardHeight)
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
-        self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .middle,
-                                  animated: false)
+        if isBottom {
+            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
+                                           animated: false)
+        }
     }
     
     @objc func keyboardWillHide() {
         chatTableView.bounces = false
         chatTableView.setBottomInset(to: 0.0)
-//        print(chatTableView.visibleCells.endIndex)
-//        chatTableViewConstraint?.constant = 0
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
-//        self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .middle,
-//                                  animated: false)
         chatTableView.bounces = true
     }
 }
