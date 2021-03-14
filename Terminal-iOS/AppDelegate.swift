@@ -83,10 +83,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "") as? MyStudyDetailView else { return }
         
         switch event {
-        
+        case .chat:
+            studyDetailView.viewState = .Chat
+            goView = studyDetailView
         case .studyUpdate,
              .studyHostDelegate,
-             .chat,
              .applyAllowed:
             studyDetailView.viewState = .StudyDetail
             goView = studyDetailView
