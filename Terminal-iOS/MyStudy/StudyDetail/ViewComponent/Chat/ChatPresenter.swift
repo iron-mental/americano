@@ -43,6 +43,10 @@ class ChatPresenter: ChatPresenterProtocol {
         view?.showSocketChat(socketChat: chat)
     }
     
+    func getParticipateNickname(nicknameList: [ChatParticipate]) {
+        view?.nicknameSet(nicknameList: nicknameList)
+    }
+    
     func showError(message: String) {
         view?.hideLoading()
         view?.showError(message: message)

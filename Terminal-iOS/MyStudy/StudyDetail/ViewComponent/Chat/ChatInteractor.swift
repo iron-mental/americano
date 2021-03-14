@@ -28,7 +28,7 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-        //작업간 슈가 코드 지우기 ㄴㄴ
+//        작업간 슈가 코드 지우기 ㄴㄴ
 //                CoreDataManager.shared.tempRemoveAllChat()
     }
     
@@ -55,25 +55,29 @@ class ChatInteractor: ChatInteractorProtocol {
     func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>) {
         switch lastRemoteChat.result {
         case true:
-            if let remoteChat = lastRemoteChat.data?.chatList {
-                if !remoteChat.isEmpty {
-                    // 기준이 될 라스트 타임스탬프 할당
-                    lastTimeStamp = remoteChat.last?.date
-                    // CoreDataManager에 lastRemoteChat 저장
-                    CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: remoteChat)
-                    // 로컬 + 리모트 채팅을 프레젠터로 패스
-                    if !lastLocalChat.isEmpty
-                        && !remoteChat.isEmpty {
-                        // 필요할 때만 넣어줌 (임시 뷰잉이기에 실제로 넣지않음)
-                        lastLocalChat.append(Chat(studyID: studyID!,
-                                                  nickname: "__SYSTEM__",
-                                                  message: "여기까지 읽으셨습니다.",
-                                                  date: 0))
+            if let remoteChatInfo = lastRemoteChat.data {
+                let remoteChat = remoteChatInfo.chatList
+                let participateNickname = remoteChatInfo.userList
+                presenter?.getParticipateNickname(nicknameList: participateNickname)
+                    if !remoteChat.isEmpty {
+                        // 기준이 될 라스트 타임스탬프 할당
+                        lastTimeStamp = remoteChat.last?.date
+                        // CoreDataManager에 lastRemoteChat 저장
+                        CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: remoteChat)
+                        // 로컬 + 리모트 채팅을 프레젠터로 패스
+                        if !lastLocalChat.isEmpty
+                            && !remoteChat.isEmpty {
+                            // 필요할 때만 넣어줌 (임시 뷰잉이기에 실제로 넣지않음)
+                            lastLocalChat.append(Chat(studyID: studyID!,
+                                                      nickname: "__SYSTEM__",
+                                                      message: "여기까지 읽으셨습니다.",
+                                                      date: 0))
+                        }
+                        presenter?.getLastChatResult(lastChat: lastLocalChat + remoteChat)
+                    } else {
+                        presenter?.getLastChatResult(lastChat: lastLocalChat)
                     }
-                    presenter?.getLastChatResult(lastChat: lastLocalChat + remoteChat)
-                } else {
-                    presenter?.getLastChatResult(lastChat: lastLocalChat)
-                }
+                
             }
         case false:
             // 리모트로부터 이전 채팅을 받아오지 못했을 때

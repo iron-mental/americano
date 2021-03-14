@@ -182,6 +182,10 @@ extension ChatView: ChatViewProtocol {
         }
     }
     
+    func nicknameSet(nicknameList: [ChatParticipate]) {
+        
+    }
+    
     func showMessage(message: String) {
         
     }

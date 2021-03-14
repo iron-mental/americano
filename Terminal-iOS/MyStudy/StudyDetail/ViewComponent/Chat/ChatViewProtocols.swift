@@ -16,6 +16,7 @@ protocol ChatViewProtocol: class {
     func showLastChat(lastChat: [Chat])
     func showSocketChat(socketChat: [Chat])
     func showMessage(message: String)
+    func nicknameSet(nicknameList: [ChatParticipate])
     func showLoading()
     func hideLoading()
     func showError(message: String)
@@ -54,6 +55,7 @@ protocol ChatPresenterProtocol: class {
     func showReceiveMessage(message: String)
     func getLastChatResult(lastChat: [Chat])
     func arrangedChatFromChat(chat: [Chat])
+    func getParticipateNickname(nicknameList: [ChatParticipate])
     func showError(message: String)
 }
 
