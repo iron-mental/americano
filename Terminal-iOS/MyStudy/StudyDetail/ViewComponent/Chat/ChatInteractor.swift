@@ -18,6 +18,7 @@ class ChatInteractor: ChatInteractorProtocol {
     var lastTimeStamp: Int?
     var mergeChatFromSocketFlag = false
     var arrangeChatTime: DispatchTime?
+    var nicknameList: [ChatParticipate] = []
     
     func connectSocket() {
         getLastLocalChat {
@@ -57,8 +58,9 @@ class ChatInteractor: ChatInteractorProtocol {
         case true:
             if let remoteChatInfo = lastRemoteChat.data {
                 let remoteChat = remoteChatInfo.chatList
-                let participateNickname = remoteChatInfo.userList
-                presenter?.getParticipateNickname(nicknameList: participateNickname)
+                nicknameList = remoteChatInfo.userList
+                presenter?.getParticipateNickname(nicknameList: nicknameList)
+                
                     if !remoteChat.isEmpty {
                         // 기준이 될 라스트 타임스탬프 할당
                         lastTimeStamp = remoteChat.last?.date
@@ -69,13 +71,16 @@ class ChatInteractor: ChatInteractorProtocol {
                             && !remoteChat.isEmpty {
                             // 필요할 때만 넣어줌 (임시 뷰잉이기에 실제로 넣지않음)
                             lastLocalChat.append(Chat(studyID: studyID!,
+                                                      userID: 0,
                                                       nickname: "__SYSTEM__",
                                                       message: "여기까지 읽으셨습니다.",
                                                       date: 0))
                         }
-                        presenter?.getLastChatResult(lastChat: lastLocalChat + remoteChat)
+                        presenter?.getLastChatResult(lastChat:
+                                                        setNickname(chatList: lastLocalChat + remoteChat))
                     } else {
-                        presenter?.getLastChatResult(lastChat: lastLocalChat)
+                        presenter?.getLastChatResult(lastChat:
+                                                        setNickname(chatList: lastLocalChat))
                     }
                 
             }
@@ -115,7 +120,8 @@ class ChatInteractor: ChatInteractorProtocol {
                     }
                     receiveFromSocketChat.removeFirst()
                 }
-                presenter?.arrangedChatFromChat(chat: chatArray)
+                
+                presenter?.arrangedChatFromChat(chat: setNickname(chatList: chatArray))
                 CoreDataManager.shared.saveChatInfo(studyID: studyID!,
                                                     chatList: chatArray)
             }
@@ -125,6 +131,19 @@ class ChatInteractor: ChatInteractorProtocol {
                 self.arrangeChat()
             }
         }
+    }
+    
+    func setNickname(chatList: [Chat]) -> [Chat] {
+        chatList.forEach { chatItem in
+            nicknameList.forEach { nicknameItem in
+                if chatItem.userID == nicknameItem.userID {
+//                    if let currentNickname = nicknameItem.nickname {
+                        chatItem.nickname = nicknameItem.nickname 
+//                    }
+                }
+            }
+        }
+        return chatList
     }
     
     func sessionTaskError(message: String) {

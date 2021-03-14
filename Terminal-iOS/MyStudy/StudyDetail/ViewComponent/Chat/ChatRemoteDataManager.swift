@@ -88,9 +88,9 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                             if let data = response.data {
                                 do {
                                     // 실패 메세지
-                                    let result = try JSONDecoder().decode(BaseResponse<[Chat]>.self, from: data)
+                                    let result = try JSONDecoder().decode(BaseResponse<RemoteChatInfo>.self, from: data)
                                     if result.message != nil {
-//                                        self.interactor?.receiveLastChat(lastRemoteChat: result)
+                                        self.interactor?.receiveLastChat(lastRemoteChat: result)
                                     }
                                 } catch {
                                     

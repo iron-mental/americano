@@ -11,7 +11,7 @@ import Foundation
 public class Chat: NSObject, Codable, NSCoding {
     let studyID: Int
     let userID: Int
-    let nickname: String?
+    var nickname: String?
     let message: String
     let date: Int
     
