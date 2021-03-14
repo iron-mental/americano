@@ -17,6 +17,9 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     var manager: SocketManager?
     
     func socketConnect(studyID: Int, date: Int? = nil) {
+        
+        
+        
         guard let baseURL = URL(string: "https://www.terminal-study.tk"),
               let accessToken = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
         manager = SocketManager(socketURL: baseURL,
@@ -27,6 +30,14 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                                                          "study_id": studyID])])
         chatSocket = manager!.socket(forNamespace: "/terminal")
         chatSocket.connect()
+        
+        
+        
+        
+        
+        
+        
+        
         
         chatSocket.on("message") { array, _ in
             do {
@@ -85,7 +96,7 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                         default:
                             if let data = response.data {
                                 do {
-                                    //실패 메세지
+                                    // 실패 메세지
                                     let result = try JSONDecoder().decode(BaseResponse<[Chat]>.self, from: data)
                                     if result.message != nil {
                                         self.interactor?.receiveLastChat(lastRemoteChat: result)

@@ -22,7 +22,6 @@ class ChatView: UIViewController {
     var tableViewConstraint: NSLayoutConstraint?
     var scrollToBottomButton = UIButton()
     var isEdting = false
-//    var inputTextField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +53,6 @@ class ChatView: UIViewController {
             $0.separatorStyle = .none
             $0.delegate = self
             $0.dataSource = self
-//            $0.bounces = false
             $0.keyboardDismissMode = .interactive
         }
         scrollToBottomButton.do {
@@ -68,23 +66,11 @@ class ChatView: UIViewController {
                 $0.layer.cornerRadius = $0.constraints[0].constant / 2
             }
         }
-//        inputTextField.do {
-//            $0.backgroundColor = .cyan
-//            $0.delegate = self
-//        }
     }
     
     func layout() {
         [chatTableView, scrollToBottomButton].forEach { view.addSubview($0) }
         
-//        textFieldConstraint = inputTextField.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-//        inputTextField.do {
-//            $0.translatesAutoresizingMaskIntoConstraints = false
-//            $0.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-//            $0.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-//            $0.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//            textFieldConstraint?.isActive = true
-//        }
         tableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         chatTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -159,16 +145,23 @@ extension ChatView: ChatViewProtocol {
                                       animated: true)
         } else {
             self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .middle,
-                                      animated: true)
+                                           animated: true)
         }
         presenter?.viewRoadLastChat()
     }
     
-    func showSocketChat(socketChat: Chat) {
+    func showSocketChat(socketChat: [Chat]) {
         let isBottom = isTableViewSetBottom()
-        self.chatList.append(socketChat)
-        self.chatTableView.insertRows(at: [IndexPath(row: chatList.count - 1, section: 0)],
-                                      with: .middle)
+        if socketChat.count == 1 {
+            self.chatList.append(socketChat.first!)
+            self.chatTableView.insertRows(at: [IndexPath(row: chatList.count - 1, section: 0)],
+                                          with: .middle)
+        } else {
+            self.chatList += socketChat
+            let indexPaths = (0 ..< socketChat.count)
+                .map { IndexPath(row: (chatList.count - socketChat.count) + $0, section: 0) }
+            self.chatTableView.insertRows(at: indexPaths, with: .middle)
+        }
         if isBottom {
             self.chatTableView
                 .scrollToRow(at: [0, chatList.count],
@@ -243,9 +236,6 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ChatView: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        //        <#code#>
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let inputChatMessage = textField.text else { return true }

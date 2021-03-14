@@ -14,7 +14,7 @@ protocol ChatViewProtocol: class {
     //PRESENTER -> VIEW
     func viewLoad() 
     func showLastChat(lastChat: [Chat])
-    func showSocketChat(socketChat: Chat)
+    func showSocketChat(socketChat: [Chat])
     func showMessage(message: String)
     func showLoading()
     func hideLoading()
@@ -53,7 +53,7 @@ protocol ChatPresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func showReceiveMessage(message: String)
     func getLastChatResult(lastChat: [Chat])
-    func arrangedChatFromChat(chat: Chat)
+    func arrangedChatFromChat(chat: [Chat])
     func showError(message: String)
 }
 
