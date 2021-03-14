@@ -29,7 +29,7 @@ class ChatInteractor: ChatInteractorProtocol {
             }
         }
         //작업간 슈가 코드 지우기 ㄴㄴ
-        //        CoreDataManager.shared.tempRemoveAllChat()
+//                CoreDataManager.shared.tempRemoveAllChat()
     }
     
     func emit(message: String) {
@@ -52,10 +52,10 @@ class ChatInteractor: ChatInteractorProtocol {
         arrangeChat()
     }
     
-    func receiveLastChat(lastRemoteChat: BaseResponse<[Chat]>) {
+    func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>) {
         switch lastRemoteChat.result {
         case true:
-            if let remoteChat = lastRemoteChat.data {
+            if let remoteChat = lastRemoteChat.data?.chatList {
                 if !remoteChat.isEmpty {
                     // 기준이 될 라스트 타임스탬프 할당
                     lastTimeStamp = remoteChat.last?.date
@@ -100,8 +100,6 @@ class ChatInteractor: ChatInteractorProtocol {
                 // 소켓으로 넘어온 채팅이 있으면서
                 && mergeChatFromSocketFlag {
                 // 뷰에 과거채팅이 준비되어있을때
-                //            if receiveFromSocketChat.count > 1 {
-                // 소켓으로 넘어온 챗이 두개 이상일 때
                 var chatArray: [Chat] = []
                 while !receiveFromSocketChat.isEmpty {
                     let first = receiveFromSocketChat.first!

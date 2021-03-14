@@ -35,7 +35,7 @@ protocol ChatInteractorProtocol: class {
     
     //remoteDataManager -> Interactor
     func receiveMessage(message: Chat)
-    func receiveLastChat(lastRemoteChat: BaseResponse<[Chat]>)
+    func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>)
     func sessionTaskError(message: String)
 }
 

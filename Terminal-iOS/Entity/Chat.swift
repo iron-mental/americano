@@ -10,11 +10,11 @@ import Foundation
 
 public class Chat: NSObject, Codable, NSCoding {
     let studyID: Int
-    let nickname: String
+    let nickname: String?
     let message: String
     let date: Int
     
-    init(studyID: Int, nickname: String, message: String, date: Int) {
+    init(studyID: Int, nickname: String?, message: String, date: Int) {
         self.studyID = studyID
         self.nickname = nickname
         self.message = message
@@ -34,7 +34,7 @@ public class Chat: NSObject, Codable, NSCoding {
     
     public required convenience init?(coder: NSCoder) {
         let studyID = coder.decodeInteger(forKey: CodingKeys.studyID.rawValue)
-        let nickname = coder.decodeObject(forKey: CodingKeys.nickname.rawValue) as? String ?? ""
+        let nickname = coder.decodeObject(forKey: CodingKeys.nickname.rawValue) as? String ?? nil
         let message = coder.decodeObject(forKey: CodingKeys.message.rawValue) as? String ?? ""
         let date = coder.decodeInteger(forKey: CodingKeys.date.rawValue)
         

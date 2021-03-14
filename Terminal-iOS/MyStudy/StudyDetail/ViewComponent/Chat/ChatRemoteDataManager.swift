@@ -17,9 +17,6 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     var manager: SocketManager?
     
     func socketConnect(studyID: Int, date: Int? = nil) {
-        
-        
-        
         guard let baseURL = URL(string: "https://www.terminal-study.tk"),
               let accessToken = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
         manager = SocketManager(socketURL: baseURL,
@@ -30,15 +27,6 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                                                          "study_id": studyID])])
         chatSocket = manager!.socket(forNamespace: "/terminal")
         chatSocket.connect()
-        
-        
-        
-        
-        
-        
-        
-        
-        
         chatSocket.on("message") { array, _ in
             do {
                 let json = JSON(array[0])
@@ -50,6 +38,9 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
         }
         chatSocket.on("connect") { _, _ in
             self.getRemoteChat(studyID: studyID, date: date)
+        }
+        chatSocket.on("disconnect") {_, _ in
+            print("끊어짐")
         }
     }
     
@@ -77,8 +68,8 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                 switch response.result {
                 case .success(let data):
                     do {
-                        let result = try JSONDecoder().decode(BaseResponse<[Chat]>.self, from: data)
-                        if result.data != nil {
+                        let result = try JSONDecoder().decode(BaseResponse<RemoteChatInfo>.self, from: data)
+                        if result.data?.chatList != nil {
                             self.interactor?.receiveLastChat(lastRemoteChat: result)
                         }
                     } catch {
@@ -99,7 +90,7 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                                     // 실패 메세지
                                     let result = try JSONDecoder().decode(BaseResponse<[Chat]>.self, from: data)
                                     if result.message != nil {
-                                        self.interactor?.receiveLastChat(lastRemoteChat: result)
+//                                        self.interactor?.receiveLastChat(lastRemoteChat: result)
                                     }
                                 } catch {
                                     
