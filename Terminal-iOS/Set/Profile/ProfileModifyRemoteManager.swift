@@ -132,4 +132,35 @@ final class ProfileModifyRemoteManager: ProfileModifyRemoteDataManagerInputProto
                 }
             }
     }
+    
+    func refreshToken() {
+        guard let refreshToken = KeychainWrapper.standard.string(forKey: "refreshToken") else { return }
+        TerminalNetworkManager
+            .shared
+            .session
+            .request(TerminalRouter.reissuanceToken(refreshToken: refreshToken))
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let result = try JSONDecoder().decode(BaseResponse<Authorization>.self, from: data)
+                        if result.result {
+                            if let refresh = result.data?.refreshToken {
+                                let result = KeychainWrapper.standard.set(refresh, forKey: "refreshToken")
+                                print("리프레쉬 토큰 갱신 여부 :", result)
+                            }
+                            if let access = result.data?.accessToken {
+                                let result = KeychainWrapper.standard.set(access, forKey: "accessToken")
+                                print("엑세스 토큰 갱신 여부 :", result)
+                            }
+                        } else {
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                case .failure: break
+                //리프레시 마저 만료
+                }
+            }
+    }
 }
