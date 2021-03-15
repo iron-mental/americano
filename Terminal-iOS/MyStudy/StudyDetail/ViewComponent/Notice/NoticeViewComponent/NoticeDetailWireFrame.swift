@@ -22,10 +22,10 @@ class NoticeDetailWireFrame: NoticeDetailWireFrameProtocol {
                                leaderID: nil,
                                studyID: studyID,
                                pinned: nil,
-                               updatedAt: nil,
+                               updatedAt: 0,
                                leaderImage: nil,
                                leaderNickname: nil,
-                               createAt: nil,
+                               createAt: 0,
                                isPaging: nil)
         view.presenter = presenter
         view.notice = newNotice

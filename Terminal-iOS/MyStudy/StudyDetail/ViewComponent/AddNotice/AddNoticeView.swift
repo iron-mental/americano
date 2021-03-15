@@ -211,10 +211,10 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                 leaderID: nil,
                                 studyID: studyID,
                                 pinned: nil,
-                                updatedAt: nil,
+                                updatedAt: 0,
                                 leaderImage: nil,
                                 leaderNickname: nil,
-                                createAt: nil,
+                                createAt: 0,
                                 isPaging: nil)
                 
                 parentView?.navigationController?.viewControllers.forEach {

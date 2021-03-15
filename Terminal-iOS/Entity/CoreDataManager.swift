@@ -30,7 +30,7 @@ class CoreDataManager {
         newUserInfo.snsWeb = userInfo.snsWeb ?? nil
         newUserInfo.snsGithub = userInfo.snsGithub ?? nil
         newUserInfo.emailVerified = userInfo.emailVerified
-        newUserInfo.createdAt = userInfo.createdAt
+        newUserInfo.createdAt = String(userInfo.createdAt)
         
         do {
             try context.save()
@@ -58,7 +58,7 @@ class CoreDataManager {
             updatingUserInfo.snsWeb = userInfo.snsWeb ?? nil
             updatingUserInfo.snsGithub = userInfo.snsGithub ?? nil
             updatingUserInfo.emailVerified = userInfo.emailVerified
-            updatingUserInfo.createdAt = userInfo.createdAt
+            updatingUserInfo.createdAt = String(userInfo.createdAt)
             try context.save()
             
         } catch {
@@ -84,7 +84,7 @@ class CoreDataManager {
                                     snsWeb: record.snsWeb,
                                     snsGithub: record.snsGithub,
                                     emailVerified: true,
-                                    createdAt: record.createdAt ?? "createdAt Temp")
+                                    createdAt: 0)
                 break
             }
             return userInfo

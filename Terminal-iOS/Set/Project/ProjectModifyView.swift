@@ -142,7 +142,7 @@ final class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                                  snsGithub: github,
                                                  snsAppstore: appStore,
                                                  snsPlaystore: playStore,
-                                                 createAt: "")
+                                                 createAt: 0)
             }
         }
         return state
@@ -258,7 +258,7 @@ final class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                   snsGithub: "",
                                   snsAppstore: "",
                                   snsPlaystore: "",
-                                  createAt: "")
+                                  createAt: 0)
             self.projectArr.append(project)
             if self.projectArr.count == 3 {
                 self.projectAddButton.backgroundColor = .darkGray
