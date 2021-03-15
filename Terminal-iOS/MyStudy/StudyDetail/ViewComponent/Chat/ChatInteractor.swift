@@ -14,18 +14,16 @@ class ChatInteractor: ChatInteractorProtocol {
     var remoteDataManager: ChatRemoteDataManagerProtocol?
     var localDataManager: ChatLocalDataManagerProtocol?
     var studyID: Int?
-    
     var lastLocalChat: [Chat] = []
     var receiveFromSocketChat: [Chat] = []
-    
     var lastTimeStamp: Int?
     var mergeChatFromSocketFlag = false
     var arrangeChatTime: DispatchTime?
     var nicknameList: [ChatParticipate] = []
     var myChatUUIDList: [[String: Any]] = []
-    
     var totalChat: [Chat] = []
     var userID: Int?
+    
     func connectSocket() {
         guard let id = KeychainWrapper.standard.string(forKey: "userID") else { return }
         self.userID = Int(id)
@@ -53,13 +51,10 @@ class ChatInteractor: ChatInteractorProtocol {
                             userID: userID!,
                             nickname: nil,
                             message: message,
-                            date: Int(NSDate().timeIntervalSince1970))
-        
-        
+//                            date: Int(NSDate().timeIntervalSince1970))
+                            date: 999999999999)
         totalChat += setNickname(chatList: [tempChat])
-        // 뷰에 미리 보여주기 UUID 넣어서
-        // presenter.tempshowchat~
-        
+        presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat))
         remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
     }
     
