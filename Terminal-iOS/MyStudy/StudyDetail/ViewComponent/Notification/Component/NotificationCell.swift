@@ -115,9 +115,9 @@ final class NotificationCell: UITableViewCell {
         }
     }
     
-    func convertToElapsedTime(notificationTime: String) -> String {
+    func convertToElapsedTime(notificationTime: Int) -> String {
         //알림 시간 쪼개기
-        let tempDate = "\(Date(timeIntervalSince1970: 1615804748))"
+        let tempDate = "\(Date(timeIntervalSince1970: TimeInterval(notificationTime)))"
         let endIdx: String.Index = tempDate.index(tempDate.startIndex, offsetBy: 19)
         let dateResult = String(tempDate[...endIdx])
         
