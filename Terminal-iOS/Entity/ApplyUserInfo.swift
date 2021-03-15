@@ -17,7 +17,7 @@ struct ApplyUserInfo: Codable {
     let careerTitle, careerContents: String?
     let snsGithub, snsLinkedin, snsWeb: String?
     let rejectedStatus: Bool
-    let rejectedAt: String?
+    let rejectedAt: Int?
     let createdAt: Int
     let project: [Project]
 
