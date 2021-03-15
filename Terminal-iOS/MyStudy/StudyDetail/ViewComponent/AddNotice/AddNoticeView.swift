@@ -214,7 +214,7 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                 updatedAt: nil,
                                 leaderImage: nil,
                                 leaderNickname: nil,
-                                createAt: nil,
+                                createAt: 0,
                                 isPaging: nil)
                 
                 parentView?.navigationController?.viewControllers.forEach {
