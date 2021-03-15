@@ -46,7 +46,8 @@ class ChatInteractor: ChatInteractorProtocol {
         let chatUUID = UUID().uuidString
         let emitTime = DispatchTime.now()
         myChatUUIDList.append(["UUID": chatUUID,
-                               "time": emitTime])
+                               "time": emitTime,
+                               "index": totalChat.count])
         let tempChat = Chat(uuid: chatUUID,
                             studyID: studyID!,
                             userID: userID!,
@@ -76,8 +77,14 @@ class ChatInteractor: ChatInteractorProtocol {
         // 소켓으로 넘어온 챗
         receiveFromSocketChat.append(message)
         if let uuid = message.uuid {
-            //성공한 채팅 처리
+            // 소켓으로 들어온 것 중 내가보낸 것들을 검사 후
             if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
+                // 해당 인덱스를 접근
+                if let totalCountRemoveIndex =  myChatUUIDList[index]["index"] as? Int {
+                    // totalChat 지워주고
+                    totalChat.remove(at: totalCountRemoveIndex)
+                }
+                // uuid 지워주고
                 myChatUUIDList.remove(at: index)
             }
         }
@@ -90,8 +97,6 @@ class ChatInteractor: ChatInteractorProtocol {
             if let remoteChatInfo = lastRemoteChat.data {
                 let remoteChat = remoteChatInfo.chatList
                 nicknameList = remoteChatInfo.userList
-//                presenter?.getParticipateNickname(nicknameList: nicknameList)
-                
                 if !remoteChat.isEmpty {
                     // 기준이 될 라스트 타임스탬프 할당
                     lastTimeStamp = remoteChat.last?.date
@@ -186,7 +191,7 @@ class ChatInteractor: ChatInteractorProtocol {
         nicknameList = Array(combine(nicknameList, list))
     }
     
-    func combine<T>(_ arrays: Array<T>?...) -> Set<T> {
+    func combine<T>(_ arrays: Array <T>?...) -> Set <T> {
         return arrays.compactMap {$0}.compactMap {Set($0)}.reduce(Set<T>()) {$0.union($1)}
     }
 }
