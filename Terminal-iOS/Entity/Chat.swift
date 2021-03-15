@@ -9,13 +9,15 @@
 import Foundation
 
 public class Chat: NSObject, Codable, NSCoding {
+    let uuid: Int
     let studyID: Int
     let userID: Int
     var nickname: String?
-    let message: String
+    let message: String?
     let date: Int
     
-    init(studyID: Int, userID: Int, nickname: String?, message: String, date: Int) {
+    init(uuid: Int, studyID: Int, userID: Int, nickname: String?, message: String?, date: Int) {
+        self.uuid = uuid
         self.studyID = studyID
         self.userID = userID
         self.nickname = nickname
@@ -25,10 +27,11 @@ public class Chat: NSObject, Codable, NSCoding {
     enum CodingKeys: String, CodingKey {
         case studyID = "study_id"
         case userID = "user_id"
-        case nickname, message, date
+        case nickname, message, date, uuid
     }
     
     public func encode(with coder: NSCoder) {
+        coder.encode(uuid, forKey: CodingKeys.uuid.rawValue)
         coder.encode(studyID, forKey: CodingKeys.studyID.rawValue)
         coder.encode(userID, forKey: CodingKeys.userID.rawValue)
         coder.encode(nickname, forKey: CodingKeys.nickname.rawValue)
@@ -37,13 +40,15 @@ public class Chat: NSObject, Codable, NSCoding {
     }
     
     public required convenience init?(coder: NSCoder) {
+        let uuid = coder.decodeInteger(forKey: CodingKeys.uuid.rawValue)
         let studyID = coder.decodeInteger(forKey: CodingKeys.studyID.rawValue)
         let userID = coder.decodeInteger(forKey: CodingKeys.userID.rawValue)
         let nickname = coder.decodeObject(forKey: CodingKeys.nickname.rawValue) as? String ?? nil
-        let message = coder.decodeObject(forKey: CodingKeys.message.rawValue) as? String ?? ""
+        let message = coder.decodeObject(forKey: CodingKeys.message.rawValue) as? String ?? nil
         let date = coder.decodeInteger(forKey: CodingKeys.date.rawValue)
         
-        self.init(studyID: studyID,
+        self.init(uuid: uuid,
+                  studyID: studyID,
                   userID: userID,
                   nickname: nickname,
                   message: message,

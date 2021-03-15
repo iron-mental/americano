@@ -62,7 +62,7 @@ protocol ChatPresenterProtocol: class {
 protocol ChatRemoteDataManagerProtocol: class {
     var interactor: ChatInteractorProtocol? { get set }
     func socketConnect(studyID: Int, date: Int?)
-    func emit(message: String)
+    func emit(message: [String: Any])
     func disconnectSocket()
     func getRemoteChat(studyID: Int, date: Int?)
 }

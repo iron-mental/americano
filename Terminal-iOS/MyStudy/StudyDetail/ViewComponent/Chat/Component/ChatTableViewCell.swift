@@ -44,12 +44,14 @@ class ChatInputTableViewCell: UITableViewCell {
     
     func setData(chat: Chat) {
         if chat.userID == 0 {
+
             chatLabel.text = "\(chat.message)"
             chatLabel.textColor = .appColor(.mainColor)
             chatLabel.textAlignment = .center
         } else {
             guard let nickname = chat.nickname else { return }
-            chatLabel.text = convertTime(timeStamp: chat.date) + " \(nickname) $ \(chat.message)"
+            guard let message = chat.message else { return }
+            chatLabel.text = convertTime(timeStamp: chat.date) + " \(nickname) $ \(message)"
             chatLabel.textColor = .white
             chatLabel.textAlignment = .left
         }

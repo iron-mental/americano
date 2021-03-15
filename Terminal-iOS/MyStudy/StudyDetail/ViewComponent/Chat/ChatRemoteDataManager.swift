@@ -48,7 +48,10 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
         
     }
     
-    func emit(message: String) {
+    func emit(message: [String: Any]) {
+//        if chatSocket.status == .disconnected {
+//            chatSocket.connect()
+//        }
         chatSocket.emit("chat", message)
     }
     

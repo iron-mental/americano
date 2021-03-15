@@ -101,6 +101,9 @@ class ChatView: UIViewController {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
+        if type(of: UIApplication.getTopViewController()) == UIAlertController.self {
+            print("신고중")
+        }
         let isBottom = isTableViewSetBottom()
         chatTableView.setBottomInset(to: keyboardHeight)
         UIView.animate(withDuration: 1) {
@@ -132,7 +135,7 @@ class ChatView: UIViewController {
     
     @objc func scrollToBottom() {
         self.chatTableView.scrollToRow(at: [0, chatList.count], at: .bottom,
-                                       animated: false)
+                                       animated: true)
     }
 }
 
@@ -154,14 +157,12 @@ extension ChatView: ChatViewProtocol {
         let isBottom = isTableViewSetBottom()
         if socketChat.count == 1 {
             self.chatList.append(socketChat.first!)
-            self.chatTableView.insertRows(at: [IndexPath(row: chatList.count - 1, section: 0)],
-                                          with: .middle)
         } else {
             self.chatList += socketChat
-            let indexPaths = (0 ..< socketChat.count)
-                .map { IndexPath(row: (chatList.count - socketChat.count) + $0, section: 0) }
-            self.chatTableView.insertRows(at: indexPaths, with: .middle)
         }
+        let indexPaths = (0 ..< socketChat.count)
+            .map { IndexPath(row: (chatList.count - socketChat.count) + $0, section: 0) }
+        self.chatTableView.insertRows(at: indexPaths, with: .middle)
         if isBottom {
             self.chatTableView
                 .scrollToRow(at: [0, chatList.count],

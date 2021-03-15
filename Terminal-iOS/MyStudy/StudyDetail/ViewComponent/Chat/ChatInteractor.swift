@@ -19,6 +19,7 @@ class ChatInteractor: ChatInteractorProtocol {
     var mergeChatFromSocketFlag = false
     var arrangeChatTime: DispatchTime?
     var nicknameList: [ChatParticipate] = []
+    var myChatUUIDList: [String] = []
     
     func connectSocket() {
         getLastLocalChat {
@@ -34,7 +35,9 @@ class ChatInteractor: ChatInteractorProtocol {
     }
     
     func emit(message: String) {
-        remoteDataManager?.emit(message: message)
+        let chatUUID = UUID().uuidString
+        myChatUUIDList.append(chatUUID)
+        remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
     }
     
     func disconnectSocket() {
@@ -70,7 +73,8 @@ class ChatInteractor: ChatInteractorProtocol {
                         if !lastLocalChat.isEmpty
                             && !remoteChat.isEmpty {
                             // 필요할 때만 넣어줌 (임시 뷰잉이기에 실제로 넣지않음)
-                            lastLocalChat.append(Chat(studyID: studyID!,
+                            lastLocalChat.append(Chat(uuid: 0,
+                                                      studyID: studyID!,
                                                       userID: 0,
                                                       nickname: "__SYSTEM__",
                                                       message: "여기까지 읽으셨습니다.",
