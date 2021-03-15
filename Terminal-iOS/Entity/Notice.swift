@@ -17,7 +17,7 @@ struct Notice: Codable {
     let updatedAt: Int
     let leaderImage: String?
     let leaderNickname: String?
-    let createAt: Int
+    let createAt: Int?
     let isPaging: Bool?
     
     enum CodingKeys: String, CodingKey {
