@@ -155,7 +155,7 @@ class ChatInteractor: ChatInteractorProtocol {
                     receiveFromSocketChat.removeFirst()
                 }
                 totalChat += chatArray
-                presenter?.arrangedChatFromChat(chat: setNickname(chatList: chatArray))
+                presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat))
                 CoreDataManager.shared.saveChatInfo(studyID: studyID!,
                                                     chatList: chatArray)
             }

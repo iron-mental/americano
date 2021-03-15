@@ -141,7 +141,7 @@ class ChatView: UIViewController {
 
 extension ChatView: ChatViewProtocol {
     func showLastChat(lastChat: [Chat]) {
-        chatList += lastChat
+        chatList = lastChat
         chatTableView.reloadData()
         if let target = lastChat.firstIndex(where: { $0.message == "여기까지 읽으셨습니다." }) {
             chatTableView.scrollToRow(at: [0, target], at: .top,
@@ -155,14 +155,22 @@ extension ChatView: ChatViewProtocol {
     
     func showSocketChat(socketChat: [Chat]) {
         let isBottom = isTableViewSetBottom()
-        if socketChat.count == 1 {
-            self.chatList.append(socketChat.first!)
-        } else {
-            self.chatList += socketChat
-        }
-        let indexPaths = (0 ..< socketChat.count)
-            .map { IndexPath(row: (chatList.count - socketChat.count) + $0, section: 0) }
+        
+        let diffrence = abs(socketChat.count - chatList.count)
+        
+        chatList = socketChat
+//        if socketChat.count == 1 {
+//            self.chatList.append(socketChat.first!)
+//        } else {
+//            self.chatList += socketChat
+//        }
+        
+        let indexPaths = (0 ..< diffrence)
+            .map { IndexPath(row: (chatList.count - diffrence) + $0, section: 0) }
         self.chatTableView.insertRows(at: indexPaths, with: .middle)
+        
+        
+        
         if isBottom {
             self.chatTableView
                 .scrollToRow(at: [0, chatList.count],

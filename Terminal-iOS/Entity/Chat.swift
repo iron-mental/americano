@@ -16,7 +16,7 @@ public class Chat: NSObject, Codable, NSCoding {
     let message: String?
     let date: Int
     
-    init(uuid: String, studyID: Int, userID: Int, nickname: String?, message: String?, date: Int) {
+    init(uuid: String?, studyID: Int, userID: Int, nickname: String?, message: String?, date: Int) {
         self.uuid = uuid
         self.studyID = studyID
         self.userID = userID
