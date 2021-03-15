@@ -211,7 +211,7 @@ extension AddNoticeView: AddNoticeViewProtocol {
                                 leaderID: nil,
                                 studyID: studyID,
                                 pinned: nil,
-                                updatedAt: nil,
+                                updatedAt: 0,
                                 leaderImage: nil,
                                 leaderNickname: nil,
                                 createAt: 0,

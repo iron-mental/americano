@@ -14,7 +14,7 @@ struct Notice: Codable {
     let leaderID: Int?
     var studyID: Int?
     let pinned: Bool?
-    let updatedAt: String?
+    let updatedAt: Int
     let leaderImage: String?
     let leaderNickname: String?
     let createAt: Int
