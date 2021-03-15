@@ -9,14 +9,14 @@
 import Foundation
 
 public class Chat: NSObject, Codable, NSCoding {
-    let uuid: Int
+    let uuid: String?
     let studyID: Int
     let userID: Int
     var nickname: String?
     let message: String?
     let date: Int
     
-    init(uuid: Int, studyID: Int, userID: Int, nickname: String?, message: String?, date: Int) {
+    init(uuid: String, studyID: Int, userID: Int, nickname: String?, message: String?, date: Int) {
         self.uuid = uuid
         self.studyID = studyID
         self.userID = userID
@@ -40,7 +40,7 @@ public class Chat: NSObject, Codable, NSCoding {
     }
     
     public required convenience init?(coder: NSCoder) {
-        let uuid = coder.decodeInteger(forKey: CodingKeys.uuid.rawValue)
+        let uuid = coder.decodeObject(forKey: CodingKeys.uuid.rawValue) as? String ?? nil
         let studyID = coder.decodeInteger(forKey: CodingKeys.studyID.rawValue)
         let userID = coder.decodeInteger(forKey: CodingKeys.userID.rawValue)
         let nickname = coder.decodeObject(forKey: CodingKeys.nickname.rawValue) as? String ?? nil

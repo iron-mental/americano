@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ChatParticipate: Codable {
+struct ChatParticipate: Codable, Hashable {
     let userID: Int
     let nickname: String
     

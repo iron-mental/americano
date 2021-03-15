@@ -42,6 +42,17 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
         chatSocket.on("disconnect") {_, _ in
             print("끊어짐")
         }
+        chatSocket.on("update_user_list") { array, _ in
+            do {
+                let json = JSON(array)
+                if let data = "\(json)".data(using: .utf8) {
+                    let newList = try JSONDecoder().decode([ChatParticipate].self, from: data)
+                    self.interactor?.setNicknameList(list: newList)
+                }
+            } catch {
+                
+            }
+        }
     }
     
     func receiveSocketEvents() {
