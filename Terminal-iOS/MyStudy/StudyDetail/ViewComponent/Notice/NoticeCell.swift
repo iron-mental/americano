@@ -45,7 +45,7 @@ class NoticeCell: UITableViewCell {
             }
             dateLabel.do {
                 let updateAt = data.updatedAt
-                let date = "\(Date(timeIntervalSince1970: 1615804748))"
+                let date = "\(Date(timeIntervalSince1970: TimeInterval(updateAt)))"
                 let endIdx: String.Index = date.index(date.startIndex, offsetBy: 19)
                 let dateResult = String(date[...endIdx])
                 $0.text = "작성일 : " + dateResult
