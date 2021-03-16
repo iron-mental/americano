@@ -103,13 +103,13 @@ class CoreDataManager {
             var currentChatInfo: [CoreChatInfo] = []
             currentChatInfo = try CoreDataManager.shared.context.fetch(fetchRequest)
             if currentChatInfo.isEmpty {
-                //스터디 최초 채팅
+                // 스터디 최초 채팅
                 let newCoreChatInfo = CoreChatInfo(context: context)
                 newCoreChatInfo.studyID = Int64(studyID)
                 newCoreChatInfo.chatList = remoteChatList
                 currentChatInfo = [newCoreChatInfo]
             } else {
-                //기존 채팅에 추가
+                // 기존 채팅에 추가
                 while !remoteChatList.isEmpty {
                     if (currentChatInfo[0].chatList?.last!.date)! >= remoteChatList.first!.date {
                         remoteChatList.removeFirst()

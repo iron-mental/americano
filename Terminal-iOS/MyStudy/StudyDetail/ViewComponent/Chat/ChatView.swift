@@ -22,10 +22,11 @@ class ChatView: UIViewController {
     var tableViewConstraint: NSLayoutConstraint?
     var scrollToBottomButton = UIButton()
     var isEdting = false
+    var blurEffect = UIBlurEffect(style: .regular)
+    lazy var visualEffectView = UIVisualEffectView(effect: blurEffect)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIView.setAnimationsEnabled(false)
         viewLoad()
     }
     
@@ -54,7 +55,12 @@ class ChatView: UIViewController {
             $0.separatorStyle = .none
             $0.delegate = self
             $0.dataSource = self
-            $0.keyboardDismissMode = .interactive
+            $0.keyboardDismissMode = .onDrag
+        }
+        visualEffectView.do {
+            $0.frame = self.view.frame
+            $0.bringSubviewToFront(self.view)
+            $0.alpha = 0.9
         }
         scrollToBottomButton.do {
             $0.tintColor = .white
@@ -70,7 +76,7 @@ class ChatView: UIViewController {
     }
     
     func layout() {
-        [chatTableView, scrollToBottomButton].forEach { view.addSubview($0) }
+        [chatTableView, scrollToBottomButton, visualEffectView].forEach { view.addSubview($0) }
         
         tableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         chatTableView.do {
@@ -106,7 +112,8 @@ class ChatView: UIViewController {
             print("신고중")
         }
         let isBottom = isTableViewSetBottom()
-        chatTableView.setBottomInset(to: keyboardHeight)
+//        chatTableView.setBottomInset(to: keyboardHeight)
+        tableViewConstraint?.constant = -keyboardHeight
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
@@ -119,14 +126,15 @@ class ChatView: UIViewController {
     @objc func keyboardWillHide() {
         let isBottom = isTableViewSetBottom()
         chatTableView.bounces = false
-        chatTableView.setBottomInset(to: 0.0)
+//        chatTableView.setBottomInset(to: 0.0)
+        tableViewConstraint?.constant = 0
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
         if isBottom {
             self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
                                            animated: false)
-        }
+        } 
         chatTableView.bounces = true
     }
     
@@ -155,6 +163,7 @@ extension ChatView: ChatViewProtocol {
     }
     
     func showSocketChat(socketChat: [Chat], reloadIndex: Int?) {
+        UIView.setAnimationsEnabled(false)
         let isBottom = isTableViewSetBottom()
         let diffrence = abs(socketChat.count - chatList.count)
         chatList = socketChat
@@ -171,9 +180,10 @@ extension ChatView: ChatViewProtocol {
             let indexPaths = (0 ..< index)
                 .map { IndexPath(row: (chatList.count - index) + $0, section: 0) }
             self.chatTableView.beginUpdates()
-            self.chatTableView.reloadRows(at: indexPaths, with: .none)
+            self.chatTableView.reloadRows(at: indexPaths, with: .fade)
             self.chatTableView.endUpdates()
         }
+        UIView.setAnimationsEnabled(true)
     }
     
     func isTableViewSetBottom() -> Bool {

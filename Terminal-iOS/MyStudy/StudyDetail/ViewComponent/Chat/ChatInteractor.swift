@@ -49,8 +49,9 @@ class ChatInteractor: ChatInteractorProtocol {
                             studyID: studyID!,
                             userID: userID!,
                             nickname: "",
-                            message: "임시" + message,
-                            date: Int(NSDate().timeIntervalSince1970) * 1000)
+                            message: message,
+                            date: Int(NSDate().timeIntervalSince1970) * 1000,
+                            isTemp: true)
         totalChat.append(tempChat)
         arrangeChat()
         remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
@@ -92,7 +93,8 @@ class ChatInteractor: ChatInteractorProtocol {
                                                   userID: 0,
                                                   nickname: "__SYSTEM__",
                                                   message: "여기까지 읽으셨습니다.",
-                                                  date: 0))
+                                                  date: 0,
+                                                  isTemp: false))
                     }
                     totalChat = lastLocalChat + remoteChat
                     presenter?.getLastChatResult(lastChat:

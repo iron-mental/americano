@@ -15,19 +15,21 @@ public class Chat: NSObject, Codable, NSCoding {
     var nickname: String?
     let message: String?
     let date: Int
+    var isTemp: Bool?
     
-    init(uuid: String?, studyID: Int, userID: Int, nickname: String?, message: String?, date: Int) {
+    init(uuid: String?, studyID: Int, userID: Int, nickname: String?, message: String?, date: Int, isTemp: Bool?) {
         self.uuid = uuid
         self.studyID = studyID
         self.userID = userID
         self.nickname = nickname
         self.message = message
         self.date = date
+        self.isTemp = isTemp
     }
     enum CodingKeys: String, CodingKey {
         case studyID = "study_id"
         case userID = "user_id"
-        case nickname, message, date, uuid
+        case nickname, message, date, uuid, isTemp
     }
     
     public func encode(with coder: NSCoder) {
@@ -37,6 +39,7 @@ public class Chat: NSObject, Codable, NSCoding {
         coder.encode(nickname, forKey: CodingKeys.nickname.rawValue)
         coder.encode(message, forKey: CodingKeys.message.rawValue)
         coder.encode(date, forKey: CodingKeys.date.rawValue)
+        coder.encode(isTemp, forKey: CodingKeys.isTemp.rawValue)
     }
     
     public required convenience init?(coder: NSCoder) {
@@ -46,12 +49,14 @@ public class Chat: NSObject, Codable, NSCoding {
         let nickname = coder.decodeObject(forKey: CodingKeys.nickname.rawValue) as? String ?? nil
         let message = coder.decodeObject(forKey: CodingKeys.message.rawValue) as? String ?? nil
         let date = coder.decodeInteger(forKey: CodingKeys.date.rawValue)
-        
+        let isTemp = coder.decodeBool(forKey: CodingKeys.isTemp.rawValue)
+
         self.init(uuid: uuid,
                   studyID: studyID,
                   userID: userID,
                   nickname: nickname,
                   message: message,
-                  date: date)
+                  date: date,
+                  isTemp: isTemp)
     }
 }

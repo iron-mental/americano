@@ -343,7 +343,6 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
         if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
             if type(of: caller) == StudyDetailView.self {
                 // 스터디 디테일이 콜했을 경우 처리
-                
                 // 공지에 state 심어주고
                 if let noticeView = vcArr[0] as? NoticeView {
                     noticeView.state = studyDetailView.state
