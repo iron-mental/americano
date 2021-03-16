@@ -37,7 +37,7 @@ class ChatInteractor: ChatInteractorProtocol {
             }
         }
         //        작업간 슈가 코드 지우기 ㄴㄴ
-        //        CoreDataManager.shared.tempRemoveAllChat()
+//                CoreDataManager.shared.tempRemoveAllChat()
     }
     
     func emit(message: String) {
@@ -51,11 +51,9 @@ class ChatInteractor: ChatInteractorProtocol {
                             nickname: nil,
                             message: message,
                             //                            date: Int(NSDate().timeIntervalSince1970))
-                            date: 999999999999)
-        //        totalChat += setNickname(chatList: [tempChat])
+                            date: 0)
         receiveFromSocketChat.append(tempChat)
         arrangeChat()
-        //이거를 동기처리해야할지도??
         remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
     }
     
@@ -77,6 +75,7 @@ class ChatInteractor: ChatInteractorProtocol {
             if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
                 // 토탈에서 과거 임시 채팅 삭제
                 if let totalChatIndex = totalChat.firstIndex(where: { $0.uuid == uuid }) {
+                    print("이거 삭제함",totalChat[totalChatIndex].message)
                     totalChat.remove(at: totalChatIndex)
                 }
                 // uuid 지워주고
@@ -130,14 +129,14 @@ class ChatInteractor: ChatInteractorProtocol {
     func mergeChatFromSocket() {
         mergeChatFromSocketFlag = true
         arrangeChatTime = DispatchTime.now()
-        DispatchQueue.main.asyncAfter(deadline: arrangeChatTime! +  0.251) {
+        DispatchQueue.main.asyncAfter(deadline: arrangeChatTime! +  0.51) {
             self.arrangeChat()
         }
     }
     
     func arrangeChat() {
         guard let distance = arrangeChatTime?.distance(to: DispatchTime.now()).toDouble() else { return }
-        if distance >= 0.25 {
+        if distance >= 0.5 {
             arrangeChatTime = DispatchTime.now()
             if !receiveFromSocketChat.isEmpty
                 // 소켓으로 넘어온 채팅이 있으면서
@@ -151,17 +150,20 @@ class ChatInteractor: ChatInteractorProtocol {
                             < first.date)
                         || lastTimeStamp == nil {
                         chatArray.append(first)
+                        if first.date != 0 {
+                            CoreDataManager.shared.saveChatInfo(studyID: studyID!,
+                                                                chatList: [first])
+                        }
                     }
                     receiveFromSocketChat.removeFirst()
                 }
                 totalChat += chatArray
                 // 여기에 리프레시해야하는 index 값을 같이 보내줘야함
                 presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat))
-                CoreDataManager.shared.saveChatInfo(studyID: studyID!,
-                                                    chatList: chatArray)
+                
             }
         }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             if !self.receiveFromSocketChat.isEmpty {
                 self.arrangeChat()
             }

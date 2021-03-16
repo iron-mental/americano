@@ -160,15 +160,24 @@ extension ChatView: ChatViewProtocol {
 //        let diffrence = 2
         if diffrence == 0 {
             chatList = socketChat
-            let indexPaths = (0 ..< 1)
-                .map { IndexPath(row: (chatList.count - 1) + $0, section: 0) }
+            let indexPaths = (0 ..< 10)
+                .map { IndexPath(row: (chatList.count - 10) + $0, section: 0) }
+            self.chatTableView.beginUpdates()
             self.chatTableView.reloadRows(at: indexPaths, with: .none)
+            self.chatTableView.endUpdates()
 //            self.chatTableView.insertRows(at: indexPaths, with: .middle)
         } else {
             chatList = socketChat
             let indexPaths = (0 ..< diffrence)
                 .map { IndexPath(row: (chatList.count - diffrence) + $0, section: 0) }
+            self.chatTableView.beginUpdates()
             self.chatTableView.insertRows(at: indexPaths, with: .middle)
+            self.chatTableView.endUpdates()
+            let indexPaths2 = (0 ..< 10)
+                .map { IndexPath(row: (chatList.count - 10) + $0, section: 0) }
+            self.chatTableView.beginUpdates()
+            self.chatTableView.reloadRows(at: indexPaths2, with: .none)
+            self.chatTableView.endUpdates()
         }
         if isBottom {
             self.chatTableView
