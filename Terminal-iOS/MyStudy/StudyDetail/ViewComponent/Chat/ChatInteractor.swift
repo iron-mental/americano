@@ -109,12 +109,12 @@ class ChatInteractor: ChatInteractorProtocol {
                                                   date: 0,
                                                   isTemp: false))
                     }
-                    totalChat = setDaySystemMessage(chat: lastLocalChat + remoteChat)
+                    totalChat = setDayPreChat(chat: lastLocalChat + remoteChat)
                     // 여기서 날짜한번 세팅
                     presenter?.getLastChatResult(lastChat:
                                                     setNickname(chatList: totalChat))
                 } else {
-                    totalChat = setDaySystemMessage(chat: lastLocalChat)
+                    totalChat = setDayPreChat(chat: lastLocalChat)
                     // 여기서 날짜한번 세팅
                     presenter?.getLastChatResult(lastChat:
                                                     setNickname(chatList: totalChat))
@@ -160,7 +160,7 @@ class ChatInteractor: ChatInteractorProtocol {
                                                                 chatList: [first])
                         }
                         // 여기서 날짜한번 세팅
-                        chatArray.append(contentsOf: setDaySystemMessage(chat: [first]))
+                        chatArray.append(contentsOf: setDaySocketChat(chat: [first]))
                         if let uuid = first.uuid {
                             // 소켓으로 들어온 것 중 내가보낸 것들을 검사 후
                             if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
@@ -215,7 +215,7 @@ class ChatInteractor: ChatInteractorProtocol {
         currentDay = "\(calender.component(.day, from: date))"
     }
     
-    func setDaySystemMessage(chat: [Chat]) -> [Chat] {
+    func setDayPreChat(chat: [Chat]) -> [Chat] {
         var result = chat
         var preYear = ""
         var preMonth = ""
@@ -240,15 +240,8 @@ class ChatInteractor: ChatInteractorProtocol {
                 || preMonth != month
                 || preDay != day {
                 result.insert(systemMessage, at: i == 0 ? 0 : i - 1)
-                if currentYear == year
-                    || currentMonth == month
-                    || currentDay == day {
-                    currentYear = year
-                    currentMonth = month
-                    currentDay = day
-                }
             }
-
+            
             preYear = year
             preMonth = month
             preDay = day
@@ -257,8 +250,38 @@ class ChatInteractor: ChatInteractorProtocol {
         return result
     }
     
-    func sessionTaskError(message: String) {
+    func setDaySocketChat(chat: [Chat]) -> [Chat] {
+        var result = chat
         
+        for i in 0..<result.count {
+            let timeStamp = result[i].date
+            let calender = Calendar.current
+            let date = Date(timeIntervalSince1970: TimeInterval(timeStamp) / 1000)
+            let year = "\(calender.component(.year, from: date))"
+            let month = "\(calender.component(.month, from: date))"
+            let day = "\(calender.component(.day, from: date))"
+            let systemMessage = Chat(uuid: "0",
+                                     studyID: studyID!,
+                                     userID: 0,
+                                     nickname: "__SYSTEM__",
+                                     message: year + "년 " + month + "월 " + day + "일",
+                                     date: timeStamp,
+                                     isTemp: nil)
+            if currentYear != year
+                || currentMonth != month
+                || currentDay != day {
+                result.insert(systemMessage, at: i == 0 ? 0 : i - 1)
+                currentYear = year
+                currentMonth = month
+                currentDay = day
+            }
+        }
+        
+        return result
+    }
+    
+    func sessionTaskError(message: String) {
+        presenter?.showError(message: message)
     }
     
     func setNicknameList(list: [ChatParticipate]) {

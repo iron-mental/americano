@@ -27,6 +27,14 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                                                          "study_id": studyID])])
         chatSocket = manager!.socket(forNamespace: "/terminal")
         chatSocket.connect()
+        
+        
+        chatSocket.on("connect") { _, _ in
+            self.getRemoteChat(studyID: studyID, date: date)
+        }
+        chatSocket.on("disconnect") {_, _ in
+            print("끊어짐")
+        }
         chatSocket.on("message") { array, _ in
             do {
                 let json = JSON(array[0])
@@ -35,12 +43,6 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                     self.interactor?.receiveMessage(message: newMessage)
                 }
             } catch { }
-        }
-        chatSocket.on("connect") { _, _ in
-            self.getRemoteChat(studyID: studyID, date: date)
-        }
-        chatSocket.on("disconnect") {_, _ in
-            print("끊어짐")
         }
         chatSocket.on("update_user_list") { array, _ in
             do {
@@ -53,16 +55,11 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                 
             }
         }
-    }
-    
-    func receiveSocketEvents() {
+        
         
     }
     
     func emit(message: [String: Any]) {
-//        if chatSocket.status == .disconnected {
-//            chatSocket.connect()
-//        }
         chatSocket.emit("chat", message)
     }
     
@@ -101,7 +98,6 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                         default:
                             if let data = response.data {
                                 do {
-                                    // 실패 메세지
                                     let result = try JSONDecoder().decode(BaseResponse<RemoteChatInfo>.self, from: data)
                                     if result.message != nil {
                                         self.interactor?.receiveLastChat(lastRemoteChat: result)
