@@ -28,6 +28,7 @@ class ChatInteractor: ChatInteractorProtocol {
     var currentMonth = ""
     var currentDay = ""
     
+    // MARK: 로컬데이터 get 후 socket 연결 동기 처리
     func connectSocket() {
         toDayDateSet()
         guard let id = KeychainWrapper.standard.string(forKey: "userID") else { return }
@@ -40,52 +41,17 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-        //        작업간 슈가 코드 지우기 ㄴㄴ
-//                CoreDataManager.shared.tempRemoveAllChat()
+///        작업간 슈가 코드 지우기 ㄴㄴ
+///        CoreDataManager.shared.tempRemoveAllChat()
     }
     
-    func emit(message: String) {
-        let chatUUID = UUID().uuidString
-        let emitTime = DispatchTime.now()
-        let tempChat = Chat(uuid: chatUUID,
-                            studyID: studyID!,
-                            userID: userID!,
-                            nickname: "",
-                            message: message,
-                            date: Int(NSDate().timeIntervalSince1970) * 1000,
-                            isTemp: true)
-        totalChat.append(tempChat)
-        myChatUUIDList.append(["UUID": chatUUID,
-                               "time": emitTime,
-                               "workItem": emitFailed(uuid: chatUUID)])
-        arrangeChat()
-        remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
-    }
-    
-    func emitFailed(uuid: String) -> DispatchWorkItem {
-        let emitFailedWorkItem = DispatchWorkItem { [weak self] in
-            self?.presenter?.emitFailed(uuid: uuid)
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: emitFailedWorkItem)
-        return emitFailedWorkItem
-    }
-    
-    func disconnectSocket() {
-        remoteDataManager?.disconnectSocket()
-    }
-    
+    // MARK: 로컬 챗 세팅
     func getLastLocalChat(_ completion: @escaping () -> Void ) {
-        // 로컬 챗 세팅
         lastLocalChat = CoreDataManager.shared.getCurrentChatInfo(studyID: studyID!)
         completion()
     }
     
-    func receiveMessage(message: Chat) {
-        // 소켓으로 넘어온 챗
-        receiveFromSocketChat.append(message)
-        arrangeChat()
-    }
-    
+    // MARK: 리모트데이터 get 후 처리
     func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>) {
         switch lastRemoteChat.result {
         case true:
@@ -109,11 +75,13 @@ class ChatInteractor: ChatInteractorProtocol {
                                                   date: 0,
                                                   isTemp: false))
                     }
+                    // 날짜 할당
                     totalChat = setDayPreChat(chat: lastLocalChat + remoteChat)
                     totalChat += remoteChat
                     presenter?.getLastChatResult(lastChat:
                                                     setNickname(chatList: totalChat))
                 } else {
+                    // 날짜 할당
                     totalChat = setDayPreChat(chat: lastLocalChat)
                     presenter?.getLastChatResult(lastChat:
                                                     setNickname(chatList: totalChat))
@@ -129,6 +97,44 @@ class ChatInteractor: ChatInteractorProtocol {
         
     }
     
+    // MARK: socket emit 전 temp chat 처리
+    func emit(message: String) {
+        let chatUUID = UUID().uuidString
+        let tempChat = Chat(uuid: chatUUID,
+                            studyID: studyID!,
+                            userID: userID!,
+                            nickname: "",
+                            message: message,
+                            date: Int(NSDate().timeIntervalSince1970) * 1000,
+                            isTemp: true)
+        totalChat.append(tempChat)
+        myChatUUIDList.append(["UUID": chatUUID,
+                               "workItem": emitFailed(uuid: chatUUID)])
+        arrangeChat()
+        remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
+    }
+    
+    // MARK: 전송 실패 예약함수
+    func emitFailed(uuid: String) -> DispatchWorkItem {
+        let emitFailedWorkItem = DispatchWorkItem { [weak self] in
+            self?.presenter?.emitFailed(uuid: uuid)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: emitFailedWorkItem)
+        return emitFailedWorkItem
+    }
+    
+    // MARK: 소켓 연결 해제 (현재 쓸 계획은 없는듯)
+    func disconnectSocket() {
+        remoteDataManager?.disconnectSocket()
+    }
+    
+    // MARK: 소켓으로 넘어온 챗 쌓아두기
+    func receiveMessage(message: Chat) {
+        receiveFromSocketChat.append(message)
+        arrangeChat()
+    }
+    
+    // MARK: 뷰에 로컬+리모트가 세팅됐을 때 호출
     func mergeChatFromSocket() {
         mergeChatFromSocketFlag = true
         arrangeChatTime = DispatchTime.now()
@@ -137,10 +143,14 @@ class ChatInteractor: ChatInteractorProtocol {
         }
     }
     
+    // MARK: 소켓을 통한 모든 챗은 이 함수를 거쳐 감 ( 나가는 길이 하나여야 뷰에 무리가 가지않는다고 판단 )
     func arrangeChat() {
         guard let distance = arrangeChatTime?.distance(to: DispatchTime.now()).toDouble() else { return }
+        // 호출된지 0.3초보다 적게 지났으면 진입 X
         if distance >= 0.3 {
+            // 현재 시간 갱신
             arrangeChatTime = DispatchTime.now()
+            // 뷰에 리로드할 인덱스 준비
             var reloadIndex: Int?
             if !receiveFromSocketChat.isEmpty
                 // 소켓으로 넘어온 채팅이 있으면서
@@ -149,30 +159,30 @@ class ChatInteractor: ChatInteractorProtocol {
                 var chatArray: [Chat] = []
                 while !receiveFromSocketChat.isEmpty {
                     let first = receiveFromSocketChat.first!
+                    // 중복 제거 if문
                     if (lastTimeStamp != nil
                             && lastTimeStamp!
                             < first.date)
                         || lastTimeStamp == nil {
-                        if first.date != 0 {
                             CoreDataManager.shared.saveChatInfo(studyID: studyID!,
                                                                 chatList: [first])
-                        }
                         // 여기서 날짜한번 세팅
                         chatArray.append(contentsOf: setDaySocketChat(chat: [first]))
                         if let uuid = first.uuid {
-                            // 소켓으로 들어온 것 중 내가보낸 것들을 검사 후
+                            // 소켓으로 들어온 것 중 내가보낸 것이 들어왔다면
                             if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
-                                // 토탈에서 과거 임시 채팅 삭제
+                                // totalChat에서 임시 채팅 제거
                                 if let totalChatIndex = totalChat.firstIndex(where: { $0.uuid == uuid }) {
                                     if reloadIndex == nil {
                                         reloadIndex = (totalChatIndex)
                                     }
                                     totalChat.remove(at: totalChatIndex)
                                 }
-                                // uuid 지워주고
                                 if let workItem = myChatUUIDList[index]["workItem"] as? DispatchWorkItem {
+                                    // 전송실패 예약 함수 취소
                                     workItem.cancel()
                                 }
+                                // uuid관리 리스트 지워줌
                                 myChatUUIDList.remove(at: index)
                             }
                         }
@@ -181,12 +191,14 @@ class ChatInteractor: ChatInteractorProtocol {
                 }
                 totalChat += chatArray
             }
+            //리로드할 인덱스 할당
             if reloadIndex != nil {
                 reloadIndex = totalChat.count - reloadIndex!
             }
             presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat),
                                             reloadIndex: reloadIndex ?? nil)
         }
+        // 함수 종료직전 또 다시 소켓으로 부터 쌓여있으면 재귀로 호출
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
             if !self.receiveFromSocketChat.isEmpty {
                 self.arrangeChat()
@@ -194,6 +206,7 @@ class ChatInteractor: ChatInteractorProtocol {
         }
     }
     
+    // MARK: 서버가 내려준 user_list를 통해 닉네임 할당 ( 닉네임 변경 대응 )
     func setNickname(chatList: [Chat]) -> [Chat] {
         chatList.forEach { chatItem in
             nicknameList.forEach { nicknameItem in
@@ -205,6 +218,7 @@ class ChatInteractor: ChatInteractorProtocol {
         return chatList
     }
     
+    // MARK: 오늘 날짜 세팅
     func toDayDateSet() {
         let calender = Calendar.current
         let date = Date(timeIntervalSince1970: NSDate().timeIntervalSince1970)
@@ -212,7 +226,7 @@ class ChatInteractor: ChatInteractorProtocol {
         currentMonth = "\(calender.component(.month, from: date))"
         currentDay = "\(calender.component(.day, from: date))"
     }
-    
+
     func setDayPreChat(chat: [Chat]) -> [Chat] {
         var result = chat
         var preYear = ""
