@@ -52,8 +52,13 @@ class ChatInputTableViewCell: UITableViewCell {
             guard let nickname = chat.nickname else { return }
             guard let message = chat.message else { return }
             chatLabel.text = convertTime(timeStamp: chat.date) + " \(nickname) $ \(message)"
-            chatLabel.textColor = .white
+            
             chatLabel.textAlignment = .left
+            if nickname == "temp" {
+                chatLabel.textColor = .lightGray
+            } else {
+                chatLabel.textColor = .white
+            }
         }
     }
     

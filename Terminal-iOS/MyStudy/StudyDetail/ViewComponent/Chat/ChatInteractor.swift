@@ -36,8 +36,8 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-//        작업간 슈가 코드 지우기 ㄴㄴ
-//        CoreDataManager.shared.tempRemoveAllChat()
+        //        작업간 슈가 코드 지우기 ㄴㄴ
+        //        CoreDataManager.shared.tempRemoveAllChat()
     }
     
     func emit(message: String) {
@@ -48,10 +48,9 @@ class ChatInteractor: ChatInteractorProtocol {
         let tempChat = Chat(uuid: chatUUID,
                             studyID: studyID!,
                             userID: userID!,
-                            nickname: nil,
+                            nickname: "",
                             message: "임시" + message,
-                            //                            date: Int(NSDate().timeIntervalSince1970))
-                            date: 0)
+                            date: Int(NSDate().timeIntervalSince1970) * 1000)
         totalChat.append(tempChat)
         arrangeChat()
         remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
@@ -149,8 +148,9 @@ class ChatInteractor: ChatInteractorProtocol {
                             if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
                                 // 토탈에서 과거 임시 채팅 삭제
                                 if let totalChatIndex = totalChat.firstIndex(where: { $0.uuid == uuid }) {
-                                    reloadIndex = (totalChat.count - totalChatIndex + 10)
-                                    print("리로드", reloadIndex)
+                                    if reloadIndex == nil {
+                                        reloadIndex = (totalChat.count - totalChatIndex)
+                                    }
                                     totalChat.remove(at: totalChatIndex)
                                 }
                                 // uuid 지워주고
@@ -167,7 +167,6 @@ class ChatInteractor: ChatInteractorProtocol {
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             if !self.receiveFromSocketChat.isEmpty {
-                print("재귀통과")
                 self.arrangeChat()
             }
         }

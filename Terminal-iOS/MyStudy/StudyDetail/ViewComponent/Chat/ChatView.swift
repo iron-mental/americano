@@ -25,6 +25,7 @@ class ChatView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIView.setAnimationsEnabled(false)
         viewLoad()
     }
     
@@ -169,7 +170,6 @@ extension ChatView: ChatViewProtocol {
         if let index = reloadIndex {
             let indexPaths = (0 ..< index)
                 .map { IndexPath(row: (chatList.count - index) + $0, section: 0) }
-            UIView.setAnimationsEnabled(false)
             self.chatTableView.beginUpdates()
             self.chatTableView.reloadRows(at: indexPaths, with: .none)
             self.chatTableView.endUpdates()
