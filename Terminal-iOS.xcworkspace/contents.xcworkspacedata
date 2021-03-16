@@ -2,22 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-<<<<<<< HEAD
-<<<<<<< HEAD
-      location = "group:Terminal-iOS/CoreDataModel/CoreUserInfo+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Terminal-iOS/CoreDataModel/CoreUserInfo+CoreDataProperties.swift">
-=======
-      location = "group:/Users/jeongjaein/Desktop/Terminal-iOS/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:/Users/jeongjaein/Desktop/Terminal-iOS/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataProperties.swift">
->>>>>>> feat : coredata에 chat 저장로직 구성
-   </FileRef>
-   <FileRef
-=======
->>>>>>> feat : pod 에러 해결
       location = "group:Terminal-iOS.xcodeproj">
    </FileRef>
    <FileRef

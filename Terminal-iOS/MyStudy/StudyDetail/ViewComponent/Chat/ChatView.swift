@@ -156,10 +156,20 @@ extension ChatView: ChatViewProtocol {
     func showSocketChat(socketChat: [Chat]) {
         let isBottom = isTableViewSetBottom()
         let diffrence = abs(socketChat.count - chatList.count)
-        chatList = socketChat
-        let indexPaths = (0 ..< diffrence)
-            .map { IndexPath(row: (chatList.count - diffrence) + $0, section: 0) }
-        self.chatTableView.insertRows(at: indexPaths, with: .middle)
+        print(diffrence)
+//        let diffrence = 2
+        if diffrence == 0 {
+            chatList = socketChat
+            let indexPaths = (0 ..< 1)
+                .map { IndexPath(row: (chatList.count - 1) + $0, section: 0) }
+            self.chatTableView.reloadRows(at: indexPaths, with: .none)
+//            self.chatTableView.insertRows(at: indexPaths, with: .middle)
+        } else {
+            chatList = socketChat
+            let indexPaths = (0 ..< diffrence)
+                .map { IndexPath(row: (chatList.count - diffrence) + $0, section: 0) }
+            self.chatTableView.insertRows(at: indexPaths, with: .middle)
+        }
         if isBottom {
             self.chatTableView
                 .scrollToRow(at: [0, chatList.count],

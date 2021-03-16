@@ -13,21 +13,21 @@ class ChatInteractor: ChatInteractorProtocol {
     weak var presenter: ChatPresenterProtocol?
     var remoteDataManager: ChatRemoteDataManagerProtocol?
     var localDataManager: ChatLocalDataManagerProtocol?
+    
     var studyID: Int?
+    var userID: Int?
+    var lastTimeStamp: Int?
+    var arrangeChatTime: DispatchTime?
+    var myChatUUIDList: [[String: Any]] = []
     var lastLocalChat: [Chat] = []
     var receiveFromSocketChat: [Chat] = []
-    var lastTimeStamp: Int?
     var mergeChatFromSocketFlag = false
-    var arrangeChatTime: DispatchTime?
     var nicknameList: [ChatParticipate] = []
-    var myChatUUIDList: [[String: Any]] = []
     var totalChat: [Chat] = []
-    var userID: Int?
     
     func connectSocket() {
         guard let id = KeychainWrapper.standard.string(forKey: "userID") else { return }
         self.userID = Int(id)
-        
         getLastLocalChat {
             if self.lastLocalChat.isEmpty {
                 self.remoteDataManager?.socketConnect(studyID: self.studyID!, date: nil)
@@ -36,25 +36,26 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-//        작업간 슈가 코드 지우기 ㄴㄴ
-//        CoreDataManager.shared.tempRemoveAllChat()
+        //        작업간 슈가 코드 지우기 ㄴㄴ
+        //        CoreDataManager.shared.tempRemoveAllChat()
     }
     
     func emit(message: String) {
         let chatUUID = UUID().uuidString
         let emitTime = DispatchTime.now()
         myChatUUIDList.append(["UUID": chatUUID,
-                               "time": emitTime,
-                               "index": totalChat.count])
+                               "time": emitTime])
         let tempChat = Chat(uuid: chatUUID,
                             studyID: studyID!,
                             userID: userID!,
                             nickname: nil,
                             message: message,
-//                            date: Int(NSDate().timeIntervalSince1970))
+                            //                            date: Int(NSDate().timeIntervalSince1970))
                             date: 999999999999)
-        totalChat += setNickname(chatList: [tempChat])
-        presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat))
+        //        totalChat += setNickname(chatList: [tempChat])
+        receiveFromSocketChat.append(tempChat)
+        arrangeChat()
+        //이거를 동기처리해야할지도??
         remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
     }
     
@@ -74,10 +75,9 @@ class ChatInteractor: ChatInteractorProtocol {
         if let uuid = message.uuid {
             // 소켓으로 들어온 것 중 내가보낸 것들을 검사 후
             if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
-                // 해당 인덱스를 접근
-                if let totalCountRemoveIndex =  myChatUUIDList[index]["index"] as? Int {
-                    // totalChat 지워주고
-                    totalChat.remove(at: totalCountRemoveIndex)
+                // 토탈에서 과거 임시 채팅 삭제
+                if let totalChatIndex = totalChat.firstIndex(where: { $0.uuid == uuid }) {
+                    totalChat.remove(at: totalChatIndex)
                 }
                 // uuid 지워주고
                 myChatUUIDList.remove(at: index)
@@ -155,6 +155,7 @@ class ChatInteractor: ChatInteractorProtocol {
                     receiveFromSocketChat.removeFirst()
                 }
                 totalChat += chatArray
+                // 여기에 리프레시해야하는 index 값을 같이 보내줘야함
                 presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat))
                 CoreDataManager.shared.saveChatInfo(studyID: studyID!,
                                                     chatList: chatArray)
@@ -186,7 +187,7 @@ class ChatInteractor: ChatInteractorProtocol {
         nicknameList = Array(combine(nicknameList, list))
     }
     
-    func combine<T>(_ arrays: Array <T>?...) -> Set <T> {
+    func combine<T>(_ arrays: [T]?...) -> Set <T> {
         return arrays.compactMap {$0}.compactMap {Set($0)}.reduce(Set<T>()) {$0.union($1)}
     }
 }
