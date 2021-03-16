@@ -45,7 +45,6 @@ class ChatView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
-//        self.hideKeyboardWhenTappedAround()
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
@@ -125,13 +124,18 @@ class ChatView: UIViewController {
     
     // MARK: @objc
     @objc func keyboardWillShow(notification: NSNotification) {
-        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
         let isBottom = isTableViewSetBottom()
-        tableViewConstraint?.constant = -keyboardHeight
+        if #available(iOS 13.0, *) {
+            let window = UIApplication.shared.windows[0]
+            let bottomPadding = window.safeAreaInsets.bottom
+            tableViewConstraint?.constant = -keyboardHeight + bottomPadding
+        }
+        
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
