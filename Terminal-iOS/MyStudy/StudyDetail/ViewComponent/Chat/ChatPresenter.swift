@@ -35,10 +35,6 @@ class ChatPresenter: ChatPresenterProtocol {
         view?.showLastChat(lastChat: lastChat)
     }
     
-    func showReceiveMessage(message: String) {
-        view?.showMessage(message: message)
-    }
-    
     func arrangedChatFromChat(chat: [Chat], reloadIndex: Int?) {
         view?.showSocketChat(socketChat: chat, reloadIndex: reloadIndex)
     }

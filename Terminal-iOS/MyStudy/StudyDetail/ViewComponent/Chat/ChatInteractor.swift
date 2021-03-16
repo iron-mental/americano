@@ -268,7 +268,7 @@ class ChatInteractor: ChatInteractorProtocol {
             if currentYear != year
                 || currentMonth != month
                 || currentDay != day {
-                result.insert(systemMessage, at: i == 0 ? 0 : i - 1)
+                result.insert(systemMessage, at: i)
                 currentYear = year
                 currentMonth = month
                 currentDay = day

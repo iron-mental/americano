@@ -37,7 +37,6 @@ class ChatView: UIViewController {
             self.visualEffectView.alpha = 0
         } completion: { _ in
             self.visualEffectView.removeFromSuperview()
-            print("지움")
         }
     }
     
@@ -47,7 +46,9 @@ class ChatView: UIViewController {
         layout()
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(keyboardDidHide),
+//                                               name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
     func attribute() {
@@ -64,15 +65,16 @@ class ChatView: UIViewController {
             $0.keyboardDismissMode = .onDrag
         }
         scrollToBottomButton.do {
-            $0.tintColor = .appColor(.mainColor)
-            $0.backgroundColor = .appColor(.InputViewColor)
-            $0.layer.masksToBounds  = true
             $0.addTarget(self, action: #selector(scrollToBottom), for: .touchUpInside)
-            $0.setImage(UIImage(systemName: "chevron.down")?
-                            .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)), for: .normal)
             if !$0.constraints.isEmpty {
                 $0.layer.cornerRadius = $0.constraints[0].constant / 2
             }
+            $0.setImage(UIImage(systemName: "chevron.down")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)), for: .normal)
+            $0.tintColor = .appColor(.mainColor)
+            $0.backgroundColor = .appColor(.InputViewColor)
+            $0.layer.masksToBounds  = true
+            $0.alpha = 0
         }
         validGuideLabel.do {
             $0.dynamicFont(fontSize: 15, weight: .bold)
@@ -118,31 +120,22 @@ class ChatView: UIViewController {
         }
     }
     
-    func tableViewAddConstant() {
-        
-    }
-    
     // MARK: @objc
     @objc func keyboardWillShow(notification: NSNotification) {
-        
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
-        let isBottom = isTableViewSetBottom()
         if #available(iOS 13.0, *) {
             let window = UIApplication.shared.windows[0]
             let bottomPadding = window.safeAreaInsets.bottom
             tableViewConstraint?.constant = -keyboardHeight + bottomPadding
         }
-        
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
-        if isBottom {
-            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
-                                           animated: false)
-        }
+        self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
+                                       animated: false)
     }
     
     @objc func keyboardWillHide() {
@@ -159,9 +152,9 @@ class ChatView: UIViewController {
         chatTableView.bounces = true
     }
     
-    @objc func keyboardDidHide() {
-        chatTableView.setBottomInset(to: 0.0)
-    }
+//    @objc func keyboardDidHide() {
+//        chatTableView.setBottomInset(to: 0.0)
+//    }
     
     @objc func scrollToBottom() {
         scrollToBottomButton.alpha = 0
@@ -272,7 +265,6 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
             let outputCell = tableView
                 .dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id,
                                      for: indexPath)as! ChatOutputTableViewCell
-            outputCell.textInput.delegate = self
             outputCell.sendButton.addTarget(self,
                                             action: #selector(sendButtonDidTap(_: )),
                                             for: .touchUpInside)
@@ -289,7 +281,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let interval = chatTableView.contentSize.height
             - (chatTableView.contentOffset.y + chatTableView.visibleSize.height)
-        if interval > 1500 {
+        if interval > 1000 {
             UIView.animate(withDuration: 0.3) {
                 self.scrollToBottomButton.alpha = 10
             }
@@ -300,11 +292,6 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
-extension ChatView: UITextFieldDelegate {
-
-}
-
 extension ChatView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

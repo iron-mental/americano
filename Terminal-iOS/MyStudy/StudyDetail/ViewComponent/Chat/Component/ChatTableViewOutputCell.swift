@@ -10,7 +10,7 @@ import UIKit
 
 class ChatOutputTableViewCell: UITableViewCell {
     static var id = "ChatOutputTableViewCell"
-    var textInput = UITextField()
+    var textInput = UITextView()
     var dallarLabel = UILabel()
     var sendButton = UIButton()
     
@@ -27,18 +27,15 @@ class ChatOutputTableViewCell: UITableViewCell {
         }
         textInput.do {
             $0.textColor = .white
-            $0.font = UIFont.monospacedSystemFont(ofSize: textInput.font!.pointSize, weight: UIFont.Weight.regular)
             $0.tintColor = .none
             $0.backgroundColor = .appColor(.InputViewColor)
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
-            $0.addLeftPadding(padding: 10)
             $0.returnKeyType = .default
         }
         dallarLabel.do {
             $0.textColor = .white
             $0.text = "$"
-            $0.font = UIFont.monospacedSystemFont(ofSize: textInput.font!.pointSize + 4, weight: UIFont.Weight.regular)
         }
         sendButton.do {
             $0.tintColor = .white
@@ -65,7 +62,7 @@ class ChatOutputTableViewCell: UITableViewCell {
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor, constant: -10).isActive = true
-            $0.heightAnchor.constraint(equalTo: heightAnchor, constant: -Terminal.convertHeight(value: 5)).isActive = true
+            $0.heightAnchor.constraint(equalTo: heightAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
         }
         sendButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
