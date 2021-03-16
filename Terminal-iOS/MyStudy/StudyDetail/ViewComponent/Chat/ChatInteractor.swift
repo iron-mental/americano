@@ -49,10 +49,12 @@ class ChatInteractor: ChatInteractorProtocol {
                             studyID: studyID!,
                             userID: userID!,
                             nickname: nil,
-                            message: message,
+                            message: "임시" + message,
                             //                            date: Int(NSDate().timeIntervalSince1970))
                             date: 0)
-        receiveFromSocketChat.append(tempChat)
+//        receiveFromSocketChat.append(tempChat)
+//        arrangeChat(from: false)
+        totalChat.append(tempChat)
         arrangeChat()
         remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
     }
@@ -70,18 +72,18 @@ class ChatInteractor: ChatInteractorProtocol {
     func receiveMessage(message: Chat) {
         // 소켓으로 넘어온 챗
         receiveFromSocketChat.append(message)
-        if let uuid = message.uuid {
-            // 소켓으로 들어온 것 중 내가보낸 것들을 검사 후
-            if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
-                // 토탈에서 과거 임시 채팅 삭제
-                if let totalChatIndex = totalChat.firstIndex(where: { $0.uuid == uuid }) {
-                    print("이거 삭제함",totalChat[totalChatIndex].message)
-                    totalChat.remove(at: totalChatIndex)
-                }
-                // uuid 지워주고
-                myChatUUIDList.remove(at: index)
-            }
-        }
+//        if let uuid = message.uuid {
+//            // 소켓으로 들어온 것 중 내가보낸 것들을 검사 후
+//            if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
+//                // 토탈에서 과거 임시 채팅 삭제
+//                if let totalChatIndex = totalChat.firstIndex(where: { $0.uuid == uuid }) {
+//                    print("이거 삭제함", totalChat[totalChatIndex].message)
+//                    totalChat.remove(at: totalChatIndex)
+//                }
+//                // uuid 지워주고
+//                myChatUUIDList.remove(at: index)
+//            }
+//        }
         arrangeChat()
     }
     
@@ -154,17 +156,32 @@ class ChatInteractor: ChatInteractorProtocol {
                             CoreDataManager.shared.saveChatInfo(studyID: studyID!,
                                                                 chatList: [first])
                         }
+//                        if socket {
+                            if let uuid = first.uuid {
+                                // 소켓으로 들어온 것 중 내가보낸 것들을 검사 후
+                                if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
+                                    // 토탈에서 과거 임시 채팅 삭제
+                                    if let totalChatIndex = totalChat.firstIndex(where: { $0.uuid == uuid }) {
+                                        print("이거 삭제함", totalChat[totalChatIndex].message)
+                                        totalChat.remove(at: totalChatIndex)
+                                    }
+                                    // uuid 지워주고
+                                    myChatUUIDList.remove(at: index)
+                                }
+                            }
+//                        }
                     }
                     receiveFromSocketChat.removeFirst()
                 }
                 totalChat += chatArray
                 // 여기에 리프레시해야하는 index 값을 같이 보내줘야함
-                presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat))
-                
+                // 여기에서 미처 지우지 못하고 totalChat을 내려보내주는 듯
             }
+            presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat))
         }
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
             if !self.receiveFromSocketChat.isEmpty {
+                print("재귀통과")
                 self.arrangeChat()
             }
         }

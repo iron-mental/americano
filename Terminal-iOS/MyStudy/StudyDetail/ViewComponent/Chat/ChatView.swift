@@ -157,34 +157,24 @@ extension ChatView: ChatViewProtocol {
         let isBottom = isTableViewSetBottom()
         let diffrence = abs(socketChat.count - chatList.count)
         print(diffrence)
-//        let diffrence = 2
-        if diffrence == 0 {
-            chatList = socketChat
-            let indexPaths = (0 ..< 10)
-                .map { IndexPath(row: (chatList.count - 10) + $0, section: 0) }
-            self.chatTableView.beginUpdates()
-            self.chatTableView.reloadRows(at: indexPaths, with: .none)
-            self.chatTableView.endUpdates()
-//            self.chatTableView.insertRows(at: indexPaths, with: .middle)
-        } else {
-            chatList = socketChat
-            let indexPaths = (0 ..< diffrence)
-                .map { IndexPath(row: (chatList.count - diffrence) + $0, section: 0) }
-            self.chatTableView.beginUpdates()
-            self.chatTableView.insertRows(at: indexPaths, with: .middle)
-            self.chatTableView.endUpdates()
-            let indexPaths2 = (0 ..< 10)
-                .map { IndexPath(row: (chatList.count - 10) + $0, section: 0) }
-            self.chatTableView.beginUpdates()
-            self.chatTableView.reloadRows(at: indexPaths2, with: .none)
-            self.chatTableView.endUpdates()
-        }
+        chatList = socketChat
+        let indexPaths = (0 ..< diffrence)
+            .map { IndexPath(row: (chatList.count - diffrence) + $0, section: 0) }
+        self.chatTableView.beginUpdates()
+        self.chatTableView.insertRows(at: indexPaths, with: .middle)
+        self.chatTableView.endUpdates()
         if isBottom {
             self.chatTableView
                 .scrollToRow(at: [0, chatList.count],
                              at: .bottom,
                              animated: true)
         }
+        // 리로드해야하는 index를 정확히 받고난 후 제거할 코드
+        let indexPaths2 = (0 ..< 10)
+            .map { IndexPath(row: (chatList.count - 10) + $0, section: 0) }
+        self.chatTableView.beginUpdates()
+        self.chatTableView.reloadRows(at: indexPaths2, with: .none)
+        self.chatTableView.endUpdates()
     }
     
     func isTableViewSetBottom() -> Bool {
