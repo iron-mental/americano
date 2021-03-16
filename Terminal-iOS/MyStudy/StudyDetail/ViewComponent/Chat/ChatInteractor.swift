@@ -24,8 +24,12 @@ class ChatInteractor: ChatInteractorProtocol {
     var mergeChatFromSocketFlag = false
     var nicknameList: [ChatParticipate] = []
     var totalChat: [Chat] = []
+    var currentYear = ""
+    var currentMonth = ""
+    var currentDay = ""
     
     func connectSocket() {
+        toDayDateSet()
         guard let id = KeychainWrapper.standard.string(forKey: "userID") else { return }
         self.userID = Int(id)
         getLastLocalChat {
@@ -36,8 +40,8 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-//        //        작업간 슈가 코드 지우기 ㄴㄴ
-//                CoreDataManager.shared.tempRemoveAllChat()
+        //        //        작업간 슈가 코드 지우기 ㄴㄴ
+        //                CoreDataManager.shared.tempRemoveAllChat()
     }
     
     func emit(message: String) {
@@ -203,6 +207,14 @@ class ChatInteractor: ChatInteractorProtocol {
         return chatList
     }
     
+    func toDayDateSet() {
+        let calender = Calendar.current
+        let date = Date(timeIntervalSince1970: NSDate().timeIntervalSince1970)
+        currentYear = "\(calender.component(.year, from: date))"
+        currentMonth = "\(calender.component(.month, from: date))"
+        currentDay = "\(calender.component(.day, from: date))"
+    }
+    
     func setDaySystemMessage(chat: [Chat]) -> [Chat] {
         var result = chat
         var preYear = ""
@@ -217,22 +229,31 @@ class ChatInteractor: ChatInteractorProtocol {
             let month = "\(calender.component(.month, from: date))"
             let day = "\(calender.component(.day, from: date))"
             let systemMessage = Chat(uuid: "0",
-                                 studyID: studyID!,
-                                 userID: 0,
-                                 nickname: "__SYSTEM__",
-                                 message: year + "년 " + month + "월" + day + "일",
-                                 date: timeStamp,
-                                 isTemp: nil)
+                                     studyID: studyID!,
+                                     userID: 0,
+                                     nickname: "__SYSTEM__",
+                                     message: year + "년 " + month + "월 " + day + "일",
+                                     date: timeStamp,
+                                     isTemp: nil)
             
             if preYear != year
-            || preMonth != month
-            || preDay != day {
+                || preMonth != month
+                || preDay != day {
                 result.insert(systemMessage, at: i == 0 ? 0 : i - 1)
+                if currentYear == year
+                    || currentMonth == month
+                    || currentDay == day {
+                    currentYear = year
+                    currentMonth = month
+                    currentDay = day
+                }
             }
+
             preYear = year
             preMonth = month
             preDay = day
         }
+        
         return result
     }
     
