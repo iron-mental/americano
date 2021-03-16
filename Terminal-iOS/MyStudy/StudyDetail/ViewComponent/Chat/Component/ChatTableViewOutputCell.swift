@@ -63,7 +63,7 @@ class ChatOutputTableViewCell: UITableViewCell {
         textInput.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor, constant: 3).isActive = true
+            $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor, constant: -10).isActive = true
         }
         sendButton.do {
@@ -78,4 +78,7 @@ class ChatOutputTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension ChatOutputTableViewCell: UITextFieldDelegate {
 }

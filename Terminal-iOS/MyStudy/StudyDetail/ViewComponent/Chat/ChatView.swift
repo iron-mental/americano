@@ -31,6 +31,16 @@ class ChatView: UIViewController {
         viewLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 1.5) {
+            self.visualEffectView.alpha = 0
+        } completion: { _ in
+            self.visualEffectView.removeFromSuperview()
+            print("지움")
+        }
+    }
+    
     func viewLoad() {
         presenter?.viewDidLoad()
         attribute()
@@ -54,18 +64,13 @@ class ChatView: UIViewController {
             $0.dataSource = self
             $0.keyboardDismissMode = .onDrag
         }
-        visualEffectView.do {
-            $0.frame = self.view.frame
-            $0.bringSubviewToFront(self.view)
-            $0.alpha = 1.0
-        }
         scrollToBottomButton.do {
-            $0.tintColor = .white
+            $0.tintColor = .appColor(.mainColor)
             $0.backgroundColor = .appColor(.InputViewColor)
             $0.layer.masksToBounds  = true
             $0.addTarget(self, action: #selector(scrollToBottom), for: .touchUpInside)
             $0.setImage(UIImage(systemName: "chevron.down")?
-                            .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)), for: .normal)
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)), for: .normal)
             if !$0.constraints.isEmpty {
                 $0.layer.cornerRadius = $0.constraints[0].constant / 2
             }
@@ -73,6 +78,10 @@ class ChatView: UIViewController {
         validGuideLabel.do {
             $0.dynamicFont(fontSize: 15, weight: .bold)
             $0.text = "폭력적인 채팅은 자제해주세요😭"
+        }
+        visualEffectView.do {
+            $0.bringSubviewToFront(self.view)
+            $0.alpha = 1.0
         }
     }
     
@@ -90,17 +99,23 @@ class ChatView: UIViewController {
         }
         scrollToBottomButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.trailingAnchor.constraint(equalTo: chatTableView.trailingAnchor,
-                                         constant: -Terminal.convertWidth(value: 25)).isActive = true
+            $0.centerXAnchor.constraint(equalTo: chatTableView.centerXAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: chatTableView.bottomAnchor,
                                        constant: -Terminal.convertWidth(value: 10)).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 60)).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 60)).isActive = true
         }
         validGuideLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        }
+        visualEffectView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            $0.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         }
     }
     
@@ -145,8 +160,9 @@ class ChatView: UIViewController {
     }
     
     @objc func scrollToBottom() {
+        scrollToBottomButton.alpha = 0
         self.chatTableView.scrollToRow(at: [0, chatList.count], at: .bottom,
-                                       animated: true)
+                                       animated: false)
     }
     
     @objc func sendButtonDidTap(_ sender: UIButton) {
@@ -154,6 +170,12 @@ class ChatView: UIViewController {
             guard let inputChatMessage = cell.textInput.text else { return }
             presenter?.emitButtonDidTap(message: inputChatMessage)
             cell.textInput.text = ""
+            sender.isEnabled = false
+            sender.backgroundColor = .lightGray
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                sender.isEnabled = true
+                sender.backgroundColor = .appColor(.mainColor)
+            }
         }
     }
 }
@@ -170,11 +192,6 @@ extension ChatView: ChatViewProtocol {
                                            animated: true)
         }
         presenter?.viewRoadLastChat()
-        UIView.animate(withDuration: 2) {
-            self.visualEffectView.alpha = 0
-        } completion: { _ in
-            self.visualEffectView.removeFromSuperview()
-        }
     }
     
     func showSocketChat(socketChat: [Chat], reloadIndex: Int?) {
@@ -189,7 +206,7 @@ extension ChatView: ChatViewProtocol {
             self.chatTableView
                 .scrollToRow(at: [0, chatList.count],
                              at: .bottom,
-                             animated: true)
+                             animated: false)
         }
         if let index = reloadIndex {
             let indexPaths = (0 ..< index)
