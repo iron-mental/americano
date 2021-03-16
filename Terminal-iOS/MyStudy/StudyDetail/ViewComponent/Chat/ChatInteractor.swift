@@ -151,7 +151,7 @@ class ChatInteractor: ChatInteractorProtocol {
                                 // 토탈에서 과거 임시 채팅 삭제
                                 if let totalChatIndex = totalChat.firstIndex(where: { $0.uuid == uuid }) {
                                     if reloadIndex == nil {
-                                        reloadIndex = (totalChat.count - totalChatIndex)
+                                        reloadIndex = (totalChatIndex)
                                     }
                                     totalChat.remove(at: totalChatIndex)
                                 }
@@ -163,6 +163,9 @@ class ChatInteractor: ChatInteractorProtocol {
                     receiveFromSocketChat.removeFirst()
                 }
                 totalChat += chatArray
+            }
+            if reloadIndex != nil {
+                reloadIndex = totalChat.count - reloadIndex!
             }
             presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat),
                                             reloadIndex: reloadIndex ?? nil)
