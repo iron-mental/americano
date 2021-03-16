@@ -19,6 +19,7 @@ protocol ChatViewProtocol: class {
     func showLoading()
     func hideLoading()
     func showError(message: String)
+    func emitFailed(uuid: String)
 }
 
 protocol ChatInteractorProtocol: class {
@@ -55,6 +56,7 @@ protocol ChatPresenterProtocol: class {
     func showReceiveMessage(message: String)
     func getLastChatResult(lastChat: [Chat])
     func arrangedChatFromChat(chat: [Chat], reloadIndex: Int?)
+    func emitFailed(uuid: String)
     func showError(message: String)
 }
 

@@ -60,13 +60,9 @@ class ChatInteractor: ChatInteractorProtocol {
     
     func emitFailed(uuid: String) -> DispatchWorkItem {
         let emitFailedWorkItem = DispatchWorkItem { [weak self] in
-            if let totalChatIndex = self?.totalChat.firstIndex(where: { $0.uuid == uuid }) {
-                print("이거살아있냐??")
-                self?.totalChat[totalChatIndex].isTemp = false
-                self?.arrangeChat()
-            }
+            self?.presenter?.emitFailed(uuid: uuid)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: emitFailedWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: emitFailedWorkItem)
         return emitFailedWorkItem
     }
     
@@ -170,7 +166,7 @@ class ChatInteractor: ChatInteractorProtocol {
                                 }
                                 // uuid 지워주고
                                 if let workItem = myChatUUIDList[index]["workItem"] as? DispatchWorkItem {
-//                                    workItem.cancel()
+                                    workItem.cancel()
                                 }
                                 myChatUUIDList.remove(at: index)
                             }

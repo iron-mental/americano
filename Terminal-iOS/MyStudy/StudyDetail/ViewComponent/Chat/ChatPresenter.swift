@@ -47,4 +47,8 @@ class ChatPresenter: ChatPresenterProtocol {
         view?.hideLoading()
         view?.showError(message: message)
     }
+    
+    func emitFailed(uuid: String) {
+        view?.emitFailed(uuid: uuid)
+    }
 }

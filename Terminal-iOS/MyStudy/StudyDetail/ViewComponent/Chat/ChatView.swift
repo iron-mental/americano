@@ -192,21 +192,13 @@ extension ChatView: ChatViewProtocol {
                              at: .bottom,
                              animated: true)
         }
-//        if let index = reloadIndex {
-//            let indexPaths = (0 ..< index)
-//                .map { IndexPath(row: (chatList.count - index) + $0, section: 0) }
-//            self.chatTableView.beginUpdates()
-//            self.chatTableView.reloadRows(at: indexPaths, with: .fade)
-//            self.chatTableView.endUpdates()
-//        }
-//        UIView.setAnimationsEnabled(true)
-//        if let index = reloadIndex {
-            let indexPaths2 = (0 ..< 10)
-                .map { IndexPath(row: (chatList.count - 10) + $0, section: 0) }
+        if let index = reloadIndex {
+            let indexPaths = (0 ..< index)
+                .map { IndexPath(row: (chatList.count - index) + $0, section: 0) }
             self.chatTableView.beginUpdates()
-            self.chatTableView.reloadRows(at: indexPaths2, with: .fade)
+            self.chatTableView.reloadRows(at: indexPaths, with: .fade)
             self.chatTableView.endUpdates()
-//        }
+        }
         UIView.setAnimationsEnabled(true)
     }
     
@@ -219,6 +211,13 @@ extension ChatView: ChatViewProtocol {
             return true
         } else {
             return false
+        }
+    }
+    
+    func emitFailed(uuid: String) {
+        if let index = chatList.firstIndex(where: { $0.uuid == uuid }) {
+            chatList[index].isTemp = false
+            chatTableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
         }
     }
     
