@@ -2,7 +2,7 @@
 //  CoreChatInfo+CoreDataProperties.swift
 //  
 //
-//  Created by 정재인 on 2021/03/11.
+//  Created by 정재인 on 2021/03/16.
 //
 //
 
@@ -16,11 +16,7 @@ extension CoreChatInfo {
         return NSFetchRequest<CoreChatInfo>(entityName: "CoreChatInfo")
     }
 
-    @NSManaged public var studyID: Int64
     @NSManaged public var chatList: [Chat]?
-
-}
-
-extension CoreChatInfo: Identifiable {
+    @NSManaged public var studyID: Int64
 
 }

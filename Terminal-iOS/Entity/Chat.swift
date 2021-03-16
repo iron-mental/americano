@@ -49,7 +49,7 @@ public class Chat: NSObject, Codable, NSCoding {
         let nickname = coder.decodeObject(forKey: CodingKeys.nickname.rawValue) as? String ?? nil
         let message = coder.decodeObject(forKey: CodingKeys.message.rawValue) as? String ?? nil
         let date = coder.decodeInteger(forKey: CodingKeys.date.rawValue)
-        let isTemp = coder.decodeBool(forKey: CodingKeys.isTemp.rawValue)
+        let isTemp = coder.decodeObject(forKey: CodingKeys.isTemp.rawValue) as? Bool ?? nil
 
         self.init(uuid: uuid,
                   studyID: studyID,

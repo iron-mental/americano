@@ -40,8 +40,8 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-        //        //        작업간 슈가 코드 지우기 ㄴㄴ
-        //                CoreDataManager.shared.tempRemoveAllChat()
+        //        작업간 슈가 코드 지우기 ㄴㄴ
+//                CoreDataManager.shared.tempRemoveAllChat()
     }
     
     func emit(message: String) {
@@ -110,12 +110,11 @@ class ChatInteractor: ChatInteractorProtocol {
                                                   isTemp: false))
                     }
                     totalChat = setDayPreChat(chat: lastLocalChat + remoteChat)
-                    // 여기서 날짜한번 세팅
+                    totalChat += remoteChat
                     presenter?.getLastChatResult(lastChat:
                                                     setNickname(chatList: totalChat))
                 } else {
                     totalChat = setDayPreChat(chat: lastLocalChat)
-                    // 여기서 날짜한번 세팅
                     presenter?.getLastChatResult(lastChat:
                                                     setNickname(chatList: totalChat))
                 }
@@ -123,7 +122,6 @@ class ChatInteractor: ChatInteractorProtocol {
             }
         case false:
             // 리모트로부터 이전 채팅을 받아오지 못했을 때
-            // 여기서 날짜한번 세팅
             presenter?.getLastChatResult(lastChat: lastLocalChat)
             guard let message = lastRemoteChat.message else { return }
             presenter?.showError(message: message)

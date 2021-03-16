@@ -31,10 +31,6 @@ class ChatView: UIViewController {
         viewLoad()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        presenter?.viewWillDisappear()
-    }
-    
     func viewLoad() {
         presenter?.viewDidLoad()
         attribute()
@@ -119,11 +115,7 @@ class ChatView: UIViewController {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
-        if type(of: UIApplication.getTopViewController()) == UIAlertController.self {
-            print("신고중")
-        }
         let isBottom = isTableViewSetBottom()
-//        chatTableView.setBottomInset(to: keyboardHeight)
         tableViewConstraint?.constant = -keyboardHeight
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
@@ -137,7 +129,6 @@ class ChatView: UIViewController {
     @objc func keyboardWillHide() {
         let isBottom = isTableViewSetBottom()
         chatTableView.bounces = false
-//        chatTableView.setBottomInset(to: 0.0)
         tableViewConstraint?.constant = 0
         UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
@@ -266,7 +257,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let interval = chatTableView.contentSize.height
             - (chatTableView.contentOffset.y + chatTableView.visibleSize.height)
-        if interval > 2000 {
+        if interval > 1500 {
             UIView.animate(withDuration: 0.3) {
                 self.scrollToBottomButton.alpha = 10
             }

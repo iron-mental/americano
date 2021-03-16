@@ -33,7 +33,10 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
             self.getRemoteChat(studyID: studyID, date: date)
         }
         chatSocket.on("disconnect") {_, _ in
-            print("끊어짐")
+            self.interactor?.sessionTaskError(message:
+                                                TerminalNetworkManager
+                                                .shared
+                                                .sessionTaskErrorMessage)
         }
         chatSocket.on("message") { array, _ in
             do {

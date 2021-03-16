@@ -132,11 +132,11 @@ class CoreDataManager {
             var currentChatInfo: [CoreChatInfo] = []
             currentChatInfo = try CoreDataManager.shared.context.fetch(fetchRequest)
             if currentChatInfo.isEmpty {
-                //로컬에 챗 없음
+                // 로컬에 챗 없음
                 return []
             } else {
                 if let currentLocalChat = currentChatInfo[0].chatList {
-                    //로컬에 챗 없음
+                    // 로컬에 챗 없음
                     return currentLocalChat
                 }
             }
