@@ -44,8 +44,8 @@ class ChatInputTableViewCell: UITableViewCell {
     
     func setData(chat: Chat) {
         if chat.userID == 0 {
-
-            chatLabel.text = "\(chat.message)"
+            guard let message = chat.message else { return }
+            chatLabel.text = "\(message)"
             chatLabel.textColor = .appColor(.mainColor)
             chatLabel.textAlignment = .center
         } else {
@@ -58,7 +58,8 @@ class ChatInputTableViewCell: UITableViewCell {
                 if isTemp {
                     chatLabel.textColor = .lightGray
                 } else {
-                    chatLabel.textColor = .white
+                    chatLabel.text = chatLabel.text! + " - 전송실패"
+                    chatLabel.textColor = .systemRed
                 }
             } else {
                 chatLabel.textColor = .white

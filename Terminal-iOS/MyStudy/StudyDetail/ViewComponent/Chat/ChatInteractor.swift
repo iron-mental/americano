@@ -36,15 +36,13 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-        //        작업간 슈가 코드 지우기 ㄴㄴ
-        //        CoreDataManager.shared.tempRemoveAllChat()
+//        //        작업간 슈가 코드 지우기 ㄴㄴ
+//                CoreDataManager.shared.tempRemoveAllChat()
     }
     
     func emit(message: String) {
         let chatUUID = UUID().uuidString
         let emitTime = DispatchTime.now()
-        myChatUUIDList.append(["UUID": chatUUID,
-                               "time": emitTime])
         let tempChat = Chat(uuid: chatUUID,
                             studyID: studyID!,
                             userID: userID!,
@@ -53,8 +51,23 @@ class ChatInteractor: ChatInteractorProtocol {
                             date: Int(NSDate().timeIntervalSince1970) * 1000,
                             isTemp: true)
         totalChat.append(tempChat)
+        myChatUUIDList.append(["UUID": chatUUID,
+                               "time": emitTime,
+                               "workItem": emitFailed(uuid: chatUUID)])
         arrangeChat()
         remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
+    }
+    
+    func emitFailed(uuid: String) -> DispatchWorkItem {
+        let emitFailedWorkItem = DispatchWorkItem { [weak self] in
+            if let totalChatIndex = self?.totalChat.firstIndex(where: { $0.uuid == uuid }) {
+                print("이거살아있냐??")
+                self?.totalChat[totalChatIndex].isTemp = false
+                self?.arrangeChat()
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: emitFailedWorkItem)
+        return emitFailedWorkItem
     }
     
     func disconnectSocket() {
@@ -156,6 +169,9 @@ class ChatInteractor: ChatInteractorProtocol {
                                     totalChat.remove(at: totalChatIndex)
                                 }
                                 // uuid 지워주고
+                                if let workItem = myChatUUIDList[index]["workItem"] as? DispatchWorkItem {
+//                                    workItem.cancel()
+                                }
                                 myChatUUIDList.remove(at: index)
                             }
                         }

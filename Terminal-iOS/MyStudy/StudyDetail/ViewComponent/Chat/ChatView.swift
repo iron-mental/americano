@@ -76,7 +76,7 @@ class ChatView: UIViewController {
         }
         validGuideLabel.do {
             $0.dynamicFont(fontSize: 15, weight: .bold)
-            $0.text = "이메일 인증된 사용자만 참여할 수 있습니다."
+            $0.text = "폭력적인 채팅은 자제해주세요😭"
         }
     }
     
@@ -192,13 +192,21 @@ extension ChatView: ChatViewProtocol {
                              at: .bottom,
                              animated: true)
         }
-        if let index = reloadIndex {
-            let indexPaths = (0 ..< index)
-                .map { IndexPath(row: (chatList.count - index) + $0, section: 0) }
+//        if let index = reloadIndex {
+//            let indexPaths = (0 ..< index)
+//                .map { IndexPath(row: (chatList.count - index) + $0, section: 0) }
+//            self.chatTableView.beginUpdates()
+//            self.chatTableView.reloadRows(at: indexPaths, with: .fade)
+//            self.chatTableView.endUpdates()
+//        }
+//        UIView.setAnimationsEnabled(true)
+//        if let index = reloadIndex {
+            let indexPaths2 = (0 ..< 10)
+                .map { IndexPath(row: (chatList.count - 10) + $0, section: 0) }
             self.chatTableView.beginUpdates()
-            self.chatTableView.reloadRows(at: indexPaths, with: .fade)
+            self.chatTableView.reloadRows(at: indexPaths2, with: .fade)
             self.chatTableView.endUpdates()
-        }
+//        }
         UIView.setAnimationsEnabled(true)
     }
     
