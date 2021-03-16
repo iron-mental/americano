@@ -24,6 +24,7 @@ class ChatView: UIViewController {
     var isEdting = false
     var blurEffect = UIBlurEffect(style: .regular)
     lazy var visualEffectView = UIVisualEffectView(effect: blurEffect)
+    let validGuideLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +61,7 @@ class ChatView: UIViewController {
         visualEffectView.do {
             $0.frame = self.view.frame
             $0.bringSubviewToFront(self.view)
-            $0.alpha = 0.9
+            $0.alpha = 1.0
         }
         scrollToBottomButton.do {
             $0.tintColor = .white
@@ -73,10 +74,15 @@ class ChatView: UIViewController {
                 $0.layer.cornerRadius = $0.constraints[0].constant / 2
             }
         }
+        validGuideLabel.do {
+            $0.dynamicFont(fontSize: 15, weight: .bold)
+            $0.text = "이메일 인증된 사용자만 참여할 수 있습니다."
+        }
     }
     
     func layout() {
         [chatTableView, scrollToBottomButton, visualEffectView].forEach { view.addSubview($0) }
+        visualEffectView.contentView.addSubview(validGuideLabel)
         
         tableViewConstraint = chatTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         chatTableView.do {
@@ -94,6 +100,11 @@ class ChatView: UIViewController {
                                        constant: -Terminal.convertWidth(value: 10)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 40)).isActive = true
+        }
+        validGuideLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         }
     }
     
@@ -160,6 +171,11 @@ extension ChatView: ChatViewProtocol {
                                            animated: true)
         }
         presenter?.viewRoadLastChat()
+        UIView.animate(withDuration: 2) {
+            self.visualEffectView.alpha = 0
+        } completion: { _ in
+            self.visualEffectView.removeFromSuperview()
+        }
     }
     
     func showSocketChat(socketChat: [Chat], reloadIndex: Int?) {

@@ -28,6 +28,10 @@ class ChatOutputTableViewCell: UITableViewCell {
             $0.textColor = .white
             $0.font = UIFont.monospacedSystemFont(ofSize: textInput.font!.pointSize, weight: UIFont.Weight.regular)
             $0.tintColor = .none
+            $0.backgroundColor = .appColor(.InputViewColor)
+            $0.layer.cornerRadius = 5
+            $0.layer.masksToBounds = true
+            $0.addLeftPadding(padding: 10)
         }
         dallarLabel.do {
             $0.textColor = .white
@@ -43,6 +47,7 @@ class ChatOutputTableViewCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
         }
         textInput.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
