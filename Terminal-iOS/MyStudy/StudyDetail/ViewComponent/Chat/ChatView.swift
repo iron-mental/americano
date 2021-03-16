@@ -35,7 +35,7 @@ class ChatView: UIViewController {
         presenter?.viewDidLoad()
         attribute()
         layout()
-        self.hideKeyboardWhenTappedAround()
+//        self.hideKeyboardWhenTappedAround()
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
@@ -148,6 +148,14 @@ class ChatView: UIViewController {
         self.chatTableView.scrollToRow(at: [0, chatList.count], at: .bottom,
                                        animated: true)
     }
+    
+    @objc func sendButtonDidTap(_ sender: UIButton) {
+        if let cell = sender.superview?.superview as? ChatOutputTableViewCell {
+            guard let inputChatMessage = cell.textInput.text else { return }
+            presenter?.emitButtonDidTap(message: inputChatMessage)
+            cell.textInput.text = ""
+        }
+    }
 }
 
 extension ChatView: ChatViewProtocol {
@@ -244,6 +252,9 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
                 .dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id,
                                      for: indexPath)as! ChatOutputTableViewCell
             outputCell.textInput.delegate = self
+            outputCell.sendButton.addTarget(self,
+                                            action: #selector(sendButtonDidTap(_: )),
+                                            for: .touchUpInside)
             return outputCell
         } else {
             let inputCell = tableView
@@ -270,13 +281,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ChatView: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let inputChatMessage = textField.text else { return true }
-        presenter?.emitButtonDidTap(message: inputChatMessage)
-        textField.text = ""
-        return true
-    }
+
 }
 
 extension ChatView: UIGestureRecognizerDelegate {

@@ -40,6 +40,7 @@ class ChatInputTableViewCell: UITableViewCell {
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
+        
     }
     
     func setData(chat: Chat) {

@@ -132,14 +132,14 @@ class ChatInteractor: ChatInteractorProtocol {
     func mergeChatFromSocket() {
         mergeChatFromSocketFlag = true
         arrangeChatTime = DispatchTime.now()
-        DispatchQueue.main.asyncAfter(deadline: arrangeChatTime! +  0.51) {
+        DispatchQueue.main.asyncAfter(deadline: arrangeChatTime! +  0.31) {
             self.arrangeChat()
         }
     }
     
     func arrangeChat() {
         guard let distance = arrangeChatTime?.distance(to: DispatchTime.now()).toDouble() else { return }
-        if distance >= 0.5 {
+        if distance >= 0.3 {
             arrangeChatTime = DispatchTime.now()
             var reloadIndex: Int?
             if !receiveFromSocketChat.isEmpty
@@ -187,7 +187,7 @@ class ChatInteractor: ChatInteractorProtocol {
             presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat),
                                             reloadIndex: reloadIndex ?? nil)
         }
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
             if !self.receiveFromSocketChat.isEmpty {
                 self.arrangeChat()
             }
@@ -237,7 +237,7 @@ class ChatInteractor: ChatInteractorProtocol {
             if preYear != year
                 || preMonth != month
                 || preDay != day {
-                result.insert(systemMessage, at: i == 0 ? 0 : i - 1)
+                result.insert(systemMessage, at: i)
             }
             
             preYear = year
