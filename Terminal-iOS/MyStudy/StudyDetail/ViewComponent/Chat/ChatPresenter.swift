@@ -39,8 +39,8 @@ class ChatPresenter: ChatPresenterProtocol {
         view?.showMessage(message: message)
     }
     
-    func arrangedChatFromChat(chat: [Chat]) {
-        view?.showSocketChat(socketChat: chat)
+    func arrangedChatFromChat(chat: [Chat], reloadIndex: Int?) {
+        view?.showSocketChat(socketChat: chat, reloadIndex: reloadIndex)
     }
 
     func showError(message: String) {

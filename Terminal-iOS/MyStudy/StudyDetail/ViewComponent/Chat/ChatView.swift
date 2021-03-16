@@ -153,28 +153,27 @@ extension ChatView: ChatViewProtocol {
         presenter?.viewRoadLastChat()
     }
     
-    func showSocketChat(socketChat: [Chat]) {
+    func showSocketChat(socketChat: [Chat], reloadIndex: Int?) {
         let isBottom = isTableViewSetBottom()
         let diffrence = abs(socketChat.count - chatList.count)
-        print(diffrence)
         chatList = socketChat
         let indexPaths = (0 ..< diffrence)
             .map { IndexPath(row: (chatList.count - diffrence) + $0, section: 0) }
-        self.chatTableView.beginUpdates()
         self.chatTableView.insertRows(at: indexPaths, with: .middle)
-        self.chatTableView.endUpdates()
         if isBottom {
             self.chatTableView
                 .scrollToRow(at: [0, chatList.count],
                              at: .bottom,
                              animated: true)
         }
-        // 리로드해야하는 index를 정확히 받고난 후 제거할 코드
-        let indexPaths2 = (0 ..< 10)
-            .map { IndexPath(row: (chatList.count - 10) + $0, section: 0) }
-        self.chatTableView.beginUpdates()
-        self.chatTableView.reloadRows(at: indexPaths2, with: .none)
-        self.chatTableView.endUpdates()
+        if let index = reloadIndex {
+            let indexPaths = (0 ..< index)
+                .map { IndexPath(row: (chatList.count - index) + $0, section: 0) }
+            UIView.setAnimationsEnabled(false)
+            self.chatTableView.beginUpdates()
+            self.chatTableView.reloadRows(at: indexPaths, with: .none)
+            self.chatTableView.endUpdates()
+        }
     }
     
     func isTableViewSetBottom() -> Bool {
