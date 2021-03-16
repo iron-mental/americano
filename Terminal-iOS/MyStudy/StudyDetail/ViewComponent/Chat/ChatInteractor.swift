@@ -62,7 +62,7 @@ class ChatInteractor: ChatInteractorProtocol {
         let emitFailedWorkItem = DispatchWorkItem { [weak self] in
             self?.presenter?.emitFailed(uuid: uuid)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: emitFailedWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: emitFailedWorkItem)
         return emitFailedWorkItem
     }
     
@@ -105,11 +105,13 @@ class ChatInteractor: ChatInteractorProtocol {
                                                   date: 0,
                                                   isTemp: false))
                     }
-                    totalChat = lastLocalChat + remoteChat
+                    totalChat = setDaySystemMessage(chat: lastLocalChat + remoteChat)
+                    // 여기서 날짜한번 세팅
                     presenter?.getLastChatResult(lastChat:
                                                     setNickname(chatList: totalChat))
                 } else {
-                    totalChat = lastLocalChat
+                    totalChat = setDaySystemMessage(chat: lastLocalChat)
+                    // 여기서 날짜한번 세팅
                     presenter?.getLastChatResult(lastChat:
                                                     setNickname(chatList: totalChat))
                 }
@@ -117,6 +119,7 @@ class ChatInteractor: ChatInteractorProtocol {
             }
         case false:
             // 리모트로부터 이전 채팅을 받아오지 못했을 때
+            // 여기서 날짜한번 세팅
             presenter?.getLastChatResult(lastChat: lastLocalChat)
             guard let message = lastRemoteChat.message else { return }
             presenter?.showError(message: message)
@@ -148,12 +151,12 @@ class ChatInteractor: ChatInteractorProtocol {
                             && lastTimeStamp!
                             < first.date)
                         || lastTimeStamp == nil {
-                        
-                        chatArray.append(first)
                         if first.date != 0 {
                             CoreDataManager.shared.saveChatInfo(studyID: studyID!,
                                                                 chatList: [first])
                         }
+                        // 여기서 날짜한번 세팅
+                        chatArray.append(contentsOf: setDaySystemMessage(chat: [first]))
                         if let uuid = first.uuid {
                             // 소켓으로 들어온 것 중 내가보낸 것들을 검사 후
                             if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
@@ -198,6 +201,39 @@ class ChatInteractor: ChatInteractorProtocol {
             }
         }
         return chatList
+    }
+    
+    func setDaySystemMessage(chat: [Chat]) -> [Chat] {
+        var result = chat
+        var preYear = ""
+        var preMonth = ""
+        var preDay = ""
+        
+        for i in 0..<result.count {
+            let timeStamp = result[i].date
+            let calender = Calendar.current
+            let date = Date(timeIntervalSince1970: TimeInterval(timeStamp) / 1000)
+            let year = "\(calender.component(.year, from: date))"
+            let month = "\(calender.component(.month, from: date))"
+            let day = "\(calender.component(.day, from: date))"
+            let systemMessage = Chat(uuid: "0",
+                                 studyID: studyID!,
+                                 userID: 0,
+                                 nickname: "__SYSTEM__",
+                                 message: year + "년 " + month + "월" + day + "일",
+                                 date: timeStamp,
+                                 isTemp: nil)
+            
+            if preYear != year
+            || preMonth != month
+            || preDay != day {
+                result.insert(systemMessage, at: i == 0 ? 0 : i - 1)
+            }
+            preYear = year
+            preMonth = month
+            preDay = day
+        }
+        return result
     }
     
     func sessionTaskError(message: String) {
