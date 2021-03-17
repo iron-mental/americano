@@ -53,7 +53,6 @@ class ChatInputTableViewCell: UITableViewCell {
             guard let nickname = chat.nickname else { return }
             guard let message = chat.message else { return }
             chatLabel.text = convertTime(timeStamp: chat.date) + " \(nickname) $ \(message)"
-            
             chatLabel.textAlignment = .left
             if let isTemp = chat.isTemp {
                 if isTemp {

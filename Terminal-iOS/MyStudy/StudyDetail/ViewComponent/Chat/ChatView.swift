@@ -153,6 +153,11 @@ class ChatView: UIViewController {
     
     // MARK: scrollToBottom 액션
     @objc func scrollToBottom() {
+        //        chatTableView.reloadData()
+        //        let indexPaths2 = (0 ..< self.chatList.count)
+        //            .map { IndexPath(row: $0, section: 0) }
+        //        print("리로드 인덱스", indexPaths2)
+        //        self.chatTableView.reloadRows(at: indexPaths2, with: .fade)
         scrollToBottomButton.alpha = 0
         self.chatTableView.scrollToRow(at: [0, chatList.count], at: .bottom,
                                        animated: true)
@@ -229,17 +234,15 @@ extension ChatView: ChatViewProtocol {
     
     // MARK: 페이징챗 처리
     func showPagingChat(pagingChat: [Chat]) {
-//        UIView.setAnimationsEnabled(false)
-        print("뷰로 들어온 개수", pagingChat.count)
-//        let diffrence = pagingChat.count - chatList.count
-//        if diffrence != 0 {
-            chatList = pagingChat
-//        chatTableView.reloadData()
-//            let indexPaths = (0 ..< diffrence)
-//                .map { IndexPath(row: $0, section: 0) }
-//            chatTableView.insertRows(at: indexPaths, with: .none)
-//        }
-//        UIView.setAnimationsEnabled(true)
+        let diffrence = pagingChat.count - chatList.count
+        chatList = pagingChat
+        if diffrence != 0 {
+//            chatTableView.beginUpdates()
+            let indexPaths = (0 ..< diffrence)
+                .map { IndexPath(row: $0, section: 0) }
+            chatTableView.insertRows(at: indexPaths, with: .none)
+//            chatTableView.endUpdates()
+        }
     }
     
     // MARK: 전송 실패한 메세지 처리
@@ -263,9 +266,14 @@ extension ChatView: ChatViewProtocol {
     }
     
 }
+
 extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count + 1
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("인덱스는",indexPath)
+        print("값은", chatList[indexPath.row].message)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -277,12 +285,18 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
             outputCell.sendButton.addTarget(self,
                                             action: #selector(sendButtonDidTap(_: )),
                                             for: .touchUpInside)
+            outputCell.backgroundColor = .none
             return outputCell
         } else {
             let inputCell = tableView
                 .dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id,
                                      for: indexPath) as! ChatInputTableViewCell
             inputCell.setData(chat: chatList[indexPath.row])
+            if indexPath.row % 100 == 0 {
+                inputCell.backgroundColor = .red
+            } else {
+                inputCell.backgroundColor = .none
+            }
             return inputCell
         }
     }
@@ -301,12 +315,12 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
             }
         }
     }
+    
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if indexPaths[0].row < 10 {
+        if indexPaths[0].row < 50 {
             presenter?.chatPaging()
         }
     }
-    
 }
 
 extension ChatView: UITextViewDelegate {

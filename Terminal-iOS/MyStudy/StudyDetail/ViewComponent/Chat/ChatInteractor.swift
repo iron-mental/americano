@@ -131,8 +131,7 @@ class ChatInteractor: ChatInteractorProtocol {
                 viewingChat = totalChat + viewingChat
                 totalChat.removeAll()
             }
-            print("이거 바뀌면 안돼", totalChat.count + viewingChat.count)
-            presenter?.getPreChatResult(pagingChat: viewingChat)
+            presenter?.getPreChatResult(pagingChat: setNickname(chatList: viewingChat))
         }
     }
     
