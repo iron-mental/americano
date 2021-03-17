@@ -14,15 +14,45 @@ class ChatPresenter: ChatPresenterProtocol {
     var interactor: ChatInteractorProtocol?
     
     func viewDidLoad() {
+        view?.showLoading()
         interactor?.connectSocket()
     }
+    
+    func viewRoadLastChat() {
+        interactor?.mergeChatFromSocket()
+    }
+    
     func emitButtonDidTap(message: String) {
         interactor?.emit(message: message)
     }
+    
     func viewWillDisappear() {
         interactor?.disconnectSocket()
     }
-    func showReceiveMessage(message: String) {
-        view?.showMessage(message: message)
+    
+    func getLastChatResult(lastChat: [Chat]) {
+        view?.hideLoading()
+        view?.showLastChat(lastChat: lastChat)
+    }
+    
+    func arrangedChatFromChat(chat: [Chat], reloadIndex: Int?) {
+        view?.showSocketChat(socketChat: chat, reloadIndex: reloadIndex)
+    }
+
+    func showError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
+    
+    func emitFailed(uuid: String) {
+        view?.emitFailed(uuid: uuid)
+    }
+    
+    func chatPaging() {
+        interactor?.getPreChat()
+    }
+    
+    func getPreChatResult(pagingChat: [Chat]) {
+        view?.showPagingChat(pagingChat: pagingChat)
     }
 }

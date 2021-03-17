@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // firebase 연동
         FirebaseApp.configure()
-        
+        FirebaseConfiguration.shared.setLoggerLevel(FirebaseLoggerLevel.min)
         if let userID = KeychainWrapper.standard.string(forKey: "userID") {
             Crashlytics.crashlytics().setCustomValue(userID, forKey: "userID")
             Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
@@ -83,10 +83,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "") as? MyStudyDetailView else { return }
         
         switch event {
-        
+        case .chat:
+            studyDetailView.viewState = .Chat
+            goView = studyDetailView
         case .studyUpdate,
              .studyHostDelegate,
-             .chat,
              .applyAllowed:
             studyDetailView.viewState = .StudyDetail
             goView = studyDetailView

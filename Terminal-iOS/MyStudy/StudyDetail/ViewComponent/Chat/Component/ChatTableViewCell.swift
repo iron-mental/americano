@@ -19,7 +19,12 @@ class ChatInputTableViewCell: UITableViewCell {
     }
     
     func attribute() {
+        self.do {
+            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.selectionStyle = .none
+        }
         chatLabel.do {
+            $0.numberOfLines = 0
             $0.textColor = .white
             $0.font = UIFont.monospacedSystemFont(ofSize: chatLabel.font.pointSize-4, weight: UIFont.Weight.regular)
         }
@@ -35,9 +40,40 @@ class ChatInputTableViewCell: UITableViewCell {
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
+        
     }
     
+    func setData(chat: Chat) {
+        if chat.userID == 0 {
+            guard let message = chat.message else { return }
+            chatLabel.text = "\(message)"
+            chatLabel.textColor = .appColor(.mainColor)
+            chatLabel.textAlignment = .center
+        } else {
+            guard let nickname = chat.nickname else { return }
+            guard let message = chat.message else { return }
+            chatLabel.text = convertTime(timeStamp: chat.date) + " \(nickname) $ \(message)"
+            chatLabel.textAlignment = .left
+            if let isTemp = chat.isTemp {
+                if isTemp {
+                    chatLabel.textColor = .lightGray
+                } else {
+                    chatLabel.text = chatLabel.text! + " - 전송실패"
+                    chatLabel.textColor = .systemRed
+                }
+            } else {
+                chatLabel.textColor = .white
+            }
+        }
+    }
     
+    func convertTime(timeStamp: Int) -> String {
+        let calender = Calendar.current
+        let date = Date(timeIntervalSince1970: TimeInterval(timeStamp) / 1000)
+        let hour = "\(calender.component(.hour, from: date))"
+        let minute = "\(calender.component(.minute, from: date))"
+        return "[\(hour.count == 2 ? hour : "0"+hour):\(minute.count == 2 ? minute : "0"+minute)]"
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

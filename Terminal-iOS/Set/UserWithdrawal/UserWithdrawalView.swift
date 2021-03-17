@@ -125,7 +125,6 @@ class UserWithdrawalView: UIViewController {
     @objc func remove() {
         let emailText = self.email.text!
         let passwordText = self.password.text!
-        
         presenter?.userWithdrawal(email: emailText, password: passwordText)
     }
 }

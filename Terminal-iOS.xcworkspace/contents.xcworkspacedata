@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Terminal-iOS/CoreDataModel/CoreUserInfo+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Terminal-iOS/CoreDataModel/CoreUserInfo+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
       location = "group:Terminal-iOS.xcodeproj">
    </FileRef>
    <FileRef

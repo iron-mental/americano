@@ -59,6 +59,7 @@ protocol ProfileModifyRemoteDataManagerInputProtocol: class {
     func authCheck(completion: @escaping () -> Void)
     func retrieveImageModify(image: UIImage, profileExistence: Bool)
     func retrieveNicknameModify(profile: [String: String])
+    func refreshToken()
 }
 
 protocol ProfileModifyRemoteDataManagerOutputProtocol: class {

@@ -18,7 +18,7 @@ struct ChatMessage {
       var date: String
     }
 
-class TempChatView: UIViewController {
+class ChatView: UIViewController {
     var presenter: ChatPresenterProtocol?
     var chatTableView = UITableView()
     var chatArray: [ChatMessage] = [
@@ -73,24 +73,23 @@ class TempChatView: UIViewController {
     }
 }
 
-extension TempChatView: ChatViewProtocol {
+extension ChatView: ChatViewProtocol {
     func showMessage(message: String) {
     }
     
     
 }
-extension TempChatView: UITableViewDelegate, UITableViewDataSource {
+extension ChatView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatArray.count + 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let inputCell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id, for: indexPath) as! ChatInputTableViewCell
-        let outputCell = tableView.dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id, for: indexPath) as! ChatOutputTableViewCell
-        
-        outputCell.textInput.delegate = self
         if indexPath.row == chatArray.count {
+            let outputCell = tableView.dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id, for: indexPath) as! ChatOutputTableViewCell
+            outputCell.textInput.delegate = self
             return outputCell
         } else {
+            let inputCell = tableView.dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id, for: indexPath) as! ChatInputTableViewCell
             inputCell.chatLabel.text =  "[\(chatArray[indexPath.row].date)] \(chatArray[indexPath.row].nickname) $ \(chatArray[indexPath.row].message)"
             return inputCell
         }
@@ -101,7 +100,7 @@ extension TempChatView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension TempChatView: UITextFieldDelegate {
+extension ChatView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let inputChatMessage = textField.text else { return true }
         presenter?.emitButtonDidTap(message: inputChatMessage)

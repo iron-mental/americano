@@ -14,6 +14,7 @@ class CoreDataManager {
     let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
     lazy var context = appDelegate.persistentContainer.viewContext
     
+    // MARK: UserInfo
     func createUserInfo(userInfo: UserInfo) {
         let newUserInfo = CoreUserInfo(context: context)
         
@@ -90,6 +91,68 @@ class CoreDataManager {
             return userInfo
         } catch {
             return nil
+        }
+    }
+    
+    // MARK: Chat
+    func saveChatInfo(studyID: Int, chatList: [Chat]) {
+        var remoteChatList = chatList
+        let fetchRequest: NSFetchRequest<CoreChatInfo> = CoreChatInfo.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "studyID == %@", String(studyID))
+        do {
+            var currentChatInfo: [CoreChatInfo] = []
+            currentChatInfo = try CoreDataManager.shared.context.fetch(fetchRequest)
+            if currentChatInfo.isEmpty {
+                // 스터디 최초 채팅
+                let newCoreChatInfo = CoreChatInfo(context: context)
+                newCoreChatInfo.studyID = Int64(studyID)
+                newCoreChatInfo.chatList = remoteChatList
+                currentChatInfo = [newCoreChatInfo]
+            } else {
+                // 기존 채팅에 추가
+                while !remoteChatList.isEmpty {
+                    if (currentChatInfo[0].chatList?.last!.date)! >= remoteChatList.first!.date {
+                        remoteChatList.removeFirst()
+                    } else {
+                        break
+                    }
+                }
+                currentChatInfo[0].chatList! += remoteChatList
+            }
+            try context.save()
+        } catch {
+            print("실패다")
+        }
+    }
+    
+    func getCurrentChatInfo(studyID: Int) -> [Chat] {
+        let fetchRequest: NSFetchRequest<CoreChatInfo> = CoreChatInfo.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "studyID == %@", String(studyID))
+        do {
+            var currentChatInfo: [CoreChatInfo] = []
+            currentChatInfo = try CoreDataManager.shared.context.fetch(fetchRequest)
+            if currentChatInfo.isEmpty {
+                // 로컬에 챗 없음
+                return []
+            } else {
+                if let currentLocalChat = currentChatInfo[0].chatList {
+                    // 로컬에 챗 없음
+                    return currentLocalChat
+                }
+            }
+        } catch {
+            // 코어데이터 디코딩 실패
+            return []
+        }
+        return []
+    }
+    
+    func tempRemoveAllChat() {
+        let request: NSFetchRequest<NSFetchRequestResult> = CoreChatInfo.fetchRequest()
+        let delete = NSBatchDeleteRequest(fetchRequest: request)
+        do {
+            try self.context.execute(delete)
+        } catch {
         }
     }
 }
