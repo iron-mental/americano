@@ -229,13 +229,17 @@ extension ChatView: ChatViewProtocol {
     
     // MARK: 페이징챗 처리
     func showPagingChat(pagingChat: [Chat]) {
-        UIView.setAnimationsEnabled(false)
-        let diffrence = abs(pagingChat.count - chatList.count)
-        chatList = pagingChat
-        let indexPaths = (0 ..< diffrence)
-            .map { IndexPath(row: $0, section: 0) }
-        chatTableView.insertRows(at: indexPaths, with: .fade)
-        UIView.setAnimationsEnabled(true)
+//        UIView.setAnimationsEnabled(false)
+        print("뷰로 들어온 개수", pagingChat.count)
+//        let diffrence = pagingChat.count - chatList.count
+//        if diffrence != 0 {
+            chatList = pagingChat
+//        chatTableView.reloadData()
+//            let indexPaths = (0 ..< diffrence)
+//                .map { IndexPath(row: $0, section: 0) }
+//            chatTableView.insertRows(at: indexPaths, with: .none)
+//        }
+//        UIView.setAnimationsEnabled(true)
     }
     
     // MARK: 전송 실패한 메세지 처리
@@ -269,6 +273,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
             let outputCell = tableView
                 .dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id,
                                      for: indexPath)as! ChatOutputTableViewCell
+            outputCell.textInput.delegate = self
             outputCell.sendButton.addTarget(self,
                                             action: #selector(sendButtonDidTap(_: )),
                                             for: .touchUpInside)
@@ -297,12 +302,20 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
         }
     }
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print(indexPaths)
-        if indexPaths[0].row < 20 {
+        if indexPaths[0].row < 10 {
             presenter?.chatPaging()
         }
     }
     
+}
+
+extension ChatView: UITextViewDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let inputChatMessage = textField.text else { return true }
+        presenter?.emitButtonDidTap(message: inputChatMessage)
+        textField.text = ""
+        return true
+    }
 }
 extension ChatView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
