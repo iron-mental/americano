@@ -226,6 +226,11 @@ extension ChatView: ChatViewProtocol {
         }
     }
     
+    // MARK: 페이징챗 처리
+    func showPagingChat(pagingChat: [Chat]) {
+        
+    }
+    
     // MARK: 전송 실패한 메세지 처리
     func emitFailed(uuid: String) {
         if let index = chatList.firstIndex(where: { $0.uuid == uuid }) {

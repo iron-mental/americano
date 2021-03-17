@@ -47,4 +47,12 @@ class ChatPresenter: ChatPresenterProtocol {
     func emitFailed(uuid: String) {
         view?.emitFailed(uuid: uuid)
     }
+    
+    func chatPaging() {
+        interactor?.getPreChat()
+    }
+    
+    func getPreChatResult(pagingChat: [Chat]) {
+        view?.showPagingChat(pagingChat: pagingChat)
+    }
 }

@@ -75,9 +75,17 @@ class ChatInteractor: ChatInteractorProtocol {
                                                   nickname: "__SYSTEM__",
                                                   message: "여기까지 읽으셨습니다.",
                                                   date: lastData,
-                                                  isTemp: false))
+                                                  isTemp: nil))
                     }
-                } 
+                }
+                totalChat = setDayPreChat(chat: lastLocalChat + remoteChat)
+                if lastLocalChat.count > 50 {
+                    //로컬 50 + 리모트 먼저 뷰잉
+                    viewingChat = Array(totalChat[(totalChat.count - remoteChat.count - 50)..<totalChat.count])
+                    totalChat = Array(totalChat[0..<(totalChat.count - remoteChat.count - 50)])
+                } else {
+                    viewingChat = totalChat
+                }
                 viewingChat = setDayPreChat(chat: lastLocalChat + remoteChat)
                 presenter?.getLastChatResult(lastChat:
                                                 setNickname(chatList: viewingChat))
@@ -107,6 +115,18 @@ class ChatInteractor: ChatInteractorProtocol {
                                "workItem": emitFailed(uuid: chatUUID)])
         arrangeChat()
         remoteDataManager?.emit(message: ["message": message, "uuid": chatUUID])
+    }
+    
+    // MARK: 페이지네이션
+    func getPreChat() {
+        if totalChat.count > 50 {
+            let preChat = Array(totalChat[(totalChat.count - 50)..<totalChat.count])
+            totalChat = Array(totalChat[0..<(totalChat.count - 50)])
+            viewingChat = preChat + viewingChat
+        } else {
+            viewingChat = totalChat + viewingChat
+        }
+        presenter?.getPreChatResult(pagingChat: viewingChat)
     }
     
     // MARK: 전송 실패 예약함수
