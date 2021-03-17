@@ -24,6 +24,7 @@ class ChatInteractor: ChatInteractorProtocol {
     var mergeChatFromSocketFlag = false
     var nicknameList: [ChatParticipate] = []
     var totalChat: [Chat] = []
+    var viewingChat: [Chat] = []
     var currentYear = ""
     var currentMonth = ""
     var currentDay = ""
@@ -67,25 +68,19 @@ class ChatInteractor: ChatInteractorProtocol {
                     if !lastLocalChat.isEmpty
                         && !remoteChat.isEmpty {
                         // 필요할 때만 넣어줌 (임시 뷰잉이기에 실제로 넣지않음)
+                        guard let lastData = lastLocalChat.last?.date else { return }
                         lastLocalChat.append(Chat(uuid: "0",
                                                   studyID: studyID!,
                                                   userID: 0,
                                                   nickname: "__SYSTEM__",
                                                   message: "여기까지 읽으셨습니다.",
-                                                  date: 0,
+                                                  date: lastData,
                                                   isTemp: false))
                     }
-                    // 날짜 할당
-                    totalChat = setDayPreChat(chat: lastLocalChat + remoteChat)
-                    totalChat += remoteChat
-                    presenter?.getLastChatResult(lastChat:
-                                                    setNickname(chatList: totalChat))
-                } else {
-                    // 날짜 할당
-                    totalChat = setDayPreChat(chat: lastLocalChat)
-                    presenter?.getLastChatResult(lastChat:
-                                                    setNickname(chatList: totalChat))
-                }
+                } 
+                viewingChat = setDayPreChat(chat: lastLocalChat + remoteChat)
+                presenter?.getLastChatResult(lastChat:
+                                                setNickname(chatList: viewingChat))
                 
             }
         case false:
@@ -107,7 +102,7 @@ class ChatInteractor: ChatInteractorProtocol {
                             message: message,
                             date: Int(NSDate().timeIntervalSince1970) * 1000,
                             isTemp: true)
-        totalChat.append(tempChat)
+        viewingChat.append(tempChat)
         myChatUUIDList.append(["UUID": chatUUID,
                                "workItem": emitFailed(uuid: chatUUID)])
         arrangeChat()
@@ -143,7 +138,7 @@ class ChatInteractor: ChatInteractorProtocol {
         }
     }
     
-    // MARK: 소켓을 통한 모든 챗은 이 함수를 거쳐 감 ( 나가는 길이 하나여야 뷰에 무리가 가지않는다고 판단 )
+    // MARK: 소켓을 통한 모든 챗은 이 함수를 거쳐 감 ( 뷰로 가는 길이 하나여야 뷰에 무리가 가지않는다고 판단 )
     func arrangeChat() {
         guard let distance = arrangeChatTime?.distance(to: DispatchTime.now()).toDouble() else { return }
         // 호출된지 0.3초보다 적게 지났으면 진입 X
@@ -172,11 +167,11 @@ class ChatInteractor: ChatInteractorProtocol {
                             // 소켓으로 들어온 것 중 내가보낸 것이 들어왔다면
                             if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
                                 // totalChat에서 임시 채팅 제거
-                                if let totalChatIndex = totalChat.firstIndex(where: { $0.uuid == uuid }) {
+                                if let totalChatIndex = viewingChat.firstIndex(where: { $0.uuid == uuid }) {
                                     if reloadIndex == nil {
                                         reloadIndex = (totalChatIndex)
                                     }
-                                    totalChat.remove(at: totalChatIndex)
+                                    viewingChat.remove(at: totalChatIndex)
                                 }
                                 if let workItem = myChatUUIDList[index]["workItem"] as? DispatchWorkItem {
                                     // 전송실패 예약 함수 취소
@@ -189,13 +184,13 @@ class ChatInteractor: ChatInteractorProtocol {
                     }
                     receiveFromSocketChat.removeFirst()
                 }
-                totalChat += chatArray
+                viewingChat += chatArray
             }
             // 리로드할 인덱스 할당
             if reloadIndex != nil {
-                reloadIndex = totalChat.count - reloadIndex!
+                reloadIndex = viewingChat.count - reloadIndex!
             }
-            presenter?.arrangedChatFromChat(chat: setNickname(chatList: totalChat),
+            presenter?.arrangedChatFromChat(chat: setNickname(chatList: viewingChat),
                                             reloadIndex: reloadIndex ?? nil)
         }
         // 함수 종료직전 또 다시 소켓으로 부터 쌓여있으면 재귀로 호출
@@ -247,7 +242,6 @@ class ChatInteractor: ChatInteractorProtocol {
                                      message: year + "년 " + month + "월 " + day + "일",
                                      date: timeStamp,
                                      isTemp: nil)
-            
             if preYear != year
                 || preMonth != month
                 || preDay != day {
@@ -259,6 +253,7 @@ class ChatInteractor: ChatInteractorProtocol {
             preDay = day
         }
         if result.isEmpty {
+            //첫 채팅일 시 날짜 배정
             let systemMessage = Chat(uuid: "0",
                                      studyID: studyID!,
                                      userID: 0,

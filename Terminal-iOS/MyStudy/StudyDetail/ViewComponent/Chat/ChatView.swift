@@ -154,7 +154,7 @@ class ChatView: UIViewController {
     @objc func scrollToBottom() {
         scrollToBottomButton.alpha = 0
         self.chatTableView.scrollToRow(at: [0, chatList.count], at: .bottom,
-                                       animated: false)
+                                       animated: true)
     }
     
     // MARK: sendButton 액션
@@ -279,7 +279,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
                 self.scrollToBottomButton.alpha = 10
             }
         } else {
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.3) {
                 self.scrollToBottomButton.alpha = 0
             }
         }
