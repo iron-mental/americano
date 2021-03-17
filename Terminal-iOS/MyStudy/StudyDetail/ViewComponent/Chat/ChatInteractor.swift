@@ -10,6 +10,8 @@ import Foundation
 import SwiftKeychainWrapper
 
 class ChatInteractor: ChatInteractorProtocol {
+    
+    
     weak var presenter: ChatPresenterProtocol?
     var remoteDataManager: ChatRemoteDataManagerProtocol?
     var localDataManager: ChatLocalDataManagerProtocol?
@@ -80,16 +82,14 @@ class ChatInteractor: ChatInteractorProtocol {
                 }
                 totalChat = setDayPreChat(chat: lastLocalChat + remoteChat)
                 if lastLocalChat.count > 50 {
-                    //로컬 50 + 리모트 먼저 뷰잉
+                    // 로컬 50개 + 리모트 먼저 뷰잉
                     viewingChat = Array(totalChat[(totalChat.count - remoteChat.count - 50)..<totalChat.count])
                     totalChat = Array(totalChat[0..<(totalChat.count - remoteChat.count - 50)])
                 } else {
                     viewingChat = totalChat
                 }
-                viewingChat = setDayPreChat(chat: lastLocalChat + remoteChat)
                 presenter?.getLastChatResult(lastChat:
                                                 setNickname(chatList: viewingChat))
-                
             }
         case false:
             // 리모트로부터 이전 채팅을 받아오지 못했을 때

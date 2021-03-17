@@ -60,6 +60,7 @@ class ChatView: UIViewController {
             $0.delegate = self
             $0.dataSource = self
             $0.keyboardDismissMode = .onDrag
+            $0.prefetchDataSource = self
         }
         scrollToBottomButton.do {
             $0.addTarget(self, action: #selector(scrollToBottom), for: .touchUpInside)
@@ -228,7 +229,13 @@ extension ChatView: ChatViewProtocol {
     
     // MARK: 페이징챗 처리
     func showPagingChat(pagingChat: [Chat]) {
-        
+        UIView.setAnimationsEnabled(false)
+        let diffrence = abs(pagingChat.count - chatList.count)
+        chatList = pagingChat
+        let indexPaths = (0 ..< diffrence)
+            .map { IndexPath(row: $0, section: 0) }
+        chatTableView.insertRows(at: indexPaths, with: .fade)
+        UIView.setAnimationsEnabled(true)
     }
     
     // MARK: 전송 실패한 메세지 처리
@@ -252,7 +259,7 @@ extension ChatView: ChatViewProtocol {
     }
     
 }
-extension ChatView: UITableViewDelegate, UITableViewDataSource {
+extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count + 1
     }
@@ -289,6 +296,13 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        print(indexPaths)
+        if indexPaths[0].row < 20 {
+            presenter?.chatPaging()
+        }
+    }
+    
 }
 extension ChatView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,

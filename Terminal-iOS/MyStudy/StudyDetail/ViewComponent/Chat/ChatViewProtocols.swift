@@ -40,7 +40,6 @@ protocol ChatInteractorProtocol: class {
     func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>)
     func sessionTaskError(message: String)
     func setNicknameList(list: [ChatParticipate])
-    func getPreChatResult(pagingChat: [Chat])
 }
 
 protocol ChatPresenterProtocol: class {
@@ -60,6 +59,7 @@ protocol ChatPresenterProtocol: class {
     func arrangedChatFromChat(chat: [Chat], reloadIndex: Int?)
     func emitFailed(uuid: String)
     func showError(message: String)
+    func getPreChatResult(pagingChat: [Chat])
 }
 
 protocol ChatRemoteDataManagerProtocol: class {
