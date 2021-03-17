@@ -15,6 +15,7 @@ protocol ChatViewProtocol: class {
     func viewLoad() 
     func showLastChat(lastChat: [Chat])
     func showSocketChat(socketChat: [Chat], reloadIndex: Int?)
+    func showPagingChat(pagingChat: [Chat]) 
     func showLoading()
     func hideLoading()
     func showError(message: String)
@@ -32,12 +33,14 @@ protocol ChatInteractorProtocol: class {
     func emit(message: String)
     func disconnectSocket()
     func mergeChatFromSocket()
+    func getPreChat()
     
     // remoteDataManager -> Interactor
     func receiveMessage(message: Chat)
     func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>)
     func sessionTaskError(message: String)
     func setNicknameList(list: [ChatParticipate])
+    func getPreChatResult(pagingChat: [Chat])
 }
 
 protocol ChatPresenterProtocol: class {
@@ -50,6 +53,7 @@ protocol ChatPresenterProtocol: class {
     func viewRoadLastChat()
     func emitButtonDidTap(message: String)
     func viewWillDisappear()
+    func chatPaging()
     
     // INTERACTOR -> PRESENTER
     func getLastChatResult(lastChat: [Chat])
