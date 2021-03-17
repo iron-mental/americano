@@ -153,11 +153,6 @@ class ChatView: UIViewController {
     
     // MARK: scrollToBottom 액션
     @objc func scrollToBottom() {
-        //        chatTableView.reloadData()
-        //        let indexPaths2 = (0 ..< self.chatList.count)
-        //            .map { IndexPath(row: $0, section: 0) }
-        //        print("리로드 인덱스", indexPaths2)
-        //        self.chatTableView.reloadRows(at: indexPaths2, with: .fade)
         scrollToBottomButton.alpha = 0
         self.chatTableView.scrollToRow(at: [0, chatList.count], at: .bottom,
                                        animated: true)
@@ -171,7 +166,7 @@ class ChatView: UIViewController {
             cell.textInput.text = ""
             sender.isEnabled = false
             sender.backgroundColor = .lightGray
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                 sender.isEnabled = true
                 sender.backgroundColor = .appColor(.mainColor)
             }
@@ -237,11 +232,11 @@ extension ChatView: ChatViewProtocol {
         let diffrence = pagingChat.count - chatList.count
         chatList = pagingChat
         if diffrence != 0 {
-//            chatTableView.beginUpdates()
+            chatTableView.beginUpdates()
             let indexPaths = (0 ..< diffrence)
                 .map { IndexPath(row: $0, section: 0) }
             chatTableView.insertRows(at: indexPaths, with: .none)
-//            chatTableView.endUpdates()
+            chatTableView.endUpdates()
         }
     }
     
@@ -271,32 +266,21 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chatList.count + 1
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("인덱스는",indexPath)
-        print("값은", chatList[indexPath.row].message)
-    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == chatList.count {
             let outputCell = tableView
                 .dequeueReusableCell(withIdentifier: ChatOutputTableViewCell.id,
                                      for: indexPath)as! ChatOutputTableViewCell
-            outputCell.textInput.delegate = self
             outputCell.sendButton.addTarget(self,
                                             action: #selector(sendButtonDidTap(_: )),
                                             for: .touchUpInside)
-            outputCell.backgroundColor = .none
             return outputCell
         } else {
             let inputCell = tableView
                 .dequeueReusableCell(withIdentifier: ChatInputTableViewCell.id,
                                      for: indexPath) as! ChatInputTableViewCell
             inputCell.setData(chat: chatList[indexPath.row])
-            if indexPath.row % 100 == 0 {
-                inputCell.backgroundColor = .red
-            } else {
-                inputCell.backgroundColor = .none
-            }
             return inputCell
         }
     }
@@ -317,18 +301,9 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
     }
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if indexPaths[0].row < 50 {
+        for indexPath in indexPaths where indexPath.row == 0 {
             presenter?.chatPaging()
         }
-    }
-}
-
-extension ChatView: UITextViewDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let inputChatMessage = textField.text else { return true }
-        presenter?.emitButtonDidTap(message: inputChatMessage)
-        textField.text = ""
-        return true
     }
 }
 extension ChatView: UIGestureRecognizerDelegate {
