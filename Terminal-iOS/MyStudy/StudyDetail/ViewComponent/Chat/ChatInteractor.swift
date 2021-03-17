@@ -191,7 +191,7 @@ class ChatInteractor: ChatInteractorProtocol {
                 }
                 totalChat += chatArray
             }
-            //리로드할 인덱스 할당
+            // 리로드할 인덱스 할당
             if reloadIndex != nil {
                 reloadIndex = totalChat.count - reloadIndex!
             }
@@ -257,6 +257,16 @@ class ChatInteractor: ChatInteractorProtocol {
             preYear = year
             preMonth = month
             preDay = day
+        }
+        if result.isEmpty {
+            let systemMessage = Chat(uuid: "0",
+                                     studyID: studyID!,
+                                     userID: 0,
+                                     nickname: "__SYSTEM__",
+                                     message: currentYear + "년 " + currentMonth + "월 " + currentDay + "일",
+                                     date: 0,
+                                     isTemp: nil)
+            result.insert(systemMessage, at: 0)
         }
         
         return result
