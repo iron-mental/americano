@@ -83,10 +83,7 @@ class ChatInteractor: ChatInteractorProtocol {
                 totalChat = setDayPreChat(chat: lastLocalChat + remoteChat)
                 viewingChat = totalChat
                 if lastLocalChat.count > 100 {
-                    // 로컬 100개 + 리모트 먼저 뷰잉
-                    // 902 ~ 1001까지 viewing
                     viewingChat = Array(totalChat[(totalChat.count - remoteChat.count - 100)..<totalChat.count])
-                    // 0~ 901까지 토탈
                     totalChat = Array(totalChat[0..<(totalChat.count - remoteChat.count - 100)])
                 } else {
                     viewingChat = totalChat
