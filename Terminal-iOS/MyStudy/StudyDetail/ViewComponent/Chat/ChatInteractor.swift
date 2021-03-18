@@ -9,10 +9,8 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class ChatInteractor: ChatInteractorProtocol {
-    
-    
-    weak var presenter: ChatPresenterProtocol?
+final class ChatInteractor: ChatInteractorProtocol {
+    weak var presenter: ChatInteractorOutputProtocol?
     var remoteDataManager: ChatRemoteDataManagerProtocol?
     var localDataManager: ChatLocalDataManagerProtocol?
     
@@ -53,66 +51,6 @@ class ChatInteractor: ChatInteractorProtocol {
         completion()
     }
     
-    // MARK: 리모트데이터 get 후 처리
-    func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>) {
-        switch lastRemoteChat.result {
-        case true:
-            if let remoteChatInfo = lastRemoteChat.data {
-                let remoteChat = remoteChatInfo.chatList
-                nicknameList = remoteChatInfo.userList
-                if !remoteChat.isEmpty {
-                    // 뱃지 카운트 차감
-                    UIApplication.shared.applicationIconBadgeNumber -= remoteChat.count
-                    // 기준이 될 라스트 타임스탬프 할당
-                    lastTimeStamp = remoteChat.last?.date
-                    // CoreDataManager에 lastRemoteChat 저장
-                    CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: remoteChat)
-                    // 로컬 + 리모트 채팅을 프레젠터로 패스
-                    if !lastLocalChat.isEmpty
-                        && !remoteChat.isEmpty {
-                        // 필요할 때만 넣어줌 (임시 뷰잉이기에 실제로 넣지않음)
-                        guard let lastData = lastLocalChat.last?.date else { return }
-                        lastLocalChat.append(Chat(uuid: "0",
-                                                  studyID: studyID!,
-                                                  userID: 0,
-                                                  nickname: "__SYSTEM__",
-                                                  message: "여기까지 읽으셨습니다.",
-                                                  date: lastData,
-                                                  isTemp: nil))
-                    }
-                }
-                totalChat = setGuideDay(chat: lastLocalChat + remoteChat)
-                if totalChat.isEmpty {
-                    // 통틀어 첫채팅일 시 날짜 세팅
-                    toDayDateSet()
-                    let systemMessage = Chat(uuid: "0",
-                                             studyID: studyID!,
-                                             userID: 0,
-                                             nickname: "__SYSTEM__",
-                                             message: currentYear + "년 " + currentMonth + "월 " + currentDay + "일",
-                                             date: 0,
-                                             isTemp: nil)
-                    totalChat.insert(systemMessage, at: 0)
-                }
-                viewingChat = totalChat
-                if lastLocalChat.count > 100 {
-                    viewingChat = Array(totalChat[(totalChat.count - remoteChat.count - 100)..<totalChat.count])
-                    totalChat = Array(totalChat[0..<(totalChat.count - remoteChat.count - 100)])
-                } else {
-                    viewingChat = totalChat
-                    totalChat.removeAll()
-                }
-                presenter?.getLastChatResult(lastChat:
-                                                setNickname(chatList: viewingChat))
-            }
-        case false:
-            // 리모트로부터 이전 채팅을 받아오지 못했을 때
-            presenter?.getLastChatResult(lastChat: lastLocalChat)
-            guard let message = lastRemoteChat.message else { return }
-            presenter?.showError(message: message)
-        }
-        
-    }
     
     // MARK: socket emit 전 temp chat 처리
     func emit(message: String) {
@@ -160,11 +98,6 @@ class ChatInteractor: ChatInteractorProtocol {
         remoteDataManager?.disconnectSocket()
     }
     
-    // MARK: 소켓으로 넘어온 챗 쌓아두기
-    func receiveMessage(message: Chat) {
-        receiveFromSocketChat.append(message)
-        arrangeChat()
-    }
     
     // MARK: 뷰에 로컬+리모트가 세팅됐을 때 호출
     func mergeChatFromSocket() {
@@ -288,15 +221,87 @@ class ChatInteractor: ChatInteractorProtocol {
         return result
     }
     
+    func combine<T>(_ arrays: [T]?...) -> Set <T> {
+        return arrays.compactMap {$0}.compactMap {Set($0)}.reduce(Set<T>()) {$0.union($1)}
+    }
+}
+
+extension ChatInteractor: ChatRemoteDataManagerOutputProtocol {
+    
+    // MARK: 소켓으로 넘어온 챗 쌓아두기
+    
+    func receiveMessage(message: Chat) {
+        receiveFromSocketChat.append(message)
+        arrangeChat()
+    }
+    
+    // MARK: 리모트데이터 get 후 처리
+    
+    func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>) {
+        switch lastRemoteChat.result {
+        case true:
+            if let remoteChatInfo = lastRemoteChat.data {
+                let remoteChat = remoteChatInfo.chatList
+                nicknameList = remoteChatInfo.userList
+                if !remoteChat.isEmpty {
+                    // 뱃지 카운트 차감
+                    UIApplication.shared.applicationIconBadgeNumber -= remoteChat.count
+                    // 기준이 될 라스트 타임스탬프 할당
+                    lastTimeStamp = remoteChat.last?.date
+                    // CoreDataManager에 lastRemoteChat 저장
+                    CoreDataManager.shared.saveChatInfo(studyID: studyID!, chatList: remoteChat)
+                    // 로컬 + 리모트 채팅을 프레젠터로 패스
+                    if !lastLocalChat.isEmpty
+                        && !remoteChat.isEmpty {
+                        // 필요할 때만 넣어줌 (임시 뷰잉이기에 실제로 넣지않음)
+                        guard let lastData = lastLocalChat.last?.date else { return }
+                        lastLocalChat.append(Chat(uuid: "0",
+                                                  studyID: studyID!,
+                                                  userID: 0,
+                                                  nickname: "__SYSTEM__",
+                                                  message: "여기까지 읽으셨습니다.",
+                                                  date: lastData,
+                                                  isTemp: nil))
+                    }
+                }
+                totalChat = setGuideDay(chat: lastLocalChat + remoteChat)
+                if totalChat.isEmpty {
+                    // 통틀어 첫채팅일 시 날짜 세팅
+                    toDayDateSet()
+                    let systemMessage = Chat(uuid: "0",
+                                             studyID: studyID!,
+                                             userID: 0,
+                                             nickname: "__SYSTEM__",
+                                             message: currentYear + "년 " + currentMonth + "월 " + currentDay + "일",
+                                             date: 0,
+                                             isTemp: nil)
+                    totalChat.insert(systemMessage, at: 0)
+                }
+                viewingChat = totalChat
+                if lastLocalChat.count > 100 {
+                    viewingChat = Array(totalChat[(totalChat.count - remoteChat.count - 100)..<totalChat.count])
+                    totalChat = Array(totalChat[0..<(totalChat.count - remoteChat.count - 100)])
+                } else {
+                    viewingChat = totalChat
+                    totalChat.removeAll()
+                }
+                presenter?.getLastChatResult(lastChat:
+                                                setNickname(chatList: viewingChat))
+            }
+        case false:
+            // 리모트로부터 이전 채팅을 받아오지 못했을 때
+            presenter?.getLastChatResult(lastChat: lastLocalChat)
+            guard let message = lastRemoteChat.message else { return }
+            presenter?.showError(message: message)
+        }
+        
+    }
+    
     func sessionTaskError(message: String) {
         presenter?.showError(message: message)
     }
     
     func setNicknameList(list: [ChatParticipate]) {
         nicknameList = Array(combine(nicknameList, list))
-    }
-    
-    func combine<T>(_ arrays: [T]?...) -> Set <T> {
-        return arrays.compactMap {$0}.compactMap {Set($0)}.reduce(Set<T>()) {$0.union($1)}
     }
 }
