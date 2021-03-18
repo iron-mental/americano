@@ -76,27 +76,32 @@ class ChatOutputTableViewCell: UITableViewCell {
         dallarLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 5)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 5)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
         }
         cursorView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.heightAnchor.constraint(equalTo: textInput.heightAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
+            $0.heightAnchor.constraint(equalTo: textInput.heightAnchor,
+                                       constant: -Terminal.convertHeight(value: 10)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 5)).isActive = true
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor,
+                                        constant: Terminal.convertWidth(value: 10)).isActive = true
         }
         textInput.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: cursorView.trailingAnchor, constant: 1).isActive = true
             $0.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor, constant: -10).isActive = true
-            $0.heightAnchor.constraint(equalTo: heightAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
+            $0.heightAnchor.constraint(equalTo: heightAnchor,
+                                       constant: -Terminal.convertHeight(value: 10)).isActive = true
         }
         sendButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                         constant: -Terminal.convertWidth(value: 10)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: self.frame.height - 10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: self.frame.height - 10).isActive = true
         }
@@ -112,6 +117,7 @@ extension ChatOutputTableViewCell: UITextViewDelegate {
         twinkleFlag = false
         cursorView.isHidden = true
     }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         twinkleFlag = true
         cursorView.isHidden = false
