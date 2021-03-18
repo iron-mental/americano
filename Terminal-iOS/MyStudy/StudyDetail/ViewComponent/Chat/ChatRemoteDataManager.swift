@@ -68,7 +68,9 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     }
     
     func disconnectSocket() {
-        chatSocket.disconnect()
+        if chatSocket.status == .connected {
+            chatSocket.disconnect()
+        }
     }
     
     func getRemoteChat(studyID: Int, date: Int?) {

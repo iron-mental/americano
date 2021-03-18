@@ -44,7 +44,7 @@ class ChatInteractor: ChatInteractorProtocol {
             }
         }
         //        작업간 슈가 코드 지우기 ㄴㄴ
-        //        CoreDataManager.shared.tempRemoveAllChat()
+//        CoreDataManager.shared.tempRemoveAllChat()
     }
     
     // MARK: 로컬 챗 세팅
