@@ -14,19 +14,25 @@ class ChatOutputTableViewCell: UITableViewCell {
     var dallarLabel = UILabel()
     var sendButton = UIButton()
     var cursorView = UIView()
+    var twinkleFlag = true
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(twincleCursor), userInfo: nil, repeats: true)
         attribute()
         layout()
+        twinkleCursor()
     }
     
-    @objc func twincleCursor() {
+    @objc func twinkleCursor() {
         cursorView.backgroundColor =
             cursorView.backgroundColor == .white
             ? .appColor(.terminalBackground)
             : .white
+        if twinkleFlag {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.6) {
+                self.twinkleCursor()
+            }
+        }
     }
     
     func attribute() {
@@ -100,9 +106,13 @@ class ChatOutputTableViewCell: UITableViewCell {
 
 extension ChatOutputTableViewCell: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        print("비긴")
+        twinkleFlag = false
+        cursorView.isHidden = true
     }
     func textViewDidEndEditing(_ textView: UITextView) {
-        print("엔드")
+        twinkleFlag = true
+        cursorView.isHidden = false
+        cursorView.backgroundColor = .white
+        twinkleCursor()
     }
 }
