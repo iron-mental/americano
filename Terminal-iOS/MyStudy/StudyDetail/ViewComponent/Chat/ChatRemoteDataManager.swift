@@ -11,8 +11,8 @@ import SocketIO
 import SwiftKeychainWrapper
 import SwiftyJSON
 
-class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
-    weak var interactor: ChatInteractorProtocol?
+final class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
+    weak var interactor: ChatRemoteDataManagerOutputProtocol?
     var chatSocket: SocketIOClient!
     var manager: SocketManager?
     

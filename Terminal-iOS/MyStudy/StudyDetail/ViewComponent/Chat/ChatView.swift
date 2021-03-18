@@ -10,7 +10,7 @@ import UIKit
 import SocketIO
 import SwiftyJSON
 
-class ChatView: UIViewController {
+final class ChatView: UIViewController {
     deinit {
         self.keyboardRemoveObserver()
     }

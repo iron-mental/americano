@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatOutputTableViewCell: UITableViewCell {
+final class ChatOutputTableViewCell: UITableViewCell {
     static var id = "ChatOutputTableViewCell"
     var textInput = UITextView()
     var dallarLabel = UILabel()

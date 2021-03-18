@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-class ChatInputTableViewCell: UITableViewCell {
+final class ChatInputTableViewCell: UITableViewCell {
     static var id = "ChatInputTableViewCell"
     var chatLabel = UILabel()
     
