@@ -87,6 +87,7 @@ class ChatInteractor: ChatInteractorProtocol {
                     totalChat = Array(totalChat[0..<(totalChat.count - remoteChat.count - 100)])
                 } else {
                     viewingChat = totalChat
+                    totalChat.removeAll()
                 }
                 presenter?.getLastChatResult(lastChat:
                                                 setNickname(chatList: viewingChat))
