@@ -27,10 +27,10 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                                                          "study_id": studyID])])
         chatSocket = manager!.socket(forNamespace: "/terminal")
         chatSocket.connect()
-        socketEvents()
         chatSocket.on("connect") { _, _ in
             self.getRemoteChat(studyID: studyID, date: date)
         }
+        socketEvents()
     }
     func socketEvents() {
         chatSocket.on("disconnect") {_, _ in

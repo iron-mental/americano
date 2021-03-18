@@ -41,12 +41,10 @@ class ChatInputTableViewCell: UITableViewCell {
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
-        
     }
     
     func setData(chat: Chat) {
-        let receiveUserID = chat.userID
-        if receiveUserID == 0 {
+        if chat.userID == 0 {
             guard let message = chat.message else { return }
             chatLabel.do {
                 $0.text = "\(message)"
@@ -57,7 +55,7 @@ class ChatInputTableViewCell: UITableViewCell {
             guard let nickname = chat.nickname,
                   let message = chat.message,
                   let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-            let isIncoming = userID == String(receiveUserID) ? ">>" : "  "
+            let isIncoming = userID == String(chat.userID) ? ">>" : "  "
             chatLabel.text = isIncoming + convertTime(timeStamp: chat.date) + " \(nickname) $ \(message)"
             chatLabel.textAlignment = .left
             if let isTemp = chat.isTemp {
