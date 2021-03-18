@@ -123,6 +123,7 @@ final class ChatView: UIViewController {
     }
     
     // MARK: 키보드 올라갈 때
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
@@ -148,6 +149,7 @@ final class ChatView: UIViewController {
     }
     
     // MARK: 키보드 내려갈 때
+    
     @objc func keyboardWillHide() {
         let isBottom = isTableViewSetBottom()
         chatTableView.bounces = false
@@ -156,20 +158,24 @@ final class ChatView: UIViewController {
             self.view.layoutIfNeeded()
         }
         if isBottom {
-            self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
+            self.chatTableView.scrollToRow(at: [0, self.chatList.count],
+                                           at: .bottom,
                                            animated: false)
         } 
         chatTableView.bounces = true
     }
     
     // MARK: scrollToBottom 액션
+    
     @objc func scrollToBottom() {
         scrollToBottomButton.alpha = 0
-        self.chatTableView.scrollToRow(at: [0, chatList.count], at: .bottom,
+        self.chatTableView.scrollToRow(at: [0, chatList.count],
+                                       at: .bottom,
                                        animated: true)
     }
     
     // MARK: sendButton 액션
+    
     @objc func sendButtonDidTap(_ sender: UIButton) {
         if let cell = sender.superview?.superview as? ChatOutputTableViewCell {
             guard let inputChatMessage = cell.textInput.text else { return }
@@ -187,7 +193,9 @@ final class ChatView: UIViewController {
 }
 
 extension ChatView: ChatViewProtocol {
+    
     // MARK: 로컬챗 + 리모트챗 처리 (최초 1회 실행)
+    
     func showLastChat(lastChat: [Chat]) {
         chatList = lastChat
         chatTableView.reloadData()
@@ -202,6 +210,7 @@ extension ChatView: ChatViewProtocol {
     }
     
     // MARK: 소켓으로 들어온 챗 처리
+    
     func showSocketChat(socketChat: [Chat], reloadIndex: Int?) {
         UIView.setAnimationsEnabled(false)
         let isBottom = isTableViewSetBottom()
@@ -227,6 +236,7 @@ extension ChatView: ChatViewProtocol {
     }
     
     // MARK: 테이블뷰가 바닥에 있는 지 확인
+    
     func isTableViewSetBottom() -> Bool {
         let interval = chatTableView.contentOffset.y
             + chatTableView.visibleSize.height
@@ -240,6 +250,7 @@ extension ChatView: ChatViewProtocol {
     }
     
     // MARK: 페이징챗 처리
+    
     func showPagingChat(pagingChat: [Chat]) {
         let diffrence = pagingChat.count - chatList.count
         chatList = pagingChat
@@ -253,6 +264,7 @@ extension ChatView: ChatViewProtocol {
     }
     
     // MARK: 전송 실패한 메세지 처리
+    
     func emitFailed(uuid: String) {
         if let index = chatList.firstIndex(where: { $0.uuid == uuid }) {
             chatList[index].isTemp = false
@@ -306,7 +318,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
             - (chatTableView.contentOffset.y + chatTableView.visibleSize.height)
         if interval > 1700 {
             UIView.animate(withDuration: 0.3) {
-                self.scrollToBottomButton.alpha = 10
+                self.scrollToBottomButton.alpha = 1.0
             }
         } else {
             UIView.animate(withDuration: 0.3) {
@@ -317,9 +329,6 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
     
     // MARK: 페이지네이션
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            print(indexPath.row)
-        }
         for indexPath in indexPaths where indexPath.row < 15 {
             presenter?.chatPaging()
         }
