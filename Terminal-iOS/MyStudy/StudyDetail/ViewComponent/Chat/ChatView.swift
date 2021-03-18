@@ -310,6 +310,7 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
         }
     }
 }
+
 extension ChatView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

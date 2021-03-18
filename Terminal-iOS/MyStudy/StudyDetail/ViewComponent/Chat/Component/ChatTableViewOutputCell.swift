@@ -13,11 +13,20 @@ class ChatOutputTableViewCell: UITableViewCell {
     var textInput = UITextView()
     var dallarLabel = UILabel()
     var sendButton = UIButton()
+    var cursorView = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(twincleCursor), userInfo: nil, repeats: true)
         attribute()
         layout()
+    }
+    
+    @objc func twincleCursor() {
+        cursorView.backgroundColor =
+            cursorView.backgroundColor == .white
+            ? .appColor(.terminalBackground)
+            : .white
     }
     
     func attribute() {
@@ -27,11 +36,12 @@ class ChatOutputTableViewCell: UITableViewCell {
         }
         textInput.do {
             $0.textColor = .white
-            $0.tintColor = .none
-            $0.backgroundColor = .appColor(.InputViewColor)
+            $0.tintColor = .clear
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
             $0.returnKeyType = .default
+            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.delegate = self
         }
         dallarLabel.do {
             $0.textColor = .white
@@ -46,10 +56,13 @@ class ChatOutputTableViewCell: UITableViewCell {
             $0.layer.cornerRadius = (self.frame.height - 10) / 2
             $0.layer.masksToBounds = true
         }
+        cursorView.do {
+            $0.backgroundColor = .white
+        }
     }
     
     func layout() {
-        [dallarLabel, textInput, sendButton].forEach { contentView.addSubview($0) }
+        [dallarLabel, textInput, sendButton, cursorView].forEach { contentView.addSubview($0) }
         
         dallarLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -57,10 +70,17 @@ class ChatOutputTableViewCell: UITableViewCell {
             $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 5)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
         }
+        cursorView.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.heightAnchor.constraint(equalTo: textInput.heightAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 5)).isActive = true
+            $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
+        }
         textInput.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: cursorView.trailingAnchor, constant: 10).isActive = true
             $0.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalTo: heightAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
         }
@@ -78,5 +98,11 @@ class ChatOutputTableViewCell: UITableViewCell {
     }
 }
 
-extension ChatOutputTableViewCell: UITextFieldDelegate {
+extension ChatOutputTableViewCell: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print("비긴")
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("엔드")
+    }
 }
