@@ -169,10 +169,10 @@ class ChatView: UIViewController {
             presenter?.emitButtonDidTap(message: inputChatMessage)
             cell.textInput.text = ""
             sender.isEnabled = false
-            sender.backgroundColor = .lightGray
+            sender.tintColor = .lightGray
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                 sender.isEnabled = true
-                sender.backgroundColor = .appColor(.mainColor)
+                sender.tintColor = .appColor(.mainColor)
             }
         }
     }

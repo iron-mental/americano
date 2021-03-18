@@ -54,8 +54,8 @@ class ChatOutputTableViewCell: UITableViewCell {
             $0.text = "$"
         }
         sendButton.do {
-            $0.tintColor = .white
-            $0.backgroundColor = .appColor(.mainColor)
+            $0.tintColor = .appColor(.mainColor)
+            $0.backgroundColor = .clear
             $0.setImage(UIImage(systemName: "arrow.up")?
                             .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)),
                         for: .normal)
@@ -86,7 +86,7 @@ class ChatOutputTableViewCell: UITableViewCell {
         textInput.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: cursorView.trailingAnchor, constant: 10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: cursorView.trailingAnchor, constant: 1).isActive = true
             $0.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor, constant: -10).isActive = true
             $0.heightAnchor.constraint(equalTo: heightAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
         }
