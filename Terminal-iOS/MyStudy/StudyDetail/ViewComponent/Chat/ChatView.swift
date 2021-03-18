@@ -128,12 +128,19 @@ class ChatView: UIViewController {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
+        var fromEmoticon = false
         if #available(iOS 13.0, *) {
             let window = UIApplication.shared.windows[0]
             let bottomPadding = window.safeAreaInsets.bottom
+            if let constant = tableViewConstraint?.constant {
+                if constant < (-keyboardHeight + bottomPadding) {
+                    fromEmoticon = true
+                }
+            }
             tableViewConstraint?.constant = -keyboardHeight + bottomPadding
         }
-        UIView.animate(withDuration: 1) {
+        
+        UIView.animate(withDuration: fromEmoticon ? 0.1 : 1) {
             self.view.layoutIfNeeded()
         }
         self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
