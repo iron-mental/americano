@@ -173,13 +173,14 @@ class ChatView: UIViewController {
     @objc func sendButtonDidTap(_ sender: UIButton) {
         if let cell = sender.superview?.superview as? ChatOutputTableViewCell {
             guard let inputChatMessage = cell.textInput.text else { return }
-            presenter?.emitButtonDidTap(message: inputChatMessage)
-            cell.textInput.text = ""
-            sender.isEnabled = false
-            sender.tintColor = .lightGray
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                sender.isEnabled = true
-                sender.tintColor = .appColor(.mainColor)
+            if !inputChatMessage.isEmpty {
+                presenter?.emitButtonDidTap(message: inputChatMessage)
+                cell.textInput.text = ""
+                sender.isEnabled = false
+                sender.tintColor = .lightGray
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                    sender.isEnabled = true
+                }
             }
         }
     }
