@@ -147,12 +147,23 @@ class CoreDataManager {
         return []
     }
     
+    func removeChat(studyID: Int) {
+        let fetchRequest: NSFetchRequest<CoreChatInfo> = CoreChatInfo.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "studyID == %@", String(studyID))
+        let objects = try! context.fetch(fetchRequest)
+        for obj in objects {
+            context.delete(obj)
+        }
+        do {
+            try context.save()
+        } catch { }
+    }
+    
     func tempRemoveAllChat() {
         let request: NSFetchRequest<NSFetchRequestResult> = CoreChatInfo.fetchRequest()
         let delete = NSBatchDeleteRequest(fetchRequest: request)
         do {
             try self.context.execute(delete)
-        } catch {
-        }
+        } catch { }
     }
 }
