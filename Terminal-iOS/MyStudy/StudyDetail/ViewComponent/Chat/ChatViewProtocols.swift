@@ -23,26 +23,6 @@ protocol ChatViewProtocol: class {
     func disconnectSocket()
 }
 
-protocol ChatInteractorProtocol: class {
-    var presenter: ChatPresenterProtocol? { get set }
-    var remoteDataManager: ChatRemoteDataManagerProtocol? { get set }
-    var localDataManager: ChatLocalDataManagerProtocol? { get set }
-    var studyID: Int? { get set }
-    
-    // PRESENTER -> INTERACTOR
-    func connectSocket()
-    func emit(message: String)
-    func disconnectSocket()
-    func mergeChatFromSocket()
-    func getPreChat()
-    
-    // remoteDataManager -> Interactor
-    func receiveMessage(message: Chat)
-    func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>)
-    func sessionTaskError(message: String)
-    func setNicknameList(list: [ChatParticipate])
-}
-
 protocol ChatPresenterProtocol: class {
     var view: ChatViewProtocol? { get set }
     var wireFrame: ChatWireFrameProtocol? { get set }
@@ -54,6 +34,9 @@ protocol ChatPresenterProtocol: class {
     func emitButtonDidTap(message: String)
     func viewWillDisappear()
     func chatPaging()
+}
+
+protocol ChatInteractorOutputProtocol: class {
     
     // INTERACTOR -> PRESENTER
     func getLastChatResult(lastChat: [Chat])
@@ -63,8 +46,32 @@ protocol ChatPresenterProtocol: class {
     func getPreChatResult(pagingChat: [Chat])
 }
 
+protocol ChatInteractorProtocol: class {
+    var presenter: ChatInteractorOutputProtocol? { get set }
+    var remoteDataManager: ChatRemoteDataManagerProtocol? { get set }
+    var localDataManager: ChatLocalDataManagerProtocol? { get set }
+    var studyID: Int? { get set }
+    
+    // PRESENTER -> INTERACTOR
+    func connectSocket()
+    func emit(message: String)
+    func disconnectSocket()
+    func mergeChatFromSocket()
+    func getPreChat()
+}
+
+protocol ChatRemoteDataManagerOutputProtocol: class {
+    
+    // REMOTEDATAMANAGER -> INTERACTOR
+    func receiveMessage(message: Chat)
+    func receiveLastChat(lastRemoteChat: BaseResponse<RemoteChatInfo>)
+    func sessionTaskError(message: String)
+    func setNicknameList(list: [ChatParticipate])
+}
+
 protocol ChatRemoteDataManagerProtocol: class {
-    var interactor: ChatInteractorProtocol? { get set }
+    var interactor: ChatRemoteDataManagerOutputProtocol? { get set }
+    
     func socketConnect(studyID: Int, date: Int?)
     func emit(message: [String: Any])
     func disconnectSocket()
