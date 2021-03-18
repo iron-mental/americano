@@ -54,11 +54,14 @@ class ChatOutputTableViewCell: UITableViewCell {
             $0.text = "$"
         }
         sendButton.do {
-            $0.tintColor = .appColor(.mainColor)
+            $0.tintColor = .lightGray
             $0.backgroundColor = .clear
             $0.setImage(UIImage(systemName: "arrow.up")?
                             .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)),
                         for: .normal)
+            $0.setImage(UIImage(systemName: "arrow.up")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)),
+                        for: .disabled)
             $0.layer.cornerRadius = (self.frame.height - 10) / 2
             $0.layer.masksToBounds = true
         }
@@ -114,5 +117,10 @@ extension ChatOutputTableViewCell: UITextViewDelegate {
         cursorView.isHidden = false
         cursorView.backgroundColor = .white
         twinkleCursor()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        sendButton.tintColor = text.isEmpty ? .lightGray : .appColor(.mainColor)
+        return true
     }
 }

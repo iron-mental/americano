@@ -811,8 +811,8 @@
 		CCFA775A25EFA61800DEE2D3 /* EmailValidteResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidteResult.swift; sourceTree = "<group>"; };
 		CCFA779925F1496200DEE2D3 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		CCFA77A625F1593200DEE2D3 /* UITapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITapGestureRecognizer.swift; sourceTree = "<group>"; };
-		CCFF2EF02600DE7800A6874C /* CoreChatInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataProperties.swift"; path = "/Users/jeongjaein/Desktop/Terminal-iOS/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		CCFF2EF12600DE7800A6874C /* CoreChatInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataClass.swift"; path = "/Users/jeongjaein/Desktop/Terminal-iOS/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataClass.swift"; sourceTree = "<absolute>"; };
+		CCFF2EF02600DE7800A6874C /* CoreChatInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataProperties.swift"; path = "/Users/once/Documents/Terminal/americano/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		CCFF2EF12600DE7800A6874C /* CoreChatInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataClass.swift"; path = "/Users/once/Documents/Terminal/americano/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
