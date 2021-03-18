@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class ChatInputTableViewCell: UITableViewCell {
     static var id = "ChatInputTableViewCell"
@@ -44,15 +45,20 @@ class ChatInputTableViewCell: UITableViewCell {
     }
     
     func setData(chat: Chat) {
-        if chat.userID == 0 {
+        let receiveUserID = chat.userID
+        if receiveUserID == 0 {
             guard let message = chat.message else { return }
-            chatLabel.text = "\(message)"
-            chatLabel.textColor = .appColor(.mainColor)
-            chatLabel.textAlignment = .center
+            chatLabel.do {
+                $0.text = "\(message)"
+                $0.textColor = .appColor(.mainColor)
+                $0.textAlignment = .center
+            }
         } else {
-            guard let nickname = chat.nickname else { return }
-            guard let message = chat.message else { return }
-            chatLabel.text = convertTime(timeStamp: chat.date) + " \(nickname) $ \(message)"
+            guard let nickname = chat.nickname,
+                  let message = chat.message,
+                  let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
+            let isIncoming = userID == String(receiveUserID) ? ">>" : "  "
+            chatLabel.text = isIncoming + convertTime(timeStamp: chat.date) + " \(nickname) $ \(message)"
             chatLabel.textAlignment = .left
             if let isTemp = chat.isTemp {
                 if isTemp {
