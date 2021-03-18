@@ -48,6 +48,10 @@ class ChatView: UIViewController {
                                  hideSelector: #selector(keyboardWillHide))
     }
     
+    func disconnectSocket() {
+        presenter?.viewWillDisappear()
+    }
+    
     func attribute() {
         view.do {
             $0.backgroundColor = .appColor(.terminalBackground)
