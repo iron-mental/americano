@@ -61,6 +61,8 @@ class ChatInteractor: ChatInteractorProtocol {
                 let remoteChat = remoteChatInfo.chatList
                 nicknameList = remoteChatInfo.userList
                 if !remoteChat.isEmpty {
+                    // 뱃지 카운트 차감
+                    UIApplication.shared.applicationIconBadgeNumber -= remoteChat.count
                     // 기준이 될 라스트 타임스탬프 할당
                     lastTimeStamp = remoteChat.last?.date
                     // CoreDataManager에 lastRemoteChat 저장
@@ -81,6 +83,7 @@ class ChatInteractor: ChatInteractorProtocol {
                 }
                 totalChat = setGuideDay(chat: lastLocalChat + remoteChat)
                 if totalChat.isEmpty {
+                    // 통틀어 첫채팅일 시 날짜 세팅
                     toDayDateSet()
                     let systemMessage = Chat(uuid: "0",
                                              studyID: studyID!,
