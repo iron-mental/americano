@@ -36,7 +36,7 @@ class ChatView: UIViewController {
         UIView.animate(withDuration: 1.5) {
             self.visualEffectView.alpha = 0
         } completion: { _ in
-            self.visualEffectView.removeFromSuperview()
+            self.visualEffectView.isHidden = true
         }
     }
     
@@ -268,6 +268,9 @@ extension ChatView: ChatViewProtocol {
     }
     
     func showError(message: String) {
+        visualEffectView.isHidden = false
+        visualEffectView.alpha = 1
+        validGuideLabel.text = "연결이 불안정합니다. 잠시 후에 다시 시도해 주세요"
         showToast(controller: self, message: message, seconds: 1)
     }
     
@@ -311,16 +314,13 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
         }
     }
     
+    // MARK: 페이지네이션
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths where indexPath.row == 0 {
+        for indexPath in indexPaths {
+            print(indexPath.row)
+        }
+        for indexPath in indexPaths where indexPath.row < 15 {
             presenter?.chatPaging()
         }
-    }
-}
-
-extension ChatView: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 }
