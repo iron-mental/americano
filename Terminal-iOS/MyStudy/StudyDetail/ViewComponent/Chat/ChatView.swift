@@ -36,7 +36,7 @@ class ChatView: UIViewController {
         UIView.animate(withDuration: 1.5) {
             self.visualEffectView.alpha = 0
         } completion: { _ in
-            self.visualEffectView.removeFromSuperview()
+            self.visualEffectView.isHidden = true
         }
     }
     
@@ -46,6 +46,10 @@ class ChatView: UIViewController {
         layout()
         self.keyboardAddObserver(showSelector: #selector(keyboardWillShow),
                                  hideSelector: #selector(keyboardWillHide))
+    }
+    
+    func disconnectSocket() {
+        presenter?.viewWillDisappear()
     }
     
     func attribute() {
@@ -124,12 +128,19 @@ class ChatView: UIViewController {
         let keyboardFrame: NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         self.keyboardHeight = keyboardRectangle.height
+        var fromEmoticon = false
         if #available(iOS 13.0, *) {
             let window = UIApplication.shared.windows[0]
             let bottomPadding = window.safeAreaInsets.bottom
+            if let constant = tableViewConstraint?.constant {
+                if constant < (-keyboardHeight + bottomPadding) {
+                    fromEmoticon = true
+                }
+            }
             tableViewConstraint?.constant = -keyboardHeight + bottomPadding
         }
-        UIView.animate(withDuration: 1) {
+        
+        UIView.animate(withDuration: fromEmoticon ? 0.1 : 1) {
             self.view.layoutIfNeeded()
         }
         self.chatTableView.scrollToRow(at: [0, self.chatList.count], at: .bottom,
@@ -165,10 +176,10 @@ class ChatView: UIViewController {
             presenter?.emitButtonDidTap(message: inputChatMessage)
             cell.textInput.text = ""
             sender.isEnabled = false
-            sender.backgroundColor = .lightGray
+            sender.tintColor = .lightGray
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                 sender.isEnabled = true
-                sender.backgroundColor = .appColor(.mainColor)
+                sender.tintColor = .appColor(.mainColor)
             }
         }
     }
@@ -257,6 +268,9 @@ extension ChatView: ChatViewProtocol {
     }
     
     func showError(message: String) {
+        visualEffectView.isHidden = false
+        visualEffectView.alpha = 1
+        validGuideLabel.text = "연결이 불안정합니다. 잠시 후에 다시 시도해 주세요"
         showToast(controller: self, message: message, seconds: 1)
     }
     
@@ -300,15 +314,13 @@ extension ChatView: UITableViewDelegate, UITableViewDataSource, UITableViewDataS
         }
     }
     
+    // MARK: 페이지네이션
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths where indexPath.row == 0 {
+        for indexPath in indexPaths {
+            print(indexPath.row)
+        }
+        for indexPath in indexPaths where indexPath.row < 15 {
             presenter?.chatPaging()
         }
-    }
-}
-extension ChatView: UIGestureRecognizerDelegate {
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
-                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
     }
 }

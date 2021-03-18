@@ -20,6 +20,7 @@ protocol ChatViewProtocol: class {
     func hideLoading()
     func showError(message: String)
     func emitFailed(uuid: String)
+    func disconnectSocket()
 }
 
 protocol ChatInteractorProtocol: class {

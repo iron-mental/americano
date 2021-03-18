@@ -46,7 +46,9 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
                     let newMessage = try JSONDecoder().decode(Chat.self, from: data)
                     self.interactor?.receiveMessage(message: newMessage)
                 }
-            } catch { }
+            } catch {
+                print("실패")
+            }
         }
         chatSocket.on("update_user_list") { array, _ in
             do {
@@ -66,7 +68,9 @@ class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     }
     
     func disconnectSocket() {
-        chatSocket.disconnect()
+        if chatSocket.status == .connected {
+            chatSocket.disconnect()
+        }
     }
     
     func getRemoteChat(studyID: Int, date: Int?) {

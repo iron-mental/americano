@@ -44,6 +44,13 @@ final class MyStudyDetailView: UIViewController {
         layout()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let chatView = vcArr[2] as? ChatViewProtocol {
+            chatView.disconnectSocket()
+        }
+    }
+    
     func attribute() {
         self.do {
             if let title = studyInfo?.title {
