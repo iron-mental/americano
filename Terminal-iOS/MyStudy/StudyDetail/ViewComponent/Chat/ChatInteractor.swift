@@ -33,7 +33,6 @@ class ChatInteractor: ChatInteractorProtocol {
     
     // MARK: 로컬데이터 get 후 socket 연결 동기 처리
     func connectSocket() {
-        toDayDateSet()
         guard let id = KeychainWrapper.standard.string(forKey: "userID") else { return }
         self.userID = Int(id)
         getLastLocalChat {
@@ -44,8 +43,8 @@ class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-//        작업간 슈가 코드 지우기 ㄴㄴ
-//        CoreDataManager.shared.tempRemoveAllChat()
+        //        작업간 슈가 코드 지우기 ㄴㄴ
+        //        CoreDataManager.shared.tempRemoveAllChat()
     }
     
     // MARK: 로컬 챗 세팅
@@ -80,7 +79,18 @@ class ChatInteractor: ChatInteractorProtocol {
                                                   isTemp: nil))
                     }
                 }
-                totalChat = setDayPreChat(chat: lastLocalChat + remoteChat)
+                totalChat = setGuideDay(chat: lastLocalChat + remoteChat)
+                if totalChat.isEmpty {
+                    toDayDateSet()
+                    let systemMessage = Chat(uuid: "0",
+                                             studyID: studyID!,
+                                             userID: 0,
+                                             nickname: "__SYSTEM__",
+                                             message: currentYear + "년 " + currentMonth + "월 " + currentDay + "일",
+                                             date: 0,
+                                             isTemp: nil)
+                    totalChat.insert(systemMessage, at: 0)
+                }
                 viewingChat = totalChat
                 if lastLocalChat.count > 100 {
                     viewingChat = Array(totalChat[(totalChat.count - remoteChat.count - 100)..<totalChat.count])
@@ -183,10 +193,10 @@ class ChatInteractor: ChatInteractorProtocol {
                             && lastTimeStamp!
                             < first.date)
                         || lastTimeStamp == nil {
-                            CoreDataManager.shared.saveChatInfo(studyID: studyID!,
-                                                                chatList: [first])
+                        CoreDataManager.shared.saveChatInfo(studyID: studyID!,
+                                                            chatList: [first])
                         // 여기서 날짜한번 세팅
-                        chatArray.append(contentsOf: setDaySocketChat(chat: [first]))
+                        chatArray.append(contentsOf: setGuideDay(chat: [first]))
                         if let uuid = first.uuid {
                             // 소켓으로 들어온 것 중 내가보낸 것이 들어왔다면
                             if let index = myChatUUIDList.firstIndex(where: { $0["UUID"] as? String == uuid }) {
@@ -245,53 +255,8 @@ class ChatInteractor: ChatInteractorProtocol {
         currentMonth = "\(calender.component(.month, from: date))"
         currentDay = "\(calender.component(.day, from: date))"
     }
-
-    func setDayPreChat(chat: [Chat]) -> [Chat] {
-        var result = chat
-        var preYear = ""
-        var preMonth = ""
-        var preDay = ""
-        
-        for i in 0..<result.count {
-            let timeStamp = result[i].date
-            let calender = Calendar.current
-            let date = Date(timeIntervalSince1970: TimeInterval(timeStamp) / 1000)
-            let year = "\(calender.component(.year, from: date))"
-            let month = "\(calender.component(.month, from: date))"
-            let day = "\(calender.component(.day, from: date))"
-            let systemMessage = Chat(uuid: "0",
-                                     studyID: studyID!,
-                                     userID: 0,
-                                     nickname: "__SYSTEM__",
-                                     message: year + "년 " + month + "월 " + day + "일",
-                                     date: timeStamp,
-                                     isTemp: nil)
-            if preYear != year
-                || preMonth != month
-                || preDay != day {
-                result.insert(systemMessage, at: i)
-            }
-            
-            preYear = year
-            preMonth = month
-            preDay = day
-        }
-        if result.isEmpty {
-            // 첫 채팅일 시 날짜 배정
-            let systemMessage = Chat(uuid: "0",
-                                     studyID: studyID!,
-                                     userID: 0,
-                                     nickname: "__SYSTEM__",
-                                     message: currentYear + "년 " + currentMonth + "월 " + currentDay + "일",
-                                     date: 0,
-                                     isTemp: nil)
-            result.insert(systemMessage, at: 0)
-        }
-        
-        return result
-    }
     
-    func setDaySocketChat(chat: [Chat]) -> [Chat] {
+    func setGuideDay(chat: [Chat]) -> [Chat] {
         var result = chat
         
         for i in 0..<result.count {
@@ -317,7 +282,6 @@ class ChatInteractor: ChatInteractorProtocol {
                 currentDay = day
             }
         }
-        
         return result
     }
     
