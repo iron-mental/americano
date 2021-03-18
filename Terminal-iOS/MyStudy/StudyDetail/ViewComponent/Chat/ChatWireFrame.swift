@@ -9,8 +9,6 @@
 import UIKit
 
 final class ChatWireFrame: ChatWireFrameProtocol {
-    weak var presenter: ChatPresenterProtocol?
-    
     static func createChatModule(studyID: Int) -> UIViewController {
         let view: ChatViewProtocol = ChatView()
         let presenter: ChatPresenterProtocol
@@ -33,8 +31,6 @@ final class ChatWireFrame: ChatWireFrameProtocol {
         interactor.studyID = studyID
         
         remoteDataManager.interactor = interactor
-        
-        wireFrame.presenter = presenter
         
         if let view = view as? UIViewController {
             return view
