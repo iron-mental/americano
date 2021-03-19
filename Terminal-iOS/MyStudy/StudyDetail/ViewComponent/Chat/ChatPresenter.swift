@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ChatPresenter: ChatPresenterProtocol {
+final class ChatPresenter: ChatPresenterProtocol {
     weak var view: ChatViewProtocol?
     var wireFrame: ChatWireFrameProtocol?
     var interactor: ChatInteractorProtocol?
@@ -30,6 +30,12 @@ class ChatPresenter: ChatPresenterProtocol {
         interactor?.disconnectSocket()
     }
     
+    func chatPaging() {
+        interactor?.getPreChat()
+    }
+}
+
+extension ChatPresenter: ChatInteractorOutputProtocol {
     func getLastChatResult(lastChat: [Chat]) {
         view?.hideLoading()
         view?.showLastChat(lastChat: lastChat)
@@ -38,18 +44,14 @@ class ChatPresenter: ChatPresenterProtocol {
     func arrangedChatFromChat(chat: [Chat], reloadIndex: Int?) {
         view?.showSocketChat(socketChat: chat, reloadIndex: reloadIndex)
     }
-
-    func showError(message: String) {
-        view?.hideLoading()
-        view?.showError(message: message)
-    }
     
     func emitFailed(uuid: String) {
         view?.emitFailed(uuid: uuid)
     }
     
-    func chatPaging() {
-        interactor?.getPreChat()
+    func showError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
     
     func getPreChatResult(pagingChat: [Chat]) {

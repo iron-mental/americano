@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatOutputTableViewCell: UITableViewCell {
+final class ChatOutputTableViewCell: UITableViewCell {
     static var id = "ChatOutputTableViewCell"
     var textInput = UITextView()
     var dallarLabel = UILabel()
@@ -54,11 +54,14 @@ class ChatOutputTableViewCell: UITableViewCell {
             $0.text = "$"
         }
         sendButton.do {
-            $0.tintColor = .appColor(.mainColor)
+            $0.tintColor = .lightGray
             $0.backgroundColor = .clear
             $0.setImage(UIImage(systemName: "arrow.up")?
                             .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)),
                         for: .normal)
+            $0.setImage(UIImage(systemName: "arrow.up")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .regular)),
+                        for: .disabled)
             $0.layer.cornerRadius = (self.frame.height - 10) / 2
             $0.layer.masksToBounds = true
         }
@@ -73,27 +76,32 @@ class ChatOutputTableViewCell: UITableViewCell {
         dallarLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Terminal.convertWidth(value: 5)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 5)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
         }
         cursorView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.heightAnchor.constraint(equalTo: textInput.heightAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
+            $0.heightAnchor.constraint(equalTo: textInput.heightAnchor,
+                                       constant: -Terminal.convertHeight(value: 10)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 5)).isActive = true
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor, constant: Terminal.convertWidth(value: 10)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: dallarLabel.trailingAnchor,
+                                        constant: Terminal.convertWidth(value: 10)).isActive = true
         }
         textInput.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: cursorView.trailingAnchor, constant: 1).isActive = true
             $0.trailingAnchor.constraint(equalTo: sendButton.leadingAnchor, constant: -10).isActive = true
-            $0.heightAnchor.constraint(equalTo: heightAnchor, constant: -Terminal.convertHeight(value: 10)).isActive = true
+            $0.heightAnchor.constraint(equalTo: heightAnchor,
+                                       constant: -Terminal.convertHeight(value: 10)).isActive = true
         }
         sendButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Terminal.convertWidth(value: 10)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                         constant: -Terminal.convertWidth(value: 10)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: self.frame.height - 10).isActive = true
             $0.heightAnchor.constraint(equalToConstant: self.frame.height - 10).isActive = true
         }
@@ -109,10 +117,16 @@ extension ChatOutputTableViewCell: UITextViewDelegate {
         twinkleFlag = false
         cursorView.isHidden = true
     }
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         twinkleFlag = true
         cursorView.isHidden = false
         cursorView.backgroundColor = .white
         twinkleCursor()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        sendButton.tintColor = text.isEmpty ? .lightGray : .appColor(.mainColor)
+        return true
     }
 }

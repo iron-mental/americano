@@ -8,6 +8,6 @@
 
 import Foundation
 
-class ChatLocalDataManager: ChatLocalDataManagerProtocol {
+final class ChatLocalDataManager: ChatLocalDataManagerProtocol {
     
 }

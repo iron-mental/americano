@@ -16,6 +16,11 @@ enum MyStudyDetialInitView {
 }
 
 final class MyStudyDetailView: UIViewController {
+    deinit {
+        if let chatView = vcArr[2] as? ChatViewProtocol {
+            chatView.disconnectSocket()
+        }
+    }
     var presenter: MyStudyDetailPresenterProtocol?
     
     var viewState: MyStudyDetialInitView = .StudyDetail
@@ -42,13 +47,6 @@ final class MyStudyDetailView: UIViewController {
         showLoading()
         attribute()
         layout()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if let chatView = vcArr[2] as? ChatViewProtocol {
-            chatView.disconnectSocket()
-        }
     }
     
     func attribute() {
