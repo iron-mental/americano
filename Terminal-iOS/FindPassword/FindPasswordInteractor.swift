@@ -24,6 +24,10 @@ final class FindPasswordInteractor: FindPasswordInteractorInputProtocol {
 }
 
 extension FindPasswordInteractor: FindPasswordRemoteDataManagerOutputProtocol {
+    func sessionTaskError(message: String) {
+        self.presenter?.sessionTaskError(message: message)
+    }
+    
     func resetResponse(result: BaseResponse<Bool>) {
         self.presenter?.resetResponse(result: result.result, message: result.message!)
     }

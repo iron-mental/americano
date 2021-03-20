@@ -26,13 +26,20 @@ final class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtoc
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
-                            self.interactor?.leaveStudyResult(result: result.result, message: result.message!)
-                        } catch {
-                            
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                                    self.interactor?.leaveStudyResult(result: result.result, message: result.message!)
+                                } catch {
+                                    
+                                }
+                            }
                         }
                     }
                 }
@@ -54,15 +61,23 @@ final class MyStudyDetailRemoteDataManager: MyStudyDetailRemoteDataManagerProtoc
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
-                            self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
-                        } catch {
-                            
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                                    self.interactor?.deleteStudyResult(result: result.result, message: result.message!)
+                                } catch {
+                                    
+                                }
+                            }
                         }
                     }
+                    
                 }
             }
     }

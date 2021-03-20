@@ -8,24 +8,25 @@
 
 import UIKit
 
-class SNSModifyView: UIViewController {
+final class SNSModifyView: UIViewController {
     var presenter: SNSModifyPresenterProtocol?
     
     var github: String = ""
     var linkedin: String = ""
     var web: String = ""
     
-    lazy var snsModifyView = ProfileSNSModifyView()
-    lazy var completeButton = UIButton()
-    var accessoryCompleteButton = UIButton()
+    let snsModifyView = ProfileSNSModifyView()
+    let completeButton = UIButton()
+    let accessoryCompleteButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
+        snsValidCheck()
     }
 
-    func attribute() {
+    private func attribute() {
         self.do {
             $0.hideKeyboardWhenTappedAround()
             $0.view.backgroundColor = .appColor(.terminalBackground)
@@ -54,7 +55,7 @@ class SNSModifyView: UIViewController {
         }
     }
     
-    func layout() {
+    private func layout() {
         self.view.addSubview(snsModifyView)
         self.view.addSubview(completeButton)
         
@@ -75,6 +76,30 @@ class SNSModifyView: UIViewController {
         }
     }
     
+    private func snsValidCheck() {
+        self.snsModifyView.secondTextField.debounce(delay: 1) { [weak self] _ in
+            guard let text = self?.snsModifyView.secondTextField.text else { return }
+            if text.linkedInCheck() || text.isEmpty {
+                self!.snsModifyView.secondTextField.layer.borderWidth = 0.1
+                self!.snsModifyView.secondTextField.layer.borderColor = UIColor.gray.cgColor
+            } else {
+                self!.snsModifyView.secondTextField.layer.borderWidth = 0.4
+                self!.snsModifyView.secondTextField.layer.borderColor = UIColor.systemRed.cgColor
+            }
+        }
+        
+        self.snsModifyView.thirdTextField.debounce(delay: 1) { [weak self] _ in
+            guard let text = self?.snsModifyView.thirdTextField.text else { return }
+            if text.webCheck() || text.isEmpty {
+                self!.snsModifyView.thirdTextField.layer.borderWidth = 0.1
+                self!.snsModifyView.thirdTextField.layer.borderColor = UIColor.gray.cgColor
+            } else {
+                self!.snsModifyView.thirdTextField.layer.borderWidth = 0.4
+                self!.snsModifyView.thirdTextField.layer.borderColor = UIColor.systemRed.cgColor
+            }
+        }
+    }
+    
     @objc func completeModify() {
         let github = snsModifyView.firstTextFeield.text ?? ""
         let linkedin = snsModifyView.secondTextField.text ?? ""
@@ -86,15 +111,13 @@ class SNSModifyView: UIViewController {
             || web.whitespaceCheck() {
             self.showToast(controller: self, message: "공백은 포함되지 않습니다.", seconds: 0.5)
         } else if !linkedin.linkedInCheck() {
-            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
+            self.showError(label: "sns_linkedin", message: "SNS 형식이 맞지 않습니다.")
         } else if !web.webCheck() {
-            self.showToast(controller: self, message: "SNS 형식이 맞지 않습니다.", seconds: 0.5)
+            self.showError(label: "sns_web", message: "SNS 형식이 맞지 않습니다.")
         } else {
             showLoading()
             self.presenter?.completeModify(github: github, linkedin: linkedin, web: web)
         }
-        
-        print("씨다", linkedin.linkedInCheck())
     }
 }
 
@@ -118,5 +141,22 @@ extension SNSModifyView: SNSModifyViewProtocol {
     
     func hideLoading() {
         LoadingRainbowCat.hide(caller: self)
+    }
+    
+    func showError(label: String?, message: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            if let label = label {
+                switch label {
+                case "sns_github":
+                    self.snsModifyView.firstTextFeield.warningEffect()
+                case "sns_linkedin":
+                    self.snsModifyView.secondTextField.warningEffect()
+                case "sns_web":
+                    self.snsModifyView.thirdTextField.warningEffect()
+                default:
+                    break
+                }
+            }
+        }
     }
 }

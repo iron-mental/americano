@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
+final class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
     weak var interactor: LaunchRemoteDataManagerOutputProtocol?
     
     func getVersionCheck(version: String) {
@@ -24,27 +24,40 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                         let result = try JSONDecoder().decode(BaseResponse<VersionResult>.self, from: data)
                         self.interactor?.getVersionResult(result: result)
                     } catch {
-                        //서버와 형식이 맞지않아 임시로 써놓음
-                        self.interactor?.getVersionResult(result: BaseResponse(result: true,
-                                                                               type: nil,
-                                                                               label: nil,
-                                                                               message: nil,
-                                                                               code: nil,
-                                                                               data: VersionResult(latestVersion: "1.0",
-                                                                                                   force: "0",
-                                                                                                   maintenance: false)))
+                        self.interactor?.getVersionResult(
+                            result: BaseResponse(
+                                result: true,
+                                type: nil,
+                                label: nil,
+                                message: nil,
+                                code: nil,
+                                data: VersionResult(
+                                    latestVersion: "1.0",
+                                    force: 1,
+                                    maintenance: false)
+                            )
+                        )
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<VersionResult>.self, from: data)
-                            if result.message != nil {
-                                self.interactor?.getVersionResult(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<VersionResult>.self, from: data)
+                                    if result.message != nil {
+                                        self.interactor?.getVersionResult(result: result)
+                                    }
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
+                    
                 }
             }
     }
@@ -64,15 +77,23 @@ class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
-                            if result.message != nil {
-                                self.interactor?.getRefreshTokenResult(result: result)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?
+                                .sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<UserInfo>.self, from: data)
+                                    if result.message != nil {
+                                        self.interactor?.getRefreshTokenResult(result: result)
+                                    }
+                                } catch {
+                                    
+                                }
                             }
-                        } catch {
-                            
                         }
                     }
                 }

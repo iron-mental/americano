@@ -40,6 +40,7 @@ protocol SearchStudyInteractorOutputProtocol: class {
     //INTERACTOR -> PRESENTER
     func getHotKeywordSuccess(keyword: [HotKeyword])
     func getHotKeywordFailure(message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol SearchStudyRemoteDataManagerInputProtocol: class {
@@ -53,6 +54,7 @@ protocol SearchStudyRemoteDataManagerOutputProtocol: class {
     
     //REMOTEDATAMANAGER -> INTERACTOR
     func getHotKeywordResult(response: BaseResponse<[HotKeyword]>)
+    func sessionTaskError(message: String)
 }
 
 protocol SearchStudyWireFrameProtocol: class {

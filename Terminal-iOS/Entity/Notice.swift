@@ -14,10 +14,10 @@ struct Notice: Codable {
     let leaderID: Int?
     var studyID: Int?
     let pinned: Bool?
-    let updatedAt: String?
+    let updatedAt: Int
     let leaderImage: String?
     let leaderNickname: String?
-    let createAt: String?
+    let createAt: Int?
     let isPaging: Bool?
     
     enum CodingKeys: String, CodingKey {
@@ -25,7 +25,7 @@ struct Notice: Codable {
         case studyID = "study_id"
         case title, contents, pinned
         case updatedAt = "updated_at"
-        case createAt = "create_at"
+        case createAt = "created_at"
         case leaderID = "leader_id"
         case leaderImage = "leader_image"
         case leaderNickname = "leader_nickname"

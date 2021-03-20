@@ -18,4 +18,12 @@ final class SearchStudyListEmptyView: BaseEmptyView {
             $0.text = "스터디 검색 결과가 없습니다."
         }
     }
+    
+    override func layout() {
+        super.layout()
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            guideLabelTopLayout?.isActive = false
+            guideLabel.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: Terminal.convertHeight(value: 100)).isActive = true
+        }
+    }
 }

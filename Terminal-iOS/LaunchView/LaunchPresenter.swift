@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LaunchPresenter: LaunchPresenterProtocol {
+final class LaunchPresenter: LaunchPresenterProtocol {
     weak var view: LaunchViewProtocol?
     var interactor: LaunchInteractorInputProtocol?
     var wireFrame: LaunchWireFrameProtocol?
@@ -33,7 +33,8 @@ extension LaunchPresenter: LaunchInteractorOutputProtocol {
             view?.showVersionUpdateAlert(alertType: .VersionUpdateRecommendView)
         case .Required:
             view?.showVersionUpdateAlert(alertType: .VersionUpdateRequiredView)
-        case .notRequired: break
+        case .notRequired:
+            break
         }
     }
     
@@ -54,4 +55,7 @@ extension LaunchPresenter: LaunchInteractorOutputProtocol {
         view?.showMainTenanceAlert()
     }
     
+    func sessionTaskError(message: String) {
+        view?.showError(message: message)
+    }
 }

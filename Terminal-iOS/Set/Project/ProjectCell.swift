@@ -12,7 +12,7 @@ protocol CellSubclassDelegate: class {
     func buttonTapped(cell: ProjectCell)
 }
 
-class ProjectCell: UITableViewCell {
+final class ProjectCell: UITableViewCell {
     static let projectCellID = "ProjectCellID"
     
     lazy var remove = UIButton()
@@ -50,7 +50,7 @@ class ProjectCell: UITableViewCell {
         }
         
         self.sns.thirdTextField.debounce(delay: 1) { [weak self] _ in
-            guard let text = self?.sns.secondTextField.text else { return }
+            guard let text = self?.sns.thirdTextField.text else { return }
             if text.playstoreCheck() || text.isEmpty {
                 self!.sns.thirdTextField.layer.borderWidth = 0.1
                 self!.sns.thirdTextField.layer.borderColor = UIColor.gray.cgColor

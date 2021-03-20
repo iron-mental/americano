@@ -58,6 +58,7 @@ protocol SetInteractorOutputProtocol: class {
     func eamilAuthResponse(result: Bool, message: String)
     func logoutResult(result: BaseResponse<String>)
     func onError()
+    func sessionTaskError(message: String)
 }
 
 protocol SetInteractortInputProtocol: class {
@@ -83,6 +84,7 @@ protocol SetRemoteDataManagerOutputProtocol: class {
     func emailAuthResponse(result: BaseResponse<Bool>)
     func postLogoutResult(result: BaseResponse<String>)
     func error()
+    func sessionTaskError(message: String)
 }
 
 protocol SetLocalDataManagerInputProtocol: class {

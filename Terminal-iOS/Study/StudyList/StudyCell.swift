@@ -11,7 +11,7 @@ import SwiftKeychainWrapper
 import Then
 import Kingfisher
 
-class StudyCell: UITableViewCell {
+final class StudyCell: UITableViewCell {
     static let cellId = "StudyCellID"
     
     let mainTitle = UILabel()
@@ -58,7 +58,17 @@ class StudyCell: UITableViewCell {
         }
         
         self.date.do {
-            $0.text = data.createdAt
+            let timestamp = data.createdAt
+            let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+            let calendar = Calendar.current
+            let year = "\(calendar.component(.year, from: date))"
+            let month = calendar.component(.month, from: date)
+            let day = calendar.component(.day, from: date)
+            
+            let endIdx = year.index(year.startIndex, offsetBy: 1)
+            let yearResult = String(year[...endIdx])
+            
+            $0.text = yearResult + " / " + "\(month)" + " / " + "\(day)"
         }
         
         self.memberCount.do {
@@ -200,8 +210,8 @@ class StudyCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: self.date.centerYAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
-            $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 20)).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            $0.heightAnchor.constraint(equalToConstant: 20).isActive = true
         }
         
         self.managerImage.do {

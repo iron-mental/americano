@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchStudyInteractor: SearchStudyInteractorInputProtocol {
+final class SearchStudyInteractor: SearchStudyInteractorInputProtocol {
     weak var presenter: SearchStudyInteractorOutputProtocol?
     var remoteDataManager: SearchStudyRemoteDataManagerInputProtocol?
     
@@ -28,5 +28,8 @@ extension SearchStudyInteractor: SearchStudyRemoteDataManagerOutputProtocol {
             guard let message = response.message else { return }
             self.presenter?.getHotKeywordFailure(message: message)
         }
+    }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

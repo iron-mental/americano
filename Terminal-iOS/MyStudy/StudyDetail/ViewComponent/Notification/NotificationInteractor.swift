@@ -8,7 +8,8 @@
 
 import Foundation
 import SwiftKeychainWrapper
-class NotificationInteractor: NotificationInteractorInputProtocol {
+
+final class NotificationInteractor: NotificationInteractorInputProtocol {
     weak var presenter: NotificationInteractorOutputProtocol?
     var remoteDataManager: NotificationRemoteDataManagerInputProtocol?
     
@@ -43,6 +44,7 @@ extension NotificationInteractor: NotificationRemoteDataManagerOutputProtocol {
             presenter?.retrievedAlertFailed(message: message)
         }
     }
+    
     func alertConfirmResult(result: BaseResponse<String>) {
         switch result.result {
         case true:
@@ -51,5 +53,9 @@ extension NotificationInteractor: NotificationRemoteDataManagerOutputProtocol {
             guard let message = result.message else { return }
             presenter?.alertConfirmFailed(message: message)
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

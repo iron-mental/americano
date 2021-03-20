@@ -8,16 +8,16 @@
 
 import UIKit
 
-class StudyListInteractor: StudyListInteractorInputProtocol {
+final class StudyListInteractor: StudyListInteractorInputProtocol {
+    weak var presenter: StudyListInteractorOutputProtocol?
+    var localDataManager: StudyListLocalDataManagerInputProtocol?
+    var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
+    
     var studyKeyArr: [Study] = []
     var lengthStudyKeyArr: [Study] = []
     var keyValue: [Int] = []
     var newKeyValue: [Int] = []
     var lengthNewKeyValue: [Int] = []
-    
-    weak var presenter: StudyListInteractorOutputProtocol?
-    var localDataManager: StudyListLocalDataManagerInputProtocol?
-    var remoteDataManager: StudyListRemoteDataManagerInputProtocol?
     
     func retrieveStudyList(category: String) {
         remoteDataManager?.retrieveLatestStudyList(category: category)
@@ -84,6 +84,8 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
             for study in resultArr where !study.isPaging! {
                 studyArr.append(study)
             }
+        } else {
+            presenter?.sessionTaskError(message: "요청하는 도중 에러가 발생했습니다.")
         }
         
         presenter?.didRetrieveLatestStudies(studies: studyArr)
@@ -108,6 +110,8 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
             for data in resultArr where !data.isPaging! {
                 studyArr.append(data)
             }
+        } else {
+            presenter?.sessionTaskError(message: "요청하는 도중 에러가 발생했습니다.")
         }
         presenter?.didRetrieveLengthStudies(studies: studyArr)
     }
@@ -118,6 +122,8 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
         if result.result {
             guard let studyList = result.data else { return }
             presenter?.didRetrieveLatestStudies(studies: studyList)
+        } else {
+            presenter?.sessionTaskError(message: "요청하는 도중 에러가 발생했습니다.")
         }
     }
     
@@ -125,11 +131,12 @@ extension StudyListInteractor: StudyListRemoteDataManagerOutputProtocol {
         if result.result {
             guard let studyList = result.data else { return }
             presenter?.didRetrieveLengthStudies(studies: studyList)
+        } else {
+            presenter?.sessionTaskError(message: "요청하는 도중 에러가 발생했습니다.")
         }
     }
     
-    
-    func onError() {
-        
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

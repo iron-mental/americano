@@ -48,7 +48,9 @@ class MyApplyStudyModifyView: UIViewController {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         dismissButton.do {
-            $0.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+            $0.tintColor = .white
+            $0.setImage(UIImage(systemName: "xmark")?
+                            .withConfiguration(UIImage.SymbolConfiguration(weight: .light)), for: .normal)
             $0.addTarget(self, action: #selector(dismissButtonTap), for: .touchUpInside)
         }
         applyTextField.do {
@@ -110,9 +112,7 @@ class MyApplyStudyModifyView: UIViewController {
             presenter?.admitButtonDidTap(newMessage: newMessage)
         }
     }
-    @objc func didCancelButtonDidTap() {
-        TerminalAlertMessage.show(controller: self, type: .StudyApplyDeleteView)
-    }
+    
     @objc func dismissButtonTap() {
         dismiss(animated: true)
     }
@@ -135,7 +135,7 @@ extension MyApplyStudyModifyView: MyApplyStudyModifyViewProtocol {
     
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
-//            팝시켜줘야할듯?
+            self.dismiss(animated: true)
         }
     }
     

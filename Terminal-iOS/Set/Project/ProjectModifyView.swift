@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectModifyView: UIViewController, CellSubclassDelegate {
+final class ProjectModifyView: UIViewController, CellSubclassDelegate {
     deinit { self.keyboardRemoveObserver() }
     
     var presenter: ProjectModifyPresenterProtocol?
@@ -142,7 +142,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                                  snsGithub: github,
                                                  snsAppstore: appStore,
                                                  snsPlaystore: playStore,
-                                                 createAt: "")
+                                                 createAt: 0)
             }
         }
         return state
@@ -258,7 +258,7 @@ class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                   snsGithub: "",
                                   snsAppstore: "",
                                   snsPlaystore: "",
-                                  createAt: "")
+                                  createAt: 0)
             self.projectArr.append(project)
             if self.projectArr.count == 3 {
                 self.projectAddButton.backgroundColor = .darkGray
@@ -325,6 +325,10 @@ extension ProjectModifyView: ProjectModifyViewProtocol {
     
     func hideLoading() {
         LoadingRainbowCat.hide(caller: self)
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }
 

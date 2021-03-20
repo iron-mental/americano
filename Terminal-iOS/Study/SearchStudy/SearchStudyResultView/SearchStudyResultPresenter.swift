@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
+final class SearchStudyResultPresenter: SearchStudyResultPresenterProtocol {
     weak var view: SearchStudyResultViewProtocol?
     var interactor: SearchStudyResultInteractorInputProtocol?
     var wireFrame: SearchStudyResultWireFrameProtocol?
@@ -41,6 +41,10 @@ extension SearchStudyResultPresenter: SearchStudyResultInteractorOutputProtocol 
     }
     
     func showError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
+    func sessionTaskError(message: String) {
         view?.hideLoading()
         view?.showError(message: message)
     }

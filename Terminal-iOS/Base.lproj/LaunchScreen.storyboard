@@ -12,24 +12,24 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="terminal.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="bPz-zm-7cx">
-                                <rect key="frame" x="57" y="245" width="300" height="197.5"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="smallertmn" translatesAutoresizingMaskIntoConstraints="NO" id="bPz-zm-7cx">
+                                <rect key="frame" x="157" y="298" width="100" height="100"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="ODl-VN-DF6"/>
-                                    <constraint firstAttribute="width" constant="300" id="WLj-rk-aXL"/>
+                                    <constraint firstAttribute="width" constant="100" id="3MA-NW-qRV"/>
+                                    <constraint firstAttribute="height" constant="100" id="bXz-52-kdE"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.090196078430000007" green="0.090196078430000007" blue="0.10980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bPz-zm-7cx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="4ZA-F6-nRS"/>
-                            <constraint firstItem="bPz-zm-7cx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Ipm-dw-GiP"/>
+                            <constraint firstItem="bPz-zm-7cx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6Du-rE-wJI"/>
+                            <constraint firstAttribute="centerY" secondItem="bPz-zm-7cx" secondAttribute="bottom" constant="50" id="UCO-Re-qOf"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -39,6 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="terminal.fill" catalog="system" width="128" height="93"/>
+        <image name="smallertmn" width="125" height="79"/>
     </resources>
 </document>

@@ -43,4 +43,8 @@ class AddNoticeInteractor: AddNoticeInteractorProtocol {
             print("addnoticestate값 지정 안됨")
         }
     }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
+    }
 }

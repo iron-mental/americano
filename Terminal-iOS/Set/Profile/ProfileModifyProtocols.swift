@@ -13,7 +13,7 @@ protocol ProfileModifyViewProtocol: class {
     
     // PRESENTER -> VIEW
     func modifyResultHandle(result: Bool, message: String)
-    func showError(message: String, label: String)
+    func showError(message: String, label: String?)
     func showLoading()
     func hideLoading()
 }
@@ -31,13 +31,14 @@ protocol ProfileModifyPresenterProtocol: class {
     
     // VIEW -> PRESENTER
     func viewDidLoad()
-    func completeImageModify(image: UIImage)
+    func completeImageModify(image: UIImage, profileExistence: Bool)
     func completeModify(profile: Profile)
 }
 
 protocol ProfileModifyInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didCompleteModify(result: Bool, message: String)
+    func sessionTaskError(message: String)
     func modifyFailed(message: String, label: String)
 }
 
@@ -47,7 +48,7 @@ protocol ProfileModifyInteractorInputProtocol: class {
     
     // PRESENTER -> INTERACTOR
     func viewDidLoad()
-    func completeImageModify(image: UIImage)
+    func completeImageModify(image: UIImage, profileExistence: Bool)
     func completeModify(profile: Profile)
 }
 
@@ -56,8 +57,9 @@ protocol ProfileModifyRemoteDataManagerInputProtocol: class {
     
     // INTERACTOR -> REMOTEDATAMANAGER
     func authCheck(completion: @escaping () -> Void)
-    func retrieveImageModify(image: UIImage)
+    func retrieveImageModify(image: UIImage, profileExistence: Bool)
     func retrieveNicknameModify(profile: [String: String])
+    func refreshToken()
 }
 
 protocol ProfileModifyRemoteDataManagerOutputProtocol: class {
@@ -66,4 +68,5 @@ protocol ProfileModifyRemoteDataManagerOutputProtocol: class {
     func imageModifyRetrieved(result: BaseResponse<Bool>)
     func nicknameModifyRetrieved(result: BaseResponse<Bool>)
     func mergeProfileModifyResult()
+    func sessionTaskError(message: String)
 }

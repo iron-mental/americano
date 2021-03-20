@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyApplyStudyInfoPresenter: MyApplyStudyInfoPresenterProtocol {
+final class MyApplyStudyInfoPresenter: MyApplyStudyInfoPresenterProtocol {
     weak var view: MyApplyStudyInfoViewProtocol?
     var wireFrame: MyApplyStudyInfoWireFrameProtocol?
     var interactor: MyApplyStudyInfoInteractorInputProtocol?
@@ -32,5 +32,8 @@ extension MyApplyStudyInfoPresenter: MyApplyStudyInfoInteractorOutputProtocol {
         case false:
             view?.showError(message: message)
         }
+    }
+    func sessionTaskError(message: String) {
+        view?.showError(message: message)
     }
 }

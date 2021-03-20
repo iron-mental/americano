@@ -9,7 +9,8 @@
 import UIKit
 
 struct Profile {
-    var profileImage: UIImage
+    var profileImage: UIImage?
     var nickname: String
     var introduction: String
+    var profileState: Bool
 }

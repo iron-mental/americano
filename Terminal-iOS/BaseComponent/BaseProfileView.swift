@@ -28,8 +28,10 @@ class BaseProfileView: UIViewController {
     let email           = EmailView()
     let locationLabel   = UILabel()
     let location        = LocationView()
+    
     var projectData: [Project] = []
     var userInfo: UserInfo?
+    var profileState: Bool?
     
     // MARK: ViewDidLoad
     
@@ -83,6 +85,20 @@ class BaseProfileView: UIViewController {
             $0.text = "Email"
             $0.textColor = .white
             $0.dynamicFont(fontSize: 15, weight: .regular)
+        }
+        self.email.do {
+            $0.accountButton.do {
+                guard let emailVerified = userInfo?.emailVerified else { return }
+                if emailVerified {
+                    $0.setTitle("인증완료", for: .normal)
+                    $0.setTitleColor(.appColor(.mainColor), for: .normal)
+                    $0.backgroundColor = .appColor(.eamilAuthComplete)
+                } else {
+                    $0.setTitle("미인증", for: .normal)
+                    $0.setTitleColor(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1), for: .normal)
+                    $0.backgroundColor = .appColor(.emailAuthRequire)
+                }
+            }
         }
         
         self.locationLabel.do {
@@ -209,17 +225,23 @@ extension BaseProfileView: BaseProfileViewProtocol {
     func showUserInfo(userInfo: UserInfo) {
         var snsList: [String: String] = [:]
         self.userInfo = userInfo
-        
+        self.attribute()
         // MARK: Set User Info
       
         /// 프로필
         self.profile.name.text = userInfo.nickname
         self.profile.descript.text = userInfo.introduce ?? ""
         
-        let imageURL = userInfo.image ?? ""
-        self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
-                                              placeholder: UIImage(named: "defaultProfile"),
-                                              options: [.requestModifier(RequestToken.token())])
+        if let imageURL = userInfo.image {
+            self.profile.profileImage.kf.setImage(with: URL(string: imageURL),
+                                                  placeholder: UIImage(named: "defaultProfile"),
+                                                  options: [.requestModifier(RequestToken.token())])
+            self.profileState = imageURL.isEmpty ? false : true
+        } else {
+            self.profile.profileImage.image = UIImage(named: "defaultProfile")
+            self.profileState = false
+        }
+        
         self.profile.attribute()
         /// 경력
         let careerTitle = userInfo.careerTitle ?? ""

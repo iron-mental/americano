@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MyApplyStudyInfoInteractor: MyApplyStudyInfoInteractorInputProtocol {
+final class MyApplyStudyInfoInteractor: MyApplyStudyInfoInteractorInputProtocol {
     weak var presenter: MyApplyStudyInfoInteractorOutputProtocol?
     var remoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol?
     var applyID: Int?
@@ -29,5 +29,9 @@ extension MyApplyStudyInfoInteractor: MyApplyStudyInfoRemoteDataManagerOutputPro
         case false:
             presenter?.retriveDeleteApplyResult(result: result, message: message)
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

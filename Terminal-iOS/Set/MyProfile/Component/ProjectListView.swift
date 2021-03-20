@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectListView: UIView {
+final class ProjectListView: UIView {
     let emptyMessage = UILabel()
     let modify = UIButton()
     let projectStack = UIStackView()

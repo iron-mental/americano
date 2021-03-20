@@ -26,9 +26,10 @@ extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol 
             if let categories = result.data {
                 for category in categories {
                     /// Static Image
-                    let image = category != "etc" ?
-                    "https://www.terminal-study.tk/images/category/\(category).png" :
-                    ""
+                    let image =
+                        category != "etc"
+                        ? "https://www.terminal-study.tk/images/category/\(category).png"
+                        : ""
                     let name = category
                     categoryList.append(Category(image: image, name: name))
                     
@@ -39,5 +40,8 @@ extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol 
             guard let message = result.message else { return }
             presenter?.onError(message: message)
         }
+    }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

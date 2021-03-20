@@ -46,7 +46,6 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
             guard let msg = result.message else { return }
             presenter?.onError(message: msg)
         }
-        
     }
     
     func postStudyJoinResult(result: BaseResponse<String>) {
@@ -82,5 +81,8 @@ extension StudyDetailInteractor: StudyDetailRemoteDataManagerOutputProtocol {
         } else {
             return sns!
         }
+    }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

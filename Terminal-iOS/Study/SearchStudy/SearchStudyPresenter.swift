@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchStudyPresenter: SearchStudyPresenterProtocol {
+final class SearchStudyPresenter: SearchStudyPresenterProtocol {
     weak var view: SearchStudyViewProtocol?
     var interactor: SearchStudyInteractorInputProtocol?
     var wireFrame: SearchStudyWireFrameProtocol?
@@ -29,6 +29,11 @@ extension SearchStudyPresenter: SearchStudyInteractorOutputProtocol {
     }
     
     func getHotKeywordFailure(message: String) {
+        view?.showError(message: message)
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
         view?.showError(message: message)
     }
 }

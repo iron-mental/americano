@@ -13,6 +13,7 @@ protocol FindPasswordViewProtocol: class {
     
     // PRESENTER -> VIEW
     func showResult(result: Bool, message: String?)
+    func showError(message: String)
     func showLoading()
     func hideLoading()
 }
@@ -42,6 +43,7 @@ protocol FindPasswordInteractorOutputProtocol: class {
     
     // INTERACTOR -> PRESENTER
     func resetResponse(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol FindPasswordRemoteDataManagerInputProtocol: class {
@@ -55,4 +57,5 @@ protocol FindPasswordRemoteDataManagerOutputProtocol: class {
     
     // REMOTEDATAMANAGER -> INTERACTOR
     func resetResponse(result: BaseResponse<Bool>)
+    func sessionTaskError(message: String)
 }

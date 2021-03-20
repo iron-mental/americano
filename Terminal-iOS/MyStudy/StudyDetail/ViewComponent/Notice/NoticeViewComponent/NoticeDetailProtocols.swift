@@ -12,7 +12,6 @@ protocol NoticeDetailViewProtocol: class {
     var presenter: NoticeDetailPresenterProtocol? { get set }
     var notice: Notice? { get set }
     var parentView: UIViewController? { get set }
-    var noticeID: Int? { get set }
     
     //PRESENTER -> VIEW
     func showNoticeDetail(notice: Notice)
@@ -49,6 +48,7 @@ protocol NoticeDetailInteractorOutputProtocol: class {
     func getNoticeDetailSuccess(notice: Notice)
     func getNoticeDetailFailure(message: String)
     func removeNoticeResult(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol NoticeDetailRemoteDataManagerInputProtocol: class {
@@ -60,6 +60,7 @@ protocol NoticeDetailRemoteDataManagerInputProtocol: class {
 protocol NoticeDetailRemoteDataManagerOutputProtocol: class {
     func getNoticeDetailResult(result: BaseResponse<Notice>)
     func removeNoticeDetailResult(result: BaseResponse<String>)
+    func sessionTaskError(message: String)
 }
 
 protocol NoticeDetailWireFrameProtocol: class {

@@ -11,16 +11,17 @@ import SwiftKeychainWrapper
 import Kingfisher
 import CoreData
 
-class SetView: UIViewController {
+final class SetView: UIViewController {
     var presenter: SetPresenterProtocol?
     // 섹션
     var sections: [String] = ["", "계정", "알림", "정보", ""]
     var account: [String] = ["이메일"]
     var noti: [String] = ["알림"]
-    var settingData: [Setting] = [Setting(title: "앱버전", status: "1.0.0"),
+    var settingData: [Setting] = [Setting(title: "앱버전"),
                                   Setting(title: "문의하기"),
                                   Setting(title: "이용약관"),
-                                  Setting(title: "개인정보 취급방침")]
+                                  Setting(title: "개인정보 취급방침"),
+                                  Setting(title: "오픈소스 라이센스")]
     var userManage: [String] = ["로그아웃", "회원탈퇴"]
     var userInfo: UserInfo? { didSet { self.settingList.reloadData() }}
     var emailVerify: Bool = false
@@ -90,6 +91,9 @@ class SetView: UIViewController {
             $0.titleLabel?.font = UIFont.notosansMedium(size: 14)
             $0.addTarget(self, action: #selector(emailAuth), for: .touchUpInside)
         }
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            settingData[0].status = version
+        }
     }
     
     func layout() {
@@ -150,7 +154,7 @@ extension SetView: SetViewProtocol {
     
     func emailAuthResponse(result: Bool, message: String) {
         if result {
-            self.showToast(controller: self, message: "이메일로 인증이 전송되었습니다.", seconds: 1)
+            self.showToast(controller: self, message: message, seconds: 1.5)
         } else {
             self.showToast(controller: self, message: message, seconds: 1)
         }
@@ -257,6 +261,9 @@ extension SetView: UITableViewDelegate, UITableViewDataSource {
                 presenter?.goToPrivacyWeb()
             } else if indexPath.row == 3 {
                 presenter?.goToTermsOfServiceWeb()
+            } else if indexPath.row == 4 {
+                let view = LicensesView()
+                self.navigationController?.pushViewController(view, animated: true)
             }
         }
         

@@ -16,6 +16,7 @@ protocol SearchLocationViewProtocol: class {
     func showSearchResult(list: [StudyDetailLocationPost])
     func showLoading()
     func hideLoading()
+    func showError(message: String)
 }
 
 protocol SearchLocationPresenterProtocol: class {
@@ -29,6 +30,7 @@ protocol SearchLocationPresenterProtocol: class {
     func didClickedSearchButton(text: String)
     //INTERACTOR -> PRESENTER
     func searchResult(list: [StudyDetailLocationPost])
+    func sessionTaskError(message: String)
 }
 
 protocol SearchLocationInteractorProtocol: class {
@@ -37,9 +39,12 @@ protocol SearchLocationInteractorProtocol: class {
     
     //PRESENTER -> INTERACTOR
     func searchKeyWord(text: String)
+    //DATAMANAGER -> INTERACTOR
+    func sessionTaskError(message: String)
 }
 
 protocol SearchLocationRemoteDataManagerProtocol: class {
+    var interactor: SearchLocationInteractorProtocol? { get set }
     func getSearchResultByKeyword(text: String, completionHandler: @escaping (_: Bool, _ list: [StudyDetailLocationPost]) -> Void)
 }
 

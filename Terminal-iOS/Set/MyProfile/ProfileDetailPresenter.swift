@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
+final class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     weak var view: ProfileDetailViewProtocol?
     var interactor: ProfileDetailInteractorInputProtocol?
     var wireFrame: ProfileDetailWireFrameProtocol?
@@ -52,5 +52,10 @@ extension ProfileDetailPresenter: ProfileDetailInteractorOutputProtocol {
     
     func didRetrievedProject(project: [Project]) {
         view?.addProjectToStackView(project: project)
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

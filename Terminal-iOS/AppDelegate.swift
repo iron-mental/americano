@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 import Firebase
+import FirebaseAnalytics
 import Kingfisher
 import SwiftKeychainWrapper
 
@@ -26,6 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // firebase 연동
         FirebaseApp.configure()
+        FirebaseConfiguration.shared.setLoggerLevel(FirebaseLoggerLevel.min)
+        if let userID = KeychainWrapper.standard.string(forKey: "userID") {
+            Crashlytics.crashlytics().setCustomValue(userID, forKey: "userID")
+            Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                AnalyticsParameterItemID: "\(userID)"
+            ])
+        }
         
         // Noti Request
         let center = UNUserNotificationCenter.current()
@@ -49,24 +57,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        completionHandler([.alert, .badge, .sound])
+            completionHandler([.alert, .badge, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         sleep(1)
         var goView: UIViewController?
-        let userInfo =          response.notification.request.content.userInfo
-        guard let eventValue =  userInfo["pushEvent"] as? String else { return }
-        guard let studyID =     userInfo["study_id"] as? Int else { return }
-        guard let event =       AlarmType(rawValue: eventValue) else { return }
-        
-        guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: studyID, studyTitle: "") as? MyStudyDetailView else { return }
+        let userInfo = response.notification.request.content.userInfo
+        if let alertID = userInfo["alert_id"] as? Int,
+           let userID = KeychainWrapper.standard.string(forKey: "userID") {
+            guard let id = Int(userID) else { return }
+            TerminalNetworkManager
+                .shared
+                .session
+                .request(TerminalRouter.alertConfirm(userID: id, alertID: alertID))
+                .validate()
+                .responseData { response in
+                    print(response.result)
+                }
+        }
+        guard let eventValue    = userInfo["pushEvent"] as? String else { return }
+        guard let studyID       = userInfo["study_id"] as? String else { return }
+        guard let event         = AlarmType(rawValue: eventValue) else { return }
+        guard let id            = Int(studyID) else { return }
+        guard let studyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "") as? MyStudyDetailView else { return }
         
         switch event {
-        
+        case .chat:
+            studyDetailView.viewState = .Chat
+            goView = studyDetailView
         case .studyUpdate,
              .studyHostDelegate,
-             .chat:
+             .applyAllowed:
             studyDetailView.viewState = .StudyDetail
             goView = studyDetailView
             
@@ -83,11 +105,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let notificationListView = NotificationWireFrame.createModule()
             goView = notificationListView
             
-        case .testPush, .undefined, .applyAllowed: break
+        case .testPush, .undefined: break
             
         }
         if let tabVC = self.window?.rootViewController as? UITabBarController,
            let navVC = tabVC.selectedViewController as? UINavigationController {
+            navVC.rootViewController?.dismiss(animated: false, completion: nil)
             guard let targetView = goView else { return }
             var targetParentView: UIViewController?
             navVC.viewControllers.forEach {
@@ -106,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         } else {
             window = UIWindow()
-            let launchView = LaunchWireFrame.createLaunchModule(studyID: studyID, pushEvent: event)
+            let launchView = LaunchWireFrame.createLaunchModule(studyID: id, pushEvent: event)
             window?.rootViewController = launchView
             window?.makeKeyAndVisible()
         }
@@ -131,7 +154,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
          error conditions that could cause the creation of the store to fail.
          */
         let container = NSPersistentContainer(name: "TerminalCoreData")
-        container.loadPersistentStores(completionHandler: { storeDescription, error in
+        container.loadPersistentStores(completionHandler: { _, error in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.

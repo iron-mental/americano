@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NotificationPresenter: NotificationPresenterProtocol {
+final class NotificationPresenter: NotificationPresenterProtocol {
     weak var view: NotificationViewProtocol?
     var interactor: NotificationInteractorInputProtocol?
     var wireFrame: NotificationWireFrameProtocol?
@@ -54,7 +54,13 @@ extension NotificationPresenter: NotificationInteractorOutputProtocol {
             break
         }
     }
+    
     func alertConfirmFailed(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
+    }
+    
+    func sessionTaskError(message: String) {
         view?.hideLoading()
         view?.showError(message: message)
     }

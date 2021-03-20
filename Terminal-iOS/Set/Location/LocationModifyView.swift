@@ -17,8 +17,8 @@ class LocationModifyView: UIViewController {
     var address1depth: [Address] = []
     var address2depth: [String] = []
     
-    var the1depth: String = ""        { didSet { attribute() } }
-    var the2depth: String = ""        { didSet { attribute() } }
+    var the1depth: String = "" { didSet { attribute() } }
+    var the2depth: String = "" { didSet { attribute() } }
     var selectedSegmentIndex: Int = 0 { didSet { attribute() } }
     
     lazy var locationLabel = UILabel()

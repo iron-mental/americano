@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
+final class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
     weak var interactor: ModifyStudyRemoteDataManagerOutputProtocol?
     
     func putStudyInfo(studyID: Int, study: StudyDetailPost) {
@@ -44,6 +44,8 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             if let detailAddress = location.detailAddress {
                 if !detailAddress.isEmpty {
                     params["location_detail"] = detailAddress
+                } else {
+                    params["location_detail"] = ""
                 }
             }
             if let placeName =  location.placeName {
@@ -55,17 +57,25 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
             .shared
             .session
             .upload(multipartFormData: { multipartFormData in
+                if let defaultState = study.imageState, defaultState == true {
+                    multipartFormData.append("".data(using: .utf8)!,
+                                             withName: "image",
+                                             mimeType: "text/plain")
+                } else {
+                    if let image = study.image {
+                        if let imageData = image.jpegData(compressionQuality: 0.1) {
+                            multipartFormData.append(imageData,
+                                                     withName: "image",
+                                                     fileName: "testImage.jpg",
+                                                     mimeType: "image/jpeg")
+                        }
+                    }
+                }
+                
                 for (key, value) in params {
                     multipartFormData.append("\(value)".data(using: .utf8)!, withName: key, mimeType: "text/plain")
                 }
-                if let image = study.image {
-                    if let imageData = image.jpegData(compressionQuality: 0.1) {
-                        multipartFormData.append(imageData,
-                                                 withName: "image",
-                                                 fileName: "testImage.jpg",
-                                                 mimeType: "image/jpeg")
-                    }
-                }
+                
             }, with: TerminalRouter.studyUpdate(studyID: "\(studyID)", study: params))
             .validate()
             .responseData { response in
@@ -77,15 +87,23 @@ class ModifyStudyRemoteDataManager: ModifyStudyRemoteDataManagerInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
-                            self.interactor?.putStudyInfoResult(result: result)
-                        } catch {
-                            
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.interactor?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<String>.self, from: data)
+                                    self.interactor?.putStudyInfoResult(result: result)
+                                } catch {
+                                    
+                                }
+                            }
                         }
                     }
+                    
                 }
             }
     }

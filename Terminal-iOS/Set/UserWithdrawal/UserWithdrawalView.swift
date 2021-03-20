@@ -125,7 +125,6 @@ class UserWithdrawalView: UIViewController {
     @objc func remove() {
         let emailText = self.email.text!
         let passwordText = self.password.text!
-        
         presenter?.userWithdrawal(email: emailText, password: passwordText)
     }
 }
@@ -147,5 +146,9 @@ extension UserWithdrawalView: UserWithdrawalViewProtocol {
     
     func hideLoading() {
         LoadingRainbowCat.hide(caller: self)
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }

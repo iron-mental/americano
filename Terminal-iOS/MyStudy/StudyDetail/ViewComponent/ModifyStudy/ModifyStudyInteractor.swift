@@ -8,7 +8,7 @@
 
 import Foundation
  
-class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
+final class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
     weak var presenter: ModifyStudyInteractorOutputProtocol?
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol?
     var currentStudy: StudyDetail?
@@ -26,6 +26,7 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
                                           snsNotion: targetStudy.snsNotion,
                                           snsEvernote: targetStudy.snsEvernote,
                                           image: targetStudy.image,
+                                          imageState: targetStudy.imageState,
                                           location: targetStudy.location)
         return resultStudy
     }
@@ -46,8 +47,19 @@ class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
 
 extension ModifyStudyInteractor: ModifyStudyRemoteDataManagerOutputProtocol {
     func putStudyInfoResult(result: BaseResponse<String>) {
-        self.presenter?.putStudyInfoResult(result: result.result,
-                                           label: result.label,
-                                           message: result.message ?? "")
+        switch result.result {
+        case true:
+            self.presenter?.putStudyInfoResult(result: true, label: nil, message: result.message ?? "")
+        case false:
+            let message = result.message ?? "스터디 생성에 문제가 발생했습니다."
+            if let label = result.label {
+                self.presenter?.putStudyInfoResult(result: false, label: label, message: message)
+            } else if let code = result.code, code == 101 {
+                self.presenter?.putStudyInfoResult(result: false, label: "title", message: message)
+            }
+        }
+    }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

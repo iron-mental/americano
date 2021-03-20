@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
+final class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
     weak var presenter: SearchStudyResultInteractorOutputProtocol?
     var remoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol?
     var studyList: [Study] = []
@@ -61,5 +61,9 @@ extension SearchStudyResultInteractor: SearchStudyResultRemoteDataManagerOutputP
         case false:
             print("err")
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

@@ -9,16 +9,12 @@
 import UIKit
 import Then
 
-class SearchStudyView: UIViewController {
-    deinit {
-        searchController.isActive = false
-    }
-    
+final class SearchStudyView: UIViewController {
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
     let hotLable = UILabel()
     let titleLabel = UILabel()
-    var searchController = UISearchController(searchResultsController: nil)
+    lazy var searchController = UISearchController(searchResultsController: nil)
     let collectionView: UICollectionView = {
         let layout = LeftAlignedCollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -27,19 +23,19 @@ class SearchStudyView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchBar.becomeFirstResponder()
         presenter?.viewDidLoad()
         attribute()
         layout()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchController.isActive = false
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchController.isActive = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
     
     func attribute() {
@@ -54,11 +50,11 @@ class SearchStudyView: UIViewController {
         }
         self.searchController.do {
             $0.hidesNavigationBarDuringPresentation = true
-            navigationController!.navigationBar.sizeToFit()
             $0.obscuresBackgroundDuringPresentation = false
-            $0.searchBar.showsCancelButton = false
-            $0.hidesNavigationBarDuringPresentation = false
+            $0.automaticallyShowsCancelButton = false
             $0.searchBar.delegate = self
+            navigationController!.navigationBar.sizeToFit()
+            $0.hidesNavigationBarDuringPresentation = false
             $0.delegate = self
         }
         self.view.do {
@@ -78,7 +74,7 @@ class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [ hotLable, collectionView].forEach { self.view.addSubview($0) }
+        [hotLable, collectionView].forEach { self.view.addSubview($0) }
         
         self.hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

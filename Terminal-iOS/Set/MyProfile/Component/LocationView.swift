@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationView: UIView {
+final class LocationView: UIView {
     let emptyMessage = UILabel()
     let location = UILabel()
     let modify = UIButton()

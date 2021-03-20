@@ -50,6 +50,7 @@ final class CreateStudyView: BaseEditableStudyDetailView {
                                                snsNotion: self.SNSInputView.notion.textField.text!,
                                                snsEvernote: self.SNSInputView.evernote.textField.text!,
                                                image: self.mainImageView.image,
+                                               imageState: nil,
                                                location: self.selectedLocation ?? nil)
         
         presenter?.clickCompleteButton(study: studyDetailPost!, studyID: study?.id ?? nil)
@@ -116,5 +117,9 @@ extension CreateStudyView: CreateStudyViewProtocol {
                 }
             }
         }
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }

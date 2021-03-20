@@ -9,7 +9,7 @@
 import UIKit
 import NMapsMap
 
-class SelectLocationPresenter: SelectLocationPresenterProtocol {
+final class SelectLocationPresenter: SelectLocationPresenterProtocol {
     weak var view: SelectLocationViewProtocol?
     var interactor: SelectLocationInteractorProtocol?
     var wireFrame: SelectLocationWireFrameProtocol?
@@ -31,5 +31,10 @@ class SelectLocationPresenter: SelectLocationPresenterProtocol {
     }
     
     func didClickedCompletButton(item: StudyDetailLocationPost) {
+        
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.showError(message: message)
     }
 }

@@ -8,17 +8,20 @@
 
 import UIKit
 
-class SearchLocationInteractor: SearchLocationInteractorProtocol {
+final class SearchLocationInteractor: SearchLocationInteractorProtocol {
     weak var presenter: SearchLocationPresenterProtocol?
     var remoteDataManager: SearchLocationRemoteDataManagerProtocol?
     
     func searchKeyWord(text: String) {
-        remoteDataManager?.getSearchResultByKeyword(text: text, completionHandler: { [self] (result, list)in
+        remoteDataManager?.getSearchResultByKeyword(text: text, completionHandler: { [self] (result, list) in
             if result {
                 presenter?.searchResult(list: list)
             } else {
                 presenter?.searchResult(list: [])
             }
         })
+    }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

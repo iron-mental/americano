@@ -9,7 +9,7 @@
 import UIKit
 import Then
 
-class StudyListView: UIViewController {
+final class StudyListView: UIViewController {
     var category: String?
     let tableView = UITableView()
     let aligmentView = UIView()
@@ -116,10 +116,10 @@ class StudyListView: UIViewController {
     }
     
     @objc func updateList() {
+        self.presenter?.studyList(category: self.category!)
+        self.newStudyList.removeAll()
+        self.lengthStudyList.removeAll()
         DispatchQueue.main.asyncAfter(deadline: .now()+1.5) {
-            self.newStudyList.removeAll()
-            self.lengthStudyList.removeAll()
-            self.presenter?.studyList(category: self.category!)
             self.refreshControl.endRefreshing()
         }
     }
@@ -179,6 +179,9 @@ extension StudyListView: StudyListViewProtocol {
         LoadingRainbowCat.hide(caller: self)
     }
     
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
+    }
 }
 
 extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching {
@@ -213,11 +216,16 @@ extension StudyListView: UITableViewDataSource, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StudyCell.cellId, for: indexPath) as! StudyCell
-        if sortState == .new {
-            cell.setData(newStudyList[indexPath.row])
-        } else if sortState == .length {
-            cell.setData(lengthStudyList[indexPath.row])
-        }
+        
+            if sortState == .new {
+                if !newStudyList.isEmpty {
+                    cell.setData(newStudyList[indexPath.row])
+                }
+            } else if sortState == .length {
+                if !lengthStudyList.isEmpty {
+                    cell.setData(lengthStudyList[indexPath.row])
+                }
+            }
         return cell
     }
     

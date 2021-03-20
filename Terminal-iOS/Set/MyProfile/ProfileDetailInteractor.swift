@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
+final class ProfileDetailInteractor: ProfileDetailInteractorInputProtocol {
     weak var presenter: ProfileDetailInteractorOutputProtocol?
     var localDataManager: ProfileDetailLocalDataManagerInputProtocol?
     var remoteDataManager: ProfileDetailRemoteDataManagerInputProtocol?
@@ -34,5 +34,8 @@ extension ProfileDetailInteractor: ProfileDetailRemoteDataManagerOutputProtocol 
     func onProjectRetrieved(project: BaseResponse<[Project]>) {
         guard let result = project.data else { return }
         presenter?.didRetrievedProject(project: result)
+    }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchLocationPresenter: SearchLocationPresenterProtocol {
+final class SearchLocationPresenter: SearchLocationPresenterProtocol {
     weak var view: SearchLocationViewProtocol?
     var interactor: SearchLocationInteractorProtocol?
     var wireFrame: SearchLocationWireFrameProtocol?
@@ -25,5 +25,9 @@ class SearchLocationPresenter: SearchLocationPresenterProtocol {
     func searchResult(list: [StudyDetailLocationPost]) {
         view?.hideLoading()
         view?.showSearchResult(list: list)
+    }
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

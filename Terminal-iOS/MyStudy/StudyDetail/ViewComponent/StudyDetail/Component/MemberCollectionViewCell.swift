@@ -72,7 +72,7 @@ class MemberCollectionViewCell: UICollectionViewCell {
         DispatchQueue.main.async { [self] in
             if image.isEmpty {
                 profileImage.layer.borderColor = .none
-                profileImage.image = UIImage(named: "defaultProfile")
+                profileImage.image = #imageLiteral(resourceName: "defaultProfile")
             } else {
                 profileImage.layer.borderColor = UIColor.gray.cgColor
                 profileImage.contentMode = .scaleAspectFill

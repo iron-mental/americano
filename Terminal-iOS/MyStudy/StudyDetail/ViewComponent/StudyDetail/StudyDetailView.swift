@@ -57,6 +57,7 @@ final class StudyDetailView: UIViewController {
     var joinButton = UIButton()
     let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
     let appearance = UINavigationBarAppearance()
+    var categoryLabel = UILabel()
     weak var parentView: MyStudyDetailViewProtocol?
     lazy var studyPlanView = TitleWithContentView()
     lazy var timeView = TitleWithContentView()
@@ -78,19 +79,25 @@ final class StudyDetailView: UIViewController {
                 $0.title = studyTitle
             }
         }
+        appearance.do {
+            $0.configureWithTransparentBackground()
+            $0.backgroundColor = .appColor(.terminalBackground)
+        }
         navigationController?.do {
             $0.navigationBar.standardAppearance = appearance
-            $0.navigationBar.standardAppearance.backgroundColor = UIColor.appColor(.terminalBackground)
-            
+            $0.navigationBar.standardAppearance.configureWithTransparentBackground()
+            $0.navigationBar.backgroundColor = .appColor(.terminalBackground)
         }
         navigationItem.do {
             $0.rightBarButtonItems = [moreButton]
+            $0.largeTitleDisplayMode = .always
         }
         moreButton.do {
             $0.image = UIImage(systemName: "ellipsis")?.withConfiguration(UIImage.SymbolConfiguration(weight: .regular))
             $0.target = self
             $0.action = #selector(moreButtonAction)
         }
+        
         view.do {
             $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
@@ -105,6 +112,7 @@ final class StudyDetailView: UIViewController {
             $0.layer.masksToBounds = true
             guard let imageURL = studyInfo?.image else { return }
             if imageURL.isEmpty {
+                $0.image = nil
                 $0.backgroundColor = .systemGray5
                 $0.defaultStudyImage()
             } else {
@@ -161,6 +169,13 @@ final class StudyDetailView: UIViewController {
             if state == .none || state == .member {
             } else {
             }
+        }
+        
+        categoryLabel.do {
+            $0.textColor = .appColor(.mainColor)
+            $0.text = studyInfo?.category ?? ""
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.dynamicFont(fontSize: 14, weight: .regular)
         }
         
         memberView.do {
@@ -221,13 +236,13 @@ final class StudyDetailView: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(tempBackgroundView)
         
-        [mainImageView, joinButton, snsIconsView, studyIntroduceView, memberView, studyPlanView, timeView, locationView, mapView, joinProgressCat].forEach { tempBackgroundView.addSubview($0) }
+        [mainImageView, joinButton, snsIconsView, studyIntroduceView, categoryLabel, memberView, studyPlanView, timeView, locationView, mapView, joinProgressCat].forEach { tempBackgroundView.addSubview($0) }
         
         scrollView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            $0.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         }
         tempBackgroundView.do {
@@ -264,6 +279,11 @@ final class StudyDetailView: UIViewController {
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.bottomAnchor.constraint(equalTo: studyIntroduceView.label.isHidden == false ? studyIntroduceView.label.bottomAnchor : studyIntroduceView.label.bottomAnchor ).isActive = true
+        }
+        categoryLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.centerYAnchor.constraint(equalTo: studyIntroduceView.title.centerYAnchor).isActive = true
+            $0.trailingAnchor.constraint(equalTo: studyIntroduceView.trailingAnchor).isActive = true
         }
         memberView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -421,15 +441,16 @@ extension StudyDetailView: StudyDetailViewProtocol {
     
     func showError(message: String) {
         self.hideLoading()
-        if message != "공백은 허용되지 않습니다" {
+        if message == "공백은 허용되지 않습니다" {
+            showToast(controller: self, message: message, seconds: 1)
+        } else {
+            mapView.removeFromSuperview()
             self.state = .none
             parentView?.setting(caller: self)
             self.view.isHidden = true
             showToast(controller: self, message: message, seconds: 1) {
                 self.navigationController?.popViewController(animated: true)
             }
-        } else {
-            showToast(controller: self, message: message, seconds: 1)
         }
     }
     

@@ -29,6 +29,8 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
         interactor.remoteManager = remoteDataManager
         interactor.localManager = localDataManager
         
+        remoteDataManager.interactor = interactor
+        
         if let id = studyID, let event = alarmType {
             view.startedByPushNotification = true
             wireFrame.studyID = id
@@ -70,22 +72,34 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
                 guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
                 castedMyStudyDetailView.applyState = true
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+                
             case .newNotice,
                  .updatedNotice:
                 let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
                 guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
                 castedMyStudyDetailView.viewState = .Notice
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+                
             case .studyUpdate,
                  .studyHostDelegate,
-                 .chat,
                  .applyAllowed:
                 let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
                 guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
                 castedMyStudyDetailView.viewState = .StudyDetail
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
-            case .testPush, .undefined, .studyDelete, .applyRejected: break
-            
+                
+            case .chat:
+                let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
+                guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
+                castedMyStudyDetailView.viewState = .Chat
+                view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
+            case .applyRejected,
+                 .studyDelete:
+                let notificationListView = NotificationWireFrame.createModule()
+                view.navigationController?.pushViewController(notificationListView, animated: true)
+                
+            case .testPush, .undefined:
+                break
             }
         }
     }

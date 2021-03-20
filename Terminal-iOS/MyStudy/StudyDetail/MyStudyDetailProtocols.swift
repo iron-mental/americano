@@ -26,7 +26,9 @@ protocol MyStudyDetailViewProtocol: class {
     func showDeleteStudyFailed(message: String)
     
     func showLoading()
-    func hideLoading()   
+    func hideLoading()
+    
+    func showError(message: String)
 }
 
 protocol MyStudyDetailInteractorProtocol: class {
@@ -41,6 +43,7 @@ protocol MyStudyDetailInteractorProtocol: class {
     //DATAMANAGER -> INTERACTOR
     func leaveStudyResult(result: Bool, message: String)
     func deleteStudyResult(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol MyStudyDetailPresenterProtocol: class {
@@ -50,7 +53,7 @@ protocol MyStudyDetailPresenterProtocol: class {
     
     //VIEW -> PRESENTER
     func addNoticeButtonDidTap(studyID: Int)
-    func editStudyButtonDidTap(study: StudyDetail, location: Location)
+    func editStudyButtonDidTap(study: StudyDetail, location: Location, mainImage: UIImage?)
     func addNoticeFinished(notice: Int, studyID: Int, title: String)
     func showApplyUserList(studyID: Int)
     func leaveStudyButtonDidTap(studyID: Int)
@@ -60,6 +63,7 @@ protocol MyStudyDetailPresenterProtocol: class {
     //INTERACTOR -> PRESENTER
     func leaveStudyResult(result: Bool, message: String)
     func deleteStudyResult(result: Bool, message: String)
+    func sessionTaskError(message: String)
 }
 
 protocol MyStudyDetailRemoteDataManagerProtocol: class {
@@ -78,7 +82,7 @@ protocol MyStudyDetailWireFrameProtocol: class {
     static func createMyStudyDetailModule(studyID: Int, studyTitle: String) -> UIViewController
 
     func goToAddNotice(studyID: Int, parentView: MyStudyDetailViewProtocol)
-    func goToEditStudy(study: StudyDetail, location: Location, parentView: MyStudyDetailViewProtocol)
+    func goToEditStudy(study: StudyDetail, location: Location, parentView: MyStudyDetailViewProtocol, mainImage: UIImage?)
     func goToNoticeDetail(notice: Int, studyID: Int, title: String, parentView: MyStudyDetailViewProtocol)
     func goToApplyUser(from view: MyStudyDetailViewProtocol, studyID: Int)
     func goToDelegateHost(from view: MyStudyDetailViewProtocol, studyID: Int, userList: [Participate])

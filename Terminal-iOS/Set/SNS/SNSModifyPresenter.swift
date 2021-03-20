@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SNSModifyPresenter: SNSModifyPresenterProtocol {
+final class SNSModifyPresenter: SNSModifyPresenterProtocol {
     weak var view: SNSModifyViewProtocol?
     var interactor: SNSModifyInteractorInputProtocol?
     var wireFrame: SNSModifyWireFrameProtocol?
@@ -21,5 +21,14 @@ class SNSModifyPresenter: SNSModifyPresenterProtocol {
 extension SNSModifyPresenter: SNSModifyInteractorOutputProtocol {
     func didCompleteModify(result: Bool, message: String) {
         self.view?.modifyResultHandle(result: result, message: message)
+    }
+    
+    func modifyError(label: String?, message: String) {
+        view?.showError(label: label, message: message)
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(label: nil, message: message)
     }
 }

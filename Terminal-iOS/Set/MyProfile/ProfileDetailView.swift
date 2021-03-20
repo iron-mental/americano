@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
 
-class ProfileDetailView: BaseProfileView {
+final class ProfileDetailView: BaseProfileView {
     var presenter: ProfileDetailPresenterProtocol?
     
     // MARK: viewDidLoad
@@ -26,6 +26,7 @@ class ProfileDetailView: BaseProfileView {
     
     override func attribute() {
         super.attribute()
+        self.email.accountButton.isHidden = true
         self.profile.modify.addTarget(self, action: #selector(modifyProfile), for: .touchUpInside)
         self.career.modify.addTarget(self, action: #selector(modifyCareer), for: .touchUpInside)
         self.sns.modify.addTarget(self, action: #selector(modifySNS), for: .touchUpInside)
@@ -47,10 +48,13 @@ class ProfileDetailView: BaseProfileView {
     // MARK: Profile modify action
     
     @objc func modifyProfile() {
-        let profileImage = profile.profileImage.image ?? UIImage(named: "defaultProfile")!
+        let profileImage = profile.profileImage.image
         let name = profile.name.text ?? "none"
         let introduction = profile.descript.text ?? "none"
-        let profile = Profile(profileImage: profileImage, nickname: name, introduction: introduction)
+        let profile = Profile(profileImage: profileImage,
+                              nickname: name,
+                              introduction: introduction,
+                              profileState: self.profileState!)
         presenter?.showProfileModify(profile: profile)
     }
     
@@ -83,4 +87,9 @@ class ProfileDetailView: BaseProfileView {
 }
 
 extension ProfileDetailView: ProfileDetailViewProtocol {
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1) {
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
 }

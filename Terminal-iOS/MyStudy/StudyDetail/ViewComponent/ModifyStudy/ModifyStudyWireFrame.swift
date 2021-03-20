@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
-    static func createModifyStudyModule(study: StudyDetail, location: Location) -> UIViewController {
+final class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
+    static func createModifyStudyModule(study: StudyDetail,
+                                        location: Location,
+                                        mainImage: UIImage?) -> UIViewController {
         let view = ModifyStudyView()
         let presenter: ModifyStudyPresenterProtocol & ModifyStudyInteractorOutputProtocol = ModifyStudyPresenter()
         let interactor: ModifyStudyInteractorInputProtocol & ModifyStudyRemoteDataManagerOutputProtocol = ModifyStudyInteractor()
@@ -27,16 +29,16 @@ class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
 
         remoteDataManager.interactor = interactor
         
-        view.study = study
-        
         let postLocation = StudyDetailLocationPost(address: location.addressName,
                                                    lat: Double(location.latitude)!,
-                                                   lng: Double(location.latitude)!,
+                                                   lng: Double(location.longitude)!,
                                                    detailAddress: location.locationDetail ?? "",
                                                    placeName: location.placeName ?? "",
                                                    category: "",
                                                    sido: "",
                                                    sigungu: "")
+        view.study = study
+        view.initImage = mainImage ?? nil
         view.selectedLocation = postLocation
         interactor.currentStudy = study
         

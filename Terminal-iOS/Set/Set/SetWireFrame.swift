@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class SetWireFrame: SetWireFrameProtocol {
+final class SetWireFrame: SetWireFrameProtocol {
     static func setCreateModule() -> UIViewController {
         let view: SetViewProtocol = SetView()
         let presenter: SetPresenterProtocol & SetInteractorOutputProtocol = SetPresenter()
@@ -68,8 +68,8 @@ class SetWireFrame: SetWireFrameProtocol {
     }
     
     func goToInquiryWeb(from view: SetViewProtocol) {
-        let email = "https://mailto:team.ironmental@gmail.com"
-        if let url = URL(string: "mailto:\(email)") {
+        let email = "mailto:team.ironmental@gmail.com"
+        if let url = URL(string: email) {
           if #available(iOS 10.0, *) {
             UIApplication.shared.open(url)
           } else {

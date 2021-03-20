@@ -8,7 +8,7 @@
 
 import Foundation
 
-class IntroPresenter: IntroPresenterProtocol {
+final class IntroPresenter: IntroPresenterProtocol {
     weak var view: IntroViewProtocol?
     var interactor: IntroInteractorProtocol?
     var wireFrame: IntroWireFrameProtocol?
@@ -46,11 +46,10 @@ class IntroPresenter: IntroPresenterProtocol {
         switch result {
         case true:
             view?.hideLoading()
-            view?.presentCompleteView()
+            view?.completeSignUP()
         case false:
             view?.hideLoading()
         }
-        
     }
     
     /// 로그인 유효성 확인
@@ -76,5 +75,10 @@ class IntroPresenter: IntroPresenterProtocol {
     
     func privacyWebDidTap() {
         wireFrame?.goToPrivacyWeb(from: view!)
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectLocationInteractor: SelectLocationInteractorProtocol {
+final class SelectLocationInteractor: SelectLocationInteractorProtocol {
     weak var presenter: SelectLocationPresenterProtocol?
     var remoteDataManager: SelectLocationRemoteDataManagerProtocol?
     var localDataManager: SelectLocationLocalDataManagerProtocol?
@@ -43,5 +43,9 @@ class SelectLocationInteractor: SelectLocationInteractorProtocol {
     
     func selectLocation(item: StudyDetailLocationPost) {
         print("test")
+    }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

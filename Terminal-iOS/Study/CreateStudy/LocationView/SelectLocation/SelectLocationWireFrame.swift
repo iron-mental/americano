@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectLocationWireFrame: SelectLocationWireFrameProtocol {    
+final class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
     static func selectLocationViewModule(item: StudyDetailLocationPost, parentView: UIViewController) -> UIViewController {
         let view = SelectLocationView()
         view.location = item
@@ -29,6 +29,8 @@ class SelectLocationWireFrame: SelectLocationWireFrameProtocol {
         interactor.presenter = presenter
         interactor.localDataManager = localDataManager
         interactor.remoteDataManager = remoteDataManager
+        
+        remoteDataManager.interactor = interactor
         
         return view
     }

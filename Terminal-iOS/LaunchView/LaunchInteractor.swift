@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class LaunchInteractor: LaunchInteractorInputProtocol {
+final class LaunchInteractor: LaunchInteractorInputProtocol {
     weak var presenter: LaunchInteractorOutputProtocol?
     var remoteDataManager: LaunchRemoteDataManagerInputProtocol?
     
@@ -77,5 +77,9 @@ extension LaunchInteractor: LaunchRemoteDataManagerOutputProtocol {
             emptyAllToken()
             presenter?.refreshTokenResult(result: result.result)
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

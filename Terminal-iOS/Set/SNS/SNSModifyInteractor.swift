@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class SNSModifyInteractor: SNSModifyInteractorInputProtocol {
+final class SNSModifyInteractor: SNSModifyInteractorInputProtocol {
     weak var presenter: SNSModifyInteractorOutputProtocol?
     
     func completeModify(github: String, linkedin: String, web: String) {
@@ -36,15 +36,22 @@ class SNSModifyInteractor: SNSModifyInteractorInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    let data = response.data
-                    do {
-                        let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
-                        let isSuccess = result.result
-                        let message = result.message!
-                        self.presenter?.didCompleteModify(result: isSuccess, message: message)
-                    } catch {
-                        print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.presenter?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            let data = response.data
+                            do {
+                                let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data!)
+                                let message = result.message!
+                                let label = result.label ?? nil
+                                self.presenter?.modifyError(label: label, message: message)
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
                     }
                 }
             }

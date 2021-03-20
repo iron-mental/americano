@@ -8,8 +8,8 @@
 
 import UIKit
 
-class SelectCategoryPresenter: SelectCategoryPresenterProtocol {
-    var view: SelectCategoryViewProtocol?
+final class SelectCategoryPresenter: SelectCategoryPresenterProtocol {
+    weak var view: SelectCategoryViewProtocol?
     var wireFrame: SelectCategoryWireFrameProtocol?
     
     func viewDidLoad() {

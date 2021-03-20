@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LaunchWireFrame: LaunchWireFrameProtocol {
+final class LaunchWireFrame: LaunchWireFrameProtocol {
     var studyID: Int?
     var pushEvent: AlarmType?
     
@@ -35,6 +35,7 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
         
         return view
     }
+    
     func replaceRootViewToIntroView() {
         let home = HomeView()
         let nav = UINavigationController(rootViewController: home)
@@ -54,7 +55,7 @@ class LaunchWireFrame: LaunchWireFrameProtocol {
     }
     
     func jumpToAppStore() {
-        if let url = URL(string: "itms-apps://itunes.apple.com/app/[@id]"), UIApplication.shared.canOpenURL(url) {
+        if let url = URL(string: "https://apps.apple.com/app/id1557178596"), UIApplication.shared.canOpenURL(url) {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             } else {

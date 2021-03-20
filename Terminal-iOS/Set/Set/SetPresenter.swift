@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SetPresenter: SetPresenterProtocol {
+final class SetPresenter: SetPresenterProtocol {
     weak var view: SetViewProtocol?
     var interactor: SetInteractortInputProtocol?
     var wireFrame: SetWireFrameProtocol?
@@ -82,5 +82,10 @@ extension SetPresenter: SetInteractorOutputProtocol {
     
     func onError() {
         
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message)
     }
 }

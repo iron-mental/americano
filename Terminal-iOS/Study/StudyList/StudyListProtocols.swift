@@ -16,6 +16,7 @@ protocol StudyListViewProtocol: class {
     func saveLengthStudyList(with studies: [Study])
     func showLoading()
     func hideLoading()
+    func showError(message: String)
 }
 
 protocol StudyListWireFrameProtocol: class {
@@ -41,7 +42,7 @@ protocol StudyListInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrieveLatestStudies(studies: [Study])
     func didRetrieveLengthStudies(studies: [Study])
-    func onError()
+    func sessionTaskError(message: String)
 }
 
 protocol StudyListInteractorInputProtocol: class {
@@ -53,10 +54,6 @@ protocol StudyListInteractorInputProtocol: class {
     func retrieveStudyList(category: String)
     func pagingRetrieveStudyList()
     func pagingRetrieveLengthStudyList()
-}
-
-protocol StudyListDataManagerInputProtocol: class {
-    // INTERACTOR -> DATAMANAGER
 }
 
 protocol StudyListRemoteDataManagerInputProtocol: class {
@@ -75,12 +72,11 @@ protocol StudyListRemoteDataManagerOutputProtocol: class {
     func onStudiesLengthRetrieved(result: BaseResponse<[Study]>)
     func onStudiesForKeyLatestRetrieved(result: BaseResponse<[Study]>)
     func onStudiesForKeyLengthRetrieved(result: BaseResponse<[Study]>)
-    func onError()
+    func sessionTaskError(message: String)
 }
 
 protocol StudyListLocalDataManagerInputProtocol: class {
     // INTERACTOR -> LOCALDATAMANAGER
     func retrieveStudyList() throws -> [Study]
     func saveStudylist(studyList: [Study])
-//    func savePost(id: Int, title: String, imageUrl: String, thumbImageUrl: String) throws
 }

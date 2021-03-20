@@ -29,7 +29,6 @@ class MyStudyMainTableViewCell: UITableViewCell {
             $0.selectionStyle = .none
         }
         studyMainimage.do {
-            $0.image = #imageLiteral(resourceName: "swiftmain")
             $0.contentMode = .scaleAspectFill
             $0.layer.masksToBounds = true
             $0.layer.cornerRadius = 8

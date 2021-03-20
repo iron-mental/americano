@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectCategoryView: UIViewController {
+final class SelectCategoryView: UIViewController {
     var presenter: SelectCategoryPresenterProtocol?
     var categoryList: [Category] = []
     let scrollView = UIScrollView()
@@ -88,8 +88,8 @@ class SelectCategoryView: UIViewController {
         textLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 24).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: UIScreen.main.bounds.width).isActive = true
-//            $0.leadingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor,
+                                        constant: UIScreen.main.bounds.width).isActive = true
         }
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -108,8 +108,7 @@ class SelectCategoryView: UIViewController {
     }
     
     func viewAppearAnimation() {
-        //애니메이션은 task 단위로 묶어서 하나 하는 중일 때 하나 들어오면 그전 꺼 취소하거나 그런식으로..
-        UIView.animate(withDuration: 0.25, delay: 0, options: .transitionCurlUp, animations: { [self] in
+        UIView.animate(withDuration: 0.15, delay: 0, options: .transitionCurlUp, animations: { [self] in
             self.textLabel.transform = self.textLabel.transform.translatedBy(x: -(UIScreen.main.bounds.width - 10), y: 0)
         }) { _ in
             UIView.animate(withDuration: 0.1, delay: 0, options: .transitionCurlUp, animations: {
@@ -123,7 +122,7 @@ class SelectCategoryView: UIViewController {
     }
     
     func viewDisappearAnimation() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCurlUp, animations: { [self] in
+        UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: { [self] in
             self.textLabel.transform = self.textLabel.transform.translatedBy(x: UIScreen.main.bounds.width, y: 0)
         }) { _ in
             UIView.animate(withDuration: 0.2, delay: 0, options: .transitionCurlUp, animations: {

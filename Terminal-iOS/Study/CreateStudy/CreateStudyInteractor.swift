@@ -33,12 +33,16 @@ extension CreateStudyInteractor: CreateStudyReMoteDataManagerOutputProtocol {
             guard let studyID = response.data?.studyID else { return }
             self.presenter?.studyInfoValid(studyID: studyID, message: "스터디 생성완료")
         case false:
-            guard let message = response.message,
-                  let label = response.label else {
-                self.presenter?.studyInfoInvalid(label: nil, message: response.message ?? "생성 실패")
-                return
+            let message = response.message ?? "스터디 생성에 문제가 발생했습니다."
+            if let label = response.label {
+                self.presenter?.studyInfoInvalid(label: label, message: message)
+            } else if let code = response.code, code == 101 {
+                self.presenter?.studyInfoInvalid(label: "title", message: message)
             }
-            self.presenter?.studyInfoInvalid(label: label, message: message)
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-class NotiCell: DefaultCell {
+final class NotiCell: DefaultCell {
     static let notiCellId = "notiCell"
     var result = false
     
@@ -28,6 +28,7 @@ class NotiCell: DefaultCell {
     
     override func layout() {
         super.layout()
+        self.rightLabelTrailingConstraint.isActive = false
         rightLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 40)).isActive = true
     }
     

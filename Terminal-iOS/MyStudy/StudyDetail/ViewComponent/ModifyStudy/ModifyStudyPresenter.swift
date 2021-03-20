@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
+final class ModifyStudyPresenter: ModifyStudyPresenterProtocol {
     weak var view: ModifyStudyViewProtocol?
     var interactor: ModifyStudyInteractorInputProtocol?
     var wireFrame: ModifyStudyWireFrameProtocol?
@@ -36,5 +36,10 @@ extension ModifyStudyPresenter: ModifyStudyInteractorOutputProtocol {
             }
             self.view?.showError(label: label, message: message)
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(label: nil, message: message)
     }
 }

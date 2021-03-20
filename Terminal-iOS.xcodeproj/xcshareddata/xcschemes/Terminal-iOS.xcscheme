@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CCA1FF5224FD0C930026C3EA"
-               BuildableName = "Terminal-iOS.app"
+               BuildableName = "Terminal.app"
                BlueprintName = "Terminal-iOS"
                ReferencedContainer = "container:Terminal-iOS.xcodeproj">
             </BuildableReference>
@@ -45,11 +45,17 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CCA1FF5224FD0C930026C3EA"
-            BuildableName = "Terminal-iOS.app"
+            BuildableName = "Terminal.app"
             BlueprintName = "Terminal-iOS"
             ReferencedContainer = "container:Terminal-iOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-FIRAnalyticsDebugEnabled"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -62,7 +68,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CCA1FF5224FD0C930026C3EA"
-            BuildableName = "Terminal-iOS.app"
+            BuildableName = "Terminal.app"
             BlueprintName = "Terminal-iOS"
             ReferencedContainer = "container:Terminal-iOS.xcodeproj">
          </BuildableReference>

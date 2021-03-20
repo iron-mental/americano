@@ -19,7 +19,7 @@ enum IntroViewState {
     case nickname
 }
 
-class IntroView: UIViewController {
+final class IntroView: UIViewController {
     var presenter: IntroPresenterProtocol?
     
     var leftButton = UIButton()
@@ -78,10 +78,16 @@ class IntroView: UIViewController {
             termsOfSerViceView.isHidden = true
         case .nickname:
             self.guideLabel.text = "가입을 위해\n닉네임을 입력해 주세요"
-            self.inputTextfield.placeholder = "추천 닉네임"
+            self.inputTextfield.placeholder = "닉네임"
             self.introState = .nickname
-            self.leftButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            self.leftButton.setImage(UIImage(systemName: "chevron.left")?
+                                        .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)),
+                                     for: .normal)
             self.rightbutton.setTitle("완료", for: .normal)
+            self.leftButton.setImage(UIImage(systemName: "chevron.left")?
+                                        .withConfiguration(UIImage.SymbolConfiguration(weight: .bold)),
+                                     for: .normal)
+            termsOfSerViceView.isHidden = true
         case .none:
             print("none")
         }
@@ -101,7 +107,6 @@ class IntroView: UIViewController {
             $0.delegate = self
         }
         leftButton.do {
-            UIImage(systemName: "books.vertical")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
             $0.tintColor = .white
             $0.addTarget(self, action: #selector(didClickedBackButon), for: .touchUpInside)
         }
@@ -214,6 +219,7 @@ extension IntroView: IntroViewProtocol {
         presenter.interactor = interactor
         interactor.presenter = presenter
         interactor.remoteDataManager = remoteDataManager
+        remoteDataManager.interactor = interactor
         
         switch introState {
         case .emailInput:
@@ -254,10 +260,16 @@ extension IntroView: IntroViewProtocol {
         }
     }
     
+    func completeSignUP() {
+        let view = ViewController(signUpState: true)
+        guard let window = UIApplication.shared.windows.first else { return }
+        window.replaceRootViewController(view, animated: true, completion: nil)
+    }
+    
     func completeJoin() {
         let view = ViewController()
-        view.modalPresentationStyle = .fullScreen
-        present(view, animated: true, completion: nil)
+        guard let window = UIApplication.shared.windows.first else { return }
+        window.replaceRootViewController(view, animated: true, completion: nil)
     }
     
     func showInvalidEmailAction(message: String) {
@@ -306,6 +318,9 @@ extension IntroView: IntroViewProtocol {
                 }
             }
         }
+    }
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }
 

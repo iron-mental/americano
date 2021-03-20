@@ -23,7 +23,7 @@ class EmailAlertMessageView: AlertBaseUIView {
     override func attribute() {
         super.attribute()
         alertMessageLabel.do {
-            $0.textColor = UIColor.appColor(.alertTextcolor)
+            $0.textColor = .white
             $0.numberOfLines = 0
             $0.textAlignment = .center
             $0.dynamicFont(fontSize: 13, weight: .regular)

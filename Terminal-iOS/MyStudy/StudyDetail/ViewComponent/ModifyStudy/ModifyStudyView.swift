@@ -8,9 +8,25 @@
 
 import UIKit
 
-class ModifyStudyView: BaseEditableStudyDetailView {
+final class ModifyStudyView: BaseEditableStudyDetailView {
     var presenter: ModifyStudyPresenterProtocol?
-    var study: StudyDetail?
+    var postDefaultImage = false
+    var initImage: UIImage? {
+        didSet {
+            guard let _ = self.initImage else {
+                self.studyImageExistence = false
+                return
+            }
+            self.studyImageExistence = true
+        }
+    }
+    var study: StudyDetail? {
+        didSet {
+            if let url = study?.image, url.isEmpty {
+                self.studyImageExistence = false
+            }
+        }
+    }
     
     override func attribute() {
         super.attribute()
@@ -45,10 +61,10 @@ class ModifyStudyView: BaseEditableStudyDetailView {
             $0.detailTime.text = study?.studyTime
         }
         completeButton.do {
-            $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
         accessoryCompleteButton.do {
-            $0.addTarget(self, action: #selector(buttonDidTap), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(completeModify), for: .touchUpInside)
         }
     }
     
@@ -56,8 +72,17 @@ class ModifyStudyView: BaseEditableStudyDetailView {
         presenter?.clickLocationView()
     }
     
-    @objc func buttonDidTap() {
+    @objc func completeModify() {
         self.selectedLocation?.detailAddress = self.locationView.detailAddress.text
+        
+        let image = self.initImage ?? nil
+        
+        // 초기와 이미지가 다를때
+        if image != self.mainImageView.image {
+            if !self.studyImageExistence {
+                self.postDefaultImage = true
+            }
+        }
         
         self.studyDetailPost = StudyDetailPost(category: self.study!.category,
                                                title: self.studyTitleTextField.text ?? "",
@@ -68,6 +93,7 @@ class ModifyStudyView: BaseEditableStudyDetailView {
                                                snsNotion: self.SNSInputView.notion.textField.text ?? "",
                                                snsEvernote: self.SNSInputView.evernote.textField.text ?? "",
                                                image: self.mainImageView.image,
+                                               imageState: self.postDefaultImage,
                                                location: self.selectedLocation ?? nil)
         
         guard let id = study?.id else { return }

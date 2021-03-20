@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
+final class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
     weak var view: ProfileModifyViewProtocol?
     var interactor: ProfileModifyInteractorInputProtocol?
     var wireFrame: ProfileModifyWireFrameProtocol?
@@ -17,8 +17,8 @@ class ProfileModifyPresenter: ProfileModifyPresenterProtocol {
         interactor?.viewDidLoad()
     }
     
-    func completeImageModify(image: UIImage) {
-        interactor?.completeImageModify(image: image)
+    func completeImageModify(image: UIImage, profileExistence: Bool) {
+        interactor?.completeImageModify(image: image, profileExistence: profileExistence)
     }
     
     func completeModify(profile: Profile) {
@@ -34,5 +34,10 @@ extension ProfileModifyPresenter: ProfileModifyInteractorOutputProtocol {
     func modifyFailed(message: String, label: String) {
         view?.hideLoading()
         view?.showError(message: message, label: label)
+    }
+    
+    func sessionTaskError(message: String) {
+        view?.hideLoading()
+        view?.showError(message: message, label: nil)
     }
 }

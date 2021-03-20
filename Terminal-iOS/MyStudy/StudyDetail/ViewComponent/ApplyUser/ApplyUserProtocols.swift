@@ -38,6 +38,7 @@ protocol ApplyUserPresenterProtocol: class {
 protocol ApplyUserInteractorOutputProtocol: class {
     // INTERACTOR -> PRESENTER
     func didRetrieveUser(result: BaseResponse<[ApplyUser]>)
+    func sessionTaskError(message: String)
 }
 
 protocol ApplyUserInteractorInputProtocol: class {

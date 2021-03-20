@@ -16,6 +16,11 @@ enum MyStudyDetialInitView {
 }
 
 final class MyStudyDetailView: UIViewController {
+    deinit {
+        if let chatView = vcArr[2] as? ChatViewProtocol {
+            chatView.disconnectSocket()
+        }
+    }
     var presenter: MyStudyDetailPresenterProtocol?
     
     var viewState: MyStudyDetialInitView = .StudyDetail
@@ -26,7 +31,7 @@ final class MyStudyDetailView: UIViewController {
     var studyTitle: String?
     var pageBeforeIndex: Int = 0
     var vcArr: [UIViewController] = []
-    let state: [String] = ["공지사항", "스터디 정보"]
+    let state: [String] = ["공지사항", "스터디 정보", "채팅"]
     var studyInfo: StudyDetail?
     var userList: [Participate] = []
     var authority: StudyDetailViewState = .member
@@ -40,7 +45,6 @@ final class MyStudyDetailView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoading()
-        setPageControllerChild()
         attribute()
         layout()
     }
@@ -117,9 +121,16 @@ final class MyStudyDetailView: UIViewController {
                                                   completion: nil)
             self.pageBeforeIndex = 1
             self.selectedUnderLine.transform
-                = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count), y: 0)
+                = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(pageBeforeIndex), y: 0)
         case .Chat:
-            break
+            self.tapSege.selectedSegmentIndex = 2
+            self.childPageView.setViewControllers([self.vcArr[2]],
+                                                  direction: .forward,
+                                                  animated: true,
+                                                  completion: nil)
+            self.pageBeforeIndex = 2
+            self.selectedUnderLine.transform
+                = CGAffineTransform(translationX: (self.view.frame.width / CGFloat(state.count)) * CGFloat(pageBeforeIndex), y: 0)
         }
     }
     
@@ -160,7 +171,8 @@ final class MyStudyDetailView: UIViewController {
         if let studyDetail = vcArr[1] as? StudyDetailView,
            let targetStudy = studyDetail.studyInfo {
             let location = targetStudy.location
-            presenter?.editStudyButtonDidTap(study: targetStudy, location: location)
+            let mainImage = studyDetail.mainImageView.image ?? nil
+            presenter?.editStudyButtonDidTap(study: targetStudy, location: location, mainImage: mainImage)
         }
     }
     
@@ -200,10 +212,14 @@ final class MyStudyDetailView: UIViewController {
                       StudyDetailWireFrame.createStudyDetail(parent: self,
                                                              studyID: studyID!,
                                                              state: .member,
-                                                             studyTitle: studyTitle ?? "")]
+                                                             studyTitle: studyTitle ?? ""),
+                      ChatWireFrame.createChatModule(studyID: studyID!)]
         
         if let noticeView = vcArr[0] as? NoticeViewProtocol {
             noticeView.viewLoad()
+        }
+        if let chatView = vcArr[2] as? ChatViewProtocol {
+            chatView.viewLoad()
         }
     }
     
@@ -228,9 +244,9 @@ final class MyStudyDetailView: UIViewController {
         case 2: viewState = .Chat
         default: print("들어오지 않아요")
         }
-        
+        tapSege.selectedSegmentIndex = selectedIndex
         UIView.animate(withDuration: 0.2) { [self] in
-            self.selectedUnderLine.transform = CGAffineTransform(translationX: self.view.frame.width / CGFloat(state.count) * CGFloat(selectedIndex), y: 0)
+            self.selectedUnderLine.transform = CGAffineTransform(translationX: (self.view.frame.width / CGFloat(state.count)) * CGFloat(selectedIndex), y: 0)
         }
         
         // PageView paging
@@ -329,16 +345,14 @@ extension MyStudyDetailView: UIPageViewControllerDataSource, UIPageViewControlle
 
 extension MyStudyDetailView: MyStudyDetailViewProtocol {
     func setting(caller: UIViewController) {
-        
         if let studyDetailView = vcArr[1] as? StudyDetailViewProtocol {
             if type(of: caller) == StudyDetailView.self {
-                //스터디 디테일이 콜했을 경우 처리
-                
-                //공지에 state 심어주고
+                // 스터디 디테일이 콜했을 경우 처리
+                // 공지에 state 심어주고
                 if let noticeView = vcArr[0] as? NoticeView {
                     noticeView.state = studyDetailView.state
                 }
-                //메인스터디디테일에 정보 심어주고
+                // 메인스터디디테일에 정보 심어주고
                 self.studyInfo = studyDetailView.studyInfo
                 self.authority = studyDetailView.state
                 
@@ -353,7 +367,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
                     if applyState == nil {
                         self.hideLoading()
                     } else {
-                        applyState! ? presenter?.showApplyUserList(studyID: studyID!) : nil
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { [self] in
+                            applyState! ? presenter?.showApplyUserList(studyID: studyID!) : nil
+                        }
                     }
                 }
             }
@@ -399,5 +415,9 @@ extension MyStudyDetailView: MyStudyDetailViewProtocol {
     
     func hideLoading() {
         LoadingRainbowCat.hide(caller: self)
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }

@@ -13,20 +13,20 @@ protocol selectLocationDelegate: class {
     func passLocation(location: StudyDetailLocationPost)
 }
 
-class SelectLocationView: UIViewController {
+final class SelectLocationView: UIViewController {
     deinit { self.keyboardRemoveObserver() }
-    
     var presenter: SelectLocationPresenterProtocol?
+    
+    let mapView = NMFMapView()
+    let bottomView = BottomView()
     let pin = UIImageView()
+    
     var task: DispatchWorkItem?
-    var mapView = NMFMapView()
-    var bottomView = BottomView()
     var location: StudyDetailLocationPost?
     var animationFlag = true
     var isMoving = false
     weak var delegate: selectLocationDelegate?
     var keyboardHeight: CGFloat = 0.0
-    var mapViewTopAnchor: NSLayoutConstraint?
     var mapViewBottomAnchor: NSLayoutConstraint?
     var bottomAnchor: NSLayoutConstraint?
     
@@ -43,7 +43,9 @@ class SelectLocationView: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         bottomView.detailAddress.becomeFirstResponder()
-        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)), zoomTo: 17))
+        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat),
+                                                               lng: Double(location!.lng)),
+                                           zoomTo: 17))
         location?.lng = mapView.cameraPosition.target.lng
         location?.lat = mapView.cameraPosition.target.lat
     }
@@ -154,15 +156,17 @@ class SelectLocationView: UIViewController {
 
 extension SelectLocationView: NMFMapViewCameraDelegate {
     func mapViewCameraIdle(_ mapView: NMFMapView) {
-        task = DispatchWorkItem { [self] in
-            self.pin.alpha = 1
+        task = DispatchWorkItem { [weak self] in
+            self?.pin.alpha = 1
             UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
-                self.pin.transform = CGAffineTransform(translationX: 0, y: 0)
-                location?.lng = mapView.cameraPosition.target.lng
-                location?.lat = mapView.cameraPosition.target.lat
-                location?.category = ""
-                if isMoving {
-                    presenter?.getAddress(item: location!)
+                self?.pin.transform = CGAffineTransform(translationX: 0, y: 0)
+                self?.location?.lng = mapView.cameraPosition.target.lng
+                self?.location?.lat = mapView.cameraPosition.target.lat
+                self?.location?.category = ""
+                if self?.isMoving != nil {
+                    if (self?.isMoving)! {
+                        self?.presenter?.getAddress(item: (self?.location)!)
+                    }
                 }
             })
         }
@@ -195,5 +199,9 @@ extension SelectLocationView: SelectLocationViewProtocol {
     func setLocaionOnce(sido: String, sigungu: String) {
         location?.sido = sido
         location?.sigungu = sigungu
+    }
+    
+    func showError(message: String) {
+        showToast(controller: self, message: message, seconds: 1)
     }
 }

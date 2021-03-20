@@ -12,10 +12,9 @@ target 'Terminal-iOS' do
   pod 'SwiftyJSON'
   pod 'Kingfisher'
   pod 'SwiftKeychainWrapper'
-  pod 'Socket.IO-Client-Swift', '~> 13.0.0'
+  pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   pod 'lottie-ios'
   pod 'Firebase/Crashlytics'
-# Recommended: Add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
 # Pods for Terminal-iOS
   

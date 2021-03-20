@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
+final class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
     weak var presenter: ProfileModifyInteractorOutputProtocol?
     var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol?
     
@@ -20,8 +20,8 @@ class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
         remoteDataManager?.authCheck {}
     }
     
-    func completeImageModify(image: UIImage) {
-        remoteDataManager?.retrieveImageModify(image: image)
+    func completeImageModify(image: UIImage, profileExistence: Bool) {
+        remoteDataManager?.retrieveImageModify(image: image, profileExistence: profileExistence)
         imageResult = false
     }
         
@@ -46,6 +46,7 @@ extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol 
             self.presenter?.didCompleteModify(result: true, message: message)
             self.imageResult = false
             self.nicknameResult = false
+            remoteDataManager?.refreshToken()
         } else {
             print("수정 실패")
         }
@@ -72,5 +73,9 @@ extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol 
                   let label = result.label else { return }
             presenter?.modifyFailed(message: message, label: label)
         }
+    }
+    
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }

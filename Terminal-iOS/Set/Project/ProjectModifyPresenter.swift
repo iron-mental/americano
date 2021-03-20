@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProjectModifyPresenter: ProjectModifyPresenterProtocol {
+final class ProjectModifyPresenter: ProjectModifyPresenterProtocol {
     weak var view: ProjectModifyViewProtocol?
     var interactor: ProjectModifyInteractorInputProtocol?
     var wireFrame: ProjectModifyWireFrameProtocol?
@@ -21,6 +21,11 @@ class ProjectModifyPresenter: ProjectModifyPresenterProtocol {
 extension ProjectModifyPresenter: ProjectModifyInteractorOutputProtocol {
     func didCompleteModify(result: Bool, message: String) {
         self.view?.modifyResultHandle(result: result, message: message)
+    }
+    
+    func sessionTaskError(message: String) {
+        self.view?.hideLoading()
+        self.view?.showError(message: message)
     }
     
     func modifyFailed(message: String, label: String) {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ParticipantProfileInteractor: ParticipantProfileInteractorInputProtocol {
+final class ParticipantProfileInteractor: ParticipantProfileInteractorInputProtocol {
     weak var presenter: ParticipantProfileInteractorOutputProtocol?
     var remoteDataManager: ParticipantProfileRemoteDataManagerInputProtocol?
     var userID: Int?
@@ -47,4 +47,7 @@ extension ParticipantProfileInteractor: ParticipantProfileRemoteDataManagerOutpu
         }
     }
     
+    func sessionTaskError(message: String) {
+        presenter?.showError(message: message)
+    }
 }

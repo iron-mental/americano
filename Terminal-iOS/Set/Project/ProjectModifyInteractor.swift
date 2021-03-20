@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
+final class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
     weak var presenter: ProjectModifyInteractorOutputProtocol?
     
     func completeModify(project: [Project]) {
@@ -49,15 +49,22 @@ class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
                     } catch {
                         print(error.localizedDescription)
                     }
-                case .failure:
-                    if let data = response.data {
-                        do {
-                            let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
-                            let message = result.message ?? ""
-                            let label = result.label ?? ""
-                            self.presenter?.modifyFailed(message: message, label: label)
-                        } catch {
-                            print(error.localizedDescription)
+                case .failure(let err):
+                    if let err = err.asAFError {
+                        switch err {
+                        case .sessionTaskFailed:
+                            self.presenter?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
+                        default:
+                            if let data = response.data {
+                                do {
+                                    let result = try JSONDecoder().decode(BaseResponse<Bool>.self, from: data)
+                                    let message = result.message ?? ""
+                                    let label = result.label ?? ""
+                                    self.presenter?.modifyFailed(message: message, label: label)
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
+                            }
                         }
                     }
                 }

@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class SetInteractor: SetInteractortInputProtocol {
+final class SetInteractor: SetInteractortInputProtocol {
     weak var presenter: SetInteractorOutputProtocol?
     var localDataManager: SetLocalDataManagerInputProtocol?
     var remoteDataManager: SetRemoteDataManagerInputProtocol?
@@ -61,5 +61,8 @@ extension SetInteractor: SetRemoteDataManagerOutputProtocol {
         if let coreUserInfo = CoreDataManager.shared.getUserinfo() {
             presenter?.didRetrievedUserInfo(userInfo: coreUserInfo)
         }
+    }
+    func sessionTaskError(message: String) {
+        presenter?.sessionTaskError(message: message)
     }
 }
