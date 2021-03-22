@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class SNSModifyPresenter: SNSModifyPresenterProtocol {
+class SNSModifyPresenter: SNSModifyPresenterProtocol {
     weak var view: SNSModifyViewProtocol?
     var interactor: SNSModifyInteractorInputProtocol?
     var wireFrame: SNSModifyWireFrameProtocol?

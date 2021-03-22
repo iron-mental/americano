@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class StudyListWireFrame: StudyListWireFrameProtocol {
+class StudyListWireFrame: StudyListWireFrameProtocol {
     static func createStudyListModule(category: String) -> UIViewController {
         let view: StudyListViewProtocol = StudyListView()
         let presenter: StudyListPresenterProtocol

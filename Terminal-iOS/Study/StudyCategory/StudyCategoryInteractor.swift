@@ -26,10 +26,9 @@ extension StudyCategoryInteractor: StudyCategoryRemoteDataManagerOutputProtocol 
             if let categories = result.data {
                 for category in categories {
                     /// Static Image
-                    let image =
-                        category != "etc"
-                        ? "https://www.terminal-study.tk/images/category/\(category).png"
-                        : ""
+                    let image = category != "etc" ?
+                    "https://www.terminal-study.tk/images/category/\(category).png" :
+                    ""
                     let name = category
                     categoryList.append(Category(image: image, name: name))
                     

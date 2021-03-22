@@ -14,7 +14,7 @@ struct Noti: Codable {
     let id, studyID: Int
     let studyTitle, message: String
     let pushEvent: AlarmType.RawValue
-    let createdAt: Int
+    let createdAt: String
     let confirm: Bool
 
     enum CodingKeys: String, CodingKey {

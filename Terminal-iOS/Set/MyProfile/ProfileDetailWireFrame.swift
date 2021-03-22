@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
+class ProfileDetailWireFrame: ProfileDetailWireFrameProtocol {
     static func createModule() -> UIViewController {
         let view: ProfileDetailViewProtocol = ProfileDetailView()
         let presenter: ProfileDetailPresenterProtocol & ProfileDetailInteractorOutputProtocol = ProfileDetailPresenter()

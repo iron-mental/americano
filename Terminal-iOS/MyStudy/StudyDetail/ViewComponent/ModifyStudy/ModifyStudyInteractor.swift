@@ -8,7 +8,7 @@
 
 import Foundation
  
-final class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
+class ModifyStudyInteractor: ModifyStudyInteractorInputProtocol {
     weak var presenter: ModifyStudyInteractorOutputProtocol?
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol?
     var currentStudy: StudyDetail?

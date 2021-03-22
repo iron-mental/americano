@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SearchLocationWireFrame: SearchLocationWireFrameProtocol {
+class SearchLocationWireFrame: SearchLocationWireFrameProtocol {
     static func searchLocationViewModule(parentView: UIViewController) -> UIViewController {
         let view = SearchLocationView()
         let interactor = SearchLocationInteractor()

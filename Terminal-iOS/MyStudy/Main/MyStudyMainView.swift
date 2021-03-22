@@ -144,7 +144,7 @@ extension MyStudyMainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (91.7/667) * view.bounds.height
+        return (91.7/667) * view.bounds.height 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

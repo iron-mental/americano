@@ -9,7 +9,7 @@
 import UIKit
 import NMapsMap
 
-final class SelectLocationLocalDataManager: SelectLocationLocalDataManagerProtocol {
+class SelectLocationLocalDataManager: SelectLocationLocalDataManagerProtocol {
     
     func getCurrentLocation() -> (NMGLatLng) {
         return NMGLatLng()

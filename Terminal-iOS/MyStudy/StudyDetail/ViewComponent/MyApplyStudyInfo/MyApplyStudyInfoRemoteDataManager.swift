@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class MyApplyStudyInfoRemoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol {
+class MyApplyStudyInfoRemoteDataManager: MyApplyStudyInfoRemoteDataManagerInputProtocol {
     weak var interactor: MyApplyStudyInfoRemoteDataManagerOutputProtocol?
     
     func deleteApply(studyID: Int, applyID: Int) {

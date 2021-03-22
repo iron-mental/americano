@@ -9,5 +9,5 @@
 import Foundation
 import SwiftKeychainWrapper
 
-final class ProfileDetailRemoteManager: BaseProfileRemoteDataManager, ProfileDetailRemoteDataManagerInputProtocol {
+class ProfileDetailRemoteManager: BaseProfileRemoteDataManager, ProfileDetailRemoteDataManagerInputProtocol {
 }

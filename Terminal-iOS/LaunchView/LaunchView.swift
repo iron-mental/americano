@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class LaunchView: UIViewController {
+class LaunchView: UIViewController {
     var presenter: LaunchPresenterProtocol?
     let appearance = UINavigationBarAppearance()
     var splashImageView = UIImageView()

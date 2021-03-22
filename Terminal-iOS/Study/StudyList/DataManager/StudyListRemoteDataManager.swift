@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-final class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
+class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol {
     weak var remoteRequestHandler: StudyListRemoteDataManagerOutputProtocol?
     
     // MARK: 최신순 리스트 검색시 초기 배열값
@@ -35,21 +35,7 @@ final class StudyListRemoteDataManager: StudyListRemoteDataManagerInputProtocol 
                         print(error.localizedDescription)
                     }
                 case .failure(let err):
-                    if let err = err.asAFError {
-                        switch err {
-                        case .sessionTaskFailed:
-                            self.remoteRequestHandler?.sessionTaskError(message: TerminalNetworkManager.shared.sessionTaskErrorMessage)
-                        default:
-                            if let data = response.data {
-                                do {
-                                    let result = try JSONDecoder().decode(BaseResponse<[Study]>.self, from: data)
-                                    self.remoteRequestHandler?.onStudiesLatestRetrieved(result: result)
-                                } catch {
-                                    print(error.localizedDescription)
-                                }
-                            }
-                        }
-                    }
+                    print(err)
                 }
             }
     }

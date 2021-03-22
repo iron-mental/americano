@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class SearchStudyInteractor: SearchStudyInteractorInputProtocol {
+class SearchStudyInteractor: SearchStudyInteractorInputProtocol {
     weak var presenter: SearchStudyInteractorOutputProtocol?
     var remoteDataManager: SearchStudyRemoteDataManagerInputProtocol?
     

@@ -8,7 +8,8 @@
 
 import UIKit
 
-final class MyApplyStudyInfoWireFrame: MyApplyStudyInfoWireFrameProtocol {
+class MyApplyStudyInfoWireFrame: MyApplyStudyInfoWireFrameProtocol {
+    
     static func createMyApplyStudyDetailModule(applyStudy: ApplyStudy) -> UIViewController {
         let view  = MyApplyStudyInfoView()
         let presenter: MyApplyStudyInfoPresenterProtocol & MyApplyStudyInfoInteractorOutputProtocol = MyApplyStudyInfoPresenter()

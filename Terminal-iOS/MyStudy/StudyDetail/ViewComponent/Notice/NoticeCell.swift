@@ -11,11 +11,11 @@ import UIKit
 class NoticeCell: UITableViewCell {
     static let noticeCellID = "NoticeCellID"
     
-    let noticeBackground = UIView()
-    let noticeState = UILabel()
-    let noticeTitle = UILabel()
-    let noticeContent = UILabel()
-    let dateLabel = UILabel()
+    lazy var noticeBackground = UIView()
+    lazy var noticeState = UILabel()
+    lazy var noticeTitle = UILabel()
+    lazy var noticeContent = UILabel()
+    lazy var dateLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,13 +30,11 @@ class NoticeCell: UITableViewCell {
     
     func setData(_ data: Notice) {
         if let isPinned = data.pinned,
+           let updateAt = data.updatedAt,
            let title = data.title,
            let contents = data.contents {
             self.noticeState.text = isPinned ? "필독" : "일반"
-            self.noticeBackground.backgroundColor =
-                isPinned
-                ? .appColor(.pinnedNoticeColor)
-                : .appColor(.noticeColor)
+            self.noticeBackground.backgroundColor = isPinned ? UIColor.appColor(.pinnedNoticeColor) : UIColor.appColor(.noticeColor)
             noticeTitle.do {
                 $0.text = title
             }
@@ -44,22 +42,20 @@ class NoticeCell: UITableViewCell {
                 $0.text = contents
             }
             dateLabel.do {
-                let updateAt = data.updatedAt
-                let date = "\(Date(timeIntervalSince1970: TimeInterval(updateAt)))"
-                let endIdx: String.Index = date.index(date.startIndex, offsetBy: 19)
-                let dateResult = String(date[...endIdx])
-                $0.text = "작성일 : " + dateResult
+                $0.text = "작성일 : \(updateAt)"
             }
+            
         }
+        
     }
     
     func attribute() {
         self.do {
             $0.selectionStyle = .none
-            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         noticeBackground.do {
-            $0.backgroundColor = .appColor(.noticeColor)
+            $0.backgroundColor = UIColor.appColor(.noticeColor)
             $0.layer.cornerRadius = 5
         }
         noticeState.do {
@@ -89,10 +85,8 @@ class NoticeCell: UITableViewCell {
         
         noticeBackground.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor,
-                                    constant: Terminal.convertHeight(value: 9)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor,
-                                        constant: Terminal.convertHeight(value: 13)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 9)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Terminal.convertHeight(value: 13)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 41)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 20)).isActive = true
         }
@@ -103,27 +97,21 @@ class NoticeCell: UITableViewCell {
         }
         noticeTitle.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.leadingAnchor.constraint(equalTo: self.noticeBackground.trailingAnchor,
-                                        constant: Terminal.convertWidth(value: 15)).isActive = true
-            $0.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor,
-                                         constant: -10).isActive = true
+            $0.leadingAnchor.constraint(equalTo: self.noticeBackground.trailingAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
+            $0.trailingAnchor.constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -10).isActive = true
             $0.centerYAnchor.constraint(equalTo: noticeBackground.centerYAnchor).isActive = true
         }
         noticeContent.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 13).isActive = true
             $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -13).isActive = true
-            $0.topAnchor.constraint(equalTo: self.noticeTitle.bottomAnchor,
-                                    constant: Terminal.convertHeight(value: 10)).isActive = true
-            $0.bottomAnchor.constraint(lessThanOrEqualTo: self.dateLabel.topAnchor,
-                                       constant: -10).isActive = true
+            $0.topAnchor.constraint(equalTo: self.noticeTitle.bottomAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
+            $0.bottomAnchor.constraint(lessThanOrEqualTo: self.dateLabel.topAnchor, constant: -10).isActive = true
         }
         dateLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor,
-                                       constant: -Terminal.convertHeight(value: 5)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                         constant: -Terminal.convertWidth(value: 12)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -Terminal.convertHeight(value: 5)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 12)).isActive = true
         }
     }
     

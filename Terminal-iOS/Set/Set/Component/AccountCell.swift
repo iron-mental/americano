@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class AccountCell: DefaultCell {
+class AccountCell: DefaultCell {
     static let accountCellId = "accountCell"
     
     lazy var rightImage = UIImageView()

@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-final class IntroWireFrame: IntroWireFrameProtocol {
+class IntroWireFrame: IntroWireFrameProtocol {
     static func createIntroModule(beginState: BeginState, introState: IntroViewState) -> UIViewController {
         let view: IntroViewProtocol = IntroView()
         let presenter: IntroPresenterProtocol = IntroPresenter()

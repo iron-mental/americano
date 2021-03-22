@@ -11,7 +11,7 @@ import SwiftKeychainWrapper
 import Then
 import Kingfisher
 
-final class StudyCell: UITableViewCell {
+class StudyCell: UITableViewCell {
     static let cellId = "StudyCellID"
     
     let mainTitle = UILabel()
@@ -58,17 +58,7 @@ final class StudyCell: UITableViewCell {
         }
         
         self.date.do {
-            let timestamp = data.createdAt
-            let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
-            let calendar = Calendar.current
-            let year = "\(calendar.component(.year, from: date))"
-            let month = calendar.component(.month, from: date)
-            let day = calendar.component(.day, from: date)
-            
-            let endIdx = year.index(year.startIndex, offsetBy: 1)
-            let yearResult = String(year[...endIdx])
-            
-            $0.text = yearResult + " / " + "\(month)" + " / " + "\(day)"
+            $0.text = data.createdAt
         }
         
         self.memberCount.do {

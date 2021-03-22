@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SearchLocationPresenter: SearchLocationPresenterProtocol {
+class SearchLocationPresenter: SearchLocationPresenterProtocol {
     weak var view: SearchLocationViewProtocol?
     var interactor: SearchLocationInteractorProtocol?
     var wireFrame: SearchLocationWireFrameProtocol?

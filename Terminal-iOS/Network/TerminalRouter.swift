@@ -57,7 +57,6 @@ enum TerminalRouter: URLRequestConvertible {
     case studyCategory
     case delegateHost           (studyID: Int, newLeader: Int)
     case reportStudy            (studyID: Int, message: String)
-    case studyChat              (studyID: Int, date: Int, first: Bool)
     
     // 신청부분
     case applyStudy             (studyID: String, message: Parameters)
@@ -82,7 +81,7 @@ enum TerminalRouter: URLRequestConvertible {
     
     var baseURL: URL {
         if endPoint == "check-version" {
-            return URL(string: API.COMMON_BASE_URL)!
+            return URL(string: API.Common_Base_URL)!
         } else {
             return URL(string: API.BASE_URL)!
         }
@@ -167,8 +166,6 @@ enum TerminalRouter: URLRequestConvertible {
             return .put
         case .reportStudy:
             return .post
-        case .studyChat:
-            return .get
             
         // 신청
         case .applyStudy:
@@ -284,8 +281,6 @@ enum TerminalRouter: URLRequestConvertible {
             return "study/\(studyID)/delegate"
         case let .reportStudy(studyID, _):
             return "study/\(studyID)/report"
-        case let .studyChat(studyID, _, _):
-            return "study/\(studyID)/chat"
             
         // 신청
         case let .applyStudy(studyID, _):
@@ -384,9 +379,6 @@ enum TerminalRouter: URLRequestConvertible {
             return ["new_leader": newLeader]
         case let .reportStudy(_, message):
             return ["message": message]
-        case let .studyChat(_, date, first):
-            return ["date": date,
-                    "first": "\(first)"]
             
         // 신청
         case let .applyStudy(_, message):

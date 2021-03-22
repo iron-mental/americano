@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProjectSNSView: BaseSNSView {
+class ProjectSNSView: BaseSNSView {
     let github = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
         $0.accessibilityIdentifier = "github"

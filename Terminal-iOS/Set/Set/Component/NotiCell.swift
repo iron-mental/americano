@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-final class NotiCell: DefaultCell {
+class NotiCell: DefaultCell {
     static let notiCellId = "notiCell"
     var result = false
     

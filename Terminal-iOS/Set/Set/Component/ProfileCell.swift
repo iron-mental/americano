@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
 
-final class ProfileCell: UITableViewCell {
+class ProfileCell: UITableViewCell {
     static let profileCellId = "profileCell"
     let profile = UIImageView(frame: CGRect(x: 0, y: 0,
                                             width: UIScreen.main.bounds.height * 0.1,

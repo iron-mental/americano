@@ -9,7 +9,7 @@
 import UIKit
 import Then
 
-final class SearchStudyView: UIViewController {
+class SearchStudyView: UIViewController {
     var keyword: [HotKeyword] = []
     var presenter: SearchStudyPresenterProtocol?
     let hotLable = UILabel()
@@ -27,12 +27,10 @@ final class SearchStudyView: UIViewController {
         attribute()
         layout()
     }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         searchController.isActive = false
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchController.isActive = true
@@ -74,7 +72,7 @@ final class SearchStudyView: UIViewController {
     }
     
     func layout() {
-        [hotLable, collectionView].forEach { self.view.addSubview($0) }
+        [ hotLable, collectionView].forEach { self.view.addSubview($0) }
         
         self.hotLable.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

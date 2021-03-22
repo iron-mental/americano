@@ -8,4 +8,4 @@
 
 import Foundation
 
-final class ParticipantProfileRemoteDataManager: BaseProfileRemoteDataManager, ParticipantProfileRemoteDataManagerInputProtocol {}
+class ParticipantProfileRemoteDataManager: BaseProfileRemoteDataManager, ParticipantProfileRemoteDataManagerInputProtocol {}

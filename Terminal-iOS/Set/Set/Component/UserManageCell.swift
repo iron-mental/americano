@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class UserManageCell: DefaultCell {
+class UserManageCell: DefaultCell {
     static let userManageCellId = "userManageCell"
     
     override func attribute() {

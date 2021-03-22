@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class ProjectModifyPresenter: ProjectModifyPresenterProtocol {
+class ProjectModifyPresenter: ProjectModifyPresenterProtocol {
     weak var view: ProjectModifyViewProtocol?
     var interactor: ProjectModifyInteractorInputProtocol?
     var wireFrame: ProjectModifyWireFrameProtocol?

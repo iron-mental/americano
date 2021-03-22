@@ -21,19 +21,13 @@ class SearchLocationTableViewCell: UITableViewCell {
         layout()
     }
     
-    func setData(data: StudyDetailLocationPost) {
-        self.detailAddress.text = data.address
-        self.title.text = data.placeName
-        self.category.text = data.category
-    }
-    
     func attribute() {
         self.do {
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 72)).isActive = true
-            $0.backgroundColor = .appColor(.terminalBackground)
+            $0.backgroundColor = UIColor.appColor(.terminalBackground)
         }
         title.do {
-            $0.textColor = .appColor(.mainColor)
+            $0.textColor = UIColor.appColor(.mainColor)
             $0.dynamicFont(fontSize: 16, weight: .regular)
             $0.sizeToFit()
         }
@@ -52,21 +46,18 @@ class SearchLocationTableViewCell: UITableViewCell {
         
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor,
-                                    constant: Terminal.convertWidth(value: 15)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertWidth(value: 15)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         }
         category.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: title.centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor,
-                                         constant: -Terminal.convertWidth(value: 21.9)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Terminal.convertWidth(value: 21.9)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 200)).isActive = true
         }
         detailAddress.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: self.topAnchor,
-                                    constant: Terminal.convertHeight(value: 40.9)).isActive = true
+            $0.topAnchor.constraint(equalTo: self.topAnchor, constant: Terminal.convertHeight(value: 40.9)).isActive = true
             $0.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
             $0.heightAnchor.constraint(equalToConstant: 26).isActive = true

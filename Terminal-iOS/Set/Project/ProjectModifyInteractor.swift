@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-final class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
+class ProjectModifyInteractor: ProjectModifyInteractorInputProtocol {
     weak var presenter: ProjectModifyInteractorOutputProtocol?
     
     func completeModify(project: [Project]) {

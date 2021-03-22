@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class ParticipantProfileInteractor: ParticipantProfileInteractorInputProtocol {
+class ParticipantProfileInteractor: ParticipantProfileInteractorInputProtocol {
     weak var presenter: ParticipantProfileInteractorOutputProtocol?
     var remoteDataManager: ParticipantProfileRemoteDataManagerInputProtocol?
     var userID: Int?

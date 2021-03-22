@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
+class ModifyStudyWireFrame: ModifyStudyWireFrameProtocol {
     static func createModifyStudyModule(study: StudyDetail,
                                         location: Location,
                                         mainImage: UIImage?) -> UIViewController {

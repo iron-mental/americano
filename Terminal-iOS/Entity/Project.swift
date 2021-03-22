@@ -14,7 +14,7 @@ struct Project: Codable {
     let id: Int?
     var title, contents: String
     var snsGithub, snsAppstore, snsPlaystore: String?
-    let createAt: Int?
+    let createAt: String?
 
     enum CodingKeys: String, CodingKey {
         case id, title, contents

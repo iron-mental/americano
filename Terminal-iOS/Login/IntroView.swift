@@ -19,7 +19,7 @@ enum IntroViewState {
     case nickname
 }
 
-final class IntroView: UIViewController {
+class IntroView: UIViewController {
     var presenter: IntroPresenterProtocol?
     
     var leftButton = UIButton()

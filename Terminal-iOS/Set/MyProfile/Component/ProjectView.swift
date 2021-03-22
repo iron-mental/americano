@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProjectView: UIView {
+class ProjectView: UIView {
     var snsList: [String: String] = [:]
     var sns = ProjectSNSView()
     var projectTitle = UILabel()

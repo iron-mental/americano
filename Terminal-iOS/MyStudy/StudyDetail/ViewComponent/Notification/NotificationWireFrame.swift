@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class NotificationWireFrame: NotificationWireFrameProtocol {
+class NotificationWireFrame: NotificationWireFrameProtocol {
     static func createModule() -> UIViewController {
         let view: NotificationViewProtocol = NotificationView()
         let presenter: NotificationPresenterProtocol

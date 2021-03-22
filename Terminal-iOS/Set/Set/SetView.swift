@@ -11,7 +11,7 @@ import SwiftKeychainWrapper
 import Kingfisher
 import CoreData
 
-final class SetView: UIViewController {
+class SetView: UIViewController {
     var presenter: SetPresenterProtocol?
     // 섹션
     var sections: [String] = ["", "계정", "알림", "정보", ""]

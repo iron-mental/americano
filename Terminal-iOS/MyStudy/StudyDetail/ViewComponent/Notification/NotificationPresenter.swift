@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class NotificationPresenter: NotificationPresenterProtocol {
+class NotificationPresenter: NotificationPresenterProtocol {
     weak var view: NotificationViewProtocol?
     var interactor: NotificationInteractorInputProtocol?
     var wireFrame: NotificationWireFrameProtocol?

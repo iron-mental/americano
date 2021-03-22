@@ -49,7 +49,7 @@ public class LocalUserInfo: NSObject, NSCoding {
         self.snsWeb = userInfo.snsWeb
         self.snsGithub = userInfo.snsGithub
         self.emailVerified = userInfo.emailVerified
-        self.createdAt = String(userInfo.createdAt)
+        self.createdAt = userInfo.createdAt
     }
     
     public func encode(with coder: NSCoder) {
@@ -83,7 +83,7 @@ public class LocalUserInfo: NSObject, NSCoding {
                  snsWeb: decoder.decodeObject(forKey: Keys.snsWeb.rawValue) as? String ?? "",
                  snsGithub: decoder.decodeObject(forKey: Keys.snsGithub.rawValue) as? String ?? "",
                  emailVerified: decoder.decodeBool(forKey: Keys.emailVerified.rawValue),
-                 createdAt: 0)
+                 createdAt: decoder.decodeObject(forKey: Keys.createdAt.rawValue) as? String ?? "")
         self.init(userInfo: decodedUserInfo)
     }
 }

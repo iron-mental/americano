@@ -7,7 +7,7 @@
 //
 import UIKit
 
-final class SNSModifyWireFrame: SNSModifyWireFrameProtocol {
+class SNSModifyWireFrame: SNSModifyWireFrameProtocol {
     static func createModule(github: String, linkedin: String, web: String) -> UIViewController {
         let view: SNSModifyViewProtocol = SNSModifyView()
         let presenter: SNSModifyPresenterProtocol & SNSModifyInteractorOutputProtocol = SNSModifyPresenter()

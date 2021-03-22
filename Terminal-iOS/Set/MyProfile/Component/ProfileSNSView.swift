@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProfileSNSView: BaseSNSView {
+class ProfileSNSView: BaseSNSView {
     let github = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "github"), for: .normal)
     }

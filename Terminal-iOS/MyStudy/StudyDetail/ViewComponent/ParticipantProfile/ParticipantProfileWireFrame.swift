@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ParticipantProfileWireFrame: ParticipantProfileWireFrameProtocol {
+class ParticipantProfileWireFrame: ParticipantProfileWireFrameProtocol {
     static func createParticipantProfileModule(userInfo: Int) -> UIViewController {
         let view = ParticipantProfileView()
         let presenter: ParticipantProfilePresenterProtocol & ParticipantProfileInteractorOutputProtocol = ParticipantProfilePresenter()

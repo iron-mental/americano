@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ModifyStudyView: BaseEditableStudyDetailView {
+class ModifyStudyView: BaseEditableStudyDetailView {
     var presenter: ModifyStudyPresenterProtocol?
     var postDefaultImage = false
     var initImage: UIImage? {

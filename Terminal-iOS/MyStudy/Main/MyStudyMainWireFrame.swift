@@ -82,17 +82,13 @@ class MyStudyMainWireFrame: MyStudyMainWireFrameProtocol {
                 
             case .studyUpdate,
                  .studyHostDelegate,
+                 .chat,
                  .applyAllowed:
                 let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
                 guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
                 castedMyStudyDetailView.viewState = .StudyDetail
                 view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
                 
-            case .chat:
-                let myStudyDetailView = MyStudyDetailWireFrame.createMyStudyDetailModule(studyID: id, studyTitle: "")
-                guard let castedMyStudyDetailView = myStudyDetailView as? MyStudyDetailView else { return }
-                castedMyStudyDetailView.viewState = .Chat
-                view.navigationController?.pushViewController(castedMyStudyDetailView, animated: true)
             case .applyRejected,
                  .studyDelete:
                 let notificationListView = NotificationWireFrame.createModule()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProjectModifyView: UIViewController, CellSubclassDelegate {
+class ProjectModifyView: UIViewController, CellSubclassDelegate {
     deinit { self.keyboardRemoveObserver() }
     
     var presenter: ProjectModifyPresenterProtocol?
@@ -142,7 +142,7 @@ final class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                                  snsGithub: github,
                                                  snsAppstore: appStore,
                                                  snsPlaystore: playStore,
-                                                 createAt: 0)
+                                                 createAt: "")
             }
         }
         return state
@@ -258,7 +258,7 @@ final class ProjectModifyView: UIViewController, CellSubclassDelegate {
                                   snsGithub: "",
                                   snsAppstore: "",
                                   snsPlaystore: "",
-                                  createAt: 0)
+                                  createAt: "")
             self.projectArr.append(project)
             if self.projectArr.count == 3 {
                 self.projectAddButton.backgroundColor = .darkGray

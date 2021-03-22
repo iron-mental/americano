@@ -18,7 +18,7 @@ struct UserInfo: Codable {
     let careerTitle, careerContents: String?
     let snsLinkedin, snsWeb, snsGithub: String?
     let emailVerified: Bool
-    let createdAt: Int
+    let createdAt: String
 
     enum CodingKeys: String, CodingKey {
         case id, nickname, email, image, introduce

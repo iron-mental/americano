@@ -14,15 +14,8 @@ extension UITableView {
         self.backgroundView = type.view
         self.separatorStyle = .none
     }
-    
     func restore() {
         self.backgroundView = nil
         self.separatorStyle = .singleLine
-    }
-    
-    func setBottomInset(to value: CGFloat) {
-        let edgeInset = UIEdgeInsets(top: 0, left: 0, bottom: value, right: 0)
-        self.contentInset = edgeInset
-        self.scrollIndicatorInsets = edgeInset
     }
 }

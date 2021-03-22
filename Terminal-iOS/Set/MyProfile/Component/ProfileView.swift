@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProfileView: UIView {
+class ProfileView: UIView {
     let profileImage = UIImageView()
     let name = UILabel()
     let descript = UILabel()

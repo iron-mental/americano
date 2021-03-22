@@ -13,20 +13,20 @@ protocol selectLocationDelegate: class {
     func passLocation(location: StudyDetailLocationPost)
 }
 
-final class SelectLocationView: UIViewController {
+class SelectLocationView: UIViewController {
     deinit { self.keyboardRemoveObserver() }
+    
     var presenter: SelectLocationPresenterProtocol?
-    
-    let mapView = NMFMapView()
-    let bottomView = BottomView()
     let pin = UIImageView()
-    
     var task: DispatchWorkItem?
+    var mapView = NMFMapView()
+    var bottomView = BottomView()
     var location: StudyDetailLocationPost?
     var animationFlag = true
     var isMoving = false
     weak var delegate: selectLocationDelegate?
     var keyboardHeight: CGFloat = 0.0
+    var mapViewTopAnchor: NSLayoutConstraint?
     var mapViewBottomAnchor: NSLayoutConstraint?
     var bottomAnchor: NSLayoutConstraint?
     
@@ -43,9 +43,7 @@ final class SelectLocationView: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         bottomView.detailAddress.becomeFirstResponder()
-        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat),
-                                                               lng: Double(location!.lng)),
-                                           zoomTo: 17))
+        mapView.moveCamera(NMFCameraUpdate(scrollTo: NMGLatLng(lat: Double(location!.lat), lng: Double(location!.lng)), zoomTo: 17))
         location?.lng = mapView.cameraPosition.target.lng
         location?.lat = mapView.cameraPosition.target.lat
     }

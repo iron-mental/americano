@@ -8,8 +8,7 @@
 
 import Foundation
 import SwiftKeychainWrapper
-
-final class NotificationInteractor: NotificationInteractorInputProtocol {
+class NotificationInteractor: NotificationInteractorInputProtocol {
     weak var presenter: NotificationInteractorOutputProtocol?
     var remoteDataManager: NotificationRemoteDataManagerInputProtocol?
     

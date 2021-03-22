@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class CareerView: UIView {
+class CareerView: UIView {
     let emptyMessage = UILabel()
     let careerTitle = UILabel()
     let careerContents = UILabel()

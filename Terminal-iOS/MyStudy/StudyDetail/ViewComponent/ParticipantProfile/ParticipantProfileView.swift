@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ParticipantProfileView: BaseProfileView {
+class ParticipantProfileView: BaseProfileView {
     var presenter: ParticipantProfilePresenterProtocol?
     
     override func viewDidLoad() {
@@ -23,7 +23,6 @@ final class ParticipantProfileView: BaseProfileView {
         [ profile.modify, career.modify, project.modify, sns.modify, email.modify, location.modify]
             .forEach { $0.isHidden = true}
     }
-    
     override func layout() {
         super.layout()
         
@@ -31,7 +30,6 @@ final class ParticipantProfileView: BaseProfileView {
             $0.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         }
     }
-    
     override func showLoading() {
         LoadingRainbowCat.show(caller: self)
     }
@@ -42,6 +40,7 @@ final class ParticipantProfileView: BaseProfileView {
 }
 
 extension ParticipantProfileView: ParticipantProfileViewProtocol {
+    
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1) {
             self.navigationController?.popViewController(animated: true)

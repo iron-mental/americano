@@ -13,8 +13,7 @@ import UIKit
 struct Study: Codable {
     let id: Int
     let title, introduce, image, sigungu: String?
-    let leaderImage: String?
-    let createdAt: Int
+    let leaderImage, createdAt: String?
     let memberCount: Int?
     let distance: Double?
     let isMember: Bool?

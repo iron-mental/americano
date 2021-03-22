@@ -440,6 +440,7 @@ extension BaseEditableStudyDetailView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.textViewTapFlag = true
         self.clickedView = textField
+        
         self.editableViewDidTap(textView: self.clickedView!,
                                 viewMinY: CGFloat(self.currentScrollViewMinY),
                                 viewMaxY: CGFloat(self.currentScrollViewMaxY))

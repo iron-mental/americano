@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SelectCategoryView: UIViewController {
+class SelectCategoryView: UIViewController {
     var presenter: SelectCategoryPresenterProtocol?
     var categoryList: [Category] = []
     let scrollView = UIScrollView()
@@ -88,8 +88,8 @@ final class SelectCategoryView: UIViewController {
         textLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 24).isActive = true
-            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor,
-                                        constant: UIScreen.main.bounds.width).isActive = true
+            $0.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: UIScreen.main.bounds.width).isActive = true
+//            $0.leadingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         }
         collectionView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false

@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class SearchStudyRemoteDataManager: SearchStudyRemoteDataManagerInputProtocol {
+class SearchStudyRemoteDataManager: SearchStudyRemoteDataManagerInputProtocol {
     weak var interactor: SearchStudyRemoteDataManagerOutputProtocol?
     
     func getHotKeyword() {

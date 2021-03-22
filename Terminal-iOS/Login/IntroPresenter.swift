@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class IntroPresenter: IntroPresenterProtocol {
+class IntroPresenter: IntroPresenterProtocol {
     weak var view: IntroViewProtocol?
     var interactor: IntroInteractorProtocol?
     var wireFrame: IntroWireFrameProtocol?

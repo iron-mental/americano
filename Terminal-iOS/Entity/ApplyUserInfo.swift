@@ -10,15 +10,14 @@ import Foundation
 
 struct ApplyUserInfo: Codable {
     let id, userID, studyID: Int
-    let message, applyStatus: String
+    let message, applyStatus, createdAt: String
     let image: String?
     let nickname, email: String
     let sido, sigungu: String?
     let careerTitle, careerContents: String?
     let snsGithub, snsLinkedin, snsWeb: String?
     let rejectedStatus: Bool
-    let rejectedAt: Int?
-    let createdAt: Int
+    let rejectedAt: String?
     let project: [Project]
 
     enum CodingKeys: String, CodingKey {

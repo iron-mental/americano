@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class IntroLocalDataManager: IntroLocalDataManagerProtocol {
+class IntroLocalDataManager: IntroLocalDataManagerProtocol {
     static var shared = IntroLocalDataManager()
     
     var email = ""

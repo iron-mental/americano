@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
+class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
     weak var interactor: LaunchRemoteDataManagerOutputProtocol?
     
     func getVersionCheck(version: String) {
@@ -24,6 +24,7 @@ final class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                         let result = try JSONDecoder().decode(BaseResponse<VersionResult>.self, from: data)
                         self.interactor?.getVersionResult(result: result)
                     } catch {
+                        //서버와 형식이 맞지않아 임시로 써놓음
                         self.interactor?.getVersionResult(
                             result: BaseResponse(
                                 result: true,

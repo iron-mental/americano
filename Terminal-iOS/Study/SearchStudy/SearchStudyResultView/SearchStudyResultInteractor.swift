@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
+class SearchStudyResultInteractor: SearchStudyResultInteractorInputProtocol {
     weak var presenter: SearchStudyResultInteractorOutputProtocol?
     var remoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol?
     var studyList: [Study] = []
