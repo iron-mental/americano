@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class SetWireFrame: SetWireFrameProtocol {
+final class SetWireFrame: SetWireFrameProtocol {
     static func setCreateModule() -> UIViewController {
         let view: SetViewProtocol = SetView()
         let presenter: SetPresenterProtocol & SetInteractorOutputProtocol = SetPresenter()

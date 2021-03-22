@@ -9,7 +9,7 @@
 import Foundation
 import SwiftKeychainWrapper
 
-class SetRemoteManager: SetRemoteDataManagerInputProtocol {
+final class SetRemoteManager: SetRemoteDataManagerInputProtocol {
     weak var interactor: SetRemoteDataManagerOutputProtocol?
     
     func getUserInfo() {

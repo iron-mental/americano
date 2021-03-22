@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchStudyWireFrame: SearchStudyWireFrameProtocol {
+final class SearchStudyWireFrame: SearchStudyWireFrameProtocol {
     static func createSearchStudyModule() -> UIViewController {
         let view = SearchStudyView()
         let interactor: SearchStudyInteractorInputProtocol & SearchStudyRemoteDataManagerOutputProtocol = SearchStudyInteractor()

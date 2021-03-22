@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol {
+final class SearchStudyResultRemoteDataManager: SearchStudyResultRemoteDataManagerInputProtocol {
     weak var interactor: SearchStudyResultRemoteDataManagerOutputProtocol?
     
     func getSearchStudyList(keyWord: String) {

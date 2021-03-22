@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
+final class ProfileDetailPresenter: ProfileDetailPresenterProtocol {
     weak var view: ProfileDetailViewProtocol?
     var interactor: ProfileDetailInteractorInputProtocol?
     var wireFrame: ProfileDetailWireFrameProtocol?

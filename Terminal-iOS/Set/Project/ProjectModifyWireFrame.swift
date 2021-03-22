@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectModifyWireFrame: ProjectModifyWireFrameProtocol {
+final class ProjectModifyWireFrame: ProjectModifyWireFrameProtocol {
     static func createModule(project: [Project]) -> UIViewController {
         let view: ProjectModifyViewProtocol = ProjectModifyView()
         let presenter: ProjectModifyPresenterProtocol & ProjectModifyInteractorOutputProtocol = ProjectModifyPresenter()

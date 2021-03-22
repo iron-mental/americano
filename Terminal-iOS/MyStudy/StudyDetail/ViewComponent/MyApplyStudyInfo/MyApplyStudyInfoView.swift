@@ -8,14 +8,14 @@
 
 import UIKit
 
-class MyApplyStudyInfoView: UIViewController {
+final class MyApplyStudyInfoView: UIViewController {
     var applyStudy: ApplyStudy?
     var presenter: MyApplyStudyInfoPresenterProtocol?
     
     let mainImageView = MainImageView(frame: CGRect.zero)
-    var studyTitleLabel = TitleWithContentView()
-    var applyMessageLabel = TitleWithContentView()
-    lazy var moreButton = UIBarButtonItem()
+    let studyTitleLabel = TitleWithContentView()
+    let applyMessageLabel = TitleWithContentView()
+    let moreButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class MyApplyStudyInfoView: UIViewController {
     func attribute() {
         self.do {
             $0.navigationItem.rightBarButtonItems = [moreButton]
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = .appColor(.terminalBackground)
         }
         mainImageView.do {
             guard let image = applyStudy?.image else { return }
@@ -50,12 +50,12 @@ class MyApplyStudyInfoView: UIViewController {
                 $0.contentMode = .scaleAspectFill
             }
         }
-        studyTitleLabel.do {
+        self.studyTitleLabel.do {
             $0.backgroundColor = UIColor.appColor(.InputViewColor)
             guard let title = applyStudy?.title else { return }
             $0.contentText = ["스터디 제목", title]
         }
-        applyMessageLabel.do {
+        self.applyMessageLabel.do {
             guard let message = applyStudy?.message else { return }
             $0.contentText = ["신청 메세지", message]
         }

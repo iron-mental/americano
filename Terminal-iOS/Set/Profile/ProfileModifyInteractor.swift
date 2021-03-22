@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
+final class ProfileModifyInteractor: ProfileModifyInteractorInputProtocol {
     weak var presenter: ProfileModifyInteractorOutputProtocol?
     var remoteDataManager: ProfileModifyRemoteDataManagerInputProtocol?
     
@@ -46,6 +46,7 @@ extension ProfileModifyInteractor: ProfileModifyRemoteDataManagerOutputProtocol 
             self.presenter?.didCompleteModify(result: true, message: message)
             self.imageResult = false
             self.nicknameResult = false
+            remoteDataManager?.refreshToken()
         } else {
             print("수정 실패")
         }

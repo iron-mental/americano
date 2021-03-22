@@ -8,12 +8,12 @@
 
 import UIKit
 
-class SearchStudyResultView: UIViewController {
+final class SearchStudyResultView: UIViewController {
     var presenter: SearchStudyResultPresenterProtocol?
     var keyword: String?
-    var studyListTableView = UITableView()
     var searchResult: [Study] = []
     let searchController = UISearchController(searchResultsController: nil)
+    let studyListTableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class SearchStudyResultView: UIViewController {
     
     func attribute() {
         self.do {
-            $0.view.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.view.backgroundColor = .appColor(.terminalBackground)
             if let title = keyword {
                 $0.title = "\(title) 에 대한 검색결과"
             }
@@ -43,7 +43,6 @@ class SearchStudyResultView: UIViewController {
             $0.obscuresBackgroundDuringPresentation = false
             $0.automaticallyShowsCancelButton = false
             $0.searchBar.delegate = self
-            
             $0.searchBar.placeholder = "키워드를 검색하세요"
             definesPresentationContext = true
             $0.searchBar.searchTextField.text = keyword
@@ -60,7 +59,7 @@ class SearchStudyResultView: UIViewController {
     }
     
     func layout() {
-        [ studyListTableView ].forEach { view.addSubview($0) }
+        [studyListTableView].forEach { view.addSubview($0) }
 
         studyListTableView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -109,7 +108,6 @@ extension SearchStudyResultView: UITableViewDelegate, UITableViewDataSource, UIT
 }
 
 extension SearchStudyResultView: SearchStudyResultViewProtocol {    
-    
     func showLoading() {
         LoadingRainbowCat.show(caller: self)
     }

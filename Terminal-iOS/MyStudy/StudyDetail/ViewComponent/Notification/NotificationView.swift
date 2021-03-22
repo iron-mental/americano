@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationView: UIViewController {
+final class NotificationView: UIViewController {
     var presenter: NotificationPresenterProtocol?
     let tableView = UITableView()
     var notiList: [Noti] = []

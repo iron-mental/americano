@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationCell: UITableViewCell {
+final class NotificationCell: UITableViewCell {
     static let cellID = "NotificationCell"
     
     let iconLabel = UILabel()
@@ -115,9 +115,13 @@ class NotificationCell: UITableViewCell {
         }
     }
     
-    func convertToElapsedTime(notificationTime: String) -> String {
+    func convertToElapsedTime(notificationTime: Int) -> String {
         //알림 시간 쪼개기
-        let splitNotificationTime = notificationTime.components(separatedBy: " ")
+        let tempDate = "\(Date(timeIntervalSince1970: TimeInterval(notificationTime)))"
+        let endIdx: String.Index = tempDate.index(tempDate.startIndex, offsetBy: 19)
+        let dateResult = String(tempDate[...endIdx])
+        
+        let splitNotificationTime = dateResult.components(separatedBy: " ")
         let notiDayArr =  split(target: splitNotificationTime[0], separateItem: "-")
         let notiTimeArr = split(target: splitNotificationTime[1], separateItem: ":")
         
@@ -132,22 +136,22 @@ class NotificationCell: UITableViewCell {
         let currentTimeArr = split(target: splitcurruntTime[1], separateItem: ":")
         
         if currentDayArr[0] - notiDayArr[0] > 0 {
-//            년이 다름 (해가 바뀌는 순간엔 정확하진 않음 서버에서 timeStamp로 내려오지 않아 이정도에서 정리)
+            // 년이 다름 (해가 바뀌는 순간엔 정확하진 않음 서버에서 timeStamp로 내려오지 않아 이정도에서 정리)
             return "\(notiDayArr[0] - currentDayArr[0])년 전"
         } else if currentDayArr[1] - notiDayArr[1] > 0 {
-//            년은 같고 달이 다름
+            //년은 같고 달이 다름
             return "\(currentDayArr[1] - notiDayArr[1])달 전"
         } else if currentDayArr[2] - notiDayArr[2] > 0 {
-//            년,달 같고 일이 다름
+            // 년,달 같고 일이 다름
             return "\(currentDayArr[2] - notiDayArr[2])일 전"
         } else if currentTimeArr[0] - notiTimeArr[0] > 0 {
-//            년,달,일 같고 시간이 다름
+            // 년,달,일 같고 시간이 다름
             return "\(currentTimeArr[0] - notiTimeArr[0])시간 전"
         } else if currentTimeArr[1] - notiTimeArr[1] > 0 {
-//            년,달,일,시간 같고 분이 다름
+            // 년,달,일,시간 같고 분이 다름
             return "\(currentTimeArr[1] - notiTimeArr[1])분 전"
         } else if currentTimeArr[2] - notiTimeArr[2] > 0 {
-//            년,달,일,시간,분이 같고 초가 다름
+            // 년,달,일,시간,분이 같고 초가 다름
             return "\(currentTimeArr[2] - notiTimeArr[2])초 전"
         }
         return ""

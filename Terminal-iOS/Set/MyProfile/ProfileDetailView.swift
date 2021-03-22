@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
 
-class ProfileDetailView: BaseProfileView {
+final class ProfileDetailView: BaseProfileView {
     var presenter: ProfileDetailPresenterProtocol?
     
     // MARK: viewDidLoad

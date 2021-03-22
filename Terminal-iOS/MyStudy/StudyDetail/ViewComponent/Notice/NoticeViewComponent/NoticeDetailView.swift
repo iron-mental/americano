@@ -23,9 +23,9 @@ class NoticeDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad(notice: notice!)
         attribute()
         layout()
+        presenter?.viewDidLoad(notice: notice!)
     }
     
     func attribute() {
@@ -40,11 +40,6 @@ class NoticeDetailView: UIViewController {
         }
         noticeBackground.do {
             $0.layer.cornerRadius = 5
-            if let isPinned = notice?.pinned {
-                $0.backgroundColor = isPinned
-                    ? .appColor(.pinnedNoticeColor)  // true
-                    : .appColor(.noticeColor)        // false
-            }
         }
         noticeLabel.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
@@ -52,15 +47,8 @@ class NoticeDetailView: UIViewController {
             $0.textColor = .white
             $0.clipsToBounds = true
             $0.layer.cornerRadius = 5
-            if let isPinned = notice?.pinned {
-                $0.text = isPinned ? "필독" : "일반"
-            }
         }
         profileImage.do {
-            let imageURL = notice?.leaderImage ?? ""
-            $0.kf.setImage(with: URL(string: imageURL),
-                           placeholder: UIImage(named: "defaultProfile"),
-                           options: [.requestModifier(RequestToken.token())])
             $0.contentMode = .scaleAspectFill
             $0.frame.size.width = Terminal.convertWidth(value: 35)
             $0.frame.size.height = Terminal.convertWidth(value: 35)
@@ -69,20 +57,16 @@ class NoticeDetailView: UIViewController {
         }
         profileName.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            guard let name = notice?.leaderNickname else { return }
-            $0.text = name
             $0.textColor = .white
             $0.textAlignment = .center
         }
         noticeDate.do {
             $0.dynamicFont(fontSize: 12, weight: .medium)
-            $0.text = notice?.updatedAt
             $0.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             $0.textAlignment = .center
         }
         noticeContents.do {
             $0.dynamicFont(size: 12, weight: .regular)
-            $0.text = notice?.contents
             $0.isEditable = false
             $0.bounces = false
             $0.backgroundColor = .appColor(.cellBackground)
@@ -93,7 +77,7 @@ class NoticeDetailView: UIViewController {
     }
     
     func layout() {
-        [ noticeBackground, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0)}
+        [ noticeBackground, profileImage, profileName, noticeDate, noticeContents].forEach { view.addSubview($0) }
         noticeBackground.addSubview(noticeLabel)
         
         noticeBackground.do {
@@ -176,7 +160,36 @@ extension NoticeDetailView: NoticeDetailViewProtocol {
     func showNoticeDetail(notice: Notice) {
         self.title = notice.title
         self.notice = notice
-        attribute()
+        
+        if let pinned = notice.pinned {
+            self.noticeBackground.backgroundColor =
+                pinned
+                ? .appColor(.pinnedNoticeColor)
+                : .appColor(.noticeColor)
+            
+            self.noticeLabel.text =
+                pinned
+                ? "필독"
+                : "일반"
+        }
+        
+        let imageURL = notice.leaderImage ?? ""
+        self.profileImage.kf.setImage(with: URL(string: imageURL),
+                                      placeholder: UIImage(named: "defaultProfile"),
+                                      options: [.requestModifier(RequestToken.token())])
+        
+        let name = notice.leaderNickname ?? ""
+        self.profileName.text = name
+        
+        let timestamp = notice.updatedAt
+        let date = "\(Date(timeIntervalSince1970: TimeInterval(timestamp)))"
+        
+        let endIdx: String.Index = date.index(date.startIndex, offsetBy: 19)
+        let dateResult = String(date[...endIdx])
+        self.noticeDate.text = dateResult
+        
+        let contents = notice.contents ?? ""
+        self.noticeContents.text = contents
     }
     
     func showNoticeRemove(message: String) {
@@ -189,7 +202,7 @@ extension NoticeDetailView: NoticeDetailViewProtocol {
                 self.navigationController?.popViewController(animated: true)
             }
         }
-    } 
+    }
     
     func showError(message: String) {
         showToast(controller: self, message: message, seconds: 1)
