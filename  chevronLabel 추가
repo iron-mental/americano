@@ -1,0 +1,4 @@
+[feat/chat-feedback a257b9fb] feat : chat -
+ 4 files changed, 61 insertions(+), 13 deletions(-)
+ create mode 100644 CoreChatInfo+CoreDataClass.swift
+ create mode 100644 CoreChatInfo+CoreDataProperties.swift
