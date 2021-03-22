@@ -326,6 +326,8 @@
 		CCB33E5D25F48C50006B55C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */; };
 		CCB33E5E25F48C50006B55C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */; };
 		CCB33E5F25F48C50006B55C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */; };
+		CCB3AFBA260894E30044A5BB /* CoreChatInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB3AFB9260894E30044A5BB /* CoreChatInfo+CoreDataClass.swift */; };
+		CCB3AFBB260894E30044A5BB /* CoreChatInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB3AFB8260894E30044A5BB /* CoreChatInfo+CoreDataProperties.swift */; };
 		CCB752CA25A841E3003E7CA7 /* StudyApplyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */; };
 		CCBBEEFB2583A30A00177E25 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */; };
 		CCBBEEFF2583A38E00177E25 /* TerminalCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCBBEEFD2583A38E00177E25 /* TerminalCoreData.xcdatamodeld */; };
@@ -391,8 +393,6 @@
 		CCFA775B25EFA61800DEE2D3 /* EmailValidteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA775A25EFA61800DEE2D3 /* EmailValidteResult.swift */; };
 		CCFA779A25F1496200DEE2D3 /* TermsOfServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA779925F1496200DEE2D3 /* TermsOfServiceView.swift */; };
 		CCFA77A725F1593200DEE2D3 /* UITapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFA77A625F1593200DEE2D3 /* UITapGestureRecognizer.swift */; };
-		CCFF2EF22600DE7800A6874C /* CoreChatInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFF2EF12600DE7800A6874C /* CoreChatInfo+CoreDataClass.swift */; };
-		CCFF2EF32600DE7800A6874C /* CoreChatInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFF2EF02600DE7800A6874C /* CoreChatInfo+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -739,6 +739,8 @@
 		CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateSequence.swift; sourceTree = "<group>"; };
 		CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWireFrame.swift; sourceTree = "<group>"; };
 		CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CCB3AFB8260894E30044A5BB /* CoreChatInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataProperties.swift"; path = "../../CoreChatInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CCB3AFB9260894E30044A5BB /* CoreChatInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataClass.swift"; path = "../../CoreChatInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyApplyMessageView.swift; sourceTree = "<group>"; };
 		CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CCBBEEFE2583A38E00177E25 /* TerminalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TerminalCoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -811,8 +813,6 @@
 		CCFA775A25EFA61800DEE2D3 /* EmailValidteResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidteResult.swift; sourceTree = "<group>"; };
 		CCFA779925F1496200DEE2D3 /* TermsOfServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfServiceView.swift; sourceTree = "<group>"; };
 		CCFA77A625F1593200DEE2D3 /* UITapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITapGestureRecognizer.swift; sourceTree = "<group>"; };
-		CCFF2EF02600DE7800A6874C /* CoreChatInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataProperties.swift"; path = "/Users/once/Documents/Terminal/americano/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
-		CCFF2EF12600DE7800A6874C /* CoreChatInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataClass.swift"; path = "/Users/once/Documents/Terminal/americano/Terminal-iOS/CoreDataModel/CoreChatInfo+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1674,8 +1674,8 @@
 			children = (
 				CCBBEF332583C45A00177E25 /* CoreUserInfo+CoreDataClass.swift */,
 				CCBBEF342583C45A00177E25 /* CoreUserInfo+CoreDataProperties.swift */,
-				CCFF2EF12600DE7800A6874C /* CoreChatInfo+CoreDataClass.swift */,
-				CCFF2EF02600DE7800A6874C /* CoreChatInfo+CoreDataProperties.swift */,
+				CCB3AFB9260894E30044A5BB /* CoreChatInfo+CoreDataClass.swift */,
+				CCB3AFB8260894E30044A5BB /* CoreChatInfo+CoreDataProperties.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -2135,7 +2135,7 @@
 				CCD51C73256D274A00D41771 /* MyStudyDetailProtocols.swift in Sources */,
 				A5BA1ED6254A8E9C0089D4E9 /* NotificationView.swift in Sources */,
 				CCF4709B256B9A510085B371 /* ChatInteractor.swift in Sources */,
-				CCFF2EF22600DE7800A6874C /* CoreChatInfo+CoreDataClass.swift in Sources */,
+				CCB3AFBA260894E30044A5BB /* CoreChatInfo+CoreDataClass.swift in Sources */,
 				CCFA775B25EFA61800DEE2D3 /* EmailValidteResult.swift in Sources */,
 				CC03D7E925FDFC8800113C92 /* RemoteChatInfo.swift in Sources */,
 				CC29FB2F25207D3F00C1BDCE /* SelectLocationInteractor.swift in Sources */,
@@ -2395,7 +2395,7 @@
 				CC5794FE2570C9C600DF96AB /* AddNoticeInteractor.swift in Sources */,
 				A51D8BE125264DB9003BD1B9 /* AccountCell.swift in Sources */,
 				CCBBEEFF2583A38E00177E25 /* TerminalCoreData.xcdatamodeld in Sources */,
-				CCFF2EF32600DE7800A6874C /* CoreChatInfo+CoreDataProperties.swift in Sources */,
+				CCB3AFBB260894E30044A5BB /* CoreChatInfo+CoreDataProperties.swift in Sources */,
 				CC1BE0372510D83100F88313 /* SelectCategoryWireFrame.swift in Sources */,
 				A5753449257669DE00FD7D0C /* ProjectCell.swift in Sources */,
 				A5C205A125E6AF6A006EBD14 /* StudyNilCheck.swift in Sources */,
