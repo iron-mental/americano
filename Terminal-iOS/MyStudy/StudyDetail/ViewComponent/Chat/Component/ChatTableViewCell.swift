@@ -44,6 +44,7 @@ final class ChatInputTableViewCell: UITableViewCell {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
         }
         chatLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
