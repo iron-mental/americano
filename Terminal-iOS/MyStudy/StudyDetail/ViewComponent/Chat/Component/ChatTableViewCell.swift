@@ -57,6 +57,7 @@ final class ChatInputTableViewCell: UITableViewCell {
     
     func setData(chat: Chat) {
         if chat.userID == 0 {
+            chevronLabel.isHidden = true
             guard let message = chat.message else { return }
             chatLabel.do {
                 $0.text = "\(message)"
