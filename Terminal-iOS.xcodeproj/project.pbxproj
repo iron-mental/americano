@@ -739,8 +739,8 @@
 		CCB1A3A825D7BDC600AADE33 /* ValidateSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateSequence.swift; sourceTree = "<group>"; };
 		CCB23AAF256E3C1E001736CA /* NoticeWireFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeWireFrame.swift; sourceTree = "<group>"; };
 		CCB33E5C25F48C50006B55C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CCB3AFB8260894E30044A5BB /* CoreChatInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataProperties.swift"; path = "../../CoreChatInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		CCB3AFB9260894E30044A5BB /* CoreChatInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CoreChatInfo+CoreDataClass.swift"; path = "../../CoreChatInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CCB3AFB8260894E30044A5BB /* CoreChatInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreChatInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CCB3AFB9260894E30044A5BB /* CoreChatInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreChatInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CCB752C925A841E3003E7CA7 /* StudyApplyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyApplyMessageView.swift; sourceTree = "<group>"; };
 		CCBBEEFA2583A30A00177E25 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CCBBEEFE2583A38E00177E25 /* TerminalCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TerminalCoreData.xcdatamodel; sourceTree = "<group>"; };
