@@ -12,7 +12,7 @@ import NMapsMap
 protocol SelectLocationViewProtocol: class {
     var presenter: SelectLocationPresenterProtocol? { get set }
     var delegate: selectLocationDelegate? { get set }
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func setViewWithResult(item: StudyDetailLocationPost)
     func setLocaionOnce(sido: String, sigungu: String)
     func showError(message: String)
@@ -23,12 +23,12 @@ protocol SelectLocationInteractorProtocol: class {
     var remoteDataManager: SelectLocationRemoteDataManagerProtocol? { get set }
     var localDataManager: SelectLocationLocalDataManagerProtocol? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func searchAddressOnce(item: StudyDetailLocationPost)
     func searchAddress(item: StudyDetailLocationPost)
     func selectLocation(item: StudyDetailLocationPost)
     
-    //DATAMANAGER -> INTERACTOR
+    // DATAMANAGER -> INTERACTOR
     func sessionTaskError(message: String)
 }
 
@@ -37,20 +37,20 @@ protocol SelectLocationPresenterProtocol: class {
     var interactor: SelectLocationInteractorProtocol? { get set }
     var wireFrame: SelectLocationWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func getAddress(item: StudyDetailLocationPost)
     func searchAddressOnceResult(sido: String, sigungu: String)
     func didClickedCompletButton(item: StudyDetailLocationPost)
     func viewDidLoad(item: StudyDetailLocationPost)
     
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func getAddressResult(item: StudyDetailLocationPost)
     func sessionTaskError(message: String)
 }
 
 protocol SelectLocationRemoteDataManagerProtocol: class {
     var interactor: SelectLocationInteractorProtocol? { get set }
-    //INTERACTOR -> REMOTEDATAMANAGER
+    // INTERACTOR -> REMOTEDATAMANAGER
     func getAddressInfoOnce(lat: Double,
                             lng: Double,
                             completion: @escaping (Bool, _ sido: String?, _ sigungu: String?) -> Void)
@@ -60,7 +60,7 @@ protocol SelectLocationRemoteDataManagerProtocol: class {
 }
 
 protocol SelectLocationLocalDataManagerProtocol: class {
-    //INTERACTOR -> LOCALDATAMANAGER
+    // INTERACTOR -> LOCALDATAMANAGER
 }
 
 protocol SelectLocationWireFrameProtocol: class {    

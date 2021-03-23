@@ -11,7 +11,7 @@ import UIKit
 protocol MyStudyMainViewProtocol: class {
     var presenter: MyStudyMainPresenterProtocol? { get set }
     var startedByPushNotification: Bool? { get set }
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showMyStudyList(myStudyList: MyStudyList)
     func showErrMessage(message: String)
     func showLoading()
@@ -33,9 +33,9 @@ protocol MyStudyMainInteractorProtocol: class {
     var remoteManager: MyStudyMainRemoteDataManagerProtocol? { get set }
     var localManager: MyStudyMainLocalDataManagerProtocol? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func getMyStudyList()
-    //DATAMANAGER -> INTERACTOR
+    // DATAMANAGER -> INTERACTOR
     func sessionTaskError(message: String)
 }
 
@@ -44,21 +44,21 @@ protocol MyStudyMainPresenterProtocol: class {
     var wireFrame: MyStudyMainWireFrameProtocol? { get set }
     var interactor: MyStudyMainInteractorProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func viewDidLoad()
     func showApplyList()
     func showAlert()
     func didClickedCellForDetail(view: UIViewController, selectedStudy: MyStudy)
     func showStudyDetailDirectly()
     
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func MyStudyListResult(result: Bool, itemList: MyStudyList?)
     func sessionTaskError(message: String)
 }
 
 protocol MyStudyMainRemoteDataManagerProtocol: class {
     var interactor: MyStudyMainInteractorProtocol? { get set }
-    //INTERACTOR -> RemoteDataManager
+    // INTERACTOR -> RemoteDataManager
     func getMyStudyList(completion: @escaping (_: BaseResponse<MyStudyList>) -> Void)
 }
 

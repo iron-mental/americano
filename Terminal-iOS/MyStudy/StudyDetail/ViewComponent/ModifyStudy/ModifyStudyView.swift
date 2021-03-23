@@ -13,7 +13,7 @@ final class ModifyStudyView: BaseEditableStudyDetailView {
     var postDefaultImage = false
     var initImage: UIImage? {
         didSet {
-            guard let _ = self.initImage else {
+            guard self.initImage != nil else {
                 self.studyImageExistence = false
                 return
             }

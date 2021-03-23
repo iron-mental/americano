@@ -44,7 +44,7 @@ class LoadingRainbowCat: NSObject {
                 popupView.play()
                 popupView.loopMode = .loop
                 
-                //개발을 위한 슈가코드
+                // 개발을 위한 슈가코드
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
                     hide(caller: UIApplication.getTopViewController())
                 }

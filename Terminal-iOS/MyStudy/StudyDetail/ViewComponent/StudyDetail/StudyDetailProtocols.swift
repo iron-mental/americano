@@ -51,7 +51,7 @@ protocol StudyDetailPresenterProtocol: class {
     func memberDidTap(userID: Int)
     func snsButtonDidTap(url: String)
     func reportConfirmButtonDidTap(studyID: Int, reportMessage: String)
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     
 }
 
@@ -68,7 +68,7 @@ protocol StudyDetailInteractorInputProtocol: class {
 
 protocol StudyDetailInteractorOutputProtocol: class {
 
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func didRetrieveStudyDetail(_ studyDetail: StudyDetail)
     func studyJoinResult(result: Bool, message: String)
     func onError(message: String)

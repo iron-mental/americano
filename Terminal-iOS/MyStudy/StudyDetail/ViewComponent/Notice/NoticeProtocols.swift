@@ -11,9 +11,8 @@ import UIKit
 protocol NoticeViewProtocol: class {
     var studyID: Int? { get set }
     var presenter: NoticePresenterProtocol? { get set }
-//    var noticeList: [Notice] { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showNoticeList(firstNoticeList: [Notice]?, secondNoticeList: [Notice]?)
     func showMessage(message: String)
     func viewLoad()
@@ -25,7 +24,7 @@ protocol NoticeInteractorInputProtocol: class {
     var presenter: NoticeInteractorOutputProtocol? { get set }
     var remoteDataManager: NoticeRemoteDataManagerProtocol? { get set }
 
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func getNoticeList(studyID: Int)
     func getNoticeListPagination(studyID: Int)
     func sessionTaskError(message: String)
@@ -33,7 +32,7 @@ protocol NoticeInteractorInputProtocol: class {
 
 protocol NoticeInteractorOutputProtocol: class {
     
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func showResult(result: Bool,
                     firstNoticeList: [Notice],
                     secondNoticeList: [Notice])
@@ -45,7 +44,7 @@ protocol NoticePresenterProtocol: class {
     var wireFrame: NoticeWireFrameProtocol? { get set }
     var interactor: NoticeInteractorInputProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func viewDidLoad(studyID: Int)
     func celldidTap(notice: Notice, parentView: UIViewController, state: StudyDetailViewState)
     func didScrollEnded(studyID: Int)

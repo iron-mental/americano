@@ -12,7 +12,7 @@ protocol MyApplyStudyInfoViewProtocol: class {
     var presenter: MyApplyStudyInfoPresenterProtocol? { get set }
     var applyStudy: ApplyStudy? { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showDeleteApply(message: String)
     func showError(message: String)
 }
@@ -22,7 +22,7 @@ protocol MyApplyStudyInfoPresenterProtocol: class {
     var wireFrame: MyApplyStudyInfoWireFrameProtocol? { get set }
     var interactor: MyApplyStudyInfoInteractorInputProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func modifyButtonDidTap(studyID: Int)
     func deleteButtonDidTap()
 }
@@ -33,12 +33,12 @@ protocol MyApplyStudyInfoInteractorInputProtocol: class {
     var applyID: Int? { get set }
     var studyID: Int? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func deleteApply()
 }
 
 protocol MyApplyStudyInfoInteractorOutputProtocol: class {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func retriveDeleteApplyResult(result: Bool, message: String)
     func sessionTaskError(message: String)
 }
@@ -46,7 +46,7 @@ protocol MyApplyStudyInfoInteractorOutputProtocol: class {
 protocol MyApplyStudyInfoRemoteDataManagerInputProtocol: class {
     var interactor: MyApplyStudyInfoRemoteDataManagerOutputProtocol? { get set }
     
-    //INTERACTOR -> REMOTEDATAMANAGER
+    // INTERACTOR -> REMOTEDATAMANAGER
     func deleteApply(studyID: Int, applyID: Int)
 }
 

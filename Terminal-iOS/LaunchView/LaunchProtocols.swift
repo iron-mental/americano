@@ -11,7 +11,7 @@ import UIKit
 protocol LaunchViewProtocol: class {
     var presenter: LaunchPresenterProtocol? { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showVersionUpdateAlert(alertType: AlertType)
     func showError(message: String)
     func showMainTenanceAlert()
@@ -22,7 +22,7 @@ protocol LaunchPresenterProtocol: class {
     var interactor: LaunchInteractorInputProtocol? { get set }
     var wireFrame: LaunchWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func viewDidLoad()
     func getRefreshTokenValid()
     func jumpToAppStore()
@@ -32,13 +32,13 @@ protocol LaunchInteractorInputProtocol: class {
     var presenter: LaunchInteractorOutputProtocol? { get set }
     var remoteDataManager: LaunchRemoteDataManagerInputProtocol? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func getVersionCheck()
     func refreshTokenCheck()
 }
 
 protocol LaunchInteractorOutputProtocol: class {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func versionNeedUpdate(force: VersionResultType)
     func refreshTokenIsEmpty()
     func refreshTokenResult(result: Bool)
@@ -49,13 +49,13 @@ protocol LaunchInteractorOutputProtocol: class {
 protocol LaunchRemoteDataManagerInputProtocol: class {
     var interactor: LaunchRemoteDataManagerOutputProtocol? { get set }
     
-    //INTERACTOR -> REMOTEDATAMANAGER
+    // INTERACTOR -> REMOTEDATAMANAGER
     func getVersionCheck(version: String)
     func getRefreshTokenValid(userID: String)
 }
 
 protocol LaunchRemoteDataManagerOutputProtocol: class {
-    //REMOTEDATAMANAGER -> INTERACTOR
+    // REMOTEDATAMANAGER -> INTERACTOR
     func getVersionResult(result: BaseResponse<VersionResult>)
     func getRefreshTokenResult(result: BaseResponse<UserInfo>)
     func sessionTaskError(message: String)
@@ -66,7 +66,7 @@ protocol LaunchWireFrameProtocol: class {
     var pushEvent: AlarmType? { get set }
     static func createLaunchModule(studyID: Int?, pushEvent: AlarmType?) -> UIViewController
     
-    //PRESENTER -> WIREFRAME
+    // PRESENTER -> WIREFRAME
     func replaceRootViewToIntroView()
     func replaceRootViewToMainView()
     func jumpToAppStore()

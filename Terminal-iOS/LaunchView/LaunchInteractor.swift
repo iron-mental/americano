@@ -17,7 +17,7 @@ final class LaunchInteractor: LaunchInteractorInputProtocol {
         if UserDefaults.standard.object(forKey: "FirstInstall") == nil {
             UserDefaults.standard.set(false, forKey: "FirstInstall")
             UserDefaults.standard.synchronize()
-            //첫 설치 혹은 앱 삭제후 재설치 이기 때문에 모두 삭제
+            // 첫 설치 혹은 앱 삭제후 재설치 이기 때문에 모두 삭제
             emptyAllToken()
         }
         
@@ -49,10 +49,10 @@ extension LaunchInteractor: LaunchRemoteDataManagerOutputProtocol {
         case true:
             guard let data = result.data else { return }
             if data.maintenance {
-                //서버 점검 중
+                // 서버 점검 중
                 presenter?.serverMaintenance()
             } else {
-                //서버 정상
+                // 서버 정상
                 switch VersionResultType(rawValue: result.data!.force) {
                 case .notRequired:
                     refreshTokenCheck()
@@ -73,7 +73,7 @@ extension LaunchInteractor: LaunchRemoteDataManagerOutputProtocol {
         case true:
             presenter?.refreshTokenResult(result: result.result)
         case false:
-            //리프레시 토큰이 만료되었기에 로그아웃 시켜줄 것 이고 그전 토큰 모두 삭제 
+            // 리프레시 토큰이 만료되었기에 로그아웃 시켜줄 것 이고 그전 토큰 모두 삭제 
             emptyAllToken()
             presenter?.refreshTokenResult(result: result.result)
         }

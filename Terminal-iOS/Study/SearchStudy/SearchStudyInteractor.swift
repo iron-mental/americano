@@ -12,7 +12,7 @@ final class SearchStudyInteractor: SearchStudyInteractorInputProtocol {
     weak var presenter: SearchStudyInteractorOutputProtocol?
     var remoteDataManager: SearchStudyRemoteDataManagerInputProtocol?
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func getHotKeyword() {
         remoteDataManager?.getHotKeyword()
     }

@@ -87,7 +87,7 @@ class BaseEditableStudyDetailView: UIViewController {
         picker.delegate = self
         
         SNSInputView.notion.textField.debounce(delay: 1) { [weak self] _ in
-            //첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
+            // 첫 로드 시 한번 실행되는 거는 분기처리를 해주자 text.isEmpty 등등으로 해결볼 수 있을 듯
             guard let text = self?.SNSInputView.notion.textField.text else { return }
             if text.notionCheck() || text.isEmpty {
                 self!.SNSInputView.notion.textField.layer.borderWidth = 0.1

@@ -50,14 +50,14 @@ protocol NotificationInteractorOutputProtocol: class {
 protocol NotificationWireFrameProtocol: class {
     static func createModule() -> UIViewController
     
-    //PRESENTER -> WIREFRAME
+    // PRESENTER -> WIREFRAME
     func goToStudyDetail(from view: NotificationViewProtocol, alarmCase: AlarmType, studyTitle: String, studyID: Int)
 }
 
 protocol NotificationRemoteDataManagerInputProtocol: class {
     var interactor: NotificationRemoteDataManagerOutputProtocol? { get set }
     
-    //INTERACTOR -> REMOTEDATAMANAGER
+    // INTERACTOR -> REMOTEDATAMANAGER
     func retrieveAlert()
     func alertGotConfirmed(userID: Int, alertID: Int)
 }
