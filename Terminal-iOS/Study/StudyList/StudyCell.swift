@@ -93,7 +93,7 @@ final class StudyCell: UITableViewCell {
         let managerImageURL = data.leaderImage ?? ""
         
         DispatchQueue.main.async { [self]  in
-            //메인 이미지
+            // 메인 이미지
             if mainImageURL.isEmpty {
                 mainImage.layer.addSublayer(borderLayer)
                 mainImage.image = nil
@@ -110,7 +110,7 @@ final class StudyCell: UITableViewCell {
                 mainImage.kf.setImage(with: URL(string: mainImageURL),
                                       options: [.requestModifier(RequestToken.token())])
             }
-            //방장 이미지
+            // 방장 이미지
             if managerImageURL.isEmpty {
                 managerImage.image = #imageLiteral(resourceName: "defaultProfile")
             } else {

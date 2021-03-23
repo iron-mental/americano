@@ -11,12 +11,12 @@ import UIKit
 protocol SelectCategoryViewProtocol: class {
     var presenter: SelectCategoryPresenterProtocol? { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showCategory()
     func showLoading()
     func hideLoading()
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func backTapped()
 }
 
@@ -24,7 +24,7 @@ protocol SelectCategoryPresenterProtocol: class {
     var view: SelectCategoryViewProtocol? { get set }
     var wireFrame: SelectCategoryWireFrameProtocol? { get set }
 
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func viewDidLoad()
     func go(selected: Category)
     func back()

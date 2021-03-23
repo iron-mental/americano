@@ -11,17 +11,17 @@ import UIKit
 protocol IntroViewProtocol: class {
     var presenter: IntroPresenterProtocol? { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showLoading()
     func hideLoading()
     
-        //success
+    // success
     func presentNextView()
     func presentCompleteView()
     func completeSignUP()
     func completeJoin()
     
-        //false
+    // fail
     func showInvalidEmailAction(message: String)
     func showInvalidPasswordAction()
     func showInvalidNickNameAction(message: String)
@@ -43,12 +43,12 @@ protocol IntroPresenterProtocol: class {
     var interactor: IntroInteractorProtocol? { get set }
     var wireFrame: IntroWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func didClickedRightBarButton(input: String, introState: IntroViewState, beginState: BeginState)
     func termsOfServiceDidTap()
     func privacyWebDidTap()
     
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func emailValidInfo(result: Bool, message: String)
     func passwordValidInfo(result: Bool)
     func nicknameValidInfo(result: Bool, message: String)
@@ -61,7 +61,7 @@ protocol IntroInteractorProtocol: class {
     var presenter: IntroPresenterProtocol? { get set }
     var remoteDataManager: IntroRemoteDataManagerProtocol? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func checkedEmailValid(input: String, beginState: BeginState)
     func checkedPasswordValid(input: String)
     func signUpValid(input: String)

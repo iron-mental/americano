@@ -11,7 +11,7 @@ import UIKit
 protocol ApplyUserDetailViewProtocol: BaseProfileViewProtocol {
     var presenter: ApplyUserDetailPresenterInputProtocol? { get set }
     
-    //PRESENTER -> View
+    // PRESENTER -> View
     func showUserInfo(userInfo: ApplyUserInfo)
     func showError(message: String)
     func showApplyStatusResult(message: String, studyID: Int)
@@ -22,7 +22,7 @@ protocol ApplyUserDetailPresenterInputProtocol: class {
     var interactor: ApplyUserDetailInteractorInputProtocol? { get set }
     var wireFrame: ApplyUserDetailWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func viewDidLoad()
     func rejectButtonDidTap()
     func acceptButtonDidtap()
@@ -35,14 +35,14 @@ protocol ApplyUserDetailInteractorInputProtocol: class {
     var applyID: Int? { get set }
     var userID: Int? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func getUserInfo()
     func postRejectStatus()
     func postAcceptStatus()
 }
 
 protocol ApplyUserDetailInteractorOutputProtocol: class {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func retriveUserInfo(result: Bool, userInfo: ApplyUserInfo)
     func retriveApplyStatus(result: Bool, message: String, studyID: Int)
     func sessionTaskError(message: String)
@@ -51,13 +51,13 @@ protocol ApplyUserDetailInteractorOutputProtocol: class {
 protocol ApplyUserDetailRemoteDataManagerInputProtocol: class {
     var interactor: ApplyUserDetailRemoteDataManagerOutputProtocol? { get set }
     
-    //INTERACTOR -> REMOTEDATAMANAGER
+    // INTERACTOR -> REMOTEDATAMANAGER
     func postApplyStatus(studyID: Int, applyID: Int, status: Bool)
     func getApplyUserInfo(studyID: Int, applyID: Int)
 }
 
 protocol ApplyUserDetailRemoteDataManagerOutputProtocol: class {
-    //REMOTEDATAMANAGER -> INTERACTOR
+    // REMOTEDATAMANAGER -> INTERACTOR
     func onUserInfoRetrieved(userInfo: BaseResponse<ApplyUserInfo>)
     func onApplyStatusRetrieved(response: BaseResponse<String>)
     func sessionTaskError(message: String)

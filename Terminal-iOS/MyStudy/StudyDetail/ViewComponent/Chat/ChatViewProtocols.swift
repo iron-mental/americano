@@ -11,7 +11,7 @@ import UIKit
 protocol ChatViewProtocol: class {
     var presenter: ChatPresenterProtocol? { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func viewLoad() 
     func showLastChat(lastChat: [Chat])
     func showSocketChat(socketChat: [Chat], reloadIndex: Int?)

@@ -42,7 +42,7 @@ final class ChatInteractor: ChatInteractorProtocol {
                                                       date: self.lastLocalChat.last!.date)
             }
         }
-        // 작업간 슈가 코드 지우기 ㄴㄴ
+        // 작업간 슈가 코드 지우지 말기
         // CoreDataManager.shared.tempRemoveAllChat()
     }
     

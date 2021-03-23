@@ -22,7 +22,7 @@ protocol SearchStudyPresenterProtocol: class {
     var interactor: SearchStudyInteractorInputProtocol? { get set }
     var wireFrame: SearchStudyWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func didSearchButtonClicked(keyword: String)
     func viewDidLoad()
 }
@@ -31,13 +31,13 @@ protocol SearchStudyInteractorInputProtocol: class {
     var presenter: SearchStudyInteractorOutputProtocol? { get set }
     var remoteDataManager: SearchStudyRemoteDataManagerInputProtocol? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func getHotKeyword()
 }
 
 protocol SearchStudyInteractorOutputProtocol: class {
     
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func getHotKeywordSuccess(keyword: [HotKeyword])
     func getHotKeywordFailure(message: String)
     func sessionTaskError(message: String)
@@ -46,13 +46,13 @@ protocol SearchStudyInteractorOutputProtocol: class {
 protocol SearchStudyRemoteDataManagerInputProtocol: class {
     var interactor: SearchStudyRemoteDataManagerOutputProtocol? { get set }
     
-    //INTERACTOR -> REMOTEDATAMANAGER
+    // INTERACTOR -> REMOTEDATAMANAGER
     func getHotKeyword()
 }
 
 protocol SearchStudyRemoteDataManagerOutputProtocol: class {
     
-    //REMOTEDATAMANAGER -> INTERACTOR
+    // REMOTEDATAMANAGER -> INTERACTOR
     func getHotKeywordResult(response: BaseResponse<[HotKeyword]>)
     func sessionTaskError(message: String)
 }
@@ -60,6 +60,6 @@ protocol SearchStudyRemoteDataManagerOutputProtocol: class {
 protocol SearchStudyWireFrameProtocol: class {
     static func createSearchStudyModule() -> UIViewController
     
-    //PRESENTER -> WIREFRAME
+    // PRESENTER -> WIREFRAME
     func goToSearchStudyRestult(from view: SearchStudyViewProtocol, keyword: String)
 }

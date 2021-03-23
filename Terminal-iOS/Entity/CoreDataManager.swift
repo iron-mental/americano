@@ -44,7 +44,7 @@ class CoreDataManager {
     func putUserInfo(userInfo: UserInfo) {
         var updatingUserInfo: CoreUserInfo
         do {
-            //userInfo.id와 매칭 되는 애만 불러와야함
+            // userInfo.id와 매칭 되는 애만 불러와야함
             let coreUserInfo = try CoreDataManager.shared.context.fetch(CoreUserInfo.fetchRequest()) as! [CoreUserInfo]
             updatingUserInfo = coreUserInfo.first!
             updatingUserInfo.nickname = userInfo.nickname

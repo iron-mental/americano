@@ -11,7 +11,7 @@ import UIKit
 protocol ParticipantProfileViewProtocol: BaseProfileViewProtocol {
     var presenter: ParticipantProfilePresenterProtocol? { get set }
     
-    //PRESENTER -> View
+    // PRESENTER -> View
     func showError(message: String)
 }
 
@@ -20,7 +20,7 @@ protocol ParticipantProfilePresenterProtocol: class {
     var interactor: ParticipantProfileInteractorInputProtocol? { get set }
     var wireFrame: ParticipantProfileWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func viewDidLoad()
 }
 
@@ -29,12 +29,12 @@ protocol ParticipantProfileInteractorInputProtocol: class {
     var remoteDataManager: ParticipantProfileRemoteDataManagerInputProtocol? { get set }
     var userID: Int? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func getUserInfo()
 }
 
 protocol ParticipantProfileInteractorOutputProtocol: class {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func retriveUserInfo(result: Bool, userInfo: UserInfo)
     func retriveProjectList(result: Bool, projectList: [Project])
     func showError(message: String)

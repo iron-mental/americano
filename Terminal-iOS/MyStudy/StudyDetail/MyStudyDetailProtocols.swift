@@ -15,10 +15,10 @@ protocol MyStudyDetailViewProtocol: class {
     var studyTitle: String? { get set }
     var applyState: Bool? { get set }
     var viewState: MyStudyDetialInitView { get set }
-    //CHILD -> PARENT
+    // CHILD -> PARENT
     func setting(caller: UIViewController)
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showLeaveStudyComplete(message: String)
     func showLeaveStudyFailed(message: String)
     
@@ -36,11 +36,11 @@ protocol MyStudyDetailInteractorProtocol: class {
     var remoteDatamanager: MyStudyDetailRemoteDataManagerProtocol? { get set }
     var localDatamanager: MyStudyDetailLocalDataManagerProtocol? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func postLeaveStudyAPI(studyID: Int)
     func callDeleteStudyAPI(studyID: Int)
     
-    //DATAMANAGER -> INTERACTOR
+    // DATAMANAGER -> INTERACTOR
     func leaveStudyResult(result: Bool, message: String)
     func deleteStudyResult(result: Bool, message: String)
     func sessionTaskError(message: String)
@@ -51,7 +51,7 @@ protocol MyStudyDetailPresenterProtocol: class {
     var interactor: MyStudyDetailInteractorProtocol? { get set }
     var wireFrame: MyStudyDetailWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func addNoticeButtonDidTap(studyID: Int)
     func editStudyButtonDidTap(study: StudyDetail, location: Location, mainImage: UIImage?)
     func addNoticeFinished(notice: Int, studyID: Int, title: String)
@@ -60,7 +60,7 @@ protocol MyStudyDetailPresenterProtocol: class {
     func deleteStudyButtonDidTap(studyID: Int)
     func delegateHostButtonDidTap(studyID: Int, userList: [Participate])
     
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func leaveStudyResult(result: Bool, message: String)
     func deleteStudyResult(result: Bool, message: String)
     func sessionTaskError(message: String)
@@ -69,7 +69,7 @@ protocol MyStudyDetailPresenterProtocol: class {
 protocol MyStudyDetailRemoteDataManagerProtocol: class {
     var interactor: MyStudyDetailInteractorProtocol? { get set }
     
-    //INTERACTOR -> REMOTEDATAMANAGER
+    // INTERACTOR -> REMOTEDATAMANAGER
     func postLeaveStudyAPI(studyID: Int)
     func callDeleteStudyAPI(studyID: Int)
 }

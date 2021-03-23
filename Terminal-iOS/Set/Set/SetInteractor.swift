@@ -38,14 +38,14 @@ extension SetInteractor: SetRemoteDataManagerOutputProtocol {
     
     func onUserInfoRetrieved(userInfo: BaseResponse<UserInfo>) {
         guard let result = userInfo.data else { return }
-        //기존의 내용을 수정
+        // 기존의 내용을 수정
         if CoreDataManager.shared.getUserinfo() != nil {
-            //core에 있다는소리
-            //put 하는 함수
+            // core에 있다는소리
+            // put 하는 함수
             CoreDataManager.shared.putUserInfo(userInfo: result)
         } else {
-            //core가 nil 이라는 소리
-            //create 하는 함수
+            // core가 nil 이라는 소리
+            // create 하는 함수
             CoreDataManager.shared.createUserInfo(userInfo: result)
         }
         presenter?.didRetrievedUserInfo(userInfo: result)

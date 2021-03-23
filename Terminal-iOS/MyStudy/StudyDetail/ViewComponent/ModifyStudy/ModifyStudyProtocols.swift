@@ -12,7 +12,7 @@ protocol ModifyStudyViewProtocol: class {
     var presenter: ModifyStudyPresenterProtocol? { get set }
     var study: StudyDetail? { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showResult(message: String)
     func showLoading()
     func hideLoading()
@@ -24,7 +24,7 @@ protocol ModifyStudyPresenterProtocol: class {
     var wireFrame: ModifyStudyWireFrameProtocol? { get set }
     var interactor: ModifyStudyInteractorInputProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func completButtonDidTap(studyID: Int, study: StudyDetailPost)
     func clickLocationView()
 }
@@ -34,12 +34,12 @@ protocol ModifyStudyInteractorInputProtocol: class {
     var remoteDataManager: ModifyStudyRemoteDataManagerInputProtocol? { get set }
     var currentStudy: StudyDetail? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func putStudyInfo(studyID: Int, study: StudyDetailPost)
 }
 
 protocol ModifyStudyInteractorOutputProtocol: class {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func putStudyInfoResult(result: Bool, label: String?, message: String)
     func sessionTaskError(message: String)
 }
@@ -47,12 +47,12 @@ protocol ModifyStudyInteractorOutputProtocol: class {
 protocol ModifyStudyRemoteDataManagerInputProtocol: class {
     var interactor: ModifyStudyRemoteDataManagerOutputProtocol? { get set }
     
-    //INTERACTOR -> REMOTEDATAMANAGER
+    // INTERACTOR -> REMOTEDATAMANAGER
     func putStudyInfo(studyID: Int, study: StudyDetailPost)
 }
 
 protocol ModifyStudyRemoteDataManagerOutputProtocol: class {
-    //REMOTEDATAMANAGER -> INTERACTOR
+    // REMOTEDATAMANAGER -> INTERACTOR
     func putStudyInfoResult(result: BaseResponse<String>)
     func sessionTaskError(message: String)
 }
@@ -62,6 +62,6 @@ protocol ModifyStudyWireFrameProtocol: class {
                                         location: Location,
                                         mainImage: UIImage?) -> UIViewController
     
-    //PRESENTER -> WIREFRAME
+    // PRESENTER -> WIREFRAME
     func goToSelectLocation(from view: ModifyStudyViewProtocol)
 }

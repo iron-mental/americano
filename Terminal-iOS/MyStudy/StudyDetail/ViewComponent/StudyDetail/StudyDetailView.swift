@@ -22,8 +22,11 @@ enum StudyDetailViewState: String {
 }
 
 final class StudyDetailView: UIViewController {
+  
+    // state
     var presenter: StudyDetailPresenterProtocol?
-    
+    weak var parentView: MyStudyDetailViewProtocol?
+  
     var state: StudyDetailViewState = .member {
         didSet {
             attribute()
@@ -44,26 +47,26 @@ final class StudyDetailView: UIViewController {
             self.title = studyTitle
         }
     }
-    var memberView = MemeberView()
+    
     var userData: [Participate] = []
-    var mainImageView = MainImageView(frame: CGRect.zero)
-    var snsIconsView = StudyDetailSNSView()
-    var mapView = NMFMapView()
-    var joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
-    var scrollView = UIScrollView()
-    var tempBackgroundView = UIView()
-    let picker = UIImagePickerController()
-    var mainImageViewTapGesture = UITapGestureRecognizer()
-    var joinButton = UIButton()
-    let joinProgressCatTapGesture = UITapGestureRecognizer(target: self, action: #selector(modifyJoinButtonDidTap))
+    let joinProgressCatTapGesture = UITapGestureRecognizer(target: self,
+                                                           action: #selector(modifyJoinButtonDidTap))
+    // UI
     let appearance = UINavigationBarAppearance()
-    var categoryLabel = UILabel()
-    weak var parentView: MyStudyDetailViewProtocol?
-    lazy var studyPlanView = TitleWithContentView()
-    lazy var timeView = TitleWithContentView()
-    lazy var locationView = TitleWithContentView()
-    lazy var studyIntroduceView = TitleWithContentView()
-    lazy var moreButton = UIBarButtonItem()
+    let scrollView = UIScrollView()
+    let tempBackgroundView = UIView()
+    let joinButton = UIButton()
+    let categoryLabel = UILabel()
+    let memberView = MemeberView()
+    let mainImageView = MainImageView(frame: CGRect.zero)
+    let snsIconsView = StudyDetailSNSView()
+    let mapView = NMFMapView()
+    let joinProgressCat = AnimationView(name: "14476-rainbow-cat-remix")
+    let studyPlanView = TitleWithContentView()
+    let timeView = TitleWithContentView()
+    let locationView = TitleWithContentView()
+    let studyIntroduceView = TitleWithContentView()
+    let moreButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,9 +169,6 @@ final class StudyDetailView: UIViewController {
         
         studyIntroduceView.do {
             $0.contentText = ["스터디 소개", String(studyInfo?.introduce ?? "")]
-            if state == .none || state == .member {
-            } else {
-            }
         }
         
         categoryLabel.do {
@@ -186,17 +186,11 @@ final class StudyDetailView: UIViewController {
         studyPlanView.do {
             $0.title.text = "스터디 진행"
             $0.contentText = ["스터디 진행", String(studyInfo?.progress ?? "")]
-            if state == .none || state == .member {
-            } else {
-            }
         }
         
         timeView.do {
             $0.title.text = "시간"
             $0.contentText = ["시간", String(studyInfo?.studyTime ?? "")]
-            if state == .none || state == .member {
-            } else {
-            }
         }
         
         locationView.do {
@@ -261,15 +255,18 @@ final class StudyDetailView: UIViewController {
         }
         snsIconsView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: 5).isActive = true
-            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+            $0.topAnchor.constraint(equalTo: mainImageView.bottomAnchor,
+                                    constant: 5).isActive = true
+            $0.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                        constant: 15).isActive = true
             $0.trailingAnchor.constraint(equalTo: joinButton.leadingAnchor).isActive = true
             $0.heightAnchor.constraint(equalTo: snsIconsView.heightAnchor).isActive = true
         }
         joinButton.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.centerYAnchor.constraint(equalTo: snsIconsView.centerYAnchor).isActive = true
-            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor,
+                                         constant: -Terminal.convertWidth(value: 24)).isActive = true
             $0.widthAnchor.constraint(equalToConstant: Terminal.convertWidth(value: 150)).isActive = true
             $0.heightAnchor.constraint(equalToConstant: Terminal.convertHeight(value: 36)).isActive = true
         }
@@ -278,7 +275,7 @@ final class StudyDetailView: UIViewController {
             $0.topAnchor.constraint(equalTo: snsIconsView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
             $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyIntroduceView.label.isHidden == false ? studyIntroduceView.label.bottomAnchor : studyIntroduceView.label.bottomAnchor ).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyIntroduceView.label.bottomAnchor).isActive = true
         }
         categoryLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -287,31 +284,42 @@ final class StudyDetailView: UIViewController {
         }
         memberView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.topAnchor.constraint(equalTo: studyIntroduceView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 24)).isActive = true
             $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: $0.collectionView.bottomAnchor).isActive = true
         }
         studyPlanView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: memberView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: studyPlanView.label.isHidden == false ? studyPlanView.label.bottomAnchor : studyPlanView.label.bottomAnchor ).isActive = true
+            $0.topAnchor.constraint(equalTo: memberView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor,
+                                         constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: studyPlanView.label.bottomAnchor).isActive = true
         }
         timeView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: studyPlanView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: timeView.label.isHidden == false ? timeView.label.bottomAnchor : timeView.label.bottomAnchor ).isActive = true
+            $0.topAnchor.constraint(equalTo: studyPlanView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor,
+                                         constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: timeView.label.bottomAnchor).isActive = true
         }
         locationView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor, constant: Terminal.convertHeight(value: 23)).isActive = true
-            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor, constant: Terminal.convertWidth(value: 24)).isActive = true
-            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor, constant: -Terminal.convertWidth(value: 24)).isActive = true
-            $0.bottomAnchor.constraint(equalTo: locationView.label.isHidden == false ? locationView.label.bottomAnchor : locationView.label.bottomAnchor).isActive = true
+            $0.topAnchor.constraint(equalTo: timeView.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 23)).isActive = true
+            $0.leadingAnchor.constraint(equalTo: tempBackgroundView.leadingAnchor,
+                                        constant: Terminal.convertWidth(value: 24)).isActive = true
+            $0.trailingAnchor.constraint(equalTo: tempBackgroundView.trailingAnchor,
+                                         constant: -Terminal.convertWidth(value: 24)).isActive = true
+            $0.bottomAnchor.constraint(equalTo: locationView.label.bottomAnchor).isActive = true
         }
         mapView.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -375,7 +383,7 @@ final class StudyDetailView: UIViewController {
         let reportStudy =  UIAlertAction(title: "신고하기", style: .default) {_ in self.reportButtonDidTap() }
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
-        [ reportStudy, cancel].forEach { alert.addAction($0) }
+        [reportStudy, cancel].forEach { alert.addAction($0) }
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             if let popoverController = alert.popoverPresentationController {
@@ -411,7 +419,6 @@ final class StudyDetailView: UIViewController {
 }
 
 extension StudyDetailView: StudyDetailViewProtocol {
-    
     func studyJoinResult(message: String) {
         showToast(controller: self, message: message, seconds: 1)
         presenter?.showStudyListDetail(studyID: "\(studyInfo!.id)")
