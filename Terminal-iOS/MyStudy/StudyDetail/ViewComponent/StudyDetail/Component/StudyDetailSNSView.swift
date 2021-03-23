@@ -8,22 +8,19 @@
 
 import UIKit
 
-class StudyDetailSNSView: BaseSNSView {
+final class StudyDetailSNSView: BaseSNSView {
     let notion = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "notion"), for: .normal)
         $0.tag = 0
     }
-    
     let evernote = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "evernote"), for: .normal)
         $0.tag = 1
     }
-    
     let web = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "web"), for: .normal)
         $0.tag = 2
     }
-    
     let modify = UIButton().then {
         $0.setTitle("수정", for: .normal)
         $0.setTitleColor(.appColor(.mainColor), for: .normal)

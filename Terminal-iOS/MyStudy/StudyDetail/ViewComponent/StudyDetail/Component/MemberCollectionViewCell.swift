@@ -10,17 +10,11 @@ import UIKit
 import Kingfisher
 import SwiftKeychainWrapper
 
-class MemberCollectionViewCell: UICollectionViewCell {
+final class MemberCollectionViewCell: UICollectionViewCell {
     static let identifier = "cell"
     
     var profileImage = UIImageView()
     var nickname = UILabel()
-    let token = KeychainWrapper.standard.string(forKey: "accessToken")!
-    lazy var imageDownloadRequest = AnyModifier { request in
-        var requestBody = request
-        requestBody.setValue("Bearer "+self.token, forHTTPHeaderField: "Authorization")
-        return requestBody
-    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -77,7 +71,7 @@ class MemberCollectionViewCell: UICollectionViewCell {
                 profileImage.layer.borderColor = UIColor.gray.cgColor
                 profileImage.contentMode = .scaleAspectFill
                 self.profileImage.kf.setImage(with: URL(string: image),
-                                                 options: [.requestModifier(imageDownloadRequest)])
+                                              options: [.requestModifier(RequestToken.token())])
             }
         }
     }

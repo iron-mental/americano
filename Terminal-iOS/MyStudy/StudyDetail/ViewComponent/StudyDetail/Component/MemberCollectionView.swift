@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemberCollectionView: UICollectionView {
+final class MemberCollectionView: UICollectionView {
     
     let layoutValue: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     

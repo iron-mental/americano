@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TitleWithContentView: UIView {
+final class TitleWithContentView: UIView {
     var title = UILabel()
     var label = PaddingLabel()
     var state: StudyDetailViewState = .none
@@ -57,7 +57,8 @@ class TitleWithContentView: UIView {
         }
         label.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: title.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         }
