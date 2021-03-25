@@ -126,7 +126,9 @@ extension ChatOutputTableViewCell: UITextViewDelegate {
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        sendButton.tintColor = text.isEmpty ? .lightGray : .appColor(.mainColor)
+        guard let str = textView.text else { return true }
+        let newLength = str.count + text.count - range.length
+        sendButton.tintColor = newLength == 0 ? .lightGray : .appColor(.mainColor)
         return true
     }
 }
