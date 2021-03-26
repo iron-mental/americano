@@ -14,7 +14,7 @@ struct Study: Codable {
     let id: Int
     let title, introduce, image, sigungu: String?
     let leaderImage: String?
-    let createdAt: Int
+    let createdAt: Int?
     let memberCount: Int?
     let distance: Double?
     let isMember: Bool?
