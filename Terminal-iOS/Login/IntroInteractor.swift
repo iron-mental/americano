@@ -62,7 +62,7 @@ final class IntroInteractor: IntroInteractorProtocol {
     // MARK: 로그인 패스워드 체크
     
     func checkedPasswordValid(input: String) {
-        if input.count >= 8 && input.count <= 20 {
+        if input.count >= 6 && input.count <= 20 {
             presenter?.passwordValidInfo(result: true)
             IntroLocalDataManager.shared.password = input
         } else {
