@@ -75,7 +75,7 @@ PODS:
     - nanopb/encode (= 2.30907.0)
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
-  - NMapsMap (3.11.0)
+  - NMapsMap (3.10.0)
   - PromisesObjC (1.2.12)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
@@ -91,7 +91,7 @@ DEPENDENCIES:
   - Firebase/Crashlytics
   - Kingfisher
   - lottie-ios
-  - NMapsMap
+  - NMapsMap (= 3.10.0)
   - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftKeychainWrapper
   - SwiftLint
@@ -136,7 +136,7 @@ SPEC CHECKSUMS:
   Kingfisher: e71c6fac2aebb1262888cabc2cb13d313362a48f
   lottie-ios: 106e92eaf11fbed0a76590b4cdb9b5ec26123ff7
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
-  NMapsMap: e6dbea85c2c195c7532deb637a5e90fd70f94fed
+  NMapsMap: 17caab4af9a3fc5c25b79858de18bdeab1eaff87
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
@@ -145,6 +145,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: c1b16e1def87fa47a589b0b1f1d217bd478fb29d
+PODFILE CHECKSUM: 06b391bade41020a94df8741ec114b8a1c85e92f
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.0

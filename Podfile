@@ -7,7 +7,7 @@ target 'Terminal-iOS' do
 
   pod 'SwiftLint'
   pod 'Then'
-  pod 'NMapsMap'
+  pod 'NMapsMap', '3.10.0'
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'Kingfisher'
