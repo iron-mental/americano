@@ -33,7 +33,7 @@ final class LaunchRemoteDataManager: LaunchRemoteDataManagerInputProtocol {
                                 code: nil,
                                 data: VersionResult(
                                     latestVersion: "1.0",
-                                    force: 1,
+                                    force: 2,
                                     maintenance: false)
                             )
                         )
