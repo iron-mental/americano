@@ -15,7 +15,7 @@ final class SearchLocationListEmptyView: BaseEmptyView {
             $0.image = UIImage(systemName: "magnifyingglass.circle")?.withConfiguration(UIImage.SymbolConfiguration(weight: .light))
         }
         self.guideLabel.do {
-            $0.text = "검색 결과가 없습니다.\n키워드를 입력 해주세요"
+            $0.text = "검색 결과가 없습니다.\n키워드를 입력해 주세요"
             $0.numberOfLines = 0
         }
     }
