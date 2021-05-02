@@ -17,7 +17,7 @@ final class ChatRemoteDataManager: ChatRemoteDataManagerProtocol {
     var manager: SocketManager?
     
     func socketConnect(studyID: Int, date: Int? = nil) {
-        guard let baseURL = URL(string: "https://www.terminal-study.tk"),
+        guard let baseURL = URL(string: "https://www.terminal-study.site"),
               let accessToken = KeychainWrapper.standard.string(forKey: "accessToken") else { return }
         manager = SocketManager(socketURL: baseURL,
                                 config: [.log(false),

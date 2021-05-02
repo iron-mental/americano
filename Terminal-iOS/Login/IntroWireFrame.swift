@@ -36,7 +36,7 @@ final class IntroWireFrame: IntroWireFrameProtocol {
     }
     
     func goToTermsOfServiceWeb(from view: IntroViewProtocol) {
-        guard let url = URL(string: "https://www.terminal-study.tk/terms") else { return }
+        guard let url = URL(string: "https://www.terminal-study.site/terms") else { return }
         let webView = SFSafariViewController(url: url)
         if let introview = view as? UIViewController {
             introview.present(webView, animated: true, completion: nil)
@@ -44,7 +44,7 @@ final class IntroWireFrame: IntroWireFrameProtocol {
     }
     
     func goToPrivacyWeb(from view: IntroViewProtocol) {
-        guard let url = URL(string: "https://www.terminal-study.tk/privacy") else { return }
+        guard let url = URL(string: "https://www.terminal-study.site/privacy") else { return }
         let webView = SFSafariViewController(url: url)
         if let introview = view as? UIViewController {
             introview.present(webView, animated: true, completion: nil)

@@ -120,6 +120,7 @@ final class IntroView: UIViewController {
             $0.dynamicFont(fontSize: 23, weight: .bold)
         }
         invalidLabel.do {
+            $0.dynamicFont(fontSize: 12, weight: .regular)
             $0.numberOfLines = 0
             $0.textColor = .systemRed
         }
@@ -148,6 +149,7 @@ final class IntroView: UIViewController {
         invalidLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: inputTextfield.bottomAnchor, constant: 10).isActive = true
+            $0.trailingAnchor.constraint(equalTo: inputTextfield.trailingAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: inputTextfield.leadingAnchor).isActive = true
         }
         termsOfSerViceView.do {
