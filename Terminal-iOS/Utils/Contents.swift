@@ -9,7 +9,7 @@
 import Foundation
 
 enum API {
-    static let COMMON_BASE_URL: String = "https://www.terminal-study.tk/"
-    static let BASE_URL: String = "https://www.terminal-study.tk/v1/"
+    static let COMMON_BASE_URL: String = "https://www.terminal-study.site/"
+    static let BASE_URL: String = "https://www.terminal-study.site/v1/"
     static let KAKAO_BASE_URL: String = "https://dapi.kakao.com/v2/local/search/address.json"
 }
