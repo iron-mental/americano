@@ -7,9 +7,9 @@
 
 import UIKit
 
-class AlertMessageView: AlertBaseUIView {
-  var alertMessageLabel = UILabel()
-  var alertMessage = ""
+public class AlertMessageView: AlertBaseUIView {
+  public var alertMessageLabel = UILabel()
+  public var alertMessage = ""
   
   init(message: String) {
     super.init()

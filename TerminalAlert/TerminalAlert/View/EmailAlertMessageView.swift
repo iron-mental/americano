@@ -7,9 +7,9 @@
 
 import UIKit
 
-class EmailAlertMessageView: AlertBaseUIView {
-  var alertMessageLabel = UILabel()
-  var message: String?
+public class EmailAlertMessageView: AlertBaseUIView {
+  public var alertMessageLabel = UILabel()
+  public var message: String?
   
   init(message: String) {
     super.init()

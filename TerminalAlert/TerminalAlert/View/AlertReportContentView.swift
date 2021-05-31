@@ -7,9 +7,9 @@
 
 import UIKit
 
-class AlertReportContentView: AlertBaseUIView {
-  var reportTitleLabel = UILabel()
-  var editMessageTextView = UITextView()
+public class AlertReportContentView: AlertBaseUIView {
+  public var reportTitleLabel = UILabel()
+  public var editMessageTextView = UITextView()
   
   override init() {
     super.init()
@@ -54,7 +54,7 @@ class AlertReportContentView: AlertBaseUIView {
 }
 
 extension AlertReportContentView: UITextViewDelegate {
-  func textViewDidBeginEditing(_ textView: UITextView) {
+  public func textViewDidBeginEditing(_ textView: UITextView) {
     textView.font = UIFont.systemFont(ofSize: 12)
     textView.textColor = .white
     textView.text = ""

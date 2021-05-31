@@ -7,16 +7,16 @@
 
 import UIKit
 
-enum StudyApplyMessageType {
+public enum StudyApplyMessageType {
   case apply
   case modify
 }
 
-class StudyApplyMessageView: AlertBaseUIView {
-  var type: StudyApplyMessageType = .apply
-  var applyTitleLabel = UILabel()
-  var applyGuideLabel = UILabel()
-  var editMessageTextView = UITextView()
+public class StudyApplyMessageView: AlertBaseUIView {
+  public var type: StudyApplyMessageType = .apply
+  public var applyTitleLabel = UILabel()
+  public var applyGuideLabel = UILabel()
+  public var editMessageTextView = UITextView()
   
   init(type: StudyApplyMessageType) {
     super.init()
@@ -71,7 +71,7 @@ class StudyApplyMessageView: AlertBaseUIView {
 }
 
 extension StudyApplyMessageView: UITextViewDelegate {
-  func textViewDidBeginEditing(_ textView: UITextView) {
+  public func textViewDidBeginEditing(_ textView: UITextView) {
     textView.font = UIFont.systemFont(ofSize: 12)
     textView.textColor = .white
     textView.text = ""

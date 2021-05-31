@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AlertBaseUIView: UIView {
+public class AlertBaseUIView: UIView {
   
   static func convertHeight(value: CGFloat) -> CGFloat {
       return UIScreen.main.bounds.height * (value / 667)
@@ -17,13 +17,13 @@ class AlertBaseUIView: UIView {
       return UIScreen.main.bounds.width * (value / 375)
   }
   
-  var redButton = UIButton()
-  var yellowButton = UIButton()
-  var greenButton = UIButton()
-  var topBar = UIView()
-  var bottomBar = UIView()
-  var dismissButton = UIButton()
-  var completeButton = UIButton()
+  public var redButton = UIButton()
+  public var yellowButton = UIButton()
+  public var greenButton = UIButton()
+  public var topBar = UIView()
+  public var bottomBar = UIView()
+  public var dismissButton = UIButton()
+  public var completeButton = UIButton()
   
   init() {
     super.init(frame: CGRect.zero)
