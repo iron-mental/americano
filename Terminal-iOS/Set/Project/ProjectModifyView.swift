@@ -127,7 +127,7 @@ final class ProjectModifyView: UIViewController, CellSubclassDelegate {
                 let appStore = cell.sns.secondTextField.text ?? ""
                 let playStore = cell.sns.thirdTextField.text ?? ""
                 
-                //enum 으로 관리하면 더 명확할 듯
+                // enum 으로 관리하면 더 명확할 듯
                 if github.whitespaceCheck() || appStore.whitespaceCheck() || playStore.whitespaceCheck() {
                     state = SNSValidate(state: false, kind: "whitespace")
                 } else if !appStore.appstoreCheck() {
@@ -154,7 +154,7 @@ final class ProjectModifyView: UIViewController, CellSubclassDelegate {
             var targetMaxY: CGFloat = 0
             
             if type(of: parentView) == ProjectSNSModifyView.self {
-                //sns textField 클릭 시
+                // sns textField 클릭 시
                 if let cellView = parentView.superview?.superview,
                    let superView = parentView.superview?.superview?.superview {
                     targetMinY = textView.frame.minY
@@ -168,7 +168,7 @@ final class ProjectModifyView: UIViewController, CellSubclassDelegate {
                         + superView.frame.origin.y
                 }
             } else {
-                //제목 or 내용 textView 클릭 시
+                // 제목 or 내용 textView 클릭 시
                 if let cellView = parentView.superview,
                    let superView = parentView.superview?.superview {
                     targetMinY = textView.frame.minY

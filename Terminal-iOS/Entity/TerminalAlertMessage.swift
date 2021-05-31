@@ -9,22 +9,22 @@
 import UIKit
 
 enum AlertType {
-    case StudyApplyView                 //신청
-    case StudyApplyDeleteView           //신청 취소
-    case EmailAuthView                  //이메일 auth
-    case DelegateHostConfirmView        //방장 위임
-    case LeaveStudyView                 //스터디 나가기
-    case DeleteStudyView                //스터디 삭제
-    case ProjectLimitView               //프로젝트 3개 이하 안내
-    case AllowUserView                  //스터디 신청 수락
-    case RejectUserView                 //스터디 신청 거절
-    case LogOutView                     //로그아웃
-    case VersionUpdateRecommendView     //업데이트 권장
-    case VersionUpdateRequiredView      //업데이트 필수
-    case JumpToSettingAppView           //알림 설정
-    case ReportContentView              //컨텐츠 신고
-    case ServerMaintenanceView          //서버 점검중
-    case LaunchDisConnectView           //런치스크린 통신에러
+    case StudyApplyView                 // 신청
+    case StudyApplyDeleteView           // 신청 취소
+    case EmailAuthView                  // 이메일 auth
+    case DelegateHostConfirmView        // 방장 위임
+    case LeaveStudyView                 // 스터디 나가기
+    case DeleteStudyView                // 스터디 삭제
+    case ProjectLimitView               // 프로젝트 3개 이하 안내
+    case AllowUserView                  // 스터디 신청 수락
+    case RejectUserView                 // 스터디 신청 거절
+    case LogOutView                     // 로그아웃
+    case VersionUpdateRecommendView     // 업데이트 권장
+    case VersionUpdateRequiredView      // 업데이트 필수
+    case JumpToSettingAppView           // 알림 설정
+    case ReportContentView              // 컨텐츠 신고
+    case ServerMaintenanceView          // 서버 점검중
+    case LaunchDisConnectView           // 런치스크린 통신에러
     
     var view: UIView {
         switch self {

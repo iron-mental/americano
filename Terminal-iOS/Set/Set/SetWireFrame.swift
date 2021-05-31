@@ -79,7 +79,7 @@ final class SetWireFrame: SetWireFrameProtocol {
     }
     
     func goToPrivacyWeb(from view: SetViewProtocol) {
-        guard let url = URL(string: "https://www.terminal-study.tk/privacy") else { return }
+        guard let url = URL(string: "https://www.terminal-study.site/privacy") else { return }
         let webView = SFSafariViewController(url: url)
         if let introview = view as? UIViewController {
             introview.present(webView, animated: true, completion: nil)
@@ -87,7 +87,7 @@ final class SetWireFrame: SetWireFrameProtocol {
     }
     
     func goToTermsOfServiceWeb(from view: SetViewProtocol) {
-        guard let url = URL(string: "https://www.terminal-study.tk/terms") else { return }
+        guard let url = URL(string: "https://www.terminal-study.site/terms") else { return }
         let webView = SFSafariViewController(url: url)
         if let introview = view as? UIViewController {
             introview.present(webView, animated: true, completion: nil)

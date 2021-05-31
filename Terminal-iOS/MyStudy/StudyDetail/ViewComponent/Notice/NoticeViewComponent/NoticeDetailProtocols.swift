@@ -13,7 +13,7 @@ protocol NoticeDetailViewProtocol: class {
     var notice: Notice? { get set }
     var parentView: UIViewController? { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showNoticeDetail(notice: Notice)
     func showNoticeRemove(message: String)
     func showError(message: String)
@@ -27,7 +27,7 @@ protocol NoticeDetailPresenterProtocol: class {
     var interactor: NoticeDetailInteractorInputProtocol? { get set }
     var wireFrame: NoticeDetailWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func viewDidLoad(notice: Notice)
     func removeButtonDidTap(notice: Notice)
     func modifyButtonDidTap(state: AddNoticeState,
@@ -39,7 +39,7 @@ protocol NoticeDetailInteractorInputProtocol: class {
     var presenter: NoticeDetailInteractorOutputProtocol? { get set }
     var remoteDataManager: NoticeDetailRemoteDataManagerInputProtocol? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func getNoticeDetail(notice: Notice)
     func postNoticeRemove(notice: Notice)
 }

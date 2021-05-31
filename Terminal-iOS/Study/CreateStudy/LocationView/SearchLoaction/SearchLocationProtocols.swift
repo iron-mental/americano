@@ -11,7 +11,7 @@ import UIKit
 protocol SearchLocationViewProtocol: class {
     var presenter: SearchLocationPresenterProtocol? { get set }
     var parentView: UIViewController? { get set }
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func dismiss()
     func showSearchResult(list: [StudyDetailLocationPost])
     func showLoading()
@@ -24,11 +24,11 @@ protocol SearchLocationPresenterProtocol: class {
     var interactor: SearchLocationInteractorProtocol? { get set }
     var wireFrame: SearchLocationWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
-    //추후에 index가 아닌 remoteDataManager로 부터 받아온 정보중 좌표값을 넘겨주어야 할듯 하네요
+    // VIEW -> PRESENTER
+    // 추후에 index가 아닌 remoteDataManager로 부터 받아온 정보중 좌표값을 넘겨주어야 할듯 하네요
     func didSelectedItem(item: StudyDetailLocationPost, view: UIViewController, parentView: UIViewController)
     func didClickedSearchButton(text: String)
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func searchResult(list: [StudyDetailLocationPost])
     func sessionTaskError(message: String)
 }
@@ -37,9 +37,9 @@ protocol SearchLocationInteractorProtocol: class {
     var presenter: SearchLocationPresenterProtocol? { get set }
     var remoteDataManager: SearchLocationRemoteDataManagerProtocol? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func searchKeyWord(text: String)
-    //DATAMANAGER -> INTERACTOR
+    // DATAMANAGER -> INTERACTOR
     func sessionTaskError(message: String)
 }
 
@@ -51,7 +51,7 @@ protocol SearchLocationRemoteDataManagerProtocol: class {
 protocol SearchLocationWireFrameProtocol: class {
     static func searchLocationViewModule(parentView: UIViewController) -> UIViewController
     
-    //PRESENTER -> WIREFRAME
+    // PRESENTER -> WIREFRAME
     func goToSelectLocationView(item: StudyDetailLocationPost,
                                 view: UIViewController,
                                 parentView: UIViewController)

@@ -43,7 +43,7 @@ protocol StudyCategoryPresenterProtocol: class {
 }
 
 protocol StudyCategoryInteractorOutputProtocol: class {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func didRetrieveCategories(_ categories: [Category])
     func onError(message: String)
     func sessionTaskError(message: String)

@@ -416,7 +416,7 @@ enum TerminalRouter: URLRequestConvertible {
         case .noticeDetail, .noticeList, .noticeDelete:
             return nil
             
-        //Common
+        // Common
         case let .versionCheck(version):
             return ["version": version, "device": "ios"]
         }

@@ -13,12 +13,13 @@ import FirebaseCrashlytics
 
 // MARK: 마이스터디 탭에 들어갈 메인 뷰 입니다.
 final class MyStudyMainView: UIViewController {
+    // state
     var presenter: MyStudyMainPresenterProtocol?
-    
     var myStudyList: [MyStudy] = []
-    //이거 로딩캣단에서 처리 다할 수 있을 듯
     var startedByPushNotification: Bool?
-    var dismissEditViewButtonItem: UIBarButtonItem?
+  
+  
+    // UI
     var alarmButton = BadgeBarButtonItem()
     let refreshControl = UIRefreshControl()
     let appearance = UINavigationBarAppearance()

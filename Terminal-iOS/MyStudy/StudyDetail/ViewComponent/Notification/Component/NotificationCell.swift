@@ -116,7 +116,7 @@ final class NotificationCell: UITableViewCell {
     }
     
     func convertToElapsedTime(notificationTime: Int) -> String {
-        //알림 시간 쪼개기
+        // 알림 시간 쪼개기
         let tempDate = "\(Date(timeIntervalSince1970: TimeInterval(notificationTime)))"
         let endIdx: String.Index = tempDate.index(tempDate.startIndex, offsetBy: 19)
         let dateResult = String(tempDate[...endIdx])
@@ -125,7 +125,7 @@ final class NotificationCell: UITableViewCell {
         let notiDayArr =  split(target: splitNotificationTime[0], separateItem: "-")
         let notiTimeArr = split(target: splitNotificationTime[1], separateItem: ":")
         
-        //현재 시간 쪼개기
+        // 현재 시간 쪼개기
         date.locale = Locale(identifier: "ko_kr")
         date.timeZone = TimeZone(abbreviation: "KST") // "2018-03-21 18:07:27"
         date.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -139,7 +139,7 @@ final class NotificationCell: UITableViewCell {
             // 년이 다름 (해가 바뀌는 순간엔 정확하진 않음 서버에서 timeStamp로 내려오지 않아 이정도에서 정리)
             return "\(notiDayArr[0] - currentDayArr[0])년 전"
         } else if currentDayArr[1] - notiDayArr[1] > 0 {
-            //년은 같고 달이 다름
+            // 년은 같고 달이 다름
             return "\(currentDayArr[1] - notiDayArr[1])달 전"
         } else if currentDayArr[2] - notiDayArr[2] > 0 {
             // 년,달 같고 일이 다름

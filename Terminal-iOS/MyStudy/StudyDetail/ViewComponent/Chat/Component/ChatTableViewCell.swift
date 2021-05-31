@@ -12,7 +12,8 @@ import SwiftKeychainWrapper
 final class ChatInputTableViewCell: UITableViewCell {
     static var id = "ChatInputTableViewCell"
     var chatLabel = UILabel()
-    
+    var chevronLabel = UILabel()
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         attribute()
@@ -24,6 +25,11 @@ final class ChatInputTableViewCell: UITableViewCell {
             $0.backgroundColor = .appColor(.terminalBackground)
             $0.selectionStyle = .none
         }
+        chevronLabel.do {
+            $0.text = ">>"
+            $0.textColor = .white
+            $0.font = UIFont.monospacedSystemFont(ofSize: chatLabel.font.pointSize-4, weight: UIFont.Weight.regular)
+        }
         chatLabel.do {
             $0.numberOfLines = 0
             $0.textColor = .white
@@ -32,12 +38,18 @@ final class ChatInputTableViewCell: UITableViewCell {
     }
     
     func layout() {
-        [chatLabel].forEach { addSubview($0) }
+        [chevronLabel, chatLabel].forEach { addSubview($0) }
         
-        chatLabel.do {
+        chevronLabel.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            $0.widthAnchor.constraint(equalToConstant: $0.intrinsicContentSize.width).isActive = true
+        }
+        chatLabel.do {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            $0.leadingAnchor.constraint(equalTo: chevronLabel.trailingAnchor).isActive = true
             $0.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
             $0.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
@@ -45,6 +57,7 @@ final class ChatInputTableViewCell: UITableViewCell {
     
     func setData(chat: Chat) {
         if chat.userID == 0 {
+            chevronLabel.isHidden = true
             guard let message = chat.message else { return }
             chatLabel.do {
                 $0.text = "\(message)"
@@ -55,8 +68,8 @@ final class ChatInputTableViewCell: UITableViewCell {
             guard let nickname = chat.nickname,
                   let message = chat.message,
                   let userID = KeychainWrapper.standard.string(forKey: "userID") else { return }
-            let isIncoming = userID == String(chat.userID) ? ">>" : "  "
-            chatLabel.text = isIncoming + convertTime(timeStamp: chat.date) + " \(nickname) $ \(message)"
+            chevronLabel.isHidden = !(chat.userID == Int(userID))
+            chatLabel.text = convertTime(timeStamp: chat.date) + " \(nickname) $ \(message)"
             chatLabel.textAlignment = .left
             if let isTemp = chat.isTemp {
                 if isTemp {

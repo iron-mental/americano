@@ -26,13 +26,13 @@ protocol AddNoticePresenterProtocol: class {
     var wireFrame: AddNoticeWireFrameProtocol? { get set }
     var interactor: AddNoticeInteractorProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func completeButtonDidTap(studyID: Int,
                               notice: NoticePost,
                               state: AddNoticeState,
                               noticeID: Int?)
     
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func addNoticeValid(notice: Int, studyID: Int)
     func addNoticeInvalid(message: String)
     func sessionTaskError(message: String)
@@ -43,16 +43,16 @@ protocol AddNoticeInteractorProtocol: class {
     var remoteDataManager: AddNoticeRemoteDataManagerProtocol? { get set }
     var localDataManager: AddNoticeLocalDataManagerProtocol? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func postNotice(studyID: Int, notice: NoticePost, state: AddNoticeState, noticeID: Int?)
     
-    //DATAMANGER -> INTERACTOR
+    // DATAMANGER -> INTERACTOR
     func sessionTaskError(message: String)
 }
 
 protocol AddNoticeRemoteDataManagerProtocol: class {
     var interactor: AddNoticeInteractorProtocol? { get set }
-    //INTERACTOR -> REMOTE
+    // INTERACTOR -> REMOTE
     func postNotice(studyID: Int,
                     notice: NoticePost,
                     completion: @escaping (BaseResponse<EditNoticeResult>) -> Void)

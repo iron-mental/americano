@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TitleWithContentView: UIView {
+final class TitleWithContentView: UIView {
     var title = UILabel()
     var label = PaddingLabel()
     var state: StudyDetailViewState = .none
@@ -30,7 +30,7 @@ class TitleWithContentView: UIView {
     
     func attribute() {
         self.do {
-            $0.backgroundColor = UIColor.appColor(.terminalBackground)
+            $0.backgroundColor = .appColor(.terminalBackground)
         }
         title.do {
             $0.dynamicFont(fontSize: 16, weight: .bold)
@@ -44,20 +44,17 @@ class TitleWithContentView: UIView {
     }
     
     func labelLayout() {
-        [title, label ].forEach { addSubview($0) }
-        
-        label.isHidden = false
+        [title, label].forEach { addSubview($0) }
         
         title.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.topAnchor.constraint(equalTo: topAnchor).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-            $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-            $0.heightAnchor.constraint(equalToConstant: title.intrinsicContentSize.height).isActive = true
         }
         label.do {
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Terminal.convertHeight(value: 10)).isActive = true
+            $0.topAnchor.constraint(equalTo: title.bottomAnchor,
+                                    constant: Terminal.convertHeight(value: 10)).isActive = true
             $0.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
             $0.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         }

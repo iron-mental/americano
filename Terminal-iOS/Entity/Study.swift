@@ -14,7 +14,7 @@ struct Study: Codable {
     let id: Int
     let title, introduce, image, sigungu: String?
     let leaderImage: String?
-    let createdAt: Int
+    let createdAt: Int?
     let memberCount: Int?
     let distance: Double?
     let isMember: Bool?
@@ -35,7 +35,7 @@ public class TestStudyList: NSObject, NSCoding {
     public var testList: [TestStudy] = []
     
     enum Key: String {
-        case testList = "testList"
+        case testList
     }
     init(list: [TestStudy]) {
         self.testList = list
@@ -55,7 +55,7 @@ public class TestStudy: NSObject, NSCoding {
     public var id = 0
     
     enum Key: String {
-        case id = "id"
+        case id
     }
     init(id: Int) {
         self.id = id

@@ -19,7 +19,7 @@ protocol CreateStudyViewProtocol: class {
     var studyDetailPost: StudyDetailPost? { get set }
     var parentView: UIViewController? { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showLoading()
     func hideLoading()
     func setView()
@@ -35,13 +35,13 @@ protocol CreateStudyInteractorInputProtocol: class {
     var remoteDataManager: CreateStudyRemoteDataManagerInputProtocol? { get set }
     var studyInfo: StudyDetail? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func studyCreateComplete(study: StudyDetailPost, studyID: Int?)
 }
 
 protocol CreateStudyInteractorOutputProtocol: class {
     
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func studyInfoInvalid(label: String?, message: String)
     func studyInfoValid(studyID: Int, message: String)
     func sessionTaskError(message: String)
@@ -52,7 +52,7 @@ protocol CreateStudyPresenterProtocol: class {
     var interactor: CreateStudyInteractorInputProtocol? { get set }
     var wireFrame: CreateStudyWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func viewDidLoad()
     func clickLocationView()
     func clickCompleteButton(study: StudyDetailPost, studyID: Int?)
@@ -73,6 +73,6 @@ protocol CreateStudyWireFrameProtocol: class {
     static func createStudyViewModule(category: String,
                                       studyDetail: StudyDetail?,
                                       parentView: UIViewController?) -> UIViewController
-    //추후에 스터디 모델이 들어가야겠네용?
+    // 추후에 스터디 모델이 들어가야겠네용?
     func goToSelectLocation(from view: CreateStudyViewProtocol)
 }

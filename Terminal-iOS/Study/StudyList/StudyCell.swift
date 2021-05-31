@@ -58,17 +58,18 @@ final class StudyCell: UITableViewCell {
         }
         
         self.date.do {
-            let timestamp = data.createdAt
-            let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
-            let calendar = Calendar.current
-            let year = "\(calendar.component(.year, from: date))"
-            let month = calendar.component(.month, from: date)
-            let day = calendar.component(.day, from: date)
+            if let timestamp = data.createdAt {
+                let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+                let calendar = Calendar.current
+                let year = "\(calendar.component(.year, from: date))"
+                let month = calendar.component(.month, from: date)
+                let day = calendar.component(.day, from: date)
             
-            let endIdx = year.index(year.startIndex, offsetBy: 1)
-            let yearResult = String(year[...endIdx])
+                let endIdx = year.index(year.startIndex, offsetBy: 1)
+                let yearResult = String(year[...endIdx])
             
-            $0.text = yearResult + " / " + "\(month)" + " / " + "\(day)"
+                $0.text = yearResult + " / " + "\(month)" + " / " + "\(day)"
+            }
         }
         
         self.memberCount.do {
@@ -93,7 +94,7 @@ final class StudyCell: UITableViewCell {
         let managerImageURL = data.leaderImage ?? ""
         
         DispatchQueue.main.async { [self]  in
-            //메인 이미지
+            // 메인 이미지
             if mainImageURL.isEmpty {
                 mainImage.layer.addSublayer(borderLayer)
                 mainImage.image = nil
@@ -110,7 +111,7 @@ final class StudyCell: UITableViewCell {
                 mainImage.kf.setImage(with: URL(string: mainImageURL),
                                       options: [.requestModifier(RequestToken.token())])
             }
-            //방장 이미지
+            // 방장 이미지
             if managerImageURL.isEmpty {
                 managerImage.image = #imageLiteral(resourceName: "defaultProfile")
             } else {

@@ -13,7 +13,7 @@ protocol DelegateHostViewProtocol: class {
     var userList: [Participate]? { get set }
     var studyID: Int? { get set }
     
-    //PRESENTER -> VIEW
+    // PRESENTER -> VIEW
     func showDelegateHostResult(message: String)
     func showError(message: String)
 }
@@ -23,7 +23,7 @@ protocol DelegateHostPresenterProtocol: class {
     var interactor: DelegateHostInteractorInputProtocol? { get set }
     var wireFrame: DelegateHostWireFrameProtocol? { get set }
     
-    //VIEW -> PRESENTER
+    // VIEW -> PRESENTER
     func delegateHostButtonDidTap(newLeader: Int)
 }
 
@@ -32,12 +32,12 @@ protocol DelegateHostInteractorInputProtocol: class {
     var remoteDataManager: DelegateHostRemoteDataManagerInputProtocol? { get set }
     var studyID: Int? { get set }
     
-    //PRESENTER -> INTERACTOR
+    // PRESENTER -> INTERACTOR
     func putDelegateHostAPI(newLeader: Int)
 }
 
 protocol DelegateHostInteractorOutputProtocol: class {
-    //INTERACTOR -> PRESENTER
+    // INTERACTOR -> PRESENTER
     func delegateHostResult(result: Bool, message: String)
     func sessionTaskError(message: String)
 }
@@ -45,12 +45,12 @@ protocol DelegateHostInteractorOutputProtocol: class {
 protocol DelegateHostRemoteDataManagerInputProtocol: class {
     var interactor: DelegateHostRemoteDataManagerOutputProtocol? { get set }
     
-    //INTERACTOR -> REMOTEDATAMANAGER
+    // INTERACTOR -> REMOTEDATAMANAGER
     func putDelegateHostAPI(studyID: Int, newLeader: Int)
 }
 
 protocol DelegateHostRemoteDataManagerOutputProtocol: class {
-    //REMOTEDATAMANAGER -> INTERACTOR
+    // REMOTEDATAMANAGER -> INTERACTOR
     func delegateHostResult(response: BaseResponse<String>)
     func sessionTaskError(message: String)
 }

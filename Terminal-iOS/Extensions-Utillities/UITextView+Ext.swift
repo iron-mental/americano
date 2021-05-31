@@ -15,17 +15,17 @@ extension UITextView {
         var fontSize: CGFloat?
         
         switch height {
-        case 667.0: //iphone 6, 6s, 7, 8
+        case 667.0: // iphone 6, 6s, 7, 8
             fontSize = size
-        case 736.0: //iphone 6s+ 6+, 7+, 8+
+        case 736.0: // iphone 6s+ 6+, 7+, 8+
             fontSize = size * 1.05
-        case 812.0: //iphone X, XS
+        case 812.0: // iphone X, XS
             fontSize = size * 1.12
-        case 844.0: //iphone 12, 12pro
+        case 844.0: // iphone 12, 12pro
             fontSize = size * 1.17
-        case 896.0: //iphone XR, XS MAX
+        case 896.0: // iphone XR, XS MAX
             fontSize = size * 1.2
-        case 926.0: //iphone 12pro max
+        case 926.0: // iphone 12pro max
             fontSize = size * 1.25
         default:
             fontSize = size

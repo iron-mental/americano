@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemeberView: UIView {
+final class MemeberView: UIView {
     var title = UILabel()
     var totalMember = UILabel()
     var collectionView = MemberCollectionView(frame: CGRect.zero)

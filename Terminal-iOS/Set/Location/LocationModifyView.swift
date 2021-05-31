@@ -22,7 +22,7 @@ class LocationModifyView: UIViewController {
     var selectedSegmentIndex: Int = 0 { didSet { attribute() } }
     
     lazy var locationLabel = UILabel()
-    lazy var locationTab = UISegmentedControl(items: ["광역시도","시군구"])
+    lazy var locationTab = UISegmentedControl(items: ["광역시도", "시군구"])
     lazy var completeButton = UIButton()
     
     let locationCollectionView: UICollectionView = {

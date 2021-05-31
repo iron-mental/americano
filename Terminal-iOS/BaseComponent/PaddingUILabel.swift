@@ -21,7 +21,7 @@ class PaddingLabel: UILabel {
         self.do {
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
-            $0.backgroundColor = UIColor.appColor(.InputViewColor)
+            $0.backgroundColor = .appColor(.InputViewColor)
             $0.layer.borderWidth = 0.1
             $0.layer.borderColor = UIColor.gray.cgColor
             $0.numberOfLines = 0
@@ -31,16 +31,10 @@ class PaddingLabel: UILabel {
         }
     }
     
-    override func drawText(in rect: CGRect) {
-        let paddingRect = rect.inset(by: padding!)
-        super.drawText(in: paddingRect)
-    }
-    
     override var intrinsicContentSize: CGSize {
-        var contentSize = super.intrinsicContentSize
-        contentSize.height += padding!.top + padding!.bottom
-        contentSize.width += padding!.left + padding!.right
-        return contentSize
+        let contentSize = super.intrinsicContentSize
+        return CGSize(width: contentSize.width + padding!.left + padding!.right,
+                      height: contentSize.height + padding!.top + padding!.bottom)
     }
     
     required init?(coder: NSCoder) {
