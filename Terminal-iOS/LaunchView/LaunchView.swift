@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TerminalAlert
 
 final class LaunchView: UIViewController {
     var presenter: LaunchPresenterProtocol?

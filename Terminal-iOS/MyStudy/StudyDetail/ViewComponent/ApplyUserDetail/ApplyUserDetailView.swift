@@ -9,6 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 import Kingfisher
+import TerminalAlert
 
 class ApplyUserDetailView: BaseProfileView {
     var presenter: ApplyUserDetailPresenterInputProtocol?

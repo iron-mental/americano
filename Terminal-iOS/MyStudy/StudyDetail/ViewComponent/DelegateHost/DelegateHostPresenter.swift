@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TerminalAlert
 
 final class DelegateHostPresenter: DelegateHostPresenterProtocol {
     weak var view: DelegateHostViewProtocol?

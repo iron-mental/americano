@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftKeychainWrapper
+import TerminalAlert
 
 enum MyStudyDetialInitView {
     case Notice

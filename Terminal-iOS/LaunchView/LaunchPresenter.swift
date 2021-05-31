@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import TerminalAlert
 
 final class LaunchPresenter: LaunchPresenterProtocol {
     weak var view: LaunchViewProtocol?

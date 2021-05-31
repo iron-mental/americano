@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TerminalAlert
 
 final class MyApplyStudyInfoView: UIViewController {
     var applyStudy: ApplyStudy?

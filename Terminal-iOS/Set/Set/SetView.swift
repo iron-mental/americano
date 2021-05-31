@@ -10,6 +10,7 @@ import UIKit
 import SwiftKeychainWrapper
 import Kingfisher
 import CoreData
+import TerminalAlert
 
 final class SetView: UIViewController {
     var presenter: SetPresenterProtocol?

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TerminalAlert
 
 final class ProjectModifyView: UIViewController, CellSubclassDelegate {
     deinit { self.keyboardRemoveObserver() }

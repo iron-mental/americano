@@ -11,6 +11,7 @@ import NMapsMap
 import SwiftKeychainWrapper
 import Kingfisher
 import Lottie
+import TerminalAlert
 
 enum StudyDetailViewState: String {
     case edit
@@ -349,7 +350,7 @@ final class StudyDetailView: UIViewController {
     }
     
     @objc func studyApplyMessageEndEditing() {
-        TerminalAlertMessage.dismiss()
+      TerminalAlertMessage.dismiss()
         if let contentViewController = TerminalAlertMessage.alert.value(forKey: "contentViewController"),
            let castContentViewController = contentViewController as? UIViewController {
             if let alertView = castContentViewController.view {

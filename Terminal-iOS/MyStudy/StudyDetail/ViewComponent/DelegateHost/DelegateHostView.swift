@@ -8,6 +8,7 @@
 
 import UIKit
 import AudioToolbox
+import TerminalAlert
 
 final class DelegateHostView: UIViewController {
     var presenter: DelegateHostPresenterProtocol?
@@ -108,7 +109,10 @@ extension DelegateHostView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedUserID = userList![indexPath.row].userID
         TerminalAlertMessage.show(controller: self, type: .DelegateHostConfirmView)
-        ((TerminalAlertMessage.alert.value(forKey: "contentViewController") as! UIViewController).view as! AlertBaseUIView).completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
-
+      if let view = TerminalAlertMessage.alert.value(forKey: "contentViewController") as? UIViewController {
+        if let alertView = view.view as? AlertBaseUIView {
+          alertView.completeButton.addTarget(self, action: #selector(delegateCompelteButtonDidTap), for: .touchUpInside)
+        }
+      }
     }
 }
